@@ -7,6 +7,9 @@
 
 ---
 
+## AI
+![](./images/AI.png)
+
 ## 파이썬 패키지 설치
 
 파이썬은 세 개의 주요 운영 체제인 마이크로소프트 윈도(Microsoft Windows), macOS, 리눅스(Linux)에서 사용할 수 있습니다. 파이썬 공식 웹 사이트(https://www.python.org)에서 문서와 설치 파일을 내려받을 수 있습니다
