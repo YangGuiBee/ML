@@ -3,7 +3,7 @@ Machine Learning Study
 
 2024년 2학기 Plan
 
-01(09-02 ~ 09-06) OT & Artificial Intelligence Overview : 강의 소개(실습환경 준비), AI의 정의와 역사
+01(09-02 ~ 09-06) OT & Artificial Intelligence Overview : 강의 소개(실습환경 준비), AI의 정의와 역사<br>
 02(09-09 ~ 09-13) Machine Learning Overview : ML의 정의와 절차, 학습 방법과 모델
 03(09-16 ~ 09-20) Data Collection, Data Processing : Python, 라이브러리(NumPy, Scikit-Learn, MNIST, TensorFlow)
 04(09-23 ~ 09-27) Supervised Learning(1) : 분류(Logistic regression, K-NN, Decision tree, Bagging/Pasting, Boosting, Random forest)
