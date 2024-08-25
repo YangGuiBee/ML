@@ -1,7 +1,7 @@
 #  01 : 강의 소개(실습환경 준비), AI의 정의와 역사
 
 
-<span style="color: #0000FF">## 2024년 10대 전략기술 트렌트</span>
+## <span style="color: #0000FF">2024년 10대 전략기술 트렌트</span>
 
 <!--
 ![](./images/top-strategic-technology-trends-2024.png)
