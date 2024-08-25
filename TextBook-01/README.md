@@ -7,6 +7,30 @@
 
 ---
 
+|Year|Trend 1|Trend 2|Trend 3|Trend 4|Trend 5|Trend 6|Trend 7|Trend 8|Trend 9|Trend 10|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|2024|Democratized Generative AI|AI Trust, Risk, and Security Mgmt|Sustainable Technology|Platform Engineering|AI-Augmented Development|Industry Cloud Platforms|Intelligent Applications|Augmented-Connected Workforce|Continuous Threat Exposure Mgmt|Machine Customers|
+|2023|Sustainability|Generative AI|Privacy-Enhancing Computation|Cloud-Native Platforms|Composable Applications|Decision Intelligence|Hyperautomation|Autonomic Systems|AI Engineering|Distributed Enterprise|
+|2022|Data Fabric|Cybersecurity Mesh|Privacy-Enhancing Computation|Cloud-Native Platforms|Composable Applications|Decision Intelligence|Hyperautomation|Autonomic Systems|AI Engineering|Distributed Enterprise|
+|2021|Internet of Behaviors|Total Experience (TX)|Privacy-Enhancing Computation|Distributed Cloud|Anywhere Operations|Cybersecurity Mesh|Intelligent Composable Business|AI Engineering|Hyperautomation|Anywhere Operations|
+|2020|Hyperautomation|Multi-experience|Democratization of Expertise|Human Augmentation|Transparency and Traceability|AI Security|Distributed Cloud|Practical Blockchain|AI-Driven Development|Autonomous Things|
+|2019|Autonomous Things|Augmented Analytics|AI-Driven Development|Digital Twins|Empowered Edge|Smart Spaces|Immersive Experience|Digital Ethics and Privacy|Quantum Computing|Augmented Reality|
+|2018|AI Foundation|Intelligent Apps and Analytics|Intelligent Things|Digital Twins|Cloud to the Edge|Conversational Platforms|Immersive Experience|Blockchain|Event-Driven|Continuous Adaptive Risk and Trust|
+|2017|Intelligent Apps|Intelligent Things|Digital Twins|Blockchain|Mesh App and Service Arch|Digital Technology Platforms|Immersive Experience|Adaptive Security Architecture|Advanced System Architecture|Through Silicon Via|
+|2016|The Device Mesh|Ambient User Experience|3D-Printing Materials|Information of Everything|Advanced System Architecture|Mesh App and Service Arch|Ambient User Experience|Internet of Things|The Ambient User Experience|Smart Dust|
+|2015|Computing Everywhere|Internet of Things|3D Printing|Advanced, Pervasive, and Invisible Analytics|Context-Rich Systems|Smart Machines|Cloud/Client Computing|Software-Defined Applications|Web-Scale IT|Risk-Based Security and Self-Protection|
+|2014|Internet of Things|Cloud Computing|Big Data|Cloud-Based|Cloud Services|Big Data|Business Intelligence|Mobile Cloud|Social Software and Collaboration|Mobile Devices|
+|2013|Mobile|Mobile Applications|Cloud|Cloud Computing|Cloud Services|Cloud|Business Intelligence|Virtualization|Virtualization|Cloud|
+|2012|Business Analytics|App and Service Architecture|Advanced Analytics|Cloud Services|Big Data Analytics|Virtualization|Cloud Computing|Data Integration|Advanced Analytics|Data Integration|
+|2011|Social Software and Collaboration|Social Media Analytics|Cloud Services|Mobile Device Management|Cloud Computing|Cloud Native|Business Intelligence|Business Process Management|IoT|Business Intelligence|
+|2010|Cloud Computing|Big Data|Mobile Device Deployment|Business Intelligence|Business Intelligence|Cloud Native|Mobile Devices|Business Process Management|IoT|Data Integration|
+|2009|Virtualization|Cloud/Client Computing|Software-Defined Networking|Mobile Cloud|Cloud Infrastructure Services|Edge Computing|IoT|Advanced System Architecture|Advanced Analytics|IoT|
+|2008|Web-Scale IT|Edge Computing|Context-Rich Systems|Social Networks|Mobile Device Management|Cloud Services|Cloud Infrastructure Service|Mobile Devices|IoT|Application Security|
+|2007|Service-Oriented Architecture|Social Networks|Business Process Management|Cloud Infrastructure Services|Cloud Services|IoT|Application Security|Automation|Big Data|Data Integration|
+|2006|Application Infrastructure|Contextual Services|IoT|IT Service Management|Automation|Application Infrastructure|Data Integration|Application Infrastructure|Big Data Analytics|Application Infrastructure|
+|2005|Automated IT|IT Asset Management|Mobile Device Management|Analytics|Enterprise Mobility Management|Analytics-Driven Business Intelligence|Big Data|Business Process Management|Big Data Analytics|Business Process Management|
+
+
 ## AI
 ![](./images/AI.png)
 
