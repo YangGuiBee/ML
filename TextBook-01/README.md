@@ -1,12 +1,5 @@
 ##  01 : 강의 소개(실습환경 준비), AI의 정의와 역사
 
-
----
-
-**1장에는 코드 예제가 없습니다.**
-
----
-
 ## 2024년 10대 전략기술 트렌트
 ![](./images/top-strategic-technology-trends-2024.png)
 <출처:https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-for-2024>
