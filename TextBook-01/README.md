@@ -11,7 +11,7 @@
 
 
 
-
+<span style="font-size:100%"> 
 |Year|Trend 1|Trend 2|Trend 3|Trend 4|Trend 5|Trend 6|Trend 7|Trend 8|Trend 9|Trend 10|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |2024|Democratized Generative AI|AI Trust, Risk, and Security Mgmt|Sustainable Technology|Platform Engineering|AI-Augmented Development|Industry Cloud Platforms|Intelligent Applications|Augmented-Connected Workforce|Continuous Threat Exposure Mgmt|Machine Customers|
@@ -57,7 +57,7 @@
 |2007|서비스 지향 아키텍처|소셜 네트워크|비즈니스 프로세스 관리|클라우드 인프라 서비스|클라우드 서비스|IoT|애플리케이션 보안|자동화|빅 데이터|데이터 통합|
 |2006|애플리케이션 인프라|컨텍스트 서비스|IoT|IT 서비스 관리|자동화|애플리케이션 인프라|데이터 통합|애플리케이션 인프라|빅 데이터 분석|애플리케이션 인프라|
 |2005|자동화된 IT|IT 자산 관리|모바일 기기 관리|분석|엔터프라이즈 모빌리티 관리|분석 기반 비즈니스 인텔리전스|빅 데이터|비즈니스 프로세스 관리|빅 데이터 분석|비즈니스 프로세스 관리|
-
+</span>
 
 ## ChatGPT가 그린 AI 이미지
 ![](./images/AI.png)
