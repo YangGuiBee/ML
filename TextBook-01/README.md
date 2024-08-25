@@ -3,6 +3,8 @@
 ## 2024년 10대 전략기술 트렌트
 ![](./images/top-strategic-technology-trends-2024.png)
 
+![](./images/top-strategic-technology-trends-2024_table.png)
+
 
 
 
