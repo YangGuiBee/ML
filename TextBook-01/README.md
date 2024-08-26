@@ -63,8 +63,10 @@ https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-f
 -->
 
 ## 2024년, Hyper Cycle for Emerging Technologies
+![](./images/HypeCycle_2024.jpg)
 
 ## 2024년, Hyper Cycle for AI
+![](./images/HypeCycle_AI2024.jpg)
 
 
 ## ChatGPT가 그린 AI 이미지
