@@ -74,6 +74,9 @@
 
 ## AI의 역사
 
+![](./images/DL_History.png)
+http://beamlab.org/deeplearning/2017/02/23/deep_learning_101_part1.html
+
 
 
 ### <span style='background-color: #fff5b1'> 1. 기초 이론과 초기 발전 (1943년~1955년)	</span><br>										
