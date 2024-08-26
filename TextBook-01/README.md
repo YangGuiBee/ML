@@ -87,6 +87,7 @@
 
 ### AI 개념도
 ![](./images/AI_LG.png)
+
     LG전자 뉴스룸(https://live.lge.co.kr/live_with_ai_01/)
 
 
