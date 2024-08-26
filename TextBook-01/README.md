@@ -156,17 +156,24 @@
 
 
 
-### 1977년, 파트릭 윈스턴 (Patrick Winston)
-정의 : "인공지능은 컴퓨터가 인간의 지능적인 행위를 모방할 수 있도록 하는 알고리즘과 시스템을 연구하는 학문이다."
-도서 : "Artificial Intelligence" 
-설명 : 파트릭 윈스턴은 MIT의 AI 연구원으로, AI를 인간 지능을 모방하는 알고리즘과 시스템을 연구하는 학문으로 정의했으며 그의 저서는 AI 교육에 널리 사용.
-
-
-
 ### 1978년, 리처드 벨만 (Richard Bellman)
-정의 : "인공지능은 복잡한 목적을 달성하기 위해 환경과의 상호작용을 통해 지능적 결정을 내리는 자동화된 의사결정 시스템이다."
-논문 : "An Introduction to Artificial Intelligence: Can Computers Think?"
-설명 : 벨만은 AI를 환경과의 상호작용을 통해 복잡한 문제를 해결하는 자동화 시스템으로 정의했으며, 이는 동적 프로그래밍과 제어 이론에서 그의 업적과 연결.
+정의 : "인공지능은 복잡한 목적을 달성하기 위해 환경과의 상호작용을 통해 지능적 결정을 내리는 자동화된 의사결정 시스템이다."<br>
+논문 : "An Introduction to Artificial Intelligence: Can Computers Think?"<br>
+설명 : 벨만은 AI를 환경과의 상호작용을 통해 복잡한 문제를 해결하는 자동화 시스템으로 정의했으며, 이는 동적 프로그래밍과 제어 이론에서 그의 업적과 연결.<br>
+
+
+
+### 1992년, 파트릭 윈스턴 (Patrick Winston)
+정의 : "인공지능은 컴퓨터가 인간의 지능적인 행위를 모방할 수 있도록 하는 알고리즘과 시스템을 연구하는 학문이다."<br>
+도서 : "Artificial Intelligence"<br>
+설명 : 파트릭 윈스턴은 MIT의 AI 연구원으로, AI를 인간 지능을 모방하는 알고리즘과 시스템을 연구하는 학문으로 정의했으며 그의 저서는 AI 교육에 널리 사용.<br>
+
+
+
+### 1998년, 데이비드 풀 (David Poole)
+정의 : "인공지능은 확률적 추론을 통해 불확실한 상황에서 결정을 내리고, 지능적인 행동을 구현하는 시스템을 연구하는 학문이다."<br>
+도서 :  "Computational Intelligence: A Logical Approach"<br>
+설명 : 풀은 AI를 불확실한 상황에서의 추론 능력으로 정의하며, 확률적 추론과 불확실한 데이터에서의 지능적 행동을 강조했으며, 이 정의는 AI의 논리적 접근과 확률적 방법론을 결합한 점에서 중요.<br>
 
 
 
@@ -175,18 +182,12 @@
 도서 : "The Age of Spiritual Machines"<br>
 설명 : 커즈와일은 AI를 인간 지능의 확장으로 보면서 궁극적으로는 인간 지능을 초월하는 강한 인공지능을 예측했으며, 기술적 특이점을 통해 AI가 인간의 모든 지적 활동을 수행할 수 있을 것이라고 주장.<br>
 
-
-
-
-### 2020년, 데이비드 풀 (David Poole)
-정의 : "인공지능은 확률적 추론을 통해 불확실한 상황에서 결정을 내리고, 지능적인 행동을 구현하는 시스템을 연구하는 학문이다."<br>
-도서 :  "Computational Intelligence: A Logical Approach"<br>
-설명 : 풀은 AI를 불확실한 상황에서의 추론 능력으로 정의하며, 확률적 추론과 불확실한 데이터에서의 지능적 행동을 강조했으며, 이 정의는 AI의 논리적 접근과 확률적 방법론을 결합한 점에서 중요.<br>
+<br><br><br>
 
 ### ChatGPT가 그린 AI 이미지
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/AI.png'>
 
-<br><br><br>
+<br>
 
 ### AI 개념도
 ![](./images/AI_LG.png)
