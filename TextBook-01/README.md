@@ -136,7 +136,7 @@
 정의 : "인공지능은 **컴퓨터가 사람처럼 대화하고 문제를 해결할 수 있는 능력**을 의미한다."<br>
 논문 : "Computing Machinery and Intelligence"<br>
 설명 : 터링은 "기계가 인간처럼 생각하고 인식할 수 있는가?"와 관련하여 인공지능의 가능성을 논의하며, 기계가 인간처럼 생각할 수 있는지를 평가하기 위한 "튜링 테스트"를 제안하여 AI의 철학적 기반을 다지는 중요한 작업으로 평가.<br>
- ★ 튜링 테스트 : https://terms.tta.or.kr/dictionary/dictionaryView.do?subject=%ED%8A%9C%EB%A7%81+%EC%8B%9C%ED%97%98
+#### ★ 튜링 테스트 : https://terms.tta.or.kr/dictionary/dictionaryView.do?subject=%ED%8A%9C%EB%A7%81+%EC%8B%9C%ED%97%98
 
 
 
