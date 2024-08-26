@@ -91,14 +91,15 @@
 **1943년:** 워런 맥컬록(Warren McCulloch)과 월터 피츠(Walter Pitts)는  "A Logical Calculus of the Ideas Immanent in Nervous Activity" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/McCulloch_Pitts.pdf) 논문을 통해 신경망 모델의 기초를 마련. 신경망의 수학적 모델을 제안. 신경세포(뉴런)를 이진(binary) 장치로 모델링하여 입력 신호가 일정한 임계값을 넘으면 뉴런이 활성화되어 출력을 생성하고, 그렇지 않으면 비활성 상태로 남는다는 뉴런의 "발화" 메커니즘을 설명한 것으로, 현재의 퍼셉트론(Perceptron) 개념의 기초가 됨. 또한 여러 뉴런이 결합하여 더 복잡한 계산을 수행할 수 있는 신경망을 제안하였고 이 신경망은 다양한 입력에 대해 복잡한 논리적 결정을 내릴 수 있는 구조로 이후 인공 신경망의 이론적 기초가 됨.<br>							
 **1950년:** 앨런 튜링(Alan Turing)은 "Computing Machinery and Intelligence" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Computing%20Machinery%20and%20Intelligence.pdf) 논문을 발표. 튜링은 기계가 지능을 가질 수 있는지에 대한 질문을 제기하고, 기계가 인간과 구별되지 않는 대화를 할 수 있는지를 평가하는 "튜링 테스트"를 제안. 튜링 테스트는 기계가 인간과 구별되지 않을 정도로 대화를 할 수 있는지를 평가하는 테스트로 기계의 지능을 평가하는 기준으로 널리 사용되었으며, 기계가 학습할 수 있는 가능성에 대해 논의하며, 기계가 지능을 가질 수 있다는 이론적 기초를 마련.<br>
 **1951년:** 유세프 아이젠스타인(Yoshua Bengio)와 프랭크 로젠블렛(Frank Rosenblatt)은 퍼셉트론(Perceptron)이라는 초기 신경망 모델을 개발. 퍼셉트론은 간단한 형태의 기계 학습 모델로, 패턴 인식 문제를 해결할 수 있는 가능성을 보여줌.퍼셉트론은 패턴 인식을 위한 학습 알고리즘을 포함하고 있으며, 입력 데이터에 대한 가중치를 조정하여 학습하고, 이후의 다층 신경망과 딥러닝의 기초가 되는 개념을 제공.<br>
+											
 
-											
-											
+	   
 ### AI의 탄생과 초기 연구 (1956년~1960년대)<br>											
 **1956년:** 다트머스 회의(Dartmouth Conference)에서 '인공지능'이라는 용어가 처음 사용되었으며, 인공지능 연구의 출발점으로 간주. 존 매카시(John McCarthy), 마빈 민스키(Marvin Minsky), 클로드 섀넌(Claude Shannon) 등이 참석하여 AI의 가능성과 기계가 인간처럼 지능적 작업을 수행할 수 있는 가능성에 대해 논의. 앨런 뉴웰(Allen Newell)과 허버트 사이먼(Herbert A. Simon)은 "The Logic Theory Machine: A Complex Information Processing System" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/logictheorymachine.pdf) 논문에서 인간의 사고를 모방하는 기계의 가능성에 대해 논의하며, 논리적 이론을 증명할 수 있는 '논리 이론가(The Logic Theorist)'라는 컴퓨터 프로그램을 개발함으로써 AI 연구의 초기 단계에서 중요한 기여였으며, 이 논문은 인공지능의 문제 해결 능력과 알고리즘의 효율성에 대한 논의를 포함.<br>
 **1958년:** 존 매카시는 리스프(LISP)라는 프로그래밍 언어를 개발함으로써 인공지능 연구에서 중요한 역할을 했으며, 기호 처리(symbolic processing)에 적합한 언어로 널리 사용.<br>		
 **1960년대:** 제임스 얼 캐벗(James Allen)은 자연어 이해의 기초를 마련했으며, 엘리자(ELIZA)와 같은 초기 대화형 프로그램을 개발<br>		
-								
+
+	
 											
 ### 첫 번째 AI 겨울 (1970년대)<br>											
 **1969년:** 마빈 민스키(Marvin Minsky)와 세이무어 페퍼트(Seymour Papert)는 "Perceptrons: an introduction to computing geometry" 책 (https://direct.mit.edu/books/monograph/3132/PerceptronsAn-Introduction-to-Computational) 을 ​​통해 선형모델인 퍼셉트론이 간단한 비선형인 배타적-or(XOR) 함수를 학습할 수 없으므로 아무리 오랫동안 학습시키더라도 퍼셉트론이 그러한 함수를 학습하는 것이 이론적으로 불가능하다는 것을 증명함으로써 당시 신경망에 대한 모든 연구가 중단되고 첫 번째 AI 겨울이 도래.<br>
@@ -187,6 +188,12 @@
 정의 : "인공지능은 **확률적 추론을 통해 불확실한 상황에서 결정을 내리고, 지능적인 행동을 구현하는 시스템을 연구하는 학문**이다."<br>
 도서 :  "Computational Intelligence: A Logical Approach"<br>
 설명 : 풀은 AI를 불확실한 상황에서의 추론 능력으로 정의하며, 확률적 추론과 불확실한 데이터에서의 지능적 행동을 강조했으며, 이 정의는 AI의 논리적 접근과 확률적 방법론을 결합한 점에서 중요.<br>
+
+<br>
+|인간적 행위|사람이 지능적으로 수행해야 하는 기능을 수행하는 기계의 제작을 위한 기술(자연어처리, 지식표현, 자동추론, 컴퓨터 시각, 로봇공학, 기계학습 등)|
+|인간적 사고|인간의 사고, 그리고 의사결정, 문제풀기, 학습 등의 활동에 연관시킬 수 있는 활동들(인지과학)|
+|합리적 행동|지능적 에이전트와 설계에 관한 계산지능 연구(알파고)|
+|합리적 사고|인지와 추론 행위를 가능하게 하는 계산의 연구(삼단논법 논리학)|
 
 <br><br>
 
