@@ -152,7 +152,7 @@
 
 예제 실습에 필요한 패키지는 pip 설치 프로그램으로 설치할 수 있습니다. 
 이 프로그램은 파이썬 3.3 버전부터 파이썬 표준 라이브러리에 포함되었습니다. 
-자세한 pip 설명은 온라인 문서(https://docs.python.org/3/installing/index.html)를 참고하세요.
+자세한 pip 설명은 온라인 문서(https://docs.python.org/3/installing/index.html) 를 참고하세요.
 
 파이썬을 설치하고 난 후 터미널(Terminal)에서 pip 명령으로 필요한 파이썬 패키지를 설치할 수 있습니다:
 (`SomePackage`는 numpy, pandas, matplotlib, scikit-learn 등이 될 수 있습니다)
