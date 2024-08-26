@@ -6,7 +6,7 @@
 
 
 ![](./images/top-strategic-technology-trends-2024.png)
-https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-for-2024
+Gartner 홈페이지(https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-for-2024)
 <!--
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/top-strategic-technology-trends-2024.png'>
 -->
@@ -62,24 +62,38 @@ https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-f
 |2005|자동화된 IT|IT 자산 관리|모바일 기기 관리|분석|엔터프라이즈 모빌리티 관리|분석 기반 비즈니스 인텔리전스|빅 데이터|비즈니스 프로세스 관리|빅 데이터 분석|비즈니스 프로세스 관리|
 -->
 
-## 2024년, Hyper Cycle for Emerging Technologies
+### 2024년, Hyper Cycle for Emerging Technologies
 ![](./images/HypeCycle_2024.png)
 
-## 2024년, Hyper Cycle for AI
+
+
+### 2024년, Hyper Cycle for AI
 ![](./images/HypeCycle_AI2024.png)
 
 
-## ChatGPT가 그린 AI 이미지
+
+## AI의 역사
+
+
+
+## AI의 정의
+
+
+
+### ChatGPT가 그린 AI 이미지
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/AI.png'>
 
 
 
-## AI 개념도
+### AI 개념도
 ![](./images/AI_LG.png)
 LiVE LG LG전자 뉴스룸(https://live.lge.co.kr/live_with_ai_01/)
 
 
+
 ---
+
+
 
 ### 파이썬
 
