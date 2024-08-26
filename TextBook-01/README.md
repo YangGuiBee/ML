@@ -70,7 +70,7 @@
 
 ### 2024년, Hyper Cycle for AI
 ![](./images/HypeCycle_AI2024.png)
-
+ (출처) https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Hype_Cycle_for_AI.pdf
 
 
 ## AI의 역사
