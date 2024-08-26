@@ -137,9 +137,9 @@
 논문 : "Computing Machinery and Intelligence"<br>
 설명 : 터링은 "기계가 인간처럼 생각하고 인식할 수 있는가?"와 관련하여 인공지능의 가능성을 논의하며, 기계가 인간처럼 생각할 수 있는지를 평가하기 위한 **"튜링 테스트"** 를 제안하여 AI의 철학적 기반을 다지는 중요한 작업으로 평가.<br>
 
-	【튜링 테스트(TTA)】https://terms.tta.or.kr/dictionary/dictionaryView.do?subject=%ED%8A%9C%EB%A7%81+%EC%8B%9C%ED%97%98
- 	
-	【튜링 테스트(Wiki)】https://ko.wikipedia.org/wiki/%ED%8A%9C%EB%A7%81_%ED%85%8C%EC%8A%A4%ED%8A%B8
+	【튜링 테스트(TTA)】<a href="[https://www.google.com/](https://terms.tta.or.kr/dictionary/dictionaryView.do?subject=%ED%8A%9C%EB%A7%81+%EC%8B%9C%ED%97%98)" target="_blank">  	
+	
+ <a href="https://ko.wikipedia.org/wiki/%ED%8A%9C%EB%A7%81_%ED%85%8C%EC%8A%A4%ED%8A%B8" target="_blank">튜링 테스트(Wiki)</a>
  
 
 ### □ 1955년, 스튜어트 러셀과 피터 노빅 (Stuart Russell and Peter Norvig)
