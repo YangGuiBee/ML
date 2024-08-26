@@ -2,7 +2,7 @@
 
 
 
-## <span style="color: #0000FF">2024년 10대 전략기술 트렌트</span>
+## ▣ 2024년 10대 전략기술 트렌트
 
 
 ![](./images/top-strategic-technology-trends-2024.png)
@@ -76,7 +76,7 @@
  (출처) https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Hype_Cycle_for_AI.pdf
 
 
-## AI의 역사
+## ▣ AI의 역사
 
 <img width ='1200' height = '500' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/DL_History.PNG'>
 <!--
@@ -122,7 +122,7 @@
 
 <br><br><br>
 
-## AI의 정의
+## ▣ AI의 정의
 
 
 
@@ -203,8 +203,8 @@
 <br><br><br>
 
 ---
-
-
+## ▣ 실습 준비
+---
 
 ### 파이썬
 
