@@ -87,7 +87,7 @@ Gartner 홈페이지(https://www.gartner.com/en/articles/gartner-top-10-strategi
 
 ### AI 개념도
 ![](./images/AI_LG.png)
-LiVE LG LG전자 뉴스룸(https://live.lge.co.kr/live_with_ai_01/)
+LG전자 뉴스룸(https://live.lge.co.kr/live_with_ai_01/)
 
 
 
