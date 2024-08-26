@@ -6,7 +6,7 @@
 
 
 ![](./images/top-strategic-technology-trends-2024.png)
- Gartner 홈페이지(https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-for-2024)
+ (출처) Gartner 홈페이지(https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-for-2024)
 <!--
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/top-strategic-technology-trends-2024.png'>
 -->
@@ -77,7 +77,7 @@
 
 ![](./images/DL_History.PNG)
 <br>
-Deep Learning 101 - Part 1: History and Background (http://beamlab.org/deeplearning/2017/02/23/deep_learning_101_part1.html)
+ (출처) Deep Learning 101 - Part 1: History and Background (http://beamlab.org/deeplearning/2017/02/23/deep_learning_101_part1.html)
 
 
 
@@ -130,7 +130,7 @@ Deep Learning 101 - Part 1: History and Background (http://beamlab.org/deeplearn
 ### AI 개념도
 ![](./images/AI_LG.png)
 
- LG전자 뉴스룸(https://live.lge.co.kr/live_with_ai_01/)
+ (출처) LG전자 뉴스룸(https://live.lge.co.kr/live_with_ai_01/)
 
 
 
@@ -186,11 +186,7 @@ Deep Learning 101 - Part 1: History and Background (http://beamlab.org/deeplearn
 
     conda update SomePackage
 
-실습에서는 데이터를 저장하고 조작하는 데 넘파이 다차원 배열을 주로 사용합니다. 이따금
-판다스(Pandas)도 사용합니다. 판다스는 넘파이 위에 구축된 라이브러리고 테이블 형태의 데이터
-를 아주 쉽게 다룰 수 있는 고수준 도구를 제공합니다. 종종 정량적인 데이터를 시각화하면
-이해하는 데 매우 도움이 됩니다. 이를 위해 많은 옵션을 제공하는 맷플롯립(Matplotlib) 라이
-브러리를 사용하겠습니다.
+
 
 ### 핵심 패키지
 
@@ -203,6 +199,8 @@ Deep Learning 101 - Part 1: History and Background (http://beamlab.org/deeplearn
 - [matplotlib](http://matplotlib.org) >= 3.1.1
 - [pandas](http://pandas.pydata.org) >= 1.0.4
 - [TensorFlow](https://www.tensorflow.org) >= 2.3.0
+
+
 
 ### 파이썬/주피터 노트북
 
