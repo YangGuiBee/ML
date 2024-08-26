@@ -74,7 +74,7 @@
 
 ## AI의 역사
 
-<img width ='1200' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/DL_History.PNG'>
+<img width ='1200' height = '500' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/DL_History.PNG'>
 <!--
 ![](./images/DL_History.PNG)
 -->
