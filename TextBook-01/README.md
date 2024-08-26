@@ -11,6 +11,7 @@
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/top-strategic-technology-trends-2024.png'>
 -->
 
+### 최근 10년간 10대 전략기술
 ![](./images/top-strategic-technology-trends-2024_table.png)
 
 
