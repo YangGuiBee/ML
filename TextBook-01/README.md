@@ -7,7 +7,6 @@
 
 ![](./images/top-strategic-technology-trends-2024.png)
 https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-for-2024
-
 <!--
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/top-strategic-technology-trends-2024.png'>
 -->
@@ -62,6 +61,11 @@ https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-f
 |2006|애플리케이션 인프라|컨텍스트 서비스|IoT|IT 서비스 관리|자동화|애플리케이션 인프라|데이터 통합|애플리케이션 인프라|빅 데이터 분석|애플리케이션 인프라|
 |2005|자동화된 IT|IT 자산 관리|모바일 기기 관리|분석|엔터프라이즈 모빌리티 관리|분석 기반 비즈니스 인텔리전스|빅 데이터|비즈니스 프로세스 관리|빅 데이터 분석|비즈니스 프로세스 관리|
 -->
+
+## 2024년, Hyper Cycle for Emerging Technologies
+
+## 2024년, Hyper Cycle for AI
+
 
 ## ChatGPT가 그린 AI 이미지
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/AI.png'>
@@ -168,7 +172,8 @@ https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-f
 
 ![](./images/ipynb_ex2.png)
 
-주피터 노트북에 대한 더 자세한 내용은 [주피터 초보자 가이드](http://jupyter-notebook-beginner-guide.readthedocs.org/en/latest/what_is_jupyter.html)와 [주피터 노트북 기본사항](https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Notebook%20Basics.html)을 참고하세요.
+주피터 노트북에 대한 더 자세한 내용은 [주피터 초보자 가이드](http://jupyter-notebook-beginner-guide.readthedocs.org/en/latest/what_is_jupyter.html)와
+[주피터 노트북 기본사항](https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Notebook%20Basics.html)을 참고하세요.
 
 ### 주피터 랩
 
@@ -183,5 +188,5 @@ https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-f
 
     $ jupyter lab
 
-이 명령을 커맨드 라인 터미널에서 실행하면 브라우저에서 주피터 랩 세션을 시작합니다. 
+이 명령을 커맨드 라인 터미널에서 실행하면 브라우저에서 주피터 랩 세션이 시작됩니다. 
 주피터 랩에 대한 더 자세한 정보는 [공식 문서](https://jupyterlab.readthedocs.io/en/stable/)를 참고하세요.
