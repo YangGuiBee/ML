@@ -95,7 +95,7 @@
 								
 											
 ### <span style='background-color: #fff5b1'> 3. 첫 번째 AI 겨울 (1970년대)</span><br>											
-**1970년대:** AI 연구에 대한 기대와 실제 성과 간의 차이로 인해 자금 지원이 줄어들고, 연구자들은 AI의 한계와 복잡성을 깨달으면서 기술적 문제를 해결하는 데 어려움을 겪으면서 이 시기를 'AI 겨울'이라고 지칭<br>
+**1969년:** 마빈 민스키(Marvin Minsky) 와 세이무어 페퍼트(Seymour Papert)는 "Perceptrons: an introduction to computing geometry" 책 (https://direct.mit.edu/books/monograph/3132/PerceptronsAn-Introduction-to-Computational) 을 ​​통해 선형모델인 퍼셉트론이 간단한 비선형인 배타적-or(XOR) 함수를 학습할 수 없으므로 아무리 오랫동안 학습시키더라도 퍼셉트론이 그러한 함수를 학습하는 것이 이론적으로 불가능하다는 것을 증명함으로써 당시 신경망에 대한 모든 연구가 중단되고 첫 번째 AI 겨울이 도래.<br>
 
 									
 											
