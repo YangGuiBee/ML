@@ -74,8 +74,10 @@
 
 ## AI의 역사
 
-
+<img width ='800' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/DL_History.PNG'>
+<!--
 ![](./images/DL_History.PNG)
+-->
 <br>
  (출처) Deep Learning 101 - Part 1: History and Background (http://beamlab.org/deeplearning/2017/02/23/deep_learning_101_part1.html)
 
