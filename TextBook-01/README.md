@@ -216,7 +216,14 @@
 
 ---
 ## ▣ 실습 준비
----
+
+
+
+### □ 구글 코랩
+
+구글 계정으로 로그인하여 https://colab.research.google.com/?hl=ko 에서 새노트로 시작<br>
+본 강의 중에는 구글 코랩으로 실습을 시연할 예정인 바, 이하 설치는 선택사항임
+
 
 ### □ 파이썬
 
@@ -306,6 +313,7 @@
 [주피터 노트북 기본사항](https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Notebook%20Basics.html)  참고
 
 
+
 ### □ 주피터 랩
 
 또 다른 주피터 노트북 환경인 주피터 랩(Jupyter Lab)은 `.ipynb` 파일을 다루며 브라우저 인터페이스에서 추가적인 기능을 제공<br>  
@@ -323,7 +331,4 @@
 주피터 랩에 대한 더 자세한 정보는 [공식 문서](https://jupyterlab.readthedocs.io/en/stable/) 참고
 
 
-### □ 구글 코랩
 
-구글 계정으로 로그인하여 https://colab.research.google.com/?hl=ko 에서 새노트로 시작<br>
-본 강의 중에는 구글 코랩으로 실습을 시연할 예정
