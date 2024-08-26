@@ -77,14 +77,14 @@
 
 
 ### <span style='background-color: #fff5b1'> 1. 기초 이론과 초기 발전 (1943년~1955년)	</span><br>										
-**1943년:** 워런 맥컬록(Warren McCulloch)과 월터 피츠(Walter Pitts)는  "A Logical Calculus of the Ideas Immanent in Nervous Activity" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/McCulloch_Pitts.pdf) 라는 논문을 통해 신경망 모델의 기초를 마련. 신경망의 수학적 모델을 제안. 신경세포(뉴런)를 이진(binary) 장치로 모델링하여 입력 신호가 일정한 임계값을 넘으면 뉴런이 활성화되어 출력을 생성하고, 그렇지 않으면 비활성 상태로 남는다는 뉴런의 "발화" 메커니즘을 설명한 것으로, 현재의 퍼셉트론(Perceptron) 개념의 기초가 됨. 또한 여러 뉴런이 결합하여 더 복잡한 계산을 수행할 수 있는 신경망을 제안하였고 이 신경망은 다양한 입력에 대해 복잡한 논리적 결정을 내릴 수 있는 구조로 이후 인공 신경망의 이론적 기초가 됨.<br>							
-**1950년:** 앨런 튜링(Alan Turing)은 "Computing Machinery and Intelligence" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Computing%20Machinery%20and%20Intelligence.pdf) 이라는 논문을 발표. 튜링은 기계가 지능을 가질 수 있는지에 대한 질문을 제기하고, 기계가 인간과 구별되지 않는 대화를 할 수 있는지를 평가하는 "튜링 테스트"를 제안. 튜링 테스트는 기계가 인간과 구별되지 않을 정도로 대화를 할 수 있는지를 평가하는 테스트로 기계의 지능을 평가하는 기준으로 널리 사용되었으며, 기계가 학습할 수 있는 가능성에 대해 논의하며, 기계가 지능을 가질 수 있다는 이론적 기초를 마련.<br>
+**1943년:** 워런 맥컬록(Warren McCulloch)과 월터 피츠(Walter Pitts)는  "A Logical Calculus of the Ideas Immanent in Nervous Activity" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/McCulloch_Pitts.pdf) 논문을 통해 신경망 모델의 기초를 마련. 신경망의 수학적 모델을 제안. 신경세포(뉴런)를 이진(binary) 장치로 모델링하여 입력 신호가 일정한 임계값을 넘으면 뉴런이 활성화되어 출력을 생성하고, 그렇지 않으면 비활성 상태로 남는다는 뉴런의 "발화" 메커니즘을 설명한 것으로, 현재의 퍼셉트론(Perceptron) 개념의 기초가 됨. 또한 여러 뉴런이 결합하여 더 복잡한 계산을 수행할 수 있는 신경망을 제안하였고 이 신경망은 다양한 입력에 대해 복잡한 논리적 결정을 내릴 수 있는 구조로 이후 인공 신경망의 이론적 기초가 됨.<br>							
+**1950년:** 앨런 튜링(Alan Turing)은 "Computing Machinery and Intelligence" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Computing%20Machinery%20and%20Intelligence.pdf) 논문을 발표. 튜링은 기계가 지능을 가질 수 있는지에 대한 질문을 제기하고, 기계가 인간과 구별되지 않는 대화를 할 수 있는지를 평가하는 "튜링 테스트"를 제안. 튜링 테스트는 기계가 인간과 구별되지 않을 정도로 대화를 할 수 있는지를 평가하는 테스트로 기계의 지능을 평가하는 기준으로 널리 사용되었으며, 기계가 학습할 수 있는 가능성에 대해 논의하며, 기계가 지능을 가질 수 있다는 이론적 기초를 마련.<br>
 **1951년:** 유세프 아이젠스타인(Yoshua Bengio)와 프랭크 로젠블렛(Frank Rosenblatt)은 퍼셉트론(Perceptron)이라는 초기 신경망 모델을 개발. 퍼셉트론은 간단한 형태의 기계 학습 모델로, 패턴 인식 문제를 해결할 수 있는 가능성을 보여줌.퍼셉트론은 패턴 인식을 위한 학습 알고리즘을 포함하고 있으며, 입력 데이터에 대한 가중치를 조정하여 학습하고, 이후의 다층 신경망과 딥러닝의 기초가 되는 개념을 제공.<br>
 
 											
 											
 ### <span style='background-color: #fff5b1'> 2. AI의 탄생과 초기 연구 (1956년~1960년대)</span><br>											
-**1956년:** 다트머스 회의(Dartmouth Conference)에서 '인공지능'이라는 용어가 처음 사용되었으며, 인공지능 연구의 출발점으로 간주. 존 매카시(John McCarthy), 마빈 민스키(Marvin Minsky), 클로드 섀넌(Claude Shannon) 등이 참석하여 AI의 가능성과 기계가 인간처럼 지능적 작업을 수행할 수 있는 가능성에 대해 논의. 앨런 뉴웰(Allen Newell)과 허버트 사이먼(Herbert A. Simon)은 "The Logic Theory Machine: A Complex Information Processing System" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/logictheorymachine.pdf) 이라는 논문에서 인간의 사고를 모방하는 기계의 가능성에 대해 논의하며, 논리적 이론을 증명할 수 있는 '논리 이론가(The Logic Theorist)'라는 컴퓨터 프로그램을 개발함으로써 AI 연구의 초기 단계에서 중요한 기여였으며, 이 논문은 인공지능의 문제 해결 능력과 알고리즘의 효율성에 대한 논의를 포함.<br>
+**1956년:** 다트머스 회의(Dartmouth Conference)에서 '인공지능'이라는 용어가 처음 사용되었으며, 인공지능 연구의 출발점으로 간주. 존 매카시(John McCarthy), 마빈 민스키(Marvin Minsky), 클로드 섀넌(Claude Shannon) 등이 참석하여 AI의 가능성과 기계가 인간처럼 지능적 작업을 수행할 수 있는 가능성에 대해 논의. 앨런 뉴웰(Allen Newell)과 허버트 사이먼(Herbert A. Simon)은 "The Logic Theory Machine: A Complex Information Processing System" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/logictheorymachine.pdf) 논문에서 인간의 사고를 모방하는 기계의 가능성에 대해 논의하며, 논리적 이론을 증명할 수 있는 '논리 이론가(The Logic Theorist)'라는 컴퓨터 프로그램을 개발함으로써 AI 연구의 초기 단계에서 중요한 기여였으며, 이 논문은 인공지능의 문제 해결 능력과 알고리즘의 효율성에 대한 논의를 포함.<br>
 **1958년:** 존 매카시는 리스프(LISP)라는 프로그래밍 언어를 개발함으로써 인공지능 연구에서 중요한 역할을 했으며, 기호 처리(symbolic processing)에 적합한 언어로 널리 사용.<br>		
 **1960년대:** 제임스 얼 캐벗(James Allen)은 자연어 이해의 기초를 마련했으며, 엘리자(ELIZA)와 같은 초기 대화형 프로그램을 개발<br>		
 								
@@ -170,7 +170,7 @@
 아나콘다는 상업적 목적을 포함하여 무료로 사용할 수 있고 기업이 사용하기 충분한 수준의 파이썬 배포판입니다. 
 데이터 과학, 수학, 공학용 파이썬 필수 패키지들을 모두 포함하고 있으며 주요 운영 체제를 모두 지원합니다. 
 아나콘다 설치 파일은 https://www.anaconda.com/download/ 에서 내려받을 수 있습니다. 
-간단한 아나콘다 안내는 온라인 문서(https://docs.anaconda.com/anaconda/userguide/getting-started/)를 참고하세요.
+간단한 아나콘다 안내는 온라인 문서(https://docs.anaconda.com/anaconda/userguide/getting-started/) 를 참고하세요.
 
 아나콘다를 설치한 후 다음 명령으로 필요한 파이썬 패키지를 설치할 수 있습니다:
 
@@ -204,7 +204,7 @@
 
 ![](./images/ipynb_ex1.png)
 
-"IPython 노트북"은 최근에 "[주피터(Jupyter) 노트북](http://jupyter.org)"으로 바뀌었습니다. 
+"IPython 노트북"은 최근에 "[주피터(Jupyter) 노트북](http://jupyter.org)" 으로 바뀌었습니다. 
 주피터는 파이썬 외에도 줄리아(Julia), R 등의 다른 언어를 지원하는 프로젝트입니다. 
 파이썬 사용자에게는 달라지는 것이 없습니다. 이름만 바뀌었을 뿐입니다("IPython 노트북" 대신 "주피터 노트북"이라고 부릅니다).
 
@@ -224,13 +224,13 @@
 
     $ jupyter notebook
 
-주피터가 기본 브라우저를 실행합니다(일반적으로 [http://localhost:8888/](http://localhost:8888/)에서 실행됩니다). 
+주피터가 기본 브라우저를 실행합니다(일반적으로 [http://localhost:8888/](http://localhost:8888/) 에서 실행됩니다). 
 이제 주피터 메뉴에서 원하는 노트북을 선택해 열 수 있습니다.
 
 ![](./images/ipynb_ex2.png)
 
 주피터 노트북에 대한 더 자세한 내용은 [주피터 초보자 가이드](http://jupyter-notebook-beginner-guide.readthedocs.org/en/latest/what_is_jupyter.html)와
-[주피터 노트북 기본사항](https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Notebook%20Basics.html)을 참고하세요.
+[주피터 노트북 기본사항](https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Notebook%20Basics.html) 을 참고하세요.
 
 ### 주피터 랩
 
