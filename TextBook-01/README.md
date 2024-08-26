@@ -66,7 +66,10 @@ https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-f
 ## ChatGPT가 그린 AI 이미지
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/AI.png'>
 
-### 파이썬 설치
+
+
+
+### 파이썬
 
 파이썬은 주요 운영 체제인 마이크로소프트 윈도(Microsoft Windows), macOS, 리눅스(Linux)에서 사용할 수 있습니다. 
 파이썬 공식 웹 사이트(https://www.python.org)에서 문서와 설치 파일을 내려받을 수 있습니다
@@ -97,7 +100,7 @@ https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-f
     pip install SomePackage --upgrade
 
 
-### 아나콘다 설치
+### 아나콘다
 
 과학 컴퓨팅을 위해서는 컨티넘 애널리틱스(Continuum Analytics)의 아나콘다(Anaconda) 파이썬 배포판을 권장합니다. 
 아나콘다는 상업적 목적을 포함하여 무료로 사용할 수 있고 기업이 사용하기 충분한 수준의 파이썬 배포판입니다. 
@@ -119,7 +122,7 @@ https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-f
 이해하는 데 매우 도움이 됩니다. 이를 위해 많은 옵션을 제공하는 맷플롯립(Matplotlib) 라이
 브러리를 사용하겠습니다.
 
-## 핵심 패키지
+### 핵심 패키지
 
 책에서 사용하는 주요 파이썬 패키지 버전은 다음과 같습니다. 여러분 컴퓨터에 설치된 패키지와 버전이 동일하거나 더 높은지 확인하세요. 
 예제 코드를 정상적으로 실행하려면 버전을 맞추는 것이 좋습니다:
@@ -131,7 +134,7 @@ https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-f
 - [pandas](http://pandas.pydata.org) >= 1.0.4
 - [TensorFlow](https://www.tensorflow.org) >= 2.3.0
 
-## 파이썬/주피터 노트북
+### 파이썬/주피터 노트북
 
 어떤 독자들은 `.ipynb` 코드 파일에 무엇인지 모를 수 있습니다. 이 파일은 IPython 노트북입니다. 이 책의 코드는 평범한 파이썬 `.py` 스크립트 대신에 IPython 노트북에 담겨 있습니다. IPython 노트북이 데이터 분석 프로젝트에 안성맞춤이기 때문입니다! IPython 노트북을 사용하면 한 곳에서 모든 것을 처리할 수 있습니다. 코드, 코드를 실행한 결과, 그래프, 막다운(markdown)과 LaTeX 문법을을 지원하는 문서까지 가능합니다!
 
@@ -164,7 +167,7 @@ https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-f
 
 주피터 노트북에 대한 더 자세한 내용은 [주피터 초보자 가이드](http://jupyter-notebook-beginner-guide.readthedocs.org/en/latest/what_is_jupyter.html)와 [주피터 노트북 기본사항](https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Notebook%20Basics.html)을 참고하세요.
 
-## 주피터 랩
+### 주피터 랩
 
 또 다른 주피터 노트북 환경인 주피터 랩(Jupyter Lab)이 2018년에 릴리스되었습니다. 
 동일한 `.ipynb` 파일을 다룰 수 있지만 브라우저 인터페이스에서 추가적인 기능을 제공합니다. 주피터 노트북과 주피터 랩 중 어느 것을 사용해도 괜찮습니다.
