@@ -78,7 +78,7 @@
 
 ### <span style='background-color: #fff5b1'> 1. 기초 이론과 초기 발전 (1943년~1955년)	</span><br>										
 **1943년:** 워런 맥컬록(Warren McCulloch)과 월터 피츠(Walter Pitts)는 신경망의 수학적 모델을 제안. 이들은 인간 뇌의 뉴런의 작용을 모방한 간단한 계산 모델을 제시했으며, 이것이 이후 인공지능 연구의 기초가 됨.<br>							
-**1950년:** 앨런 튜링(Alan Turing)은 "Computing Machinery and Intelligence"라는 논문을 발표. 튜링은 기계가 지능을 가질 수 있는지에 대한 질문을 제기하고, 기계가 인간과 구별되지 않는 대화를 할 수 있는지를 평가하는 "튜링 테스트"를 제안.<br>				
+**1950년:** 앨런 튜링(Alan Turing)은 "Computing Machinery and Intelligence"(https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Computing%20Machinery%20and%20Intelligence.pdf)라는 논문을 발표. 튜링은 기계가 지능을 가질 수 있는지에 대한 질문을 제기하고, 기계가 인간과 구별되지 않는 대화를 할 수 있는지를 평가하는 "튜링 테스트"를 제안.<br>				
 **1951년:** 유세프 아이젠스타인(Yoshua Bengio)와 프랭크 로젠블렛(Frank Rosenblatt)은 퍼셉트론(Perceptron)이라는 초기 신경망 모델을 개발. 퍼셉트론은 간단한 형태의 기계 학습 모델로, 패턴 인식 문제를 해결할 수 있는 가능성을 보여줌.<br>
 
 											
