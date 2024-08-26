@@ -69,7 +69,7 @@ https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-f
 
 
 ## AI 개념도
-![](./images/AI_LG전자.png)
+![](./images/AI_LG.png)
 
 
 ### 파이썬
