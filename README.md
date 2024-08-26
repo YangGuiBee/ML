@@ -1,7 +1,6 @@
-# ML
-Machine Learning Study
+# ML(Machine Learning) Study
 
-2024년 2학기 Plan<br>
+## 2024년 2학기 Plan<br>
 
 01(09-02 ~ 09-06) OT & Artificial Intelligence Overview : 강의 소개(실습환경 준비), AI의 정의와 역사<br>
 02(09-09 ~ 09-13) Machine Learning Overview : ML의 정의와 절차, 학습 방법과 모델<br>
@@ -22,4 +21,5 @@ Machine Learning Study
 
 Reference Book : 
 머신러닝 교과서(3판) 실습소스코드 : https://github.com/rickiepark/python-machine-learning-book-3rd-edition
+<br>
 파이썬 머신러닝 완벽가이드(2판) 실습소스코드 : https://github.com/chulminkw/PerfectGuide
