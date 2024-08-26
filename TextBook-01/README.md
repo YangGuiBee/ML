@@ -11,7 +11,7 @@
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/top-strategic-technology-trends-2024.png'>
 -->
 
-### 최근 10년간 10대 전략기술
+### □ 최근 10년간 10대 전략기술
 ![](./images/top-strategic-technology-trends-2024_table.png)
 
 
@@ -63,14 +63,14 @@
 |2005|자동화된 IT|IT 자산 관리|모바일 기기 관리|분석|엔터프라이즈 모빌리티 관리|분석 기반 비즈니스 인텔리전스|빅 데이터|비즈니스 프로세스 관리|빅 데이터 분석|비즈니스 프로세스 관리|
 -->
 
-### 2024년, Hyper Cycle for Emerging Technologies
+### □ 2024년, Hyper Cycle for Emerging Technologies
 ![](./images/HypeCycle_2024.png)
 <br>
  (출처) https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Hype_Cycle_for_Emerg_tech.pdf
 
 <br><br>
 
-### 2024년, Hyper Cycle for AI
+### □ 2024년, Hyper Cycle for AI
 ![](./images/HypeCycle_AI2024.png)
 <br>
  (출처) https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Hype_Cycle_for_AI.pdf
@@ -87,37 +87,37 @@
 
 <br><br>
 
-### 기초 이론과 초기 발전 (1943년~1955년)<br>										
+### □ 기초 이론과 초기 발전 (1943년~1955년)<br>										
 **1943년:** 워런 맥컬록(Warren McCulloch)과 월터 피츠(Walter Pitts)는  "A Logical Calculus of the Ideas Immanent in Nervous Activity" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/McCulloch_Pitts.pdf) 논문을 통해 신경망 모델의 기초를 마련. 신경망의 수학적 모델을 제안. 신경세포(뉴런)를 이진(binary) 장치로 모델링하여 입력 신호가 일정한 임계값을 넘으면 뉴런이 활성화되어 출력을 생성하고, 그렇지 않으면 비활성 상태로 남는다는 뉴런의 "발화" 메커니즘을 설명한 것으로, 현재의 퍼셉트론(Perceptron) 개념의 기초가 됨. 또한 여러 뉴런이 결합하여 더 복잡한 계산을 수행할 수 있는 신경망을 제안하였고 이 신경망은 다양한 입력에 대해 복잡한 논리적 결정을 내릴 수 있는 구조로 이후 인공 신경망의 이론적 기초가 됨.<br>							
 **1950년:** 앨런 튜링(Alan Turing)은 "Computing Machinery and Intelligence" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Computing%20Machinery%20and%20Intelligence.pdf) 논문을 발표. 튜링은 기계가 지능을 가질 수 있는지에 대한 질문을 제기하고, 기계가 인간과 구별되지 않는 대화를 할 수 있는지를 평가하는 "튜링 테스트"를 제안. 튜링 테스트는 기계가 인간과 구별되지 않을 정도로 대화를 할 수 있는지를 평가하는 테스트로 기계의 지능을 평가하는 기준으로 널리 사용되었으며, 기계가 학습할 수 있는 가능성에 대해 논의하며, 기계가 지능을 가질 수 있다는 이론적 기초를 마련.<br>
 **1951년:** 유세프 아이젠스타인(Yoshua Bengio)와 프랭크 로젠블렛(Frank Rosenblatt)은 퍼셉트론(Perceptron)이라는 초기 신경망 모델을 개발. 퍼셉트론은 간단한 형태의 기계 학습 모델로, 패턴 인식 문제를 해결할 수 있는 가능성을 보여줌.퍼셉트론은 패턴 인식을 위한 학습 알고리즘을 포함하고 있으며, 입력 데이터에 대한 가중치를 조정하여 학습하고, 이후의 다층 신경망과 딥러닝의 기초가 되는 개념을 제공.<br>
 											
 
 	   
-### AI의 탄생과 초기 연구 (1956년~1960년대)<br>											
+### □ AI의 탄생과 초기 연구 (1956년~1960년대)<br>											
 **1956년:** 다트머스 회의(Dartmouth Conference)에서 '인공지능'이라는 용어가 처음 사용되었으며, 인공지능 연구의 출발점으로 간주. 존 매카시(John McCarthy), 마빈 민스키(Marvin Minsky), 클로드 섀넌(Claude Shannon) 등이 참석하여 AI의 가능성과 기계가 인간처럼 지능적 작업을 수행할 수 있는 가능성에 대해 논의. 앨런 뉴웰(Allen Newell)과 허버트 사이먼(Herbert A. Simon)은 "The Logic Theory Machine: A Complex Information Processing System" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/logictheorymachine.pdf) 논문에서 인간의 사고를 모방하는 기계의 가능성에 대해 논의하며, 논리적 이론을 증명할 수 있는 '논리 이론가(The Logic Theorist)'라는 컴퓨터 프로그램을 개발함으로써 AI 연구의 초기 단계에서 중요한 기여였으며, 이 논문은 인공지능의 문제 해결 능력과 알고리즘의 효율성에 대한 논의를 포함.<br>
 **1958년:** 존 매카시는 리스프(LISP)라는 프로그래밍 언어를 개발함으로써 인공지능 연구에서 중요한 역할을 했으며, 기호 처리(symbolic processing)에 적합한 언어로 널리 사용.<br>		
 **1960년대:** 제임스 얼 캐벗(James Allen)은 자연어 이해의 기초를 마련했으며, 엘리자(ELIZA)와 같은 초기 대화형 프로그램을 개발<br>		
 
 	
 											
-### 첫 번째 AI 겨울 (1970년대)<br>											
+### □ 첫 번째 AI 겨울 (1970년대)<br>											
 **1969년:** 마빈 민스키(Marvin Minsky)와 세이무어 페퍼트(Seymour Papert)는 "Perceptrons: an introduction to computing geometry" 책 (https://direct.mit.edu/books/monograph/3132/PerceptronsAn-Introduction-to-Computational) 을 ​​통해 선형모델인 퍼셉트론이 간단한 비선형인 배타적-or(XOR) 함수를 학습할 수 없으므로 아무리 오랫동안 학습시키더라도 퍼셉트론이 그러한 함수를 학습하는 것이 이론적으로 불가능하다는 것을 증명함으로써 당시 신경망에 대한 모든 연구가 중단되고 첫 번째 AI 겨울이 도래.<br>
 
 									
 											
-### 전문가 시스템의 부상과 상업화 (1980년대)<br>											
+### □ 전문가 시스템의 부상과 상업화 (1980년대)<br>											
 **1980년대:** AI 연구는 특정 분야의 지식을 기반으로 문제를 해결하는 전문가 시스템(Expert Systems)이 부상함. 예컨대, 컴퓨터 구성의 자동화를 위한 XCON(eXpert CONfigurer), 법률 분야의 루카스(LUCAS), 생명과학 및 의학 분야의 세이백(SEYBAC) 등이 상업적으로도 성공.<br>	
 **1983년:** 정통 AI(Tradition AI) 연구의 중심이 문제 해결에서 지식 표현과 추론으로 이동. 이 시기에 조지프 와이젠바움(Joseph Weizenbaum)의 엘리자(ELIZA)와 같은 프로그램이 인기.<br>
 
 											
 											
-### 두 번째 AI 겨울 (1990년대)<br>											
+### □ 두 번째 AI 겨울 (1990년대)<br>											
 **1990년대:** 전문가 시스템의 한계(유연성 부족, 지식베이스의 유지비용, 응용의 제한성) 등과 AI의 발전속도 문제(자연어 처리의 한계, 컴퓨팅 파워와 데이터의 부족, 추론과 학습의 한계) 등으로 인해 또 다시 자금 지원이 감소함에 따라 AI 연구는 실질적인 성과를 내는 데 어려움을 겪는 '두 번째 AI 겨울'.<br>
 			
 
 								
-### 머신러닝과 딥러닝의 부상 (2000년대~현재)<br>											
+### □ 머신러닝과 딥러닝의 부상 (2000년대~현재)<br>											
 **2006년:** 컴퓨터 성능의 향상과 대량의 데이터, 그리고 새로운 알고리즘의 발전으로 인해 AI 연구가 재조명. 제프리 힌튼(Geoffrey Hinton), 얀 르쿤(Yann LeCun), 요슈아 벵지오(Yoshua Bengio) 등이 딥러닝 기술을 발전<br>					
 **2010년대:** 2010년, 스탠포드의 Fei-Fei Li 그룹에서 수백만 개의 레이블이 지정된 이미지를 포함하는 Imagenet 이라는 대규모 데이터베이스를 만들어 게시하고, 2012년  Alex Krizhevsky , Ilya Sutskever , Geoff Hinton은 대규모 시각 인식 챌린지 (LSVRC)에서 GPU를 기반으로 기존 오류율을 절반으로 16%로 줄임. 이 시기에 자율주행차, 음성 인식, 자연어 처리 등의 분야에서 혁신적인 성과.<br>
 **2020년대:** 대규모 언어 모델(GPT-3, GPT-4 등)의 등장과 상업적 활용이 증가하면서 AI 기술은 다양한 분야에 통합되고 AI는 헬스케어, 금융, 고객 서비스, 창의적 작업 등 여러 산업에서 중요한 역할을 수행<br>	
@@ -128,63 +128,63 @@
 
 
 
-### 1950년, 앨런 튜링 (Alan Turing)
+### □ 1950년, 앨런 튜링 (Alan Turing)
 정의 : "인공지능은 **컴퓨터가 사람처럼 대화하고 문제를 해결할 수 있는 능력**을 의미한다."<br>
 논문 : "Computing Machinery and Intelligence"<br>
 설명 : 터링은 "기계가 인간처럼 생각하고 인식할 수 있는가?"와 관련하여 인공지능의 가능성을 논의하며, 기계가 인간처럼 생각할 수 있는지를 평가하기 위한 "튜링 테스트"를 제안하여 AI의 철학적 기반을 다지는 중요한 작업으로 평가.<br>
 
 
 
-### 1955년, 스튜어트 러셀과 피터 노빅 (Stuart Russell and Peter Norvig)
+### □ 1955년, 스튜어트 러셀과 피터 노빅 (Stuart Russell and Peter Norvig)
 정의 : "인공지능은 **인간의 지능적 행동을 모방하여 인간과 유사하게 학습하고, 추론하며, 적응할 수 있는 시스템을 만드는 것에 관한 연구**이다."<br>
 도서 : "Artificial Intelligence: A Modern Approach"<br>
 설명 : 이들은 AI를 지능적 에이전트를 연구하는 학문으로 정의하며, 학습과 적응의 중요성을 강조.<br>
 
 
 
-### 1956년, 존 매카시 (John McCarthy)
+### □ 1956년, 존 매카시 (John McCarthy)
 정의 : "인공지능은 **지능적인 행동을 수행하는 기계를 설계하고, 이들이 사람처럼 사고하고 배우는 시스템을 만드는 과학과 공학**이다."<br>
 회의 : 다트머스 회의에서  "인공지능"이라는 용어를 처음 제안<br>
 설명 : 이 회의는 AI의 출발점으로 여겨지며, 매카시는 AI를 광범위하게 정의하면서 인간처럼 사고하고 배우는 기계를 만드는 것이 목표.<br>
 
 
 
-### 1956년, 앨런 뉴웰과 허버트 사이먼 (Allen Newell and Herbert A. Simon)
+### □ 1956년, 앨런 뉴웰과 허버트 사이먼 (Allen Newell and Herbert A. Simon)
 정의 : "인공지능은 **컴퓨터 프로그램이 어떤 목표를 달성하기 위해 필요한 논리적, 수학적 과정을 자동으로 수행할 수 있게 하는 능력**이다."<br>
 회의 : 다트머스 회의에서 로직 이론가(The Logic Theorist) 발표<br>
 설명 : 뉴웰과 사이먼은 인공지능 연구 초기 단계에서 인간의 문제 해결 능력을 컴퓨터로 재현하는 데 중점을 두고 정의를 내렸으며, 이들은 AI의 창시자로 널리 인정받고 있으며, 그들의 작업은 AI의 인지 과학적 접근의 기초를 마련.<br>
 
 
 
-### 1956년, 마빈 민스키 (Marvin Minsky)
+### □ 1956년, 마빈 민스키 (Marvin Minsky)
 정의 : "인공지능은 **인간처럼 사고할 수 있는 기계를 만드는 과학**이다."<br>
 회의 : 다트머스 회의에서 발표<br>
 설명 : 민스키는 AI 연구의 선구자로, 인간 지능을 모방하는 기계를 만드는 과학으로 AI를 정의했으며 MIT에서 AI 연구실을 설립하며, AI의 발전에 중요한 역할.<br>
 
 
 
-### 1978년, 리처드 벨만 (Richard Bellman) : 인간적인 사고
+### □ 1978년, 리처드 벨만 (Richard Bellman) : 인간적인 사고
 정의 : "인공지능은 **복잡한 목적을 달성하기 위해 환경과의 상호작용을 통해 지능적 결정을 내리는 자동화된 의사결정 시스템**이다."<br>
 논문 : "An Introduction to Artificial Intelligence: Can Computers Think?"<br>
 설명 : 벨만은 AI를 환경과의 상호작용을 통해 복잡한 문제를 해결하는 자동화 시스템으로 정의했으며, 이는 동적 프로그래밍과 제어 이론에서 그의 업적과 연결.<br>
 
 
 
-### 1992년, 파트릭 윈스턴 (Patrick Winston) : 합리적인 사고
+### □ 1992년, 파트릭 윈스턴 (Patrick Winston) : 합리적인 사고
 정의 : "인공지능은 **컴퓨터가 인간의 지능적인 행위를 모방할 수 있도록 하는 알고리즘과 시스템을 연구하는 학문**이다."<br>
 도서 : "Artificial Intelligence"<br>
 설명 : 파트릭 윈스턴은 MIT의 AI 연구원으로, AI를 인간 지능을 모방하는 알고리즘과 시스템을 연구하는 학문으로 정의했으며 그의 저서는 AI 교육에 널리 사용.<br>
 
 
 
-### 1998년, 레이 커즈와일 (Ray Kurzweil) : 인간적인 행위
+### □ 1998년, 레이 커즈와일 (Ray Kurzweil) : 인간적인 행위
 정의 : "인공지능은 **인간의 지적 능력을 확장하거나 이를 초월하는 능력을 가진 기계나 프로그램을 만드는 것**이다."<br>
 도서 : "The Age of Spiritual Machines"<br>
 설명 : 커즈와일은 AI를 인간 지능의 확장으로 보면서 궁극적으로는 인간 지능을 초월하는 강한 인공지능을 예측했으며, 기술적 특이점을 통해 AI가 인간의 모든 지적 활동을 수행할 수 있을 것이라고 주장.<br>
 
 
 
-### 1998년, 데이비드 풀 (David Poole) : 합리적인 행위
+### □ 1998년, 데이비드 풀 (David Poole) : 합리적인 행위
 정의 : "인공지능은 **확률적 추론을 통해 불확실한 상황에서 결정을 내리고, 지능적인 행동을 구현하는 시스템을 연구하는 학문**이다."<br>
 도서 :  "Computational Intelligence: A Logical Approach"<br>
 설명 : 풀은 AI를 불확실한 상황에서의 추론 능력으로 정의하며, 확률적 추론과 불확실한 데이터에서의 지능적 행동을 강조했으며, 이 정의는 AI의 논리적 접근과 확률적 방법론을 결합한 점에서 중요.<br>
@@ -201,12 +201,12 @@
 
 <br><br>
 
-### ChatGPT가 그린 AI 이미지
+### 【ChatGPT가 그린 AI 이미지】
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/AI.png'>
 
 <br>
 
-### AI 개념도
+### 【AI 개념도】
 ![](./images/AI_LG.png)
 
  (출처) LG전자 뉴스룸(https://live.lge.co.kr/live_with_ai_01/)
@@ -218,7 +218,7 @@
 ## ▣ 실습 준비
 ---
 
-### 파이썬
+### □ 파이썬
 
 파이썬은 주요 운영 체제인 마이크로소프트 윈도(Microsoft Windows), macOS, 리눅스(Linux)에서 사용할 수 있습니다. 
 파이썬 공식 웹 사이트(https://www.python.org)에서 문서와 설치 파일을 내려받을 수 있습니다
@@ -250,7 +250,7 @@
     pip install SomePackage --upgrade
 
 
-### 아나콘다
+### □ 아나콘다
 
 과학 컴퓨팅을 위해서는 컨티넘 애널리틱스(Continuum Analytics)의 아나콘다(Anaconda) 파이썬 배포판을 권장합니다. 
 아나콘다는 상업적 목적을 포함하여 무료로 사용할 수 있고 기업이 사용하기 충분한 수준의 파이썬 배포판입니다. 
@@ -268,7 +268,7 @@
 
 
 
-### 핵심 패키지
+### □ 핵심 패키지
 
 책에서 사용하는 주요 파이썬 패키지 버전은 다음과 같습니다. 여러분 컴퓨터에 설치된 패키지와 버전이 동일하거나 더 높은지 확인하세요. 
 예제 코드를 정상적으로 실행하려면 버전을 맞추는 것이 좋습니다:
@@ -282,7 +282,7 @@
 
 
 
-### 파이썬/주피터 노트북
+### □ 파이썬/주피터 노트북
 
 어떤 독자들은 `.ipynb` 코드 파일에 무엇인지 모를 수 있습니다. 이 파일은 IPython 노트북입니다. 이 책의 코드는 평범한 파이썬 `.py` 스크립트 대신에 IPython 노트북에 담겨 있습니다. IPython 노트북이 데이터 분석 프로젝트에 안성맞춤이기 때문입니다! IPython 노트북을 사용하면 한 곳에서 모든 것을 처리할 수 있습니다. 코드, 코드를 실행한 결과, 그래프, 막다운(markdown)과 LaTeX 문법을을 지원하는 문서까지 가능합니다!
 
