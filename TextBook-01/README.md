@@ -65,7 +65,7 @@
 
 ### 2024년, Hyper Cycle for Emerging Technologies
 ![](./images/HypeCycle_2024.png)
-
+ (출처) https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Hype_Cycle_for_Emerg_tech.pdf
 
 
 ### 2024년, Hyper Cycle for AI
