@@ -122,10 +122,14 @@
 **2010년대:** 2010년, 스탠포드의 Fei-Fei Li 그룹에서 수백만 개의 레이블이 지정된 이미지를 포함하는 Imagenet 이라는 대규모 데이터베이스를 만들어 게시하고, 2012년  Alex Krizhevsky , Ilya Sutskever , Geoff Hinton은 대규모 시각 인식 챌린지 (LSVRC)에서 GPU를 기반으로 기존 오류율을 절반으로 16%로 줄임. 이 시기에 자율주행차, 음성 인식, 자연어 처리 등의 분야에서 혁신적인 성과.<br>
 **2020년대:** 대규모 언어 모델(GPT-3, GPT-4 등)의 등장과 상업적 활용이 증가하면서 AI 기술은 다양한 분야에 통합되고 AI는 헬스케어, 금융, 고객 서비스, 창의적 작업 등 여러 산업에서 중요한 역할을 수행<br>	
 
+
+### 【AI 역사 요약】
+![](./images/AI_History.PNG)
+ (출처) SAS(https://www.sas.com/ko_kr/insights/analytics/what-is-artificial-intelligence.html))
+
 <br><br><br>
 
 ## ▣ AI의 정의
-
 
 
 ### □ 1950년, 앨런 튜링 (Alan Turing)
