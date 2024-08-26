@@ -6,7 +6,7 @@
 
 
 ![](./images/top-strategic-technology-trends-2024.png)
-    Gartner 홈페이지(https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-for-2024)
+ Gartner 홈페이지(https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-for-2024)
 <!--
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/top-strategic-technology-trends-2024.png'>
 -->
@@ -88,7 +88,7 @@
 ### AI 개념도
 ![](./images/AI_LG.png)
 
-    LG전자 뉴스룸(https://live.lge.co.kr/live_with_ai_01/)
+ LG전자 뉴스룸(https://live.lge.co.kr/live_with_ai_01/)
 
 
 
