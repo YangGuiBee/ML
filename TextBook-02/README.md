@@ -137,37 +137,37 @@ model (모델) : 머신러닝이 찾은 규칙의 수학적 표현(수식), 학�
 (1-1) 회귀<br>
  - 선형 회귀 (Linear Regression)<br>
  - 다항 회귀 (Polynomial Regression)<br>
-릿지 회귀 (Ridge Regression)<br>
-라쏘 회귀 (Lasso Regression)<br>
-엘라스틱넷 회귀 (Elastic Net Regression)<br>
-서포트 벡터 회귀 (Support Vector Regression, SVR)<br>
-결정 트리 회귀 (Decision Tree Regression)<br>
-랜덤 포레스트 회귀 (Random Forest Regression)<br>
+ - 릿지 회귀 (Ridge Regression)<br>
+ - 라쏘 회귀 (Lasso Regression)<br>
+ - 엘라스틱넷 회귀 (Elastic Net Regression)<br>
+ - 서포트 벡터 회귀 (Support Vector Regression, SVR)<br>
+ - 결정 트리 회귀 (Decision Tree Regression)<br>
+ - 랜덤 포레스트 회귀 (Random Forest Regression)<br>
 
 (1-2) 분류
-로지스틱 회귀 (Logistic Regression)<br>
-서포트 벡터 분류 (Support Vector Classification, SVC)<br>
-결정 트리 분류 (Decision Tree Classification)<br>
-랜덤 포레스트 분류 (Random Forest Classification)<br>
-k-최근접 이웃 (k-Nearest Neighbors, k-NN)<br>
-나이브 베이즈 (Naive Bayes)<br>
-XGBoost (Extreme Gradient Boosting)<br>
+ - 로지스틱 회귀 (Logistic Regression)<br>
+ - 서포트 벡터 분류 (Support Vector Classification, SVC)<br>
+ - 결정 트리 분류 (Decision Tree Classification)<br>
+ - 랜덤 포레스트 분류 (Random Forest Classification)<br>
+ - k-최근접 이웃 (k-Nearest Neighbors, k-NN)<br>
+ - 나이브 베이즈 (Naive Bayes)<br>
+ - XGBoost (Extreme Gradient Boosting)<br>
 
 
 ### (2) 비지도 학습 (Unsupervised learning) : 군집, 차원축소
-(2-1) 클러스터링
-k-평균 클러스터링 (k-Means Clustering)
-계층적 클러스터링 (Hierarchical Clustering)
-DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
-가우시안 혼합 모델 (Gaussian Mixture Model, GMM)
+(2-1) 클러스터링<br>
+ - k-평균 클러스터링 (k-Means Clustering)<br>
+ - 계층적 클러스터링 (Hierarchical Clustering)<br>
+ - DBSCAN (Density-Based Spatial Clustering of Applications with Noise)<br>
+ - 가우시안 혼합 모델 (Gaussian Mixture Model, GMM)<br>
 
 (2-2) 차원 축소
-주성분 분석 (Principal Component Analysis, PCA)
-독립 성분 분석 (Independent Component Analysis, ICA)
-자기 조직화 지도 (Self-Organizing Maps, SOM)
-오토인코더 (Autoencoders)
+ - 주성분 분석 (Principal Component Analysis, PCA)<br>
+ - 독립 성분 분석 (Independent Component Analysis, ICA)<br>
+ - 자기 조직화 지도 (Self-Organizing Maps, SOM)<br>
+ - 오토인코더 (Autoencoders)<br>
 
-### 강화학습 (Reinforcement learning)
+### (3) 강화학습 (Reinforcement learning)
 
 
 
