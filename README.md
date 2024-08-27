@@ -1,4 +1,4 @@
-# ML(Machine Learning) Study
+# Machine Learning Study
 
 ## 2024년 2학기 Plan<br>
 
