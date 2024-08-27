@@ -66,7 +66,7 @@
 <br><br><br>
 
 ## ▣ ML의 학습방법
-<img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_01.png'><br>
+<img width ='800' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_01.png'><br>
 
 ### 지도 학습
 네 가지 머신러닝 모델 중 첫 번째는 지도 학습입니다. 지도 학습 알고리즘에서는 예시를 통해 머신을 훈련합니다. 지도 학습 모델은 '입력', '출력' 데이터 쌍으로 구성되며, 원하는 값으로 출력 레이블을 지정할 수 있습니다. 예를 들어 머신을 데이지꽃과 팬지꽃의 차이를 식별할 수 있도록 훈련하려고 합니다. 하나의 이진 입력 데이터 쌍에는 데이지꽃의 이미지와 팬지꽃의 이미지가 모두 포함됩니다. 해당 특정 쌍에 원하는 결과는 데이지꽃을 선택하는 것이기 때문에, 이것이 올바른 결과로서 사전 식별됩니다.
