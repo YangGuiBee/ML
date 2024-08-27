@@ -192,8 +192,7 @@
 차원 축소는 가능한 한 많은 정보를 보존하면서 데이터에서 사용되는 변수의 수를 줄이는 방법입니다. 고차원 데이터는 계산 복잡성과 차원의 저주 문제로 인해 분석이 어려울 수 있습니다. 따라서 차원 축소를 통해 고차원 데이터를 저차원 공간으로 표현하면 분석이 용이해집니다. 차원 축소는 수백 개의 잠재적 독립변수가 있는 기업의 미래 주가 예측 문제 등에서 활용될 수 있습니다. 예측 변수에는 회사의 과거 주가, 거래량, 매출, 수익, 비용, 그리고 GDP 성장률, 실업률, 인플레이션율, 금리 등의 거시경제 변수가 포함될 수 있습니다. 이러한 변수들은 주가와 관련성이 있을 수 있으며, 모든 변수들을 직접 사용하면 다중 공선성 문제가 발생할 수 있습니다. 따라서 PCA 등의 차원 축소 방법을 활용하여 고차원의 예측 변수를 저차원의 주성분으로 변환하여 주가 예측에 활용할 수 있습니다. 이를 통해 다중 공선성, 차원의 저주, 과적합 등의 문제를 방지할 수 있습니다. 비지도학습의 결과는 입력 데이터의 품질과 관련성, 사용된 알고리즘의 매개변수 선택, 그리고 결과 해석에 의존합니다. 따라서 이 결과는 확정적이지 않으며, 인과적인 통찰력을 제공하지 않습니다.<br> 
  **주성분 분석 (Principal Component Analysis, PCA)**<br>
  **독립 성분 분석 (Independent Component Analysis, ICA)**<br>
- **자기 조직화 지도 (Self-Organizing Maps, SOM)**<br>
- **오토인코더 (Autoencoders)**<br> 
+ **자기 조직화 지도 (Self-Organizing Maps, SOM)**<br> 
  **잠재 의미 분석 (Latent Semantic Analysis, LSA)**<br>
  **특이값 분해 (Singular Value Decomposition, SVD)**<br>
  **잠재 디리클레 할당 (Latent Dirichlet Allocation, LDA)**<br>
@@ -217,7 +216,6 @@
  **배깅 (Bagging)**<br>
    - Random Forest<br>
  **부스팅 (Boosting)**<br>
-부스팅은 여러 약한 분류기(weak classifier)를 통합하여 강한 분류기(strong classifier)를 생성하는 것을 목표로 하는 앙상블 방법입니다. 이는 훈련 데이터로부터 모델을 구축한 후, 이 모델의 오류를 수정하는 두 번째 모델을 생성함으로써 이루어집니다. 훈련 세트가 완벽하게 예측되거나, 최대 수의 모델이 추가될 때까지 이러한 과정이 반복됩니다.
    - XGBoost<br>
    - Light Gradient Boosting Machine (LightGBM)<br>
    - CatBoost<br>
@@ -225,8 +223,13 @@
 
 <br>
 
-### (5) 인공신경망(Artificial Neural Networks, ANNs), 심층학습 (Deep Learning, DL)<br>
+### (5) 인공신경망(Artificial Neural Networks, ANN), 심층학습 (Deep Learning, DL)<br>
 인공신경망(ANNs)은 인간의 뇌 구조에서 영감을 받아 만들어진 계산 모델입니다. 상호 연결된 인공 뉴런 집합으로 구성되며, 연결주의적 계산 방법을 통해 정보를 처리합니다. 이는 인간처럼 경험을 통해 학습하고 성능을 개선할 수 있습니다. 심층학습(Deep Learning)은 이러한 인공신경망을 보다 깊게 쌓아 복잡한 패턴과 구조를 모델링하는 발전된 형태입니다.<br>
+ **퍼셉트론 (Perceptrons)**<br>
+ **Convolutional Neural Networks (CNN)**<br>
+ **Recurrent Neural Networks (RNN)**<br>
+ **오토인코더(Autoencoders)**<br>
+ **생성적 적대 신경망(Generative Adversarial Networks, GAN)**<br>
 
 <br><br>
    
