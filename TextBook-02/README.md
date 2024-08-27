@@ -170,6 +170,7 @@
  - 나이브 베이즈 (Naive Bayes)<br>
  - XGBoost (Extreme Gradient Boosting)<br>
 
+<br>
 
 ### (2) 비지도 학습 (Unsupervised Learning, UL) : 군집화, 차원축소
 #### (2-1) 군집화 (Clustering)<br>
@@ -179,7 +180,6 @@
  - 가우시안 혼합 모델 (Gaussian Mixture Model, GMM)<br>
 
 #### (2-2) 연관 규칙 (Association Rule)<br>
- - 주성분 분석 (Principal Component Analysis, PCA)<br>
  - FP Growth
  - 이클렛 (Eclat), 
  - 어프라이어리 (Apriori)
@@ -194,6 +194,8 @@
  - 잠재 디리클레 할당 (Latent Dirichlet Allocation, LDA)<br>
  - t-distributed Stochastic Neighbor Embedding (t-SNE)<br>
 
+<br>
+
 ### (3) 강화 학습 (Reinforcement Learning, RL)<br>
  - Q-learning<br>
  - Deep Q-Network (DQN)<br>
@@ -201,10 +203,17 @@
  - 유전 알고리즘 (Genetic Algorithm)<br>
  - Asynchronous Advantage Actor-Critic (A3C)<br> 
 
+<br>
+
 ### (4) 앙상블 학습 (Ensemble Learning, EL)<br>
  - 스태킹 (Stacking)<br>
- - 배깅 (Bagging, Bootstrap aggregating)<br>
+ - 배깅 (Bagging)<br>
+   - Random Forest<br>
  - 부스팅 (Boosting)<br>
+   - XGBoost<br>
+   - Light Gradient Boosting Machine (LightGBM)<br>
+   - CatBoost<br>
+   - Adaptive Boosting (AdaBoost)<br>
 
 <br><br><br>
    
