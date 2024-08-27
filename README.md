@@ -3,7 +3,7 @@
 ## 2024년 2학기 Plan<br>
 
 
-<img width ='900' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/plan.PNG'>
+<img width ='1000' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/plan.PNG'>
 <!--
 01(09-02 ~ 09-06) OT & Artificial Intelligence Overview : 강의 소개(실습환경 준비), AI의 정의와 역사<br>
 02(09-09 ~ 09-13) Machine Learning Overview : ML의 정의와 절차, 학습 방법과 모델<br>
