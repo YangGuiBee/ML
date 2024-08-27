@@ -295,6 +295,11 @@ https://www.ibm.com/kr-ko/topics/artificial-intelligence
 <br><br>
 
 ## ▣ AI의 활용 분야
+![](./images/AI_Division.PNG)
+ (정부보도자료) https://github.com/YangGuiBee/ML/blob/main/TextBook-01/AI20191217.pdf
+<br>
+ (AI 국가전략) https://github.com/YangGuiBee/ML/blob/main/TextBook-01/AI_Strategy.pdf
+<br>
 
 ### 개인과 가정
 스마트 스피커<br>
