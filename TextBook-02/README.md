@@ -59,9 +59,9 @@
 
 ### ML 용어
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_08.png'><br>
-Sample (샘플, 인스턴스, 관측치, 데이터셋)
-Feature (특성, 속성, 측정치, 차원, 입력, 변수)
-Label (레이블, 타깃, 출력, 반응변수, 정답, 목표값)
+**Sample** (샘플, 인스턴스, 관측치, 데이터셋)<br>
+**Feature** (특성, 속성, 측정치, 차원, 입력, 변수)<br>
+**Label** (레이블, 타깃, 출력, 반응변수, 정답, 목표값)<br>
 
 ## ▣ ML의 학습방법
 
