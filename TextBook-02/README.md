@@ -12,43 +12,43 @@
 ## ▣ ML의 정의
 
 
-### □ 1959년, Arthur Samuel (아서 새뮤얼)
+### 1959년, Arthur Samuel (아서 새뮤얼)
 정의 : "컴퓨터에 **명시적으로 프로그래밍되지 않고도 학습할 수 있는 능력을 부여**하는 연구 분야."<br>
 표현 : "Field of study that gives computers the ability to learn without being explicitly programmed."<br>
 설명 : 기계학습이라는 용어는 IBM 직원이자 컴퓨터 게임 및 인공 지능 분야의 선구자인 아서 새뮤얼이 처음 사용하였으며, 머신러닝이 기존의 명시적 프로그래밍 방식과 어떻게 다른지를 설명하면서 컴퓨터가 데이터를 통해 스스로 학습할 수 있는 능력을 강조<br>
 
 
-### □ 1983년, Herbert A. Simon (허버트 사이먼)
+### 1983년, Herbert A. Simon (허버트 사이먼)
 정의 : "학습은 시스템이 **주어진 작업에 대해 이전보다 더 나은 성능**을 보일 때 발생한다."<br>
 표현 : "Learning is any process by which a system improves performance from experience."<br>
 설명 : 경험을 통한 성능 향상을 학습의 핵심으로 보았습니다. 이 정의는 특히 시스템이 경험을 통해 지속적으로 개선되는 과정을 강조<br>
 
 
-### □ 1997년, Tom M. Mitchell (톰 미첼) 
+### 1997년, Tom M. Mitchell (톰 미첼) 
 정의 : "컴퓨터 프로그램이 경험(E)에서 학습하며, 작업(T)과 성능측정(P)과 관련하여 성능이 향상되었다면, 그 프로그램은 작업(T)에 대해 경험(E)로부터 학습한 것."<br>
 표현 : "A computer program is said to learn from experience EEE with respect to some task TTT and performance measure PPP, if its performance on TTT, as measured by PPP, improves with experience EEE."<br>
 설명 : "Machine Learning" 저서에서 학습의 세 가지 주요 요소(작업, 경험, 성능 측정)를 통해 머신러닝의 핵심 개념을 체계적으로 설명<br>
 
 
-### □ 2004년, Ethem Alpaydin (에텀 알파이딘)
+### 2004년, Ethem Alpaydin (에텀 알파이딘)
 정의 : "머신러닝은 **데이터에서 패턴을 찾고, 이를 바탕으로 예측을 수행할 수 있는 알고리즘의 설계와 연구**."
 표현 : "Machine learning is the study of algorithms that learn from data and make predictions."
 설명 : "Introduction to Machine Learning" 저서에서 머신러닝의 예측 기능에 중점을 두며, 데이터에서 패턴을 발견하고 이를 기반으로 예측하는 과정의 중요성을 강조
 
 
-### □ 2008년, Andrew Ng (앤드류 응)
+### 2008년, Andrew Ng (앤드류 응)
 정의 : "머신러닝은 **명시적으로 프로그래밍하지 않고 컴퓨터가 행동하는 방식을 학습**하는 학문이다."<br>
 표현 : "Machine learning is the field of study that enables computers to learn from data without being explicitly programmed."<br>
 설명 : "Stanford Machine Learning" 강의에서 데이터 기반 학습과 자율 학습 능력의 중요성을 강조하며, 현대의 대규모 데이터와 복잡한 문제를 해결하는 머신러닝의 필요성을 반영<br>
 
 
-### □  2012년, Kevin P. Murphy (케빈 머피)
+### 2012년, Kevin P. Murphy (케빈 머피)
 정의 : "머신러닝은 **데이터를 사용하여 예측 모델을 학습**하는 데 중점을 둔 컴퓨터 과학의 하위 분야이다."<br>
 표현 : "Machine learning is a subfield of computer science that focuses on the development of algorithms that can learn from and make predictions on data."<br>
 설명 : "Machine Learning: A Probabilistic Perspective" 저서에서 머신러닝의 이론적 연구와 실질적인 예측 모델의 개발을 강조<br>
 
 
-### □  2016년, Joel Grus (조엘 그루스)
+### 2016년, Joel Grus (조엘 그루스)
 정의 : "머신러닝은 **데이터를 이용해 명시적으로 프로그래밍하지 않고도 작업을 수행할 수 있는 모델을 만드는 과정**이다."<br>
 표현 : "Machine learning is the subfield of computer science that gives computers the ability to learn without explicitly being programmed."<br>
 설명 : "Data Science from Scratch" 저서에서 전통적인 프로그래밍과 구별되는, 데이터에 기반한 학습과 의사결정의 자동화 도구로 정의하고 머신러닝의 본질은 데이터를 통해 패턴을 학습하고, 이를 활용해 예측하거나 분류 등의 작업을 수행<br><br>
@@ -88,8 +88,6 @@
 머신러닝 알고리즘은 기본적으로 사물 분류, 패턴 발견, 결과 예측, 정보 기반 의사결정 등을 수행하도록 설계<br>
 알고리즘은 하나씩 사용할 수도 있고 복잡하고 예측불가능한 데이터의는 정확도를 극대화하기 위해 여러 알고리즘을 결합도 가능<br>
 ![](images/01_09.png)
-
-<br>
 
 ### 【ML 용어】
 <img width ='800' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_08.png'><br>
