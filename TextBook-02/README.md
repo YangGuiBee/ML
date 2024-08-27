@@ -52,7 +52,12 @@
 ### □  2016년, Joel Grus (조엘 그루스)
 정의 : "머신러닝은 **데이터를 이용해 명시적으로 프로그래밍하지 않고도 작업을 수행할 수 있는 모델을 만드는 과정**이다."<br>
 표현 : "Machine learning is the subfield of computer science that gives computers the ability to learn without explicitly being programmed."<br>
-설명 : "Data Science from Scratch" 저서에서 전통적인 프로그래밍과 구별되는, 데이터에 기반한 학습과 의사결정의 자동화 도구로 정의했습니다. 머신러닝의 본질은 데이터를 통해 패턴을 학습하고, 이를 활용해 예측하거나 분류 등의 작업을 수행<br>
+설명 : "Data Science from Scratch" 저서에서 전통적인 프로그래밍과 구별되는, 데이터에 기반한 학습과 의사결정의 자동화 도구로 정의했습니다. 머신러닝의 본질은 데이터를 통해 패턴을 학습하고, 이를 활용해 예측하거나 분류 등의 작업을 수행<br><br>
+
+	머신러닝은 인공지능의 하위 집합으로, 
+	명시적으로 프로그래밍하지 않고 
+	많은 양의 데이터를 제공하여 많은 '경험'을 쌓으면서
+	시스템이 자율적으로 학습하고 개선할 수 있게 하는 것.
 
 <br><br><br>
 
