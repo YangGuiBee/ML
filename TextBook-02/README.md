@@ -221,8 +221,8 @@
 앙상블 학습은 여러 모델을 동시에 훈련시켜 동일한 문제를 해결하고, 이들을 결합하여 더 우수한 결과를 도출하는 기계학습의 패러다임입니다. 앙상블 학습의 기본 가정은 개별적으로는 성능이 떨어지는 모델들이 적절히 결합될 경우, 보다 정확하고 뛰어난 모델을 구축할 수 있다는 것입니다. 앙상블 학습은 과적합, 편향, 분산 등의 문제를 완화하는 데 도움을 주며, 여러 모델을 구축하고 이를 통합함으로써 개별 모델의 오류를 보정하여 전체적으로 개별 모델보다 더 뛰어난 성능을 달성할 수 있습니다.<br> 
 
  **스태킹 (Stacking)** <br>
- **배깅 (Bagging)** : Random Forest <br>
- **부스팅 (Boosting)** : XGBoost, Light Gradient Boosting Machine (LightGBM), CatBoost, Adaptive Boosting (AdaBoost)<br>
+ **배깅 (Bagging)** <br>
+ **부스팅 (Boosting)** <br>
 
 <br>
 
