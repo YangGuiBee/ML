@@ -16,7 +16,7 @@
 12(11-18 ~ 11-22) Reinforcement Learning : Q-learning, DQN, SARSA, Genetic Algorithm, A3C<br>
 13(11-25 ~ 11-29) Evaluation(1) : 회귀 평가지표(MAE, MSE, MSLE, RMSE, RMSLE, MAPE, MPE, R2 score)<br>
 14(12-02 ~ 12-06) Evaluation(2) : 분류 평가지표(Accurancy, Confusion Matrix, Precision, Recall, F1 score, ROC curve, AUC score)<br>
-15(12-09 ~ 12-13) Case Study : Kaggle 프로젝트 리뷰<br>
+15(12-09 ~ 12-13) Case Study : Kaggle 프로젝트 등 리뷰<br>
 16(12-16 ~ 12-20) 기말고사<br>
 
 Reference Book : 
