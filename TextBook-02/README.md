@@ -238,13 +238,26 @@
 <br><br>
    
 ## ▣ ML의 모델 평가
- - 교차 검증<br>
- - 혼동 행렬<br>
- - 정확도<br>
- - 정밀도, 재현율 (Precision, Recall)<br>
- - F1-Score<br>
- - ROC 곡선<br>
- - AUC<br>
+### (1) 회귀 평가 지표
+ **평균 절대 오차 (Mean Absolute Error, MAE)** <br> 
+ **평균 제곱 오차 (Mean Squared Error, MSE)** <br> 
+ **평균 제곱 오차(로그적용) (Mean Squared Log Error, MSLE)** <br>
+ **평균 제곱근 오차 (Root Mean Squared Error, RMSE)** <br> 
+ **평균 제곱근 오차(로그적용) (Root Mean Squared Log Error, RMSLE)** <br>
+ **평균 절대 비율 오차 (Mean Absolute Percentage Error, MAPE)** <br> 
+ **평균 절대 비율 오차(절대값제외) (Mean Percentage Error, MPE)** <br>
+ **R2 score** <br>
+
+ <br>
+ 
+### (2) 분류 평가 지표
+ **정확도 (Accurancy)** <br> 
+ **오차행렬 (Confusion Matrix)** <br> 
+ **정밀도(Precision)** <br> 
+ **재현율(Recall)** <br> 
+ **F1 score** <br> 
+ **ROC curve** <br> 
+ **AUC score** <br> 
 
 <br><br><br>
 
