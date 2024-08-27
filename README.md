@@ -13,7 +13,7 @@
 09(10-28 ~ 11-01) Unsupervised Learning(1) : 시각화(Matplotlib, Seaborn)<br>
 10(11-04 ~ 11-08) Unsupervised Learning(2) : 차원축소(LDA, PCA, KPCA...)<br>
 11(11-11 ~ 11-15) Unsupervised Learning(3) : 군집화(K-Means, Hierarchical, KDE, GMM, DBSCAN)<br>
-12(11-18 ~ 11-22) Reinforcement Learning : 인공신경망(CNN, RNN), MDP/MRP(동적 프로그래밍, MC, TD)<br>
+12(11-18 ~ 11-22) Reinforcement Learning : Q-learning, DQN, SARSA, Genetic Algorithm, A3C<br>
 13(11-25 ~ 11-29) Evaluation(1) : 회귀 평가지표(MAE, MSE, RMSE, MSLE, RMSLE, R2)<br>
 14(12-02 ~ 12-06) Evaluation(2) : 분류 평가지표(Accurancy, Precision, Recall, F1 score, ROC, AUC, FPR, TPR)<br>
 15(12-09 ~ 12-13) Case Study : Kaggle 프로젝트 리뷰<br>
