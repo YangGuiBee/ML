@@ -262,7 +262,8 @@ https://www.ibm.com/kr-ko/topics/artificial-intelligence
 <br><br><br>
 
 ## ▣ AI의 유형
-
+ (출처) https://azure.microsoft.com/ko-kr/resources/cloud-computing-dictionary/what-is-artificial-intelligence#%EC%9D%98%EB%A3%8C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D
+ 
 ### 인공 단순 지능(단순 AI, 약 AI)
 인공 단순 지능(“약한 AI”라고도 함)은 단순하게 정의된 작업을 인간보다 잘 수행하는 컴퓨터 시스템의 능력을 지칭한다. 단순 AI는 인간이 지금까지 도달한 가장 높은 수준의 AI 개발이며, 무인 자동차와 개인 디지털 도우미를 비롯하여 실생활에서 볼 수 있는 모든 AI의 예가 이 범주에 속한다. 이는 AI가 실시간으로 자체적인 사고를 하는 것처럼 보이지만 실제로는 여러 단순 프로세스를 조정하고 미리 결정된 프레임워크 내에서 의사 결정을 내리기 때문이며, AI의 “사고”는 의식이나 감정을 포함하지 않는다.
 
@@ -272,9 +273,7 @@ https://www.ibm.com/kr-ko/topics/artificial-intelligence
 ### ASI(인공 슈퍼 지능)
 인공 슈퍼 지능을 갖춘 컴퓨터 시스템은 과학적 창의성, 통념 및 사회적 기술 등 거의 모든 분야에서 인간을 능가하는 능력을 얻게 된다.
 
- (출처) https://azure.microsoft.com/ko-kr/resources/cloud-computing-dictionary/what-is-artificial-intelligence#%EC%9D%98%EB%A3%8C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D
-
-<br><br><br>
+<br><br>
 
 ## ▣ AI의 활용 분야
 
