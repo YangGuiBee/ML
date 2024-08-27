@@ -152,70 +152,83 @@
 
 ### (1) 지도 학습 (Supervised Learning, SL) : 회귀, 분류
 #### (1-1) 회귀 (regression)<br>
- - 선형 회귀 (Linear Regression)<br>
- - 다항 회귀 (Polynomial Regression)<br>
- - 릿지 회귀 (Ridge Regression)<br>
- - 라쏘 회귀 (Lasso Regression)<br>
- - 엘라스틱넷 회귀 (Elastic Net Regression)<br>
- - 서포트 벡터 회귀 (Support Vector Regression, SVR)<br>
- - 결정 트리 회귀 (Decision Tree Regression)<br>
- - 랜덤 포레스트 회귀 (Random Forest Regression)<br>
+회귀분석은 종속변수가 “급여” 혹은 “가중치”와 같이 실수 (real number) 또는 연속형 변수 (continuous variable)인 경우에 적용됩니다. 회귀의 목표는 연속형 변수의 값을 예측하는 것입니다. 예를 들어, 임금 예측 문제를 고려해봅시다. 이때의 분석 목표는 교육 수준, 경력, 산업, 직책, 지역 등 다양한 요인을 고려하여 근로자의 임금을 예측하는 것입니다. 이때 필요한 데이터는 다수의 근로자에 대한 과거 데이터로, 각 근로자의 상세 정보는 독립변수의 역할을 하며 임금은 종속변수의 역할을 합니다. SL 모델은 이 과거 데이터를 통해 훈련되어, 주어진 독립변수에서 종속변수로의 매핑을 학습합니다. 훈련이 완료된 후에는, 모델은 제공된 상세 정보를 기반으로 근로자의 임금을 예측하는 데 활용됩니다. 이를 통한 분석 결과는 기업의 경쟁력 있는 급여 수준을 설정하거나 다른 그룹간의 임금 공정성을 분석하는 등의 다양한 목적으로 사용될 수 있습니다.<br>
+ **선형 회귀 (Linear Regression)**<br>
+ **다항 회귀 (Polynomial Regression)**<br>
+ **릿지 회귀 (Ridge Regression)**<br>
+ **라쏘 회귀 (Lasso Regression)**<br>
+ **엘라스틱넷 회귀 (Elastic Net Regression)**<br>
+ **서포트 벡터 회귀 (Support Vector Regression, SVR)**<br>
+ **결정 트리 회귀 (Decision Tree Regression)**<br>
+ **랜덤 포레스트 회귀 (Random Forest Regression)**<br>
 
 #### (1-2) 분류 (classification)<br>
- - 로지스틱 회귀 (Logistic Regression)<br>
- - 서포트 벡터 분류 (Support Vector Classification, SVC)<br>
- - 결정 트리 분류 (Decision Tree Classification)<br>
- - 랜덤 포레스트 분류 (Random Forest Classification)<br>
- - k-최근접 이웃 (k-Nearest Neighbors, k-NN)<br>
- - 나이브 베이즈 (Naive Bayes)<br>
- - XGBoost (Extreme Gradient Boosting)<br>
+분류는 출력 변수가 “Yes” 또는 “No”와 같은 이진법 적인 카테고리일 경우에 활용됩니다. 주 목적은 데이터를 사전에 지정된 클래스로 분류하는 것입니다. 예를 들어, 은행이 대출 신청자의 대출 채무 불이행 여부를 예측하는 신용 점수 시스템을 가지고 있다고 상상해보세요. 이때 독립변수는 신청자의 개인적 특징인 소득, 신용 이력, 나이, 고용 상태 등이 될 수 있으며, 종속변수는 채무 불이행의 여부 등의 이진 결과입니다. 이 분류 모델에서의 목표는 입력된 개인의 특징을 기반으로 채무 불이행 가능성을 최대한 정확하게 예측하는 매핑을 학습하는 것이며, 이 모델은 새로운 신청자를 분류하는 데 도움이 됩니다. 물론, 위의 분석에 포함된 독립변수가 반드시 외생적이라는 보장은 없습니다. 대부분의 변수들, 예를 들어 교육 수준은 내생적인 변수일 수 있습니다. 그러나 간단한 지도학습 분석에서는 이를 독립변수로 가정합니다. 이와 관련된 문제는 지도학습에 대한 더욱 상세한 포스팅에서 살펴보도록 하겠습니다.<br>
+ **로지스틱 회귀 (Logistic Regression)**<br>
+ **서포트 벡터 분류 (Support Vector Classification, SVC)**<br>
+ **결정 트리 분류 (Decision Tree Classification)**<br>
+ **랜덤 포레스트 분류 (Random Forest Classification)**<br>
+ **k-최근접 이웃 (k-Nearest Neighbors, k-NN)**<br>
+ **나이브 베이즈 (Naive Bayes)**<br>
+ **XGBoost (Extreme Gradient Boosting)**<br>
 
 <br>
 
 ### (2) 비지도 학습 (Unsupervised Learning, UL) : 군집화, 차원축소
 #### (2-1) 군집화 (Clustering)<br>
- - k-평균 클러스터링 (k-Means Clustering)<br>
- - 계층적 클러스터링 (Hierarchical Clustering)<br>
- - DBSCAN (Density-Based Spatial Clustering of Applications with Noise)<br>
- - 가우시안 혼합 모델 (Gaussian Mixture Model, GMM)<br>
+클러스터링은 특정 기준에 따라 서로 유사한 데이터 관찰값을 그룹화하는 방법입니다. 이를 통해, 우리는 데이터를 클러스터로 분할하여 동일한 클러스터 내의 데이터가 다른 클러스터 내의 데이터보다 더 유사하도록 할 수 있습니다. 예컨대, 고객 세분화 (segmentation) 문제는 그룹별로 최적화된 마케팅 전략을 구현하기 위해 클러스터링이 활용됩니다. 소비자들의 연령, 소득, 소비 습관 등 다양한 요인에 따라 소비자를 그룹화하는 문제는 비지도 학습의 전형적인 적용 사례입니다. 결과적으로, 하나의 그룹은 대량 구매를 드물게 하는 고소득 중년의 소비자로 구성되고, 다른 그룹은 소량 구매는 자주 하지만 젊은 저소득 소비자로 구성될 수 있습니다.<br>
+ **k-평균 클러스터링 (k-Means Clustering)**<br>
+ **계층적 클러스터링 (Hierarchical Clustering)**<br>
+ **DBSCAN (Density-Based Spatial Clustering of Applications with Noise)**<br>
+ **가우시안 혼합 모델 (Gaussian Mixture Model, GMM)**<br>
 
 #### (2-2) 연관 규칙 (Association Rule)<br>
- - FP Growth
- - 이클렛 (Eclat), 
- - 어프라이어리 (Apriori)
+연관 규칙 학습은 대량의 데이터베이스에서 항목 집합 간의 관계나 연관성을 찾는 방법입니다. 주로 시장 바구니 분석에 사용되며, 함께 구매되는 상품 간의 연관성을 찾는 것이 목적입니다. 예를 들면, 식료품점에서 고객의 구매 이력을 연관 규칙 학습을 통해 분석하면, 빵과 버터를 함께 구매하는 고객이 우유도 함께 구매하는 경향이 있다는 사실을 찾아낼 수 있습니다. 이러한 규칙은 제품의 효율적인 배치, 고객의 동선 조정, 특정 제품 추천 등에 활용될 수 있습니다.<br>
+ **FP Growth**<br>
+ **이클렛 (Eclat)**<br> 
+ **어프라이어리 (Apriori)**<br>
  
 #### (2-3) 차원 축소 (Dimensionality Reduction)<br>
- - 주성분 분석 (Principal Component Analysis, PCA)<br>
- - 독립 성분 분석 (Independent Component Analysis, ICA)<br>
- - 자기 조직화 지도 (Self-Organizing Maps, SOM)<br>
- - 오토인코더 (Autoencoders)<br> 
- - 잠재 의미 분석 (Latent Semantic Analysis, LSA)<br>
- - 특이값 분해 (Singular Value Decomposition, SVD)<br>
- - 잠재 디리클레 할당 (Latent Dirichlet Allocation, LDA)<br>
- - t-distributed Stochastic Neighbor Embedding (t-SNE)<br>
+차원 축소는 가능한 한 많은 정보를 보존하면서 데이터에서 사용되는 변수의 수를 줄이는 방법입니다. 고차원 데이터는 계산 복잡성과 차원의 저주 문제로 인해 분석이 어려울 수 있습니다. 따라서 차원 축소를 통해 고차원 데이터를 저차원 공간으로 표현하면 분석이 용이해집니다. 차원 축소는 수백 개의 잠재적 독립변수가 있는 기업의 미래 주가 예측 문제 등에서 활용될 수 있습니다. 예측 변수에는 회사의 과거 주가, 거래량, 매출, 수익, 비용, 그리고 GDP 성장률, 실업률, 인플레이션율, 금리 등의 거시경제 변수가 포함될 수 있습니다. 이러한 변수들은 주가와 관련성이 있을 수 있으며, 모든 변수들을 직접 사용하면 다중 공선성 문제가 발생할 수 있습니다. 따라서 PCA 등의 차원 축소 방법을 활용하여 고차원의 예측 변수를 저차원의 주성분으로 변환하여 주가 예측에 활용할 수 있습니다. 이를 통해 다중 공선성, 차원의 저주, 과적합 등의 문제를 방지할 수 있습니다. 비지도학습의 결과는 입력 데이터의 품질과 관련성, 사용된 알고리즘의 매개변수 선택, 그리고 결과 해석에 의존합니다. 따라서 이 결과는 확정적이지 않으며, 인과적인 통찰력을 제공하지 않습니다.<br> 
+ **주성분 분석 (Principal Component Analysis, PCA)**<br>
+ **독립 성분 분석 (Independent Component Analysis, ICA)**<br>
+ **자기 조직화 지도 (Self-Organizing Maps, SOM)**<br>
+ **오토인코더 (Autoencoders)**<br> 
+ **잠재 의미 분석 (Latent Semantic Analysis, LSA)**<br>
+ **특이값 분해 (Singular Value Decomposition, SVD)**<br>
+ **잠재 디리클레 할당 (Latent Dirichlet Allocation, LDA)**<br>
+ **t-distributed Stochastic Neighbor Embedding (t-SNE)**<br>
 
 <br>
 
 ### (3) 강화 학습 (Reinforcement Learning, RL)<br>
- - Q-learning<br>
- - Deep Q-Network (DQN)<br>
- - State-Action-Reward-State-Action (SARSA)<br>
- - 유전 알고리즘 (Genetic Algorithm)<br>
- - Asynchronous Advantage Actor-Critic (A3C)<br> 
+강화학습은 학습하는 주체(모델)가 주어진 환경에서 보상을 최대화하기 위해 어떤 행동을 취해야 할지 스스로 결정하는 방법을 학습하는 머신러닝의 한 분야입니다. 지도학습과는 다르게 정답 레이블(종속변수)이 제공되지 않으며, 대신 학습하는 주체는 행동의 결과로부터 학습하며, 이를 통해 받는 보상(또는 처벌)에 따라 행동 전략인 정책(policy)을 조정합니다. 강화학습에서 학습하는 주체는 어떤 행동을 취해야 할지 지시를 받지 않고, 어떤 행동을 시도하여 가장 많은 보상을 얻을 수 있는지 스스로 학습해야 합니다. 이에 따라, 학습하는 주체의 행동은 이후 받게 될 데이터에 영향을 미치며, 이로 인해 능동적인 학습의 형태를 가지게 됩니다. 따라서, 강화학습의 핵심은 어떤 행동이 더 큰 보상을 주는지에 대한 탐험(exploration)과 이미 알고 있는 행동을 고수하는 착취(exploitation) 사이의 균형을 찾는 것입니다. 실제 강화학습의 적용 예로는 우버(Uber)나 리프트(Lyft)와 같은 승차 공유 회사에서 동적 가격 전략을 결정하는 경우를 들 수 있습니다. 이러한 강화학습 환경에서 기업은 매 시간 단위마다 현재 상태(state(t))를 수신하고, 행동(action)을 선택하며, 보상(reward)을 얻고, 새로운 상태(state(t+1))로 전환합니다. 상태는 시간, 요일, 수요, 공급, 날씨 등의 다양한 요인들에 의해 결정되며, 행동은 기업이 설정하는 가격 정책입니다. 그리고 보상은 선택된 가격과 수요에 의해 직접적으로 영향을 받는 수익입니다. 기업은 강화학습을 통해 누적 보상을 최대화하는 정책, 즉 상태에서 행동으로의 매핑을 학습할 수 있습니다. 다양한 가격 전략을 탐색하면서, 가장 높은 보상을 얻을 수 있는 전략을 활용하는 방법을 시간이 지남에 따라 학습합니다. 예를 들어, 비가 오는 날에 가격을 높이는 것이 더 높은 수익을 가져온다는 사실을 발견할 수 있습니다.<br>
+ **Q-learning**<br>
+ **Deep Q-Network (DQN)**<br>
+ **State-Action-Reward-State-Action (SARSA)**<br>
+ **유전 알고리즘 (Genetic Algorithm)**<br>
+ **Asynchronous Advantage Actor-Critic (A3C)**<br> 
 
 <br>
 
 ### (4) 앙상블 학습 (Ensemble Learning, EL)<br>
- - 스태킹 (Stacking)<br>
- - 배깅 (Bagging)<br>
+앙상블 학습은 여러 모델을 동시에 훈련시켜 동일한 문제를 해결하고, 이들을 결합하여 더 우수한 결과를 도출하는 기계학습의 패러다임입니다. 앙상블 학습의 기본 가정은 개별적으로는 성능이 떨어지는 모델들이 적절히 결합될 경우, 보다 정확하고 뛰어난 모델을 구축할 수 있다는 것입니다. 앙상블 학습은 과적합, 편향, 분산 등의 문제를 완화하는 데 도움을 주며, 여러 모델을 구축하고 이를 통합함으로써 개별 모델의 오류를 보정하여 전체적으로 개별 모델보다 더 뛰어난 성능을 달성할 수 있습니다. 
+ **스태킹 (Stacking)**<br>
+ **배깅 (Bagging)**<br>
    - Random Forest<br>
- - 부스팅 (Boosting)<br>
+ **부스팅 (Boosting)**<br>
+부스팅은 여러 약한 분류기(weak classifier)를 통합하여 강한 분류기(strong classifier)를 생성하는 것을 목표로 하는 앙상블 방법입니다. 이는 훈련 데이터로부터 모델을 구축한 후, 이 모델의 오류를 수정하는 두 번째 모델을 생성함으로써 이루어집니다. 훈련 세트가 완벽하게 예측되거나, 최대 수의 모델이 추가될 때까지 이러한 과정이 반복됩니다.
    - XGBoost<br>
    - Light Gradient Boosting Machine (LightGBM)<br>
    - CatBoost<br>
    - Adaptive Boosting (AdaBoost)<br>
 
-<br><br><br>
+<br>
+
+### (5) 인공신경망(Artificial Neural Networks, ANNs), 심층학습 (Deep Learning, DL)<br>
+인공신경망(ANNs)은 인간의 뇌 구조에서 영감을 받아 만들어진 계산 모델입니다. 상호 연결된 인공 뉴런 집합으로 구성되며, 연결주의적 계산 방법을 통해 정보를 처리합니다. 이는 인간처럼 경험을 통해 학습하고 성능을 개선할 수 있습니다. 심층학습(Deep Learning)은 이러한 인공신경망을 보다 깊게 쌓아 복잡한 패턴과 구조를 모델링하는 발전된 형태입니다.<br>
+
+<br><br>
    
 ## ▣ ML의 모델 평가
  - 교차 검증<br>
