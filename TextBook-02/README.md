@@ -54,7 +54,7 @@
 표현 : "Machine learning is the subfield of computer science that gives computers the ability to learn without explicitly being programmed."<br>
 설명 : "Data Science from Scratch" 저서에서 전통적인 프로그래밍과 구별되는, 데이터에 기반한 학습과 의사결정의 자동화 도구로 정의했습니다. 머신러닝의 본질은 데이터를 통해 패턴을 학습하고, 이를 활용해 예측하거나 분류 등의 작업을 수행<br><br>
 
-	머신러닝은 인공지능의 하위 집합으로, 
+	머신러닝은 인공지능의 하위 집합으로 
 	명시적으로 프로그래밍하지 않고 
 	많은 양의 데이터를 제공하여 많은 '경험'을 쌓으면서
 	시스템이 자율적으로 학습하고 개선할 수 있게 하는 것.
@@ -71,11 +71,12 @@
 사용 중인 데이터 세트와 원하는 결과에 따라 각 모델 내에서 하나 이상의 알고리즘 기법을 적용<br>
 머신러닝 알고리즘은 기본적으로 사물 분류, 패턴 발견, 결과 예측, 정보 기반 의사결정 등을 수행하도록 설계<br>
 알고리즘은 하나씩 사용할 수도 있고 복잡하고 예측불가능한 데이터의 경우는 정확도를 극대화하기 위해 여러 알고리즘을 결합도 가능<br>
-<img width ='800' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_09.png'><br>
+![](images/01_09.png)
 
+<br><br><br>
 
 ### 【ML 용어】
-<img width ='800' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_08.png'><br>
+<img width ='800' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_08.png'><br>
 **Sample** (샘플, 인스턴스, 관측치, 데이터셋)<br>
 **Feature** (특성, 속성, 측정치, 차원, 입력, 변수)<br>
 **Label** (레이블, 타깃, 출력, 반응변수, 정답, 목표값)<br>
