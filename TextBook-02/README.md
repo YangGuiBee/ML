@@ -48,7 +48,7 @@
 표현 : "Machine learning is a subfield of computer science that focuses on the development of algorithms that can learn from and make predictions on data."<br>
 설명 : "Machine Learning: A Probabilistic Perspective" 저서에서 머신러닝의 이론적 연구와 실질적인 예측 모델의 개발에 대한 중요성을 강조<br>
 
-
+<br><br><br>
 
 ## ▣ ML의 절차
 ![](images/ML_Process.PNG)
@@ -63,7 +63,10 @@
 **Feature** (특성, 속성, 측정치, 차원, 입력, 변수)<br>
 **Label** (레이블, 타깃, 출력, 반응변수, 정답, 목표값)<br>
 
+<br><br><br>
+
 ## ▣ ML의 학습방법
+<img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_01.png'><br>
 
 ### 지도 학습
 네 가지 머신러닝 모델 중 첫 번째는 지도 학습입니다. 지도 학습 알고리즘에서는 예시를 통해 머신을 훈련합니다. 지도 학습 모델은 '입력', '출력' 데이터 쌍으로 구성되며, 원하는 값으로 출력 레이블을 지정할 수 있습니다. 예를 들어 머신을 데이지꽃과 팬지꽃의 차이를 식별할 수 있도록 훈련하려고 합니다. 하나의 이진 입력 데이터 쌍에는 데이지꽃의 이미지와 팬지꽃의 이미지가 모두 포함됩니다. 해당 특정 쌍에 원하는 결과는 데이지꽃을 선택하는 것이기 때문에, 이것이 올바른 결과로서 사전 식별됩니다.
