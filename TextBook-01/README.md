@@ -296,6 +296,14 @@ https://www.ibm.com/kr-ko/topics/artificial-intelligence
 
 ## ▣ AI의 활용 분야
 ![](./images/AI_Division.PNG)
+<br>
+범정부 역량을 결집하여 AI 시대 미래 비전과 전략을 담은 ‘AI 국가전략’을 발표<br>
+경제·사회 전반의 혁신을 위한 3대 분야 9대 전략, 100대 실행과제 제시<br>
+AI를 통해 경제효과 최대455조원 창출, 삶의 질 세계 10위 도약(~2030)<br>
+▶ AI 반도체 세계 1위, 전국 단위 AI 거점화 등 세계를 선도하는 AI 생태계 조성<br>
+▶ 전 생애·모든 직군에 걸친 AI교육 실시 및 세계 최고의 AI인재 양성<br>
+▶ 현 전자정부를 차세대 지능형 정부로 대전환하여 국민 체감도 향상<br>
+▶ 사회보험 확대 등 일자리 안전망 확충 및 AI 윤리 정립으로 사람 중심 AI 실현<br>
  (정부보도자료) https://github.com/YangGuiBee/ML/blob/main/TextBook-01/AI20191217.pdf
 <br>
  (AI 국가전략) https://github.com/YangGuiBee/ML/blob/main/TextBook-01/AI_Strategy.pdf
