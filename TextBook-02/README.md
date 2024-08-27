@@ -66,7 +66,15 @@
 	많은 양의 데이터를 제공하여 많은 '경험'을 쌓으면서
 	시스템이 자율적으로 학습하고 개선할 수 있게 하는 것.
 
-<br><br><br>
+<br><br>
+
+### 【ML 개념】
+
+![](images/ML_1.PNG)
+
+![](images/ML_2.PNG)
+
+<br>
 
 ## ▣ ML의 절차
 ![](images/ML_Process.PNG)
