@@ -190,6 +190,8 @@
  - 스태킹 (Stacking)<br>
  - 배깅 (Bagging, Bootstrap aggregating)<br>
  - 부스팅 (Boosting)<br>
+
+<br><br><br>
    
 ## ▣ ML의 모델 평가
  - 교차 검증<br>
@@ -199,6 +201,8 @@
  - F1-Score<br>
  - ROC 곡선<br>
  - AUC<br>
+
+<br><br><br>
 
 ## ▣ ML의 최적화 기법
  - 과적합 방지<br>
