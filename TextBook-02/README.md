@@ -16,7 +16,7 @@
 ### □ 1959년, Arthur Samuel (아서 새뮤얼)
 정의 : "컴퓨터에 **명시적으로 프로그래밍되지 않고도 학습할 수 있는 능력을 부여**하는 연구 분야."<br>
 표현 : "Field of study that gives computers the ability to learn without being explicitly programmed."<br>
-설명 : 머신러닝이 기존의 명시적 프로그래밍 방식과 어떻게 다른지를 설명하면서 컴퓨터가 데이터를 통해 스스로 학습할 수 있는 능력을 강조<br>
+설명 : 기계학습이라는 용어는 IBM 직원이자 컴퓨터 게임 및 인공 지능 분야의 선구자인 아서 새뮤얼이 처음 사용하였으며, 머신러닝이 기존의 명시적 프로그래밍 방식과 어떻게 다른지를 설명하면서 컴퓨터가 데이터를 통해 스스로 학습할 수 있는 능력을 강조<br>
 
 
 ### □ 1983년, Herbert A. Simon (허버트 사이먼)
@@ -53,6 +53,12 @@
 정의 : "머신러닝은 **데이터를 이용해 명시적으로 프로그래밍하지 않고도 작업을 수행할 수 있는 모델을 만드는 과정**이다."<br>
 표현 : "Machine learning is the subfield of computer science that gives computers the ability to learn without explicitly being programmed."<br>
 설명 : "Data Science from Scratch" 저서에서 전통적인 프로그래밍과 구별되는, 데이터에 기반한 학습과 의사결정의 자동화 도구로 정의했습니다. 머신러닝의 본질은 데이터를 통해 패턴을 학습하고, 이를 활용해 예측하거나 분류 등의 작업을 수행<br><br>
+
+
+	현실세계의 복잡한 업무와 규칙을 구현하기 위한 매우 복잡하고 방대한 코드
+	수시로 변하는 업무환경, 정책, 사용자 성향에 따른 어플리케이션 구현의 어려움
+	많은 자원과 비용을 통해서 구현된 어플리케이션의 예측 정확성 문제
+
 
 	머신러닝은 인공지능의 하위 집합으로 
 	명시적으로 프로그래밍하지 않고 
