@@ -5,6 +5,8 @@
 	 ▣ ML의 절차
 	 ▣ ML의 학습 방법
 	 ▣ ML의 학습별 알고리즘	 
+  	 ▣ ML의 모델 평가
+    	 ▣ ML의 최적화 기법    	 
 ---
 
 ## ▣ ML의 정의
@@ -168,6 +170,27 @@
  - 오토인코더 (Autoencoders)<br>
 
 ### (3) 강화학습 (Reinforcement learning)
+ - 신경망 (Neural Networks)<br>
+ - 딥러닝 (Deep Learning)<br>
 
+
+## ▣ ML의 모델 평가
+ - 교차 검증<br>
+ - 혼동 행렬<br>
+ - 정확도<br>
+ - 정밀도, 재현율 (Precision, Recall)<br>
+ - F1-Score<br>
+ - ROC 곡선<br>
+ - AUC<br>
+
+## ▣ ML의 최적화 기법
+ - 과적합 방지<br>
+ - 정규화 (L1, L2)<br>
+ - 드롭아웃<br>
+ - 조기 종료<br>
+ - 하이퍼파라미터 튜닝<br>
+ - Grid Search<br>
+ - Random Search<br>
+ - Bayesian Optimization<br>
 
 
