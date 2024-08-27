@@ -3,7 +3,7 @@
 ---
 	 ▣ ML의 정의
 	 ▣ ML의 절차
-	 ▣ ML의 학습방법
+	 ▣ ML의 학습 방법
 	 ▣ ML의 학습별 알고리즘	 
 ---
 
@@ -103,7 +103,7 @@ model (모델) : 머신러닝이 찾은 규칙의 수학적 표현(수식), 학�
 
 <br><br><br>
 
-## ▣ ML의 학습방법
+## ▣ ML의 학습 방법
 <img width ='800' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_01.png'><br>
 
 ### 지도 학습 (Supervised learning)
@@ -128,6 +128,46 @@ model (모델) : 머신러닝이 찾은 규칙의 수학적 표현(수식), 학�
 <img width ='600' height = '300' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_05.png'><br>
 지도형 학습에서는 머신에 정답 키를 제공해 모든 올바른 결과 중에서 상관관계를 찾아 학습하도록 합니다. 강화학습 모델에서는 정답 키는 제공되지 않지만 일련의 허용 가능한 행동, 규칙, 잠재적 최종 상태가 입력됩니다. 알고리즘의 원하는 목표가 고정되어 있거나 양자택일인 경우 머신은 예시를 통해 학습할 수 있습니다. 그러나 원하는 목표가 변동 가능한 경우에는 경험과 보상을 통해 학습해야 합니다. 강화학습 모델에서 '보상'은 숫자이며, 시스템에서 수집하려는 항목으로 알고리즘에 프로그래밍됩니다.
 이 모델은 여러 면에서 사람에게 체스 게임을 하는 법을 가르치는 것과 유사합니다. 체스 말이 이동할 수 있는 경우를 모두 보여주는 것은 불가능하며, 그 대신 규칙을 설명해주고 연습을 통해 기술을 습득하도록 합니다. 보상은 게임을 이기는 것뿐 아니라 상대방의 말을 획득하는 형태로 이루어집니다. 강화학습 적용 분야에는 온라인 광고 구매자의 자동 가격 입찰, 컴퓨터 게임 개발, 고위험 주식 시장 거래 등이 있습니다.
+
+
+
+## ▣ ML의 학습별 알고리즘
+
+### (1) 지도 학습 (Supervised learning) : 회귀, 분류
+(1-1) 회귀<br>
+ - 선형 회귀 (Linear Regression)<br>
+ - 다항 회귀 (Polynomial Regression)<br>
+릿지 회귀 (Ridge Regression)<br>
+라쏘 회귀 (Lasso Regression)<br>
+엘라스틱넷 회귀 (Elastic Net Regression)<br>
+서포트 벡터 회귀 (Support Vector Regression, SVR)<br>
+결정 트리 회귀 (Decision Tree Regression)<br>
+랜덤 포레스트 회귀 (Random Forest Regression)<br>
+
+(1-2) 분류
+로지스틱 회귀 (Logistic Regression)<br>
+서포트 벡터 분류 (Support Vector Classification, SVC)<br>
+결정 트리 분류 (Decision Tree Classification)<br>
+랜덤 포레스트 분류 (Random Forest Classification)<br>
+k-최근접 이웃 (k-Nearest Neighbors, k-NN)<br>
+나이브 베이즈 (Naive Bayes)<br>
+XGBoost (Extreme Gradient Boosting)<br>
+
+
+### (2) 비지도 학습 (Unsupervised learning) : 군집, 차원축소
+(2-1) 클러스터링
+k-평균 클러스터링 (k-Means Clustering)
+계층적 클러스터링 (Hierarchical Clustering)
+DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
+가우시안 혼합 모델 (Gaussian Mixture Model, GMM)
+
+(2-2) 차원 축소
+주성분 분석 (Principal Component Analysis, PCA)
+독립 성분 분석 (Independent Component Analysis, ICA)
+자기 조직화 지도 (Self-Organizing Maps, SOM)
+오토인코더 (Autoencoders)
+
+### 강화학습 (Reinforcement learning)
 
 
 
