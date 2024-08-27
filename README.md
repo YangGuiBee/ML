@@ -22,7 +22,7 @@
 15(12-09 ~ 12-13) Case Study : Kaggle 프로젝트 등 리뷰<br>
 16(12-16 ~ 12-20) 기말고사<br>
 -->
-Reference Book : 
+
+Reference :<br> 
 머신러닝 교과서(3판) 실습소스코드 : https://github.com/rickiepark/python-machine-learning-book-3rd-edition
-<br>
 파이썬 머신러닝 완벽가이드(2판) 실습소스코드 : https://github.com/chulminkw/PerfectGuide
