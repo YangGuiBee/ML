@@ -165,12 +165,19 @@
 
 #### (2-2) 연관 규칙 (Association Rule)<br>
  - 주성분 분석 (Principal Component Analysis, PCA)<br>
+ - FP Growth
+ - 이클렛 (Eclat), 
+ - 어프라이어리 (Apriori)
  
 #### (2-3) 차원 축소 (Dimensionality Reduction)<br>
  - 주성분 분석 (Principal Component Analysis, PCA)<br>
  - 독립 성분 분석 (Independent Component Analysis, ICA)<br>
  - 자기 조직화 지도 (Self-Organizing Maps, SOM)<br>
- - 오토인코더 (Autoencoders)<br>
+ - 오토인코더 (Autoencoders)<br> 
+ - 잠재 의미 분석 (Latent Semantic Analysis, LSA)<br>
+ - 특이값 분해 (Singular Value Decomposition, SVD)<br>
+ - 잠재 디리클레 할당 (Latent Dirichlet Allocation, LDA)<br>
+ - t-distributed Stochastic Neighbor Embedding (t-SNE)<br>
 
 ### (3) 강화 학습 (Reinforcement Learning, RL)<br>
  - Q-learning<br>
