@@ -135,8 +135,8 @@
 
 ## ▣ ML의 학습별 알고리즘
 
-### (1) 지도 학습 (Supervised learning) : 회귀, 분류
-(1-1) 회귀<br>
+### (1) 지도 학습 (Supervised Learning, SL) : 회귀, 분류
+#### (1-1) 회귀 (regression)<br>
  - 선형 회귀 (Linear Regression)<br>
  - 다항 회귀 (Polynomial Regression)<br>
  - 릿지 회귀 (Ridge Regression)<br>
@@ -146,7 +146,7 @@
  - 결정 트리 회귀 (Decision Tree Regression)<br>
  - 랜덤 포레스트 회귀 (Random Forest Regression)<br>
 
-(1-2) 분류
+#### (1-2) 분류 (classification)<br>
  - 로지스틱 회귀 (Logistic Regression)<br>
  - 서포트 벡터 분류 (Support Vector Classification, SVC)<br>
  - 결정 트리 분류 (Decision Tree Classification)<br>
@@ -156,24 +156,34 @@
  - XGBoost (Extreme Gradient Boosting)<br>
 
 
-### (2) 비지도 학습 (Unsupervised learning) : 군집, 차원축소
-(2-1) 클러스터링<br>
+### (2) 비지도 학습 (Unsupervised Learning, UL) : 군집화, 차원축소
+#### (2-1) 군집화 (Clustering)<br>
  - k-평균 클러스터링 (k-Means Clustering)<br>
  - 계층적 클러스터링 (Hierarchical Clustering)<br>
  - DBSCAN (Density-Based Spatial Clustering of Applications with Noise)<br>
  - 가우시안 혼합 모델 (Gaussian Mixture Model, GMM)<br>
 
-(2-2) 차원 축소
+#### (2-2) 연관 규칙 (Association Rule)<br>
+ - 주성분 분석 (Principal Component Analysis, PCA)<br>
+ 
+#### (2-3) 차원 축소 (Dimensionality Reduction)<br>
  - 주성분 분석 (Principal Component Analysis, PCA)<br>
  - 독립 성분 분석 (Independent Component Analysis, ICA)<br>
  - 자기 조직화 지도 (Self-Organizing Maps, SOM)<br>
  - 오토인코더 (Autoencoders)<br>
 
-### (3) 강화학습 (Reinforcement learning)
- - 신경망 (Neural Networks)<br>
- - 딥러닝 (Deep Learning)<br>
+### (3) 강화 학습 (Reinforcement Learning, RL)<br>
+ - Q-learning<br>
+ - Deep Q-Network (DQN)<br>
+ - State-Action-Reward-State-Action (SARSA)<br>
+ - 유전 알고리즘 (Genetic Algorithm)<br>
+ - Asynchronous Advantage Actor-Critic (A3C)<br> 
 
-
+### (4) 앙상블 학습 (Ensemble Learning, EL)<br>
+ - 스태킹 (Stacking)<br>
+ - 배깅 (Bagging, Bootstrap aggregating)<br>
+ - 부스팅 (Boosting)<br>
+   
 ## ▣ ML의 모델 평가
  - 교차 검증<br>
  - 혼동 행렬<br>
