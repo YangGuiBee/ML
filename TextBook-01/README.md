@@ -103,6 +103,9 @@
 ### □ 기초 이론과 초기 발전 (1943년~1955년)<br>										
 **1943년:** 워런 맥컬록(Warren McCulloch)과 월터 피츠(Walter Pitts)는  "A Logical Calculus of the Ideas Immanent in Nervous Activity" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/McCulloch_Pitts.pdf) 논문을 통해 신경망 모델의 기초를 마련. 신경망의 수학적 모델을 제안. 신경세포(뉴런)를 이진(binary) 장치로 모델링하여 입력 신호가 일정한 임계값을 넘으면 뉴런이 활성화되어 출력을 생성하고, 그렇지 않으면 비활성 상태로 남는다는 뉴런의 "발화" 메커니즘을 설명한 것으로, 현재의 퍼셉트론(Perceptron) 개념의 기초가 됨. 또한 여러 뉴런이 결합하여 더 복잡한 계산을 수행할 수 있는 신경망을 제안하였고 이 신경망은 다양한 입력에 대해 복잡한 논리적 결정을 내릴 수 있는 구조로 이후 인공 신경망의 이론적 기초가 됨.<br>							
 **1950년:** 앨런 튜링(Alan Turing)은 "Computing Machinery and Intelligence" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Computing%20Machinery%20and%20Intelligence.pdf) 논문을 발표. 튜링은 기계가 지능을 가질 수 있는지에 대한 질문을 제기하고, 기계가 인간과 구별되지 않는 대화를 할 수 있는지를 평가하는 "튜링 테스트"를 제안. 튜링 테스트는 기계가 인간과 구별되지 않을 정도로 대화를 할 수 있는지를 평가하는 테스트로 기계의 지능을 평가하는 기준으로 널리 사용되었으며, 기계가 학습할 수 있는 가능성에 대해 논의하며, 기계가 지능을 가질 수 있다는 이론적 기초를 마련.<br>
+ <a href="https://terms.tta.or.kr/dictionary/dictionaryView.do?subject=%ED%8A%9C%EB%A7%81+%EC%8B%9C%ED%97%98" target="_blank">튜링 테스트에 대한 명확한 정의(TTA)</a><br>
+ <a href="https://ko.wikipedia.org/wiki/%ED%8A%9C%EB%A7%81_%ED%85%8C%EC%8A%A4%ED%8A%B8" target="_blank">튜링 테스트에 대한 상세한 설명(Wiki)</a><br>
+ <a href="https://ko.wikipedia.org/wiki/%EC%A4%91%EA%B5%AD%EC%96%B4_%EB%B0%A9" target="_blank">중국어 방(Wiki)</a>
 											
 
 	   
@@ -149,9 +152,7 @@
 정의 : "인공지능은 **컴퓨터가 사람처럼 대화하고 문제를 해결할 수 있는 능력**을 의미한다."<br>
 논문 : "Computing Machinery and Intelligence"<br>
 설명 : 터링은 "기계가 인간처럼 생각하고 인식할 수 있는가?"와 관련하여 인공지능의 가능성을 논의하며, 기계가 인간처럼 생각할 수 있는지를 평가하기 위한 **"튜링 테스트"** 를 제안하여 AI의 철학적 기반을 다지는 중요한 작업으로 평가<br>
- <a href="https://terms.tta.or.kr/dictionary/dictionaryView.do?subject=%ED%8A%9C%EB%A7%81+%EC%8B%9C%ED%97%98" target="_blank">튜링 테스트에 대한 명확한 정의(TTA)</a><br>
- <a href="https://ko.wikipedia.org/wiki/%ED%8A%9C%EB%A7%81_%ED%85%8C%EC%8A%A4%ED%8A%B8" target="_blank">튜링 테스트에 대한 상세한 설명(Wiki)</a><br>
- <a href="https://ko.wikipedia.org/wiki/%EC%A4%91%EA%B5%AD%EC%96%B4_%EB%B0%A9" target="_blank">중국어 방(Wiki)</a>
+
  
 
 ### □ 1955년, 스튜어트 러셀과 피터 노빅 (Stuart Russell and Peter Norvig)
