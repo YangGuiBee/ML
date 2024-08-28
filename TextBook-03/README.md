@@ -1,11 +1,13 @@
 #  03 : Data Collection, Data Processing : Python, 라이브러리(NumPy, Scikit-Learn, MNIST, TensorFlow...)
 ---
-	 ▣ 데이터 수집
+	 ▣ Python 라이브러리	
+  	 ▣ 데이터 수집
 	 ▣ 데이터 전처리
 	 ▣ 범주형 데이터 처리
-	 ▣ 훈련 데이터셋과 테스트 데이터셋 분리
-  	 ▣ Python 라이브러리	 
+	 ▣ 훈련 데이터셋과 테스트 데이터셋 분리  	  
 ---
+
+## ▣ Python 라이브러리
 
 ## ▣ 데이터 수집
 
@@ -15,7 +17,7 @@
 
 ## ▣ 훈련 데이터셋과 테스트 데이터셋 분리
 
-## ▣ Python 라이브러리
+
 
 
 
