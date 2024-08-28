@@ -48,14 +48,14 @@ MNIST 사용가이드 : https://guide.ncloud-docs.com/docs/tensorflow-tensorflow
 머신러닝 및 인공 지능을 위한 무료 오픈소스 소프트웨어 라이브러리<br>
 다양한 작업에 사용할 수 있지만 특히 심층 신경망의 교육 및 추론에 중점<br>
 연구 및 생산에서 Google의 내부 사용을 위해 Google Brain 팀에서 개발<br>
-TensorFlow는 Python, JavaScript, C++ 및 Java를 포함한 다양한 프로그래밍 언어와 많은 분야의 다양한 애플리케이션에서 쉽게 사용가능<br>
+TensorFlow는 Python, JavaScript, C++ 및 Java 등 다양한 프로그래밍 언어와 많은 분야의 다양한 애플리케이션에서 쉽게 사용가능<br>
 TensorFlow 공식문서 : https://www.tensorflow.org/?hl=ko
 
 <br>
 
 ### 【Matplotlib】
-Python 프로그래밍 언어 및 수학적 확장 NumPy 라이브러리를 활용한 플로팅 라이브러리
-이다. Tkinter , wxPython , Qt 또는 GTK 와 같은 범용 GUI 툴킷을 사용하여 애플리케이션에 플롯을 포함 하기 위한 객체 지향 API를 제공한다. Matplotlib은 매트랩과 유사하게 설계된 상태기계(예: OpenGL )을 기반으로 하는 절차적 "pylab" 인터페이스도 있지만 사용은 권장되지 않는다.   SciPy는 Matplotlib을 활용한다.
+Python 프로그래밍 언어 및 수학적 확장 NumPy 라이브러리를 활용한 플로팅 라이브러리<br>
+Tkinter , wxPython , Qt 또는 GTK 와 같은 범용 GUI 툴킷을 사용하여 애플리케이션에 플롯을 포함 하기 위한 객체 지향 API를 제공<br> 
 Matplotlib 공식문서 : https://matplotlib.org/stable/
 <br>
 Matplotlib 가이드 : https://wikidocs.net/92071
