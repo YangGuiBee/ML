@@ -140,6 +140,7 @@ Matplotlib 가이드 : https://wikidocs.net/92071
 
 고품질 데이터 확보는 원활한 머신러닝 프로젝트를 위해 중요한 첫 단계입니다. 
 
+https://kr.appen.com/blog/best-datasets/
 
 
 ## ▣ 데이터 전처리
