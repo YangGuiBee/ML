@@ -271,6 +271,10 @@
  - Random Search<br>
  - Bayesian Optimization<br>
 
+<br><br><br>
 
 ![](images/ML_list.PNG)
+
+<br><br><br>
+
 
