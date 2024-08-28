@@ -27,7 +27,11 @@ Pandas 공식문서 : https://pandas.pydata.org/pandas-docs/stable/getting_start
 <br>
 
 ### 【Scikit-Learn】
-
+Scikit-learn(이전 명칭: scikits.learn, sklearn)은 파이썬 프로그래밍 언어용 자유 소프트웨어 기계 학습 라이브러리<br>
+다양한 분류, 회귀, 그리고 서포트 벡터 머신, 랜덤 포레스트, 그라디언트 부스팅, k-평균, DBSCAN을 포함한 클러스터링 알고리즘<br>
+파이썬의 수치 및 과학 라이브러리 NumPy 및 SciPy와 함께 운용되도록 설계<br>
+Scikit-learn 공식문서 : https://scikit-learn.org/stable/user_guide.html
+SciPy 공식문서 : https://docs.scipy.org/doc/scipy/
 <br>
 
 ### 【MNIST】
