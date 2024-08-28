@@ -295,7 +295,8 @@ Test 데이터셋 (평가 데이터셋) → 마지막에 모델의 성능을 측
  - Random Search<br>
  - Bayesian Optimization<br>
 
-<br><br><br>
+<br><br>
+### 【ML 강의 구성】
 
 ![](images/ML_list.PNG)
 
