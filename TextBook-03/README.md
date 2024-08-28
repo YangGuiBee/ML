@@ -32,9 +32,14 @@ Scikit-learn(이전 명칭: scikits.learn, sklearn)은 파이썬 프로그래밍
 파이썬의 수치 및 과학 라이브러리 NumPy 및 SciPy와 함께 운용되도록 설계<br>
 Scikit-learn 공식문서 : https://scikit-learn.org/stable/user_guide.html
 SciPy 공식문서 : https://docs.scipy.org/doc/scipy/
+
 <br>
 
 ### 【MNIST】
+MNIST(Modified National Institute of Standards and Technology database)는 손으로 쓴 숫자들로 이루어진 대형 데이터베이스<br>
+다양한 화상처리시스템과 기계학습 분야의 트레이닝 및 테스트에 널리 사용<br>
+MNIST 데이터베이스는 60,000개의 트레이닝 이미지와 10,000개의 테스트 이미지를 포함<br>
+MNIST 사용가이드 : https://guide.ncloud-docs.com/docs/tensorflow-tensorflow-1-3
 
 <br>
 
