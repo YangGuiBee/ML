@@ -65,6 +65,8 @@ Matplotlib 가이드 : https://wikidocs.net/92071
 ## ▣ 데이터 수집
 
 ## ▣ 데이터 전처리
+데이터 인코딩 : One-Hot encoding<br>
+스케일링 : StandardScaler, MinMaxScaler<br>
 
 ## ▣ 범주형 데이터 처리
 
