@@ -17,7 +17,12 @@ NumPy 공식문서 : https://numpy.org/doc/stable/user/whatisnumpy.html
 <br>
 
 ### 【Pandas】
-
+데이터 조작 및 분석을 위한 파이썬 프로그래밍 언어 용으로 작성된 소프트웨어 라이브러리<br>
+숫자 테이블과 시계열을 조작하기 위한 데이터 구조와 연산을 제공<br>
+Pandas란 이름은 한 개인에 대해 여러 기간 동안 관찰을 한다는 데이터 세트에 대한 계량 경제학 용어인 "패널 데이터"에서 파생<br>
+또한 "Python 데이터 분석"이라는 문구 자체에서 따온 것이기도 하다.<br>
+Wes McKinney는 2007년부터 2010년까지 연구원으로 있을 때 AQR Capital에서 pandas를 만들기 시작했다.<br>
+Pandas 공식문서 : https://pandas.pydata.org/pandas-docs/stable/getting_started/index.html
 
 <br>
 
