@@ -1,5 +1,4 @@
-#  03 : ML의 정의와 절차, 학습방법과 모델
-
+#  03 : Data Collection, Data Processing : Python, 라이브러리(NumPy, Scikit-Learn, MNIST, TensorFlow...)
 ---
 	 ▣ ML의 정의
 	 ▣ ML의 절차
