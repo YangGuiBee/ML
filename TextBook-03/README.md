@@ -144,12 +144,17 @@ https://kr.appen.com/blog/best-datasets/
 
 
 ## ▣ 데이터 전처리
+https://davinci-ai.tistory.com/15
+
 데이터 인코딩 : One-Hot encoding<br>
 스케일링 : StandardScaler, MinMaxScaler<br>
 
 ## ▣ 범주형 데이터 처리
+https://ysyblog.tistory.com/71
 
 ## ▣ 훈련 데이터셋과 테스트 데이터셋 분리
+https://velog.io/@ljs7463/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%ED%95%99%EC%8A%B5%EC%9D%84-%EC%9C%84%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B-%EB%B6%84%EB%A6%ACtraintestvalidation
+
 
 
 
