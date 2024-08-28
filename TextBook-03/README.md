@@ -1,4 +1,4 @@
-#  03 : Data Collection, Data Processing : Python, 라이브러리(NumPy, Scikit-Learn, MNIST, TensorFlow...)
+#  03 : Data Collection, Data Processing : Python, 라이브러리(NumPy, Pandas, Scikit-Learn, MNIST, TensorFlow...)
 ---
 	 ▣ Python 라이브러리	
   	 ▣ 데이터 수집
@@ -8,6 +8,30 @@
 ---
 
 ## ▣ Python 라이브러리
+
+### 【NumPy】
+행렬이나 일반적으로 대규모 다차원 배열을 쉽게 처리할 수 있도록 지원하는 파이썬의 라이브러리<br>
+NumPy는 데이터 구조 외에도 수치 계산을 위해 효율적으로 구현된 기능을 제공<br>
+NumPy 공식문서 : https://numpy.org/doc/stable/user/whatisnumpy.html
+
+<br>
+
+### 【Pandas】
+
+
+<br>
+
+### 【Scikit-Learn】
+
+<br>
+
+### 【MNIST】
+
+<br>
+
+### 【TensorFlow】
+
+<br><br><br>
 
 ## ▣ 데이터 수집
 
