@@ -152,6 +152,11 @@
 
 ### (1) 지도 학습 (Supervised Learning, SL) : 회귀, 분류
 #### (1-1) 회귀 (regression)<br>
+<img width ='800' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_03.png'><br>
+이진 분류(binary classification) vs 다중 분류(multiclass classification)<br>
+양성 클래스(positive class) / 음성 클래스(negative class)<br>
+결정 경계(decision boundary)<br>
+
 회귀분석은 종속변수가 “급여” 혹은 “가중치”와 같이 실수 (real number) 또는 연속형 변수 (continuous variable)인 경우에 적용됩니다. 회귀의 목표는 연속형 변수의 값을 예측하는 것입니다. 예를 들어, 임금 예측 문제를 고려해봅시다. 이때의 분석 목표는 교육 수준, 경력, 산업, 직책, 지역 등 다양한 요인을 고려하여 근로자의 임금을 예측하는 것입니다. 이때 필요한 데이터는 다수의 근로자에 대한 과거 데이터로, 각 근로자의 상세 정보는 독립변수의 역할을 하며 임금은 종속변수의 역할을 합니다. SL 모델은 이 과거 데이터를 통해 훈련되어, 주어진 독립변수에서 종속변수로의 매핑을 학습합니다. 훈련이 완료된 후에는, 모델은 제공된 상세 정보를 기반으로 근로자의 임금을 예측하는 데 활용됩니다. 이를 통한 분석 결과는 기업의 경쟁력 있는 급여 수준을 설정하거나 다른 그룹간의 임금 공정성을 분석하는 등의 다양한 목적으로 사용될 수 있습니다.<br>
 
  **선형 회귀 (Linear Regression)** <br>
