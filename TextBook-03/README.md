@@ -1,14 +1,23 @@
 #  03 : Data Collection, Data Processing : Python, 라이브러리(NumPy, Scikit-Learn, MNIST, TensorFlow...)
 ---
-	 ▣ ML의 정의
-	 ▣ ML의 절차
-	 ▣ ML의 학습 방법
-	 ▣ ML의 학습별 알고리즘	 
-  	 ▣ ML의 모델 평가
-	 ▣ ML의 최적화 기법    	 
+	 ▣ 데이터 수집
+	 ▣ 데이터 전처리
+	 ▣ 범주형 데이터 처리
+	 ▣ 훈련 데이터셋과 테스트 데이터셋 분리
+  	 ▣ Python 라이브러리	 
 ---
 
-## ▣ ML의 정의
+## ▣ 데이터 수집
+
+## ▣ 데이터 전처리
+
+## ▣ 범주형 데이터 처리
+
+## ▣ 훈련 데이터셋과 테스트 데이터셋 분리
+
+## ▣ Python 라이브러리
+
+
 
 
 
