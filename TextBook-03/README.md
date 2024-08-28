@@ -37,7 +37,7 @@
 
 브라우저에서 윈도우가 열리면 원하는 `.ipynb`가 들어 있는 디렉토리로 이동할 수 있습니다.
 
-**설치와 설정에 관한 더 자세한 내용은 1장의 [README.md 파일](../TextBook-02/README.md)에 있습니다.**
+**설치와 설정에 관한 더 자세한 내용은 1장의 [README.md 파일](../TextBook-01/README.md)에 있습니다.**
 
 **(주피터 노트북을 설치하지 않았더라도 깃허브에서 [`ch03.ipynb`](https://github.com/rickiepark/python-machine-learning-book-3rd-edition/blob/master/ch03/ch03.ipynb)을 클릭해 노트북 파일을 볼 수 있습니다.)**.
 
