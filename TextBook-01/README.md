@@ -464,13 +464,13 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 
 
 
-### □ 구글 코랩
+### 【구글 코랩】
 
-구글 계정으로 로그인하여 https://colab.research.google.com/?hl=ko 에서 새노트로 시작<br>
+구글 계정으로 로그인하여 https://colab.research.google.com/?hl=ko 에서 [새노트]로 시작<br>
 본 강의 중에는 구글 코랩으로 실습을 시연할 예정인 바, 이하 설치는 선택사항임
 
 
-### □ 파이썬
+### 【파이썬】
 
 파이썬은 주요 운영 체제인 마이크로소프트 윈도(Microsoft Windows), macOS, 리눅스(Linux)에서 사용가능<br>  
 파이썬 문서와 설치 파일 다운로드 : 파이썬 공식 웹 사이트(https://www.python.org)<br> 
@@ -481,7 +481,6 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 명령실행 결과는 다음과 같이 출력
 
     Python 3.7.1 :: Continuum Analytics, Inc.
-
 
 예제 실습에 필요한 패키지는 pip 설치 프로그램으로 설치<br>  
 자세한 pip 설명은 온라인 문서(https://docs.python.org/3/installing/index.html) 참고<br> 
@@ -495,9 +494,9 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
     pip install SomePackage --upgrade
 
 
-### □ 아나콘다
+### 【아나콘다】
 
-아나콘다는 데이터 과학, 수학, 공학용 파이썬 필수 패키지들을 모두 포함하고 있으며 주요 운영 체제를 모두 지원<br>  
+아나콘다는 데이터 과학, 수학, 공학용 파이썬 필수 패키지들을 모두 포함하고 있으며, 주요 운영 체제를 모두 지원<br>  
 아나콘다 설치 파일 다운로드 : https://www.anaconda.com/download/ <br>  
 간단한 아나콘다 안내는 온라인 문서(https://docs.anaconda.com/anaconda/userguide/getting-started/) 참고<br> 
 
@@ -509,30 +508,24 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 
     conda update SomePackage
 
+SomePackage명에는 아래와 같이 핵심 패키지명을 각각 입력
 
-
-### □ 핵심 패키지
-
-실습 예제 코드를 정상적으로 실행하려면 버전을 맞추는 것을 권장<br> 
-
-- [NumPy](http://www.numpy.org) >= 1.18.5
-- [SciPy](http://www.scipy.org) >= 1.4.1
-- [scikit-learn](http://scikit-learn.org/stable/) >= 0.23.2
-- [matplotlib](http://matplotlib.org) >= 3.1.1
-- [pandas](http://pandas.pydata.org) >= 1.0.4
-- [TensorFlow](https://www.tensorflow.org) >= 2.3.0
+ - [NumPy](http://www.numpy.org) >= 1.18.5
+ - [SciPy](http://www.scipy.org) >= 1.4.1
+ - [scikit-learn](http://scikit-learn.org/stable/) >= 0.23.2
+ - [matplotlib](http://matplotlib.org) >= 3.1.1
+ - [pandas](http://pandas.pydata.org) >= 1.0.4
+ - [TensorFlow](https://www.tensorflow.org) >= 2.3.0
 
 
 
-### □ 파이썬/주피터 노트북
+### 【주피터 노트북】
 
-일반적인 파이썬 `.py` 스크립트 대신에 노트북에 담겨있는 `.ipynb` 코드 파일을 사용하면<br> 
+일반적인 파이썬 .py 스크립트 대신에 노트북에 담겨있는 .ipynb 코드 파일을 사용하면<br> 
 코드, 코드를 실행한 결과, 그래프, 막다운(markdown)과 LaTeX 문법을을 지원하는 문서까지 가능<br>
+[주피터(Jupyter) 노트북](http://jupyter.org) 에서는 파이썬 외에도 R 등의 다른 언어를 지원<br>  
 
 ![](./images/ipynb_ex1.png)
-
-"IPython 노트북"은 최근에 "[주피터(Jupyter) 노트북](http://jupyter.org)" 으로 이름이 변경<br>  
-주피터는 파이썬 외에도 줄리아(Julia), R 등의 다른 언어를 지원하는 프로젝트<br>  
 
 주피터 노트북은 pip를 사용해 설치
 
@@ -542,14 +535,12 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 
     $ conda install jupyter notebook
 
-주피터 노트북을 열려면 먼저 코드가 있는 디렉토리로 이동
+주피터 노트북을 열려면 먼저 코드가 있는 디렉토리로 이동하여  `jupyter notebook`을 실행
 
     $ cd ~/code/python-machine-learning-book
-
-그다음 `jupyter notebook`을 실행
-
     $ jupyter notebook
 
+  
 주피터가 기본 브라우저를 실행(일반적으로 [http://localhost:8888/](http://localhost:8888/) 에서 실행)<br>
 
 ![](./images/ipynb_ex2.png)
@@ -559,7 +550,7 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 
 
 
-### □ 주피터 랩
+### 【주피터 랩】
 
 또 다른 주피터 노트북 환경인 주피터 랩(Jupyter Lab)은 `.ipynb` 파일을 다루며 브라우저 인터페이스에서 추가적인 기능을 제공<br>  
 주피터 노트북과 주피터 랩 중 어느 것을 사용해도 가능
