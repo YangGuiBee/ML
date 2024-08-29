@@ -206,45 +206,37 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 	#희소행렬은 대부분 0으로 구성된 행렬과 계산이나 메모리 효율을 이용해 0이 아닌 값의 index만 관리한다.
 	#csr_matrix.toarray()로 ndarray로 바꿀수 있다.
  
+	import numpy as np
+	import pandas as pd
+	from sklearn.preprocessing import OneHotEncoder
+
+	# items 배열 정의
+	items = np.array(['TV', '냉장고', '컴퓨터', '컴퓨터', '냉장고', '에어컨', '에어컨', '선풍기'])
+
+	# 데이터프레임 생성
 	d = {
-    	'item':items,
-    	'cnt':np.arange(8)
+    	'item': items,
+    	'cnt': np.arange(8)
 	}
 	df = pd.DataFrame(d)
 	df.info()
-	
-	items[..., np.newaxis]
-	# ==> array([['TV'],
-	#       ['냉장고'],
-	#       ['컴퓨터'],
-	#       ['컴퓨터'],
-	#       ['냉장고'],
-	#       ['에어콘'],
-	#       ['에어콘'],
-	#       ['선풍기']], dtype='<U3')
 
-	from sklearn.preprocessing import OneHotEncoder
-	ohe = OneHotEncoder()
-	ohe.fit(items[..., np.newaxis])
-	ohv = ohe.transform(items[..., np.newaxis])
-	ohv, type(ohv)
-	ohv.toarray()
-	# ==> array([[1., 0., 0., 0., 0.],
-	#       [0., 1., 0., 0., 0.],
-	#       [0., 0., 0., 0., 1.],
-	#       [0., 0., 0., 0., 1.],
-	#       [0., 1., 0., 0., 0.],
-	#       [0., 0., 0., 1., 0.],
-	#       [0., 0., 0., 1., 0.],
-	#       [0., 0., 1., 0., 0.]])
+	# 아이템 배열에 새로운 축 추가
+	items_expanded = items[..., np.newaxis]
 
+	# One-Hot Encoding 수행
+	ohe = OneHotEncoder(sparse_output=False)  # sparse_output=False: 결과를 배열 형태로 반환
+	ohe.fit(items_expanded)
+	ohv = ohe.transform(items_expanded)
 
-	from sklearn.preprocessing import OneHotEncoder
-	ohe = OneHotEncoder(sparse=False)
-	ohe.fit(items[..., np.newaxis])
-	ohv = ohe.transform(items[..., np.newaxis])
-	ohv, type(ohv)
-	pd.DataFrame(ohv, columns=ohe.get_feature_names())
+	# One-Hot Encoding 결과 확인
+	print(ohv)
+	print(type(ohv))
+
+	# One-Hot Encoding 결과를 데이터프레임으로 변환
+	df_ohv = pd.DataFrame(ohv, columns=ohe.get_feature_names_out())
+	print(df_ohv)
+
 
 
 
