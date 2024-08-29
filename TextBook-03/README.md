@@ -51,7 +51,7 @@ https://ysyblog.tistory.com/71
 
 ![](./images/DataSet2.PNG)
 
-	
+(소스코드)
 	import pandas as pd
 	from sklearn.model_selection import train_test_split
 	
@@ -91,7 +91,7 @@ https://ysyblog.tistory.com/71
  	print(f"검증 데이터 비율: {len(X2_val) / len(df):.2f}")
 
 
-
+(실행결과)
 	전체 데이터 크기: 10
 	학습 데이터 크기 (Train): 8
 	테스트 데이터 크기 (Test): 2
@@ -103,22 +103,13 @@ https://ysyblog.tistory.com/71
 	검증 데이터 비율: 0.20
 
  
- 
- 	from sklearn.model_selection import train_test_split
-	
-	# train-test분리
-	X_train, X_test, y_train, y_test = train_test_split(df['feature'],df['target'])
-	
-	# train-validation분리
-	X2_train, X2_val, y2_train, y_val = train_test_split(X_train, y_train)
-
-
 <br><br><br>
 
 
 
-
 붓꽃 데이터(Iris Dataset)는 Setosa, Virginica, Versicolor 3개의 붓꽃 품종을 구분해내는 것을 목적으로 만들어졌으며, 머신러닝을 경험해볼 수 있는 아주 간단한 장난감 데이터(toy data set)이다.<br> 
+
+![](./images/iris_data.PNG)
 
 **전통적인 프로그래밍(Traditional Programming)** <br>
 (1) 데이터 수집: 붓꽃 품종에 관련된 많은 데이터를 수집한다.<br>
