@@ -128,7 +128,7 @@ Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(�
 									
 											
 ### 전문가 시스템의 부상과 상업화 (1980년대)<br>											
-**1980년대:** AI 연구는 특정 분야의 지식을 기반으로 문제를 해결하는 <ins>전문가 시스템(Expert Systems)</ins>이 부상함. 예컨대, 컴퓨터 구성의 자동화를 위한 XCON(eXpert CONfigurer), 법률 분야의 루카스(LUCAS), 생명과학 및 의학 분야의 세이백(SEYBAC) 등이 상업적으로도 성공.<br><br>	
+**1980년대:** AI 연구는 특정 분야의 지식을 기반으로 문제를 해결하는 <ins>전문가 시스템(Expert Systems)</ins>이 부상함. 예컨대, 컴퓨터 구성의 자동화를 위한 XCON(eXpert CONfigurer), 법률 분야의 루카스(LUCAS), 생명과학 및 의학 분야의 세이백(SEYBAC) 등이 상업적으로도 성공.<br>
 **1983년:** 정통 AI(Tradition AI) 연구의 중심이 문제 해결에서 지식 표현과 추론으로 이동. 이 시기에 조지프 와이젠바움(Joseph Weizenbaum)의 엘리자(ELIZA)와 같은 프로그램이 인기.<br>
 **1986년:** Geoffrey Hinton, David Rumelhart, Ronald Williams는 역전파 알고리즘(backpropagation algorithm)을 제안하여 <ins>다층 퍼셉트론 (Multilayer Perceptron, MLP)</ins>의 학습을 가능하게 했다. 입력층과 출력층 사이에 특징분석기인 은닉층(hidden layers)을 하나 이상 구성함으로써 퍼셉트론의 한계를 극복한 신경망의 학습방법의 발전으로 딥러닝 기술의 기초가 됨<br>
 
@@ -141,7 +141,7 @@ Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(�
 								
 ### 머신러닝과 딥러닝의 부상 (2000년대~현재)<br>											
 **2000년:** 엔비디아는 컴퓨터 시스템에서 그래픽 연산을 빠르게 처리하여 결과값을 모니터에 출력하는 연산 장치인 <ins>GPU(Graphic Processing Unit)</ins>를 최초로 출시<br>
-**2006년:** 컴퓨터 성능의 향상과 대량의 데이터, 그리고 새로운 알고리즘의 발전으로 인해 AI 연구가 재조명. 제프리 힌튼(Geoffrey Hinton)은 딥러닝 논문(A Fast Learning Algorithm for Deep Belief Nets)을 발표<br>					
+**2006년:** 컴퓨터 성능의 향상과 대량의 데이터, 그리고 새로운 알고리즘의 발전으로 인해 AI 연구가 재조명되고, 제프리 힌튼(Geoffrey Hinton)은 <ins>딥러닝 논문(A Fast Learning Algorithm for Deep Belief Nets)</ins>을 발표<br>					
 **2010년:** 스탠포드의 Fei-Fei Li 그룹에서 수백만 개의 레이블이 지정된 이미지를 포함하는 Imagenet 이라는 대규모 데이터베이스를 만들어 게시<br>
 **2012년:** Alex Krizhevsky , Ilya Sutskever , Geoff Hinton은 대규모 시각 인식 챌린지(LSVRC)에서 GPU를 기반으로 기존 오류율을 절반으로 16%로 줄임. 이 시기에 자율주행차, 음성 인식, 자연어 처리 등의 분야에서 혁신적인 성과.<br>
 **2015년:** ResNet이 사람보다 이미지 분류를 더욱 잘 수행<br>
