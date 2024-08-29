@@ -499,30 +499,6 @@ https://ysyblog.tistory.com/71
  
 <br><br><br>
 
-
-
-붓꽃 데이터(Iris Dataset)는 Setosa, Virginica, Versicolor 3개의 붓꽃 품종을 구분해내는 것을 목적으로 만들어졌으며, 머신러닝을 경험해볼 수 있는 아주 간단한 장난감 데이터(toy data set)이다.<br> 
-
-![](./images/iris_data.PNG)
-
-**전통적인 프로그래밍(Traditional Programming)** <br>
-(1) 데이터 수집: 붓꽃 품종에 관련된 많은 데이터를 수집한다.<br>
-(2) 변수 가공: 붓꽃 품종은 '꽃잎(Petal)의 길이'와 '꽃받침(Sepal)의 길이'로 구분 할 수 있다는 변수를 알아낸다.<br>
-(3) 로직 정의: 전문가에게 부탁하거나 본인이 분석하여 꽃받침의 길이가 몇cm 이상이면 Versicolor, 이하면 Setosa라는 여러 세트의 rule들을 정의하여 모델을 만든다.<br>
-(4) 모델 평가: 데이터를 모델에 넣어 정확도가 어느정도 인지 확인해본다.<br>
-
-**머신러닝(Machine Learning)** <br>
-(1) 데이터 수집: 붓꽃 품종에 관련된 많은 데이터를 수집한다.<br>
-(2) 변수 가공: 붓꽃 품종은 '꽃잎의 길이'와 '꽃받침의 길이'로 구분할 수 있다는 변수를 알아낸 뒤 해당 변수의 데이터를 잘 정리한다.<br>
-(3) 모델 학습: Decision Tree, SVM 등 다양한 알고리즘에 데이터만을 입력해보며 적합한 모델을 생성한다.<br>
-(4) 모델 평가: 학습에 사용되지 않은 데이터를 최종 모델에 넣어 정확도가 어느정도 인지 확인해본다.<br>
-
-**딥러닝(Deep Learning)** <br>
-(1) 데이터 수집: 붓꽃 품종에 관련된 많은 이미지 데이터를 수집한다.<br>
-(2) 변수 가공: 변수(feature)는 모델에서 자동 생성된다.<br>
-(3) 모델 학습: 이미지 데이터를 입력하여 다양한 네트워크를 구성해보고 적합한 모델을 생성한다.<br>
-(4) 모델 평가: 학습에 사용되지 않은 이미지 데이터를 최종 모델에 넣어 정확도가 어느 정도 인지 확인해본다.<br>
-
 	import matplotlib.pyplot as plt
 	from pandas import DataFrame
 	from sklearn import datasets, svm, metrics
@@ -582,8 +558,28 @@ https://ysyblog.tistory.com/71
 	print('Test Score :', test_score)
 
 
+붓꽃 데이터(Iris Dataset)는 Setosa, Virginica, Versicolor 3개의 붓꽃 품종을 구분해내는 것을 목적으로 만들어졌으며, 머신러닝을 경험해볼 수 있는 아주 간단한 장난감 데이터(toy data set)이다.<br> 
 
----
+![](./images/iris_data.PNG)
+
+**전통적인 프로그래밍(Traditional Programming)** <br>
+(1) 데이터 수집: 붓꽃 품종에 관련된 많은 데이터를 수집한다.<br>
+(2) 변수 가공: 붓꽃 품종은 '꽃잎(Petal)의 길이'와 '꽃받침(Sepal)의 길이'로 구분 할 수 있다는 변수를 알아낸다.<br>
+(3) 로직 정의: 전문가에게 부탁하거나 본인이 분석하여 꽃받침의 길이가 몇cm 이상이면 Versicolor, 이하면 Setosa라는 여러 세트의 rule들을 정의하여 모델을 만든다.<br>
+(4) 모델 평가: 데이터를 모델에 넣어 정확도가 어느정도 인지 확인해본다.<br>
+
+**머신러닝(Machine Learning)** <br>
+(1) 데이터 수집: 붓꽃 품종에 관련된 많은 데이터를 수집한다.<br>
+(2) 변수 가공: 붓꽃 품종은 '꽃잎의 길이'와 '꽃받침의 길이'로 구분할 수 있다는 변수를 알아낸 뒤 해당 변수의 데이터를 잘 정리한다.<br>
+(3) 모델 학습: Decision Tree, SVM 등 다양한 알고리즘에 데이터만을 입력해보며 적합한 모델을 생성한다.<br>
+(4) 모델 평가: 학습에 사용되지 않은 데이터를 최종 모델에 넣어 정확도가 어느정도 인지 확인해본다.<br>
+
+**딥러닝(Deep Learning)** <br>
+(1) 데이터 수집: 붓꽃 품종에 관련된 많은 이미지 데이터를 수집한다.<br>
+(2) 변수 가공: 변수(feature)는 모델에서 자동 생성된다.<br>
+(3) 모델 학습: 이미지 데이터를 입력하여 다양한 네트워크를 구성해보고 적합한 모델을 생성한다.<br>
+(4) 모델 평가: 학습에 사용되지 않은 이미지 데이터를 최종 모델에 넣어 정확도가 어느 정도 인지 확인해본다.<br>
+
 
 	from sklearn import datasets
 	import matplotlib.pyplot as plt
