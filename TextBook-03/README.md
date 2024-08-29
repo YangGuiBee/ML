@@ -43,13 +43,51 @@ https://ysyblog.tistory.com/71
 3 단계 : training데이터로 모델을 만들고 validation데이터로 검증한다. 만족시 해당모델을 train과 validation데이터를 합쳐서 학습을 시킨후 test데이터를 넣어 확인한다.<br>
 
 데이터 셋의 비중은 정해진 것은 아니나 보통 Training set : Validation set : Test sets = 60 : 20 : 20 으로 설정한다.<br>
+한번의 학습으로 완전하게 모델을 학습시키기 어렵기 때문에, 다르게 튜닝된 여러 모델들을 학습한 후 어떤모델이 잘 학습되었는지 검증셋으로 검증하고 모델을 선택하는 과정이 필요하다. 이렇게 훈련/검증세트로 좋은 모델을 만들어 낸 후 최종적으로 테스트세트에는 단 한번의 예측테스트를 진행한다. 결과가 마음에 들지 않아도 또 수정하게되면 테스트 세트에 과적합되어 일반화의 성능이 떨어지게 된다. 훈련데이터는 모델을 Fit하는데 사용하며, 검증데이터트 예측 모델을 선택하기 위해 모델의 예측오류를 측정할 때 사용한다. 테스터데이터는 일반화 오류를 평가하기 위해 마지막에 단 한번만 사용해야한다. 이때 테스트 데이터는 한번도 공개된적 없는 데이터이어야 한다.<br>
+
 **훈련 데이터(Training set) :** 모델을 학습하는데 사용된다. Training set으로 모델을 만든 뒤 동일한 데이터로 성능을 평가해보기도 하지만, 이는 cheating이 되기 때문에 유효한 평가는 아니다. 마치 모의고사와 동일한 수능 문제지를 만들어 대입 점수를 매기는 것과 같다. Training set은 Test set이 아닌 나머지 데이터 set을 의미하기도 하며, Training set 내에서 또 다시 쪼갠 Validation set이 아닌 나머지 데이터 set을 의미하기도 한다. 문맥상 Test set과 구분하기 위해 사용되는지, Validation과 구분하기 위해 사용되는지를 확인해야 한다.<br>
 **테스트 데이터(Test set) :** validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한번 해당 모델의 예상되는 성능을 측정하기 위해 사용된다. 이미 validation set은 여러 모델에 반복적으로 사용되었고 그중 운 좋게 성능이 보다 더 뛰어난 것으로 측정되어 모델이 선택되었을 가능성이 있다. 때문에 이러한 오차를 줄이기 위해 한 번도 사용해본 적 없는 test set을 사용하여 최종 모델의 성능을 측정하게 된다.<br>
 **검정 데이터(Validation set) :** 여러 모델들 각각에 적용되어 성능을 측정하며, 최종 모델을 선정하기 위해 사용된다. 반면 test set은 최종 모델에 대해 단 한번 성능을 측정하며, 앞으로 기대되는 성능을 예측하기 위해 사용된다. Training set으로 모델들을 만든 뒤, validation set으로 최종 모델을 선택하게 된다. 최종 모델의 예상되는 성능을 보기 위해 test set을 사용하여 마지막으로 성능을 평가한다. 그 뒤 실제 사용하기 전에는 쪼개서 사용하였던 training set, validation set, test set 을 모두 합쳐 다시 모델을 training 하여 최종 모델을 만든다. 기존 training set만을 사용하였던 모델의 파라미터와 구조는 그대로 사용하지만, 전체 데이터를 사용하여 다시 학습시킴으로써 모델이 조금 더 튜닝되도록 만든다. 혹은 data modeling을 진행하는 동안 새로운 데이터를 계속 축적하는 방법도 있다. 최종 모델이 결정되었을 때 새로 축적된 data를 test data로 사용하여 성능평가를 할 수도 있다.<br>
 
 ![](./images/DataSet2.PNG)
 
+	
+	import pandas as pd
 	from sklearn.model_selection import train_test_split
+	
+	# 예시 데이터프레임 생성 (실제 데이터프레임이 이미 있다고 가정)
+	# 예시: df = pd.DataFrame({'feature': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'target': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]})
+	# 아래 예시 데이터프레임은 실행 가능성을 위해 추가됨
+	
+	# 데이터프레임 생성
+	df = pd.DataFrame({
+    		'feature': range(1, 11),  # 1~10까지의 숫자
+    		'target': [0, 1] * 5      # 0과 1이 반복되는 타겟값
+	})
+	
+	# 단일 피처를 2차원 배열로 변환
+	X = df[['feature']]  # X는 2차원 데이터프레임으로, [[ ]]를 사용하여 2차원으로 만듭니다.
+	y = df['target']     # y는 1차원 Series
+	
+	# train-test 분리
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+	
+	# train-validation 분리
+	X2_train, X2_val, y2_train, y2_val = train_test_split(X_train, y_train, test_size=0.25, random_state=42)
+	
+	# 각 데이터 세트의 크기를 출력
+	print(f"전체 데이터 크기: {len(df)}")
+	print(f"학습 데이터 크기 (Train): {len(X2_train)}")
+	print(f"검증 데이터 크기 (Validation): {len(X2_val)}")
+	print(f"테스트 데이터 크기 (Test): {len(X_test)}")
+	
+	# 데이터 분할 비율 확인
+	print(f"\n학습 데이터 비율: {len(X2_train) / len(df):.2f}")
+	print(f"검증 데이터 비율: {len(X2_val) / len(df):.2f}")
+	print(f"테스트 데이터 비율: {len(X_test) / len(df):.2f}")
+ 	
+ 
+ from sklearn.model_selection import train_test_split
 	
 	# train-test분리
 	X_train, X_test, y_train, y_test = train_test_split(df['feature'],df['target'])
@@ -59,6 +97,9 @@ https://ysyblog.tistory.com/71
 
 
 <br><br><br>
+
+
+
 
 붓꽃 데이터(Iris Dataset)는 Setosa, Virginica, Versicolor 3개의 붓꽃 품종을 구분해내는 것을 목적으로 만들어졌으며, 머신러닝을 경험해볼 수 있는 아주 간단한 장난감 데이터(toy data set)이다.<br> 
 
