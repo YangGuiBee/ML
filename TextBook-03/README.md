@@ -66,31 +66,31 @@ https://ysyblog.tistory.com/71
 	})
 	
 	# 단일 피처를 2차원 배열로 변환
-	X = df[['feature']]  # X는 2차원 데이터프레임으로, [[ ]]를 사용하여 2차원으로 만듭니다.
+	X = df[['feature']]  # X는 2차원 데이터프레임으로, [[ ]]를 사용하여 2차원으로 생성
 	y = df['target']     # y는 1차원 Series
 	
 	# train-test 분리
+ 	# 전체 데이터에서 80%를 학습 데이터로, 20%를 테스트 데이터로 분리
+  	# random_state=42 : 설정하지 않거나 'None'으로 설정시, 매번 다른 결과를 생성
 	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 	
 	# train-validation 분리
+ 	# 학습 데이터에서 75%를 최종 학습 데이터로, 25%를 검증 데이터로 분리
 	X2_train, X2_val, y2_train, y2_val = train_test_split(X_train, y_train, test_size=0.25, random_state=42)
 	
 	# 각 데이터 세트의 크기를 출력
 	print(f"전체 데이터 크기: {len(df)}")
 	print(f"학습 데이터 크기 (Train): {len(X2_train)}")
-	print(f"검증 데이터 크기 (Validation): {len(X2_val)}")
 	print(f"테스트 데이터 크기 (Test): {len(X_test)}")
+ 	print(f"검증 데이터 크기 (Validation): {len(X2_val)}")
 	
 	# 데이터 분할 비율 확인
 	print(f"\n학습 데이터 비율: {len(X2_train) / len(df):.2f}")
-	print(f"검증 데이터 비율: {len(X2_val) / len(df):.2f}")
 	print(f"테스트 데이터 비율: {len(X_test) / len(df):.2f}")
+ 	print(f"검증 데이터 비율: {len(X2_val) / len(df):.2f}")
 
-X = df[['feature']]: 이 부분에서 feature 열을 2차원으로 변환하여 X에 저장<br>
-y = df['target']: target 값은 1차원<br>
-train-test 분리 : 전체 데이터에서 80%를 학습 데이터로, 20%를 테스트 데이터로 분리<br>
-train-validation 분리: 학습 데이터에서 75%를 최종 학습 데이터로, 25%를 검증 데이터로 분리<br>
-random_state=42 : 설정하지 않거나 'None'으로 설정시, 함수는 시스템시드 또는 현재시간에 따라 시드를 자동으로 선택하여 매번 다른 결과를 생성
+
+
 
 	전체 데이터 크기: 10
 	학습 데이터 크기 (Train): 6
