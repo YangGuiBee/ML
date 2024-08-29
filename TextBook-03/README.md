@@ -75,14 +75,10 @@
 
 ### (2) Handling Text and Categorical Attributes
 수집된 데이터는 컴퓨팅 학습을 위해서 기존 데이터 세트에 텍스트가 있는 경우 이것을 숫자형 데이터로 인코딩(Encoding)이 필요하다. 인코딩에는 레이블 인코딩(Label Encoding)과 원핫 인코딩(One-hot Encoding)을 통해 범주형 데이터를 수치형 데이터로 변환이 필요하다.<br>
-**레이블 인코딩 :** 각 카테고리를 숫자로 대응시켜서 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"를 1로, "green"을 2로, "blue"를 3으로 변환하는 것이다. 이 방법은 간단하고 직관적이지만, 각 카테고리가 가지는 값의 크기 차이가 있을 경우 예측 결과에 영향을 미칠 수 있다.<br>
+**레이블 인코딩 :** 각 카테고리를 숫자로 대응시켜서 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"를 1로, "green"을 2로, "blue"를 3으로 변환하는 것이다. 이 방법은 간단하고 직관적이지만, 각 카테고리가 가지는 값의 크기 차이가 있을 경우 예측 결과에 영향을 미칠 수 있다. 텍스트를 숫자로 인코딩하는 메소드로는 factorize()와 OrdinalEncoder()이 있다.<br>
 <br>
 **원핫 인코딩 :** 각 카테고리를 벡터 형태로 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"는 [1, 0, 0], "green"은 [0, 1, 0], "blue"는 [0, 0, 1]로 변환하는 것이다. 이 방법은 각 카테고리를 독립적인 변수로 취급하기 때문에 각 카테고리가 가지는 값의 크기 차이를 고려하지 않기 때문에 범주형 변수의 카테고리가 많을수록 차원이 커지는 단점이 있지만, 예측 결과에 영향을 미치는 위험이 적다.<br>
-따라서, 레이블 인코딩은 카테고리가 서열을 가지는 경우(예: "bad", "average", "good")나 카테고리의 수가 적을 경우에 사용하고, 원핫 인코딩은 카테고리의 수가 많을 경우에 사용한다.<br>
-
-Encoding text to number method : factorize(), OrdinalEncoder()
-One-Hot Encoding method : OneHotEncoder()
-
+따라서, 레이블 인코딩은 카테고리가 서열을 가지는 경우(예: "bad", "average", "good")나 카테고리의 수가 적을 경우에 사용하고, 원핫 인코딩은 카테고리의 수가 많을 경우에 사용한다. 원핫 인코딩 메소드로는 OneHotEncoder()가 있다.<br>
 
 
 예제로 사용할 데이터<br>
@@ -105,7 +101,7 @@ One-Hot Encoding method : OneHotEncoder()
         dtype='object')
 
 
-factorize()<br>
+**factorize()** <br>
 
 	Pandas에서 제공하는 메서드로서, 숫자형 또는 카테고리형으로 인코딩을 해주는 함수
 	여러 개의 카테고리형 input feature들을 인코딩
@@ -118,7 +114,7 @@ factorize()<br>
   	[0 0 1 2 0 2 0 2 0 0 2 2 0 2 2 0 3 2 2 2 0]
 
 
-OrdinalEncoder()<br>
+**OrdinalEncoder()** <br>
 
 	Scikit-learn에서 제공하는 factorize 역할의 클래스
 	OrdinalEncoder객체를 생성해서, inputer와 비슷한 방식으로 사용
@@ -147,7 +143,7 @@ OrdinalEncoder()<br>
 위의 factorize()와 OrdinalEncoder()와 같은 카테고리형 텍스트를 단순히 순서에 맞게 숫자형으로 바꾸어주는 방법은 문제점이 있다. 예컨대, 위의 함수들을 사용해서 변환시키면 <1H OCEAN변수는 0이고, NEAR OCEAN변수는 4입니다. 각각 변수들은 0~4까지 있는데, 1 같은 경우 0과 비슷하다고 ML알고리즘은 판단할 수 있다. 실제로는 비슷하지 않지만, 알고리즘은 숫자에 의미를 두어 거리를 판단하게 되는 경우가 생긴다. 이를 방지하기 위해서 나온 것인 One-Hot Encoder.
 
 
-OneHotEncoding()<br>
+**OneHotEncoding()** <br>
 
 	Scikit-learn에서 제공하는 클래스로, 카테고리형 특징들을 one-hot 숫자형 배열로 인코딩해주는 클래스
 	오직 하나로 해당되는 부분만 1(Hot)로, 나머지는 0(Cold)으로 바꾸는 방법
@@ -172,59 +168,51 @@ OneHotEncoding()<br>
 
 
 
-Custom Transformers
-Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공합니다. 이를 이용하여, 커스텀 변환기를 만들 수 있습니다. 이를 위해서는 세 가지 메서드를 알아야 합니다.
+### (3) Custom Transformers
+Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하는데, 이를 이용하여 커스텀 변환기를 만들 수 있다.
 
+**fit()**
 
-fit()
+	x: input data
+	x라는 데이터에 특정 알고리즘 또는 전처리를 적용하는 메서드
+ 	이를 통해 변환기에 알맞는 파라미터를 생성
 
-x: input data
-x라는 데이터에 특정 알고리즘 또는 전처리를 적용하는 메서드입니다. 이를 통해 변환기에 알맞는 파라미터를 생성합니다.
+**transform()**
 
+	x: input data
+	fit()을 통해 생성된 파라미터를 통해서 모델을 적용시켜 데이터 세트를 알맞게 변환시키는 메소드
 
+**fit_transform()**
 
-transform()
+	#같은 데이터 세트를 사용하여 fit과 transform을 한 번에 하는 메서드
+ 	#아래 코드는 rooms_per_household, population_per_household 두 변수의 데이터를 생성하는 코드로
+        #fit함수 작성을 통해 데이터 세트를 받아서 객체를 return 하고, 
+	#transform을 통해 데이터 세트를 실질적으로 변환(생성)
+ 
+  	from sklearn.base import BaseEstimator, TransformerMixin
+	rooms_ix, bedrooms_ix, population_ix, households_ix = 3, 4, 5, 6
 
-x: input data
-fit()을 통해 생성된 파라미터를 통해서 모델을 적용시켜 데이터 세트를 알맞게 변환시키는 메소드입니다.
-
-
-
-fit_transform()
-
-
-같은 데이터 세트를 사용하여 fit과 transform을 한 번에 하는 메서드입니다.
-  from sklearn.base import BaseEstimator, TransformerMixin
-
-  rooms_ix, bedrooms_ix, population_ix, households_ix = 3, 4, 5, 6
-
-  class CombinedAttributesAdder(BaseEstimator, TransformerMixin):
-      def __init__(self, add_bedrooms_per_room = True): # no *args or **kargs
-          self.add_bedrooms_per_room = add_bedrooms_per_room
-      def fit(self, X, y=None):
-          return self  # nothing else to do
-      def transform(self, X, y=None):
-          rooms_per_household = X[:, rooms_ix] / X[:, households_ix]
-          population_per_household = X[:, population_ix] / X[:, households_ix]
-          if self.add_bedrooms_per_room:
-              bedrooms_per_room = X[:, bedrooms_ix] / X[:, rooms_ix]
-              return np.c_[X, rooms_per_household, population_per_household,
-                           bedrooms_per_room]
-          else:
-              return np.c_[X, rooms_per_household, population_per_household]
-
-  attr_adder = CombinedAttributesAdder(add_bedrooms_per_room=False)
-  housing_extra_attribs = attr_adder.transform(housing.values)
-
+ 	class CombinedAttributesAdder(BaseEstimator, TransformerMixin):
+      		def __init__(self, add_bedrooms_per_room = True): # no *args or **kargs
+          		self.add_bedrooms_per_room = add_bedrooms_per_room
+      		def fit(self, X, y=None):
+          	   return self  # nothing else to do
+      		def transform(self, X, y=None):
+          	   rooms_per_household = X[:, rooms_ix] / X[:, households_ix]
+          	population_per_household = X[:, population_ix] / X[:, households_ix]
+          	if self.add_bedrooms_per_room:
+		   bedrooms_per_room = X[:, bedrooms_ix] / X[:, rooms_ix]
+              	   return np.c_[X, rooms_per_household, population_per_household,
+			bedrooms_per_room]
+          	else:
+                  return np.c_[X, rooms_per_household, population_per_household]
+	
+  	attr_adder = CombinedAttributesAdder(add_bedrooms_per_room=False)
+  	housing_extra_attribs = attr_adder.transform(housing.values)
 
 
 
-위의 코드는 rooms_per_household, population_per_household 두 변수의 데이터를 생성하는 코드입니다.
-
-
-위의 코드를 통해 이해한 내용으로는, fit함수 작성을 통해 데이터 세트를 받아서 객체를 return 하고, transform을 통해 데이터 세트를 실질적으로 변환(생성)시킨다는 것을 알 수 있습니다.
-
-Feature Scaling
+### (3) Feature Scaling
 숫자형으로 다 바꾼 데이터를 바로 학습시킨다면 좋은 성능을 가진 모델이 될까요? 일반적인 ML 알고리즘들은 아주 다양한 범위의 숫자형 데이터를 학습시킨다면 제대로 성능을 보여주지 못합니다.
 예를 들어, 특정 데이터의 범위가 -500~39,320이라면 아주 다양한 데이터가 존재합니다. 이러한 상태에서는 제대로 된 학습을 잘하지 못합니다. 이를 방지하기 위해서 숫자형 데이터의 범위를 줄여주는 방법을 사용합니다.
 
