@@ -24,6 +24,17 @@
 
 머신러닝 데이터셋(dataset) 사이트 40가지 모음 : https://kr.appen.com/blog/best-datasets/
 
+Housing Price Prediction (Hands-on Machine Learning with Schikit Learn & TensorFlow) : Hounsing Price Dataset
+https://raw.githubusercontent.com/ageron/handson-ml
+
+Iris Flower Classification : Scikit - learn dataset
+
+Mushrooms Classification https://www.kaggle.com/uciml/mushroom-classification
+
+Medical Costs Personal Dataset https://www.kaggle.com/mirichoi0218/insurance/data
+
+Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswithkartik/red-white-wine-dataset 
+
 <br><br>
 
 ## ▣ 데이터 전처리
@@ -145,8 +156,8 @@
 
 **OneHotEncoding()** <br>
 
-	Scikit-learn에서 제공하는 클래스로, 카테고리형 특징들을 one-hot 숫자형 배열로 인코딩해주는 클래스
-	오직 하나로 해당되는 부분만 1(Hot)로, 나머지는 0(Cold)으로 바꾸는 방법
+	#Scikit-learn에서 제공하는 클래스로, 카테고리형 특징들을 one-hot 숫자형 배열로 인코딩해주는 클래스
+	#오직 하나로 해당되는 부분만 1(Hot)로, 나머지는 0(Cold)으로 바꾸는 방법
   	
   	from sklearn.preprocessing import OneHotEncoder
   	cat_encoder = OneHotEncoder() 
@@ -238,7 +249,7 @@ Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하
 
 
 
-** Standardization**
+**Standardization**
 
 	#특정 범위에 값을 바인딩하지 않는다.
 	#특정 알고리즘(ex. Neural Network)에서는 사용되지 않는 방식
@@ -282,8 +293,6 @@ Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하
 
 위의 코드에서, Pipleline클래스에 imputer, 특성 추가, StandardScaler()를 모두 선언하여 데이터가 해당 순서에 맞춰 진행되도록 하는 코드입니다.
 
-머신러닝 입문 관련 데이터 세트 프로젝트는 아래의 github 레포지토리에 있습니다.
-https://github.com/harimkang/Scikit-Learn-Example
 
 
 https://davinci-ai.tistory.com/15
