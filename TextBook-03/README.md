@@ -212,111 +212,79 @@ Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하
 
 
 
-### (3) Feature Scaling
-숫자형으로 다 바꾼 데이터를 바로 학습시킨다면 좋은 성능을 가진 모델이 될까요? 일반적인 ML 알고리즘들은 아주 다양한 범위의 숫자형 데이터를 학습시킨다면 제대로 성능을 보여주지 못합니다.
-예를 들어, 특정 데이터의 범위가 -500~39,320이라면 아주 다양한 데이터가 존재합니다. 이러한 상태에서는 제대로 된 학습을 잘하지 못합니다. 이를 방지하기 위해서 숫자형 데이터의 범위를 줄여주는 방법을 사용합니다.
+### (4) Feature Scaling
+일반적인 ML 알고리즘들은 아주 다양한 범위의 숫자형 데이터를 학습시킨다면 제대로 성능을 보여주지 못한다. 예컨대, 특정 데이터의 범위가 -500~39,320이라면 아주 다양한 데이터가 존재한다. 이러한 상태에서는 제대로 된 학습을 잘하지 못한다. 이를 방지하기 위해서 숫자형 데이터의 범위를 줄여주는 방법을 사용한다.
 
 
-Min-Max Scaling (Normalization)
+**Min-Max Scaling (Normalization)**
 
+	#최솟값과 최댓값을 확인하여 이 값들을 모두 지정한 범위(대체로 0과 1 사이)의 상대적인 값으로 변환
+	#특정 범위를 지정하면 해당 범위 안으로 바인딩
+	#Scikit-learn에서는 MinMaxScaler(feature_range, copy) class를 제공
+	#feature_range: tuple(min, max), default=(0, 1), 변환하고자 하는 데이터의 변환 지정 범위
+	#copy: Boolean, 변환 이전의 값들을 복사해 둘 것인지에 대한 여부
+ 
+ 	from sklearn.preprocessing import MinMaxScaler
 
-최솟값과 최댓값을 확인하여 이 값들을 모두 지정한 범위(대체로 0과 1 사이)의 상대적인 값으로 변환시키는 방법입니다.
-
-
-특정 범위를 지정하면 해당 범위 안으로 바인딩시키는 방법입니다.
-
-
-
-Scikit-learn에서는 MinMaxScaler(feature_range, copy) class를 제공합니다.
-
-
-feature_range: tuple(min, max), default=(0, 1), 변환하고자 하는 데이터의 변환 지정 범위입니다.
-
-
-copy: Boolean, 변환 이전의 값들을 복사해 둘 것인지에 대한 여부입니다.
-  from sklearn.preprocessing import MinMaxScaler
-
-  a = [[10, 2, 1], [9, 2, 1], [8, 2, 1], [6, 2, 5], [2, 8, 10]]
-  scaler = MinMaxScaler(feature_range=(0,1))
-  a = scaler.fit_transform(a)
-  >>> print(a)
-  [ [1.    0.     0.]
-      [0.875    0.    0.]
-      [0.75    0.    0.]
-      [0.5    0.    0.44444444]
-      [0.    1.    1.]]
+  	a = [[10, 2, 1], [9, 2, 1], [8, 2, 1], [6, 2, 5], [2, 8, 10]]
+  	scaler = MinMaxScaler(feature_range=(0,1))
+  	a = scaler.fit_transform(a)
+  	>>> print(a)
+	 [ [1.    0.     0.]
+		[0.875    0.    0.]
+      		[0.75    0.    0.]
+      		[0.5    0.    0.44444444]
+      		[0.    1.    1.]]
 
 
 
+** Standardization**
+
+	#특정 범위에 값을 바인딩하지 않는다.
+	#특정 알고리즘(ex. Neural Network)에서는 사용되지 않는 방식
+	#특이점(이상점)의 영향이 적다
+	#Scikit-learn에서는 StandardScaler() 클래스를 제공
+ 	
+  	from sklearn.preprocessing import StandardScaler
+	
+  	a = [[10, 2, 1], [9, 2, 1], [8, 2, 1], [6, 2, 5], [2, 8, 10]]
+  	scaler = StandardScaler()
+  	a = scaler.fit_transform(a)
+  	>>> print(a)
+  	[ [1.06066017    -0.5     -0.73130714]
+      	[0.70710678    -0.5    -0.73130714]
+      	[0.35355339    -0.5    -0.73130714]
+      	[0.35355339    -0.5    0.39378077]
+      	[-1.76776695    2.    1.80014064]]
 
 
 
-Standardization
+### (5) ML Pipeline
+위의 데이터 전처리 방식들은 아주 다양한 컴포넌트들로 이루어져 있다. 매번 데이터 정제마다 같은 순서를 반복하기 싫다면, Pipeline이라는 방식을 사용하면 된다. Pipeline은 Data Processing Component들의 순서를 정의해놓은 것이다. 데이터 변환을 조작하고 적용하는 방법으로 각각의 컴포넌트들과 교류하며 사용하고 ML 워크플로우의 자동화를 지원한다. Scikit-Learn에서는 Pipeline Class를 제공하는데, 이것은 데이터 변환 단계의 순서를 정리하고 만들기 쉽다.
 
 
-특정 범위에 값을 바인딩하지 않습니다.
+**Parameter**
 
-
-특정 알고리즘(ex. Neural Network)에서는 사용되지 않는 방식입니다.
-
-
-특이점(이상점)의 영향이 적습니다.
-
-
-
-Scikit-learn에서는 StandardScaler() 클래스를 제공합니다.
-  from sklearn.preprocessing import StandardScaler
-
-  a = [[10, 2, 1], [9, 2, 1], [8, 2, 1], [6, 2, 5], [2, 8, 10]]
-  scaler = StandardScaler()
-  a = scaler.fit_transform(a)
-  >>> print(a)
-  [ [1.06066017    -0.5     -0.73130714]
-      [0.70710678    -0.5    -0.73130714]
-      [0.35355339    -0.5    -0.73130714]
-      [0.35355339    -0.5    0.39378077]
-      [-1.76776695    2.    1.80014064]]
-
-
-
-
-ML Pipeline
-위의 데이터 전처리 방식들은 아주 다양한 컴포넌트들로 이루어져 있습니다. 매번 데이터 정제마다 같은 순서를 반복하기 싫다면, Pipeline이라는 방식을 사용하면 됩니다.
-Pipeline은 Data Processing Component들의 순서를 정의해놓은 것입니다.
-
-데이터 변환을 조작하고 적용하는 방법입니다.
-각각의 컴포넌트들과 교류하며 사용합니다.
-ML 워크플로우의 자동화를 돕는 방법입니다.
-
-
-
-Scikit-Learn에서는 Pipeline Class를 제공합니다. 이것은 데이터 변환 단계의 순서를 정리하고 만들기 쉽게 합니다.
-
-
-Parameter
-
-steps: list, list of tuple
-
-
-
-마지막에 사용되는 estimator는 반드시 데이터 변환 단계를 필요로 합니다. (fit_transform이 포함되어야 합니다.)
-  from sklearn.pipeline import Pipeline
-  from sklearn.preprocessing import StandardScaler
-
-  num_pipeline = Pipeline([
+	#steps: list, list of tuple
+	#마지막에 사용되는 estimator는 반드시 데이터 변환 단계를 필요로 한다. (fit_transform이 포함되어야 함)
+  
+  	from sklearn.pipeline import Pipeline
+  	from sklearn.preprocessing import StandardScaler
+	
+  	num_pipeline = Pipeline([
           ('imputer', SimpleImputer(strategy="median")),
           ('attribs_adder', CombinedAttributesAdder()),
           ('std_scaler', StandardScaler()),
-      ])
+      	])
 
-  housing_num_tr = num_pipeline.fit_transform(housing_num)
+  	housing_num_tr = num_pipeline.fit_transform(housing_num)
 
 
 위의 코드에서, Pipleline클래스에 imputer, 특성 추가, StandardScaler()를 모두 선언하여 데이터가 해당 순서에 맞춰 진행되도록 하는 코드입니다.
-다음 포스팅에서는 이어서 ML 알고리즘, 모델 선정, 학습, 평가 등에 관한 내용을 작성할 예정입니다.
+
 머신러닝 입문 관련 데이터 세트 프로젝트는 아래의 github 레포지토리에 있습니다.
 https://github.com/harimkang/Scikit-Learn-Example
-출처: https://davinci-ai.tistory.com/15 [DAVINCI - AI:티스토리]
+
 
 https://davinci-ai.tistory.com/15
 https://ysyblog.tistory.com/71
