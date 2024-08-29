@@ -19,7 +19,7 @@
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/top-strategic-technology-trends-2024.png'>
 -->
 
-### □ 최근 10년간 10대 전략기술
+### 최근 10년간 10대 전략기술
 ![](./images/top-strategic-technology-trends-2024_table.png)
 
 
@@ -71,10 +71,11 @@
 |2005|자동화된 IT|IT 자산 관리|모바일 기기 관리|분석|엔터프라이즈 모빌리티 관리|분석 기반 비즈니스 인텔리전스|빅 데이터|비즈니스 프로세스 관리|빅 데이터 분석|비즈니스 프로세스 관리|
 -->
 
-### □ 2024년, Hyper Cycle for Emerging Technologies
+### 2024년, Hyper Cycle for Emerging Technologies
 ![](./images/HypeCycle_2024.png)
 <br>
 가트너가 2024년 Hype Cycle for Emerging Technologies 보고서를 통해 주목해야 할 25가지의 혁신 기술을 발표했다. 이 기술들은 ①자율형 AI, ②개발자 생산성, ③총체적 경험, ④인간 중심의 보안 및 개인정보 보호 프로그램 등 네 가지 주요 트렌드로 분류된다.<br>
+<br>
 **①자율형 AI:** AI의 빠른 발전으로 인해 인간의 감독을 최소화하면서, 스스로 작동하고 개선하며 복잡한 환경에서도 효과적인 의사 결정을 내릴 수 있는 자율형 AI 시스템이 탄생하고 있다. 인간이 할 수 있는 모든 작업을 수행할 수 있는 이러한 첨단 AI 시스템은 공상 과학에서 현실로 서서히 다가오고 있다. 이 기술에는 다중 에이전트 시스템, 대규모 행동 모델, 기계 고객, 휴머노이드 작업 로봇, 자율 에이전트, 강화 학습 등이 포함된다.<br>
 **②개발자 생산성 향상:** 개발자 생산성은 코드를 빠르게 작성하는 것 이상의 의미를 갖는다. 이는 개발자의 효과적인 커뮤니케이션과 협업, 집중력, 만족도 등에 영향을 받는다. 개발자의 생산성을 향상시키는 신기술로는 AI 증강 소프트웨어 엔지니어링, 클라우드 네이티브, 깃옵스, 내부 개발자 포털, 프롬프트 엔지니어링, 웹어셈블리 등이 있다.<br>
 **③총체적 경험을 통한 역량 강화:** 총체적 경험은 고객 경험, 직원 경험, 다중 경험, 사용자 경험을 서로 연결해 우수한 공유 경험을 창출하는 전략이다. 신뢰도, 만족도, 충성도, 지지도 향상을 목표로 기술을 사용해 중요한 상호 작용을 해결하고 고객과 직원 모두의 역량을 강화한다. 평가 대상 기술에는 디지털 트윈, 공간 컴퓨팅, 슈퍼앱, 6G 등이 포함된다.<br>
@@ -83,7 +84,7 @@
 
 <br><br>
 
-### □ 2024년, Hyper Cycle for AI
+### 2024년, Hyper Cycle for AI
 ![](./images/HypeCycle_AI2024.png)
 <br>
  (출처) https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Hype_Cycle_for_AI.pdf
@@ -100,7 +101,7 @@
 
 <br><br>
 
-### □ 기초 이론과 초기 발전 (1943년~1955년)<br>										
+### 기초 이론과 초기 발전 (1943년~1955년)<br>										
 **1943년:** 워런 맥컬록(Warren McCulloch)과 월터 피츠(Walter Pitts)는  "A Logical Calculus of the Ideas Immanent in Nervous Activity" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/McCulloch_Pitts.pdf) 논문을 통해 신경망 모델의 기초를 마련. 신경망의 수학적 모델을 제안. 신경세포(뉴런)를 이진(binary) 장치로 모델링하여 입력 신호가 일정한 임계값을 넘으면 뉴런이 활성화되어 출력을 생성하고, 그렇지 않으면 비활성 상태로 남는다는 뉴런의 "발화" 메커니즘을 설명한 것으로, 현재의 퍼셉트론(Perceptron) 개념의 기초가 됨. 또한 여러 뉴런이 결합하여 더 복잡한 계산을 수행할 수 있는 신경망을 제안하였고 이 신경망은 다양한 입력에 대해 복잡한 논리적 결정을 내릴 수 있는 구조로 이후 인공 신경망의 이론적 기초가 됨.<br>	
 <img width ='800' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/02_01.png'><br>
 Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(축삭돌기), Axon terminal(축삭가지)<br><br>
@@ -111,32 +112,32 @@ Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(�
 											
 
 	   
-### □ AI의 탄생과 초기 연구 (1956년~1960년대)<br>											
-**1956년:** 다트머스 회의(Dartmouth Conference)에서 '인공지능'이라는 용어가 처음 사용되었으며, 인공지능 연구의 출발점으로 간주. 존 매카시(John McCarthy), 마빈 민스키(Marvin Minsky), 클로드 섀넌(Claude Shannon) 등이 참석하여 AI의 가능성과 기계가 인간처럼 지능적 작업을 수행할 수 있는 가능성에 대해 논의. 앨런 뉴웰(Allen Newell)과 허버트 사이먼(Herbert A. Simon)은 "The Logic Theory Machine: A Complex Information Processing System" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/logictheorymachine.pdf) 논문에서 인간의 사고를 모방하는 기계의 가능성에 대해 논의하며, 논리적 이론을 증명할 수 있는 '논리 이론가(The Logic Theorist)'라는 컴퓨터 프로그램을 개발함으로써 AI 연구의 초기 단계에서 중요한 기여였으며, 이 논문은 인공지능의 문제 해결 능력과 알고리즘의 효율성에 대한 논의를 포함.<br><br>
-**1957년:** 프랭크 로젠블렛(Frank Rosenblatt)은 퍼셉트론(Perceptron) 이라는 초기 신경망 모델을 개발. 퍼셉트론은 간단한 형태의 기계 학습 모델로, 패턴 인식 문제를 해결할 수 있는 가능성을 보여줌.퍼셉트론은 패턴 인식을 위한 학습 알고리즘을 포함하고 있으며, 입력 데이터에 대한 가중치를 조정하여 학습하고, 이후의 다층 신경망과 딥러닝의 기초가 되는 개념을 제공.<br>
+### AI의 탄생과 초기 연구 (1956년~1960년대)<br>											
+**1956년:** <ins>다트머스 회의(Dartmouth Conference)</ins>에서 '인공지능'이라는 용어가 처음 사용되었으며, 인공지능 연구의 출발점으로 간주. 존 매카시(John McCarthy), 마빈 민스키(Marvin Minsky), 클로드 섀넌(Claude Shannon) 등이 참석하여 AI의 가능성과 기계가 인간처럼 지능적 작업을 수행할 수 있는 가능성에 대해 논의. 앨런 뉴웰(Allen Newell)과 허버트 사이먼(Herbert A. Simon)은 "The Logic Theory Machine: A Complex Information Processing System" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/logictheorymachine.pdf) 논문에서 인간의 사고를 모방하는 기계의 가능성에 대해 논의하며, 논리적 이론을 증명할 수 있는 '논리 이론가(The Logic Theorist)'라는 컴퓨터 프로그램을 개발함으로써 AI 연구의 초기 단계에서 중요한 기여였으며, 이 논문은 인공지능의 문제 해결 능력과 알고리즘의 효율성에 대한 논의를 포함.<br><br>
+**1957년:** 프랭크 로젠블렛(Frank Rosenblatt)은 <ins>퍼셉트론(Perceptron)</ins> 이라는 초기 신경망 모델을 개발. 퍼셉트론은 간단한 형태의 기계 학습 모델로, 패턴 인식 문제를 해결할 수 있는 가능성을 보여줌.퍼셉트론은 패턴 인식을 위한 학습 알고리즘을 포함하고 있으며, 입력 데이터에 대한 가중치를 조정하여 학습하고, 이후의 다층 신경망과 딥러닝의 기초가 되는 개념을 제공.<br>
  <a href="https://wikidocs.net/24958" target="_blank">딥러닝을 이용한 자연어처리 입문(Perceptron)</a><br><br>
 **1958년:** 존 매카시는 리스프(LISP: https://ko.wikipedia.org/wiki/%EB%A6%AC%EC%8A%A4%ED%94%84) 이라는 프로그래밍 언어를 개발함으로써 인공지능 연구에서 중요한 역할을 했으며, 기호 처리(symbolic processing)에 적합한 언어로 널리 사용.<br><br>		
 **1960년대:** 제임스 얼 캐벗(James Allen)은 자연어 이해의 기초를 마련했으며, 엘리자(ELIZA)와 같은 초기 대화형 프로그램을 개발<br>		
 
 	
 											
-### □ 첫 번째 AI 겨울 (1970년대)<br>											
-**1969년:** 마빈 민스키(Marvin Minsky)와 세이무어 페퍼트(Seymour Papert)는 "Perceptrons: an introduction to computing geometry" 책 (https://direct.mit.edu/books/monograph/3132/PerceptronsAn-Introduction-to-Computational) 을 ​​통해 선형모델인 퍼셉트론이 간단한 비선형인 배타적-or(XOR) 함수를 학습할 수 없으므로 아무리 오랫동안 학습시키더라도 퍼셉트론이 그러한 함수를 학습하는 것이 이론적으로 불가능하다는 것을 증명함으로써 당시 신경망에 대한 모든 연구가 중단되고 첫 번째 AI 겨울이 도래.<br>
+### 첫 번째 AI 겨울 (1970년대)<br>											
+**1969년:** 마빈 민스키(Marvin Minsky)와 세이무어 페퍼트(Seymour Papert)는 "Perceptrons: an introduction to computing geometry" 책 (https://direct.mit.edu/books/monograph/3132/PerceptronsAn-Introduction-to-Computational) 을 ​​통해 선형모델인 퍼셉트론이 간단한 비선형인 배타적-or(XOR) 함수를 학습할 수 없으므로 아무리 오랫동안 학습시키더라도 퍼셉트론이 그러한 함수를 학습하는 것이 이론적으로 불가능하다는 <ins>퍼셉트론의 한계</ins>를 증명함으로써 당시 신경망에 대한 모든 연구가 중단되고 첫 번째 AI 겨울이 도래.<br>
 
 									
 											
-### □ 전문가 시스템의 부상과 상업화 (1980년대)<br>											
-**1980년대:** AI 연구는 특정 분야의 지식을 기반으로 문제를 해결하는 전문가 시스템(Expert Systems)이 부상함. 예컨대, 컴퓨터 구성의 자동화를 위한 XCON(eXpert CONfigurer), 법률 분야의 루카스(LUCAS), 생명과학 및 의학 분야의 세이백(SEYBAC) 등이 상업적으로도 성공.<br><br>	
+### 전문가 시스템의 부상과 상업화 (1980년대)<br>											
+**1980년대:** AI 연구는 특정 분야의 지식을 기반으로 문제를 해결하는 <ins>전문가 시스템(Expert Systems)</ins>이 부상함. 예컨대, 컴퓨터 구성의 자동화를 위한 XCON(eXpert CONfigurer), 법률 분야의 루카스(LUCAS), 생명과학 및 의학 분야의 세이백(SEYBAC) 등이 상업적으로도 성공.<br><br>	
 **1983년:** 정통 AI(Tradition AI) 연구의 중심이 문제 해결에서 지식 표현과 추론으로 이동. 이 시기에 조지프 와이젠바움(Joseph Weizenbaum)의 엘리자(ELIZA)와 같은 프로그램이 인기.<br>
 
 											
 											
-### □ 두 번째 AI 겨울 (1990년대)<br>											
+### 두 번째 AI 겨울 (1990년대)<br>											
 **1990년대:** 전문가 시스템의 한계(유연성 부족, 지식베이스의 유지비용, 응용의 제한성) 등과 AI의 발전속도 문제(자연어 처리의 한계, 컴퓨팅 파워와 데이터의 부족, 추론과 학습의 한계) 등으로 인해 또 다시 자금 지원이 감소함에 따라 AI 연구는 실질적인 성과를 내는 데 어려움을 겪는 '두 번째 AI 겨울'.<br>
 			
 
 								
-### □ 머신러닝과 딥러닝의 부상 (2000년대~현재)<br>											
+### 머신러닝과 딥러닝의 부상 (2000년대~현재)<br>											
 **2006년:** 컴퓨터 성능의 향상과 대량의 데이터, 그리고 새로운 알고리즘의 발전으로 인해 AI 연구가 재조명. 제프리 힌튼(Geoffrey Hinton), 얀 르쿤(Yann LeCun), 요슈아 벵지오(Yoshua Bengio) 등이 딥러닝 기술을 발전<br><br>					
 **2010년대:** 2010년, 스탠포드의 Fei-Fei Li 그룹에서 수백만 개의 레이블이 지정된 이미지를 포함하는 Imagenet 이라는 대규모 데이터베이스를 만들어 게시하고, 2012년  Alex Krizhevsky , Ilya Sutskever , Geoff Hinton은 대규모 시각 인식 챌린지 (LSVRC)에서 GPU를 기반으로 기존 오류율을 절반으로 16%로 줄임. 이 시기에 자율주행차, 음성 인식, 자연어 처리 등의 분야에서 혁신적인 성과.<br><br>
 **2020년대:** 대규모 언어 모델(GPT-3, GPT-4 등)의 등장과 상업적 활용이 증가하면서 AI 기술은 다양한 분야에 통합되고 AI는 헬스케어, 금융, 고객 서비스, 창의적 작업 등 여러 산업에서 중요한 역할을 수행<br>	
