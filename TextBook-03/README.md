@@ -80,8 +80,9 @@ https://ysyblog.tistory.com/71
 	
 	# 각 데이터 세트의 크기를 출력
 	print(f"전체 데이터 크기: {len(df)}")
-	print(f"학습 데이터 크기 (Train): {len(X2_train)}")
+	print(f"학습 데이터 크기 (Train): {len(X_train)}")
 	print(f"테스트 데이터 크기 (Test): {len(X_test)}")
+ 	print(f"검증을 제외한 학습 데이터 크기 (Train-Validation): {len(X2_train)}")
  	print(f"검증 데이터 크기 (Validation): {len(X2_val)}")
 	
 	# 데이터 분할 비율 확인
@@ -91,15 +92,17 @@ https://ysyblog.tistory.com/71
 
 
 
-
 	전체 데이터 크기: 10
-	학습 데이터 크기 (Train): 6
-	검증 데이터 크기 (Validation): 2
+	학습 데이터 크기 (Train): 8
 	테스트 데이터 크기 (Test): 2
+	검증을 제외한 학습 데이터 크기 (Train-Validation): 6
+	검증 데이터 크기 (Validation): 2
 	
 	학습 데이터 비율: 0.60
-	검증 데이터 비율: 0.20
 	테스트 데이터 비율: 0.20
+	검증 데이터 비율: 0.20
+
+ 
  
  	from sklearn.model_selection import train_test_split
 	
