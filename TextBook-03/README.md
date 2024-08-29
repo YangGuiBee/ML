@@ -171,6 +171,8 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
          	[0., 0., 0., 1., 0.]])
 
 
+![](./images/encoding.PNG)
+
 **sklearn.preprocessing.LabelEncoder**
 
 	#fit(): 어떻게 변환할 지 학습
