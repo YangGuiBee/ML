@@ -39,29 +39,29 @@
 ### (1) Data Cleaning
 대부분의 머신러닝 알고리즘은 Missing feature, 즉 누락된 데이터가 있을 때, 제대로 역할을 하지 못한다. 그래서 먼저 Missing feature에 대해 처리해주어야 한다.<br>
 
- - 불필요 데이터 제거(처리)<br>
+ 불필요 데이터 제거(처리)<br>
  
- 	dropna() : pandas에서 제공하는 누락 데이터를 제거하는 함수<br>
-   	Na/NaN과 같은 누락 데이터를 제거하는 함수
+ 	dropna() : pandas에서 제공하는 누락 데이터를 제거하는 함수
+   	Na/NaN과 같은 누락 데이터를 제거
 	axis: 파라미터 값으로 0을 주면 행 제거, 1을 주면 열 제거(default값은 0)
-	subset: array, 특정 feature를 지정하여 해당 Feature의 누락 데이터 제거가 가능
+	subset: array, 특정 feature를 지정하여 해당 Feature의 누락 데이터 제거
 
- - 전체 속성 제거 : 연관성 없는 feature의 경우, 학습에 방해가 될 수 있기 때문에 제거<br>
-   drop() : pandas에서 제공하는 특정 데이터 열(또는 행)을 제거하는 함수<br>
-   
+ 전체 속성 제거 : 연관성 없는 feature의 경우, 학습에 방해가 될 수 있기 때문에 제거<br>
+ 
+   	drop() : pandas에서 제공하는 특정 데이터 열(또는 행)을 제거하는 함수   
 	특정 행 또는 열의 라벨(데이터)들을 제거
 	labels: 제거할 데이터를 지정하는 파라미터
 	axis: 파라미터 값으로 0을 주면 행 제거, 1을 주면 열 제거(default값은 0)
 
- - 누락 데이터에 특정 값을 지정 : zero(0으로 채우기), the mean(평균값으로 채우기), the median(중간값으로 채우기) 등<br>
-   fillna() : pandas에서 제공하는 누락 데이터에 특정 값을 채우는 함수<br>
-   
-	특정 메서드를 지정하여 Na/NaN값을 채우기
+ 누락 데이터에 특정 값을 지정 : zero(0으로 채우기), the mean(평균값으로 채우기), the median(중간값으로 채우기) 등<br>
+ 
+ 	fillna() : pandas에서 제공하는 누락 데이터에 특정 값을 채우는 함수<br>
+   	특정 메서드를 지정하여 Na/NaN값을 채우기
 	value: scalar, dict, series or dataframe, value 등 구멍을 메우기 위한 값
 
- - scikit-learn에서 제공하는 클래스<br>
-   Imputer() class<br>
-   
+ scikit-learn에서 제공하는 클래스<br>
+ 
+ 	Imputer() class   
 	missing_values: int or 'NaN'
 	strategy: 'median'(중앙값), 'mean'(평균값), 'most_frequent'(최빈값)
 	axis: 0(columns), 1(rows)
