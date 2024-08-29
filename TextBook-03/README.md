@@ -240,6 +240,39 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
  	pd.get_dummies(items)
 
 
+adult dataset에 one-hot encoding 적용
+
+	#범주형 : workclass,education,education-num,marital-status,occupation,relationship,race,gender,hours-per-week,native-country,income
+	#연속형 : age,fnlwgt,capital-gain,capital-loss
+	#위의 컬럼중 'age','workclass','education', 'occupation', 'gender', 'hours-per-week', 'income' 만 사용
+	#income 은 순서형 데이터이기 때문에 Label Encoding으로 처리
+
+	import pandas as pd
+
+	# adult 데이터셋의 컬럼 이름 정의
+	cols = ['age', 'workclass','fnlwgt','education', 'education-num', 'marital-status', 'occupation',
+        'relationship', 'race', 'gender','capital-gain','capital-loss', 'hours-per-week',
+        'native-country', 'income']
+
+	# 데이터셋을 URL에서 읽어오기
+	url = 'http://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data'
+	df = pd.read_csv(url, header=None, names=cols, na_values=' ?')
+
+	# 결측값 제거
+	df = df.dropna()
+
+	# 필요한 열만 선택하여 새로운 DataFrame을 생성합니다.
+	data_cols = ['age', 'workclass', 'education', 'occupation', 'gender', 'hours-per-week', 'income']
+	adult_df = df[data_cols]
+
+	# 데이터프레임의 상위 5개 행을 출력합니다.
+	print(adult_df.head())
+
+	# One-Hot Encoding 적용
+	adult_df_encoded = pd.get_dummies(adult_df, columns=['workclass', 'education', 'occupation', 'gender', 'income'])
+
+	# 인코딩된 데이터프레임 출력
+	print(adult_df_encoded.head())
 
 
 ### (3) Custom Transformers
