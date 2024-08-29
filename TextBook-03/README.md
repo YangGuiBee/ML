@@ -107,72 +107,66 @@ One-Hot Encoding method : OneHotEncoder()
 
 factorize()<br>
 
-	Pandas에서 제공하는 메서드로서, 숫자형 또는 카테고리형으로 인코딩을 해주는 함수입니다.
-	여러 개의 카테고리형 input feature들을 인코딩할 수 있습니다.
-	파라미터 : values: a 1-D array, factorization전의 배열
-		   sort: bool, default False, 관계를 유지하면서 unipue 한 카테고리 label을 준비합니다.
-	Returns : labels: ndarray, 인코딩 된 결과를 배열로 리턴합니다.
-	uniques: ndarray, 카테고리를 배열로 리턴합니다.
+	Pandas에서 제공하는 메서드로서, 숫자형 또는 카테고리형으로 인코딩을 해주는 함수
+	여러 개의 카테고리형 input feature들을 인코딩
+	파라미터 = values: a 1-D array, factorization전의 배열
+		   sort: bool, default False, 관계를 유지하면서 unipue 한 카테고리 label을 준비
+	Returns = labels: ndarray, 인코딩된 결과를 배열로 리턴
+	          uniques: ndarray, 카테고리를 배열로 리턴
  
  	housing_cat_encoded, housing_categories = housing_cat.factorize()
   	[0 0 1 2 0 2 0 2 0 0 2 2 0 2 2 0 3 2 2 2 0]
 
-OrdinalEncoder()
+
+OrdinalEncoder()<br>
+
+	Scikit-learn에서 제공하는 factorize 역할의 클래스
+	OrdinalEncoder객체를 생성해서, inputer와 비슷한 방식으로 사용
+ 	대신, fit_transform() 메서드를 사용하여, fit과 transform을 한 번에 제공
+  	
+  	from sklearn.preprocessing import OrdinalEncoder 
+  	ordinal_encoder = OrdinalEncoder()
+  	housing_cat_encoded = ordinal_encoder.fit_transform(housing_cat)**
+	
+  	> housing_cat_encoded[:10] 
+  	> array([[0.],
+  	> 
+  	> 
+  	>      [0.],
+  	>      [4.],
+  	>      [1.],
+  	>      [0.],
+  	>      [1.],
+  	>      [0.],
+  	>      [1.],
+  	>      [0.],
+  	>      [0.]])
+  	>
 
 
-Scikit-learn에서 제공하는 factorize 역할의 클래스라고 생각하면 될 거 같습니다.
+위의 factorize()와 OrdinalEncoder()와 같은 카테고리형 텍스트를 단순히 순서에 맞게 숫자형으로 바꾸어주는 방법은 문제점이 있다. 예컨대, 위의 함수들을 사용해서 변환시키면 <1H OCEAN변수는 0이고, NEAR OCEAN변수는 4입니다. 각각 변수들은 0~4까지 있는데, 1 같은 경우 0과 비슷하다고 ML알고리즘은 판단할 수 있다. 실제로는 비슷하지 않지만, 알고리즘은 숫자에 의미를 두어 거리를 판단하게 되는 경우가 생긴다. 이를 방지하기 위해서 나온 것인 One-Hot Encoder.
 
 
-OrdinalEncoder객체를 생성해서, inputer와 비슷한 방식으로 사용합니다. 대신, fit_transform() 메서드를 사용하여, fit과 transform을 한 번에 제공합니다.
-  from sklearn.preprocessing import OrdinalEncoder 
-  ordinal_encoder = OrdinalEncoder()
-  housing_cat_encoded = ordinal_encoder.fit_transform(housing_cat)**
+OneHotEncoding()<br>
 
-  > housing_cat_encoded[:10] 
-  > array([[0.],
-  > 
-  > 
-  >      [0.],
-  >      [4.],
-  >      [1.],
-  >      [0.],
-  >      [1.],
-  >      [0.],
-  >      [1.],
-  >      [0.],
-  >      [0.]])
-  >
-
-
-
-
-위의 factorize()와 OrdinalEncoder()와 같은 카테고리형 텍스트를 단순히 순서에 맞게 숫자형으로 바꾸어주는 방법은 문제점이 있습니다. 예를 들어 위의 함수들을 사용해서 변환시키면 <1H OCEAN변수는 0이고, NEAR OCEAN변수는 4입니다. 각각 변수들은 0~4까지 있는데, 1 같은 경우 0과 비슷하다고 ML알고리즘은 판단할 수 있습니다. 실제로는 비슷하지 않지만, 알고리즘은 숫자에 의미를 두어 거리를 판단하게 되는 경우가 생깁니다. 이를 방지하기 위해서 나온 것인 One-Hot Encoder입니다.
-
-
-OneHotEncoding()
-
-
-Scikit-learn에서 제공하는 클래스로, 카테고리형 특징들을 one-hot 숫자형 배열로 인코딩해주는 클래스입니다.
-
-
-오직 하나로 해당되는 부분만 1(Hot)로, 나머지는 0(Cold)으로 바꾸는 방법입니다.
-  from sklearn.preprocessing import OneHotEncoder
-  cat_encoder = OneHotEncoder() 
-  > housing_cat_1hot = cat_encoder.fit_transform(housing_cat) 
-  > housing_cat_1hot
-  > <16512x5 sparse matrix of type '<class 'numpy.float64'>'
-  > with 16512 stored elements in Compressed Sparse Row format>
-
-
-위와 같은 코드로 사용합니다. OrdinalEncoder와 비슷한 방식으로 사용됩니다. 아래에는 numpy배열로 변환한 코드입니다.
-  >>> housing_cat_1hot.toarray()
-  array([[1., 0., 0., 0., 0.],
-         [1., 0., 0., 0., 0.],
-         [0., 0., 0., 0., 1.],
-         ...,
-         [0., 1., 0., 0., 0.],
-         [1., 0., 0., 0., 0.],
-         [0., 0., 0., 1., 0.]])
+	Scikit-learn에서 제공하는 클래스로, 카테고리형 특징들을 one-hot 숫자형 배열로 인코딩해주는 클래스
+	오직 하나로 해당되는 부분만 1(Hot)로, 나머지는 0(Cold)으로 바꾸는 방법
+  	
+  	from sklearn.preprocessing import OneHotEncoder
+  	cat_encoder = OneHotEncoder() 
+  	> housing_cat_1hot = cat_encoder.fit_transform(housing_cat) 
+  	> housing_cat_1hot
+  	> <16512x5 sparse matrix of type '<class 'numpy.float64'>'
+  	> with 16512 stored elements in Compressed Sparse Row format>
+	
+  	>>> housing_cat_1hot.toarray()
+  	array([[1., 0., 0., 0., 0.],
+         	[1., 0., 0., 0., 0.],
+         	[0., 0., 0., 0., 1.],
+         	...,
+         	[0., 1., 0., 0., 0.],
+         	[1., 0., 0., 0., 0.],
+         	[0., 0., 0., 1., 0.]])
 
 
 
