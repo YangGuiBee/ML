@@ -160,6 +160,7 @@ Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(�
 <br>
 
 ![](./images/AI_Table.png)
+<br>
 (출처) 박태웅의 AI강의(한빛비즈, 2023)
 
 <br><br>
