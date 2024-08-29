@@ -193,7 +193,17 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 	# ==> ['TV' '냉장고' '에어콘' '컴퓨터']
 
 
+**sklearn.preprocessing.OneHotEncoder**
 
+	#fit(): 어떻게 변환할 지 학습
+	#transform(): 문자열를 숫자로 변환
+	#fit_transform(): 학습과 변환을 한번에 처리
+	#get_feature_names() : 원핫인코딩으로 변환된 컬럼의 이름을 반환
+	#DataFrame을 넣을 경우 모든 변수들을 변환한다. 범주형 컬럼만 처리하도록 해야 한다.
+	#sparse를 False로 주지 않으면 scipy의 csr_matrix(희소행렬 객체)로 반환
+	#희소행렬은 대부분 0으로 구성된 행렬과 계산이나 메모리 효율을 이용해 0이 아닌 값의 index만 관리한다.
+	#csr_matrix.toarray()로 ndarray로 바꿀수 있다.
+ 
 	d = {
     	'item':items,
     	'cnt':np.arange(8)
