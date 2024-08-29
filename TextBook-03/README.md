@@ -27,13 +27,6 @@
 <br><br>
 
 ## ▣ 데이터 전처리
-수집된 데이터는 컴퓨팅 학습을 위해서 레이블 인코딩(Label Encoding)과 원핫 인코딩(One-hot Encoding)을 통해 범주형 데이터를 수치형 데이터로 변환이 필요하다.<br>
-**레이블 인코딩 :** 각 카테고리를 숫자로 대응시켜서 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"를 1로, "green"을 2로, "blue"를 3으로 변환하는 것이다. 이 방법은 간단하고 직관적이지만, 각 카테고리가 가지는 값의 크기 차이가 있을 경우 예측 결과에 영향을 미칠 수 있다.<br>
-<br>
-**원핫 인코딩 :** 각 카테고리를 벡터 형태로 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"는 [1, 0, 0], "green"은 [0, 1, 0], "blue"는 [0, 0, 1]로 변환하는 것이다. 이 방법은 각 카테고리를 독립적인 변수로 취급하기 때문에 각 카테고리가 가지는 값의 크기 차이를 고려하지 않기 때문에 범주형 변수의 카테고리가 많을수록 차원이 커지는 단점이 있지만, 예측 결과에 영향을 미치는 위험이 적다.<br>
-따라서, 레이블 인코딩은 카테고리가 서열을 가지는 경우(예: "bad", "average", "good")나 카테고리의 수가 적을 경우에 사용하고, 원핫 인코딩은 카테고리의 수가 많을 경우에 사용한다.<br>
-
-
 데이터 전처리는 기존의 데이터를 머신러닝 알고리즘에 알맞은 데이터로 바꾸는 과정이다. 이 전처리 과정은 모델이 생성된 이후에도 예측하고자 하는 새로운 데이터에도 적용할 수 있는 과정으로 전처리 과정을 통해 더욱더 모델 학습의 성능을 높일 수 있다. 데이터 전처리는 Data Cleaning, Handling Text and Categorical Attributes, Custom Transformers, Feature Scaling, Transformation Pipelines등 5개의 과정으로 수행한다. 
 
 ### (1) Data Cleaning
@@ -81,63 +74,48 @@
 
 
 ### (2) Handling Text and Categorical Attributes
-대부분의 ML알고리즘들은 숫자 데이터로 학습하는 것을 선호하며, 기존 데이터 세트에 텍스트가 있는 경우 이것을 숫자형 데이터로 인코딩(Encoding)이 필요하다.
-
+수집된 데이터는 컴퓨팅 학습을 위해서 기존 데이터 세트에 텍스트가 있는 경우 이것을 숫자형 데이터로 인코딩(Encoding)이 필요하다. 인코딩에는 레이블 인코딩(Label Encoding)과 원핫 인코딩(One-hot Encoding)을 통해 범주형 데이터를 수치형 데이터로 변환이 필요하다.<br>
+**레이블 인코딩 :** 각 카테고리를 숫자로 대응시켜서 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"를 1로, "green"을 2로, "blue"를 3으로 변환하는 것이다. 이 방법은 간단하고 직관적이지만, 각 카테고리가 가지는 값의 크기 차이가 있을 경우 예측 결과에 영향을 미칠 수 있다.<br>
+<br>
+**원핫 인코딩 :** 각 카테고리를 벡터 형태로 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"는 [1, 0, 0], "green"은 [0, 1, 0], "blue"는 [0, 0, 1]로 변환하는 것이다. 이 방법은 각 카테고리를 독립적인 변수로 취급하기 때문에 각 카테고리가 가지는 값의 크기 차이를 고려하지 않기 때문에 범주형 변수의 카테고리가 많을수록 차원이 커지는 단점이 있지만, 예측 결과에 영향을 미치는 위험이 적다.<br>
+따라서, 레이블 인코딩은 카테고리가 서열을 가지는 경우(예: "bad", "average", "good")나 카테고리의 수가 적을 경우에 사용하고, 원핫 인코딩은 카테고리의 수가 많을 경우에 사용한다.<br>
 
 Encoding text to number method : factorize(), OrdinalEncoder()
 One-Hot Encoding method : OneHotEncoder()
 
 
 
-예제로 사용할 데이터
-  >>> housing_cat = housing[["ocean_proximity"]]
-  >>> housing_cat.head(10)
-        ocean_proximity
-  17606       <1H OCEAN
-  18632       <1H OCEAN
-  14650      NEAR OCEAN
-  3230           INLAND
-  3555        <1H OCEAN
-  19480          INLAND
-  8879        <1H OCEAN
-  13685          INLAND
-  4937        <1H OCEAN
-  4861        <1H OCEAN
-  >>> housing_categories
-  Index(['<1H OCEAN', 'INLAND', 'ISLAND', 'NEAR BAY', 'NEAR OCEAN'],
-         dtype='object')
+예제로 사용할 데이터<br>
+
+	>>> housing_cat = housing[["ocean_proximity"]]
+	>>> housing_cat.head(10)
+        	ocean_proximity
+  	17606       <1H OCEAN
+  	18632       <1H OCEAN
+  	14650      NEAR OCEAN
+  	3230           INLAND
+  	3555        <1H OCEAN
+  	19480          INLAND
+  	8879        <1H OCEAN
+  	13685          INLAND
+  	4937        <1H OCEAN
+  	4861        <1H OCEAN
+  	>>> housing_categories
+  	Index(['<1H OCEAN', 'INLAND', 'ISLAND', 'NEAR BAY', 'NEAR OCEAN'],
+        dtype='object')
 
 
-factorize()
+factorize()<br>
 
-
-Pandas에서 제공하는 메서드로서, 숫자형 또는 카테고리형으로 인코딩을 해주는 함수입니다.
-
-
-여러 개의 카테고리형 input feature들을 인코딩할 수 있습니다.
-
-
-파라미터
-
-values: a 1-D array, factorization전의 배열
-sort: bool, default False, 관계를 유지하면서 unipue 한 카테고리 label을 준비합니다.
-
-
-
-Returns
-
-
-labels: ndarray, 인코딩 된 결과를 배열로 리턴합니다.
-
-
-uniques: ndarray, 카테고리를 배열로 리턴합니다.
-  housing_cat_encoded, housing_categories = housing_cat.factorize()
-  [0 0 1 2 0 2 0 2 0 0 2 2 0 2 2 0 3 2 2 2 0]
-
-
-
-
-
+	Pandas에서 제공하는 메서드로서, 숫자형 또는 카테고리형으로 인코딩을 해주는 함수입니다.
+	여러 개의 카테고리형 input feature들을 인코딩할 수 있습니다.
+	파라미터 : values: a 1-D array, factorization전의 배열
+		   sort: bool, default False, 관계를 유지하면서 unipue 한 카테고리 label을 준비합니다.
+	Returns : labels: ndarray, 인코딩 된 결과를 배열로 리턴합니다.
+	uniques: ndarray, 카테고리를 배열로 리턴합니다.
+ 
+ 	housing_cat_encoded, housing_categories = housing_cat.factorize()
+  	[0 0 1 2 0 2 0 2 0 0 2 2 0 2 2 0 3 2 2 2 0]
 
 OrdinalEncoder()
 
