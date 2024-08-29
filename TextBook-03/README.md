@@ -585,6 +585,31 @@ https://ysyblog.tistory.com/71
 
 ---
 
+	from sklearn import datasets
+	import matplotlib.pyplot as plt
+
+	# Iris 데이터셋 로드
+	iris = datasets.load_iris()
+
+	# 서브플롯 생성
+	fig, ax = plt.subplots()
+
+	# 산점도 그리기
+	scatter = ax.scatter(iris.data[:, 0], iris.data[:, 1], c=iris.target, cmap=plt.cm.Set1)
+
+	# 축 레이블 설정
+	ax.set(xlabel=iris.feature_names[0], ylabel=iris.feature_names[1])
+
+	# 고유한 클래스 타겟과 그에 해당하는 명칭 얻기
+	handles, _ = scatter.legend_elements()
+	labels = iris.target_names
+
+	# 범례 추가: 클래스 코드 대신 명칭 표시
+	ax.legend(handles, labels, loc="lower right", title="Classes")
+
+	# 그래프 표시
+	plt.show()
+
 
 ## ▣ Python 라이브러리
 
