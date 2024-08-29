@@ -51,7 +51,8 @@ https://ysyblog.tistory.com/71
 
 ![](./images/DataSet2.PNG)
 
-(소스코드)<br>
+(소스코드)
+<br>
 	import pandas as pd
 	from sklearn.model_selection import train_test_split
 	
@@ -91,7 +92,8 @@ https://ysyblog.tistory.com/71
  	print(f"검증 데이터 비율: {len(X2_val) / len(df):.2f}")
 
 
-(실행결과)<br>
+(실행결과)
+<br>
 	전체 데이터 크기: 10
 	학습 데이터 크기 (Train): 8
 	테스트 데이터 크기 (Test): 2
