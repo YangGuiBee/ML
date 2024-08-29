@@ -22,6 +22,31 @@
 <br>
 이렇게 데이터 수집 단계를 통해 필요한 데이터를 효과적으로 확보하고, 그 데이터의 질을 보장하고, 데이터를 적절하게 관리하고 사용할 수 있으며, 이 단계를 잘 수행하면, 그 이후의 분석 과정에서 좀 더 정확하고 효율적인 결과를 얻을 수 있다다. 이렇게 데이터 수집 단계를 거친 후에는, 데이터의 질을 보장하고, 필요한 정보를 효율적으로 제공하는 '탐색적 데이터 분석(EDA)', '피처 엔지니어링', '예측 모델 개발', '서비스 적용' 등의 작업을 진행할 수 있다.<br>
 
+**open data repository**
+<br>
+https://archive.ics.uci.edu/
+<br>
+https://www.kaggle.com/datasets
+<br>
+https://registry.opendata.aws/
+<br>
+
+**meta portal**
+<br>
+http://dataportals.org/
+<br>
+http://opendatamonitor.eu/
+<br>
+http://quandl.com/
+
+**DataSet**
+<br>
+https://en.wikipedia.org/wiki/List_of_datasets_for_machine-learning_research
+<br>
+https://www.quora.com/Where-can-I-find-large-datasets-open-to-the-public
+<br>
+https://www.reddit.com/r/datasets/
+<br>
 머신러닝 데이터셋(dataset) 사이트 40가지 모음 : https://kr.appen.com/blog/best-datasets/
 <br>
 Mushrooms Classification https://www.kaggle.com/uciml/mushroom-classification
