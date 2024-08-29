@@ -40,9 +40,9 @@
 대부분의 머신러닝 알고리즘은 Missing feature, 즉 누락된 데이터가 있을 때, 제대로 역할을 하지 못한다. 그래서 먼저 Missing feature에 대해 처리해주어야 한다.<br>
 
  - 불필요 데이터 제거(처리)<br>
-   dropna() : pandas에서 제공하는 누락 데이터를 제거하는 함수<br>
-   
-	Na/NaN과 같은 누락 데이터를 제거하는 함수
+ 
+ 	dropna() : pandas에서 제공하는 누락 데이터를 제거하는 함수<br>
+   	Na/NaN과 같은 누락 데이터를 제거하는 함수
 	axis: 파라미터 값으로 0을 주면 행 제거, 1을 주면 열 제거(default값은 0)
 	subset: array, 특정 feature를 지정하여 해당 Feature의 누락 데이터 제거가 가능
 
