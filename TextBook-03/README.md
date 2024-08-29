@@ -193,6 +193,49 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 	# ==> ['TV' '냉장고' '에어콘' '컴퓨터']
 
 
+
+	d = {
+    	'item':items,
+    	'cnt':np.arange(8)
+	}
+	df = pd.DataFrame(d)
+	df.info()
+	
+	items[..., np.newaxis]
+	# ==> array([['TV'],
+	#       ['냉장고'],
+	#       ['컴퓨터'],
+	#       ['컴퓨터'],
+	#       ['냉장고'],
+	#       ['에어콘'],
+	#       ['에어콘'],
+	#       ['선풍기']], dtype='<U3')
+
+	from sklearn.preprocessing import OneHotEncoder
+	ohe = OneHotEncoder()
+	ohe.fit(items[..., np.newaxis])
+	ohv = ohe.transform(items[..., np.newaxis])
+	ohv, type(ohv)
+	ohv.toarray()
+	# ==> array([[1., 0., 0., 0., 0.],
+	#       [0., 1., 0., 0., 0.],
+	#       [0., 0., 0., 0., 1.],
+	#       [0., 0., 0., 0., 1.],
+	#       [0., 1., 0., 0., 0.],
+	#       [0., 0., 0., 1., 0.],
+	#       [0., 0., 0., 1., 0.],
+	#       [0., 0., 1., 0., 0.]])
+
+
+	from sklearn.preprocessing import OneHotEncoder
+	ohe = OneHotEncoder(sparse=False)
+	ohe.fit(items[..., np.newaxis])
+	ohv = ohe.transform(items[..., np.newaxis])
+	ohv, type(ohv)
+	pd.DataFrame(ohv, columns=ohe.get_feature_names())
+
+
+
 ### (3) Custom Transformers
 Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하는데, 이를 이용하여 커스텀 변환기를 만들 수 있다.
 
