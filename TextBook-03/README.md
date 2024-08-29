@@ -61,8 +61,8 @@ https://ysyblog.tistory.com/71
 	
 	# 데이터프레임 생성
 	df = pd.DataFrame({
-    		'feature': range(1, 11),  # 1~10까지의 숫자
-    		'target': [0, 1] * 5      # 0과 1이 반복되는 타겟값
+    	    'feature': range(1, 11),  # 1~10까지의 숫자
+	    'target': [0, 1] * 5      # 0과 1이 반복되는 타겟값
 	})
 	
 	# 단일 피처를 2차원 배열로 변환
@@ -85,9 +85,22 @@ https://ysyblog.tistory.com/71
 	print(f"\n학습 데이터 비율: {len(X2_train) / len(df):.2f}")
 	print(f"검증 데이터 비율: {len(X2_val) / len(df):.2f}")
 	print(f"테스트 데이터 비율: {len(X_test) / len(df):.2f}")
- 	
+
+X = df[['feature']]: 이 부분에서 feature 열을 2차원으로 변환하여 X에 저장.
+y = df['target']: target 값은 1차원
+train-test 분리 : 전체 데이터에서 80%를 학습 데이터로, 20%를 테스트 데이터로 분리합니다.
+train-validation 분리: 학습 데이터에서 75%를 최종 학습 데이터로, 25%를 검증 데이터로 분리합니다.
+
+	전체 데이터 크기: 10
+	학습 데이터 크기 (Train): 6
+	검증 데이터 크기 (Validation): 2
+	테스트 데이터 크기 (Test): 2
+	
+	학습 데이터 비율: 0.60
+	검증 데이터 비율: 0.20
+	테스트 데이터 비율: 0.20
  
- from sklearn.model_selection import train_test_split
+ 	from sklearn.model_selection import train_test_split
 	
 	# train-test분리
 	X_train, X_test, y_train, y_test = train_test_split(df['feature'],df['target'])
