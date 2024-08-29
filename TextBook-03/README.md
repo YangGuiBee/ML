@@ -74,7 +74,9 @@ https://ysyblog.tistory.com/71
 	# train-test 분리
  	# 전체 데이터에서 80%를 학습 데이터로, 20%를 테스트 데이터로 분리
   	# random_state=42 : 설정하지 않거나 'None'으로 설정시, 매번 다른 결과를 생성
-	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+   	# shuffle=True : split 하기 전에 데이터를 섞을지 여부(default는 True)
+    	# stratify=y : target으로 지정하면 각 class 비율을 train/validation으로 유지. 한쪽에 쏠림 분배방지(default는 None)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=True, stratify=y,random_state=42)
 	
 	# train-validation 분리
  	# 학습 데이터에서 75%를 최종 학습 데이터로, 25%를 검증 데이터로 분리
@@ -158,10 +160,8 @@ https://ysyblog.tistory.com/71
 	data = digits.images.reshape((n_samples, -1))
 	
 	# Split data into train, valid and test subsets
-	X_train, X_test, y_train, y_test = train_test_split(
-	data, digits.target, test_size=0.2, random_state=1)
-	X_train, X_val, y_train, y_val = train_test_split(
-	X_train, y_train, test_size=0.2, random_state=1)
+	X_train, X_test, y_train, y_test = train_test_split(data, digits.target, test_size=0.2, random_state=1)
+	X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.2, random_state=1)
 	
 	gmm_list = [0.1, 0.01, 0.001]
 	score_list = []
