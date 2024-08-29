@@ -34,17 +34,18 @@ https://ysyblog.tistory.com/71
 <br><br><br>
 
 ## ▣ 데이터셋 분리
-데이터를 적절히 포맷했고 품질을 확인했고 모든 관련 특성을 확보했다면, 이제 머신러닝을 위해 데이터 분할이 필요하다. 분할의 단계는 총 3단계로 나누어 볼 수 있다.<br>
+데이터를 적절히 포맷했고 품질을 확인했고 모든 관련 특성을 확보했다면, 이제 머신러닝을 위해 데이터 분할이 필요하다. 분할은 수집된 데이터를 훈련 데이터와 검정데이터<br>
 ![](./images/DataSet.PNG)
 <br>
+분할의 단계는 총 3단계로 나누어 볼 수 있다.<br> 
 1 단계 : training과 test데이터로 분리한다.<br>
 2 단계 : training데이터를 training과 validation으로 분리한다.<br>
 3 단계 : training데이터로 모델을 만들고 validation데이터로 검증한다. 만족시 해당모델을 train과 validation데이터를 합쳐서 학습을 시킨후 test데이터를 넣어 확인한다.<br>
 
 데이터 셋의 비중은 정해진 것은 아니나 보통 Training set : Validation set : Test sets = 60 : 20 : 20 으로 설정한다.<br>
 **훈련 데이터(Training set) :** 모델을 학습하는데 사용된다. Training set으로 모델을 만든 뒤 동일한 데이터로 성능을 평가해보기도 하지만, 이는 cheating이 되기 때문에 유효한 평가는 아니다. 마치 모의고사와 동일한 수능 문제지를 만들어 대입 점수를 매기는 것과 같다. Training set은 Test set이 아닌 나머지 데이터 set을 의미하기도 하며, Training set 내에서 또 다시 쪼갠 Validation set이 아닌 나머지 데이터 set을 의미하기도 한다. 문맥상 Test set과 구분하기 위해 사용되는지, Validation과 구분하기 위해 사용되는지를 확인해야 한다.<br>
-**검정 데이터(Validation set) :** training set으로 만들어진 모델의 성능을 측정하기 위해 사용된다. 일반적으로 어떤 모델이 가장 데이터에 적합한지 찾아내기 위해서 다양한 파라미터와 모델을 사용해보게 되며, 그 중 validation set으로 가장 성능이 좋았던 모델을 선택한다. 테스트 데이터(Test set)은 validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한번 해당 모델의 예상되는 성능을 측정하기 위해 사용된다. 이미 validation set은 여러 모델에 반복적으로 사용되었고 그중 운 좋게 성능이 보다 더 뛰어난 것으로 측정되어 모델이 선택되었을 가능성이 있다. 때문에 이러한 오차를 줄이기 위해 한 번도 사용해본 적 없는 test set을 사용하여 최종 모델의 성능을 측정하게 된다.<br>
-**Validation set :** 여러 모델들 각각에 적용되어 성능을 측정하며, 최종 모델을 선정하기 위해 사용된다. 반면 test set은 최종 모델에 대해 단 한번 성능을 측정하며, 앞으로 기대되는 성능을 예측하기 위해 사용된다. Training set으로 모델들을 만든 뒤, validation set으로 최종 모델을 선택하게 된다. 최종 모델의 예상되는 성능을 보기 위해 test set을 사용하여 마지막으로 성능을 평가한다. 그 뒤 실제 사용하기 전에는 쪼개서 사용하였던 training set, validation set, test set 을 모두 합쳐 다시 모델을 training 하여 최종 모델을 만든다. 기존 training set만을 사용하였던 모델의 파라미터와 구조는 그대로 사용하지만, 전체 데이터를 사용하여 다시 학습시킴으로써 모델이 조금 더 튜닝되도록 만든다. 혹은 data modeling을 진행하는 동안 새로운 데이터를 계속 축적하는 방법도 있다. 최종 모델이 결정되었을 때 새로 축적된 data를 test data로 사용하여 성능평가를 할 수도 있다.<br>
+**테스트 데이터(Test set) :** validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한번 해당 모델의 예상되는 성능을 측정하기 위해 사용된다. 이미 validation set은 여러 모델에 반복적으로 사용되었고 그중 운 좋게 성능이 보다 더 뛰어난 것으로 측정되어 모델이 선택되었을 가능성이 있다. 때문에 이러한 오차를 줄이기 위해 한 번도 사용해본 적 없는 test set을 사용하여 최종 모델의 성능을 측정하게 된다.<br>
+**검정 데이터(Validation set) :** 여러 모델들 각각에 적용되어 성능을 측정하며, 최종 모델을 선정하기 위해 사용된다. 반면 test set은 최종 모델에 대해 단 한번 성능을 측정하며, 앞으로 기대되는 성능을 예측하기 위해 사용된다. Training set으로 모델들을 만든 뒤, validation set으로 최종 모델을 선택하게 된다. 최종 모델의 예상되는 성능을 보기 위해 test set을 사용하여 마지막으로 성능을 평가한다. 그 뒤 실제 사용하기 전에는 쪼개서 사용하였던 training set, validation set, test set 을 모두 합쳐 다시 모델을 training 하여 최종 모델을 만든다. 기존 training set만을 사용하였던 모델의 파라미터와 구조는 그대로 사용하지만, 전체 데이터를 사용하여 다시 학습시킴으로써 모델이 조금 더 튜닝되도록 만든다. 혹은 data modeling을 진행하는 동안 새로운 데이터를 계속 축적하는 방법도 있다. 최종 모델이 결정되었을 때 새로 축적된 data를 test data로 사용하여 성능평가를 할 수도 있다.<br>
 
 ![](./images/DataSet2.PNG)
 
@@ -58,6 +59,89 @@ https://ysyblog.tistory.com/71
 
 
 <br><br><br>
+붓꽃 데이터(Iris Dataset)는 Setosa, Virginica, Versicolor 3개의 붓꽃 품종을 구분해내는 것을 목적으로 만들어졌으며, 머신러닝을 경험해볼 수 있는 아주 간단한 장난감 데이터(toy data set)이다.
+
+전통적인 프로그래밍(Traditional Programming)
+
+데이터 수집: 붓꽃 품종에 관련된 많은 데이터를 수집한다.
+변수 가공: 붓꽃 품종은 '꽃잎(Petal)의 길이'와 '꽃받침(Sepal)의 길이'로 구분 할 수 있다는 변수를 알아낸다.
+로직 정의: 전문가에게 부탁하거나 본인이 분석하여 꽃받침의 길이가 몇cm 이상이면 Versicolor, 이하면 Setosa라는 여러 세트의 rule들을 정의하여 모델을 만든다.
+모델 평가: 데이터를 모델에 넣어 정확도가 어느정도 인지 확인해본다.
+- 머신러닝(Machine Learning) 
+
+데이터 수집: 붓꽃 품종에 관련된 많은 데이터를 수집한다.
+변수 가공: 붓꽃 품종은 '꽃잎의 길이'와 '꽃받침의 길이'로 구분할 수 있다는 변수를 알아낸 뒤 해당 변수의 데이터를 잘 정리한다.
+모델 학습: Decision Tree, SVM 등 다양한 알고리즘에 데이터만을 입력해보며 적합한 모델을 생성한다.
+모델 평가: 학습에 사용되지 않은 데이터를 최종 모델에 넣어 정확도가 어느정도 인지 확인해본다. 
+- 딥러닝(Deep Learning)
+
+데이터 수집: 붓꽃 품종에 관련된 많은 이미지 데이터를 수집한다.
+변수 가공: 변수(feature)는 모델에서 자동 생성된다.
+모델 학습: 이미지 데이터를 입력하여 다양한 네트워크를 구성해보고 적합한 모델을 생성한다.
+모델 평가: 학습에 사용되지 않은 이미지 데이터를 최종 모델에 넣어 정확도가 어느 정도 인지 확인해본다.
+
+import matplotlib.pyplot as plt
+from pandas import DataFrame
+from sklearn import datasets, svm, metrics
+from sklearn.model_selection import train_test_split
+
+# 8x8 Images of digits
+digits = datasets.load_digits()
+
+images_and_labels = list(zip(digits.images, digits.target))
+
+# Plot sample images
+_, axes = plt.subplots(1, 4)
+for ax, (image, label) in zip(axes[:], images_and_labels[:4]):
+    ax.set_axis_off()
+    ax.imshow(image, cmap=plt.cm.gray_r, interpolation='nearest')
+    ax.set_title('Training: %i' % label)
+
+print('---------Sample---------')
+plt.show()
+
+# flattened to (samples, feature) matrix:
+n_samples = len(digits.images)
+data = digits.images.reshape((n_samples, -1))
+
+# Split data into train, valid and test subsets
+X_train, X_test, y_train, y_test = train_test_split(
+data, digits.target, test_size=0.2, random_state=1)
+X_train, X_val, y_train, y_val = train_test_split(
+X_train, y_train, test_size=0.2, random_state=1)
+
+gmm_list = [0.1, 0.01, 0.001]
+score_list = []
+
+# Validation
+for gmm in gmm_list:
+    # Support vector classifier
+    classifier = svm.SVC(gamma=gmm)
+    classifier.fit(X_train, y_train)
+
+    # Score with validation set
+    predicted = classifier.predict(X_val)
+    score = metrics.accuracy_score(predicted, y_val)
+    score_list.append(score)
+
+    result = list(map(list, zip(gmm_list, score_list)))
+    result_df = DataFrame(result,columns=['gamma', 'score'])
+
+print('-------Validation-------')
+print(result_df)
+print('')
+print('----------Test----------')
+
+# Test
+best_gmm = result_df.iloc[result_df['score'].argmax()]['gamma']
+classifier = svm.SVC(gamma=best_gmm)
+classifier.fit(X_train, y_train)
+predicted = classifier.predict(X_test)
+test_score = metrics.accuracy_score(predicted, y_test)
+
+print('Test Score :', test_score)
+
+
 
 https://velog.io/@ljs7463/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%ED%95%99%EC%8A%B5%EC%9D%84-%EC%9C%84%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B-%EB%B6%84%EB%A6%ACtraintestvalidation
 
