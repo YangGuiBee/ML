@@ -61,7 +61,7 @@ https://ysyblog.tistory.com/71
 	
 	# 데이터프레임 생성
 	df = pd.DataFrame({
-    	    'feature': range(1, 11),  # 1~10까지의 숫자
+	    'feature': range(1, 11),  # 1~10까지의 숫자
 	    'target': [0, 1] * 5      # 0과 1이 반복되는 타겟값
 	})
 	
@@ -86,10 +86,11 @@ https://ysyblog.tistory.com/71
 	print(f"검증 데이터 비율: {len(X2_val) / len(df):.2f}")
 	print(f"테스트 데이터 비율: {len(X_test) / len(df):.2f}")
 
-X = df[['feature']]: 이 부분에서 feature 열을 2차원으로 변환하여 X에 저장.
-y = df['target']: target 값은 1차원
-train-test 분리 : 전체 데이터에서 80%를 학습 데이터로, 20%를 테스트 데이터로 분리합니다.
-train-validation 분리: 학습 데이터에서 75%를 최종 학습 데이터로, 25%를 검증 데이터로 분리합니다.
+X = df[['feature']]: 이 부분에서 feature 열을 2차원으로 변환하여 X에 저장<br>
+y = df['target']: target 값은 1차원<br>
+train-test 분리 : 전체 데이터에서 80%를 학습 데이터로, 20%를 테스트 데이터로 분리<br>
+train-validation 분리: 학습 데이터에서 75%를 최종 학습 데이터로, 25%를 검증 데이터로 분리<br>
+random_state=42 : 설정하지 않거나 'None'으로 설정시, 함수는 시스템시드 또는 현재시간에 따라 시드를 자동으로 선택하여 매번 다른 결과를 생성
 
 	전체 데이터 크기: 10
 	학습 데이터 크기 (Train): 6
