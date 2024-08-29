@@ -237,6 +237,8 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 	df_ohv = pd.DataFrame(ohv, columns=ohe.get_feature_names_out())
 	print(df_ohv)
 
+ 	pd.get_dummies(items)
+
 
 
 
