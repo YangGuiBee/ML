@@ -109,14 +109,18 @@
 ### 【ML 용어】
 <img width ='800' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_08.png'><br>
 **Sample** (샘플, 인스턴스, 관측치, 데이터셋)<br>
-**Feature** (특성, 속성, 측정치, 차원, 입력, 변수)<br>
-**Label** (레이블, 타깃, 출력, 반응변수, 정답, 목표값)<br>
+**Feature** (특성, 속성, 측정치, 차원, 컬럼, 입력, 변수, 문제)<br>
+**Label** (레이블, 타깃, 출력, 반응변수, 목표값, 답)<br>
 <br>
+
 model(모델) : 머신러닝이 찾은 규칙의 수학적 표현(수식), 학습 또는 훈련데이터로 학습된 머신러닝 알고리즘<br>
 모델의 규칙 : 가중치와 절편<br>
 규칙을 찾는 과정 : 모델을 통해서 훈련 또는 학습을 진행하면서 손실함수를 통해 규칙을 수정하는 과정<br>
 손실함수(비용함수) : 예측값과 실제값의 차이로 모델의 규칙을 수정하는 기준이 되는 함수<br>
 최적화 알고리즘 : 손실함수의 값을 최솟값에 수렴하도록 하는 효율적인 방법<br>
+차원축소 : feature의 수를 줄이기, 압축
+분류 : 단일값
+회귀 : 연속값(ex.주가, 매출 예측)
 train, val → training set / test → test set
 Train Dataset : 훈련/학습 데이터셋
 Validation Dataset : 검증 데이터셋, 중간 확인용
