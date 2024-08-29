@@ -156,12 +156,11 @@ Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(�
 
 ### 【AI 역사 요약】
 ![](./images/AI_History.PNG)
- (출처) SAS(https://www.sas.com/ko_kr/insights/analytics/what-is-artificial-intelligence.html)
+(출처) SAS(https://www.sas.com/ko_kr/insights/analytics/what-is-artificial-intelligence.html)
 <br>
 
-![](./images/AI_Table.PNG)
- (출처) 박태웅의 AI강의(한빛비즈, 2023)
-
+![](./images/AI_Table.png)
+(출처) 박태웅의 AI강의(한빛비즈, 2023)
 
 <br><br>
 
