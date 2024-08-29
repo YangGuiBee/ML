@@ -80,66 +80,65 @@ https://ysyblog.tistory.com/71
 모델 학습: 이미지 데이터를 입력하여 다양한 네트워크를 구성해보고 적합한 모델을 생성한다.
 모델 평가: 학습에 사용되지 않은 이미지 데이터를 최종 모델에 넣어 정확도가 어느 정도 인지 확인해본다.
 
-import matplotlib.pyplot as plt
-from pandas import DataFrame
-from sklearn import datasets, svm, metrics
-from sklearn.model_selection import train_test_split
-
-# 8x8 Images of digits
-digits = datasets.load_digits()
-
-images_and_labels = list(zip(digits.images, digits.target))
-
-# Plot sample images
-_, axes = plt.subplots(1, 4)
-for ax, (image, label) in zip(axes[:], images_and_labels[:4]):
-    ax.set_axis_off()
-    ax.imshow(image, cmap=plt.cm.gray_r, interpolation='nearest')
-    ax.set_title('Training: %i' % label)
-
-print('---------Sample---------')
-plt.show()
-
-# flattened to (samples, feature) matrix:
-n_samples = len(digits.images)
-data = digits.images.reshape((n_samples, -1))
-
-# Split data into train, valid and test subsets
-X_train, X_test, y_train, y_test = train_test_split(
-data, digits.target, test_size=0.2, random_state=1)
-X_train, X_val, y_train, y_val = train_test_split(
-X_train, y_train, test_size=0.2, random_state=1)
-
-gmm_list = [0.1, 0.01, 0.001]
-score_list = []
-
-# Validation
-for gmm in gmm_list:
-    # Support vector classifier
-    classifier = svm.SVC(gamma=gmm)
-    classifier.fit(X_train, y_train)
-
-    # Score with validation set
-    predicted = classifier.predict(X_val)
-    score = metrics.accuracy_score(predicted, y_val)
-    score_list.append(score)
-
-    result = list(map(list, zip(gmm_list, score_list)))
-    result_df = DataFrame(result,columns=['gamma', 'score'])
-
-print('-------Validation-------')
-print(result_df)
-print('')
-print('----------Test----------')
-
-# Test
-best_gmm = result_df.iloc[result_df['score'].argmax()]['gamma']
-classifier = svm.SVC(gamma=best_gmm)
-classifier.fit(X_train, y_train)
-predicted = classifier.predict(X_test)
-test_score = metrics.accuracy_score(predicted, y_test)
-
-print('Test Score :', test_score)
+	import matplotlib.pyplot as plt
+	from pandas import DataFrame
+	from sklearn import datasets, svm, metrics
+	from sklearn.model_selection import train_test_split
+	
+	# 8x8 Images of digits
+	digits = datasets.load_digits()
+	
+	images_and_labels = list(zip(digits.images, digits.target))
+	
+	# Plot sample images
+	_, axes = plt.subplots(1, 4)
+	for ax, (image, label) in zip(axes[:], images_and_labels[:4]):
+    		ax.set_axis_off()
+    		ax.imshow(image, cmap=plt.cm.gray_r, interpolation='nearest')
+    		ax.set_title('Training: %i' % label)
+	
+	print('---------Sample---------')
+	plt.show()
+	
+	# flattened to (samples, feature) matrix:
+	n_samples = len(digits.images)
+	data = digits.images.reshape((n_samples, -1))
+	
+	# Split data into train, valid and test subsets
+	X_train, X_test, y_train, y_test = train_test_split(
+	data, digits.target, test_size=0.2, random_state=1)
+	X_train, X_val, y_train, y_val = train_test_split(
+	X_train, y_train, test_size=0.2, random_state=1)
+	
+	gmm_list = [0.1, 0.01, 0.001]
+	score_list = []
+	
+	# Validation
+	for gmm in gmm_list:
+    		# Support vector classifier
+    		classifier = svm.SVC(gamma=gmm)
+    		classifier.fit(X_train, y_train)
+	
+    		# Score with validation set
+    		predicted = classifier.predict(X_val)
+    		score = metrics.accuracy_score(predicted, y_val)
+    		score_list.append(score)
+		result = list(map(list, zip(gmm_list, score_list)))
+    		result_df = DataFrame(result,columns=['gamma', 'score'])
+	
+	print('-------Validation-------')
+	print(result_df)
+	print('')
+	print('----------Test----------')
+	
+	# Test
+	best_gmm = result_df.iloc[result_df['score'].argmax()]['gamma']
+	classifier = svm.SVC(gamma=best_gmm)
+	classifier.fit(X_train, y_train)
+	predicted = classifier.predict(X_test)
+	test_score = metrics.accuracy_score(predicted, y_test)
+	
+	print('Test Score :', test_score)
 
 
 
