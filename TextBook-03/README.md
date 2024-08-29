@@ -609,7 +609,8 @@ https://ysyblog.tistory.com/71
 
 ## ▣ Python 라이브러리
 
-
+![](./images/python.PNG)
+<br>
 파이썬 전세계 점유율(티오베 지수) : https://www.tiobe.com/tiobe-index/
 파이썬 자습서 : https://docs.python.org/ko/3/tutorial/
 점프투파이썬 : https://wikidocs.net/book/1
