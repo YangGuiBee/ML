@@ -1,13 +1,21 @@
 <a href="https://www.google.com/" target="_blank">
 
 <!--
-
 -->
 
 테이블 생성기
 https://www.tablesgenerator.com/markdown_tables#
+
 ![](./images/top-strategic-technology-trends-2024.png)
 <img width ='600' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/plan.PNG'>
+
+cols = ['age', 'workclass','fnlwgt','education', 'education-num', 'marital-status', 'occupation','relationship', 'race', 'gender','capital-gain','capital-loss', 'hours-per-week','native-country', 'income']
+import pandas as pd
+# df = pd.read_csv('data/adult.data', header=None, names=cols, na_values=' ?')
+url = 'http://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data'
+df = pd.read_csv(url, header=None, names=cols, na_values=' ?')
+df.shape   # (32561, 15)
+df = df.dropna()
 
 <span style="color: red">red</span>
 <span style="color: #0000FF">파랑</span>
