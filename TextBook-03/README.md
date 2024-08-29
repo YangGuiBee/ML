@@ -612,8 +612,11 @@ https://ysyblog.tistory.com/71
 ![](./images/python.PNG)
 <br>
 파이썬 전세계 점유율(티오베 지수) : https://www.tiobe.com/tiobe-index/
+<br>
 파이썬 자습서 : https://docs.python.org/ko/3/tutorial/
+<br>
 점프투파이썬 : https://wikidocs.net/book/1
+<br>
 
 ### 【NumPy】
 행렬이나 일반적으로 대규모 다차원 배열을 쉽게 처리할 수 있도록 지원하는 파이썬의 라이브러리<br>
