@@ -53,7 +53,8 @@ https://ysyblog.tistory.com/71
 
 (소스코드)
 <br>
-	import pandas as pd
+
+ 	import pandas as pd
 	from sklearn.model_selection import train_test_split
 	
 	# 예시 데이터프레임 생성 (실제 데이터프레임이 이미 있다고 가정)
@@ -94,6 +95,7 @@ https://ysyblog.tistory.com/71
 
 (실행결과)
 <br>
+
 	전체 데이터 크기: 10
 	학습 데이터 크기 (Train): 8
 	테스트 데이터 크기 (Test): 2
