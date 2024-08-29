@@ -122,7 +122,7 @@ https://ysyblog.tistory.com/71
     		# Score with validation set
     		predicted = classifier.predict(X_val)
     		score = metrics.accuracy_score(predicted, y_val)
-    		score_list.append(score)
+		score_list.append(score)
 		result = list(map(list, zip(gmm_list, score_list)))
     		result_df = DataFrame(result,columns=['gamma', 'score'])
 	
