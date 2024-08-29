@@ -23,9 +23,11 @@
 이렇게 데이터 수집 단계를 통해 필요한 데이터를 효과적으로 확보하고, 그 데이터의 질을 보장하고, 데이터를 적절하게 관리하고 사용할 수 있으며, 이 단계를 잘 수행하면, 그 이후의 분석 과정에서 좀 더 정확하고 효율적인 결과를 얻을 수 있다다. 이렇게 데이터 수집 단계를 거친 후에는, 데이터의 질을 보장하고, 필요한 정보를 효율적으로 제공하는 '탐색적 데이터 분석(EDA)', '피처 엔지니어링', '예측 모델 개발', '서비스 적용' 등의 작업을 진행할 수 있다.<br>
 
 머신러닝 데이터셋(dataset) 사이트 40가지 모음 : https://kr.appen.com/blog/best-datasets/
-
+<br>
 Mushrooms Classification https://www.kaggle.com/uciml/mushroom-classification
+<br>
 Medical Costs Personal Dataset https://www.kaggle.com/mirichoi0218/insurance/data
+<br>
 Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswithkartik/red-white-wine-dataset 
 
 <br><br>
@@ -79,7 +81,7 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 
 ### (2) Handling Text and Categorical Attributes
 수집된 데이터는 컴퓨팅 학습을 위해서 기존 데이터 세트에 텍스트가 있는 경우 이것을 숫자형 데이터로 인코딩(Encoding)이 필요하다. 인코딩에는 레이블 인코딩(Label Encoding)과 원핫 인코딩(One-hot Encoding)을 통해 범주형 데이터를 수치형 데이터로 변환이 필요하다.<br>
-**레이블 인코딩 :** 각 카테고리를 숫자로 대응시켜서 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"를 1로, "green"을 2로, "blue"를 3으로 변환하는 것이다. 이 방법은 간단하고 직관적이지만, 각 카테고리가 가지는 값의 크기 차이가 있을 경우 예측 결과에 영향을 미칠 수 있다. 텍스트를 숫자로 인코딩하는 메소드로는 factorize()와 OrdinalEncoder()이 있다.<br>
+**레이블 인코딩 :** 각 카테고리를 숫자로 대응시켜서 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"를 1로, "green"을 2로, "blue"를 3으로 변환하는 것이다. 이 방법은 간단하고 직관적이지만, 각 카테고리가 가지는 값의 크기 차이가 있을 경우 예측 결과에 영향을 미칠 수 있다. 텍스트를 숫자로 인코딩하는 메소드로는 Pandas에서 제공하는 factorize()와 OrdinalEncoder()이 있으며, sklearn.preprocessing.LabelEncoder를 사용할 수도 있다.<br>
 <br>
 **원핫 인코딩 :** 각 카테고리를 벡터 형태로 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"는 [1, 0, 0], "green"은 [0, 1, 0], "blue"는 [0, 0, 1]로 변환하는 것이다. 이 방법은 각 카테고리를 독립적인 변수로 취급하기 때문에 각 카테고리가 가지는 값의 크기 차이를 고려하지 않기 때문에 범주형 변수의 카테고리가 많을수록 차원이 커지는 단점이 있지만, 예측 결과에 영향을 미치는 위험이 적다.<br>
 따라서, 레이블 인코딩은 카테고리가 서열을 가지는 경우(예: "bad", "average", "good")나 카테고리의 수가 적을 경우에 사용하고, 원핫 인코딩은 카테고리의 수가 많을 경우에 사용한다. 원핫 인코딩 메소드로는 OneHotEncoder()가 있다.<br>
@@ -107,12 +109,12 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 
 **factorize()** <br>
 
-	Pandas에서 제공하는 메서드로서, 숫자형 또는 카테고리형으로 인코딩을 해주는 함수
-	여러 개의 카테고리형 input feature들을 인코딩
-	파라미터 = values: a 1-D array, factorization전의 배열
-		   sort: bool, default False, 관계를 유지하면서 unipue 한 카테고리 label을 준비
-	Returns = labels: ndarray, 인코딩된 결과를 배열로 리턴
-	          uniques: ndarray, 카테고리를 배열로 리턴
+	#Pandas에서 제공하는 메서드로서, 숫자형 또는 카테고리형으로 인코딩을 해주는 함수
+	#여러 개의 카테고리형 input feature들을 인코딩
+	#파라미터 = values: a 1-D array, factorization전의 배열
+	#	   sort: bool, default False, 관계를 유지하면서 unipue 한 카테고리 label을 준비
+	#Returns = labels: ndarray, 인코딩된 결과를 배열로 리턴
+	#          uniques: ndarray, 카테고리를 배열로 리턴
  
  	housing_cat_encoded, housing_categories = housing_cat.factorize()
   	[0 0 1 2 0 2 0 2 0 0 2 2 0 2 2 0 3 2 2 2 0]
@@ -120,9 +122,9 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 
 **OrdinalEncoder()** <br>
 
-	Scikit-learn에서 제공하는 factorize 역할의 클래스
-	OrdinalEncoder객체를 생성해서, inputer와 비슷한 방식으로 사용
- 	대신, fit_transform() 메서드를 사용하여, fit과 transform을 한 번에 제공
+	#Scikit-learn에서 제공하는 factorize 역할의 클래스
+	#OrdinalEncoder객체를 생성해서, inputer와 비슷한 방식으로 사용
+ 	#대신, fit_transform() 메서드를 사용하여, fit과 transform을 한 번에 제공
   	
   	from sklearn.preprocessing import OrdinalEncoder 
   	ordinal_encoder = OrdinalEncoder()
@@ -169,7 +171,26 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
          	[0., 0., 0., 1., 0.]])
 
 
+**sklearn.preprocessing.LabelEncoder**
 
+	#fit(): 어떻게 변환할 지 학습
+	#transform(): 문자열를 숫자로 변환
+	#fit_transform(): 학습과 변환을 한번에 처리
+	#inverse_transform():숫자를 문자열로 변환
+	#classes_ : 인코딩한 클래스 조회
+	
+	import numpy as np
+	from sklearn.preprocessing import LabelEncoder
+ 
+	items = ['TV','TV','냉장고','컴퓨터','냉장고','컴퓨터', '에어콘']
+	le = LabelEncoder()
+	le.fit(items) 
+	label = le.transform(items)
+	
+	print(label, type(label))
+	# ==> [0 0 1 3 1 3 2] <class 'numpy.ndarray'>
+	print(le.classes_)
+	# ==> ['TV' '냉장고' '에어콘' '컴퓨터']
 
 
 ### (3) Custom Transformers
