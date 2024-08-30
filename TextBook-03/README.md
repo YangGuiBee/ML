@@ -65,32 +65,30 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 
  불필요 데이터 제거(처리)<br>
  
- 	dropna() : pandas에서 제공하는 누락 데이터를 제거하는 함수
-   	Na/NaN과 같은 누락 데이터를 제거
-	axis: 파라미터 값으로 0을 주면 행 제거, 1을 주면 열 제거(default값은 0)
-	subset: array, 특정 feature를 지정하여 해당 Feature의 누락 데이터 제거
+ 	#dropna() : pandas에서 제공하는 누락 데이터를 제거하는 함수
+   	#Na/NaN과 같은 누락 데이터를 제거
+	#axis: 파라미터 값으로 0을 주면 행 제거, 1을 주면 열 제거(default값은 0)
+	#subset: array, 특정 feature를 지정하여 해당 Feature의 누락 데이터 제거
 
  전체 속성 제거 : 연관성 없는 feature의 경우, 학습에 방해가 될 수 있기 때문에 제거<br>
  
-   	drop() : pandas에서 제공하는 특정 데이터 열(또는 행)을 제거하는 함수   
-	특정 행 또는 열의 라벨(데이터)들을 제거
-	labels: 제거할 데이터를 지정하는 파라미터
-	axis: 파라미터 값으로 0을 주면 행 제거, 1을 주면 열 제거(default값은 0)
+   	#drop() : pandas에서 제공하는 특정 데이터 열(또는 행)을 제거하는 함수   
+	#특정 행 또는 열의 라벨(데이터)들을 제거
+	#labels: 제거할 데이터를 지정하는 파라미터
+	#axis: 파라미터 값으로 0을 주면 행 제거, 1을 주면 열 제거(default값은 0)
 
  누락 데이터에 특정 값을 지정 : zero(0으로 채우기), the mean(평균값으로 채우기), the median(중간값으로 채우기) 등<br>
  
- 	fillna() : pandas에서 제공하는 누락 데이터에 특정 값을 채우는 함수<br>
-   	특정 메서드를 지정하여 Na/NaN값을 채우기
-	value: scalar, dict, series or dataframe, value 등 구멍을 메우기 위한 값
+ 	#fillna() : pandas에서 제공하는 누락 데이터에 특정 값을 채우는 함수<br>
+   	#특정 메서드를 지정하여 Na/NaN값을 채우기
+	#value: scalar, dict, series or dataframe, value 등 구멍을 메우기 위한 값
 
  scikit-learn에서 제공하는 클래스<br>
  
- 	Imputer() class   
-	missing_values: int or 'NaN'
-	strategy: 'median'(중앙값), 'mean'(평균값), 'most_frequent'(최빈값)
-	axis: 0(columns), 1(rows)
-
-사용법<br>
+ 	# Imputer() class   
+	# missing_values: int or 'NaN'
+	# strategy: 'median'(중앙값), 'mean'(평균값), 'most_frequent'(최빈값)
+	# axis: 0(columns), 1(rows)
 
 	# Imputer Class 선언, 채우고자 하는 값을 함께 정의
  	from sklearn.preprocessing import Imputer
@@ -112,8 +110,18 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 따라서, 레이블 인코딩은 카테고리가 서열을 가지는 경우(예: "bad", "average", "good")나 카테고리의 수가 적을 경우에 사용하고, 원핫 인코딩은 카테고리의 수가 많을 경우에 사용한다. 원핫 인코딩 메소드로는 OneHotEncoder()가 있다.<br>
 
 
-예제로 사용할 데이터<br>
+**factorize()** <br>
 
+	#Pandas에서 제공하는 메서드로서, 숫자형 또는 카테고리형으로 인코딩을 해주는 함수
+	#여러 개의 카테고리형 input feature들을 인코딩
+	#파라미터 = values: a 1-D array, factorization전의 배열
+	#	   sort: bool, default False, 관계를 유지하면서 unipue 한 카테고리 label을 준비
+	#Returns = labels: ndarray, 인코딩된 결과를 배열로 리턴
+	#          uniques: ndarray, 카테고리를 배열로 리턴
+ 
+ 	housing_cat_encoded, housing_categories = housing_cat.factorize()
+  	[0 0 1 2 0 2 0 2 0 0 2 2 0 2 2 0 3 2 2 2 0]
+   
 	>>> housing_cat = housing[["ocean_proximity"]]
 	>>> housing_cat.head(10)
         	ocean_proximity
@@ -130,19 +138,6 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
   	>>> housing_categories
   	Index(['<1H OCEAN', 'INLAND', 'ISLAND', 'NEAR BAY', 'NEAR OCEAN'],
         dtype='object')
-
-
-**factorize()** <br>
-
-	#Pandas에서 제공하는 메서드로서, 숫자형 또는 카테고리형으로 인코딩을 해주는 함수
-	#여러 개의 카테고리형 input feature들을 인코딩
-	#파라미터 = values: a 1-D array, factorization전의 배열
-	#	   sort: bool, default False, 관계를 유지하면서 unipue 한 카테고리 label을 준비
-	#Returns = labels: ndarray, 인코딩된 결과를 배열로 리턴
-	#          uniques: ndarray, 카테고리를 배열로 리턴
- 
- 	housing_cat_encoded, housing_categories = housing_cat.factorize()
-  	[0 0 1 2 0 2 0 2 0 0 2 2 0 2 2 0 3 2 2 2 0]
 
 
 **OrdinalEncoder()** <br>
@@ -172,7 +167,6 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 
 
 위의 factorize()와 OrdinalEncoder()와 같은 카테고리형 텍스트를 단순히 순서에 맞게 숫자형으로 바꾸어주는 방법은 문제점이 있다. 예컨대, 위의 함수들을 사용해서 변환시키면 <1H OCEAN변수는 0이고, NEAR OCEAN변수는 4입니다. 각각 변수들은 0~4까지 있는데, 1 같은 경우 0과 비슷하다고 ML알고리즘은 판단할 수 있다. 실제로는 비슷하지 않지만, 알고리즘은 숫자에 의미를 두어 거리를 판단하게 되는 경우가 생긴다. 이를 방지하기 위해서 나온 것인 One-Hot Encoder.
-
 
 **OneHotEncoding()** <br>
 
@@ -434,7 +428,9 @@ https://ysyblog.tistory.com/71
 한번의 학습으로 완전하게 모델을 학습시키기 어렵기 때문에, 다르게 튜닝된 여러 모델들을 학습한 후 어떤모델이 잘 학습되었는지 검증셋으로 검증하고 모델을 선택하는 과정이 필요하다. 이렇게 훈련/검증세트로 좋은 모델을 만들어 낸 후 최종적으로 테스트세트에는 단 한번의 예측테스트를 진행한다. 결과가 마음에 들지 않아도 또 수정하게되면 테스트 세트에 과적합되어 일반화의 성능이 떨어지게 된다. 훈련데이터는 모델을 Fit하는데 사용하며, 검증데이터트 예측 모델을 선택하기 위해 모델의 예측오류를 측정할 때 사용한다. 테스터데이터는 일반화 오류를 평가하기 위해 마지막에 단 한번만 사용해야한다. 이때 테스트 데이터는 한번도 공개된적 없는 데이터이어야 한다.<br>
 
 **훈련 데이터(Training set) :** 모델을 학습하는데 사용된다. Training set으로 모델을 만든 뒤 동일한 데이터로 성능을 평가해보기도 하지만, 이는 cheating이 되기 때문에 유효한 평가는 아니다. 마치 모의고사와 동일한 수능 문제지를 만들어 대입 점수를 매기는 것과 같다. Training set은 Test set이 아닌 나머지 데이터 set을 의미하기도 하며, Training set 내에서 또 다시 쪼갠 Validation set이 아닌 나머지 데이터 set을 의미하기도 한다. 문맥상 Test set과 구분하기 위해 사용되는지, Validation과 구분하기 위해 사용되는지를 확인해야 한다.<br>
+<br>
 **테스트 데이터(Test set) :** validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한번 해당 모델의 예상되는 성능을 측정하기 위해 사용된다. 이미 validation set은 여러 모델에 반복적으로 사용되었고 그중 운 좋게 성능이 보다 더 뛰어난 것으로 측정되어 모델이 선택되었을 가능성이 있다. 때문에 이러한 오차를 줄이기 위해 한 번도 사용해본 적 없는 test set을 사용하여 최종 모델의 성능을 측정하게 된다.<br>
+<br>
 **검정 데이터(Validation set) :** 여러 모델들 각각에 적용되어 성능을 측정하며, 최종 모델을 선정하기 위해 사용된다. 반면 test set은 최종 모델에 대해 단 한번 성능을 측정하며, 앞으로 기대되는 성능을 예측하기 위해 사용된다. Training set으로 모델들을 만든 뒤, validation set으로 최종 모델을 선택하게 된다. 최종 모델의 예상되는 성능을 보기 위해 test set을 사용하여 마지막으로 성능을 평가한다. 그 뒤 실제 사용하기 전에는 쪼개서 사용하였던 training set, validation set, test set 을 모두 합쳐 다시 모델을 training 하여 최종 모델을 만든다. 기존 training set만을 사용하였던 모델의 파라미터와 구조는 그대로 사용하지만, 전체 데이터를 사용하여 다시 학습시킴으로써 모델이 조금 더 튜닝되도록 만든다. 혹은 data modeling을 진행하는 동안 새로운 데이터를 계속 축적하는 방법도 있다. 최종 모델이 결정되었을 때 새로 축적된 data를 test data로 사용하여 성능평가를 할 수도 있다.<br>
 
 ![](./images/DataSet2.PNG)
