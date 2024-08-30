@@ -106,22 +106,23 @@
 <img width ='800' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/02_01.png'><br>
 Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(축삭돌기), Axon terminal(축삭가지)<br><br>
 
-	$\\boldsymbol{w}=\\begin{bmatrix} w_1 \\\\ \\vdots \\\\ w_m\\end{bmatrix}$\n
-        $\\boldsymbol{x}=\\begin{bmatrix} x_1 \\\\ \\vdots \\\\ x_m\\end{bmatrix}$\n
-        \n
-        최종 입력(net input) : $z = w_1x_1+w_2x_2+\\cdots+w_mx_m$\n
-        \n
-        \n
-        벡터 점곱(dot product), 행렬 곱셈(matrix multiplication) :\n
-        $\\begin{bmatrix}1&2&3\\end{bmatrix}\\times\\begin{bmatrix}4\\\\5\\\\6\\end{bmatrix}=1\\times4+2\\times5+3\\times6=32$\
-        \n
-        점곱을 사용한 표현 : $z = w_1x_1+\\cdots+w_mx_m=\\sum_{j=1}^mx_jw_j=\\boldsymbol{w}^T\\boldsymbol{x}$\n
-        \n
-        퍼셉트론의 결정 함수 : $\\phi(z)=\\begin{cases}1&z\\ge\\theta\\mbox{ 일 때} \\\\ -1&\\mbox{그 외}\\end{cases}$\n
-        $\\;\\;\\;\\;\\;$\n
-        $\\phi(z)=\\begin{cases}1&z-\\theta\\ge0\\mbox{ 일 때} \\\\ -1&\\mbox{그 외}\\end{cases}$\n
-        \n
-	$w_0=-\\theta , x_0=1$ 일 때 : $z_{new} = w_0x_0+w_1x_1+\\cdots+w_mx_m=\\sum_{j=0}^mx_jw_j=\\boldsymbol{w}^T\\boldsymbol{x}$
+$\\boldsymbol{w}=\\begin{bmatrix} w_1 \\\\ \\vdots \\\\ w_m\\end{bmatrix}$<br>
+$\\boldsymbol{x}=\\begin{bmatrix} x_1 \\\\ \\vdots \\\\ x_m\\end{bmatrix}$<br>
+<br>
+최종 입력(net input) : $z = w_1x_1+w_2x_2+\\cdots+w_mx_m$<br>
+<br>
+<br>
+벡터 점곱(dot product), 행렬 곱셈(matrix multiplication) :
+$\\begin{bmatrix}1&2&3\\end{bmatrix}\\times\\begin{bmatrix}4\\\\5\\\\6\\end{bmatrix}=1\\times4+2\\times5+3\\times6=32$
+<br>
+점곱을 사용한 표현 : $z = w_1x_1+\\cdots+w_mx_m=\\sum_{j=1}^mx_jw_j=\\boldsymbol{w}^T\\boldsymbol{x}$
+<br>
+퍼셉트론의 결정 함수 : $\\phi(z)=\\begin{cases}1&z\\ge\\theta\\mbox{ 일 때} \\\\ -1&\\mbox{그 외}\\end{cases}$
+<br>
+$\\phi(z)=\\begin{cases}1&z-\\theta\\ge0\\mbox{ 일 때} \\\\ -1&\\mbox{그 외}\\end{cases}$
+<br>        
+$w_0=-\\theta , x_0=1$ 일 때 : $z_{new} = w_0x_0+w_1x_1+\\cdots+w_mx_m=\\sum_{j=0}^mx_jw_j=\\boldsymbol{w}^T\\boldsymbol{x}$
+<br>
 
 
 **1950년:** 앨런 튜링(Alan Turing)은 "Computing Machinery and Intelligence" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Computing%20Machinery%20and%20Intelligence.pdf) 논문을 발표. 튜링은 기계가 지능을 가질 수 있는지에 대한 질문을 제기하고, 기계가 인간과 구별되지 않는 대화를 할 수 있는지를 평가하는 "튜링 테스트"를 제안. 튜링 테스트는 기계가 인간과 구별되지 않을 정도로 대화를 할 수 있는지를 평가하는 테스트로 기계의 지능을 평가하는 기준으로 널리 사용되었으며, 기계가 학습할 수 있는 가능성에 대해 논의하며, 기계가 지능을 가질 수 있다는 이론적 기초를 마련.<br>
