@@ -669,7 +669,9 @@ Matplotlib 공식문서 : https://matplotlib.org/stable/
 <br>
 Matplotlib 가이드 : https://wikidocs.net/92071
 
-<br><br><br>
+<br><br>
+
+---
 
 Anaconda 다운로드 : https://www.anaconda.com/download
 <br>
@@ -704,10 +706,9 @@ LightGBM 업데이트(3.3.2) : Anaconda Prompt(관리자권한)<br>
 	$ pip install lightgbm==3.3.2
 
  
-Visual Studio 다운로드 : https://visualstudio.microsoft.com/ko/downloads/
+Visual Studio 다운로드 : https://visualstudio.microsoft.com/ko/downloads/ <br>
 도구 - 빌드도구 - C++ 데스크톱
 
-
-
+---
 
 	
