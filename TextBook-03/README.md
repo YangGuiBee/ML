@@ -671,5 +671,16 @@ Matplotlib 가이드 : https://wikidocs.net/92071
 
 <br><br><br>
 
+Anaconda 다운로드 : https://www.anaconda.com/download
+<br>
+
+	import sklearn
+ 	import pandas as pd
+  	import numpy as np
+   
+	sklearn.__version__
+ 
+Scikit Learn 업데이트 : Anaconda Prompt(관리자권한) 
+	$ pip install -U scikit -learn
 
 
