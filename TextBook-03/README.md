@@ -679,7 +679,7 @@ Anaconda 다운로드 : https://www.anaconda.com/download
 	import numpy as np
 	import matplotlib.pyplot
 	import seaborn
-     	import xgboost
+	import xgboost
 	import lightgbm
    
 	print(sklearn.__version__)
@@ -687,22 +687,27 @@ Anaconda 다운로드 : https://www.anaconda.com/download
   	print(lightgbm.__version__)
  
 
-Scikit Learn 업데이트 : Anaconda Prompt(관리자권한)  1.0.2
-<br>
+Scikit Learn 업데이트(1.0.2) : Anaconda Prompt(관리자권한)<br>
+
 	# scikit -learn 최신버전 설치
 	$ pip install -U scikit -learn
  	# scikit -learn 교재버전 고정
  	$ pip install -U scikit -learn==1.0.2
+
+XGBoost 설치 : Anaconda Prompt(관리자권한)<br>
   
   	# xgboost 설치
  	$ conda install -c anaconda py-xgboost
 
+LightGBM 업데이트(3.3.2) : Anaconda Prompt(관리자권한)<br>
 
-LightGBM 업데이트 : Anaconda Prompt(관리자권한) 3.3.2
-<br>
 	$ pip install lightgbm==3.3.2
+
  
 Visual Studio 다운로드 : https://visualstudio.microsoft.com/ko/downloads/
 도구 - 빌드도구 - C++ 데스크톱
+
+
+
 
 	
