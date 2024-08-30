@@ -105,6 +105,25 @@
 **1943년:** 워런 맥컬록(Warren McCulloch)과 월터 피츠(Walter Pitts)는  "A Logical Calculus of the Ideas Immanent in Nervous Activity" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/McCulloch_Pitts.pdf) 논문을 통해 신경망 모델의 기초를 마련. 신경망의 수학적 모델을 제안. 신경세포(뉴런)를 이진(binary) 장치로 모델링하여 입력 신호가 일정한 임계값을 넘으면 뉴런이 활성화되어 출력을 생성하고, 그렇지 않으면 비활성 상태로 남는다는 뉴런의 "발화" 메커니즘을 설명한 것으로, 현재의 퍼셉트론(Perceptron) 개념의 기초가 됨. 또한 여러 뉴런이 결합하여 더 복잡한 계산을 수행할 수 있는 신경망을 제안하였고 이 신경망은 다양한 입력에 대해 복잡한 논리적 결정을 내릴 수 있는 구조로 이후 인공 신경망의 이론적 기초가 됨.<br>	
 <img width ='800' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/02_01.png'><br>
 Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(축삭돌기), Axon terminal(축삭가지)<br><br>
+
+	$\\boldsymbol{w}=\\begin{bmatrix} w_1 \\\\ \\vdots \\\\ w_m\\end{bmatrix}$\n
+        $\\boldsymbol{x}=\\begin{bmatrix} x_1 \\\\ \\vdots \\\\ x_m\\end{bmatrix}$\n
+        \n
+        최종 입력(net input) : $z = w_1x_1+w_2x_2+\\cdots+w_mx_m$\n
+        \n
+        \n
+        벡터 점곱(dot product), 행렬 곱셈(matrix multiplication) :\n
+        $\\begin{bmatrix}1&2&3\\end{bmatrix}\\times\\begin{bmatrix}4\\\\5\\\\6\\end{bmatrix}=1\\times4+2\\times5+3\\times6=32$\
+        \n
+        점곱을 사용한 표현 : $z = w_1x_1+\\cdots+w_mx_m=\\sum_{j=1}^mx_jw_j=\\boldsymbol{w}^T\\boldsymbol{x}$\n
+        \n
+        퍼셉트론의 결정 함수 : $\\phi(z)=\\begin{cases}1&z\\ge\\theta\\mbox{ 일 때} \\\\ -1&\\mbox{그 외}\\end{cases}$\n
+        $\\;\\;\\;\\;\\;$\n
+        $\\phi(z)=\\begin{cases}1&z-\\theta\\ge0\\mbox{ 일 때} \\\\ -1&\\mbox{그 외}\\end{cases}$\n
+        \n
+	$w_0=-\\theta , x_0=1$ 일 때 : $z_{new} = w_0x_0+w_1x_1+\\cdots+w_mx_m=\\sum_{j=0}^mx_jw_j=\\boldsymbol{w}^T\\boldsymbol{x}$
+
+
 **1950년:** 앨런 튜링(Alan Turing)은 "Computing Machinery and Intelligence" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Computing%20Machinery%20and%20Intelligence.pdf) 논문을 발표. 튜링은 기계가 지능을 가질 수 있는지에 대한 질문을 제기하고, 기계가 인간과 구별되지 않는 대화를 할 수 있는지를 평가하는 "튜링 테스트"를 제안. 튜링 테스트는 기계가 인간과 구별되지 않을 정도로 대화를 할 수 있는지를 평가하는 테스트로 기계의 지능을 평가하는 기준으로 널리 사용되었으며, 기계가 학습할 수 있는 가능성에 대해 논의하며, 기계가 지능을 가질 수 있다는 이론적 기초를 마련.<br>
  <a href="https://terms.tta.or.kr/dictionary/dictionaryView.do?subject=%ED%8A%9C%EB%A7%81+%EC%8B%9C%ED%97%98" target="_blank">튜링 테스트에 대한 명확한 정의(TTA)</a><br>
  <a href="https://ko.wikipedia.org/wiki/%ED%8A%9C%EB%A7%81_%ED%85%8C%EC%8A%A4%ED%8A%B8" target="_blank">튜링 테스트에 대한 상세한 설명(Wiki)</a><br>
