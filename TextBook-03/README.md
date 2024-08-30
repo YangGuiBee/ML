@@ -356,11 +356,11 @@ Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하
   	scaler = MinMaxScaler(feature_range=(0,1))
   	a = scaler.fit_transform(a)
   	>>> print(a)
-	 [ [1.    0.     0.]
-		[0.875    0.    0.]
-      		[0.75    0.    0.]
-      		[0.5    0.    0.44444444]
-      		[0.    1.    1.]]
+	[[1.    0.     0.]
+	[0.875    0.    0.]
+	[0.75    0.    0.]
+	[0.5    0.    0.44444444]
+	[0.    1.    1.]]
 
 
 
@@ -406,11 +406,8 @@ Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하
   	housing_num_tr = num_pipeline.fit_transform(housing_num)
 
 
-
-
-
-
 https://davinci-ai.tistory.com/15
+<br>
 https://ysyblog.tistory.com/71
 
 <br><br><br>
