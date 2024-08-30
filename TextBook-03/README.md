@@ -636,6 +636,15 @@ Pandas 공식문서 : https://pandas.pydata.org/pandas-docs/stable/getting_start
 
 <br>
 
+### 【Matplotlib】
+Python 프로그래밍 언어 및 수학적 확장 NumPy 라이브러리를 활용한 플로팅 라이브러리<br>
+Tkinter , wxPython , Qt 또는 GTK 와 같은 범용 GUI 툴킷을 사용하여 애플리케이션에 플롯을 포함 하기 위한 객체 지향 API를 제공<br> 
+Matplotlib 공식문서 : https://matplotlib.org/stable/
+<br>
+Matplotlib 가이드 : https://wikidocs.net/92071
+
+<br>
+
 ### 【Scikit-Learn】
 Scikit-learn(이전 명칭: scikits.learn, sklearn)은 파이썬 프로그래밍 언어용 자유 소프트웨어 기계 학습 라이브러리<br>
 다양한 분류, 회귀, 그리고 서포트 벡터 머신, 랜덤 포레스트, 그라디언트 부스팅, k-평균, DBSCAN을 포함한 클러스터링 알고리즘<br>
@@ -663,14 +672,7 @@ TensorFlow 공식문서 : https://www.tensorflow.org/?hl=ko
 
 <br>
 
-### 【Matplotlib】
-Python 프로그래밍 언어 및 수학적 확장 NumPy 라이브러리를 활용한 플로팅 라이브러리<br>
-Tkinter , wxPython , Qt 또는 GTK 와 같은 범용 GUI 툴킷을 사용하여 애플리케이션에 플롯을 포함 하기 위한 객체 지향 API를 제공<br> 
-Matplotlib 공식문서 : https://matplotlib.org/stable/
 <br>
-Matplotlib 가이드 : https://wikidocs.net/92071
-
-<br><br>
 
 ---
 
