@@ -203,15 +203,15 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 	import numpy as np
 	from sklearn.preprocessing import LabelEncoder
  
-	items = ['TV','TV','냉장고','컴퓨터','냉장고','컴퓨터', '에어콘']
+	items = ['TV','냉장고','컴퓨터', '컴퓨터','냉장고','에어콘', 'TV']
 	le = LabelEncoder()
 	le.fit(items) 
 	label = le.transform(items)
 	
 	print(label, type(label))
-	# ==> [0 0 1 3 1 3 2] <class 'numpy.ndarray'>
+	# ==> [0 1 2 2 1 3 0] <class 'numpy.ndarray'>
 	print(le.classes_)
-	# ==> ['TV' '냉장고' '에어콘' '컴퓨터']
+	# ==> ['TV' '냉장고' '컴퓨터' '에어콘']
 
 
 **sklearn.preprocessing.OneHotEncoder**
