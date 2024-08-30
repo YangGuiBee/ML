@@ -17,6 +17,18 @@ df = pd.read_csv(url, header=None, names=cols, na_values=' ?')
 df.shape   # (32561, 15)
 df = df.dropna()
 
+
+
+
+import os
+import pandas as pd
+s = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
+print('URL:', s)
+df = pd.read_csv(s, header=None, encoding='utf-8')
+df.tail
+
+
+
 <span style="color: red">red</span>
 <span style="color: #0000FF">파랑</span>
 <span style="color: #008000">초록</span>
