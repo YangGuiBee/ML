@@ -117,6 +117,7 @@
  <a href="https://wikidocs.net/24958" target="_blank">딥러닝을 이용한 자연어처리 입문(Perceptron)</a><br>
  <a href="https://imjuno.tistory.com/entry/Perceptron-MLP" target="_blank">Perceptron 개념</a>  
 ![](./images/p.png) 
+<br>
 **1958년:** 존 매카시는 리스프(LISP: https://ko.wikipedia.org/wiki/%EB%A6%AC%EC%8A%A4%ED%94%84) 이라는 프로그래밍 언어를 개발함으로써 인공지능 연구에서 중요한 역할을 했으며, 기호 처리(symbolic processing)에 적합한 언어로 널리 사용.<br>				
 **1959년:** 사무엘 기계학습을 이용한 체커게임 개발<br>
 **1960년:** 제임스 얼 캐벗(James Allen)은 자연어 이해의 기초를 마련<br>
