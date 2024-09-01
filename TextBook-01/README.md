@@ -132,7 +132,7 @@
 **1972년:** 인공지능 언어 Prolog 탄생<br>
 **1973년:** 라트힐 보고서<br>
 **1974년:** 웨어보스의 "오류 역전파 알고리즘" 논문 발표<br>
-**1980년:** 중국인의 방 논문 발표<br>
+**1980년:** 존 설(John Searle)이라는 철학자가 학술지 『Behavioral and Brain Sciences』에 발표한 「Minds, brains, and programs」라는 논문에서 튜링 테스트를 통해 기계의 인공지능 여부를 판정할 수 없음을 논증<br>
 
 <br><br><br>
 											
