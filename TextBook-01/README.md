@@ -98,35 +98,37 @@
 
 <br><br>
 
-## 1943 ~ 1950년대 : 기초 이론과 초기 발전 <br>										
-**1943년:** 워런 맥컬록(Warren McCulloch)과 월터 피츠(Walter Pitts)는  "A Logical Calculus of the Ideas Immanent in Nervous Activity" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/McCulloch_Pitts.pdf) 논문을 통해 신경망 모델의 기초를 마련. 신경망의 수학적 모델을 제안. 신경세포(뉴런)를 이진(binary) 장치로 모델링하여 입력 신호가 일정한 임계값을 넘으면 뉴런이 활성화되어 출력을 생성하고, 그렇지 않으면 비활성 상태로 남는다는 뉴런의 "발화" 메커니즘을 설명한 것으로, 현재의 퍼셉트론(Perceptron) 개념의 기초가 됨. 또한 여러 뉴런이 결합하여 더 복잡한 계산을 수행대 : AI의 탄생과 초기 연구<br>											
+## 1. 초기 단계 (~ 1950년대) <br>										
+**1936년:** 앨런 튜링(Alan Turing, 1912~1954)은 "On Computable Numbers, with an Application to the Entscheidungsproblem" 논문을 통해 계산할 수 있는 것과 없는 것을 구분하여, 어떤 문제들은 컴퓨터(또는 기계)가 풀 수 있지만, 어떤 문제들은 아무리 노력해도 풀 수 없다는 것을 증명한 연구로 수십 년간 컴퓨터 과학과 인공지능 분야에서 이루어진 모든 연구의 기반이 됨<br>
+**1943년:** 워런 맥컬록(Warren McCulloch)과 월터 피츠(Walter Pitts)는  "A Logical Calculus of the Ideas Immanent in Nervous Activity" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/McCulloch_Pitts.pdf) 논문을 통해 신경망 모델의 기초를 마련. 신경망의 수학적 모델을 제안. 신경세포(뉴런)를 이진(binary) 장치로 모델링하여 입력 신호가 일정한 임계값을 넘으면 뉴런이 활성화되어 출력을 생성하고, 그렇지 않으면 비활성 상태로 남는다는 뉴런의 "발화" 메커니즘을 설명한 것으로, 현재의 퍼셉트론(Perceptron) 개념의 기초가 됨. 또한 여러 뉴런이 결합하여 더 복잡한 계산을 수행대 : AI의 탄생과 초기 연구<br>	
+**1950년:** 앨런 튜링(Alan Turing)은 철학 저널 '마인드'에 '기계가 생각할 수 있는가?'라는 주제의 논문을 발표하고, 튜링 테스트 라는 '기계가 생각하는 것이 가능한가?'라는 명제로 기계의 답이 얼마나 인간다운지 평가한 실험을 하여 성과를 거둠.<br>
 **1956년:** <ins>다트머스 회의(Dartmouth Conference)</ins>에서 '인공지능'이라는 용어가 처음 사용되었으며, 인공지능 연구의 출발점으로 간주. 존 매카시(John McCarthy), 마빈 민스키(Marvin Minsky), 클로드 섀넌(Claude Shannon) 등이 참석하여 AI의 가능성과 기계가 인간처럼 지능적 작업을 수행할 수 있는 가능성에 대해 논의. 앨런 뉴웰(Allen Newell)과 허버트 사이먼(Herbert A. Simon)은 "The Logic Theory Machine: A Complex Information Processing System" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/logictheorymachine.pdf) 논문에서 인간의 사고를 모방하는 기계의 가능성에 대해 논의하며, 논리적 이론을 증명할 수 있는 '논리 이론가(The Logic Theorist)'라는 컴퓨터 프로그램을 개발함으로써 AI 연구의 초기 단계에서 중요한 기여였으며, 이 논문은 인공지능의 문제 해결 능력과 알고리즘의 효율성에 대한 논의를 포함.<br>
 **1957년:** 프랭크 로젠블렛(Frank Rosenblatt)은 <ins>퍼셉트론(Perceptron)</ins> 이라는 초기 신경망 모델을 개발. 퍼셉트론은 간단한 형태의 기계 학습 모델로, 패턴 인식 문제를 해결할 수 있는 가능성을 보여줌.퍼셉트론은 패턴 인식을 위한 학습 알고리즘을 포함하고 있으며, 입력 데이터에 대한 가중치를 조정하여 학습하고, 이후의 다층 신경망과 딥러닝의 기초가 되는 개념을 제공.<br>
  <a href="https://wikidocs.net/24958" target="_blank">딥러닝을 이용한 자연어처리 입문(Perceptron)</a><br>
  <a href="https://imjuno.tistory.com/entry/Perceptron-MLP" target="_blank">Perceptron 개념</a><br>  
 **1958년:** 존 매카시는 리스프(LISP: https://ko.wikipedia.org/wiki/%EB%A6%AC%EC%8A%A4%ED%94%84) 이라는 프로그래밍 언어를 개발함으로써 인공지능 연구에서 중요한 역할을 했으며, 기호 처리(symbolic processing)에 적합한 언어로 널리 사용.<br>		
-**1960년대:** 제임스 얼 캐벗(James Allen)은 자연어 이해의 기초를 마련했으며, 엘리자(ELIZA)와 같은 초기 대화형 프로그램을 개발<br>		
 
 <br><br><br>	
 											
-## 1970년대 : 첫 번째 AI 겨울<br>											
+## 2. 첫번째 AI겨울 (1960년대말 ~ 1970년대)<br>											
+**1960년대:** 제임스 얼 캐벗(James Allen)은 자연어 이해의 기초를 마련했으며, 엘리자(ELIZA)와 같은 초기 대화형 프로그램을 개발<br>		
 **1969년:** 마빈 민스키(Marvin Minsky)와 세이무어 페퍼트(Seymour Papert)는 "Perceptrons: an introduction to computing geometry" 책 (https://direct.mit.edu/books/monograph/3132/PerceptronsAn-Introduction-to-Computational) 을 ​​통해 선형모델인 퍼셉트론이 간단한 비선형인 배타적-or(XOR) 함수를 학습할 수 없으므로 아무리 오랫동안 학습시키더라도 퍼셉트론이 그러한 함수를 학습하는 것이 이론적으로 불가능하다는 <ins>퍼셉트론의 한계</ins>를 증명함으로써 당시 신경망에 대한 모든 연구가 중단되고 첫 번째 AI 겨울이 도래.<br>
 
 <br><br><br>									
 											
-## 1980년대 : 전문가 시스템의 부상과 상업화<br>											
+## 3. 전문가 시스템의 부상과 상업화 (1980년대)<br>											
 **1980년대:** AI 연구는 특정 분야의 지식을 기반으로 문제를 해결하는 <ins>전문가 시스템(Expert Systems)</ins>이 부상함. 예컨대, 컴퓨터 구성의 자동화를 위한 XCON(eXpert CONfigurer), 법률 분야의 루카스(LUCAS), 생명과학 및 의학 분야의 세이백(SEYBAC) 등이 상업적으로도 성공.<br>
 **1983년:** 정통 AI(Tradition AI) 연구의 중심이 문제 해결에서 지식 표현과 추론으로 이동. 이 시기에 조지프 와이젠바움(Joseph Weizenbaum)의 엘리자(ELIZA)와 같은 프로그램이 인기.<br>
 **1986년:** 제프리 힌튼(Geoffrey Hinton), David Rumelhart, Ronald Williams는 역전파 알고리즘(backpropagation algorithm)을 제안하여 <ins>다층 퍼셉트론 (Multilayer Perceptron, MLP)</ins>의 학습을 가능하게 했다. 입력층과 출력층 사이에 특징분석기인 은닉층(hidden layers)을 하나 이상 구성함으로써 퍼셉트론의 한계를 극복한 신경망의 학습방법의 발전으로 딥러닝 기술의 기초가 됨<br>
 
 <br><br><br>											
 											
-## 1990년대 : 두 번째 AI 겨울<br>											
+## 4. 두 번째 AI 겨울 (1990년대)<br>											
 **1990년대:** 전문가 시스템의 한계(유연성 부족, 지식베이스의 유지비용, 응용의 제한성) 등과 AI의 발전속도 문제(자연어 처리의 한계, 컴퓨팅 파워와 데이터의 부족, 추론과 학습의 한계) 등으로 인해 또 다시 자금 지원이 감소함에 따라 AI 연구는 실질적인 성과를 내는 데 어려움을 겪는 '두 번째 AI 겨울'.<br>
 			
 <br><br><br>
 								
-## 2000년 ~ 현재 : 머신러닝과 딥러닝의 부상<br>											
+## 5. 머신러닝과 딥러닝의 부상 (2000년 ~)<br>											
 **2000년:** 엔비디아는 컴퓨터 시스템에서 그래픽 연산을 빠르게 처리하여 결과값을 모니터에 출력하는 연산 장치인 <ins>GPU(Graphic Processing Unit)</ins>를 최초로 출시<br>
 **2006년:** 컴퓨터 성능의 향상과 대량의 데이터, 그리고 새로운 알고리즘의 발전으로 인해 AI 연구가 재조명되고, 제프리 힌튼(Geoffrey Hinton)은 <ins>딥러닝 논문(A Fast Learning Algorithm for Deep Belief Nets)</ins>을 발표<br>					
 **2010년:** 스탠포드의 Fei-Fei Li 그룹에서 수백만 개의 레이블이 지정된 이미지를 포함하는 이미지넷(Imagenet) 이라는 대규모 데이터베이스를 만들어 게시<br>
