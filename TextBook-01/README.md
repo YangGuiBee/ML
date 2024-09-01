@@ -7,6 +7,7 @@
 	 ▣ AI의 정의(최근 IT기업)
 	 ▣ AI의 유형
 	 ▣ AI의 활용 분야
+  	 ▣ AI, ML, DL
   	 ▣ 실습 준비
 ---
 
@@ -90,6 +91,8 @@
  (출처) https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Hype_Cycle_for_AI.pdf
 
 <br><br><br>
+
+---
 
 # ▣ AI의 역사
 
@@ -181,6 +184,8 @@ Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(�
 
 <br><br>
 
+---
+
 # ▣ AI의 정의
 
 
@@ -270,6 +275,8 @@ Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(�
 
 <br><br>
 
+---
+
 # ▣ AI의 정의(최근 IT기업)
 
 ## 위키백과 :
@@ -302,6 +309,8 @@ https://www.ibm.com/kr-ko/topics/artificial-intelligence
 
 <br><br><br>
 
+---
+
 # ▣ AI의 유형
  (출처) https://azure.microsoft.com/ko-kr/resources/cloud-computing-dictionary/what-is-artificial-intelligence#%EC%9D%98%EB%A3%8C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D
  
@@ -319,6 +328,8 @@ https://www.ibm.com/kr-ko/topics/artificial-intelligence
 인공 슈퍼지능을 갖춘 컴퓨터 시스템은 과학적 창의성, 통념 및 사회적 기술 등 거의 모든 분야에서 인간을 능가하는 능력을 얻게 됨
 
 <br><br>
+
+---
 
 # ▣ AI의 활용 분야
 ![](./images/AI_Division.PNG)
@@ -478,8 +489,9 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 관광 연계상품 개발 지원 **+ 위치정보에 따른 산업 연계**<br>
 접대, 서빙 로봇 **+ 가이드 해설** <br>
 
-
 <br><br><br>
+
+---
 
 # ▣ AI,ML,DL
 
