@@ -1,7 +1,7 @@
 # Machine Learning Study
 
 ## 2024년 2학기 Plan<br>
-<img width ='1000' height = '350' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/CI.PNG'>
+<img width ='1000' height = '350' src = '../TextBook-01/images/CI.png'>
 <br>
 <img width ='1000' height = '350' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/plan.PNG'>
 <!--
