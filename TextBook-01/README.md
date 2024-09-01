@@ -511,15 +511,20 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 ![](./images/DataScience.png)
 <br>
 (출처) https://towardsdatascience.com/clearly-explained-how-machine-learning-differs-from-statistical-modeling-967f2c5a9cfd
-
-
+<br>
 ![](./images/DeepLearning.png)
 <br>
 (출처) https://wikidocs.net/204493
+<br>
+![](./images/DeepLearning_RL.png)
+<br>
+(출처) https://wikidocs.net/175429
+
 
 ---
-# ▣ 실습 준비
 
+
+# ▣ 실습 준비
 
 
 ### 【구글 코랩】
