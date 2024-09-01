@@ -178,7 +178,7 @@
 **2021년:** AlphaFold, 딥마인드 단백질 접힘을 거의 완벽히 예측, OpenAI : 그림 인공지능 DALL·E 출시<br>
 **2022년:** 그림 인공지능 미드저니(Midjourney) 출시, Stability AI 오픈소스 라이선스 그림 인공지능 모델인 Stable diffusion 출시, OpenAI 대화형 인공지능 ChatGPT  초기베타 출시, GPT-3.5 미국 변호사 시험(Uniform Bar Exam)에서 213점(400점 만점)을 받아 하위 10%<br>
 **2023년:** 마이크로소프트 : 대화형 인공지능 Bing chat 출시, 구글 대화형 인공지능 Bard 출시, GPT-4 미국 변호사 시험(Uniform Bar Exam)에서 298점(400점 만점)을 받아 상위 10%로 통과, 인공지능 ‘특이점’ 돌파 이슈<br>	
-**2024년:** 구글 'Bard' 리브랜딩한 제미나이(Gemini) 출시, Open AI 동영상 생성 인공지능 소라(Sora) 공개, 오픈AI(챗GPT) 주간 사용자 2억명, 메타(라마) 월 사용자 4억명 돌파, 사카나 AI, 과학연구 자율수행하는 'AI 에이전트' 공개
+**2024년:** 구글 'Bard' 리브랜딩한 제미나이(Gemini) 출시, Open AI 동영상 생성 인공지능 소라(Sora) 공개, 오픈AI(챗GPT) 주간 사용자 2억명, 메타(라마) 월 사용자 4억명 돌파, 사카나 AI, 과학연구 자율수행하는 'AI 에이전트' 공개, 챗GPT가 튜링 테스트를 통과하지 못한 이유..."사람보다 탁월한 게 문제"(https://www.aitimes.com/news/articleView.html?idxno=159449)
 
 <br><br><br>
 
