@@ -511,7 +511,6 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 
 <br>
 ![](./images/AI_DS.png)
-
 <br>
 ![](./images/DeepLearning.png)
 <br>
