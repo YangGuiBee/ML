@@ -112,6 +112,7 @@
 											
 ## 2. 첫번째 AI겨울 (1960년대말 ~ 1970년대)<br>							
 **1960년대:** 제임스 얼 캐벗(James Allen)은 자연어 이해의 기초를 마련했으며, 엘리자(ELIZA)와 같은 초기 대화형 프로그램을 개발<br>
+**1961년:** 레너드 메릭 어(Leonard Merrick Uhr)와 찰스 M 보슬러(Charles M Vossler)는 생성, 평가 및 조정하는 패턴 인식 프로그램 자체 운영자(Own Operators)에 의한 패턴 인식 논문에서 기계학습 또는 자기 조직화 프로세스를 사용하여 패턴 인식 프로그램을 설계하려는 시도를 설명하고 최초의 기계학습 프로그램을 개발<br>
 **1964년:** 대니얼 보브로(Daniel Bobrow)는 컴퓨터 문제 해결 시스템을 위한 자연어 입력(Natural Language Input for a Computer Problem Solving System)을 출간<br>
 **1966년:** MIT의 컴퓨터 과학자인 조셉 바이젠바움(Joseph Weizenbaum)은 ACM에 "ELIZA, a Computer Program for the Study of Human-Computer Natural Language Communication"이라는 논문에서 엘리자(ELIZA)라는 프로그램을 통해 인간과 컴퓨터가 어느 정도의 자연어 대화를 할 수 있게 되는 방법을 설명하고 임상 치료 중인 정신과 의사를 모방하기 위해 최초의 챗봇인 EZZA를 개발<br>
 **1969년:** 마빈 민스키(Marvin Minsky)와 세이무어 페퍼트(Seymour Papert)는 "Perceptrons: an introduction to computing geometry" 책 (https://direct.mit.edu/books/monograph/3132/PerceptronsAn-Introduction-to-Computational) 을 ​​통해 선형모델인 퍼셉트론이 간단한 비선형인 배타적-or(XOR) 함수를 학습할 수 없으므로 아무리 오랫동안 학습시키더라도 퍼셉트론이 그러한 함수를 학습하는 것이 이론적으로 불가능하다는 <ins>퍼셉트론의 한계</ins>를 증명함으로써 당시 신경망에 대한 모든 연구가 중단되고 첫 번째 AI 겨울이 도래.<br>
