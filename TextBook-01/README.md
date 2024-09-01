@@ -323,7 +323,7 @@ https://www.ibm.com/kr-ko/topics/artificial-intelligence
 ---
 
 # ▣ AI의 활용 분야
-<img width ='800' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/AI_Division.PNG'>
+<img width ='700' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/AI_Division.PNG'>
 <br>
 범정부 역량을 결집하여 AI 시대 미래 비전과 전략을 담은 ‘AI 국가전략’을 발표<br>
 경제·사회 전반의 혁신을 위한 3대 분야 9대 전략, 100대 실행과제 제시<br>
