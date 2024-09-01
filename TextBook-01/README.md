@@ -117,7 +117,7 @@
  <a href="https://imjuno.tistory.com/entry/Perceptron-MLP" target="_blank">Perceptron 개념</a>  
 **1958년:** 존 매카시는 리스프(LISP: https://ko.wikipedia.org/wiki/%EB%A6%AC%EC%8A%A4%ED%94%84) 이라는 프로그래밍 언어를 개발함으로써 인공지능 연구에서 중요한 역할을 했으며, 기호 처리(symbolic processing)에 적합한 언어로 널리 사용.<br>				
 **1959년:** 사무엘 기계학습을 이용한 체커게임 개발<br>
-**1960년대:** 제임스 얼 캐벗(James Allen)은 자연어 이해의 기초를 마련했으며, 엘리자(ELIZA)와 같은 초기 대화형 프로그램을 개발<br>
+**1960년:** 제임스 얼 캐벗(James Allen)은 자연어 이해의 기초를 마련<br>
 **1961년:** 레너드 메릭 어(Leonard Merrick Uhr)와 찰스 M 보슬러(Charles M Vossler)는 생성, 평가 및 조정하는 패턴 인식 프로그램 자체 운영자(Own Operators)에 의한 패턴 인식 논문에서 기계학습 또는 자기 조직화 프로세스를 사용하여 패턴 인식 프로그램을 설계하려는 시도를 설명하고 최초의 기계학습 프로그램을 개발<br>
 **1964년:** 대니얼 보브로(Daniel Bobrow)는 컴퓨터 문제 해결 시스템을 위한 자연어 입력(Natural Language Input for a Computer Problem Solving System)을 출간<br>
 **1965년:** 자데 퍼지이론 발표<br>
