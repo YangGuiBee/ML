@@ -529,6 +529,7 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 
 
 # ▣ 실습 준비
+**<3강에서 설명>**
 
 
 ### 【구글 코랩】
@@ -540,21 +541,20 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 ### 【아나콘다】
 
 아나콘다는 데이터 과학, 수학, 공학용 파이썬 필수 패키지들을 모두 포함하고 있으며, 주요 운영 체제를 모두 지원<br>  
-아나콘다 설치 파일 다운로드 : https://www.anaconda.com/download/ <br>  
+아나콘다 설치 파일 다운로드 : https://www.anaconda.com/download/
 간단한 아나콘다 안내는 온라인 문서(https://docs.anaconda.com/anaconda/userguide/getting-started/) 참고<br> 
 
 	#아나콘다를 설치한 후 다음 명령으로 필요한 파이썬 패키지를 설치
 	conda install SomePackage
 	#설치한 패키지를 업데이트할 때는 다음 명령을 사용
 	conda update SomePackage
-
-SomePackage명에는 아래와 같이 핵심 패키지명을 각각 입력 **<3강에서 설명>**
- - [NumPy](http://www.numpy.org) >= 1.18.5
- - [SciPy](http://www.scipy.org) >= 1.4.1
- - [scikit-learn](http://scikit-learn.org/stable/) >= 0.23.2
- - [matplotlib](http://matplotlib.org) >= 3.1.1
- - [pandas](http://pandas.pydata.org) >= 1.0.4
- - [TensorFlow](https://www.tensorflow.org) >= 2.3.0
+	#SomePackage명에는 아래와 같이 핵심 패키지명을 각각 입력 
+ 	- [NumPy](http://www.numpy.org) >= 1.18.5
+ 	- [SciPy](http://www.scipy.org) >= 1.4.1
+ 	- [scikit-learn](http://scikit-learn.org/stable/) >= 0.23.2
+ 	- [matplotlib](http://matplotlib.org) >= 3.1.1
+ 	- [pandas](http://pandas.pydata.org) >= 1.0.4
+ 	- [TensorFlow](https://www.tensorflow.org) >= 2.3.0
 
 
 
