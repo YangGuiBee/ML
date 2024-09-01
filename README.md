@@ -1,7 +1,7 @@
 # Machine Learning Study
 
 ## <img width ='150' height = '80' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/CI.png'> 2024년 2학기 Plan 
-<img width ='1000' height = '350' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/plan.PNG'>
+<img width ='900' height = '320' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/plan.PNG'>
 <!--
 01(09-02 ~ 09-06) OT & Artificial Intelligence Overview : 강의 소개(실습환경 준비), AI의 정의와 역사<br>
 02(09-09 ~ 09-13) Machine Learning Overview : ML의 정의와 절차, 학습 방법과 모델<br>
@@ -21,6 +21,6 @@
 16(12-16 ~ 12-20) 기말고사<br>
 -->
     Reference :
-    머신러닝 교과서(3판) 실습소스코드 : https://github.com/rickiepark/python-machine-learning-book-3rd-edition
-    파이썬 머신러닝 완벽가이드(2판) 실습소스코드 : https://github.com/chulminkw/PerfectGuide
+    머신러닝 교과서(3판) 실습소스코드 : https://github.com/rickiepark/python-machine-learning-book-3rd-edition<br>
+    파이썬 머신러닝 완벽가이드(2판) 실습소스코드 : https://github.com/chulminkw/PerfectGuide<br>
     인공지능과 머신러닝 사전 : https://wikidocs.net/book/5942
