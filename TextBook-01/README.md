@@ -502,11 +502,12 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 
 <br>
 
-## 【AI 개념도】
+## 【AI 구성도】
 ![](./images/AI_ML_DL.png) 
 
 <br><br>
 
+## 【Computer Science > Data Science】
 ![](./images/ComputerScience.png)
 <br>
 (출처) https://ebrary.net/190208/health/relationship_data_mining_machine_learning_artificial_intelligence
@@ -515,9 +516,11 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 ![](./images/AI_DS.png)
 <br>
 
+## 【Machine Learning 구성도】
 ![](./images/ML.png)
 <br>
 
+## 【Machine Learning】
 ![](./images/DeepLearning_RL.png)
 <br>
 (출처) https://wikidocs.net/175429
