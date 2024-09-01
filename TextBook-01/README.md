@@ -179,6 +179,10 @@ $w_0=-\\theta , x_0=1$ 일 때 : $z_{new} = w_0x_0+w_1x_1+\\cdots+w_mx_m=\\sum_{
 (출처) SAS(https://www.sas.com/ko_kr/insights/analytics/what-is-artificial-intelligence.html)
 <br>
 
+
+(동영상) https://originalfileserver.aminer.cn/sys/aminer/history/AI-history-1.mp4
+(출처) Jie Tang et al., "Extraction and Mining of Academic Social Networks", SIGKDD 2008
+
 ![](./images/AI_Table.png)
 <br>
 (출처) 박태웅의「AI강의」(한빛비즈, 2023)
