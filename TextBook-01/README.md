@@ -501,8 +501,7 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 <br>
 
 ## 【AI 개념도】
-![](./images/AI_LG.png)
- (출처) LG전자 뉴스룸(https://live.lge.co.kr/live_with_ai_01/)
+![](./images/AI_ML_DL.png) 
 <br>
 ![](./images/ComputerScience.png)
 <br>
