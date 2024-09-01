@@ -100,28 +100,36 @@
 
 ## 1. AI의 태동기 (~ 1955년) <br>										
 **1936년:** 앨런 튜링(Alan Turing, 1912~1954)은 "On Computable Numbers, with an Application to the Entscheidungsproblem (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/TuringFullText.pdf) " 논문을 통해 계산할 수 있는 것과 없는 것을 구분하여, 어떤 문제들은 컴퓨터(또는 기계)가 풀 수 있지만, 어떤 문제들은 아무리 노력해도 풀 수 없다는 것을 증명한 연구로 튜링 머신 이론과 노이만형 컴퓨터에 있어서 이론적 토대를 제시하고 수십 년간 컴퓨터 과학과 인공지능 분야에서 이루어진 모든 연구의 기반이 됨<br>
+**1946년:** 세계 최초의 범용 디지털 컴퓨터(애니악) 탄생<br>
 **1943년:** 워런 맥컬록(Warren McCulloch)과 월터 피츠(Walter Pitts)는  "A Logical Calculus of the Ideas Immanent in Nervous Activity" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/McCulloch_Pitts.pdf) 논문을 통해 신경망 모델의 기초를 마련. 신경망의 수학적 모델을 제안. 신경세포(뉴런)를 이진(binary) 장치로 모델링하여 입력 신호가 일정한 임계값을 넘으면 뉴런이 활성화되어 출력을 생성하고, 그렇지 않으면 비활성 상태로 남는다는 뉴런의 "발화" 메커니즘을 설명한 것으로, 현재의 퍼셉트론(Perceptron) 개념의 기초가 됨<br>	
 **1950년:** 앨런 튜링(Alan Turing)은 클로드 섀넌(Claude Shannon)과 함께 철학 저널 '마인드(Mind)'에 "기계가 생각할 수 있는가?(https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Computing%20Machinery%20and%20Intelligence.pdf)"라는 주제의 논문을 발표하고, 튜링 테스트라는 '기계가 생각하는 것이 가능한가?'라는 명제로 기계의 답이 얼마나 인간다운지 평가한 실험을 하여 성과를 거둠.<br>
 
 <br><br><br>
 
-## 2. 데이터 기반 분석 (1956년 ~ 1974년) <br>
+## 2. 데이터 기반 분석 (1956년 ~ 1972년) <br>
 
 **1956년:** <ins>다트머스 회의(Dartmouth Conference)</ins>에서 '인공지능'이라는 용어가 처음 사용되었으며, 인공지능 연구의 출발점으로 간주. 존 매카시(John McCarthy), 마빈 민스키(Marvin Minsky), 클로드 섀넌(Claude Shannon) 등이 참석하여 AI의 가능성과 기계가 인간처럼 지능적 작업을 수행할 수 있는 가능성에 대해 논의. 앨런 뉴웰(Allen Newell)과 허버트 사이먼(Herbert A. Simon)은 "The Logic Theory Machine: A Complex Information Processing System" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/logictheorymachine.pdf) 논문에서 인간의 사고를 모방하는 기계의 가능성에 대해 논의하며, 논리적 이론을 증명할 수 있는 '논리 이론가(The Logic Theorist)'라는 컴퓨터 프로그램을 개발함으로써 AI 연구의 초기 단계에서 중요한 기여였으며, 이 논문은 인공지능의 문제 해결 능력과 알고리즘의 효율성에 대한 논의를 포함.<br>
 <img width ='400' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/1956.png'><br>
 **1957년:** 프랭크 로젠블렛(Frank Rosenblatt)은 <ins>퍼셉트론(Perceptron)</ins> 이라는 초기 신경망 모델을 개발. 퍼셉트론은 간단한 형태의 기계 학습 모델로, 패턴 인식 문제를 해결할 수 있는 가능성을 보여줌.퍼셉트론은 패턴 인식을 위한 학습 알고리즘을 포함하고 있으며, 입력 데이터에 대한 가중치를 조정하여 학습하고, 이후의 다층 신경망과 딥러닝의 기초가 되는 개념을 제공.<br>
  <a href="https://wikidocs.net/24958" target="_blank">딥러닝을 이용한 자연어처리 입문(Perceptron)</a><br>
  <a href="https://imjuno.tistory.com/entry/Perceptron-MLP" target="_blank">Perceptron 개념</a>  
-**1958년:** 존 매카시는 리스프(LISP: https://ko.wikipedia.org/wiki/%EB%A6%AC%EC%8A%A4%ED%94%84) 이라는 프로그래밍 언어를 개발함으로써 인공지능 연구에서 중요한 역할을 했으며, 기호 처리(symbolic processing)에 적합한 언어로 널리 사용.<br>					
+**1958년:** 존 매카시는 리스프(LISP: https://ko.wikipedia.org/wiki/%EB%A6%AC%EC%8A%A4%ED%94%84) 이라는 프로그래밍 언어를 개발함으로써 인공지능 연구에서 중요한 역할을 했으며, 기호 처리(symbolic processing)에 적합한 언어로 널리 사용.<br>				
+**1959년:** 사무엘 기계학습을 이용한 체커게임 개발<br>
 **1960년대:** 제임스 얼 캐벗(James Allen)은 자연어 이해의 기초를 마련했으며, 엘리자(ELIZA)와 같은 초기 대화형 프로그램을 개발<br>
 **1961년:** 레너드 메릭 어(Leonard Merrick Uhr)와 찰스 M 보슬러(Charles M Vossler)는 생성, 평가 및 조정하는 패턴 인식 프로그램 자체 운영자(Own Operators)에 의한 패턴 인식 논문에서 기계학습 또는 자기 조직화 프로세스를 사용하여 패턴 인식 프로그램을 설계하려는 시도를 설명하고 최초의 기계학습 프로그램을 개발<br>
 **1964년:** 대니얼 보브로(Daniel Bobrow)는 컴퓨터 문제 해결 시스템을 위한 자연어 입력(Natural Language Input for a Computer Problem Solving System)을 출간<br>
+**1965년:** 자데 퍼지이론 발표<br>
 **1966년:** MIT의 컴퓨터 과학자인 조셉 바이젠바움(Joseph Weizenbaum)은 ACM에 "ELIZA, a Computer Program for the Study of Human-Computer Natural Language Communication"이라는 논문에서 엘리자(ELIZA)라는 프로그램을 통해 인간과 컴퓨터가 어느 정도의 자연어 대화를 할 수 있게 되는 방법을 설명하고 임상 치료 중인 정신과 의사를 모방하기 위해 최초의 챗봇인 EZZA를 개발<br>
+**1968년:** 공간탐색 알고리즘 A 발표<br>
+**1972년:** 인공지능 언어 Prolog 탄생<br>
 
 <br><br><br>	
 
-## 3. 첫번째 AI겨울 (1974년 ~ 1980년대)<br>
+## 3. 첫번째 AI겨울 (1973년 ~ 1980년대)<br>
 다트머스 컨퍼런스가 끝나고, 많은 과학자들이 연구에 돌입했지만, 인간에게 쉬운 글자 읽기와 그림 인식 같은 기능을 구현하는 것이 어려웠다. 그 당시에는 컴퓨터의 성능과 하드웨어도 성능이 충분하지 않았고, 기대와 달리 연구 성과가 낮아 투자가 적어지게 되어 재정적 어려움과 함께 인공지능 연구에 대한 비판이 나오기 시작됨. 특히, 마빈 민스키(Marvin Minsky)와 세이무어 페퍼트(Seymour Papert)는 "Perceptrons: an introduction to computing geometry" 책 (https://direct.mit.edu/books/monograph/3132/PerceptronsAn-Introduction-to-Computational) 을 ​​통해 선형모델인 퍼셉트론이 간단한 비선형인 배타적-or(XOR) 함수를 학습할 수 없으므로 아무리 오랫동안 학습시키더라도 퍼셉트론이 그러한 함수를 학습하는 것이 이론적으로 불가능하다는 퍼셉트론의 한계를 증명함으로써 당시 신경망에 대한 모든 연구가 중단되고 첫 번째 AI 겨울이 도래<br>
+**1973년:** 라트힐 보고서<br>
+**1974년:** 웨어보스의 "오류 역전파 알고리즘" 논문 발표<br>
+**1980년:** 중국인의 방 논문 발표<br>
 
 <br><br><br>
 											
@@ -132,30 +140,43 @@
 
 <br><br><br>											
 											
-## 5. 두 번째 AI 겨울 (1987년 ~ 1993년)<br>											
+## 5. 두 번째 AI 겨울 (1987년 ~ 1993년)<br>								
+
+**1987년:** Lisp 머신의 시장 붕괴, UCI Machine Learning Repository 데이터 공개서비스 시작<br>
 **1990년대:** 전문가 시스템의 한계(유연성 부족, 지식베이스의 유지비용, 응용의 제한성) 등과 AI의 발전속도 문제(자연어 처리의 한계, 컴퓨팅 파워와 데이터의 부족, 추론과 학습의 한계) 등으로 인해 또 다시 자금 지원이 감소함에 따라 AI 연구는 실질적인 성과를 내는 데 어려움을 겪는 '두 번째 AI 겨울'.<br>
+**1991년:** Python 탄생<br>
+**1993년:** R 탄생<br>
 			
 <br><br><br>
 								
 ## 6. 인공신경망 연구 (1993년 ~ 2000년)<br>								
 
+**1997년:** 순환신경망의 일종인 LSTM 발표, IBM 딥블루가 세계 체스 챔피언 카스파로에게 승<br>
+**1998년:** 르쿤 컨볼루션 신경망의 실용적 학습 알고리즘 제안, 메시 "빅데이터" 용어 사용<br>
+**1999년:** 소니 애완로봇 AIBO 시판<br>
+
+
 <br><br><br>
 
 ## 7. 머신러닝과 딥러닝의 발전 (2000년 ~)<br>											
-**2000년:** 엔비디아는 컴퓨터 시스템에서 그래픽 연산을 빠르게 처리하여 결과값을 모니터에 출력하는 연산 장치인 <ins>GPU(Graphic Processing Unit)</ins>를 최초로 출시<br>
-**2006년:** 컴퓨터 성능의 향상과 대량의 데이터, 그리고 새로운 알고리즘의 발전으로 인해 AI 연구가 재조명되고, 제프리 힌튼(Geoffrey Hinton)은 <ins>딥러닝 논문(A Fast Learning Algorithm for Deep Belief Nets)</ins>을 발표<br>					
-**2010년:** 스탠포드의 Fei-Fei Li 그룹에서 수백만 개의 레이블이 지정된 이미지를 포함하는 이미지넷(Imagenet) 이라는 대규모 데이터베이스를 만들어 게시<br>
+**2000년:** 엔비디아(NVIDIA)는 컴퓨터 시스템에서 그래픽 연산을 빠르게 처리하여 결과값을 모니터에 출력하는 연산 장치인 GPU(Graphic Processing Unit)를 최초로 출시, 컴퓨터 비전 패키지 OpenCV 공개<br>
+**2004년:** 제1회 그랜드 챌린지(고속도로 자율주행)<br>
+**2006년:** 컴퓨터 성능의 향상과 대량의 데이터, 그리고 새로운 알고리즘의 발전으로 인해 AI 연구가 재조명되고, 제프리 힌튼(Geoffrey Hinton)은 딥러닝 논문(A Fast Learning Algorithm for Deep Belief Nets)을 발표<br>	
+**2007년:** GPU 프로그램 라이브러리(CUDA) 공개, 사이킷런(Scikit-Learn) 최초 공개<br>			
+**2009년:** 딥러닝 패키지(Theano) 서비스 개시<br>
+**2010년:** 스탠포드의 Fei-Fei Li 그룹에서 수백만 개의 레이블이 지정된 이미지를 포함하는 이미지넷(Imagenet) 이라는 대규모 데이터베이스 게시, 마이크로소프트 동작 인식 카메라 키넥트(Kinect) 시판<br>
 **2012년:** 제프리 힌튼(Geoffrey Hinton)은 알렉스 크리제브스키(Alex Krizhevsky), 일리아 수츠케버(Ilya Sutskever)와 함께 이미지넷이 주최하는 대규모 시각 인식 챌린지(LSVRC)에서 GPU를 기반으로 기존 오류율을 절반으로 16%로 줄임. 이 시기에 자율주행차, 음성 인식, 자연어 처리 등의 분야에서 혁신적인 성과.<br>
-**2015년:** ResNet이 사람보다 이미지 분류를 더욱 잘 수행<br>
-**2016년:** AlphaGo과 이세돌9단 바둑 대결 4:1로 승<br>
-**2017년:** Transformer 모델 등장<br>
-**2018년:** GPT/BERT 생성형 인공지능 등장, GPT(GPT-1) : 117m 파라미터 (학습데이터 4.5GB)<br>
-**2019년:** GPT-2 : 1,500m 파라미터 (학습데이터 40GB)<br>
-**2020년:** 대규모 언어 모델(GPT-3) 등장, GPT-3 : 175,000m 파라미터 (학습데이터 570GB)<br>
-**2021년:** AlphaFold, 딥마인드 단백질 접힘을 거의 안벽히 예측<br>
-**2022년:** ChatGPT 놀라운 자연어 구현, GPT-3.5 미국 변호사 시험(Uniform Bar Exam)에서 213점(400점 만점)을 받아 하위 10%<br>
-**2023년:** GPT-4 멀티모달의 등장과 상업적 활용이 증가하면서 AI 기술은 다양한 분야에 통합되고 AI는 헬스케어, 금융, 고객 서비스, 창의적 작업 등 여러 산업에서 중요한 역할을 수행, GPT-4 미국 변호사 시험(Uniform Bar Exam)에서 298점(400점 만점)을 받아 상위 10%로 통과, 인공지능 ‘특이점’ 돌파 이슈<br>	
-**2024년:** 오픈AI(챗GPT) 주간 사용자 2억명, 메타(라마) 월 사용자 4억명 돌파, 사카나 AI, 과학연구 자율수행하는 'AI 에이전트' 공개
+**2014년:** 딥러닝 패키지(Caffe) 서비스 개시<br>
+**2015년:** 클라우스 슈밥 "제4차 산업혁명" 언급, OpenAI 창립, 딥러닝 패키지(TensorFlow) 서비스 개시, ResNet이 사람보다 이미지 분류를 더욱 잘 수행<br>
+**2016년:** AlphaGo과 이세돌9단 바둑 대결 4:1로 승, 딥러닝 패키지(PyTorch, Keras) 서비스 개시<br>
+**2017년:** AlphaGo Zero가 AlphaGo를 100:0으로 승, 구글 Teachable Machine 공개, Transformer 모델 등장<br>
+**2018년:** GPT/BERT 생성형 인공지능 등장, GPT(GPT-1) : 117m 파라미터 (학습데이터 4.5GB), 인공지능이 그린 초상화(에드몽 벨라미)가 경매 시장에서 432,500달러에 판매<br>
+**2019년:** GPT-2 : 1,500m 파라미터 (학습데이터 40GB), 알프 스타 스타크래프르에서 그랜드마스터 수준 달성<br>
+**2020년:** 대규모 언어 모델(GPT-3) 등장, GPT-3 : 175,000m 파라미터 (학습데이터 570GB), 제약회사 엑센시아 : 인공지능이 개발한 후보 신약의 1상 시험 시작<br>
+**2021년:** AlphaFold, 딥마인드 단백질 접힘을 거의 완벽히 예측, OpenAI : 그림 인공지능 DALL·E 출시<br>
+**2022년:** 그림 인공지능 미드저니(Midjourney) 출시, Stability AI 오픈소스 라이선스 그림 인공지능 모델인 Stable diffusion 출시, OpenAI 대화형 인공지능 ChatGPT  초기베타 출시, GPT-3.5 미국 변호사 시험(Uniform Bar Exam)에서 213점(400점 만점)을 받아 하위 10%<br>
+**2023년:** 마이크로소프트 : 대화형 인공지능 Bing chat 출시, 구글 대화형 인공지능 Bard 출시, GPT-4 미국 변호사 시험(Uniform Bar Exam)에서 298점(400점 만점)을 받아 상위 10%로 통과, 인공지능 ‘특이점’ 돌파 이슈<br>	
+**2024년:** 구글 'Bard' 리브랜딩한 제미나이(Gemini) 출시, Open AI 동영상 생성 인공지능 소라(Sora) 공개, 오픈AI(챗GPT) 주간 사용자 2억명, 메타(라마) 월 사용자 4억명 돌파, 사카나 AI, 과학연구 자율수행하는 'AI 에이전트' 공개
 
 <br><br><br>
 
