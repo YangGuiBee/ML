@@ -162,8 +162,8 @@ $w_0=-\\theta , x_0=1$ 일 때 : $z_{new} = w_0x_0+w_1x_1+\\cdots+w_mx_m=\\sum_{
 ### 머신러닝과 딥러닝의 부상 (2000년대~현재)<br>											
 **2000년:** 엔비디아는 컴퓨터 시스템에서 그래픽 연산을 빠르게 처리하여 결과값을 모니터에 출력하는 연산 장치인 <ins>GPU(Graphic Processing Unit)</ins>를 최초로 출시<br>
 **2006년:** 컴퓨터 성능의 향상과 대량의 데이터, 그리고 새로운 알고리즘의 발전으로 인해 AI 연구가 재조명되고, 제프리 힌튼(Geoffrey Hinton)은 <ins>딥러닝 논문(A Fast Learning Algorithm for Deep Belief Nets)</ins>을 발표<br>					
-**2010년:** 스탠포드의 Fei-Fei Li 그룹에서 수백만 개의 레이블이 지정된 이미지를 포함하는 Imagenet 이라는 대규모 데이터베이스를 만들어 게시<br>
-**2012년:** 제프리 힌튼(Geoffrey Hinton)Alex Krizhevsky , Ilya Sutskever은 대규모 시각 인식 챌린지(LSVRC)에서 GPU를 기반으로 기존 오류율을 절반으로 16%로 줄임. 이 시기에 자율주행차, 음성 인식, 자연어 처리 등의 분야에서 혁신적인 성과.<br>
+**2010년:** 스탠포드의 Fei-Fei Li 그룹에서 수백만 개의 레이블이 지정된 이미지를 포함하는 이미지넷(Imagenet) 이라는 대규모 데이터베이스를 만들어 게시<br>
+**2012년:** 제프리 힌튼(Geoffrey Hinton)은 알렉스 크리제브스키(Alex Krizhevsky), 일리아 수츠케버(Ilya Sutskever)와 함께 이미지넷이 주최하는 대규모 시각 인식 챌린지(LSVRC)에서 GPU를 기반으로 기존 오류율을 절반으로 16%로 줄임. 이 시기에 자율주행차, 음성 인식, 자연어 처리 등의 분야에서 혁신적인 성과.<br>
 **2015년:** ResNet이 사람보다 이미지 분류를 더욱 잘 수행<br>
 **2016년:** AlphaGo과 이세돌9단 바둑 대결 4:1로 승<br>
 **2017년:** Transformer 모델 등장<br>
