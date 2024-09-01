@@ -106,7 +106,7 @@
 
 <br><br><br>
 
-## 2. 데이터 기반 분석 (1956년 ~ 1972년) <br>
+## 2. 데이터 기반 분석 (1956년 ~ 1960년대) <br>
 
 **1956년:** <ins>다트머스 회의(Dartmouth Conference)</ins>에서 '인공지능'이라는 용어가 처음 사용되었으며, 인공지능 연구의 출발점으로 간주. 존 매카시(John McCarthy), 마빈 민스키(Marvin Minsky), 클로드 섀넌(Claude Shannon) 등이 참석하여 AI의 가능성과 기계가 인간처럼 지능적 작업을 수행할 수 있는 가능성에 대해 논의. 앨런 뉴웰(Allen Newell)과 허버트 사이먼(Herbert A. Simon)은 "The Logic Theory Machine: A Complex Information Processing System" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/logictheorymachine.pdf) 논문에서 인간의 사고를 모방하는 기계의 가능성에 대해 논의하며, 논리적 이론을 증명할 수 있는 '논리 이론가(The Logic Theorist)'라는 컴퓨터 프로그램을 개발함으로써 AI 연구의 초기 단계에서 중요한 기여였으며, 이 논문은 인공지능의 문제 해결 능력과 알고리즘의 효율성에 대한 논의를 포함.<br>
 <img width ='400' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/1956.png'><br>
@@ -121,12 +121,13 @@
 **1965년:** 자데 퍼지이론 발표<br>
 **1966년:** MIT의 컴퓨터 과학자인 조셉 바이젠바움(Joseph Weizenbaum)은 ACM에 "ELIZA, a Computer Program for the Study of Human-Computer Natural Language Communication"이라는 논문에서 엘리자(ELIZA)라는 프로그램을 통해 인간과 컴퓨터가 어느 정도의 자연어 대화를 할 수 있게 되는 방법을 설명하고 임상 치료 중인 정신과 의사를 모방하기 위해 최초의 챗봇인 EZZA를 개발<br>
 **1968년:** 공간탐색 알고리즘 A 발표<br>
-**1972년:** 인공지능 언어 Prolog 탄생<br>
+**1969년:** 마빈 민스키(Marvin Minsky)와 세이무어 페퍼트(Seymour Papert)는 "Perceptrons: an introduction to computing geometry" 책 (https://direct.mit.edu/books/monograph/3132/PerceptronsAn-Introduction-to-Computational) 을 ​​통해 선형모델인 퍼셉트론이 간단한 비선형인 배타적-or(XOR) 함수를 학습할 수 없으므로 아무리 오랫동안 학습시키더라도 퍼셉트론이 그러한 함수를 학습하는 것이 이론적으로 불가능하다는 퍼셉트론의 한계를 증명<br>
 
 <br><br><br>	
 
 ## 3. 첫번째 AI겨울 (1973년 ~ 1980년대)<br>
-다트머스 컨퍼런스가 끝나고, 많은 과학자들이 연구에 돌입했지만, 인간에게 쉬운 글자 읽기와 그림 인식 같은 기능을 구현하는 것이 어려웠다. 그 당시에는 컴퓨터의 성능과 하드웨어도 성능이 충분하지 않았고, 기대와 달리 연구 성과가 낮아 투자가 적어지게 되어 재정적 어려움과 함께 인공지능 연구에 대한 비판이 나오기 시작됨. 특히, 마빈 민스키(Marvin Minsky)와 세이무어 페퍼트(Seymour Papert)는 "Perceptrons: an introduction to computing geometry" 책 (https://direct.mit.edu/books/monograph/3132/PerceptronsAn-Introduction-to-Computational) 을 ​​통해 선형모델인 퍼셉트론이 간단한 비선형인 배타적-or(XOR) 함수를 학습할 수 없으므로 아무리 오랫동안 학습시키더라도 퍼셉트론이 그러한 함수를 학습하는 것이 이론적으로 불가능하다는 퍼셉트론의 한계를 증명함으로써 당시 신경망에 대한 모든 연구가 중단되고 첫 번째 AI 겨울이 도래<br>
+**1971년:** 제임스 라이트힐(James Lighthill)경은 대영제국의 과학 연구회의 위임을 받아 '영국 인공지능 연구 현황'에 대한 보고서를 작성하게 된다. 이 보고서에서 그는 현재의 인공지능 기술이 '폭발적 조합의 증가' 문제에 제대로 대처할 수 없다는 점을 들어 AI 연구에서 중요한 결과는커녕, 의미 있는 결과조차 찾지 못해서 'AI'라는 별도의 과학 분야는 필요 없다고 주장. 다트머스 컨퍼런스가 끝나고, 많은 과학자들이 연구에 돌입했지만, 인간에게 쉬운 글자 읽기와 그림 인식 같은 기능을 구현하는 것이 어려웠다. 그 당시에는 컴퓨터의 성능과 하드웨어도 성능이 충분하지 않았고, 기대와 달리 연구 성과가 낮아 투자가 적어지게 되어 재정적 어려움과 함께 인공지능 연구에 대한 비판이 나오기 시작되면서 당시 신경망에 대한 모든 연구가 중단되고 첫 번째 AI 겨울이 도래<br>
+**1972년:** 인공지능 언어 Prolog 탄생<br>
 **1973년:** 라트힐 보고서<br>
 **1974년:** 웨어보스의 "오류 역전파 알고리즘" 논문 발표<br>
 **1980년:** 중국인의 방 논문 발표<br>
