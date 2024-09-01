@@ -510,15 +510,12 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 ![](./images/ComputerScience.png)
 <br>
 (출처) https://ebrary.net/190208/health/relationship_data_mining_machine_learning_artificial_intelligence
-
-<br><br><br>
+<br>
 
 ![](./images/AI_DS.png)
 <br>
 
-![](./images/DeepLearning.png)
-<br>
-(출처) https://wikidocs.net/204493
+![](./images/ML.png)
 <br>
 
 ![](./images/DeepLearning_RL.png)
