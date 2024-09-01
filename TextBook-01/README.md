@@ -10,7 +10,7 @@
   	 ▣ 실습 준비
 ---
 
-## ▣ 2024년 10대 전략기술 트렌트
+# ▣ 2024년 10대 전략기술 트렌트
 
 
 ![](./images/top-strategic-technology-trends-2024.png)
@@ -19,7 +19,7 @@
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/top-strategic-technology-trends-2024.png'>
 -->
 
-### 최근 10년간 10대 전략기술
+## 최근 10년간 10대 전략기술
 ![](./images/top-strategic-technology-trends-2024_table.png)
 
 
@@ -71,7 +71,7 @@
 |2005|자동화된 IT|IT 자산 관리|모바일 기기 관리|분석|엔터프라이즈 모빌리티 관리|분석 기반 비즈니스 인텔리전스|빅 데이터|비즈니스 프로세스 관리|빅 데이터 분석|비즈니스 프로세스 관리|
 -->
 
-### 2024년, Hyper Cycle for Emerging Technologies
+## 2024년, Hyper Cycle for Emerging Technologies
 ![](./images/HypeCycle_2024.png)
 <br>
 가트너가 2024년 Hype Cycle for Emerging Technologies 보고서를 통해 주목해야 할 25가지의 혁신 기술을 발표했다. 이 기술들은 ①자율형 AI, ②개발자 생산성, ③총체적 경험, ④인간 중심의 보안 및 개인정보 보호 프로그램 등 네 가지 주요 트렌드로 분류된다.<br>
@@ -84,18 +84,18 @@
 
 <br><br>
 
-### 2024년, Hyper Cycle for AI
+## 2024년, Hyper Cycle for AI
 ![](./images/HypeCycle_AI2024.png)
 <br>
  (출처) https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Hype_Cycle_for_AI.pdf
 
 <br><br><br>
 
-## ▣ AI의 역사
+# ▣ AI의 역사
 
 <br><br>
 
-### 기초 이론과 초기 발전 (1943년~1955년)<br>										
+## 기초 이론과 초기 발전 (1943년~1955년)<br>										
 **1943년:** 워런 맥컬록(Warren McCulloch)과 월터 피츠(Walter Pitts)는  "A Logical Calculus of the Ideas Immanent in Nervous Activity" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/McCulloch_Pitts.pdf) 논문을 통해 신경망 모델의 기초를 마련. 신경망의 수학적 모델을 제안. 신경세포(뉴런)를 이진(binary) 장치로 모델링하여 입력 신호가 일정한 임계값을 넘으면 뉴런이 활성화되어 출력을 생성하고, 그렇지 않으면 비활성 상태로 남는다는 뉴런의 "발화" 메커니즘을 설명한 것으로, 현재의 퍼셉트론(Perceptron) 개념의 기초가 됨. 또한 여러 뉴런이 결합하여 더 복잡한 계산을 수행할 수 있는 신경망을 제안하였고 이 신경망은 다양한 입력에 대해 복잡한 논리적 결정을 내릴 수 있는 구조로 이후 인공 신경망의 이론적 기초가 됨.<br>	
 <img width ='800' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/02_01.png'><br>
 Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(축삭돌기), Axon terminal(축삭가지)<br>
@@ -109,7 +109,7 @@ Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(�
 											
 <br><br><br>
 	   
-### AI의 탄생과 초기 연구 (1956년~1960년대)<br>											
+## AI의 탄생과 초기 연구 (1956년~1960년대)<br>											
 **1956년:** <ins>다트머스 회의(Dartmouth Conference)</ins>에서 '인공지능'이라는 용어가 처음 사용되었으며, 인공지능 연구의 출발점으로 간주. 존 매카시(John McCarthy), 마빈 민스키(Marvin Minsky), 클로드 섀넌(Claude Shannon) 등이 참석하여 AI의 가능성과 기계가 인간처럼 지능적 작업을 수행할 수 있는 가능성에 대해 논의. 앨런 뉴웰(Allen Newell)과 허버트 사이먼(Herbert A. Simon)은 "The Logic Theory Machine: A Complex Information Processing System" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/logictheorymachine.pdf) 논문에서 인간의 사고를 모방하는 기계의 가능성에 대해 논의하며, 논리적 이론을 증명할 수 있는 '논리 이론가(The Logic Theorist)'라는 컴퓨터 프로그램을 개발함으로써 AI 연구의 초기 단계에서 중요한 기여였으며, 이 논문은 인공지능의 문제 해결 능력과 알고리즘의 효율성에 대한 논의를 포함.<br>
 **1957년:** 프랭크 로젠블렛(Frank Rosenblatt)은 <ins>퍼셉트론(Perceptron)</ins> 이라는 초기 신경망 모델을 개발. 퍼셉트론은 간단한 형태의 기계 학습 모델로, 패턴 인식 문제를 해결할 수 있는 가능성을 보여줌.퍼셉트론은 패턴 인식을 위한 학습 알고리즘을 포함하고 있으며, 입력 데이터에 대한 가중치를 조정하여 학습하고, 이후의 다층 신경망과 딥러닝의 기초가 되는 개념을 제공.<br>
  <a href="https://wikidocs.net/24958" target="_blank">딥러닝을 이용한 자연어처리 입문(Perceptron)</a><br>
@@ -119,24 +119,24 @@ Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(�
 
 <br><br><br>	
 											
-### 첫 번째 AI 겨울 (1970년대)<br>											
+## 첫 번째 AI 겨울 (1970년대)<br>											
 **1969년:** 마빈 민스키(Marvin Minsky)와 세이무어 페퍼트(Seymour Papert)는 "Perceptrons: an introduction to computing geometry" 책 (https://direct.mit.edu/books/monograph/3132/PerceptronsAn-Introduction-to-Computational) 을 ​​통해 선형모델인 퍼셉트론이 간단한 비선형인 배타적-or(XOR) 함수를 학습할 수 없으므로 아무리 오랫동안 학습시키더라도 퍼셉트론이 그러한 함수를 학습하는 것이 이론적으로 불가능하다는 <ins>퍼셉트론의 한계</ins>를 증명함으로써 당시 신경망에 대한 모든 연구가 중단되고 첫 번째 AI 겨울이 도래.<br>
 
 <br><br><br>									
 											
-### 전문가 시스템의 부상과 상업화 (1980년대)<br>											
+## 전문가 시스템의 부상과 상업화 (1980년대)<br>											
 **1980년대:** AI 연구는 특정 분야의 지식을 기반으로 문제를 해결하는 <ins>전문가 시스템(Expert Systems)</ins>이 부상함. 예컨대, 컴퓨터 구성의 자동화를 위한 XCON(eXpert CONfigurer), 법률 분야의 루카스(LUCAS), 생명과학 및 의학 분야의 세이백(SEYBAC) 등이 상업적으로도 성공.<br>
 **1983년:** 정통 AI(Tradition AI) 연구의 중심이 문제 해결에서 지식 표현과 추론으로 이동. 이 시기에 조지프 와이젠바움(Joseph Weizenbaum)의 엘리자(ELIZA)와 같은 프로그램이 인기.<br>
 **1986년:** 제프리 힌튼(Geoffrey Hinton), David Rumelhart, Ronald Williams는 역전파 알고리즘(backpropagation algorithm)을 제안하여 <ins>다층 퍼셉트론 (Multilayer Perceptron, MLP)</ins>의 학습을 가능하게 했다. 입력층과 출력층 사이에 특징분석기인 은닉층(hidden layers)을 하나 이상 구성함으로써 퍼셉트론의 한계를 극복한 신경망의 학습방법의 발전으로 딥러닝 기술의 기초가 됨<br>
 
 <br><br><br>											
 											
-### 두 번째 AI 겨울 (1990년대)<br>											
+## 두 번째 AI 겨울 (1990년대)<br>											
 **1990년대:** 전문가 시스템의 한계(유연성 부족, 지식베이스의 유지비용, 응용의 제한성) 등과 AI의 발전속도 문제(자연어 처리의 한계, 컴퓨팅 파워와 데이터의 부족, 추론과 학습의 한계) 등으로 인해 또 다시 자금 지원이 감소함에 따라 AI 연구는 실질적인 성과를 내는 데 어려움을 겪는 '두 번째 AI 겨울'.<br>
 			
 <br><br><br>
 								
-### 머신러닝과 딥러닝의 부상 (2000년대~현재)<br>											
+## 머신러닝과 딥러닝의 부상 (2000년대~현재)<br>											
 **2000년:** 엔비디아는 컴퓨터 시스템에서 그래픽 연산을 빠르게 처리하여 결과값을 모니터에 출력하는 연산 장치인 <ins>GPU(Graphic Processing Unit)</ins>를 최초로 출시<br>
 **2006년:** 컴퓨터 성능의 향상과 대량의 데이터, 그리고 새로운 알고리즘의 발전으로 인해 AI 연구가 재조명되고, 제프리 힌튼(Geoffrey Hinton)은 <ins>딥러닝 논문(A Fast Learning Algorithm for Deep Belief Nets)</ins>을 발표<br>					
 **2010년:** 스탠포드의 Fei-Fei Li 그룹에서 수백만 개의 레이블이 지정된 이미지를 포함하는 이미지넷(Imagenet) 이라는 대규모 데이터베이스를 만들어 게시<br>
@@ -152,7 +152,7 @@ Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(�
 
 <br><br><br>
 
-### 【AI 역사 요약】
+## 【AI 역사 요약】
 
 <img width ='1200' height = '500' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/DL_History.PNG'>
 <!--
@@ -181,80 +181,80 @@ Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(�
 
 <br><br>
 
-## ▣ AI의 정의
+# ▣ AI의 정의
 
 
-### 1950년, 앨런 튜링 (Alan Turing)
+## 1950년, 앨런 튜링 (Alan Turing)
 정의 : "인공지능은 **컴퓨터가 사람처럼 대화하고 문제를 해결할 수 있는 능력**을 의미한다."<br>
 논문 : "Computing Machinery and Intelligence"<br>
 설명 : 터링은 "기계가 인간처럼 생각하고 인식할 수 있는가?"와 관련하여 인공지능의 가능성을 논의하며, 기계가 인간처럼 생각할 수 있는지를 평가하기 위한 **"튜링 테스트"** 를 제안하여 AI의 철학적 기반을 다지는 중요한 작업으로 평가<br>
 
 <br><br> 
 
-### 1955년, 스튜어트 러셀과 피터 노빅 (Stuart Russell and Peter Norvig)
+## 1955년, 스튜어트 러셀과 피터 노빅 (Stuart Russell and Peter Norvig)
 정의 : "인공지능은 **인간의 지능적 행동을 모방하여 인간과 유사하게 학습하고, 추론하며, 적응할 수 있는 시스템을 만드는 연구**이다."<br>
 도서 : "Artificial Intelligence: A Modern Approach"<br>
 설명 : 이들은 AI를 지능적 에이전트를 연구하는 학문으로 정의하며, 학습과 적응의 중요성을 강조<br>
 
 <br><br> 
 
-### 1956년, 존 매카시 (John McCarthy)
+## 1956년, 존 매카시 (John McCarthy)
 정의 : "인공지능은 **지능적인 행동을 수행하는 기계를 설계하고, 이들이 사람처럼 사고하고 배우는 시스템을 만드는 과학과 공학**이다."<br>
 회의 : 다트머스 회의에서  "인공지능"이라는 용어를 처음 제안<br>
 설명 : 이 회의는 AI 출발점으로 여겨지며, 매카시는 AI를 광범위하게 정의하면서 인간처럼 사고하고 배우는 기계를 만드는 것이 목표<br>
 
 <br><br> 
 
-### 1956년, 앨런 뉴웰과 허버트 사이먼 (Allen Newell and Herbert A. Simon)
+## 1956년, 앨런 뉴웰과 허버트 사이먼 (Allen Newell and Herbert A. Simon)
 정의 : "인공지능은 **컴퓨터 프로그램이 목표를 달성하기 위해 필요한 논리적, 수학적 과정을 자동으로 수행할 수 있게 하는 능력**이다."<br>
 회의 : 다트머스 회의에서 로직 이론가(The Logic Theorist) 발표<br>
 설명 : 뉴웰과 사이먼은 인공지능 연구 초기 단계에서 인간의 문제 해결 능력을 컴퓨터로 재현하는 데 중점을 두고 정의를 내렸으며, 이들은 AI의 창시자로 널리 인정받고 있으며, 그들의 작업은 AI의 인지 과학적 접근의 기초를 마련<br>
 
 <br><br> 
 
-### 1956년, 마빈 민스키 (Marvin Minsky)
+## 1956년, 마빈 민스키 (Marvin Minsky)
 정의 : "인공지능은 **인간처럼 사고할 수 있는 기계를 만드는 과학**이다."<br>
 회의 : 다트머스 회의에서 발표<br>
 설명 : 민스키는 AI 연구의 선구자로, 인간 지능을 모방하는 기계를 만드는 과학으로 AI를 정의하고 MIT에서 AI 연구실을 설립하며, AI의 발전에 중요한 역할<br>
 
 <br><br> 
 
-### 1978년, 리처드 벨만 (Richard Bellman) : 인간적인 사고
+## 1978년, 리처드 벨만 (Richard Bellman) : 인간적인 사고
 정의 : "인공지능은 **복잡한 목적을 달성하기 위해 환경과의 상호작용을 통해 지능적 결정을 내리는 자동화된 의사결정 시스템**이다."<br>
 논문 : "An Introduction to Artificial Intelligence: Can Computers Think?"<br>
 설명 : 벨만은 AI를 환경과의 상호작용을 통해 복잡한 문제를 해결하는 자동화 시스템으로 정의했으며, 이는 동적 프로그래밍과 제어 이론에서 그의 업적과 연결.<br>
 
 <br><br> 
 
-### 1992년, 파트릭 윈스턴 (Patrick Winston) : 합리적인 사고
+## 1992년, 파트릭 윈스턴 (Patrick Winston) : 합리적인 사고
 정의 : "인공지능은 **컴퓨터가 인간의 지능적인 행위를 모방할 수 있도록 하는 알고리즘과 시스템을 연구하는 학문**이다."<br>
 도서 : "Artificial Intelligence"<br>
 설명 : MIT의 AI 연구원인 파트릭 윈스턴은 AI를 인간지능을 모방하는 알고리즘과 시스템을 연구하는 학문으로 정의했으며 그의 저서는 AI 교육에 널리 사용<br>
 
 <br><br> 
 
-### 1994년, 리치와 나이트 (Rich & Knight)
+## 1994년, 리치와 나이트 (Rich & Knight)
 정의 : "인공지능은 **현재는 인간이 더 잘하는 일을 컴퓨터가 수행하도록 만드는 방법에 대한 연구**이다."<br>
 도서 : "Artificial Intelligence"<br>
 설명 : 이 정의는 인공지능의 목표를 인간의 지능적 행동을 모방하거나 재현하기 위해 인간의 인지적 기능을 기계로 구현하는 것에 중점을 두고 있으며, 인공지능 연구의 주요 목표 중 하나인 기계가 인간처럼 학습하고, 추론하며, 문제를 해결하는 능력을 가지도록 만드는 것과 일치.<br>
 
 <br><br> 
 
-### 1998년, 레이 커즈와일 (Ray Kurzweil) : 인간적인 행위
+## 1998년, 레이 커즈와일 (Ray Kurzweil) : 인간적인 행위
 정의 : "인공지능은 **인간의 지적 능력을 확장하거나 이를 초월하는 능력을 가진 기계나 프로그램을 만드는 것**이다."<br>
 도서 : "The Age of Spiritual Machines"<br>
 설명 : 커즈와일은 AI를 인간 지능의 확장으로 보면서 궁극적으로는 인간 지능을 초월하는 강한 인공지능을 예측했으며, 기술적 특이점을 통해 AI가 인간의 모든 지적 활동을 수행할 수 있을 것이라고 주장.<br>
 
 <br><br> 
 
-### 1998년, 데이비드 풀 (David Poole) : 합리적인 행위
+## 1998년, 데이비드 풀 (David Poole) : 합리적인 행위
 정의 : "인공지능은 **확률적 추론을 통해 불확실한 상황에서 결정을 내리고, 지능적인 행동을 구현하는 시스템을 연구하는 학문**이다."<br>
 도서 :  "Computational Intelligence: A Logical Approach"<br>
 설명 : 풀은 AI를 불확실한 상황에서의 추론 능력으로 정의하며, 확률적 추론과 불확실한 데이터에서의 지능적 행동을 강조했으며, 이 정의는 AI의 논리적 접근과 확률적 방법론을 결합한 점에서 중요.<br>
 
 <br><br> 
 
-### 2018년, 앤드류 응(Andrew Ng)
+## 2018년, 앤드류 응(Andrew Ng)
 정의 : "인공지능은 **새로운 전력(電力)으로 광범위한 문제를 해결하고 다양한 산업에 혁신을 일으킬 수 있는 범용 기술**이다."<br>
 발표 : MIT 테크놀로지 리뷰(MIT Technology Review)
 설명 : 인공지능이 전기처럼 광범위한 영향을 미칠 것이라는 비유를 통해 인공지능의 중요성과 잠재력을 설명했으며, 이 비유는 이후로도 여러 강연과 글에서 반복적으로 사용.<br>
@@ -270,68 +270,57 @@ Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(�
 
 <br><br>
 
-## ▣ AI의 정의(최근 IT기업)
+# ▣ AI의 정의(최근 IT기업)
 
-### 위키백과 :
+## 위키백과 :
 인공지능(人工智能, 영어: artificial intelligence, AI)은 인간의 학습능력, 추론능력, 지각능력을 인공적으로 구현하려는 컴퓨터 과학의 세부분야 중 하나로 정보공학 분야에 있어 하나의 인프라 기술. 인간을 포함한 동물이 갖고 있는 지능 즉, 자연 지능(natural intelligence)과는 다른 개념. 인간의 지능을 모방한 기능을 갖춘 컴퓨터 시스템이며, 인간의 지능을 기계 등에 인공적으로 시연(구현)한 것. 일반적으로 범용 컴퓨터에 적용한다고 가정. 이 용어는 또한 그와 같은 지능을 만들 수 있는 방법론이나 실현 가능성 등을 연구하는 과학 기술 분야를 지칭<br>
 https://ko.wikipedia.org/wiki/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5
 
 
 
-### AWS : 
+## AWS : 
 인공 지능(AI)은 학습, 창조, 이미지 인식 등과 같이 주로 인간 지능과 연결된 인지 문제를 해결하는 데 주력하는 컴퓨터 공학 분야. 현대 조직은 스마트 센서, 사람이 생성한 콘텐츠, 모니터링 도구, 시스템 로그와 같은 다양한 소스에서 대량의 데이터를 수집. AI의 목표는 데이터에서 의미를 도출하는 자기 학습 시스템을 만드는 것. 그러면 AI는 그 지식을 인간과 같은 방식으로 새로운 문제를 해결하는 데 적용. 예를 들어 AI 기술은 사람의 대화에 의미 있게 반응하고, 독창적인 이미지와 텍스트를 만들고, 실시간 데이터 입력을 기반으로 결정. 조직은 애플리케이션에 AI 기능을 통합하여 비즈니스 프로세스를 최적화하고 고객 경험을 개선하며 혁신을 가속화<br>
 https://aws.amazon.com/ko/what-is/artificial-intelligence/
 
 
 
-### Google Cloud :
+## Google Cloud :
 인공지능은 일반적으로 인간 지능이 필요하거나 인간이 분석할 수 있는 범위를 벗어난 대규모 데이터를 포함하는 방식으로 추론, 학습 및 행동할 수 있는 컴퓨터와 머신을 빌드하는 과학 분야. AI는 컴퓨터 공학, 데이터 분석 및 통계, 하드웨어 및 소프트웨어 엔지니어링, 언어학, 신경 과학은 물론 철학과 심리학 등 다양한 학문을 포괄하는 광범위한 분야. 비즈니스의 운영 수준에서 AI는 주로 머신러닝과 딥 러닝을 기반으로 하는 기술로, 데이터 분석, 예측 및 예상, 객체 분류, 자연어 처리, 추천, 지능형 데이터 검색 등에 사용<br>
 https://cloud.google.com/learn/what-is-artificial-intelligence?hl=ko
 
 
 
-### Hewlett Packard Enterprise :
+## Hewlett Packard Enterprise :
 광의의 AI(인공 지능)란 기계 또는 시스템에서 표시하는 인간과 같은 모든 행동을 의미. AI의 기본 형식에서 컴퓨터는 과거의 유사한 행동 사례를 통해 얻은 광범위한 데이터를 사용하여 인간의 행동을 ‘모방’하도록 프로그래밍 됨. 고양이와 새의 차이를 인식하는 것부터 제조 시설에서 복잡한 활동을 수행하는 것에 이르기까지 다양<br>
 https://www.hpe.com/kr/ko/what-is/artificial-intelligence.html
 
 
 
-### IBK :
+## IBK :
 인공지능은 컴퓨터 과학과 강력한 데이터 세트를 결합하여 문제 해결을 가능하게 하는 분야. 인공지능과 함께 자주 언급되는 머신 러닝, 딥 러닝 등의 하위 분야도 여기에 포함됨. 이러한 분야는 입력 데이터를 기반으로 예측 또는 분류를 수행하는 전문 시스템을 만들려는 AI 알고리즘으로 구성<br>
 https://www.ibm.com/kr-ko/topics/artificial-intelligence
 
-<br><br>
-
-### 【ChatGPT가 그린 AI 이미지】
-<img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/AI.png'>
-
-<br>
-
-### 【AI 개념도】
-![](./images/AI_LG.png)
- (출처) LG전자 뉴스룸(https://live.lge.co.kr/live_with_ai_01/)
-
 <br><br><br>
 
-## ▣ AI의 유형
+# ▣ AI의 유형
  (출처) https://azure.microsoft.com/ko-kr/resources/cloud-computing-dictionary/what-is-artificial-intelligence#%EC%9D%98%EB%A3%8C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D
  
-### 인공 단순지능(단순 AI, 약 AI)
+## 인공 단순지능(단순 AI, 약 AI)
 인공 단순 지능(“약한 AI”라고도 함)은 단순하게 정의된 작업을 인간보다 잘 수행하는 컴퓨터 시스템의 능력을 지칭. 단순 AI는 인간이 지금까지 도달한 가장 높은 수준의 AI 개발이며, 무인 자동차와 개인 디지털 도우미를 비롯하여 실생활에서 볼 수 있는 모든 AI의 예가 이 범주에 포함. 이는 AI가 실시간으로 자체적인 사고를 하는 것처럼 보이지만 실제로는 여러 단순 프로세스를 조정하고 미리 결정된 프레임워크 내에서 의사 결정을 내리기 때문이며, AI의 “사고”는 의식이나 감정을 포함하지 않음. IBM의 왓슨, 아마존의 알렉사, 구글의 알파고 등
 
 
 
-### 인공 일반지능(일반 AI, 강 AI)
+## 인공 일반지능(일반 AI, 강 AI)
 “강력한 AI” 또는 “인간 수준 AI”라고도 하는 인공 일반 지능은 모든 지적 작업에서 인간을 능가하는 컴퓨터 시스템의 능력을 지칭. 로봇이 의식적 사고를 하고 자체적 동기에 따라 행동하는 영화 속의 AI 유형. 이론적으로 일반 AI를 갖춘 컴퓨터 시스템은 매우 복잡한 문제를 해결할 수 있고, 불확실한 상황에서 판단을 적용할 수 있으며, 사전 지식을 현재 추론에 통합할 수 있음. 또한 인간과 동등한 창의력과 상상력을 발휘할 수 있으며 단순 AI보다 훨씬 더 광범위한 작업을 수행할 수 있음. 영화 속에 등장하는 인공지능 로봇(현실에서는 미개발)
 
 
 
-### ASI(인공 슈퍼지능)
+## ASI(인공 슈퍼지능)
 인공 슈퍼지능을 갖춘 컴퓨터 시스템은 과학적 창의성, 통념 및 사회적 기술 등 거의 모든 분야에서 인간을 능가하는 능력을 얻게 됨
 
 <br><br>
 
-## ▣ AI의 활용 분야
+# ▣ AI의 활용 분야
 ![](./images/AI_Division.PNG)
 <br>
 범정부 역량을 결집하여 AI 시대 미래 비전과 전략을 담은 ‘AI 국가전략’을 발표<br>
@@ -492,8 +481,21 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 
 <br><br><br>
 
+# ▣ AI,ML,DL
+
+## 【ChatGPT가 그린 AI 이미지】
+<img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/AI.png'>
+
+<br>
+
+## 【AI 개념도】
+![](./images/AI_LG.png)
+ (출처) LG전자 뉴스룸(https://live.lge.co.kr/live_with_ai_01/)
+
+<br><br><br>
+
 ---
-## ▣ 실습 준비
+# ▣ 실습 준비
 
 
 
