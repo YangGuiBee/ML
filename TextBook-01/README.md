@@ -514,6 +514,9 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 <br>
 (출처) https://wikidocs.net/175429
 
+## 【ML vs DL】
+![](./images/ML_DL.png)
+(출처) https://www.codestates.com/blog/content/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EB%94%A5%EB%9F%AC%EB%8B%9D%EA%B0%9C%EB%85%90
 
 ---
 
