@@ -93,19 +93,6 @@
 
 ## ▣ AI의 역사
 
-<img width ='1200' height = '500' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/DL_History.PNG'>
-<!--
-![](./images/DL_History.PNG)
--->
- (출처) Deep Learning 101 - Part 1: History and Background (http://beamlab.org/deeplearning/2017/02/23/deep_learning_101_part1.html)
-
-<br><br>
-
-![](./images/AI_aminer.png)
-(동영상) https://originalfileserver.aminer.cn/sys/aminer/history/AI-history-1.mp4
-<br>
-(출처) Jie Tang et al., "Extraction and Mining of Academic Social Networks", SIGKDD 2008
-
 <br><br>
 
 ### 기초 이론과 초기 발전 (1943년~1955년)<br>										
@@ -163,16 +150,34 @@ Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(�
 **2022년:** ChatGPT 놀라운 자연어 구현<br>
 **2023년:** GPT-4 멀티모달의 등장과 상업적 활용이 증가하면서 AI 기술은 다양한 분야에 통합되고 AI는 헬스케어, 금융, 고객 서비스, 창의적 작업 등 여러 산업에서 중요한 역할을 수행<br>	
 
+<br><br><br>
 
 ### 【AI 역사 요약】
-![](./images/AI_History.PNG)
-(출처) SAS(https://www.sas.com/ko_kr/insights/analytics/what-is-artificial-intelligence.html)
-<br>
 
+<img width ='1200' height = '500' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/DL_History.PNG'>
+<!--
+![](./images/DL_History.PNG)
+-->
+ (출처) Deep Learning 101 - Part 1: History and Background (http://beamlab.org/deeplearning/2017/02/23/deep_learning_101_part1.html)
+
+<br><br>
+
+![](./images/AI_aminer.png)
+(동영상) https://originalfileserver.aminer.cn/sys/aminer/history/AI-history-1.mp4
+<br>
+(출처) Jie Tang et al., "Extraction and Mining of Academic Social Networks" : https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Hype_Cycle_for_Emerg_tech.pdf
+
+<br><br> 
 
 ![](./images/AI_Table.png)
 <br>
 (출처) 박태웅의「AI강의」(한빛비즈, 2023)
+
+<br><br>
+
+![](./images/AI_History.PNG)
+(출처) SAS(https://www.sas.com/ko_kr/insights/analytics/what-is-artificial-intelligence.html)
+<br>
 
 <br><br>
 
@@ -184,70 +189,70 @@ Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(�
 논문 : "Computing Machinery and Intelligence"<br>
 설명 : 터링은 "기계가 인간처럼 생각하고 인식할 수 있는가?"와 관련하여 인공지능의 가능성을 논의하며, 기계가 인간처럼 생각할 수 있는지를 평가하기 위한 **"튜링 테스트"** 를 제안하여 AI의 철학적 기반을 다지는 중요한 작업으로 평가<br>
 
- 
+<br><br> 
 
 ### 1955년, 스튜어트 러셀과 피터 노빅 (Stuart Russell and Peter Norvig)
 정의 : "인공지능은 **인간의 지능적 행동을 모방하여 인간과 유사하게 학습하고, 추론하며, 적응할 수 있는 시스템을 만드는 연구**이다."<br>
 도서 : "Artificial Intelligence: A Modern Approach"<br>
 설명 : 이들은 AI를 지능적 에이전트를 연구하는 학문으로 정의하며, 학습과 적응의 중요성을 강조<br>
 
-
+<br><br> 
 
 ### 1956년, 존 매카시 (John McCarthy)
 정의 : "인공지능은 **지능적인 행동을 수행하는 기계를 설계하고, 이들이 사람처럼 사고하고 배우는 시스템을 만드는 과학과 공학**이다."<br>
 회의 : 다트머스 회의에서  "인공지능"이라는 용어를 처음 제안<br>
 설명 : 이 회의는 AI 출발점으로 여겨지며, 매카시는 AI를 광범위하게 정의하면서 인간처럼 사고하고 배우는 기계를 만드는 것이 목표<br>
 
-
+<br><br> 
 
 ### 1956년, 앨런 뉴웰과 허버트 사이먼 (Allen Newell and Herbert A. Simon)
 정의 : "인공지능은 **컴퓨터 프로그램이 목표를 달성하기 위해 필요한 논리적, 수학적 과정을 자동으로 수행할 수 있게 하는 능력**이다."<br>
 회의 : 다트머스 회의에서 로직 이론가(The Logic Theorist) 발표<br>
 설명 : 뉴웰과 사이먼은 인공지능 연구 초기 단계에서 인간의 문제 해결 능력을 컴퓨터로 재현하는 데 중점을 두고 정의를 내렸으며, 이들은 AI의 창시자로 널리 인정받고 있으며, 그들의 작업은 AI의 인지 과학적 접근의 기초를 마련<br>
 
-
+<br><br> 
 
 ### 1956년, 마빈 민스키 (Marvin Minsky)
 정의 : "인공지능은 **인간처럼 사고할 수 있는 기계를 만드는 과학**이다."<br>
 회의 : 다트머스 회의에서 발표<br>
 설명 : 민스키는 AI 연구의 선구자로, 인간 지능을 모방하는 기계를 만드는 과학으로 AI를 정의하고 MIT에서 AI 연구실을 설립하며, AI의 발전에 중요한 역할<br>
 
-
+<br><br> 
 
 ### 1978년, 리처드 벨만 (Richard Bellman) : 인간적인 사고
 정의 : "인공지능은 **복잡한 목적을 달성하기 위해 환경과의 상호작용을 통해 지능적 결정을 내리는 자동화된 의사결정 시스템**이다."<br>
 논문 : "An Introduction to Artificial Intelligence: Can Computers Think?"<br>
 설명 : 벨만은 AI를 환경과의 상호작용을 통해 복잡한 문제를 해결하는 자동화 시스템으로 정의했으며, 이는 동적 프로그래밍과 제어 이론에서 그의 업적과 연결.<br>
 
-
+<br><br> 
 
 ### 1992년, 파트릭 윈스턴 (Patrick Winston) : 합리적인 사고
 정의 : "인공지능은 **컴퓨터가 인간의 지능적인 행위를 모방할 수 있도록 하는 알고리즘과 시스템을 연구하는 학문**이다."<br>
 도서 : "Artificial Intelligence"<br>
 설명 : MIT의 AI 연구원인 파트릭 윈스턴은 AI를 인간지능을 모방하는 알고리즘과 시스템을 연구하는 학문으로 정의했으며 그의 저서는 AI 교육에 널리 사용<br>
 
-
+<br><br> 
 
 ### 1994년, 리치와 나이트 (Rich & Knight)
 정의 : "인공지능은 **현재는 인간이 더 잘하는 일을 컴퓨터가 수행하도록 만드는 방법에 대한 연구**이다."<br>
 도서 : "Artificial Intelligence"<br>
 설명 : 이 정의는 인공지능의 목표를 인간의 지능적 행동을 모방하거나 재현하기 위해 인간의 인지적 기능을 기계로 구현하는 것에 중점을 두고 있으며, 인공지능 연구의 주요 목표 중 하나인 기계가 인간처럼 학습하고, 추론하며, 문제를 해결하는 능력을 가지도록 만드는 것과 일치.<br>
 
-
+<br><br> 
 
 ### 1998년, 레이 커즈와일 (Ray Kurzweil) : 인간적인 행위
 정의 : "인공지능은 **인간의 지적 능력을 확장하거나 이를 초월하는 능력을 가진 기계나 프로그램을 만드는 것**이다."<br>
 도서 : "The Age of Spiritual Machines"<br>
 설명 : 커즈와일은 AI를 인간 지능의 확장으로 보면서 궁극적으로는 인간 지능을 초월하는 강한 인공지능을 예측했으며, 기술적 특이점을 통해 AI가 인간의 모든 지적 활동을 수행할 수 있을 것이라고 주장.<br>
 
-
+<br><br> 
 
 ### 1998년, 데이비드 풀 (David Poole) : 합리적인 행위
 정의 : "인공지능은 **확률적 추론을 통해 불확실한 상황에서 결정을 내리고, 지능적인 행동을 구현하는 시스템을 연구하는 학문**이다."<br>
 도서 :  "Computational Intelligence: A Logical Approach"<br>
 설명 : 풀은 AI를 불확실한 상황에서의 추론 능력으로 정의하며, 확률적 추론과 불확실한 데이터에서의 지능적 행동을 강조했으며, 이 정의는 AI의 논리적 접근과 확률적 방법론을 결합한 점에서 중요.<br>
 
-
+<br><br> 
 
 ### 2018년, 앤드류 응(Andrew Ng)
 정의 : "인공지능은 **새로운 전력(電力)으로 광범위한 문제를 해결하고 다양한 산업에 혁신을 일으킬 수 있는 범용 기술**이다."<br>
