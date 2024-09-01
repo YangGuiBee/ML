@@ -101,7 +101,7 @@
 ## 1. 초기 단계 (~ 1950년대) <br>										
 **1936년:** 앨런 튜링(Alan Turing, 1912~1954)은 "On Computable Numbers, with an Application to the Entscheidungsproblem (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/TuringFullText.pdf) " 논문을 통해 계산할 수 있는 것과 없는 것을 구분하여, 어떤 문제들은 컴퓨터(또는 기계)가 풀 수 있지만, 어떤 문제들은 아무리 노력해도 풀 수 없다는 것을 증명한 연구로 튜링 머신 이론과 노이만형 컴퓨터에 있어서 이론적 토대를 제시하고 수십 년간 컴퓨터 과학과 인공지능 분야에서 이루어진 모든 연구의 기반이 됨<br>
 **1943년:** 워런 맥컬록(Warren McCulloch)과 월터 피츠(Walter Pitts)는  "A Logical Calculus of the Ideas Immanent in Nervous Activity" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/McCulloch_Pitts.pdf) 논문을 통해 신경망 모델의 기초를 마련. 신경망의 수학적 모델을 제안. 신경세포(뉴런)를 이진(binary) 장치로 모델링하여 입력 신호가 일정한 임계값을 넘으면 뉴런이 활성화되어 출력을 생성하고, 그렇지 않으면 비활성 상태로 남는다는 뉴런의 "발화" 메커니즘을 설명한 것으로, 현재의 퍼셉트론(Perceptron) 개념의 기초가 됨<br>	
-**1950년:** 앨런 튜링(Alan Turing)은 철학 저널 '마인드'에 '기계가 생각할 수 있는가?(https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Computing%20Machinery%20and%20Intelligence.pdf)) '라는 주제의 논문을 발표하고, 튜링 테스트라는 '기계가 생각하는 것이 가능한가?'라는 명제로 기계의 답이 얼마나 인간다운지 평가한 실험을 하여 성과를 거둠.<br>
+**1950년:** 앨런 튜링(Alan Turing)은 클로드 섀넌(Claude Shannon)과 함께 철학 저널 '마인드(Mind)'에 "기계가 생각할 수 있는가?(https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Computing%20Machinery%20and%20Intelligence.pdf)"라는 주제의 논문을 발표하고, 튜링 테스트라는 '기계가 생각하는 것이 가능한가?'라는 명제로 기계의 답이 얼마나 인간다운지 평가한 실험을 하여 성과를 거둠.<br>
 **1956년:** <ins>다트머스 회의(Dartmouth Conference)</ins>에서 '인공지능'이라는 용어가 처음 사용되었으며, 인공지능 연구의 출발점으로 간주. 존 매카시(John McCarthy), 마빈 민스키(Marvin Minsky), 클로드 섀넌(Claude Shannon) 등이 참석하여 AI의 가능성과 기계가 인간처럼 지능적 작업을 수행할 수 있는 가능성에 대해 논의. 앨런 뉴웰(Allen Newell)과 허버트 사이먼(Herbert A. Simon)은 "The Logic Theory Machine: A Complex Information Processing System" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/logictheorymachine.pdf) 논문에서 인간의 사고를 모방하는 기계의 가능성에 대해 논의하며, 논리적 이론을 증명할 수 있는 '논리 이론가(The Logic Theorist)'라는 컴퓨터 프로그램을 개발함으로써 AI 연구의 초기 단계에서 중요한 기여였으며, 이 논문은 인공지능의 문제 해결 능력과 알고리즘의 효율성에 대한 논의를 포함.<br>
 **1957년:** 프랭크 로젠블렛(Frank Rosenblatt)은 <ins>퍼셉트론(Perceptron)</ins> 이라는 초기 신경망 모델을 개발. 퍼셉트론은 간단한 형태의 기계 학습 모델로, 패턴 인식 문제를 해결할 수 있는 가능성을 보여줌.퍼셉트론은 패턴 인식을 위한 학습 알고리즘을 포함하고 있으며, 입력 데이터에 대한 가중치를 조정하여 학습하고, 이후의 다층 신경망과 딥러닝의 기초가 되는 개념을 제공.<br>
  <a href="https://wikidocs.net/24958" target="_blank">딥러닝을 이용한 자연어처리 입문(Perceptron)</a><br>
@@ -110,8 +110,10 @@
 
 <br><br><br>	
 											
-## 2. 첫번째 AI겨울 (1960년대말 ~ 1970년대)<br>											
-**1960년대:** 제임스 얼 캐벗(James Allen)은 자연어 이해의 기초를 마련했으며, 엘리자(ELIZA)와 같은 초기 대화형 프로그램을 개발<br>		
+## 2. 첫번째 AI겨울 (1960년대말 ~ 1970년대)<br>							
+**1960년대:** 제임스 얼 캐벗(James Allen)은 자연어 이해의 기초를 마련했으며, 엘리자(ELIZA)와 같은 초기 대화형 프로그램을 개발<br>
+**1964년:** 대니얼 보브로(Daniel Bobrow)는 컴퓨터 문제 해결 시스템을 위한 자연어 입력(Natural Language Input for a Computer Problem Solving System)을 출간<br>
+**1966년:** MIT의 컴퓨터 과학자인 조셉 바이젠바움(Joseph Weizenbaum)은 ACM에 "ELIZA, a Computer Program for the Study of Human-Computer Natural Language Communication"이라는 논문에서 엘리자(ELIZA)라는 프로그램을 통해 인간과 컴퓨터가 어느 정도의 자연어 대화를 할 수 있게 되는 방법을 설명하고 임상 치료 중인 정신과 의사를 모방하기 위해 최초의 챗봇인 EZZA를 개발<br>
 **1969년:** 마빈 민스키(Marvin Minsky)와 세이무어 페퍼트(Seymour Papert)는 "Perceptrons: an introduction to computing geometry" 책 (https://direct.mit.edu/books/monograph/3132/PerceptronsAn-Introduction-to-Computational) 을 ​​통해 선형모델인 퍼셉트론이 간단한 비선형인 배타적-or(XOR) 함수를 학습할 수 없으므로 아무리 오랫동안 학습시키더라도 퍼셉트론이 그러한 함수를 학습하는 것이 이론적으로 불가능하다는 <ins>퍼셉트론의 한계</ins>를 증명함으로써 당시 신경망에 대한 모든 연구가 중단되고 첫 번째 AI 겨울이 도래.<br>
 
 <br><br><br>									
