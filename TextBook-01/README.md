@@ -168,7 +168,9 @@ Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(�
 ![](./images/AI_aminer.png)
 (동영상) https://originalfileserver.aminer.cn/sys/aminer/history/AI-history-1.mp4
 <br>
-(출처) Jie Tang et al., "Extraction and Mining of Academic Social Networks" : https://github.com/YangGuiBee/ML/blob/main/TextBook-01/KDD08-Tang-et-al-ArnetMiner.pdf
+(출처) https://www.aminer.org/ai-history
+<br>
+(참고문허) Jie Tang et al., "Extraction and Mining of Academic Social Networks" : https://github.com/YangGuiBee/ML/blob/main/TextBook-01/KDD08-Tang-et-al-ArnetMiner.pdf
 
 <br><br> 
 
