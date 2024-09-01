@@ -181,7 +181,7 @@ $w_0=-\\theta , x_0=1$ 일 때 : $z_{new} = w_0x_0+w_1x_1+\\cdots+w_mx_m=\\sum_{
 
 ![](./images/AI_Table.png)
 <br>
-(출처) 박태웅의 AI강의(한빛비즈, 2023)
+(출처) 박태웅의「AI강의」(한빛비즈, 2023)
 
 <br><br>
 
