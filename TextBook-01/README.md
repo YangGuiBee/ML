@@ -105,7 +105,7 @@
 **1956년:** <ins>다트머스 회의(Dartmouth Conference)</ins>에서 '인공지능'이라는 용어가 처음 사용되었으며, 인공지능 연구의 출발점으로 간주. 존 매카시(John McCarthy), 마빈 민스키(Marvin Minsky), 클로드 섀넌(Claude Shannon) 등이 참석하여 AI의 가능성과 기계가 인간처럼 지능적 작업을 수행할 수 있는 가능성에 대해 논의. 앨런 뉴웰(Allen Newell)과 허버트 사이먼(Herbert A. Simon)은 "The Logic Theory Machine: A Complex Information Processing System" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/logictheorymachine.pdf) 논문에서 인간의 사고를 모방하는 기계의 가능성에 대해 논의하며, 논리적 이론을 증명할 수 있는 '논리 이론가(The Logic Theorist)'라는 컴퓨터 프로그램을 개발함으로써 AI 연구의 초기 단계에서 중요한 기여였으며, 이 논문은 인공지능의 문제 해결 능력과 알고리즘의 효율성에 대한 논의를 포함.<br>
 **1957년:** 프랭크 로젠블렛(Frank Rosenblatt)은 <ins>퍼셉트론(Perceptron)</ins> 이라는 초기 신경망 모델을 개발. 퍼셉트론은 간단한 형태의 기계 학습 모델로, 패턴 인식 문제를 해결할 수 있는 가능성을 보여줌.퍼셉트론은 패턴 인식을 위한 학습 알고리즘을 포함하고 있으며, 입력 데이터에 대한 가중치를 조정하여 학습하고, 이후의 다층 신경망과 딥러닝의 기초가 되는 개념을 제공.<br>
  <a href="https://wikidocs.net/24958" target="_blank">딥러닝을 이용한 자연어처리 입문(Perceptron)</a><br>
- <a href="https://imjuno.tistory.com/entry/Perceptron-MLP" target="_blank">Perceptron 개념</a><br>  
+ <a href="https://imjuno.tistory.com/entry/Perceptron-MLP" target="_blank">Perceptron 개념</a>  
 **1958년:** 존 매카시는 리스프(LISP: https://ko.wikipedia.org/wiki/%EB%A6%AC%EC%8A%A4%ED%94%84) 이라는 프로그래밍 언어를 개발함으로써 인공지능 연구에서 중요한 역할을 했으며, 기호 처리(symbolic processing)에 적합한 언어로 널리 사용.<br>		
 
 <br><br><br>	
@@ -136,11 +136,12 @@
 **2015년:** ResNet이 사람보다 이미지 분류를 더욱 잘 수행<br>
 **2016년:** AlphaGo과 이세돌9단 바둑 대결 4:1로 승<br>
 **2017년:** Transformer 모델 등장<br>
-**2018년:** GPT/BERT 생성형 인공지능 등장<br>
-**2020년:** 대규모 언어 모델(GPT-3) 등장<br>
+**2018년:** GPT/BERT 생성형 인공지능 등장, GPT(GPT-1) : 117m 파라미터 (학습데이터 4.5GB)<br>
+**2019년:** GPT-2 : 1,500m 파라미터 (학습데이터 40GB)<br>
+**2020년:** 대규모 언어 모델(GPT-3) 등장, GPT-3 : 175,000m 파라미터 (학습데이터 570GB)<br>
 **2021년:** AlphaFold, 딥마인드 단백질 접힘을 거의 안벽히 예측<br>
-**2022년:** ChatGPT 놀라운 자연어 구현<br>
-**2023년:** GPT-4 멀티모달의 등장과 상업적 활용이 증가하면서 AI 기술은 다양한 분야에 통합되고 AI는 헬스케어, 금융, 고객 서비스, 창의적 작업 등 여러 산업에서 중요한 역할을 수행<br>	
+**2022년:** ChatGPT 놀라운 자연어 구현, GPT-3.5 미국 변호사 시험(Uniform Bar Exam)에서 213점(400점 만점)을 받아 하위 10%<br>
+**2023년:** GPT-4 멀티모달의 등장과 상업적 활용이 증가하면서 AI 기술은 다양한 분야에 통합되고 AI는 헬스케어, 금융, 고객 서비스, 창의적 작업 등 여러 산업에서 중요한 역할을 수행, GPT-4 미국 변호사 시험(Uniform Bar Exam)에서 298점(400점 만점)을 받아 상위 10%로 통과<br>	
 
 <br><br><br>
 
@@ -159,7 +160,7 @@
 <br>
 (출처) https://www.aminer.org/ai-history
 <br>
-(참고문허) Jie Tang et al., "Extraction and Mining of Academic Social Networks" : https://github.com/YangGuiBee/ML/blob/main/TextBook-01/KDD08-Tang-et-al-ArnetMiner.pdf
+(참고문헌) Jie Tang et al., "Extraction and Mining of Academic Social Networks" : https://github.com/YangGuiBee/ML/blob/main/TextBook-01/KDD08-Tang-et-al-ArnetMiner.pdf
 
 <br><br> 
 
