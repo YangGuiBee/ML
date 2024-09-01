@@ -499,13 +499,11 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 
 ## 【ChatGPT가 그린 AI 이미지】
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/AI.png'>
-
 <br>
 
 ## 【AI 구성도】
 ![](./images/AI_ML_DL.png) 
-
-<br><br>
+<br>
 
 ## 【Computer Science > Data Science】
 ![](./images/ComputerScience.png)
@@ -516,7 +514,7 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 ![](./images/AI_DS.png)
 <br>
 
-## 【Machine Learning 구성도】
+## 【Machine Learning 구성변화】
 ![](./images/ML.png)
 <br>
 
