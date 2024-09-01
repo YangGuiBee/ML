@@ -503,12 +503,15 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 ## 【AI 개념도】
 ![](./images/AI_LG.png)
  (출처) LG전자 뉴스룸(https://live.lge.co.kr/live_with_ai_01/)
-
-<br><br><br>
-
+<br>
 ![](./images/ComputerScience.png)
 <br>
 (출처) https://ebrary.net/190208/health/relationship_data_mining_machine_learning_artificial_intelligence
+<br>
+![](./images/DataScience.png)
+<br>
+(출처) https://towardsdatascience.com/clearly-explained-how-machine-learning-differs-from-statistical-modeling-967f2c5a9cfd
+
 
 ![](./images/DeepLearning.png)
 <br>
@@ -525,30 +528,6 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 본 강의 중에는 구글 코랩으로 실습을 시연할 예정인 바, 이하 설치는 선택사항임
 
 
-### 【파이썬】
-
-파이썬은 주요 운영 체제인 마이크로소프트 윈도(Microsoft Windows), macOS, 리눅스(Linux)에서 사용가능<br>  
-파이썬 문서와 설치 파일 다운로드 : 파이썬 공식 웹 사이트(https://www.python.org)<br> 
-다음 명령으로 현재 파이썬 버전을 확인(파이썬 3.7 또는 그 이상을 사용하는 것 권장)<br>
-
-    $ python -V
-
-명령실행 결과는 다음과 같이 출력
-
-    Python 3.7.1 :: Continuum Analytics, Inc.
-
-예제 실습에 필요한 패키지는 pip 설치 프로그램으로 설치<br>  
-자세한 pip 설명은 온라인 문서(https://docs.python.org/3/installing/index.html) 참고<br> 
-파이썬을 설치하고 난 후 터미널(Terminal)에서 pip 명령으로 필요한 파이썬 패키지를 설치<br> 
-(`SomePackage`는 numpy, pandas, matplotlib, scikit-learn 등을 작성)
-
-    pip install SomePackage
-
-설치한 패키지를 업데이트할 때는 `--upgrade` 옵션을 사용
-
-    pip install SomePackage --upgrade
-
-
 ### 【아나콘다】
 
 아나콘다는 데이터 과학, 수학, 공학용 파이썬 필수 패키지들을 모두 포함하고 있으며, 주요 운영 체제를 모두 지원<br>  
@@ -563,7 +542,7 @@ IoT 센서와 컴퓨터 비전 **+ 스마트 팩토리, 스마트 팜**<br>
 
     conda update SomePackage
 
-SomePackage명에는 아래와 같이 핵심 패키지명을 각각 입력
+SomePackage명에는 아래와 같이 핵심 패키지명을 각각 입력 **<3강에서 설명>**
 
  - [NumPy](http://www.numpy.org) >= 1.18.5
  - [SciPy](http://www.scipy.org) >= 1.4.1
@@ -571,82 +550,6 @@ SomePackage명에는 아래와 같이 핵심 패키지명을 각각 입력
  - [matplotlib](http://matplotlib.org) >= 3.1.1
  - [pandas](http://pandas.pydata.org) >= 1.0.4
  - [TensorFlow](https://www.tensorflow.org) >= 2.3.0
-
-
-
-### 【주피터 노트북】
-
-일반적인 파이썬 .py 스크립트 대신에 노트북에 담겨있는 .ipynb 코드 파일을 사용하면<br> 
-코드, 코드를 실행한 결과, 그래프, 막다운(markdown)과 LaTeX 문법을을 지원하는 문서까지 가능<br>
-[주피터(Jupyter) 노트북](http://jupyter.org) 에서는 파이썬 외에도 R 등의 다른 언어를 지원<br>  
-
-![](./images/ipynb_ex1.png)
-
-주피터 노트북은 pip를 사용해 설치
-
-    $ pip install jupyter notebook
-
-또는 아나콘다나 미니콘다를 설치했다면 콘다를 사용
-
-    $ conda install jupyter notebook
-
-주피터 노트북을 열려면 먼저 코드가 있는 디렉토리로 이동하여  `jupyter notebook`을 실행
-
-    $ cd ~/code/python-machine-learning-book
-    $ jupyter notebook
-
-  
-주피터가 기본 브라우저를 실행(일반적으로 [http://localhost:8888/](http://localhost:8888/) 에서 실행)<br>
-
-![](./images/ipynb_ex2.png)
-
-주피터 노트북에 대한 더 자세한 내용은 [주피터 초보자 가이드](http://jupyter-notebook-beginner-guide.readthedocs.org/en/latest/what_is_jupyter.html)와
-[주피터 노트북 기본사항](https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Notebook%20Basics.html)  참고
-
-
-
-### 【주피터 랩】
-
-또 다른 주피터 노트북 환경인 주피터 랩(Jupyter Lab)은 `.ipynb` 파일을 다루며 브라우저 인터페이스에서 추가적인 기능을 제공<br>  
-주피터 노트북과 주피터 랩 중 어느 것을 사용해도 가능
-
-주피터 랩은 다음과 같이 설치
-
-    $ conda install -c conda-forge jupyterlab
-
-주피터 노트북과 비슷하게 실행하려면 다음 명령을 실행
-
-    $ jupyter lab
-
-이 명령을 커맨드 라인 터미널에서 실행하면 브라우저에서 주피터 랩 세션이 시작됨<br> 
-주피터 랩에 대한 더 자세한 정보는 [공식 문서](https://jupyterlab.readthedocs.io/en/stable/) 참고
-
-
----
-
-### 【코드 사용 방법 안내】
-
-이 책의 코드를 사용하는 가장 좋은 방법은 주피터 노트북(`.ipynb` 파일)입니다. 주피터 노트북을 사용하면 단계적으로 코드를 실행하고 하나의 문서에 편리하게 (그림과 이미지를 포함해) 모든 출력을 저장할 수 있습니다.
-
-![](../TextBook-02/images/jupyter-example-1.png)
-
-주피터 노트북은 매우 간단하게 설치할 수 있습니다. 아나콘다 파이썬 배포판을 사용한다면 터미널에서 다음 명령을 실행하여 주피터 노트북을 설치할 수 있습니다:
-
-    conda install jupyter notebook
-
-다음 명령으로 주피터 노트북을 실행합니다.
-
-    jupyter notebook
-
-브라우저에서 윈도우가 열리면 원하는 `.ipynb`가 들어 있는 디렉토리로 이동할 수 있습니다.
-
-**설치와 설정에 관한 더 자세한 내용은 1장의 [README.md 파일](../TextBook-01/README.md)에 있습니다.**
-
-**(주피터 노트북을 설치하지 않았더라도 깃허브에서 [`ch03.ipynb`](https://github.com/rickiepark/python-machine-learning-book-3rd-edition/blob/master/ch03/ch03.ipynb)을 클릭해 노트북 파일을 볼 수 있습니다.)**.
-
-코드 예제 외에도 주피터 노트북에는 책의 내용에 맞는 섹션 제목을 함께 실었습니다. 또한 주피터 노트북에 원본 이미지와 그림을 포함시켰기 때문에 책을 읽으면서 코드를 쉽게 따라할 수 있으면 좋겠습니다.
-
-![](../TextBook-02/images/jupyter-example-2.png)
 
 
 
