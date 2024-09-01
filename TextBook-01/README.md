@@ -76,7 +76,7 @@
 <br>
 가트너가 2024년 Hype Cycle for Emerging Technologies 보고서를 통해 주목해야 할 25가지의 혁신 기술을 발표했다. 이 기술들은 ①자율형 AI, ②개발자 생산성, ③총체적 경험, ④인간 중심의 보안 및 개인정보 보호 프로그램 등 네 가지 주요 트렌드로 분류된다.<br>
 <br>
-**①자율형 AI:** AI의 빠른 발전으로 인해 인간의 감독을 최소화하면서, 스스로 작동하고 개선하며 복잡한 환경에서도 효과적인 의사 결정을 내릴 수 있는 자율형 AI 시스템이 탄생하고 있다. 인간이 할 수 있는 모든 작업을 수행할 수 있는 이러한 첨단 AI 시스템은 공상 과학에서 현실로 서서히 다가오고 있다. 이 기술에는 다중 에이전트 시스템, 대규모 행동 모델, 기계 고객, 휴머노이드 작업 로봇, 자율 에이전트, 강화 학습 등이 포함된다.<br>
+**①자율형 AI:** AI의 빠른 발전으로 인해 인간의 감독을 최소화하면서, 스스로 작동하고 개선하며 복잡한 환경에서도 효과적인 의사 결정을 내릴 수 있는 자율형 AI 시스템이 탄생했다. 인간이 할 수 있는 모든 작업을 수행할 수 있는 이러한 첨단 AI 시스템은 공상 과학에서 현실로 다가오고 있다. 이 기술에는 다중 에이전트 시스템, 대규모 행동 모델, 기계 고객, 휴머노이드 작업 로봇, 자율 에이전트, 강화 학습 등이 포함된다.<br>
 **②개발자 생산성 향상:** 개발자 생산성은 코드를 빠르게 작성하는 것 이상의 의미를 갖는다. 이는 개발자의 효과적인 커뮤니케이션과 협업, 집중력, 만족도 등에 영향을 받는다. 개발자의 생산성을 향상시키는 신기술로는 AI 증강 소프트웨어 엔지니어링, 클라우드 네이티브, 깃옵스, 내부 개발자 포털, 프롬프트 엔지니어링, 웹어셈블리 등이 있다.<br>
 **③총체적 경험을 통한 역량 강화:** 총체적 경험은 고객 경험, 직원 경험, 다중 경험, 사용자 경험을 서로 연결해 우수한 공유 경험을 창출하는 전략이다. 신뢰도, 만족도, 충성도, 지지도 향상을 목표로 기술을 사용해 중요한 상호 작용을 해결하고 고객과 직원 모두의 역량을 강화한다. 평가 대상 기술에는 디지털 트윈, 공간 컴퓨팅, 슈퍼앱, 6G 등이 포함된다.<br>
 **④인간 중심의 보안 및 개인정보보호 제공:** 기업은 상호 신뢰의 문화를 조성하고 팀 간에 공유된 위험을 인식하는 보안 및 개인정보 보호 기술을 사용해 더욱 탄력적인 조직으로 거듭날 수 있다. 인간 중심 보안 및 개인정보 보호를 지원하는 떠오르는 기술로는 AI 트리즘, 사이버 보안 메시 아키텍처, 디지털 면역 시스템, 허위 정보 보안, 연합 머신러닝, 동형 암호가 있다.<br>
@@ -110,11 +110,11 @@ Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(�
 <br><br><br>
 	   
 ### AI의 탄생과 초기 연구 (1956년~1960년대)<br>											
-**1956년:** <ins>다트머스 회의(Dartmouth Conference)</ins>에서 '인공지능'이라는 용어가 처음 사용되었으며, 인공지능 연구의 출발점으로 간주. 존 매카시(John McCarthy), 마빈 민스키(Marvin Minsky), 클로드 섀넌(Claude Shannon) 등이 참석하여 AI의 가능성과 기계가 인간처럼 지능적 작업을 수행할 수 있는 가능성에 대해 논의. 앨런 뉴웰(Allen Newell)과 허버트 사이먼(Herbert A. Simon)은 "The Logic Theory Machine: A Complex Information Processing System" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/logictheorymachine.pdf) 논문에서 인간의 사고를 모방하는 기계의 가능성에 대해 논의하며, 논리적 이론을 증명할 수 있는 '논리 이론가(The Logic Theorist)'라는 컴퓨터 프로그램을 개발함으로써 AI 연구의 초기 단계에서 중요한 기여였으며, 이 논문은 인공지능의 문제 해결 능력과 알고리즘의 효율성에 대한 논의를 포함.<br><br>
+**1956년:** <ins>다트머스 회의(Dartmouth Conference)</ins>에서 '인공지능'이라는 용어가 처음 사용되었으며, 인공지능 연구의 출발점으로 간주. 존 매카시(John McCarthy), 마빈 민스키(Marvin Minsky), 클로드 섀넌(Claude Shannon) 등이 참석하여 AI의 가능성과 기계가 인간처럼 지능적 작업을 수행할 수 있는 가능성에 대해 논의. 앨런 뉴웰(Allen Newell)과 허버트 사이먼(Herbert A. Simon)은 "The Logic Theory Machine: A Complex Information Processing System" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/logictheorymachine.pdf) 논문에서 인간의 사고를 모방하는 기계의 가능성에 대해 논의하며, 논리적 이론을 증명할 수 있는 '논리 이론가(The Logic Theorist)'라는 컴퓨터 프로그램을 개발함으로써 AI 연구의 초기 단계에서 중요한 기여였으며, 이 논문은 인공지능의 문제 해결 능력과 알고리즘의 효율성에 대한 논의를 포함.<br>
 **1957년:** 프랭크 로젠블렛(Frank Rosenblatt)은 <ins>퍼셉트론(Perceptron)</ins> 이라는 초기 신경망 모델을 개발. 퍼셉트론은 간단한 형태의 기계 학습 모델로, 패턴 인식 문제를 해결할 수 있는 가능성을 보여줌.퍼셉트론은 패턴 인식을 위한 학습 알고리즘을 포함하고 있으며, 입력 데이터에 대한 가중치를 조정하여 학습하고, 이후의 다층 신경망과 딥러닝의 기초가 되는 개념을 제공.<br>
  <a href="https://wikidocs.net/24958" target="_blank">딥러닝을 이용한 자연어처리 입문(Perceptron)</a><br>
  <a href="https://imjuno.tistory.com/entry/Perceptron-MLP" target="_blank">Perceptron 개념</a><br>  
-**1958년:** 존 매카시는 리스프(LISP: https://ko.wikipedia.org/wiki/%EB%A6%AC%EC%8A%A4%ED%94%84) 이라는 프로그래밍 언어를 개발함으로써 인공지능 연구에서 중요한 역할을 했으며, 기호 처리(symbolic processing)에 적합한 언어로 널리 사용.<br><br>		
+**1958년:** 존 매카시는 리스프(LISP: https://ko.wikipedia.org/wiki/%EB%A6%AC%EC%8A%A4%ED%94%84) 이라는 프로그래밍 언어를 개발함으로써 인공지능 연구에서 중요한 역할을 했으며, 기호 처리(symbolic processing)에 적합한 언어로 널리 사용.<br>		
 **1960년대:** 제임스 얼 캐벗(James Allen)은 자연어 이해의 기초를 마련했으며, 엘리자(ELIZA)와 같은 초기 대화형 프로그램을 개발<br>		
 
 <br><br><br>	
@@ -165,7 +165,7 @@ Dendrites(수상돌기), Cell Nucleus(세포핵), Myelin sheath(수초), Axon(�
 ![](./images/AI_aminer.png)
 (동영상) https://originalfileserver.aminer.cn/sys/aminer/history/AI-history-1.mp4
 <br>
-(출처) Jie Tang et al., "Extraction and Mining of Academic Social Networks" : https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Hype_Cycle_for_Emerg_tech.pdf
+(출처) Jie Tang et al., "Extraction and Mining of Academic Social Networks" : https://github.com/YangGuiBee/ML/blob/main/TextBook-01/KDD08-Tang-et-al-ArnetMiner.pdf
 
 <br><br> 
 
