@@ -162,7 +162,7 @@
 ## 7. 머신러닝과 딥러닝의 발전 (2000년 ~)<br>											
 **2000년:** 엔비디아(NVIDIA)는 컴퓨터 시스템에서 그래픽 연산을 빠르게 처리하여 결과값을 모니터에 출력하는 연산 장치인 GPU(Graphic Processing Unit)를 최초로 출시, 컴퓨터 비전 패키지 OpenCV 공개<br>
 **2004년:** 제1회 그랜드 챌린지(고속도로 자율주행)<br>
-**2006년:** 컴퓨터 성능의 향상과 대량의 데이터, 그리고 새로운 알고리즘의 발전으로 인해 AI 연구가 재조명되고, 제프리 힌튼(Geoffrey Hinton)은 딥러닝 논문 "A Fast Learning Algorithm for Deep Belief Nets"  (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/TuringFullText.pdf) 을 발표<br>	
+**2006년:** 컴퓨터 성능의 향상과 대량의 데이터, 그리고 새로운 알고리즘의 발전으로 인해 AI 연구가 재조명되고, 제프리 힌튼(Geoffrey Hinton)은 딥러닝 논문 "A Fast Learning Algorithm for Deep Belief Nets"  (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/fastnc.pdf) 을 발표<br>	
 **2007년:** GPU 프로그램 라이브러리(CUDA) 공개, 사이킷런(Scikit-Learn) 최초 공개<br>			
 **2009년:** 딥러닝 패키지(Theano) 서비스 개시<br>
 **2010년:** 스탠포드의 Fei-Fei Li 그룹에서 수백만 개의 레이블이 지정된 이미지를 포함하는 이미지넷(Imagenet) 이라는 대규모 데이터베이스 게시, 마이크로소프트 동작 인식 카메라 키넥트(Kinect) 시판<br>
