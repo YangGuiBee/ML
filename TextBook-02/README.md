@@ -296,7 +296,7 @@ Test Dataset : 평가 데이터셋, 마지막에 모델의 성능을 측정(한�
 <br><br>
 ### 【ML 강의 구성】
 
-![](images/ML_list.PNG)
+![](images/ML_Contents.PNG)
 
 <br><br><br>
 
