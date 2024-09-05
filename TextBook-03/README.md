@@ -646,8 +646,9 @@ Scikit-learn 공식문서 : https://scikit-learn.org/stable/user_guide.html
 <br>
 SciPy 공식문서 : https://docs.scipy.org/doc/scipy/
 <br>
-![](./images/encoding.PNG)
-Scikit-learn 모델 선정절차 : https://scikit-learn.org/1.3/tutorial/machine_learning_map/index.html
+![](./images/sk_map.png)
+
+<br>Scikit-learn 모델 선정절차 : https://scikit-learn.org/1.3/tutorial/machine_learning_map/index.html
 <br>
 
 ### 【MNIST】
