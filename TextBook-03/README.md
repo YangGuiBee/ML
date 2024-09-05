@@ -601,10 +601,9 @@ https://ysyblog.tistory.com/71
 
 
 ## ▣ Python 라이브러리
-
-![](./images/python.PNG)
-<br>
 파이썬 전세계 점유율(티오베 지수) : https://www.tiobe.com/tiobe-index/
+<br>
+![](./images/python.PNG)
 <br>
 파이썬 자습서 : https://docs.python.org/ko/3/tutorial/
 <br>
@@ -646,7 +645,8 @@ Scikit-learn(이전 명칭: scikits.learn, sklearn)은 파이썬 프로그래밍
 Scikit-learn 공식문서 : https://scikit-learn.org/stable/user_guide.html
 <br>
 SciPy 공식문서 : https://docs.scipy.org/doc/scipy/
-
+<br>
+Scikit-learn 모델 선정절차 : https://scikit-learn.org/1.3/tutorial/machine_learning_map/index.html
 <br>
 
 ### 【MNIST】
