@@ -154,6 +154,10 @@ Test Dataset : 평가 데이터셋, 마지막에 모델의 성능을 측정(한�
 
 <br><br><br>
 
+![](images/ML_diagram.png)
+<br>출처 : https://medium.com/marketing-and-entrepreneurship/10-companies-using-machine-learning-in-cool-ways-887c25f913c3
+
+
 ## ▣ ML의 학습별 알고리즘
 
 ### (1) 지도 학습 (Supervised Learning, SL) : 회귀, 분류
