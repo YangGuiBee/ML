@@ -678,6 +678,17 @@ Kaggle 공식사이트 : https://www.kaggle.com/
 Kaggle 가이드 : https://wikidocs.net/86304
 <br>
 
+
+![](./images/ML_2019.png)
+
+<br>
+
+출처 : https://www.kdnuggets.com/2019/04/top-data-science-machine-learning-methods-2018-2019.html
+
+<br>
+
+2024년 조회 : https://www.coursera.org/articles/machine-learning-algorithms?msockid=0197f0fd39fb68c821f1e42d38db69bd
+
 ---
 
 Anaconda 다운로드 : https://www.anaconda.com/download
