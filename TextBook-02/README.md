@@ -157,6 +157,11 @@ Test Dataset : 평가 데이터셋, 마지막에 모델의 성능을 측정(한�
 ![](images/ML_diagram.png)
 <br>출처 : https://medium.com/marketing-and-entrepreneurship/10-companies-using-machine-learning-in-cool-ways-887c25f913c3
 
+<br>
+
+![](images/ML_wordpress.png)
+<br>출처 : https://favouriteblog.com/essential-cheat-sheets-for-machine-learning-python-and-maths/
+
 <br><br>
 
 ## ▣ ML의 학습별 알고리즘
