@@ -13,9 +13,9 @@
 ![](images/Google_Trend.png)
 
 <br>
-https://trends.google.com/trends/explore?date=2004-01-01%202024-09-06&q=Data%20Mining,Big%20Data,Machine%20Learning&hl=ko
-<br>
-https://trends.google.com/trends/explore?date=2004-01-01%202024-09-06&q=Data%20Mining,Big%20Data,Machine%20Learning,Deep%20Learning&hl=ko
+현재까지 검색추가 : https://trends.google.com/trends/explore?date=2004-01-01%202024-09-06&q=Data%20Mining,Big%20Data,Machine%20Learning&hl=ko
+<br><br>
+딥러닝 검색추가 : https://trends.google.com/trends/explore?date=2004-01-01%202024-09-06&q=Data%20Mining,Big%20Data,Machine%20Learning,Deep%20Learning&hl=ko
 <br><br>
 
 
