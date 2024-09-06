@@ -615,7 +615,7 @@ https://ysyblog.tistory.com/71
 행렬이나 일반적으로 대규모 다차원 배열을 쉽게 처리할 수 있도록 지원하는 파이썬의 라이브러리<br>
 NumPy는 데이터 구조 외에도 수치 계산을 위해 효율적으로 구현된 기능을 제공<br>
 NumPy 공식문서 : https://numpy.org/doc/stable/user/whatisnumpy.html
-NumPy 실습 : http://ml-ko.kr/homl2/tools_numpy.html
+<br>NumPy 실습 : http://ml-ko.kr/homl2/tools_numpy.html
 
 <br>
 
@@ -626,7 +626,7 @@ Pandas란 이름은 한 개인에 대해 여러 기간 동안 관찰을 한다�
 또한 "Python 데이터 분석"이라는 문구 자체에서 따온 것이기도 하다.<br>
 Wes McKinney는 2007년부터 2010년까지 연구원으로 있을 때 AQR Capital에서 pandas를 만들기 시작했다.<br>
 Pandas 공식문서 : https://pandas.pydata.org/pandas-docs/stable/getting_started/index.html
-사용현황 : https://www.datacamp.com/blog/top-data-science-tools
+<br>사용현황 : https://www.datacamp.com/blog/top-data-science-tools
 
 <br>
 
