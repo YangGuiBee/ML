@@ -626,6 +626,7 @@ Pandas란 이름은 한 개인에 대해 여러 기간 동안 관찰을 한다�
 또한 "Python 데이터 분석"이라는 문구 자체에서 따온 것이기도 하다.<br>
 Wes McKinney는 2007년부터 2010년까지 연구원으로 있을 때 AQR Capital에서 pandas를 만들기 시작했다.<br>
 Pandas 공식문서 : https://pandas.pydata.org/pandas-docs/stable/getting_started/index.html
+사용현황 : https://www.datacamp.com/blog/top-data-science-tools
 
 <br>
 
