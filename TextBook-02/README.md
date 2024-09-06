@@ -9,6 +9,16 @@
 	 ▣ ML의 최적화 기법  	 
 ---
 
+
+![](images/Google_Trend.png)
+
+<br>
+https://trends.google.com/trends/explore?date=2004-01-01%202024-09-06&q=Data%20Mining,Big%20Data,Machine%20Learning&hl=ko
+<br>
+https://trends.google.com/trends/explore?date=2004-01-01%202024-09-06&q=Data%20Mining,Big%20Data,Machine%20Learning,Deep%20Learning&hl=ko
+<br><br>
+
+
 ## ▣ ML의 정의
 
 
