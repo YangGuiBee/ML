@@ -687,7 +687,18 @@ Kaggle 가이드 : https://wikidocs.net/86304
 
 <br>
 
-2024년 조회 : https://www.coursera.org/articles/machine-learning-algorithms?msockid=0197f0fd39fb68c821f1e42d38db69bd
+### 2024년 update
+1. Linear regression<br>
+2. Logistic regression<br>
+3. Naive Bayes<br> 
+4. Decision tree<br>
+5. Random forest<br>
+6. K-nearest neighbor (KNN)<br>
+7.  K-means<br>
+8. Support vector machine (SVM)<br>
+9. Apriori<br>
+10. Gradient boosting<br>
+출처 : https://www.coursera.org/articles/machine-learning-algorithms?msockid=0197f0fd39fb68c821f1e42d38db69bd
 
 ---
 
