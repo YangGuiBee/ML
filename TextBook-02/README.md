@@ -126,6 +126,9 @@
 **Label** (레이블, 타깃, 출력, 반응변수, 목표값, 답)<br>
 <br>
 
+<img width ='600' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/ML_variable.png'><br>
+
+<br>
 model(모델) : 머신러닝이 찾은 규칙의 수학적 표현(수식), 학습 또는 훈련데이터로 학습된 머신러닝 알고리즘<br>
 모델의 규칙 : 가중치와 절편<br>
 규칙을 찾는 과정 : 모델을 통해서 훈련 또는 학습을 진행하면서 손실함수를 통해 규칙을 수정하는 과정<br>
