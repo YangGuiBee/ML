@@ -120,13 +120,13 @@
 ---
 
 ### 【ML 용어】
-<img width ='800' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_08.png'><br>
+<img width ='600' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_08.png'><br>
 **Sample** (샘플, 인스턴스, 관측치, 데이터셋)<br>
 **Feature** (특성, 속성, 측정치, 차원, 컬럼, 입력, 변수, 문제)<br>
 **Label** (레이블, 타깃, 출력, 반응변수, 목표값, 답)<br>
 <br>
 
-<img width ='600' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/ML_variable.png'><br>
+<img width ='600' height = '300' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/ML_variable.png'><br>
 
 <br>
 model(모델) : 머신러닝이 찾은 규칙의 수학적 표현(수식), 학습 또는 훈련데이터로 학습된 머신러닝 알고리즘<br>
