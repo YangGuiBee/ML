@@ -63,131 +63,16 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 ### (1) Data Cleaning
 대부분의 머신러닝 알고리즘은 Missing feature, 즉 누락된 데이터가 있을 때, 제대로 역할을 하지 못한다. 그래서 먼저 Missing feature에 대해 처리해주어야 한다.<br>
 
- 불필요 데이터 제거(처리)<br>
+	불필요한 누락 데이터 제거(처리) : pandas의 dropna()<br>
+	학습에 방해가 되는 연관성 없는 전체 속성(특정 행 또는 열의 라벨) 제거 : pandas의 drop()<br>
+	누락 데이터에 0, 평균값, 중간값으로 채우기 : pandas의 fillna(), scikit-learn의 Imputer()<br>
  
- 	#dropna() : pandas에서 제공하는 누락 데이터를 제거하는 함수
-   	#Na/NaN과 같은 누락 데이터를 제거
-	#axis: 파라미터 값으로 0을 주면 행 제거, 1을 주면 열 제거(default값은 0)
-	#subset: array, 특정 feature를 지정하여 해당 Feature의 누락 데이터 제거
-
- 전체 속성 제거 : 연관성 없는 feature의 경우, 학습에 방해가 될 수 있기 때문에 제거<br>
- 
-   	#drop() : pandas에서 제공하는 특정 데이터 열(또는 행)을 제거하는 함수   
-	#특정 행 또는 열의 라벨(데이터)들을 제거
-	#labels: 제거할 데이터를 지정하는 파라미터
-	#axis: 파라미터 값으로 0을 주면 행 제거, 1을 주면 열 제거(default값은 0)
-
- 누락 데이터에 특정 값을 지정 : zero(0으로 채우기), the mean(평균값으로 채우기), the median(중간값으로 채우기) 등<br>
- 
- 	#fillna() : pandas에서 제공하는 누락 데이터에 특정 값을 채우는 함수<br>
-   	#특정 메서드를 지정하여 Na/NaN값을 채우기
-	#value: scalar, dict, series or dataframe, value 등 구멍을 메우기 위한 값
-
- scikit-learn에서 제공하는 클래스<br>
- 
- 	# Imputer() class   
-	# missing_values: int or 'NaN'
-	# strategy: 'median'(중앙값), 'mean'(평균값), 'most_frequent'(최빈값)
-	# axis: 0(columns), 1(rows)
-
-	# Imputer Class 선언, 채우고자 하는 값을 함께 정의
- 	from sklearn.preprocessing import Imputer
- 	imputer = Imputer(strategy='median')
-
-	# fit() 함수를 사용하여 기존 데이터의 누락 데이터에 채워야 할 값을 imputer 객체에 훈련
- 	imputer.fit(dataset)
-	
-	# transform() 함수를 사용하여 기존 데이터의 누락 데이터를 변환합니다.
- 	X = imputer.transform(dataset)
-
-
-
 ### (2) Handling Text and Categorical Attributes
 수집된 데이터는 컴퓨팅 학습을 위해서 기존 데이터 세트에 텍스트가 있는 경우 이것을 숫자형 데이터로 인코딩(Encoding)이 필요하다. 인코딩에는 레이블 인코딩(Label Encoding)과 원핫 인코딩(One-hot Encoding)을 통해 범주형 데이터를 수치형 데이터로 변환이 필요하다.<br>
 **레이블 인코딩 :** 각 카테고리를 숫자로 대응시켜서 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"를 1로, "green"을 2로, "blue"를 3으로 변환하는 것이다. 이 방법은 간단하고 직관적이지만, 각 카테고리가 가지는 값의 크기 차이가 있을 경우 예측 결과에 영향을 미칠 수 있다. 텍스트를 숫자로 인코딩하는 메소드로는 Pandas에서 제공하는 factorize()와 OrdinalEncoder()이 있으며, sklearn.preprocessing.LabelEncoder를 사용할 수도 있다.<br>
 <br>
 **원핫 인코딩 :** 각 카테고리를 벡터 형태로 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"는 [1, 0, 0], "green"은 [0, 1, 0], "blue"는 [0, 0, 1]로 변환하는 것이다. 이 방법은 각 카테고리를 독립적인 변수로 취급하기 때문에 각 카테고리가 가지는 값의 크기 차이를 고려하지 않기 때문에 범주형 변수의 카테고리가 많을수록 차원이 커지는 단점이 있지만, 예측 결과에 영향을 미치는 위험이 적다.<br>
 따라서, 레이블 인코딩은 카테고리가 서열을 가지는 경우(예: "bad", "average", "good")나 카테고리의 수가 적을 경우에 사용하고, 원핫 인코딩은 카테고리의 수가 많을 경우에 사용한다. 원핫 인코딩 메소드로는 OneHotEncoder()가 있다.<br>
-
-
-**factorize()** <br>
-
-	#Pandas에서 제공하는 메서드로서, 숫자형 또는 카테고리형으로 인코딩을 해주는 함수
-	#여러 개의 카테고리형 input feature들을 인코딩
-	#파라미터 = values: a 1-D array, factorization전의 배열
-	#	   sort: bool, default False, 관계를 유지하면서 unipue 한 카테고리 label을 준비
-	#Returns = labels: ndarray, 인코딩된 결과를 배열로 리턴
-	#          uniques: ndarray, 카테고리를 배열로 리턴
- 
- 	housing_cat_encoded, housing_categories = housing_cat.factorize()
-  	[0 0 1 2 0 2 0 2 0 0 2 2 0 2 2 0 3 2 2 2 0]
-   
-	>>> housing_cat = housing[["ocean_proximity"]]
-	>>> housing_cat.head(10)
-        	ocean_proximity
-  	17606       <1H OCEAN
-  	18632       <1H OCEAN
-  	14650      NEAR OCEAN
-  	3230           INLAND
-  	3555        <1H OCEAN
-  	19480          INLAND
-  	8879        <1H OCEAN
-  	13685          INLAND
-  	4937        <1H OCEAN
-  	4861        <1H OCEAN
-  	>>> housing_categories
-  	Index(['<1H OCEAN', 'INLAND', 'ISLAND', 'NEAR BAY', 'NEAR OCEAN'],
-        dtype='object')
-
-
-**OrdinalEncoder()** <br>
-
-	#Scikit-learn에서 제공하는 factorize 역할의 클래스
-	#OrdinalEncoder객체를 생성해서, inputer와 비슷한 방식으로 사용
- 	#대신, fit_transform() 메서드를 사용하여, fit과 transform을 한 번에 제공
-  	
-  	from sklearn.preprocessing import OrdinalEncoder 
-  	ordinal_encoder = OrdinalEncoder()
-  	housing_cat_encoded = ordinal_encoder.fit_transform(housing_cat)**
-	
-  	> housing_cat_encoded[:10] 
-  	> array([[0.],
-  	> 
-  	> 
-  	>      [0.],
-  	>      [4.],
-  	>      [1.],
-  	>      [0.],
-  	>      [1.],
-  	>      [0.],
-  	>      [1.],
-  	>      [0.],
-  	>      [0.]])
-  	>
-
-
-위의 factorize()와 OrdinalEncoder()와 같은 카테고리형 텍스트를 단순히 순서에 맞게 숫자형으로 바꾸어주는 방법은 문제점이 있다. 예컨대, 위의 함수들을 사용해서 변환시키면 <1H OCEAN변수는 0이고, NEAR OCEAN변수는 4입니다. 각각 변수들은 0~4까지 있는데, 1 같은 경우 0과 비슷하다고 ML알고리즘은 판단할 수 있다. 실제로는 비슷하지 않지만, 알고리즘은 숫자에 의미를 두어 거리를 판단하게 되는 경우가 생긴다. 이를 방지하기 위한 것이 One-Hot Encoder.
-
-**OneHotEncoding()** <br>
-
-	#Scikit-learn에서 제공하는 클래스로, 카테고리형 특징들을 one-hot 숫자형 배열로 인코딩해주는 클래스
-	#오직 하나로 해당되는 부분만 1(Hot)로, 나머지는 0(Cold)으로 바꾸는 방법
-  	
-  	from sklearn.preprocessing import OneHotEncoder
-  	cat_encoder = OneHotEncoder() 
-  	> housing_cat_1hot = cat_encoder.fit_transform(housing_cat) 
-  	> housing_cat_1hot
-  	> <16512x5 sparse matrix of type '<class 'numpy.float64'>'
-  	> with 16512 stored elements in Compressed Sparse Row format>
-	
-  	>>> housing_cat_1hot.toarray()
-  	array([[1., 0., 0., 0., 0.],
-         	[1., 0., 0., 0., 0.],
-         	[0., 0., 0., 0., 1.],
-         	...,
-         	[0., 1., 0., 0., 0.],
-         	[1., 0., 0., 0., 0.],
-         	[0., 0., 0., 1., 0.]])
 
 
 ![](./images/encoding.PNG)
