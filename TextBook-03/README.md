@@ -69,11 +69,9 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
  
 ### (2) Handling Text and Categorical Attributes
 수집된 데이터는 컴퓨팅 학습을 위해서 기존 데이터 세트에 텍스트가 있는 경우 이것을 숫자형 데이터로 인코딩(Encoding)이 필요하다. 인코딩에는 레이블 인코딩(Label Encoding)과 원핫 인코딩(One-hot Encoding)을 통해 범주형 데이터를 수치형 데이터로 변환이 필요하다.<br>
-**레이블 인코딩 :** 각 카테고리를 숫자로 대응시켜서 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"를 1로, "green"을 2로, "blue"를 3으로 변환하는 것이다. 이 방법은 간단하고 직관적이지만, 각 카테고리가 가지는 값의 크기 차이가 있을 경우 예측 결과에 영향을 미칠 수 있다. 텍스트를 숫자로 인코딩하는 메소드로는 Pandas에서 제공하는 factorize()와 OrdinalEncoder()이 있으며, sklearn.preprocessing.LabelEncoder를 사용할 수도 있다.<br>
 <br>
-**원핫 인코딩 :** 각 카테고리를 벡터 형태로 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"는 [1, 0, 0], "green"은 [0, 1, 0], "blue"는 [0, 0, 1]로 변환하는 것이다. 이 방법은 각 카테고리를 독립적인 변수로 취급하기 때문에 각 카테고리가 가지는 값의 크기 차이를 고려하지 않기 때문에 범주형 변수의 카테고리가 많을수록 차원이 커지는 단점이 있지만, 예측 결과에 영향을 미치는 위험이 적다.<br>
-따라서, 레이블 인코딩은 카테고리가 서열을 가지는 경우(예: "bad", "average", "good")나 카테고리의 수가 적을 경우에 사용하고, 원핫 인코딩은 카테고리의 수가 많을 경우에 사용한다. 원핫 인코딩 메소드로는 OneHotEncoder()가 있다.<br>
-
+**레이블 인코딩 :** 각 카테고리를 숫자로 대응시켜서 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"를 1로, "green"을 2로, "blue"를 3으로 변환하는 것이다. 이 방법은 간단하고 직관적이지만, 각 카테고리가 가지는 값의 크기 차이가 있을 경우 예측 결과에 영향을 미칠 수 있다. 텍스트를 숫자로 인코딩하는 메소드로는 Pandas에서 제공하는 factorize()와 OrdinalEncoder()이 있으며, sklearn.preprocessing.LabelEncoder를 사용할 수도 있다.<br>
+**원핫 인코딩 :** 각 카테고리를 벡터 형태로 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"는 [1, 0, 0], "green"은 [0, 1, 0], "blue"는 [0, 0, 1]로 변환하는 것이다. 이 방법은 각 카테고리를 독립적인 변수로 취급하기 때문에 각 카테고리가 가지는 값의 크기 차이를 고려하지 않기 때문에 범주형 변수의 카테고리가 많을수록 차원이 커지는 단점이 있지만, 예측 결과에 영향을 미치는 위험이 적다. 따라서, 레이블 인코딩은 카테고리가 서열을 가지는 경우(예: "bad", "average", "good")나 카테고리의 수가 적을 경우에 사용하고, 원핫 인코딩은 카테고리의 수가 많을 경우에 사용한다. 원핫 인코딩 메소드로는 OneHotEncoder()가 있다.<br>
 
 ![](./images/encoding.PNG)
 
@@ -182,114 +180,20 @@ adult dataset에 one-hot encoding 적용
 ### (3) Custom Transformers
 Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하는데, 이를 이용하여 커스텀 변환기를 만들 수 있다.
 
-**fit()**
-
-	x: input data
-	x라는 데이터에 특정 알고리즘 또는 전처리를 적용하는 메서드
- 	이를 통해 변환기에 알맞는 파라미터를 생성
-
-**transform()**
-
-	x: input data
-	fit()을 통해 생성된 파라미터를 통해서 모델을 적용시켜 데이터 세트를 알맞게 변환시키는 메소드
-
-**fit_transform()**
-
-	#같은 데이터 세트를 사용하여 fit과 transform을 한 번에 하는 메서드
- 	#아래 코드는 rooms_per_household, population_per_household 두 변수의 데이터를 생성하는 코드로
-        #fit함수 작성을 통해 데이터 세트를 받아서 객체를 return 하고, 
-	#transform을 통해 데이터 세트를 실질적으로 변환(생성)
- 
-  	from sklearn.base import BaseEstimator, TransformerMixin
-	rooms_ix, bedrooms_ix, population_ix, households_ix = 3, 4, 5, 6
-
- 	class CombinedAttributesAdder(BaseEstimator, TransformerMixin):
-      		def __init__(self, add_bedrooms_per_room = True): # no *args or **kargs
-          		self.add_bedrooms_per_room = add_bedrooms_per_room
-      		def fit(self, X, y=None):
-          	   return self  # nothing else to do
-      		def transform(self, X, y=None):
-          	   rooms_per_household = X[:, rooms_ix] / X[:, households_ix]
-          	population_per_household = X[:, population_ix] / X[:, households_ix]
-          	if self.add_bedrooms_per_room:
-		   bedrooms_per_room = X[:, bedrooms_ix] / X[:, rooms_ix]
-              	   return np.c_[X, rooms_per_household, population_per_household,
-			bedrooms_per_room]
-          	else:
-                  return np.c_[X, rooms_per_household, population_per_household]
-	
-  	attr_adder = CombinedAttributesAdder(add_bedrooms_per_room=False)
-  	housing_extra_attribs = attr_adder.transform(housing.values)
-
-
+**fit()** : 입력받은 데이터에 특정 알고리즘 또는 전처리를 적용하는 메서드를 통해 변환기에 알맞는 파라미터를 생성<br>
+**transform()** : fit()을 통해 생성된 파라미터를 통해서 모델을 적용시켜 데이터 세트를 알맞게 변환시키는 메소드<br>
+**fit_transform()** : 같은 데이터 세트를 사용하여 fit과 transform을 한 번에 하는 메서드<br>
+ 	
 
 ### (4) Feature Scaling
-일반적인 ML 알고리즘들은 아주 다양한 범위의 숫자형 데이터를 학습시킨다면 제대로 성능을 보여주지 못한다. 예컨대, 특정 데이터의 범위가 -500~39,320이라면 아주 다양한 데이터가 존재한다. 이러한 상태에서는 제대로 된 학습을 잘하지 못한다. 이를 방지하기 위해서 숫자형 데이터의 범위를 줄여주는 방법을 사용한다.
+일반적인 ML 알고리즘들은 아주 다양한 범위의 숫자형 데이터를 학습시킨다면 제대로 성능을 보여주지 못한다. 예컨대, 특정 데이터의 범위가 -500~39,320이라면 아주 다양한 데이터가 존재한다. 이러한 상태에서는 제대로 된 학습을 잘하지 못한다. 이를 방지하기 위해서 숫자형 데이터의 범위를 줄여주는 방법을 사용한다.<br>
 
-
-**Min-Max Scaling (Normalization)**
-
-	#최솟값과 최댓값을 확인하여 이 값들을 모두 지정한 범위(대체로 0과 1 사이)의 상대적인 값으로 변환
-	#특정 범위를 지정하면 해당 범위 안으로 바인딩
-	#Scikit-learn에서는 MinMaxScaler(feature_range, copy) class를 제공
-	#feature_range: tuple(min, max), default=(0, 1), 변환하고자 하는 데이터의 변환 지정 범위
-	#copy: Boolean, 변환 이전의 값들을 복사해 둘 것인지에 대한 여부
- 
- 	from sklearn.preprocessing import MinMaxScaler
-
-  	a = [[10, 2, 1], [9, 2, 1], [8, 2, 1], [6, 2, 5], [2, 8, 10]]
-  	scaler = MinMaxScaler(feature_range=(0,1))
-  	a = scaler.fit_transform(a)
-  	>>> print(a)
-	[[1.    0.     0.]
-	[0.875    0.    0.]
-	[0.75    0.    0.]
-	[0.5    0.    0.44444444]
-	[0.    1.    1.]]
-
-
-
-**Standardization**
-
-	#특정 범위에 값을 바인딩하지 않는다.
-	#특정 알고리즘(ex. Neural Network)에서는 사용되지 않는 방식
-	#특이점(이상점)의 영향이 적다
-	#Scikit-learn에서는 StandardScaler() 클래스를 제공
- 	
-  	from sklearn.preprocessing import StandardScaler
-	
-  	a = [[10, 2, 1], [9, 2, 1], [8, 2, 1], [6, 2, 5], [2, 8, 10]]
-  	scaler = StandardScaler()
-  	a = scaler.fit_transform(a)
-  	>>> print(a)
-  	[ [1.06066017    -0.5     -0.73130714]
-      	[0.70710678    -0.5    -0.73130714]
-      	[0.35355339    -0.5    -0.73130714]
-      	[0.35355339    -0.5    0.39378077]
-      	[-1.76776695    2.    1.80014064]]
-
+**Min-Max Scaling (Normalization)** : 최소와 최대를 확인하여 이 값들을 모두 지정한 범위(대체로 0과 1 사이)의 상대적인 값으로 변환, Scikit-learn에서는 MinMaxScaler(feature_range, copy) class를 제공<br>
+**Standardization** : 특정 범위에 값을 바인딩하지 않음으로써 특이점(이상점)의 영향을 제거, Scikit-learn에서는 StandardScaler() 클래스를 제공<br>
 
 
 ### (5) ML Pipeline
-위의 데이터 전처리 방식들은 아주 다양한 컴포넌트들로 이루어져 있다. 매번 데이터 정제마다 같은 순서를 반복하기 싫다면, Pipeline이라는 방식을 사용하면 된다. Pipeline은 Data Processing Component들의 순서를 정의해놓은 것이다. 데이터 변환을 조작하고 적용하는 방법으로 각각의 컴포넌트들과 교류하며 사용하고 ML 워크플로우의 자동화를 지원한다. Scikit-Learn에서는 Pipeline Class를 제공하는데, 이것은 데이터 변환 단계의 순서를 정리하고 만들기 쉽다.
-
-
-	#Parameter
-	#steps: list, list of tuple
-	#마지막에 사용되는 estimator는 반드시 데이터 변환 단계를 필요로 한다. (fit_transform이 포함되어야 함)
- 	#Pipleline클래스에 imputer, 특성 추가, StandardScaler()를 모두 선언하여 데이터가 해당 순서에 맞춰 진행되도록 하는 코드
-  
-  	from sklearn.pipeline import Pipeline
-  	from sklearn.preprocessing import StandardScaler
-	
-  	num_pipeline = Pipeline([
-          ('imputer', SimpleImputer(strategy="median")),
-          ('attribs_adder', CombinedAttributesAdder()),
-          ('std_scaler', StandardScaler()),
-      	])
-
-  	housing_num_tr = num_pipeline.fit_transform(housing_num)
-
+매번 데이터 정제마다 위와 같은 순서를 반복하기 싫다면, Pipeline이라는 방식을 사용하면 된다. Pipeline은 Data Processing Component들의 순서를 정의해놓은 것이다. 데이터 변환을 조작하고 적용하는 방법으로 각각의 컴포넌트들과 교류하며 사용하고 ML 워크플로우의 자동화를 지원한다. Scikit-Learn에서는 Pipeline Class를 제공하는데, 이것은 데이터 변환 단계의 순서를 정리하고 만들기 쉽다.<br>
 
 https://davinci-ai.tistory.com/15
 <br>
@@ -376,65 +280,6 @@ https://ysyblog.tistory.com/71
 
  
 <br><br><br>
-
-	import matplotlib.pyplot as plt
-	from pandas import DataFrame
-	from sklearn import datasets, svm, metrics
-	from sklearn.model_selection import train_test_split
-	
-	# 8x8 Images of digits
-	digits = datasets.load_digits()
-	
-	images_and_labels = list(zip(digits.images, digits.target))
-	
-	# Plot sample images
-	_, axes = plt.subplots(1, 4)
-	for ax, (image, label) in zip(axes[:], images_and_labels[:4]):
-    		ax.set_axis_off()
-    		ax.imshow(image, cmap=plt.cm.gray_r, interpolation='nearest')
-    		ax.set_title('Training: %i' % label)
-	
-	print('---------Sample---------')
-	plt.show()
-	
-	# flattened to (samples, feature) matrix:
-	n_samples = len(digits.images)
-	data = digits.images.reshape((n_samples, -1))
-	
-	# Split data into train, valid and test subsets
-	X_train, X_test, y_train, y_test = train_test_split(data, digits.target, test_size=0.2, random_state=1)
-	X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.2, random_state=1)
-	
-	gmm_list = [0.1, 0.01, 0.001]
-	score_list = []
-	
-	# Validation
-	for gmm in gmm_list:
-    		# Support vector classifier
-    		classifier = svm.SVC(gamma=gmm)
-    		classifier.fit(X_train, y_train)
-	
-    		# Score with validation set
-    		predicted = classifier.predict(X_val)
-    		score = metrics.accuracy_score(predicted, y_val)
-    		score_list.append(score)
-    		result = list(map(list, zip(gmm_list, score_list)))
-    		result_df = DataFrame(result,columns=['gamma', 'score'])
-	
-	print('-------Validation-------')
-	print(result_df)
-	print('')
-	print('----------Test----------')
-	
-	# Test
-	best_gmm = result_df.iloc[result_df['score'].argmax()]['gamma']
-	classifier = svm.SVC(gamma=best_gmm)
-	classifier.fit(X_train, y_train)
-	predicted = classifier.predict(X_test)
-	test_score = metrics.accuracy_score(predicted, y_test)
-	
-	print('Test Score :', test_score)
-
 
 붓꽃 데이터(Iris Dataset)는 Setosa, Virginica, Versicolor 3개의 붓꽃 품종을 구분해내는 것을 목적으로 만들어졌으며, 머신러닝을 경험해볼 수 있는 아주 간단한 장난감 데이터(toy data set)이다.<br> 
 
