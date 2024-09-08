@@ -195,10 +195,6 @@ Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하
 ### (5) ML Pipeline
 매번 데이터 정제마다 위와 같은 순서를 반복하기 싫다면, Pipeline이라는 방식을 사용하면 된다. Pipeline은 Data Processing Component들의 순서를 정의해놓은 것이다. 데이터 변환을 조작하고 적용하는 방법으로 각각의 컴포넌트들과 교류하며 사용하고 ML 워크플로우의 자동화를 지원한다. Scikit-Learn에서는 Pipeline Class를 제공하는데, 이것은 데이터 변환 단계의 순서를 정리하고 만들기 쉽다.<br>
 
-https://davinci-ai.tistory.com/15
-<br>
-https://ysyblog.tistory.com/71
-
 <br><br><br>
 
 ## ▣ 데이터셋 분리
