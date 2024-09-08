@@ -375,6 +375,43 @@ Wes McKinney는 2007년부터 2010년까지 연구원으로 있을 때 AQR Capit
 Pandas 공식문서 : https://pandas.pydata.org/pandas-docs/stable/getting_started/index.html
 <br>사용현황 : https://www.datacamp.com/blog/top-data-science-tools
 
+**pandas.ipynb 실습**
+
+	객체명 = pandas.read_csv('파일명')
+	display(객체명) #객체명만 적거나 print(객체명)만 적어도 됨
+	객체명.head() #5개만 조회
+	객체명.tail() #5개만 조회
+	pandas.set_option('display.max_rows', 1000)
+	pandas.set_option('display.max_colwidth', 100)
+	pandas.set_option('display.max_columns', 100)
+	pandas.DataFrame()
+	객체명.shape : DataFrame의 행(Row)와 열(Column) 크기
+	객체명.colums
+	객체명.index
+	객체명.values : DataFrame의 값(numpy로 변환)
+	객체명.info() : DataFrame내의 컬럼명, 데이터 타입, Null건수, 데이터 건수 정보
+	객체명.describe() : 데이터값들의 평균,표준편차,4분위 분포도
+	객체명['특성명'].value_counts() : 개별 데이터값의 건수, 디폴트는 dropna=True 
+	객체명['특성명'].value_counts(dropna=False)) : null값도 표시
+	객체명=객체명.drop('특성명', axis=1(0은 row삭제), inplace=False)
+	indexes = 객체명.index
+	객체명.reset_index(inplace=False)
+	객체명.iloc[:, -1]) : 처음부터 마지막 컬럼까지
+	객체명.iloc[:, :-1]) : 처음부터 마지막 컬럼 전까지
+	객체명.sort_values(by=['특성명'], ascending=True)
+	객체명.count() : null값은 제외
+	객체명.mean() : average 대신 사용
+	객체명.sum()
+	객체명.groupby(by='특성명')
+	객체명.groupby('특성명').agg([max, min])
+	객체명.isna() : 모든 컬럼에 대하여 True(1)/False(0) 출력
+	객체명.isna().sum() : 모든 컬럼에 대하여 널값의 수를 출력
+	객체명['특성명'].fillna('채울값')
+	객체명['특성명'].unique() : 해당 컬럼내 고유값의 수
+	객체명['특성명'].replace() : 값 변경
+	객체명['특성명'].apply(lamda 입력값 : 함수)
+	객체명['특성명'].apply(lamda 입력값 : '출력값' if 입력값 조건식 else '또다른 출력값')
+
 <br>
 
 ### 【Matplotlib】
