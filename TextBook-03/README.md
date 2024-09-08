@@ -347,11 +347,14 @@ NumPy는 데이터 구조 외에도 수치 계산을 위해 효율적으로 구�
 NumPy 공식문서 : https://numpy.org/doc/stable/user/whatisnumpy.html
 <br>NumPy 실습 : http://ml-ko.kr/homl2/tools_numpy.html
 
+**numpy.ipynb 실습**<br>
+
 	numpy.array() : ndarray 배열 생성
-	ndarray.shape : 행렬 차수 정보
-	ndarray.ndim : 차원 정보
-	ndarray.type : 행렬의 타입, ndarray.dtype : 데이터 타입
-	ndarray.astype : 행렬의 타입 변경, 
+	numpy.array().shape : 행렬 형태 정보
+	numpy.array().ndim : 차원 정보
+	type(numpy.array()) : 행렬의 타입
+	numpy.array().dtype : 행렬의 데이터 타입
+	numpy.array().astype : 행렬의 데이터 타입 변경, 
 	numpy.arrange() : 행렬 데이터 초기값 생성
 	numpy.zeros() : 기본값 0으로 채우기
 	numpy.ones() : 기본값 1로 채우기
@@ -360,7 +363,6 @@ NumPy 공식문서 : https://numpy.org/doc/stable/user/whatisnumpy.html
 	numpy.argsort() : 정렬 행렬의 원본 행렬 인덱스를 ndarray로 반환
 	numpy.dot() : 선형대수 연산(행렬내적)
 	numpy.transpose() : 선형대수 연산(전치행렬)
-
 
 <br>
 
