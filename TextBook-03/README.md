@@ -347,7 +347,7 @@ NumPy는 데이터 구조 외에도 수치 계산을 위해 효율적으로 구�
 NumPy 공식문서 : https://numpy.org/doc/stable/user/whatisnumpy.html
 <br>NumPy 실습 : http://ml-ko.kr/homl2/tools_numpy.html
 
-**numpy.ipynb 실습**<br>
+**numpy.ipynb 실습**
 
 	numpy.array() : ndarray 배열 생성
 	numpy.array().shape : 행렬 형태 정보
@@ -359,7 +359,7 @@ NumPy 공식문서 : https://numpy.org/doc/stable/user/whatisnumpy.html
 	numpy.zeros() : 기본값 0으로 채우기
 	numpy.ones() : 기본값 1로 채우기
 	ndarray.shape : 차원과 크기 변경
-	numpy.sort() : 2차원 배열에서 axis 기반의 정렬(내림차순 [::-1], row방향 axis=0, column방향 axis=1)
+	numpy.sort() : 행렬내 정렬(내림차순 [::-1], row방향 axis=0, column방향 axis=1)
 	numpy.argsort() : 정렬 행렬의 원본 행렬 인덱스를 ndarray로 반환
 	numpy.dot() : 선형대수 연산(행렬내적)
 	numpy.transpose() : 선형대수 연산(전치행렬)
