@@ -19,7 +19,7 @@
 <br><br>
 
 
-## ▣ ML의 정의
+# ▣ ML의 정의
 
 
 ### 1959년, Arthur Samuel (아서 새뮤얼)
@@ -90,7 +90,7 @@
 
 <br>
 
-## ▣ ML의 절차
+# ▣ ML의 절차
 ![](images/ML_Process.PNG)
 <br>
 (출처) https://www.sap.com/korea/products/artificial-intelligence/what-is-machine-learning.html
@@ -103,6 +103,8 @@
 ![](images/01_09.png)
 
 ---
+### 【ML 수행 8단계 절차】
+
 ### 데이터 처리 : (3강)
 (1) 데이터를 불러온다<br>
 (2) 데이터를 확인한다(시각화)<br>
