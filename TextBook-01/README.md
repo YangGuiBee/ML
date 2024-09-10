@@ -72,7 +72,7 @@
 |2005|자동화된 IT|IT 자산 관리|모바일 기기 관리|분석|엔터프라이즈 모빌리티 관리|분석 기반 비즈니스 인텔리전스|빅 데이터|비즈니스 프로세스 관리|빅 데이터 분석|비즈니스 프로세스 관리|
 -->
 
-## 2024년, Hyper Cycle for Emerging Technologies
+## 2024년, Hype Cycle for Emerging Technologies
 ![](./images/HypeCycle_2024.png)
 <br>
 가트너가 2024년 Hype Cycle for Emerging Technologies 보고서를 통해 주목해야 할 25가지의 혁신 기술을 발표했다. 이 기술들은 ①자율형 AI, ②개발자 생산성, ③총체적 경험, ④인간 중심의 보안 및 개인정보 보호 프로그램 등 네 가지 주요 트렌드로 분류된다.<br>
@@ -85,7 +85,7 @@
 
 <br><br>
 
-## 2024년, Hyper Cycle for AI
+## 2024년, Hype Cycle for AI
 ![](./images/HypeCycle_AI2024.png)
 <br>
  (출처) https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Hype_Cycle_for_AI.pdf
