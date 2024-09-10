@@ -6,7 +6,7 @@
   	 ▣ Python 라이브러리	
 ---
 
-## ▣ 데이터 수집
+# ▣ 데이터 수집
 전통적인 데이터 분석을 위한 데이터 수집은 크게 세 단계로 진행된다. 첫 번째는 현업 사용자의 요청에 따라 여러 가지 데이터 소스에서 데이터를 추출(Extract)한다. 두 번째는 대상 데이터 시스템 및 해당 시스템의 다른 데이터와 통합할 수 있도록 정보의 구조를 변경하는 변환(Transform) 과정을 거친다. 마지막으로 세 번째 단계는 데이터 스토리지 시스템에 적재(Load)하는 방식으로 진행된다. 데이터 수집은 가장 많은 시간이 소요되며 방법에 따라 최종 결과물이 크게 달라지기도 한다. 머신러닝의 데이터 수집은 머신러닝 절차(분석 문제 정의 → 데이터 수집 → 탐색적 데이터 분석(EDA) → 피처 엔지니어링 → 예측 모델 개발 → 서비스 적용) 중 분석 문제 정의 다음의 단계이며, 이 단계에서는 정의한 문제를 해결하기 위한 데이터들을 수집하는 단계이다. 어떤 데이터를 수집하느냐에 따라 문제 해결을 위한 접근 방식이 달라지며, 이것은 데이터의 유형도 신경써야할 필요가 있다. 머신러닝 프로젝트에서 두 번째 단계인 '데이터 수집'은 분석의 기반이 되는 데이터를 확보하는 과정으로 다음과 같은 5가지 단계로 이루어진다.<br>
 
 **(1) 원시 데이터 수집 :** 중요도에 비해 관심을 덜 받는 경우가 많지만 데이터 수집은 우수한 알고리즘을 얻기 위한 첫 걸음이다. 일반적으로 대량의 데이터 집합을 사용하는 단순한 모델이 소량의 데이터 집합을 사용하는 진보된 모델보다 성능이 더 우수하다.<br> 
@@ -55,17 +55,17 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 
 <br><br>
 
-## ▣ 데이터 전처리
+# ▣ 데이터 전처리
 데이터 전처리는 기존의 데이터를 머신러닝 알고리즘에 알맞은 데이터로 바꾸는 과정이다. 이 전처리 과정은 모델이 생성된 이후에도 예측하고자 하는 새로운 데이터에도 적용할 수 있는 과정으로 전처리 과정을 통해 더욱더 모델 학습의 성능을 높일 수 있다. 데이터 전처리는 Data Cleaning, Handling Text and Categorical Attributes, Custom Transformers, Feature Scaling, Transformation Pipelines등 5개의 과정으로 수행한다. 
 
-### (1) Data Cleaning
+## (1) Data Cleaning
 대부분의 머신러닝 알고리즘은 Missing feature, 즉 누락된 데이터가 있을 때, 제대로 역할을 하지 못한다. 그래서 먼저 Missing feature에 대해 처리해주어야 한다.<br>
 
 	불필요한 누락 데이터 제거(처리) : pandas의 dropna()<br>
 	학습에 방해가 되는 연관성 없는 전체 속성(특정 행 또는 열의 라벨) 제거 : pandas의 drop()<br>
 	누락 데이터에 0, 평균값, 중간값으로 채우기 : pandas의 fillna(), scikit-learn의 Imputer()<br>
  
-### (2) Handling Text and Categorical Attributes
+## (2) Handling Text and Categorical Attributes
 수집된 데이터는 컴퓨팅 학습을 위해서 기존 데이터 세트에 텍스트가 있는 경우 이것을 숫자형 데이터로 인코딩(Encoding)이 필요하다. 인코딩에는 레이블 인코딩(Label Encoding)과 원핫 인코딩(One-hot Encoding)을 통해 범주형 데이터를 수치형 데이터로 변환이 필요하다.<br>
 <br>
 **레이블 인코딩 :** 각 카테고리를 숫자로 대응시켜서 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"를 1로, "green"을 2로, "blue"를 3으로 변환하는 것이다. 이 방법은 간단하고 직관적이지만, 각 카테고리가 가지는 값의 크기 차이가 있을 경우 예측 결과에 영향을 미칠 수 있다. 텍스트를 숫자로 인코딩하는 메소드로는 Pandas에서 제공하는 factorize()와 OrdinalEncoder()이 있으며, sklearn.preprocessing.LabelEncoder를 사용할 수도 있다.<br>
@@ -175,7 +175,7 @@ adult dataset에 one-hot encoding 적용
 	print(adult_df_encoded.head())
 
 
-### (3) Custom Transformers
+## (3) Custom Transformers
 Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하는데, 이를 이용하여 커스텀 변환기를 만들 수 있다.
 
 **fit()** : 입력받은 데이터에 특정 알고리즘 또는 전처리를 적용하는 메서드를 통해 변환기에 알맞는 파라미터를 생성<br>
@@ -183,14 +183,14 @@ Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하
 **fit_transform()** : 같은 데이터 세트를 사용하여 fit과 transform을 한 번에 하는 메서드<br>
  	
 
-### (4) Feature Scaling
+## (4) Feature Scaling
 일반적인 ML 알고리즘들은 아주 다양한 범위의 숫자형 데이터를 학습시킨다면 제대로 성능을 보여주지 못한다. 예컨대, 특정 데이터의 범위가 -500~39,320이라면 아주 다양한 데이터가 존재한다. 이러한 상태에서는 제대로 된 학습을 잘하지 못한다. 이를 방지하기 위해서 숫자형 데이터의 범위를 줄여주는 방법을 사용한다.<br>
 
 **Min-Max Scaling (Normalization)** : 최소와 최대를 확인하여 이 값들을 모두 지정한 범위(대체로 0과 1 사이)의 상대적인 값으로 변환, Scikit-learn에서는 MinMaxScaler(feature_range, copy) class를 제공<br>
 **Standardization** : 특정 범위에 값을 바인딩하지 않음으로써 특이점(이상점)의 영향을 제거, Scikit-learn에서는 StandardScaler() 클래스를 제공<br>
 
 
-### (5) ML Pipeline
+## (5) ML Pipeline
 매번 데이터 정제마다 위와 같은 순서를 반복하기 싫다면, Pipeline이라는 방식을 사용하면 된다. Pipeline은 Data Processing Component들의 순서를 정의해놓은 것이다. 데이터 변환을 조작하고 적용하는 방법으로 각각의 컴포넌트들과 교류하며 사용하고 ML 워크플로우의 자동화를 지원한다. Scikit-Learn에서는 Pipeline Class를 제공하는데, 이것은 데이터 변환 단계의 순서를 정리하고 만들기 쉽다.<br>
 
 <br><br><br>
@@ -324,7 +324,7 @@ Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하
 	plt.show()
 
 
-## ▣ Python 라이브러리
+# ▣ Python 라이브러리
 파이썬 전세계 점유율(티오베 지수) : https://www.tiobe.com/tiobe-index/
 <br>
 ![](./images/python.PNG)
@@ -335,7 +335,7 @@ Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하
 
 <br><br>
 
-### 【NumPy】
+## 【NumPy】
 행렬이나 일반적으로 대규모 다차원 배열을 쉽게 처리할 수 있도록 지원하는 파이썬의 라이브러리<br>
 NumPy는 데이터 구조 외에도 수치 계산을 위해 효율적으로 구현된 기능을 제공<br>
 NumPy 공식문서 : https://numpy.org/doc/stable/user/whatisnumpy.html
@@ -360,7 +360,7 @@ NumPy 공식문서 : https://numpy.org/doc/stable/user/whatisnumpy.html
 
 <br>
 
-### 【Pandas】
+## 【Pandas】
 데이터 조작 및 분석을 위한 파이썬 프로그래밍 언어 용으로 작성된 소프트웨어 라이브러리<br>
 숫자 테이블과 시계열을 조작하기 위한 데이터 구조와 연산을 제공<br>
 Pandas란 이름은 한 개인에 대해 여러 기간 동안 관찰을 한다는 데이터 세트에 대한 계량 경제학 용어인 "패널 데이터"에서 파생<br>
@@ -408,7 +408,7 @@ Pandas 공식문서 : https://pandas.pydata.org/pandas-docs/stable/getting_start
 
 <br>
 
-### 【Matplotlib】
+## 【Matplotlib】
 Python 프로그래밍 언어 및 수학적 확장 NumPy 라이브러리를 활용한 플로팅 라이브러리<br>
 Tkinter , wxPython , Qt 또는 GTK 와 같은 범용 GUI 툴킷을 사용하여 애플리케이션에 플롯을 포함 하기 위한 객체 지향 API를 제공<br> 
 Matplotlib 공식문서 : https://matplotlib.org/stable/
@@ -417,7 +417,7 @@ Matplotlib 가이드 : https://wikidocs.net/92071
 
 <br>
 
-### 【Scikit-Learn】
+## 【Scikit-Learn】
 Scikit-learn(이전 명칭: scikits.learn, sklearn)은 파이썬 프로그래밍 언어용 자유 소프트웨어 기계 학습 라이브러리<br>
 다양한 분류, 회귀, 그리고 서포트 벡터 머신, 랜덤 포레스트, 그라디언트 부스팅, k-평균, DBSCAN을 포함한 클러스터링 알고리즘<br>
 파이썬의 수치 및 과학 라이브러리 NumPy 및 SciPy와 함께 운용되도록 설계<br>
@@ -430,7 +430,7 @@ SciPy 공식문서 : https://docs.scipy.org/doc/scipy/
 <br>Scikit-learn 모델 선정절차 : https://scikit-learn.org/1.3/tutorial/machine_learning_map/index.html
 <br>
 
-### 【MNIST】
+## 【MNIST】
 MNIST(Modified National Institute of Standards and Technology database)는 손으로 쓴 숫자들로 이루어진 대형 데이터베이스<br>
 다양한 화상처리시스템과 기계학습 분야의 트레이닝 및 테스트에 널리 사용<br>
 MNIST 데이터베이스는 60,000개의 트레이닝 이미지와 10,000개의 테스트 이미지를 포함<br>
@@ -438,7 +438,7 @@ MNIST 사용가이드 : https://guide.ncloud-docs.com/docs/tensorflow-tensorflow
 
 <br>
 
-### 【TensorFlow】
+## 【TensorFlow】
 머신러닝 및 인공 지능을 위한 무료 오픈소스 소프트웨어 라이브러리<br>
 다양한 작업에 사용할 수 있지만 특히 심층 신경망의 교육 및 추론에 중점<br>
 연구 및 생산에서 Google의 내부 사용을 위해 Google Brain 팀에서 개발<br>
@@ -447,7 +447,7 @@ TensorFlow 공식문서 : https://www.tensorflow.org/?hl=ko
 
 <br>
 
-### 【Kaggle】
+## 【Kaggle】
 2010년 설립된 예측모델 및 분석 대회 플랫폼으로 2017년 3월 구글에 인수됨<br>
 기업 및 단체에서 데이터와 해결과제를 등록하면, 데이터 과학자들이 이를 해결하는 모델을 개발하고 경쟁<br>
 Kaggle은 전 세계 데이터 사이언티스트들이 데이터를 분석할 수 있도록 대회를 개최하고, 분석 내용을 토론할 수 있는 커뮤니티를 제공하는 플랫폼<br>
@@ -465,7 +465,7 @@ Kaggle 가이드 : https://wikidocs.net/86304
 
 <br>
 
-### 2024년 update
+## 2024년 update
 1. Linear regression<br>
 2. Logistic regression<br>
 3. Naive Bayes<br> 
