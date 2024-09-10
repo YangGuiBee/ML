@@ -309,7 +309,7 @@ validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한
 	from sklearn import datasets
 	import matplotlib.pyplot as plt
 
-	#Iris 데이터셋 로드
+ 	#Iris 데이터셋 로드
 	iris = datasets.load_iris()
 
 	#서브플롯 생성
