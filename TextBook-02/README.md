@@ -129,25 +129,6 @@
 <br>
 
 <img width ='500' height = '250' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/ML_variable.png'><br>
-
-        $\\boldsymbol{X} \\in \\mathbb{R}^{150\\times4}$<br>
-        <br>
-        $\\begin{bmatrix}<br>
-        x_1^{(1)} & x_2^{(1)} & x_3^{(1)} & x_4^{(1)} \\\\<br>
-        x_1^{(2)} & x_2^{(2)} & x_3^{(2)} & x_4^{(2)} \\\\<br>
-        \\vdots & \\vdots & \\vdots & \\vdots \\\\<br>
-        x_1^{(150)} & x_2^{(150)} & x_3^{(150)} & x_4^{(150)} \\\\<br>
-        \\end{bmatrix}$<br>
-        <br>
-        벡터 : $\\boldsymbol{x}\\in\\mathbb{R}^{n\\times1}$<br>
-        <br>
-        행렬 : $\\boldsymbol{X}\\in\\mathbb{R}^{n\\times m}$<br>
-        <br>
-        샘플(행 벡터): $\\boldsymbol{x}^{(i)}=\\begin{bmatrix} x_1^{(i)} & x_2^{(i)} & x_3^{(i)} & x_4^{(i)}\\end{bmatrix}$<br>
-        <br>
-        특성(열 벡터): $\\boldsymbol{x}_j=\\begin{bmatrix} x_j^{(1)} \\\\ x_j^{(2)} \\\\ \\vdots \\\\ x_j^{(150)} \\end{bmatrix}$<br>
-        <br>
-        타깃(열 벡터): $\\boldsymbol{y}=\\begin{bmatrix} y^{(1)} \\\\ y^{(2)} \\\\ \\vdots \\\\ y^{(150)} \\end{bmatrix}$ $(y \\in \\text{\\{Setosa, Versicolor, Virginica\\}})$<br>
 <br>
 model(모델) : 머신러닝이 찾은 규칙의 수학적 표현(수식), 학습 또는 훈련데이터로 학습된 머신러닝 알고리즘<br>
 모델의 규칙 : 가중치와 절편<br>
