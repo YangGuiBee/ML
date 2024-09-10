@@ -280,8 +280,9 @@ validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한
 	테스트 데이터 비율: 0.20
 	검증 데이터 비율: 0.20
 
- 
-<br><br><br>
+<br><br>
+
+## 【ML 예제】
 
 붓꽃 데이터(Iris Dataset)는 Setosa, Virginica, Versicolor 3개의 붓꽃 품종을 구분해내는 것을 목적으로 만들어졌으며, 머신러닝을 경험해볼 수 있는 아주 간단한 장난감 데이터(toy data set)이다.<br> 
 
