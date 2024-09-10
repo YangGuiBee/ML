@@ -304,8 +304,7 @@ validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한
  - 변수 가공: 변수(feature)는 모델에서 자동 생성된다.<br>
  - 모델 학습: 이미지 데이터를 입력하여 다양한 네트워크를 구성해보고 적합한 모델을 생성한다.<br>
  - 모델 평가: 학습에 사용되지 않은 이미지 데이터를 최종 모델에 넣어 정확도가 어느 정도 인지 확인해본다.<br>
-
-
+<br>
 	from sklearn import datasets
 	import matplotlib.pyplot as plt
 
