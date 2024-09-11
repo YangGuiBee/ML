@@ -425,6 +425,8 @@ Kaggle 가이드 : https://wikidocs.net/86304
 <br>
 
 
+## 【ML 알고리즘/모델】
+
 ![](./images/ML_2019.png)
 
 <br>
