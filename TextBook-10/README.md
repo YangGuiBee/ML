@@ -12,7 +12,7 @@
 
 # [1] KDE (Kernel Desity Estimation)
 
-#	[2] k-평균 클러스터링 (k-Means Clustering)
+# [2] k-평균 클러스터링 (k-Means Clustering)
 
 # [3] 계층적 클러스터링 (Hierarchical Clustering)
 
