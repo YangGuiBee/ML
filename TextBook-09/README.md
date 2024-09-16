@@ -3,7 +3,7 @@
 ---
 
 	[1] Matplotlib
-  [2] Seaborn
+ 	[2] Seaborn
    
 ---  
 
