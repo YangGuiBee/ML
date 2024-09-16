@@ -1,30 +1,30 @@
-#  04 : 지도 학습 (Supervised Learning, SL) : 회귀 (regression)
+#  04 : 지도 학습 (Supervised Learning, SL) : 분류 (classification)
+
 
 ---
 
-	[1] 선형 회귀 (Linear Regression)
-	[2] 다항 회귀 (Polynomial Regression)
-	[3] 릿지 회귀 (Ridge Regression)
-	[4] 라쏘 회귀 (Lasso Regression)
-	[5] 엘라스틱넷 회귀 (Elastic Net Regression)
-	[6] 서포트 벡터 회귀 (Support Vector Regression, SVR)
-	[7] 결정 트리 회귀 (Decision Tree Regression)
-	[8] 랜덤 포레스트 회귀 (Random Forest Regression)  
+	[1] 로지스틱 회귀 (Logistic Regression)
+	[2] 서포트 벡터 분류 (Support Vector Classification, SVC)
+	[3] 결정 트리 분류 (Decision Tree Classification)
+	[4] 랜덤 포레스트 분류 (Random Forest Classification)
+	[5] k-최근접 이웃 (k-Nearest Neighbors, k-NN)
+	[6] 나이브 베이즈 (Naive Bayes)
+	[7] XGBoost (Extreme Gradient Boosting)
   
 ---
 
-# [1] 선형 회귀 (Linear Regression)
 
-# [2] 다항 회귀 (Polynomial Regression)
+# [1] 로지스틱 회귀 (Logistic Regression)
 
-# [3] 릿지 회귀 (Ridge Regression)
+# [2] 서포트 벡터 분류 (Support Vector Classification, SVC)
 
-# [4] 라쏘 회귀 (Lasso Regression)
+# [3] 결정 트리 분류 (Decision Tree Classification)
 
-# [5] 엘라스틱넷 회귀 (Elastic Net Regression)
+# [4] 랜덤 포레스트 분류 (Random Forest Classification)
 
-# [6] 서포트 벡터 회귀 (Support Vector Regression, SVR)
+# [5] k-최근접 이웃 (k-Nearest Neighbors, k-NN)
 
-# [7] 결정 트리 회귀 (Decision Tree Regression)
+# [6] 나이브 베이즈 (Naive Bayes)
 
-# [8] 랜덤 포레스트 회귀 (Random Forest Regression)  
+# [7] XGBoost (Extreme Gradient Boosting)
+
