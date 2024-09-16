@@ -1,12 +1,15 @@
 #  04 : 지도학습
 
 ---
-	 ▣ ML의 정의
-	 ▣ ML의 절차
-	 ▣ ML의 구분
-	 ▣ ML의 학습별 알고리즘	 
-   ▣ ML의 모델 평가
-	 ▣ ML의 최적화 기법  	 
+
+	[1] 선형 회귀 (Linear Regression)
+	[2] 다항 회귀 (Polynomial Regression)
+	[3] 릿지 회귀 (Ridge Regression)
+	[4] 라쏘 회귀 (Lasso Regression)
+	[5] 엘라스틱넷 회귀 (Elastic Net Regression)
+	[6] 서포트 벡터 회귀 (Support Vector Regression, SVR)
+	[7] 결정 트리 회귀 (Decision Tree Regression)
+	[8] 랜덤 포레스트 회귀 (Random Forest Regression)  
   
 ---
 
@@ -15,3 +18,13 @@
 
 
 # ▣ ML의 정의
+
+
+# [1] 선형 회귀 (Linear Regression)
+# [2] 다항 회귀 (Polynomial Regression)
+# [3] 릿지 회귀 (Ridge Regression)
+# [4] 라쏘 회귀 (Lasso Regression)
+# [5] 엘라스틱넷 회귀 (Elastic Net Regression)
+# [6] 서포트 벡터 회귀 (Support Vector Regression, SVR)
+# [7] 결정 트리 회귀 (Decision Tree Regression)
+# [8] 랜덤 포레스트 회귀 (Random Forest Regression)  
