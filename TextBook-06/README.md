@@ -7,7 +7,7 @@
  	[3] 랜덤 포레스트 회귀 (Random Forest Regression)  
   	[4] 서포트 벡터 분류 (Support Vector Classification, SVC)
    	[5] 결정 트리 분류 (Decision Tree Classification)
-    	[6] 랜덤 포레스트 분류 (Random Forest Classification)
+   	[6] 랜덤 포레스트 분류 (Random Forest Classification)    	
 	
 ---  
 
