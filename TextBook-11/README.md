@@ -2,14 +2,17 @@
 
 ---
 
-연관 규칙 (Association Rule)
+## 연관 규칙 (Association Rule)
 <br>
+
   FP Growth
   이클렛 (Eclat)
   어프라이어리 (Apriori)
+  
+
+## 차원 축소 (Dimensionality Reduction)
 <br>
-차원 축소 (Dimensionality Reduction)
-<br>
+
   주성분 분석 (Principal Component Analysis, PCA)
   독립 성분 분석 (Independent Component Analysis, ICA)
   자기 조직화 지도 (Self-Organizing Maps, SOM)
