@@ -52,4 +52,5 @@ $= SSE + SSR (단, 2∑(yi - ŷi)(ŷi - ȳ)는 0)$ <br>
 <br>
 
 ![](./images/SST.png)
+<br>
 출처 : https://medium.com/coders-mojo/data-science-and-machine-learning-projects-mega-compilation-part-5-e50baa2faa85
