@@ -20,12 +20,14 @@
 # [1] 선형 회귀 (Linear Regression)
 종속변수 y와 독립변수(설명변수) X와의 선형 상관 관계를 모델링하는 회귀<br>
 독립변수(설명변수) X가 2개 이상인 회귀는 다중선형회귀 (Multiple  Linear Regression)<br>
+![](./images/LR.png)
 
 <br>
 
 # [2] 다항 회귀 (Polynomial Regression)
 독립변수와 종속변수가 선형관계가 아닌 비선형 회귀(Non-linear Regression)<br>
-직선이 아닌 곡선 형태의 관계를 가질 수도 있기 때문에 독립변수에 제곱이나 로그(log) 등을 취해 보면서 적합한 비선형 모델을 찾아낸다
+직선이 아닌 곡선 형태의 관계를 가질 수도 있기 때문에 독립변수에 제곱이나 로그(log) 등을 취해 보면서 적합한 비선형 모델을 찾아낸다<br>
+![](./images/PR.png)
 
 <br>
 
@@ -54,5 +56,8 @@ L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회�
 L1-norm 과 L2-norm을 모두 이용하여 패널티를 부과하여 회귀모델을 생성<br>
 
 <br>
+
+![](./images/L1L2.png)
+
 
 
