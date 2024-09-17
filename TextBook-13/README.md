@@ -60,6 +60,10 @@ MAE를 비율, 퍼센트로 표현하여 스케인 의존적 에러의 문제점
 <br>
 
 # [7] 평균 절대 비율 오차(절대값제외) (Mean Percentage Error, MPE)
+![](./images/MPE.svg)
+<br>
+MAPE에서 절대값을 제외하여 계산한다.<br>
+음수면 overperformance, 양수면 underperformance으로 판단<br>
 
 # [8] R2 score
 
@@ -69,17 +73,9 @@ MAE를 비율, 퍼센트로 표현하여 스케인 의존적 에러의 문제점
 <br>
 ![](./images/R.svg)
 <br>
-R-squared는 모델이 데이터를 얼마나 잘 설명하는지를 나타내는 지표<bbr>
-R-squared는 0에서 1 사이의 값을 가지며, 1에 가까울수록 모델이 데이터를 잘 설명한다는 의미<br>
-$R-Squared = SSR / SST = (SST – SSE) / SST = 1 – (SSE / SST)$ <br>
-$SSR = ∑(i=1 to n) (ŷi - ȳ)^2$ <br>
-$SST = ∑(i=1 to n) (yi - ȳ)^2$ <br>
-
-$SST = ∑(yi - ȳ)²$ <br>
-$= ∑[(yi - ŷi) + (ŷi - ȳ)]²$ <br>
-$= ∑(yi - ŷi)² + 2∑(yi - ŷi)(ŷi - ȳ) + ∑(ŷi - ȳ)²$ <br>
-$= SSE + 2∑(yi - ŷi)(ŷi - ȳ) + SSR$ <br>
-$= SSE + SSR (단, 2∑(yi - ŷi)(ŷi - ȳ)는 0)$ <br>
+다른 지표(MAE, MSE, RMSE)들은 모델마다 값이 다르기 때문에 절대 값만 보고 선능을 판단하기 어려운 반면, $R^2$ score는 상대적인 성능을 나타내기 비교가 쉽다.<br>
+실제 값의 분산 대비 예측값의 분산 비율을 의미한다.<br>
+0에서 1 사이의 값을 가지며, 1에 가까울 수록 좋다.<br>
 
 <br>
 
