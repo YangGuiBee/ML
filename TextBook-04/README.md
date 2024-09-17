@@ -4,10 +4,14 @@
 
 	[1] 선형 회귀 (Linear Regression)
 	[2] 다항 회귀 (Polynomial Regression)
+ 	정규화된 회귀 (Regularized Regression)
 	[3] 릿지 회귀 (Ridge Regression)
 	[4] 라쏘 회귀 (Lasso Regression)
 	[5] 엘라스틱넷 회귀 (Elastic Net Regression)
-	  
+
+---
+	Logistic Regression → 분류
+	Support Vector Regression → 분류+회귀 
 ---
 
 지도 학습은 회귀(Regression)와 분류(Classification)로 구분<br>
@@ -27,7 +31,7 @@ $y = w_1x_1 + w_2x_2 + ... + w_nx_n + b$ <br>
 
 ![](./images/LinearRegression.gif)
 출처 : https://savannahar68.medium.com/getting-started-with-regression-a39aca03b75f
-<br>
+<br><br>
 모델 추정을 위해서, 예측값과 실제관측값인 잔차의 제곱을 최소화하는 최소제곱법(OLS)을 사용<br>
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/LRd.png'>
 <br>
