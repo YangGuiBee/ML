@@ -27,7 +27,8 @@
 출처 : https://savannahar68.medium.com/getting-started-with-regression-a39aca03b75f
 <br>
 
-![](./images/LRd.png)
+<img width ='600' height = '500' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/LRd.PNG'>
+
 <br>
 출처 : https://blog.csdn.net/Amy_mm/article/details/79989722
 
