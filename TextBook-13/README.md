@@ -79,6 +79,10 @@ MAPE에서 절대값을 제외하여 계산한다.<br>
 
 <br>
 
+출처 : https://aliencoder.tistory.com/43
+
+<br>
+
 ![](./images/SST.png)
 <br>
 출처 : https://medium.com/coders-mojo/data-science-and-machine-learning-projects-mega-compilation-part-5-e50baa2faa85
