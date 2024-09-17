@@ -49,3 +49,7 @@ $= ∑(yi - ŷi)² + 2∑(yi - ŷi)(ŷi - ȳ) + ∑(ŷi - ȳ)²$ <br>
 $= SSE + 2∑(yi - ŷi)(ŷi - ȳ) + SSR$ <br>
 $= SSE + SSR (단, 2∑(yi - ŷi)(ŷi - ȳ)는 0)$ <br>
 
+<br>
+
+![](./images/SST.png)
+
