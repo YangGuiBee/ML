@@ -10,8 +10,13 @@
 	[5] 엘라스틱넷 회귀 (Elastic Net Regression)
 
 ---
-	Logistic Regression → 분류
-	Support Vector Regression → 분류+회귀 
+
+	로지스틱 회귀 (Logistic Regression) → 분류	
+	k-최근접 이웃 회귀(k-Nearest Neighbors Regression) → 분류+회귀 
+	서포트 벡터 회귀 (Support Vector Regression, SVR) → 분류+회귀 
+	결정 트리 회귀 (Decision Tree Regression) → 분류+회귀 
+	랜덤 포레스트 회귀 (Random Forest Regression) → 분류+회귀   
+
 ---
 
 지도 학습은 회귀(Regression)와 분류(Classification)로 구분<br>
