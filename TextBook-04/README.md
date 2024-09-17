@@ -12,12 +12,12 @@
 
 # [1] 선형 회귀 (Linear Regression)
 종속변수 y와 독립변수(설명변수) X와의 선형 상관 관계를 모델링하는 회귀<br>
-특히 특히 독립변수(설명변수) X가 2개 이상인 경우는 다중선형회귀 (Multiple  Linear Regression)
+독립변수(설명변수) X가 2개 이상인 회귀는 다중선형회귀 (Multiple  Linear Regression)<br>
 
 <br>
 
 # [2] 다항 회귀 (Polynomial Regression)
-데이터 표현이 선형이 아닌 곡선으로 나타나는 경우에 사용하는 회귀
+독립변수와 종속변수가 선형관계가 아닌 비선형 회귀(Non-linear Regression)로 직선이 아닌 곡선 형태의 관계를 가질 수도 있기 때문에 이런 때에는 독립변수에 로그(log)나 거듭제곱 등을 취해 보면서 적합한 비선형 모델을 찾아내는 회귀
 
 <br>
 
