@@ -28,7 +28,7 @@ $y = w_1x_1 + w_2x_2 + ... + w_nx_n + b$ <br>
 ![](./images/LinearRegression.gif)
 출처 : https://savannahar68.medium.com/getting-started-with-regression-a39aca03b75f
 <br>
-
+모델 추정을 위해서, 예측값과 실제관측값인 잔차의 제곱을 최소화하는 최소제곱법(OLS)을 사용<br>
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/LRd.png'>
 <br>
 출처 : https://blog.csdn.net/Amy_mm/article/details/79989722
