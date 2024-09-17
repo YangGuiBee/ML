@@ -20,15 +20,16 @@
 
 # [1] 선형 회귀 (Linear Regression)
 종속변수 y와 독립변수(설명변수) X와의 선형 상관 관계를 모델링하는 회귀<br>
+$y = wx + b$ <br>
 독립변수(설명변수) X가 2개 이상인 회귀는 다중선형회귀 (Multiple  Linear Regression)<br>
+$y = w_1x_1 + w_2x_2 + ... + w_nx_n + b$ <br>
 <br>
 
 ![](./images/LinearRegression.gif)
 출처 : https://savannahar68.medium.com/getting-started-with-regression-a39aca03b75f
 <br>
 
-<img width ='600' height = '500' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/LRd.png'>
-
+<img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/LRd.png'>
 <br>
 출처 : https://blog.csdn.net/Amy_mm/article/details/79989722
 
