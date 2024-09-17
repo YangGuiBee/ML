@@ -24,6 +24,11 @@
 
 ![](./images/LinearRegression.gif)
 출처 : https://savannahar68.medium.com/getting-started-with-regression-a39aca03b75f
+<br>
+
+![](./images/LRd.png)
+<br>
+출처 : https://blog.csdn.net/Amy_mm/article/details/79989722
 
 <br>
 
