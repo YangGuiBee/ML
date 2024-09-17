@@ -69,6 +69,7 @@ L1-norm 과 L2-norm을 모두 이용하여 패널티를 부과하여 회귀모�
 <br>
 
 ![](./images/L1L2.png)
-
+<br>
+출처 : https://savannahar68.medium.com/getting-started-with-regression-a39aca03b75f
 
 
