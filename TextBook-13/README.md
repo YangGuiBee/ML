@@ -50,6 +50,14 @@ MSE에 루트는 씌워서 에러를 제곱해서 생기는 값의 왜곡이 줄
 # [5] 평균 제곱근 오차(로그적용) (Root Mean Squared Log Error, RMSLE)
 
 # [6] 평균 절대 비율 오차 (Mean Absolute Percentage Error, MAPE)
+![](./images/MAPE.svg)
+<br>
+MAE를 비율, 퍼센트로 표현하여 스케인 의존적 에러의 문제점을 개선한다.<br>
+값이 낮을수록 좋다.<br>
+직관적이고, 다른 모델과 에러율 비교가 쉬운 장점<br>
+실제 정답보다 낮게 예측했는지, 높게 했는지를 파악하기 힘들고 실제 정답이 1보다작을 경우,무한대의 값으로 수렴할 수 있는 단점<br>
+
+<br>
 
 # [7] 평균 절대 비율 오차(절대값제외) (Mean Percentage Error, MPE)
 
