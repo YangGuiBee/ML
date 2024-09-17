@@ -20,7 +20,10 @@
 # [1] 선형 회귀 (Linear Regression)
 종속변수 y와 독립변수(설명변수) X와의 선형 상관 관계를 모델링하는 회귀<br>
 독립변수(설명변수) X가 2개 이상인 회귀는 다중선형회귀 (Multiple  Linear Regression)<br>
+<br>
+
 ![](./images/LinearRegression.gif)
+출처 : https://savannahar68.medium.com/getting-started-with-regression-a39aca03b75f
 
 <br>
 
