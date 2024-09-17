@@ -37,6 +37,8 @@ MSE가 작을수록 모델의 예측 성능이 높다고 해석
 # [7] 평균 절대 비율 오차(절대값제외) (Mean Percentage Error, MPE)
 
 # [8] R2 score
+![](./images/R.png)
+<br>
 R-squared는 모델이 데이터를 얼마나 잘 설명하는지를 나타내는 지표<bbr>
 R-squared는 0에서 1 사이의 값을 가지며, 1에 가까울수록 모델이 데이터를 잘 설명한다는 의미<br>
 $R-Squared = SSR / SST = (SST – SSE) / SST = 1 – (SSE / SST)$ <br>
