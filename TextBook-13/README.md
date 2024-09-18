@@ -165,6 +165,11 @@ $SST = SSR + SSE$ <br>
 
 <br><br>
 
+![](./images/SST_SSE.png)
+<br>
+출처 : https://devhwi.tistory.com/13
+
+
 ![](./images/SST.png)
 <br>
 출처 : https://medium.com/coders-mojo/data-science-and-machine-learning-projects-mega-compilation-part-5-e50baa2faa85
