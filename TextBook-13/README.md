@@ -9,8 +9,8 @@
 	[5] 평균 제곱근 오차(로그적용) (Root Mean Squared Log Error, RMSLE)
  	[6] 평균 비율 오차 (Mean Percentage Error, MPE)
 	[7] 평균 절대 비율 오차 (Mean Absolute Percentage Error, MAPE)
-	[8] R2 score
-
+	[8] 평균 절대 규모 오차 (MASE(Mean Absolute Scaled Error)
+	[9] R2 score
 	  
 ---
 
@@ -109,8 +109,21 @@ MAE를 비율, 퍼센트로 표현하여 스케인 의존적 에러의 문제점
 
 <br>
 
-# [8] R2 score
+# [8] 평균 절대 규모 오차 (MASE(Mean Absolute Scaled Error)
+![](./images/MASE.svg)
+<br>
+데이터를 척도화하여 이를 기준으로 예측오차의 절대값에 대한 평균을 낸 값<br>
+스케일에 대한 의존성이 낮다는 장점<br>
 
+	def MASE(y, t):
+		n = len(y)
+		d = np.abs(np.diff(y)).sum() / (n - 1)
+		errors = abs(y-t)
+		return errors.mean(axis=None)/d
+
+<br>
+
+# [9] R2 score
 ![](./images/SSR.svg)
 <br>
 ![](./images/SST.svg)
