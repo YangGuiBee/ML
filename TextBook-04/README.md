@@ -55,6 +55,9 @@ $y = w_1x + w_2x^2 + ... + w_nx^n + b$ <br>
 <br>
 ![](./images/PL.png)
 
+
+![](./images/RSSd.png)
+
 <br>
 
 	입력데이터의 Feature들이 너무 많은 경우(Feature수에 비해 관측치 수가 적은 경우) 과적합이 발생
