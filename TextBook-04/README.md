@@ -56,7 +56,7 @@ $y = w_1x + w_2x^2 + ... + w_nx^n + b$ <br>
 ![](./images/PL.png)
 
 
-![](./images/RSSd.png)
+![](./images/RSSd.svg)
 
 <br>
 
