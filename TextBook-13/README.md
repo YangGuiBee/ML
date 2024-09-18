@@ -131,7 +131,8 @@ MAE를 비율, 퍼센트로 표현하여 스케인 의존적 에러의 문제점
 <br>
 
 # [10] R2 score
-![](./images/SSR.svg)
+$SST = SSR + SSE$
+![](./images/SSR.svg) , ![](./images/SSE.svg)
 <br>
 ![](./images/SST.svg)
 <br>
