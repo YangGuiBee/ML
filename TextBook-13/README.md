@@ -15,7 +15,7 @@
 	  
 ---
 
-# [1] 평균 절대 오차 (Mean Error, ME)
+# [1] 평균 오차 (Mean Error, ME)
 ![](./images/ME.svg)
 <br>
 예측오차의 산술평균을 의미<br>
