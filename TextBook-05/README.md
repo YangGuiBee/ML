@@ -9,12 +9,17 @@
   
 ---
 
+	k-최근접 이웃 분류(k-Nearest Neighbors Classification) → 분류+회귀
+	서포트 벡터 분류 (Support Vector Classification, SVC) → 분류+회귀
+	결정 트리 분류 (Decision Tree Classification) → 분류+회귀
+	랜덤 포레스트 분류 (Random Forest Classification) → 분류+회귀
+
+---
+
 
 # [1] 로지스틱 회귀 (Logistic Regression)
 
-# [2] k-최근접 이웃 (k-Nearest Neighbors, k-NN)
+# [2] 나이브 베이즈 (Naive Bayes)
 
-# [3] 나이브 베이즈 (Naive Bayes)
-
-# [4] XGBoost (Extreme Gradient Boosting)
+# [3] XGBoost (Extreme Gradient Boosting)
 
