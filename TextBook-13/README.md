@@ -199,7 +199,7 @@ SSE값은 오차(Error)에 대한 변동성을 나타내는데, 이 값이 작�
 	    # Linear Regression model 평가
 	    r_sq = model.score(x.reshape(-1,1), y)  
     	    print("결정 계수 (model.score): ", r_sq)
-    	    r2 = r2_score(y, model.predict(x.reshape(-1,1)))  # 이 부분을 수정했습니다
+    	    r2 = r2_score(y, model.predict(x.reshape(-1,1)))  
     	    print("결정 계수 (r2_score): ", r2)
     
 	    # Linear Model 식 
