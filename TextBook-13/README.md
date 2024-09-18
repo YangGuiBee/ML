@@ -146,3 +146,41 @@ MAE를 비율, 퍼센트로 표현하여 스케인 의존적 에러의 문제점
 ![](./images/SST.png)
 <br>
 출처 : https://medium.com/coders-mojo/data-science-and-machine-learning-projects-mega-compilation-part-5-e50baa2faa85
+
+
+	import numpy as np
+	import matplotlib.pyplot as plt
+	from sklearn.linear_model import LinearRegression
+
+	#해당 구문이 사용된 파이썬 파일을 직접 실행했을 때만 아래 코드를 실행
+	if __name__ == '__main__':
+    
+	    # 테스트용 데이터 생성
+	    x = np.random.rand(1000)*100
+	    y = 0.8*x+np.random.randn(1000)*30
+
+	    # Linear Regrssion model 생성
+	    model = LinearRegression() 
+    
+	    # Linear Regression model 학습
+	    model.fit(x.reshape(-1,1), y) 
+    
+	    # Prediction
+	    y_new = model.predict(np.array([6]).reshape((-1, 1))) 
+	    print("Data Prediction: ", y_new)
+    
+	    # Linear Regression model 평가
+	    r_sq = model.score(x.reshape(-1,1), y)  
+	    print("결정 계수: ", r_sq)
+    
+	    # Linear Model 식 
+	    b0,b1 = model.intercept_, model.coef_[0]   
+	    print("기울기", model.coef_[0])
+	    print("절편", model.intercept_)
+
+	    # 시각화
+	    plt.scatter(x, y, s=5)
+	    plt.plot(x, model.predict(x.reshape(-1,1)), color='red', linewidth=2)
+	    plt.annotate('y = '+str(round(b1,2))+'x '+str(round(b0,2)), xy=(100, 100), xytext=(80, 80))
+	    plt.show()
+
