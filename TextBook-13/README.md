@@ -131,14 +131,32 @@ MAE를 비율, 퍼센트로 표현하여 스케인 의존적 에러의 문제점
 <br>
 
 # [10] R2 score
-$SST = SSR + SSE$ <br>
+**SST(Total Sum of Squares) :** 관측값에서 관측값의 평균(혹은 추정치의 평균)을 뺀 결과의 총합인 총 제곱합<br>
+전체(Total)에 대한 변동성을 나타내며 SST는 SSR과 SSE의 합<br>
+
+![](./images/SST.svg)
+<br>
+
+**SSR(Sum of Squares due to Regression) :** 회귀식 추정 값과 관측값의 평균 간 차이인 회귀 제곱합<br>
+회귀식으로 부터 나온 예측값에서 관측값(y)의 평균(혹은 추정치의 평균)을 뺀 결과의 총합<br>
+ESS(Explained Sum of Squares)로 분석을 통해 설명 가능한 수치로 직선(Regression)에 대한 변동성을 나타낸다.<br>
 
 ![](./images/SSR.svg)
 <br>
+
+**SSE(Sum of Squares Residual of Error) :** 실제 관측값(y)과 예측값 사이의 차인 잔차(Residual)의 총합<br>
+예측값과 실제 관측값의 차이가 있을 수 있으며 이는 회귀식으로는 설명할 수 없는 설명 불가능한 수치이다.<br> 
+SSE값은 오차(Error)에 대한 변동성을 나타내는데, 이 값이 작을수록 좋은 모델이라 볼 수 있다. 자주 사용되는 MSE(Mean Squared Error)는 SSE를 표준화한 개념이다.<br>
+
 ![](./images/SSE.svg)
 <br>
-![](./images/SST.svg)
-<br>
+
+위의 수식에 따라 결국 SST=SSR+SSE이며, SSR과 SSE는 반비례 관계라는 것을 알 수 있다.<br>
+총 변동 중 설명 가능한 변동의 비율을 뜻하는 결정계수(R2)는 아래와 같은 식이 성립한다.<br>
+
+$SST = SSR + SSE$ <br>
+
+
 ![](./images/R.svg)
 <br>
 다른 지표(MAE, MSE, RMSE)들은 모델마다 값이 다르기 때문에 절대 값만 보고 선능을 판단하기 어려운 반면, $R^2$ score는 상대적인 성능을 나타내기 비교가 쉽다.<br>
