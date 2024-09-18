@@ -45,7 +45,10 @@ $y = w_1x_1 + w_2x_2 + ... + w_nx_n + b$ <br>
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/LRd.png'>
 <br>
 출처 : https://blog.csdn.net/Amy_mm/article/details/79989722
+<br>
 
+선형회귀는 학습을 통해 RSS를 최소로 하는 회귀계수($W_0$과 $W_1$)를 찾는 것이 핵심.<br>
+![](./images/RSSd.svg)
 <br>
 
 # [2] 다항 회귀 (Polynomial Regression)
@@ -55,8 +58,6 @@ $y = w_1x + w_2x^2 + ... + w_nx^n + b$ <br>
 <br>
 ![](./images/PL.png)
 
-
-![](./images/RSSd.svg)
 
 <br>
 
