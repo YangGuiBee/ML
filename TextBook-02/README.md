@@ -128,6 +128,8 @@
 **Label** (레이블, 타깃, 출력, 반응변수, 목표값, 답) **Y** <br>
 <br>
 
+<img width ='500' height = '500' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/iris_num.png'><br>
+
 <img width ='500' height = '250' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/ML_variable.png'><br>
 <br>
 model(모델) : 머신러닝이 찾은 규칙의 수학적 표현(수식), 학습 또는 훈련데이터로 학습된 머신러닝 알고리즘<br>
@@ -142,11 +144,7 @@ train, val → training set / test → test set
 Train Dataset : 훈련/학습 데이터셋
 Validation Dataset : 검증 데이터셋, 중간 확인용
 Test Dataset : 평가 데이터셋, 마지막에 모델의 성능을 측정(한번만 사용, 두번이상 사용하면 검증 데이터셋, 학습 할 때 미적용)
-<br>
-
-<img width ='500' height = '250' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/iris_num.png'><br>
-
-<br><br>
+<br><br><br>
 
 # ▣ ML의 구분
 
