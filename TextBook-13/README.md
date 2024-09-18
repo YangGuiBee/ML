@@ -132,7 +132,7 @@ MAE를 비율, 퍼센트로 표현하여 스케인 의존적 에러의 문제점
 
 # [10] R2 score
 **SST(Total Sum of Squares) :** 관측값에서 관측값의 평균(혹은 추정치의 평균)을 뺀 결과의 총합인 총 제곱합<br>
-전체(Total)에 대한 변동성을 나타내며 SST는 SSR과 SSE의 합<br>
+전체(Total)에 대한 변동성을 나타낸다<br>
 
 ![](./images/SST.svg)
 <br>
@@ -143,6 +143,11 @@ ESS(Explained Sum of Squares)로 분석을 통해 설명 가능한 수치로 직
 
 ![](./images/SSR.svg)
 <br>
+
+![](./images/SST_SSE.png)
+<br>
+출처 : https://devhwi.tistory.com/13
+
 
 **SSE(Sum of Squares Residual of Error) :** 실제 관측값(y)과 예측값 사이의 차인 잔차(Residual)의 총합<br>
 예측값과 실제 관측값의 차이가 있을 수 있으며 이는 회귀식으로는 설명할 수 없는 설명 불가능한 수치이다.<br> 
@@ -164,10 +169,6 @@ $SST = SSR + SSE$ <br>
 0에서 1 사이의 값을 가지며, 1에 가까울 수록 좋다.<br>
 
 <br><br>
-
-![](./images/SST_SSE.png)
-<br>
-출처 : https://devhwi.tistory.com/13
 
 
 ![](./images/SST.png)
