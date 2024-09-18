@@ -110,7 +110,7 @@ MAE를 비율, 퍼센트로 표현하여 스케인 의존적 에러의 문제점
 <br>
 
 # [8] 평균 절대 규모 오차 (MASE(Mean Absolute Scaled Error)
-![](./images/MASE.svg)
+![](./images/MASE.svg) ![](./images/MASE1.svg)
 <br>
 데이터를 척도화하여 이를 기준으로 예측오차의 절대값에 대한 평균을 낸 값<br>
 스케일에 대한 의존성이 낮다는 장점<br>
