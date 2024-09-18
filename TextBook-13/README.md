@@ -22,6 +22,13 @@
 값이 낮을수록 좋다.<br>
 직관적이고 정답 및 예측 값과 같은 단위를 가지는 장점<br>
 실제 정답보다 낮게 예측했는지, 높게 했는지를 파악하기 힘들고, 스케일 의존적(scal dependency)으로 모델마다 에류 크기가 동일해도 에러율은 동일하지 않은 단점<br>
+CF : ME(Mean of Error)는 예측오차의 산술평균을 의미<br>
+
+	def MAE(y, t):
+    	return (abs(y - t)).mean(axis=None)
+     
+	def ME(y, t):
+	return (y-t).mean(axis=None)
 
 <br>
 
@@ -32,6 +39,15 @@
 값이 낮을수록 좋다.<br>
 직관적인 장점<br>
 제곱하기 때문에 1미만의 에러는 작아지고, 그 이상의 에러는 커지고, 실제 정답보다 낮게 예측했는지, 높게 했는지를 파악하기 힘들고, 스케일 의존적(scal dependency)이라 모델마다 에류 크기가 동일해도 에러율은 동일하지 않은 단점<br>
+오차제곱합(SSE)와 유사하지만 오차제곱합으로는 실제 오차가 커서 값이 커지는 것인지 데이터의 양이 많아서 값이 커지는 것인지를 구분할 수 없게 된다.<br>
+
+
+	def MSE(y, t):
+    	return ((y-t)**2).mean(axis=None)
+
+	def SSE(y, t):
+    	return 0.5*np.sum((y-t)**2)
+
 
 <br>
 
@@ -42,7 +58,7 @@ MSE에 로그를 적용한 것이다.<br>
 결정 값이 클수록 오류값도 커지기 때문에 일부 큰 오류값들로 인해 전체 오류값이 커지는 것을 막아준다.<br>
 
 	def MSLE(y, t):
-	    return np.log((y-t)**2).mean(axis=None)
+	return np.log((y-t)**2).mean(axis=None)
 
 
 <br>
