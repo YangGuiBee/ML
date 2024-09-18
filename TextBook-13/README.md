@@ -179,6 +179,7 @@ $SST = SSR + SSE$ <br>
 	import numpy as np
 	import matplotlib.pyplot as plt
 	from sklearn.linear_model import LinearRegression
+ 	from sklearn.metrics import r2_score
 
 	#해당 구문이 사용된 파이썬 파일을 직접 실행했을 때만 아래 코드를 실행
 	if __name__ == '__main__':
@@ -199,7 +200,9 @@ $SST = SSR + SSE$ <br>
     
 	    # Linear Regression model 평가
 	    r_sq = model.score(x.reshape(-1,1), y)  
-	    print("결정 계수: ", r_sq)
+    	    print("결정 계수 (model.score): ", r_sq)
+    	    r2 = r2_score(y, model.predict(x.reshape(-1,1)))  # 이 부분을 수정했습니다
+    	    print("결정 계수 (r2_score): ", r2)
     
 	    # Linear Model 식 
 	    b0,b1 = model.intercept_, model.coef_[0]   
@@ -209,6 +212,6 @@ $SST = SSR + SSE$ <br>
 	    # 시각화
 	    plt.scatter(x, y, s=5)
 	    plt.plot(x, model.predict(x.reshape(-1,1)), color='red', linewidth=2)
-	    plt.annotate('y = '+str(round(b1,2))+'x '+str(round(b0,2)), xy=(100, 100), xytext=(80, 80))
+	    plt.annotate(f'y = {b1:.2f}x + {b0:.2f}', xy=(0.7*max(x), 0.8*max(y)))
 	    plt.show()
 
