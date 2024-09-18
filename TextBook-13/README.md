@@ -2,19 +2,30 @@
 
 ---
 
-	[1] 평균 절대 오차 (Mean Absolute Error, MAE)
-	[2] 평균 제곱 오차 (Mean Squared Error, MSE)
-	[3] 평균 제곱 오차(로그적용) (Mean Squared Log Error, MSLE)
-	[4] 평균 제곱근 오차 (Root Mean Squared Error, RMSE)
-	[5] 평균 제곱근 오차(로그적용) (Root Mean Squared Log Error, RMSLE)
- 	[6] 평균 비율 오차 (Mean Percentage Error, MPE)
-	[7] 평균 절대 비율 오차 (Mean Absolute Percentage Error, MAPE)
-	[8] 평균 절대 규모 오차 (MASE(Mean Absolute Scaled Error)
-	[9] R2 score
+	[1] 평균 오차 (Mean Error, ME)
+ 	[2] 평균 절대 오차 (Mean Absolute Error, MAE)
+	[3] 평균 제곱 오차 (Mean Squared Error, MSE)
+	[4] 평균 제곱 오차(로그적용) (Mean Squared Log Error, MSLE)
+	[5] 평균 제곱근 오차 (Root Mean Squared Error, RMSE)
+	[6] 평균 제곱근 오차(로그적용) (Root Mean Squared Log Error, RMSLE)
+ 	[7] 평균 비율 오차 (Mean Percentage Error, MPE)
+	[8] 평균 절대 비율 오차 (Mean Absolute Percentage Error, MAPE)
+	[9] 평균 절대 규모 오차 (MASE(Mean Absolute Scaled Error)
+	[10] R2 score
 	  
 ---
 
-# [1] 평균 절대 오차 (Mean Absolute Error, MAE)
+# [1] 평균 절대 오차 (Mean Error, ME)
+![](./images/ME.svg)
+<br>
+예측오차의 산술평균을 의미<br>
+
+	def ME(y, t):
+		return (y-t).mean(axis=None)
+
+<br>
+
+# [2] 평균 절대 오차 (Mean Absolute Error, MAE)
 ![](./images/MAE.svg)
 <br>
 실제 정답 값과 예측 값의 차이를 절댓값으로 변환한 뒤 합산하여 평균을 구한다.<br>
@@ -22,17 +33,13 @@
 값이 낮을수록 좋다.<br>
 직관적이고 정답 및 예측 값과 같은 단위를 가지고, MSE, RMSE에 비해, 오차값이 outlier의 영향을 상대적으로 적게 받는 장점<br>
 절댓값을 취하므로 underestimates/overestimates인지에 대한 판단을 할 수 없으며, 스케일 의존적(scal dependency)으로 모델마다 에러 크기가 동일해도 에러율은 동일하지 않은 단점<br>
-CF : ME(Mean of Error)는 예측오차의 산술평균을 의미<br>
 
 	def MAE(y, t):
     	return (abs(y - t)).mean(axis=None)
-     
-	def ME(y, t):
-		return (y-t).mean(axis=None)
-
+   
 <br>
 
-# [2] 평균 제곱 오차 (Mean Squared Error, MSE)
+# [3] 평균 제곱 오차 (Mean Squared Error, MSE)
 ![](./images/MSE.svg)
 <br>
 실제 정답 값과 예측 값의 차이를 제곱(예측값과 실제값 차이의 면적)한 뒤 평균을 구한다.<br>
@@ -49,7 +56,7 @@ CF : 오차제곱합(SSE)와 유사하지만 오차제곱합으로는 실제 오
 
 <br>
 
-# [3] 평균 제곱 오차(로그적용) (Mean Squared Log Error, MSLE)
+# [4] 평균 제곱 오차(로그적용) (Mean Squared Log Error, MSLE)
 ![](./images/MSLE.svg)
 <br>
 MSE에 로그를 적용한 것이다.<br> 
@@ -60,7 +67,7 @@ MSE에 로그를 적용한 것이다.<br>
 
 <br>
 
-# [4] 평균 제곱근 오차 (Root Mean Squared Error, RMSE)
+# [5] 평균 제곱근 오차 (Root Mean Squared Error, RMSE)
 ![](./images/RMSE.svg)
 <br>
 MSE에 루트는 씌워서 에러를 제곱해서 생기는 값의 왜곡이 줄어든다.<br>
@@ -73,7 +80,7 @@ MSE에 루트는 씌워서 에러를 제곱해서 생기는 값의 왜곡이 줄
 
 <br>
 
-# [5] 평균 제곱근 오차(로그적용) (Root Mean Squared Log Error, RMSLE)
+# [6] 평균 제곱근 오차(로그적용) (Root Mean Squared Log Error, RMSLE)
 ![](./images/RMSLE.svg)
 <br>
 RMSE값에 로그를 취한 값이다.<br>
@@ -84,7 +91,7 @@ RMSE값에 로그를 취한 값이다.<br>
 
 <br>
 
-# [6] 평균 비율 오차 (Mean Percentage Error, MPE)
+# [7] 평균 비율 오차 (Mean Percentage Error, MPE)
 ![](./images/MPE.svg)
 <br>
 절대적인 의미의 예측오차뿐 아니라 상대적인 의미의 예측오차가 필요할 경우에 계산한다.<br>
@@ -96,7 +103,7 @@ RMSE값에 로그를 취한 값이다.<br>
 
 <br>
 
-# [7] 평균 절대 비율 오차 (Mean Absolute Percentage Error, MAPE)
+# [8] 평균 절대 비율 오차 (Mean Absolute Percentage Error, MAPE)
 ![](./images/MAPE.svg)
 <br>
 MAE를 비율, 퍼센트로 표현하여 스케인 의존적 에러의 문제점을 개선한다.<br>
@@ -109,7 +116,7 @@ MAE를 비율, 퍼센트로 표현하여 스케인 의존적 에러의 문제점
 
 <br>
 
-# [8] 평균 절대 규모 오차 (MASE(Mean Absolute Scaled Error)
+# [9] 평균 절대 규모 오차 (MASE(Mean Absolute Scaled Error)
 ![](./images/MASE.svg) ![](./images/MASE1.svg)
 <br>
 데이터를 척도화하여 이를 기준으로 예측오차의 절대값에 대한 평균을 낸 값<br>
@@ -123,7 +130,7 @@ MAE를 비율, 퍼센트로 표현하여 스케인 의존적 에러의 문제점
 
 <br>
 
-# [9] R2 score
+# [10] R2 score
 ![](./images/SSR.svg)
 <br>
 ![](./images/SST.svg)
