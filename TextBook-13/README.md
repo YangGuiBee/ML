@@ -36,6 +36,14 @@
 <br>
 
 # [3] 평균 제곱 오차(로그적용) (Mean Squared Log Error, MSLE)
+MSE에 로그를 적용한 것이다.<br> 
+결정 값이 클수록 오류값도 커지기 때문에 일부 큰 오류값들로 인해 전체 오류값이 커지는 것을 막아준다.<br>
+
+	def MSLE(y, t):
+	    return np.log((y-t)**2).mean(axis=None)
+
+
+<br>
 
 # [4] 평균 제곱근 오차 (Root Mean Squared Error, RMSE)
 ![](./images/RMSE.svg)
