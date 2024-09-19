@@ -57,6 +57,24 @@ Recall를 높이기 위해선 FN(모델이 negative라고 예측했는데 정답
 
 <br>
 
+	from sklearn.metrics import *
+
+	y_true = [ 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 ]
+	y_pred = [ 0, 1, 1, 1, 1, 0, 0, 0, 1, 1 ]
+	cm =confusion_matrix(y_true, y_pred)
+	print(cm)
+
+	acc = accuracy_score(y_true, y_pred)
+	print('accuracy_score : ',acc)
+
+	pre = precision_score(y_true, y_pred)
+	print('precision_score : ', pre)
+
+	recall = recall_score(y_true, y_pred)
+	print('recall_score: ', recall)
+
+<br>
+
 # [5] F1 score
 $F1 = \frac{2 \times Precision \times Recall}{Precision + Recall}$<br>
 <br>
