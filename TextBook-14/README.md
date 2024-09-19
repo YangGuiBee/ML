@@ -13,6 +13,8 @@
 ---
 
 # [1] 정확도 (Accurancy)
+$Accuracy = \frac{TP + TN}{TP + TN + FP + FN}$
+
 
 # [2] 오차행렬 (Confusion Matrix)
 
