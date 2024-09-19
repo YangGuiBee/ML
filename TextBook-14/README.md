@@ -25,6 +25,7 @@ FP(False Positive): 모델이 positive라고 예측했는데 실제로 정답이
 FN(False Negative): 모델이 negative라고 예측했는데 실제로 정답이 positive (오답)<br>
 <br>
 **scikit-learn의 confusion_matrix 기반**
+<br>
 ![](./images/CM_table_real.PNG)
 
 <br>
