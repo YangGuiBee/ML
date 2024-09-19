@@ -65,10 +65,27 @@ Precision과 Recall이 한쪽으로 치우쳐지지 않고 모두 클 때 큰 �
 
 <br>
 
-# [6] ROC curve
+# [6] 오분류율 (Error Rate)
+$Accuracy = \frac{FP + FN}{TP + TN + FP + FN}$<br>
+모델이 전체 데이터에서 잘못 맞춘 비율<br>
 
 <br>
 
-# [7] AUC score
+# [7] 특이도 (Specificity), TNR(True Negative Rate)
+$Specificity = \frac{TN}{TN + FP}$<br>
+실제 정답이 negative인 것들 중에서 모델이 negative라고 예측한 비율<br>
+
+<br>
+
+# [8] 위양성률 (Fall Out), FPR(False Positive Rate)
+$Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br>
+실제 정답이 negative인 것들 중에서 모델이 positive라고 예측한 비율<br>
+<br>
+
+# [9] ROC curve
+
+<br>
+
+# [10] AUC score
 
 <br>
