@@ -37,6 +37,9 @@ $Accuracy = \frac{TP + TN}{TP + TN + FP + FN}$<br>
 0 ~ 1 사이의 값을 가지며, 1에 가까울수록 좋다.<br>
 데이터가 불균형할 때(positive:negative=9:1)는 Accuracy만으로 제대로 분류했는지는 알 수 없기 때문에 Recall과 Precision을 사용<br>
 
+	from sklearn.metrics import accuracy_score
+	accuracy_score(정답,  모델예측값)  # label과 predict
+
 <br>
 
 # [3] 정밀도 (Precision), PPV(Positive Predictive Value)
@@ -47,6 +50,9 @@ $Precision = \frac{TP}{TP + FP}$<br>
 실제 정답이 negative인 데이터를 positive라고 잘못 예측하면 안 되는 경우에 중요한 지표가 될 수 있다.<br>
 Precision을 높이기 위해선 FP(모델이 positive라고 예측했는데 정답은 negative인 경우)를 낮추는 것이 중요하다.<br>
 
+	from sklearn.metrics import precision_score
+	precision_score(실제값, 예측값)
+
 <br>
 
 # [4] 재현율 (Recall), 민감도 (Sensitivity), TPR (True Positive Rate)
@@ -56,6 +62,9 @@ $Recall = \frac{TP}{TP + FN}$<br>
 0 ~ 1 사이의 값을 가지며, 1에 가까울수록 좋다.<br>
 실제 정답이 positive인 데이터를 negative라고 잘못 예측하면 안 되는 경우에 중요한 지표가 될 수 있다.<br>
 Recall를 높이기 위해선 FN(모델이 negative라고 예측했는데 정답이 positive인 경우)을 낮추는 것이 중요하다.<br>
+
+	from sklearn.metrics import recall_score
+	recall_score(실제값, 예측값)
 
 <br>
 
@@ -84,6 +93,9 @@ Recall과 Precision의 조화평균<br>
 0 ~ 1 사이의 값을 가지며, 1에 가까울수록 좋다.<br>
 Recall과 Precision은 상호 보완적인 평가 지표이기 때문에 F1 score를 사용한다.<br>
 Precision과 Recall이 한쪽으로 치우쳐지지 않고 모두 클 때 큰 값을 가진다.<br>
+
+	from sklearn.metrics import f1_score
+	f1_score(실제값, 예측값)
 
 <br>
 
