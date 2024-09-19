@@ -4,8 +4,8 @@
 	
  	[1] 오차행렬, 혼동행렬 (Confusion Matrix)
   	[2] 정확도 (Accurancy)
-	[3] 정밀도(Precision)
-	[4] 재현율(Recall)
+	[3] 정밀도 (Precision), PPV (Positive Predictive Value)
+	[4] 재현율 (Recall), 민감도 (Sensitivity), TPR (True Positive Rate)
 	[5] F1 score
 	[6] ROC curve
 	[7] AUC score
@@ -32,11 +32,23 @@ $Accuracy = \frac{TP + TN}{TP + TN + FP + FN}$<br>
 
 <br>
 
-# [3] 정밀도(Precision)
+# [3] 정밀도 (Precision), PPV(Positive Predictive Value)
+$Precision = \frac{TP}{TP + FP}$<br>
+<br>
+모델이 positive라고 예측한 것들 중에서 실제로 정답이 positive인 비율<br>
+0 ~ 1 사이의 값을 가지며, 1에 가까울수록 좋다.<br>
+실제 정답이 negative인 데이터를 positive라고 잘못 예측하면 안 되는 경우에 중요한 지표가 될 수 있다.<br>
+Precision을 높이기 위해선 FP(모델이 positive라고 예측했는데 정답은 negative인 경우)를 낮추는 것이 중요하다.<br>
 
 <br>
 
-# [4] 재현율(Recall)
+# [4] 재현율 (Recall), 민감도 (Sensitivity), TPR (True Positive Rate)
+$Precision = \frac{TP}{TP + FP}$<br>
+<br>
+실제로 정답이 positive인 것들 중에서 모델이 positive라고 예측한 비율<br>
+0 ~ 1 사이의 값을 가지며, 1에 가까울수록 좋다.<br>
+실제 정답이 positive인 데이터를 negative라고 잘못 예측하면 안 되는 경우에 중요한 지표가 될 수 있다.<br>
+Recall를 높이기 위해선 FN(모델이 negative라고 예측했는데 정답이 positive인 경우)을 낮추는 것이 중요하다.<br>
 
 <br>
 
