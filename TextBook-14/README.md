@@ -86,6 +86,21 @@ Recall를 높이기 위해선 FN(모델이 negative라고 예측했는데 정답
 
  	print(classification_report(y_true, y_pred))
 
+
+	# 3개 클래스 사례
+	y_true_m = [ 0, 0, 0, 1, 1, 1, 2, 2, 2 ]
+	y_pred_m = [ 0, 1, 1, 1, 1, 2, 2, 2, 2 ]
+
+	print(confusion_matrix(y_true_m, y_pred_m),'\n')
+
+	print('average=None : ', precision_score(y_true_m, y_pred_m, average=None))
+	print('average=\'macro\' : ', precision_score(y_true_m, y_pred_m, average='macro'))
+	print('average=\'micro\' : ', precision_score(y_true_m, y_pred_m, average='micro'))
+	print('average=\'weighted\' : ', precision_score(y_true_m, y_pred_m, average='weighted'))
+	print('\n')
+
+	print(classification_report(y_true_m, y_pred_m))
+
 <br>
 
 # [5] F1 score
