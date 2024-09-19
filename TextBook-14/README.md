@@ -87,6 +87,10 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br>
 
 # [9] ROC curve
 FPR을 X축, TPR을 Y축으로 놓고 임계값을 변경해서 FPR이 변할 때 TPR이 어떻게 변하는지 나타내는 곡선<br>
+여러 임계값들을 기준으로 Recall-Fallout의 변화를 시각화한 것<br>
+Fallout은 실제 False인 data 중에서 모델이 True로 분류항 비율을<br>
+Recall은 실제 True인 data 중에서 모델이 True로 분류한 비율을 나타낸 지표로써,<br> 
+이 두 지표를 각각 x, y의 축으로 놓고 그려지는 그래프를 해석<br>
 
 <br>
 
