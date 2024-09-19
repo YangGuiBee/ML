@@ -84,6 +84,8 @@ Recall를 높이기 위해선 FN(모델이 negative라고 예측했는데 정답
 	recall = recall_score(y_true, y_pred)
 	print('recall_score: ', recall)
 
+ 	print(classification_report(y_true, y_pred))
+
 <br>
 
 # [5] F1 score
