@@ -23,6 +23,7 @@ TP(True Positive): 모델이 positive라고 예측했는데 실제로 정답이 
 TN(True Negative): 모델이 negative라고 예측했는데 실제로 정답이 negative (정답)<br>
 FP(False Positive): 모델이 positive라고 예측했는데 실제로 정답이 negative (오답)<br>
 FN(False Negative): 모델이 negative라고 예측했는데 실제로 정답이 positive (오답)<br>
+<br>
 ![](./images/CM_table_real.PNG)
 
 <br>
