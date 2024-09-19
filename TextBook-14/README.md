@@ -43,7 +43,7 @@ Precision을 높이기 위해선 FP(모델이 positive라고 예측했는데 정
 <br>
 
 # [4] 재현율 (Recall), 민감도 (Sensitivity), TPR (True Positive Rate)
-$Precision = \frac{TP}{TP + FP}$<br>
+$Recall = \frac{TP}{TP + FN}$<br>
 <br>
 실제로 정답이 positive인 것들 중에서 모델이 positive라고 예측한 비율<br>
 0 ~ 1 사이의 값을 가지며, 1에 가까울수록 좋다.<br>
@@ -53,6 +53,12 @@ Recall를 높이기 위해선 FN(모델이 negative라고 예측했는데 정답
 <br>
 
 # [5] F1 score
+$F1 = \frac{2 \times Precision \times Recall}{Precision + Recall}$<br>
+<br>
+Recall과 Precision의 조화평균<br>
+0 ~ 1 사이의 값을 가지며, 1에 가까울수록 좋다.<br>
+Recall과 Precision은 상호 보완적인 평가 지표이기 때문에 F1 score를 사용한다.<br>
+Precision과 Recall이 한쪽으로 치우쳐지지 않고 모두 클 때 큰 값을 가진다.<br>
 
 <br>
 
