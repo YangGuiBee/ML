@@ -7,8 +7,11 @@
 	[3] 정밀도 (Precision), PPV (Positive Predictive Value)
 	[4] 재현율 (Recall), 민감도 (Sensitivity), TPR (True Positive Rate)
 	[5] F1 score
-	[6] ROC curve
-	[7] AUC score
+ 	[6] 오분류율 (Error Rate)
+  	[7] 특이도 (Specificity), TNR(True Negative Rate)
+   	[8] 위양성률 (Fall Out), FPR(False Positive Rate)
+	[9] ROC curve
+	[10]AUC score
 	  
 ---
 
