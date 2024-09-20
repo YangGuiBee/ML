@@ -53,6 +53,7 @@ $y = w_1x_1 + w_2x_2 + ... + w_nx_n + b$ <br>
 <br>
 
 # [2] 다항 회귀 (Polynomial Regression)
+▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#polynomial-regression-extending-linear-models-with-basis-functions<br>
 독립변수와 종속변수가 선형관계가 아닌 비선형 회귀(Non-linear Regression)<br>
 직선이 아닌 곡선 형태의 관계의 경우, 독립변수에 제곱이나 로그(log) 등을 취해 보면서 실시하는 모델링<br>
 $y = w_1x + w_2x^2 + ... + w_nx^n + b$ <br>
