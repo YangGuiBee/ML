@@ -3,11 +3,11 @@
 ---
 
 	[1] k-최근접 이웃 (k-Nearest Neighbors, K-NN) 	
-  		k-최근접 이웃 회귀(k-Nearest Neighbors Regression)
-    		k-최근접 이웃 분류(k-Nearest Neighbors Classification)
+		k-최근접 이웃 회귀(k-Nearest Neighbors Regression)
+		k-최근접 이웃 분류(k-Nearest Neighbors Classification)
  	[2] 서포트 벡터 머신 (Support Vector Machine, SVM)
-  		서포트 벡터 회귀 (Support Vector Regression, SVR)
-    		서포트 벡터 분류 (Support Vector Classification, SVC)
+		서포트 벡터 회귀 (Support Vector Regression, SVR)
+		서포트 벡터 분류 (Support Vector Classification, SVC)
 	[3] 결정 트리 (Decision Tree)
  		결정 트리 회귀 (Decision Tree Regression)
    		결정 트리 분류 (Decision Tree Classification)
