@@ -16,6 +16,7 @@
 
 # [1] k-최근접 이웃 회귀(k-Nearest Neighbors Regression)
 https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html<br>
+주변의 가장 가까운 K개의 샘플 평균을 통해 값을 예측하는 방식이다.<br> 
 한계 : 테스트하고자 하는 샘플에 근접한 훈련 데이터가 없는 경우, 즉 훈련 셋의 범위를 많이 벗어나는 샘플인 경우 정확하게 예측하기 어렵다. 
 
 	class sklearn.neighbors.KNeighborsRegressor(n_neighbors=5, *, weights='uniform', algorithm='auto', 
