@@ -18,6 +18,7 @@
 ---  
 
 # [1] k-최근접 이웃 (k-Nearest Neighbors, K-NN) 	
+【예제】https://scikit-learn.org/stable/auto_examples/neighbors/index.html
 
 ## k-최근접 이웃 회귀(k-Nearest Neighbors Regression)
 https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html<br>
@@ -70,6 +71,8 @@ SVM에서 Support Vector는 데이터들 중에서 결정 경계에 가장 가�
 이 마진을 이용하여 최적의 결정 경계를 찾아내는데, 각 데이터 그룹의 support vector의 마진이 가장 크게(결정 경계의 쏠림 방지) 결정 경계를 잡아야한다.
 Cost : 마진(Margin) 크기의 반비례
 Gamma : train data 하나 당 결정 경계에 영향을 끼치는 범위를 조절하는 변수(크면 오버피팅, 작으면 언더피팅)
+예제 : https://scikit-learn.org/stable/auto_examples/svm/index.html
+
 
 ## 서포트 벡터 회귀 (Support Vector Regression, SVR)
 https://scikit-learn.org/stable/auto_examples/svm/index.html
