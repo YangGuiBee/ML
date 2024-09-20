@@ -18,7 +18,7 @@
 ---  
 
 # [1] k-최근접 이웃 (k-Nearest Neighbors, K-NN) 	
-【예제】https://scikit-learn.org/stable/auto_examples/neighbors/index.html
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/neighbors/index.html<br>
 
 ## k-최근접 이웃 회귀(k-Nearest Neighbors Regression)
 https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html<br>
@@ -61,6 +61,8 @@ https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsCl
 <br>
  
 # [2] 서포트 벡터 머신 (Support Vector Machine, SVM)
+▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/svm/index.html<br>
 분류를 위한 선형 혹은 비선형 결정 경계(Decision Boundary)를 정하는 모델
 선형 분류에서 명확하게 결정경계를 그을 수 없는 상황에서는 데이터의 특징을 추가함으로써 차원을 늘려서 분류가 필요
 고차원(N차원)에서 데이터를 두 분류로 나누는 결정 경계를 초평면(hyper plane)이라고 한다.
@@ -71,7 +73,7 @@ SVM에서 Support Vector는 데이터들 중에서 결정 경계에 가장 가�
 이 마진을 이용하여 최적의 결정 경계를 찾아내는데, 각 데이터 그룹의 support vector의 마진이 가장 크게(결정 경계의 쏠림 방지) 결정 경계를 잡아야한다.
 Cost : 마진(Margin) 크기의 반비례
 Gamma : train data 하나 당 결정 경계에 영향을 끼치는 범위를 조절하는 변수(크면 오버피팅, 작으면 언더피팅)
-예제 : https://scikit-learn.org/stable/auto_examples/svm/index.html
+
 
 
 ## 서포트 벡터 회귀 (Support Vector Regression, SVR)
@@ -82,8 +84,12 @@ https://scikit-learn.org/stable/auto_examples/svm/index.html
 <br>
 
 # [3] 결정 트리 (Decision Tree)
+▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/index.html<br>
 
 # 결정 트리 회귀 (Decision Tree Regression)
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html<br>
+
 # 결정 트리 분류 (Decision Tree Classification)
 
 <br>
