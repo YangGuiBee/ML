@@ -32,6 +32,8 @@
 <br>
 
 # [1] 선형 회귀 (Linear Regression)
+▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/index.html<br>
 종속변수 y와 독립변수(설명변수) X와의 선형 상관 관계를 모델링하는 회귀<br>
 $y = wx + b$ <br>
 독립변수(설명변수) X가 2개 이상인 회귀는 다중선형회귀 (Multiple  Linear Regression)<br>
