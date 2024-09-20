@@ -18,6 +18,7 @@
 
 
 # [1] 로지스틱 회귀 (Logistic Regression)
+▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression<br>
 
 # [2] 나이브 베이즈 (Naive Bayes)
 
