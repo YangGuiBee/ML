@@ -51,6 +51,19 @@ https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRe
 
 # [2] 서포트 벡터 회귀 (Support Vector Regression, SVR)
 
+
+	SVM (Support Vector Machine) : 분류를 위한 선형 혹은 비선형 결정 경계(Decision Boundary)를 정하는 모델
+	선형 분류에서 명확하게 결정경계를 그을 수 없는 상황에서는 데이터의 특징을 추가함으로써 차원을 늘려서 분류가 필요
+	고차원(N차원)에서 데이터를 두 분류로 나누는 결정 경계를 초평면(hyper plane)이라고 한다.
+	선형 분류로 구분할 수 없는 데이터를 비선형 분류까지 이용하여 분류하는 분류기를 SVM이라고 한다.
+	비선형 분류를 하기 위해 차원을 높여줄 때마다 필요한 엄청난 계산량을 줄이기 위해 SVM 구조에서 커널 트릭(Kernel trick)을 사용
+	커널 트릭은 실제로는 데이터의 특성을 확장하지 않으면서 특성을 확장한 것과 동일한 효과를 가져오는 기법이다.
+	SVM에서 Support Vector는 데이터들 중에서 결정 경계에 가장 가까운 데이터들을 의미하며, 이때 결정 경계와 support vector사이의 거리를 마진(Margin)이라고 한다.
+	이 마진을 이용하여 최적의 결정 경계를 찾아내는데, 각 데이터 그룹의 support vector의 마진이 가장 크게(결정 경계의 쏠림 방지) 결정 경계를 잡아야한다.
+	
+	Cost : 마진(Margin) 크기의 반비례
+	Gamma : train data 하나 당 결정 경계에 영향을 끼치는 범위를 조절하는 변수(크면 오버피팅, 작으면 언더피팅)
+
 <br>
 
 # [3] 결정 트리 회귀 (Decision Tree Regression)
