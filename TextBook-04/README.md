@@ -67,6 +67,18 @@ $y = w_1x_1 + w_2x_2 + ... + w_nx_n + b$ <br>
 ![](./images/RSSd.svg)
 <br>
 
+	from sklearn.linear_model import LinearRegression
+
+	lr = LinearRegression()
+	lr.fit(train_input, train_target)
+
+	print(lr.predict(([50]))
+
+	# coef_ : 기울기, intercept_ : 절편
+	print(lr.coef_, lr.intercept_)
+
+<br>
+
 # [2] 다항 회귀 (Polynomial Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#polynomial-regression-extending-linear-models-with-basis-functions<br>
 독립변수와 종속변수가 선형관계가 아닌 비선형 회귀(Non-linear Regression)<br>
