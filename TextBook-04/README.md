@@ -92,6 +92,37 @@ N개의 샘플에 대하여 확장한 후, vector-matrix 형태로 표기하면,
 <img width ='500' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/vectorMX.png'><br>
 $e∼N(0,σ^2I_N)$<br>
 
+	import pandas as pd
+	import matplotlib.pyplot as plt 
+	from sklearn.model_selection import train_test_split
+	from sklearn.linear_model import LinearRegression
+	
+	df = pd.read_csv('https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-04/manhattan.csv')
+	df = df.drop(['neighborhood','borough','rental_id'], axis=1)
+	print(df.columns)
+	print(len(df.columns))
+	
+	X = df [['bedrooms', 'bathrooms', 'size_sqft', 'min_to_subway', 'floor',
+       	'building_age_yrs', 'no_fee', 'has_roofdeck', 'has_washer_dryer',
+	'has_doorman', 'has_elevator', 'has_dishwasher', 'has_patio','has_gym']]
+	y = df [['rent']]       
+ 
+	X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.8,test_size=0.2)
+	mlr = LinearRegression()
+	mlr.fit(X_train, y_train)
+	
+	my_apartment = [[1,2,620,16,1,98,1,0,1,0,0,1,1,0]]
+	my_predict = mlr.predict(my_apartment)
+	my_predict
+	
+	y_predict = mlr.predict(X_test)
+	
+	plt.scatter(y_test,y_predict,alpha=0.4)
+	plt.xlabel('Actual Rent')
+	plt.ylabel('Predicted Rent')
+	plt.title('Multiple Linear Regression')
+	plt.show()
+
 <br>
 
 # [2] 다항 회귀 (Polynomial Regression)
