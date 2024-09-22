@@ -213,14 +213,62 @@ $Q_{\tau}(y_{i}) = \beta_{0}(\tau) + \beta_{1}(\tau)x_{i1} + \cdots + \beta_{p}(
 
 최적의 분위수 방정식을 찾기 위한 과정은 중위수절대편차인 MAD(Median Absolute Deviation) 값을 최소화함으로써 찾을 수 있다.<br>
 $MAD = \frac{1}{n} \sum_{i=1}^{n} \rho_{\tau}(y_{i} - (\beta_{0}(\tau) + \beta_{1}(\tau)x_{i1} +\cdots +\beta_{p}(\tau)x_{ip}))$<br>
+ 
+ρ함수는 오차의 분위수와 전체적인 부호에 따라 오차에 비대칭 가중치를 부여하는 체크 함수<br>
+$\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
+<br>
+
+	from sklearn.linear_model import LinearRegression
+	lm_model = LinearRegression()
+	lm_model.fit(X,y)
+	y_pred = lm_model.predict(X)
+	# 분위수 회귀 모형 구축
+	mod = smf.quantreg('Price ~ Area', house_data)
+	# 각 분위수에 따른 분위수 회귀 값 저장
+	quantiles = np.arange(.05,.96,.1) # quantiles = [.05,.15,.25,...,.95]
+	
+	def fit_model(q):
+	  res = mod.fit(q=q)
+	  return [q, res.params['Intercept'], res.params['Area']] + \
+	  res.conf_int().loc['Area'].tolist()
+	  
+	models = [fit_model(x) for x in quantiles]
+	models = pd.DataFrame(models, columns=['q', 'a', 'b', 'lb', 'ub'])
+
+	# 비교를 위해 최소 기존의 선형 회귀 값도 저장
+	ols = smf.ols('Price ~ Area', house_data).fit()
+	ols_ci = ols.conf_int().loc['Area'].tolist()
+	ols = dict(a = ols.params['Intercept'], b = ols.params['Area'], lb = ols_ci[0], ub = ols_ci[1])
+
+	print(models)
+	print(ols)
 
 <br>
 
 # [2-2] 단계적 회귀 (Stepwise Regression)
+여러 독립변수 중에서 종속변수를 가장 잘 설명하는 변수들을 선택하는 방법<br>
+독립 변수들을 자동으로 모델에 추가하거나 제거하여 최적의 모델을 탐색(변수의 추가나 제거가 통계적으로 유의미한지 여부에 따라 이루어짐)<br>
+예를 들어, 변수를 추가할 때마다 F 통계량이유의미하게 증가하는지 확인하거나, 제거할 때마다 변수의 t 통계량이 유의미하게 감소하는지 확인함.<br> 
+장점: 자동으로 변수를 선택하므로 모델이 데이터에 더 잘 맞을 가능성이 있음<br>
+**위계적 회귀 (Hierarchical Regression)** 는 독립 변수들을 미리 정의한 순서에 따라 모델에 추가하는 것으로,<br>
+이론적으로 중요한 변수부터 시작하여 덜 중요한 변수를 차례로 추가하는 방식<br>
+장점: 이론적 근거에 따라 변수를 추가하므로 결과 해석이 이론적으로 타당함.<br>
 
 <br>
 
 # [2-3] 포아송 회귀 (Poisson Regression)
+종속 변수가 포아송 분포를 따르는 경우에 사용되며, 이산형 카운트 데이터를 모델링하는 데 적합함<br>
+
+<br>
+
+**매개회귀(Mediation Regression)**
+독립변수와 종속변수 간의 관계가 다른 변수(매개변수)에 의해 어떻게 매개되는지 분석
+
+**조절회귀(Mederation Regression)**
+독립변수와 종속변수 간의 관계가 다른 변수(조절변수)에 의해 어떻게 매개되는지 분석
+
+**시계열 회귀 (Time Series Regression)**
+시간에 따라 변하는 데이터에 적용되며, 시간 요인을 고려하여 독립 변수와 종속변수간의 관계를 모델링
 
 
 <br>
