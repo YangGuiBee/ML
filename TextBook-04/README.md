@@ -41,18 +41,11 @@
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/index.html<br>
 종속변수 y(예상값)과 독립변수(설명변수) X와의 선형 상관 관계를 모델링하는 회귀<br>
+'선형'은 독립변수가 1차항으로써 2차원에서는 직선형태로, 3차원 공간에서는 평면으로 나타난다.<br> 
 <br>
 $y = wx + b$ <br>
-$y = w_1x + w_0$ <br>
-$y_i = β_1x_i + β_0 + ϵ_i$<br>
-$y_i$ : i번째 반응변수 값<br>
-$x_i$ : i번째 설명변수 값<br>
-$β_0$ : 절편 회귀계수<br>
-$β_1$ : 기울기 회귀계수<br>
-$ϵ_i$ : i번째 측정된 $y_i$의 오차 성분<br>
-$E[ϵ_i]=0, Var(ϵ_i)=σ^2, E[ϵ_iϵ_j] = δ_{ij}$<br>
 ​​
- <br>
+<br>
 
 ![](./images/LinearRegression.gif)
 출처 : https://savannahar68.medium.com/getting-started-with-regression-a39aca03b75f
@@ -78,7 +71,17 @@ $E[ϵ_i]=0, Var(ϵ_i)=σ^2, E[ϵ_iϵ_j] = δ_{ij}$<br>
 	# coef_ : 기울기(w1), intercept_ : 절편(w0)
 	print(lr.coef_, lr.intercept_)
 
-'선형'은 독립변수가 1차항으로써 2차원에서는 직선형태로, 3차원 공간에서는 평면으로 나타나며,<br> 
+
+독립변수가 1개이고, 모델이 독립변수와 회귀계수에 대하여 선형인 경우를 **단순선형회귀모델(simple linear regression model)** 이라 부른다.
+$y = w_1x + w_0$ <br>
+$y_i = β_1x_i + β_0 + ϵ_i$<br>
+$y_i$ : i번째 반응변수 값<br>
+$x_i$ : i번째 설명변수 값<br>
+$β_0$ : 절편 회귀계수<br>
+$β_1$ : 기울기 회귀계수<br>
+$ϵ_i$ : i번째 측정된 $y_i$의 오차 성분<br>
+$E[ϵ_i]=0, Var(ϵ_i)=σ^2, E[ϵ_iϵ_j] = δ_{ij}$<br>
+<br>
 독립변수 X가 2개 이상인 회귀는 **다중회귀 (Multiple Regression)** 라고 한다.<br>
 $y = w_1x_1 + w_2x_2 + ... + w_nx_n + w_0$ <br>
 $y_i = β_0 + β_1x_{i1} + β_2x_{i2} + ... + β_kx_{ik} + ϵ_i$<br>
