@@ -259,26 +259,47 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 # [2-3] 포아송 회귀 (Poisson Regression)
 종속변수가 포아송 분포를 따르는 경우에 사용되며, 이산형 카운트 데이터를 모델링하는 데 적합<br>
 포아송 분포(Poisson Distribution)는 단위(한정된) 시간이나 공간에서 발생하는 평균적인 사건의 횟수(λ)를 바탕으로 특정 횟수의 사건이 발생할 확률을 설명하는 분포<br>
-포아송 과정(Poisson process)<br>
+**포아송 과정(Poisson process)** <br>
 1) 정상성(stationarity): 현상이 발생하는 횟수의 분포는 시작 시각과 관계없음. 즉, 
 $N_t$의 분포와 $N_{s+t}−N_S$의 분포가 같고 $N_0=0$이다.
-2) 독립 증분성(independent increment): 시각 0부터 $t$까지 현상이 발생하는 횟수와 시각 $t$후부터 $t+h(h>0)$까지의 발생 횟수는 서로 독립. 즉, $N_t$와 $N_{t+h}−N_t$는 서로 독립.
+2) 독립 증분성(independent increment): 시각 0부터 $t$까지 현상이 발생하는 횟수와 시각 $t$후부터 $t+h(h>0)$까지의 발생 횟수는 서로 독립(즉, $N_t$와 $N_{t+h}−N_t$는 서로 독립)
 3) 비례성(propertionality): 짧은 시간 동안에 현상이 한 번 발생할 확률은 시간에 비례.
 $P(N_h=1)=λh+o(h),h→0$
 ※ λ는 양의 비례상수, o(h)는 $lim_{h→0}o(h)/h=0$
 4) 희귀성(rareness): 짧은 시간 동안에 현상이 두 번 이상 발생할 확률은 매우 작음.
 $P(N_h≥2)=o(h),h→0$
-
-포아송 확률변수 $X$의 확률밀도함수(probability mass function)는<br>
+**포아송 확률변수 $X$의 확률밀도함수(probability mass function)** <br>
 $P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
-
-포아송 회귀 적용 사례<br>
+**포아송 회귀 적용 사례** <br>
 1) 일정 주어진 시간 동안에 방문하는 고객의 수<br>
 2) 일정 주어진 생산시간 동안 발생하는 불량 수<br>
 3) 하룻동안 발생하는 출생자 수<br>
 4) 어떤 시간 동안 톨게이트를 통과하는 차량의 수<br>
 5) 어떤 페이지에 있는 오타의 발생률<br>
 6) 어떤 특정 면적의 삼림에서 자라는 소나무의 수<br>
+
+	import numpy as np
+	from scipy.stats import poisson
+	import numpy as np
+	import seaborn as sns
+	from scipy.special import factorial
+	
+	np.random.seed(123)
+	poisson.rvs(mu = 1, size = 10)
+	pal_brbg = sns.color_palette("BrBG", 6)
+	
+	x = np.arange(0, 11)
+	for n_lambda in range(1, 6):
+	    y = np.exp(-n_lambda) * np.power(n_lambda, x) / factorial(x)
+	    plt.plot(x, y, color = pal_brbg[n_lambda - 1], label=f"λ = {n_lambda}")
+	    plt.scatter(x, y, color = pal_brbg[n_lambda - 1])
+    
+	plt.ylabel("Probability")
+	plt.title(f"Poisson Distribution (λ = [1, 5])")
+	plt.xticks(x)
+	plt.grid(axis = "y", linestyle = "--", color = "#CCCCCC")
+	plt.legend(loc="upper right")
+	plt.show()
 
 <br>
 
