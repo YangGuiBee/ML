@@ -267,9 +267,11 @@ $N_t$의 분포와 $N_{s+t}−N_S$의 분포가 같고 $N_0=0$이다.
 $P(N_h=1)=λh+o(h),h→0$
 ※ λ는 양의 비례상수, o(h)는 $lim_{h→0}o(h)/h=0$
 4) 희귀성(rareness): 짧은 시간 동안에 현상이 두 번 이상 발생할 확률은 매우 작음.
-$P(N_h≥2)=o(h),h→0$
+$P(N_h≥2)=o(h),h→0$<br>
+
 **포아송 확률변수 $X$의 확률밀도함수(probability mass function)** <br>
 $P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
+
 **포아송 회귀 적용 사례** <br>
 1) 일정 주어진 시간 동안에 방문하는 고객의 수<br>
 2) 일정 주어진 생산시간 동안 발생하는 불량 수<br>
@@ -280,7 +282,6 @@ $P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
 
 	import numpy as np
 	from scipy.stats import poisson
-	import numpy as np
 	import seaborn as sns
 	from scipy.special import factorial
 	
