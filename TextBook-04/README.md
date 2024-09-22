@@ -259,6 +259,7 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 # [2-3] 포아송 회귀 (Poisson Regression)
 종속변수가 포아송 분포를 따르는 경우에 사용되며, 이산형 카운트 데이터를 모델링하는 데 적합<br>
 포아송 분포(Poisson Distribution)는 단위(한정된) 시간이나 공간에서 발생하는 평균적인 사건의 횟수(λ)를 바탕으로 특정 횟수의 사건이 발생할 확률을 설명하는 분포<br>
+
 **포아송 과정(Poisson process)** <br>
 1) 정상성(stationarity): 현상이 발생하는 횟수의 분포는 시작 시각과 관계없음. 즉, 
 $N_t$의 분포와 $N_{s+t}−N_S$의 분포가 같고 $N_0=0$이다.
@@ -280,28 +281,28 @@ $P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
 5) 어떤 페이지에 있는 오타의 발생률<br>
 6) 어떤 특정 면적의 삼림에서 자라는 소나무의 수<br>
 
-	import numpy as np	
-	from scipy.stats import poisson	
-	import numpy as np	
-	import seaborn as sns	
-	from scipy.special import factorial	
+	import numpy as np
+	from scipy.stats import poisson
+	import numpy as np
+	import seaborn as sns
+	from scipy.special import factorial
 	
-	np.random.seed(123)	
-	poisson.rvs(mu = 1, size = 10)	
-	pal_brbg = sns.color_palette("BrBG", 6)	
+	np.random.seed(123)
+	poisson.rvs(mu = 1, size = 10)
+	pal_brbg = sns.color_palette("BrBG", 6)
 	
-	x = np.arange(0, 11)	
-	for n_lambda in range(1, 6):	
-	    y = np.exp(-n_lambda) * np.power(n_lambda, x) / factorial(x)	
-	    plt.plot(x, y, color = pal_brbg[n_lambda - 1], label=f"λ = {n_lambda}")	
-	    plt.scatter(x, y, color = pal_brbg[n_lambda - 1])	
+	x = np.arange(0, 11)
+	for n_lambda in range(1, 6):
+	    y = np.exp(-n_lambda) * np.power(n_lambda, x) / factorial(x)
+	    plt.plot(x, y, color = pal_brbg[n_lambda - 1], label=f"λ = {n_lambda}")
+	    plt.scatter(x, y, color = pal_brbg[n_lambda - 1])
     	
-	plt.ylabel("Probability")	
-	plt.title(f"Poisson Distribution (λ = [1, 5])")	
-	plt.xticks(x)	
-	plt.grid(axis = "y", linestyle = "--", color = "#CCCCCC")	
-	plt.legend(loc="upper right")	
-	plt.show()	
+	plt.ylabel("Probability")
+	plt.title(f"Poisson Distribution (λ = [1, 5])")
+	plt.xticks(x)
+	plt.grid(axis = "y", linestyle = "--", color = "#CCCCCC")
+	plt.legend(loc="upper right")
+	plt.show()
 
 <br>
 
