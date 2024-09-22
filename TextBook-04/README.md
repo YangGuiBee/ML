@@ -73,7 +73,9 @@ $y = w_1x + w_0$ <br>
 독립변수에 지수항이 있으면 '비선형'이 된다.<br> 
 독립변수 X가 2개 이상인 회귀는 다중선형회귀 (Multiple  Linear Regression)<br>
 $y = w_1x_1 + w_2x_2 + ... + w_nx_n + b$ <br>
-$y = w*x+b, w=(w_1,w_2,...w_n), x=(x_1,x_2,...x_n), * : innerproduct)$<br>
+<br>
+$y = w*x+b$<br>
+$w=(w_1,w_2,...w_n), x=(x_1,x_2,...x_n), * : innerproduct)$<br>
 <br>
 
 # [2] 다항 회귀 (Polynomial Regression)
