@@ -73,7 +73,7 @@ $y = w_1x + w_0$ <br>
 독립변수 X가 2개 이상인 회귀는 **다중회귀 (Multiple Regression)**<br>
 $y = w_1x_1 + w_2x_2 + ... + w_nx_n + w_0$ <br>
 $y_i = β_0 + β_1x_{i1} + β_2x_{i2} + ... + β_kx_{ik} + ϵ_i$<br>
-$y_i$ : i번째 관측치, $$ϵ_i$ : 이때의 오차항, $x_{ij}$ : 독립변수로 known value<br>
+$y_i$ : i번째 관측치, $ϵ_i$ : 이때의 오차항, $x_{ij}$ : 독립변수로 known value<br>
 $β_j$ : 추정하고자하는 값인 회귀계수로 $0≤j≤k$ 사이의 값  
 ​
 
