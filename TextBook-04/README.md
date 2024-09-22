@@ -280,27 +280,28 @@ $P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
 5) 어떤 페이지에 있는 오타의 발생률<br>
 6) 어떤 특정 면적의 삼림에서 자라는 소나무의 수<br>
 
-	import numpy as np
-	from scipy.stats import poisson
-	import seaborn as sns
-	from scipy.special import factorial
+	import numpy as np	
+	from scipy.stats import poisson	
+	import numpy as np	
+	import seaborn as sns	
+	from scipy.special import factorial	
 	
-	np.random.seed(123)
-	poisson.rvs(mu = 1, size = 10)
-	pal_brbg = sns.color_palette("BrBG", 6)
+	np.random.seed(123)	
+	poisson.rvs(mu = 1, size = 10)	
+	pal_brbg = sns.color_palette("BrBG", 6)	
 	
-	x = np.arange(0, 11)
-	for n_lambda in range(1, 6):
-	    y = np.exp(-n_lambda) * np.power(n_lambda, x) / factorial(x)
-	    plt.plot(x, y, color = pal_brbg[n_lambda - 1], label=f"λ = {n_lambda}")
-	    plt.scatter(x, y, color = pal_brbg[n_lambda - 1])
-    
-	plt.ylabel("Probability")
-	plt.title(f"Poisson Distribution (λ = [1, 5])")
-	plt.xticks(x)
-	plt.grid(axis = "y", linestyle = "--", color = "#CCCCCC")
-	plt.legend(loc="upper right")
-	plt.show()
+	x = np.arange(0, 11)	
+	for n_lambda in range(1, 6):	
+	    y = np.exp(-n_lambda) * np.power(n_lambda, x) / factorial(x)	
+	    plt.plot(x, y, color = pal_brbg[n_lambda - 1], label=f"λ = {n_lambda}")	
+	    plt.scatter(x, y, color = pal_brbg[n_lambda - 1])	
+    	
+	plt.ylabel("Probability")	
+	plt.title(f"Poisson Distribution (λ = [1, 5])")	
+	plt.xticks(x)	
+	plt.grid(axis = "y", linestyle = "--", color = "#CCCCCC")	
+	plt.legend(loc="upper right")	
+	plt.show()	
 
 <br>
 
