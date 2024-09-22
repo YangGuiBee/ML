@@ -75,7 +75,7 @@ $y = w_1x + w_0$ <br>
 $y = w_1x_1 + w_2x_2 + ... + w_nx_n + b$ <br>
 <br>
 위의 식을 벡터(볼드체)로 표현하면,<br>
-<img width ='400' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/vectorWX.png'>
+<img width ='500' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/vectorWX.png'>
 
 <br>
 
