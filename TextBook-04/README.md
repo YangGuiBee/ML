@@ -45,7 +45,13 @@
 $y = wx + b$ <br>
 $y = w_1x + w_0$ <br>
 $y_i = β_1x_i + β_0 + ϵ_i$<br>
-​
+$y_i$ : i번째 반응변수 값<br>
+$x_i$ : i번째 설명변수 값<br>
+$β_0$ : 절편 회귀계수<br>
+$β_1$ : 기울기 회귀계수<br>
+$ϵ_i$ : i번째 측정된 $y_i$의 오차 성분<br>
+$E[ϵ_i]=0, Var(ϵ_i)=σ^2, E[ϵ_iϵ_j] = δ_{ij}$<br>
+​​
  <br>
 
 ![](./images/LinearRegression.gif)
