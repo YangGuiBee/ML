@@ -64,7 +64,6 @@ $y = w_1x_1 + w_2x_2 + ... + w_nx_n + b$ <br>
 
 선형회귀는 학습을 통해 잔차 제곱들의 합인 RSS(Residual Sum of Squares)를 최소로 하는 회귀계수($W_0$과 $W_1$)를 찾는 것이 핵심.<br>
 잔차제곱합(RSS)을 최소화하는 방법을 최소제곱회귀 혹은 Ordinary Least Squares(OLS) 라고 부른다.<br>
-$\bar{y}=\beta_0+\beta_1x$
 ![](./images/RSSd.svg)
 <br>
 
