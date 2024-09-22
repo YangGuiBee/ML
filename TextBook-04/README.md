@@ -43,7 +43,6 @@
 종속변수 y(예상값)과 독립변수(설명변수) X와의 선형 상관 관계를 모델링하는 회귀<br>
 <br>
 $y = wx + b$ <br>
-<br>
 $y = w_1x + w_0$ <br>
 
 ![](./images/LinearRegression.gif)
