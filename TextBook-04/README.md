@@ -70,9 +70,11 @@ $y = w_1x + w_0$ <br>
 	print(lr.coef_, lr.intercept_)
 
 '선형'은 독립변수가 1차항으로써 2차원에서는 직선형태로, 3차원 공간에서는 평면으로 나타나며,<br> 
-독립변수에 지수항이 있으면 '비선형'이 된다.<br> 
-독립변수 X가 2개 이상인 회귀는 다중선형회귀 (Multiple  Linear Regression)<br>
-$y = w_1x_1 + w_2x_2 + ... + w_nx_n + b$ <br>
+독립변수 X가 2개 이상인 회귀는 **다중회귀 (Multiple Regression)**<br>
+$y = w_1x_1 + w_2x_2 + ... + w_nx_n + w_0$ <br>
+
+독립변수에 지수항이 있으면 '비선형'인 **다항회귀 (Polynomial Regression)**<br> 
+$y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 <br>
 위의 식을 벡터(볼드체)로 표현하면,<br>
 <img width ='500' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/vectorWX.png'>
