@@ -41,7 +41,10 @@
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/index.html<br>
 종속변수 y(예상값)과 독립변수(설명변수) X와의 선형 상관 관계를 모델링하는 회귀<br>
+<br>
 $y = wx + b$ <br>
+<br>
+$y = w_1x + w_0$ <br>
 
 ![](./images/LinearRegression.gif)
 출처 : https://savannahar68.medium.com/getting-started-with-regression-a39aca03b75f
