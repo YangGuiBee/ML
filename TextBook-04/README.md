@@ -122,6 +122,16 @@ $e∼N(0,σ^2I_N)$<br>
 	plt.ylabel('Predicted Rent')
 	plt.title('Multiple Linear Regression')
 	plt.show()
+ 
+	# 특성별 상관분석
+	#plt.scatter(df[['size_sqft']],df[['rent']], alpha = 0.4)
+	#plt.show()
+	
+	#r2(coefficient of determination) : 결정계수 = 1 - (RSS/TSS)
+	#RSS(Residual Sum of Square) : 잔차의 제곱의 평균으로 직선이 미처 y에 대해 설명하지 못한 변화량
+	#TSS(Total Sum of Squares) : y값의 총 변화량
+	
+	mlr.score(X_train, y_train)
 
 <br>
 
