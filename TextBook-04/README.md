@@ -66,14 +66,15 @@ $y = w_1x + w_0$ <br>
 
 	print(lr.predict(([50]))
 
-	# coef_ : 기울기($w_1$), intercept_ : 절편($w_0$)
+	# coef_ : 기울기(w1), intercept_ : 절편(w0)
 	print(lr.coef_, lr.intercept_)
 
 '선형'은 독립변수가 1차항으로써 2차원에서는 직선형태로, 3차원 공간에서는 평면으로 나타나며,<br> 
 독립변수에 지수항이 있으면 '비선형'이 된다.<br> 
 독립변수 X가 2개 이상인 회귀는 다중선형회귀 (Multiple  Linear Regression)<br>
 $y = w_1x_1 + w_2x_2 + ... + w_nx_n + b$ <br>
-
+$$y = w*x+b$$
+$$( w=(w_1,w_2,...w_n), x=(x_1,x_2,...x_n), * : innerproduct)$$
 <br>
 
 # [2] 다항 회귀 (Polynomial Regression)
