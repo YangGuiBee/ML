@@ -207,7 +207,20 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 최소제곱추정치(OLS)가 편향되지 않더라도 분산이 커서 관측값이 실제값에서 크게 벗어나는 다중공선성(multicollinearity)이 발생할 경우, 회귀 분석 추정치에 치우침 정도를 추가하여 표준오차를 줄이기 위해 사용<br>
 모델의 설명력에 기여하지 못하는 독립변수의 회귀계수 크기를 0에 근접하도록 축소시키는 회귀<br>
 L2-norm 페널티항을 통해 일반 선형회귀 모델에 페널티를 부과하는 방법으로 회귀계수를 축소<br>
-(L2 norm : 실제값과 예측값의 오차의 제곱의 합)
+(L2 norm : 실제값과 예측값의 오차의 제곱의 합)<br>
+
+	from sklearn.linear_model import Ridge
+	from sklearn.metrics import mean_squared_error
+	from sklearn.metrics import r2_score
+
+	ridge = Ridge(alpha=1.0)
+	ridge.fit(X_train, y_train)
+	y_train_pred = ridge.predict(X_train)
+	y_test_pred = ridge.predict(X_test)
+	print(ridge.coef_)
+	
+	print('훈련 MSE: %.3f, 테스트 MSE: %.3f' % (mean_squared_error(y_train, y_train_pred),mean_squared_error(y_test, y_test_pred)))
+print('훈련 R^2: %.3f, 테스트 R^2: %.3f' % (r2_score(y_train, y_train_pred),r2_score(y_test, y_test_pred)))
 
 <br>
 
