@@ -73,7 +73,7 @@ $y = wx + b$ <br>
 	print(lr.coef_, lr.intercept_)
 
 
-독립변수가 1개이고, 모델이 독립변수와 회귀계수에 대하여 선형인 경우를 **단순선형회귀 (simple linear regression)** 이라 부른다.
+독립변수가 1개이고, 모델이 독립변수와 회귀계수에 대하여 선형인 경우를 **단순선형회귀 (simple linear regression)** 라 부른다.<br>
 $y = w_1x + w_0$ <br>
 $y_i = β_1x_i + β_0 + ϵ_i$<br>
 $y_i$ : i번째 반응변수 값<br>
