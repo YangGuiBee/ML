@@ -262,12 +262,15 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 포아송 과정(Poisson process)<br>
 1) 정상성(stationarity): 현상이 발생하는 횟수의 분포는 시작 시각과 관계없음. 즉, 
 $N_t$의 분포와 $N_{s+t}−N_S$의 분포가 같고 $N_0=0$이다.
-2) 독립 증분성(independent increment): 시각 0부터 $t$까지 현상이 발생하는 횟수와 시각 $t$후부터 $t+h(h>0)$까지의 발생 횟수는 서로 독립. 즉, $N_t$와 N_{t+h}−N_t$는 서로 독립.
+2) 독립 증분성(independent increment): 시각 0부터 $t$까지 현상이 발생하는 횟수와 시각 $t$후부터 $t+h(h>0)$까지의 발생 횟수는 서로 독립. 즉, $N_t$와 $N_{t+h}−N_t$는 서로 독립.
 3) 비례성(propertionality): 짧은 시간 동안에 현상이 한 번 발생할 확률은 시간에 비례.
 $P(N_h=1)=λh+o(h),h→0$
 ※ λ는 양의 비례상수, o(h)는 $lim_{h→0}o(h)/h=0$
 4) 희귀성(rareness): 짧은 시간 동안에 현상이 두 번 이상 발생할 확률은 매우 작음.
 $P(N_h≥2)=o(h),h→0$
+
+포아송 확률변수 $X$의 확률밀도함수(probability mass function)는<br>
+$P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
 
 포아송 회귀 적용 사례<br>
 1) 일정 주어진 시간 동안에 방문하는 고객의 수<br>
