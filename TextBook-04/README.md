@@ -42,7 +42,9 @@
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/index.html<br>
 종속변수 y(예상값)과 독립변수(설명변수) X와의 선형 상관 관계를 모델링하는 회귀<br>
 $y = wx + b$ <br>
-'선형'은 독립변수가 1차항으로써 2차원에서는 직선형태로, 3차원 공간에서는 평면으로 나타나며, 독립변수에 지수항이 있으면 '비선형'이 된다. 독립변수 X가 2개 이상인 회귀는 다중선형회귀 (Multiple  Linear Regression)<br>
+'선형'은 독립변수가 1차항으로써 2차원에서는 직선형태로, 3차원 공간에서는 평면으로 나타나며,<br> 
+독립변수에 지수항이 있으면 '비선형'이 된다.<br> 
+독립변수 X가 2개 이상인 회귀는 다중선형회귀 (Multiple  Linear Regression)<br>
 $y = w_1x_1 + w_2x_2 + ... + w_nx_n + b$ <br>
 <br>
 
