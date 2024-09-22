@@ -27,7 +27,7 @@
 현재 가지고 있는 데이터(학습 데이터 $X$, $y$)로부터 학습하는 과정이다.<br>
 수식을 이용하여 표현하면, 현재 가지고 있는 학습데이터 $(X, y)$로부터 $y = f(X)$를 만족하는<br> 
 여러 함수 $f$중에서 가장 최적의(주어진 Task에 따라 달라짐) $f$를 찾는 과정이라고 할 수 있다.<br>
-지도 학습이라는 단어는 출력 변수 $y$가 최적 함수 $f$를 찾도록 지도해주는 역할을 한다고 해서 지도 학습이라고 한다.<br>
+출력 변수 $y$가 최적 함수 $f$를 찾도록 지도해주는 역할을 한다고 해서 지도 학습이라고 한다.<br>
 
 지도 학습은 회귀(Regression)와 분류(Classification)로 구분된다.<br>
 그 차이는 회귀 모델은 예측값으로 연속적인 값을 출력하고, 분류 모델은 예측값으로 이산적인 값을 출력한다.<br> 
@@ -47,9 +47,9 @@
 # [1] 선형 회귀 (Linear Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/index.html<br>
-종속변수 y와 독립변수(설명변수) X와의 선형 상관 관계를 모델링하는 회귀<br>
+종속변수 y(예상값)과 독립변수(설명변수) X와의 선형 상관 관계를 모델링하는 회귀<br>
 $y = wx + b$ <br>
-독립변수(설명변수) X가 2개 이상인 회귀는 다중선형회귀 (Multiple  Linear Regression)<br>
+'선형'은 독립변수가 1차항으로써 2차원에서는 직선형태로, 3차원 공간에서는 평면으로 나타나며, 독립변수에 지수항이 있으면 '비선형'이 된다. 독립변수 X가 2개 이상인 회귀는 다중선형회귀 (Multiple  Linear Regression)<br>
 $y = w_1x_1 + w_2x_2 + ... + w_nx_n + b$ <br>
 <br>
 
