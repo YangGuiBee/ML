@@ -92,18 +92,13 @@ N개의 샘플에 대하여 확장한 후, vector-matrix 형태로 표기하면,
 <img width ='500' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/vectorMX.png'><br>
 $e∼N(0,σ^2I_N)$<br>
 
-​
-
-독립변수에 지수항이 있으면 '비선형'인 **다항회귀 (Polynomial Regression)** 라고 한다.<br> 
-$y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
-
 <br>
 
 # [2] 다항 회귀 (Polynomial Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#polynomial-regression-extending-linear-models-with-basis-functions<br>
 독립변수와 종속변수가 선형관계가 아닌 비선형 회귀(Non-linear Regression)<br>
 직선이 아닌 곡선 형태의 관계의 경우, 독립변수에 제곱이나 로그(log) 등을 취해 보면서 실시하는 모델링<br>
-$y = w_1x + w_2x^2 + ... + w_nx^n + b$ <br>
+$y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 <br>
 ![](./images/PolynomialFeatures.png)
 
