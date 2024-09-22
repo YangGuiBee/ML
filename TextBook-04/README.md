@@ -105,7 +105,7 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 직선이 아닌 곡선 형태의 관계의 경우, 독립변수에 제곱이나 로그(log) 등을 취해 보면서 실시하는 모델링<br>
 $y = w_1x + w_2x^2 + ... + w_nx^n + b$ <br>
 <br>
-![](./images/PL.png)
+![](./images/PolynomialFeatures.png)
 
 
 <br>
