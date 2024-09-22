@@ -208,6 +208,9 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 보통 OLS 회귀는 조건부 평균값을 모델링하는 반면 분위수 회귀는 조건부 분위수를 모델링하고<br>
 조건부 분위수를 모델링하기 위해 Pinball loss를 사용<br>
 
+$Q_{\tau}(y_{i}) = \beta_{0}(\tau) + \beta_{1}(\tau)x_{i1} + \cdots + \beta_{p}(\tau)x_{ip}$
+
+
 <br>
 
 # [2-2] 단계적 회귀 (Stepwise Regression)
