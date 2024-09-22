@@ -16,6 +16,7 @@
 ---
 
 # [1] 오차행렬, 혼동행렬 (Confusion Matrix)
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html<br>
 분류 모델의 평가 기준<br>
 ![](./images/CM_table.PNG)
 <br>
@@ -56,6 +57,7 @@ Precision을 높이기 위해선 FP(모델이 positive라고 예측했는데 정
 <br>
 
 # [4] 재현율 (Recall), 민감도 (Sensitivity), TPR (True Positive Rate)
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_precision_recall.html<br>
 $Recall = \frac{TP}{TP + FN}$<br>
 <br>
 실제로 정답이 positive인 것들 중에서 모델이 positive라고 예측한 비율<br>
@@ -117,6 +119,7 @@ Precision과 Recall이 한쪽으로 치우쳐지지 않고 모두 클 때 큰 �
 <br>
 
 # [6] 오분류율 (Error Rate)
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_train_error_vs_test_error.html<br>
 $Accuracy = \frac{FP + FN}{TP + TN + FP + FN}$<br>
 <br>
 모델이 전체 데이터에서 잘못 맞춘 비율<br>
@@ -137,6 +140,7 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br>
 <br>
 
 # [9] ROC curve
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html<br>
 FPR을 X축, TPR을 Y축으로 놓고 임계값을 변경해서 FPR이 변할 때 TPR이 어떻게 변하는지 나타내는 곡선<br>
 여러 임계값들을 기준으로 Recall-Fallout의 변화를 시각화한 것<br>
 Fallout은 실제 False인 data 중에서 모델이 True로 분류항 비율을<br>
