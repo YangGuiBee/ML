@@ -52,12 +52,6 @@ $y = wx + b$ <br>
 출처 : https://blog.csdn.net/Amy_mm/article/details/79989722
 <br>
 
-'선형'은 독립변수가 1차항으로써 2차원에서는 직선형태로, 3차원 공간에서는 평면으로 나타나며,<br> 
-독립변수에 지수항이 있으면 '비선형'이 된다.<br> 
-독립변수 X가 2개 이상인 회귀는 다중선형회귀 (Multiple  Linear Regression)<br>
-$y = w_1x_1 + w_2x_2 + ... + w_nx_n + b$ <br>
-<br>
-
 선형회귀는 학습을 통해 잔차 제곱들의 합인 RSS(Residual Sum of Squares)를 최소로 하는 회귀계수($W_0$과 $W_1$)를 찾는 것이 핵심.<br>
 잔차제곱합(RSS)을 최소화하는 방법을 최소제곱회귀 혹은 Ordinary Least Squares(OLS) 라고 부른다.<br>
 ![](./images/RSSd.svg)
@@ -72,6 +66,11 @@ $y = w_1x_1 + w_2x_2 + ... + w_nx_n + b$ <br>
 
 	# coef_ : 기울기, intercept_ : 절편
 	print(lr.coef_, lr.intercept_)
+
+'선형'은 독립변수가 1차항으로써 2차원에서는 직선형태로, 3차원 공간에서는 평면으로 나타나며,<br> 
+독립변수에 지수항이 있으면 '비선형'이 된다.<br> 
+독립변수 X가 2개 이상인 회귀는 다중선형회귀 (Multiple  Linear Regression)<br>
+$y = w_1x_1 + w_2x_2 + ... + w_nx_n + b$ <br>
 
 <br>
 
