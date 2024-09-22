@@ -44,6 +44,9 @@
 <br>
 $y = wx + b$ <br>
 $y = w_1x + w_0$ <br>
+$y_i = β_1x_i + β_0 + ϵ_i<br>
+​
+ <br>
 
 ![](./images/LinearRegression.gif)
 출처 : https://savannahar68.medium.com/getting-started-with-regression-a39aca03b75f
@@ -77,7 +80,8 @@ $y_i$ : i번째 관측치, $ϵ_i$ : 이때의 오차항, $x_{ij}$ : 독립변수
 $β_j$ : 추정하고자하는 값인 회귀계수로 $0≤j≤k$ 사이의 값<br>
 N개의 샘플에 대하여 확장한 후, vector-matrix 형태로 표기하면,<br>
 <img width ='500' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/vectorMX.png'><br>
-$e∼N(0,σ^2I_N)$
+$e∼N(0,σ^2I_N)$<br>
+
 ​
 
 독립변수에 지수항이 있으면 '비선형'인 **다항회귀 (Polynomial Regression)** 라고 한다.<br> 
