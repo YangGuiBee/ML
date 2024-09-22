@@ -56,7 +56,8 @@ $y = wx + b$ <br>
 출처 : https://blog.csdn.net/Amy_mm/article/details/79989722
 <br>
 
-선형회귀는 학습을 통해 잔차 제곱들의 합인 RSS(Residual Sum of Squares)를 최소로 하는 회귀계수($W_0$과 $W_1$)를 찾는 것이 핵심.<br>
+선형회귀는 학습을 통해 잔차 제곱들의 합인 RSS(Residual Sum of Squares)를 최소로 하는<br> 
+회귀계수($W_0$과 $W_1$)를 찾는 것이 핵심.<br>
 잔차제곱합(RSS)을 최소화하는 방법을 최소제곱회귀 혹은 Ordinary Least Squares(OLS) 라고 부른다.<br>
 ![](./images/RSSd.svg)
 <br>
@@ -72,7 +73,7 @@ $y = wx + b$ <br>
 	print(lr.coef_, lr.intercept_)
 
 
-독립변수가 1개이고, 모델이 독립변수와 회귀계수에 대하여 선형인 경우를 **단순선형회귀모델(simple linear regression model)** 이라 부른다.
+독립변수가 1개이고, 모델이 독립변수와 회귀계수에 대하여 선형인 경우를 **단순선형회귀 (simple linear regression)** 이라 부른다.
 $y = w_1x + w_0$ <br>
 $y_i = β_1x_i + β_0 + ϵ_i$<br>
 $y_i$ : i번째 반응변수 값<br>
