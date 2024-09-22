@@ -215,7 +215,20 @@ L2-norm 페널티항을 통해 일반 선형회귀 모델에 페널티를 부과
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#lasso<br>
 릿지회귀모델과 다르게 설명력에 기여하지 못하는 독립변수의 회귀계수를 0으로 만드는 회귀<br>
 L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회귀계수를 축소<br>
-(L1 norm : 실제값과 예측값의 오차의 절대값의 합)
+(L1 norm : 실제값과 예측값의 오차의 절대값의 합)<br>
+
+	from sklearn.linear_model import Lasso
+	from sklearn.metrics import mean_squared_error
+	from sklearn.metrics import r2_score
+	
+	lasso = Lasso(alpha=0.1)
+	lasso.fit(X_train, y_train)
+	y_train_pred = lasso.predict(X_train)
+	y_test_pred = lasso.predict(X_test)
+	print(lasso.coef_)
+	
+	print('훈련 MSE: %.3f, 테스트 MSE: %.3f' % (mean_squared_error(y_train, y_train_pred), mean_squared_error(y_test, y_test_pred)))
+	print('훈련 R^2: %.3f, 테스트 R^2: %.3f' % (r2_score(y_train, y_train_pred),r2_score(y_test, y_test_pred)))
 
 <br>
 
