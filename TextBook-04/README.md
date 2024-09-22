@@ -66,7 +66,7 @@ $y = w_1x + w_0$ <br>
 
 	print(lr.predict(([50]))
 
-	# coef_ : 기울기, intercept_ : 절편
+	# coef_ : 기울기($w_1$), intercept_ : 절편($w_0$)
 	print(lr.coef_, lr.intercept_)
 
 '선형'은 독립변수가 1차항으로써 2차원에서는 직선형태로, 3차원 공간에서는 평면으로 나타나며,<br> 
