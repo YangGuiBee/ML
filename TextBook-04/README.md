@@ -281,6 +281,8 @@ $P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
 5) 어떤 페이지에 있는 오타의 발생률<br>
 6) 어떤 특정 면적의 삼림에서 자라는 소나무의 수<br>
 
+<br>
+
 	import numpy as np
 	from scipy.stats import poisson
 	import numpy as np
@@ -303,6 +305,7 @@ $P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
 	plt.grid(axis = "y", linestyle = "--", color = "#CCCCCC")
 	plt.legend(loc="upper right")
 	plt.show()
+
 
 <br>
 
