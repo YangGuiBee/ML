@@ -2,23 +2,23 @@
 
 ---
 
-	[1] 일반 선형 회귀 (Linear Regression)
+	[1] 선형 회귀 (Linear Regression)
 		[1-1] 포아송 회귀 (Poisson Regression)
      
- 	[2] 다중 선형 회귀 (Linear Regression)
+ 	[2] 다중 선형 회귀 (Multiple Linear Regression)
 		[2-1] 단계적 회귀 (Stepwise Regression), 위계적 회귀 (Hierarchical Regression) 
-     
-	[3] 비선형 회귀 (Non-linear Regression) : 다항 회귀 (Polynomial Regression)
-		[3-1] 분위수 회귀 (Quantile Regression)
+		[2-2] 분위수 회귀 (Quantile Regression)
   
- 	[4] 정규화된 회귀 (Regularized Regression), 벌점 회귀 (Penalized Regression)
+	[3] 비선형 회귀 (Non-linear Regression) : 다항 회귀 (Polynomial Regression)
+
+   	[4] 정규화된 회귀 (Regularized Regression), 벌점 회귀 (Penalized Regression)
 		[4-1] 릿지 회귀 (Ridge Regression)
 		[4-2] 라쏘 회귀 (Lasso Regression)
 		[4-3] 엘라스틱넷 회귀 (Elastic Net Regression)
 
 ---
 
-	로지스틱 회귀 (Logistic Regression) → 분류(5강)	
+	일반화선형회귀(Generalized Linear Regression, GLM) : 로지스틱 회귀 (Logistic Regression) → 분류(5강)	
 	k-최근접 이웃 회귀(k-Nearest Neighbors Regression) → 분류+회귀(6강) 
 	서포트 벡터 회귀 (Support Vector Regression, SVR) → 분류+회귀(6강) 
 	결정 트리 회귀 (Decision Tree Regression) → 분류+회귀(6강) 
@@ -88,7 +88,63 @@ $β_1$ : 기울기 회귀계수<br>
 $ϵ_i$ : i번째 측정된 $y_i$의 오차 성분<br>
 $E[ϵ_i]=0, Var(ϵ_i)=σ^2, E[ϵ_iϵ_j] = δ_{ij}$<br>
 <br>
-독립변수 X가 2개 이상인 회귀는 **다중회귀 (Multiple Regression)** 라고 한다.<br>
+
+# [1-1] 포아송 회귀 (Poisson Regression)
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.PoissonRegressor.html<br>
+종속변수가 포아송 분포를 따르는 경우에 사용되며, 이산형 카운트 데이터를 모델링하는 데 적합<br>
+포아송 분포(Poisson Distribution)는 단위(한정된) 시간이나 공간에서 발생하는 평균적인 사건의 횟수(λ)를 바탕으로 특정 횟수의 사건이 발생할 확률을 설명하는 분포<br>
+
+**포아송 과정(Poisson process)** <br>
+1) 정상성(stationarity): 현상이 발생하는 횟수의 분포는 시작 시각과 관계없음. 즉, 
+$N_t$의 분포와 $N_{s+t}−N_S$의 분포가 같고 $N_0=0$이다.
+2) 독립 증분성(independent increment): 시각 0부터 $t$까지 현상이 발생하는 횟수와 시각 $t$후부터 $t+h(h>0)$까지의 발생 횟수는 서로 독립(즉, $N_t$와 $N_{t+h}−N_t$는 서로 독립)
+3) 비례성(propertionality): 짧은 시간 동안에 현상이 한 번 발생할 확률은 시간에 비례.
+$P(N_h=1)=λh+o(h),h→0$
+※ λ는 양의 비례상수, o(h)는 $lim_{h→0}o(h)/h=0$
+4) 희귀성(rareness): 짧은 시간 동안에 현상이 두 번 이상 발생할 확률은 매우 작음.
+$P(N_h≥2)=o(h),h→0$<br>
+
+**포아송 확률변수 $X$의 확률밀도함수(probability mass function)** <br>
+$P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
+
+**포아송 회귀 적용 사례** <br>
+1) 일정 주어진 시간 동안에 방문하는 고객의 수<br>
+2) 일정 주어진 생산시간 동안 발생하는 불량 수<br>
+3) 하룻동안 발생하는 출생자 수<br>
+4) 어떤 시간 동안 톨게이트를 통과하는 차량의 수<br>
+5) 어떤 페이지에 있는 오타의 발생률<br>
+6) 어떤 특정 면적의 삼림에서 자라는 소나무의 수<br>
+
+<br>
+
+	import numpy as np
+	from scipy.stats import poisson
+	import numpy as np
+	import seaborn as sns
+	from scipy.special import factorial
+	
+	np.random.seed(123)
+	poisson.rvs(mu = 1, size = 10)
+	pal_brbg = sns.color_palette("BrBG", 6)
+	
+	x = np.arange(0, 11)
+	for n_lambda in range(1, 6):
+	    y = np.exp(-n_lambda) * np.power(n_lambda, x) / factorial(x)
+	    plt.plot(x, y, color = pal_brbg[n_lambda - 1], label=f"λ = {n_lambda}")
+	    plt.scatter(x, y, color = pal_brbg[n_lambda - 1])
+    	
+	plt.ylabel("Probability")
+	plt.title(f"Poisson Distribution (λ = [1, 5])")
+	plt.xticks(x)
+	plt.grid(axis = "y", linestyle = "--", color = "#CCCCCC")
+	plt.legend(loc="upper right")
+	plt.show()
+
+
+<br>
+
+# [2] 다중회귀 (Multiple Regression)
+독립변수 X가 2개 이상인 회귀<br>
 $y = w_1x_1 + w_2x_2 + ... + w_nx_n + w_0$ <br>
 $y_i = β_0 + β_1x_{i1} + β_2x_{i2} + ... + β_kx_{ik} + ϵ_i$<br>
 $y_i$ : i번째 관측치, $ϵ_i$ : 이때의 오차항, $x_{ij}$ : 독립변수로 known value<br>
@@ -140,7 +196,70 @@ $e∼N(0,σ^2I_N)$<br>
 
 <br>
 
-# [2] 비선형 회귀 (Non-linear Regression) : 다항 회귀 (Polynomial Regression)
+# [2-1] 단계적 회귀 (Stepwise Regression), 위계적 회귀 (Hierarchical Regression) 
+여러 독립변수 중에서 종속변수를 가장 잘 설명하는 변수들을 선택하는 방법<br>
+**단계적 회귀 (Stepwise Regression)** 는 독립 변수들을 자동으로 모델에 추가하거나 제거하여 최적의 모델을 탐색(변수의 추가나 제거가 통계적으로 유의미한지 여부에 따라 이루어짐)<br>
+예를 들어, 변수를 추가할 때마다 F 통계량이유의미하게 증가하는지 확인하거나, 제거할 때마다 변수의 t 통계량이 유의미하게 감소하는지 확인함.<br> 
+장점: 자동으로 변수를 선택하므로 모델이 데이터에 더 잘 맞을 가능성이 있음<br>
+**위계적 회귀 (Hierarchical Regression)** 는 독립 변수들을 미리 정의한 순서에 따라 모델에 추가하는 것으로,<br>
+이론적으로 중요한 변수부터 시작하여 덜 중요한 변수를 차례로 추가하는 방식<br>
+장점: 이론적 근거에 따라 변수를 추가하므로 결과 해석이 이론적으로 타당함.<br>
+
+<br>
+
+# [2-2] 분위수 회귀 (Quantile Regression)
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.QuantileRegressor.html<br>
+반응 변수의 조건부 분위수를 모델링 하는 모델<br>
+1) 선형 회귀 조건이 충족되지 않는 경우<br>
+2) 오차의 분산이 큰 경우<br>
+3) Robust한 결과를 위하여<br>
+4) 많은 이상치의 영향을 줄이기 위하여<br>
+5) 점 추정이 아닌 구간추정을 통해 결과의 정확도를 높이기 위하여<br>
+6) 반응변수의 스프레드를 같이 살펴보기 위하여<br>
+7) 회귀곡선에 대한 설득력을 높이기 위하여<br>
+사용되는 선형 회귀의 확장 버전<br>
+<br>
+보통 OLS 회귀는 조건부 평균값을 모델링하는 반면 분위수 회귀는 조건부 분위수를 모델링하고<br>
+조건부 분위수를 모델링하기 위해 Pinball loss를 사용<br>
+기존의 조건부 평균 값 예측이 아닌 조건부 분위수 값을 예측하는 문제로 풀이 될 수 있다.<br>
+
+$Q_{\tau}(y_{i}) = \beta_{0}(\tau) + \beta_{1}(\tau)x_{i1} + \cdots + \beta_{p}(\tau)x_{ip}$<br>
+
+최적의 분위수 방정식을 찾기 위한 과정은 중위수절대편차인 MAD(Median Absolute Deviation) 값을 최소화함으로써 찾을 수 있다.<br>
+$MAD = \frac{1}{n} \sum_{i=1}^{n} \rho_{\tau}(y_{i} - (\beta_{0}(\tau) + \beta_{1}(\tau)x_{i1} +\cdots +\beta_{p}(\tau)x_{ip}))$<br>
+ 
+ρ함수는 오차의 분위수와 전체적인 부호에 따라 오차에 비대칭 가중치를 부여하는 체크 함수<br>
+$\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
+<br>
+
+	from sklearn.linear_model import LinearRegression
+	lm_model = LinearRegression()
+	lm_model.fit(X,y)
+	y_pred = lm_model.predict(X)
+	# 분위수 회귀 모형 구축
+	mod = smf.quantreg('Price ~ Area', house_data)
+	# 각 분위수에 따른 분위수 회귀 값 저장
+	quantiles = np.arange(.05,.96,.1) # quantiles = [.05,.15,.25,...,.95]
+	
+	def fit_model(q):
+	  res = mod.fit(q=q)
+	  return [q, res.params['Intercept'], res.params['Area']] + \
+	  res.conf_int().loc['Area'].tolist()
+	  
+	models = [fit_model(x) for x in quantiles]
+	models = pd.DataFrame(models, columns=['q', 'a', 'b', 'lb', 'ub'])
+
+	# 비교를 위해 최소 기존의 선형 회귀 값도 저장
+	ols = smf.ols('Price ~ Area', house_data).fit()
+	ols_ci = ols.conf_int().loc['Area'].tolist()
+	ols = dict(a = ols.params['Intercept'], b = ols.params['Area'], lb = ols_ci[0], ub = ols_ci[1])
+
+	print(models)
+	print(ols)
+
+<br>
+
+# [3] 비선형 회귀 (Non-linear Regression) : 다항 회귀 (Polynomial Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#polynomial-regression-extending-linear-models-with-basis-functions<br>
 독립변수와 종속변수가 선형관계가 아닌 비선형 회귀(Non-linear Regression)<br>
 직선이 아닌 곡선 형태의 관계의 경우, 독립변수에 제곱이나 로그(log) 등을 취해 보면서 실시하는 모델링<br>
@@ -196,123 +315,6 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 	plt.ylabel('Price in $1000s [MEDV]')
 	plt.legend(loc='upper right')
 	plt.show()
-
-<br>
-
-# [2-1] 분위수 회귀 (Quantile Regression)
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.QuantileRegressor.html<br>
-반응 변수의 조건부 분위수를 모델링 하는 모델<br>
-1) 선형 회귀 조건이 충족되지 않는 경우<br>
-2) 오차의 분산이 큰 경우<br>
-3) Robust한 결과를 위하여<br>
-4) 많은 이상치의 영향을 줄이기 위하여<br>
-5) 점 추정이 아닌 구간추정을 통해 결과의 정확도를 높이기 위하여<br>
-6) 반응변수의 스프레드를 같이 살펴보기 위하여<br>
-7) 회귀곡선에 대한 설득력을 높이기 위하여<br>
-사용되는 선형 회귀의 확장 버전<br>
-<br>
-보통 OLS 회귀는 조건부 평균값을 모델링하는 반면 분위수 회귀는 조건부 분위수를 모델링하고<br>
-조건부 분위수를 모델링하기 위해 Pinball loss를 사용<br>
-기존의 조건부 평균 값 예측이 아닌 조건부 분위수 값을 예측하는 문제로 풀이 될 수 있다.<br>
-
-$Q_{\tau}(y_{i}) = \beta_{0}(\tau) + \beta_{1}(\tau)x_{i1} + \cdots + \beta_{p}(\tau)x_{ip}$<br>
-
-최적의 분위수 방정식을 찾기 위한 과정은 중위수절대편차인 MAD(Median Absolute Deviation) 값을 최소화함으로써 찾을 수 있다.<br>
-$MAD = \frac{1}{n} \sum_{i=1}^{n} \rho_{\tau}(y_{i} - (\beta_{0}(\tau) + \beta_{1}(\tau)x_{i1} +\cdots +\beta_{p}(\tau)x_{ip}))$<br>
- 
-ρ함수는 오차의 분위수와 전체적인 부호에 따라 오차에 비대칭 가중치를 부여하는 체크 함수<br>
-$\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
-<br>
-
-	from sklearn.linear_model import LinearRegression
-	lm_model = LinearRegression()
-	lm_model.fit(X,y)
-	y_pred = lm_model.predict(X)
-	# 분위수 회귀 모형 구축
-	mod = smf.quantreg('Price ~ Area', house_data)
-	# 각 분위수에 따른 분위수 회귀 값 저장
-	quantiles = np.arange(.05,.96,.1) # quantiles = [.05,.15,.25,...,.95]
-	
-	def fit_model(q):
-	  res = mod.fit(q=q)
-	  return [q, res.params['Intercept'], res.params['Area']] + \
-	  res.conf_int().loc['Area'].tolist()
-	  
-	models = [fit_model(x) for x in quantiles]
-	models = pd.DataFrame(models, columns=['q', 'a', 'b', 'lb', 'ub'])
-
-	# 비교를 위해 최소 기존의 선형 회귀 값도 저장
-	ols = smf.ols('Price ~ Area', house_data).fit()
-	ols_ci = ols.conf_int().loc['Area'].tolist()
-	ols = dict(a = ols.params['Intercept'], b = ols.params['Area'], lb = ols_ci[0], ub = ols_ci[1])
-
-	print(models)
-	print(ols)
-
-<br>
-
-# [2-2] 단계적 회귀 (Stepwise Regression), 위계적 회귀 (Hierarchical Regression) 
-여러 독립변수 중에서 종속변수를 가장 잘 설명하는 변수들을 선택하는 방법<br>
-**단계적 회귀 (Stepwise Regression)** 는 독립 변수들을 자동으로 모델에 추가하거나 제거하여 최적의 모델을 탐색(변수의 추가나 제거가 통계적으로 유의미한지 여부에 따라 이루어짐)<br>
-예를 들어, 변수를 추가할 때마다 F 통계량이유의미하게 증가하는지 확인하거나, 제거할 때마다 변수의 t 통계량이 유의미하게 감소하는지 확인함.<br> 
-장점: 자동으로 변수를 선택하므로 모델이 데이터에 더 잘 맞을 가능성이 있음<br>
-**위계적 회귀 (Hierarchical Regression)** 는 독립 변수들을 미리 정의한 순서에 따라 모델에 추가하는 것으로,<br>
-이론적으로 중요한 변수부터 시작하여 덜 중요한 변수를 차례로 추가하는 방식<br>
-장점: 이론적 근거에 따라 변수를 추가하므로 결과 해석이 이론적으로 타당함.<br>
-
-<br>
-
-# [2-3] 포아송 회귀 (Poisson Regression)
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.PoissonRegressor.html<br>
-종속변수가 포아송 분포를 따르는 경우에 사용되며, 이산형 카운트 데이터를 모델링하는 데 적합<br>
-포아송 분포(Poisson Distribution)는 단위(한정된) 시간이나 공간에서 발생하는 평균적인 사건의 횟수(λ)를 바탕으로 특정 횟수의 사건이 발생할 확률을 설명하는 분포<br>
-
-**포아송 과정(Poisson process)** <br>
-1) 정상성(stationarity): 현상이 발생하는 횟수의 분포는 시작 시각과 관계없음. 즉, 
-$N_t$의 분포와 $N_{s+t}−N_S$의 분포가 같고 $N_0=0$이다.
-2) 독립 증분성(independent increment): 시각 0부터 $t$까지 현상이 발생하는 횟수와 시각 $t$후부터 $t+h(h>0)$까지의 발생 횟수는 서로 독립(즉, $N_t$와 $N_{t+h}−N_t$는 서로 독립)
-3) 비례성(propertionality): 짧은 시간 동안에 현상이 한 번 발생할 확률은 시간에 비례.
-$P(N_h=1)=λh+o(h),h→0$
-※ λ는 양의 비례상수, o(h)는 $lim_{h→0}o(h)/h=0$
-4) 희귀성(rareness): 짧은 시간 동안에 현상이 두 번 이상 발생할 확률은 매우 작음.
-$P(N_h≥2)=o(h),h→0$<br>
-
-**포아송 확률변수 $X$의 확률밀도함수(probability mass function)** <br>
-$P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
-
-**포아송 회귀 적용 사례** <br>
-1) 일정 주어진 시간 동안에 방문하는 고객의 수<br>
-2) 일정 주어진 생산시간 동안 발생하는 불량 수<br>
-3) 하룻동안 발생하는 출생자 수<br>
-4) 어떤 시간 동안 톨게이트를 통과하는 차량의 수<br>
-5) 어떤 페이지에 있는 오타의 발생률<br>
-6) 어떤 특정 면적의 삼림에서 자라는 소나무의 수<br>
-
-<br>
-
-	import numpy as np
-	from scipy.stats import poisson
-	import numpy as np
-	import seaborn as sns
-	from scipy.special import factorial
-	
-	np.random.seed(123)
-	poisson.rvs(mu = 1, size = 10)
-	pal_brbg = sns.color_palette("BrBG", 6)
-	
-	x = np.arange(0, 11)
-	for n_lambda in range(1, 6):
-	    y = np.exp(-n_lambda) * np.power(n_lambda, x) / factorial(x)
-	    plt.plot(x, y, color = pal_brbg[n_lambda - 1], label=f"λ = {n_lambda}")
-	    plt.scatter(x, y, color = pal_brbg[n_lambda - 1])
-    	
-	plt.ylabel("Probability")
-	plt.title(f"Poisson Distribution (λ = [1, 5])")
-	plt.xticks(x)
-	plt.grid(axis = "y", linestyle = "--", color = "#CCCCCC")
-	plt.legend(loc="upper right")
-	plt.show()
-
 
 <br>
 
