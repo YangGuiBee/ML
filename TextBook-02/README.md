@@ -17,7 +17,9 @@
 <br><br>
 딥러닝 검색추가 : https://trends.google.com/trends/explore?date=2004-01-01%202024-09-06&q=Data%20Mining,Big%20Data,Machine%20Learning,Deep%20Learning&hl=ko
 <br><br>
+2024년 MAD(ML, AI, DATA) 환경 : https://mad.firstmark.com/?utm_source=pytorchkr&ref=pytorchkr
 
+<br>
 
 # ▣ ML의 정의
 
