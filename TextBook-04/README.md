@@ -8,13 +8,13 @@
  	[2] 다중 선형 회귀 (Linear Regression)
     	[2-1] 단계적 회귀 (Stepwise Regression), 위계적 회귀 (Hierarchical Regression) 
      
-	[2] 비선형 회귀 (Non-linear Regression) : 다항 회귀 (Polynomial Regression)
- 	[2-1] 분위수 회귀 (Quantile Regression)
+	[3] 비선형 회귀 (Non-linear Regression) : 다항 회귀 (Polynomial Regression)
+ 	[3-1] 분위수 회귀 (Quantile Regression)
   
- 	[3] 정규화된 회귀 (Regularized Regression), 벌점 회귀 (Penalized Regression)
-	[3-1] 릿지 회귀 (Ridge Regression)
-	[3-2] 라쏘 회귀 (Lasso Regression)
-	[3-3] 엘라스틱넷 회귀 (Elastic Net Regression)
+ 	[4] 정규화된 회귀 (Regularized Regression), 벌점 회귀 (Penalized Regression)
+	[4-1] 릿지 회귀 (Ridge Regression)
+	[4-2] 라쏘 회귀 (Lasso Regression)
+	[4-3] 엘라스틱넷 회귀 (Elastic Net Regression)
 
 ---
 
