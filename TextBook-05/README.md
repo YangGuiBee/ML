@@ -19,8 +19,15 @@
 
 # [1] 로지스틱 회귀 (Logistic Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html<br>
+
+<br>
 
 # [2] 나이브 베이즈 (Naive Bayes)
 
+<br>
+
 # [3] XGBoost (Extreme Gradient Boosting)
+
+<br>
 
