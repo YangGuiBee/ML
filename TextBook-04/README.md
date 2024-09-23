@@ -18,7 +18,7 @@
 
 ---
 
-	일반화선형회귀(Generalized Linear Regression, GLM) : 로지스틱 회귀 (Logistic Regression) → 분류(5강)	
+	일반화 선형회귀(Generalized Linear Regression, GLM) : 로지스틱 회귀 (Logistic Regression) → 분류(5강)	
 	k-최근접 이웃 회귀(k-Nearest Neighbors Regression) → 분류+회귀(6강) 
 	서포트 벡터 회귀 (Support Vector Regression, SVR) → 분류+회귀(6강) 
 	결정 트리 회귀 (Decision Tree Regression) → 분류+회귀(6강) 
@@ -91,8 +91,11 @@ $E[ϵ_i]=0, Var(ϵ_i)=σ^2, E[ϵ_iϵ_j] = δ_{ij}$<br>
 
 # [1-1] 포아송 회귀 (Poisson Regression)
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.PoissonRegressor.html<br>
-종속변수가 포아송 분포를 따르는 경우에 사용되며, 이산형 카운트 데이터를 모델링하는 데 적합<br>
-포아송 분포(Poisson Distribution)는 단위(한정된) 시간이나 공간에서 발생하는 평균적인 사건의 횟수(λ)를 바탕으로 특정 횟수의 사건이 발생할 확률을 설명하는 분포<br>
+종속변수가 포아송 분포(Poisson Distribution)를 따르는 경우에 사용되며, 이산형 카운트 데이터를 모델링하는 데 적합<br>
+포아송 분포는 단위(한정된) 시간이나 공간에서 발생하는 평균적인 사건의 횟수(λ)를 바탕으로 특정 횟수의 사건이 발생할 확률을 설명하는 분포로 데이터 및 분할표를 모델링하는 데 사용되는 회귀 분석의 일반화 선형회귀(Generalized Linear Regression, GLM) 모델 형태이다.<br>
+포아송 회귀(poisson regression) 는 종속변수가 빈도변수로 0이상 정수이거나, 왜도가 크거나, 분포유형이 포아송 로그선형일 경우에 실시한다.<br>
+참고로 음이항 분포 회귀 (negative binomial regression)는 평균보다 분산이 큰 경우에 적용한다.<br>
+음이항 회귀(Negative binomial regression)는 분산이 포아송 모델의 평균과 동일하다는 매우 제한적인 가정을 완화하기 때문에 포아송 회귀의 널리 사용되는 일반화이다. 전통적인 음이항 회귀 모델은 포아송과 감마(gamma regression) 혼합 분포를 기반으로 한다. 이 모델은 감마 분포를 사용하여 포아송 이질성을 모델링하기 때문에 널리 사용된다.
 
 **포아송 과정(Poisson process)** <br>
 1) 정상성(stationarity): 현상이 발생하는 횟수의 분포는 시작 시각과 관계없음. 즉, 
