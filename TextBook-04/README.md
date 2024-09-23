@@ -3,27 +3,27 @@
 ---
 
 	[1] 일반 선형 회귀 (Linear Regression)
-    	[1-1] 포아송 회귀 (Poisson Regression)
+		[1-1] 포아송 회귀 (Poisson Regression)
      
  	[2] 다중 선형 회귀 (Linear Regression)
-    	[2-1] 단계적 회귀 (Stepwise Regression), 위계적 회귀 (Hierarchical Regression) 
+		[2-1] 단계적 회귀 (Stepwise Regression), 위계적 회귀 (Hierarchical Regression) 
      
 	[3] 비선형 회귀 (Non-linear Regression) : 다항 회귀 (Polynomial Regression)
- 	[3-1] 분위수 회귀 (Quantile Regression)
+		[3-1] 분위수 회귀 (Quantile Regression)
   
  	[4] 정규화된 회귀 (Regularized Regression), 벌점 회귀 (Penalized Regression)
-	[4-1] 릿지 회귀 (Ridge Regression)
-	[4-2] 라쏘 회귀 (Lasso Regression)
-	[4-3] 엘라스틱넷 회귀 (Elastic Net Regression)
+		[4-1] 릿지 회귀 (Ridge Regression)
+		[4-2] 라쏘 회귀 (Lasso Regression)
+		[4-3] 엘라스틱넷 회귀 (Elastic Net Regression)
 
 ---
 
-	로지스틱 회귀 (Logistic Regression) → 분류	
-	k-최근접 이웃 회귀(k-Nearest Neighbors Regression) → 분류+회귀 
-	서포트 벡터 회귀 (Support Vector Regression, SVR) → 분류+회귀 
-	결정 트리 회귀 (Decision Tree Regression) → 분류+회귀 
-	랜덤 포레스트 회귀 (Random Forest Regression) → 분류+회귀   
- 	주성분 회귀 (Principal Component Regression) → 차원축소   
+	로지스틱 회귀 (Logistic Regression) → 분류(5강)	
+	k-최근접 이웃 회귀(k-Nearest Neighbors Regression) → 분류+회귀(6강) 
+	서포트 벡터 회귀 (Support Vector Regression, SVR) → 분류+회귀(6강) 
+	결정 트리 회귀 (Decision Tree Regression) → 분류+회귀(6강) 
+	랜덤 포레스트 회귀 (Random Forest Regression) → 분류+회귀(6강)   
+ 	주성분 회귀 (Principal Component Regression) → 차원축소(10강)   
 
 ---
 
