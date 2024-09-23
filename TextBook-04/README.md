@@ -150,8 +150,9 @@ $P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
 <br>
 
 # [2] 일반화 선형 회귀(Generalized Linear Regression, GLM)
-일반 선형 회귀의 경우 선형성, 독립성, 등분산성, 정규성의 가정을 갖고 있지만, 종속변수가 연속형이 아니라면 대표적으로 오차항의 정규성 가정이 깨지게 된다.<br>
-대표적으로 **로지스틱 회귀(Logistic Regression)** 와 **Cox의 비례위험회귀(Cox's Proportional Hazard Regression)** 는 대표적인 일반화선형회귀이며, 일반화선형회귀는 종속변수를 적절한 함수로 변화시킨 f(y)를 독립변수와 회귀계수의 선형결합으로 모형화한 것이다.<br>
+일반화 선형 회귀의 경우 선형성, 독립성, 등분산성, 정규성의 가정을 갖고 있지만, 종속변수가 연속형이 아니라면 대표적으로 오차항의 정규성 가정이 깨지게 된다.<br>
+**로지스틱 회귀(Logistic Regression)** 와 **Cox의 비례위험회귀(Cox's Proportional Hazard Regression)** 는 대표적인 일반화선형회귀이며,<br> 
+일반화 선형 회귀는 종속변수를 적절한 함수로 변화시킨 f(y)를 독립변수와 회귀계수의 선형결합으로 모형화한 것이다.<br>
 
 <br>
 
