@@ -195,6 +195,7 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 <br>
 
 # [2-1] 분위수 회귀 (Quantile Regression)
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.QuantileRegressor.html<br>
 반응 변수의 조건부 분위수를 모델링 하는 모델<br>
 1) 선형 회귀 조건이 충족되지 않는 경우<br>
 2) 오차의 분산이 큰 경우<br>
