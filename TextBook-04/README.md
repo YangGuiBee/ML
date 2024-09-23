@@ -337,6 +337,7 @@ $P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
 
 # [3-1] 릿지 회귀 (Ridge Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html<br>
 최소제곱추정치(OLS)가 편향되지 않더라도 분산이 커서 관측값이 실제값에서 크게 벗어나는 다중공선성(multicollinearity)이 발생할 경우, 회귀 분석 추정치에 치우침 정도를 추가하여 표준오차를 줄이기 위해 사용<br>
 모델의 설명력에 기여하지 못하는 독립변수의 회귀계수 크기를 0에 근접하도록 축소시키는 회귀<br>
 L2-norm 페널티항을 통해 일반 선형회귀 모델에 페널티를 부과하는 방법으로 회귀계수를 축소<br>
@@ -359,6 +360,7 @@ print('훈련 R^2: %.3f, 테스트 R^2: %.3f' % (r2_score(y_train, y_train_pred)
 
 # [3-2] 라쏘 회귀 (Lasso Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#lasso<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Lasso.html<br>
 릿지회귀모델과 다르게 설명력에 기여하지 못하는 독립변수의 회귀계수를 0으로 만드는 회귀<br>
 L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회귀계수를 축소<br>
 (L1 norm : 실제값과 예측값의 오차의 절대값의 합)<br>
@@ -380,6 +382,7 @@ L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회�
 
 # [3-3] 엘라스틱넷 회귀 (Elastic Net Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#elastic-net<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html<br>
 릿지와 라쏘의 결합<br>
 L1-norm 과 L2-norm을 모두 이용하여 패널티를 부과하여 회귀모델을 생성<br>
 
