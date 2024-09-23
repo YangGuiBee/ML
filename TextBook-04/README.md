@@ -72,7 +72,12 @@ $y = wx + b$ <br>
 선형회귀는 학습을 통해 잔차 제곱들의 합인 RSS(Residual Sum of Squares)를 최소로 하는<br> 
 회귀계수($W_0$과 $W_1$)를 찾는 것이 핵심.<br>
 잔차제곱합(RSS)을 최소화하는 방법을 최소제곱회귀 혹은 Ordinary Least Squares(OLS) 라고 부른다.<br>
+비용함수(Cost function), 손실함수(loss function) =<br>
 ![](./images/RSSd.svg)
+
+오류가 작아지는 방향으로 w값을 보정할 수 있는 해법을 경사적하강법을 통해 구한다.
+비용함수가 최소인 w값이 최적의 회귀계
+
 <br>
 
 	from sklearn.linear_model import LinearRegression
