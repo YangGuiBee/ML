@@ -4,21 +4,24 @@
 
 	[1] 선형 회귀 (Linear Regression)
 		[1-1] 포아송 회귀 (Poisson Regression)
-     
- 	[2] 다중 선형 회귀 (Multiple Linear Regression)
-		[2-1] 단계적 회귀 (Stepwise Regression), 위계적 회귀 (Hierarchical Regression) 
-		[2-2] 분위수 회귀 (Quantile Regression)
   
-	[3] 비선형 회귀 (Non-linear Regression) : 다항 회귀 (Polynomial Regression)
+  	[2] 일반화 선형 회귀(Generalized Linear Regression, GLM)
+   		[2-1] 로지스틱 회귀 (Logistic Regression) → 분류(5강)
+     		[2-2] Cox의 비례위험회귀(Cox's Proportional Hazard Regression)
+     
+ 	[3] 다중 선형 회귀 (Multiple Linear Regression)
+		[3-1] 단계적 회귀 (Stepwise Regression), 위계적 회귀 (Hierarchical Regression) 
+		[3-2] 분위수 회귀 (Quantile Regression)
+  
+	[4] 비선형 회귀 (Non-linear Regression) : 다항 회귀 (Polynomial Regression)
 
-   	[4] 정규화된 회귀 (Regularized Regression), 벌점 회귀 (Penalized Regression)
-		[4-1] 릿지 회귀 (Ridge Regression)
-		[4-2] 라쏘 회귀 (Lasso Regression)
-		[4-3] 엘라스틱넷 회귀 (Elastic Net Regression)
+   	[5] 정규화된 회귀 (Regularized Regression), 벌점 회귀 (Penalized Regression)
+		[5-1] 릿지 회귀 (Ridge Regression)
+		[5-2] 라쏘 회귀 (Lasso Regression)
+		[5-3] 엘라스틱넷 회귀 (Elastic Net Regression)
 
 ---
 
-	일반화 선형회귀(Generalized Linear Regression, GLM) : 로지스틱 회귀 (Logistic Regression) → 분류(5강)	
 	k-최근접 이웃 회귀(k-Nearest Neighbors Regression) → 분류+회귀(6강) 
 	서포트 벡터 회귀 (Support Vector Regression, SVR) → 분류+회귀(6강) 
 	결정 트리 회귀 (Decision Tree Regression) → 분류+회귀(6강) 
@@ -146,7 +149,11 @@ $P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
 
 <br>
 
-# [2] 다중회귀 (Multiple Regression)
+# [2] 일반화 선형 회귀(Generalized Linear Regression, GLM)
+
+<br>
+
+# [3] 다중회귀 (Multiple Regression)
 독립변수 X가 2개 이상인 회귀<br>
 $y = w_1x_1 + w_2x_2 + ... + w_nx_n + w_0$ <br>
 $y_i = β_0 + β_1x_{i1} + β_2x_{i2} + ... + β_kx_{ik} + ϵ_i$<br>
@@ -199,7 +206,7 @@ $e∼N(0,σ^2I_N)$<br>
 
 <br>
 
-# [2-1] 단계적 회귀 (Stepwise Regression), 위계적 회귀 (Hierarchical Regression) 
+# [3-1] 단계적 회귀 (Stepwise Regression), 위계적 회귀 (Hierarchical Regression) 
 여러 독립변수 중에서 종속변수를 가장 잘 설명하는 변수들을 선택하는 방법<br>
 **단계적 회귀 (Stepwise Regression)** 는 독립 변수들을 자동으로 모델에 추가하거나 제거하여 최적의 모델을 탐색(변수의 추가나 제거가 통계적으로 유의미한지 여부에 따라 이루어짐)<br>
 예를 들어, 변수를 추가할 때마다 F 통계량이유의미하게 증가하는지 확인하거나, 제거할 때마다 변수의 t 통계량이 유의미하게 감소하는지 확인함.<br> 
@@ -210,7 +217,7 @@ $e∼N(0,σ^2I_N)$<br>
 
 <br>
 
-# [2-2] 분위수 회귀 (Quantile Regression)
+# [3-2] 분위수 회귀 (Quantile Regression)
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.QuantileRegressor.html<br>
 반응 변수의 조건부 분위수를 모델링 하는 모델<br>
 1) 선형 회귀 조건이 충족되지 않는 경우<br>
@@ -262,7 +269,7 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 
 <br>
 
-# [3] 비선형 회귀 (Non-linear Regression) : 다항 회귀 (Polynomial Regression)
+# [4] 비선형 회귀 (Non-linear Regression) : 다항 회귀 (Polynomial Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#polynomial-regression-extending-linear-models-with-basis-functions<br>
 독립변수와 종속변수가 선형관계가 아닌 비선형 회귀(Non-linear Regression)<br>
 직선이 아닌 곡선 형태의 관계의 경우, 독립변수에 제곱이나 로그(log) 등을 취해 보면서 실시하는 모델링<br>
@@ -347,9 +354,9 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 <br>
 
 ---
-# 정규화된 회귀 (Regularized Regression), 벌점 회귀 (Penalized Regression)
+# [5] 정규화된 회귀 (Regularized Regression), 벌점 회귀 (Penalized Regression)
 
-# [3-1] 릿지 회귀 (Ridge Regression)
+# [5-1] 릿지 회귀 (Ridge Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html<br>
 최소제곱추정치(OLS)가 편향되지 않더라도 분산이 커서 관측값이 실제값에서 크게 벗어나는 다중공선성(multicollinearity)이 발생할 경우, 회귀 분석 추정치에 치우침 정도를 추가하여 표준오차를 줄이기 위해 사용<br>
@@ -372,7 +379,7 @@ print('훈련 R^2: %.3f, 테스트 R^2: %.3f' % (r2_score(y_train, y_train_pred)
 
 <br>
 
-# [3-2] 라쏘 회귀 (Lasso Regression)
+# [5-2] 라쏘 회귀 (Lasso Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#lasso<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Lasso.html<br>
 릿지회귀모델과 다르게 설명력에 기여하지 못하는 독립변수의 회귀계수를 0으로 만드는 회귀<br>
@@ -394,7 +401,7 @@ L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회�
 
 <br>
 
-# [3-3] 엘라스틱넷 회귀 (Elastic Net Regression)
+# [5-3] 엘라스틱넷 회귀 (Elastic Net Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#elastic-net<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html<br>
 릿지와 라쏘의 결합<br>
