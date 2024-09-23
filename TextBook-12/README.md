@@ -20,7 +20,7 @@
     [8] 부스팅 (Boosting)
 
 ---  
-## 강화 학습 (Reinforcement Learning, RL)
+# 강화 학습 (Reinforcement Learning, RL)
 
 # [1] Q-learning
 
@@ -42,7 +42,7 @@
 
 <br>
 
-## 앙상블 학습 (Ensemble Learning, EL)
+# 앙상블 학습 (Ensemble Learning, EL)
 ▣ API : https://scikit-learn.org/stable/api/sklearn.ensemble.html<br>
 
 # [6] 스태킹 (Stacking)
