@@ -42,6 +42,8 @@
 
 <br>
 
+---
+
 # 앙상블 학습 (Ensemble Learning, EL)
 ▣ API : https://scikit-learn.org/stable/api/sklearn.ensemble.html<br>
 
