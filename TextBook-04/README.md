@@ -7,7 +7,7 @@
   
   	[2] 일반화 선형 회귀(Generalized Linear Regression, GLM)
    		[2-1] 로지스틱 회귀 (Logistic Regression) → 분류(5강)
-		[2-2] Cox의 비례위험회귀(Cox's Proportional Hazard Regression)
+		[2-2] Cox의 비례위험 회귀(Cox's Proportional Hazard Regression)
      
  	[3] 다중 선형 회귀 (Multiple Linear Regression)
 		[3-1] 단계적 회귀 (Stepwise Regression), 위계적 회귀 (Hierarchical Regression) 
