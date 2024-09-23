@@ -7,5 +7,9 @@
 <br>
 
   https://www.kaggle.com/
+
+<br>
+
+  참고 : https://github.com/dair-ai/ML-Course-Notes
     	
 ---  
