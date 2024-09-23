@@ -3,7 +3,7 @@
 ---
 
 	[1] 선형 회귀 (Linear Regression)
-	[2] 다항 회귀 (Polynomial Regression)
+	[2] 비선형 회귀 (Non-linear Regression) : 다항 회귀 (Polynomial Regression)
  	[2-1] 분위수 회귀 (Quantile Regression)
   	[2-2] 단계적 회귀 (Stepwise Regression), 위계적 회귀 (Hierarchical Regression) 
    	[2-3] 포아송 회귀 (Poisson Regression)
@@ -136,7 +136,7 @@ $e∼N(0,σ^2I_N)$<br>
 
 <br>
 
-# [2] 다항 회귀 (Polynomial Regression)
+# [2] 비선형 회귀 (Non-linear Regression) : 다항 회귀 (Polynomial Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#polynomial-regression-extending-linear-models-with-basis-functions<br>
 독립변수와 종속변수가 선형관계가 아닌 비선형 회귀(Non-linear Regression)<br>
 직선이 아닌 곡선 형태의 관계의 경우, 독립변수에 제곱이나 로그(log) 등을 취해 보면서 실시하는 모델링<br>
@@ -336,6 +336,9 @@ $P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
  	            Feature들에 곱해지는 가중치가 커지지 않도록 제한
 
 <br>
+
+---
+# 정규화된 회귀 (Regularized Regression), 벌점 회귀 (Penalized Regression)
 
 # [3-1] 릿지 회귀 (Ridge Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification<br>
