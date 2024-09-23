@@ -5,7 +5,7 @@
 	[1] 선형 회귀 (Linear Regression)
 	[2] 다항 회귀 (Polynomial Regression)
  	[2-1] 분위수 회귀 (Quantile Regression)
-  	[2-2] 단계적 회귀 (Stepwise Regression)
+  	[2-2] 단계적 회귀 (Stepwise Regression), 위계적 회귀 (Hierarchical Regression) 
    	[2-3] 포아송 회귀 (Poisson Regression)
  	[3] 정규화된 회귀 (Regularized Regression), 벌점 회귀 (Penalized Regression)
 	[3-1] 릿지 회귀 (Ridge Regression)
@@ -247,9 +247,9 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 
 <br>
 
-# [2-2] 단계적 회귀 (Stepwise Regression)
+# [2-2] 단계적 회귀 (Stepwise Regression), 위계적 회귀 (Hierarchical Regression) 
 여러 독립변수 중에서 종속변수를 가장 잘 설명하는 변수들을 선택하는 방법<br>
-독립 변수들을 자동으로 모델에 추가하거나 제거하여 최적의 모델을 탐색(변수의 추가나 제거가 통계적으로 유의미한지 여부에 따라 이루어짐)<br>
+**단계적 회귀 (Stepwise Regression)** 는 독립 변수들을 자동으로 모델에 추가하거나 제거하여 최적의 모델을 탐색(변수의 추가나 제거가 통계적으로 유의미한지 여부에 따라 이루어짐)<br>
 예를 들어, 변수를 추가할 때마다 F 통계량이유의미하게 증가하는지 확인하거나, 제거할 때마다 변수의 t 통계량이 유의미하게 감소하는지 확인함.<br> 
 장점: 자동으로 변수를 선택하므로 모델이 데이터에 더 잘 맞을 가능성이 있음<br>
 **위계적 회귀 (Hierarchical Regression)** 는 독립 변수들을 미리 정의한 순서에 따라 모델에 추가하는 것으로,<br>
