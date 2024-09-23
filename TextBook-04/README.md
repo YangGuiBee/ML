@@ -153,10 +153,15 @@ $P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
 <br>
 
 # [2] 일반화 선형 회귀(Generalized Linear Regression, GLM)
-일반화 선형 회귀의 경우 선형성, 독립성, 등분산성, 정규성의 가정을 갖고 있지만, 종속변수가 연속형이 아니라면 대표적으로 오차항의 정규성 가정이 깨지게 된다.<br>
-**로지스틱 회귀(Logistic Regression)** 와 **Cox의 비례위험회귀(Cox's Proportional Hazard Regression)** 는 대표적인 일반화선형회귀이며,<br> 
-일반화 선형 회귀는 종속변수를 적절한 함수로 변화시킨 f(y)를 독립변수와 회귀계수의 선형결합으로 모형화한 것이다.<br>
+일반화 선형 회귀의 경우 선형성, 독립성, 등분산성, 정규성의 가정을 갖고 있지만, 종속변수가 연속형이 아니라면 대표적으로 오차항의 정규성 가정이 깨지게 되는데, 종속변수를 적절한 함수로 변화시킨 f(y)를 독립변수와 회귀계수의 선형결합으로 모형화한 것이다.<br>
 
+# [2-1] 로지스틱 회귀 (Logistic Regression) → 분류(5강)
+
+<br>
+
+# [2-2] Cox의 비례위험 회귀(Cox's Proportional Hazard Regression)
+Cox의 비례위험회귀는 시간에 따라 $hazard ratio(log(h(t)/h_0(t)))$가 일정하다는 가정을 가지는 방법론으로, 어떤 사건(event)이 일어날 때까지의 시간을 대상으로 분석하는 통계방법으로 사건과 사건 사이의 예측 회귀 모형을 분석한다.<br>
+HR>1이면 위험이 증가하고, HR<1이면 사망위험이 감소하는 것으로 평가
 <br>
 
 # [3] 다중회귀 (Multiple Regression)
