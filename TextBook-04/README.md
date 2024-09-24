@@ -49,8 +49,9 @@
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/index.html<br>
-종속변수 y(예상값)과 독립변수(설명변수) X와의 선형 상관 관계를 모델링하는 회귀<br>
-'선형'은 독립변수가 1차항으로써 2차원에서는 직선형태로, 3차원 공간에서는 평면으로 나타난다.<br> 
+종속변수 y(예상값)과 독립변수(설명변수) X와의 선형 상관 관계를 모델링하는 회귀로<br>
+회귀 계수(regression coefficient)를 선형 결합으로 표현할 수 있는 모델<br>
+'선형'은 종속변수와 독립변수의 관계가 2차원에서는 직선형태로, 3차원 공간에서는 평면으로 나타난다.<br> 
 
 ![](./images/RA.PNG)
 
