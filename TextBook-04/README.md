@@ -13,7 +13,7 @@
 		[3-1] 단계적 회귀 (Stepwise Regression), 위계적 회귀 (Hierarchical Regression) 
 		[3-2] 분위수 회귀 (Quantile Regression)
   
-	[4] 비선형 회귀 (Non-linear Regression) : 다항 회귀 (Polynomial Regression)
+	[4] 다항 회귀 (Polynomial Regression)
 
    	[5] 정규화된 회귀 (Regularized Regression), 벌점 회귀 (Penalized Regression)
 		[5-1] 릿지 회귀 (Ridge Regression)
@@ -287,9 +287,8 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 
 <br>
 
-# [4] 비선형 회귀 (Non-linear Regression) : 다항 회귀 (Polynomial Regression)
+# [4] 다항 회귀 (Polynomial Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#polynomial-regression-extending-linear-models-with-basis-functions<br>
-독립변수와 종속변수가 선형관계가 아닌 비선형 회귀(Non-linear Regression)<br>
 직선이 아닌 곡선 형태의 관계의 경우, 독립변수에 제곱이나 로그(log) 등을 취해 보면서 실시하는 모델링<br>
 $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 <br>
