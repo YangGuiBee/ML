@@ -61,6 +61,7 @@
 출처 : https://savannahar68.medium.com/getting-started-with-regression-a39aca03b75f
 <br>
 
+---
 독립변수가 1개이고, 모델이 독립변수와 회귀계수에 대하여 선형인 경우를 **단순선형 회귀 (simple linear regression)** 라 부른다. 모형식의 모든 회귀계수 각각에 대해 편미분한 결과가 다른 회귀계수를 포함하지 않으면 선형모형이라고 할 수 있다.<br>
 $y = w_1x + w_0$ <br>
 $y_i = β_1x_i + β_0 + ϵ_i$
@@ -69,26 +70,29 @@ $y_i = β_1x_i + β_0 + ϵ_i$
 ​​
 <br>
 
+---
 데이터를 어떻게 변형하더라도 파라미터를 선형 결합식으로 표현할 수 없는 모델로 회귀모형에 주어진 회귀식이 모수들의 비선형함수로 나타나는 경우는 **비선형 회귀(nonlinear regression model)** 이다.<br> 
 선형회귀에서 회귀계수는 설명변수의 변화량에 따른 반응변수의 평균변화량으로 해석되지만, 비선형회귀에서는 각 모수가 특정한 의미를 가질 수 있다.<br><br>
 $Y=β_0 +β_1e^{−β_2X}+ε$ : 회귀계수에 대해 편미분을 해도 $β_0$는 선형이나, $β_1$와 $β_2$는 비선형<br>
 $f(X,β_1,β_2)= (β_1X)/(β_2+X)$<br>
 
+---
 선형회귀는 학습을 통해 잔차 제곱들의 합인 RSS(Residual Sum of Squares)를 최소로 하는 회귀계수($W_0$과 $W_1$)를 찾는 것이 핵심. 모델 추정을 위해 예측값과 실제관측값인 잔차의 제곱(RSS)을 최소화하는 최소제곱법(OLS)을 사용한다.<br>
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/LRd.png'>
 <br>
 출처 : https://blog.csdn.net/Amy_mm/article/details/79989722
 <br>
-
 비용함수(Cost function), 손실함수(loss function) =<br>
 ![](./images/RSSd.svg)
 ​<br>
-오류가 작아지는 방향으로 w값을 보정할 수 있는 해법을 **경사하강법 (Gradient descent)** 을 통해 구한다.<br>
 
+---
+오류가 작아지는 방향으로 w값을 보정할 수 있는 해법을 **경사하강법 (Gradient descent)** 을 통해 구한다.<br>
 (1) $W_1$, $W_0$을 임의의 값으로 설정하고 첫 비용함수의 값을 계산한다.<br>
 (2) $W_1$, $W_0$의 값을 주어진 횟수만큼 계속 업데이트한다.<br>
 ![](./images/w1.svg) , ![](./images/w0.svg)
 
+---
 <br>
 
 	from sklearn.linear_model import LinearRegression
