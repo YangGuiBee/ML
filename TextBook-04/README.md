@@ -61,22 +61,6 @@
 출처 : https://savannahar68.medium.com/getting-started-with-regression-a39aca03b75f
 <br>
 
-독립변수가 1개이고, 모델이 독립변수와 회귀계수에 대하여 선형인 경우를 **단순 선형 회귀 (simple linear regression)** 라 부른다.<br>
-$y = w_1x + w_0$ <br>
-$y_i = β_1x_i + β_0 + ϵ_i$<br>
-$y_i$ : i번째 반응변수 값, $x_i$ : i번째 설명변수 값<br>
-$β_0$ : 절편 회귀계수, $β_1$ : 기울기 회귀계수<br>
-$ϵ_i$ : i번째 측정된 $y_i$의 오차 성분<br>
-
-![](./images/LRS.png)
-​​
-<br>
-
-비선형 모델은 데이터를 어떻게 변형하더라도 파라미터를 선형 결합식으로 표현할 수 없는 모델
-회귀모형에 주어진 회귀식이 모수들의 비선형함수로 나타내어지는 경우가 **비선형 회귀(nonlinear regression model)** 이다.
-
-$Y=β_0 +β_1e^{−β_2X}+ε$
-
 모델 추정을 위해서, 예측값과 실제관측값인 잔차의 제곱을 최소화하는 최소제곱법(OLS)을 사용<br>
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/LRd.png'>
 <br>
@@ -88,6 +72,23 @@ $Y=β_0 +β_1e^{−β_2X}+ε$
 잔차제곱합(RSS)을 최소화하는 방법을 최소제곱회귀 혹은 Ordinary Least Squares(OLS) 라고 부른다.<br>
 비용함수(Cost function), 손실함수(loss function) =<br>
 ![](./images/RSSd.svg)
+
+독립변수가 1개이고, 모델이 독립변수와 회귀계수에 대하여 선형인 경우를 **단순선형 회귀 (simple linear regression)** 라 부른다.<br>
+$y = w_1x + w_0$ <br>
+$y_i = β_1x_i + β_0 + ϵ_i$<br>
+$y_i$ : i번째 반응변수 값, $x_i$ : i번째 설명변수 값<br>
+$β_0$ : 절편 회귀계수, $β_1$ : 기울기 회귀계수<br>
+$ϵ_i$ : i번째 측정된 $y_i$의 오차 성분<br>
+
+![](./images/LRS.png)
+​​
+<br>
+
+데이터를 어떻게 변형하더라도 파라미터를 선형 결합식으로 표현할 수 없는 모델로<br>
+회귀모형에 주어진 회귀식이 모수들의 비선형함수로 나타내어지는 경우는 **비선형 회귀(nonlinear regression model)** 이다.
+
+$Y=β_0 +β_1e^{−β_2X}+ε$
+
 
 오류가 작아지는 방향으로 w값을 보정할 수 있는 해법을 경사적하강법을 통해 구한다.
 비용함수가 최소인 w값이 최적의 회귀계
