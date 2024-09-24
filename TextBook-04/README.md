@@ -57,12 +57,6 @@
 
 <br>
 
-$y = wx + b$ <br>
-
-![](./images/LRS.png)
-​​
-<br>
-
 ![](./images/LinearRegression.gif)
 출처 : https://savannahar68.medium.com/getting-started-with-regression-a39aca03b75f
 <br><br>
@@ -103,6 +97,9 @@ $β_0$ : 절편 회귀계수<br>
 $β_1$ : 기울기 회귀계수<br>
 $ϵ_i$ : i번째 측정된 $y_i$의 오차 성분<br>
 $E[ϵ_i]=0, Var(ϵ_i)=σ^2, E[ϵ_iϵ_j] = δ_{ij}$<br>
+
+![](./images/LRS.png)
+​​
 <br>
 
 # [1-1] 포아송 회귀 (Poisson Regression)
