@@ -61,7 +61,7 @@
 출처 : https://savannahar68.medium.com/getting-started-with-regression-a39aca03b75f
 <br>
 
-독립변수가 1개이고, 모델이 독립변수와 회귀계수에 대하여 선형인 경우를 **단순선형회귀 (simple linear regression)** 라 부른다.<br>
+독립변수가 1개이고, 모델이 독립변수와 회귀계수에 대하여 선형인 경우를 **단순 선형 회귀 (simple linear regression)** 라 부른다.<br>
 $y = w_1x + w_0$ <br>
 $y_i = β_1x_i + β_0 + ϵ_i$<br>
 $y_i$ : i번째 반응변수 값, $x_i$ : i번째 설명변수 값<br>
@@ -71,6 +71,11 @@ $ϵ_i$ : i번째 측정된 $y_i$의 오차 성분<br>
 ![](./images/LRS.png)
 ​​
 <br>
+
+비선형 모델은 데이터를 어떻게 변형하더라도 파라미터를 선형 결합식으로 표현할 수 없는 모델
+회귀모형에 주어진 회귀식이 모수들의 비선형함수로 나타내어지는 경우가 **비선형 회귀(nonlinear regression model)** 이다.
+
+$Y=β_0 +β_1e^{−β_2X}+ε$
 
 모델 추정을 위해서, 예측값과 실제관측값인 잔차의 제곱을 최소화하는 최소제곱법(OLS)을 사용<br>
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/LRd.png'>
