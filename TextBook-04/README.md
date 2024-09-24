@@ -61,14 +61,13 @@
 출처 : https://savannahar68.medium.com/getting-started-with-regression-a39aca03b75f
 <br>
 
-모델 추정을 위해서, 예측값과 실제관측값인 잔차의 제곱을 최소화하는 최소제곱법(OLS)을 사용<br>
+선형회귀는 학습을 통해 잔차 제곱들의 합인 RSS(Residual Sum of Squares)를 최소로 하는 회귀계수($W_0$과 $W_1$)를 찾는 것이 핵심.<br>
+모델 추정을 위해서, 예측값과 실제관측값인 잔차의 제곱(RSS)을 최소화하는 최소제곱법(OLS)을 사용한다.<br>
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/LRd.png'>
 <br>
 출처 : https://blog.csdn.net/Amy_mm/article/details/79989722
 <br>
 
-선형회귀는 학습을 통해 잔차 제곱들의 합인 RSS(Residual Sum of Squares)를 최소로 하는 회귀계수($W_0$과 $W_1$)를 찾는 것이 핵심.<br>
-잔차제곱합(RSS)을 최소화하는 방법을 최소제곱회귀 혹은 Ordinary Least Squares(OLS) 라고 부른다.<br>
 비용함수(Cost function), 손실함수(loss function) =<br>
 ![](./images/RSSd.svg)
 
