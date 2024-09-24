@@ -3,11 +3,11 @@
 ---
 
 	[1] 선형 회귀 (Linear Regression)
-		[1-1] 포아송 회귀 (Poisson Regression)
   
   	[2] 일반화 선형 회귀(Generalized Linear Regression, GLM)
    		[2-1] 로지스틱 회귀 (Logistic Regression) → 분류(5강)
-		[2-2] Cox의 비례위험 회귀(Cox's Proportional Hazard Regression)
+     		[2-2] 포아송 회귀 (Poisson Regression)
+		[2-3] Cox의 비례위험 회귀(Cox's Proportional Hazard Regression)
      
  	[3] 다중 선형 회귀 (Multiple Linear Regression)
 		[3-1] 단계적 회귀 (Stepwise Regression), 위계적 회귀 (Hierarchical Regression) 
@@ -107,37 +107,6 @@ $f(X,β_1,β_2)= (β_1X)/(β_2+X)$<br>
 
 <br>
 
-# [1-1] 포아송 회귀 (Poisson Regression)
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.PoissonRegressor.html<br>
-종속변수가 포아송 분포(Poisson Distribution)를 따르는 경우에 사용되며, 이산형 카운트 데이터를 모델링하는 데 적합<br>
-포아송 분포는 단위(한정된) 시간이나 공간에서 발생하는 평균적인 사건의 횟수(λ)를 바탕으로 특정 횟수의 사건이 발생할 확률을 설명하는 분포로 데이터 및 분할표를 모델링하는 데 사용되는 회귀 분석의 일반화 선형회귀(Generalized Linear Regression, GLM) 모델 형태이다.<br>
-포아송 회귀(poisson regression) 는 종속변수가 빈도변수로 0이상 정수이거나, 왜도가 크거나, 분포유형이 포아송 로그선형일 경우에 실시한다.<br>
-참고로 음이항 분포 회귀 (negative binomial regression)는 평균보다 분산이 큰 경우에 적용한다.<br>
-음이항 회귀(Negative binomial regression)는 분산이 포아송 모델의 평균과 동일하다는 매우 제한적인 가정을 완화하기 때문에 포아송 회귀의 널리 사용되는 일반화이다. 전통적인 음이항 회귀 모델은 포아송과 감마(gamma regression) 혼합 분포를 기반으로 한다. 이 모델은 감마 분포를 사용하여 포아송 이질성을 모델링하기 때문에 널리 사용된다.
-
-**포아송 과정(Poisson process)** <br>
-1) 정상성(stationarity): 현상이 발생하는 횟수의 분포는 시작 시각과 관계없음. 즉, 
-$N_t$의 분포와 $N_{s+t}−N_S$의 분포가 같고 $N_0=0$이다.
-2) 독립 증분성(independent increment): 시각 0부터 $t$까지 현상이 발생하는 횟수와 시각 $t$후부터 $t+h(h>0)$까지의 발생 횟수는 서로 독립(즉, $N_t$와 $N_{t+h}−N_t$는 서로 독립)
-3) 비례성(propertionality): 짧은 시간 동안에 현상이 한 번 발생할 확률은 시간에 비례.
-$P(N_h=1)=λh+o(h),h→0$
-※ λ는 양의 비례상수, o(h)는 $lim_{h→0}o(h)/h=0$
-4) 희귀성(rareness): 짧은 시간 동안에 현상이 두 번 이상 발생할 확률은 매우 작음.
-$P(N_h≥2)=o(h),h→0$<br>
-
-**포아송 확률변수 $X$의 확률밀도함수(probability mass function)** <br>
-$P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
-
-**포아송 회귀 적용 사례** <br>
-1) 일정 주어진 시간 동안에 방문하는 고객의 수<br>
-2) 일정 주어진 생산시간 동안 발생하는 불량 수<br>
-3) 하룻동안 발생하는 출생자 수<br>
-4) 어떤 시간 동안 톨게이트를 통과하는 차량의 수<br>
-5) 어떤 페이지에 있는 오타의 발생률<br>
-6) 어떤 특정 면적의 삼림에서 자라는 소나무의 수<br>
-
-<br>
-
 	import numpy as np
 	from scipy.stats import poisson
 	import numpy as np
@@ -171,7 +140,38 @@ $P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
 
 <br>
 
-# [2-2] Cox의 비례위험 회귀(Cox's Proportional Hazard Regression)
+# [2-2] 포아송 회귀 (Poisson Regression)
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.PoissonRegressor.html<br>
+종속변수가 포아송 분포(Poisson Distribution)를 따르는 경우에 사용되며, 이산형 카운트 데이터를 모델링하는 데 적합<br>
+포아송 분포는 단위(한정된) 시간이나 공간에서 발생하는 평균적인 사건의 횟수(λ)를 바탕으로 특정 횟수의 사건이 발생할 확률을 설명하는 분포로 데이터 및 분할표를 모델링하는 데 사용되는 회귀 분석의 일반화 선형회귀(Generalized Linear Regression, GLM) 모델 형태이다.<br>
+포아송 회귀(poisson regression) 는 종속변수가 빈도변수로 0이상 정수이거나, 왜도가 크거나, 분포유형이 포아송 로그선형일 경우에 실시한다.<br>
+참고로 음이항 분포 회귀 (negative binomial regression)는 평균보다 분산이 큰 경우에 적용한다.<br>
+음이항 회귀(Negative binomial regression)는 분산이 포아송 모델의 평균과 동일하다는 매우 제한적인 가정을 완화하기 때문에 포아송 회귀의 널리 사용되는 일반화이다. 전통적인 음이항 회귀 모델은 포아송과 감마(gamma regression) 혼합 분포를 기반으로 한다. 이 모델은 감마 분포를 사용하여 포아송 이질성을 모델링하기 때문에 널리 사용된다.
+
+**포아송 과정(Poisson process)** <br>
+1) 정상성(stationarity): 현상이 발생하는 횟수의 분포는 시작 시각과 관계없음. 즉, 
+$N_t$의 분포와 $N_{s+t}−N_S$의 분포가 같고 $N_0=0$이다.
+2) 독립 증분성(independent increment): 시각 0부터 $t$까지 현상이 발생하는 횟수와 시각 $t$후부터 $t+h(h>0)$까지의 발생 횟수는 서로 독립(즉, $N_t$와 $N_{t+h}−N_t$는 서로 독립)
+3) 비례성(propertionality): 짧은 시간 동안에 현상이 한 번 발생할 확률은 시간에 비례.
+$P(N_h=1)=λh+o(h),h→0$
+※ λ는 양의 비례상수, o(h)는 $lim_{h→0}o(h)/h=0$
+4) 희귀성(rareness): 짧은 시간 동안에 현상이 두 번 이상 발생할 확률은 매우 작음.
+$P(N_h≥2)=o(h),h→0$<br>
+
+**포아송 확률변수 $X$의 확률밀도함수(probability mass function)** <br>
+$P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
+
+**포아송 회귀 적용 사례** <br>
+1) 일정 주어진 시간 동안에 방문하는 고객의 수<br>
+2) 일정 주어진 생산시간 동안 발생하는 불량 수<br>
+3) 하룻동안 발생하는 출생자 수<br>
+4) 어떤 시간 동안 톨게이트를 통과하는 차량의 수<br>
+5) 어떤 페이지에 있는 오타의 발생률<br>
+6) 어떤 특정 면적의 삼림에서 자라는 소나무의 수<br>
+
+<br>
+
+# [2-3] Cox의 비례위험 회귀(Cox's Proportional Hazard Regression)
 Cox의 비례위험회귀는 시간에 따라 $hazard ratio(log(h(t)/h_0(t)))$가 일정하다는 가정을 가지는 방법론으로, 어떤 사건(event)이 일어날 때까지의 시간을 대상으로 분석하는 통계방법으로 사건과 사건 사이의 예측 회귀 모형을 분석한다.<br>
 HR>1이면 위험이 증가하고, HR<1이면 사망위험이 감소하는 것으로 평가
 <br>
