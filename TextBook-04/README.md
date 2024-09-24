@@ -59,7 +59,22 @@
 
 ![](./images/LinearRegression.gif)
 출처 : https://savannahar68.medium.com/getting-started-with-regression-a39aca03b75f
-<br><br>
+<br>
+
+독립변수가 1개이고, 모델이 독립변수와 회귀계수에 대하여 선형인 경우를 **단순선형회귀 (simple linear regression)** 라 부른다.<br>
+$y = w_1x + w_0$ <br>
+$y_i = β_1x_i + β_0 + ϵ_i$<br>
+$y_i$ : i번째 반응변수 값<br>
+$x_i$ : i번째 설명변수 값<br>
+$β_0$ : 절편 회귀계수<br>
+$β_1$ : 기울기 회귀계수<br>
+$ϵ_i$ : i번째 측정된 $y_i$의 오차 성분<br>
+$E[ϵ_i]=0, Var(ϵ_i)=σ^2, E[ϵ_iϵ_j] = δ_{ij}$<br>
+
+![](./images/LRS.png)
+​​
+<br>
+
 모델 추정을 위해서, 예측값과 실제관측값인 잔차의 제곱을 최소화하는 최소제곱법(OLS)을 사용<br>
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/LRd.png'>
 <br>
@@ -87,19 +102,6 @@
 	# coef_ : 기울기(w1), intercept_ : 절편(w0)
 	print(lr.coef_, lr.intercept_)
 
-
-독립변수가 1개이고, 모델이 독립변수와 회귀계수에 대하여 선형인 경우를 **단순선형회귀 (simple linear regression)** 라 부른다.<br>
-$y = w_1x + w_0$ <br>
-$y_i = β_1x_i + β_0 + ϵ_i$<br>
-$y_i$ : i번째 반응변수 값<br>
-$x_i$ : i번째 설명변수 값<br>
-$β_0$ : 절편 회귀계수<br>
-$β_1$ : 기울기 회귀계수<br>
-$ϵ_i$ : i번째 측정된 $y_i$의 오차 성분<br>
-$E[ϵ_i]=0, Var(ϵ_i)=σ^2, E[ϵ_iϵ_j] = δ_{ij}$<br>
-
-![](./images/LRS.png)
-​​
 <br>
 
 # [1-1] 포아송 회귀 (Poisson Regression)
