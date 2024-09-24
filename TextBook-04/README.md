@@ -84,7 +84,7 @@ $f(X,β_1,β_2)= (β_1X)/(β_2+X)$<br>
 
 비용함수(Cost function), 손실함수(loss function) =<br>
 ![](./images/RSSd.svg)
-​
+​<br>
 오류가 작아지는 방향으로 w값을 보정할 수 있는 해법을 경사적하강법을 통해 구한다.<br>
 
 <br>
