@@ -58,6 +58,8 @@
 <br>
 
 $y = wx + b$ <br>
+
+![](./images/LRS.png)
 ​​
 <br>
 
