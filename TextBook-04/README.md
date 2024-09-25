@@ -45,6 +45,7 @@
 
 <br>
 
+---
 # [1] 선형 회귀 (Linear Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html<br>
@@ -93,8 +94,7 @@ $y_i = β_1x_i + β_0 + ϵ_i$
 오류가 작아지는 방향으로 w값을 보정할 수 있는 해법을 구하는 방법<br>
 (1) $W_1$, $W_0$을 임의의 값으로 설정하고 첫 비용함수의 값을 계산한다.<br>
 (2) $W_1$, $W_0$의 값을 주어진 횟수만큼 계속 업데이트한다.<br>
-$x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$<br>
-$x_{i+1} = x_i - \alpha \nabla f(x_i)$<br>
+$x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_i)$<br>
 
 ![](./images/w1.svg) , ![](./images/w0.svg)
 
@@ -112,6 +112,7 @@ $x_{i+1} = x_i - \alpha \nabla f(x_i)$<br>
 
 <br>
 
+---
 # [2] 일반화 선형 회귀(Generalized Linear Regression, GLM)
 일반화 선형 회귀의 경우 선형성, 독립성, 등분산성, 정규성의 가정을 갖고 있지만, 종속변수가 연속형이 아니라면 대표적으로 오차항의 정규성 가정이 깨지게 되는데, 종속변수를 적절한 함수로 변화시킨 f(y)를 독립변수와 회귀계수의 선형결합으로 모형화한 것이다.<br>
 
@@ -169,6 +170,7 @@ Cox의 비례위험 회귀는 생존 분석(survival analysis)에서 주로 사�
 
 <br>
 
+---
 # [3] 다중회귀 (Multiple Regression)
 독립변수 X가 2개 이상인 회귀<br>
 $y = w_1x_1 + w_2x_2 + ... + w_nx_n + w_0$ <br>
@@ -285,6 +287,7 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 
 <br>
 
+---
 # [4] 다항 회귀 (Polynomial Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#polynomial-regression-extending-linear-models-with-basis-functions<br>
 직선이 아닌 곡선 형태의 관계의 경우, 독립변수에 제곱이나 로그(log) 등을 취해 보면서 실시하는 모델링<br>
@@ -343,9 +346,6 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 
 <br>
 
----
-
-<br>
 
 	입력데이터의 Feature들이 너무 많은 경우(Feature수에 비해 관측치 수가 적은 경우) 과적합이 발생
 	→ 
@@ -420,6 +420,7 @@ L1-norm 과 L2-norm을 모두 이용하여 패널티를 부과하여 회귀모�
 
 <br>
 
+---
 # [6] 비선형 회귀 (nonlinear regression)
 데이터를 어떻게 변형하더라도 파라미터를 선형 결합식으로 표현할 수 없는 모델로 회귀모형에 주어진 회귀식이 모수들의 비선형함수로 나타나는 경우이다.<br> 
 선형회귀에서 회귀계수는 설명변수의 변화량에 따른 반응변수의 평균변화량으로 해석되지만, 비선형회귀에서는 각 모수가 특정한 의미를 가질 수 있다.<br><br>
@@ -428,17 +429,4 @@ $f(X,β_1,β_2)= (β_1X)/(β_2+X)$<br>
 
 <br>
 
-# 기타 회귀 분석
-<br>
 
-	매개회귀(Mediation Regression)
-	독립변수와 종속변수 간의 관계가 다른 변수(매개변수)에 의해 어떻게 매개되는지 분석
-<br>
-
-	조절회귀(Mederation Regression)
-	독립변수와 종속변수 간의 관계가 다른 변수(조절변수)에 의해 어떻게 매개되는지 분석
-<br>
-
-	시계열 회귀 (Time Series Regression)
-	시간에 따라 변하는 데이터에 적용되며, 시간 요인을 고려하여 독립 변수와 종속변수간의 관계를 모델링
-<br>
