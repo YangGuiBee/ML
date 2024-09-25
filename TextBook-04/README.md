@@ -85,13 +85,6 @@ $y_i = β_1x_i + β_0 + ϵ_i$
 ​<br>
 
 ---
-오류가 작아지는 방향으로 w값을 보정할 수 있는 해법을 **경사하강법 (Gradient descent)** 을 통해 구한다.<br>
-(1) $W_1$, $W_0$을 임의의 값으로 설정하고 첫 비용함수의 값을 계산한다.<br>
-(2) $W_1$, $W_0$의 값을 주어진 횟수만큼 계속 업데이트한다.<br>
-![](./images/w1.svg) , ![](./images/w0.svg)
-
----
-<br>
 
 	from sklearn.linear_model import LinearRegression
 
@@ -347,7 +340,9 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 
 <br>
 
-경사하강법 (Gradient Decent)
+---
+
+** 경사하강법 (Gradient Decent)**
 비용 함수 f의 함숫값이 줄어드는 방향으로 함수의 계수를 일정 크기(학습량)만큼 더해나가며 f의 최솟값을 찾는 최적화 기법이다.
 기울기 $Gradient(f)=∇f(x)=[ ∂f(x_0)/∂x_0, ∂f(x_1)/∂x_1,...,∂f(x_{N−1}/∂x_{N−1}]^T$
 ​미분 가능한 N개의 다변수 함수 f를 각 축에 대하여 편미분한 값으로, 스칼라 함수의 모든 축에 대응하는 벡터장을 생성하는 역할을 한다.
@@ -357,10 +352,12 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$<br>
 $x_{i+1} = x_i - \alpha \nabla f(x_i)$<br>
 ![](./images/gradient_descent.gif)
 <br>
+오류가 작아지는 방향으로 w값을 보정할 수 있는 해법을 구하는 방법<br>
+(1) $W_1$, $W_0$을 임의의 값으로 설정하고 첫 비용함수의 값을 계산한다.<br>
+(2) $W_1$, $W_0$의 값을 주어진 횟수만큼 계속 업데이트한다.<br>
+![](./images/w1.svg) , ![](./images/w0.svg)
 
 SGDClassifier
-
-
 
 
 	입력데이터의 Feature들이 너무 많은 경우(Feature수에 비해 관측치 수가 적은 경우) 과적합이 발생
