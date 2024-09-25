@@ -103,32 +103,6 @@ $y_i = β_1x_i + β_0 + ϵ_i$
 
 <br>
 
-	import numpy as np
-	from scipy.stats import poisson
-	import numpy as np
-	import seaborn as sns
-	from scipy.special import factorial
-	
-	np.random.seed(123)
-	poisson.rvs(mu = 1, size = 10)
-	pal_brbg = sns.color_palette("BrBG", 6)
-	
-	x = np.arange(0, 11)
-	for n_lambda in range(1, 6):
-	    y = np.exp(-n_lambda) * np.power(n_lambda, x) / factorial(x)
-	    plt.plot(x, y, color = pal_brbg[n_lambda - 1], label=f"λ = {n_lambda}")
-	    plt.scatter(x, y, color = pal_brbg[n_lambda - 1])
-    	
-	plt.ylabel("Probability")
-	plt.title(f"Poisson Distribution (λ = [1, 5])")
-	plt.xticks(x)
-	plt.grid(axis = "y", linestyle = "--", color = "#CCCCCC")
-	plt.legend(loc="upper right")
-	plt.show()
-
-
-<br>
-
 # [2] 일반화 선형 회귀(Generalized Linear Regression, GLM)
 일반화 선형 회귀의 경우 선형성, 독립성, 등분산성, 정규성의 가정을 갖고 있지만, 종속변수가 연속형이 아니라면 대표적으로 오차항의 정규성 가정이 깨지게 되는데, 종속변수를 적절한 함수로 변화시킨 f(y)를 독립변수와 회귀계수의 선형결합으로 모형화한 것이다.<br>
 
@@ -165,10 +139,34 @@ $P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
 5) 어떤 페이지에 있는 오타의 발생률<br>
 6) 어떤 특정 면적의 삼림에서 자라는 소나무의 수<br>
 
+
+	import numpy as np
+	from scipy.stats import poisson
+	import numpy as np
+	import seaborn as sns
+	from scipy.special import factorial
+	
+	np.random.seed(123)
+	poisson.rvs(mu = 1, size = 10)
+	pal_brbg = sns.color_palette("BrBG", 6)
+	
+	x = np.arange(0, 11)
+	for n_lambda in range(1, 6):
+	    y = np.exp(-n_lambda) * np.power(n_lambda, x) / factorial(x)
+	    plt.plot(x, y, color = pal_brbg[n_lambda - 1], label=f"λ = {n_lambda}")
+	    plt.scatter(x, y, color = pal_brbg[n_lambda - 1])
+    	
+	plt.ylabel("Probability")
+	plt.title(f"Poisson Distribution (λ = [1, 5])")
+	plt.xticks(x)
+	plt.grid(axis = "y", linestyle = "--", color = "#CCCCCC")
+	plt.legend(loc="upper right")
+	plt.show()
+
 <br>
 
 # [2-3] Cox의 비례위험 회귀(Cox's Proportional Hazard Regression)
-Cox의 비례위험회귀는 시간에 따라 $hazard ratio(log(h(t)/h_0(t)))$가 일정하다는 가정을 가지는 방법론으로, 어떤 사건(event)이 일어날 때까지의 시간을 대상으로 분석하는 통계방법으로 사건과 사건 사이의 예측 회귀 모형을 분석한다. HR>1이면 위험이 증가하고, HR<1이면 사망위험이 감소하는 것으로 평가한다. 생존 분석(survival analysis)에서 주로 사용되는 회귀 모델입니다. 이 모델은 사건(예: 사망, 질병 발병, 기계 고장 등)이 발생할 때까지의 시간과 그 사건이 발생할 확률(위험율) 사이의 관계를 설명한다. 주어진 독립변수 값에 대해 위험율(hazard rate)이 시간에 걸쳐 일정한 비율로 유지(두 피험자에 대해 위험율의 비율이 시간이 지나도 일정하게 유지)된다고 가정한다. 환자가 특정 치료 후 생존할 확률을 예측, 기계 부품이 고장날 때까지의 시간을 분석, 사회학 연구에서 결혼생활이 파탄날 확률을 예측할 때 활용한다. 만약 비례 위험 가정이 만족되지 않으면 Cox 회귀 모델의 결과가 왜곡될 수 있으므로, 이 경우에는 비례 위험 가정을 검토하거나 시간을 고려한 상호작용 변수를 추가해야 한다.<br>
+Cox의 비례위험 회귀는 생존 분석(survival analysis)에서 주로 사용되는 회귀 모델이다. 어떤 사건(event)이 일어날 때까지의 시간을 대상으로 분석하는 통계방법으로 사건과 사건 사이의 예측 회귀 모형을 분석한다. 이 모델은 사건(예: 사망, 질병 발병, 기계 고장 등)이 발생할 때까지의 시간과 그 사건이 발생할 확률(위험율) 사이의 관계를 설명한다. 주어진 독립변수 값에 대해 위험율($hazard ratio(log(h(t)/h_0(t)))$)이 시간에 걸쳐 일정한 비율로 유지(두 피험자에 대해 위험율의 비율이 시간이 지나도 일정하게 유지)된다고 가정한다. 위험율(HR)이 1보다 크면 위험이 증가하고, 1보다 작으면 위험이 감소하는 것으로 평가한다. 환자가 특정 치료 후 생존할 확률을 예측, 기계 부품이 고장날 때까지의 시간을 분석, 사회학 연구에서 결혼생활이 파탄날 확률을 예측할 때 활용한다. 만약 비례 위험 가정이 만족되지 않으면 Cox 회귀 모델의 결과가 왜곡될 수 있으므로, 이 경우에는 비례 위험 가정을 검토하거나 시간을 고려한 상호작용 변수를 추가해야 한다.<br>
 <br>
 
 | 구분   | 포아송 회귀                                  | Cox 회귀                                                   |
