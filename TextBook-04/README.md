@@ -362,6 +362,7 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 
 ---
 # [5] 정규화 (Regularized), 벌점부여 (Penalized) 선형 회귀
+규제(Regularization) : 비용함수에 alpha값으로 패널티를 부여해서 회귀계수값의 크기를 감소시켜서 과적합을 개선<br>
 
 # [5-1] 릿지 회귀 (Ridge Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification<br>
@@ -411,8 +412,7 @@ L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회�
 # [5-3] 엘라스틱넷 회귀 (Elastic Net Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#elastic-net<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html<br>
-릿지와 라쏘의 결합<br>
-L1-norm 과 L2-norm을 모두 이용하여 패널티를 부과하여 회귀모델을 생성<br>
+릿지와 라쏘의 결합으로 L1규제로 Feature 수를 줄임과 동시에 L2규제로 계수값의 크기를 조정하는 패널티를 부과하여 회귀모델을 생성<br>
 
 	from sklearn.linear_model import ElasticNet
 	elanet = ElasticNet(alpha=1.0, l1_ratio=0.5)
