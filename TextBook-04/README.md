@@ -295,6 +295,11 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 <br>
 ![](./images/PolynomialFeatures.png)
 
+<br>
+
+![](./images/ddd.PNG)
+
+
 
 	import pandas as pd
 	import numpy as np
