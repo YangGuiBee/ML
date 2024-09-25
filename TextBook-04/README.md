@@ -364,6 +364,7 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 ---
 # [5] 정규화 (Regularized), 벌점부여 (Penalized) 선형 회귀
 규제(Regularization) : 비용함수에 alpha값으로 패널티를 부여해서 회귀계수값의 크기를 감소시켜서 과적합을 개선<br>
+비용함수의 목표 = $Min(RSS(W) + alpha * ||W||_2^2)$
 
 # [5-1] 릿지 회귀 (Ridge Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification<br>
