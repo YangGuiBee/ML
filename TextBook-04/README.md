@@ -221,7 +221,7 @@ $e∼N(0,σ^2I_N)$<br>
 
 # [3-2] 분위수 회귀 (Quantile Regression)
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.QuantileRegressor.html<br>
-반응 변수의 조건부 분위수를 모델링 하는 모델<br>
+반응 변수의 조건부 분위수를 모델링 할때 사용되는 선형 회귀의 확장 버전<br>
 1) 선형 회귀 조건이 충족되지 않는 경우<br>
 2) 오차의 분산이 큰 경우<br>
 3) Robust한 결과를 위하여<br>
@@ -229,7 +229,7 @@ $e∼N(0,σ^2I_N)$<br>
 5) 점 추정이 아닌 구간추정을 통해 결과의 정확도를 높이기 위하여<br>
 6) 반응변수의 스프레드를 같이 살펴보기 위하여<br>
 7) 회귀곡선에 대한 설득력을 높이기 위하여<br>
-사용되는 선형 회귀의 확장 버전<br>
+
 <br>
 보통 OLS 회귀는 조건부 평균값을 모델링하는 반면 분위수 회귀는 조건부 분위수를 모델링하고<br>
 조건부 분위수를 모델링하기 위해 Pinball loss를 사용<br>
