@@ -296,7 +296,7 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 ![](./images/PolynomialFeatures.png)
 
 <br>
-과소적합(Under fitting)  & 과대적합(Over fitting)<br><br>
+편향이 높으면 분산은 낮아짐 : 과소적합(Under fitting), 분산이 높으면 편향이 낮아짐 : 과대적합(Over fitting)<br>
   
 ![](./images/ddd.PNG)
 
