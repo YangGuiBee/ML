@@ -64,7 +64,8 @@
 <br>
 
 ---
-독립변수가 1개이고, 모델이 독립변수와 회귀계수에 대하여 선형인 경우를 **단순선형 회귀 (simple linear regression)** 라 부른다. 모든 회귀계수 각각에 대해 편미분한 결과가 다른 회귀계수를 포함하지 않으면 선형모형이라고 할 수 있다.<br>
+독립변수가 1개이고, 모델이 독립변수와 회귀계수에 대하여 선형인 경우를 **단순선형 회귀 (simple linear regression)** 라 부른다.<br> 
+모든 회귀계수 각각에 대해 편미분한 결과가 다른 회귀계수를 포함하지 않으면 선형모형이라고 할 수 있다.<br>
 $y = w_1x + w_0$ <br>
 $y_i = β_1x_i + β_0 + ϵ_i$
 ###### $y_i$ : i번째 반응변수 값, $x_i$ : i번째 설명변수 값, $β_0$ : 절편 회귀계수, $β_1$ : 기울기 회귀계수, $ϵ_i$ : i번째 측정된 $y_i$의 오차 성분<br>
@@ -73,7 +74,8 @@ $y_i = β_1x_i + β_0 + ϵ_i$
 <br>
 
 ---
-선형회귀는 학습을 통해 잔차 제곱들의 합인 RSS(Residual Sum of Squares)를 최소로 하는 회귀계수($W_0$과 $W_1$)를 찾는 것이 핵심. 모델 추정을 위해 예측값과 실제관측값인 잔차의 제곱(RSS)을 최소화하는 최소제곱법(OLS)을 사용한다.<br>
+선형회귀는 학습을 통해 잔차 제곱들의 합인 RSS(Residual Sum of Squares)를 최소로 하는 회귀계수($W_0$과 $W_1$)를 찾는 것이 핵심.<br> 
+모델 추정을 위해 예측값과 실제관측값인 잔차의 제곱(RSS)을 최소화하는 최소제곱법(OLS)을 사용한다.<br>
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/LRd.png'>
 <br>
 출처 : https://blog.csdn.net/Amy_mm/article/details/79989722
