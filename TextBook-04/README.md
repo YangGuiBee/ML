@@ -100,15 +100,20 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 
 ---
 
-	from sklearn.linear_model import LinearRegression
-
+	# 선형회귀모델(LinearRegression) Scikit-Learn Package 사용
+ 	from sklearn.linear_model import LinearRegression
+	
+ 	# 선형회귀모델(LinearRegression) 클래스 객체 생성
 	lr = LinearRegression()
+ 
+ 	# 선형회귀모델(LinearRegression) 학습
 	lr.fit(train_input, train_target)
 
-	print(lr.predict(([50]))
-
-	# coef_ : 기울기(w1), intercept_ : 절편(w0)
+	# 학습결과로 도출한 값 coef_ : 기울기(w1), intercept_ : 절편(w0)
 	print(lr.coef_, lr.intercept_)
+
+ 	# 선형회귀모델(LinearRegression) 학습결과를 바탕으로 새로운값에 대한 예측
+	print(lr.predict(([50]))
 
 <br>
 
