@@ -41,7 +41,5 @@
 
 <br>
 
-# [3] XGBoost (Extreme Gradient Boosting)
 
-<br>
 
