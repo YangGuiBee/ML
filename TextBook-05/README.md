@@ -17,7 +17,6 @@
 ---
 
 ![](./images/SLC.png)
-
 <br>출처 : https://towardsdatascience.com/top-machine-learning-algorithms-for-classification-2197870ff501
 
 <br>
