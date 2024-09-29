@@ -3,9 +3,18 @@
 
 ---
 
-	[1] 로지스틱 회귀 (Logistic Regression)	
-	[2] 나이브 베이즈 (Naive Bayes)
-	[3] XGBoost (Extreme Gradient Boosting)
+	[1] 경사하강법 기반 알고리즘 : Logistic Regression
+
+	[2] 확률 기반 알고리즘 : Naive Bayes Classifier
+
+	[3] 거리 기반 알고리즘 
+		[3-1] K-Nearest Neighbor Classification → 6강
+		[3-2] Support Vector Machine Classification → 6강
+
+	[4] 트리기반 알고리즘
+		[4-1] Decision Tree Classification → 6강
+		[4-2] Random Forest Classification → 6강
+		[4-3] 앙상블 기반 :  AdaBoost, Gradient Boosting Tree (GBT), lightGBM, XGBoost, CatBoost → 12강
   
 ---
 
