@@ -133,6 +133,7 @@ $\text{logitstic}(z) = \sigma(z) = \dfrac{1}{1+\exp{(-z)}}$ <br>
  - **가우시안 나이브 베이즈(Gaussian Naive Bayes, GaussianNB) :** 연속적인 값을 지닌 데이터를 처리 할때, 전형적으로 각 클래스의 연속적인 값들이 가우스 분포를 따른다고 가정한다.<br>
 $P(x_i \mid y) = \frac{1}{\sqrt{2\pi\sigma^2_y}} \exp\left(-\frac{(x_i - \mu_y)^2}{2\sigma^2_y}\right)$<br>
 
+
 	from sklearn.datasets import load_iris
 	from sklearn.model_selection import train_test_split
 	from sklearn.naive_bayes import GaussianNB
@@ -158,6 +159,7 @@ $P(x_i \mid y) = \frac{1}{\sqrt{2\pi\sigma^2_y}} \exp\left(-\frac{(x_i - \mu_y)^
 	#정확도 계산 및 출력
 	accuracy = (X_test.shape[0] - mislabeled_points) / X_test.shape[0]
 	print(f"Accuracy: {accuracy:.4f}")
+
 
 <br>
  - **다항 나이브 베이즈(Multinomial Naive Bayes, MultinomialNB) :** 하나의 문서에서 단어의 출현을 나타내는 이벤트를 가지고 문서 분류를 하는데 사용되는 이벤트 모델이다.<br>
