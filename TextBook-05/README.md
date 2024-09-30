@@ -82,6 +82,34 @@ $y = logit(odds ratio) = log ( \frac{ \theta (x) }{ 1 - \theta (x) } )$ <br>
 로지스틱함수(Logistic function)은 로지트 함수의 역함수이다. 즉 음의 무한대부터 양의 무한대 까지의 값을 가지는 입력변수를 0부터 1사이의 값을 가지는 출력변수로 변환한 것이다.<br>
 $\text{logitstic}(z) = \sigma(z) = \dfrac{1}{1+\exp{(-z)}}$ <br>
 
+
+	import pandas as pd
+	from sklearn.datasets import load_iris
+	from sklearn.linear_model import LogisticRegression
+
+	# Iris 데이터 로드
+	iris = load_iris()
+	X, y = iris.data, iris.target
+
+	# Feature 데이터와 Target 데이터를 DataFrame으로 변환
+ 	# 0: setosa, 1: versicolor, 2: virginica
+	df = pd.DataFrame(data=X, columns=iris.feature_names)
+	df['target'] = y	
+	print(df)
+
+	# Logistic Regression 모델 반복 훈련
+	clf = LogisticRegression(random_state=0, max_iter=200).fit(X, y)
+
+	# 예측
+	predictions = clf.predict(X[:2, :])
+	probabilities = clf.predict_proba(X[:2, :])
+	score = clf.score(X, y)
+
+	# 예측 결과 출력
+	print("Predictions: ", predictions)
+	print("Probabilities: ", probabilities)
+	print("Model Score: ", score)
+
 <br>
 
 # [2] 나이브 베이즈 (Naive Bayes)
