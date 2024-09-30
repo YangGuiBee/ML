@@ -67,11 +67,7 @@ $−∞ ≤ log(Odds) = log(p/(1−p​)) ≤ ∞$<br>
 $LogOdds = log(\frac{P(y=0|x)}{1-P(y=0|x)}) = \beta_0 + \sum_{j=1}^{p}\beta_j x_j$<br>
 
 $log−odds$로부터 특정 범주에 속할 확률을 얻기 위해  $log−odds$의 식을 $P(Y=0|x)$에 대해서 다시 정리하면,<br>
-$P(y=0|x) = \frac{exp({\beta}_0 + \displaystyle\sum_{j=1}^{p}{\beta}_{j}x_j)}{1+exp({\beta}0 + \displaystyle\sum_{j=1}^{p}{\beta}_{j}x_j)}$<br>
-
 $P(y=0|x) = \frac{exp(\beta_0 + \displaystyle\sum_{j=1}^{p}\beta_jx_j)}{1+exp(\beta_0 + \displaystyle\sum_{j=1}^{p}\beta_jx_j)}$<br>
-
-![](./images/cc.PNG)
 
 $z = {\beta}_0 + \displaystyle\sum_{j=1}^{p}{\beta}_{j}x_j$ 라고 한다면, 식은 보다 간결하게 표현된다.<br>
 $P(y=0|x) = \frac{1}{1+exp(-z)}$
