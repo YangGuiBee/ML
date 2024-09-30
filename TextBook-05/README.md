@@ -69,7 +69,7 @@ $LogOdds = log(\frac{P(y=0|x)}{1-P(y=0|x)}) = \beta_0 + \sum_{j=1}^{p}\beta_j x_
 $log−odds$로부터 특정 범주에 속할 확률을 얻기 위해  $log−odds$의 식을 $P(Y=0|x)$에 대해서 다시 정리하면,<br>
 $P(y=0|x) = \frac{exp(\beta_0 + \displaystyle\sum_{j=1}^{p}\beta_jx_j)}{1+exp(\beta_0 + \displaystyle\sum_{j=1}^{p}\beta_jx_j)}$<br>
 
-$z = {\beta}_0 + \displaystyle\sum_{j=1}^{p}{\beta}_{j}x_j$ 라고 한다면, 식은 보다 간결하게 표현된다.<br>
+$z = \beta_0 + \displaystyle\sum_{j=1}^{p}\beta_jx_j$ 라고 한다면, 식은 보다 간결하게 표현된다.<br>
 $P(y=0|x) = \frac{1}{1+exp(-z)}$
 
 오즈비(odds ratio)는 베르누이 시도에서 1이 나올 확률 θ(x)와 0이 나올 확률 1−θ(x)의 비율(ratio)을 의미한다.<br>
