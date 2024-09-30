@@ -115,6 +115,9 @@ $\text{logitstic}(z) = \sigma(z) = \dfrac{1}{1+\exp{(-z)}}$ <br>
 # [2] 나이브 베이즈 (Naive Bayes)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/naive_bayes.html<br>
 
+![](./images/nb.png)
+<br>
+
 ▣ 정의<br>
  - 베이즈 정리 : 사건의 확률과 추가정보를 고려했을때 확률의 변화<br>
  - 나이브 베이지안 알고리즘 : 사전확률을 통해 특징값이 제공하는 증거를 기반으로 사후확률을 예측(순진하고 때로는 잘못된 가정에도 불구하고 우수한 성능을 보임)<br>
@@ -128,6 +131,11 @@ $\text{logitstic}(z) = \sigma(z) = \dfrac{1}{1+\exp{(-z)}}$ <br>
 
 ▣ 단점<br>
  - feature 간의 독립성(feature간에 서로 상관관계 無)이어야 하므로 실생활에서 바로 적용하기는 곤란<br>
+
+▣ 활용분야<br>
+ - 스팸메일 필터와 같은 테스트 분류기<br>
+ - 컴퓨터 네트워크에서 침입이나 비정상행위 탐지<br>
+ - 일련의 관찰된 증상을 통한 의학적 질병의 진단<br>
 
 ▣ 유형<br>
  - **가우시안 나이브 베이즈(Gaussian Naive Bayes, GaussianNB) :** 연속적인 값을 지닌 데이터를 처리 할때, 전형적으로 각 클래스의 연속적인 값들이 가우스 분포를 따른다고 가정한다.<br>
@@ -182,14 +190,6 @@ $\text{logitstic}(z) = \sigma(z) = \dfrac{1}{1+\exp{(-z)}}$ <br>
  - API : https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.CategoricalNB.html#sklearn.naive_bayes.CategoricalNB<br>
   
 
-▣ 활용분야<br>
- - 스팸메일 필터와 같은 테스트 분류기<br>
- - 컴퓨터 네트워크에서 침입이나 비정상행위 탐지<br>
- - 일련의 관찰된 증상을 통한 의학적 질병의 진단<br>
-
-▣ 회귀식<br> 
-![](./images/nb.png)
-<br>
 
 
 
