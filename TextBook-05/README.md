@@ -14,7 +14,8 @@
 	[4] 트리기반 알고리즘
 		[4-1] Decision Tree Classification → 6강
 		[4-2] Random Forest Classification → 6강
-		[4-3] 앙상블 기반 :  AdaBoost, Gradient Boosting Tree (GBT), lightGBM, XGBoost, CatBoost → 12강
+		[4-3] 앙상블 기반 :  
+  		      AdaBoost, Gradient Boosting Tree (GBT), lightGBM, XGBoost, CatBoost → 12강
   
 ---
 
