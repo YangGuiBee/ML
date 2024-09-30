@@ -135,7 +135,7 @@ $P(x_i \mid y) = \frac{1}{\sqrt{2\pi\sigma^2_y}} \exp\left(-\frac{(x_i - \mu_y)^
  - **다항 나이브 베이즈(Multinomial Naive Bayes) :** 하나의 문서에서 단어의 출현을 나타내는 이벤트를 가지고 문서 분류를 하는데 사용되는 이벤트 모델이다.<br>
 $\hat{\theta}_{yi} = \frac{ N_{yi} + \alpha}{N_y + \alpha n}$<br><br>
  - **베르누이 나이브 베이즈(Bernoulli Naive Bayes) :** 다변수 베르누이 이벤트 모델에서, 특성들은 입력들을 설명하는 독립적인 부울 값(이진 변수)이다.<br>
-$P(x_i_중간 y) = P(x_i_중간 y) x_i + (1 - P(x_i_중간 y)) (1 - x_i)$<br>
+$P(x_i \mid y) = P(x_i = 1 \mid y) x_i + (1 - P(x_i = 1 \mid y)) (1 - x_i)$<br>
 
 ▣ 활용분야<br>
  - 스팸메일 필터와 같은 테스트 분류기<br>
