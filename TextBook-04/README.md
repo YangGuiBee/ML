@@ -137,30 +137,6 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 
 <br>
 
-	import numpy as np
-	from scipy.stats import poisson
-	import numpy as np
-	import seaborn as sns
-	from scipy.special import factorial
-	
-	np.random.seed(123)
-	poisson.rvs(mu = 1, size = 10)
-	pal_brbg = sns.color_palette("BrBG", 6)
-	
-	x = np.arange(0, 11)
-	for n_lambda in range(1, 6):
-	    y = np.exp(-n_lambda) * np.power(n_lambda, x) / factorial(x)
-	    plt.plot(x, y, color = pal_brbg[n_lambda - 1], label=f"λ = {n_lambda}")
-	    plt.scatter(x, y, color = pal_brbg[n_lambda - 1])
-    	
-	plt.ylabel("Probability")
-	plt.title(f"Poisson Distribution (λ = [1, 5])")
-	plt.xticks(x)
-	plt.grid(axis = "y", linestyle = "--", color = "#CCCCCC")
-	plt.legend(loc="upper right")
-	plt.show()
-
-
 	# numpy 라이브러리 임포트 (수치 계산에 유용한 함수 제공)
 	import numpy as np                      
 	# seaborn 라이브러리 임포트 (데이터 시각화 라이브러리)
@@ -237,42 +213,34 @@ $e∼N(0,σ^2I_N)$<br>
 	import matplotlib.pyplot as plt 
 	from sklearn.model_selection import train_test_split
 	from sklearn.linear_model import LinearRegression
-	
+
+ 	# 데이터 수집
 	df = pd.read_csv('https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-04/manhattan.csv')
+ 	# 데이터 전처리(null겂이 많은 항목 삭제)
 	df = df.drop(['neighborhood','borough','rental_id'], axis=1)
-	print(df.columns)
-	print(len(df.columns))
 	
 	X = df [['bedrooms', 'bathrooms', 'size_sqft', 'min_to_subway', 'floor',
        	'building_age_yrs', 'no_fee', 'has_roofdeck', 'has_washer_dryer',
 	'has_doorman', 'has_elevator', 'has_dishwasher', 'has_patio','has_gym']]
 	y = df [['rent']]       
  
+ 	# 데이터 구분 (학습데이터와 테스트 데이터 8:2)
 	X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.8,test_size=0.2)
+ 	# 선형회귀모델 객체 생성
 	mlr = LinearRegression()
-	mlr.fit(X_train, y_train)
-	
-	my_apartment = [[1,2,620,16,1,98,1,0,1,0,0,1,1,0]]
-	my_predict = mlr.predict(my_apartment)
-	my_predict
-	
+ 	# 학습
+	mlr.fit(X_train, y_train)	
+  	# 평가
+ 	print(mlr.score(X_train, y_train))
+ 	# 예측
 	y_predict = mlr.predict(X_test)
-	
+
+ 	# 그래프 그리기
 	plt.scatter(y_test,y_predict,alpha=0.4)
 	plt.xlabel('Actual Rent')
 	plt.ylabel('Predicted Rent')
 	plt.title('Multiple Linear Regression')
 	plt.show()
- 
-	# 특성별 상관분석
-	#plt.scatter(df[['size_sqft']],df[['rent']], alpha = 0.4)
-	#plt.show()
-	
-	#r2(coefficient of determination) : 결정계수 = 1 - (RSS/TSS)
-	#RSS(Residual Sum of Square) : 잔차의 제곱의 평균으로 직선이 미처 y에 대해 설명하지 못한 변화량
-	#TSS(Total Sum of Squares) : y값의 총 변화량
-	
-	mlr.score(X_train, y_train)
 
 <br>
 
