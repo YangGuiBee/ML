@@ -85,6 +85,7 @@ $\text{logitstic}(z) = \sigma(z) = \dfrac{1}{1+\exp{(-z)}}$ <br>
 <br>
 
 # [2] 나이브 베이즈 (Naive Bayes)
+▣ 가이드 : https://scikit-learn.org/stable/modules/naive_bayes.html<br>
 ![](./images/nb.png)
 <br>
 
