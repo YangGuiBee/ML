@@ -140,25 +140,26 @@ $P(x_i \mid y) = \frac{1}{\sqrt{2\pi\sigma^2_y}} \exp\left(-\frac{(x_i - \mu_y)^
 	
 	#Iris 데이터셋 로드
 	X, y = load_iris(return_X_y=True)
-
+	
 	#원 데이터셋의 크기 출력
 	print(f"Total number of data points in the dataset: {X.shape[0]}")
-
+	
 	#학습용 데이터와 테스트용 데이터로 나누기
 	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=0)
-
+	
 	#Gaussian Naive Bayes 모델 생성 및 학습
 	gnb = GaussianNB()
 	y_pred = gnb.fit(X_train, y_train).predict(X_test)
-
+	
 	#오분류된 데이터의 개수 출력
 	mislabeled_points = (y_test != y_pred).sum()
 	print("Number of mislabeled points out of a total %d points: %d" 
-      	% (X_test.shape[0], mislabeled_points))
-
+	      % (X_test.shape[0], mislabeled_points))
+	
 	#정확도 계산 및 출력
 	accuracy = (X_test.shape[0] - mislabeled_points) / X_test.shape[0]
 	print(f"Accuracy: {accuracy:.4f}")
+
 
 
 <br>
