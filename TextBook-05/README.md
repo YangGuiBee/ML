@@ -59,7 +59,7 @@ $log−odds$로부터 특정 범주에 속할 확률을 얻기 위해  $log−od
 $P(y=0|x) =$ $\frac{exp({\beta}_0 + \displaystyle\sum_{j=1}^{p}{\beta}_{j}x_j)}{1+exp({\beta}_0 + \displaystyle\sum_{j=1}^{p}{\beta}_{j}x_j)}$
 
 
-
+$\text{logitstic}(z) = \sigma(z) = \dfrac{1}{1+\exp{(-z)}}$
 
 <br>
 
