@@ -56,7 +56,7 @@
 $LogOdds = log(\frac{P(y=0|x)}{1-P(y=0|x)}) = \beta_0 + \sum_{j=1}^{p}\beta_j x_j$<br>
 
 $log−odds$로부터 특정 범주에 속할 확률을 얻기 위해  $log−odds$의 식을 $P(Y=0|x)$에 대해서 다시 정리하면,<br>
-$$P(y=0|x) = \frac{exp({\beta}_0 + \displaystyle\sum_{j=1}^{p}{\beta}_{j}x_j)}{1+exp({\beta}_0 + \displaystyle\sum_{j=1}^{p}{\beta}_{j}x_j)}$$
+$P(y=0|x) =$ $\frac{exp({\beta}_0 + \displaystyle\sum_{j=1}^{p}{\beta}_{j}x_j)}{1+exp({\beta}_0 + \displaystyle\sum_{j=1}^{p}{\beta}_{j}x_j)}$
 
 
 
