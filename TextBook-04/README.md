@@ -115,9 +115,9 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
  	# 선형회귀모델(LinearRegression) 학습결과를 바탕으로 새로운값에 대한 예측
 	print(lr.predict(([50]))
 
+---
 <br>
 
----
 # [2] 일반화 선형 회귀(Generalized Linear Regression, GLM)
 일반화 선형 회귀의 경우 선형성, 독립성, 등분산성, 정규성의 가정을 갖고 있지만, 종속변수가 연속형이 아니라면 대표적으로 오차항의 정규성 가정이 깨지게 되는데, 종속변수를 적절한 함수로 변화시킨 f(y)를 독립변수와 회귀계수의 선형결합으로 모형화한 것이다.<br>
 
@@ -159,6 +159,53 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 	plt.grid(axis = "y", linestyle = "--", color = "#CCCCCC")
 	plt.legend(loc="upper right")
 	plt.show()
+
+
+	# numpy 라이브러리 임포트 (수치 계산에 유용한 함수 제공)
+	import numpy as np                      
+	# seaborn 라이브러리 임포트 (데이터 시각화 라이브러리)
+	import seaborn as sns                
+	# matplotlib의 pyplot 모듈 임포트 (그래프 그리기에 사용)
+	import matplotlib.pyplot as plt         
+	# scipy.stats에서 poisson 모듈 임포트 (포아송 분포 관련 함수 제공)
+	from scipy.stats import poisson          
+	# scipy.special에서 factorial 모듈 임포트 (팩토리얼 계산을 위한 함수 제공)
+	from scipy.special import factorial      
+	
+	# 평균이 1인 포아송 분포에서 10개의 랜덤 샘플을 생성 (이 코드는 결과를 사용하지 않음)
+	poisson.rvs(mu=1, size=10)               
+
+	# seaborn의 "BrBG" 색상 팔레트에서 6개의 색을 선택 (그래프 색상에 사용)
+	pal_brbg = sns.color_palette("BrBG", 6)  
+	
+	# 0부터 10까지의 정수 배열 생성 (x축 값, 즉 포아송 분포에서 발생 가능한 사건의 수)
+	x = np.arange(0, 11)                     
+
+	# λ 값을 1부터 5까지 반복하여 각각의 포아송 분포 그래프를 그림
+	for n_lambda in range(1, 6):             
+
+    		# 포아송 분포의 확률 계산: P(x; λ) = (e^(-λ) * λ^x) / x!
+    		y = np.exp(-n_lambda) * np.power(n_lambda, x) / factorial(x)  
+
+    		# 계산된 확률 y값을 x값에 대해 선 그래프로 그림, 각각 다른 색 사용
+    		plt.plot(x, y, color=pal_brbg[n_lambda - 1], label=f"λ = {n_lambda}")  
+
+    		# 해당 λ에 대한 확률 값을 점으로 표시
+    		plt.scatter(x, y, color=pal_brbg[n_lambda - 1])  
+
+	# y축 라벨 설정 (확률)
+	plt.ylabel("Probability")                
+	# 그래프 제목 설정 (λ 값의 범위 명시)
+	plt.title(f"Poisson Distribution (λ = [1, 5])")  
+	# x축에 0부터 10까지의 값 표시
+	plt.xticks(x)                            
+	# y축에 점선 스타일의 회색 그리드 추가 (가독성 향상)
+	plt.grid(axis="y", linestyle="--", color="#CCCCCC")  
+	# 그래프의 범례를 오른쪽 상단에 표시
+	plt.legend(loc="upper right")            
+	# 그래프를 화면에 출력
+	plt.show()                               
+
 
 <br>
 
