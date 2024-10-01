@@ -89,9 +89,9 @@ P(X_i,y_i|\beta) = \left\{\begin{matrix}
 
 $P(X_i,y_i|\beta) = \sigma(X_i|\beta)^{y_i}(1-\sigma(X_i|\beta))^{1-y_i}$<br>
 
-
-
 $L(X,y|\beta) = \prod_{i=1}^{N}P(X_i,y_i|\beta)=\prod_{i=1}^{N}P(X_i|\beta)^{y_i}(1-\sigma (X_i|\beta))^{1-y_i}$<br>
+
+$logL(X,y|\beta) = \sum_{i=1}^{N}y_ilog(\sigma (X_i|\beta))+(1-y_i)log(1-\sigma (X_i|\beta))$<br>
 
 ▣ 경사하강법(Gradient Descent Algorithm)
 
