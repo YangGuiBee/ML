@@ -109,7 +109,6 @@ $\omega_{new}=\omega_{old}-\alpha f'(\omega), 0<\alpha<1$<br>
 $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\alpha\left|f'(\omega)\right|^2<f(\omega_{old})$
 
 
-
 	import pandas as pd
 	from sklearn.datasets import load_iris
 	from sklearn.linear_model import LogisticRegression
@@ -137,7 +136,9 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 	print("Probabilities: ", probabilities)
 	print("Model Score: ", score)
 
+
 <br>
+
 
 # [2] 나이브 베이즈 (Naive Bayes)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/naive_bayes.html<br>
