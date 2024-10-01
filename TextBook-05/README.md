@@ -95,7 +95,8 @@ $logL(X,y|\beta) = \sum_{i=1}^{N}y_ilog(\sigma (X_i|\beta))+(1-y_i)log(1-\sigma 
 
 <br>
 
-▣ 경사하강법(Gradient Descent Algorithm)<br><br>
+▣ 경사하강법(Gradient Descent Algorithm)<br>
+$\omega_{new}=\omega_{old}-\alpha f'(\omega), 0<\alpha<1$<br>
 
 $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\alpha\left|f'(\omega)\right|^2<f(\omega_{old})$
 
