@@ -78,6 +78,7 @@ P(X_i,y_i|\beta) = \left\{\begin{matrix}
 1-\sigma(X_i|\beta), y_i=0
 \end{matrix}\right.
 -->
+$P(X_i,y_i|\beta) = \sigma(X_i|\beta)^{y_i}(1-\sigma(X_i|\beta))^{1-y_i}$
 
 만일 종속변수가 0일 확률을 $P(y=0|x)$라고 한다면, 이를 구하는 식은 다음과 같다.<br>
 $LogOdds = log(\frac{P(y=0|x)}{1-P(y=0|x)}) = \beta_0 + \sum_{j=1}^{p}\beta_j x_j$<br>
