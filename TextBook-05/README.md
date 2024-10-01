@@ -64,6 +64,7 @@ $0 ≤ Odds = 성공확률/실패확률​ = p/(1−p​) ≤ ∞$<br>
 
 $−∞ ≤ log(Odds) = log(p/(1−p​)) ≤ ∞$<br>
 
+$log(Odds) = log(p/(1−p​)) = \hat{\beta}_0 + \hat{\beta}_1x_1 + \hat{\beta}_2x_2 + ...+\hat{\beta}_dx_d$<br>
 
 만일 종속변수가 0일 확률을 $P(y=0|x)$라고 한다면, 이를 구하는 식은 다음과 같다.<br>
 $LogOdds = log(\frac{P(y=0|x)}{1-P(y=0|x)}) = \beta_0 + \sum_{j=1}^{p}\beta_j x_j$<br>
