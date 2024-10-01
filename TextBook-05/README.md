@@ -78,6 +78,11 @@ $p = \frac{1}{1+e^{-(\hat{\beta}_0 + \hat{\beta}_1x_1 + \hat{\beta}_2x_2 + ...+\
 ![](./images/p.png)
 
 ▣ 최대우도추정법(Maximum Likelihood Estimation, MLE)<br><br>
+
+![](./images/likelihood.png)
+
+<br>
+
 ![](./images/PB.svg)
 
 <!--
