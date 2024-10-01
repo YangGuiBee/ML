@@ -146,6 +146,9 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 ![](./images/nb.png)
 <br>
 
+![](./images/table.png)
+<br>
+
 ▣ 정의<br>
  - 베이즈 정리 : 사건의 확률과 추가정보를 고려했을때 확률의 변화<br>
  - 나이브 베이지안 알고리즘 : 사전확률을 통해 특징값이 제공하는 증거를 기반으로 사후확률을 예측(순진하고 때로는 잘못된 가정에도 불구하고 우수한 성능을 보임)<br>
