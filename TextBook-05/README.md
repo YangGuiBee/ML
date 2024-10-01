@@ -60,7 +60,7 @@ Linear Regression : $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1x_1 + \hat{\beta}_2x
 
 $0 ≤ P(y=1 | X) = p(성공확률) ≤ 1$<br>
 
-$0 ≤ Odds = 성공확률/실패확률​ = p/(1−p​) ≤ ∞$<br>
+$0 ≤ Odds(승산) = 성공확률/실패확률​ = p/(1−p​) ≤ ∞$<br>
 
 $−∞ ≤ log(Odds) = log(p/(1−p​)) ≤ ∞$<br>
 
