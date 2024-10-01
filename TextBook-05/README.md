@@ -78,25 +78,9 @@ P(X_i,y_i|\beta) = \left\{\begin{matrix}
 1-\sigma(X_i|\beta), y_i=0
 \end{matrix}\right.
 -->
-$P(X_i,y_i|\beta) = \sigma(X_i|\beta)^{y_i}(1-\sigma(X_i|\beta))^{1-y_i}$
+$P(X_i,y_i|\beta) = \sigma(X_i|\beta)^{y_i}(1-\sigma(X_i|\beta))^{1-y_i}$<br>
 
-만일 종속변수가 0일 확률을 $P(y=0|x)$라고 한다면, 이를 구하는 식은 다음과 같다.<br>
-$LogOdds = log(\frac{P(y=0|x)}{1-P(y=0|x)}) = \beta_0 + \sum_{j=1}^{p}\beta_j x_j$<br>
-
-$log−odds$로부터 특정 범주에 속할 확률을 얻기 위해  $log−odds$의 식을 $P(Y=0|x)$에 대해서 다시 정리하면,<br>
-$P(y=0|x) = \frac{exp(\beta_0 + \displaystyle\sum_{j=1}^{p}\beta_jx_j)}{1+exp(\beta_0 + \displaystyle\sum_{j=1}^{p}\beta_jx_j)}$<br>
-
-$z = \beta_0 + \displaystyle\sum_{j=1}^{p}\beta_jx_j$ 라고 한다면, 식은 보다 간결하게 표현된다.<br>
-$P(y=0|x) = \frac{1}{1+exp(-z)}$
-
-오즈비(odds ratio)는 베르누이 시도에서 1이 나올 확률 θ(x)와 0이 나올 확률 1−θ(x)의 비율(ratio)을 의미한다.<br>
-$odds ratio = \frac{ \theta (x) }{1 - \theta (x)}$ <br>
-
-0부터 1사이의 값만 가지는 확률값인 θ(x)를 오즈비로 변환하면 0부터 양의 무한대까지의 값을 가질 수 있다. 오즈비를 로그변환한 것이 위에서 언급한 Logit function이다. 이로써 로지트 함수의 값은 로그변환에 의해 음의 무한대 (−∞)부터 양의 무한대(∞)까지의 값을 가질 수 있다.<br>
-$y = logit(odds ratio) = log ( \frac{ \theta (x) }{ 1 - \theta (x) } )$ <br>
-
-로지스틱함수(Logistic function)은 로지트 함수의 역함수이다. 즉 음의 무한대부터 양의 무한대 까지의 값을 가지는 입력변수를 0부터 1사이의 값을 가지는 출력변수로 변환한 것이다.<br>
-$\text{logitstic}(z) = \sigma(z) = \dfrac{1}{1+\exp{(-z)}}$ <br>
+![](./images/p.png)
 
 
 	import pandas as pd
