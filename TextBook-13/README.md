@@ -213,3 +213,43 @@ SSE값은 오차(Error)에 대한 변동성을 나타내는데, 이 값이 작�
 	    plt.annotate(f'y = {b1:.2f}x + {b0:.2f}', xy=(0.7*max(x), 0.8*max(y)))
 	    plt.show()
 
+
+
+# 경사하강법(Gradient Descent)을 활용한 회귀모델 최적화 기법
+
+**(1) LinearRegression :**  solver 매개변수에서 sag(Stochastic Average Gradient), lsqr 변형 사용<br>
+
+	from sklearn.linear_model import LinearRegression
+
+	model = LinearRegression(solver='sag')  # 경사하강법 기반 해법
+	model.fit(X_train, y_train)
+	predictions = model.predict(X_test)
+
+
+**(2) SGDRegressor (Stochastic Gradient Descent Regressor) :** 대규모 데이터에 적합, 정규화를 위한 L2, L1 및 ElasticNet 규제를 지원<br>
+
+ 	from sklearn.linear_model import SGDRegressor
+
+	model = SGDRegressor()
+	model.fit(X_train, y_train)
+	predictions = model.predict(X_test)
+
+
+**(3) Ridge, Lasso, ElasticNet :** 대규모 데이터셋에서 solver 매개변수에서 sag(Stochastic Average Gradient) 선택<br>
+
+	from sklearn.linear_model import Ridge
+
+	model = Ridge(solver='saga')  # 경사하강법 기반 해법
+	model.fit(X_train, y_train)
+	predictions = model.predict(X_test)
+
+
+   **(4) PassiveAggressiveRegressor :** 대규모 데이터셋에서 빠르게 학습하기 위해 경사하강법의 변형 중 하나인 수동 공격적 학습(passive-aggressive learning)을 사용<br>
+   
+	from sklearn.linear_model import PassiveAggressiveRegressor
+
+	model = PassiveAggressiveRegressor()
+	model.fit(X_train, y_train)
+	predictions = model.predict(X_test)
+
+
