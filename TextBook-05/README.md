@@ -75,7 +75,9 @@ $\frac{p}{1-p} =$ $e^{\hat{\beta}_0 + \hat{\beta}_1x_1 + \hat{\beta}_2x_2 + ...+
 $p = \frac{1}{1+e^{-(\hat{\beta}_0 + \hat{\beta}_1x_1 + \hat{\beta}_2x_2 + ...+\hat{\beta}_dx_d)}} =\sigma(x|\beta)$
 -->
 
-▣ 최대우도추정법(Maximum Likelihood Estimation, MLE)
+![](./images/p.png)
+
+▣ 최대우도추정법(Maximum Likelihood Estimation, MLE)<br>
 ![](./images/PB.svg)
 
 <!--
@@ -84,9 +86,10 @@ P(X_i,y_i|\beta) = \left\{\begin{matrix}
 1-\sigma(X_i|\beta), y_i=0
 \end{matrix}\right.
 -->
+
 $P(X_i,y_i|\beta) = \sigma(X_i|\beta)^{y_i}(1-\sigma(X_i|\beta))^{1-y_i}$<br>
 
-![](./images/p.png)
+
 
 $L(X,y|\beta) = \prod_{i=1}^{N}P(X_i,y_i|\beta)=\prod_{i=1}^{N}P(X_i|\beta)^{y_i}(1-\sigma (X_i|\beta))^{1-y_i}$<br>
 
