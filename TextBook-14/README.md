@@ -158,3 +158,42 @@ ROC 곡선 아래쪽 면적<br>
 0.6 ~ 0.5 : 좋지 않은 모델<br>
 
 <br>
+
+
+# 경사하강법(Gradient Descent)을 활용한 분류모델 최적화 기법
+
+ **(1) LogisticRegression :** solver 옵션에서 sag, saga와 같은 경사하강법 변형을 선택<br>
+
+ 	from sklearn.linear_model import LogisticRegression
+
+	model = LogisticRegression(solver='saga')  # 경사하강법 기반 해법
+	model.fit(X_train, y_train)
+	predictions = model.predict(X_test)
+
+
+ **(2) SGDClassifier (Stochastic Gradient Descent Classifier) :** <br>
+
+	from sklearn.linear_model import SGDClassifier
+
+	model = SGDClassifier()
+	model.fit(X_train, y_train)
+	predictions = model.predict(X_test)
+
+
+ **(3) Perceptron :** 이진분류 문제를 위한 단일 층 퍼셉트론 모델로, 기본적으로 경사하강법을 사용<br>
+
+	from sklearn.linear_model import Perceptron
+
+	model = Perceptron()
+	model.fit(X_train, y_train)
+	predictions = model.predict(X_test)
+
+
+**(4) PassiveAggressiveClassifier :** 대규모 데이터셋에서 빠르게 학습하기 위해 경사하강법의 변형 중 하나인 수동 공격적 학습(passive-aggressive learning)을 사용<br>
+
+	from sklearn.linear_model import PassiveAggressiveClassifier
+
+	model = PassiveAggressiveClassifier()
+	model.fit(X_train, y_train)
+	predictions = model.predict(X_test)
+
