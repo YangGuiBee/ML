@@ -272,7 +272,8 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
  - **범주형 나이브 베이즈(Categorical Naive Bayes, CategoricalNB) :** 범주적으로 분포된 데이터에 대한 범주적 나이브 베이즈 알고리즘을 구현하고, 인덱스로 설명되는 각 기능이 고유한 범주형 분포를 갖는다.<br>
  - API : https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.CategoricalNB.html#sklearn.naive_bayes.CategoricalNB<br>
 
- 
+
+<br> 
 	import numpy as np
 	from sklearn.naive_bayes import CategoricalNB
 
@@ -299,5 +300,5 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 	print(clf.get_params()) ## CategoricalNB 클래스 인자 설정 정보
 	print('정확도 : ', clf.score(X,y)) ## 성능 평가 점수(Accuracy)
 
-
+<br>
 
