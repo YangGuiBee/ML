@@ -186,10 +186,15 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
  - 컴퓨터 네트워크에서 침입이나 비정상행위 탐지<br>
  - 일련의 관찰된 증상을 통한 의학적 질병의 진단<br>
 
+▣ 회귀식<br>
+$\DeclareMathOperator*{\argmaxB}{argmax} f^{\text{Naive}}(X) = \argmaxB_{j\in\{1,2,\ldots,J\}}P(y=j)\prod_{l=1}^pP(X_l|y=j)\tag{*}$
+ 
+
 ▣ 유형<br>
+
  - **가우시안 나이브 베이즈(Gaussian Naive Bayes, GaussianNB) :** 연속적인 값을 지닌 데이터를 처리 할때, 전형적으로 각 클래스의 연속적인 값들이 가우스 분포를 따른다고 가정한다.<br>
  - API : https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB<br>
-- 회귀식 : $P(x_i \mid y) = \frac{1}{\sqrt{2\pi\sigma^2_y}} \exp\left(-\frac{(x_i - \mu_y)^2}{2\sigma^2_y}\right)$<br>
+ - 회귀식 : $P(x_i \mid y) = \frac{1}{\sqrt{2\pi\sigma^2_y}} \exp\left(-\frac{(x_i - \mu_y)^2}{2\sigma^2_y}\right)$<br>
 
 <br>
 
