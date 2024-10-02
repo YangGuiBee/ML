@@ -228,6 +228,40 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
  - 회귀식 :   ![](./images/theta.svg)
 <br>
 
+	import numpy as np
+	from sklearn.naive_bayes import MultinomialNB
+
+	#난수 생성을 위한 RandomState 객체 생성 (시드 값 50)
+	rng = np.random.RandomState(50)
+
+	#데이터 샘플의 개수 설정
+	num_data = 50
+
+	#각 샘플이 가질 특징(feature)의 개수 설정
+	num_feature = 10
+
+	#0부터 4까지의 정수로 구성된 (50, 10) 크기의 데이터 행렬 X 생성
+	X = rng.randint(5, size=(num_data, num_feature))
+
+	#0부터 5까지의 정수로 구성된 50개의 레이블 벡터 y 생성
+	y = np.random.randint(6, size=num_data)
+
+	#MultinomialNB 모델을 alpha=0.8로 설정하여 학습
+	#alpha 매개변수는 라플라스/리지 정규화 (Laplace Smoothing) 계수로 0인 확률을 방지하기 위해 사용
+	#alpha=1.0이 기본값이지만, 여기서는 alpha=0.8으로 설정하여 약간의 정규화를 적용
+	#값이 클수록 더 많은 평활화가 적용되며, 값이 작을수록 모델이 데이터에 더 민감하게 반응 
+	clf = MultinomialNB(alpha=0.8).fit(X, y)
+
+	#학습된 모델을 사용해 X 데이터에 대해 처음 3개의 예측값 출력
+	print(clf.predict(X)[:3])
+
+	#MultinomialNB 모델의 파라미터 정보 출력
+	print(clf.get_params())  # MultinomialNB 클래스 인자 설정 정보
+
+	#학습 데이터(X, y)에 대한 정확도 출력 (모델의 성능 평가)
+	print('정확도 : ', clf.score(X, y))  # 성능 평가 점수 (Accuracy)
+
+
  - **베르누이 나이브 베이즈(Bernoulli Naive Bayes, Bernoulli NB) :** 다변량 베르누이 분포에 따라 분포된 데이터에 대한 나이브 베이즈 학습 및 분류 알고리즘으로, 특성들은 입력들을 설명하는 독립적인 부울 값(이진 변수)이다.<br>
  - API : https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.BernoulliNB.html#sklearn.naive_bayes.BernoulliNB<br>
  - 회귀식 : $P(x_i \mid y) = P(x_i = 1 \mid y) x_i + (1 - P(x_i = 1 \mid y)) (1 - x_i)$<br>
@@ -238,7 +272,31 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
  - **범주형 나이브 베이즈(Categorical Naive Bayes, CategoricalNB) :** 범주적으로 분포된 데이터에 대한 범주적 나이브 베이즈 알고리즘을 구현하고, 인덱스로 설명되는 각 기능이 고유한 범주형 분포를 갖는다.<br>
  - API : https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.CategoricalNB.html#sklearn.naive_bayes.CategoricalNB<br>
   
+	import numpy as np
+	from sklearn.naive_bayes import CategoricalNB
 
+	#난수 생성을 위한 RandomState 객체 생성 (시드 값 100)
+	rng = np.random.RandomState(100)
+
+	#데이터 샘플의 개수 설정
+	num_data = 50
+
+	#각 샘플이 가질 특징(feature)의 개수 설정
+	num_feature = 10
+
+	#0부터 4까지의 정수로 구성된 (50, 10) 크기의 데이터 행렬 X 생성
+	X = rng.randint(5, size=(num_data, num_feature))
+
+	#0부터 5까지의 정수로 구성된 50개의 레이블 벡터 y 생성
+	y = np.random.randint(6, size=num_data)
+
+	#CategoricalNB 모델을 alpha=0.8로 설정하여 학습	
+	clf = CategoricalNB(alpha=0.8).fit(X, y)
+
+	#예측
+	print(clf.predict(X)[:3]) 
+	print(clf.get_params()) ## CategoricalNB 클래스 인자 설정 정보
+	print('정확도 : ', clf.score(X,y)) ## 성능 평가 점수(Accuracy)
 
 
 
