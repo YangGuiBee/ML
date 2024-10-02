@@ -274,6 +274,7 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 
 
 <br> 
+
 	import numpy as np
 	from sklearn.naive_bayes import CategoricalNB
 
