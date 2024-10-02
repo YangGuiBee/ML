@@ -187,8 +187,10 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
  - 일련의 관찰된 증상을 통한 의학적 질병의 진단<br>
 
 ▣ 회귀식<br>
-$\DeclareMathOperator*{\argmaxB}{argmax} f^{\text{Naive}}(X) = \argmaxB_{j\in\{1,2,\ldots,J\}}P(y=j)\prod_{l=1}^pP(X_l|y=j)\tag{*}$
- 
+
+![](./images/NB.png)
+
+<br>
 
 ▣ 유형<br>
 
