@@ -326,6 +326,9 @@ NumPy 공식문서 : https://numpy.org/doc/stable/user/whatisnumpy.html
 	numpy.dot() : 선형대수 연산(행렬내적)
 	numpy.transpose() : 선형대수 연산(전치행렬)
 
+
+![](./images/array.png)
+
 <br>
 
 ## 【Pandas】
