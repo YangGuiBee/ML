@@ -331,6 +331,8 @@ NumPy 공식문서 : https://numpy.org/doc/stable/user/whatisnumpy.html
 
 ![](./images/array2.png)
 
+![](./images/np.png)
+
 <br>
 
 ## 【Pandas】
