@@ -491,6 +491,76 @@ L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회�
 <br>
 
 ---
+
+# [선형회귀모델과 경사하강법 비교 예제]
+
+
+	import numpy as np
+	import matplotlib.pyplot as plt
+	from sklearn.linear_model import LinearRegression, SGDRegressor
+	from sklearn.model_selection import train_test_split
+
+	# 예제 데이터 생성
+	np.random.seed(0)
+	X = 2 * np.random.rand(100, 1)  # 0에서 2까지의 랜덤 숫자 100개 생성
+	y = 4 + 3 * X + np.random.randn(100, 1)  # y = 4 + 3x + 가우시안 노이즈
+
+	# 훈련 세트와 테스트 세트로 나누기
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+	# 기본 LinearRegression 모델 초기화 및 훈련
+	linear_reg = LinearRegression()
+	linear_reg.fit(X_train, y_train)
+
+	# SGDRegressor 모델 초기화 및 훈련
+	sgd_reg = SGDRegressor(max_iter=1000, tol=1e-3)
+	sgd_reg.fit(X_train, y_train.ravel())  # y_train은 1D 배열로 변환
+
+	# 모델 예측
+	y_pred_linear = linear_reg.predict(X_test)
+	y_pred_sgd = sgd_reg.predict(X_test)
+
+	# 결과 시각화
+	plt.figure(figsize=(12, 6))
+
+	# Linear Regression 결과
+	plt.subplot(1, 2, 1)
+	plt.scatter(X_test, y_test, color='blue', label='실제값')
+	plt.scatter(X_test, y_pred_linear, color='red', label='LinearRegression 예측값')
+	plt.plot(X_test, y_pred_linear, color='red', linewidth=2)
+	plt.title('기본 선형 회귀 모델')
+	plt.xlabel('X')
+	plt.ylabel('y')
+	plt.legend()
+
+	# SGDRegressor 결과
+	plt.subplot(1, 2, 2)
+	plt.scatter(X_test, y_test, color='blue', label='실제값')
+	plt.scatter(X_test, y_pred_sgd, color='green', label='SGDRegressor 예측값')
+	plt.plot(X_test, y_pred_sgd, color='green', linewidth=2)
+	plt.title('SGDRegressor 모델')
+	plt.xlabel('X')
+	plt.ylabel('y')
+	plt.legend()
+	plt.tight_layout()
+	plt.show()
+
+	# 회귀 계수 및 절편 출력
+	print("LinearRegression 회귀 계수:", linear_reg.coef_)
+	print("LinearRegression 절편:", linear_reg.intercept_)
+	print("SGDRegressor 회귀 계수:", sgd_reg.coef_)
+	print("SGDRegressor 절편:", sgd_reg.intercept_)
+
+	# R² 점수 출력
+	score_linear = linear_reg.score(X_test, y_test)
+	score_sgd = sgd_reg.score(X_test, y_test)
+
+	print("LinearRegression R² 점수:", score_linear)
+	print("SGDRegressor R² 점수:", score_sgd)
+
+<br>
+
+---
 # [6] 비선형 회귀 (nonlinear regression)
 데이터를 어떻게 변형하더라도 파라미터를 선형 결합식으로 표현할 수 없는 모델로 회귀모형에 주어진 회귀식이 모수들의 비선형함수로 나타나는 경우 선형회귀에서 회귀계수는 설명변수의 변화량에 따른 반응변수의 평균변화량으로 해석되지만, 비선형회귀에서는 각 모수가 특정한 의미를 가지게 된다.<br>
 (1) 다항 회귀 (Polynomial Regression)
