@@ -3,9 +3,9 @@
 
 ---
 
-	[1] 경사하강법 기반 알고리즘 : Logistic Regression
+	[1] 경사하강법 기반 알고리즘 : 로지스틱 회귀 (Logistic Regression)
 
-	[2] 확률 기반 알고리즘 : Naive Bayes Classifier
+	[2] 확률 기반 알고리즘 : 나이브 베이즈 분류기 (Naive Bayes Classifier, NBC)
 
 	[3] 거리 기반 알고리즘 
 		[3-1] k-최근접 이웃 분류(k-Nearest Neighbors Classification) → 분류+회귀(6강)
@@ -133,7 +133,7 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 <br>
 
 
-# [2] 나이브 베이즈 (Naive Bayes)
+# [2] 나이브 베이즈 분류기 (Naive Bayes Classifier, NBC)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/naive_bayes.html<br>
 
 ![](./images/nb.png)
