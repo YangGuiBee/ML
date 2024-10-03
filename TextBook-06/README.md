@@ -124,9 +124,22 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 <br>  
 
 ## 서포트 벡터 회귀 (Support Vector Regression, SVR)
-https://scikit-learn.org/stable/auto_examples/svm/index.html
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/svm/plot_svm_regression.html
+
+<br> 
 
 ## 서포트 벡터 분류 (Support Vector Classification, SVC)
+
+	import sklearn.svm as svm
+
+ 	# 선형일 경우
+	svm_clf =svm.SVC(kernel = 'linear')
+ 	# 비선형일 경우
+ 	svm_clf =svm.SVC(kernel = 'rbf')
+
+	# 교차검증
+	scores = cross_val_score(svm_clf, X, y, cv = 5)
+ 	scores.mean()
 
 <br>
 
