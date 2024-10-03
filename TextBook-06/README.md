@@ -199,13 +199,13 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 # [4] 랜덤 포레스트 (Random Forest)  
 ▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#random-forests<br>
 
-![](./images/margin.png)
+![](./images/rf.png)
 
 
 | 장점                             | 단점                                              |
 |----------------------------------|---------------------------------------------------|
-| 모델이 단순하며, 과적합이 잘 일어나지 않음 | 여러개의 결정트리 사용으로 메모리 사용량 큼 |
-| 새로운 데이터에 일반화가 용이함 | 고차원 데이터나 희소 데이터에 잘 작동하지 않음 |
+| 모델이 단순, 과적합이 잘 일어나지 않음 | 여러개의 결정트리 사용으로 메모리 사용량 큼 |
+| 새로운 데이터에 일반화가 용이함 | 고차원 및 희소 데이터에 잘 작동하지 않음 |
 
 # 랜덤 포레스트 회귀 (Random Forest Regression)  
 ▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#randomforestregressor<br>
