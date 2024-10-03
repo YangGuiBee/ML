@@ -199,6 +199,9 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 # [4] 랜덤 포레스트 (Random Forest)  
 ▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#random-forests<br>
 
+![](./images/margin.png)
+
+
 | 장점                             | 단점                                              |
 |----------------------------------|---------------------------------------------------|
 | 모델이 단순하며, 과적합이 잘 일어나지 않음 | 여러개의 결정트리 사용으로 메모리 사용량 큼 |
