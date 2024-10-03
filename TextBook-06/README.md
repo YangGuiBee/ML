@@ -132,9 +132,9 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 <br>  
 
 ## 서포트 벡터 회귀 (Support Vector Regression, SVR)
-▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html#regression
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html
-▣ 예제 : https://scikit-learn.org/stable/auto_examples/svm/plot_svm_regression.html
+▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html#regression<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/svm/plot_svm_regression.html<br>
 
 	from sklearn.svm import SVR
  
@@ -147,8 +147,8 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 <br> 
 
 ## 서포트 벡터 분류 (Support Vector Classification, SVC)
-▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html#classification
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC
+▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html#classification<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC<br>
 
 	import sklearn.svm as svm
 
