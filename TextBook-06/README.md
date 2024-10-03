@@ -105,9 +105,18 @@ $\displaystyle \min_{w}\frac{1}{2}\left\|w\right\|^2$<br>
 - 소프트마진 :  하드마진이 가진 한계를 개선하고자 나온 개념으로, 완벽하게 분류하는 초평면을 찾는 것이 아니라 어느 정도의 오분류를 허용하는 방식이다. 소프트마진에서는 오분류를 허용하고 이를 고려하기 위해 slack variable을 사용하여 해당 결정경계로부터 잘못 분류된 데이터의 거리를 측정한다.<br><br>
 $\displaystyle \min_{w}\frac{1}{2}\left\|w\right\|^2 + C\sum_{i=1}^{n}\varepsilon i$
 
-- 비선형분류 : 선형분리가 불가능한 입력공간을 선형분리가 가능한 고차원 특성공간으로 보내 선형분리를 진행하고 그 후 다시 기존의 입력공간으로 변환하면 비선형 분리를 하게 된다.
+- 비선형분류 : 선형분리가 불가능한 입력공간을 선형분리가 가능한 고차원 특성공간으로 보내 선형분리를 진행하고 그 후 다시 기존의 입력공간으로 변환하면 비선형 분리를 하게 된다.<br><br>
+입력공간을 특성공간으로 변환하기 위해서 mapping function을 사용한다<br>
+$\Phi(x) = Ax$<br><br>
+고차원의 특성공간으로 변환하고 목적함수에 대한 문제를 푸는 것이 간단한 차원에서는 가능하나 그 차수가 커질수록 계산량의 증가하는 것을 다시 해결하고자 나오는 개념이 커널트릭이다.<br>
+$k(x_i, x_j) =\Phi(x_i)^T\Phi(x_j)$<br><br>
+확장된 특성공간의 두 벡터의 내적만을 계산하여 고차원의 복잡한 계산 없이 커널 함수를 사용하여 연산량을 간단하게 해결할 수 있다.<br> 
+가장 성능이 좋고 많이 사용 : ($Radial basis function : k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}$<br>
+직접 차수를 정하는 방식 : $Polynomial : k(x,y) = (1+x^Ty)^p$<br>
+신경망 학습 : $Signomail : k(x,y) = tanh(kx_ix_j-\delta)$<br>
 
 <br>  
+
 ## 서포트 벡터 회귀 (Support Vector Regression, SVR)
 https://scikit-learn.org/stable/auto_examples/svm/index.html
 
