@@ -29,11 +29,11 @@
 | 수치기반 데이터 분류 성능 우수   | 명목특징 및 누락데이터위한 추가처리 필요          |
 
 K-NN 모델은 각 변수들의 범위를 재조정(표준화, 정규화)하여 거리함수의 영향을 줄여야 한다.<br>
-(1) 최소-최대 정규화(min-max normalization)
+(1) 최소-최대 정규화(min-max normalization) : 변수 X의 범위를 0%에서 100%까지로 나타냄<br>
 $X_{new} = \frac{X-min(X)}{max(X)-min(X)}$<br>
 
-(2) z-점수 표준화(z-score standardization)
-
+(2) z-점수 표준화(z-score standardization) : 변수 X의 범위를 평균의 위또는 아래로 표준편차만큼 떨어져 있는 지점으로 확대 또는 축소<br>
+$X_{new} = \frac{X-\mu}{\sigma}= \frac{X-min(X)}{StdDev(X)}$
 
 <br>
 
