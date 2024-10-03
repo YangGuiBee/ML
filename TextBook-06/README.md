@@ -111,9 +111,9 @@ $\Phi(x) = Ax$<br><br>
 고차원의 특성공간으로 변환하고 목적함수에 대한 문제를 푸는 것이 간단한 차원에서는 가능하나 그 차수가 커질수록 계산량의 증가하는 것을 다시 해결하고자 나오는 개념이 커널트릭이다.<br>
 $k(x_i, x_j) =\Phi(x_i)^T\Phi(x_j)$<br><br>
 확장된 특성공간의 두 벡터의 내적만을 계산하여 고차원의 복잡한 계산 없이 커널 함수를 사용하여 연산량을 간단하게 해결할 수 있다.<br> 
-가장 성능이 좋고 많이 사용 : $Radial basis function : k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}$<br>
-직접 차수를 정하는 방식 : $Polynomial : k(x,y) = (1+x^Ty)^p$<br>
-신경망 학습 : $Signomail : k(x,y) = tanh(kx_ix_j-\delta)$<br>
+가장 성능이 좋고 많이 사용(Radial basis function) : $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}$<br>
+직접 차수를 정하는 방식(Polynomial) : $k(x,y) = (1+x^Ty)^p$<br>
+신경망 학습(Signomail) : $k(x,y) = tanh(kx_ix_j-\delta)$<br>
 
 <br>  
 
