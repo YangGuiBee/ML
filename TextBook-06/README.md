@@ -134,6 +134,14 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 ## 서포트 벡터 회귀 (Support Vector Regression, SVR)
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/svm/plot_svm_regression.html
 
+	from sklearn.svm import SVR
+ 
+ 	svr = SVR(kernel='rbf', gamma='auto')
+	svr.fit(xtrain, ytrain)
+
+	score = svr.score(xtest, ytest)
+	print("R-squared: ", score)
+
 <br> 
 
 ## 서포트 벡터 분류 (Support Vector Classification, SVC)
