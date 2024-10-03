@@ -168,9 +168,12 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 # [3] 결정 트리 (Decision Tree)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/index.html<br>
-▣ 정의 : 결정트리는 어떤 항목에 대한 관측값과 목표값을 연결시켜주는 예측 모델로, 대표적인 지도학습 분류 모델이며, 스무고개와 같이 질문에 대하여 '예' 또는 '아니오'를 결정하여 트리 구조를 나타낸다. 결정트리의 기본적 아이디어는 복잡도 감소시키는 것에 있다. 정보의 복잡도를 불순도(Impurity)라고 하며, 불순도를 수치화한 값에는 지니계수(Gini coefficient)와 엔트로피(Entropy)가 있다.<br> 
-- 지니계수 
-
+▣ 정의 : 결정트리는 어떤 항목에 대한 관측값과 목표값을 연결시켜주는 예측 모델로, 대표적인 지도학습 분류 모델이며, 스무고개와 같이 질문에 대하여 '예' 또는 '아니오'를 결정하여 트리 구조를 나타낸다. 결정트리의 기본적 아이디어는 복잡도 감소시키는 것에 있다. 정보의 복잡도를 불순도(Impurity)라고 하며, 불순도를 수치화한 값에는 지니계수(Gini coefficient)와 엔트로피(Entropy)가 있다.<br><br>
+ - 지니계수 : $G_i = 1-\sum_{k=1}^{n}P^2_{i,k}$<br>
+ - 엔트로피 : $E_i = -\sum_{k=1}^{n}P_{i,k}log_2P_{i,k}$<br>
+▣ 유형 :  ID3, CART
+ - ID3 : 모든 독립변수가 범주형 데이터인 경우에만 분류가 가능하다. 정보획득량(Infomation Gain)이 높은 특징부터 분기해나가는데 정보획득량은 분기전 엔트로피와 분기후 엔트로피의 차이를 말한다.(엔트로피 사용)<br>
+ - CART : Classification and Regression Tree의 약자로, 이름 그대로 분류와 회귀가 모두 가능한 결정트리 알고리즘으로 yes 또는 no 두 가지로 분기한다.(지니계수 사용)<br> 
 
 <br>
 
