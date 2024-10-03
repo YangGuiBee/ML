@@ -82,6 +82,8 @@ $X_{new} = \frac{X-\mu}{\sigma}= \frac{X-min(X)}{StdDev(X)}$
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/svm/index.html<br>
 ▣ 정의 : SVM은 N차원 공간을 (N-1)차원으로 나눌 수 있는 초평면을 찾는 분류 기법으로 2개의 클래스를 분류할 수 있는 최적의 경계를 찾는다.<br>
 
+![](./images/margin.png)
+
 - 최적의 경계 : 각 클래스의 말단에 위치한 데이터들 사이의 거리를 최대화 할 수 있는 경계<br>
 - 초평면(hyper plane) : 고차원(N차원)에서 데이터를 두 분류로 나누는 결정 경계<br>
 - Support Vector : 데이터들 중에서 결정 경계에 가장 가까운 데이터들<br>
@@ -102,8 +104,12 @@ $X_{new} = \frac{X-\mu}{\sigma}= \frac{X-min(X)}{StdDev(X)}$
 - 하드마진 : 두 클래스를 분류할 수 있는 최대마진의 초평면을 찾는 방법으로, 모든 훈련데이터는 마진의 바깥족에 위치하게 선형으로 구분해서 하나의 오차도 허용하면 안된다. 모든 데이터를 선형으로 오차없이 나눌 수 있는 결정경계를 찾는 것은 사실상 어렵다.<br><br>
 $\displaystyle \min_{w}\frac{1}{2}\left\|w\right\|^2$<br>
 
+![](./images/hmargin.png)
+
 - 소프트마진 :  하드마진이 가진 한계를 개선하고자 나온 개념으로, 완벽하게 분류하는 초평면을 찾는 것이 아니라 어느 정도의 오분류를 허용하는 방식이다. 소프트마진에서는 오분류를 허용하고 이를 고려하기 위해 slack variable을 사용하여 해당 결정경계로부터 잘못 분류된 데이터의 거리를 측정한다.<br><br>
 $\displaystyle \min_{w}\frac{1}{2}\left\|w\right\|^2 + C\sum_{i=1}^{n}\varepsilon i$
+
+![](./images/smargin.png)
 
 - 비선형분류 : 선형분리가 불가능한 입력공간을 선형분리가 가능한 고차원 특성공간으로 보내 선형분리를 진행하고 그 후 다시 기존의 입력공간으로 변환하면 비선형 분리를 하게 된다.<br><br>
 입력공간을 특성공간으로 변환하기 위해서 mapping function을 사용한다<br>
