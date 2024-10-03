@@ -132,6 +132,8 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 <br>  
 
 ## 서포트 벡터 회귀 (Support Vector Regression, SVR)
+▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html#regression
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/svm/plot_svm_regression.html
 
 	from sklearn.svm import SVR
@@ -145,6 +147,8 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 <br> 
 
 ## 서포트 벡터 분류 (Support Vector Classification, SVC)
+▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html#classification
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC
 
 	import sklearn.svm as svm
 
@@ -163,17 +167,33 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/index.html<br>
 
+<br>
+
 # 결정 트리 회귀 (Decision Tree Regression)
+▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html#regression<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html<br>
 
+<br>
+
 # 결정 트리 분류 (Decision Tree Classification)
+▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html#classification<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html<br>
 
 <br>
 
 # [4] 랜덤 포레스트 (Random Forest)  
+▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#random-forests<br>
 
 # 랜덤 포레스트 회귀 (Random Forest Regression)  
+▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#randomforestregressor<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor<br>
+
+<br>
+
 # 랜덤 포레스트 분류 (Random Forest Classification)    	  	
+▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#randomforestclassifier<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier<br>
 
 <br>
 
