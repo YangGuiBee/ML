@@ -28,6 +28,14 @@
 | 빠른 훈련 단계                   | 데이터가 많아지면 분류단계가 느리다               |
 | 수치기반 데이터 분류 성능 우수   | 명목특징 및 누락데이터위한 추가처리 필요          |
 
+K-NN 모델은 각 변수들의 범위를 재조정(표준화, 정규화)하여 거리함수의 영향을 줄여야 한다.<br>
+(1) 최소-최대 정규화(min-max normalization)
+$X_{new} = \frac{X-min(X)}{max(X)-min(X)}$<br>
+
+(2) z-점수 표준화(z-score standardization)
+
+
+<br>
 
 ## k-최근접 이웃 회귀(k-Nearest Neighbors Regression)
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html<br>
