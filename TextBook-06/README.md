@@ -75,6 +75,14 @@ $X_{new} = \frac{X-\mu}{\sigma}= \frac{X-min(X)}{StdDev(X)}$
 ## k-최근접 이웃 분류(k-Nearest Neighbors Classification)
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
 
+	from sklearn.neighbors import KNeighborsClassifier
+	kn = KNeighborsClassifier()
+
+	#훈련
+	kn.fit(train_input, train_target)
+	#평가
+	print(kn.score(test_input, test_target))
+
 <br>
  
 # [2] 서포트 벡터 머신 (Support Vector Machine, SVM)
