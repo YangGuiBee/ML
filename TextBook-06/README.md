@@ -29,10 +29,10 @@
 | 수치기반 데이터 분류 성능우수 | 명목특징 및 누락데이터위한 추가처리 필요(이상치에 민감)|
 
 K-NN 모델은 각 변수들의 범위를 재조정(표준화, 정규화)하여 거리함수의 영향을 줄여야 한다.<br>
-(1) 최소-최대 정규화(min-max normalization) : 변수 X의 범위를 0%에서 100%까지로 나타냄<br>
+(1) 최소-최대 정규화(min-max normalization) : 변수 X의 범위를 0%에서 100%까지로 나타냄<br><br>
 $X_{new} = \frac{X-min(X)}{max(X)-min(X)}$<br>
 
-(2) z-점수 표준화(z-score standardization) : 변수 X의 범위를 평균의 위또는 아래로 표준편차만큼 떨어져 있는 지점으로 확대 또는 축소<br>
+(2) z-점수 표준화(z-score standardization) : 변수 X의 범위를 평균의 위또는 아래로 표준편차만큼 떨어져 있는 지점으로 확대 또는 축소<br><br>
 $X_{new} = \frac{X-\mu}{\sigma}= \frac{X-min(X)}{StdDev(X)}$
 
 <br>
@@ -52,22 +52,22 @@ $X_{new} = \frac{X-\mu}{\sigma}= \frac{X-min(X)}{StdDev(X)}$
 	# 예측에 사용되는 가중 방법을 결정한다. default는 uniform이다. 
 	# 'uniform' : 각각의 이웃이 모두 동일한 가중치를 갖는다. 
 	# 'distance' : 거리가 가까울수록 더 높은 가중치를 가져 더 큰 영향을 미치게 된다.
-	# callable : 사용자가 직접 정의한 함수를 사용할 수도 있다. 거리가 저장된 배열을 입력받고 가중치가 저장된 배열을 반환하는 함수
+	# callable : 사용자가 정의한 함수(거리가 저장된 배열을 입력받고 가중치가 저장된 배열을 반환)
  	
 	# algorithm : {'auto', 'ball_tree', 'kd_tree', 'brute'} 
 	# 가장 가까운 이웃들을 계산하는 데 사용하는 알고리즘을 결정한다. default는 auto이다. 
 	# 'auto' : 입력된 훈련 데이터에 기반하여 가장 적절한 알고리즘을 사용한다. 
-	# 'ball_tree' : Ball-Tree 구조를 사용한다.(Ball-Tree 설명 : https://nobilitycat.tistory.com/entry/ball-tree)
+	# 'ball_tree' : Ball-Tree 구조를 사용한다.(https://nobilitycat.tistory.com/entry/ball-tree)
 	# 'kd_tree' : KD-Tree 구조를 사용한다.
 	# 'brute' : Brute-Force 탐색을 사용한다.  	
  	
 	# leaf_size : int
 	# Ball-Tree나 KD-Tree의 leaf size를 결정한다. default값은 30이다.
-	# 이는 트리를 저장하기 위한 메모리뿐만 아니라, 트리의 구성과 쿼리 처리의 속도에도 영향을 미친다. 
+	# 트리를 저장하기 위한 메모리뿐만 아니라, 트리의 구성과 쿼리 처리의 속도에도 영향을 미친다. 
  	
 	# p : int
 	# 민코프스키 미터법(Minkowski)의 차수를 결정한다. 
-	# 예를 들어 p = 1이면 맨해튼 거리(Manhatten distance), 
+	# p = 1이면 맨해튼 거리(Manhatten distance)
 	# p = 2이면 유클리드 거리(Euclidean distance)이다. 
 
 <br>
@@ -98,9 +98,16 @@ $X_{new} = \frac{X-\mu}{\sigma}= \frac{X-min(X)}{StdDev(X)}$
 | 잡음에 강하다 | 데이터 특성의 스케일링에 민감하다|
 | 데이터 특성이 적어도 좋은 성능 | | 
 
-▣ 유형 : 선형SVM(하드마진, 소프트마진), 비선형SVM
+▣ 유형 : 선형SVM(하드마진, 소프트마진), 비선형SVM<br>
+- 하드마진 : 두 클래스를 분류할 수 있는 최대마진의 초평면을 찾는 방법으로, 모든 훈련데이터는 마진의 바깥족에 위치하게 선형으로 구분해서 하나의 오차도 허용하면 안된다. 모든 데이터를 선형으로 오차없이 나눌 수 있는 결정경계를 찾는 것은 사실상 어렵다.<br><br>
+$\displaystyle \min_{w}\frac{1}{2}\left\|w\right\|^2$<br>
 
+- 소프트마진 :  하드마진이 가진 한계를 개선하고자 나온 개념으로, 완벽하게 분류하는 초평면을 찾는 것이 아니라 어느 정도의 오분류를 허용하는 방식이다. 소프트마진에서는 오분류를 허용하고 이를 고려하기 위해 slack variable을 사용하여 해당 결정경계로부터 잘못 분류된 데이터의 거리를 측정한다.<br><br>
+$\displaystyle \min_{w}\frac{1}{2}\left\|w\right\|^2 + C\sum_{i=1}^{n}\varepsilon i$
 
+- 비선형분류 : 선형분리가 불가능한 입력공간을 선형분리가 가능한 고차원 특성공간으로 보내 선형분리를 진행하고 그 후 다시 기존의 입력공간으로 변환하면 비선형 분리를 하게 된다.
+
+<br>  
 ## 서포트 벡터 회귀 (Support Vector Regression, SVR)
 https://scikit-learn.org/stable/auto_examples/svm/index.html
 
