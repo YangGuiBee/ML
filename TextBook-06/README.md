@@ -219,6 +219,21 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html#classification<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html<br>
 
+	from sklearn.tree import DecisionTreeClassifier
+	from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+ 	# 결정 트리 분류 모델 생성 (최대 깊이 3으로 설정)
+	clf = DecisionTreeClassifier(max_depth=3, random_state=42)
+	clf.fit(X_train, y_train)  # 학습 데이터를 이용해 모델 학습
+
+	# 테스트 데이터에 대한 예측
+	y_pred = clf.predict(X_test)
+
+	# 정확도 출력
+	accuracy = accuracy_score(y_test, y_pred)  # 정확도 계산
+	print(f"Accuracy: {accuracy * 100:.2f}%")  # 정확도 출력
+
+
 <br>
 
 # [4] 랜덤 포레스트(Random Forest)  
