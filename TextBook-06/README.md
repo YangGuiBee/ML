@@ -174,6 +174,7 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/index.html<br>
 ▣ 정의 : 어떤 항목에 대한 관측값과 목표값을 연결시켜주는 예측 모델로, 대표적인 지도학습 분류 모델이며, 스무고개와 같이 질문에 대하여 '예' 또는 '아니오'를 결정하여 트리 구조를 나타낸다.<br> 
+▣ 회귀식 : $\widehat{y}=\frac{1}{M}\sum_{i=1}^{M}y_i$ ($M$: 해당 리프노드에 속한 데이터 포인트의 수, $y_i$: 리프노드에 포함된 각 데이터 포인트의 실제 타겟값)<br>
 
 ![](./images/tree.png)
 
