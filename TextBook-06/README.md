@@ -1,19 +1,19 @@
-#  06 : 지도 학습 (Supervised Learning, SL) : 회귀 (regression) + 분류 (classification)
+#  06 : 지도 학습(Supervised Learning, SL) : 회귀(regression) + 분류(classification)
 
 ---
 
-	[1] k-최근접 이웃 (k-Nearest Neighbors, K-NN) 	
+	[1] k-최근접 이웃(k-Nearest Neighbors, K-NN) 	
 		k-최근접 이웃 회귀(k-Nearest Neighbors Regression)
 		k-최근접 이웃 분류(k-Nearest Neighbors Classification)
- 	[2] 서포트 벡터 머신 (Support Vector Machine, SVM)
-		서포트 벡터 회귀 (Support Vector Regression, SVR)
-		서포트 벡터 분류 (Support Vector Classification, SVC)
-	[3] 결정 트리 (Decision Tree)
- 		결정 트리 회귀 (Decision Tree Regression)
-   		결정 트리 분류 (Decision Tree Classification)
- 	[4] 랜덤 포레스트 (Random Forest)  
-		랜덤 포레스트 회귀 (Random Forest Regression)  
-		랜덤 포레스트 분류 (Random Forest Classification)    	  	
+ 	[2] 서포트 벡터 머신(Support Vector Machine, SVM)
+		서포트 벡터 회귀(Support Vector Regression, SVR)
+		서포트 벡터 분류(Support Vector Classification, SVC)
+	[3] 결정 트리(Decision Tree)
+ 		결정 트리 회귀(Decision Tree Regression)
+   		결정 트리 분류(Decision Tree Classification)
+ 	[4] 랜덤 포레스트(Random Forest) : 앙상블 학습(Ensemble Learning)에 해당
+		랜덤 포레스트 회귀(Random Forest Regression)  
+		랜덤 포레스트 분류(Random Forest Classification)    	  	
 	
 ---  
 
@@ -22,7 +22,6 @@
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/neighbors/index.html<br>
 ▣ 정의 : 머신러닝에서 데이터를 가장 가까운 유사속성에 따라 분류하여 데이터를 거리기반으로 분류분석하는 기법으로,<br>
 비지도학습인 군집화(Clustering)과 유사한 개념이나 기존 관측치의 Y값이 존재한다는 점에서 지도학습에 해당한다.<br>
-▣ 응용분야 : 이미지처리, 영상에서 
 
 | 장점                             | 단점                                              |
 |----------------------------------|---------------------------------------------------|
@@ -205,6 +204,7 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 
 # [4] 랜덤 포레스트 (Random Forest)  
 ▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#random-forests<br>
+▣ 정의 : 분류와 회귀에 사용되는 지도학습 알고리즘으로 여러 개의 의사결정나무(Decision Tree)를 조합한 모델입니다. 의사결정나무는 일련의 if-else로 이루어진 나무모형으로 중간마디(internal node)와 끝마디(leaf node)로 구성된다. 의사결정나무에 배깅(bootstrap aggregation, bagging)이라는 앙상블 학습(ensemble learning)을 적용한 모델이다.<br>
 
 ![](./images/rf.png)
 
