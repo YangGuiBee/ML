@@ -11,7 +11,7 @@
 	[3] 결정 트리(Decision Tree)
  		결정 트리 회귀(Decision Tree Regression)
    		결정 트리 분류(Decision Tree Classification)
- 	[4] 랜덤 포레스트(Random Forest) : 앙상블 학습(Ensemble Learning)에 해당
+ 	[4] 랜덤 포레스트(Random Forest) : 앙상블 학습(Ensemble Learning)에 해당(12강)
 		랜덤 포레스트 회귀(Random Forest Regression)  
 		랜덤 포레스트 분류(Random Forest Classification)    	  	
 	
