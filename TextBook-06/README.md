@@ -17,7 +17,7 @@
 	
 ---  
 
-# [1] k-최근접 이웃 (k-Nearest Neighbors, K-NN) 	
+# [1] k-최근접 이웃(k-Nearest Neighbors, K-NN) 	
 ▣ 가이드 : https://scikit-learn.org/stable/modules/neighbors.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/neighbors/index.html<br>
 ▣ 정의 : 머신러닝에서 데이터를 가장 가까운 유사속성에 따라 분류하여 데이터를 거리기반으로 분류분석하는 기법으로,<br>
@@ -90,7 +90,7 @@ $X_{new} = \frac{X-\mu}{\sigma}= \frac{X-min(X)}{StdDev(X)}$
 
 <br>
  
-# [2] 서포트 벡터 머신 (Support Vector Machine, SVM)
+# [2] 서포트 벡터 머신(Support Vector Machine, SVM)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/svm/index.html<br>
 ▣ 정의 : SVM은 N차원 공간을 (N-1)차원으로 나눌 수 있는 초평면을 찾는 분류 기법으로 2개의 클래스를 분류할 수 있는 최적의 경계를 찾는다.<br>
@@ -136,7 +136,7 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 
 <br>  
 
-## 서포트 벡터 회귀 (Support Vector Regression, SVR)
+## 서포트 벡터 회귀(Support Vector Regression, SVR)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html#regression<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/svm/plot_svm_regression.html<br>
@@ -152,7 +152,7 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 
 <br> 
 
-## 서포트 벡터 분류 (Support Vector Classification, SVC)
+## 서포트 벡터 분류(Support Vector Classification, SVC)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html#classification<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC<br>
 ▣ 회귀식 : https://scikit-learn.org/stable/modules/svm.html#svc<br>
@@ -170,7 +170,7 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 
 <br>
 
-# [3] 결정 트리 (Decision Tree)
+# [3] 결정 트리(Decision Tree)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/index.html<br>
 ▣ 정의 : 어떤 항목에 대한 관측값과 목표값을 연결시켜주는 예측 모델로, 대표적인 지도학습 분류 모델이며, 스무고개와 같이 질문에 대하여 '예' 또는 '아니오'를 결정하여 트리 구조를 나타낸다.<br> 
@@ -189,22 +189,22 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 
 <br>
 
-# 결정 트리 회귀 (Decision Tree Regression)
+# 결정 트리 회귀(Decision Tree Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html#regression<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html<br>
 
 <br>
 
-# 결정 트리 분류 (Decision Tree Classification)
+# 결정 트리 분류(Decision Tree Classification)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html#classification<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html<br>
 
 <br>
 
-# [4] 랜덤 포레스트 (Random Forest)  
+# [4] 랜덤 포레스트(Random Forest)  
 ▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#random-forests<br>
-▣ 정의 : 분류와 회귀에 사용되는 지도학습 알고리즘으로 여러 개의 의사결정나무(Decision Tree)를 조합한 모델입니다. 의사결정나무는 일련의 if-else로 이루어진 나무모형으로 중간마디(internal node)와 끝마디(leaf node)로 구성된다. 의사결정나무에 배깅(bootstrap aggregation, bagging)이라는 앙상블 학습(ensemble learning)을 적용한 모델이다.<br>
+▣ 정의 : 분류와 회귀에 사용되는 지도학습 알고리즘으로 여러 개의 의사결정나무(Decision Tree)를 조합한 모델이다. 의사결정나무는 일련의 if-else로 이루어진 나무모형으로 중간마디(internal node)와 끝마디(leaf node)로 구성되며, 의사결정나무에 배깅(bootstrap aggregation, bagging)이라는 앙상블 학습(ensemble learning)을 적용한 모델이다.<br>
 
 ![](./images/rf.png)
 
@@ -214,13 +214,13 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 | 모델이 단순, 과적합이 잘 일어나지 않음 | 여러개의 결정트리 사용으로 메모리 사용량 큼 |
 | 새로운 데이터에 일반화가 용이함 | 고차원 및 희소 데이터에 잘 작동하지 않음 |
 
-# 랜덤 포레스트 회귀 (Random Forest Regression)  
+# 랜덤 포레스트 회귀(Random Forest Regression)  
 ▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#randomforestregressor<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor<br>
 
 <br>
 
-# 랜덤 포레스트 분류 (Random Forest Classification)    	  	
+# 랜덤 포레스트 분류(Random Forest Classification)    	  	
 ▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#randomforestclassifier<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier<br>
 
