@@ -224,6 +224,34 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#randomforestclassifier<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier<br>
 
+	from sklearn.ensemble import RandomForestClassifier
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score
+	from sklearn import datasets
+
+	# 붓꽃 데이터셋 로드
+	iris = datasets.load_iris()
+
+	# 독립 변수와 종속 변수 분리
+	X = iris.data
+	y = iris.target
+
+	# 학습용 데이터와 테스트용 데이터 분리
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+	# 랜덤 포레스트 모델 초기화
+	model = RandomForestClassifier()
+
+	# 모델 학습
+	model.fit(X_train, y_train)
+
+	# 테스트 데이터 예측
+	y_pred = model.predict(X_test)
+
+	# 정확도 계산
+	accuracy = accuracy_score(y_test, y_pred)
+	print("Accuracy:", accuracy)
+ 
 <br>
 
 
