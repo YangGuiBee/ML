@@ -173,10 +173,11 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 # [3] 결정 트리 (Decision Tree)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/index.html<br>
+▣ 정의 : 어떤 항목에 대한 관측값과 목표값을 연결시켜주는 예측 모델로, 대표적인 지도학습 분류 모델이며, 스무고개와 같이 질문에 대하여 '예' 또는 '아니오'를 결정하여 트리 구조를 나타낸다.<br> 
 
 ![](./images/tree.png)
 
-▣ 정의 : 결정트리는 어떤 항목에 대한 관측값과 목표값을 연결시켜주는 예측 모델로, 대표적인 지도학습 분류 모델이며, 스무고개와 같이 질문에 대하여 '예' 또는 '아니오'를 결정하여 트리 구조를 나타낸다. 결정트리의 기본적 아이디어는 복잡도 감소시키는 것에 있다. 정보의 복잡도를 불순도(Impurity)라고 하며, 불순도를 수치화한 값에는 지니계수(Gini coefficient)와 엔트로피(Entropy)가 있다.<br><br>
+결정트리의 기본적 아이디어는 복잡도 감소시키는 것에 있다. 정보의 복잡도를 불순도(Impurity)라고 하며, 불순도를 수치화한 값에는 지니계수(Gini coefficient)와 엔트로피(Entropy)가 있다.<br><br>
  - 지니계수 : $G_i = 1-\sum_{k=1}^{n}P^2_{i,k}$<br>
  - 엔트로피 : $E_i = -\sum_{k=1}^{n}P_{i,k}log_2P_{i,k}$<br>
  
