@@ -484,9 +484,9 @@ L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회�
 
 <br>
 
-![](./images/L1L2.png)
+![](./images/L1L2_1.PNG)
 <br>
-출처 : https://savannahar68.medium.com/getting-started-with-regression-a39aca03b75f
+출처 : https://stanford.edu/~shervine/l/ko/teaching/cs-229/cheatsheet-machine-learning-tips-and-tricks
 
 <br>
 
