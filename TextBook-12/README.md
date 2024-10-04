@@ -46,6 +46,7 @@
 
 # 앙상블 학습 (Ensemble Learning, EL)
 ▣ API : https://scikit-learn.org/stable/api/sklearn.ensemble.html<br>
+▣ 정의 : 앙상블 학습이란 다수의 기초 알고리즘(base algorithm)을 결합하여 더 나은 성능의 예측 모델을 형성하는 것을 말하며, 사용 목적에 따라 배깅(Bagging), 부스팅(Boosting), 스택킹(Stacking)으로 분류된다.
 
 # [6] 스태킹 (Stacking)
 
