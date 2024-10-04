@@ -223,6 +223,28 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#randomforestregressor<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor<br>
 
+
+	from sklearn.ensemble import RandomForestRegressor
+ 
+ 	# 트리 개수를 변화시키며 모델 학습 및 평가
+	for iTrees in nTreeList:
+    		depth = None  # 트리 깊이 제한 없음
+    		maxFeat = 4  # 사용할 최대 특징 수
+    		# 랜덤 포레스트 회귀 모델 생성 및 학습
+    		wineRFModel = ensemble.RandomForestRegressor(n_estimators=iTrees,
+			max_depth=depth, max_features=maxFeat,
+			oob_score=False, random_state=531)
+    		wineRFModel.fit(xTrain, yTrain)  # 모델 학습
+    		# 테스트 데이터에 대한 예측값 계산
+    		prediction = wineRFModel.predict(xTest)
+    		# MSE 계산 및 누적
+    		mseOos.append(mean_squared_error(yTest, prediction))
+     
+	# MSE 출력
+	print("MSE")
+	print(mseOos)
+
+
 <br>
 
 # 랜덤 포레스트 분류(Random Forest Classification)    	  	
