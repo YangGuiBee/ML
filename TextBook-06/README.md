@@ -199,6 +199,20 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html<br>
 
+	from sklearn.tree import DecisionTreeRegressor
+ 	from sklearn.metrics import mean_squared_error
+ 
+ 	# 결정 트리 회귀 모델 생성 및 학습 (최대 깊이 5)
+	tree_reg = DecisionTreeRegressor(max_depth=5, random_state=42)
+	tree_reg.fit(X_train, y_train)
+
+	# 테스트 데이터에 대한 예측
+	y_pred = tree_reg.predict(X_test)
+
+	# 모델 성능 평가 (평균 제곱 오차)
+	mse = mean_squared_error(y_test, y_pred)
+	print(f"Mean Squared Error: {mse}")
+
 <br>
 
 # 결정 트리 분류(Decision Tree Classification)
