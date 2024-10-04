@@ -20,6 +20,7 @@
 # [1] k-최근접 이웃 (k-Nearest Neighbors, K-NN) 	
 ▣ 가이드 : https://scikit-learn.org/stable/modules/neighbors.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/neighbors/index.html<br>
+머신러닝에서 데이터를 가장 가까운 유사속성에 따라 분류하여 데이터를 거리기반으로 분류분석하는 기법으로, 비지도학습인 군집화(Clustering)과 유사한 개념이나 기존 관측치의 Y값이 존재한다는 점에서 지도학습에 해당한다.<br>
 
 | 장점                             | 단점                                              |
 |----------------------------------|---------------------------------------------------|
