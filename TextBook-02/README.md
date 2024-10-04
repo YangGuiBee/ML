@@ -52,6 +52,7 @@
 정의 : "머신러닝은 **명시적으로 프로그래밍하지 않고 컴퓨터가 행동하는 방식을 학습**하는 학문이다."<br>
 표현 : "Machine learning is the field of study that enables computers to learn from data without being explicitly programmed."<br>
 설명 : "Stanford Machine Learning" 강의에서 데이터 기반 학습과 자율 학습 능력의 중요성을 강조하며, 현대의 대규모 데이터와 복잡한 문제를 해결하는 머신러닝의 필요성을 반영<br>
+Andrew Ng의 ML강의(Coursera) 정리 : https://junstar92.tistory.com/68<br>
 
 
 ## 2012년, Kevin P. Murphy (케빈 머피)
