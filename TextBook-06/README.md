@@ -201,6 +201,9 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html<br>
 ▣ 정의 : 데이터에 내재되어 있는 패턴을 비슷한 수치의 관착치 변수의 조합으로 예측 모델을 나무 형태로 만든다.<br>
+▣ 회귀식  : $\widehat{f}(x) = \sum_{m=1}^{M}C_mI\left\{(x_1,x_2)\in R_m\right\}$
+비용함수(cost function)를 최소로 할때 최상의 분할 : 
+$\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{N}(y_i-\sum_{m=1}^{M}C_mI(x\in R_m))^2$
 
 	from sklearn.tree import DecisionTreeRegressor
  	from sklearn.metrics import mean_squared_error
@@ -222,8 +225,6 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html#classification<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html<br>
 ▣ 정의 : 데이터에 내재되어 있는 패턴을 비슷한 범주의 관착치 변수의 조합으로 분류 모델을 나무 형태로 만든다.<br>
-▣ 회귀식  : $\widehat{f}(x) = \sum_{m=1}^{n}C_mI\left\{(x_1,x_2)\in R_m\right\}$
-
 
 	from sklearn.tree import DecisionTreeClassifier
 	from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
