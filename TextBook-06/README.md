@@ -188,16 +188,6 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 
 ![](./images/trees.png)
 
-결정트리의 기본적 아이디어는 복잡도 감소시키는 것에 있다. 정보의 복잡도를 불순도(Impurity)라고 하며, 불순도를 수치화한 값에는 지니계수(Gini coefficient)와 엔트로피(Entropy)가 있다.<br><br>
- - 지니계수 : $G_i = 1-\sum_{k=1}^{n}P^2_{i,k}$<br>
- - 엔트로피 : $E_i = -\sum_{k=1}^{n}P_{i,k}log_2P_{i,k}$<br>
- 
-▣ 유형 :  ID3, CART
- - ID3 : 모든 독립변수가 범주형 데이터인 경우에만 분류가 가능하다. 정보획득량(Infomation Gain)이 높은 특징부터 분기해나가는데 정보획득량은 분기전 엔트로피와 분기후 엔트로피의 차이를 말한다.(엔트로피 사용)<br><br>
-$IG(S, A) = E(S) - E(S|A)$<br>
- - CART : Classification and Regression Tree의 약자로, 이름 그대로 분류와 회귀가 모두 가능한 결정트리 알고리즘으로 yes 또는 no 두 가지로 분기한다.(지니계수 사용)<br><br> 
-$f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
-
 <br>
 
 # 결정 트리 회귀(Decision Tree Regression)
@@ -233,23 +223,33 @@ $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{
 ▣ 모델식 : $\widehat{f(x)} = \sum_{m=1}^{M}k(m)I((x_1,x_2)\in R_m)$<br>
 끝노드(m)에서 클래스(k)에 속할 관측치의 비율 : $\widehat{P_{mk}}=\frac{1}{N_m}\sum_{x_i\in R_m}^{}I(y_i=k)$<br>
 끝노드 m으로 분류된 관측치 : $k(m) = \underset{k}{argmax}\widehat{P_{mk}}$<br><br>
-▣ 비용함수(불순도 측정)<br>
-(1) Misclassification rate : $\frac{1}{N_m}\sum_{i\in R_m}^{m}I(y_i\neq k(m)) = 1-\widehat{P(mk)}m$<br>
-(2) Gini Index : $\sum_{k\neq k'}^{}\widehat{P_{mk}}\widehat{P_{mk'}} = \sum_{k=1}^{k}\widehat{P_{mk}}(1-\widehat{P_{mk}})$<br>
-(3) Cross-entropy : $-\sum_{k=1}^{k}\widehat{P_{mk}}log\widehat{P_{mk}}$<br> 
+▣ 비용함수(불순도 측정) : 불순도(Impurity)가 높을수록 다양한 클래스들이 섞여 있고, 불순도가 낮을수록 특정 클래스에 속한 데이터가 명확<br>
+(1) 오분류율(Misclassification rate, Error rate) : 분류 모델이 잘못 분류한 샘플의 비율로, 전체 샘플 중에서 실제 값과 예측 값이 일치하지 않는 샘플의 비율을 나타낸다.(0~100% 사이의 값, 0%: 모델이 모든 샘플을 완벽하게 예측, 100%: 모델이 모든 샘플을 잘못 예측)<br><br>
+$\frac{FP+FN}{TP+TN+FP+FN}$<br>
+###### FP(False Positive) : 실제 값이 Negative인데 Positive로 예측, FN(False Negative) : 실제 값이 Positive인데 Negative로 예측, TP(True Positive) : 실제 값이 Positive이고 Positive로 올바르게 예측, TN(True Negative) : 실제 값이 Negative이고 Negative로 올바르게 예측<br>
+(2) 지니계수(Gini Coefficient) : 데이터셋이 얼마나 혼합되어 있는지를 나타내는 불순도의 측정치(0~0.5 사이의 값, 0: 데이터가 완벽하게 한 클래스에 속해 있음을 의미하며, 불순도가 전혀 없는 상태, 0.5: 두 개의 클래스가 완벽하게 섞여 있는 상태)<br><br>
+$Gini(p)=1-\sum_{i=1}^{n}p_i^2$<br>
+(3) 엔트로피(Entropy) : 확률 이론에서 온 개념으로 불확실성 또는 정보의 무질서를 측정하는 또 다른 방식으로, 데이터가 얼마나 혼란스럽고 예측하기 어려운지를 측정(0~1 사이의 값, 0 : 데이터가 완벽하게 한 클래스에 속해 있으며, 불확실성이 없는 상태, 1 : 데이터가 완전히 섞여 있고, 가장 큰 불확실성을 가지고 있다.<br>
+$Entropy(p) = -\sum_{i=1}^{n}p_ilog_2p_i$<br> 
+
+▣ 유형 :  ID3, CART
+ - ID3 : 모든 독립변수가 범주형 데이터인 경우에만 분류가 가능하다. 정보획득량(Infomation Gain)이 높은 특징부터 분기해나가는데 정보획득량은 분기전 엔트로피와 분기후 엔트로피의 차이를 말한다.(엔트로피 사용)<br><br>
+$IG(S, A) = E(S) - E(S|A)$<br>
+ - CART : Classification and Regression Tree의 약자로, 이름 그대로 분류와 회귀가 모두 가능한 결정트리 알고리즘으로 yes 또는 no 두 가지로 분기한다.(지니계수 사용)<br><br> 
+$f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 
 
 	from sklearn.tree import DecisionTreeClassifier
 	from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
- 	# 결정 트리 분류 모델 생성 (최대 깊이 3으로 설정)
+ 	#결정 트리 분류 모델 생성 (최대 깊이 3으로 설정)
 	clf = DecisionTreeClassifier(max_depth=3, random_state=42)
 	clf.fit(X_train, y_train)  # 학습 데이터를 이용해 모델 학습
 
-	# 테스트 데이터에 대한 예측
+	#테스트 데이터에 대한 예측
 	y_pred = clf.predict(X_test)
 
-	# 정확도 출력
+	#정확도 출력
 	accuracy = accuracy_score(y_test, y_pred)  # 정확도 계산
 	print(f"Accuracy: {accuracy * 100:.2f}%")  # 정확도 출력
 
