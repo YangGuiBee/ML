@@ -140,7 +140,10 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html#regression<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/svm/plot_svm_regression.html<br>
-▣ 회귀식 : https://scikit-learn.org/stable/modules/svm.html#svr<br>
+▣ 모델식 : https://scikit-learn.org/stable/modules/svm.html#svr<br>
+▣ 정의 : 데이터 포인트들을 초평면 근처에 배치하면서, 허용 오차 $ϵ$ 내에서 예측 오차를 최소화하는 것.<br>
+
+
 
 	from sklearn.svm import SVR
  
@@ -155,7 +158,8 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 ## 서포트 벡터 분류(Support Vector Classification, SVC)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html#classification<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC<br>
-▣ 회귀식 : https://scikit-learn.org/stable/modules/svm.html#svc<br>
+▣ 모델식 : https://scikit-learn.org/stable/modules/svm.html#svc<br>
+▣ 정의 : 두 클래스(또는 다수의 클래스)를 분류하기 위해 최대 마진을 가지는 초평면을 찾는 것.<br>
 
 	import sklearn.svm as svm
 
