@@ -258,9 +258,8 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 
 # [4] 랜덤 포레스트(Random Forest)  
 ▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#random-forests<br>
-▣ 정의 : 분류와 회귀에 사용되는 지도학습 알고리즘으로 여러 개의 의사결정나무(Decision Tree)를 조합한 모델이다. 의사결정나무는 일련의 if-else로 이루어진 나무모형으로 중간마디(internal node)와 끝마디(leaf node)로 구성되며, 의사결정나무에 배깅(bootstrap aggregation, bagging)이라는 **앙상블 학습(ensemble learning)** 을 적용한 모델이다.<br>
+▣ 정의 : 분류와 회귀에 사용되는 지도학습 알고리즘으로 여러 개의 의사결정나무(Decision Tree)를 조합한 **앙상블 학습(ensemble learning)** 을 적용한 모델이다. 여러개의 Training data를 생성하여 각 데이터마다 개별 의사결정나무모델을 구축하는 배깅(bootstrap aggregation, bagging)과 의사결정 모델 구축시 변수를 무작위로 선택하는 Random subspace가 특징.<br>
 ▣ 모델식 : $\widehat{y}=\frac{1}{N}\sum_{i=1}^{N}T_i(X)$ ($N$ : 결정트리의 수, $T_i(X)$ : 각 결정트리 $i$가 입력값 $X$에 대해 예측한 값)
-
 
 ![](./images/Bootstrap.png)
 출처: https://www.researchgate.net/figure/Schematic-of-the-RF-algorithm-based-on-the-Bagging-Bootstrap-Aggregating-method_fig1_309031320<br>
