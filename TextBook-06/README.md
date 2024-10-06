@@ -174,7 +174,6 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/index.html<br>
 ▣ 정의 : 어떤 항목에 대한 관측값과 목표값을 연결시켜주는 예측 모델로, 대표적인 지도학습 분류 모델이며, 스무고개와 같이 질문에 대하여 '예' 또는 '아니오'를 결정하여 트리 구조를 나타낸다.<br> 
-▣ 회귀식 : $\widehat{y}=\frac{1}{M}\sum_{i=1}^{M}y_i$ ($M$: 해당 리프노드에 속한 데이터 포인트의 수, $y_i$: 리프노드에 포함된 각 데이터 포인트의 실제 타겟값)<br>
 
 ![](./images/tree.png)
 
@@ -225,10 +224,10 @@ $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{
 끝노드 m으로 분류된 관측치 : $k(m) = \underset{k}{argmax}\widehat{P_{mk}}$<br><br>
 ▣ 비용함수(불순도 측정) : 불순도(Impurity)가 높을수록 다양한 클래스들이 섞여 있고, 불순도가 낮을수록 특정 클래스에 속한 데이터가 명확<br>
 (1) 오분류율(Misclassification rate, Error rate) : 분류 모델이 잘못 분류한 샘플의 비율로, 전체 샘플 중에서 실제 값과 예측 값이 일치하지 않는 샘플의 비율을 나타낸다.(0에서 100 사이의 값, 0%: 모델이 모든 샘플을 완벽하게 예측, 100%: 모델이 모든 샘플을 잘못 예측)<br><br>
-$\frac{FP+FN}{TP+TN+FP+FN}$<br>
+$\frac{FP+FN}{TP+TN+FP+FN}$ 
 ###### FP(False Positive) : 실제 값이 Negative인데 Positive로 예측, FN(False Negative) : 실제 값이 Positive인데 Negative로 예측, TP(True Positive) : 실제 값이 Positive이고 Positive로 올바르게 예측, TN(True Negative) : 실제 값이 Negative이고 Negative로 올바르게 예측<br>
 (2) 지니계수(Gini Coefficient) : 데이터셋이 얼마나 혼합되어 있는지를 나타내는 불순도의 측정치(0에서 0.5 사이의 값, 0: 데이터가 완벽하게 한 클래스에 속해 있음을 의미하며, 불순도가 전혀 없는 상태, 0.5: 두 개의 클래스가 완벽하게 섞여 있는 상태)<br>
-$Gini(p)=1-\sum_{i=1}^{n}p_i^2$<br>
+$Gini(p)=1-\sum_{i=1}^{n}p_i^2$<br><br>
 (3) 엔트로피(Entropy) : 확률 이론에서 온 개념으로 불확실성 또는 정보의 무질서를 측정하는 또 다른 방식으로, 데이터가 얼마나 혼란스럽고 예측하기 어려운지를 측정(0에서 1 사이의 값, 0 : 데이터가 완벽하게 한 클래스에 속해 있으며, 불확실성이 없는 상태, 1 : 데이터가 완전히 섞여 있고, 가장 큰 불확실성을 가지고 있다.<br>
 $Entropy(p) = -\sum_{i=1}^{n}p_ilog_2p_i$<br> 
 
@@ -238,6 +237,7 @@ $IG(S, A) = E(S) - E(S|A)$<br>
  - CART : Classification and Regression Tree의 약자로, 이름 그대로 분류와 회귀가 모두 가능한 결정트리 알고리즘으로 yes 또는 no 두 가지로 분기한다.(지니계수 사용)<br><br> 
 $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 
+<br>
 
 	from sklearn.tree import DecisionTreeClassifier
 	from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
@@ -258,8 +258,8 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 
 # [4] 랜덤 포레스트(Random Forest)  
 ▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#random-forests<br>
-▣ 정의 : 분류와 회귀에 사용되는 지도학습 알고리즘으로 여러 개의 의사결정나무(Decision Tree)를 조합한 모델이다. 의사결정나무는 일련의 if-else로 이루어진 나무모형으로 중간마디(internal node)와 끝마디(leaf node)로 구성되며, 의사결정나무에 배깅(bootstrap aggregation, bagging)이라는 앙상블 학습(ensemble learning)을 적용한 모델이다.<br>
-▣ 회귀식 : $\widehat{y}=\frac{1}{N}\sum_{i=1}^{N}T_i(X)$ ($N$ : 결정트리의 수, $T_i(X)$ : 각 결정트리 $i$가 입력값 $X$에 대해 예측한 값)
+▣ 정의 : 분류와 회귀에 사용되는 지도학습 알고리즘으로 여러 개의 의사결정나무(Decision Tree)를 조합한 모델이다. 의사결정나무는 일련의 if-else로 이루어진 나무모형으로 중간마디(internal node)와 끝마디(leaf node)로 구성되며, 의사결정나무에 배깅(bootstrap aggregation, bagging)이라는 **앙상블 학습(ensemble learning)** 을 적용한 모델이다.<br>
+▣ 모델식 : $\widehat{y}=\frac{1}{N}\sum_{i=1}^{N}T_i(X)$ ($N$ : 결정트리의 수, $T_i(X)$ : 각 결정트리 $i$가 입력값 $X$에 대해 예측한 값)
 
 
 ![](./images/rf.png)
