@@ -256,6 +256,16 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 
 <br>
 
+	(개별 트리 모델의 단점)	
+ 	계층적 구조로 인해 중간에 에러가 발생하면 다음 단계로 에러가 계속 전파
+  	학습 데이터의 미세한 변동에도 최종결과에 큰 영향
+   	적은 개수의 노이즈에도 큰 영향
+    	나무의 최종 노드 개수를 늘리면 과적합 위함(Low Bias, Large Variance)
+
+     	(해결방안) 랜덤 포레스트(Random forest)
+
+<br> 
+
 # [4] 랜덤 포레스트(Random Forest)  
 ▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#random-forests<br>
 ▣ 정의 : 분류와 회귀에 사용되는 지도학습 알고리즘으로 여러 개의 의사결정나무(Decision Tree)를 조합한 **앙상블 학습(ensemble learning)** 을 적용한 모델이다. 여러개의 Training data를 생성하여 각 데이터마다 개별 의사결정나무모델을 구축하는 배깅(bootstrap aggregation, bagging)과 의사결정 모델 구축시 변수를 무작위로 선택하는 Random subspace가 특징.<br>
