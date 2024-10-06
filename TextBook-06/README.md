@@ -264,6 +264,8 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 
 ![](./images/Bootstrap.png)
 
+출처: https://www.researchgate.net/figure/Schematic-of-the-RF-algorithm-based-on-the-Bagging-Bootstrap-Aggregating-method_fig1_309031320<br>
+
 
 | 장점                             | 단점                                              |
 |----------------------------------|---------------------------------------------------|
