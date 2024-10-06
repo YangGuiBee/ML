@@ -230,8 +230,10 @@ $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{
 끝노드(m)에서 클래스(k)에 속할 관측치의 비율 $\widehat{P}_{mk}=\frac{1}{N_m}\sum_{x_i\in R_m}^{m}I(y_i=k)$<br>
 끝노드 m으로 분류된 관측치 : $k(m) = \underset{k}{argmax}\widehat{P}_{mk}$<br>
 ▣ 비용함수(불순도 측정)<br>
-(1) Misclassification rate : $\frac{1}{N_m}\sum_{i\in R_m}^{m}I(y_i\neq k(m))=1-\widehat{P}(mk)m$<br>
-(2) Gini Index : $\sum_{k\neq k'}^{}\widehat{P}_{mk}\widehat{P}_{mk'}$=$\sum_{k=1}^{k}\widehat{P}_{mk}(1-\widehat{P}_{mk})$<br>
+(1) Misclassification rate :<br> 
+$\frac{1}{N_m}\sum_{i\in R_m}^{m}I(y_i\neq k(m))=1-\widehat{P}(mk)m$<br>
+(2) Gini Index :<br> 
+$\sum_{k\neq k'}^{}\widehat{P}_{mk}\widehat{P}_{mk'}=\sum_{k=1}^{k}\widehat{P}_{mk}(1-\widehat{P}_{mk})$<br>
 (3) Cross-entropy :<br> 
 
 
