@@ -200,7 +200,7 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html#regression<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html<br>
-▣ 정의 : 데이터에 내재되어 있는 패턴을 비슷한 수치의 관착치 변수의 조합으로 예측 모델을 나무 형태로 만든다.<br>
+▣ 정의 : 데이터에 내재되어 있는 패턴을 비슷한 수치의 관측치 변수의 조합으로 예측 모델을 나무 형태로 만든다.<br>
 ▣ 모델식 : $\widehat{f}(x) = \sum_{m=1}^{M}C_mI((x_1,x_2)\in R_m)$<br>
 비용함수(cost function)를 최소로 할때 최상의 분할 : 데이터를 M개로 분할($R_1,R_2,...R_M$)<br> 
 $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{N}(y_i-\sum_{m=1}^{M}C_mI(x\in R_m))^2$<br>
@@ -225,7 +225,7 @@ $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{
 # 결정 트리 분류(Decision Tree Classification)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html#classification<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html<br>
-▣ 정의 : 데이터에 내재되어 있는 패턴을 비슷한 범주의 관착치 변수의 조합으로 분류 모델을 나무 형태로 만든다.<br>
+▣ 정의 : 데이터에 내재되어 있는 패턴을 비슷한 범주의 관측치 변수의 조합으로 분류 모델을 나무 형태로 만든다.<br>
 ▣ 모델식 : $\widehat{f(x)} = \sum_{m=1}^{M}k(m)I((x_1,x_2)\in R_m)$<br>
 끝노드(m)에서 클래스(k)에 속할 관측치의 비율 : $\widehat{P_{mk}}=\frac{1}{N_m}\sum_{x_i\in R_m}^{}I(y_i=k)$<br>
 끝노드 m으로 분류된 관측치 : $k(m) = \underset{k}{argmax}\widehat{P_{mk}}$<br><br>
@@ -233,7 +233,6 @@ $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{
 (1) Misclassification rate : $\frac{1}{N_m}\sum_{i\in R_m}^{m}I(y_i\neq k(m)) = 1-\widehat{P(mk)}m$<br>
 (2) Gini Index : $\sum_{k\neq k'}^{}\widehat{P_{mk}}\widehat{P_{mk'}} = \sum_{k=1}^{k}\widehat{P_{mk}}(1-\widehat{P_{mk}})$<br>
 (3) Cross-entropy : $-\sum_{k=1}^{k}\widehat{P_{mk}}log\widehat{P_{mk}}$<br> 
-
 
 
 	from sklearn.tree import DecisionTreeClassifier
