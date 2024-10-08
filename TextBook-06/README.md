@@ -120,7 +120,7 @@ $\displaystyle \min_{w}\frac{1}{2}\left\|w\right\|^2$     제약 조건은 모�
 ![](./images/hmargin.png)
 
 - 소프트마진 :  하드마진이 가진 한계를 개선하고자 나온 개념으로, 완벽하게 분류하는 초평면을 찾는 것이 아니라 어느 정도의 오분류를 허용하는 방식이다. 소프트마진에서는 오분류를 허용하고 이를 고려하기 위해 slack variable을 사용하여 해당 결정경계로부터 잘못 분류된 데이터의 거리를 측정한다.<br><br>
-$\displaystyle \min_{w}\frac{1}{2}\left\||w\right\||^2 + C\sum_{i=1}^{n}\xi_i$
+$\displaystyle \min_{w}\frac{1}{2}\left\|w\right\|^2 + C\sum_{i=1}^{n}\xi_i$
 
 ![](./images/smargin.png)
 
