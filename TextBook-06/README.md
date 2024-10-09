@@ -127,16 +127,16 @@ $\displaystyle \min_{w}\frac{1}{2}\left\|\left\|w\right\|\right\|^2 + C\sum_{i=1
 - 비선형분류 : 선형분리가 불가능한 입력공간을 선형분리가 가능한 고차원 특성공간으로 보내 선형분리를 진행하고 그 후 다시 기존의 입력공간으로 변환하면 비선형 분리를 하게 된다.<br><br>
 ![](./images/nlsvm.png)
 
+<br>
+
 	from sklearn.datasets import make_moons
 	from sklearn.pipeline import Pipeline
 	from sklearn.preprocessing import PolynomialFeatures
 
-	polynomial_svm_clf = Pipeline([
-		("poly_features", PolynomialFeatures(degree=3)),
-		("scaler", StandardScaler()),
-		("svm_clf", LinearSVC(C=10, loss="hinge", max_iter=2000, random_state=42))
-		])
+	polynomial_svm_clf = Pipeline([("poly_features", PolynomialFeatures(degree=3)),("scaler", StandardScaler()),("svm_clf", LinearSVC(C=10, loss="hinge", max_iter=2000, random_state=42))])
 	polynomial_svm_clf.fit(X, y)
+
+<br>
 
 입력공간을 특성공간으로 변환하기 위해서 mapping function을 사용한다<br>
 $\Phi(x) = Ax$<br><br>
