@@ -266,7 +266,7 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
    	적은 개수의 노이즈에도 큰 영향
 	나무의 최종 노드 개수를 늘리면 과적합 위함(Low Bias, Large Variance)
 
-     	(해결방안) 랜덤 포레스트(Random forest)
+	(해결방안) 랜덤 포레스트(Random forest)
 
 <br> 
 
