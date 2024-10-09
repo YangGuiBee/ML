@@ -147,6 +147,8 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 직접 차수를 정하는 방식(Polynomial) : $k(x,y) = (1+x^Ty)^p$<br>
 신경망 학습(Signomail) : $k(x,y) = tanh(kx_ix_j-\delta)$<br>
 
+![](./images/hnlsvm.png)
+
 <br>  
 
 ## 서포트 벡터 회귀(Support Vector Regression, SVR)
