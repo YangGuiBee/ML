@@ -127,6 +127,17 @@ $\displaystyle \min_{w}\frac{1}{2}\left\|\left\|w\right\|\right\|^2 + C\sum_{i=1
 - 비선형분류 : 선형분리가 불가능한 입력공간을 선형분리가 가능한 고차원 특성공간으로 보내 선형분리를 진행하고 그 후 다시 기존의 입력공간으로 변환하면 비선형 분리를 하게 된다.<br><br>
 ![](./images/nlsvm.png)
 
+	from sklearn.datasets import make_moons
+	from sklearn.pipeline import Pipeline
+	from sklearn.preprocessing import PolynomialFeatures
+
+	polynomial_svm_clf = Pipeline([
+		("poly_features", PolynomialFeatures(degree=3)),
+		("scaler", StandardScaler()),
+		("svm_clf", LinearSVC(C=10, loss="hinge", max_iter=2000, random_state=42))
+		])
+	polynomial_svm_clf.fit(X, y)
+
 입력공간을 특성공간으로 변환하기 위해서 mapping function을 사용한다<br>
 $\Phi(x) = Ax$<br><br>
 고차원의 특성공간으로 변환하고 목적함수에 대한 문제를 푸는 것이 간단한 차원에서는 가능하나 그 차수가 커질수록 계산량의 증가하는 것을 다시 해결하고자 나오는 개념이 커널트릭(Kernel trick) : 비선형 분류를 하기 위해 차원을 높여줄 때마다 필요한 엄청난 계산량을 줄이기 위해 사용하는 커널 트릭은 실제로는 데이터의 특성을 확장하지 않으면서 특성을 확장한 것과 동일한 효과를 가져오는 기법<br>
