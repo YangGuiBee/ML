@@ -1,54 +1,54 @@
-#  12 : 비지도 학습 (Unsupervised Learning, UL) : 강화학습, 앙상블학습
+#  12 : 비지도 학습(Unsupervised Learning, UL) : 강화학습, 앙상블학습
 
 ---
 
-## 강화 학습 (Reinforcement Learning, RL)
+## 강화 학습(Reinforcement Learning, RL)
 <br>
 
     [1] Q-learning
-    [2] Deep Q-Network (DQN)
-    [3] State-Action-Reward-State-Action (SARSA)
-    [4] 유전 알고리즘 (Genetic Algorithm)
-    [5] Asynchronous Advantage Actor-Critic (A3C)
+    [2] Deep Q-Network(DQN)
+    [3] State-Action-Reward-State-Action(SARSA)
+    [4] 유전 알고리즘(Genetic Algorithm)
+    [5] Asynchronous Advantage Actor-Critic(A3C)
   
 
-## 앙상블 학습 (Ensemble Learning, EL)
+## 앙상블 학습(Ensemble Learning, EL)
 <br>
 
-    [6] 스태킹 (Stacking)
-    [7] 배깅 (Bagging)
-    [8] 부스팅 (Boosting)
+    [6] 스태킹(Stacking)
+    [7] 배깅(Bagging)
+    [8] 부스팅(Boosting)
 
 ---  
-# 강화 학습 (Reinforcement Learning, RL)
+# 강화 학습(Reinforcement Learning, RL)
 
 # [1] Q-learning
 
 <br>
 
-# [2] Deep Q-Network (DQN)
+# [2] Deep Q-Network(DQN)
 
 <br>
 
-# [3] State-Action-Reward-State-Action (SARSA)
+# [3] State-Action-Reward-State-Action(SARSA)
 
 <br>
 
-# [4] 유전 알고리즘 (Genetic Algorithm)
+# [4] 유전 알고리즘(Genetic Algorithm)
 
 <br>
 
-# [5] Asynchronous Advantage Actor-Critic (A3C)
+# [5] Asynchronous Advantage Actor-Critic(A3C)
 
 <br>
 
 ---
 
-# 앙상블 학습 (Ensemble Learning, EL)
+# 앙상블 학습(Ensemble Learning, EL)
 ▣ API : https://scikit-learn.org/stable/api/sklearn.ensemble.html<br>
 ▣ 정의 : 앙상블 학습이란 다수의 기초 알고리즘(base algorithm)을 결합하여 더 나은 성능의 예측 모델을 형성하는 것을 말하며, 사용 목적에 따라 배깅(Bagging), 부스팅(Boosting), 스택킹(Stacking)으로 분류된다.<br>
 
-# [6] 스태킹 (Stacking)
+# [6] 스태킹(Stacking)
 ▣ 정의 : 스태킹은 서로 다른 종류의 기반 모델(base model) 여러 개를 학습한 후, 이들의 예측 결과를 결합하는 방식이다. 개별 모델의 예측 결과를 다시 하나의 메타 모델(meta-model)로 학습시켜 최종 예측을 수행한다.<br>
 ▣ 필요성 : 단일 모델의 약점을 보완하기 위해 서로 다른 유형의 모델을 조합함으로써 더 나은 성능을 도출할 수 있다. 예를 들어, 결정 트리, 서포트벡터머신(SVM), 신경망 등 다양한 모델을 결합할 수 있다.<br>
 ▣ 장점 : 서로 다른 모델의 장점을 결합하여 더욱 강력한 예측 성능을 낼 수 있으며, 다양한 모델의 편향과 분산을 보완할 수 있다.<br>
@@ -80,7 +80,7 @@
     
 <br>
 
-# [7] 배깅 (Bagging)
+# [7] 배깅(Bagging)
 ▣ 정의 : 배깅은 동일한 모델을 여러 번 학습하되, 각 학습마다 다른 데이터 샘플을 사용한다. 주로 부트스트랩(bootstrap) 방법으로 샘플링된 데이터로 모델을 학습하며, 최종 예측은 개별 모델의 예측 결과를 평균 또는 투표로 결합한다. 대표적인 알고리즘은 랜덤 포레스트(Random Forest)이다.<br>
 ▣ 필요성 : 단일 모델이 데이터의 특정 부분에 과적합하는 것을 방지하고, 예측의 안정성을 높이기 위해 사용된다.<br>
 ▣ 장점 : 분산을 줄여 예측 성능을 향상시키며, 과적합(overfitting)을 방지하는 데 도움이 된다.<br>
@@ -107,7 +107,7 @@
 
 <br>
 
-# [8] 부스팅 (Boosting)
+# [8] 부스팅(Boosting)
 ▣ 정의 : 부스팅은 약한 학습기(weak learner)를 연속적으로 학습시키며, 이전 학습에서 잘못 예측한 데이터에 가중치를 부여하여 다음 모델이 이를 더 잘 학습할 수 있도록 한다. 대표적인 알고리즘으로는 AdaBoost, Gradient Boosting, XGBoost 등이 있다.<br>
 ▣ 필요성 : 약한 학습기를 여러 번 반복하여 강력한 학습기를 만들 수 있으며, 특히 잘못된 예측에 집중하여 성능을 점진적으로 개선한다.<br>
 ▣ 장점 : 모델이 연속적으로 개선되기 때문에 높은 예측 성능을 보일 수 있으며, 오류를 줄이는 데 매우 효과적이다.<br>
