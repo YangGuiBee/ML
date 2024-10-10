@@ -68,6 +68,67 @@
 <br>
 
 # [2] Deep Q-Network(DQN)
+▣ 정의 : DQN은 Q-learning을 딥러닝에 결합한 알고리즘으로, Q-table 대신 심층 신경망을 사용해 Q값을 근사하며, 주로 상태 공간이 매우 크거나 연속적인 문제에서 사용된다.<br>
+▣ 필요성 : Q-table을 사용할 수 없는 고차원 환경에서 Q-learning을 효과적으로 적용하기 위해 신경망을 사용하여 Q값을 근사한다.<br>
+▣ 장점 : 고차원 연속 상태 공간에서 사용 가능하며, 경험 재플레이(experience replay)와 타깃 네트워크로 학습 안정성을 높일 수 있다.<br>
+▣ 단점 : 신경망 학습으로 인해 높은 계산 비용이 필요하며, 과적합 위험이 있으며, 잘못 설정된 하이퍼파라미터로 인해 학습이 불안정해질 수 있다.<br>
+▣ 응용분야 : 비디오 게임(예: Atari 게임), 로봇 제어, 자율 주행 등.<br>
+▣ 모델식 : DQN에서 신경망을 사용한 Q-learning 업데이트 θ는 현재 신경망의 가중치,𝜃′ 는 타깃 신경망의 가중치.<br>
+▣ 주요 알고리즘 : 신경망 초기화 및  경험 재플레이 메모리 초기화. 현재 상태에서 행동 선택 (탐험/탐색 균형). 경험을 메모리에 저장. 일정 주기마다 경험 샘플을 이용해 신경망을 업데이트. 타깃 네트워크 주기적으로 업데이트를 반복<br>
+▣ python 예제 : 
+
+    import numpy as np
+    import tensorflow as tf
+    from collections import deque
+
+    n_states = 5
+    n_actions = 2
+
+    # 신경망 모델 정의
+    model = tf.keras.models.Sequential([
+    tf.keras.layers.Dense(24, input_dim=n_states, activation='relu'),
+    tf.keras.layers.Dense(24, activation='relu'),
+    tf.keras.layers.Dense(n_actions, activation='linear')])
+    model.compile(optimizer='adam', loss='mse')
+
+    # Q-learning 파라미터 설정
+    gamma = 0.95
+    epsilon = 1.0
+    epsilon_min = 0.01
+    epsilon_decay = 0.995
+    batch_size = 32
+    memory = deque(maxlen=2000)
+
+    def choose_action(state):
+    if np.random.rand() <= epsilon:
+        return np.random.choice(n_actions)
+    state = np.reshape(state, [1, n_states])
+    return np.argmax(model.predict(state))
+
+    def replay():
+        global epsilon
+        if len(memory) < batch_size: return
+        minibatch = np.random.choice(len(memory), batch_size)
+        for state, action, reward, next_state, done in minibatch:
+            target = reward
+            if not done: target = reward + gamma * np.amax(model.predict(next_state))
+            target_f = model.predict(state)
+            target_f[0][action] = target
+            model.fit(state, target_f, epochs=1, verbose=0)
+        if epsilon > epsilon_min: epsilon *= epsilon_decay
+
+    # 학습 반복 (예시)
+    for episode in range(1000):
+        state = np.random.rand(n_states)
+        done = False
+        while not done:
+            action = choose_action(state)
+            next_state = np.random.rand(n_states)
+            reward = 1 if np.random.rand() > 0.5 else 0
+            done = True if reward == 1 else False
+            memory.append((state, action, reward, next_state, done))
+            replay()
+    print("학습 완료")
 
 <br>
 
