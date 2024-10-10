@@ -23,7 +23,48 @@
 # 강화 학습(Reinforcement Learning, RL)
 
 # [1] Q-learning
+▣ 정의 : Q-learning은 값 기반 강화 학습의 대표적인 알고리즘으로, 상태-행동 쌍에 대한 Q값을 학습해 최적의 정책을 찾는 방법이다. 상태에서 어떤 행동을 선택할지 결정하는 Q함수를 학습하며, 최적 정책을 따르기 위해 Q값을 최대화하는 방향으로 행동한다.<br>
+▣ 필요성 : 모델에 대한 사전 지식 없이 환경 내에서 에이전트가 스스로 학습할 수 있는 능력을 제공하며, 상태 공간이 클 때도 적합하게 사용할 수 있다.<br>
+▣ 장점 : 모델 프리 방식이라 환경의 동작을 미리 알 필요가 없으며, 수렴할 경우 최적의 정책을 보장한다.<br>
+▣ 단점 : 상태 공간이 매우 크거나 연속적인 경우, Q-table이 메모리와 시간 측면에서 비효율적일 수 있으며, 학습 속도가 느리고, 보상이 주기적으로만 주어지는 경우 최적의 정책을 찾기 어려울 수 있다.<br>
+▣ 응용분야 : 게임 플레이, 로봇 제어, 자율 주행, 네트워크 트래픽 제어 등<br>
+▣ 모델식 : Q-learning 업데이트식으로 Q(s,a)는 상태 𝑠에서 행동 𝑎를 선택할 때의 Q값, α는 학습률, 𝛾는 할인 계수,𝑟은 현재 보상, max_𝑎′𝑄(𝑠′,𝑎′)는 다음 상태 𝑠′ 에서 가능한 최대 Q값.
+▣ 주요 알고리즘 : Q값을 0으로 초기화후 현재 상태에서 가능한 행동을 선택 (탐험/탐색 균형), 보상을 받고 다음 상태로 이동, Q값을 업데이트. 종료 상태에 도달할 때까지 반복.
+▣ python 예제 : 
 
+    import numpy as np
+
+    # 환경 설정 (간단한 그리드 월드 환경 가정)
+    n_states = 5
+    n_actions = 2
+    Q = np.zeros((n_states, n_actions))
+
+    alpha = 0.1  # 학습률
+    gamma = 0.9  # 할인 계수
+    epsilon = 0.1  # 탐험 확률
+
+    def choose_action(state):
+        if np.random.uniform(0, 1) < epsilon:
+           return np.random.choice(n_actions)
+        else:
+           return np.argmax(Q[state, :])
+
+    def update_q(state, action, reward, next_state):
+        predict = Q[state, action]
+        target = reward + gamma * np.max(Q[next_state, :])
+        Q[state, action] = predict + alpha * (target - predict)
+
+    # 예시 학습 반복
+    for episode in range(100):
+        state = np.random.randint(0, n_states)
+        while state != 4:  # 종료 상태 가정
+          action = choose_action(state)
+          next_state = np.random.randint(0, n_states)
+          reward = 1 if next_state == 4 else 0
+          update_q(state, action, reward, next_state)
+          state = next_state
+    print(Q)
+    
 <br>
 
 # [2] Deep Q-Network(DQN)
