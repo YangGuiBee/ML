@@ -57,12 +57,12 @@
 ▣ 모델식 : $𝑓_1$ 은 각각의 개별 모델, $𝑓_2$ 는 메타 모델, $\widehat{y}=f_2(f_1(x_1),f_1(x_2),...f_1(x_n))$<br>
 ▣ python 예제 : 
 
-    from sklearn.model_selection import train_test_split
     from sklearn.ensemble import StackingClassifier
     from sklearn.linear_model import LogisticRegression
     from sklearn.svm import SVC
     from sklearn.tree import DecisionTreeClassifier
     from sklearn.datasets import load_iris
+    from sklearn.model_selection import train_test_split
 
     # 데이터 로드 및 분할
     X, y = load_iris(return_X_y=True)
@@ -91,8 +91,9 @@
 
     from sklearn.ensemble import BaggingClassifier
     from sklearn.tree import DecisionTreeClassifier
-    from sklearn.model_selection import train_test_split
     from sklearn.datasets import load_iris
+    from sklearn.model_selection import train_test_split
+
 
     # 데이터 로드 및 분할
     X, y = load_iris(return_X_y=True)
@@ -118,8 +119,8 @@
 
     from sklearn.ensemble import AdaBoostClassifier
     from sklearn.tree import DecisionTreeClassifier
-    from sklearn.model_selection import train_test_split
     from sklearn.datasets import load_iris
+    from sklearn.model_selection import train_test_split
 
     # 데이터 로드 및 분할
     X, y = load_iris(return_X_y=True)
