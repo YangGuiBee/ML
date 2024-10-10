@@ -133,6 +133,45 @@
 <br>
 
 # [3] State-Action-Reward-State-Action(SARSA)
+▣ 정의 : SARSA는 강화 학습의 한 기법으로, 상태-행동-보상-다음 상태-다음 행동(State-Action-Reward-State-Action)의 연속적인 관계에서 학습하는 방법이다. Q-learning과 달리 SARSA는 에이전트가 선택한 행동을 기반으로 학습하며 에이전트가 현재 행동과 다음 행동을 통해 학습하는 on-policy 방법이다.<br>
+▣ 필요성 : 정책을 미리 고정한 상태에서 Q-learning처럼 탐험과 학습을 분리하지 않고, 정책을 유지하며 학습할 때 유리하다. SARSA는 실제로 에이전트가 수행하는 행동을 기반으로 학습하므로, 정책에 따른 일관성을 유지할 수 있다. 특히 탐험(exploration) 중에도 안정적으로 학습이 가능하다.<br>
+▣ 장점 : 에이전트의 실제 정책을 기반으로 학습하므로 정책의 일관성을 유지할 수 있으며, Q-learning보다 안정적인 성능을 낼 수 있다.<br>
+▣ 단점 : Q-learning보다 수렴 속도가 느릴 수 있으며, 잘못된 정책을 사용할 경우 학습 성능이 떨어질 수 있다.<br>
+▣ 응용분야 : 게임, 로봇 제어, 자율 시스템, 물류 최적화.<br>
+▣ 모델식 : SARSA 업데이트 식, Q(s,a)는 상태 𝑠에서 행동 𝑎를 선택할 때의 Q값, 𝑎′ 는 다음 상태에서 선택된
+▣ 주요 알고리즘 : 
+▣ python 예제 : 
+
+    import numpy as np
+
+    # SARSA 알고리즘을 위한 환경 설정
+    n_states = 5
+    n_actions = 2
+    Q = np.zeros((n_states, n_actions))
+    alpha = 0.1  # 학습률
+    gamma = 0.9  # 할인 계수
+    epsilon = 0.1  # 탐험 확률
+
+    def choose_action(state):
+    if np.random.uniform(0, 1) < epsilon: return np.random.choice(n_actions)
+    else: return np.argmax(Q[state, :])
+
+    def update_q(state, action, reward, next_state, next_action):
+        predict = Q[state, action]
+        target = reward + gamma * Q[next_state, next_action]
+        Q[state, action] = predict + alpha (target - predict)
+
+    # 예시 학습 반복
+    for episode in range(100):
+        state = np.random.randint(0, n_states)
+        action = choose_action(state)
+        while state != 4:  # 종료 상태 가정
+            next_state = np.random.randint(0, n_states)
+            reward = 1 if next_state == 4 else 0
+            next_action = choose_action(next_state)
+            update_q(state, action, reward, next_state, next_action)
+            state, action = next_state, next_action
+    print(Q)
 
 <br>
 
