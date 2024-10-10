@@ -24,16 +24,99 @@
 ---  
 
 # [1] FP Growth
+▣ 정의 : FP-Growth는 Apriori 알고리즘의 대안으로, 빈발 항목 집합을 효율적으로 찾는 방법이다. FP-트리(Frequent Pattern Tree)를 만들어 빈발 항목들을 저장하고, 트리 구조를 사용해 자주 발생하는 패턴을 빠르게 찾는다. Apriori와 달리 매번 후보 집합을 생성하지 않으며, 데이터의 트랜잭션을 직접 탐색하여 빈발 항목 집합을 구한다.<br>
+▣ 필요성 : Apriori의 계산 비용 문제를 해결하기 위해 고안된 알고리즘으로 FP-Growth는 트리 구조를 이용하여 대규모 데이터에서도 효율적으로 빈발 항목 집합을 찾을 수 있다.<br>
+▣ 장점 : Apriori보다 빠르고 메모리 효율적이며, 후보 집합 생성을 피하므로 계산 비용이 낮다.<br>
+▣ 단점 : FP-트리 구조를 구축하는 데 추가 메모리가 필요하며, 트리 구조가 복잡해질 경우 구현 및 이해가 어려울 수 있다.<br>
+▣ 응용분야 : 시장 바구니 분석, 로그 데이터 분석, 웹 사이트에서 자주 방문한 페이지 패턴 분석<br>
+▣ 모델식 : FP-Growth는 트리 기반의 빈발 항목 탐색 알고리즘으로, 트리에서 공통 패턴을 찾아 빈발 항목 집합을 추출한다.<br>
+▣ python 예제 : 
 
+    from mlxtend.frequent_patterns import fpgrowth
+
+    # FP-Growth 알고리즘을 사용하여 빈발 항목 집합 찾기
+    frequent_itemsets_fp = fpgrowth(df, min_support=0.6, use_colnames=True)
+
+    # 연관 규칙 찾기
+    rules_fp = association_rules(frequent_itemsets_fp, metric="confidence", min_threshold=0.7)
+
+    print(frequent_itemsets_fp)
+    print(rules_fp)
+    
 <br>
 
 # [2] 이클렛 (Eclat)
+▣ 정의 : Eclat은 연관 규칙 학습의 또 다른 방법으로, 집합 간의 교집합을 이용하여 빈발 항목 집합을 찾아낸다. Eclat은 트랜잭션 ID(TID) 집합을 사용하여 항목 집합의 지지도를 계산한다. 트랜잭션 간의 공통 항목을 기반으로 빈발 항목을 추출하는 방식이다.<br>
+▣ 필요성 : Eclat은 Apriori와 FP-Growth의 대안으로, TID 집합을 활용하여 빈발 항목 집합을 계산한다. 데이터의 수가 많아도 TID 간 교차 계산을 통해 효율적으로 연관 규칙을 도출할 수 있다.<br>
+▣ 장점 : 수평적 데이터 구조를 이용하여 트랜잭션 데이터에서 빈발 항목 집합을 빠르게 찾고, 저장 공간을 효율적으로 사용하며, 교차 연산을 통해 빈발 항목을 추출한다.<br>
+▣ 단점 : 트랜잭션 ID 집합을 계속 업데이트해야 하므로 메모리 사용이 증가할 수 있으며, 대규모 데이터셋에서는 효율성이 떨어질 수 있다.<br>
+▣ 응용분야 : 대규모 데이터에서 빈발 패턴 분석, 웹 클릭 로그 분석, 텍스트 마이닝에서 자주 나타나는 단어 조합 분석<br>
+▣ 모델식 : Eclat는 항목 집합의 지지도 계산을 위해 트랜잭션 ID 집합의 교집합을 사용하며 빈발 항목 집합의 지지도를 계산할 때 교집합을 통해 빈발 항목을 찾아낸다.<br>
+▣ python 예제 : Eclat은 일반적으로 FP-Growth와 유사하게 작동하며, 이클렛 알고리즘은 아래와 같은 기본 TID 기반 교차 연산 방식으로 구현된다.<br>
 
+    from itertools import combinations
+
+    # 데이터 집합에서 항목별로 트랜잭션 ID 집합 생성
+    def tid_lists(df):
+        tid_dict = {}
+        for col in df.columns:
+            tid_dict[col] = set(df.index[df[col] == 1])
+        return tid_dict
+
+    # 빈발 항목 집합을 찾는 Eclat 알고리즘 구현
+    def eclat(tid_dict, min_support=0.6):
+        n_transactions = len(df)
+        frequent_itemsets = {}
+    
+        for k in range(1, len(tid_dict)+1):
+            for comb in combinations(tid_dict.keys(), k):
+                intersect_tids = set.intersection(*[tid_dict[item] for item in comb])
+                support = len(intersect_tids) / n_transactions
+                if support >= min_support:
+                    frequent_itemsets[comb] = support
+        return frequent_itemsets
+
+    # 트랜잭션 ID 집합 계산
+    tid_dict = tid_lists(df)
+
+    # Eclat 알고리즘 실행
+    frequent_itemsets_eclat = eclat(tid_dict, min_support=0.6)
+    print(frequent_itemsets_eclat)
+    
 <br>
 
 # [3] 어프라이어리 (Apriori)
+▣ 정의 : Apriori는 연관 규칙 학습을 위한 고전적인 알고리즘으로, 빈발한 항목 집합(frequent itemsets)을 찾아내고, 그 집합들 간의 연관성을 추출한다. 알고리즘의 핵심은 자주 발생하지 않는 항목이 포함된 집합은 자주 발생할 수 없다는 "항목 집합의 부분 집합도 빈발하다"는 특성을 이용한다.<br>
+▣ 필요성 : 대규모 데이터에서 연관성을 발견하는 작업은 계산 비용이 높을 수 있으며, Apriori는 빈발하지 않은 항목 집합을 먼저 제거해 검색 공간을 줄여주는 방식으로 효율적인 탐색이 가능하다.<br>
+▣ 장점 : 간단한 구조로 이해하기 쉽고, 계산 공간을 줄이기 위한 사전 단계를 가지고 있어, 효율적인 탐색이 가능하다.<br>
+▣ 단점 : 탐색 공간이 커지면 성능이 저하됩니다. 대규모 데이터에서 비효율적일 수 있으며, 매번 새로운 후보 집합을 생성해야 하므로 계산 비용이 크다.<br>
+▣ 응용분야 : 시장 바구니 분석 (장바구니 데이터에서 자주 함께 구매되는 상품을 찾음), 추천 시스템, 웹 페이지 연결성 분석<br>
+▣ 모델식 : 
+지지도(Support): 특정 항목 집합이 전체 거래에서 얼마나 자주 발생하는가<br>
+신뢰도(Confidence): 특정 항목이 발생한 경우 다른 항목이 함께 발생할 확률<br>
+향상도(Lift): 항목 간의 상호 의존성을 측정<br>
+▣ python 예제 : 
 
-<br><br>
+    from mlxtend.frequent_patterns import apriori, association_rules
+    import pandas as pd
+
+    # 예시 데이터 생성 (장바구니 데이터)
+    data = {'milk': [1, 0, 1, 1, 0],
+            'bread': [1, 1, 1, 0, 1],
+            'butter': [0, 1, 0, 1, 0],
+            'beer': [1, 1, 1, 0, 0]}
+    df = pd.DataFrame(data)
+
+    # Apriori 알고리즘을 사용하여 빈발 항목 집합 찾기
+    frequent_itemsets = apriori(df, min_support=0.6, use_colnames=True)
+
+    # 연관 규칙 찾기
+    rules = association_rules(frequent_itemsets, metric="confidence", min_threshold=0.7)
+
+    print(frequent_itemsets)
+    print(rules)
+
+<br>
 
 ---
 
