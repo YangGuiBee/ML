@@ -238,6 +238,44 @@
 <br>
 
 # [5] Asynchronous Advantage Actor-Critic(A3C)
+▣ 정의 :Asynchronous Advantage Actor-Critic (A3C)은 병렬 환경에서 여러 에이전트가 동시에 학습하는 강화 학습 기법으로 액터-크리틱(Actor-Critic) 구조를 기반으로 하고 있으며, 에이전트들은 독립적으로 환경과 상호작용하면서 각각 정책과 가치 함수(critic)를 학습하고, 이를 전역 네트워크로 반영한다. A3C는 탐색(exploration)과 정책 수렴을 효과적으로 조절할 수 있어 강화 학습의 성능을 향상시킨다.<br>
+▣ 필요성 : 기존 강화 학습 알고리즘은 계산 속도가 느리거나 수렴이 불안정할 수 있는데, A3C는 병렬 학습을 통해 이러한 문제를 해결하며, 병렬적으로 에이전트들이 학습하므로 다양한 상태와 행동을 더 빠르게 탐색하고, 학습 속도를 개선할 수 있다.<br>
+▣ 장점 : 병렬 학습으로 더 빠른 학습 속도를 제공하고, 다중 에이전트를 통해 더 다양한 경험을 수집하고, 수렴의 안정성을 높일 수 있으며, 정책 그라디언트와 가치 기반 방법의 장점을 결합해 효율적인 학습이 가능하다.<br>
+▣ 단점 : 병렬 환경을 구현하기 위한 추가적인 컴퓨팅 자원이 필요하며, 복잡한 알고리즘 구조로 인해 이해하고 구현하는 데 어려움이 있을 수 있고, 하이퍼파라미터 조정이 까다롭고, 자원 소모가 클 수 있다.<br>
+▣ 응용분야 : 비디오 게임 AI 학습 (Atari 게임, StarCraft II 등), 로봇 제어, 자율 주행, 금융 분야의 자동 매매<br>
+▣ 모델식 : 
+▣ 주요 알고리즘 : 
+▣ python 예제 : 
+
+    import threading
+    import gym
+    import numpy as np
+    import tensorflow as tf
+
+    # A3C 클래스 정의
+    class A3C_Agent:
+        def __init__(self, state_size, action_size):
+            self.state_size = state_size
+            self.action_size = action_size
+            self.gamma = 0.99  # 할인 계수
+            self.actor, self.critic = self.build_model()
+
+        def build_model(self):
+            # 액터 모델
+            inputs = tf.keras.layers.Input(shape=(self.state_size,))
+            hidden = tf.keras.layers.Dense(24, activation='relu')(inputs)
+            policy = tf.keras.layers.Dense(self.action_size, activation='softmax')(hidden)
+        
+        # 크리틱 모델
+        value = tf.keras.layers.Dense(1, activation='linear')(hidden)
+
+        actor = tf.keras.models.Model(inputs=inputs, outputs=policy)
+        critic = tf.keras.models.Model(inputs=inputs, outputs=value)
+
+        actor.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001), loss='categorical_crossentropy')
+        critic.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001), loss='mse')
+
+        return actor
 
 <br>
 
