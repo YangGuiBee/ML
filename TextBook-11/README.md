@@ -1,25 +1,24 @@
-#  11 : 비지도 학습 (Unsupervised Learning, UL) : 연관규칙, 차원축소
+#  11 : 비지도 학습(Unsupervised Learning, UL) : 연관규칙, 차원축소
 
 ---
 
-## 연관 규칙 (Association Rule)
+## 연관 규칙(Association Rule)
 <br>
 
     [1] FP Growth
-    [2] 이클렛 (Eclat)
-    [3] 어프라이어리 (Apriori)
+    [2] 이클렛(Eclat)
+    [3] 어프라이어리(Apriori)
   
 
-## 차원 축소 (Dimensionality Reduction)
+## 차원 축소(Dimensionality Reduction)
 <br>
 
-    [4] 주성분 분석 (Principal Component Analysis, PCA)
-    [5] 독립 성분 분석 (Independent Component Analysis, ICA)
-    [6] 자기 조직화 지도 (Self-Organizing Maps, SOM)
-    [7] 잠재 의미 분석 (Latent Semantic Analysis, LSA)
-    [8] 특이값 분해 (Singular Value Decomposition, SVD)
-    [9] 잠재 디리클레 할당 (Latent Dirichlet Allocation, LDA)
-    [10]t-distributed Stochastic Neighbor Embedding (t-SNE)
+    [4] 주성분 분석(Principal Component Analysis, PCA)
+    [5] 독립 성분 분석(Independent Component Analysis, ICA)
+    [6] 자기 조직화 지도(Self-Organizing Maps, SOM)
+    [7] 잠재 의미 분석(Latent Semantic Analysis, LSA)
+    [8] 특이값 분해(Singular Value Decomposition, SVD)
+    [9] t-distributed Stochastic Neighbor Embedding(t-SNE)
 
 ---  
 
@@ -45,7 +44,7 @@
     
 <br>
 
-# [2] 이클렛 (Eclat)
+# [2] 이클렛(Eclat)
 ▣ 정의 : Eclat은 연관 규칙 학습의 또 다른 방법으로, 집합 간의 교집합을 이용하여 빈발 항목 집합을 찾아낸다. Eclat은 트랜잭션 ID(TID) 집합을 사용하여 항목 집합의 지지도를 계산한다. 트랜잭션 간의 공통 항목을 기반으로 빈발 항목을 추출하는 방식이다.<br>
 ▣ 필요성 : Eclat은 Apriori와 FP-Growth의 대안으로, TID 집합을 활용하여 빈발 항목 집합을 계산한다. 데이터의 수가 많아도 TID 간 교차 계산을 통해 효율적으로 연관 규칙을 도출할 수 있다.<br>
 ▣ 장점 : 수평적 데이터 구조를 이용하여 트랜잭션 데이터에서 빈발 항목 집합을 빠르게 찾고, 저장 공간을 효율적으로 사용하며, 교차 연산을 통해 빈발 항목을 추출한다.<br>
@@ -85,7 +84,7 @@
     
 <br>
 
-# [3] 어프라이어리 (Apriori)
+# [3] 어프라이어리(Apriori)
 ▣ 정의 : Apriori는 연관 규칙 학습을 위한 고전적인 알고리즘으로, 빈발한 항목 집합(frequent itemsets)을 찾아내고, 그 집합들 간의 연관성을 추출한다. 알고리즘의 핵심은 자주 발생하지 않는 항목이 포함된 집합은 자주 발생할 수 없다는 "항목 집합의 부분 집합도 빈발하다"는 특성을 이용한다.<br>
 ▣ 필요성 : 대규모 데이터에서 연관성을 발견하는 작업은 계산 비용이 높을 수 있으며, Apriori는 빈발하지 않은 항목 집합을 먼저 제거해 검색 공간을 줄여주는 방식으로 효율적인 탐색이 가능하다.<br>
 ▣ 장점 : 간단한 구조로 이해하기 쉽고, 계산 공간을 줄이기 위한 사전 단계를 가지고 있어, 효율적인 탐색이 가능하다.<br>
@@ -122,7 +121,7 @@
 
 차원축소의 필요성 : 데이터에는 중요한 부분과 중요하지 않은 부분이 존재하는데, 여기서 중요하지 않은 부분이 노이즈(noise)이다. 머신러닝 과정에서는 데이터에서 정보를 언들때 방해가 되는 불필요한 노이즈를 제거하는 것이 중요한데, 이 노이즈를 제거할 때 사용하는 방법이 차원축소(dimension reduction)이다. 차원축소는 주어진 데이터의 정보손실을 최소화하면서 노이즈를 줄이는 것이 핵심이다. 차원축소를 통해 차원이 늘어날 수록 필요한 데이터가 기하급수적으로 많아지는 차원의 저주(curse of dimensionality) 문제를 해결할 수 있다. 지도학습의 대표적인 차원축소 방법은 선형판별분석(Linear Discriminant Analysis)이 있고, 비지도학습의 대표적인 차원축소 방법은 주성분분석(Principal Component Anaysis)이 있다.<br>
 
-# [4] 주성분 분석 (Principal Component Analysis, PCA)
+# [4] 주성분 분석(Principal Component Analysis, PCA)
 PCA는 여러 특성(Feature) 변수들이 통계적으로 서로 상관관계가 없도록 변환시키는 것이다. 특성이 $p$ 개가 있을 경우, 각 특성의 벡터는 $X_1, X_2, ... X_p$ 라고 나타낼 수 있으며, 주성분분석은 오직 공분산행렬(convariance matrix) $\sum$ 에만 영향을 받는다.<br> 
 
 PCA의 핵심개념
@@ -155,7 +154,7 @@ PCA의 단점
 
 <br>
 
-# [5] 독립 성분 분석 (Independent Component Analysis, ICA)
+# [5] 독립 성분 분석(Independent Component Analysis, ICA)
 PCA는 데이터의 분산을 최대화하는 축을 찾는 반면, ICA는 신호 간의 독립성을 기반으로 성분을 찾는다. 또한 PCA는 가우시안 분포를 가정하고 데이터의 상관관계만을 이용해 차원을 축소하거나 성분을 찾는 반면, ICA는 신호들 간의 고차원적 통계적 독립성에 초점을 맞추기 때문에 더 복잡한 구조의 신호 분리 문제를 해결할 수 있다.<br>
 
 ICA의 응용분야
@@ -174,7 +173,7 @@ ICA의 단점
 
 <br> 
 
-# [6] 자기 조직화 지도 (Self-Organizing Maps, SOM)
+# [6] 자기 조직화 지도(Self-Organizing Maps, SOM)
 SOM은 비지도 학습 알고리즘 중 하나로, 고차원의 데이터를 저차원(일반적으로 2차원) 공간으로 투영하여 데이터의 구조를 시각화하는 데 사용된다. PCA는 선형 변환을 통해 차원 축소를 수행하지만, SOM은 비선형 변환을 사용하여 더 복잡한 데이터 구조를 반영할 수 있으며, k-평균은 각 군집의 중심을 찾는 방식으로 군집화를 수행하는 반면, SOM은 뉴런이 격자 형태로 조직되어 있어 더 직관적인 시각화가 가능하다.<br> 
 SOM의 핵신개념
  - 차원 축소: 고차원의 데이터를 2차원 맵으로 변환하여 시각화하여 고차원 데이터의 구조를 쉽게 이해하고 분석하는 데 유용하다.<br> 
@@ -206,7 +205,7 @@ SOM의 응용분야
 
 <br> 
 
-# [7] 잠재 의미 분석 (Latent Semantic Analysis, LSA)
+# [7] 잠재 의미 분석(Latent Semantic Analysis, LSA)
 LSA는 텍스트 데이터를 분석할 때 사용되는 자연어 처리(Natural Language Processing, NLP) 기법으로, 문서 간의 잠재적인 의미적 관계를 분석하고, 차원을 축소하여 텍스트의 중요한 의미적 패턴을 파악하는 방법이다. LSA는 특히 문서내 단어들 간의 공통적인 의미 구조를 찾는 데 중점을 두며, 이를 통해 문서 간의 유사성을 계산하고, 텍스트 데이터에서 의미적 관계를 도출한다.<br>
 
 LSA의 핵심개념
@@ -234,7 +233,7 @@ LSA의 응용분야
 
 <br>
 
-# [8] 특이값 분해 (Singular Value Decomposition, SVD)
+# [8] 특이값 분해(Singular Value Decomposition, SVD)
 SVD는 선형대수학에서 매우 중요한 행렬 분해 기법으로, 임의의 행렬을 세 개의 행렬로 분해하는 방식이다. SVD는 데이터 분석, 차원 축소, 신호 처리, 머신러닝 등 다양한 분야에서 활용되며, 특히 고차원의 데이터를 다룰 때 중요한 역할을 한다. SVD는 주로 행렬의 특이값과 특이벡터를 통해 행렬의 구조를 파악하고, 이를 통해 데이터의 패턴을 찾거나 압축하는 데 사용된다.<br>
 SVD의 핵심개념
  - 모든 행렬에 적용 가능: SVD는 정방행렬뿐만 아니라 비정방행렬이나 비대칭 행렬에도 적용할 수 있다는 점에서 SVD는 다른 행렬 분해 기법들에 비해 범용성이 높다.<br>
@@ -257,12 +256,7 @@ SVD의 응용분야
 
 <br>
 
-# [9] 잠재 디리클레 할당 (Latent Dirichlet Allocation, LDA)
-차원축소는 아니고 차원축소 결과만 낸다...
-
-<br>
-
-# [10] t-distributed Stochastic Neighbor Embedding (t-SNE)
+# [9] t-distributed Stochastic Neighbor Embedding(t-SNE)
 t-SNE는 주로 데이터 시각화와 고차원 데이터의 구조를 이해하기 위한 기법으로 사용되는 차원 축소의 방법<br>
 
 t-SNE의 장점
