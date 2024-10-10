@@ -176,7 +176,65 @@
 <br>
 
 # [4] 유전 알고리즘(Genetic Algorithm)
+▣ 정의 : 유전 알고리즘(Genetic Algorithm, GA)은 자연 선택과 유전학의 원리에 기반한 최적화 알고리즘으로, 개체군(population) 내에서 개체들이 적응도(fitness)에 따라 선택되고, 교차(crossover)와 돌연변이(mutation)를 통해 새로운 세대를 형성하여 최적 해를 찾아가는 과정이다.<br>
+▣ 필요성 : 해 공간이 매우 크거나 복잡한 문제에서 전통적인 탐색 방법으로는 최적해를 찾기 어렵기 때문에, 진화 과정을 모방한 유전 알고리즘을 사용해 빠르고 효율적으로 최적화할 수 있다.<br>
+▣ 장점 : 다양한 해를 동시에 탐색하므로 전역 최적해에 도달할 가능성이 높으며, 문제의 구조에 대한 구체적인 지식 없이도 적용할 수 있고, 비선형 문제나 다목적 최적화 문제에도 적합하다.<br>
+▣ 단점 : 계산 비용이 많이 들 수 있으며, 특정 문제에서는 수렴이 느릴 수 있으며, 너무 빠르게 수렴하면 지역 최적해에 갇힐 가능성이 있다.<br>
+▣ 응용분야 : 최적화 문제, 로봇 공학, 머신 러닝에서의 하이퍼파라미터 튜닝, 경로 계획, 게임 디자인, 재무 최적화 등.<br>
+▣ 모델식 : 유전 알고리즘의 일반적인 구성 요소:
+적응도(fitness): 해의 품질을 측정.
+선택(selection): 높은 적응도를 가진 개체를 우선적으로 선택.
+교차(crossover): 두 부모로부터 자손을 생성.
+돌연변이(mutation): 자손의 일부 유전자를 무작위로 변형.
+▣ 주요 알고리즘 : 초기화: 개체군을 무작위로 생성.
+적응도 계산: 각 개체의 적응도를 계산.
+선택: 적응도에 따라 부모 개체를 선택.
+교차 및 돌연변이: 자손을 생성.
+적응도 평가 후, 최적화될 때까지 반복.
+▣ python 예제 : 
 
+    import numpy as np
+
+    def fitness(x):
+        return np.sum(x)  # 최대화할 함수 (예시)
+
+    def selection(pop, scores, k=3):
+        selected_idx = np.random.choice(len(pop), k, replace=False)
+        return pop[selected_idx[np.argmax(scores[selected_idx])]]
+
+    def crossover(p1, p2, r_cross):
+        if np.random.rand() < r_cross:
+            pt = np.random.randint(1, len(p1))
+            return np.hstack((p1[:pt], p2[pt:]))
+        return p1
+
+    def mutation(bitstring, r_mut):
+        for i in range(len(bitstring)):
+            if np.random.rand() < r_mut:
+                bitstring[i] = 1 - bitstring[i]
+
+    # 초기화
+    n_bits = 10
+    n_pop = 20
+    r_cross = 0.9
+    r_mut = 1.0 / n_bits
+    n_iter = 100
+    pop = np.random.randint(0, 2, (n_pop, n_bits))
+
+    for gen in range(n_iter):
+        scores = np.array([fitness(c) for c in pop])
+        best = pop[np.argmax(scores)]
+        print(f"Generation {gen}, Best: {best}, Fitness: {np.max(scores)}")
+    
+        new_pop = []
+        for _ in range(n_pop // 2):
+            p1, p2 = selection(pop, scores), selection(pop, scores)
+            child1, child2 = crossover(p1, p2, r_cross), crossover(p2, p1, r_cross)
+            mutation(child1, r_mut)
+            mutation(child2, r_mut)
+            new_pop += [child1, child2]
+        pop = np.array(new_pop)
+        
 <br>
 
 # [5] Asynchronous Advantage Actor-Critic(A3C)
