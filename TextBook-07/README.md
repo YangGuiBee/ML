@@ -31,7 +31,7 @@
 | 5. Decision Trees(DT) : 14 | rpart R, rpart t, rpart2 t, obliqueTree R, C5.0Tree t, cTree t, cTree2 t, J48 w, J48 t, RandomSubSpace w, NBTree w, RandomTree w, REPTree w, DecisionStump w |
 | 6. Rule-Based Classifiers(RL) : 12 | PART w, PART t, C5.0Rules t, JRip t, JRip w, OneR t, OneR w, DTNB w, Ridor w, ZeroR w, DecisionTable w, ConjunctiveRule w |
 | 7. Boosting(BST) : 20 | adaBoost R, logitBoost R, LogitBoost w, RacedIncrementalLogitBoost w, AdaBoostM1 DecisionStump w, AdaBoostM1 J48 w, C5.0 t, MultiBoostAB DecisionStump w, MultiBoostAB DecisionTable w, MultiBoostAB IBk w, MultiBoostAB J48 w, MultiBoostAB LibSVM w, MultiBoostAB Logistic w, MultiBoostAB MultilayerPerceptron w, MultiBoostAB NaiveBayes w, MultiBoostAB OneR w, MultiBoostAB PART w, MultiBoostAB RandomForest w, MultiBoostAB RandomTree w, MultiBoostAB REPTree w |
-| 8. Bagging (BAG) | Bagging (with Decision Stump, J48, Naive Bayes, OneR, RandomForest, Logistic, PART, Multilayer Perceptron), TreeBag, MetaCost, Bagging-SVM |
+| 8. Bagging(BAG) : 24 | bagging R, Treebag t, IDABag R, PLSBag R, nbBag R, cTreeBag R, SVMBag R, NNETBag R, MetaCost w, Bagging DecisionStump w, Bagging DecisionTable w, Bagging HyperPipes w, Bagging IBk w, Bagging J48 w, Bagging LibSVM w, Bagging Logistic w, Bagging LWL w, Bagging MultilayerPerceptron w, Bagging NaiveBayes w, Bagging OneR w, Bagging PART w, Bagging RandomForest w, Bagging RandomTree w, Bagging REPTree w |
 | 9. Stacking (STC) | Stacking, StackingC |
 | 10. Random Forests (RF) | Random Forest (R, Weka), RRF (Regularized Random Forest), cForest, parRF, RotationForest |
 | 11. Other Ensembles (OEN) | Random Committee, OrdinalClassClassifier, MultiScheme, MultiClassClassifier, Grading, Dagging, LWL (Locally Weighted Learning) |
@@ -784,7 +784,7 @@
 
 <br>
 
-## 8. Bagging (BAG)
+## 8. Bagging(BAG)
 ### 8-1. bagging R
 특성: ipred 패키지를 사용한 결정 트리의 배깅(ensemble)<br>
 장점: 다양한 데이터에서 성능 우수<br>
@@ -792,21 +792,21 @@
 모델식: 배깅 기반<br>
 응용분야: 다양한 분류 문제<br>
 
-### 8-2. treebag t
+### 8-2. Treebag t
 특성: caret 인터페이스를 사용해 결정 트리의 배깅 학습<br>
 장점: 튜닝 용이<br>
 단점: 계산 비용이 클 수 있음<br>
 모델식: 배깅 기반<br>
 응용분야: 회귀 및 분류 문제<br>
 
-### 8-3. ldaBag R
+### 8-3. IDABag R
 특성: LDA를 사용한 배깅 앙상블<br>
 장점: 선형 분류에 적합<br>
 단점: 비선형 데이터 처리 어려움<br>
 모델식: LDA 기반 배깅<br>
 응용분야: 고차원 데이터 분류<br>
 
-### 8-4. plsBag R
+### 8-4. PLSBag R
 특성: 부분 최소 제곱 회귀(PLS) 기반 배깅<br>
 장점: 다변량 데이터에 적합<br>
 단점: 계산 복잡성<br>
@@ -820,21 +820,21 @@
 모델식: Naive Bayes 기반 배깅<br>
 응용분야: 텍스트 분류<br>
 
-### 8-6. ctreeBag R
+### 8-6. cTreeBag R
 특성: 조건부 추론 트리를 사용하는 배깅<br>
 장점: 통계적 유의성을 고려한 분할<br>
 단점: 복잡한 설정<br>
 모델식: 조건부 추론 트리 기반 배깅<br>
 응용분야: 생물학 데이터 분석<br>
 
-### 8-7. svmBag R
+### 8-7. SVMBag R
 특성: SVM 기반 배깅<br>
 장점: 강력한 분류 성능<br>
 단점: 계산 시간이 큼<br>
 모델식: SVM 기반 배깅<br>
 응용분야: 고차원 데이터 분석<br>
 
-### 8-8. nnetBag R
+### 8-8. NNETBag R
 특성: 다층 퍼셉트론(MLP) 기반 배깅<br>
 장점: 비선형 데이터 처리에 적합<br>
 단점: 훈련 시간이 길 수 있음<br>
