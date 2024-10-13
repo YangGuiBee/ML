@@ -230,12 +230,227 @@
 모델식: 정규 분포 사용<br>
 응용분야: 간단한 분류 문제<br>
 <br>
+
 ## 3. Neural Networks(NNET)
+### 3-1. rbf m(Radial Basis Functions - Matlab)
+특성: Matlab의 RBF 신경망, 가우시안 기저 함수 사용<br>
+장점: 신경망 크기를 동적으로 조정 가능<br>
+단점: 적절한 확산 값을 설정해야 함<br>
+모델식: 가우시안 기저 함수 기반<br>
+응용분야: 패턴 인식, 신호 처리<br>
+
+### 3-2. rbf t(Radial Basis Functions - caret)
+특성: RSNNS 패키지의 RBF 신경망<br>
+장점: 쉬운 튜닝 가능<br>
+단점: 모델 복잡성<br>
+모델식: RBF 기반<br>
+응용분야: 고차원 데이터 분류<br>
+
+### 3-3. RBFNetwork w
+특성: K-means로 중심을 선택하여 선형 회귀를 통해 학습<br>
+장점: 비선형 분류에 적합<br>
+단점: 계산 복잡<br>
+모델식: 선형 회귀 기반<br>
+응용분야: 패턴 인식, 이미지 처리<br>
+
+### 3-4. rbfDDA t
+특성: 동적 감쇠 조정을 사용하는 RBF 신경망<br>
+장점: 네트워크 크기 자동 조정<br>
+단점: 복잡한 네트워크 성장<br>
+모델식: 동적 감쇠 조정<br>
+응용분야: 신호 처리, 패턴 인식<br>
+
+### 3-5. mlp m(Multi-Layer Perceptron - Matlab)
+특성: Matlab의 다층 퍼셉트론<br>
+장점: 다양한 문제에 적용 가능<br>
+단점: 네트워크 크기 조정 필요<br>
+모델식: MLP 기반<br>
+응용분야: 이미지 분류, 패턴 인식<br>
+
+### 3-6. mlp C
+특성: FANN 라이브러리 기반 MLP<br>
+장점: 다양한 훈련 알고리즘 지원<br>
+단점: 훈련 알고리즘에 따른 성능 차이<br>
+모델식: 다층 퍼셉트론 기반<br>
+응용분야: 다양한 머신러닝 문제<br>
+
+### 3-7. mlp t
+특성: RSNNS 패키지를 사용한 MLP<br>
+장점: 튜닝 용이<br>
+단점: 파라미터 조정 복잡<br>
+모델식: MLP 기반<br>
+응용분야: 고차원 데이터 분류<br>
+
+### 3-8. avNNet t
+특성: MLP 앙상블로 구성<br>
+장점: 낮은 연산 비용으로 성능 향상<br>
+단점: 작은 뉴런 수에서 성능 저하<br>
+모델식: MLP 앙상블 기반<br>
+응용분야: 회귀 분석, 분류 문제<br>
+
+### 3-9. mlpWeightDecay t
+특성: 가중치 감소 MLP<br>
+장점: 과적합 방지<br>
+단점: 튜닝 필요<br>
+모델식: 가중치 감소 기반<br>
+응용분야: 고차원 데이터 처리<br>
+
+### 3-10. nnet t
+특성: caret 패키지를 사용한 nnet 함수<br>
+장점: 간편한 사용<br>
+단점: 네트워크 크기 및 가중치 조정 필요<br>
+모델식: MLP 기반<br>
+응용분야: 회귀 분석<br>
+
+### 3-11. pcaNNet t
+특성: PCA를 적용한 MLP<br>
+장점: 차원 축소로 성능 향상<br>
+단점: 데이터 전처리 필요<br>
+모델식: PCA 기반<br>
+응용분야: 고차원 데이터 분류<br>
+
+### 3-12. MultilayerPerceptron w
+특성: Weka에서 제공하는 MLP<br>
+장점: 다양한 문제에 적용 가능<br>
+단점: 학습 속도가 느림<br>
+모델식: MLP 기반<br>
+응용분야: 이미지 처리<br>
+
+### 3-13. pnn m(Probabilistic Neural Network)
+특성: 확률적 신경망<br>
+장점: 간단하고 빠름<br>
+단점: 스프레드 값 튜닝 필요<br>
+모델식: 가우시안 기저 함수 기반<br>
+응용분야: 분류 문제<br>
+
+### 3-14. elm m(Extreme Learning Machine)
+특성: 빠른 학습 속도를 가진 ELM<br>
+장점: 매우 빠른 학습<br>
+단점: 파라미터 조정 필요<br>
+모델식: ELM 기반<br>
+응용분야: 실시간 데이터 처리<br>
+
+### 3-15. elm kernel m
+특성: 가우시안 커널을 사용하는 ELM<br>
+장점: 비선형 문제 해결<br>
+단점: 파라미터 튜닝 필요<br>
+모델식: 커널 기반 ELM<br>
+응용분야: 고차원 데이터 분류<br>
+
+### 3-16. cascor C(Cascade Correlation Network)
+특성: 계단형 상관 신경망<br>
+장점: 높은 유연성<br>
+단점: 복잡한 구조<br>
+모델식: 계단형 상관 기반<br>
+응용분야: 패턴 인식<br>
+
+### 3-17. lvq R(Learning Vector Quantization)
+특성: 벡터 양자화를 사용한 학습<br>
+장점: 고차원 데이터에 적합<br>
+단점: 파라미터 조정 필요<br>
+모델식: 벡터 양자화 기반<br>
+응용분야: 패턴 인식<br>
+
+### 3-18. lvq t
+특성: LVQ 알고리즘을 사용<br>
+장점: 튜닝 가능<br>
+단점: 복잡한 튜닝 과정<br>
+모델식: LVQ 기반<br>
+응용분야: 분류 문제<br>
+
+### 3-19. bdk R(Bi-directional Kohonen Map)
+특성: 양방향 코호넨 맵<br>
+장점: 시각화에 적합<br>
+단점: 복잡한 데이터 처리에 어려움<br>
+모델식: 양방향 맵 기반<br>
+응용분야: 군집화 및 분류<br>
+
+### 3-20. dkp C(Direct Kernel Perceptron)
+특성: 커널 기반 퍼셉트론<br>
+장점: 빠름<br>
+단점: 일부 데이터에서 성능 저하<br>
+모델식: 커널 퍼셉트론<br>
+응용분야: 실시간 분류 문제<br>
+
+### 3-21. dpp C(Direct Parallel Perceptron)
+특성: 병렬 퍼셉트론<br>
+장점: 빠른 연산<br>
+단점: 고차원 데이터에서 성능 저하<br>
+모델식: 병렬 퍼셉트론<br>
+응용분야: 패턴 인식<br>
 
 <br>
 
 ## 4. Support Vector Machines (SVM)
+### 4-1. svm C (Support Vector Machine with Gaussian Kernel)
+특성: LibSVM을 이용해 구현된 Gaussian 커널 기반 SVM. 정규화 파라미터 C와 커널 스프레드 감마 값 조정<br>
+장점: 다중 클래스 데이터에서 one-vs-one 접근 방식 사용<br>
+단점: 대규모 데이터에 계산 복잡도 높음<br>
+모델식: Gaussian 커널 $K(x, x') = e^(-γ ||x - x'||^2)$<br>
+응용분야: 이미지 인식, 생물정보학<br>
 
+### 4-2. svmlight C
+특성: C언어 기반으로 Joachims(1999)에 의해 개발된 SVM 구현체<br>
+장점: 매우 널리 사용됨<br>
+단점: 라이브러리가 아닌 커맨드라인에서만 사용 가능, 대규모 데이터에서 에러 발생 가능<br>
+모델식: Gaussian 커널<br>
+응용분야: 텍스트 분류<br>
+
+### 4-3. LibSVM w
+특성: Weka에서 호출되는 LibSVM 라이브러리 사용<br>
+장점: 다양한 파라미터와 커널 지원<br>
+단점: 설정 복잡성<br>
+모델식: Gaussian 커널 기반 SVM<br>
+응용분야: 다양한 머신러닝 문제<br>
+
+### 4-4. LibLINEAR w
+특성: LibLinear 라이브러리 사용, 대규모 고차원 데이터에 적합<br>
+장점: 선형 모델에 효율적<br>
+단점: 비선형 데이터 처리 어려움<br>
+모델식: L2-loss 선형 SVM<br>
+응용분야: 대규모 텍스트 데이터 처리<br>
+
+### 4-5. svmRadial t
+특성: kernlab 패키지의 Gaussian 커널 기반 SVM, C와 스프레드 조정 가능<br>
+장점: 다양한 커널 사용 가능<br>
+단점: 튜닝 필요<br>
+모델식: Gaussian 커널 기반<br>
+응용분야: 고차원 데이터 처리<br>
+
+### 4-6. svmRadialCost t
+특성: kernlab 패키지 사용, 커널 스프레드를 자동으로 계산<br>
+장점: 자동 튜닝<br>
+단점: 제한된 튜닝 옵션<br>
+모델식: Gaussian 커널<br>
+응용분야: 회귀 및 분류 문제<br>
+
+### 4-7. svmLinear t
+특성: kernlab 패키지에서 선형 커널 사용, C 값 조정 가능<br>
+장점: 간단하고 빠름<br>
+단점: 비선형 데이터에서 성능 저하<br>
+모델식: 선형 커널 기반<br>
+응용분야: 고차원 텍스트 데이터<br>
+
+### 4-8. svmPoly t
+특성: kernlab 패키지의 다항 커널 사용, 차수와 스케일, 오프셋 조정 가능<br>
+장점: 다양한 비선형 관계 모델링<br>
+단점: 계산 복잡성 높음<br>
+모델식: 다항식 커널 $(sx^Ty + o)^d$<br>
+응용분야: 복잡한 데이터 분류<br>
+
+### 4-9. lssvmRadial t
+특성: 최소 제곱 SVM, Gaussian 커널 기반<br>
+장점: 간단한 구현<br>
+단점: 성능 낮음<br>
+모델식: Gaussian 커널 기반 최소 제곱 SVM<br>
+응용분야: 회귀 및 분류 문제<br>
+
+### 4-10. SMO w
+특성: 순차 최소화 최적화(SMO)를 이용한 SVM, one-vs-one 다중 클래스 처리 방식 사용<br>
+장점: 다중 클래스 문제에서 효율적<br>
+단점: 복잡한 파라미터 튜닝 필요<br>
+모델식: 이차 커널 기반 SVM<br>
+응용분야: 텍스트 및 이미지 분류<br>
 <br>
 
 ## 5. Decision Trees (DT)
@@ -261,9 +476,11 @@
 ## 10. Random Forests (RF)
 
 <br>
+
 ## 11. Other Ensembles (OEN)
 
 <br>
+
 ## 12. Generalized Linear Models (GLM)
 
 <br>
