@@ -25,8 +25,7 @@
 | Family                           | 분류기 목록                                      |
 |----------------------------------|---------------------------------------------------|
 | 1. Discriminant Analysis(DA) : 20 | LDA R, LDA2 t, RRLDA R, SDA t, SLDA t, stepLDA t, SDDA R, PenalizedLDA t, sparseLDA R, QDA t, QDACov t, SDDAQDA R, stepQDA t, FDA R, FDA t, MDA R, MDA t, PDA t, RDA R, HDDA R |
-| 2. Bayesian(BY) : 6 | NaiveBayes R, vbmpRadial t, NaiveBayes w, NaiveBayesUpdateable w, BayesNet w, NaiveBayesSimple w
- |
+| 2. Bayesian(BY) : 6 | NaiveBayes R, vbmpRadial t, NaiveBayes w, NaiveBayesUpdateable w, BayesNet w, NaiveBayesSimple w |
 | 3. Neural Networks (NNET) | MLP, avNNet, pcaNNet, RSNNS MLP, RSNNS RBF, RSNNS RBF-DDA, PNN, ELM, Cascade-Correlation (Cascor), Learning Vector Quantization (LVQ), Bidirectional Kohonen Map (BDK), DKP, DPP |
 | 4. Support Vector Machines (SVM) | SVM (Gaussian), SVMlight, LibSVM, LibLINEAR, SMO, svmRadial, svmLinear, svmPoly, lssvmRadial |
 | 5. Decision Trees (DT) | C5.0, J48, RandomTree, REPTree, DecisionStump, RandomSubspace, NBTree, RandomForest |
