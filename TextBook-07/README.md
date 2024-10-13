@@ -38,7 +38,7 @@
 | 12. Generalized Linear Models (GLM) | GLM (R), glmnet, bayesglm, glmStepAIC, mlm |
 | 13. Nearest Neighbors (NN) | k-NN (R, Weka), IB1, IBk, NNge (Non-nested generalized exemplars) |
 | 14. Partial Least Squares (PLSR) | PLSR, KernelPLS, WideKernelPLS, SparsePLS, Generalized PLS |
-| 15. Logistic Regression (LR) | Logistic Regression (Logistic, multinom, SimpleLogistic) |
+| 15. Logistic and multinomial regression (LMR) | Logistic Regression (Logistic, multinom, SimpleLogistic) |
 | 16. Multivariate Adaptive Regression Splines (MARS) | MARS (earth), gcvEarth |
 | 17. Other Methods (OM) | PAM, VFI (Voting Feature Intervals), HyperPipes, FilteredClassifier, CVParameterSelection, ClassificationViaRegression, KStar |
 
@@ -1028,31 +1028,311 @@
 <br>
 
 ## 11. Other Ensembles (OEN)
+### 11-1. RandomCommittee w
+특성: 다양한 시드를 사용하여 구축된 RandomTrees의 앙상블로, 각 기본 분류기의 출력 평균 사용<br>
+장점: 다양한 모델의 평균을 통해 강건성 향상<br>
+단점: 계산 복잡성<br>
+모델식: 랜덤 위원회 앙상블<br>
+응용분야: 분류 문제, 데이터 마이닝<br>
 
+### 11-2. OrdinalClassClassifier w
+특성: 순서형 분류 문제를 위한 앙상블 방법, J48 기본 분류기 사용, 신뢰도 임계값 C=0.25<br>
+장점: 순서형 문제에 적합한 처리<br>
+단점: 설정 복잡성<br>
+모델식: 순서형 분류기 앙상블<br>
+응용분야: 순서형 데이터 분석<br>
+
+### 11-3. MultiScheme w
+특성: 여러 ZeroR 분류기 중에서 교차 검증을 통해 선택하는 앙상블<br>
+장점: 다양한 모델 중 최적의 선택 가능<br>
+단점: 데이터에 따라 성능 변동 가능<br>
+모델식: 다중 기법 앙상블<br>
+응용분야: 다양한 분류 문제<br>
+
+### 11-4. MultiClassClassifier w
+특성: 이진 로지스틱 회귀 기반 기본 분류기를 사용하여 다중 클래스 문제 해결, One-Against-All 접근법 사용<br>
+장점: 다중 클래스 문제에서 높은 성능<br>
+단점: 모델의 복잡성 증가<br>
+모델식: 다중 클래스 로지스틱 회귀<br>
+응용분야: 다중 클래스 분류<br>
+
+### 11-5. CostSensitiveClassifier w
+특성: 오류 유형에 따라 가중치가 부여된 ZeroR 기본 분류기를 사용<br>
+장점: 비용 민감한 오류 처리 가능<br>
+단점: 가중치 설정에 따라 성능이 변동 가능<br>
+모델식: 비용 민감 분류기<br>
+응용분야: 비용 민감한 분류 문제<br>
+
+### 11-6. Grading w
+특성: "등급" ZeroR 기본 분류기를 사용하는 Grading 앙상블<br>
+장점: 간단한 구조로 빠른 학습<br>
+단점: 단순한 규칙으로 복잡한 문제에 한계<br>
+모델식: 등급 기반 분류기<br>
+응용분야: 기본적인 분류 문제<br>
+
+### 11-7. END w
+특성: 다중 클래스 데이터셋을 두 클래스 J48 트리 분류기로 분류하는 Nested Dichotomies 앙상블<br>
+장점: 복잡한 문제를 단순한 이진 분류 문제로 변환 가능<br>
+단점: 설정이 복잡할 수 있음<br>
+모델식: 중첩 이분 분류기<br>
+응용분야: 다중 클래스 분류<br>
+
+### 11-8. Decorate w
+특성: 고차원 다양성을 갖춘 15개의 J48 트리 분류기를 학습하는 앙상블<br>
+장점: 높은 다양성으로 성능 향상<br>
+단점: 인공 데이터 패턴에 의존<br>
+모델식: 다수의 J48 기반 앙상블<br>
+응용분야: 패턴 인식<br>
+
+### 11-9. Vote w
+특성: ZeroR 기본 분류기의 앙상블을 평균 규칙으로 결합<br>
+장점: 간단한 규칙으로 조합 가능<br>
+단점: 단순함으로 인해 복잡한 문제에 약함<br>
+모델식: 투표 기반 앙상블<br>
+응용분야: 다양한 분류 문제<br>
+
+### 11-10. Dagging w
+특성: SMO 기반 앙상블로, 훈련 데이터를 4개로 나누어 학습<br>
+장점: 각 분류기의 성능 향상<br>
+단점: 계산 비용 증가<br>
+모델식: 다중 이분 분류기<br>
+응용분야: 다중 클래스 문제<br>
+
+### 11-11. LWL w
+특성: 지역 가중치 학습 앙상블, DecisionStump 기본 분류기 사용<br>
+장점: 지역 패턴을 잘 포착<br>
+단점: 계산 복잡성<br>
+모델식: 지역 가중치 기반<br>
+응용분야: 패턴 인식<br>
 <br>
 
 ## 12. Generalized Linear Models (GLM)
+### 12-1. glm R
+특성: R의 stats 패키지에 있는 glm 함수를 사용하여 이항 및 포아송 분포 기반의 GLM 구현<br>
+장점: 다양한 문제에 적용 가능하며 해석이 용이<br>
+단점: 분포 가정이 잘못될 경우 성능 저하<br>
+모델식: GLM = Y ~ X (이항 또는 포아송 분포)<br>
+응용분야: 이진 및 다중 클래스 분류<br>
 
+### 12-2. glmnet R
+특성: Lasso 또는 Elastic Net 정규화를 사용하는 GLM 훈련, glmnet 패키지의 glmnet 함수 이용<br>
+장점: 모델 복잡도를 제어할 수 있어 과적합 방지<br>
+단점: 정규화 파라미터 조정 필요<br>
+모델식: GLM = Y ~ X (정규화 포함)<br>
+응용분야: 이진 및 다중 클래스 문제, 고차원 데이터<br>
+
+### 12-3. mlm R
+특성: nnet 패키지의 multinom 함수를 사용하여 다중 로지스틱 회귀 모델 구축<br>
+장점: MLP 신경망을 통해 비선형 관계 모델링 가능<br>
+단점: 데이터에 따라 성능이 변동 가능<br>
+모델식: 다중 로지스틱 회귀 모델<br>
+응용분야: 다중 클래스 분류<br>
+
+### 12-4. bayesglm t
+특성: arm 패키지의 bayesglm 함수를 사용하여 베이지안 GLM 구현<br>
+장점: 사전 확률을 고려한 유연한 모델링<br>
+단점: 계산 비용이 높을 수 있음<br>
+모델식: GLM = Y ~ X (베이지안 함수 기반)<br>
+응용분야: 회귀 분석, 분류 문제<br>
+
+### 12-5. glmStepAIC t
+특성: Akaike 정보 기준(AIC)을 이용한 모델 선택 수행, MASS 패키지의 stepAIC 함수 사용<br>
+장점: 자동으로 최적 모델 선택 가능<br>
+단점: 잘못된 초기 모델 선택 시 성능 저하<br>
+모델식: AIC 기반 GLM 모델<br>
+응용분야: 변수 선택, 모델 최적화<br>
 <br>
 
 ## 13. Nearest Neighbors (NN)
+### 13-1. knn R
+특성: class 패키지의 knn 함수를 사용하여 K-최근접 이웃(KNN) 구현, 이웃의 수를 1에서 37까지 조정<br>
+장점: 간단하고 이해하기 쉬움<br>
+단점: 고차원 데이터에서는 성능 저하<br>
+모델식: $KNN = Class(x) = argmax(count(class_i))$<br>
+응용분야: 분류 문제, 패턴 인식<br>
 
+### 13-2. knn t
+특성: caret 패키지의 knn 함수를 사용하여 KNN 구현, 이웃의 수를 5에서 23까지 조정 (10으로 설정)<br>
+장점: 파라미터 조정이 용이<br>
+단점: 대규모 데이터셋에서 느림<br>
+모델식: $KNN = Class(x) = argmax(count(class_i))$<br>
+응용분야: 분류 문제, 추천 시스템<br>
+
+### 13-3. NNge w
+특성: 비중첩 일반화 예제(classifier)인 NNge, 상호 정보 계산을 위한 하나의 폴더 사용<br>
+장점: 일반화 성능 향상<br>
+단점: 설정이 복잡할 수 있음<br>
+모델식: NNge = Generalized exemplar classifier<br>
+응용분야: 다양한 패턴 인식 문제<br>
+
+### 13-4. IBk w
+특성: KNN 분류기로, K를 교차 검증을 통해 조정, 선형 이웃 검색 및 유클리드 거리 사용<br>
+장점: 성능이 뛰어나고 유연함<br>
+단점: 계산 비용이 높음<br>
+모델식: $KNN = Class(x) = argmax(count(class_i))$<br>
+응용분야: 다양한 분류 문제, 데이터 마이닝<br>
+
+### 13-5. IB1 w
+특성: 단순한 1-NN 분류기<br>
+장점: 구현이 간단하고 효율적<br>
+단점: 과적합 가능성이 있음<br>
+모델식: $1-NN = Class(x) = argmax(count(class_i))$<br>
+응용분야: 기본적인 분류 문제, 패턴 인식<br>
 <br>
 
 ## 14. Partial Least Squares (PLSR)
+### 14-1. pls t
+특성: pls 패키지의 mvr 함수를 사용하여 PLSR 모델을 적합, 구성 요소 수를 1에서 10까지 조정<br>
+장점: 다양한 데이터 구조에 대해 효과적<br>
+단점: 최적의 구성 요소 수 선택에 따른 성능 변동 가능<br>
+모델식: PLSR = Y ~ X (구성 요소 수 조정)<br>
+응용분야: 회귀 분석, 다변량 데이터 분석<br>
 
+### 14-2. gpls R
+특성: gpls 패키지를 사용하여 일반화된 PLS 모델 구축<br>
+장점: 유연한 모델링 가능<br>
+단점: 모델 복잡성 증가<br>
+모델식: 일반화된 PLS = Y ~ X<br>
+응용분야: 복잡한 회귀 분석<br>
+
+### 14-3. spls R
+특성: spls 패키지의 spls 함수를 사용하여 희소 PLS 회귀 모델 적합, K와 η 매개변수 조정<br>
+장점: 변수 선택 및 차원 축소 가능<br>
+단점: 매개변수 조정의 복잡성<br>
+모델식: 희소 PLS = Y ~ X (K, η 매개변수 조정)<br>
+응용분야: 고차원 데이터 처리<br>
+
+### 14-4. simpls R
+특성: pls 패키지의 plsr 함수를 사용하여 SIMPLS 방법으로 PLSR 모델 적합<br>
+장점: 계산 속도 향상<br>
+단점: 모델의 복잡성<br>
+모델식: SIMPLS PLSR = Y ~ X<br>
+응용분야: 다변량 회귀 분석<br>
+
+### 14-5. kernelpls R
+특성: plsr 함수 사용, 커널 PLSR 방법 적용, 8개의 주성분 사용<br>
+장점: 많은 입력에 대해 빠른 계산<br>
+단점: 입력 수가 패턴 수보다 클 경우 계산 복잡성<br>
+모델식: 커널 PLSR = Y ~ X<br>
+응용분야: 고차원 데이터 분석<br>
+
+### 14-6. widekernelpls R
+특성: plsr 함수 사용, widekernelpls 방법으로 PLSR 모델 적합<br>
+장점: 입력 수가 패턴 수보다 클 때 빠른 계산<br>
+단점: 모델 복잡성 증가<br>
+모델식: 넓은 커널 PLSR = Y ~ X<br>
+응용분야: 고차원 데이터 처리<br>
 <br>
 
-## 15. Logistic Regression (LR)
+## 15. Logistic and multinomial regression (LMR)
+### 15-1. SimpleLogistic w
+특성: 선형 로지스틱 회귀 모델을 학습, LogitBoost를 사용하여 기본 회귀 함수로 모델을 적합<br>
+장점: 간단하고 해석하기 쉬움<br>
+단점: 비선형 관계 모델링 한계<br>
+모델식: 로지스틱 회귀 = $log(p/(1-p)) = β₀ + β₁X₁ + ... + βₖXₖ$<br>
+응용분야: 이진 및 다중 클래스 분류<br>
 
+### 15-2. Logistic w
+특성: 다항 로지스틱 회귀 모델을 학습, 리지 추정기를 사용하여 모델 적합<br>
+장점: 높은 차원의 데이터에 유연하게 적용 가능<br>
+단점: 모델 복잡성으로 인해 과적합 위험<br>
+모델식: 로지스틱 회귀 = $log(p_i/p_k) = β₀ + β₁X₁ + ... + βₖXₖ$ (다중 클래스)<br>
+응용분야: 다중 클래스 문제 해결<br>
+
+### 15-3. multinom t
+특성: nnet 패키지의 multinom 함수를 사용하여 다항 로그 선형 모델을 학습<br>
+장점: 신경망 기반으로 비선형 관계 모델링 가능<br>
+단점: 파라미터 조정이 필요하여 모델이 복잡해질 수 있음<br>
+모델식: 다항 로그 선형 회귀 = $log(p_i/p_k) = β₀ + β₁X₁ + ... + βₖXₖ$<br>
+응용분야: 다중 클래스 분류 문제<br>
 <br>
 
 ## 16. Multivariate Adaptive Regression Splines (MARS)
+### 16-1. mars R
+특성: mda 패키지의 mars 함수를 사용하여 MARS 모델을 적합<br>
+장점: 비선형 관계를 효과적으로 모델링할 수 있음<br>
+단점: 복잡한 데이터에 대해 과적합의 위험<br>
+모델식: MARS 모델 = $β₀ + Σ(β_j(X_j - T_j)^⁺)$ (절단 함수 포함)<br>
+응용분야: 회귀 분석, 데이터 마이닝<br>
 
+### 16-2. gcvEarth t
+특성: earth 패키지의 earth 함수를 사용하여 상호 작용 항이 없는 덧셈 MARS 모델 구축, 빠른 MARS 방법 적용<br>
+장점: 빠른 계산 속도와 단순한 해석<br>
+단점: 상호 작용 항을 고려하지 않아 일부 문제에서 성능 저하 가능<br>
+모델식: 덧셈 MARS = $β₀ + Σ(β_j(X_j - T_j)^⁺)$ (절단 함수 포함)<br>
+응용분야: 다변량 회귀 분석, 데이터 예측<br>
 <br>
 
 ## 17. Other Methods (OM)
+### 17-1. pam t
+특성: PAM(Partitioning Around Medoids) 알고리즘을 사용하여 중심 기반 분류기 구현<br>
+장점: 잡음과 이상치에 강함<br>
+단점: 계산 비용이 높음<br>
+모델식: PAM 알고리즘 기반<br>
+응용분야: 클러스터링 및 패턴 인식<br>
 
+### 17-2. VFI w
+특성: 특성 간의 간격을 기반으로 한 분류, VFI(Voting Feature Intervals) 사용<br>
+장점: 간단하고 직관적인 해석 가능<br>
+단점: 특정 데이터 유형에 의존할 수 있음<br>
+모델식: VFI 기반 분류<br>
+응용분야: 텍스트 분류 및 추천 시스템<br>
+
+### 17-3. HyperPipes w
+특성: 각 클래스의 패턴 범위에 따라 테스트 패턴을 분류<br>
+장점: 빠르고 간단한 계산<br>
+단점: 복잡한 데이터에 대한 성능 저하 가능<br>
+모델식: 하이퍼파이프 기반 분류<br>
+응용분야: 기본적인 분류 문제<br>
+
+### 17-4. FilteredClassifier w
+특성: 특정 데이터에 대해 필터링하여 J48 결정 트리를 사용하여 학습<br>
+장점: 필터링된 데이터를 사용해 성능 향상<br>
+단점: 필터링 과정에서 정보 손실 가능성<br>
+모델식: 필터링된 J48 기반 분류<br>
+응용분야: 텍스트 및 이미지 분류<br>
+
+### 17-5. CVParameterSelection w
+특성: 10겹 교차 검증을 통해 ZeroR의 최적 매개변수 선택<br>
+장점: 성능 최적화 가능<br>
+단점: 실행 시간이 길어질 수 있음<br>
+모델식: 교차 검증 기반 매개변수 선택<br>
+응용분야: 분류 문제 최적화<br>
+
+### 17-6. ClassificationViaClustering w
+특성: K-평균 클러스터링을 통해 데이터를 클러스터링한 후 분류<br>
+장점: 클러스터링을 통해 복잡한 패턴을 포착 가능<br>
+단점: 데이터의 초기 클러스터 수에 민감함<br>
+모델식: 클러스터링 기반 분류<br>
+응용분야: 대규모 데이터 분석<br>
+
+### 17-7. AttributeSelectedClassifier w
+특성: 중요 속성만을 선택하여 J48 결정 트리로 학습<br>
+장점: 성능 향상 및 해석 용이<br>
+단점: 잘못된 속성 선택 시 성능 저하<br>
+모델식: 속성 선택 기반 J48<br>
+응용분야: 데이터 마이닝<br>
+
+### 17-8. ClassificationViaRegression w
+특성: 클래스를 이진화하여 M5P 회귀 모델로 분류<br>
+장점: 회귀 모델링을 통한 유연한 분류 가능<br>
+단점: 설정이 복잡할 수 있음<br>
+모델식: 회귀 기반 분류<br>
+응용분야: 복잡한 회귀 및 분류 문제<br>
+
+### 17-9. KStar w
+특성: K-최근접 이웃(KNN) 방식으로 인스턴스 기반 분류<br>
+장점: 유사성에 기반한 분류로 정확도 향상<br>
+단점: 계산 비용이 높음<br>
+모델식: KNN 기반 분류<br>
+응용분야: 패턴 인식 및 데이터 분석<br>
+
+### 17-10. gaussprRadial t
+특성: kernlab 패키지의 가우스 과정 회귀를 사용하여 분류<br>
+장점: 높은 정확도 제공<br>
+단점: 대규모 데이터셋에서 느릴 수 있음<br>
+모델식: 가우스 프로세스 기반 분류<br>
+응용분야: 고차원 데이터 분석<br>
 <br>
 
 
