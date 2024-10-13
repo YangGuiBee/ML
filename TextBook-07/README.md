@@ -28,9 +28,9 @@
 | 2. Bayesian(BY) : 6 | NaiveBayes R, vbmpRadial t, NaiveBayes w, NaiveBayesUpdateable w, BayesNet w, NaiveBayesSimple w |
 | 3. Neural Networks(NNET) : 21 | RBF M, RBF t, RBFNetwork w, RBFDDA t, MLP M, MLP C, MLP t, avNNet t, MLPWeightDecay t, NNET t, PCANNet t, MultilayerPerceptron w, PMM M, ELM M, ELM kernel M, CASCOR C, LVQ R, LVQ t, BDK R, DKP C, DPP C |
 | 4. Support Vector Machines(SVM) : 10 | SVM C, SVMlight C, LibSVM w, LibLINEAR w, SVMRadial t, SVMRadialCost t, SVMLinear t, SVMPoly t, lsSVMRadial t, SMO w |
-| 5. Decision Trees (DT) | C5.0, J48, RandomTree, REPTree, DecisionStump, RandomSubspace, NBTree, RandomForest |
-| 6. Rule-Based Classifiers (RL) | JRip (RIPPER), PART, OneR, ConjunctiveRule, Ridor, DTNB, ZeroR, DecisionTable |
-| 7. Boosting (BST) | AdaBoost (with Decision Stump, J48), LogitBoost, MultiBoost (with DecisionStump, J48, RandomForest, Naive Bayes, OneR, PART), GradientBoosting |
+| 5. Decision Trees(DT) : 14 | rpart R, rpart t, rpart2 t, obliqueTree R, C5.0Tree t, cTree t, cTree2 t, J48 w, J48 t, RandomSubSpace w, NBTree w, RandomTree w, REPTree w, DecisionStump w |
+| 6. Rule-Based Classifiers(RL) : 12 | PART w, PART t, C5.0Rules t, JRip t, JRip w, OneR t, OneR w, DTNB w, Ridor w, ZeroR w, DecisionTable w, ConjunctiveRule w |
+| 7. Boosting(BST) : 20 | adaBoost R, logitBoost R, LogitBoost w, RacedIncrementalLogitBoost w, AdaBoostM1 DecisionStump w, AdaBoostM1 J48 w, C5.0 t, MultiBoostAB DecisionStump w, MultiBoostAB DecisionTable w, MultiBoostAB IBk w, MultiBoostAB J48 w, MultiBoostAB LibSVM w, MultiBoostAB Logistic w, MultiBoostAB MultilayerPerceptron w, MultiBoostAB NaiveBayes w, MultiBoostAB OneR w, MultiBoostAB PART w, MultiBoostAB RandomForest w, MultiBoostAB RandomTree w, MultiBoostAB REPTree w |
 | 8. Bagging (BAG) | Bagging (with Decision Stump, J48, Naive Bayes, OneR, RandomForest, Logistic, PART, Multilayer Perceptron), TreeBag, MetaCost, Bagging-SVM |
 | 9. Stacking (STC) | Stacking, StackingC |
 | 10. Random Forests (RF) | Random Forest (R, Weka), RRF (Regularized Random Forest), cForest, parRF, RotationForest |
@@ -188,8 +188,7 @@
 <br>
 
 ## 2. Bayesian(BY)
-베이즈 추론(Bayesian inference)은 통계적 추론의 한 방법으로, 추론 대상의 사전 확률과 추가적인 정보를 통해 해당 대상의 사후 확률을 추론하는 방법으로 베이즈 추론은 베이즈 확률론을 기반으로 하며, 이는 추론하는 대상을 확률변수로 보아 그 변수의 확률분포를 추정하는 것을 의미한다.<br>
-
+베이즈 추론(Bayesian inference)은 통계적 추론의 한 방법으로, 추론 대상의 사전 확률과 추가적인 정보를 통해 해당 대상의 사후 확률을 추론하는 방법으로 베이즈 추론은 베이즈 확률론을 기반으로 하며, 이는 추론하는 대상을 확률변수로 보아 그 변수의 확률분포를 추정하는 것을 의미한다.<br><br>
 ### 2-1. NaiveBayes R
 특성: R의 klaR 패키지에서 제공하는 Naive Bayes 분류기<br>
 장점: 간단하고 빠르며, 작은 데이터에서도 성능이 안정적임<br>
@@ -491,14 +490,14 @@
 모델식: C5.0 결정 트리<br>
 응용분야: 텍스트 및 데이터 마이닝<br>
 
-### 5-6. ctree t
+### 5-6. cTree t
 특성: 조건부 추론 트리, 통계적 테스트 기반 분할<br>
 장점: 변수의 통계적 유의성을 반영<br>
 단점: 복잡한 설정 필요<br>
 모델식: 조건부 추론 트리<br>
 응용분야: 생명과학 데이터 분석<br>
 
-### 5-7. ctree2 t
+### 5-7. cTree2 t
 특성: ctree 함수 사용, 최대 깊이를 조정해 트리 생성<br>
 장점: 트리 깊이 조정 가능<br>
 단점: 트리 깊이에 따른 성능 변동<br>
@@ -643,14 +642,14 @@
 <br>
 
 ## 7. Boosting (BST)
-### 7-1. adaboost R
+### 7-1. adaBoost R
 특성: adabag 패키지를 사용한 Adaboost.M1 방식, 분류 트리 사용<br>
 장점: 성능이 우수하고 계산 효율적<br>
 단점: 매우 복잡한 데이터에서 성능 저하 가능<br>
 모델식: Adaboost.M1<br>
 응용분야: 분류 문제, 패턴 인식<br>
 
-### 7-2. logitboost R
+### 7-2. logitBoost R
 특성: caTools 패키지를 사용한 DecisionStump 기반 LogitBoost 앙상블<br>
 장점: 반복적 학습으로 정확도 향상<br>
 단점: 반복 횟수에 따라 성능이 변동됨<br>
