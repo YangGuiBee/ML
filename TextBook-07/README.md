@@ -24,7 +24,7 @@
 
 | Family                           | 분류기 목록                                      |
 |----------------------------------|---------------------------------------------------|
-| 1. Discriminant Analysis (DA) | LDA, LDA2, RR-LDA, SDA, SLDA, Step-LDA, Step-QDA, Penalized-LDA, Sparse-LDA, QDA, QdaCov, Step-QDA, FDA, Step-FDA, PDA, RDA, MDA, HDDA |
+| 1. Discriminant Analysis(DA) : 20 | LDA R, LDA2 t, RRLDA R, SDA t, SLDA t, stepLDA t, SDDA R, PenalizedLDA t, sparseLDA R, QDA t, QDACov t, SDDAQDA R, stepQDA t, FDA R, FDA t, MDA R, MDA t, PDA t, RDA R, HDDA R |
 | 2. Bayesian (BY) | Naive Bayes (NB), BayesNet, AODE, NaiveBayesSimple, NaiveBayesUpdateable, VBMPRadial |
 | 3. Neural Networks (NNET) | MLP, avNNet, pcaNNet, RSNNS MLP, RSNNS RBF, RSNNS RBF-DDA, PNN, ELM, Cascade-Correlation (Cascor), Learning Vector Quantization (LVQ), Bidirectional Kohonen Map (BDK), DKP, DPP |
 | 4. Support Vector Machines (SVM) | SVM (Gaussian), SVMlight, LibSVM, LibLINEAR, SMO, svmRadial, svmLinear, svmPoly, lssvmRadial |
@@ -46,35 +46,35 @@
 
 ## 1. 판별분석(Discriminant Analysis, DA) 
 두 개 또는 그 이상의 그룹(또는 군집 또는 모집단)이 사전에 알려져 있을 때, 새로운 관측값을 특성에 기초하여 이미 알려진 모집단 가운데 하나로 분류하는 기법이다.<br><br>
-### 1-1. lda R(Linear Discriminant Analysis)
+### 1-1. LDA(Linear Discriminant Analysis) R
 특성: 기본 선형 판별 분석, MASS 패키지의 lda 함수 사용<br>
 장점: 계산 효율이 좋고 간단함<br>
 단점: 입력 데이터가 정규 분포를 따를 경우에만 좋은 성능<br>
 모델식: 선형 분류<br>
 응용분야: 의료, 생명과학, 금융 데이터 분류 등<br>
 
-### 1-2. lda2 t
+### 1-2. LDA2 t
 특성: LDA 변형, 컴포넌트 수를 조정 가능<br>
 장점: 더 많은 컴포넌트 활용 가능<br>
 단점: 컴포넌트 수 조정이 필요함<br>
 모델식: 선형 판별<br>
 응용분야: 다중 클래스 분류 문제<br>
 
-### 1-3. rrlda R(Robust Regularized LDA)<br>
+### 1-3. RRLDA(Robust Regularized LDA) R<br>
 특성: 정규화된 LDA, rrlda 패키지 사용<br>
 장점: 잡음이 많은 데이터에 강건<br>
 단점: 적절한 파라미터 튜닝이 필요<br>
 모델식: 정규화된 선형 판별<br>
 응용분야: 고차원 데이터 분류<br>
 
-### 1-4. sda t(Shrinkage Discriminant Analysis)
+### 1-4. SDA(Shrinkage Discriminant Analysis) t
 특성: 축소 LDA, sda 패키지 사용<br>
 장점: 변수 선택이 포함된 선형 판별<br>
 단점: 데이터가 적을 경우 성능 저하<br>
 모델식: 축소 기반 판별<br>
 응용분야: 유전자 데이터 분석<br>
 
-### 1-5. slda t(Spherical LDA)
+### 1-5. SLDA(Spherical LDA) t
 특성: 구형 기반 LDA, ipred 패키지 사용<br>
 장점: 구형으로 분포된 데이터를 처리<br>
 단점: 복잡한 데이터에 적용 어려움<br>
@@ -88,7 +88,7 @@
 모델식: 특징 선택 기반 LDA<br>
 응용분야: 피처가 많은 데이터셋<br>
 
-### 1-7. sddaLDA R(Stepwise Diagonal Discriminant Analysis)
+### 1-7. SDDA(Stepwise Diagonal Discriminant Analysis) R
 특성: 대각 판별 분석, SDDA 패키지 사용<br>
 장점: 입력 변수 추가 가능<br>
 단점: 변수 상관관계를 무시<br>
@@ -109,21 +109,21 @@
 모델식: 드문 판별<br>
 응용분야: 텍스트 데이터 분류<br>
 
-### 1-10. qda t(Quadratic Discriminant Analysis)
+### 1-10. QDA(Quadratic Discriminant Analysis) t
 특성: 2차 판별 분석, qda 함수 사용<br>
 장점: 선형적으로 분리되지 않은 데이터에 효과적<br>
 단점: 다중 공선성에 취약<br>
 모델식: 2차 판별<br>
 응용분야: 복잡한 분류 문제<br>
 
-### 1-11. QdaCov t
+### 1-11. QDACov t
 특성: 강건한 QDA, rrcov 패키지 사용<br>
 장점: 이상치에 강함<br>
 단점: 계산량이 많음<br>
 모델식: 강건한 2차 판별<br>
 응용분야: 금융 데이터 분석<br>
 
-### 1-12. sddaQDA R
+### 1-12. SDDAQDA R
 특성: 단계적 2차 판별 분석, SDDA 패키지 사용<br>
 장점: 단계적으로 변수 선택 가능<br>
 단점: 계산 복잡성<br>
@@ -137,49 +137,49 @@
 모델식: 단계적 2차 판별<br>
 응용분야: 복잡한 데이터셋<br>
 
-### 1-14. fda R(Flexible Discriminant Analysis)
+### 1-14. FDA(Flexible Discriminant Analysis) R
 특성: 유연한 판별 분석, fda 함수 사용<br>
 장점: 다양한 데이터셋에 적용 가능<br>
 단점: 계산 복잡성<br>
 모델식: 유연한 판별<br>
 응용분야: 의학적 데이터 분석<br>
 
-### 1-15. fda t
+### 1-15. FDA t
 특성: 선형 회귀 기반 fda, caret 사용<br>
 장점: 파라미터 튜닝 가능<br>
 단점: 복잡한 데이터에 적합하지 않음<br>
 모델식: 선형 회귀<br>
 응용분야: 간단한 회귀 문제<br>
 
-### 1-16. mda R(Mixture Discriminant Analysis)
+### 1-16. MDA(Mixture Discriminant Analysis) R
 특성: 혼합 모델 기반 판별 분석, mda 패키지 사용<br>
 장점: 혼합 모델 처리<br>
 단점: 과적합 가능성<br>
 모델식: 혼합 모델<br>
 응용분야: 유전자 데이터 분석<br>
 
-### 1-17. mda t
+### 1-17. MDA t
 특성: 튜닝 가능 mda, caret 사용<br>
 장점: 파라미터 튜닝<br>
 단점: 복잡한 구조<br>
 모델식: 혼합 모델<br>
 응용분야: 다중 클래스 문제<br>
 
-### 1-18. pda t(Penalized Discriminant Analysis)
+### 1-18. PDA(Penalized Discriminant Analysis) t
 특성: 제약이 포함된 판별 분석, mda 패키지 사용<br>
 장점: 과적합 방지<br>
 단점: 과적합 가능성<br>
 모델식: 제약 기반<br>
 응용분야: 고차원 문제<br>
 
-### 1-19. rda R (Regularized Discriminant Analysis)
+### 1-19. RDA(Regularized Discriminant Analysis) R
 특성: 정규화된 판별 분석, klaR 패키지 사용<br>
 장점: 다중 공선성 해결<br>
 단점: 복잡한 파라미터 조정<br>
 모델식: 정규화된 판별<br>
 응용분야: 복잡한 데이터<br>
 
-### 1-20. hdda R (High-dimensional Discriminant Analysis)
+### 1-20. HDDA(High-dimensional Discriminant Analysis) R
 특성: 고차원 데이터를 처리, HDclassif 사용<br>
 장점: 고차원 공간에서의 분류<br>
 단점: 계산 복잡성<br>
