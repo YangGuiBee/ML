@@ -37,10 +37,10 @@
 | 11. Other Ensembles(OEN) : 11 | RandomCommittee w, OrdinalClassClassifier w, MultiScheme w, MultiClassClassifier w, CostSensitiveClassifier w, Grading w, END w, Decorate w, Vote w, Dagging w, LWL w |
 | 12. Generalized Linear Models(GLM) : 5 | GLM R, GLMNET R, MLM R, bayesGLM t, GLMStepAIC t |
 | 13. Nearest Neighbors(NN) : 5 | KNN R, KNN t, NNge w, IBk w, IB1 w |
-| 14. Partial Least Squares (PLSR) | PLSR, KernelPLS, WideKernelPLS, SparsePLS, Generalized PLS |
-| 15. Logistic and multinomial regression (LMR) | Logistic Regression (Logistic, multinom, SimpleLogistic) |
-| 16. Multivariate Adaptive Regression Splines (MARS) | MARS (earth), gcvEarth |
-| 17. Other Methods (OM) | PAM, VFI (Voting Feature Intervals), HyperPipes, FilteredClassifier, CVParameterSelection, ClassificationViaRegression, KStar |
+| 14. Partial Least Squares(PLSR) : 6 | PLS t, GPLS R, SPLS R, SIMPLS R, kernelPLS R, widekernelPLS R |
+| 15. Logistic and multinomial regression(LMR) : 3 | SimpleLogistic w, Logistic w, multinom t |
+| 16. Multivariate Adaptive Regression Splines(MARS) : 2 | MARS R, gcvEarth t |
+| 17. Other Methods(OM) : 10 | PAM t, VFI w, HyperPipes w, FilteredClassifier w, CVParameterSelection w, ClassificationViaClustering w, AttributeSelectedClassifier w, ClassificationViaRegression w, KStar w, gaussprRadial t |
 
 <br>
 
@@ -1182,42 +1182,42 @@
 <br>
 
 ## 14. Partial Least Squares (PLSR)
-### 14-1. pls t
+### 14-1. PLS t
 특성: pls 패키지의 mvr 함수를 사용하여 PLSR 모델을 적합, 구성 요소 수를 1에서 10까지 조정<br>
 장점: 다양한 데이터 구조에 대해 효과적<br>
 단점: 최적의 구성 요소 수 선택에 따른 성능 변동 가능<br>
 모델식: PLSR = Y ~ X (구성 요소 수 조정)<br>
 응용분야: 회귀 분석, 다변량 데이터 분석<br>
 
-### 14-2. gpls R
+### 14-2. GPLS R
 특성: gpls 패키지를 사용하여 일반화된 PLS 모델 구축<br>
 장점: 유연한 모델링 가능<br>
 단점: 모델 복잡성 증가<br>
 모델식: 일반화된 PLS = Y ~ X<br>
 응용분야: 복잡한 회귀 분석<br>
 
-### 14-3. spls R
+### 14-3. SPLS R
 특성: spls 패키지의 spls 함수를 사용하여 희소 PLS 회귀 모델 적합, K와 η 매개변수 조정<br>
 장점: 변수 선택 및 차원 축소 가능<br>
 단점: 매개변수 조정의 복잡성<br>
 모델식: 희소 PLS = Y ~ X (K, η 매개변수 조정)<br>
 응용분야: 고차원 데이터 처리<br>
 
-### 14-4. simpls R
+### 14-4. SIMPLS R
 특성: pls 패키지의 plsr 함수를 사용하여 SIMPLS 방법으로 PLSR 모델 적합<br>
 장점: 계산 속도 향상<br>
 단점: 모델의 복잡성<br>
 모델식: SIMPLS PLSR = Y ~ X<br>
 응용분야: 다변량 회귀 분석<br>
 
-### 14-5. kernelpls R
+### 14-5. kernelPLS R
 특성: plsr 함수 사용, 커널 PLSR 방법 적용, 8개의 주성분 사용<br>
 장점: 많은 입력에 대해 빠른 계산<br>
 단점: 입력 수가 패턴 수보다 클 경우 계산 복잡성<br>
 모델식: 커널 PLSR = Y ~ X<br>
 응용분야: 고차원 데이터 분석<br>
 
-### 14-6. widekernelpls R
+### 14-6. widekernelPLS R
 특성: plsr 함수 사용, widekernelpls 방법으로 PLSR 모델 적합<br>
 장점: 입력 수가 패턴 수보다 클 때 빠른 계산<br>
 단점: 모델 복잡성 증가<br>
@@ -1225,7 +1225,7 @@
 응용분야: 고차원 데이터 처리<br>
 <br>
 
-## 15. Logistic and multinomial regression (LMR)
+## 15. Logistic and multinomial regression(LMR)
 ### 15-1. SimpleLogistic w
 특성: 선형 로지스틱 회귀 모델을 학습, LogitBoost를 사용하여 기본 회귀 함수로 모델을 적합<br>
 장점: 간단하고 해석하기 쉬움<br>
@@ -1248,8 +1248,8 @@
 응용분야: 다중 클래스 분류 문제<br>
 <br>
 
-## 16. Multivariate Adaptive Regression Splines (MARS)
-### 16-1. mars R
+## 16. Multivariate Adaptive Regression Splines(MARS)
+### 16-1. MARS R
 특성: mda 패키지의 mars 함수를 사용하여 MARS 모델을 적합<br>
 장점: 비선형 관계를 효과적으로 모델링할 수 있음<br>
 단점: 복잡한 데이터에 대해 과적합의 위험<br>
@@ -1264,8 +1264,8 @@
 응용분야: 다변량 회귀 분석, 데이터 예측<br>
 <br>
 
-## 17. Other Methods (OM)
-### 17-1. pam t
+## 17. Other Methods(OM)
+### 17-1. PAM t
 특성: PAM(Partitioning Around Medoids) 알고리즘을 사용하여 중심 기반 분류기 구현<br>
 장점: 잡음과 이상치에 강함<br>
 단점: 계산 비용이 높음<br>
