@@ -32,11 +32,11 @@
 | 6. Rule-Based Classifiers(RL) : 12 | PART w, PART t, C5.0Rules t, JRip t, JRip w, OneR t, OneR w, DTNB w, Ridor w, ZeroR w, DecisionTable w, ConjunctiveRule w |
 | 7. Boosting(BST) : 20 | adaBoost R, logitBoost R, LogitBoost w, RacedIncrementalLogitBoost w, AdaBoostM1 DecisionStump w, AdaBoostM1 J48 w, C5.0 t, MultiBoostAB DecisionStump w, MultiBoostAB DecisionTable w, MultiBoostAB IBk w, MultiBoostAB J48 w, MultiBoostAB LibSVM w, MultiBoostAB Logistic w, MultiBoostAB MultilayerPerceptron w, MultiBoostAB NaiveBayes w, MultiBoostAB OneR w, MultiBoostAB PART w, MultiBoostAB RandomForest w, MultiBoostAB RandomTree w, MultiBoostAB REPTree w |
 | 8. Bagging(BAG) : 24 | bagging R, Treebag t, IDABag R, PLSBag R, nbBag R, cTreeBag R, SVMBag R, NNETBag R, MetaCost w, Bagging DecisionStump w, Bagging DecisionTable w, Bagging HyperPipes w, Bagging IBk w, Bagging J48 w, Bagging LibSVM w, Bagging Logistic w, Bagging LWL w, Bagging MultilayerPerceptron w, Bagging NaiveBayes w, Bagging OneR w, Bagging PART w, Bagging RandomForest w, Bagging RandomTree w, Bagging REPTree w |
-| 9. Stacking (STC) | Stacking, StackingC |
-| 10. Random Forests (RF) | Random Forest (R, Weka), RRF (Regularized Random Forest), cForest, parRF, RotationForest |
-| 11. Other Ensembles (OEN) | Random Committee, OrdinalClassClassifier, MultiScheme, MultiClassClassifier, Grading, Dagging, LWL (Locally Weighted Learning) |
-| 12. Generalized Linear Models (GLM) | GLM (R), glmnet, bayesglm, glmStepAIC, mlm |
-| 13. Nearest Neighbors (NN) | k-NN (R, Weka), IB1, IBk, NNge (Non-nested generalized exemplars) |
+| 9. Stacking(STC) : 2 | Stacking w, StackingC w |
+| 10. Random Forests(RF) : 8 | rForest R, RF t, RRF t, cForest t, parRF t, RRFglobal t, RandomForest w, RotationForest w |
+| 11. Other Ensembles(OEN) : 11 | RandomCommittee w, OrdinalClassClassifier w, MultiScheme w, MultiClassClassifier w, CostSensitiveClassifier w, Grading w, END w, Decorate w, Vote w, Dagging w, LWL w |
+| 12. Generalized Linear Models(GLM) : 5 | GLM R, GLMNET R, MLM R, bayesGLM t, GLMStepAIC t |
+| 13. Nearest Neighbors(NN) : 5 | KNN R, KNN t, NNge w, IBk w, IB1 w |
 | 14. Partial Least Squares (PLSR) | PLSR, KernelPLS, WideKernelPLS, SparsePLS, Generalized PLS |
 | 15. Logistic and multinomial regression (LMR) | Logistic Regression (Logistic, multinom, SimpleLogistic) |
 | 16. Multivariate Adaptive Regression Splines (MARS) | MARS (earth), gcvEarth |
@@ -971,14 +971,14 @@
 <br>
 
 ## 10. Random Forests (RF)
-### 10-1. rforest R
+### 10-1. rForest R
 특성: Breiman(2001)의 랜덤 포레스트 앙상블을 R의 randomForest 함수로 생성, 트리 수(ntree)=500, 입력 변수 수(mtry)=√#inputs 사용<br>
 장점: 높은 정확도 및 강건한 성능<br>
 단점: 메모리 소비가 많음<br>
 모델식: 랜덤 포레스트 앙상블<br>
 응용분야: 다양한 분류 문제<br>
 
-### 10-2. rf t
+### 10-2. RF t
 특성: caret 패키지를 통해 randomForest 함수 사용, 트리 수(ntree)=500, mtry=2:3:29로 파라미터 조정<br>
 장점: 간편한 파라미터 튜닝<br>
 단점: 파라미터에 따라 성능이 크게 변동 가능<br>
@@ -992,7 +992,7 @@
 모델식: 정규화 랜덤 포레스트<br>
 응용분야: 고차원 데이터 분석<br>
 
-### 10-4. cforest t
+### 10-4. cForest t
 특성: 조건부 추론 트리(CTree)의 랜덤 포레스트 및 배깅 앙상블, 각 CTree에서 평균 관측 가중치를 사용<br>
 장점: 통계적 유의성을 반영<br>
 단점: 복잡한 모델 구조<br>
@@ -1028,7 +1028,7 @@
 응용분야: 데이터 마이닝 및 복잡한 문제 해결<br>
 <br>
 
-## 11. Other Ensembles (OEN)
+## 11. Other Ensembles(OEN)
 ### 11-1. RandomCommittee w
 특성: 다양한 시드를 사용하여 구축된 RandomTrees의 앙상블로, 각 기본 분류기의 출력 평균 사용<br>
 장점: 다양한 모델의 평균을 통해 강건성 향상<br>
@@ -1107,36 +1107,36 @@
 응용분야: 패턴 인식<br>
 <br>
 
-## 12. Generalized Linear Models (GLM)
-### 12-1. glm R
+## 12. Generalized Linear Models(GLM)
+### 12-1. GLM R
 특성: R의 stats 패키지에 있는 glm 함수를 사용하여 이항 및 포아송 분포 기반의 GLM 구현<br>
 장점: 다양한 문제에 적용 가능하며 해석이 용이<br>
 단점: 분포 가정이 잘못될 경우 성능 저하<br>
 모델식: GLM = Y ~ X (이항 또는 포아송 분포)<br>
 응용분야: 이진 및 다중 클래스 분류<br>
 
-### 12-2. glmnet R
+### 12-2. GLMNET R
 특성: Lasso 또는 Elastic Net 정규화를 사용하는 GLM 훈련, glmnet 패키지의 glmnet 함수 이용<br>
 장점: 모델 복잡도를 제어할 수 있어 과적합 방지<br>
 단점: 정규화 파라미터 조정 필요<br>
 모델식: GLM = Y ~ X (정규화 포함)<br>
 응용분야: 이진 및 다중 클래스 문제, 고차원 데이터<br>
 
-### 12-3. mlm R
+### 12-3. MLM R
 특성: nnet 패키지의 multinom 함수를 사용하여 다중 로지스틱 회귀 모델 구축<br>
 장점: MLP 신경망을 통해 비선형 관계 모델링 가능<br>
 단점: 데이터에 따라 성능이 변동 가능<br>
 모델식: 다중 로지스틱 회귀 모델<br>
 응용분야: 다중 클래스 분류<br>
 
-### 12-4. bayesglm t
+### 12-4. bayesGLM t
 특성: arm 패키지의 bayesglm 함수를 사용하여 베이지안 GLM 구현<br>
 장점: 사전 확률을 고려한 유연한 모델링<br>
 단점: 계산 비용이 높을 수 있음<br>
 모델식: GLM = Y ~ X (베이지안 함수 기반)<br>
 응용분야: 회귀 분석, 분류 문제<br>
 
-### 12-5. glmStepAIC t
+### 12-5. GLMStepAIC t
 특성: Akaike 정보 기준(AIC)을 이용한 모델 선택 수행, MASS 패키지의 stepAIC 함수 사용<br>
 장점: 자동으로 최적 모델 선택 가능<br>
 단점: 잘못된 초기 모델 선택 시 성능 저하<br>
@@ -1144,15 +1144,15 @@
 응용분야: 변수 선택, 모델 최적화<br>
 <br>
 
-## 13. Nearest Neighbors (NN)
-### 13-1. knn R
+## 13. Nearest Neighbors(NN)
+### 13-1. KNN R
 특성: class 패키지의 knn 함수를 사용하여 K-최근접 이웃(KNN) 구현, 이웃의 수를 1에서 37까지 조정<br>
 장점: 간단하고 이해하기 쉬움<br>
 단점: 고차원 데이터에서는 성능 저하<br>
 모델식: $KNN = Class(x) = argmax(count(class_i))$<br>
 응용분야: 분류 문제, 패턴 인식<br>
 
-### 13-2. knn t
+### 13-2. KNN t
 특성: caret 패키지의 knn 함수를 사용하여 KNN 구현, 이웃의 수를 5에서 23까지 조정 (10으로 설정)<br>
 장점: 파라미터 조정이 용이<br>
 단점: 대규모 데이터셋에서 느림<br>
