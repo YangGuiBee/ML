@@ -2,19 +2,15 @@
 
 ---
 
-	[1] KDE (Kernel Desity Estimation)
- 	[2] k-평균 클러스터링 (k-Means Clustering)
-	[3] 계층적 클러스터링 (Hierarchical Clustering)
-	[4] DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
-	[5] 가우시안 혼합 모델 (Gaussian Mixture Model, GMM)
+	[1] k-평균 클러스터링 (k-Means Clustering)
+	[2] 계층적 클러스터링 (Hierarchical Clustering)
+	[3] DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
+	[4] 가우시안 혼합 모델 (Gaussian Mixture Model, GMM)
    
 ---  
 
-# [1] KDE (Kernel Desity Estimation)
 
-<br>
-
-# [2] k-평균 클러스터링 (k-Means Clustering)
+# [1] k-평균 클러스터링 (k-Means Clustering)
 ▣ 정의 : 데이터를 K개의 군집으로 나누고 각 군집의 중심(centroid)을 기준으로 데이터를 반복적으로 할당하는 군집화 알고리즘<br>
 ▣ 필요성 : 데이터를 그룹화하여 숨겨진 패턴을 발견하는 데 유용<br>
 ▣ 장점 : 구현이 간단하고 계산 속도가 빠르며, 대규모 데이터셋에 적합<br>
@@ -41,7 +37,7 @@
 
 <br>
 
-# [3] 계층적 클러스터링 (Hierarchical Clustering)
+# [2] 계층적 클러스터링 (Hierarchical Clustering)
 ▣ 정의 : 데이터를 병합(bottom-up)하거나 분할(top-down)하여 계층적인 군집 구조를 만드는 방법<br>
 ▣ 필요성 : 군집의 개수를 사전에 정할 필요 없이 계층적 관계를 파악할 때 사용<br>
 ▣ 장점 : 군집 수를 미리 정할 필요 없으며, 덴드로그램(dendrogram)을 통한 군집 분석 가능<br>
@@ -97,7 +93,7 @@
 
 <br>
 
-# [4] DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
+# [3] DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
 ▣ 정의 : 밀도가 높은 영역을 군집으로 묶고, 밀도가 낮은 점들은 노이즈로 간주하는 밀도 기반 군집화 알고리즘<br>
 ▣ 필요성 : 다양한 밀도의 데이터 군집화 및 이상치 탐지에 유용<br>
 ▣ 장점 : 군집의 개수를 사전 설정할 필요 없으며, 이상치(outliers)를 자연스럽게 처리 가능<br>
@@ -123,7 +119,7 @@
 
 <br>
 
-# [5] 가우시안 혼합 모델 (Gaussian Mixture Model, GMM)
+# [4] 가우시안 혼합 모델 (Gaussian Mixture Model, GMM)
 ▣ 정의 : 여러 가우시안 분포(Gaussian Distribution)를 사용해 데이터를 모델링하고, 각 데이터 포인트가 각 분포에 속할 확률을 계산하는 군집화 방법<br>
 ▣ 필요성 : 복잡한 데이터 분포를 유연하게 모델링하여 군집 경계를 확률적으로 표현할 수 있음<br>
 ▣ 장점 : 데이터가 여러 분포를 따를 때 적합하며, 군집 간의 경계가 확률적으로 처리<br>
@@ -150,8 +146,108 @@
 
 <br>
 
+# [5] Mean-Shift Clustering
+▣ 정의 : 데이터의 밀도가 높은 방향으로 이동하며 군집의 중심을 찾는 비모수 군집화 방법<br>
+▣ 필요성 : 군집의 개수를 사전 설정할 필요 없이 자연스러운 군집을 찾을 때 유용<br>
+▣ 장점 : 군집 개수 사전 설정 불필요하며, 비선형적 분포에도 적합<br>
+▣ 단점 : 계산 비용이 크고 고차원 데이터에 적합하지 않음<br>
+▣ 응용분야 : 이미지 세그멘테이션, 객체 추적<br>
+▣ 모델식 : 𝐾는 커널 함수, 𝑥는 이동할 점, 𝑁(𝑥)는 반경 내 이웃 점<br>
 
+	from sklearn.cluster import MeanShift
+	from sklearn.datasets import load_iris
+	import matplotlib.pyplot as plt
 
+	iris = load_iris()
+	X = iris.data
 
+	mean_shift = MeanShift()
+	labels = mean_shift.fit_predict(X)
 
+	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='cool')
+	plt.title("Mean-Shift Clustering on Iris Dataset")
+	plt.xlabel("Feature 1")
+	plt.ylabel("Feature 2")
+	plt.show()
+
+<br>
+
+# [6] Spectral Clustering
+▣ 정의 : 그래프 이론을 기반으로 데이터의 유사도 행렬(Similarity Matrix)을 사용해 저차원 공간에서 군집을 찾는 알고리즘<br>
+▣ 필요성 : 복잡한 구조를 가진 데이터에서 비선형적인 경계를 정의할 수 있는 군집화 방법이 필요할 때 유용<br>
+▣ 장점 : 비선형적인 데이터에도 유용하며, 전통적인 군집화 알고리즘보다 복잡한 데이터 구조 처리 가능<br>
+▣ 단점 : 유사도 행렬을 계산해야 하므로 메모리 사용량이 크고, 대규모 데이터에 비효율적<br>
+▣ 응용분야 : 이미지 분할, 네트워크 분석<br>
+▣ 모델식 : 𝐿은 라플라시안 행렬, 𝐷는 대각 행렬(각 노드의 차수), 𝐴는 인접 행렬입니다. 이 라플라시안 행렬의 고유벡터를 사용해 데이터를 군집화<br>
+$𝐿=𝐷−𝐴$<br>
+
+	from sklearn.cluster import SpectralClustering
+	from sklearn.datasets import load_iris
+	import matplotlib.pyplot as plt
+
+	iris = load_iris()
+	X = iris.data
+
+	spectral = SpectralClustering(n_clusters=3, affinity='nearest_neighbors', random_state=0)
+	labels = spectral.fit_predict(X)
+
+	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='coolwarm')
+	plt.title("Spectral Clustering on Iris Dataset")
+	plt.xlabel("Feature 1")
+	plt.ylabel("Feature 2")
+	plt.show()
+
+<br>
+
+# [7] OPTICS (Ordering Points To Identify the Clustering Structure)
+▣ 정의 : 밀도 기반 군집화(DBSCAN)의 확장으로, 여러 밀도 수준에서 데이터의 군집 구조를 식별할 수 있는 알고리즘<br>
+▣ 필요성 : 다양한 밀도를 가진 데이터에서 군집을 찾아내고 이상치(outliers)를 처리할 때 유용<br>
+▣ 장점 : DBSCAN과 유사하게 이상치를 감지할 수 있으며, 여러 밀도 수준에서 군집을 식별 가능<br>
+▣ 단점 : 계산 시간이 오래 걸릴 수 있으며, 적절한 매개변수 설정이 어려울 수 있음<br>
+▣ 응용분야 : 지리적 데이터 분석, 이상치 탐지<br>
+▣ 모델식 : DBSCAN과 유사하게 밀도 기반 접근을 따르며, 각 데이터 포인트의 reachability-distance와 core-distance를 기반으로 군집 구조를 형성<br>
+
+	from sklearn.cluster import OPTICS
+	from sklearn.datasets import load_iris
+	import matplotlib.pyplot as plt
+
+	iris = load_iris()
+	X = iris.data
+
+	optics = OPTICS(min_samples=5)
+	labels = optics.fit_predict(X)
+
+	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='plasma')
+	plt.title("OPTICS Clustering on Iris Dataset")
+	plt.xlabel("Feature 1")
+	plt.ylabel("Feature 2")
+	plt.show()
+
+<br>
+
+# [8] Affinity Propagation
+▣ 정의 : 데이터 간의 유사도(similarity) 행렬을 사용해 가장 적합한 중심(exemplar)을 선택하여 군집을 형성하는 알고리즘<br>
+▣ 필요성 : 군집의 개수를 미리 정할 필요 없이 데이터의 유사도에 기반해 자연스럽게 군집을 찾을 수 있음<br>
+▣ 장점 : 군집 개수를 사전에 정의할 필요 없으며, 유사도에 기반한 군집화로 군집 경계가 더 명확할 수 있음<br>
+▣ 단점 : 계산 비용이 크고 큰 데이터셋에서는 느릴 수 있음<br>
+▣ 응용분야 : 이미지 분할, 문서 분류<br>
+▣ 모델식: 각 데이터 포인트 간의 유사도 𝑠(𝑖,𝑘)와 책임 𝑟(𝑖,𝑘), 가용도 𝑎(𝑖,𝑘)를 반복적으로 계산해 중심점을 결정<br>
+
+	from sklearn.cluster import AffinityPropagation
+	from sklearn.datasets import load_iris
+	import matplotlib.pyplot as plt
+
+	iris = load_iris()
+	X = iris.data
+
+	affinity_propagation = AffinityPropagation(random_state=0)
+	labels = affinity_propagation.fit_predict(X)
+
+	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='rainbow')
+	plt.title("Affinity Propagation Clustering on Iris Dataset")
+	plt.xlabel("Feature 1")
+	plt.ylabel("Feature 2")
+	plt.show()
+
+<br>
 <br>
