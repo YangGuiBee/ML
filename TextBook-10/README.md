@@ -1,16 +1,20 @@
-#  10 : 비지도 학습 (Unsupervised Learning, UL) : 군집화
+#  10 : 비지도 학습(Unsupervised Learning, UL) : 군집화
 
 ---
 
-	[1] k-평균 클러스터링 (k-Means Clustering)
-	[2] 계층적 클러스터링 (Hierarchical Clustering)
-	[3] DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
-	[4] 가우시안 혼합 모델 (Gaussian Mixture Model, GMM)
+	[1] k-평균 클러스터링(k-Means Clustering)
+	[2] 계층적 클러스터링(Hierarchical Clustering)
+	[3] 밀도기반 군집화(Density-Based Spatial Clustering of Applications with Noise, DBSCAN)
+	[4] 가우시안 혼합 모델(Gaussian Mixture Model, GMM)
+	[5] 평균이동 군집화(Mean-Shift Clustering)
+	[6] 스펙트럼 군집화(Spectral Clustering)
+	[7] 군집구조 식별을 위한 점 순서화(Ordering Points To Identify the Clustering Structure, OPTICS)
+	[8] 친화도 전파(Affinity Propagation)
    
 ---  
 
 
-# [1] k-평균 클러스터링 (k-Means Clustering)
+# [1] k-평균 클러스터링(k-Means Clustering)
 ▣ 정의 : 데이터를 K개의 군집으로 나누고 각 군집의 중심(centroid)을 기준으로 데이터를 반복적으로 할당하는 군집화 알고리즘<br>
 ▣ 필요성 : 데이터를 그룹화하여 숨겨진 패턴을 발견하는 데 유용<br>
 ▣ 장점 : 구현이 간단하고 계산 속도가 빠르며, 대규모 데이터셋에 적합<br>
@@ -37,7 +41,7 @@
 
 <br>
 
-# [2] 계층적 클러스터링 (Hierarchical Clustering)
+# [2] 계층적 클러스터링(Hierarchical Clustering)
 ▣ 정의 : 데이터를 병합(bottom-up)하거나 분할(top-down)하여 계층적인 군집 구조를 만드는 방법<br>
 ▣ 필요성 : 군집의 개수를 사전에 정할 필요 없이 계층적 관계를 파악할 때 사용<br>
 ▣ 장점 : 군집 수를 미리 정할 필요 없으며, 덴드로그램(dendrogram)을 통한 군집 분석 가능<br>
@@ -93,7 +97,7 @@
 
 <br>
 
-# [3] DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
+# [3] 밀도기반 군집화(Density-Based Spatial Clustering of Applications with Noise, DBSCAN)
 ▣ 정의 : 밀도가 높은 영역을 군집으로 묶고, 밀도가 낮은 점들은 노이즈로 간주하는 밀도 기반 군집화 알고리즘<br>
 ▣ 필요성 : 다양한 밀도의 데이터 군집화 및 이상치 탐지에 유용<br>
 ▣ 장점 : 군집의 개수를 사전 설정할 필요 없으며, 이상치(outliers)를 자연스럽게 처리 가능<br>
@@ -119,7 +123,7 @@
 
 <br>
 
-# [4] 가우시안 혼합 모델 (Gaussian Mixture Model, GMM)
+# [4] 가우시안 혼합 모델(Gaussian Mixture Model, GMM)
 ▣ 정의 : 여러 가우시안 분포(Gaussian Distribution)를 사용해 데이터를 모델링하고, 각 데이터 포인트가 각 분포에 속할 확률을 계산하는 군집화 방법<br>
 ▣ 필요성 : 복잡한 데이터 분포를 유연하게 모델링하여 군집 경계를 확률적으로 표현할 수 있음<br>
 ▣ 장점 : 데이터가 여러 분포를 따를 때 적합하며, 군집 간의 경계가 확률적으로 처리<br>
@@ -146,7 +150,7 @@
 
 <br>
 
-# [5] Mean-Shift Clustering
+# [5] 평균이동 군집화(Mean-Shift Clustering)
 ▣ 정의 : 데이터의 밀도가 높은 방향으로 이동하며 군집의 중심을 찾는 비모수 군집화 방법<br>
 ▣ 필요성 : 군집의 개수를 사전 설정할 필요 없이 자연스러운 군집을 찾을 때 유용<br>
 ▣ 장점 : 군집 개수 사전 설정 불필요하며, 비선형적 분포에도 적합<br>
@@ -172,7 +176,7 @@
 
 <br>
 
-# [6] Spectral Clustering
+# [6] 스펙트럼 군집화(Spectral Clustering)
 ▣ 정의 : 그래프 이론을 기반으로 데이터의 유사도 행렬(Similarity Matrix)을 사용해 저차원 공간에서 군집을 찾는 알고리즘<br>
 ▣ 필요성 : 복잡한 구조를 가진 데이터에서 비선형적인 경계를 정의할 수 있는 군집화 방법이 필요할 때 유용<br>
 ▣ 장점 : 비선형적인 데이터에도 유용하며, 전통적인 군집화 알고리즘보다 복잡한 데이터 구조 처리 가능<br>
@@ -199,7 +203,7 @@ $𝐿=𝐷−𝐴$<br>
 
 <br>
 
-# [7] OPTICS (Ordering Points To Identify the Clustering Structure)
+# [7] 군집구조 식별을 위한 점 순서화(Ordering Points To Identify the Clustering Structure, OPTICS)
 ▣ 정의 : 밀도 기반 군집화(DBSCAN)의 확장으로, 여러 밀도 수준에서 데이터의 군집 구조를 식별할 수 있는 알고리즘<br>
 ▣ 필요성 : 다양한 밀도를 가진 데이터에서 군집을 찾아내고 이상치(outliers)를 처리할 때 유용<br>
 ▣ 장점 : DBSCAN과 유사하게 이상치를 감지할 수 있으며, 여러 밀도 수준에서 군집을 식별 가능<br>
@@ -225,7 +229,7 @@ $𝐿=𝐷−𝐴$<br>
 
 <br>
 
-# [8] Affinity Propagation
+# [8] 친화도 전파(Affinity Propagation)
 ▣ 정의 : 데이터 간의 유사도(similarity) 행렬을 사용해 가장 적합한 중심(exemplar)을 선택하여 군집을 형성하는 알고리즘<br>
 ▣ 필요성 : 군집의 개수를 미리 정할 필요 없이 데이터의 유사도에 기반해 자연스럽게 군집을 찾을 수 있음<br>
 ▣ 장점 : 군집 개수를 사전에 정의할 필요 없으며, 유사도에 기반한 군집화로 군집 경계가 더 명확할 수 있음<br>
