@@ -14,4 +14,7 @@ https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html
 <br>
 
 # [2] Seaborn
+https://seaborn.pydata.org/tutorial.html
+
+<br>
 
