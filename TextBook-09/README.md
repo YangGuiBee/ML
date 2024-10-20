@@ -2,8 +2,22 @@
 
 ---
 
-	[1] Matplotlib
- 	[2] Seaborn
+	1. 선 그래프(Line Plot)
+	2. 산점도(Scatter Plot)
+	3. 막대 그래프(Bar Plot)
+	4. 히스토그램(Histogram)
+	5. 박스 플롯(Box Plot)
+	6. 파이 차트(Pie Chart)
+	7. 히트맵(Heatmap)
+	8. 누적 막대 그래프(Stacked Bar Plot)
+	9. 면적 그래프(Area Plot)
+	10. 꺾은선 그래프(Step Plot)
+	11. 버블 차트(Bubble Plot)
+	12. 도넛 차트(Donut Chart)
+	13. 바이올린 플롯(Violin Plot)
+	14. 밀도 플롯(Kernel Density Estimate, KDE)
+	15. 타임 시리즈(Time Series Plot)
+	16. 3D 그래프(3D Plot)
    
 ---  
 
@@ -11,10 +25,47 @@
 # [1] Matplotlib
 https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html
 
+	import matplotlib.pyplot as plt
+
+	plt.hist(titanic_df['Age'])
+	titanic_df['Age'].hist()
+
+
 <br>
 
 # [2] Seaborn
 https://seaborn.pydata.org/tutorial.html
+
+	import seaborn as sns
+
+	sns.distplot(titanic_df['Age'], bins=10)
+	sns.histplot(titanic_df['Age'], kde=True)
+	sns.countplot(x='Pclass', data=titanic_df)
+
+	sns.barplot(x='Pclass', y='Age', data=titanic_df)
+	sns.barplot(x='Pclass', y='Survived', data=titanic_df)
+	sns.barplot(x='Pclass', y='Survived', data=titanic_df, ci=None, color='green')
+	sns.barplot(x='Pclass', y='Survived', data=titanic_df, ci=None, estimator=sum)
+	sns.barplot(x='Pclass', y='Sex', data=titanic_df)
+	sns.barplot(x='Pclass', y='Age', hue='Sex', data=titanic_df)
+	sns.barplot(x='Pclass', y='Survived', hue='Sex', data=titanic_df)
+
+	sns.violinplot(y='Age', data=titanic_df)
+	sns.violinplot(x='Pclass', y='Age', data=titanic_df)
+	sns.violinplot(x='Sex', y='Age', data=titanic_df)
+
+	cat_columns = ['Survived', 'Pclass', 'Sex', 'Age_cat']
+	fig, axs = plt.subplots(nrows=1, ncols=len(cat_columns), figsize=(16, 4))
+
+	sns.boxplot(y='Age', data=titanic_df)
+	sns.boxplot(x='Pclass', y='Age', data=titanic_df)
+
+	sns.scatterplot(x='Age', y='Fare', data=titanic_df)
+	sns.scatterplot(x='Age', y='Fare', data=titanic_df, hue='Pclass')
+	sns.scatterplot(x='Age', y='Fare', data=titanic_df, hue='Pclass', style ='Survived')
+	sns.scatterplot(x='Age', y='Fare', data=titanic_df, hue='Survived')
+
+	sns.heatmap(corr, annot=True, fmt='.1f',  linewidths=0.5, cmap='YlGnBu')
 
 <br>
 
