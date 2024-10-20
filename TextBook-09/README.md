@@ -21,10 +21,10 @@ https://seaborn.pydata.org/tutorial.html
 
 
 # 1. 선 그래프 (Line Plot)
-▣ 용도: 시간에 따른 데이터의 변화를 시각화. 연속적인 변화를 나타낼 때 유용.
-▣ 특징: 각 데이터 포인트를 선으로 연결하여 시계열 데이터나 연속적인 값을 시각화.
-▣ 예시(주로 사용되는 분야): 주식 시장, 기온 변화, 판매 추이 등.
-▣ 소스코드(Matplotlib)
+▣ 용도: 시간에 따른 데이터의 변화를 시각화. 연속적인 변화를 나타낼 때 유용<br>
+▣ 특징: 각 데이터 포인트를 선으로 연결하여 시계열 데이터나 연속적인 값을 시각화<br>
+▣ 예시(주로 사용되는 분야): 주식 시장, 기온 변화, 판매 추이 등<br>
+▣ 소스코드(Matplotlib)<br>
 
 	plt.figure(figsize=(8, 6))
 	plt.plot(titanic_df['PassengerId'], titanic_df['Fare'])
@@ -33,7 +33,7 @@ https://seaborn.pydata.org/tutorial.html
 	plt.ylabel('Fare')
 	plt.show()
 
-▣ 소스코드(seaborn)
+▣ 소스코드(seaborn)<br>
 
 	plt.figure(figsize=(8, 6))
 	sns.lineplot(x='PassengerId', y='Fare', data=titanic_df)
