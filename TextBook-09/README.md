@@ -26,6 +26,7 @@ https://seaborn.pydata.org/tutorial.html
 
 	import matplotlib.pyplot as plt
 	import pandas as pd
+ 	import seaborn as sns
 
 	titanic_df = pd.read_csv('titanic_train.csv')
 
