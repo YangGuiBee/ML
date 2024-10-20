@@ -170,11 +170,24 @@ https://seaborn.pydata.org/tutorial.html
 
 ▣ 소스코드(seaborn)<br>
 
+	# Titanic 데이터 불러오기
+	titanic_df = pd.read_csv('titanic_train.csv')
+
+	# 상관 관계에 사용할 숫자형 열을 명시적으로 선택 (예: 생존 여부, 클래스, 나이, 형제/배우자 수, 부모/자녀 수, 요금)
+	numeric_cols = titanic_df[['Survived', 'Pclass', 'Age', 'SibSp', 'Parch', 'Fare']]
+
+	# 결측값 처리 (Age 등의 열에 결측값이 있으므로 이를 0으로 채움)
+	numeric_cols = numeric_cols.fillna(0)
+
+	# 상관 관계 계산
+	corr = numeric_cols.corr()
+
+	# 상관 관계 히트맵 그리기
 	plt.figure(figsize=(8, 6))
-	sns.heatmap(titanic_df.corr(), annot=True, cmap='coolwarm')
+	sns.heatmap(corr, annot=True, cmap='coolwarm')
 	plt.title('Correlation Heatmap')
 	plt.show()
-
+ 
 <br>
 
 # 8. 누적 막대 그래프 (Stacked Bar Plot)
