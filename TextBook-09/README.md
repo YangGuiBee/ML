@@ -18,6 +18,15 @@ https://seaborn.pydata.org/tutorial.html
 
 <br>
 
+	from google.colab import files
+	uploaded = files.upload()
+
+
+	import matplotlib.pyplot as plt
+	import pandas as pd
+
+	titanic_df = pd.read_csv('titanic_train.csv')
+
 
 
 # 1. 선 그래프 (Line Plot)
