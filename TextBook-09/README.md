@@ -18,6 +18,8 @@ https://seaborn.pydata.org/tutorial.html
 
 <br>
 
+▣ 소스코드(공통 준비)<br>
+
 	from google.colab import files
 	uploaded = files.upload()
 
