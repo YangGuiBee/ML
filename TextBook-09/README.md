@@ -14,6 +14,8 @@
 
 ---
 
+# [1]~[2] Python : Matplotlib, Seaborn
+
 	1. 선 그래프(Line Plot)
 	2. 산점도(Scatter Plot)
 	3. 막대 그래프(Bar Plot)
