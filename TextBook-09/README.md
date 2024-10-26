@@ -2,6 +2,18 @@
 
 ---
 
+	# [1] Matplotlib
+	https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html
+
+	# [2] Seaborn
+	https://seaborn.pydata.org/tutorial.html
+
+ 	# [3] Orange3
+  	https://orangedatamining.com/docs/
+   	https://orangedatamining.com/download/
+
+---
+
 	1. 선 그래프(Line Plot)
 	2. 산점도(Scatter Plot)
 	3. 막대 그래프(Bar Plot)
@@ -21,18 +33,7 @@
    
 ---  
 
-	# [1] Matplotlib
-	https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html
-
-	# [2] Seaborn
-	https://seaborn.pydata.org/tutorial.html
-
- 	# [3] Orange3
-  	https://orangedatamining.com/docs/
-   	https://orangedatamining.com/download/
-
----
-
+<br>
 
 ▣ 소스코드(공통 준비)<br>
 
@@ -389,6 +390,7 @@
 
 # [3] Orange3
 
+![](./images/Orange3.png)
 
 ---
 
