@@ -21,53 +21,18 @@
    
 ---  
 
+	# [1] Matplotlib
+	https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html
 
-# [1] Matplotlib
-https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html
+	# [2] Seaborn
+	https://seaborn.pydata.org/tutorial.html
 
-	import matplotlib.pyplot as plt
+ 	# [3] Orange3
+  	https://orangedatamining.com/docs/
+   	https://orangedatamining.com/download/
 
-	plt.hist(titanic_df['Age'])
-	titanic_df['Age'].hist()
+---
 
-
-<br>
-
-# [2] Seaborn
-https://seaborn.pydata.org/tutorial.html
-
-	import seaborn as sns
-
-	sns.distplot(titanic_df['Age'], bins=10)
-	sns.histplot(titanic_df['Age'], kde=True)
-	sns.countplot(x='Pclass', data=titanic_df)
-
-	sns.barplot(x='Pclass', y='Age', data=titanic_df)
-	sns.barplot(x='Pclass', y='Survived', data=titanic_df)
-	sns.barplot(x='Pclass', y='Survived', data=titanic_df, ci=None, color='green')
-	sns.barplot(x='Pclass', y='Survived', data=titanic_df, ci=None, estimator=sum)
-	sns.barplot(x='Pclass', y='Sex', data=titanic_df)
-	sns.barplot(x='Pclass', y='Age', hue='Sex', data=titanic_df)
-	sns.barplot(x='Pclass', y='Survived', hue='Sex', data=titanic_df)
-
-	sns.violinplot(y='Age', data=titanic_df)
-	sns.violinplot(x='Pclass', y='Age', data=titanic_df)
-	sns.violinplot(x='Sex', y='Age', data=titanic_df)
-
-	cat_columns = ['Survived', 'Pclass', 'Sex', 'Age_cat']
-	fig, axs = plt.subplots(nrows=1, ncols=len(cat_columns), figsize=(16, 4))
-
-	sns.boxplot(y='Age', data=titanic_df)
-	sns.boxplot(x='Pclass', y='Age', data=titanic_df)
-
-	sns.scatterplot(x='Age', y='Fare', data=titanic_df)
-	sns.scatterplot(x='Age', y='Fare', data=titanic_df, hue='Pclass')
-	sns.scatterplot(x='Age', y='Fare', data=titanic_df, hue='Pclass', style ='Survived')
-	sns.scatterplot(x='Age', y='Fare', data=titanic_df, hue='Survived')
-
-	sns.heatmap(corr, annot=True, fmt='.1f',  linewidths=0.5, cmap='YlGnBu')
-
-<br>
 
 ▣ 소스코드(공통 준비)<br>
 
@@ -75,9 +40,9 @@ https://seaborn.pydata.org/tutorial.html
 	uploaded = files.upload()
 
 
-	import matplotlib.pyplot as plt
-	import pandas as pd
- 	import seaborn as sns
+	import pandas as pd	
+ 	import matplotlib.pyplot as plt
+	import seaborn as sns
 
 	titanic_df = pd.read_csv('titanic_train.csv')
 
@@ -418,5 +383,61 @@ https://seaborn.pydata.org/tutorial.html
 
 	# Seaborn에서는 3D 그래프를 지원하지 않으므로 Matplotlib 사용
 
+<br>
 
+---
+
+# [3] Orange3
+
+
+---
+
+<!--
+# [1] Matplotlib
+https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html
+
+	import matplotlib.pyplot as plt
+
+	plt.hist(titanic_df['Age'])
+	titanic_df['Age'].hist()
+
+
+<br>
+
+# [2] Seaborn
+https://seaborn.pydata.org/tutorial.html
+
+	import seaborn as sns
+
+	sns.distplot(titanic_df['Age'], bins=10)
+	sns.histplot(titanic_df['Age'], kde=True)
+	sns.countplot(x='Pclass', data=titanic_df)
+
+	sns.barplot(x='Pclass', y='Age', data=titanic_df)
+	sns.barplot(x='Pclass', y='Survived', data=titanic_df)
+	sns.barplot(x='Pclass', y='Survived', data=titanic_df, ci=None, color='green')
+	sns.barplot(x='Pclass', y='Survived', data=titanic_df, ci=None, estimator=sum)
+	sns.barplot(x='Pclass', y='Sex', data=titanic_df)
+	sns.barplot(x='Pclass', y='Age', hue='Sex', data=titanic_df)
+	sns.barplot(x='Pclass', y='Survived', hue='Sex', data=titanic_df)
+
+	sns.violinplot(y='Age', data=titanic_df)
+	sns.violinplot(x='Pclass', y='Age', data=titanic_df)
+	sns.violinplot(x='Sex', y='Age', data=titanic_df)
+
+	cat_columns = ['Survived', 'Pclass', 'Sex', 'Age_cat']
+	fig, axs = plt.subplots(nrows=1, ncols=len(cat_columns), figsize=(16, 4))
+
+	sns.boxplot(y='Age', data=titanic_df)
+	sns.boxplot(x='Pclass', y='Age', data=titanic_df)
+
+	sns.scatterplot(x='Age', y='Fare', data=titanic_df)
+	sns.scatterplot(x='Age', y='Fare', data=titanic_df, hue='Pclass')
+	sns.scatterplot(x='Age', y='Fare', data=titanic_df, hue='Pclass', style ='Survived')
+	sns.scatterplot(x='Age', y='Fare', data=titanic_df, hue='Survived')
+
+	sns.heatmap(corr, annot=True, fmt='.1f',  linewidths=0.5, cmap='YlGnBu')
+
+<br>
+-->
 
