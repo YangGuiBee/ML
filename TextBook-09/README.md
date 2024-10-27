@@ -333,7 +333,7 @@
 ▣ 소스코드(seaborn)<br>
 
 	plt.figure(figsize=(8, 6))
-	sns.kdeplot(titanic_df['Fare'], shade=True)
+	sns.kdeplot(titanic_df['Fare'], fill=True)
 	plt.title('Fare Density Plot')
 	plt.xlabel('Fare')
 	plt.show()
