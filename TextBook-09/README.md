@@ -305,6 +305,20 @@
 
 	# Seaborn에서는 버블 차트를 직접 지원하지 않으므로 Matplotlib 사용
 
+
+![](./images/11_BubblePlot.png)
+
+	plt.figure(figsize=(10, 8))
+
+	# Fare 값을 기본으로 하되, 생존한 승객(Survived=1)의 경우 크기를 더 크게 함
+	bubble_size = (titanic_df['Fare'] + 1) * (titanic_df['Survived'] + 1) * 2  # 스케일링을 2배로 축소
+
+	plt.scatter(titanic_df['Age'], titanic_df['Fare'], s=bubble_size, alpha=0.5) # 크기를 Fare와 Survived로 설정
+	plt.title('Age vs Fare (Bubble size represents Fare and Survival)')
+	plt.xlabel('Age')
+	plt.ylabel('Fare')
+	plt.show()
+
 <br>
 
 # 12. 도넛 차트 (Donut Chart)
