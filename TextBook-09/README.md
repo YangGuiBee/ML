@@ -49,6 +49,9 @@
 	# from google.colab import files
 	# uploaded = files.upload()
 
+![](./images/titanic.png)
+
+
 
 # 1. 선 그래프 (Line Plot)
 ▣ 용도: 시간에 따른 데이터의 변화를 시각화. 연속적인 변화를 나타낼 때 유용<br>
