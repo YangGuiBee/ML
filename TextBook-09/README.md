@@ -346,18 +346,27 @@
 ▣ 예시(주로 사용되는 분야): 주식 시장의 변동, 기후 변화, 판매량 변화 등<br>
 ▣ 소스코드(Matplotlib)<br>
 
-	plt.figure(figsize=(8, 6))
-	plt.plot(titanic_df['PassengerId'], titanic_df['Fare'])
-	plt.title('Fare over Passenger ID')
-	plt.xlabel('Passenger ID')
+	# 가상의 날짜 열 추가 (예: '1912-01-01'부터 시작하여 승객 ID 순서대로 하루씩 증가)
+	titanic_df['Date'] = pd.date_range(start='1912-01-01', periods=len(titanic_df), freq='D')
+
+	plt.figure(figsize=(10, 6))
+	plt.plot(titanic_df['Date'], titanic_df['Fare'])
+	plt.title('Fare over Time (Synthetic Date)')
+	plt.xlabel('Date')
 	plt.ylabel('Fare')
+	plt.xticks(rotation=45)  # x축 라벨 회전
 	plt.show()
+
+<br>
 
 ▣ 소스코드(seaborn)<br>
 
-	plt.figure(figsize=(8, 6))
-	sns.lineplot(x='PassengerId', y='Fare', data=titanic_df)
-	plt.title('Fare over Passenger ID')
+	plt.figure(figsize=(10, 6))
+	sns.lineplot(x='Date', y='Fare', data=titanic_df)
+	plt.title('Fare over Time (Synthetic Date)')
+	plt.xlabel('Date')
+	plt.ylabel('Fare')
+	plt.xticks(rotation=45)  # x축 라벨 회전
 	plt.show()
 
 <br>
