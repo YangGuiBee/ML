@@ -39,16 +39,15 @@
 
 ▣ 소스코드(공통 준비)<br>
 
-	from google.colab import files
-	uploaded = files.upload()
-
-
 	import pandas as pd	
  	import matplotlib.pyplot as plt
 	import seaborn as sns
 
-	titanic_df = pd.read_csv('titanic_train.csv')
-
+	# GitHub의 CSV 파일을 불러오기
+	titanic_df = pd.read_csv('https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-09/titanic_train.csv')
+ 	# (CSV 불러오기 다른방법) GitHub의 CSV 파일을 나의 구글코랩에 불러와서 실행하는 경우는 다음과 같이 불러온후 소스작성
+	# from google.colab import files
+	# uploaded = files.upload()
 
 
 # 1. 선 그래프 (Line Plot)
