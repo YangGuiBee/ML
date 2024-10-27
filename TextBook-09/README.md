@@ -55,6 +55,7 @@
 ▣ 특징: 각 데이터 포인트를 선으로 연결하여 시계열 데이터나 연속적인 값을 시각화<br>
 ▣ 예시(주로 사용되는 분야): 주식 시장, 기온 변화, 판매 추이 등<br>
 ![](./images/01_LinePlot.png)
+
 ▣ 소스코드(Matplotlib)<br>
 
 	plt.figure(figsize=(8, 6))
