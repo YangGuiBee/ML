@@ -188,9 +188,6 @@
 
 ▣ 소스코드(seaborn)<br>
 
-	# Titanic 데이터 불러오기
-	titanic_df = pd.read_csv('titanic_train.csv')
-
 	# 상관 관계에 사용할 숫자형 열을 명시적으로 선택 (예: 생존 여부, 클래스, 나이, 형제/배우자 수, 부모/자녀 수, 요금)
 	numeric_cols = titanic_df[['Survived', 'Pclass', 'Age', 'SibSp', 'Parch', 'Fare']]
 
