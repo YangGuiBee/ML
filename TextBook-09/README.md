@@ -309,7 +309,7 @@
 	# Seaborn에서는 버블 차트를 직접 지원하지 않으므로 Matplotlib 사용
 
 
-![](./images/11_BubblePlot.png)
+![](./images/11_BubblePlot_1.png)
 
 	plt.figure(figsize=(10, 8))
 
