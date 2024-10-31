@@ -163,6 +163,9 @@
 
 ▣ 소스코드(seaborn)<br>
 
+	sns.set(rc={'figure.figsize':(8, 6)})
+	sns.histplot(titanic_df['Age'], bins=20).set(title='Age Distribution')
+
 <br>
 
 # 5. 박스 플롯 (Box Plot)
@@ -190,6 +193,9 @@
 
 ▣ 소스코드(seaborn)<br>
 
+	sns.set(rc={'figure.figsize':(8, 6)})
+	sns.boxplot(x='Pclass', y='Fare', data=titanic_df).set(title='Fare Distribution by Class')
+ 
 <br>
 
 # 6. 파이 차트 (Pie Chart)
@@ -240,6 +246,18 @@
 	plt.show()
 
  ▣ 소스코드(seaborn)<br>
+
+ 	# Numeric columns 선택 및 결측치 처리
+	numeric_cols = titanic_df[['Survived', 'Pclass', 'Age', 'SibSp', 'Parch', 'Fare']].fillna(0)
+
+	# 상관 행렬 계산
+	corr = numeric_cols.corr()
+
+	# Seaborn 스타일 및 크기 설정
+	sns.set(rc={'figure.figsize':(8, 6)})
+
+	# 히트맵 생성
+	sns.heatmap(corr, annot=True, cmap='coolwarm').set(title='Correlation Heatmap')
  
 <br>
 
