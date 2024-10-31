@@ -404,6 +404,11 @@
 
 ▣ 소스코드(seaborn)<br>
 
+	sns.set(rc={'figure.figsize':(8, 6)})
+
+	sns.violinplot(x='Pclass', y='Fare', data=titanic_df).set(
+    	title='Fare Distribution by Class (Violin Plot)', xlabel='Pclass', ylabel='Fare')
+
 <br>
 
 # 14. 밀도 플롯 (Kernel Density Estimate, KDE)
