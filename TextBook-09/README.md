@@ -431,6 +431,11 @@
 
 ▣ 소스코드(seaborn)<br>
 
+	sns.set(rc={'figure.figsize':(8, 6)})
+
+	sns.kdeplot(titanic_df['Fare'], fill=True).set(
+    	title='Fare Density Plot', xlabel='Fare')
+
 <br>
 
 # 15. 타임 시리즈 (Time Series Plot)
@@ -466,6 +471,11 @@
 
 ▣ 소스코드(seaborn)<br>
 
+	sns.set(rc={'figure.figsize':(10, 6)})
+	plot = sns.lineplot(x='Date', y='Fare', data=titanic_df)
+	plot.set(title='Fare over Time (Synthetic Date)', xlabel='Date', ylabel='Fare')
+	plot.set_xticklabels(plot.get_xticklabels(), rotation=45)
+
 <br>
 
 # 16. 3D 그래프 (3D Plot)
@@ -479,7 +489,8 @@
 	from mpl_toolkits.mplot3d import Axes3D
 	fig = plt.figure(figsize=(10, 8))
 	ax = fig.add_subplot(111, projection='3d')
-	ax.scatter(titanic_df['Age'], titanic_df['Fare'], titanic_df['Survived'], c=titanic_df['Survived'], cmap='coolwarm')
+	ax.scatter(titanic_df['Age'], titanic_df['Fare'], titanic_df['Survived'], c=titanic_df['Survived'], 
+ 		cmap='coolwarm')
 	ax.set_xlabel('Age')
 	ax.set_ylabel('Fare')
 	ax.set_zlabel('Survived')
