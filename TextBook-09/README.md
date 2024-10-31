@@ -77,10 +77,7 @@
 
 ▣ 소스코드(seaborn)<br>
 
-	# Seaborn 스타일 및 크기 설정
 	sns.set(rc={'figure.figsize':(8, 6)}) 
-
-	# 그래프 생성
 	sns.lineplot(x='PassengerId', y='Fare', data=titanic_df).set(title='Passenger ID vs Fare')
 
 <br>
@@ -100,12 +97,17 @@
 	plt.ylabel('Fare')
 	plt.show()
 
-▣ 소스코드(seaborn)<br>
+▣ 소스코드(seaborn+Matplotlib)<br>
 
 	plt.figure(figsize=(8, 6))
 	sns.scatterplot(x='Age', y='Fare', data=titanic_df)
 	plt.title('Age vs Fare')
 	plt.show()
+
+▣ 소스코드(seaborn)<br>
+
+	sns.set(rc={'figure.figsize':(8, 6)})
+	sns.scatterplot(x='Age', y='Fare', data=titanic_df).set(title='Age vs Fare')
 
 <br>
 
