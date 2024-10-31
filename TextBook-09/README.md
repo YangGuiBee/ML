@@ -125,12 +125,14 @@
 	plt.ylabel('Average Fare')
 	plt.show()
 
-▣ 소스코드(seaborn)<br>
+▣ 소스코드(seaborn+Matplotlib)<br>
 
 	plt.figure(figsize=(8, 6))
 	sns.barplot(x='Pclass', y='Fare', data=titanic_df)
 	plt.title('Average Fare by Class')
 	plt.show()
+
+▣ 소스코드(seaborn)<br>
 
 <br>
 
@@ -149,12 +151,14 @@
 	plt.ylabel('Frequency')
 	plt.show()
 
-▣ 소스코드(seaborn)<br>
+▣ 소스코드(seaborn+Matplotlib)<br>
 
 	plt.figure(figsize=(8, 6))
 	sns.histplot(titanic_df['Age'], bins=20)
 	plt.title('Age Distribution')
 	plt.show()
+
+▣ 소스코드(seaborn)<br>
 
 <br>
 
@@ -174,12 +178,14 @@
 	plt.xticks([1, 2, 3], ['1st Class', '2nd Class', '3rd Class'])
 	plt.show()
 
-▣ 소스코드(seaborn)<br>
+▣ 소스코드(seaborn+Matplotlib)<br>
 
 	plt.figure(figsize=(8, 6))
 	sns.boxplot(x='Pclass', y='Fare', data=titanic_df)
 	plt.title('Fare Distribution by Class')
 	plt.show()
+
+▣ 소스코드(seaborn)<br>
 
 <br>
 
@@ -213,7 +219,7 @@
 
 	# Matplotlib에서는 Seaborn이 제공하는 히트맵을 사용
 
-▣ 소스코드(seaborn)<br>
+▣ 소스코드(seaborn+Matplotlib)<br>
 
 	# 상관 관계에 사용할 숫자형 열을 명시적으로 선택 (예: 생존 여부, 클래스, 나이, 형제/배우자 수, 부모/자녀 수, 요금)
 	numeric_cols = titanic_df[['Survived', 'Pclass', 'Age', 'SibSp', 'Parch', 'Fare']]
@@ -229,6 +235,8 @@
 	sns.heatmap(corr, annot=True, cmap='coolwarm')
 	plt.title('Correlation Heatmap')
 	plt.show()
+
+ ▣ 소스코드(seaborn)<br>
  
 <br>
 
@@ -314,11 +322,6 @@
 	plt.ylabel('Fare')
 	plt.show()
 
-▣ 소스코드(seaborn)<br>
-
-	# Seaborn에서는 버블 차트를 직접 지원하지 않으므로 Matplotlib 사용
-
-
 ![](./images/11_BubblePlot_1.png)
 
 	plt.figure(figsize=(10, 8))
@@ -331,6 +334,11 @@
 	plt.xlabel('Age')
 	plt.ylabel('Fare')
 	plt.show()
+
+▣ 소스코드(seaborn)<br>
+
+	# Seaborn에서는 버블 차트를 직접 지원하지 않으므로 Matplotlib 사용
+
 
 <br>
 
@@ -364,7 +372,7 @@
 
 	# Matplotlib에서는 직접 바이올린 플롯을 지원하지 않으므로 Seaborn 사용
 
-▣ 소스코드(seaborn)<br>
+▣ 소스코드(seaborn+Matplotlib)<br>
 
 	plt.figure(figsize=(8, 6))
 	sns.violinplot(x='Pclass', y='Fare', data=titanic_df)
@@ -372,6 +380,8 @@
 	plt.xlabel('Pclass')
 	plt.ylabel('Fare')
 	plt.show()
+
+▣ 소스코드(seaborn)<br>
 
 <br>
 
@@ -385,13 +395,15 @@
 
 	# Matplotlib에서 KDE는 지원하지 않으므로 Seaborn 사용
 
-▣ 소스코드(seaborn)<br>
+▣ 소스코드(seaborn+Matplotlib)<br>
 
 	plt.figure(figsize=(8, 6))
 	sns.kdeplot(titanic_df['Fare'], fill=True)
 	plt.title('Fare Density Plot')
 	plt.xlabel('Fare')
 	plt.show()
+
+▣ 소스코드(seaborn)<br>
 
 <br>
 
@@ -416,7 +428,7 @@
 
 <br>
 
-▣ 소스코드(seaborn)<br>
+▣ 소스코드(seaborn+Matplotlib)<br>
 
 	plt.figure(figsize=(10, 6))
 	sns.lineplot(x='Date', y='Fare', data=titanic_df)
@@ -425,6 +437,8 @@
 	plt.ylabel('Fare')
 	plt.xticks(rotation=45)  # x축 라벨 회전
 	plt.show()
+
+▣ 소스코드(seaborn)<br>
 
 <br>
 
