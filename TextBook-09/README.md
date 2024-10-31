@@ -134,6 +134,9 @@
 
 ▣ 소스코드(seaborn)<br>
 
+	sns.set(rc={'figure.figsize':(8, 6)})
+	sns.barplot(x='Pclass', y='Fare', data=titanic_df).set(title='Average Fare by Class')
+
 <br>
 
 # 4. 히스토그램 (Histogram)
