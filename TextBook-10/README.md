@@ -227,7 +227,7 @@ $𝐿=𝐷−𝐴$<br>
 ▣ 장점 : DBSCAN과 유사하게 이상치를 감지할 수 있으며, 여러 밀도 수준에서 군집을 식별 가능<br>
 ▣ 단점 : 계산 시간이 오래 걸릴 수 있으며, 적절한 매개변수 설정이 어려울 수 있음<br>
 ▣ 응용분야 : 지리적 데이터 분석, 이상치 탐지<br>
-▣ 모델식 : DBSCAN과 유사하게 밀도 기반 접근을 따르며, 각 데이터 포인트의 reachability-distance와 core-distance를 기반으로 군집 구조를 형성<br>
+▣ 모델식 : DBSCAN과 유사하게 밀도 기반 접근을 따르며, 각 데이터 포인트의 reachability-distance와 core-distance를 기반으로 군집구조 형성<br>
 
 	from sklearn.cluster import OPTICS
 	from sklearn.datasets import load_iris
