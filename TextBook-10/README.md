@@ -2,35 +2,35 @@
 
 ---
 
-	[1] Partitioning-Based
+	[1] Partitioning-Based Clustering
 	[1-1] K-means
 	[1-2] K-medoids
 	[1-3] K-modes
-	[1-4] PAM
-	[1-5] CLARANS
-	[1-6] CLARA
-	[1-7] FCM
+	[1-4] PAM(Partitioning Around Medoids)
+	[1-5] CLARANS(Clustering Large Applications based on RANdomized Search)
+	[1-6] CLARA(Clustering LARge Applications)
+	[1-7] FCM(Fuzzy C-means)
 
-	[2] Hierarchical-Based
-	[2-1] BIRCH
-	[2-2] CURE
-	[2-3] ROCK
+	[2] Hierarchical-Based Clustering
+	[2-1] BIRCH(Balanced Iterative Reducing and Clustering using Hierarchies)
+	[2-2] CURE(Clustering Using Representatives)
+	[2-3] ROCK(Robust Clustering using Links)
 	[2-4] Chameleon
 	[2-5] Echidna
 
-	[3] Density-Based
+	[3] Density-Based Clustering
 	[3-1] DBSCAN
 	[3-2] OPTICS
 	[3-3] DBCLASD
 	[3-4] DENCLUE
 
-	[4] Grid-Based
+	[4] Grid-Based Clustering
 	[4-1] Wave-Cluster
 	[4-2] STING
 	[4-3] CLIQUE
 	[4-4] OptiGrid
 
-	[5] Model-Based
+	[5] Model-Based Clustering
 	[5-1] EM
 	[5-2] COBWEB
 	[5-3] CLASSIT
@@ -58,10 +58,12 @@
 # [1-1] k-평균 클러스터링(k-Means Clustering)
 ▣ 정의 : 데이터를 K개의 군집으로 나누고 각 군집의 중심점(centroid)을 기준으로 데이터를 반복적으로 할당하는 군집화 알고리즘<br>
 
-	k-Means Clustering에서 최초의 군집중심점(centroid) 선정방법
+	최초의 군집중심점(centroid) 선정방법
 
-	① 무작위 선택(Random Initialization) : 데이터 포인트 중에서 k개의 점을 무작위로 선택하여 초기 중심점으로 사용(간단하지만 결과가 일관되지 않을 가능성)
-	② k-means++ 초기화 : 첫 번째 중심점을 무작위로 선택한 후, 나머지 중심점은 현재 선택된 중심점에서의 거리가 가장 먼 점을 선택(군집의 분산을 줄이고 수렴 속도를 개선)
+	① Random Initialization : 데이터 포인트 중에서 k개의 점을 무작위로 선택하여 초기 중심점으로 사용
+	(간단하지만 결과가 일관되지 않을 가능성)
+	② k-means++ 초기화 : 첫 번째 중심점을 무작위로 선택 후, 나머지 중심점은 현재 선택된 중심점에서의 거리가 가장 먼 점을 선택
+ 	(군집의 분산을 줄이고 수렴 속도를 개선)
 	③ 특정 기준에 따라 선택 : 데이터의 분포나 도메인 지식을 바탕으로 특정 기준을 사용하여 초기 중심점을 선정
  
 ▣ 필요성 : 데이터를 그룹화하여 숨겨진 패턴을 발견하는 데 유용<br>
@@ -91,7 +93,161 @@
 
 <br>
 
-# [1-2] 밀도기반 군집화(Density-Based Spatial Clustering of Applications with Noise, DBSCAN)
+# [1-2] K-medoids
+▣ 정의: K-medoids는 K-means와 유사하지만, 각 군집의 중심을 실제 데이터 포인트(medoid)로 설정합니다. 이는 이상치(outlier)에 더 강한 특징을 가집니다.
+▣ 필요성: 이상치가 많은 데이터나 노이즈가 있는 데이터에서 K-means의 단점을 보완하여 안정적인 군집화를 제공합니다.
+▣ 장점: K-means에 비해 이상치에 덜 민감합니다.
+군집 중심이 실제 데이터 포인트이기 때문에 해석이 용이합니다.
+▣ 단점: 계산이 더 복잡하고 느립니다.
+비구형 군집을 잘 분류하지 못합니다.
+▣ 응용분야: 의료 데이터 분석, 범주형 데이터가 포함된 고객 세분화
+▣ 모델식: K-medoids는 각 군집의 중심으로 가장 대표적인 포인트(medoid)를 선택하여 군집 내 데이터와의 총 비유사도를 최소화합니다.
+
+	from sklearn.datasets import load_iris
+	from sklearn_extra.cluster import KMedoids
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	import pandas as pd
+
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = iris.data  # 데이터 추출
+
+	# K-medoids 클러스터링 적용 (군집 수: 3)
+	kmedoids = KMedoids(n_clusters=3, random_state=0)
+	kmedoids_labels = kmedoids.fit_predict(data)  # 데이터에 맞춰 군집화 수행
+
+	# 데이터 프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = kmedoids_labels  # 군집화 결과 추가
+
+	# 시각화
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis')
+	plt.title("K-medoids Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # X축: 첫 번째 특징
+	plt.ylabel(iris.feature_names[1])  # Y축: 두 번째 특징
+	plt.legend(title='Cluster')
+	plt.show()
+
+<br>
+
+# [1-3] K-modes
+▣ 정의: K-modes는 범주형 데이터를 클러스터링하기 위해 설계된 알고리즘입니다. 각 군집의 중심은 최빈값(mode)으로 결정됩니다.
+▣ 필요성: 범주형 데이터를 군집화하는 데 유용하며, 일반적인 K-means와는 다른 접근 방식이 필요합니다.
+▣ 장점: 범주형 데이터에 특화되어 있습니다. K-means와 유사하게 빠르게 계산할 수 있습니다.
+▣ 단점: 범주형이 아닌 수치형 데이터에는 부적합합니다. K 값을 사전에 설정해야 합니다.
+▣ 응용분야: 설문 데이터 분석. 고객 세분화에서 범주형 특성을 포함한 군집화.
+▣ 모델식: K-modes는 범주형 데이터의 유사도를 측정하기 위해 헴밍 거리(Hamming distance)를 사용합니다. 군집의 중심은 각 속성의 최빈값으로 설정
+
+	from kmodes.kmodes import KModes
+	from sklearn.datasets import load_iris
+	import pandas as pd
+
+	# Iris 데이터셋 로드 및 범주형 변환
+	iris = load_iris()
+	data = pd.DataFrame(iris.data, columns=iris.feature_names)
+
+	# 연속형 데이터를 범주형 데이터로 변환 (범위별로 나누어 범주형으로 변경)
+	data = data.apply(lambda x: pd.cut(x, bins=3, labels=["Low", "Medium", "High"]))
+
+	# K-modes 모델 생성 (군집 수: 3)
+	kmodes = KModes(n_clusters=3, init="Huang", n_init=5, verbose=1)
+
+	# K-modes 군집화 수행
+	clusters = kmodes.fit_predict(data)
+
+	# 군집 결과를 데이터 프레임에 추가
+	data["Cluster"] = clusters
+
+	# 결과 출력
+	print(data.head())
+
+<br>
+
+# [1-4] PAM(Partitioning Around Medoids)
+▣ 정의: PAM은 K-medoids 알고리즘의 일종으로, 각 군집의 중심으로 medoid를 선택합니다. 이상치에 강한 특성을 가지고 있으며, 군집 중심을 실제 데이터 포인트로 설정합니다.
+▣ 필요성: 이상치가 많은 데이터셋에서도 안정적인 군집화를 수행할 수 있습니다.
+▣ 장점: K-means에 비해 이상치에 덜 민감합니다. 다양한 거리 측정 방법을 사용할 수 있습니다.
+▣ 단점: 대규모 데이터에서 계산 비용이 높습니다. 군집 수(K)를 사전에 지정해야 합니다.
+▣ 응용분야: 범주형 데이터를 포함한 고객 세분화. 의료 데이터 분석.
+▣ 모델식: PAM은 각 군집의 중심으로 가장 대표적인 medoid를 선택하여 군집 내 비유사도를 최소화합니다.
+
+<br>
+
+# [1-5] CLARANS(Clustering Large Applications based on RANdomized Search)
+▣ 정의: CLARANS는 PAM(PAM과 K-medoids)의 확장판으로, 대규모 데이터셋에 효율적인 군집화를 제공하기 위해 랜덤화된 탐색 방식을 사용하는 알고리즘입니다. PAM의 전체 데이터셋 탐색 방식 대신 샘플링과 랜덤 선택을 통해 최적의 medoid를 찾습니다.
+▣ 필요성: PAM의 느린 성능을 보완하여 대규모 데이터에서도 빠르게 클러스터링을 수행할 수 있도록 설계되었습니다.
+▣ 장점: 대규모 데이터셋에 적용할 수 있으며, PAM보다 훨씬 효율적입니다. 랜덤 탐색 방식을 통해 최적의 medoid를 빠르게 찾습니다.
+▣ 단점: 랜덤화된 탐색을 사용하기 때문에 실행 결과가 매번 다를 수 있습니다. PAM과 동일하게 군집 수(K)를 사전에 지정해야 합니다.
+▣ 응용분야: 대규모 고객 세분화. 금융 데이터 분석. 대규모 이미지 및 문서 분류.
+▣ 모델식: CLARANS는 전체 데이터셋에서 일부를 랜덤하게 샘플링하여 최적의 medoid를 찾는 방식으로, 기존 PAM의 개념을 대규모 데이터셋에 맞게 확장하였습니다. 이를 통해 데이터 탐색 과정을 줄이고 효율성을 높였습니다.
+
+<br>
+
+# [1-6] CLARA(Clustering LARge Applications)
+▣ 정의: CLARA는 PAM을 대규모 데이터에 적용할 수 있도록 확장한 알고리즘으로, 데이터의 일부 샘플을 사용하여 군집화를 수행하는 방식입니다. CLARA는 여러 번의 샘플링을 통해 가장 안정적인 medoid를 선택합니다.
+▣ 필요성: PAM의 높은 계산 비용을 줄이고자 개발되어, 대규모 데이터셋에서도 빠르게 군집화를 수행할 수 있습니다.
+▣ 장점: PAM보다 계산이 효율적이며, 대규모 데이터셋에 적합합니다. 표본 기반 접근 방식을 통해 메모리와 시간 효율성을 높입니다.
+▣ 단점: 샘플링을 통해 결과의 신뢰도가 낮아질 수 있으며, 전체 데이터셋을 반영하지 못할 가능성이 있습니다. 군집 수(K)를 사전에 지정해야 합니다.
+▣ 응용분야: 대규모 고객 데이터의 군집화. 생물학적 데이터 분석. 시장 조사 데이터의 분석 및 군집화.
+▣ 모델식: CLARA는 데이터셋에서 일부 샘플을 선택하여 PAM을 적용하고, 여러 번 반복 수행하여 최적의 medoid를 찾습니다.
+
+<br>
+
+# [1-7] FCM(Fuzzy C-means) 
+▣ 정의: FCM은 소프트 군집화 방법으로, 각 데이터 포인트가 여러 군집에 속할 수 있으며, 군집 소속 확률을 계산하여 군집을 형성합니다. 이는 데이터가 명확하게 구분되지 않을 때 유용합니다.
+▣ 필요성: 데이터가 명확히 구분되지 않는 경우, 각 데이터가 여러 군집에 소속될 수 있도록 허용하여 더욱 유연한 군집화를 제공합니다.
+▣ 장점: 데이터를 여러 군집에 걸쳐 소속시킬 수 있어 유연한 군집화가 가능합니다. 군집 경계가 모호한 데이터에 적합합니다.
+▣ 단점: 이상치에 민감하고 초기 중심 설정에 따라 결과가 달라질 수 있습니다. 군집 개수와 퍼지 지수(m)를 미리 설정해야 합니다.
+▣ 응용분야: 이미지 분할 및 패턴 인식. 생물학에서 유전자 데이터 군집화. 고객 세분화와 같은 마케팅 분야.
+▣ 모델식: FCM은 각 데이터 포인트가 군집에 속할 확률(소속도, membership value)을 계산하여 군집화합니다. 이때 각 군집의 중심과 데이터 포인트 사이의 거리의 역수에 따라 소속도가 결정되며, 다음과 같은 목적 함수를 최소화합니다. 여기서 $𝑢_{𝑖𝑗}$는 데이터 포인트 $𝑥_𝑖$가 군집 $𝑐_𝑗$에 속할 확률이며, 𝑚은 퍼지 지수로, 군집의 경계를 조정하는 역할을 합니다.
+
+	# `fcmeans` 라이브러리가 필요합니다: !pip install fcmeans
+	from fcmeans import FCM
+	from sklearn.datasets import load_iris
+	import matplotlib.pyplot as plt
+	import pandas as pd
+	import seaborn as sns
+
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = iris.data  # Iris 데이터 추출
+
+	# FCM 클러스터링 적용 (군집 수: 3)
+	fcm = FCM(n_clusters=3)  # Fuzzy C-means 인스턴스 생성
+	fcm.fit(data)  # 데이터에 맞춰 군집화 수행
+	fcm_labels = fcm.predict(data)  # 예측된 군집 레이블
+
+	# 데이터 프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = fcm_labels  # FCM 클러스터 결과 추가
+
+	# 시각화
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis')
+	plt.title("Fuzzy C-means Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # X축: 첫 번째 특징
+	plt.ylabel(iris.feature_names[1])  # Y축: 두 번째 특징
+	plt.legend(title='Cluster')
+	plt.show()
+
+<br>
+
+# [2-1] BIRCH(Balanced Iterative Reducing and Clustering using Hierarchies)
+# [2-2] CURE(Clustering Using Representatives)
+# [2-3] ROCK(Robust Clustering using Links)
+# [2-4] Chameleon
+# [2-5] Echidna
+
+[3-1] DBSCAN
+[3-2] OPTICS
+[3-3] DBCLASD
+[3-4] DENCLUE
+
+
+
+# [3-1] 밀도기반 군집화(Density-Based Spatial Clustering of Applications with Noise, DBSCAN)
 ▣ 정의 : 밀도가 높은 영역을 군집으로 묶고, 밀도가 낮은 점들은 노이즈로 간주하는 밀도 기반 군집화 알고리즘<br>
 ▣ 필요성 : 다양한 밀도의 데이터 군집화 및 이상치 탐지에 유용<br>
 ▣ 장점 : 군집의 개수를 사전 설정할 필요 없으며, 이상치(outliers)를 자연스럽게 처리 가능<br>
@@ -111,6 +267,32 @@
 
 	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='plasma')
 	plt.title("DBSCAN Clustering on Iris Dataset")
+	plt.xlabel("Feature 1")
+	plt.ylabel("Feature 2")
+	plt.show()
+
+<br>
+
+# [3-2] 군집구조 식별을 위한 점 순서화(Ordering Points To Identify the Clustering Structure, OPTICS)
+▣ 정의 : 밀도 기반 군집화(DBSCAN)의 확장으로, 여러 밀도 수준에서 데이터의 군집 구조를 식별할 수 있는 알고리즘<br>
+▣ 필요성 : 다양한 밀도를 가진 데이터에서 군집을 찾아내고 이상치(outliers)를 처리할 때 유용<br>
+▣ 장점 : DBSCAN과 유사하게 이상치를 감지할 수 있으며, 여러 밀도 수준에서 군집을 식별 가능<br>
+▣ 단점 : 계산 시간이 오래 걸릴 수 있으며, 적절한 매개변수 설정이 어려울 수 있음<br>
+▣ 응용분야 : 지리적 데이터 분석, 이상치 탐지<br>
+▣ 모델식 : DBSCAN과 유사하게 밀도 기반 접근을 따르며, 각 데이터 포인트의 reachability-distance와 core-distance를 기반으로 군집구조 형성<br>
+
+	from sklearn.cluster import OPTICS
+	from sklearn.datasets import load_iris
+	import matplotlib.pyplot as plt
+
+	iris = load_iris()
+	X = iris.data
+
+	optics = OPTICS(min_samples=5)
+	labels = optics.fit_predict(X)
+
+	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='plasma')
+	plt.title("OPTICS Clustering on Iris Dataset")
 	plt.xlabel("Feature 1")
 	plt.ylabel("Feature 2")
 	plt.show()
@@ -193,32 +375,6 @@ $𝐿=𝐷−𝐴$<br>
 
 	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='coolwarm')
 	plt.title("Spectral Clustering on Iris Dataset")
-	plt.xlabel("Feature 1")
-	plt.ylabel("Feature 2")
-	plt.show()
-
-<br>
-
-# [1-6] 군집구조 식별을 위한 점 순서화(Ordering Points To Identify the Clustering Structure, OPTICS)
-▣ 정의 : 밀도 기반 군집화(DBSCAN)의 확장으로, 여러 밀도 수준에서 데이터의 군집 구조를 식별할 수 있는 알고리즘<br>
-▣ 필요성 : 다양한 밀도를 가진 데이터에서 군집을 찾아내고 이상치(outliers)를 처리할 때 유용<br>
-▣ 장점 : DBSCAN과 유사하게 이상치를 감지할 수 있으며, 여러 밀도 수준에서 군집을 식별 가능<br>
-▣ 단점 : 계산 시간이 오래 걸릴 수 있으며, 적절한 매개변수 설정이 어려울 수 있음<br>
-▣ 응용분야 : 지리적 데이터 분석, 이상치 탐지<br>
-▣ 모델식 : DBSCAN과 유사하게 밀도 기반 접근을 따르며, 각 데이터 포인트의 reachability-distance와 core-distance를 기반으로 군집구조 형성<br>
-
-	from sklearn.cluster import OPTICS
-	from sklearn.datasets import load_iris
-	import matplotlib.pyplot as plt
-
-	iris = load_iris()
-	X = iris.data
-
-	optics = OPTICS(min_samples=5)
-	labels = optics.fit_predict(X)
-
-	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='plasma')
-	plt.title("OPTICS Clustering on Iris Dataset")
 	plt.xlabel("Feature 1")
 	plt.ylabel("Feature 2")
 	plt.show()
