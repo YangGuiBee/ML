@@ -30,8 +30,8 @@
 	③ 특정 기준에 따라 선택 : 데이터의 분포나 도메인 지식을 바탕으로 특정 기준을 사용하여 초기 중심점을 선정
  
 ▣ 필요성 : 데이터를 그룹화하여 숨겨진 패턴을 발견하는 데 유용<br>
-▣ 장점 : 구현이 간단하고 계산 속도가 빠르며, 대규모 데이터셋에 적합<br>
-▣ 단점 : 군집의 개수(K)를 사전에 정의해야 하며, 구형 군집이 아니거나 이상치(outliers)가 있을 경우 성능 저하<br>
+▣ 장점 : 구현이 쉽고 간단하고 계산속도가 빠르며, 대규모 데이터셋에 적합(일반적인 군집하에서 가장많이 활용)<br>
+▣ 단점 : 군집의 개수(K)를 사전에 정의해야 하며, 구형 군집이 아니거나 이상치(outliers)가 있을 경우 성능 저하(거리ㄱ기반 알고리즘으로 속성의 수가 많을 경우 군집의 정확도가 떨어지는 단점을 보완하기 위해 PCA로 차원축소 필요)<br>
 ▣ 응용분야 : 고객 세분화, 이미지 분할, 추천 시스템<br>
 ▣ 모델식 : 𝐾는 군집의 개수, $𝐶_𝑖$는 i번째 군집, $𝜇_𝑖$는 i번째 군집의 중심, 𝑥는 데이터 포인트<br>
 ![](./images/kmeans.PNG)
@@ -44,9 +44,9 @@
 	iris = load_iris()
 	X = iris.data
 
-	kmeans = KMeans(n_clusters=3, random_state=0)
+	kmeans = KMeans(n_clusters=3, random_state=0) #n_cluster : 군집화할 개수
 	kmeans.fit(X)
-	labels = kmeans.labels_
+	labels = kmeans.labels_ 
 
 	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis')
 	plt.title("K-Means Clustering on Iris Dataset")
