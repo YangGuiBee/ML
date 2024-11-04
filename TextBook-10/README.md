@@ -2,6 +2,40 @@
 
 ---
 
+	[1] Partitioning-Based
+	[1-1] K-means
+	[1-2] K-medoids
+	[1-3] K-modes
+	[1-4] PAM
+	[1-5] CLARANS
+	[1-6] CLARA
+	[1-7] FCM
+
+	[2] Hierarchical-Based
+	[2-1] BIRCH
+	[2-2] CURE
+	[2-3] ROCK
+	[2-4] Chameleon
+	[2-5] Echidna
+
+	[3] Density-Based
+	[3-1] DBSCAN
+	[3-2] OPTICS
+	[3-3] DBCLASD
+	[3-4] DENCLUE
+
+	[4] Grid-Based
+	[4-1] Wave-Cluster
+	[4-2] STING
+	[4-3] CLIQUE
+	[4-4] OptiGrid
+
+	[5] Model-Based
+	[5-1] EM
+	[5-2] COBWEB
+	[5-3] CLASSIT
+	[5-4] SOMs
+
 	[1] 비계층적 클러스터링(Non-Hierarchical Clustering)
 	[1-1] k-평균 클러스터링(k-Means Clustering)
 	[1-2] 밀도기반 군집화(Density-Based Spatial Clustering of Applications with Noise, DBSCAN)
