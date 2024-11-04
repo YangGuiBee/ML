@@ -2,14 +2,15 @@
 
 ---
 
-	[1] k-평균 클러스터링(k-Means Clustering)
+	[1] 비계층적 클러스터링(Non-Hierarchical Clustering)
+	[1-1] k-평균 클러스터링(k-Means Clustering)
+	[1-2] 밀도기반 군집화(Density-Based Spatial Clustering of Applications with Noise, DBSCAN)
+	[1-3] 가우시안 혼합 모델(Gaussian Mixture Model, GMM)
+	[1-4] 평균이동 군집화(Mean-Shift Clustering)
+	[1-5] 스펙트럼 군집화(Spectral Clustering)
+	[1-6] 군집구조 식별을 위한 점 순서화(Ordering Points To Identify the Clustering Structure, OPTICS)
+	[1-7] 친화도 전파(Affinity Propagation)
 	[2] 계층적 클러스터링(Hierarchical Clustering)
-	[3] 밀도기반 군집화(Density-Based Spatial Clustering of Applications with Noise, DBSCAN)
-	[4] 가우시안 혼합 모델(Gaussian Mixture Model, GMM)
-	[5] 평균이동 군집화(Mean-Shift Clustering)
-	[6] 스펙트럼 군집화(Spectral Clustering)
-	[7] 군집구조 식별을 위한 점 순서화(Ordering Points To Identify the Clustering Structure, OPTICS)
-	[8] 친화도 전파(Affinity Propagation)
    
 ---  
 
