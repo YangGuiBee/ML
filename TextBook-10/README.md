@@ -35,7 +35,7 @@
 ▣ 응용분야 : 고객 세분화, 이미지 분할, 추천 시스템<br>
 ▣ 모델식 : 𝐾는 군집의 개수, $𝐶_𝑖$는 i번째 군집, $𝜇_𝑖$는 i번째 군집의 중심, 𝑥는 데이터 포인트<br>
 ![](./images/kmeans.PNG)
-$J=\sum_{i=1}^{K}\sum_{x\in C_i}^{}\left\| x-\mu_i \right\|^2$<br>
+<!--$J=\sum_{i=1}^{K}\sum_{x\in C_i}^{}\left\| x-\mu_i \right\|^2$<br>-->
 
 	from sklearn.cluster import KMeans
 	from sklearn.datasets import load_iris
