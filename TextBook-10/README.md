@@ -63,6 +63,7 @@
 ▣ 단점 : 계산 복잡도가 높으며, 초기 병합 또는 분할 결정이 최종 결과에 영향을 줄 수 있음<br>
 ▣ 응용분야 : 계통수 분석, 텍스트 및 문서 분류<br> 
 ▣ 모델식 : $𝐶_𝑖$와 $𝐶_𝑗$는 각각 두 군집이고, 𝑑(𝑥,𝑦)는 두 데이터 포인트 𝑥와 𝑦 간의 거리<br>
+![](./images/Hclustering.PNG)
 
 	from scipy.cluster.hierarchy import dendrogram, linkage
 	import matplotlib.pyplot as plt
@@ -145,6 +146,7 @@
 ▣ 단점 : 초기화에 민감하고 계산 비용이 높음<br>
 ▣ 응용분야 : 패턴 인식, 이미지 세분화<br>
 ▣ 모델식 : $π_k$는 가우시안의 가중치, $𝜇_𝑘$, $Σ_𝑘$는 각각 평균과 공분산<br>
+![](./images/GMM.PNG)
 
 	from sklearn.mixture import GaussianMixture
 	from sklearn.datasets import load_iris
@@ -172,6 +174,7 @@
 ▣ 단점 : 계산 비용이 크고 고차원 데이터에 적합하지 않음<br>
 ▣ 응용분야 : 이미지 세그멘테이션, 객체 추적<br>
 ▣ 모델식 : 𝐾는 커널 함수, 𝑥는 이동할 점, 𝑁(𝑥)는 반경 내 이웃 점<br>
+![](./images/meanshift.PNG)
 
 	from sklearn.cluster import MeanShift
 	from sklearn.datasets import load_iris
@@ -251,6 +254,7 @@ $𝐿=𝐷−𝐴$<br>
 ▣ 단점 : 계산 비용이 크고 큰 데이터셋에서는 느릴 수 있음<br>
 ▣ 응용분야 : 이미지 분할, 문서 분류<br>
 ▣ 모델식: 각 데이터 포인트 간의 유사도 𝑠(𝑖,𝑘)와 책임 𝑟(𝑖,𝑘), 가용도 𝑎(𝑖,𝑘)를 반복적으로 계산해 중심점을 결정<br>
+![](./images/AP.PNG)
 
 	from sklearn.cluster import AffinityPropagation
 	from sklearn.datasets import load_iris
