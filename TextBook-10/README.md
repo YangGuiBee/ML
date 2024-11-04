@@ -19,12 +19,12 @@
 	[2-5] Echidna
 
 	[3] Density-Based Clustering
-	[3-1] DBSCAN
-	[3-2] OPTICS
-	[3-3] DBCLASD
-	[3-4] DENCLUE
+	[3-1] DBSCAN(Density-Based Spatial Clustering of Applications with Noise)	
+	[3-2] OPTICS(Ordering Points To Identify the Clustering Structure)
+	[3-3] DBCLASD(Distribution Based Clustering of Large Spatial Databases)
+	[3-4] DENCLUE(DENsity-based CLUstEring)
 
-	[4] Grid-Based Clustering
+ 	[4] Grid-Based Clustering
 	[4-1] Wave-Cluster
 	[4-2] STING
 	[4-3] CLIQUE
@@ -313,7 +313,7 @@
 
 <br>
 
-# [3-1] 밀도기반 군집화(Density-Based Spatial Clustering of Applications with Noise, DBSCAN)
+# [3-1] DBSCAN(Density-Based Spatial Clustering of Applications with Noise)
 ▣ 정의 : 밀도가 높은 영역을 군집으로 묶고, 밀도가 낮은 점들은 노이즈로 간주하는 밀도 기반 군집화 알고리즘<br>
 ▣ 필요성 : 다양한 밀도의 데이터 군집화 및 이상치 탐지에 유용<br>
 ▣ 장점 : 군집의 개수를 사전 설정할 필요 없으며, 이상치(outliers)를 자연스럽게 처리 가능<br>
@@ -339,7 +339,7 @@
 
 <br>
 
-# [3-2] 군집구조 식별을 위한 점 순서화(Ordering Points To Identify the Clustering Structure, OPTICS)
+# [3-2] OPTICS(Ordering Points To Identify the Clustering Structure)
 ▣ 정의 : 밀도 기반 군집화(DBSCAN)의 확장으로, 여러 밀도 수준에서 데이터의 군집 구조를 식별할 수 있는 알고리즘<br>
 ▣ 필요성 : 다양한 밀도를 가진 데이터에서 군집을 찾아내고 이상치(outliers)를 처리할 때 유용<br>
 ▣ 장점 : DBSCAN과 유사하게 이상치를 감지할 수 있으며, 여러 밀도 수준에서 군집을 식별 가능<br>
@@ -365,11 +365,23 @@
 
 <br>
 
-# [3-3] DBCLASD
+# [3-3] DBCLASD(Distribution Based Clustering of Large Spatial Databases)
+▣ 정의: DBCLASD는 확률 밀도를 기반으로 클러스터를 찾는 밀도 기반 알고리즘입니다. DBCLASD는 데이터를 다양한 확률 분포로 모델링하고, 공간 데이터베이스에서 높은 밀도를 가진 데이터 군집을 찾습니다.
+▣ 필요성: 대규모 공간 데이터베이스에서 밀도에 기반한 군집을 찾고자 할 때 유용하며, 데이터의 확률 분포를 활용해 정확한 군집을 탐색할 수 있습니다.
+▣ 장점: 공간 데이터에서 군집화를 효과적으로 수행할 수 있습니다. 노이즈가 포함된 데이터에서 강건한 군집화가 가능합니다.
+▣ 단점: 설정된 확률 분포가 데이터와 일치하지 않으면 군집화가 부정확할 수 있습니다. 대규모 데이터셋에서는 계산 비용이 높습니다.
+▣ 응용분야: 지리적 데이터베이스 분석. 공간 데이터에서 밀도 기반 군집화. 이상 탐지 및 밀도 기반 패턴 탐색.
+▣ 모델식: DBCLASD는 각 데이터 포인트의 확률 밀도를 기반으로 군집을 형성하며, 확률 밀도는 주어진 확률 분포 모델을 사용해 계산됩니다.
 
 <br>
 
-# [3-4] DENCLUE
+# [3-4] DENCLUE(DENsity-based CLUstEring)
+▣ 정의: DENCLUE는 확률 밀도 함수를 기반으로 데이터의 밀도 분포를 모델링하여 군집을 형성하는 밀도 기반 클러스터링 알고리즘입니다. 핵심 아이디어는 데이터 포인트가 모여서 형성하는 밀도 함수에서 밀도가 높은 영역을 군집으로 형성하는 것입니다.
+▣ 필요성: 데이터의 밀도 구조를 기반으로 군집화하고, 노이즈나 이상치를 효과적으로 구분할 필요가 있을 때 유용합니다.
+▣ 장점: 명확하게 정의된 군집을 생성하고, 밀도가 낮은 지역을 노이즈로 구분할 수 있습니다. 데이터 분포에 따라 다양한 밀도의 군집을 잘 탐지할 수 있습니다.
+▣ 단점: 밀도 함수를 설정하는 데 필요한 매개변수가 많습니다. 계산이 복잡하여 대규모 데이터에서는 성능이 저하될 수 있습니다.
+▣ 응용분야: 패턴 인식 및 이미지 처리. 데이터 마이닝에서 밀도 기반 패턴 탐색. 환경 모니터링 데이터 분석.
+▣ 모델식: DENCLUE는 각 데이터 포인트의 밀도 기여를 가우시안 커널 등으로 모델링하여 밀도 함수를 계산합니다. 군집은 밀도 함수의 극대점에서 시작하여 군집화됩니다.
 
 <br>
 
