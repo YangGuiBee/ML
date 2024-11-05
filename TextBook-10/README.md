@@ -210,12 +210,12 @@
             	# 새로운 메도이드 계산
             	new_medoids = np.copy(medoids)
             	for i in range(self.n_clusters):
-                	# 현재 군집에 속한 데이터 포인트의 인덱스 추출
-                	cluster_points = np.where(labels == i)[0]
+                		# 현재 군집에 속한 데이터 포인트의 인덱스 추출
+                		cluster_points = np.where(labels == i)[0]
                 
                		# 군집 내 데이터 포인트 간 거리의 총합이 최소가 되는 포인트를 메도이드로 설정
-                	intra_cluster_distances = cdist(X[cluster_points], X[cluster_points], metric='euclidean').sum(axis=1)
-                	new_medoids[i] = cluster_points[np.argmin(intra_cluster_distances)]
+                		intra_cluster_distances = cdist(X[cluster_points], X[cluster_points], metric='euclidean').sum(axis=1)
+                		new_medoids[i] = cluster_points[np.argmin(intra_cluster_distances)]
             
             	# 메도이드가 변화가 없으면 종료
            	if np.array_equal(medoids, new_medoids):
