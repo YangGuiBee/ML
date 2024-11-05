@@ -705,6 +705,93 @@
 ▣ 응용분야: 위성 이미지 분석, 지리 데이터와 환경 데이터의 군집화, 데이터 마이닝에서 대규모 데이터 분석<br>
 ▣ 모델식: 격자를 계층적으로 나누고, 각 격자의 통계 정보(평균, 분산 등)를 기반으로 군집을 형성. 격자의 통계 정보는 상위 계층에서 하위 계층으로 전파되며, 밀도 기반 군집화를 수행<br>
 
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.metrics import silhouette_score, accuracy_score
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	import pandas as pd
+	from scipy.stats import mode
+	
+	# STING 군집화 클래스
+	class STING:
+	    def __init__(self, x_bins=10, y_bins=10, density_threshold=0.05):
+	        self.x_bins = x_bins  # X축 그리드 셀 개수
+	        self.y_bins = y_bins  # Y축 그리드 셀 개수
+	        self.density_threshold = density_threshold  # 군집 형성 밀도 임계값
+	
+	    def fit_predict(self, X):
+	        # 첫 번째와 두 번째 피처만 사용하여 2D 그리드 생성
+	        x_min, x_max = X[:, 0].min(), X[:, 0].max()
+	        y_min, y_max = X[:, 1].min(), X[:, 1].max()
+	        
+	        # 각 데이터 포인트의 그리드 셀 위치 계산
+	        x_bins = np.linspace(x_min, x_max, self.x_bins + 1)
+	        y_bins = np.linspace(y_min, y_max, self.y_bins + 1)
+	        grid = np.zeros((self.x_bins, self.y_bins), dtype=int)
+	
+	        # 각 데이터 포인트를 그리드에 매핑하여 밀도 계산
+	        labels = -np.ones(X.shape[0], dtype=int)
+	        for i, (x, y) in enumerate(X[:, :2]):
+	            x_idx = np.digitize(x, x_bins) - 1
+	            y_idx = np.digitize(y, y_bins) - 1
+	            if x_idx < self.x_bins and y_idx < self.y_bins:
+	                grid[x_idx, y_idx] += 1
+	        
+	        # 밀도 기준으로 군집화 (density_threshold 이상인 셀을 군집으로 간주)
+	        cluster_id = 0
+	        for i in range(self.x_bins):
+	            for j in range(self.y_bins):
+	                if grid[i, j] >= self.density_threshold * X.shape[0]:  # 밀도 기준 만족 시 군집화
+	                    for k, (x, y) in enumerate(X[:, :2]):
+	                        x_idx = np.digitize(x, x_bins) - 1
+	                        y_idx = np.digitize(y, y_bins) - 1
+	                        if x_idx == i and y_idx == j:
+	                            labels[k] = cluster_id
+	                    cluster_id += 1
+	
+	        self.labels_ = labels
+	        return self.labels_
+	
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = iris.data[:, :2]  # 첫 번째와 두 번째 피처만 사용
+	true_labels = iris.target
+	
+	# STING 알고리즘 적용
+	sting = STING(x_bins=10, y_bins=10, density_threshold=0.05)
+	predicted_labels = sting.fit_predict(data)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=[iris.feature_names[0], iris.feature_names[1]])
+	df['Cluster'] = predicted_labels
+	
+	# Silhouette Score 계산 (노이즈 데이터는 제외)
+	valid_points = predicted_labels != -1
+	if np.sum(valid_points) > 1:
+	    silhouette_avg = silhouette_score(data[valid_points], predicted_labels[valid_points])
+	    print(f"Silhouette Score: {silhouette_avg:.3f}")
+	else:
+	    print("Silhouette Score: Not enough valid points for calculation.")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(predicted_labels)
+	for i in np.unique(predicted_labels):
+	    mask = (predicted_labels == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.title("STING Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
+
 ![](./images/4-2.PNG)
 <br>
 
@@ -716,6 +803,93 @@
 ▣ 응용분야: 생물학에서 유전자 데이터 군집화, 고차원 금융 데이터 분석, 이미지 분할 및 텍스트 데이터 분석<br>
 ▣ 모델식: 데이터를 격자로 나눈 후, 밀도가 높은 부분 공간을 탐색하여 군집을 형성(군집은 각 부분 공간에서 밀도가 임계값 이상인 격자들로 구성)<br>
 
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.metrics import silhouette_score, accuracy_score
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	import pandas as pd
+	from scipy.stats import mode
+	
+	# CLIQUE 군집화 클래스
+	class CLIQUE:
+	    def __init__(self, x_bins=10, y_bins=10, density_threshold=0.05):
+	        self.x_bins = x_bins  # X축 그리드 셀 개수
+	        self.y_bins = y_bins  # Y축 그리드 셀 개수
+	        self.density_threshold = density_threshold  # 군집 형성 밀도 임계값
+	
+	    def fit_predict(self, X):
+	        # 첫 번째와 두 번째 피처만 사용하여 2D 그리드 생성
+	        x_min, x_max = X[:, 0].min(), X[:, 0].max()
+	        y_min, y_max = X[:, 1].min(), X[:, 1].max()
+	        
+	        # 각 데이터 포인트의 그리드 셀 위치 계산
+	        x_bins = np.linspace(x_min, x_max, self.x_bins + 1)
+	        y_bins = np.linspace(y_min, y_max, self.y_bins + 1)
+	        grid = np.zeros((self.x_bins, self.y_bins), dtype=int)
+	
+	        # 각 데이터 포인트를 그리드에 매핑하여 밀도 계산
+	        labels = -np.ones(X.shape[0], dtype=int)
+	        for i, (x, y) in enumerate(X[:, :2]):
+	            x_idx = np.digitize(x, x_bins) - 1
+	            y_idx = np.digitize(y, y_bins) - 1
+	            if x_idx < self.x_bins and y_idx < self.y_bins:
+	                grid[x_idx, y_idx] += 1
+	        
+	        # 밀도 기준으로 군집화 (density_threshold 이상인 셀을 군집으로 간주)
+	        cluster_id = 0
+	        for i in range(self.x_bins):
+	            for j in range(self.y_bins):
+	                if grid[i, j] >= self.density_threshold * X.shape[0]:  # 밀도 기준 만족 시 군집화
+	                    for k, (x, y) in enumerate(X[:, :2]):
+	                        x_idx = np.digitize(x, x_bins) - 1
+	                        y_idx = np.digitize(y, y_bins) - 1
+	                        if x_idx == i and y_idx == j:
+	                            labels[k] = cluster_id
+	                    cluster_id += 1
+	
+	        self.labels_ = labels
+	        return self.labels_
+	
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = iris.data[:, :2]  # 첫 번째와 두 번째 피처만 사용
+	true_labels = iris.target
+	
+	# CLIQUE 알고리즘 적용
+	clique = CLIQUE(x_bins=10, y_bins=10, density_threshold=0.05)
+	predicted_labels = clique.fit_predict(data)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=[iris.feature_names[0], iris.feature_names[1]])
+	df['Cluster'] = predicted_labels
+	
+	# Silhouette Score 계산 (노이즈 데이터는 제외)
+	valid_points = predicted_labels != -1
+	if np.sum(valid_points) > 1:
+	    silhouette_avg = silhouette_score(data[valid_points], predicted_labels[valid_points])
+	    print(f"Silhouette Score: {silhouette_avg:.3f}")
+	else:
+	    print("Silhouette Score: Not enough valid points for calculation.")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(predicted_labels)
+	for i in np.unique(predicted_labels):
+	    mask = (predicted_labels == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.title("CLIQUE Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
+
 ![](./images/4-3.PNG)
 <br>
 
@@ -726,6 +900,92 @@
 ▣ 단점: 최적의 격자 분할을 찾는 과정에서 계산 비용이 높고 파라미터 설정이 복잡하고, 데이터 분포에 민감<br>
 ▣ 응용분야: 의료 데이터의 군집화, 데이터 마이닝에서 불균일한 데이터 탐색, 지리적 데이터에서 지역적 군집 탐색<br>
 ▣ 모델식: OptiGrid는 각 차원에서 최적의 격자 분할을 탐색하여 군집을 형성합니다. 격자 내 밀도를 기준으로 최적의 분할 위치를 찾아내고, 밀도가 높은 격자들을 군집으로 형성합니다.
+
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.metrics import silhouette_score, accuracy_score
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	import pandas as pd
+	
+	# OptiGrid 군집화 클래스
+	class OptiGrid:
+	    def __init__(self, x_bins=10, y_bins=10, density_threshold=0.05):
+	        self.x_bins = x_bins  # X축 그리드 셀 개수
+	        self.y_bins = y_bins  # Y축 그리드 셀 개수
+	        self.density_threshold = density_threshold  # 군집 형성 밀도 임계값
+	
+	    def fit_predict(self, X):
+	        # 첫 번째와 두 번째 피처만 사용하여 2D 그리드 생성
+	        x_min, x_max = X[:, 0].min(), X[:, 0].max()
+	        y_min, y_max = X[:, 1].min(), X[:, 1].max()
+	        
+	        # 각 데이터 포인트의 그리드 셀 위치 계산
+	        x_bins = np.linspace(x_min, x_max, self.x_bins + 1)
+	        y_bins = np.linspace(y_min, y_max, self.y_bins + 1)
+	        grid = np.zeros((self.x_bins, self.y_bins), dtype=int)
+	
+	        # 각 데이터 포인트를 그리드에 매핑하여 밀도 계산
+	        labels = -np.ones(X.shape[0], dtype=int)
+	        for i, (x, y) in enumerate(X[:, :2]):
+	            x_idx = np.digitize(x, x_bins) - 1
+	            y_idx = np.digitize(y, y_bins) - 1
+	            if x_idx < self.x_bins and y_idx < self.y_bins:
+	                grid[x_idx, y_idx] += 1
+	        
+	        # 밀도 기준으로 군집화 (density_threshold 이상인 셀을 군집으로 간주)
+	        cluster_id = 0
+	        for i in range(self.x_bins):
+	            for j in range(self.y_bins):
+	                if grid[i, j] >= self.density_threshold * X.shape[0]:  # 밀도 기준 만족 시 군집화
+	                    for k, (x, y) in enumerate(X[:, :2]):
+	                        x_idx = np.digitize(x, x_bins) - 1
+	                        y_idx = np.digitize(y, y_bins) - 1
+	                        if x_idx == i and y_idx == j:
+	                            labels[k] = cluster_id
+	                    cluster_id += 1
+	
+	        self.labels_ = labels
+	        return self.labels_
+	
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = iris.data[:, :2]  # 첫 번째와 두 번째 피처만 사용
+	true_labels = iris.target
+	
+	# OptiGrid 알고리즘 적용
+	optigrid = OptiGrid(x_bins=10, y_bins=10, density_threshold=0.05)
+	predicted_labels = optigrid.fit_predict(data)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=[iris.feature_names[0], iris.feature_names[1]])
+	df['Cluster'] = predicted_labels
+	
+	# 군집 평가
+	# 노이즈 (-1) 데이터는 실루엣 점수 계산에서 제외합니다.
+	valid_points = predicted_labels != -1
+	if np.sum(valid_points) > 1:
+	    silhouette_avg = silhouette_score(data[valid_points], predicted_labels[valid_points])
+	    print(f"Silhouette Score: {silhouette_avg:.3f}")
+	else:
+	    print("Silhouette Score: Not enough valid points for calculation.")
+	
+	# 정확도 계산 (실제 레이블이 있는 경우)
+	# 주의: 군집화 결과는 정답 레이블과 직접적으로 매칭되지 않을 수 있습니다.
+	if len(np.unique(predicted_labels)) == len(np.unique(true_labels)):
+	    accuracy = accuracy_score(true_labels, predicted_labels)
+	    print(f"Accuracy: {accuracy:.3f}")
+	else:
+	    print("Accuracy: Cannot compute due to mismatch in label count.")
+	
+	# 시각화
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.title("OptiGrid Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
 
 ![](./images/4-4.PNG)
 <br>
