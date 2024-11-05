@@ -217,14 +217,14 @@
                 		intra_cluster_distances = cdist(X[cluster_points], X[cluster_points], metric='euclidean').sum(axis=1)
                 		new_medoids[i] = cluster_points[np.argmin(intra_cluster_distances)]
             
-            	# 메도이드가 변화가 없으면 종료
-           	if np.array_equal(medoids, new_medoids):
-                	break
-           	medoids = new_medoids
+            		# 메도이드가 변화가 없으면 종료
+           		if np.array_equal(medoids, new_medoids):
+                		break
+           		medoids = new_medoids
         
-        self.labels_ = labels
-        self.medoids_ = medoids
-        return self.labels_
+        	self.labels_ = labels
+        	self.medoids_ = medoids
+        	return self.labels_
 
 	# Iris 데이터셋 로드
 	iris = load_iris()
