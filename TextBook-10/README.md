@@ -547,28 +547,29 @@
 
 	from sklearn.datasets import load_iris
 	from sklearn.cluster import Birch
+	import pandas as pd
 	import matplotlib.pyplot as plt
 	import seaborn as sns
-	import pandas as pd
-
+	
 	# Iris 데이터셋 로드
 	iris = load_iris()
-	data = iris.data  # 특징 추출
-
-	# BIRCH 클러스터링 적용 (임의의 임계값 및 군집 수 설정)
-	birch = Birch(threshold=0.5, n_clusters=3)  # BIRCH 인스턴스 생성
-	birch_labels = birch.fit_predict(data)  # 데이터에 맞춰 군집화 수행
-
-	# 데이터 프레임으로 변환하여 시각화 준비
+	data = iris.data
+	
+	# BIRCH 알고리즘 적용 (군집 수: 3)
+	birch = Birch(n_clusters=3, threshold=0.5, branching_factor=50)
+	birch.fit(data)
+	labels = birch.predict(data)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
 	df = pd.DataFrame(data, columns=iris.feature_names)
-	df['Cluster'] = birch_labels  # BIRCH 클러스터링 결과 추가
-
-	# 시각화
+	df['Cluster'] = labels  # 각 포인트의 군집 라벨
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
 	plt.figure(figsize=(10, 5))
-	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis')
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
 	plt.title("BIRCH Clustering on Iris Dataset")
-	plt.xlabel(iris.feature_names[0])  # X축: 첫 번째 특징
-	plt.ylabel(iris.feature_names[1])  # Y축: 두 번째 특징
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
 	plt.legend(title='Cluster')
 	plt.show()
 
