@@ -741,30 +741,49 @@ E 단계: 각 데이터 포인트가 특정 군집에 속할 확률을 계산합
 M 단계: 이 확률을 사용하여 각 군집의 매개변수를 업데이트합니다.
 ![](./images/EM.png)
 
+	import numpy as np
 	from sklearn.datasets import load_iris
 	from sklearn.mixture import GaussianMixture
+	from sklearn.metrics import silhouette_score, accuracy_score
 	import matplotlib.pyplot as plt
 	import seaborn as sns
 	import pandas as pd
-
+	from scipy.stats import mode
+	
 	# Iris 데이터셋 로드
 	iris = load_iris()
-	data = iris.data  # Iris 데이터의 특징 추출
-
-	# Gaussian Mixture Model(GMM) 적용
-	gmm = GaussianMixture(n_components=3, random_state=0)  # GMM 인스턴스 생성
-	gmm_labels = gmm.fit_predict(data)  # 데이터에 맞춰 군집화 수행
-
-	# 데이터 프레임으로 변환하여 시각화 준비
+	data = iris.data
+	true_labels = iris.target
+	
+	# Gaussian Mixture (EM 알고리즘) 모델 적용
+	gmm = GaussianMixture(n_components=3, covariance_type='full', random_state=0)
+	gmm.fit(data)
+	predicted_labels = gmm.predict(data)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
 	df = pd.DataFrame(data, columns=iris.feature_names)
-	df['Cluster'] = gmm_labels  # GMM 군집화 결과 추가
-
-	# 시각화
+	df['Cluster'] = predicted_labels
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(data, predicted_labels)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	# Gaussian Mixture 모델의 군집 레이블과 실제 레이블은 매칭이 다를 수 있음
+	mapped_labels = np.zeros_like(predicted_labels)
+	for i in range(3):
+	    mask = (predicted_labels == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
 	plt.figure(figsize=(10, 5))
-	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis')
-	plt.title("Gaussian Mixture Model Clustering on Iris Dataset")
-	plt.xlabel(iris.feature_names[0])  # X축: 첫 번째 특징
-	plt.ylabel(iris.feature_names[1])  # Y축: 두 번째 특징
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.title("Gaussian Mixture Model (EM) Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
 	plt.legend(title='Cluster')
 	plt.show()
 
