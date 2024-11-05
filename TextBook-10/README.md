@@ -16,8 +16,7 @@
 	[2-2] CURE(Clustering Using Representatives)
 	[2-3] ROCK(Robust Clustering using Links)
 	[2-4] Chameleon
-	[2-5] Echidna
-
+	
 	[3] Density-Based Clustering
 	[3-1] DBSCAN(Density-Based Spatial Clustering of Applications with Noise)	
 	[3-2] OPTICS(Ordering Points To Identify the Clustering Structure)
@@ -574,6 +573,101 @@
 ▣ 응용분야: 지리적 데이터 분석, 대규모 네트워크 데이터에서 커뮤니티 탐색, 유전자 데이터의 군집화<br>
 ▣ 모델식: 각 군집의 대표 포인트를 지정하고, 이를 기반으로 다른 군집과의 거리를 계산하여 군집을 형성. 군집 내의 대표 포인트들은 군집 중심에서 일정 비율로 축소되며, 여러 개의 대표 포인트를 통해 군집의 분포를 표현<br>
 
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.cluster import AgglomerativeClustering
+	from sklearn.metrics import silhouette_score, accuracy_score
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	import pandas as pd
+	from scipy.spatial.distance import cdist
+	from scipy.stats import mode
+	
+	# 간단한 CURE 알고리즘 구현
+	class CURE:
+	    def __init__(self, n_clusters=3, n_representatives=5, shrink_factor=0.5):
+	        self.n_clusters = n_clusters
+	        self.n_representatives = n_representatives
+	        self.shrink_factor = shrink_factor
+	        self.labels_ = None
+	    
+	    def fit_predict(self, X):
+	        # 초기 군집 설정 (각 포인트가 하나의 군집)
+	        n_samples = X.shape[0]
+	        clusters = [[i] for i in range(n_samples)]
+	        cluster_centers = [X[i] for i in range(n_samples)]
+	        
+	        # 계층적 군집화 과정
+	        while len(clusters) > self.n_clusters:
+	            # 각 군집에서 대표 포인트 샘플링
+	            representative_points = [self._get_representatives(X[cluster]) for cluster in clusters]
+	            
+	            # 군집 간 최소 거리 계산
+	            distances = cdist(np.vstack(representative_points), np.vstack(representative_points), metric='euclidean')
+	            np.fill_diagonal(distances, np.inf)
+	            min_idx = np.unravel_index(np.argmin(distances), distances.shape)
+	            cluster_a, cluster_b = min_idx[0] // self.n_representatives, min_idx[1] // self.n_representatives
+	            
+	            # 군집 병합
+	            clusters[cluster_a].extend(clusters[cluster_b])
+	            clusters.pop(cluster_b)
+	            
+	            # 병합된 군집의 중심 업데이트
+	            new_representative = self._get_representatives(X[clusters[cluster_a]])
+	            cluster_centers[cluster_a] = new_representative
+	            cluster_centers.pop(cluster_b)
+	        
+	        # 최종 군집 레이블 생성
+	        self.labels_ = np.empty(n_samples, dtype=int)
+	        for cluster_id, cluster in enumerate(clusters):
+	            for index in cluster:
+	                self.labels_[index] = cluster_id
+	                
+	        return self.labels_
+	    
+	    def _get_representatives(self, cluster_points):
+	        # 군집에서 대표 포인트를 샘플링하고 축소
+	        center = np.mean(cluster_points, axis=0)
+	        distances = cdist(cluster_points, [center], metric='euclidean').flatten()
+	        representative_indices = np.argsort(distances)[:self.n_representatives]
+	        representatives = cluster_points[representative_indices]
+	        return center + self.shrink_factor * (representatives - center)
+	
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = iris.data
+	true_labels = iris.target
+	
+	# CURE 알고리즘 적용
+	cure = CURE(n_clusters=3, n_representatives=5, shrink_factor=0.5)
+	predicted_labels = cure.fit_predict(data)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = predicted_labels
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(data, predicted_labels)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(predicted_labels)
+	for i in np.unique(predicted_labels):
+	    mask = (predicted_labels == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.title("CURE Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
+ 
 ![](./images/2-2.PNG)
 <br>
 
@@ -584,6 +678,55 @@
 ▣ 단점: 계산 비용이 높아 대규모 데이터셋에는 적합하지 않으며, 거리 계산보다 연결 기반 군집화가 복잡<br>
 ▣ 응용분야: 추천 시스템, 문서 분류 및 텍스트 마이닝, 범주형 속성이 많은 데이터의 군집화<br>
 ▣ 모델식: 데이터 포인트 간의 연결을 기반으로 군집을 형성하며, 연결의 개수를 기반으로 군집 간의 유사성을 측정하여 군집화<br>
+
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.neighbors import kneighbors_graph
+	from sklearn.cluster import AgglomerativeClustering
+	from sklearn.metrics import silhouette_score, accuracy_score
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	import pandas as pd
+	from scipy.stats import mode
+	
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = iris.data
+	true_labels = iris.target
+	
+	# 1단계: K-최근접 이웃 그래프 생성 (유사도 링크 기반 생성)
+	n_neighbors = 10
+	knn_graph = kneighbors_graph(data, n_neighbors=n_neighbors, mode='connectivity', include_self=False)
+	
+	# 2단계: Agglomerative Clustering을 통해 유사도 링크 기반으로 군집화
+	rock_clustering = AgglomerativeClustering(n_clusters=3, connectivity=knn_graph, linkage='average')
+	predicted_labels = rock_clustering.fit_predict(data)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = predicted_labels
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(data, predicted_labels)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(predicted_labels)
+	for i in np.unique(predicted_labels):
+	    mask = (predicted_labels == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.title("ROCK Clustering (Approximation) on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
 
 ![](./images/2-3.PNG)
 <br>
@@ -596,18 +739,70 @@
 ▣ 응용분야: 소셜 네트워크에서 커뮤니티 탐색, 비정형 데이터 분석, 웹 문서 분류<br>
 ▣ 모델식: 두 단계로 군집을 형성하는데 첫째, 데이터를 작은 초기 군집으로 나누고, 둘째, 유사한 군집을 동적으로 병합하여 최종 군집을 형성<br>
 
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.neighbors import kneighbors_graph
+	from sklearn.cluster import AgglomerativeClustering, DBSCAN
+	from sklearn.metrics import silhouette_score, accuracy_score
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	import pandas as pd
+	from scipy.stats import mode
+	
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = iris.data
+	true_labels = iris.target
+	
+	# 1단계: K-최근접 이웃 그래프 생성
+	n_neighbors = 10
+	knn_graph = kneighbors_graph(data, n_neighbors=n_neighbors, include_self=False)
+	
+	# 2단계: 초기 군집화 - 그래프 기반의 계층적 군집화 수행
+	initial_clustering = AgglomerativeClustering(n_clusters=10, connectivity=knn_graph, linkage='average')
+	initial_labels = initial_clustering.fit_predict(data)
+	
+	# 3단계: 군집 병합 - DBSCAN을 사용하여 작은 군집을 밀도 기반으로 병합
+	# AgglomerativeClustering으로 생성된 초기 군집들을 DBSCAN으로 다시 병합
+	data_with_initial_labels = pd.DataFrame(data)
+	data_with_initial_labels['initial_cluster'] = initial_labels
+	
+	# 각 초기 군집을 DBSCAN을 통해 병합
+	dbscan = DBSCAN(eps=0.5, min_samples=5)
+	final_labels = dbscan.fit_predict(data)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = final_labels
+	
+	# Silhouette Score 계산 (노이즈 데이터는 제외)
+	valid_points = final_labels != -1  # 노이즈가 아닌 포인트만 선택
+	if np.sum(valid_points) > 1:
+	    silhouette_avg = silhouette_score(data[valid_points], final_labels[valid_points])
+	    print(f"Silhouette Score: {silhouette_avg:.3f}")
+	else:
+	    print("Silhouette Score: Not enough valid points for calculation.")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(final_labels)
+	for i in np.unique(final_labels):
+	    mask = (final_labels == i)
+	    if np.any(mask):  # 군집에 속하는 포인트가 있을 때만 계산
+	        mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels[valid_points], mapped_labels[valid_points])
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.title("Chameleon Clustering (Approximation) on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
+
 ![](./images/2-4.PNG)
-<br>
-
-# [2-5] Echidna
-▣ 정의: 다차원 공간에서 밀도의 변화를 기반으로 다양한 특성을 가진 데이터셋의 지역적 군집을 탐색하는 계층적 군집화 알고리즘으로 밀도가 고르게 분포되지 않는 데이터를 군집화하는 데 적합<br>
-▣ 필요성: 밀도가 불균일한 데이터에서 지역적 밀도 차이를 반영하여 군집을 탐색하고자 할 때 유용하며, 특히 데이터셋이 다양한 밀도와 크기의 군집을 포함할 때 효과적<br>
-▣ 장점: 다양한 밀도와 크기의 군집을 탐색할 수 있는 유연한 군집화가 가능하고, 밀도 변화에 적응할 수 있어서 밀도가 불균일한 데이터처리에 유용<br>
-▣ 단점: 계산이 복잡하여 대규모 데이터셋에서는 속도가 느리며 초기 밀도 기준과 군집 형성 기준을 설정하기 곤란<br>
-▣ 응용분야: 환경 모니터링 센서 데이터 분석, 지리적 데이터에서 지역 군집 탐색, 비정형 데이터의 군집화<br> 
-▣ 모델식: 각 데이터 포인트의 밀도를 기반으로 군집을 형성. 군집화 과정에서 지역 밀도 변화와 포인트 간의 거리 정보를 결합하여 유사성을 측정. 구체적인 수식은 이론마다 다를 수 있으며, 밀도 기반 지역 군집을 탐색하기 위해 다양한 거리와 밀도 척도를 조합하여 사용<br>
-
-![](./images/2-5.PNG)
 <br>
 
 # [3-1] DBSCAN(Density-Based Spatial Clustering of Applications with Noise)
