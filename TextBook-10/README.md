@@ -694,6 +694,66 @@
 ▣ 응용분야: 이미지 분석, 영상 처리 및 패턴 인식, 대규모 지리 데이터 분석<br>
 ▣ 모델식: 각 격자에서 웨이블릿 변환을 수행하여 밀도가 높은 클러스터 영역을 식별. 웨이블릿 변환을 통해 고주파와 저주파 성분을 분리하여 노이즈와 이상치를 제거하고, 밀도가 높은 영역을 군집으로 형성<br>
 
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.cluster import DBSCAN
+	from sklearn.metrics import silhouette_score, accuracy_score
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	import pandas as pd
+	from scipy.ndimage import gaussian_filter1d
+	from scipy.stats import mode
+	
+	# Gaussian 필터를 사용하여 밀도 기반 특징을 강조하는 함수
+	def gaussian_filter_transform(data, sigma=1):
+	    transformed_data = []
+	    for feature in data.T:  # 각 피처(열)에 대해 필터링 수행
+	        transformed_feature = gaussian_filter1d(feature, sigma=sigma)
+	        transformed_data.append(transformed_feature)
+	    return np.array(transformed_data).T
+	
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = iris.data
+	true_labels = iris.target
+	
+	# Gaussian 필터 적용 (밀도 기반 특징 강조)
+	transformed_data = gaussian_filter_transform(data, sigma=1)
+	
+	# DBSCAN 알고리즘 적용 (변환된 데이터에서 밀도 기반 군집화 수행)
+	dbscan = DBSCAN(eps=0.5, min_samples=5)
+	predicted_labels = dbscan.fit_predict(transformed_data)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = predicted_labels
+	
+	# Silhouette Score 계산 (노이즈 데이터는 제외)
+	valid_points = predicted_labels != -1
+	if np.sum(valid_points) > 1:
+	    silhouette_avg = silhouette_score(data[valid_points], predicted_labels[valid_points])
+	    print(f"Silhouette Score: {silhouette_avg:.3f}")
+	else:
+	    print("Silhouette Score: Not enough valid points for calculation.")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(predicted_labels)
+	for i in np.unique(predicted_labels):
+	    mask = (predicted_labels == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.title("Wave-Cluster (Gaussian Filter Approximation) Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
+
 ![](./images/4-1.PNG)
 <br>
 
