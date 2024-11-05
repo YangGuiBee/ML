@@ -1912,7 +1912,7 @@ M 단계: 이 확률을 사용하여 각 군집의 매개변수를 업데이트�
 ![](./images/5-4.PNG)
 <br>
 
-![](./images/CA_accuracy.png.PNG)
+![](./images/CA_accuracy.png)
 
 
 # [1-3] 가우시안 혼합 모델(Gaussian Mixture Model, GMM)
