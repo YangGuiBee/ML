@@ -66,20 +66,41 @@
 
 	from sklearn.cluster import KMeans  # KMeans 군집화 알고리즘을 사용하기 위해 sklearn의 cluster 모듈에서 KMeans 클래스를 임포트
 	from sklearn.datasets import load_iris  # 예제 데이터로 iris 데이터셋을 불러오기 위해 sklearn의 datasets 모듈에서 load_iris 함수를 임포트
+	from sklearn.metrics import silhouette_score, accuracy_score  # Silhouette Score와 Accuracy 계산을 위해 임포트
 	import matplotlib.pyplot as plt  # 데이터를 시각화하기 위해 matplotlib의 pyplot 모듈을 plt로 임포트
-
+	import numpy as np  # 배열 계산을 위해 numpy를 임포트
+	from scipy.stats import mode  # Accuracy 계산 시 군집과 실제 라벨을 매핑하기 위해 mode 함수를 임포트
+	
+	# 데이터 로드
 	iris = load_iris()  # load_iris 함수를 호출하여 iris 데이터셋을 로드하고, 이를 iris 변수에 저장
 	X = iris.data  # iris 데이터셋의 속성값(피처)들만 X에 저장(shape: [150, 4])
-
-	kmeans = KMeans(n_clusters=3, random_state=0)  # KMeans 객체를 생성하고, n_clusters=3으로 군집의 개수를 설정. 
+	true_labels = iris.target  # 실제 라벨을 저장
+	
+	# K-Means 알고리즘 적용
+	kmeans = KMeans(n_clusters=3, random_state=0)  # KMeans 객체를 생성하고, n_clusters=3으로 군집의 개수를 설정
 	kmeans.fit(X)  # KMeans 알고리즘을 사용하여 X 데이터셋에 대해 군집화를 수행하고, 각 데이터 포인트의 군집을 학습
 	labels = kmeans.labels_  # 학습 후, 각 데이터 포인트가 속하는 군집의 레이블을 labels에 저장
-
-	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis')  # X[:, 0] 모든행의 첫번째 열을 X좌표, X[:, 1] 모든행의 두번째 열을 Y좌표로 산점도 그리기
- 								 # 각 포인트의 색상은 군집 레이블(labels)에 따라 지정
-	plt.title("K-Means Clustering on Iris Dataset")  # 그래프의 제목을 설정합니다.
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(X, labels)  # Silhouette Score 계산
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(labels)
+	for i in np.unique(labels):
+	    mask = (labels == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화
+	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis', s=50)  # X[:, 0] 모든행의 첫번째 열을 X좌표, X[:, 1] 모든행의 두번째 열을 Y좌표로 산점도 그리기
+	plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], c='red', marker='X', s=200, label='Centroids')  # 군집 중심을 'X'로 표시
+	plt.title("K-Means Clustering on Iris Dataset")  # 그래프의 제목을 설정
 	plt.xlabel("Feature 1")  # X축 레이블을 'Feature 1'로 설정
 	plt.ylabel("Feature 2")  # Y축 레이블을 'Feature 2'로 설정
+	plt.legend()
 	plt.show()  # 그래프를 화면에 출력
 
 ![](./images/1-1.PNG)
@@ -95,27 +116,79 @@
 ▣ 모델식: K-medoids는 각 군집의 중심으로 가장 대표적인 포인트(medoid)를 선택하여 군집 내 데이터와의 총 비유사도를 최소화<br>
 ![](./images/k-medoids.png)
 
+	import numpy as np
 	from sklearn.datasets import load_iris
-	from sklearn_extra.cluster import KMedoids
+	from sklearn.metrics import silhouette_score, accuracy_score
+	from scipy.spatial.distance import cdist
+	import pandas as pd
 	import matplotlib.pyplot as plt
 	import seaborn as sns
-	import pandas as pd
-
+	from scipy.stats import mode
+	
+	class KMedoids:
+	    def __init__(self, n_clusters=3, max_iter=300, random_state=None):
+	        self.n_clusters = n_clusters
+	        self.max_iter = max_iter
+	        self.random_state = random_state
+	
+	    def fit_predict(self, X):
+	        if self.random_state:
+	            np.random.seed(self.random_state)
+	
+	        # 1. 초기 메도이드를 랜덤으로 선택
+	        medoids = np.random.choice(len(X), self.n_clusters, replace=False)
+	
+	        for _ in range(self.max_iter):
+	            # 각 데이터 포인트와 메도이드 간 거리 계산
+	            distances = cdist(X, X[medoids], metric='euclidean')
+	            labels = np.argmin(distances, axis=1)
+	
+	            # 새로운 메도이드 계산
+	            new_medoids = np.copy(medoids)
+	            for i in range(self.n_clusters):
+	                cluster_points = np.where(labels == i)[0]
+	                intra_cluster_distances = cdist(X[cluster_points], X[cluster_points], metric='euclidean').sum(axis=1)
+	                new_medoids[i] = cluster_points[np.argmin(intra_cluster_distances)]
+	
+	            # 메도이드가 변하지 않으면 종료
+	            if np.array_equal(medoids, new_medoids):
+	                break
+	            medoids = new_medoids
+	
+	        self.labels_ = labels
+	        self.medoids_ = X[medoids]
+	        return self.labels_
+	
 	# Iris 데이터셋 로드
 	iris = load_iris()
-	data = iris.data  # 데이터 추출
-
-	# K-medoids 클러스터링 적용 (군집 수: 3)
+	data = iris.data
+	true_labels = iris.target
+	
+	# KMedoids 알고리즘 적용
 	kmedoids = KMedoids(n_clusters=3, random_state=0)
-	kmedoids_labels = kmedoids.fit_predict(data)  # 데이터에 맞춰 군집화 수행
-
-	# 데이터 프레임으로 변환하여 시각화 준비
+	clusters = kmedoids.fit_predict(data)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
 	df = pd.DataFrame(data, columns=iris.feature_names)
-	df['Cluster'] = kmedoids_labels  # 군집화 결과 추가
-
+	df['Cluster'] = clusters  # 군집화 결과 추가
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(data, clusters)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(clusters)
+	for i in np.unique(clusters):
+	    mask = (clusters == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
 	# 시각화
 	plt.figure(figsize=(10, 5))
-	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis')
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.scatter(kmedoids.medoids_[:, 0], kmedoids.medoids_[:, 1], c='red', marker='X', s=200, label='Medoids')
 	plt.title("K-medoids Clustering on Iris Dataset")
 	plt.xlabel(iris.feature_names[0])  # X축: 첫 번째 특징
 	plt.ylabel(iris.feature_names[1])  # Y축: 두 번째 특징
@@ -133,30 +206,82 @@
 ▣ 응용분야: 설문 데이터 분석, 고객 세분화에서 범주형 특성을 포함한 군집화<br>
 ▣ 모델식: 범주형 데이터의 유사도를 측정하기 위해 헴밍 거리(Hamming distance)를 사용(군집의 중심은 각 속성의 최빈값으로 설정)
 
-	from kmodes.kmodes import KModes
+	import numpy as np
 	from sklearn.datasets import load_iris
+	from sklearn.metrics import silhouette_score, accuracy_score
 	import pandas as pd
 	import matplotlib.pyplot as plt
 	import seaborn as sns
-
+	from scipy.stats import mode
+	
+	class SimpleKModes:
+	    def __init__(self, n_clusters=3, max_iter=100, random_state=None):
+	        self.n_clusters = n_clusters
+	        self.max_iter = max_iter
+	        self.random_state = random_state
+	
+	    def fit_predict(self, X):
+	        if self.random_state:
+	            np.random.seed(self.random_state)
+	        
+	        # 초기 클러스터 중심을 무작위로 선택
+	        centers = X.sample(n=self.n_clusters, random_state=self.random_state).to_numpy()
+	        
+	        for _ in range(self.max_iter):
+	            # 각 데이터 포인트와 중심 간 일치하지 않는 항목 수로 거리 계산
+	            distances = np.array([[np.sum(x != center) for center in centers] for x in X.to_numpy()])
+	            labels = np.argmin(distances, axis=1)
+	            
+	            # 각 클러스터에 대해 새로운 중심 계산
+	            new_centers = np.array([
+	                X[labels == i].mode().iloc[0].to_numpy() if len(X[labels == i]) > 0 else centers[i]
+	                for i in range(self.n_clusters)
+	            ])
+	            
+	            # 중심이 변하지 않으면 수렴
+	            if np.array_equal(centers, new_centers):
+	                break
+	            centers = new_centers
+	
+	        self.labels_ = labels
+	        self.centers_ = centers
+	        return labels
+	
 	# Iris 데이터셋 로드
 	iris = load_iris()
 	data = pd.DataFrame(iris.data, columns=iris.feature_names)
-
+	true_labels = iris.target
+	
 	# 데이터를 범주형으로 변환 (Low, Medium, High)
 	data_cat = data.apply(lambda x: pd.cut(x, bins=3, labels=["Low", "Medium", "High"]))
-
-	# K-Modes 클러스터링 적용
-	kmodes = KModes(n_clusters=3, init="Huang", n_init=5, verbose=1)
-	clusters = kmodes.fit_predict(data_cat)
-
+	
+	# 범주형 데이터를 숫자로 인코딩
+	data_encoded = data_cat.apply(lambda x: x.cat.codes)
+	
+	# Simple K-Modes 클러스터링 적용
+	simple_kmodes = SimpleKModes(n_clusters=3, max_iter=100, random_state=0)
+	clusters = simple_kmodes.fit_predict(data_encoded)
+	
 	# 군집화 결과 추가
 	data["Cluster"] = clusters  # 원본 데이터에 군집화 결과를 추가
-
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(data_encoded, clusters)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(clusters)
+	for i in np.unique(clusters):
+	    mask = (clusters == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
 	# 시각화 (첫 번째와 두 번째 피처 사용)
 	plt.figure(figsize=(10, 5))
 	sns.scatterplot(x=data.iloc[:, 0], y=data.iloc[:, 1], hue="Cluster", data=data, palette="viridis", s=100)
-	plt.title("K-Modes Clustering on Iris Dataset (First 2 Features)")
+	plt.title("Simple K-Modes Clustering on Iris Dataset (First 2 Features)")
 	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
 	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
 	plt.legend(title="Cluster")
@@ -175,59 +300,75 @@
 
 	import numpy as np
 	from sklearn.datasets import load_iris
+	from sklearn.metrics import silhouette_score, accuracy_score
 	from scipy.spatial.distance import cdist
 	import pandas as pd
 	import matplotlib.pyplot as plt
 	import seaborn as sns
-
+	from scipy.stats import mode
+	
 	class PAM:
-    	def __init__(self, n_clusters=3, max_iter=300, random_state=None):
-        	self.n_clusters = n_clusters
-        	self.max_iter = max_iter
-        	self.random_state = random_state
-
-    	def fit_predict(self, X):
-        	if self.random_state:
-            	np.random.seed(self.random_state)
-        
-        	# 1. 초기 메도이드 선택 (랜덤 샘플링)
-        	medoids = np.random.choice(len(X), self.n_clusters, replace=False)
-        
-        	for _ in range(self.max_iter):
-            	# 각 포인트와 모든 메도이드 간 거리 계산
-            	distances = cdist(X, X[medoids], metric='euclidean')
-            	labels = np.argmin(distances, axis=1)
-            
-            	# 새로운 메도이드 계산
-            	new_medoids = np.copy(medoids)
-            	for i in range(self.n_clusters):
-                		# 현재 군집에 속한 데이터 포인트의 인덱스 추출
-                		cluster_points = np.where(labels == i)[0]
-                
-               		# 군집 내 데이터 포인트 간 거리의 총합이 최소가 되는 포인트를 메도이드로 설정
-                		intra_cluster_distances = cdist(X[cluster_points], X[cluster_points], metric='euclidean').sum(axis=1)
-                		new_medoids[i] = cluster_points[np.argmin(intra_cluster_distances)]
-            
-            		# 메도이드가 변화가 없으면 종료
-           		if np.array_equal(medoids, new_medoids):
-                		break
-           		medoids = new_medoids
-        
-        	self.labels_ = labels
-        	self.medoids_ = medoids
-        	return self.labels_
-
+	    def __init__(self, n_clusters=3, max_iter=300, random_state=None):
+	        self.n_clusters = n_clusters
+	        self.max_iter = max_iter
+	        self.random_state = random_state
+	
+	    def fit_predict(self, X):
+	        if self.random_state:
+	            np.random.seed(self.random_state)
+	        
+	        # 1. 초기 메도이드 선택 (랜덤 샘플링)
+	        medoids = np.random.choice(len(X), self.n_clusters, replace=False)
+	        
+	        for _ in range(self.max_iter):
+	            # 각 포인트와 모든 메도이드 간 거리 계산
+	            distances = cdist(X, X[medoids], metric='euclidean')
+	            labels = np.argmin(distances, axis=1)
+	            
+	            # 새로운 메도이드 계산
+	            new_medoids = np.copy(medoids)
+	            for i in range(self.n_clusters):
+	                # 현재 군집에 속한 데이터 포인트의 인덱스 추출
+	                cluster_points = np.where(labels == i)[0]
+	                
+	                # 군집 내 데이터 포인트 간 거리의 총합이 최소가 되는 포인트를 메도이드로 설정
+	                intra_cluster_distances = cdist(X[cluster_points], X[cluster_points], metric='euclidean').sum(axis=1)
+	                new_medoids[i] = cluster_points[np.argmin(intra_cluster_distances)]
+	            
+	            # 메도이드가 변화가 없으면 종료
+	            if np.array_equal(medoids, new_medoids):
+	                break
+	            medoids = new_medoids
+	        
+	        self.labels_ = labels
+	        self.medoids_ = medoids
+	        return self.labels_
+	
 	# Iris 데이터셋 로드
 	iris = load_iris()
 	data = pd.DataFrame(iris.data, columns=iris.feature_names)
-
+	true_labels = iris.target
+	
 	# PAM 알고리즘 적용 (군집 수: 3)
 	pam = PAM(n_clusters=3, random_state=0)
 	clusters = pam.fit_predict(iris.data)  # 데이터에 맞춰 군집화 수행
-
+	
 	# 군집화 결과를 데이터프레임에 추가
 	data['Cluster'] = clusters  # 각 데이터 포인트의 군집 레이블 추가
-
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(iris.data, clusters)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(clusters)
+	for i in np.unique(clusters):
+	    mask = (clusters == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
 	# 시각화 (첫 번째와 두 번째 피처 사용)
 	plt.figure(figsize=(10, 5))
 	sns.scatterplot(x=data.iloc[:, 0], y=data.iloc[:, 1], hue='Cluster', data=data, palette='viridis', s=100)
@@ -237,7 +378,7 @@
 	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
 	plt.legend(title='Cluster')
 	plt.show()
-
+	
 ![](./images/1-4.PNG)
 <br>
 
@@ -251,10 +392,12 @@
 
 	import numpy as np
 	from sklearn.datasets import load_iris
+	from sklearn.metrics import silhouette_score, accuracy_score
 	from scipy.spatial.distance import cdist
 	import pandas as pd
 	import matplotlib.pyplot as plt
 	import seaborn as sns
+	from scipy.stats import mode
 	
 	class CLARANS:
 	    def __init__(self, n_clusters=3, numlocal=5, maxneighbor=10, random_state=None):
@@ -313,6 +456,7 @@
 	# Iris 데이터셋 로드
 	iris = load_iris()
 	data = pd.DataFrame(iris.data, columns=iris.feature_names)
+	true_labels = iris.target
 	
 	# CLARANS 알고리즘 적용 (군집 수: 3)
 	clarans = CLARANS(n_clusters=3, numlocal=5, maxneighbor=10, random_state=0)
@@ -320,6 +464,19 @@
 	
 	# 군집화 결과를 데이터프레임에 추가
 	data['Cluster'] = clusters  # 각 데이터 포인트의 군집 레이블 추가
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(iris.data, clusters)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(clusters)
+	for i in np.unique(clusters):
+	    mask = (clusters == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
 	
 	# 시각화 (첫 번째와 두 번째 피처 사용)
 	plt.figure(figsize=(10, 5))
@@ -342,12 +499,14 @@
 ▣ 응용분야: 대규모 고객 데이터의 군집화, 생물학적 데이터 분석, 시장 조사 데이터의 분석 및 군집화<br>
 ▣ 모델식: 데이터셋에서 일부 샘플을 선택하여 PAM을 적용하고, 여러 번 반복 수행하여 최적의 medoid를 찾는다<br>
 
-	import numpy as np
+	import numpy as np	
 	from sklearn.datasets import load_iris
+	from sklearn.metrics import silhouette_score, accuracy_score
 	from scipy.spatial.distance import cdist
 	import pandas as pd
 	import matplotlib.pyplot as plt
 	import seaborn as sns
+	from scipy.stats import mode
 	
 	class CLARA:
 	    def __init__(self, n_clusters=3, n_samples=25, numlocal=5, max_iter=300, random_state=None):
@@ -407,6 +566,7 @@
 	# Iris 데이터셋 로드
 	iris = load_iris()
 	data = pd.DataFrame(iris.data, columns=iris.feature_names)
+	true_labels = iris.target
 	
 	# CLARA 알고리즘 적용 (군집 수: 3)
 	clara = CLARA(n_clusters=3, n_samples=30, numlocal=5, max_iter=300, random_state=0)
@@ -414,6 +574,19 @@
 	
 	# 군집화 결과를 데이터프레임에 추가
 	data['Cluster'] = clusters  # 각 데이터 포인트의 군집 레이블 추가
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(iris.data, clusters)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(clusters)
+	for i in np.unique(clusters):
+	    mask = (clusters == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
 	
 	# 시각화 (첫 번째와 두 번째 피처 사용)
 	plt.figure(figsize=(10, 5))
@@ -437,91 +610,101 @@
 ▣ 모델식: 각 데이터 포인트가 군집에 속할 확률(소속도, membership value)을 계산하여 군집화함. 이때 각 군집의 중심과 데이터 포인트 사이의 거리의 역수에 따라 소속도가 결정되며, 목적 함수를 최소화 함. 여기서 $𝑢_{𝑖𝑗}$는 데이터 포인트 $𝑥_𝑖$가 군집 $𝑐_𝑗$에 속할 확률이며, 𝑚은 퍼지 지수로, 군집의 경계를 조정하는 역할을 수행<br>
 ![](./images/FCM.png)
 
-	import numpy as np                                                                                  					
-	from sklearn.datasets import load_iris                                                              
-	import pandas as pd                                                                                 
-	import matplotlib.pyplot as plt                                                                     
-	import seaborn as sns                                                                               
-	                                                                                                    
-	class FCM:                                                                                          
-	    def __init__(self, n_clusters=3, m=2.0, max_iter=300, error=1e-5, random_state=None):           
-	        self.n_clusters = n_clusters  # 군집 수                                                     
-	        self.m = m  # 퍼지 파라미터                                                                 
-	        self.max_iter = max_iter  # 최대 반복 횟수                                                  
-	        self.error = error  # 수렴 조건                                                             
-	        self.random_state = random_state  # 난수 시드                                               
-	                                                                                                    
-	    def initialize_membership(self, n_samples):                                                     
-	        # 멤버십 행렬을 무작위로 초기화하여 각 데이터 포인트가 군집에 소속될 확률 설정              
-	        if self.random_state:                                                                       
-	            np.random.seed(self.random_state)                                                       
-	        U = np.random.rand(n_samples, self.n_clusters)                                              
-	        U = U / np.sum(U, axis=1, keepdims=True)  # 각 행의 합이 1이 되도록 정규화                  
-	        return U                                                                                    
-	                                                                                                    
-	    def update_centers(self, X, U):                                                                 
-	        # 군집 중심 업데이트                                                                        
-	        um = U ** self.m                                                                            
-	        return (um.T @ X) / np.sum(um.T, axis=1, keepdims=True)                                     
-	                                                                                                    
-	    def update_membership(self, X, centers):                                                        
-	        # 멤버십 행렬 업데이트                                                                      
-	        dist = np.linalg.norm(X[:, np.newaxis] - centers, axis=2)  # 데이터와 군집 중심 간 거리 계산
-	        dist = np.fmax(dist, np.finfo(np.float64).eps)  # 거리가 0이 되는 경우 방지                 
-	        inv_dist = dist ** (- 2 / (self.m - 1))                                                     
-	        return inv_dist / np.sum(inv_dist, axis=1, keepdims=True)                                   
-	                                                                                                    
-	    def fit(self, X):                                                                               
-	        n_samples = X.shape[0]                                                                      
-	        U = self.initialize_membership(n_samples)  # 초기 멤버십 행렬 설정                          
-	                                                                                                    
-	        for _ in range(self.max_iter):                                                              
-	            U_old = U.copy()  # 이전 멤버십 행렬 저장                                               
-	            centers = self.update_centers(X, U)  # 군집 중심 업데이트                               
-	            U = self.update_membership(X, centers)  # 멤버십 행렬 업데이트                          
-	                                                                                                    
-	            # 수렴 조건 확인                                                                        
-	            if np.linalg.norm(U - U_old) < self.error:                                              
-	                break                                                                               
-	                                                                                                    
-	        self.centers = centers  # 최종 군집 중심                                                    
-	        self.u = U  # 최종 멤버십 행렬                                                              
-	        self.labels_ = np.argmax(U, axis=1)  # 각 데이터 포인트의 최종 군집 레이블                  
-	        return self                                                                                 
-	                                                                                                    
-	    def predict(self, X):                                                                           
-	        # 새로운 데이터에 대해 소속 군집 예측                                                       
-	        return np.argmax(self.update_membership(X, self.centers), axis=1)                           
-	                                                                                                    
-	# Iris 데이터셋 로드                                                                                
-	iris = load_iris()                                                                                  
-	data = iris.data                                                                                    
-	                                                                                                    
-	# FCM 알고리즘 적용 (군집 수: 3)                                                                    
-	fcm = FCM(n_clusters=3, m=2.0, max_iter=300, random_state=0)                                        
-	fcm.fit(data)                                                                                       
-	                                                                                                    
-	# 각 데이터 포인트의 군집 소속도 (멤버십) 및 군집 레이블 예측                                       
-	fcm_labels = fcm.labels_                                                                            
-	membership_matrix = fcm.u  # 멤버십 행렬                                                            
-	                                                                                                    
-	# 데이터프레임으로 변환하여 시각화 준비                                                             
-	df = pd.DataFrame(data, columns=iris.feature_names)                                                 
-	df['Cluster'] = fcm_labels  # 각 포인트의 최종 할당된 군집                                          
-	df['Membership 1'] = membership_matrix[:, 0]  # 군집 1 소속도                                       
-	df['Membership 2'] = membership_matrix[:, 1]  # 군집 2 소속도                                       
-	df['Membership 3'] = membership_matrix[:, 2]  # 군집 3 소속도                                       
-	                                                                                                    
-	# 시각화 (첫 번째와 두 번째 피처 사용)                                                              
-	plt.figure(figsize=(10, 5))                                                                         
-	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100) 
-	plt.scatter(fcm.centers[:, 0], fcm.centers[:, 1], c='red', marker='X', s=200, label='Centers')      
-	plt.title("Fuzzy C-means (FCM) Clustering on Iris Dataset")                                         
-	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)                                    
-	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)                                     
-	plt.legend(title='Cluster')                                                                         
-	plt.show()                                                                                          
-
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.metrics import silhouette_score, accuracy_score
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	from scipy.stats import mode
+	
+	class FCM:
+	    def __init__(self, n_clusters=3, m=2.0, max_iter=300, error=1e-5, random_state=None):
+	        self.n_clusters = n_clusters
+	        self.m = m
+	        self.max_iter = max_iter
+	        self.error = error
+	        self.random_state = random_state
+	
+	    def initialize_membership(self, n_samples):
+	        if self.random_state:
+	            np.random.seed(self.random_state)
+	        U = np.random.rand(n_samples, self.n_clusters)
+	        U = U / np.sum(U, axis=1, keepdims=True)
+	        return U
+	
+	    def update_centers(self, X, U):
+	        um = U ** self.m
+	        return (um.T @ X) / np.sum(um.T, axis=1, keepdims=True)
+	
+	    def update_membership(self, X, centers):
+	        dist = np.linalg.norm(X[:, np.newaxis] - centers, axis=2)
+	        dist = np.fmax(dist, np.finfo(np.float64).eps)
+	        inv_dist = dist ** (- 2 / (self.m - 1))
+	        return inv_dist / np.sum(inv_dist, axis=1, keepdims=True)
+	
+	    def fit(self, X):
+	        n_samples = X.shape[0]
+	        U = self.initialize_membership(n_samples)
+	
+	        for _ in range(self.max_iter):
+	            U_old = U.copy()
+	            centers = self.update_centers(X, U)
+	            U = self.update_membership(X, centers)
+	            if np.linalg.norm(U - U_old) < self.error:
+	                break
+	
+	        self.centers = centers
+	        self.u = U
+	        self.labels_ = np.argmax(U, axis=1)
+	        return self
+	
+	    def predict(self, X):
+	        return np.argmax(self.update_membership(X, self.centers), axis=1)
+	
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = iris.data
+	true_labels = iris.target
+	
+	# FCM 알고리즘 적용
+	fcm = FCM(n_clusters=3, m=2.0, max_iter=300, random_state=0)
+	fcm.fit(data)
+	
+	# 각 데이터 포인트의 군집 소속도 (멤버십) 및 군집 레이블 예측
+	fcm_labels = fcm.labels_
+	membership_matrix = fcm.u
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = fcm_labels
+	df['Membership 1'] = membership_matrix[:, 0]
+	df['Membership 2'] = membership_matrix[:, 1]
+	df['Membership 3'] = membership_matrix[:, 2]
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(data, fcm_labels)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(fcm_labels)
+	for i in np.unique(fcm_labels):
+	    mask = (fcm_labels == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.scatter(fcm.centers[:, 0], fcm.centers[:, 1], c='red', marker='X', s=200, label='Centers')
+	plt.title("Fuzzy C-means (FCM) Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
+                                                                          
 ![](./images/1-7.PNG)
 <br>
 
