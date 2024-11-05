@@ -75,22 +75,25 @@
 ![](./images/kmeans.PNG)
 <br>출처 : https://www.saedsayad.com/clustering_kmeans.htm<br>
 
-	from sklearn.cluster import KMeans
-	from sklearn.datasets import load_iris
-	import matplotlib.pyplot as plt
+	from sklearn.cluster import KMeans  # KMeans 군집화 알고리즘을 사용하기 위해 sklearn의 cluster 모듈에서 KMeans 클래스를 임포트
+	from sklearn.datasets import load_iris  # 예제 데이터로 iris 데이터셋을 불러오기 위해 sklearn의 datasets 모듈에서 load_iris 함수를 임포트
+	import matplotlib.pyplot as plt  # 데이터를 시각화하기 위해 matplotlib의 pyplot 모듈을 plt로 임포트
 
-	iris = load_iris()
-	X = iris.data
+	iris = load_iris()  # load_iris 함수를 호출하여 iris 데이터셋을 로드하고, 이를 iris 변수에 저장
+	X = iris.data  # iris 데이터셋의 속성값(피처)들만 X에 저장(shape: [150, 4])
 
-	kmeans = KMeans(n_clusters=3, random_state=0) #n_cluster : 군집화할 개수
-	kmeans.fit(X)
-	labels = kmeans.labels_ 
+	kmeans = KMeans(n_clusters=3, random_state=0)  # KMeans 객체를 생성하고, n_clusters=3으로 군집의 개수를 설정. 
+	kmeans.fit(X)  # KMeans 알고리즘을 사용하여 X 데이터셋에 대해 군집화를 수행하고, 각 데이터 포인트의 군집을 학습
+	labels = kmeans.labels_  # 학습 후, 각 데이터 포인트가 속하는 군집의 레이블을 labels에 저장
 
-	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis')
-	plt.title("K-Means Clustering on Iris Dataset")
-	plt.xlabel("Feature 1")
-	plt.ylabel("Feature 2")
-	plt.show()
+	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis')  # X[:, 0] 모든행의 첫번째 열을 X좌표, X[:, 1] 모든행의 두번째 열을 Y좌표로 산점도 그리기
+ 								 # 각 포인트의 색상은 군집 레이블(labels)에 따라 지정
+	plt.title("K-Means Clustering on Iris Dataset")  # 그래프의 제목을 설정합니다.
+	plt.xlabel("Feature 1")  # X축 레이블을 'Feature 1'로 설정
+	plt.ylabel("Feature 2")  # Y축 레이블을 'Feature 2'로 설정
+	plt.show()  # 그래프를 화면에 출력
+
+![](./images/1-1.png)
 
 <br>
 
