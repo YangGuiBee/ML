@@ -146,25 +146,31 @@
 	from kmodes.kmodes import KModes
 	from sklearn.datasets import load_iris
 	import pandas as pd
+	import matplotlib.pyplot as plt
+	import seaborn as sns
 
-	# Iris 데이터셋 로드 및 범주형 변환
+	# Iris 데이터셋 로드
 	iris = load_iris()
 	data = pd.DataFrame(iris.data, columns=iris.feature_names)
 
-	# 연속형 데이터를 범주형 데이터로 변환 (범위별로 나누어 범주형으로 변경)
-	data = data.apply(lambda x: pd.cut(x, bins=3, labels=["Low", "Medium", "High"]))
+	# 데이터를 범주형으로 변환 (Low, Medium, High)
+	data_cat = data.apply(lambda x: pd.cut(x, bins=3, labels=["Low", "Medium", "High"]))
 
-	# K-modes 모델 생성 (군집 수: 3)
+	# K-Modes 클러스터링 적용
 	kmodes = KModes(n_clusters=3, init="Huang", n_init=5, verbose=1)
+	clusters = kmodes.fit_predict(data_cat)
 
-	# K-modes 군집화 수행
-	clusters = kmodes.fit_predict(data)
+	# 군집화 결과 추가
+	data["Cluster"] = clusters  # 원본 데이터에 군집화 결과를 추가
 
-	# 군집 결과를 데이터 프레임에 추가
-	data["Cluster"] = clusters
-
-	# 결과 출력
-	print(data.head())
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=data.iloc[:, 0], y=data.iloc[:, 1], hue="Cluster", data=data, palette="viridis", s=100)
+	plt.title("K-Modes Clustering on Iris Dataset (First 2 Features)")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title="Cluster")
+	plt.show()
 
 <br>
 
@@ -175,6 +181,71 @@
 ▣ 단점: 대규모 데이터에서 계산 비용이 높습니다. 군집 수(K)를 사전에 지정해야 함<br>
 ▣ 응용분야: 범주형 데이터를 포함한 고객 세분화, 의료 데이터 분석<br>
 ▣ 모델식: PAM은 각 군집의 중심으로 가장 대표적인 medoid를 선택하여 군집 내 비유사도를 최소화<br>
+
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from scipy.spatial.distance import cdist
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+
+	class PAM:
+    	def __init__(self, n_clusters=3, max_iter=300, random_state=None):
+        	self.n_clusters = n_clusters
+        	self.max_iter = max_iter
+        	self.random_state = random_state
+
+    	def fit_predict(self, X):
+        	if self.random_state:
+            	np.random.seed(self.random_state)
+        
+        	# 1. 초기 메도이드 선택 (랜덤 샘플링)
+        	medoids = np.random.choice(len(X), self.n_clusters, replace=False)
+        
+        	for _ in range(self.max_iter):
+            	# 각 포인트와 모든 메도이드 간 거리 계산
+            	distances = cdist(X, X[medoids], metric='euclidean')
+            	labels = np.argmin(distances, axis=1)
+            
+            	# 새로운 메도이드 계산
+            	new_medoids = np.copy(medoids)
+            	for i in range(self.n_clusters):
+                	# 현재 군집에 속한 데이터 포인트의 인덱스 추출
+                	cluster_points = np.where(labels == i)[0]
+                
+               		# 군집 내 데이터 포인트 간 거리의 총합이 최소가 되는 포인트를 메도이드로 설정
+                	intra_cluster_distances = cdist(X[cluster_points], X[cluster_points], metric='euclidean').sum(axis=1)
+                	new_medoids[i] = cluster_points[np.argmin(intra_cluster_distances)]
+            
+            	# 메도이드가 변화가 없으면 종료
+           	if np.array_equal(medoids, new_medoids):
+                	break
+           	medoids = new_medoids
+        
+        self.labels_ = labels
+        self.medoids_ = medoids
+        return self.labels_
+
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = pd.DataFrame(iris.data, columns=iris.feature_names)
+
+	# PAM 알고리즘 적용 (군집 수: 3)
+	pam = PAM(n_clusters=3, random_state=0)
+	clusters = pam.fit_predict(iris.data)  # 데이터에 맞춰 군집화 수행
+
+	# 군집화 결과를 데이터프레임에 추가
+	data['Cluster'] = clusters  # 각 데이터 포인트의 군집 레이블 추가
+
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=data.iloc[:, 0], y=data.iloc[:, 1], hue='Cluster', data=data, palette='viridis', s=100)
+	plt.scatter(iris.data[pam.medoids_, 0], iris.data[pam.medoids_, 1], c='red', marker='X', s=200, label='Medoids')
+	plt.title("PAM (Partitioning Around Medoids) Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
 
 <br>
 
