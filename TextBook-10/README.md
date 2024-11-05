@@ -802,28 +802,95 @@ M 단계: 이 확률을 사용하여 각 군집의 매개변수를 업데이트�
 ▣ 단점: 학습률, 이웃 크기 등의 매개변수를 조정하기가 어렵고 명확한 군집화보다는 데이터 맵을 생성하여 군집의 경계가 모호<br>
 ▣ 응용분야: 데이터 시각화 및 차원 축소, 이미지 및 패턴 인식, 시장 분석 및 소비자 행동 분석<br>
 ▣ 모델식: 데이터 포인트를 반복적으로 매핑하여 입력 벡터에 가장 가까운 노드(위너)를 찾고, 그 주변 노드들의 가중치를 갱신하는 방식<br>
-	# `MiniSom` 라이브러리가 필요합니다: !pip install MiniSom
-	from minisom import MiniSom
-	from sklearn.datasets import load_iris
-	import matplotlib.pyplot as plt
-	import pandas as pd
 
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.metrics import silhouette_score, accuracy_score
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	import pandas as pd
+	from scipy.stats import mode
+	
+	class SimpleSOM:
+	    def __init__(self, x_size=10, y_size=10, input_len=4, sigma=1.0, learning_rate=0.5, iterations=100):
+	        self.x_size = x_size
+	        self.y_size = y_size
+	        self.input_len = input_len
+	        self.sigma = sigma
+	        self.learning_rate = learning_rate
+	        self.iterations = iterations
+	        self.weights = np.random.rand(x_size, y_size, input_len)
+	
+	    def _neighborhood_function(self, distance, iteration):
+	        # 이웃 영향 반경 계산
+	        return np.exp(-distance / (2 * (self.sigma * (1 - iteration / self.iterations)) ** 2))
+	
+	    def _learning_rate_decay(self, iteration):
+	        # 학습률 감소
+	        return self.learning_rate * (1 - iteration / self.iterations)
+	
+	    def train(self, data):
+	        for iteration in range(self.iterations):
+	            for x in data:
+	                # 최적의 BMU 찾기
+	                bmu_idx = self.find_bmu(x)
+	                bmu_distance = np.array([[np.linalg.norm(np.array([i, j]) - bmu_idx) for j in range(self.y_size)] for i in range(self.x_size)])
+	                
+	                # 이웃 가중치 업데이트
+	                learning_rate = self._learning_rate_decay(iteration)
+	                neighborhood = self._neighborhood_function(bmu_distance, iteration)
+	                self.weights += learning_rate * neighborhood[:, :, np.newaxis] * (x - self.weights)
+	
+	    def find_bmu(self, x):
+	        # 입력 벡터에 가장 가까운 BMU(가중치)를 찾음
+	        distances = np.linalg.norm(self.weights - x, axis=2)
+	        return np.unravel_index(np.argmin(distances), (self.x_size, self.y_size))
+	
+	    def map_vects(self, data):
+	        # 데이터 포인트들을 SOM 맵에 매핑
+	        return np.array([self.find_bmu(x) for x in data])
+	
 	# Iris 데이터셋 로드
 	iris = load_iris()
-	data = iris.data  # Iris 데이터 추출
-
-	# SOM 초기화 및 학습
-	som = MiniSom(x=10, y=10, input_len=4, sigma=1.0, learning_rate=0.5)  # SOM 인스턴스 생성
-	som.random_weights_init(data)  # 가중치 초기화
-	som.train_random(data, 100)  # 100번 반복하여 학습 수행
-
-	# 시각화 준비
-	plt.figure(figsize=(10, 10))
-	for i, x in enumerate(data):  # 데이터 포인트 반복
-    	w = som.winner(x)  # 최적의 노드(위너) 찾기
-    	plt.text(w[0], w[1], str(iris.target[i]), color=plt.cm.tab10(iris.target[i] / 2))  # 클러스터 레이블 추가
-	plt.title("Self-Organizing Map for Iris Dataset")
-
+	data = iris.data
+	true_labels = iris.target
+	
+	# SOM 모델 설정 및 학습
+	som = SimpleSOM(x_size=10, y_size=10, input_len=data.shape[1], sigma=1.0, learning_rate=0.5, iterations=100)
+	som.train(data)
+	
+	# 각 데이터 포인트의 BMU 찾기
+	bmu_indices = som.map_vects(data)
+	bmu_labels = np.ravel_multi_index(bmu_indices.T, (10, 10))  # BMU를 1D 레이블로 변환
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = bmu_labels
+	
+	# Silhouette Score 계산
+	# Silhouette Score는 군집의 일관성을 평가하며, 값이 높을수록 군집이 잘 분리됨을 의미합니다.
+	silhouette_avg = silhouette_score(data, bmu_labels)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	# SOM의 군집 레이블과 실제 레이블은 매칭되지 않을 수 있으므로, 각 군집에 대해 가장 빈도 높은 실제 레이블을 찾습니다.
+	mapped_labels = np.zeros_like(bmu_labels)
+	for i in np.unique(bmu_labels):
+	    mask = (bmu_labels == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.title("Self-Organizing Maps (SOM) Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
+	
 ![](./images/5-4.PNG)
 <br>
 
