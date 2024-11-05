@@ -672,6 +672,88 @@
 ▣ 응용분야: 지리적 데이터베이스 분석, 공간 데이터에서 밀도 기반 군집화, 이상 탐지 및 밀도 기반 패턴 탐색<br>
 ▣ 모델식: 각 데이터 포인트의 확률 밀도를 기반으로 군집을 형성하며, 확률 밀도는 주어진 확률 분포 모델을 사용해 계산<br>
 
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.metrics import silhouette_score, accuracy_score
+	from scipy.stats import multivariate_normal
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	import pandas as pd
+	from scipy.stats import mode
+	
+	# 간단한 DBCLASD 구현 (정규 분포 기반)
+	class DBCLASD:
+	    def __init__(self, threshold=0.01, epsilon=1e-6):
+	        self.threshold = threshold  # 분포 적합 임계값
+	        self.epsilon = epsilon  # 공분산 행렬에 추가할 작은 값
+	        self.clusters = []  # 군집 정보 저장
+	    
+	    def fit_predict(self, X):
+	        labels = -np.ones(X.shape[0], dtype=int)  # 초기값 -1 (노이즈)
+	        
+	        for i, point in enumerate(X):
+	            added_to_cluster = False
+	            for cluster_id, (mean, cov) in enumerate(self.clusters):
+	                # 기존 군집의 분포와 비교하여 해당 분포에 속하는지 확인
+	                adjusted_cov = cov + self.epsilon * np.eye(cov.shape[0])  # 작은 값을 더하여 양의 정부호 행렬로 만듦
+	                if multivariate_normal(mean=mean, cov=adjusted_cov).pdf(point) > self.threshold:
+	                    labels[i] = cluster_id
+	                    # 군집 업데이트
+	                    points_in_cluster = X[labels == cluster_id]
+	                    mean = np.mean(points_in_cluster, axis=0)
+	                    cov = np.cov(points_in_cluster, rowvar=False)
+	                    self.clusters[cluster_id] = (mean, cov)
+	                    added_to_cluster = True
+	                    break
+	            if not added_to_cluster:
+	                # 새로운 군집 생성
+	                labels[i] = len(self.clusters)
+	                mean = point
+	                cov = np.cov(X.T) + self.epsilon * np.eye(X.shape[1])  # 공분산 초기값에 epsilon을 더함
+	                self.clusters.append((mean, cov))
+	        
+	        self.labels_ = labels
+	        return labels
+	
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = iris.data
+	true_labels = iris.target
+	
+	# DBCLASD 알고리즘 적용
+	dbclasd = DBCLASD(threshold=0.01, epsilon=1e-6)
+	predicted_labels = dbclasd.fit_predict(data)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = predicted_labels
+	
+	# Silhouette Score 계산 (노이즈 데이터는 제외)
+	valid_points = predicted_labels != -1
+	if np.sum(valid_points) > 1:
+	    silhouette_avg = silhouette_score(data[valid_points], predicted_labels[valid_points])
+	    print(f"Silhouette Score: {silhouette_avg:.3f}")
+	else:
+	    print("Silhouette Score: Not enough valid points for calculation.")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(predicted_labels)
+	for i in np.unique(predicted_labels):
+	    mask = (predicted_labels == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.title("DBCLASD Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
+
 ![](./images/3-3.PNG)
 <br>
 
@@ -682,6 +764,72 @@
 ▣ 단점: 밀도 함수를 설정하는 데 필요한 매개변수가 많으며 계산이 복잡하여 대규모 데이터에서는 성능이 저하될 수 있음<br>
 ▣ 응용분야: 패턴 인식 및 이미지 처리, 데이터 마이닝에서 밀도 기반 패턴 탐색, 환경 모니터링 데이터 분석<br>
 ▣ 모델식: 각 데이터 포인트의 밀도 기여를 가우시안 커널 등으로 모델링하여 밀도 함수를 계산(군집은 밀도 함수의 극대점에서 시작하여 군집화)<br>
+
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.neighbors import KernelDensity
+	from sklearn.cluster import DBSCAN
+	from sklearn.metrics import silhouette_score, accuracy_score
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	import pandas as pd
+	from scipy.stats import mode
+	
+	# Gaussian Kernel Density Estimation (KDE)를 사용하여 데이터의 밀도 기반 특징 추출
+	def kde_transform(data, bandwidth=0.5):
+	    kde = KernelDensity(bandwidth=bandwidth)
+	    kde.fit(data)
+	    log_densities = kde.score_samples(data)
+	    return log_densities
+	
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = iris.data
+	true_labels = iris.target
+	
+	# KDE 변환 적용 (밀도 기반 특징 강조)
+	log_densities = kde_transform(data, bandwidth=0.5)
+	density_threshold = np.percentile(log_densities, 75)  # 밀도 기준을 75퍼센타일로 설정
+	high_density_points = data[log_densities >= density_threshold]  # 밀도가 높은 포인트 선택
+	
+	# DBSCAN 알고리즘 적용 (밀도가 높은 영역에서 밀도 기반 군집화 수행)
+	dbscan = DBSCAN(eps=0.5, min_samples=5)
+	predicted_labels = dbscan.fit_predict(high_density_points)
+	
+	# 밀도가 높은 포인트들에 대한 레이블을 전체 데이터 레이블에 매핑
+	full_labels = -np.ones(data.shape[0], dtype=int)  # 초기값 -1 (노이즈)
+	high_density_indices = np.where(log_densities >= density_threshold)[0]
+	full_labels[high_density_indices] = predicted_labels
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = full_labels
+	
+	# Silhouette Score 계산 (노이즈 데이터는 제외)
+	valid_points = full_labels != -1
+	if np.sum(valid_points) > 1:
+	    silhouette_avg = silhouette_score(data[valid_points], full_labels[valid_points])
+	    print(f"Silhouette Score: {silhouette_avg:.3f}")
+	else:
+	    print("Silhouette Score: Not enough valid points for calculation.")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(full_labels)
+	for i in np.unique(full_labels):
+	    mask = (full_labels == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels[full_labels != -1], mapped_labels[full_labels != -1])
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.title("DENCLUE Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
 
 ![](./images/3-4.PNG)
 <br>
