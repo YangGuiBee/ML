@@ -618,20 +618,53 @@
 ▣ 응용분야 : 이상 탐지, 지리적 데이터 분석<br>
 ▣ 모델식: 각 점에서 반경 𝜖 내에 있는 점들이 미리 정의된 MinPts 보다 많으면 그 점을 중심으로 군집을 형성<br>
 
-	from sklearn.cluster import DBSCAN
+	import numpy as np
 	from sklearn.datasets import load_iris
+	from sklearn.cluster import DBSCAN
+	from sklearn.metrics import silhouette_score, accuracy_score
 	import matplotlib.pyplot as plt
-
+	import seaborn as sns
+	import pandas as pd
+	from scipy.stats import mode
+	
+	# Iris 데이터셋 로드
 	iris = load_iris()
-	X = iris.data
-
+	data = iris.data
+	true_labels = iris.target
+	
+	# DBSCAN 알고리즘 적용
 	dbscan = DBSCAN(eps=0.5, min_samples=5)
-	labels = dbscan.fit_predict(X)
-
-	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='plasma')
+	predicted_labels = dbscan.fit_predict(data)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = predicted_labels
+	
+	# Silhouette Score 계산 (노이즈 데이터는 제외)
+	valid_points = predicted_labels != -1  # 노이즈가 아닌 포인트만 선택
+	if np.sum(valid_points) > 1:
+	    silhouette_avg = silhouette_score(data[valid_points], predicted_labels[valid_points])
+	    print(f"Silhouette Score: {silhouette_avg:.3f}")
+	else:
+	    print("Silhouette Score: Not enough valid points for calculation.")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(predicted_labels)
+	for i in np.unique(predicted_labels):
+	    mask = (predicted_labels == i)
+	    if np.any(mask):  # 군집에 속하는 포인트가 있을 때만 계산
+	        mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels[valid_points], mapped_labels[valid_points])
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
 	plt.title("DBSCAN Clustering on Iris Dataset")
-	plt.xlabel("Feature 1")
-	plt.ylabel("Feature 2")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
 	plt.show()
 
 ![](./images/3-1.PNG)
