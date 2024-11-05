@@ -93,7 +93,7 @@
 	plt.ylabel("Feature 2")  # Y축 레이블을 'Feature 2'로 설정
 	plt.show()  # 그래프를 화면에 출력
 
-![](./images/1-1.png)
+![](./images/1-1.PNG)
 
 <br>
 
@@ -133,7 +133,7 @@
 	plt.legend(title='Cluster')
 	plt.show()
 
-![](./images/1-2.png)
+![](./images/1-2.PNG)
 <br>
 
 # [1-3] K-modes
@@ -173,7 +173,7 @@
 	plt.legend(title="Cluster")
 	plt.show()
 
-![](./images/1-3.png)
+![](./images/1-3.PNG)
 <br>
 
 # [1-4] PAM(Partitioning Around Medoids)
@@ -249,7 +249,7 @@
 	plt.legend(title='Cluster')
 	plt.show()
 
-![](./images/1-4.png)
+![](./images/1-4.PNG)
 <br>
 
 # [1-5] CLARANS(Clustering Large Applications based on RANdomized Search)
@@ -260,7 +260,7 @@
 ▣ 응용분야: 대규모 고객 세분화, 금융 데이터 분석, 대규모 이미지 및 문서 분류<br>
 ▣ 모델식: 전체 데이터셋에서 일부를 랜덤하게 샘플링하여 최적의 medoid를 찾는 방식으로, 기존 PAM의 개념을 대규모 데이터셋에 맞게 확장. 이를 통해 데이터 탐색 과정을 줄이고 효율성을 강화<br>
 
-![](./images/1-5.png)
+![](./images/1-5.PNG)
 <br>
 
 # [1-6] CLARA(Clustering LARge Applications)
@@ -271,7 +271,7 @@
 ▣ 응용분야: 대규모 고객 데이터의 군집화, 생물학적 데이터 분석, 시장 조사 데이터의 분석 및 군집화<br>
 ▣ 모델식: 데이터셋에서 일부 샘플을 선택하여 PAM을 적용하고, 여러 번 반복 수행하여 최적의 medoid를 찾는다<br>
 
-![](./images/1-6.png)
+![](./images/1-6.PNG)
 <br>
 
 # [1-7] FCM(Fuzzy C-means) 
@@ -312,7 +312,7 @@
 	plt.legend(title='Cluster')
 	plt.show()
 
-![](./images/1-7.png)
+![](./images/1-7.PNG)
 <br>
 
 # [2-1] BIRCH(Balanced Iterative Reducing and Clustering using Hierarchies)
