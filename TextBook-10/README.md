@@ -448,34 +448,90 @@
 ▣ 모델식: 각 데이터 포인트가 군집에 속할 확률(소속도, membership value)을 계산하여 군집화함. 이때 각 군집의 중심과 데이터 포인트 사이의 거리의 역수에 따라 소속도가 결정되며, 목적 함수를 최소화 함. 여기서 $𝑢_{𝑖𝑗}$는 데이터 포인트 $𝑥_𝑖$가 군집 $𝑐_𝑗$에 속할 확률이며, 𝑚은 퍼지 지수로, 군집의 경계를 조정하는 역할을 수행<br>
 ![](./images/FCM.png)
 
-	# `fcmeans` 라이브러리가 필요합니다: !pip install fcmeans
-	from fcmeans import FCM
-	from sklearn.datasets import load_iris
-	import matplotlib.pyplot as plt
-	import pandas as pd
-	import seaborn as sns
-
-	# Iris 데이터셋 로드
-	iris = load_iris()
-	data = iris.data  # Iris 데이터 추출
-
-	# FCM 클러스터링 적용 (군집 수: 3)
-	fcm = FCM(n_clusters=3)  # Fuzzy C-means 인스턴스 생성
-	fcm.fit(data)  # 데이터에 맞춰 군집화 수행
-	fcm_labels = fcm.predict(data)  # 예측된 군집 레이블
-
-	# 데이터 프레임으로 변환하여 시각화 준비
-	df = pd.DataFrame(data, columns=iris.feature_names)
-	df['Cluster'] = fcm_labels  # FCM 클러스터 결과 추가
-
-	# 시각화
-	plt.figure(figsize=(10, 5))
-	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis')
-	plt.title("Fuzzy C-means Clustering on Iris Dataset")
-	plt.xlabel(iris.feature_names[0])  # X축: 첫 번째 특징
-	plt.ylabel(iris.feature_names[1])  # Y축: 두 번째 특징
-	plt.legend(title='Cluster')
-	plt.show()
+	import numpy as np                                                                                  					
+	from sklearn.datasets import load_iris                                                              
+	import pandas as pd                                                                                 
+	import matplotlib.pyplot as plt                                                                     
+	import seaborn as sns                                                                               
+	                                                                                                    
+	class FCM:                                                                                          
+	    def __init__(self, n_clusters=3, m=2.0, max_iter=300, error=1e-5, random_state=None):           
+	        self.n_clusters = n_clusters  # 군집 수                                                     
+	        self.m = m  # 퍼지 파라미터                                                                 
+	        self.max_iter = max_iter  # 최대 반복 횟수                                                  
+	        self.error = error  # 수렴 조건                                                             
+	        self.random_state = random_state  # 난수 시드                                               
+	                                                                                                    
+	    def initialize_membership(self, n_samples):                                                     
+	        # 멤버십 행렬을 무작위로 초기화하여 각 데이터 포인트가 군집에 소속될 확률 설정              
+	        if self.random_state:                                                                       
+	            np.random.seed(self.random_state)                                                       
+	        U = np.random.rand(n_samples, self.n_clusters)                                              
+	        U = U / np.sum(U, axis=1, keepdims=True)  # 각 행의 합이 1이 되도록 정규화                  
+	        return U                                                                                    
+	                                                                                                    
+	    def update_centers(self, X, U):                                                                 
+	        # 군집 중심 업데이트                                                                        
+	        um = U ** self.m                                                                            
+	        return (um.T @ X) / np.sum(um.T, axis=1, keepdims=True)                                     
+	                                                                                                    
+	    def update_membership(self, X, centers):                                                        
+	        # 멤버십 행렬 업데이트                                                                      
+	        dist = np.linalg.norm(X[:, np.newaxis] - centers, axis=2)  # 데이터와 군집 중심 간 거리 계산
+	        dist = np.fmax(dist, np.finfo(np.float64).eps)  # 거리가 0이 되는 경우 방지                 
+	        inv_dist = dist ** (- 2 / (self.m - 1))                                                     
+	        return inv_dist / np.sum(inv_dist, axis=1, keepdims=True)                                   
+	                                                                                                    
+	    def fit(self, X):                                                                               
+	        n_samples = X.shape[0]                                                                      
+	        U = self.initialize_membership(n_samples)  # 초기 멤버십 행렬 설정                          
+	                                                                                                    
+	        for _ in range(self.max_iter):                                                              
+	            U_old = U.copy()  # 이전 멤버십 행렬 저장                                               
+	            centers = self.update_centers(X, U)  # 군집 중심 업데이트                               
+	            U = self.update_membership(X, centers)  # 멤버십 행렬 업데이트                          
+	                                                                                                    
+	            # 수렴 조건 확인                                                                        
+	            if np.linalg.norm(U - U_old) < self.error:                                              
+	                break                                                                               
+	                                                                                                    
+	        self.centers = centers  # 최종 군집 중심                                                    
+	        self.u = U  # 최종 멤버십 행렬                                                              
+	        self.labels_ = np.argmax(U, axis=1)  # 각 데이터 포인트의 최종 군집 레이블                  
+	        return self                                                                                 
+	                                                                                                    
+	    def predict(self, X):                                                                           
+	        # 새로운 데이터에 대해 소속 군집 예측                                                       
+	        return np.argmax(self.update_membership(X, self.centers), axis=1)                           
+	                                                                                                    
+	# Iris 데이터셋 로드                                                                                
+	iris = load_iris()                                                                                  
+	data = iris.data                                                                                    
+	                                                                                                    
+	# FCM 알고리즘 적용 (군집 수: 3)                                                                    
+	fcm = FCM(n_clusters=3, m=2.0, max_iter=300, random_state=0)                                        
+	fcm.fit(data)                                                                                       
+	                                                                                                    
+	# 각 데이터 포인트의 군집 소속도 (멤버십) 및 군집 레이블 예측                                       
+	fcm_labels = fcm.labels_                                                                            
+	membership_matrix = fcm.u  # 멤버십 행렬                                                            
+	                                                                                                    
+	# 데이터프레임으로 변환하여 시각화 준비                                                             
+	df = pd.DataFrame(data, columns=iris.feature_names)                                                 
+	df['Cluster'] = fcm_labels  # 각 포인트의 최종 할당된 군집                                          
+	df['Membership 1'] = membership_matrix[:, 0]  # 군집 1 소속도                                       
+	df['Membership 2'] = membership_matrix[:, 1]  # 군집 2 소속도                                       
+	df['Membership 3'] = membership_matrix[:, 2]  # 군집 3 소속도                                       
+	                                                                                                    
+	# 시각화 (첫 번째와 두 번째 피처 사용)                                                              
+	plt.figure(figsize=(10, 5))                                                                         
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100) 
+	plt.scatter(fcm.centers[:, 0], fcm.centers[:, 1], c='red', marker='X', s=200, label='Centers')      
+	plt.title("Fuzzy C-means (FCM) Clustering on Iris Dataset")                                         
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)                                    
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)                                     
+	plt.legend(title='Cluster')                                                                         
+	plt.show()                                                                                          
 
 ![](./images/1-7.PNG)
 <br>
