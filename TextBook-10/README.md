@@ -260,6 +260,88 @@
 ▣ 응용분야: 대규모 고객 세분화, 금융 데이터 분석, 대규모 이미지 및 문서 분류<br>
 ▣ 모델식: 전체 데이터셋에서 일부를 랜덤하게 샘플링하여 최적의 medoid를 찾는 방식으로, 기존 PAM의 개념을 대규모 데이터셋에 맞게 확장. 이를 통해 데이터 탐색 과정을 줄이고 효율성을 강화<br>
 
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from scipy.spatial.distance import cdist
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	
+	class CLARANS:
+	    def __init__(self, n_clusters=3, numlocal=5, maxneighbor=10, random_state=None):
+	        self.n_clusters = n_clusters
+	        self.numlocal = numlocal  # 랜덤 초기화 반복 횟수
+	        self.maxneighbor = maxneighbor  # 각 초기화 당 랜덤 탐색 이웃 수
+	        self.random_state = random_state
+	
+	    def fit_predict(self, X):
+	        if self.random_state:
+	            np.random.seed(self.random_state)
+	        
+	        best_medoids = None
+	        best_score = float('inf')
+	        labels = None
+	
+	        # numlocal번의 랜덤 초기화 반복
+	        for _ in range(self.numlocal):
+	            # 초기 메도이드 랜덤 선택
+	            medoids = np.random.choice(len(X), self.n_clusters, replace=False)
+	            current_score = self._calculate_total_cost(X, medoids)
+	
+	            improved = True
+	            while improved:
+	                improved = False
+	                # maxneighbor 번 만큼 랜덤으로 이웃 탐색
+	                for _ in range(self.maxneighbor):
+	                    # 현재 메도이드 중 하나와 비메도이드 중 하나를 교환
+	                    new_medoids = np.copy(medoids)
+	                    non_medoids = [i for i in range(len(X)) if i not in medoids]
+	                    new_medoids[np.random.randint(0, self.n_clusters)] = np.random.choice(non_medoids)
+	                    
+	                    # 새로운 메도이드 셋으로 비용 계산
+	                    new_score = self._calculate_total_cost(X, new_medoids)
+	                    if new_score < current_score:
+	                        medoids = new_medoids
+	                        current_score = new_score
+	                        improved = True
+	                        break
+	            
+	            # 최적의 메도이드 셋 업데이트
+	            if current_score < best_score:
+	                best_medoids = medoids
+	                best_score = current_score
+	                labels = np.argmin(cdist(X, X[best_medoids]), axis=1)
+	
+	        self.medoids_ = best_medoids
+	        self.labels_ = labels
+	        return self.labels_
+	
+	    def _calculate_total_cost(self, X, medoids):
+	        # 메도이드 셋에 대한 총 비용(거리 합계) 계산
+	        distances = cdist(X, X[medoids], metric='euclidean')
+	        return np.sum(np.min(distances, axis=1))
+	
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = pd.DataFrame(iris.data, columns=iris.feature_names)
+	
+	# CLARANS 알고리즘 적용 (군집 수: 3)
+	clarans = CLARANS(n_clusters=3, numlocal=5, maxneighbor=10, random_state=0)
+	clusters = clarans.fit_predict(iris.data)  # 데이터에 맞춰 군집화 수행
+	
+	# 군집화 결과를 데이터프레임에 추가
+	data['Cluster'] = clusters  # 각 데이터 포인트의 군집 레이블 추가
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=data.iloc[:, 0], y=data.iloc[:, 1], hue='Cluster', data=data, palette='viridis', s=100)
+	plt.scatter(iris.data[clarans.medoids_, 0], iris.data[clarans.medoids_, 1], c='red', marker='X', s=200, label='Medoids')
+	plt.title("CLARANS Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
+
 ![](./images/1-5.PNG)
 <br>
 
