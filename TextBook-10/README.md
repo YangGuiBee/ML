@@ -37,16 +37,6 @@
 	[5-4] SOMs(Self-Organizing Maps)
 
 
-	[1] 비계층적 클러스터링(Non-Hierarchical Clustering)
-	[1-1] k-평균 클러스터링(k-Means Clustering)
-	[1-2] 밀도기반 군집화(Density-Based Spatial Clustering of Applications with Noise, DBSCAN)
-	[1-3] 가우시안 혼합 모델(Gaussian Mixture Model, GMM)
-	[1-4] 평균이동 군집화(Mean-Shift Clustering)
-	[1-5] 스펙트럼 군집화(Spectral Clustering)
-	[1-6] 군집구조 식별을 위한 점 순서화(Ordering Points To Identify the Clustering Structure, OPTICS)
-	[1-7] 친화도 전파(Affinity Propagation)
-	[2] 계층적 클러스터링(Hierarchical Clustering)
-   
 ---  
 
 ### 클러스터링(k-Means Clustering)이란?
@@ -573,6 +563,7 @@
 	plt.legend(title='Cluster')
 	plt.show()
 
+![](./images/2-1.PNG)
 <br>
 
 # [2-2] CURE(Clustering Using Representatives)
@@ -583,6 +574,7 @@
 ▣ 응용분야: 지리적 데이터 분석, 대규모 네트워크 데이터에서 커뮤니티 탐색, 유전자 데이터의 군집화<br>
 ▣ 모델식: 각 군집의 대표 포인트를 지정하고, 이를 기반으로 다른 군집과의 거리를 계산하여 군집을 형성. 군집 내의 대표 포인트들은 군집 중심에서 일정 비율로 축소되며, 여러 개의 대표 포인트를 통해 군집의 분포를 표현<br>
 
+![](./images/2-2.PNG)
 <br>
 
 # [2-3] ROCK(Robust Clustering using Links)
@@ -593,6 +585,7 @@
 ▣ 응용분야: 추천 시스템, 문서 분류 및 텍스트 마이닝, 범주형 속성이 많은 데이터의 군집화<br>
 ▣ 모델식: 데이터 포인트 간의 연결을 기반으로 군집을 형성하며, 연결의 개수를 기반으로 군집 간의 유사성을 측정하여 군집화<br>
 
+![](./images/2-3.PNG)
 <br>
 
 # [2-4] Chameleon
@@ -603,6 +596,7 @@
 ▣ 응용분야: 소셜 네트워크에서 커뮤니티 탐색, 비정형 데이터 분석, 웹 문서 분류<br>
 ▣ 모델식: 두 단계로 군집을 형성하는데 첫째, 데이터를 작은 초기 군집으로 나누고, 둘째, 유사한 군집을 동적으로 병합하여 최종 군집을 형성<br>
 
+![](./images/2-4.PNG)
 <br>
 
 # [2-5] Echidna
@@ -613,6 +607,7 @@
 ▣ 응용분야: 환경 모니터링 센서 데이터 분석, 지리적 데이터에서 지역 군집 탐색, 비정형 데이터의 군집화<br> 
 ▣ 모델식: 각 데이터 포인트의 밀도를 기반으로 군집을 형성. 군집화 과정에서 지역 밀도 변화와 포인트 간의 거리 정보를 결합하여 유사성을 측정. 구체적인 수식은 이론마다 다를 수 있으며, 밀도 기반 지역 군집을 탐색하기 위해 다양한 거리와 밀도 척도를 조합하여 사용<br>
 
+![](./images/2-5.PNG)
 <br>
 
 # [3-1] DBSCAN(Density-Based Spatial Clustering of Applications with Noise)
@@ -639,6 +634,7 @@
 	plt.ylabel("Feature 2")
 	plt.show()
 
+![](./images/3-1.PNG)
 <br>
 
 # [3-2] OPTICS(Ordering Points To Identify the Clustering Structure)
@@ -665,6 +661,7 @@
 	plt.ylabel("Feature 2")
 	plt.show()
 
+![](./images/3-2.PNG)
 <br>
 
 # [3-3] DBCLASD(Distribution Based Clustering of Large Spatial Databases)
@@ -675,6 +672,7 @@
 ▣ 응용분야: 지리적 데이터베이스 분석, 공간 데이터에서 밀도 기반 군집화, 이상 탐지 및 밀도 기반 패턴 탐색<br>
 ▣ 모델식: 각 데이터 포인트의 확률 밀도를 기반으로 군집을 형성하며, 확률 밀도는 주어진 확률 분포 모델을 사용해 계산<br>
 
+![](./images/3-3.PNG)
 <br>
 
 # [3-4] DENCLUE(DENsity-based CLUstEring)
@@ -685,6 +683,7 @@
 ▣ 응용분야: 패턴 인식 및 이미지 처리, 데이터 마이닝에서 밀도 기반 패턴 탐색, 환경 모니터링 데이터 분석<br>
 ▣ 모델식: 각 데이터 포인트의 밀도 기여를 가우시안 커널 등으로 모델링하여 밀도 함수를 계산(군집은 밀도 함수의 극대점에서 시작하여 군집화)<br>
 
+![](./images/3-4.PNG)
 <br>
 
 # [4-1] Wave-Cluster
@@ -695,6 +694,7 @@
 ▣ 응용분야: 이미지 분석, 영상 처리 및 패턴 인식, 대규모 지리 데이터 분석<br>
 ▣ 모델식: 각 격자에서 웨이블릿 변환을 수행하여 밀도가 높은 클러스터 영역을 식별. 웨이블릿 변환을 통해 고주파와 저주파 성분을 분리하여 노이즈와 이상치를 제거하고, 밀도가 높은 영역을 군집으로 형성<br>
 
+![](./images/4-1.PNG)
 <br>
 
 # [4-2] STING(Statistical Information Grid-based method)
@@ -705,6 +705,7 @@
 ▣ 응용분야: 위성 이미지 분석, 지리 데이터와 환경 데이터의 군집화, 데이터 마이닝에서 대규모 데이터 분석<br>
 ▣ 모델식: 격자를 계층적으로 나누고, 각 격자의 통계 정보(평균, 분산 등)를 기반으로 군집을 형성. 격자의 통계 정보는 상위 계층에서 하위 계층으로 전파되며, 밀도 기반 군집화를 수행<br>
 
+![](./images/4-2.PNG)
 <br>
 
 # [4-3] CLIQUE(CLustering In QUEst)
@@ -715,6 +716,7 @@
 ▣ 응용분야: 생물학에서 유전자 데이터 군집화, 고차원 금융 데이터 분석, 이미지 분할 및 텍스트 데이터 분석<br>
 ▣ 모델식: 데이터를 격자로 나눈 후, 밀도가 높은 부분 공간을 탐색하여 군집을 형성(군집은 각 부분 공간에서 밀도가 임계값 이상인 격자들로 구성)<br>
 
+![](./images/4-3.PNG)
 <br>
 
 # [4-4] OptiGrid
@@ -725,6 +727,7 @@
 ▣ 응용분야: 의료 데이터의 군집화, 데이터 마이닝에서 불균일한 데이터 탐색, 지리적 데이터에서 지역적 군집 탐색<br>
 ▣ 모델식: OptiGrid는 각 차원에서 최적의 격자 분할을 탐색하여 군집을 형성합니다. 격자 내 밀도를 기준으로 최적의 분할 위치를 찾아내고, 밀도가 높은 격자들을 군집으로 형성합니다.
 
+![](./images/4-4.PNG)
 <br>
 
 # [5-1] EM(Expectation-Maximization)
@@ -765,6 +768,7 @@ M 단계: 이 확률을 사용하여 각 군집의 매개변수를 업데이트�
 	plt.legend(title='Cluster')
 	plt.show()
 
+![](./images/5-1.PNG)
 <br>
 
 # [5-2] COBWEB
@@ -776,6 +780,8 @@ M 단계: 이 확률을 사용하여 각 군집의 매개변수를 업데이트�
 ▣ 모델식: COBWEB은 각 노드의 범주 유틸리티(Category Utility, CU)를 기반으로 데이터를 분류하며, CU는 다음과 같이 계산됩니다.
 ![](./images/COBWEB.png)
 
+
+![](./images/5-2.PNG)
 <br>
 
 # [5-3] CLASSIT
@@ -786,6 +792,7 @@ M 단계: 이 확률을 사용하여 각 군집의 매개변수를 업데이트�
 ▣ 응용분야: 실시간 데이터 분석. 유전자 및 생물학적 데이터 분석. 시계열 데이터 분석.
 ▣ 모델식: CLASSIT은 COBWEB의 Category Utility를 변형하여 수치형 데이터를 처리할 수 있도록 설계되었습니다. 평균 및 분산을 기반으로 군집의 경계를 정의하여 데이터를 그룹화합니다.
 
+![](./images/5-3.PNG)
 <br>
 
 # [5-4] SOMs(Self-Organizing Maps)
@@ -818,6 +825,7 @@ M 단계: 이 확률을 사용하여 각 군집의 매개변수를 업데이트�
     	plt.text(w[0], w[1], str(iris.target[i]), color=plt.cm.tab10(iris.target[i] / 2))  # 클러스터 레이블 추가
 	plt.title("Self-Organizing Map for Iris Dataset")
 
+![](./images/5-4.PNG)
 <br>
 
 
