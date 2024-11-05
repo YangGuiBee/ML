@@ -353,6 +353,89 @@
 ▣ 응용분야: 대규모 고객 데이터의 군집화, 생물학적 데이터 분석, 시장 조사 데이터의 분석 및 군집화<br>
 ▣ 모델식: 데이터셋에서 일부 샘플을 선택하여 PAM을 적용하고, 여러 번 반복 수행하여 최적의 medoid를 찾는다<br>
 
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from scipy.spatial.distance import cdist
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	
+	class CLARA:
+	    def __init__(self, n_clusters=3, n_samples=25, numlocal=5, max_iter=300, random_state=None):
+	        self.n_clusters = n_clusters
+	        self.n_samples = n_samples  # 각 샘플의 크기
+	        self.numlocal = numlocal    # PAM 반복 횟수
+	        self.max_iter = max_iter    # 최대 반복 횟수
+	        self.random_state = random_state
+	
+	    def fit_predict(self, X):
+	        if self.random_state:
+	            np.random.seed(self.random_state)
+	
+	        best_medoids = None
+	        best_score = float('inf')
+	        best_labels = None
+	
+	        # numlocal 번의 샘플링 반복
+	        for _ in range(self.numlocal):
+	            # 데이터에서 무작위로 샘플링
+	            sample_indices = np.random.choice(len(X), self.n_samples, replace=False)
+	            sample = X[sample_indices]
+	
+	            # PAM을 샘플에 적용하여 최적의 메도이드 찾기
+	            medoids = self._initialize_medoids(sample)
+	            for _ in range(self.max_iter):
+	                distances = cdist(sample, sample[medoids], metric='euclidean')
+	                labels = np.argmin(distances, axis=1)
+	                
+	                new_medoids = np.copy(medoids)
+	                for i in range(self.n_clusters):
+	                    cluster_points = np.where(labels == i)[0]
+	                    intra_cluster_distances = cdist(sample[cluster_points], sample[cluster_points], metric='euclidean').sum(axis=1)
+	                    new_medoids[i] = cluster_points[np.argmin(intra_cluster_distances)]
+	
+	                if np.array_equal(medoids, new_medoids):
+	                    break
+	                medoids = new_medoids
+	
+	            # 전체 데이터에 대한 비용 계산
+	            full_distances = cdist(X, sample[medoids], metric='euclidean')
+	            full_score = np.sum(np.min(full_distances, axis=1))
+	
+	            # 더 나은 메도이드 셋이 발견되면 갱신
+	            if full_score < best_score:
+	                best_medoids = medoids
+	                best_score = full_score
+	                best_labels = np.argmin(full_distances, axis=1)
+	
+	        self.medoids_ = sample[best_medoids]  # 최적의 메도이드를 전체 데이터셋에서 인덱싱
+	        self.labels_ = best_labels
+	        return self.labels_
+	
+	    def _initialize_medoids(self, X):
+	        return np.random.choice(len(X), self.n_clusters, replace=False)
+	
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = pd.DataFrame(iris.data, columns=iris.feature_names)
+	
+	# CLARA 알고리즘 적용 (군집 수: 3)
+	clara = CLARA(n_clusters=3, n_samples=30, numlocal=5, max_iter=300, random_state=0)
+	clusters = clara.fit_predict(iris.data)  # 전체 데이터에 대해 군집화 수행
+	
+	# 군집화 결과를 데이터프레임에 추가
+	data['Cluster'] = clusters  # 각 데이터 포인트의 군집 레이블 추가
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=data.iloc[:, 0], y=data.iloc[:, 1], hue='Cluster', data=data, palette='viridis', s=100)
+	plt.scatter(clara.medoids_[:, 0], clara.medoids_[:, 1], c='red', marker='X', s=200, label='Medoids')
+	plt.title("CLARA Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
+	
 ![](./images/1-6.PNG)
 <br>
 
