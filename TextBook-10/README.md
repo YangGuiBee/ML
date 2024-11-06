@@ -25,11 +25,11 @@
 	[3-4] DENCLUE(DENsity-based CLUstEring)
  	[3-5] Mean-Shift Clustering
 
- 	[4] Grid-Based Clustering
-	[4-1] Wave-Cluster
-	[4-2] STING(Statistical Information Grid-based method)
-	[4-3] CLIQUE(CLustering In QUEst)
-	[4-4] OptiGrid
+ 	[4] Grid-Based Clustering : 데이터 공간을 격자(grid)로 나누고 각 격자의 특성을 바탕으로 클러스터를 형성
+	[4-1] Wave-Cluster : 웨이블렛 변환(주파수 분석 도구로, 시간이나 공간에서 신호의 국소적인 변화를 포착)을 사용하여 데이터의 밀도를 측정하고, 고밀도 지역을 클러스터로 분류
+	[4-2] STING(Statistical Information Grid-based method) : 데이터 공간을 계층적 격자로 나누고, 각 격자의 통계 정보를 바탕으로 클러스터
+	[4-3] CLIQUE(CLustering In QUEst) : 데이터 공간을 격자화하고, 밀도가 높은 격자들을 클러스터
+	[4-4] OptiGrid : 데이터 분포를 기준으로 최적의 격자를 생성하고, 이를 바탕으로 클러스터링
 
 	[5] Model-Based Clustering : 각 모델은 데이터의 특성과 요구사항에 따라, EM과 GMM은 확률적 모델링, COBWEB과 CLASSIT는 계층적 구조, SOM은 고차원 데이터를 저차원으로 표현하거나 시각화할 때 유용
 	[5-1] EM(Expectation-Maximization) : 데이터의 숨겨진 변수(클러스터 레이블)에 대한 확률 분포를 최적화
@@ -38,9 +38,9 @@
 	[5-4] SOMs(Self-Organizing Maps) : 인공신경망의 일종으로 고차원 데이터를 저차원으로 표현
  	[5-5] GMM(Gaussian Mixture Model) : 여러 개의 정규 분포를 통해 데이터를 모델링하는 혼합 모델(EM 알고리즘을 사용하여 파라미터를 최적화)
 
-	[6] Graph-Based Clustering
-	[6-1] Spectral Clustering
-	[6-2] Affinity Propagation
+	[6] Graph-Based Clustering : 그래프 기반 접근법을 사용하여 데이터의 유사성을 활용
+	[6-1] Spectral Clustering : 비선형 데이터의 그래프 표현을 통해 데이터의 연결성을 기반으로 클러스터링
+	[6-2] Affinity Propagation : 데이터 포인트 간의 "유사도"와 "우선도"에 따라 클러스터의 중심점(대표 포인트)을 자동으로 선택
 
 ---  
 
