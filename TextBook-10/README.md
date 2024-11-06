@@ -134,6 +134,8 @@
 	plt.ylabel('WCSS')  # y축 레이블 설정
 	plt.show()  # 그래프 출력
 
+ ![](./images/elbow.PNG)
+
 **▣ Silhouette :** 각 군집 간의 거리가 얼마나 효율적으로 분리돼 있는지를 나타냄
 
 
