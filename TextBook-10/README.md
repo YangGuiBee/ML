@@ -1339,7 +1339,18 @@
 (4) 어떠한 포인트가 생성한 Cluster 안에 존재하는 다른 점 중에 다른 Cluster의 중심이 되는 데이터 포인트가 존재한다면 두 Cluster는 하나의 Cluster로 간주<br>
 (5) 1~4번을 모든 포인트에 대해서 반복. 어느 Cluster에도 포함되지 않는 데이터 포인트는 이상치로 처리<br>
 
-
+![](./images/31.PNG)
+<br>
+![](./images/32.PNG)
+<br>
+![](./images/33.PNG)
+<br>
+![](./images/34.PNG)
+<br>
+![](./images/35.PNG)
+<br>
+![](./images/36.PNG)
+<br>
 
 	import numpy as np
 	from sklearn.datasets import load_iris
