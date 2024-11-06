@@ -2226,13 +2226,12 @@ M 단계: 이 확률을 사용하여 각 군집의 매개변수를 업데이트�
 	plt.legend(title='Cluster')
 	plt.show()
 
-
 ![](./images/5-5.PNG)
 
 <br>
 
 
-# [6-1] 스펙트럼 군집화(Spectral Clustering)
+# [6-1] Spectral Clustering
 ▣ 정의 : 그래프 이론을 기반으로 데이터의 유사도 행렬(Similarity Matrix)을 사용해 저차원 공간에서 군집을 찾는 알고리즘<br>
 ▣ 필요성 : 복잡한 구조를 가진 데이터에서 비선형적인 경계를 정의할 수 있는 군집화 방법이 필요할 때 유용<br>
 ▣ 장점 : 비선형적인 데이터에도 유용하며, 전통적인 군집화 알고리즘보다 복잡한 데이터 구조 처리 가능<br>
@@ -2241,22 +2240,51 @@ M 단계: 이 확률을 사용하여 각 군집의 매개변수를 업데이트�
 ▣ 모델식 : 𝐿은 라플라시안 행렬, 𝐷는 대각 행렬(각 노드의 차수), 𝐴는 인접 행렬(이 라플라시안 행렬의 고유벡터를 사용해 데이터를 군집화)<br>
 $𝐿=𝐷−𝐴$<br>
 
-	from sklearn.cluster import SpectralClustering
+	import numpy as np
 	from sklearn.datasets import load_iris
+	from sklearn.cluster import SpectralClustering
+	from sklearn.metrics import silhouette_score, accuracy_score
 	import matplotlib.pyplot as plt
-
+	import seaborn as sns
+	import pandas as pd
+	from scipy.stats import mode
+	
+	# Iris 데이터셋 로드
 	iris = load_iris()
-	X = iris.data
-
-	spectral = SpectralClustering(n_clusters=3, affinity='nearest_neighbors', random_state=0)
-	labels = spectral.fit_predict(X)
-
-	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='coolwarm')
+	data = iris.data
+	true_labels = iris.target
+	
+	# Spectral Clustering 모델 설정 및 학습
+	spectral_clustering = SpectralClustering(n_clusters=3, affinity='nearest_neighbors', random_state=0)
+	predicted_labels = spectral_clustering.fit_predict(data)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = predicted_labels
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(data, predicted_labels)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매핑하여 정확도 계산)
+	mapped_labels = np.zeros_like(predicted_labels)
+	for i in range(3):
+	    mask = (predicted_labels == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
 	plt.title("Spectral Clustering on Iris Dataset")
-	plt.xlabel("Feature 1")
-	plt.ylabel("Feature 2")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
 	plt.show()
 
+![](./images/6-1.PNG)
 <br>
 
 # [6-2] 친화도 전파(Affinity Propagation)
@@ -2268,24 +2296,53 @@ $𝐿=𝐷−𝐴$<br>
 ▣ 모델식: 각 데이터 포인트 간의 유사도 𝑠(𝑖,𝑘)와 책임 𝑟(𝑖,𝑘), 가용도 𝑎(𝑖,𝑘)를 반복적으로 계산해 중심점을 결정<br>
 ![](./images/AP.PNG)
 
-	from sklearn.cluster import AffinityPropagation
+	import numpy as np
 	from sklearn.datasets import load_iris
+	from sklearn.cluster import AffinityPropagation
+	from sklearn.metrics import silhouette_score, accuracy_score
 	import matplotlib.pyplot as plt
-
+	import seaborn as sns
+	import pandas as pd
+	from scipy.stats import mode
+	
+	# Iris 데이터셋 로드
 	iris = load_iris()
-	X = iris.data
-
+	data = iris.data
+	true_labels = iris.target
+	
+	# Affinity Propagation 모델 설정 및 학습
 	affinity_propagation = AffinityPropagation(random_state=0)
-	labels = affinity_propagation.fit_predict(X)
-
-	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='rainbow')
+	predicted_labels = affinity_propagation.fit_predict(data)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = predicted_labels
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(data, predicted_labels)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매핑하여 정확도 계산)
+	mapped_labels = np.zeros_like(predicted_labels)
+	for i in range(len(np.unique(predicted_labels))):
+	    mask = (predicted_labels == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
 	plt.title("Affinity Propagation Clustering on Iris Dataset")
-	plt.xlabel("Feature 1")
-	plt.ylabel("Feature 2")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
 	plt.show()
 
+![](./images/6-2.PNG)
 <br>
 
-![](./images/CA_accuracy.png)
+![](./images/CA.PNG)
 
 <br>
