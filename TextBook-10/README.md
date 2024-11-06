@@ -31,12 +31,12 @@
 	[4-3] CLIQUE(CLustering In QUEst)
 	[4-4] OptiGrid
 
-	[5] Model-Based Clustering
-	[5-1] EM(Expectation-Maximization)
-	[5-2] COBWEB
-	[5-3] CLASSIT
-	[5-4] SOMs(Self-Organizing Maps)
- 	[5-5] GMM(Gaussian Mixture Model)
+	[5] Model-Based Clustering : 각 모델은 데이터의 특성과 요구사항에 따라, EM과 GMM은 확률적 모델링, COBWEB과 CLASSIT는 계층적 구조, SOM은 고차원 데이터를 저차원으로 표현하거나 시각화할 때 유용
+	[5-1] EM(Expectation-Maximization) : 데이터의 숨겨진 변수(클러스터 레이블)에 대한 확률 분포를 최적화
+	[5-2] COBWEB : 트리 구조를 사용하여 점진적으로 클러스터를 생성
+	[5-3] CLASSIT : COBWEB의 변형으로 연속적인 수치 데이터를 다루는 데 초점
+	[5-4] SOMs(Self-Organizing Maps) : 인공신경망의 일종으로 고차원 데이터를 저차원으로 표현
+ 	[5-5] GMM(Gaussian Mixture Model) : 여러 개의 정규 분포를 통해 데이터를 모델링하는 혼합 모델(EM 알고리즘을 사용하여 파라미터를 최적화)
 
 	[6] Graph-Based Clustering
 	[6-1] Spectral Clustering
