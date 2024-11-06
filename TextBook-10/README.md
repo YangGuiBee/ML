@@ -109,6 +109,34 @@
 
 <br>
 
+## 군집화 알고리즘의 평가 방법(Elbow, Silhouette)
+**▣ Elbow :** 군집 수를 결정하기 위한 시각적 방법으로 군집 수를 변화시키면서 각 군집 수에 따른 관성(Inertia), 즉 군집 내 SSE(Sum of Squared Errors) 또는 WCSS(Within-Cluster Sum of Squares) 값을 계산(군집의 개수가 증가할수록 각 군집이 더 작아지고, 데이터 포인트들이 군집 중심에 더 가까워지기 때문에 WCSS이 감소하며, 군집 수를 계속 증가시키다 보면, 어느 순간부터 오차가 크게 줄어들지 않는 구간이 나타나는데 이때의 군집 수를 최적의 군집 수로 선택)<br>
+
+	import matplotlib.pyplot as plt  # 데이터 시각화를 위한 matplotlib 라이브러리 import
+	from sklearn.datasets import load_iris  # iris 데이터셋을 로드하기 위한 모듈 import
+	from sklearn.cluster import KMeans  # KMeans 군집화 알고리즘을 사용하기 위한 모듈 import
+
+	# 데이터 로드
+	iris = load_iris()  # iris 데이터셋 로드
+	data = iris.data  # iris 데이터셋에서 입력 데이터(features) 추출
+
+	# 엘보 기법을 사용한 최적의 군집 수 찾기
+	wcss = []  # 각 군집 수에 대한 WCSS 값을 저장할 리스트 초기화
+	for k in range(1, 5):  # 군집 수를 1부터 10까지 변경하며 반복
+    	kmeans = KMeans(n_clusters=k, init='k-means++', random_state=42)  # k개의 군집을 가지는 KMeans 모델 생성
+    	kmeans.fit(data)  # KMeans 모델을 데이터에 학습시킴
+    	wcss.append(kmeans.inertia_)  # 학습된 모델의 관성 값(WCSS)을 리스트에 추가
+
+	# 그래프 시각화
+	plt.plot(range(1, 5), wcss, marker='o')  # 군집 수에 따른 WCSS 값을 선 그래프로 시각화
+	plt.title('Elbow Method')  # 그래프 제목 설정
+	plt.xlabel('Number of clusters')  # x축 레이블 설정
+	plt.ylabel('WCSS')  # y축 레이블 설정
+	plt.show()  # 그래프 출력
+
+**▣ Silhouette :** 각 군집 간의 거리가 얼마나 효율적으로 분리돼 있는지를 나타냄
+
+
 # [1-2] K-medoids
 ▣ 정의: K-means와 유사하지만, 각 군집의 중심을 군집내 가장 중앙에 위치한 실제 데이터 포인트(medoid)로 설정함으로써 이상치(outlier)에 더 강하다.<br>
 ▣ 필요성: 이상치가 많은 데이터나 노이즈가 있는 데이터에서 K-means의 단점을 보완하여 안정적인 군집화를 제공<br>
