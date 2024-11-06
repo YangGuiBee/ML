@@ -184,8 +184,61 @@
 
 ![](./images/elbow3.PNG)
 
-**▣ Silhouette :** 각 군집 간의 거리가 얼마나 효율적으로 분리돼 있는지를 나타냄
+**▣ Silhouette :** 각 군집 간의 거리가 얼마나 효율적으로 분리되어 응집력있게 군집화되었는지를 평가하는 지표. 각 데이터 포인트에 대해 실루엣 계수(Silhouette Coefficient)를 계산하며, 이 값은 데이터 포인트가 자신의 군집에 얼마나 잘 속해 있는지를 나타냄<br>
 
+	import matplotlib.pyplot as plt
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.cluster import KMeans
+	from sklearn.metrics import silhouette_score, accuracy_score
+	from scipy.stats import mode
+
+	# 데이터 로드
+	iris = load_iris()
+	data = iris.data
+	true_labels = iris.target
+
+	# 실루엣 분석 및 정확도를 통한 최적의 군집 수 찾기
+	silhouette_scores = []
+	accuracies = []
+
+	for k in range(2, 11):  # 군집 수는 최소 2개 이상이어야 실루엣 점수를 계산할 수 있음
+		kmeans = KMeans(n_clusters=k, init='k-means++', random_state=42)
+		predicted_labels = kmeans.fit_predict(data)
+    
+    		# Silhouette Score 계산
+    		silhouette = silhouette_score(data, predicted_labels)
+    		silhouette_scores.append(silhouette)
+    
+    		# Accuracy 계산 (군집 레이블과 실제 레이블을 매핑하여 정확도 계산)
+    		mapped_labels = np.zeros_like(predicted_labels)
+    		for i in range(k):
+			mask = (predicted_labels == i)
+			mapped_labels[mask] = mode(true_labels[mask])[0]
+    
+    		accuracy = accuracy_score(true_labels, mapped_labels)
+    		accuracies.append(accuracy)
+
+	# 실루엣 점수 그래프 시각화
+	plt.figure(figsize=(12, 5))
+
+	plt.subplot(1, 2, 1)
+	plt.plot(range(2, 11), silhouette_scores, marker='o')
+	plt.title('Silhouette Analysis')
+	plt.xlabel('Number of clusters')
+	plt.ylabel('Silhouette Score')
+
+	# 정확도 그래프 시각화
+	plt.subplot(1, 2, 2)
+	plt.plot(range(2, 11), accuracies, marker='o', color='orange')
+	plt.title('Accuracy by Number of Clusters')
+	plt.xlabel('Number of clusters')
+	plt.ylabel('Accuracy')
+	plt.tight_layout()
+	plt.show()
+
+![](./images/silhouette.PNG)
+<br>
 
 # [1-2] K-medoids
 ▣ 정의: K-means와 유사하지만, 각 군집의 중심을 군집내 가장 중앙에 위치한 실제 데이터 포인트(medoid)로 설정함으로써 이상치(outlier)에 더 강하다.<br>
