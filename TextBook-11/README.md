@@ -5,10 +5,14 @@
 ## 연관 규칙(Association Rule)
 <br>
 
-    [1] FP Growth
-    [2] 이클렛(Eclat)
-    [3] 어프라이어리(Apriori)
-  
+    [1] Apriori
+    [2] Eclat(Equivalence Class Transformation)
+    [3] FP-Growth(Frequent Pattern Growth")
+    [4] AIS(Artificial Immune System)
+    [5] SETM(Sequential Execution of Transaction Merging)
+    [6] Multi-level Association Rules
+    [7] Multi-dimensional Association Rules
+    
 
 ## 차원 축소(Dimensionality Reduction)
 <br>
@@ -21,6 +25,71 @@
     [9] t-distributed Stochastic Neighbor Embedding(t-SNE)
 
 ---  
+
+[1] Apriori
+▣ 정의: 연관 규칙을 발견하기 위한 빈발 항목 집합 생성 알고리즘으로, 최소 지지도와 신뢰도를 설정하여 규칙을 도출<br>
+▣ 필요성: 대량의 데이터에서 연관된 항목들을 효율적으로 식별할 필요가 있을 때 사용<br>
+▣ 장점: 이해하기 쉽고, 규칙 생성 과정이 명확<br>
+▣ 단점: 데이터베이스 접근이 빈번하며, 대규모 데이터에서는 성능저하 가능성<br>
+▣ 응용분야: 마켓 바스켓 분석, 추천 시스템<br>
+
+<br>
+
+[2] Eclat(Equivalence Class Transformation)
+▣ 정의: 빈발 항목 집합을 트리 구조로 생성하여 효율적인 연관 규칙 도출을 가능하게 하는 알고리즘<br>
+▣ 필요성: 연관 규칙을 메모리 효율적으로 찾기 위해 고안<br>
+▣ 장점: 메모리 효율성이 뛰어나고, 빠름<br>
+▣ 단점: 지지도 계산이 많을 경우 성능 저하 가능성<br>
+▣ 응용분야: 실시간 데이터 분석, 추천 시스템<br>
+
+<br>
+
+[3] FP-Growth(Frequent Pattern Growth")
+▣ 정의: FP-Tree를 통해 빈발 항목 집합을 생성하는 알고리즘으로, 데이터셋이 클 때 메모리 효율적으로 작동<br>
+▣ 필요성: Apriori의 성능 문제를 해결하기 위해 고안<br>
+▣ 장점: 메모리 효율이 높고, 대규모 데이터셋에서 빠르게 작동<br>
+▣ 단점: 구현이 복잡하고, FP-Tree 생성을 위한 학습이 필요<br>
+▣ 응용분야: 대규모 데이터 분석, 전자상거래 추천 시스템<br>
+
+<br>
+
+[4] AIS(Artificial Immune System)
+▣ 정의: 거래 데이터를 순차적으로 결합하여 빈번한 항목 집합을 찾는 초기 연관규칙 알고리즘 중 하나<br>
+▣ 필요성: 초기 연관 규칙 연구에서 활용되었으나, 성능의 한계로 현재는 거의 사용되지 않음<br>
+▣ 장점: 간단한 구조로 이해하기 쉽다.<br>
+▣ 단점: 비효율적이며, Apriori보다 성능이 떨어짐<br>
+▣ 응용분야: 초기 연관 규칙 연구<br>
+
+<br>
+
+[5] SETM(Sequential Execution of Transaction Merging)
+▣ 정의: Apriori의 변형으로, 데이터베이스 접근 횟수를 줄여 성능을 개선<br>
+▣ 필요성: 연관 규칙 생성에서 데이터베이스 접근이 빈번한 경우 사용<br>
+▣ 장점: Apriori에 비해 빠르며 메모리 효율적<br>
+▣ 단점: 성능 한계로 인해 많이 사용되진 않음<br>
+▣ 응용분야: 실시간 데이터 분석, 연관 규칙 학습<br>
+
+<br>
+
+[6] Multi-level Association Rules
+▣ 정의: 연관 규칙을 계층적으로 탐색하여 다중 수준에서 규칙을 생성하는 방식<br>
+▣ 필요성: 제품 카테고리별 분석이 필요한 경우에 적합<br>
+▣ 장점: 더 정교한 규칙을 생성<br>
+▣ 단점: 복잡성이 증가하며, 해석이 어려워질 수 있음<br>
+▣ 응용분야: 전자상거래, 추천 시스템, 마케팅 분석<br>
+
+<br>
+
+[7] Multi-dimensional Association Rules
+▣ 정의: 여러 속성을 포함하여 다양한 차원의 규칙을 생성<br>
+▣ 필요성: 다양한 속성 간 관계를 탐색하는 데 적합<br>
+▣ 장점: 규칙의 범위를 확장할 수 있어 더 세밀한 규칙 도출 가능.<br>
+▣ 단점: 복잡성과 해석의 어려움<br>
+▣ 응용분야: 사용자 속성 기반 추천 시스템, 마케팅 인텔리전스<br>
+
+<br>
+
+
 
 # [1] FP Growth
 ▣ 정의 : FP-Growth는 Apriori 알고리즘의 대안으로, 빈발 항목 집합을 효율적으로 찾는 방법이다. FP-트리(Frequent Pattern Tree)를 만들어 빈발 항목들을 저장하고, 트리 구조를 사용해 자주 발생하는 패턴을 빠르게 찾는다. Apriori와 달리 매번 후보 집합을 생성하지 않으며, 데이터의 트랜잭션을 직접 탐색하여 빈발 항목 집합을 구한다.<br>
