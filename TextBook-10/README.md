@@ -136,6 +136,54 @@
 
  ![](./images/elbow.PNG)
 
+	import numpy as np
+	import matplotlib.pyplot as plt
+	from sklearn.datasets import load_iris
+	from sklearn.cluster import KMeans
+	from sklearn.metrics import silhouette_score, accuracy_score
+	import pandas as pd
+	import seaborn as sns
+	from scipy.stats import mode
+
+	# 데이터 로드
+	iris = load_iris()
+	data = iris.data
+	true_labels = iris.target
+
+	# K-means 클러스터링 (군집 수를 2로 설정)
+	kmeans = KMeans(n_clusters=2, init='k-means++', random_state=42)
+	predicted_labels = kmeans.fit_predict(data)
+
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(data, predicted_labels)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매핑하여 정확도 계산)
+	mapped_labels = np.zeros_like(predicted_labels)
+	for i in range(2):  # 각 군집에 대해 반복
+    		mask = (predicted_labels == i)
+    		mapped_labels[mask] = mode(true_labels[mask])[0]
+
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+
+	# 데이터프레임으로 변환하여 클러스터 레이블 추가
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = predicted_labels  # 예측된 군집 레이블 추가
+
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=iris.feature_names[0], y=iris.feature_names[1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.title("K-means Clustering on Iris Dataset (n_clusters=2)")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
+
+![](./images/elbow2.PNG)
+
+![](./images/elbow3.PNG)
+
 **▣ Silhouette :** 각 군집 간의 거리가 얼마나 효율적으로 분리돼 있는지를 나타냄
 
 
@@ -740,6 +788,8 @@
 ![](./images/1-7.PNG)
 <br>
 
+---
+
 # [2-1] BIRCH(Balanced Iterative Reducing and Clustering using Hierarchies)
 ▣ 정의: 대규모 데이터를 효율적으로 군집화할 수 있는 계층적 클러스터링 알고리즘으로, 메모리 사용량을 줄이기 위해 데이터를 압축하는 방식으로 클러스터링을 수행. BIRCH는 데이터를 클러스터링 피처(Clustering Feature, CF) 트리 구조로 유지하여 효율적으로 군집을 형성<br>
 ▣ 필요성: 대규모 데이터에서 효율적으로 군집화할 수 있으며, 메모리를 절약하면서도 효과적인 계층적 군집화가 필요할 때 유용<br>
@@ -1218,6 +1268,8 @@
 
 <br>
 
+---
+
 # [3-1] DBSCAN(Density-Based Spatial Clustering of Applications with Noise)
 ▣ 정의 : 밀도가 높은 영역을 군집으로 묶고, 밀도가 낮은 점들은 노이즈로 간주하는 밀도 기반 군집화 알고리즘<br>
 ▣ 필요성 : 다양한 밀도의 데이터 군집화 및 이상치 탐지에 유용<br>
@@ -1561,8 +1613,9 @@
 	plt.show()
 
 ![](./images/3-5.PNG)
-
 <br>
+
+---
 
 # [4-1] Wave-Cluster
 ▣ 정의: 웨이블릿 변환을 이용한 클러스터링 알고리즘으로 데이터를 격자 형태로 나눈 후 웨이블릿 변환을 사용해 밀도가 높은 영역을 군집으로 탐지<br>
@@ -1928,6 +1981,8 @@
 ![](./images/4-4.PNG)
 <br>
 
+---
+
 # [5-1] EM(Expectation-Maximization)
 ▣ 정의: EM(Expectation-Maximization) 알고리즘은 데이터가 여러 개의 잠재 확률 분포(보통 가우시안)에서 생성되었다고 가정하여, 데이터를 여러 분포로 모델링하는 방법입니다. EM은 각 데이터 포인트가 여러 군집에 속할 확률을 계산해 소프트 군집화를 제공합니다.
 ▣ 필요성: 데이터가 다양한 확률 분포로 구성되어 있을 때, 군집의 경계를 유연하게 설정할 수 있어 더욱 정확한 군집화가 가능합니다.
@@ -2253,9 +2308,9 @@ M 단계: 이 확률을 사용하여 각 군집의 매개변수를 업데이트�
 	plt.show()
 
 ![](./images/5-5.PNG)
-
 <br>
 
+---
 
 # [6-1] Spectral Clustering
 ▣ 정의 : 그래프 이론을 기반으로 데이터의 유사도 행렬(Similarity Matrix)을 사용해 저차원 공간에서 군집을 찾는 알고리즘<br>
