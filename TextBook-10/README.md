@@ -2,28 +2,28 @@
 
 ---
 
-	[1] Partitioning-Based Clustering
-	[1-1] K-means
-	[1-2] K-medoids
-	[1-3] K-modes
-	[1-4] PAM(Partitioning Around Medoids)
-	[1-5] CLARANS(Clustering Large Applications based on RANdomized Search)
-	[1-6] CLARA(Clustering LARge Applications)
-	[1-7] FCM(Fuzzy C-means)
+	[1] Partitioning-Based Clustering : 데이터셋을 사전에 정의된 클러스터 개수로 분할하며, 각 클러스터에 데이터를 배정하고 이를 반복적으로 최적화하는 방식
+	[1-1] K-means : 각 클러스터의 중심(centroid)을 기준으로 데이터를 분할
+	[1-2] K-medoids : K-means와 유사하지만 클러스터의 중심으로 평균값 대신 데이터 포인트 중 하나를 대표로 선택
+	[1-3] K-modes : 범주형 데이터에 특화된 K-means 변형
+	[1-4] PAM(Partitioning Around Medoids) : K-medoids의 대표적인 구현으로 각 클러스터 중심을 데이터를 대표하는 데이터 포인트로 설정하고 중심을 이동하며 클러스터링
+	[1-5] CLARANS(Clustering Large Applications based on RANdomized Search) : PAM의 개선 알고리즘으로, 랜덤 샘플링을 통해 클러스터링
+	[1-6] CLARA(Clustering LARge Applications) : PAM을 대규모 데이터셋에 적용하기 위해 샘플링 기반으로 클러스터링
+	[1-7] FCM(Fuzzy C-means) : 퍼지 클러스터링으로 중첩 클러스터에서 유연하게 적용
 
-	[2] Hierarchical-Based Clustering
-	[2-1] BIRCH(Balanced Iterative Reducing and Clustering using Hierarchies)
-	[2-2] CURE(Clustering Using Representatives)
-	[2-3] ROCK(Robust Clustering using Links)
-	[2-4] Chameleon
- 	[2-5] Hierarchical Clustering(Agglomerative / Divisive)
+	[2] Hierarchical-Based Clustering : 데이터의 계층적 구조를 바탕으로 클러스터링
+	[2-1] BIRCH(Balanced Iterative Reducing and Clustering using Hierarchies) : 데이터 압축을 활용. CF(Clustering Feature) 트리라는 데이터 구조를 통해 클러스터링
+	[2-2] CURE(Clustering Using Representatives) : 각 클러스터를 여러 대표 포인트로 요약하여 클러스터링
+	[2-3] ROCK(Robust Clustering using Links) : 데이터 포인트 간의 연결 수(링크 수)를 바탕으로 클러스터
+	[2-4] Chameleon : 클러스터 간의 내부 및 외부 관계를 모두 고려하여 클러스터링
+ 	[2-5] Hierarchical Clustering(Agglomerative / Divisive) : 상향식(Agglomerative)은 각 데이터 포인트에서 시작하여 점차 합쳐가는 방식, 하향식(Divisive)은 전체에서 시작하여 점차 분할.
 	
-	[3] Density-Based Clustering
-	[3-1] DBSCAN(Density-Based Spatial Clustering of Applications with Noise)	
-	[3-2] OPTICS(Ordering Points To Identify the Clustering Structure)
-	[3-3] DBCLASD(Distribution Based Clustering of Large Spatial Databases)
-	[3-4] DENCLUE(DENsity-based CLUstEring)
- 	[3-5] Mean-Shift Clustering
+	[3] Density-Based Clustering : 데이터의 밀도에 따라 클러스터를 형성
+	[3-1] DBSCAN(Density-Based Spatial Clustering of Applications with Noise) : 주어진 반경 내에 특정 수 이상의 포인트가 있는 경우 이를 클러스터의 일부로 간주하여 연결된 고밀도 지역을 클러스터로 형성	
+	[3-2] OPTICS(Ordering Points To Identify the Clustering Structure) : DBSCAN과 유사하나, 클러스터의 밀도가 변동하는 데이터에 대해 더 유연하게 클러스터링
+	[3-3] DBCLASD(Distribution Based Clustering of Large Spatial Databases) : 고밀도 구역을 우선적으로 클러스터링하는 밀도 기반 클러스터링 알고리즘으로, 대규모 공간 데이터베이스에 적합
+	[3-4] DENCLUE(DENsity-based CLUstEring) : 밀도를 가우시안 커널로 모델링하여, 밀도 함수의 국소적 극대값을 중심으로 클러스터를 형성
+ 	[3-5] Mean-Shift Clustering : 데이터 공간에서 각 포인트가 데이터의 밀도가 높은 방향으로 이동하여 수렴할 때까지 반복하여 클러스터링
 
  	[4] Grid-Based Clustering : 데이터 공간을 격자(grid)로 나누고 각 격자의 특성을 바탕으로 클러스터를 형성
 	[4-1] Wave-Cluster : 웨이블렛 변환(주파수 분석 도구로, 시간이나 공간에서 신호의 국소적인 변화를 포착)을 사용하여 데이터의 밀도를 측정하고, 고밀도 지역을 클러스터로 분류
