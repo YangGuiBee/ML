@@ -994,7 +994,7 @@
 ![](./images/2-4.PNG)
 <br>
 
-# [2-5] Hierarchical Clustering (Agglomerative / Divisive)
+# [2-5] Hierarchical Clustering(Agglomerative / Divisive)
 ▣ 정의 : 데이터를 병합(bottom-up)하거나 분할(top-down)하여 계층적인 군집 구조를 만드는 방법<br>
 ▣ 필요성 : 군집의 개수를 사전에 정할 필요 없이 계층적 관계를 파악할 때 사용<br>
 ▣ 장점 : 군집 수를 미리 정할 필요 없으며, 덴드로그램(dendrogram)을 통한 군집 분석 가능<br>
@@ -1003,21 +1003,162 @@
 ▣ 모델식 : $𝐶_𝑖$와 $𝐶_𝑗$는 각각 두 군집이고, 𝑑(𝑥,𝑦)는 두 데이터 포인트 𝑥와 𝑦 간의 거리<br>
 ![](./images/Hclustering.PNG)
 
-	from scipy.cluster.hierarchy import dendrogram, linkage
-	import matplotlib.pyplot as plt
+	#(Agglomerative)
+	import numpy as np
 	from sklearn.datasets import load_iris
-
+	from sklearn.cluster import KMeans
+	from sklearn.metrics import silhouette_score, accuracy_score
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	import pandas as pd
+	from scipy.stats import mode
+	
+	# Divisive Clustering 함수
+	def divisive_clustering(data, num_clusters):
+	    clusters = {0: data}  # 초기 전체 데이터를 하나의 큰 군집으로 설정
+	    current_cluster_id = 0
+	    
+	    while len(clusters) < num_clusters:
+	        # 가장 큰 군집 선택
+	        largest_cluster_id = max(clusters, key=lambda k: len(clusters[k]))
+	        largest_cluster_data = clusters[largest_cluster_id]
+	        
+	        # 해당 군집을 두 개로 분할
+	        kmeans = KMeans(n_clusters=2, random_state=0).fit(largest_cluster_data)
+	        labels = kmeans.labels_
+	        
+	        # 새로운 군집에 데이터 할당
+	        new_cluster_id = max(clusters.keys()) + 1
+	        clusters[largest_cluster_id] = largest_cluster_data[labels == 0]
+	        clusters[new_cluster_id] = largest_cluster_data[labels == 1]
+	        
+	        # 클러스터 ID 증가
+	        current_cluster_id += 1
+	    
+	    # 최종 군집 레이블 생성
+	    predicted_labels = np.zeros(data.shape[0], dtype=int)
+	    for cluster_id, cluster_data in clusters.items():
+	        for idx in range(data.shape[0]):
+	            if data[idx] in cluster_data:
+	                predicted_labels[idx] = cluster_id
+	                
+	    return predicted_labels
+	
+	# Iris 데이터셋 로드
 	iris = load_iris()
-	X = iris.data
-
-	Z = linkage(X, 'ward')  # ward: 최소분산 기준 병합
-
+	data = iris.data
+	true_labels = iris.target
+	
+	# Divisive Clustering 실행
+	num_clusters = 3
+	predicted_labels = divisive_clustering(data, num_clusters)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = predicted_labels
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(data, predicted_labels)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(predicted_labels)
+	for i in range(num_clusters):
+	    mask = (predicted_labels == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
 	plt.figure(figsize=(10, 5))
-	dendrogram(Z)
-	plt.title("Hierarchical Clustering Dendrogram")
-	plt.xlabel("Sample Index")
-	plt.ylabel("Distance")
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.title("Divisive Hierarchical Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
 	plt.show()
+
+![](./images/2-51.PNG)
+
+	#(Divisive)
+ 	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.cluster import KMeans
+	from sklearn.metrics import silhouette_score, accuracy_score
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	import pandas as pd
+	from scipy.stats import mode
+	
+	# Divisive Clustering 함수
+	def divisive_clustering(data, num_clusters):
+	    clusters = {0: data}  # 초기 전체 데이터를 하나의 큰 군집으로 설정
+	    current_cluster_id = 0
+	    
+	    while len(clusters) < num_clusters:
+	        # 가장 큰 군집 선택
+	        largest_cluster_id = max(clusters, key=lambda k: len(clusters[k]))
+	        largest_cluster_data = clusters[largest_cluster_id]
+	        
+	        # 해당 군집을 두 개로 분할
+	        kmeans = KMeans(n_clusters=2, random_state=0).fit(largest_cluster_data)
+	        labels = kmeans.labels_
+	        
+	        # 새로운 군집에 데이터 할당
+	        new_cluster_id = max(clusters.keys()) + 1
+	        clusters[largest_cluster_id] = largest_cluster_data[labels == 0]
+	        clusters[new_cluster_id] = largest_cluster_data[labels == 1]
+	        
+	        # 클러스터 ID 증가
+	        current_cluster_id += 1
+	    
+	    # 최종 군집 레이블 생성
+	    predicted_labels = np.zeros(data.shape[0], dtype=int)
+	    for cluster_id, cluster_data in clusters.items():
+	        for idx in range(data.shape[0]):
+	            if data[idx] in cluster_data:
+	                predicted_labels[idx] = cluster_id
+	                
+	    return predicted_labels
+	
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = iris.data
+	true_labels = iris.target
+	
+	# Divisive Clustering 실행
+	num_clusters = 3
+	predicted_labels = divisive_clustering(data, num_clusters)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = predicted_labels
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(data, predicted_labels)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(predicted_labels)
+	for i in range(num_clusters):
+	    mask = (predicted_labels == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.title("Divisive Hierarchical Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
+
+![](./images/2-52.PNG)
+<br>
 
 ▣ 덴드로그램(dendrogram) : 나무(tree) 모양의 도식으로, 계층적 군집화의 결과를 시각화하는 데 사용된다. 이 그래프는 각 데이터 포인트가 병합되거나 분할되는 과정을 계층 구조로 표현하며, 군집 간의 관계를 직관적으로 이해할 수 있도록 도와준다. 덴드로그램의 구조는 다음과 같다:<br>
 (1) 각 데이터 포인트는 맨 아래에서 개별 노드로 시작 : 덴드로그램에서 각 데이터 포인트는 맨 아래에 위치한 개별 노드로 시작합니다. 이 단계에서는 각각의 데이터가 하나의 군집을 이루고 있다.<br>
