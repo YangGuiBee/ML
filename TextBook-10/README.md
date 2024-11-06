@@ -1490,25 +1490,53 @@
 ▣ 모델식 : 𝐾는 커널 함수, 𝑥는 이동할 점, 𝑁(𝑥)는 반경 내 이웃 점<br>
 ![](./images/meanshift.PNG)
 
-	from sklearn.cluster import MeanShift
+	import numpy as np
 	from sklearn.datasets import load_iris
+	from sklearn.cluster import MeanShift
+	from sklearn.metrics import silhouette_score, accuracy_score
 	import matplotlib.pyplot as plt
-
+	import seaborn as sns
+	import pandas as pd
+	from scipy.stats import mode
+	
+	# Iris 데이터셋 로드
 	iris = load_iris()
-	X = iris.data
-
+	data = iris.data
+	true_labels = iris.target
+	
+	# Mean-Shift Clustering 모델 설정 및 학습
 	mean_shift = MeanShift()
-	labels = mean_shift.fit_predict(X)
-
-	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='cool')
+	predicted_labels = mean_shift.fit_predict(data)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = predicted_labels
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(data, predicted_labels)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(predicted_labels)
+	for i in range(len(np.unique(predicted_labels))):
+	    mask = (predicted_labels == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
 	plt.title("Mean-Shift Clustering on Iris Dataset")
-	plt.xlabel("Feature 1")
-	plt.ylabel("Feature 2")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
 	plt.show()
 
+![](./images/3-5.PNG)
+
 <br>
-
-
 
 # [4-1] Wave-Cluster
 ▣ 정의: 웨이블릿 변환을 이용한 클러스터링 알고리즘으로 데이터를 격자 형태로 나눈 후 웨이블릿 변환을 사용해 밀도가 높은 영역을 군집으로 탐지<br>
@@ -2145,9 +2173,6 @@ M 단계: 이 확률을 사용하여 각 군집의 매개변수를 업데이트�
 ![](./images/5-4.PNG)
 <br>
 
-![](./images/CA_accuracy.png)
-
-
 # [5-5] GMM(Gaussian Mixture Model)
 ▣ 정의 : 여러 가우시안 분포(Gaussian Distribution)를 사용해 데이터를 모델링하고, 각 데이터 포인트가 각 분포에 속할 확률을 계산하는 군집화 방법<br>
 ▣ 필요성 : 복잡한 데이터 분포를 유연하게 모델링하여 군집 경계를 확률적으로 표현할 수 있음<br>
@@ -2157,22 +2182,52 @@ M 단계: 이 확률을 사용하여 각 군집의 매개변수를 업데이트�
 ▣ 모델식 : $π_k$는 가우시안의 가중치, $𝜇_𝑘$, $Σ_𝑘$는 각각 평균과 공분산<br>
 ![](./images/GMM.PNG)
 
-	from sklearn.mixture import GaussianMixture
+	import numpy as np
 	from sklearn.datasets import load_iris
+	from sklearn.mixture import GaussianMixture
+	from sklearn.metrics import silhouette_score, accuracy_score
 	import matplotlib.pyplot as plt
-
+	import seaborn as sns
+	import pandas as pd
+	from scipy.stats import mode
+	
+	# Iris 데이터셋 로드
 	iris = load_iris()
-	X = iris.data
-
-	gmm = GaussianMixture(n_components=3)
-	gmm.fit(X)
-	labels = gmm.predict(X)
-
-	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='rainbow')
-	plt.title("GMM Clustering on Iris Dataset")
-	plt.xlabel("Feature 1")
-	plt.ylabel("Feature 2")
+	data = iris.data
+	true_labels = iris.target
+	
+	# GMM 모델 설정 및 학습
+	gmm = GaussianMixture(n_components=3, covariance_type='full', random_state=0)
+	predicted_labels = gmm.fit_predict(data)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = predicted_labels
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(data, predicted_labels)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(predicted_labels)
+	for i in range(3):
+	    mask = (predicted_labels == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.title("Gaussian Mixture Model (GMM) Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
 	plt.show()
+
+
+![](./images/5-5.PNG)
 
 <br>
 
@@ -2231,5 +2286,6 @@ $𝐿=𝐷−𝐴$<br>
 
 <br>
 
+![](./images/CA_accuracy.png)
 
 <br>
