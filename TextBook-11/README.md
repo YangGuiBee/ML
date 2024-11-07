@@ -6,12 +6,13 @@
 <br>
 
     [1] Apriori
-    [2] Eclat(Equivalence Class Transformation)
-    [3] FP-Growth(Frequent Pattern Growth")
-    [4] AIS(Artificial Immune System)
-    [5] SETM(Sequential Execution of Transaction Merging)
-    [6] Multi-level Association Rules
-    [7] Multi-dimensional Association Rules
+    [2] FP-Growth(Frequent Pattern Growth) 
+    [3] Eclat(Equivalence Class Transformation)
+    [4] Multi-level Association Rules
+    [5] Multi-dimensional Association Rules
+    [6] AIS(Artificial Immune System)
+    [7] SETM(Sequential Execution of Transaction Merging)
+
     
 
 ## 차원 축소(Dimensionality Reduction)
@@ -26,70 +27,45 @@
 
 ---  
 
-[1] Apriori
-▣ 정의: 연관 규칙을 발견하기 위한 빈발 항목 집합 생성 알고리즘으로, 최소 지지도와 신뢰도를 설정하여 규칙을 도출<br>
-▣ 필요성: 대량의 데이터에서 연관된 항목들을 효율적으로 식별할 필요가 있을 때 사용<br>
-▣ 장점: 이해하기 쉽고, 규칙 생성 과정이 명확<br>
-▣ 단점: 데이터베이스 접근이 빈번하며, 대규모 데이터에서는 성능저하 가능성<br>
-▣ 응용분야: 마켓 바스켓 분석, 추천 시스템<br>
+# [1] Apriori
+▣ 정의 : 연관규칙 학습을 위한 고전적인 알고리즘으로, 빈발항목 집합(frequent itemsets)을 찾아내고, 그 집합들 간의 연관성을 추출한다. 알고리즘의 핵심은 자주 발생하지 않는 항목이 포함된 집합은 자주 발생할 수 없다는 "항목 집합의 부분 집합도 빈발하다"는 특성을 이용<br>
+▣ 필요성 : 대규모 데이터에서 연관성을 발견하는 작업은 계산 비용이 높을 수 있는데, Apriori는 빈발하지 않은 항목 집합을 먼저 제거해 검색 공간을 줄여주는 방식으로 효율적인 탐색이 가능<br>
+▣ 장점 : 간단한 구조로 이해하기 쉽고, 계산 공간을 줄이기 위한 사전 단계를 가지고 있어, 효율적인 탐색이 가능<br>
+▣ 단점 : 탐색 공간이 커지면 성능이 저하되고 대규모 데이터에서 비효율적일 수 있으며, 매번 새로운 후보집합을 생성해야 하므로 계산비용이 크다.<br>
+▣ 응용분야 : 시장 바구니 분석(장바구니 데이터에서 자주 함께 구매되는 상품을 찾음), 추천 시스템, 웹 페이지 연결성 분석<br>
+▣ 모델식 : 
+지지도(Support): 특정 항목 집합이 전체 거래에서 얼마나 자주 발생하는가<br>
+신뢰도(Confidence): 특정 항목이 발생한 경우 다른 항목이 함께 발생할 확률<br>
+향상도(Lift): 항목 간의 상호 의존성을 측정<br>
+
+    from mlxtend.frequent_patterns import apriori, association_rules
+    import pandas as pd
+
+    # 예시 데이터 생성 (장바구니 데이터)
+    data = {'milk': [1, 0, 1, 1, 0],
+            'bread': [1, 1, 1, 0, 1],
+            'butter': [0, 1, 0, 1, 0],
+            'beer': [1, 1, 1, 0, 0]}
+    df = pd.DataFrame(data)
+
+    # Apriori 알고리즘을 사용하여 빈발 항목 집합 찾기
+    frequent_itemsets = apriori(df, min_support=0.6, use_colnames=True)
+
+    # 연관 규칙 찾기
+    rules = association_rules(frequent_itemsets, metric="confidence", min_threshold=0.7)
+
+    print(frequent_itemsets)
+    print(rules)
 
 <br>
 
-[2] Eclat(Equivalence Class Transformation)
-▣ 정의: 빈발 항목 집합을 트리 구조로 생성하여 효율적인 연관 규칙 도출을 가능하게 하는 알고리즘<br>
-▣ 필요성: 연관 규칙을 메모리 효율적으로 찾기 위해 고안<br>
-▣ 장점: 메모리 효율성이 뛰어나고, 빠름<br>
-▣ 단점: 지지도 계산이 많을 경우 성능 저하 가능성<br>
-▣ 응용분야: 실시간 데이터 분석, 추천 시스템<br>
 
-<br>
-
-[3] FP-Growth(Frequent Pattern Growth")
-▣ 정의: FP-Tree를 통해 빈발 항목 집합을 생성하는 알고리즘으로, 데이터셋이 클 때 메모리 효율적으로 작동<br>
+# [1] FP-Growth(Frequent Pattern Growth)
+▣ 정의: Apriori 알고리즘의 대안으로 FP-Tree를 통해 빈발항목 집합을 생성하는 알고리즘으로, 데이터셋이 클 때 메모리를 효율적으로 작동<br>
 ▣ 필요성: Apriori의 성능 문제를 해결하기 위해 고안<br>
 ▣ 장점: 메모리 효율이 높고, 대규모 데이터셋에서 빠르게 작동<br>
 ▣ 단점: 구현이 복잡하고, FP-Tree 생성을 위한 학습이 필요<br>
 ▣ 응용분야: 대규모 데이터 분석, 전자상거래 추천 시스템<br>
-
-<br>
-
-[4] AIS(Artificial Immune System)
-▣ 정의: 거래 데이터를 순차적으로 결합하여 빈번한 항목 집합을 찾는 초기 연관규칙 알고리즘 중 하나<br>
-▣ 필요성: 초기 연관 규칙 연구에서 활용되었으나, 성능의 한계로 현재는 거의 사용되지 않음<br>
-▣ 장점: 간단한 구조로 이해하기 쉽다.<br>
-▣ 단점: 비효율적이며, Apriori보다 성능이 떨어짐<br>
-▣ 응용분야: 초기 연관 규칙 연구<br>
-
-<br>
-
-[5] SETM(Sequential Execution of Transaction Merging)
-▣ 정의: Apriori의 변형으로, 데이터베이스 접근 횟수를 줄여 성능을 개선<br>
-▣ 필요성: 연관 규칙 생성에서 데이터베이스 접근이 빈번한 경우 사용<br>
-▣ 장점: Apriori에 비해 빠르며 메모리 효율적<br>
-▣ 단점: 성능 한계로 인해 많이 사용되진 않음<br>
-▣ 응용분야: 실시간 데이터 분석, 연관 규칙 학습<br>
-
-<br>
-
-[6] Multi-level Association Rules
-▣ 정의: 연관 규칙을 계층적으로 탐색하여 다중 수준에서 규칙을 생성하는 방식<br>
-▣ 필요성: 제품 카테고리별 분석이 필요한 경우에 적합<br>
-▣ 장점: 더 정교한 규칙을 생성<br>
-▣ 단점: 복잡성이 증가하며, 해석이 어려워질 수 있음<br>
-▣ 응용분야: 전자상거래, 추천 시스템, 마케팅 분석<br>
-
-<br>
-
-[7] Multi-dimensional Association Rules
-▣ 정의: 여러 속성을 포함하여 다양한 차원의 규칙을 생성<br>
-▣ 필요성: 다양한 속성 간 관계를 탐색하는 데 적합<br>
-▣ 장점: 규칙의 범위를 확장할 수 있어 더 세밀한 규칙 도출 가능.<br>
-▣ 단점: 복잡성과 해석의 어려움<br>
-▣ 응용분야: 사용자 속성 기반 추천 시스템, 마케팅 인텔리전스<br>
-
-<br>
-
-
 
 # [1] FP Growth
 ▣ 정의 : FP-Growth는 Apriori 알고리즘의 대안으로, 빈발 항목 집합을 효율적으로 찾는 방법이다. FP-트리(Frequent Pattern Tree)를 만들어 빈발 항목들을 저장하고, 트리 구조를 사용해 자주 발생하는 패턴을 빠르게 찾는다. Apriori와 달리 매번 후보 집합을 생성하지 않으며, 데이터의 트랜잭션을 직접 탐색하여 빈발 항목 집합을 구한다.<br>
@@ -111,6 +87,54 @@
     print(rules_fp)
     
 <br>
+
+# [3] Eclat(Equivalence Class Transformation)
+▣ 정의: 빈발항목 집합을 트리구조로 생성하여 효율적인 연관규칙 도출을 가능하게 하는 알고리즘<br>
+▣ 필요성: 연관규칙을 메모리 효율적으로 찾기 위해 고안<br>
+▣ 장점: 메모리 효율성이 뛰어나고 빠름<br>
+▣ 단점: 지지도 계산이 많을 경우 성능 저하 가능성<br>
+▣ 응용분야: 실시간 데이터 분석, 추천 시스템<br>
+
+<br>
+
+# [4] Multi-level Association Rules
+▣ 정의: 연관 규칙을 계층적으로 탐색하여 다중 수준에서 규칙을 생성하는 방식<br>
+▣ 필요성: 제품 카테고리별 분석이 필요한 경우에 적합<br>
+▣ 장점: 더 정교한 규칙을 생성<br>
+▣ 단점: 복잡성이 증가하며, 해석이 어려워질 수 있음<br>
+▣ 응용분야: 전자상거래, 추천 시스템, 마케팅 분석<br>
+
+<br>
+
+# [5] Multi-dimensional Association Rules
+▣ 정의: 여러 속성을 포함하여 다양한 차원의 규칙을 생성<br>
+▣ 필요성: 다양한 속성 간 관계를 탐색하는 데 적합<br>
+▣ 장점: 규칙의 범위를 확장할 수 있어 더 세밀한 규칙 도출 가능.<br>
+▣ 단점: 복잡성과 해석의 어려움<br>
+▣ 응용분야: 사용자 속성 기반 추천 시스템, 마케팅 인텔리전스<br>
+
+<br>
+
+# [6] SETM(Sequential Execution of Transaction Merging)
+▣ 정의: Apriori의 변형으로, 데이터베이스 접근 횟수를 줄여 성능을 개선<br>
+▣ 필요성: 연관 규칙 생성에서 데이터베이스 접근이 빈번한 경우 사용<br>
+▣ 장점: Apriori에 비해 빠르며 메모리 효율적<br>
+▣ 단점: 성능 한계로 인해 많이 사용되진 않음<br>
+▣ 응용분야: 실시간 데이터 분석, 연관 규칙 학습<br>
+
+<br>
+
+# [7] AIS(Artificial Immune System)
+▣ 정의: 거래 데이터를 순차적으로 결합하여 빈번한 항목 집합을 찾는 초기 연관규칙 알고리즘 중 하나<br>
+▣ 필요성: 초기 연관 규칙 연구에서 활용되었으나, 성능의 한계로 현재는 거의 사용되지 않음<br>
+▣ 장점: 간단한 구조로 이해하기 쉽다.<br>
+▣ 단점: 비효율적이며, Apriori보다 성능이 떨어짐<br>
+▣ 응용분야: 초기 연관 규칙 연구<br>
+
+<br>
+
+
+
 
 # [2] 이클렛(Eclat)
 ▣ 정의 : Eclat은 연관 규칙 학습의 또 다른 방법으로, 집합 간의 교집합을 이용하여 빈발 항목 집합을 찾아낸다. Eclat은 트랜잭션 ID(TID) 집합을 사용하여 항목 집합의 지지도를 계산한다. 트랜잭션 간의 공통 항목을 기반으로 빈발 항목을 추출하는 방식이다.<br>
@@ -153,37 +177,7 @@ Eclat은 일반적으로 FP-Growth와 유사하게 작동하며, 이클렛 알�
     
 <br>
 
-# [3] 어프라이어리(Apriori)
-▣ 정의 : Apriori는 연관 규칙 학습을 위한 고전적인 알고리즘으로, 빈발한 항목 집합(frequent itemsets)을 찾아내고, 그 집합들 간의 연관성을 추출한다. 알고리즘의 핵심은 자주 발생하지 않는 항목이 포함된 집합은 자주 발생할 수 없다는 "항목 집합의 부분 집합도 빈발하다"는 특성을 이용한다.<br>
-▣ 필요성 : 대규모 데이터에서 연관성을 발견하는 작업은 계산 비용이 높을 수 있으며, Apriori는 빈발하지 않은 항목 집합을 먼저 제거해 검색 공간을 줄여주는 방식으로 효율적인 탐색이 가능하다.<br>
-▣ 장점 : 간단한 구조로 이해하기 쉽고, 계산 공간을 줄이기 위한 사전 단계를 가지고 있어, 효율적인 탐색이 가능하다.<br>
-▣ 단점 : 탐색 공간이 커지면 성능이 저하됩니다. 대규모 데이터에서 비효율적일 수 있으며, 매번 새로운 후보 집합을 생성해야 하므로 계산 비용이 크다.<br>
-▣ 응용분야 : 시장 바구니 분석 (장바구니 데이터에서 자주 함께 구매되는 상품을 찾음), 추천 시스템, 웹 페이지 연결성 분석<br>
-▣ 모델식 : 
-지지도(Support): 특정 항목 집합이 전체 거래에서 얼마나 자주 발생하는가<br>
-신뢰도(Confidence): 특정 항목이 발생한 경우 다른 항목이 함께 발생할 확률<br>
-향상도(Lift): 항목 간의 상호 의존성을 측정<br>
 
-    from mlxtend.frequent_patterns import apriori, association_rules
-    import pandas as pd
-
-    # 예시 데이터 생성 (장바구니 데이터)
-    data = {'milk': [1, 0, 1, 1, 0],
-            'bread': [1, 1, 1, 0, 1],
-            'butter': [0, 1, 0, 1, 0],
-            'beer': [1, 1, 1, 0, 0]}
-    df = pd.DataFrame(data)
-
-    # Apriori 알고리즘을 사용하여 빈발 항목 집합 찾기
-    frequent_itemsets = apriori(df, min_support=0.6, use_colnames=True)
-
-    # 연관 규칙 찾기
-    rules = association_rules(frequent_itemsets, metric="confidence", min_threshold=0.7)
-
-    print(frequent_itemsets)
-    print(rules)
-
-<br>
 
 ---
 
