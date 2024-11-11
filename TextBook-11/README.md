@@ -18,12 +18,18 @@
 ## 차원 축소(Dimensionality Reduction)
 <br>
 
-    [4] 주성분 분석(Principal Component Analysis, PCA)
-    [5] 독립 성분 분석(Independent Component Analysis, ICA)
-    [6] 자기 조직화 지도(Self-Organizing Maps, SOM)
-    [7] 잠재 의미 분석(Latent Semantic Analysis, LSA)
-    [8] 특이값 분해(Singular Value Decomposition, SVD)
-    [9] t-distributed Stochastic Neighbor Embedding(t-SNE)
+    [1] 주성분 분석(Principal Component Analysis, PCA)
+    [2] 독립 성분 분석(Independent Component Analysis, ICA)
+    [3] 자기 조직화 지도(Self-Organizing Maps, SOM)
+    [4] 잠재 의미 분석(Latent Semantic Analysis, LSA)
+    [5] 특이값 분해(Singular Value Decomposition, SVD)
+    [6] t-distributed Stochastic Neighbor Embedding(t-SNE)
+
+    [차원 축소 알고리즘 평가방법]
+    ▣ 재구성 오류(Reconstruction Error) : 복원된 데이터와 원본 데이터 간의 평균 제곱 오차(MSE)
+    ▣ 분산 유지율(Explained Variance Ratio) : 각 주성분이 설명하는 분산 비율로 데이터의 정보 손실정도 파악
+    ▣ 상호 정보량(Mutual Information) :  차원 축소 전후 데이터의 정보량을 비교
+    ▣ 군집 평가 지표 : Silhouette Score, Davies-Bouldin Index, 실제 레이블과 예측 레이블 비교(ARI, NMI)
 
 ---  
 
