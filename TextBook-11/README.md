@@ -423,7 +423,42 @@ t-SNE의 응용 분야
 
 **▣ 재구성 오류(Reconstruction Error) :** 차원 축소된 데이터를 원본 차원으로 복원하여 복원된 데이터와 원본 데이터 간의 평균 제곱 오차(MSE)를 통해 재구성 오류를 계산
 
+    from sklearn.datasets import load_iris
+    from sklearn.decomposition import PCA
+    from sklearn.metrics import mean_squared_error
+
+    # 데이터 로드 : Iris 데이터셋을 로드하여 입력 데이터(X)를 준비
+    data = load_iris()
+    X = data.data  # 입력 데이터 (특성)
+
+    # PCA를 사용하여 주성분 개수를 2개로 설정하여 데이터를 2차원으로 축소
+    pca = PCA(n_components=2)
+    X_reduced = pca.fit_transform(X)  # 차원 축소된 데이터
+
+    # 재구성 오류 계산 : 차원 축소된 데이터를 원래 차원으로 복원하고 원본 데이터와의 평균 제곱 오차(MSE)를 계산
+    X_reconstructed = pca.inverse_transform(X_reduced)  # 차원 축소 후 복원된 데이터
+    reconstruction_error = mean_squared_error(X, X_reconstructed)  # 재구성 오류 계산
+    print(f"Reconstruction Error (MSE): {reconstruction_error:.3f}")
+
+
 **▣ 분산 유지율(Explained Variance Ratio) :** 각 주성분이 설명하는 분산 비율을 통해 데이터의 정보 손실 정도를 파악
+
+    from sklearn.datasets import load_iris
+    from sklearn.decomposition import PCA
+
+    # 데이터 로드 : Iris 데이터셋을 로드하여 입력 데이터(X)를 준비합니다.
+    data = load_iris()
+    X = data.data  # 입력 데이터 (특성)
+
+    # PCA를 사용하여 주성분 개수를 2개로 설정하여 데이터를 2차원으로 축소
+    pca = PCA(n_components=2)
+    pca.fit(X)  # PCA 학습
+
+    # 분산 유지율 계산 : 각 주성분이 데이터의 분산을 얼마나 설명하는지 비율로 확인
+    explained_variance_ratio = pca.explained_variance_ratio_
+    print(f"Explained Variance Ratio per Component: {explained_variance_ratio}")
+    print(f"Total Variance Retained: {sum(explained_variance_ratio):.3f}")  # 전체 분산 유지율
+
 
 **▣ 상호 정보량(Mutual Information) :** 차원 축소 전후 데이터의 정보량을 비교
 
