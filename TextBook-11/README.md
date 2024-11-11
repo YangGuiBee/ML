@@ -38,7 +38,7 @@
 ---  
 
 # [1] Apriori
-▣ 정의 : 연관규칙 학습을 위한 고전적인 알고리즘으로, 빈발항목 집합(frequent itemsets)을 찾아내고, 그 집합들 간의 연관성을 추출한다. 알고리즘의 핵심은 자주 발생하지 않는 항목이 포함된 집합은 자주 발생할 수 없다는 "항목 집합의 부분 집합도 빈발하다"는 특성을 이용<br>
+▣ 정의 : 연관규칙 학습을 위한 고전적인 알고리즘으로, 빈발항목 집합(frequent itemsets)을 찾아내고 그 집합들 간의 연관성을 추출<br>
 ▣ 필요성 : 대규모 데이터에서 연관성을 발견하는 작업은 계산 비용이 높을 수 있는데, Apriori는 빈발하지 않은 항목 집합을 먼저 제거해 검색 공간을 줄여주는 방식으로 효율적인 탐색이 가능<br>
 ▣ 장점 : 간단한 구조로 이해하기 쉽고, 계산 공간을 줄이기 위한 사전 단계를 가지고 있어, 효율적인 탐색이 가능<br>
 ▣ 단점 : 탐색 공간이 커지면 성능이 저하되고 대규모 데이터에서 비효율적일 수 있으며, 매번 새로운 후보집합을 생성해야 하므로 계산비용이 크다.<br>
@@ -164,7 +164,7 @@
 
 ---
 
-차원축소의 필요성 : 데이터에는 중요한 부분과 중요하지 않은 부분이 존재하는데, 여기서 중요하지 않은 부분이 노이즈(noise)이다. 머신러닝 과정에서는 데이터에서 정보분석에 방해가 되는 불필요한 노이즈를 제거하는 것이 중요한데, 이 노이즈를 제거할 때 사용하는 방법이 차원축소(dimension reduction)이다. 차원축소는 주어진 데이터의 정보손실을 최소화하면서 노이즈를 줄이는 것이 핵심이다. 차원축소를 통해 차원이 늘어날 수록 필요한 데이터가 기하급수적으로 많아지는 차원의 저주(curse of dimensionality) 문제를 해결할 수 있다. 지도학습의 대표적인 차원축소 방법은 선형판별분석(Linear Discriminant Analysis)이 있고, 비지도학습의 대표적인 차원축소 방법은 주성분분석(Principal Component Anaysis)이 있다.<br>
+**차원축소의 필요성 :** 데이터에는 중요한 부분과 중요하지 않은 부분이 존재하는데, 여기서 중요하지 않은 부분이 노이즈(noise)이다. 머신러닝 과정에서는 데이터에서 정보분석에 방해가 되는 불필요한 노이즈를 제거하는 것이 중요한데, 이 노이즈를 제거할 때 사용하는 방법이 차원축소(dimension reduction)이다. 차원축소는 주어진 데이터의 정보손실을 최소화하면서 노이즈를 줄이는 것이 핵심이다. 차원축소를 통해 차원이 늘어날 수록 필요한 데이터가 기하급수적으로 많아지는 차원의 저주(curse of dimensionality) 문제를 해결할 수 있다. 지도학습의 대표적인 차원축소 방법은 선형판별분석(Linear Discriminant Analysis)이 있고, 비지도학습의 대표적인 차원축소 방법은 주성분분석(Principal Component Anaysis)이 있다.<br>
 
 # [1] PCA(Principal Component Analysis)
 ▣ 정의 : 데이터의 분산을 최대한 보존하면서 데이터의 주요 성분(주성분)을 찾기 위해 선형 변환을 적용하는 차원 축소 알고리즘. 여러 특성(Feature) 변수들이 통계적으로 서로 상관관계가 없도록 변환시키는 것으로 고차원 데이터를 저차원으로 변환하는 차원 축소 기법. 주성분분석은 오직 공분산행렬(convariance matrix) $\sum$ 에만 영향을 받는다.<br> 
@@ -194,30 +194,78 @@
  - 데이터 행렬 𝑋의 공분산 행렬 𝐶의 고유값과 고유벡터를 통해 새로운 주성분을 계산 : $C=\frac{1}{n-1}X^TX$<br>
  - 고유값 분해(v_i는 i번째 고유벡터, \lambda_i는 i번째 고유값) : $Cv_i = \lambda_iv_i$<br>
 
+<br>
+
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from sklearn.decomposition import PCA
+    from sklearn.datasets import load_iris
+
+    # 데이터 로드
+    data = load_iris()
+    X = data.data
+
+    # PCA 적용
+    pca = PCA(n_components=2)
+    X_pca = pca.fit_transform(X)
+
+    # 결과 시각화
+    plt.scatter(X_pca[:, 0], X_pca[:, 1], c=data.target)
+    plt.xlabel("Principal Component 1")
+    plt.ylabel("Principal Component 2")
+    plt.title("PCA on Iris Dataset")
+    plt.colorbar()
+    plt.show()
+
+    # 분산 유지율 출력
+    print("Explained Variance Ratio:", pca.explained_variance_ratio_)
+    print("Total Variance Retained:", sum(pca.explained_variance_ratio_))
 
 <br>
 
-    from sklearn.decomposition import PCA
+# [2] t-SNE(t-distributed Stochastic Neighbor Embedding)
+▣ 정의: 고차원 데이터의 국소 구조를 잘 보존하여 저차원으로 투영하는 비선형 차원 축소 알고리즘<br>
+▣ 필요성: 데이터의 클러스터 구조를 유지한 채 저차원으로 투영하여 데이터 간의 관계를 시각적으로 파악하기 위해 사용<br>
+▣ 장점<br>
+ - 우수한 시각화: 고차원 데이터의 군집 구조를 잘 반영하므로, 데이터의 숨겨진 패턴을 시각적으로 잘 드러낸다.<br>
+ - 비선형 데이터 처리: 비선형 구조를 가진 데이터에서도 효과적으로 작동한다.<br>
+▣ 단점<br>
+ - 계산 비용: 대규모 데이터셋에서는 계산량이 많아 느릴 수 있다. 특히, 데이터 포인트 수가 많아질수록 계산 시간이 급격히 증가한다.<br>
+ - 초매개변수의 민감성: t-SNE의 성능은 초기 매개변수(예: σ 값 및 학습률)에 민감하게 반응하므로, 이 값을 잘 조정해야 최적의 결과를 얻을 수 있다.<br>
+ - 재현성 문제: 초기 위치에 따라 결과가 달라질 수 있으므로, 같은 데이터셋에서도 다른 결과를 얻을 수 있다.<br>
+▣ 응용 분야<br>
+ - 데이터 시각화: 고차원 데이터의 클러스터 및 패턴을 시각적으로 탐색하는 데 매우 유용. 예를 들어, 이미지 데이터, 텍스트 데이터, 유전자 표현 데이터 등을 시각화<br>
+ - 클러스터링 분석: t-SNE를 사용하여 데이터의 자연스러운 클러스터를 발견하고, 이를 바탕으로 클러스터링 알고리즘을 개선<br>
+ - 차원 축소: 데이터 전처리 과정에서, t-SNE를 사용하여 데이터의 차원을 줄이고, 이후 분석이나 모델링에 사용<br>
+ - 딥러닝 모델의 시각화: 신경망 모델의 중간 출력을 t-SNE로 시각화하여, 모델이 학습한 데이터의 특징을 이해<br>
+▣ 모델식: 고차원 데이터의 유사도와 저차원 데이터의 유사도 분포를 맞추기 위해 코스트 함수 𝐾𝐿(𝑝∥𝑞)를 최소화<br>
+
+<br>
+
     import matplotlib.pyplot as plt
-    import seaborn as sns
-    import numpy as np
+    from sklearn.manifold import TSNE
+    from sklearn.datasets import load_iris
 
-    # 예시 데이터 생성
-    data = np.random.rand(100, 5)
+    # 데이터 로드
+    data = load_iris()
+    X = data.data
 
-    # PCA 적용 (주성분 2개로 차원 축소)
-    pca = PCA(n_components=2)
-    pca_result = pca.fit_transform(data)
+    # t-SNE 적용
+    tsne = TSNE(n_components=2, random_state=42)
+    X_tsne = tsne.fit_transform(X)
 
     # 결과 시각화
-    plt.scatter(pca_result[:, 0], pca_result[:, 1])
-    plt.title('PCA Result')
+    plt.scatter(X_tsne[:, 0], X_tsne[:, 1], c=data.target)
+    plt.xlabel("t-SNE Component 1")
+    plt.ylabel("t-SNE Component 2")
+    plt.title("t-SNE on Iris Dataset")
+    plt.colorbar()
     plt.show()
 
 <br>
 
 # [5] 독립 성분 분석(Independent Component Analysis, ICA)
-▣ ICA의 정의 : ICA는 다변량 신호에서 통계적으로 독립적인 성분을 추출하는 비선형 차원 축소 기법으로 주로 관찰된 신호를 독립적인 원천 신호로 분리하는 데 사용된다. PCA는 데이터의 분산을 최대화하는 축을 찾는 반면, ICA는 신호 간의 독립성을 기반으로 성분을 찾는다. 또한 PCA는 가우시안 분포를 가정하고 데이터의 상관관계만을 이용해 차원을 축소하거나 성분을 찾는 반면, ICA는 신호들 간의 고차원적 통계적 독립성에 초점을 맞추기 때문에 더 복잡한 구조의 신호 분리 문제를 해결할 수 있다.<br>
+▣ 정의 : ICA는 다변량 신호에서 통계적으로 독립적인 성분을 추출하는 비선형 차원 축소 기법으로 주로 관찰된 신호를 독립적인 원천 신호로 분리하는 데 사용된다. PCA는 데이터의 분산을 최대화하는 축을 찾는 반면, ICA는 신호 간의 독립성을 기반으로 성분을 찾는다. 또한 PCA는 가우시안 분포를 가정하고 데이터의 상관관계만을 이용해 차원을 축소하거나 성분을 찾는 반면, ICA는 신호들 간의 고차원적 통계적 독립성에 초점을 맞추기 때문에 더 복잡한 구조의 신호 분리 문제를 해결할 수 있다.<br>
 ▣ ICA의 필요성 : 관측된 신호가 여러 독립적인 원천 신호의 혼합으로 구성될 때, 각 독립적인 신호를 복원하는 데 필요하며 특히 신호 처리 및 음성 분리에 유용하다.<br>
 ▣ ICA의 응용분야
  - 뇌파(EEG) 신호 분석: 뇌의 여러 부위에서 발생하는 신호들이 혼합되어 측정된 뇌파를 ICA를 사용하여 개별적인 신경 활동을 분리할 수 있다.<br>
@@ -387,42 +435,6 @@ SVD의 응용분야
     print(VT)
 
 <br>
-
-# [9] t-distributed Stochastic Neighbor Embedding(t-SNE)
-t-SNE는 주로 데이터 시각화와 고차원 데이터의 구조를 이해하기 위한 기법으로 사용되는 차원 축소의 방법<br>
-
-t-SNE의 장점
- - 우수한 시각화: 고차원 데이터의 군집 구조를 잘 반영하므로, 데이터의 숨겨진 패턴을 시각적으로 잘 드러낸다.<br>
- - 비선형 데이터 처리: 비선형 구조를 가진 데이터에서도 효과적으로 작동한다.<br>
-
-t-SNE의 단점
- - 계산 비용: 대규모 데이터셋에서는 계산량이 많아 느릴 수 있다. 특히, 데이터 포인트 수가 많아질수록 계산 시간이 급격히 증가한다.<br>
- - 초매개변수의 민감성: t-SNE의 성능은 초기 매개변수(예: σ 값 및 학습률)에 민감하게 반응하므로, 이 값을 잘 조정해야 최적의 결과를 얻을 수 있다.<br>
- - 재현성 문제: 초기 위치에 따라 결과가 달라질 수 있으므로, 같은 데이터셋에서도 다른 결과를 얻을 수 있다.<br>
-
-t-SNE의 응용 분야
- - 데이터 시각화: 고차원 데이터의 클러스터 및 패턴을 시각적으로 탐색하는 데 매우 유용하다. 예를 들어, 이미지 데이터, 텍스트 데이터, 유전자 표현 데이터 등을 시각화할 수 있다.<br>
- - 클러스터링 분석: t-SNE를 사용하여 데이터의 자연스러운 클러스터를 발견하고, 이를 바탕으로 클러스터링 알고리즘을 개선할 수 있다.<br>
- - 차원 축소: 데이터 전처리 과정에서, t-SNE를 사용하여 데이터의 차원을 줄이고, 이후 분석이나 모델링에 사용될 수 있다.<br>
- - 딥러닝 모델의 시각화: 신경망 모델의 중간 출력을 t-SNE로 시각화하여, 모델이 학습한 데이터의 특징을 이해할 수 있다.<br>
-
-<br>
-
-    from sklearn.manifold import TSNE
-    import matplotlib.pyplot as plt
-    import numpy as np
-
-    # 예시 데이터 생성
-    data = np.random.rand(100, 50)  # 50차원의 데이터 100개
-
-    # t-SNE 적용 (2차원으로 차원 축소)
-    tsne = TSNE(n_components=2, perplexity=30, random_state=42)
-    tsne_result = tsne.fit_transform(data)
-
-    # 결과 시각화
-    plt.scatter(tsne_result[:, 0], tsne_result[:, 1])
-    plt.title('t-SNE Result')
-    plt.show()
 
 
 
