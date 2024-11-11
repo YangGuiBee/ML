@@ -417,3 +417,51 @@ t-SNE의 응용 분야
     plt.show()
 
 
+
+---
+## 차원 축소 알고리즘 평가방법
+
+**▣ 재구성 오류(Reconstruction Error) :** 차원 축소된 데이터를 원본 차원으로 복원하여 복원된 데이터와 원본 데이터 간의 평균 제곱 오차(MSE)를 통해 재구성 오류를 계산
+
+**▣ 분산 유지율(Explained Variance Ratio) :** 각 주성분이 설명하는 분산 비율을 통해 데이터의 정보 손실 정도를 파악
+
+**▣ 상호 정보량(Mutual Information) :** 차원 축소 전후 데이터의 정보량을 비교
+
+**▣ 군집 평가 지표 :** 차원 축소 후 클러스터링을 수행하고 군집 평가 지표를 계산하여 차원 축소의 성능을 평가
+
+    from sklearn.datasets import load_iris
+    from sklearn.decomposition import PCA
+    from sklearn.cluster import KMeans
+    from sklearn.metrics import silhouette_score, davies_bouldin_score, adjusted_rand_score, normalized_mutual_info_score
+    from sklearn.model_selection import train_test_split
+
+    # 1. 데이터 로드
+    data = load_iris()
+    X = data.data
+    y_true = data.target  # 실제 레이블 (평가를 위해 사용)
+
+    # 2. PCA를 사용하여 차원 축소
+    pca = PCA(n_components=2)
+    X_reduced = pca.fit_transform(X)
+
+    # 3. KMeans를 사용하여 클러스터링 수행
+    kmeans = KMeans(n_clusters=3, random_state=42)
+    y_pred = kmeans.fit_predict(X_reduced)
+
+    # 4. 군집 평가 지표 계산
+    # (1) Silhouette Score
+    silhouette = silhouette_score(X_reduced, y_pred)
+    print(f"Silhouette Score: {silhouette:.3f}")
+
+    # (2) Davies-Bouldin Index
+    davies_bouldin = davies_bouldin_score(X_reduced, y_pred)
+    print(f"Davies-Bouldin Index: {davies_bouldin:.3f}")
+
+    # (3) Adjusted Rand Index (ARI) - 실제 레이블과 예측 레이블 비교
+    ari = adjusted_rand_score(y_true, y_pred)
+    print(f"Adjusted Rand Index (ARI): {ari:.3f}")
+
+    # (4) Normalized Mutual Information (NMI) - 실제 레이블과 예측 레이블 비교
+    nmi = normalized_mutual_info_score(y_true, y_pred)
+    print(f"Normalized Mutual Information (NMI): {nmi:.3f}")
+
