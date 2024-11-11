@@ -18,12 +18,16 @@
 ## 차원 축소(Dimensionality Reduction)
 <br>
 
-    [1] 주성분 분석(Principal Component Analysis, PCA)
-    [2] 독립 성분 분석(Independent Component Analysis, ICA)
-    [3] 자기 조직화 지도(Self-Organizing Maps, SOM)
-    [4] 잠재 의미 분석(Latent Semantic Analysis, LSA)
-    [5] 특이값 분해(Singular Value Decomposition, SVD)
-    [6] t-distributed Stochastic Neighbor Embedding(t-SNE)
+    [1] PCA(Principal Component Analysis)
+    [2] t-SNE(t-distributed Stochastic Neighbor Embedding)
+    [3] UMAP(Uniform Manifold Approximation and Projection)
+    [4] SVD(Singular Value Decomposition)
+    [5] ICA(Independent Component Analysis)
+    [6] LDA(Linear Discriminant Analysis)
+    [7] Isomap
+    [8] MDS(Multidimensional Scaling)
+    [9] LSA(Latent Semantic Analysis)
+    [10] SOM(Self-Organizing Maps)
 
     [차원 축소 알고리즘 평가방법]
     ▣ 재구성 오류(Reconstruction Error) : 복원된 데이터와 원본 데이터 간의 평균 제곱 오차(MSE)
@@ -162,15 +166,13 @@
 
 차원축소의 필요성 : 데이터에는 중요한 부분과 중요하지 않은 부분이 존재하는데, 여기서 중요하지 않은 부분이 노이즈(noise)이다. 머신러닝 과정에서는 데이터에서 정보분석에 방해가 되는 불필요한 노이즈를 제거하는 것이 중요한데, 이 노이즈를 제거할 때 사용하는 방법이 차원축소(dimension reduction)이다. 차원축소는 주어진 데이터의 정보손실을 최소화하면서 노이즈를 줄이는 것이 핵심이다. 차원축소를 통해 차원이 늘어날 수록 필요한 데이터가 기하급수적으로 많아지는 차원의 저주(curse of dimensionality) 문제를 해결할 수 있다. 지도학습의 대표적인 차원축소 방법은 선형판별분석(Linear Discriminant Analysis)이 있고, 비지도학습의 대표적인 차원축소 방법은 주성분분석(Principal Component Anaysis)이 있다.<br>
 
-# [4] 주성분 분석(Principal Component Analysis, PCA)
-▣ 정의 : PCA는 여러 특성(Feature) 변수들이 통계적으로 서로 상관관계가 없도록 변환시키는 것으로 고차원 데이터를 저차원으로 변환하는 차원 축소 기법으로 데이터의 분산을 최대화하는 방향으로 새로운 축(주성분)을 찾아 데이터를 투영한다. 특성이 $p$ 개가 있을 경우, 각 특성의 벡터는 $X_1, X_2, ... X_p$ 라고 나타낼 수 있으며, 주성분분석은 오직 공분산행렬(convariance matrix) $\sum$ 에만 영향을 받는다.<br> 
-▣ PCA의 핵심개념
+# [1] PCA(Principal Component Analysis)
+▣ 정의 : 데이터의 분산을 최대한 보존하면서 데이터의 주요 성분(주성분)을 찾기 위해 선형 변환을 적용하는 차원 축소 알고리즘. 여러 특성(Feature) 변수들이 통계적으로 서로 상관관계가 없도록 변환시키는 것으로 고차원 데이터를 저차원으로 변환하는 차원 축소 기법. 주성분분석은 오직 공분산행렬(convariance matrix) $\sum$ 에만 영향을 받는다.<br> 
  - 분산의 최대화: 주성분은 데이터의 분산(변동성)을 최대한 많이 설명할 수 있는 방향으로 정해진다. 즉, 데이터의 주요한 변동성을 나타내는 축을 먼저 찾고, 그 축을 기준으로 데이터를 투영한다.<br>
- - 직교성: 각 주성분은 서로 직교(orthogonal)해야 하느데 이는 각 주성분이 서로 상관관계가 없는 독립적인 축이라는 것을 의미한다.<br>
-▣ PCA의 모델식 : 주성분은 공분산 행렬의 고유값과 고유벡터를 사용하여 계산됩니다. 데이터 행렬 𝑋의 공분산 행렬 𝐶의 고유값과 고유벡터를 통해 새로운 주성분을 계산 
+ - 직교성: 각 주성분은 서로 직교(orthogonal)해야 하는데 이는 각 주성분이 서로 상관관계가 없는 독립적인 축이라는 것을 의미한다.<br>
 ▣ PCA의 절차
  - (1) 데이터 표준화 : PCA를 수행하기 전에 데이터의 스케일을 맞춰주는 과정이다. 각 변수의 평균을 0으로 만들고 분산을 1로 맞추는 표준화를 통해 서로 다른 단위를 갖는 데이터들 간의 비교가 가능해지며, 이 과정은 보통 z-점수 정규화라고 한다.<br>
- - (2) 공분산 행렬 계산 : 각 변수 간의 상관관계를 확인하기 위해 공분산 행렬을 계산한다. 공분산은 두 변수가 함께 변하는 정도를 나타내며, 이를 통해 데이터의 분산이 어떻게 다른 변수들과 상호작용하는지 알 수 있다.<br>
+ - (2) 공분산 행렬 계산 : 각 변수 간의 상관관계를 확인하기 위해 공분산 행렬을 계산. 공분산은 두 변수가 함께 변하는 정도를 나타내며, 이를 통해 데이터의 분산이 어떻게 다른 변수들과 상호작용하는지 알 수 있다.<br>
   $Cov(X,Y)=\frac{1}{n-1}\sum_{i=1}^{n}(X_i-\overline{X})(Y_i-\overline{Y})$<br>
  - (3) 고유값 분해(Eigenvalue Decomposition) : 공분산 행렬의 고유값(eigenvalue)과 고유벡터(eigenvector)를 구한다. 고유벡터는 PCA에서 주성분에 해당하며, 고유값은 주성분이 설명하는 분산의 양을 나타낸다.<br>
  - (4) 주성분 선택: 고유값이 큰 순서대로 주성분을 선택한다. 가장 큰 고유값에 해당하는 고유벡터가 제1 주성분이 되고, 그다음 고유값에 해당하는 것이 제2 주성분이 된다. 고유값이 큰 주성분일수록 데이터의 분산을 많이 설명한다.<br>
@@ -189,8 +191,8 @@
  - 해석의 어려움: 차원축소 후 결과는 원래 변수의 의미를 잃을 수 있으므로 각 주성분이 원래 데이터의 어떤 특성을 설명하는지 직관적으로 해석하기 어렵다.<br>
  - 분산에만 집중: PCA는 분산을 기준으로 차원을 축소하므로, 분산이 적지만 중요한 정보가 있을 경우 이를 놓칠 수 있다.<br>
 ▣ PCA의 모델식 : 주성분은 공분산 행렬의 고유값과 고유벡터를 사용하여 계산<br>
-데이터 행렬 𝑋의 공분산 행렬 𝐶의 고유값과 고유벡터를 통해 새로운 주성분을 계산 : $C=\frac{1}{n-1}X^TX$<br>
-고유값 분해(v_i는 i번째 고유벡터, \lambda_i는 i번째 고유값) : $Cv_i = \lambda_iv_i$<br>
+ - 데이터 행렬 𝑋의 공분산 행렬 𝐶의 고유값과 고유벡터를 통해 새로운 주성분을 계산 : $C=\frac{1}{n-1}X^TX$<br>
+ - 고유값 분해(v_i는 i번째 고유벡터, \lambda_i는 i번째 고유값) : $Cv_i = \lambda_iv_i$<br>
 
 
 <br>
