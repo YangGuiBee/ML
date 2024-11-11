@@ -440,6 +440,7 @@ t-SNE의 응용 분야
     reconstruction_error = mean_squared_error(X, X_reconstructed)  # 재구성 오류 계산
     print(f"Reconstruction Error (MSE): {reconstruction_error:.3f}")
 
+<br>
 
 **▣ 분산 유지율(Explained Variance Ratio) :** 각 주성분이 설명하는 분산 비율을 통해 데이터의 정보 손실 정도를 파악
 
@@ -459,8 +460,38 @@ t-SNE의 응용 분야
     print(f"Explained Variance Ratio per Component: {explained_variance_ratio}")
     print(f"Total Variance Retained: {sum(explained_variance_ratio):.3f}")  # 전체 분산 유지율
 
+<br>
 
 **▣ 상호 정보량(Mutual Information) :** 차원 축소 전후 데이터의 정보량을 비교
+
+    from sklearn.datasets import load_iris
+    from sklearn.decomposition import PCA
+    from sklearn.cluster import KMeans
+    from sklearn.metrics import adjusted_mutual_info_score, normalized_mutual_info_score
+
+    # 데이터 로드 : Iris 데이터셋을 로드하여 입력 데이터(X)와 실제 레이블(y_true)를 준비
+    data = load_iris()
+    X = data.data         # 입력 데이터 (특성)
+    y_true = data.target  # 실제 레이블 (클러스터링 평가 시 사용)
+
+    # PCA를 사용하여 주성분 개수를 2개로 설정하여 데이터를 2차원으로 축소
+    pca = PCA(n_components=2)
+    X_reduced = pca.fit_transform(X)  # 차원 축소된 데이터
+
+    # KMeans를 사용하여 차원 축소된 데이터에서 클러스터링을 수행 : 클러스터 개수를 3으로 설정하여 실제 클래스 수와 맞추기
+    kmeans = KMeans(n_clusters=3, random_state=42)
+    y_pred = kmeans.fit_predict(X_reduced)  # 클러스터링 예측 레이블
+
+    # 4. 상호 정보량 계산
+    # (1) Adjusted Mutual Information (AMI) : 실제 레이블(y_true)과 클러스터링 예측 레이블(y_pred) 간의 유사도를 측정
+    ami = adjusted_mutual_info_score(y_true, y_pred)
+    print(f"Adjusted Mutual Information (AMI): {ami:.3f}")
+
+    # (2) Normalized Mutual Information (NMI) : 실제 레이블과 예측 레이블 간의 상호 정보량을 정규화하여 측정
+    nmi = normalized_mutual_info_score(y_true, y_pred)
+    print(f"Normalized Mutual Information (NMI): {nmi:.3f}")
+
+<br>
 
 **▣ 군집 평가 지표 :** 차원 축소 후 클러스터링을 수행하고 군집 평가 지표를 계산하여 차원 축소의 성능을 평가
 
@@ -470,20 +501,20 @@ t-SNE의 응용 분야
     from sklearn.metrics import silhouette_score, davies_bouldin_score, adjusted_rand_score, normalized_mutual_info_score
     from sklearn.model_selection import train_test_split
 
-    # 1. 데이터 로드
+    # 데이터 로드
     data = load_iris()
     X = data.data
     y_true = data.target  # 실제 레이블 (평가를 위해 사용)
 
-    # 2. PCA를 사용하여 차원 축소
+    # PCA를 사용하여 차원 축소
     pca = PCA(n_components=2)
     X_reduced = pca.fit_transform(X)
 
-    # 3. KMeans를 사용하여 클러스터링 수행
+    # KMeans를 사용하여 클러스터링 수행
     kmeans = KMeans(n_clusters=3, random_state=42)
     y_pred = kmeans.fit_predict(X_reduced)
 
-    # 4. 군집 평가 지표 계산
+    # 군집 평가 지표 계산
     # (1) Silhouette Score
     silhouette = silhouette_score(X_reduced, y_pred)
     print(f"Silhouette Score: {silhouette:.3f}")
@@ -499,4 +530,6 @@ t-SNE의 응용 분야
     # (4) Normalized Mutual Information (NMI) - 실제 레이블과 예측 레이블 비교
     nmi = normalized_mutual_info_score(y_true, y_pred)
     print(f"Normalized Mutual Information (NMI): {nmi:.3f}")
+
+<br>
 
