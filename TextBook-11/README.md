@@ -52,24 +52,34 @@
 ▣ 응용분야 : 시장 바구니 분석(장바구니 데이터에서 자주 함께 구매되는 상품을 찾음), 추천 시스템, 웹 페이지 연결성 분석<br>
 ▣ 모델식 : 지지도(Support): 특정 항목 집합이 전체 거래에서 발생하는 빈도, 신뢰도(Confidence): 특정 항목이 발생한 경우 다른 항목이 함께 발생할 확률, 향상도(Lift): 항목 간의 상호의존성을 측정<br>
 
-    from mlxtend.frequent_patterns import apriori, association_rules
     import pandas as pd
+    from mlxtend.frequent_patterns import apriori, association_rules
+    import matplotlib.pyplot as plt
 
-    # 예시 데이터 생성 (장바구니 데이터)
-    data = {'milk': [1, 0, 1, 1, 0],
-            'bread': [1, 1, 1, 0, 1],
-            'butter': [0, 1, 0, 1, 0], 
-            'beer': [1, 1, 1, 0, 0]}
-    df = pd.DataFrame(data)
+    # 데이터 로드 및 전처리 (Online Retail 데이터 예제 사용)
+    df = pd.read_excel("Online Retail.xlsx")
+    df = df.dropna(subset=['InvoiceNo', 'Description'])
+    df['InvoiceNo'] = df['InvoiceNo'].astype(str)
+    df = df[df['Country'] == 'United Kingdom']
+    basket = df.groupby(['InvoiceNo', 'Description'])['Quantity'].sum().unstack().reset_index().fillna(0).set_index('InvoiceNo')
+    basket = basket.applymap(lambda x: 1 if x > 0 else 0)
 
-    # Apriori 알고리즘을 사용하여 빈발 항목 집합 찾기
-    frequent_itemsets = apriori(df, min_support=0.6, use_colnames=True)
+    # Apriori 알고리즘
+    frequent_itemsets = apriori(basket, min_support=0.01, use_colnames=True)
+    rules = association_rules(frequent_itemsets, metric="confidence", min_threshold=0.1)
 
-    # 연관 규칙 찾기
-    rules = association_rules(frequent_itemsets, metric="confidence", min_threshold=0.7)
-
+    # 결과 출력
+    print("Apriori Frequent Itemsets:")
     print(frequent_itemsets)
-    print(rules)
+    print("\nApriori Association Rules:")
+    print(rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
+
+    # 시각화 - Lift vs Confidence
+    plt.scatter(rules['confidence'], rules['lift'], alpha=0.5)
+    plt.xlabel("Confidence")
+    plt.ylabel("Lift")
+    plt.title("Apriori Rules (Confidence vs Lift)")
+    plt.show()
 
 <br>
 
@@ -101,34 +111,35 @@
 ▣ 응용분야 : 대규모 데이터에서 빈발 패턴 분석, 웹 클릭 로그 분석, 텍스트 마이닝에서 자주 나타나는 단어 조합 분석<br>
 ▣ 모델식 : 항목 집합의 지지도 계산을 위해 트랜잭션 ID 집합의 교집합을 사용하며 빈발항목 집합의 지지도를 계산할 때 교집합을 통해 빈발 항목을 찾아낸다<br>
 
-    from itertools import combinations
+    from collections import defaultdict
 
-    # 데이터 집합에서 항목별로 트랜잭션 ID 집합 생성
-    def tid_lists(df):
-        tid_dict = {}
-        for col in df.columns:
-            tid_dict[col] = set(df.index[df[col] == 1])
-        return tid_dict
+    # 데이터 로드 및 전처리
+    df = pd.read_excel("Online Retail.xlsx")
+    df = df.dropna(subset=['InvoiceNo', 'Description'])
+    df['InvoiceNo'] = df['InvoiceNo'].astype(str)
+    df = df[df['Country'] == 'United Kingdom']
+    basket = df.groupby(['InvoiceNo', 'Description'])['Quantity'].sum().unstack().reset_index().fillna(0).set_index('InvoiceNo')
+    basket = basket.applymap(lambda x: 1 if x > 0 else 0)
 
-    # 빈발항목 집합을 찾는 Eclat 알고리즘 구현
-    def eclat(tid_dict, min_support=0.6):
-        n_transactions = len(df)
-        frequent_itemsets = {}
-    
-        for k in range(1, len(tid_dict)+1):
-            for comb in combinations(tid_dict.keys(), k):
-                intersect_tids = set.intersection(*[tid_dict[item] for item in comb])
-                support = len(intersect_tids) / n_transactions
-                if support >= min_support:
-                    frequent_itemsets[comb] = support
-        return frequent_itemsets
+    # Eclat 알고리즘
+    def eclat(data, min_support):
+        transaction_index = defaultdict(set)
+        for i, transaction in enumerate(data):
+            for item in transaction:
+                transaction_index[item].add(i)
 
-    # 트랜잭션 ID 집합 계산
-    tid_dict = tid_lists(df)
+        patterns = {frozenset([item]): trans for item, trans in transaction_index.items() if len(trans) >= min_support}
+        return patterns
 
-    # Eclat 알고리즘 실행
-    frequent_itemsets_eclat = eclat(tid_dict, min_support=0.6)
-    print(frequent_itemsets_eclat)
+    # 트랜잭션 데이터로 변환
+    transactions = basket.apply(lambda x: set(basket.columns[x == 1]), axis=1).tolist()
+    min_support = 10
+    patterns = eclat(transactions, min_support)
+
+    # 결과 출력
+    print("Eclat Frequent Patterns:")
+    for pattern, transaction_ids in patterns.items():
+        print(f"Pattern: {pattern}, Support: {len(transaction_ids)}")
     
 <br>
 
@@ -139,6 +150,22 @@
 ▣ 단점: 복잡성이 증가하며, 해석이 어려워질 수 있음<br>
 ▣ 응용분야: 전자상거래, 추천 시스템, 마케팅 분석<br>
 
+    # 예제 계층 구조 데이터 생성
+    df['Category'] = df['Description'].apply(lambda x: 'Category1' if 'A' in x else 'Category2')
+
+    # Apriori 알고리즘을 각 계층(Category)별로 적용
+    rules_by_category = {}
+    for category, group in df.groupby('Category'):
+        basket = group.groupby(['InvoiceNo', 'Description'])['Quantity'].sum().unstack().reset_index().fillna(0).set_index('InvoiceNo')
+        basket = basket.applymap(lambda x: 1 if x > 0 else 0)
+        frequent_itemsets = apriori(basket, min_support=0.01, use_colnames=True)
+        rules_by_category[category] = association_rules(frequent_itemsets, metric="confidence", min_threshold=0.1)
+
+    # 결과 출력
+    for category, rules in rules_by_category.items():
+        print(f"\nCategory: {category} - Rules")
+        print(rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
+
 <br>
 
 # [5] Multi-dimensional Association Rules
@@ -147,6 +174,18 @@
 ▣ 장점: 규칙의 범위를 확장할 수 있어 더 세밀한 규칙 도출 가능.<br>
 ▣ 단점: 복잡성과 해석의 어려움<br>
 ▣ 응용분야: 사용자 속성 기반 추천 시스템, 마케팅 인텔리전스<br>
+
+    # Country 속성을 추가하여 Multi-dimensional Association Rules 생성
+    df = df[df['Country'].isin(['United Kingdom', 'France'])]  # 특정 국가 데이터만 사용
+    basket_sets = df.groupby(['InvoiceNo', 'Country', 'Description'])
+    ['Quantity'].sum().unstack().reset_index().fillna(0).set_index('InvoiceNo')
+    basket_sets = basket_sets.applymap(lambda x: 1 if x > 0 else 0)
+
+    # Apriori 알고리즘 적용
+    frequent_itemsets = apriori(basket_sets, min_support=0.01, use_colnames=True)
+    rules = association_rules(frequent_itemsets, metric="confidence", min_threshold=0.1)
+    print("Multi-dimensional Association Rules:")
+    print(rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
 
 <br>
 
