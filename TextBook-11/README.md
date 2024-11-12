@@ -904,6 +904,10 @@ Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
     plt.colorbar()
     plt.show()
 
+
+![](./images/PCA_LDA.png)
+<br>
+https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysis-python/
 <br>
 
 # [7] Isomap
