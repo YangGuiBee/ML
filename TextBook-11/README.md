@@ -52,9 +52,9 @@
 ▣ 응용분야 : 시장 바구니 분석(장바구니 데이터에서 자주 함께 구매되는 상품을 찾음), 추천 시스템, 웹 페이지 연결성 분석<br>
 ▣ 모델식 : 지지도(Support): 특정 항목 집합이 전체 거래에서 발생하는 빈도, 신뢰도(Confidence): 특정 항목이 발생한 경우 다른 항목이 함께 발생할 확률, 향상도(Lift): 항목 간의 상호의존성을 측정<br>
 
-	import pandas as pd
-	from mlxtend.frequent_patterns import apriori
+	import pandas as pd	
 	import matplotlib.pyplot as plt
+ 	from mlxtend.frequent_patterns import apriori
 	from itertools import combinations
 	
 	# 데이터셋 생성
