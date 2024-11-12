@@ -242,90 +242,197 @@
 
 <br>
 
-
 # [3] UMAP(Uniform Manifold Approximation and Projection)
+▣ 정의: 데이터의 국소 구조와 전역 구조를 동시에 보존하면서 저차원으로 투영하는 비선형 차원 축소 알고리즘<br>
+▣ 필요성: 고차원 데이터를 저차원에서 시각화하면서 데이터의 전체적 및 국소적 관계를 동시에 보존하기 위해 사용<br>
+▣ 장점: t-SNE보다 계산이 빠르고, 대규모 데이터에서도 잘 작동, 데이터의 전역적 및 국소적 구조를 동시에 보존<br>
+▣ 단점: 일부 매개변수 조정이 필요하며, 결과가 매개변수에 민감할 수 있음<br>
+▣ 응용분야: 대용량 데이터 시각화, 생물정보학, 텍스트 분석 등<br>
+▣ 모델식: 이론적으로는 리만 거리와 초구 면적 개념을 이용하여 데이터의 근접성을 유지하면서 고차원에서 저차원으로 투영<br>
 
-# [4] SVD(Singular Value Decomposition)
-SVD는 선형대수학에서 매우 중요한 행렬 분해 기법으로, 임의의 행렬을 세 개의 행렬로 분해하는 방식이다. SVD는 데이터 분석, 차원 축소, 신호 처리, 머신러닝 등 다양한 분야에서 활용되며, 특히 고차원의 데이터를 다룰 때 중요한 역할을 한다. SVD는 주로 행렬의 특이값과 특이벡터를 통해 행렬의 구조를 파악하고, 이를 통해 데이터의 패턴을 찾거나 압축하는 데 사용된다.<br>
+    import umap
+    import matplotlib.pyplot as plt
+    from sklearn.datasets import load_iris
 
-SVD의 핵심개념
- - 모든 행렬에 적용 가능: SVD는 정방행렬뿐만 아니라 비정방행렬이나 비대칭 행렬에도 적용할 수 있다는 점에서 SVD는 다른 행렬 분해 기법들에 비해 범용성이 높다.<br>
- - 특이값: Σ의 대각 성분인 특이값은 A의 행렬에 대한 중요한 정보를 담고 있으며 특이값이 클수록 데이터의 변동성이 크다는 것을 의미하며, 작은 특이값은 데이터의 변동이 적은 방향을 나타낸다.<br>
- - 차원 축소: SVD는 특이값을 기준으로 가장 중요한 축을 선택하여 차원을 축소할 수 있다. 가장 큰 특이값에 해당하는 축만 남기고 나머지를 제거하면, 데이터의 중요한 정보는 유지하면서 노이즈나 불필요한 차원을 줄일 수 있다.<br>
-SVD의 장점
- - 모든 행렬에 적용 가능: SVD는 정방, 비정방, 비대칭 행렬 등 어떤 형태의 행렬에도 적용할 수 있다.<br>
- - 차원 축소: 데이터를 저차원 공간으로 변환하면서도 중요한 패턴을 유지할 수 있다.<br>
- - 노이즈 제거: 데이터에서 노이즈를 제거하여 중요한 정보만 남길 수 있다.<br>
- - 추천 시스템에서 활용: 사용자-아이템 간의 관계를 분석하고, 효과적인 추천을 가능하게 한다.<br>
-SVD의 단점
- - 계산 복잡도: SVD는 계산 비용이 매우 높으며, 특히 매우 큰 행렬의 경우 계산이 오래 걸릴 수 있다.<br>
- - 해석 어려움: 분해된 행렬들이 원본 데이터와 직관적인 관계를 가지지 않기 때문에, 결과를 해석하는 것이 어려울 수 있다.<br>
-SVD의 응용분야
- - 차원 축소(Dimensionality Reduction) : 고차원 데이터를 저차원으로 변환할 때 SVD는 중요한 역할을 한다. 데이터에서 가장 중요한 패턴을 유지하면서도 차원을 줄일 수 있습니다. 예를 들어, 텍스트 데이터를 다루는 잠재 의미 분석(LSA)에서는 단어-문서 행렬을 SVD를 사용하여 차원을 축소하고, 문서 간의 의미적 관계를 파악한다.<br>
- - 데이터 압축(Data Compression) : 이미지, 영상, 신호 데이터와 같은 큰 데이터를 압축할 때도 SVD가 유용하다. 원래 데이터의 중요한 정보를 유지하면서 압축된 데이터를 생성할 수 있으며, 이를 통해 메모리 사용량을 줄이고 계산 시간을 단축할 수 있다.<br>
- - 노이즈 제거(Denoising) : 데이터에서 노이즈를 제거하는 데 SVD가 사용된다. 노이즈는 주로 작은 특이값에 해당하는 방향에서 발생하므로, 작은 특이값을 제거하고 큰 특이값에 해당하는 정보만 남기면 노이즈를 제거할 수 있다.<br>
- - 추천 시스템(Recommendation Systems) : 추천 시스템에서 사용자와 아이템 간의 상호작용 행렬을 SVD로 분해하여, 사용자에게 가장 적합한 아이템을 추천할 수 있다. 이는 영화 추천, 제품 추천 등 다양한 도메인에서 활용된다.<br>
- - 이미지 압축(Image Compression) : SVD는 이미지 데이터를 효율적으로 압축하는 데 사용된다. 이미지를 행렬로 표현한 후 SVD를 통해 차원을 축소하면, 원본 이미지의 중요한 정보는 유지하면서도 크기가 줄어든 이미지를 생성할 수 있다.<br> 
+    # 데이터 로드
+    data = load_iris()
+    X = data.data
+
+    # UMAP 적용
+    umap_model = umap.UMAP(n_components=2, random_state=42)
+    X_umap = umap_model.fit_transform(X)
+
+    # 결과 시각화
+    plt.scatter(X_umap[:, 0], X_umap[:, 1], c=data.target)
+    plt.xlabel("UMAP Component 1")
+    plt.ylabel("UMAP Component 2")
+    plt.title("UMAP on Iris Dataset")
+    plt.colorbar()
+    plt.show()
 
 <br>
-    import numpy as np
-    from numpy.linalg import svd
 
-    # 예시 데이터 생성
-    A = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+# [4] SVD(Singular Value Decomposition)
+▣ 정의: 임의의 행렬을 세 개의 행렬로 분해하는 방식으로 행렬의 특이값과 특이벡터를 통해 행렬의 구조를 파악하고, 이를 통해 데이터의 패턴을 찾거나 압축하는 데 사용<br> 
+▣ 장점 : 정방/비정방/비대칭 행렬 등 어떤 형태의 행렬에도 적용 가능, 데이터를 저차원 공간으로 변환하면서도 중요한 패턴을 유지, 데이터에서 노이즈를 제거하여 중요한 정보만 남길 수 있음<br>
+▣ 단점 : 특히 매우 큰 행렬의 경우 계산이 오래 걸릴 수 있으며, 분해된 행렬들이 원본 데이터와 직관적인 관계를 가지지 않기 때문에 결과를 해석하는 것이 어려울 수 있음<br>
+▣ 응용분야 : 단어-문서 행렬의 차원 축소, 데이터 압축, 노이즈 제거, 추천 시스템, 이미지 압축<br> 
+▣ 모델식 : $X=UΣV^T$<br>
+𝑋는 𝑚×𝑛 크기의 원본 행렬, 𝑈는 𝑚×𝑚 크기의 좌측 직교 행렬, Σ는 𝑚×𝑛 크기의 대각 행렬로 특이값이 대각 원소로 배치, $𝑉^𝑇$는 𝑛×𝑛 크기의 우측 직교 행렬<br>
+
+<br>
+
+    import numpy as np
+    from sklearn.decomposition import TruncatedSVD
+    import matplotlib.pyplot as plt
+    from sklearn.datasets import load_iris
+
+    # 데이터 로드
+    data = load_iris()
+    X = data.data
 
     # SVD 적용
-    U, Sigma, VT = svd(A)
+    svd = TruncatedSVD(n_components=2)
+    X_svd = svd.fit_transform(X)
 
-    print("U matrix:")
-    print(U)
-    print("Sigma values:")
-    print(Sigma)
-    print("VT matrix:")
-    print(VT)
+    # 결과 시각화
+    plt.scatter(X_svd[:, 0], X_svd[:, 1], c=data.target)
+    plt.xlabel("SVD Component 1")
+    plt.ylabel("SVD Component 2")
+    plt.title("SVD on Iris Dataset")
+    plt.colorbar()
+    plt.show()
+
+    # 분산 유지율 출력
+    print("Explained Variance Ratio:", svd.explained_variance_ratio_)
+    print("Total Variance Retained:", sum(svd.explained_variance_ratio_))
 
 <br>
 
 # [5] ICA(Independent Component Analysis)
-▣ 정의 : ICA는 다변량 신호에서 통계적으로 독립적인 성분을 추출하는 비선형 차원 축소 기법으로 주로 관찰된 신호를 독립적인 원천 신호로 분리하는 데 사용된다. PCA는 데이터의 분산을 최대화하는 축을 찾는 반면, ICA는 신호 간의 독립성을 기반으로 성분을 찾는다. 또한 PCA는 가우시안 분포를 가정하고 데이터의 상관관계만을 이용해 차원을 축소하거나 성분을 찾는 반면, ICA는 신호들 간의 고차원적 통계적 독립성에 초점을 맞추기 때문에 더 복잡한 구조의 신호 분리 문제를 해결할 수 있다.<br>
-▣ ICA의 필요성 : 관측된 신호가 여러 독립적인 원천 신호의 혼합으로 구성될 때, 각 독립적인 신호를 복원하는 데 필요하며 특히 신호 처리 및 음성 분리에 유용하다.<br>
-▣ ICA의 응용분야
- - 뇌파(EEG) 신호 분석: 뇌의 여러 부위에서 발생하는 신호들이 혼합되어 측정된 뇌파를 ICA를 사용하여 개별적인 신경 활동을 분리할 수 있다.<br>
- - 음성 신호 분리: 여러 사람이 동시에 이야기하는 상황에서, 각각의 사람의 목소리를 분리해 내는 문제를 해결하는 데 사용된다.<br>
- - 이미지 처리: 이미지에서 개별적인 패턴을 추출하거나 잡음을 제거하는 데 사용될 수 있다.<br>
-▣ ICA의 ICA의 알고리즘  
- - FastICA: 가장 널리 사용되는 ICA 알고리즘으로, 비선형성을 이용해 독립 성분을 빠르게 찾는 방법으로 주로 신경망 기반의 고속 수렴 특성을 이용해 구현된다. FastICA는 신호의 비정규성(정규 분포에서 얼마나 벗어나는지)을 최대화하는 방향으로 성분을 찾는데, 이는 신호가 정규 분포에서 멀어질수록 독립적인 성분일 가능성이 크다는 통계적 특성에 기반한다.<br>
- - Infomax ICA: 정보 이론을 기반으로 한 ICA 방법으로, 관측된 데이터에서 정보량을 최대화하는 방식으로 독립 성분을 추정하며, 신경망의 학습 방식과 유사한 방식으로 작동한다.<br>
-▣ 모델식 : ICA는 신호의 혼합 행렬 𝑋를 독립적인 신호 𝑆와 혼합 행렬 𝐴로 분해하는 문제로 정의하며, 목표는 𝑆를 추출<br> 
-▣ ICA의 장점 : 통계적으로 독립적인 신호를 분리할 수 있으며 신호 처리, 이미지 분할, 음성 분리 등에서 강력한 성능을 발휘한다. 
-▣ ICA의 ICA의 단점
- - 혼합 행렬의 정확성: ICA는 관측 데이터가 독립적인 신호들의 선형 혼합으로 이루어졌다고 가정하지만 이 가정이 항상 맞는 것은 아니다.<br>
- - 잡음에 민감함: 데이터에 잡음이 많이 포함되어 있으면 성분 분리가 어려워질 수 있다.<br>
- - 순서 문제: ICA에서 추출된 독립 성분은 원래 신호의 순서를 보장하지 않으며, 성분의 크기도 원래 신호와 다를 수 있는데 이는 추가적인 후처리가 필요할 수 있음을 의미한다.<br>
-▣ ICA의 모델식 : ICA는 신호의 혼합 행렬 𝑋를 독립적인 신호 𝑆와 혼합 행렬 𝐴로 분해하는 문제로 정의 : $𝑋=𝐴𝑆$<br>
-
+▣ 정의 : 다변량 신호에서 통계적으로 독립적인 성분을 추출하는 비선형 차원 축소 기법. PCA는 데이터의 분산을 최대화하는 축을 찾는 반면, ICA는 신호 간의 독립성을 기반으로 성분을 찾는다. 또한 PCA는 가우시안 분포를 가정하고 데이터의 상관관계만을 이용해 차원을 축소하거나 성분을 찾는 반면, ICA는 신호들 간의 고차원적 통계적 독립성에 초점을 맞추기 때문에 더 복잡한 구조의 신호분리 문제를 해결<br>
+▣ 필요성 : 관측된 신호가 여러 독립적인 원천 신호의 혼합으로 구성될 때 각 독립적인 신호를 복원하는 데 필요하며 특히 신호 처리 및 음성 분리에 유용<br>
+▣ 응용분야 : 뇌파(EEG) 신호 분석, 음성 신호 분리, 이미지 처리<br>
+▣ 장점 : 통계적으로 독립적인 신호를 분리할 수 있으며 신호 처리, 이미지 분할, 음성 분리 등에서 강력한 성능을 발휘<br>
+▣ 단점 : 잡음에 민감하고, 원래 신호의 순서를 보장하지 않으며, 성분의 크기도 원래 신호와 다를 수 있어서 추가적인 후처리가 필요<br>
+▣ 모델식 : 관측 데이터 𝑋=𝐴𝑆에서 𝐴는 혼합 행렬, 𝑆는 독립 성분 행렬이며, 𝐴와 𝑆를 추정하여 𝑆를 추출<br>
+▣ 알고리즘 : 비선형성을 이용해 독립 성분을 빠르게 찾는 방법으로 신호의 비정규성을 최대화하는 방향으로 성분을 추정하는 Fast ICA과 정보 이론을 기반으로 한 방법으로, 관측된 데이터에서 정보량을 최대화하는 방식으로 독립 성분을 추정하는 Infomax ICA<br>
 
 <br>
-    from sklearn.decomposition import FastICA
-    import numpy as np
 
-    # 예시 데이터 생성
-    data = np.random.rand(100, 5)
+    import numpy as np
+    from sklearn.decomposition import FastICA
+    import matplotlib.pyplot as plt
+    from sklearn.datasets import load_iris
+
+    # 데이터 로드
+    data = load_iris()
+    X = data.data
 
     # ICA 적용
-    ica = FastICA(n_components=2)
-    ica_result = ica.fit_transform(data)
+    ica = FastICA(n_components=2, random_state=42)
+    X_ica = ica.fit_transform(X)
 
-    # 결과 출력
-    print(ica_result)
+    # 결과 시각화
+    plt.scatter(X_ica[:, 0], X_ica[:, 1], c=data.target)
+    plt.xlabel("ICA Component 1")
+    plt.ylabel("ICA Component 2")
+    plt.title("ICA on Iris Dataset")
+    plt.colorbar()
+    plt.show()
 
 <br> 
 
 # [6] LDA(Linear Discriminant Analysis)
+▣ 정의: 클래스 간 분산을 최대화하고 클래스 내 분산을 최소화하는 선형 차원 축소 기법으로 주로 지도 학습에서 사용<br>
+▣ 필요성: 클래스 간 분리를 극대화하면서 데이터를 저차원으로 투영하여 분류 문제의 성능을 향상시키기 위해 필요<br>
+▣ 장점: 클래스 분리를 극대화하여 분류 성능을 개선할 수 있으며, 선형 변환을 통해 효율적으로 차원을 축소<br>
+▣ 단점: 데이터가 선형적으로 구분되지 않는 경우 성능이 저하될 수 있으며, 클래스 간 분포가 정규 분포를 따를 때 더 효과적<br>
+▣ 응용분야: 얼굴 인식, 이미지 분류, 텍스트 분류 등<br>
+▣ 모델식: 두 클래스 간의 분산 비율을 최대화하는 방향으로 데이터를 투영<br>
+
+    from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+    import matplotlib.pyplot as plt
+    from sklearn.datasets import load_iris
+
+    # 데이터 로드
+    data = load_iris()
+    X = data.data
+    y = data.target
+
+    # LDA 적용
+    lda = LinearDiscriminantAnalysis(n_components=2)
+    X_lda = lda.fit_transform(X, y)
+
+    # 결과 시각화
+    plt.scatter(X_lda[:, 0], X_lda[:, 1], c=y)
+    plt.xlabel("LDA Component 1")
+    plt.ylabel("LDA Component 2")
+    plt.title("LDA on Iris Dataset")
+    plt.colorbar()
+    plt.show()
+
+<br>
 
 # [7] Isomap
+▣ 정의: 데이터의 기하학적 구조를 보존하여 고차원 데이터를 저차원으로 투영하는 비선형 차원 축소 기법<br>
+▣ 필요성: 비선형적인 데이터 구조를 저차원에서도 유지하며 시각화할 때 유용<br>
+▣ 장점: 고차원 데이터의 매니폴드(저차원 다양체) 구조를 잘 보존하며, 국소적인 거리 정보를 기반으로 데이터의 구조를 유지<br>
+▣ 단점: 데이터가 고차원에서 매니폴드 구조를 형성하지 않는 경우 효과적이지 않으며, 계산 비용이 높아 대용량 데이터에는 부적합<br>
+▣ 응용분야: 시각화, 이미지 및 텍스트 데이터 분석, 생물정보학<br>
+▣ 모델식: 근접 그래프와 다차원 척도를 결합하여 비선형 구조를 보존<br>
+
+    from sklearn.manifold import Isomap
+    import matplotlib.pyplot as plt
+    from sklearn.datasets import load_iris
+
+    # 데이터 로드
+    data = load_iris()
+    X = data.data
+
+    # Isomap 적용
+    isomap = Isomap(n_components=2)
+    X_isomap = isomap.fit_transform(X)
+
+    # 결과 시각화
+    plt.scatter(X_isomap[:, 0], X_isomap[:, 1], c=data.target)
+    plt.xlabel("Isomap Component 1")
+    plt.ylabel("Isomap Component 2")
+    plt.title("Isomap on Iris Dataset")
+    plt.colorbar()
+    plt.show()
+
+<br>
 
 # [8] MDS(Multidimensional Scaling)
+▣ 정의: MDS는 고차원 데이터 포인트 간의 거리를 보존하며 저차원으로 투영하는 차원 축소 기법<br>
+▣ 필요성: 데이터의 유사성 또는 거리 정보를 저차원에서도 유지하여 시각화하기 위해 사용<br>
+▣ 장점: 거리 정보를 보존하므로 데이터의 기하학적 관계를 잘 유지하며, 비선형 구조를 일부 보존<br>
+▣ 단점: 계산 비용이 높고, 대용량 데이터에는 적합하지 않으며, 초기화에 민감하여 결과가 다를 수 있음<br>
+▣ 응용분야: 심리학, 생물정보학, 마케팅 데이터 분석 등<br>
+▣ 모델식: 데이터 포인트 간의 거리 행렬을 유지하며 저차원에서 구성<br>
+
+    from sklearn.manifold import MDS
+    import matplotlib.pyplot as plt
+    from sklearn.datasets import load_iris
+
+    # 데이터 로드
+    data = load_iris()
+    X = data.data
+
+    # MDS 적용
+    mds = MDS(n_components=2, random_state=42)
+    X_mds = mds.fit_transform(X)
+
+    # 결과 시각화
+    plt.scatter(X_mds[:, 0], X_mds[:, 1], c=data.target)
+    plt.xlabel("MDS Component 1")
+    plt.ylabel("MDS Component 2")
+    plt.title("MDS on Iris Dataset")
+    plt.colorbar()
+    plt.show()
+
+<br>
 
 # [9] LSA(Latent Semantic Analysis)
 ▣ LSA의 정의 : LSA는 텍스트 데이터를 분석할 때 사용되는 자연어 처리(Natural Language Processing, NLP) 기법으로, 문서 간의 잠재적인 의미적 관계를 분석하고, 차원을 축소하여 텍스트의 중요한 의미적 패턴을 파악하는 방법이다. LSA는 특히 문서내 단어들 간의 공통적인 의미 구조를 찾는 데 중점을 두며, 이를 통해 문서 간의 유사성을 계산하고, 텍스트 데이터에서 의미적 관계를 도출한다.<br>
