@@ -52,35 +52,63 @@
 ▣ 응용분야 : 시장 바구니 분석(장바구니 데이터에서 자주 함께 구매되는 상품을 찾음), 추천 시스템, 웹 페이지 연결성 분석<br>
 ▣ 모델식 : 지지도(Support): 특정 항목 집합이 전체 거래에서 발생하는 빈도, 신뢰도(Confidence): 특정 항목이 발생한 경우 다른 항목이 함께 발생할 확률, 향상도(Lift): 항목 간의 상호의존성을 측정<br>
 
-    import pandas as pd
-    from mlxtend.frequent_patterns import apriori, association_rules
-    import matplotlib.pyplot as plt
-
-    # 데이터 로드 및 전처리 (Online Retail 데이터 예제 사용)
-    df = pd.read_excel("Online Retail.xlsx")
-    df = df.dropna(subset=['InvoiceNo', 'Description'])
-    df['InvoiceNo'] = df['InvoiceNo'].astype(str)
-    df = df[df['Country'] == 'United Kingdom']
-    basket = df.groupby(['InvoiceNo', 'Description'])['Quantity'].sum().unstack().reset_index().fillna(0).set_index('InvoiceNo')
-    basket = basket.applymap(lambda x: 1 if x > 0 else 0)
-
-    # Apriori 알고리즘
-    frequent_itemsets = apriori(basket, min_support=0.01, use_colnames=True)
-    rules = association_rules(frequent_itemsets, metric="confidence", min_threshold=0.1)
-
-    # 결과 출력
-    print("Apriori Frequent Itemsets:")
-    print(frequent_itemsets)
-    print("\nApriori Association Rules:")
-    print(rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
-
-    # 시각화 - Lift vs Confidence
-    plt.scatter(rules['confidence'], rules['lift'], alpha=0.5)
-    plt.xlabel("Confidence")
-    plt.ylabel("Lift")
-    plt.title("Apriori Rules (Confidence vs Lift)")
-    plt.show()
-
+import pandas as pd
+	from mlxtend.frequent_patterns import apriori
+	import matplotlib.pyplot as plt
+	from itertools import combinations
+	
+	# 데이터셋 생성
+	data = {
+	    'TID': [1, 2, 3, 4, 5],
+	    'milk': [1, 1, 0, 1, 0],
+	    'bread': [1, 1, 1, 0, 1],
+	    'butter': [0, 1, 1, 1, 1],
+	}
+	df = pd.DataFrame(data).set_index('TID')
+	
+	# 데이터 시각화
+	item_counts = df.sum()
+	item_counts.plot(kind='bar', color='blue')
+	plt.title('Item Frequency')
+	plt.xlabel('Items')
+	plt.ylabel('Frequency')
+	plt.show()
+	
+	# apriori 알고리즘 적용
+	frequent_itemsets = apriori(df, min_support=0.4, use_colnames=True)
+	
+	# 수동으로 연관 규칙 계산
+	rules = []
+	for itemset in frequent_itemsets['itemsets']:
+	    if len(itemset) > 1:
+	        for antecedent in combinations(itemset, len(itemset) - 1):
+	            antecedent = frozenset(antecedent)
+	            consequent = itemset - antecedent
+	            
+	            # 지지도 계산
+	            support = frequent_itemsets[frequent_itemsets['itemsets'] == itemset]['support'].values[0]
+	            
+	            # 신뢰도 계산
+	            antecedent_support = frequent_itemsets[frequent_itemsets['itemsets'] == antecedent]['support'].values[0]
+	            confidence = support / antecedent_support
+	            
+	            # 향상도 계산
+	            consequent_support = frequent_itemsets[frequent_itemsets['itemsets'] == consequent]['support'].values[0]
+	            lift = confidence / consequent_support
+	            
+	            # 규칙 저장
+	            rules.append({
+	                'antecedents': antecedent,
+	                'consequents': consequent,
+	                'support': support,
+	                'confidence': confidence,
+	                'lift': lift
+	            })
+	
+	# 결과를 DataFrame으로 변환하여 출력
+	rules_df = pd.DataFrame(rules)
+	print("Association Rules:")
+	
 <br>
 
 # [2] FP-Growth(Frequent Pattern Growth)
