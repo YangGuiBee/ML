@@ -269,21 +269,81 @@ import pandas as pd
 ▣ 단점: 복잡성이 증가하며, 해석이 어려워질 수 있음<br>
 ▣ 응용분야: 전자상거래, 추천 시스템, 마케팅 분석<br>
 
-    # 예제 계층 구조 데이터 생성
-    df['Category'] = df['Description'].apply(lambda x: 'Category1' if 'A' in x else 'Category2')
-
-    # Apriori 알고리즘을 각 계층(Category)별로 적용
-    rules_by_category = {}
-    for category, group in df.groupby('Category'):
-        basket = group.groupby(['InvoiceNo', 'Description'])['Quantity'].sum().unstack().reset_index().fillna(0).set_index('InvoiceNo')
-        basket = basket.applymap(lambda x: 1 if x > 0 else 0)
-        frequent_itemsets = apriori(basket, min_support=0.01, use_colnames=True)
-        rules_by_category[category] = association_rules(frequent_itemsets, metric="confidence", min_threshold=0.1)
-
-    # 결과 출력
-    for category, rules in rules_by_category.items():
-        print(f"\nCategory: {category} - Rules")
-        print(rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
+	import pandas as pd
+	from mlxtend.frequent_patterns import apriori
+	import matplotlib.pyplot as plt
+	from itertools import combinations
+	
+	# 데이터셋 생성 (Multi-level 구조)
+	data = {
+	    'TID': [1, 2, 3, 4, 5],
+	    'Dairy_Milk': [1, 1, 0, 1, 0],
+	    'Bakery_Bread': [1, 1, 1, 0, 1],
+	    'Bakery_Butter': [0, 1, 1, 1, 1]
+	}
+	df = pd.DataFrame(data).set_index('TID')
+	
+	# 상위 계층 데이터 생성
+	df['Dairy'] = df['Dairy_Milk']
+	df['Bakery'] = df[['Bakery_Bread', 'Bakery_Butter']].max(axis=1)
+	
+	# 원본 데이터 시각화
+	item_counts = df[['Dairy_Milk', 'Bakery_Bread', 'Bakery_Butter']].sum()
+	item_counts.plot(kind='bar', color='purple')
+	plt.title('Item Frequency (Multi-level Association Rules)')
+	plt.xlabel('Items')
+	plt.ylabel('Frequency')
+	plt.show()
+	
+	# 상위 계층에서 apriori 알고리즘 적용
+	frequent_itemsets_upper = apriori(df[['Dairy', 'Bakery']], min_support=0.4, use_colnames=True)
+	frequent_itemsets_upper['length'] = frequent_itemsets_upper['itemsets'].apply(lambda x: len(x))
+	
+	# 하위 계층에서 apriori 알고리즘 적용
+	frequent_itemsets_lower = apriori(df[['Dairy_Milk', 'Bakery_Bread', 'Bakery_Butter']], min_support=0.4, use_colnames=True)
+	frequent_itemsets_lower['length'] = frequent_itemsets_lower['itemsets'].apply(lambda x: len(x))
+	
+	# 연관 규칙 수동 계산
+	def generate_rules(frequent_itemsets):
+	    rules = []
+	    for itemset in frequent_itemsets['itemsets']:
+	        if len(itemset) > 1:
+	            for antecedent in combinations(itemset, len(itemset) - 1):
+	                antecedent = frozenset(antecedent)
+	                consequent = itemset - antecedent
+	                
+	                # 지지도 계산
+	                support = frequent_itemsets[frequent_itemsets['itemsets'] == itemset]['support'].values[0]
+	                
+	                # 신뢰도 계산
+	                antecedent_support = frequent_itemsets[frequent_itemsets['itemsets'] == antecedent]['support'].values[0]
+	                confidence = support / antecedent_support
+	                
+	                # 향상도 계산
+	                consequent_support = frequent_itemsets[frequent_itemsets['itemsets'] == consequent]['support'].values[0]
+	                lift = confidence / consequent_support
+	                
+	                # 규칙 저장
+	                rules.append({
+	                    'antecedents': antecedent,
+	                    'consequents': consequent,
+	                    'support': support,
+	                    'confidence': confidence,
+	                    'lift': lift
+	                })
+	    return rules
+	
+	# 상위 계층 연관 규칙 생성
+	rules_upper = generate_rules(frequent_itemsets_upper)
+	rules_df_upper = pd.DataFrame(rules_upper)
+	print("Association Rules (Upper Level):")
+	print(rules_df_upper[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
+	
+	# 하위 계층 연관 규칙 생성
+	rules_lower = generate_rules(frequent_itemsets_lower)
+	rules_df_lower = pd.DataFrame(rules_lower)
+	print("\nAssociation Rules (Lower Level):")
+	print(rules_df_lower[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
 
 <br>
 
@@ -294,36 +354,247 @@ import pandas as pd
 ▣ 단점: 복잡성과 해석의 어려움<br>
 ▣ 응용분야: 사용자 속성 기반 추천 시스템, 마케팅 인텔리전스<br>
 
-    # Country 속성을 추가하여 Multi-dimensional Association Rules 생성
-    df = df[df['Country'].isin(['United Kingdom', 'France'])]  # 특정 국가 데이터만 사용
-    basket_sets = df.groupby(['InvoiceNo', 'Country', 'Description'])
-    ['Quantity'].sum().unstack().reset_index().fillna(0).set_index('InvoiceNo')
-    basket_sets = basket_sets.applymap(lambda x: 1 if x > 0 else 0)
-
-    # Apriori 알고리즘 적용
-    frequent_itemsets = apriori(basket_sets, min_support=0.01, use_colnames=True)
-    rules = association_rules(frequent_itemsets, metric="confidence", min_threshold=0.1)
-    print("Multi-dimensional Association Rules:")
-    print(rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
+	import pandas as pd
+	from mlxtend.frequent_patterns import apriori
+	import matplotlib.pyplot as plt
+	from itertools import combinations
+	
+	# 데이터셋 생성 (Multi-dimensional 구조)
+	data = {
+	    'TID': [1, 2, 3, 4, 5],
+	    'milk': [1, 1, 0, 1, 0],
+	    'bread': [1, 1, 1, 0, 1],
+	    'butter': [0, 1, 1, 1, 1],
+	    'Gender_Male': [1, 0, 0, 1, 1],
+	    'Gender_Female': [0, 1, 1, 0, 0],
+	    'Category_Dairy': [1, 1, 0, 1, 0],
+	    'Category_Bakery': [1, 1, 1, 0, 1]
+	}
+	df = pd.DataFrame(data).set_index('TID')
+	
+	# 원본 데이터 시각화
+	item_counts = df[['milk', 'bread', 'butter']].sum()
+	item_counts.plot(kind='bar', color='orange')
+	plt.title('Item Frequency (Multi-dimensional Association Rules)')
+	plt.xlabel('Items')
+	plt.ylabel('Frequency')
+	plt.show()
+	
+	# apriori 알고리즘을 사용하여 빈발 항목 집합 생성
+	frequent_itemsets = apriori(df, min_support=0.4, use_colnames=True)
+	frequent_itemsets['length'] = frequent_itemsets['itemsets'].apply(lambda x: len(x))
+	
+	# 연관 규칙 수동 계산
+	def generate_rules(frequent_itemsets):
+	    rules = []
+	    for itemset in frequent_itemsets['itemsets']:
+	        if len(itemset) > 1:
+	            for antecedent in combinations(itemset, len(itemset) - 1):
+	                antecedent = frozenset(antecedent)
+	                consequent = itemset - antecedent
+	                
+	                # 지지도 계산
+	                support = frequent_itemsets[frequent_itemsets['itemsets'] == itemset]['support'].values[0]
+	                
+	                # 신뢰도 계산
+	                antecedent_support = frequent_itemsets[frequent_itemsets['itemsets'] == antecedent]['support'].values[0]
+	                confidence = support / antecedent_support
+	                
+	                # 향상도 계산
+	                consequent_support = frequent_itemsets[frequent_itemsets['itemsets'] == consequent]['support'].values[0]
+	                lift = confidence / consequent_support
+	                
+	                # 규칙 저장
+	                rules.append({
+	                    'antecedents': antecedent,
+	                    'consequents': consequent,
+	                    'support': support,
+	                    'confidence': confidence,
+	                    'lift': lift
+	                })
+	    return rules
+	
+	# Multi-dimensional 연관 규칙 생성
+	rules = generate_rules(frequent_itemsets)
+	rules_df = pd.DataFrame(rules)
+	print("Association Rules (Multi-dimensional):")
+	print(rules_df[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
+	
 
 <br>
 
-# [6] SETM(Sequential Execution of Transaction Merging)
-▣ 정의: Apriori의 변형으로, 데이터베이스 접근 횟수를 줄여 성능을 개선<br>
-▣ 필요성: 연관 규칙 생성에서 데이터베이스 접근이 빈번한 경우 사용<br>
-▣ 장점: Apriori에 비해 빠르며 메모리 효율적<br>
-▣ 단점: 성능 한계로 인해 많이 사용되진 않음<br>
-▣ 응용분야: 실시간 데이터 분석, 연관 규칙 학습<br>
-
-<br>
-
-# [7] AIS(Artificial Immune System)
+# [6] AIS(Artificial Immune System)
 ▣ 정의: 거래 데이터를 순차적으로 결합하여 빈번한 항목 집합을 찾는 초기 연관규칙 알고리즘 중 하나<br>
 ▣ 필요성: 초기 연관 규칙 연구에서 활용되었으나, 성능의 한계로 현재는 거의 사용되지 않음<br>
 ▣ 장점: 간단한 구조로 이해하기 쉽다.<br>
 ▣ 단점: 비효율적이며, Apriori보다 성능이 떨어짐<br>
 ▣ 응용분야: 초기 연관 규칙 연구<br>
 
+	import pandas as pd
+	import numpy as np
+	import matplotlib.pyplot as plt
+	
+	# 데이터셋 생성
+	data = {
+	    'TID': [1, 2, 3, 4, 5],
+	    'milk': [1, 1, 0, 1, 0],
+	    'bread': [1, 1, 1, 0, 1],
+	    'butter': [0, 1, 1, 1, 1],
+	}
+	df = pd.DataFrame(data).set_index('TID')
+	
+	# 데이터 시각화
+	item_counts = df.sum()
+	item_counts.plot(kind='bar', color='blue')
+	plt.title('Item Frequency')
+	plt.xlabel('Items')
+	plt.ylabel('Frequency')
+	plt.show()
+	
+	# AIS 알고리즘 설정
+	population_size = 10         # 초기 항체(해) 개수
+	num_generations = 10         # 반복할 세대 수
+	mutation_rate = 0.1          # 돌연변이율
+	selection_rate = 0.5         # 선택률
+	
+	# 적합도 함수 정의 (예: milk, bread, butter 구매 조합의 점수화)
+	def fitness(antibody):
+	    # 항체의 적합도를 milk, bread, butter의 합으로 정의
+	    return antibody['milk'] * 1 + antibody['bread'] * 1.2 + antibody['butter'] * 0.8
+	
+	# 초기 항체(해) 생성 (milk, bread, butter 구매 유무에 따라 항체 구성)
+	population = [df.sample(1, replace=True).squeeze() for _ in range(population_size)]
+	fitness_scores = np.array([fitness(antibody) for antibody in population])
+	
+	# AIS 알고리즘 실행
+	for generation in range(num_generations):
+	    # 선택: 상위 selection_rate 비율의 항체만 유지
+	    num_selected = int(selection_rate * population_size)
+	    selected_indices = np.argsort(fitness_scores)[-num_selected:]
+	    selected_population = [population[i] for i in selected_indices]
+	    
+	    # 복제 및 돌연변이
+	    offspring = []
+	    for antibody in selected_population:
+	        # 복제
+	        cloned = antibody.copy()
+	        # 돌연변이 적용
+	        for item in ['milk', 'bread', 'butter']:
+	            if np.random.rand() < mutation_rate:
+	                cloned[item] = 1 - cloned[item]  # 0이면 1로, 1이면 0으로 변경
+	        offspring.append(cloned)
+	    
+	    # 새 세대 생성
+	    population = offspring
+	    fitness_scores = np.array([fitness(antibody) for antibody in population])
+	
+	# 최적의 항체 선택
+	best_solution = population[np.argmax(fitness_scores)]
+	best_fitness = fitness(best_solution)
+	
+	# 결과 출력
+	print("최적의 해:", best_solution)
+	print("최적의 적합도:", best_fitness)
+	
+	# 평가 결과 (유사 지지도, 신뢰도, 향상도)
+	support = sum(best_solution) / len(best_solution)
+	confidence = best_fitness / max(fitness_scores)
+	lift = confidence / (support if support != 0 else 1)
+	
+	print("\n평가 결과:")
+	print(f"지지도(Support): {support}")
+	print(f"신뢰도(Confidence): {confidence}")
+	print(f"향상도(Lift): {lift}")
+	
+	# 최종 항체 적합도 분포 시각화
+	plt.plot(range(len(fitness_scores)), fitness_scores, 'bo')
+	plt.xlabel("Antibody Index")
+	plt.ylabel("Fitness Score")
+	plt.title("AIS Antibody Fitness Distribution")
+	plt.show()
+	
+<br>
+
+# [7] SETM(Sequential Execution of Transaction Merging)
+▣ 정의: Apriori의 변형으로, 데이터베이스 접근 횟수를 줄여 성능을 개선<br>
+▣ 필요성: 연관 규칙 생성에서 데이터베이스 접근이 빈번한 경우 사용<br>
+▣ 장점: Apriori에 비해 빠르며 메모리 효율적<br>
+▣ 단점: 성능 한계로 인해 많이 사용되진 않음<br>
+▣ 응용분야: 실시간 데이터 분석, 연관 규칙 학습<br>
+
+	import pandas as pd
+	from itertools import combinations
+	import matplotlib.pyplot as plt
+	
+	# 데이터셋 생성
+	data = {
+	    'TID': [1, 2, 3, 4, 5],
+	    'items': [
+	        ['milk', 'bread'],
+	        ['milk', 'bread', 'butter'],
+	        ['bread', 'butter'],
+	        ['milk', 'butter'],
+	        ['bread']
+	    ]
+	}
+	
+	# 데이터프레임으로 변환
+	df = pd.DataFrame(data).set_index('TID')
+	
+	# 원본 데이터 시각화 (항목별 빈도)
+	item_counts = pd.Series([item for sublist in df['items'] for item in sublist]).value_counts()
+	item_counts.plot(kind='bar', color='green')
+	plt.title('Item Frequency (SETM)')
+	plt.xlabel('Items')
+	plt.ylabel('Frequency')
+	plt.show()
+	
+	# 빈발 항목 집합 계산 (min_support 이상인 항목 집합만 선택)
+	min_support = 0.4
+	num_transactions = len(df)
+	frequent_itemsets = {}
+	
+	for transaction in df['items']:
+	    for i in range(1, len(transaction) + 1):
+	        for combination in combinations(transaction, i):
+	            combination = frozenset(combination)
+	            if combination in frequent_itemsets:
+	                frequent_itemsets[combination] += 1
+	            else:
+	                frequent_itemsets[combination] = 1
+	
+	# 지지도 기반으로 필터링
+	frequent_itemsets = {itemset: support / num_transactions 
+	                     for itemset, support in frequent_itemsets.items() 
+	                     if support / num_transactions >= min_support}
+	
+	# 연관 규칙 생성 및 평가
+	rules = []
+	for itemset, support in frequent_itemsets.items():
+	    if len(itemset) > 1:
+	        for antecedent in combinations(itemset, len(itemset) - 1):
+	            antecedent = frozenset(antecedent)
+	            consequent = itemset - antecedent
+	            
+	            # 지지도 계산
+	            antecedent_support = frequent_itemsets.get(antecedent, 0)
+	            consequent_support = frequent_itemsets.get(consequent, 0)
+	            confidence = support / antecedent_support if antecedent_support > 0 else 0
+	            lift = confidence / consequent_support if consequent_support > 0 else 0
+	            
+	            rules.append({
+	                'antecedents': antecedent,
+	                'consequents': consequent,
+	                'support': support,
+	                'confidence': confidence,
+	                'lift': lift
+	            })
+	
+	# 결과를 DataFrame으로 변환하여 출력
+	rules_df = pd.DataFrame(rules)
+	print("Association Rules (SETM):")
+	print(rules_df[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
+	
 <br>
 
 ---
