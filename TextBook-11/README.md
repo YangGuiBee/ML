@@ -109,7 +109,8 @@ import pandas as pd
 	rules_df = pd.DataFrame(rules)
 	print("Association Rules:")
  	print(rules_df[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
-	
+
+![](./images/1-1.png)
 <br>
 
 # [2] FP-Growth(Frequent Pattern Growth)
@@ -176,7 +177,8 @@ import pandas as pd
 	rules_df = pd.DataFrame(rules)
 	print("Association Rules (FP-Growth):")
 	print(rules_df[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
-    
+
+![](./images/1-2.png)   
 <br>
 
 # [3] Eclat(Equivalence Class Transformation)
@@ -260,6 +262,7 @@ import pandas as pd
 	print("Association Rules (Eclat):")
 	print(rules_df[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
     
+![](./images/1-3.png)
 <br>
 
 # [4] Multi-level Association Rules
@@ -345,6 +348,7 @@ import pandas as pd
 	print("\nAssociation Rules (Lower Level):")
 	print(rules_df_lower[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
 
+![](./images/1-4.png)
 <br>
 
 # [5] Multi-dimensional Association Rules
@@ -420,7 +424,7 @@ import pandas as pd
 	print("Association Rules (Multi-dimensional):")
 	print(rules_df[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
 	
-
+![](./images/1-5.png)
 <br>
 
 # [6] AIS(Artificial Immune System)
@@ -512,7 +516,8 @@ import pandas as pd
 	plt.ylabel("Fitness Score")
 	plt.title("AIS Antibody Fitness Distribution")
 	plt.show()
-	
+
+![](./images/1-6.png)
 <br>
 
 # [7] SETM(Sequential Execution of Transaction Merging)
@@ -594,7 +599,8 @@ import pandas as pd
 	rules_df = pd.DataFrame(rules)
 	print("Association Rules (SETM):")
 	print(rules_df[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
-	
+
+![](./images/1-7.png)
 <br>
 
 ---
