@@ -108,6 +108,7 @@ import pandas as pd
 	# 결과를 DataFrame으로 변환하여 출력
 	rules_df = pd.DataFrame(rules)
 	print("Association Rules:")
+ 	print(rules_df[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
 	
 <br>
 
@@ -118,16 +119,63 @@ import pandas as pd
 ▣ 단점: FP-트리 구조를 구축하는 데 추가 메모리가 필요하며, 구현이 복잡하고 FP-Tree 생성을 위한 학습이 필요<br>
 ▣ 응용분야: 대규모 데이터 분석, 전자상거래 추천 시스템<br>
 
-    from mlxtend.frequent_patterns import fpgrowth
-
-    # FP-Growth 알고리즘을 사용하여 빈발 항목 집합 찾기
-    frequent_itemsets_fp = fpgrowth(df, min_support=0.6, use_colnames=True)
-
-    # 연관 규칙 찾기
-    rules_fp = association_rules(frequent_itemsets_fp, metric="confidence", min_threshold=0.7)
-
-    print(frequent_itemsets_fp)
-    print(rules_fp)
+	import pandas as pd
+	from mlxtend.frequent_patterns import fpgrowth
+	import matplotlib.pyplot as plt
+	from itertools import combinations
+	
+	# 데이터셋 생성
+	data = {
+	    'TID': [1, 2, 3, 4, 5],
+	    'milk': [1, 1, 0, 1, 0],
+	    'bread': [1, 1, 1, 0, 1],
+	    'butter': [0, 1, 1, 1, 1],
+	}
+	df = pd.DataFrame(data).set_index('TID')
+	
+	# 데이터 시각화
+	item_counts = df.sum()
+	item_counts.plot(kind='bar', color='green')
+	plt.title('Item Frequency (FP-Growth)')
+	plt.xlabel('Items')
+	plt.ylabel('Frequency')
+	plt.show()
+	
+	# FP-Growth 알고리즘 적용
+	frequent_itemsets = fpgrowth(df, min_support=0.4, use_colnames=True)
+	
+	# 수동으로 연관 규칙 계산
+	rules = []
+	for itemset in frequent_itemsets['itemsets']:
+	    if len(itemset) > 1:
+	        for antecedent in combinations(itemset, len(itemset) - 1):
+	            antecedent = frozenset(antecedent)
+	            consequent = itemset - antecedent
+	            
+	            # 지지도 계산
+	            support = frequent_itemsets[frequent_itemsets['itemsets'] == itemset]['support'].values[0]
+	            
+	            # 신뢰도 계산
+	            antecedent_support = frequent_itemsets[frequent_itemsets['itemsets'] == antecedent]['support'].values[0]
+	            confidence = support / antecedent_support
+	            
+	            # 향상도 계산
+	            consequent_support = frequent_itemsets[frequent_itemsets['itemsets'] == consequent]['support'].values[0]
+	            lift = confidence / consequent_support
+	            
+	            # 규칙 저장
+	            rules.append({
+	                'antecedents': antecedent,
+	                'consequents': consequent,
+	                'support': support,
+	                'confidence': confidence,
+	                'lift': lift
+	            })
+	
+	# 결과를 DataFrame으로 변환하여 출력
+	rules_df = pd.DataFrame(rules)
+	print("Association Rules (FP-Growth):")
+	print(rules_df[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
     
 <br>
 
@@ -139,35 +187,78 @@ import pandas as pd
 ▣ 응용분야 : 대규모 데이터에서 빈발 패턴 분석, 웹 클릭 로그 분석, 텍스트 마이닝에서 자주 나타나는 단어 조합 분석<br>
 ▣ 모델식 : 항목 집합의 지지도 계산을 위해 트랜잭션 ID 집합의 교집합을 사용하며 빈발항목 집합의 지지도를 계산할 때 교집합을 통해 빈발 항목을 찾아낸다<br>
 
-    from collections import defaultdict
-
-    # 데이터 로드 및 전처리
-    df = pd.read_excel("Online Retail.xlsx")
-    df = df.dropna(subset=['InvoiceNo', 'Description'])
-    df['InvoiceNo'] = df['InvoiceNo'].astype(str)
-    df = df[df['Country'] == 'United Kingdom']
-    basket = df.groupby(['InvoiceNo', 'Description'])['Quantity'].sum().unstack().reset_index().fillna(0).set_index('InvoiceNo')
-    basket = basket.applymap(lambda x: 1 if x > 0 else 0)
-
-    # Eclat 알고리즘
-    def eclat(data, min_support):
-        transaction_index = defaultdict(set)
-        for i, transaction in enumerate(data):
-            for item in transaction:
-                transaction_index[item].add(i)
-
-        patterns = {frozenset([item]): trans for item, trans in transaction_index.items() if len(trans) >= min_support}
-        return patterns
-
-    # 트랜잭션 데이터로 변환
-    transactions = basket.apply(lambda x: set(basket.columns[x == 1]), axis=1).tolist()
-    min_support = 10
-    patterns = eclat(transactions, min_support)
-
-    # 결과 출력
-    print("Eclat Frequent Patterns:")
-    for pattern, transaction_ids in patterns.items():
-        print(f"Pattern: {pattern}, Support: {len(transaction_ids)}")
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	from itertools import combinations
+	
+	# 데이터셋 생성
+	data = {
+	    'TID': [1, 2, 3, 4, 5],
+	    'milk': [1, 1, 0, 1, 0],
+	    'bread': [1, 1, 1, 0, 1],
+	    'butter': [0, 1, 1, 1, 1],
+	}
+	df = pd.DataFrame(data).set_index('TID')
+	
+	# 데이터 시각화
+	item_counts = df.sum()
+	item_counts.plot(kind='bar', color='purple')
+	plt.title('Item Frequency (Eclat)')
+	plt.xlabel('Items')
+	plt.ylabel('Frequency')
+	plt.show()
+	
+	# Eclat 알고리즘 구현
+	def eclat(data, min_support=0.4):
+	    # 항목별 지지도 계산
+	    itemsets = {}
+	    for col in data.columns:
+	        support = data[col].sum() / len(data)
+	        if support >= min_support:
+	            itemsets[frozenset([col])] = support
+	    
+	    # 두 개 이상의 항목 집합에 대해 지지도 계산
+	    for length in range(2, len(data.columns) + 1):
+	        for comb in combinations(data.columns, length):
+	            comb_set = frozenset(comb)
+	            support = (data[list(comb)].sum(axis=1) == length).mean()
+	            if support >= min_support:
+	                itemsets[comb_set] = support
+	
+	    return itemsets
+	
+	# Eclat 알고리즘 적용하여 빈발 항목 집합 생성
+	frequent_itemsets = eclat(df, min_support=0.4)
+	
+	# 빈발 항목 집합에서 연관 규칙 계산
+	rules = []
+	for itemset, support in frequent_itemsets.items():
+	    if len(itemset) > 1:
+	        for antecedent in combinations(itemset, len(itemset) - 1):
+	            antecedent = frozenset(antecedent)
+	            consequent = itemset - antecedent
+	            
+	            # 신뢰도 계산
+	            antecedent_support = frequent_itemsets[antecedent]
+	            confidence = support / antecedent_support
+	            
+	            # 향상도 계산
+	            consequent_support = frequent_itemsets[consequent]
+	            lift = confidence / consequent_support
+	            
+	            # 규칙 저장
+	            rules.append({
+	                'antecedents': antecedent,
+	                'consequents': consequent,
+	                'support': support,
+	                'confidence': confidence,
+	                'lift': lift
+	            })
+	
+	# 결과를 DataFrame으로 변환하여 출력
+	rules_df = pd.DataFrame(rules)
+	print("Association Rules (Eclat):")
+	print(rules_df[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
     
 <br>
 
