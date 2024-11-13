@@ -45,6 +45,8 @@
 ---  
 **연관 규칙 추천(Assocication Rule based Recommendation) :** 빅데이터 기반의 데이터 마이닝기법<br>
 "A를 선택하면(antecedent), B도 선택한다(Consequent)"는 규칙을 찾는다.<br>
+![](./images/data.PNG)
+<br>
 
 # [1] Apriori
 ▣ 정의 : 연관규칙 학습을 위한 고전적인 알고리즘으로, 빈발항목 집합(frequent itemsets)을 찾아내고 그 집합 간 연관성을 추출<br>
