@@ -11,8 +11,7 @@
     [4] Multi-level Association Rules
     [5] Multi-dimensional Association Rules
     [6] AIS(Artificial Immune System)
-    [7] SETM(Sequential Execution of Transaction Merging)
-    
+       
     [연관 규칙 알고리즘 평가방법]
     ▣ 지지도(Support) : 특정 항목 집합이 전체 거래에서 얼마나 자주 나타나는지 나타낸다.
     ▣ 신뢰도(Confidence) : A가 주어졌을 때 B가 발생할 확률
@@ -531,89 +530,6 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 	plt.show()
 
 ![](./images/1-6.png)
-<br>
-
-# [7] SETM(Sequential Execution of Transaction Merging)
-▣ 정의: Apriori의 변형으로, 데이터베이스 접근 횟수를 줄여 성능을 개선<br>
-▣ 필요성: 연관 규칙 생성에서 데이터베이스 접근이 빈번한 경우 사용<br>
-▣ 장점: Apriori에 비해 빠르며 메모리 효율적<br>
-▣ 단점: 성능 한계로 인해 많이 사용되진 않음<br>
-▣ 응용분야: 실시간 데이터 분석, 연관 규칙 학습<br>
-
-	import pandas as pd
-	from itertools import combinations
-	import matplotlib.pyplot as plt
-	
-	# 데이터셋 생성
-	data = {
-	    'TID': [1, 2, 3, 4, 5],
-	    'items': [
-	        ['milk', 'bread'],
-	        ['milk', 'bread', 'butter'],
-	        ['bread', 'butter'],
-	        ['milk', 'butter'],
-	        ['bread']
-	    ]
-	}
-	
-	# 데이터프레임으로 변환
-	df = pd.DataFrame(data).set_index('TID')
-	
-	# 원본 데이터 시각화 (항목별 빈도)
-	item_counts = pd.Series([item for sublist in df['items'] for item in sublist]).value_counts()
-	item_counts.plot(kind='bar', color='green')
-	plt.title('Item Frequency (SETM)')
-	plt.xlabel('Items')
-	plt.ylabel('Frequency')
-	plt.show()
-	
-	# 빈발 항목 집합 계산 (min_support 이상인 항목 집합만 선택)
-	min_support = 0.4
-	num_transactions = len(df)
-	frequent_itemsets = {}
-	
-	for transaction in df['items']:
-	    for i in range(1, len(transaction) + 1):
-	        for combination in combinations(transaction, i):
-	            combination = frozenset(combination)
-	            if combination in frequent_itemsets:
-	                frequent_itemsets[combination] += 1
-	            else:
-	                frequent_itemsets[combination] = 1
-	
-	# 지지도 기반으로 필터링
-	frequent_itemsets = {itemset: support / num_transactions 
-	                     for itemset, support in frequent_itemsets.items() 
-	                     if support / num_transactions >= min_support}
-	
-	# 연관 규칙 생성 및 평가
-	rules = []
-	for itemset, support in frequent_itemsets.items():
-	    if len(itemset) > 1:
-	        for antecedent in combinations(itemset, len(itemset) - 1):
-	            antecedent = frozenset(antecedent)
-	            consequent = itemset - antecedent
-	            
-	            # 지지도 계산
-	            antecedent_support = frequent_itemsets.get(antecedent, 0)
-	            consequent_support = frequent_itemsets.get(consequent, 0)
-	            confidence = support / antecedent_support if antecedent_support > 0 else 0
-	            lift = confidence / consequent_support if consequent_support > 0 else 0
-	            
-	            rules.append({
-	                'antecedents': antecedent,
-	                'consequents': consequent,
-	                'support': support,
-	                'confidence': confidence,
-	                'lift': lift
-	            })
-	
-	# 결과를 DataFrame으로 변환하여 출력
-	rules_df = pd.DataFrame(rules)
-	print("Association Rules (SETM):")
-	print(rules_df[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
-
-![](./images/1-7.png)
 <br>
 
 ---
