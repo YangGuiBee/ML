@@ -30,7 +30,7 @@
     [3] UMAP(Uniform Manifold Approximation and Projection) - ML
     [4] SVD(Singular Value Decomposition)
     [5] ICA(Independent Component Analysis)
-    [6] LDA(Linear Discriminant Analysis)
+    [6] LDA(Linear Discriminant Analysis) : 두 클래스 간의 차이를 최대화하고, 같은 클래스 내의 분산을 최소화하는 선형 결정 경계를 탐색(클래스 간의 분리를 극대화하면서 차원을 축소)
     [7] Isomap  - ML
     [8] MDS(Multidimensional Scaling)
     [9] SOM(Self-Organizing Maps)  - ML
