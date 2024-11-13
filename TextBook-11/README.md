@@ -644,6 +644,7 @@ Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
 ▣ 응용분야: 대용량 데이터 시각화, 생물정보학, 텍스트 분석 등<br>
 ▣ 모델식: 이론적으로는 리만 거리와 초구 면적 개념을 이용하여 데이터의 근접성을 유지하면서 고차원에서 저차원으로 투영<br>
 
+    !pip install umap-learn
     import umap
     import matplotlib.pyplot as plt
     from sklearn.datasets import load_iris
