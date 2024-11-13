@@ -602,6 +602,7 @@ Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
     print("Explained Variance Ratio:", pca.explained_variance_ratio_)
     print("Total Variance Retained:", sum(pca.explained_variance_ratio_))
 
+![](./images/PCA.png)
 <br>
 
 # [2] t-SNE(t-distributed Stochastic Neighbor Embedding)
@@ -634,6 +635,7 @@ Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
     plt.colorbar()
     plt.show()
 
+![](./images/tSNE.png)
 <br>
 
 # [3] UMAP(Uniform Manifold Approximation and Projection)
@@ -665,6 +667,7 @@ Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
     plt.colorbar()
     plt.show()
 
+![](./images/UMAP.png)
 <br>
 
 # [4] SVD(Singular Value Decomposition)
@@ -704,6 +707,7 @@ Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
     print("Explained Variance Ratio:", svd.explained_variance_ratio_)
     print("Total Variance Retained:", sum(svd.explained_variance_ratio_))
 
+![](./images/SVD.png)
 <br>
 
 # [5] ICA(Independent Component Analysis)
@@ -738,6 +742,7 @@ Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
     plt.colorbar()
     plt.show()
 
+![](./images/ICA.png)
 <br> 
 
 # [6] LDA(Linear Discriminant Analysis)
@@ -771,7 +776,8 @@ Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
     plt.colorbar()
     plt.show()
 
-
+![](./images/LDA.png)
+<br><br>
 ![](./images/PCA_LDA.png)
 <br>
 https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysis-python/
@@ -805,6 +811,7 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
     plt.colorbar()
     plt.show()
 
+![](./images/ISO.png)
 <br>
 
 # [8] MDS(Multidimensional Scaling)
@@ -835,6 +842,7 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
     plt.colorbar()
     plt.show()
 
+![](./images/MDS.png)
 <br>
 
 
@@ -883,6 +891,7 @@ $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
     plt.grid()
     plt.show()
 
+![](./images/SOM.png)
 <br> 
 
 ---
