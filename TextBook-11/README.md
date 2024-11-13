@@ -191,7 +191,7 @@
 <br>
 chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournier-viger.com/COURSES/Pattern_mining/Eclat.pdf
 <br>
-노란색 빈발 집합 : 사전 정의된 최소 지지도(minimum support) 이상의 지지도를 가지는 항목의 조합<br>
+노란색 빈발 집합 : 사전 정의된 최소 지지도(minimum support) 이상의 지지도를 가지는 항목의 조합<br><br>
 ▣ 정의: Apriori와 FP-Growth의 대안으로, 트랜잭션 간의 공통항목(교집합)을 기반으로 빈발항목을 추출하는 알고리즘<br>
 ▣ 필요성: 데이터의 수가 많아도 트랜잭션 간 교차 계산을 통해 효율적으로 연관 규칙을 도출<br>
 ▣ 장점 : 수평적 데이터 구조를 이용하여 트랜잭션 데이터에서 빈발 항목 집합을 빠르게 찾고, 저장 공간을 효율적으로 사용하며, 교차 연산을 통해 빈발 항목을 추출<br>
@@ -616,87 +616,22 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 ---
 ## [연관 규칙 알고리즘 평가방법]
 
-    (공통소스)
-    import pandas as pd
-
-    # 예제 데이터 (거래 내역)
-    data = {
-        'milk': [1, 0, 1, 1, 0],
-        'bread': [1, 1, 1, 0, 1],
-        'butter': [0, 1, 0, 1, 0],
-        'beer': [1, 1, 1, 0, 0]}
-    df = pd.DataFrame(data)
-
-    # 전체 거래 수
-    total_transactions = len(df)
-
-    # 특정 항목 집합 A와 B 설정 : A (milk) => B (bread)
-    A = 'milk'
-    B = 'bread'
-
-    # A와 B가 동시에 발생한 거래 수
-    support_AB_count = len(df[(df[A] == 1) & (df[B] == 1)])
-
-    # A가 발생한 거래 수
-    support_A_count = len(df[df[A] == 1])
-
-    # B가 발생한 거래 수
-    support_B_count = len(df[df[B] == 1])
-
-<br>
-
 **▣ 지지도(Support):** 특정 항목 집합이 전체 거래에서 얼마나 자주 나타나는지 나타낸다.<br>
 Support(A) = (거래에서 A가 발생한 횟수)/(전체 거래 수)<br>
-
-    # Support (A와 B가 동시에 발생한 비율)
-    support_AB = support_AB_count / total_transactions
-    print(f"Support(A => B): {support_AB:.3f}")
-
-<br>
 
 **▣ 신뢰도(Confidence):** A가 주어졌을 때 B가 발생할 확률<br>
 Confidence(A ⇒ B) = Support(A ∩ B)/Support(A)<br>
 
-    # Confidence (A가 발생했을 때 B가 발생할 확률)
-    confidence_A_B = support_AB_count / support_A_count if support_A_count > 0 else 0
-    print(f"Confidence(A => B): {confidence_A_B:.3f}")
-
-<br>
-
 **▣ 향상도(Lift):** A와 B가 서로 독립적으로 발생하는 경우에 비해 A가 발생했을 때 B가 발생할 가능성이 얼마나 높은지를 나타낸다. 1이면 두 항목이 독립적, 1보다 크면 양의 상관관계, 1보다 작으면 음의 상관관계<br>
 Lift(A ⇒ B) = Confidence(A ⇒ B)/Support(B)<br>
-
-    # Lift (A와 B가 독립적인 경우에 비해 A가 발생할 때 B가 발생할 가능성 비율)
-    lift_A_B = confidence_A_B / (support_B_count / total_transactions) if support_B_count > 0 else 0
-    print(f"Lift(A => B): {lift_A_B:.3f}")
-
-<br>
 
 **▣ 레버리지(Leverage):** A와 B의 결합 빈도가 두 항목이 독립적으로 발생하는 빈도와 얼마나 차이가 나는지 나타낸다. 0이면 두 항목이 독립적<br>
 Leverage(A ⇒ B) =  Support(A ∩ B) - (Support(A) × Support(B))<br>
 
-    # Leverage (A와 B가 독립적일 때 결합 빈도와의 차이)
-    leverage_A_B = support_AB - (support_A_count / total_transactions) * (support_B_count / total_transactions)
-    print(f"Leverage(A => B): {leverage_A_B:.3f}")
-
-<br>
-
 **▣ Conviction(확신도):** A가 발생할 때 B가 발생하지 않을 가능성이 독립적인 경우보다 얼마나 줄어드는지를 나타낸다. 1에 가까우면 A와 B는 서로 독립적<br>
 Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
 
-    # Conviction (A가 발생했을 때 B가 발생하지 않을 가능성 감소율)
-    conviction_A_B = (1 - (support_B_count / total_transactions)) / (1 - confidence_A_B) if confidence_A_B < 1 else float('inf')
-    print(f"Conviction(A => B): {conviction_A_B:.3f}")
-
-<br>
-
 **▣ 컬러레이션 계수(Correlation Coefficient):** 0에 가까우면 두 항목 간에 상관관계가 없고, 양수나 음수로 갈수록 상관관계가 강하다.<br>
-
-    # Correlation Coefficient (피어슨 상관계수)
-    from scipy.stats import pearsonr
-
-    correlation_A_B, _ = pearsonr(df[A], df[B])
-    print(f"Correlation Coefficient(A, B): {correlation_A_B:.3f}")
 
 <br>
 
