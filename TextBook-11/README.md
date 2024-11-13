@@ -26,14 +26,14 @@
 <br>
 
     [1] PCA(Principal Component Analysis)
-    [2] t-SNE(t-distributed Stochastic Neighbor Embedding)
-    [3] UMAP(Uniform Manifold Approximation and Projection)
+    [2] t-SNE(t-distributed Stochastic Neighbor Embedding) - ML
+    [3] UMAP(Uniform Manifold Approximation and Projection) - ML
     [4] SVD(Singular Value Decomposition)
     [5] ICA(Independent Component Analysis)
     [6] LDA(Linear Discriminant Analysis)
-    [7] Isomap
+    [7] Isomap  - ML
     [8] MDS(Multidimensional Scaling)
-    [9] SOM(Self-Organizing Maps)
+    [9] SOM(Self-Organizing Maps)  - ML
 
     [차원 축소 알고리즘 평가방법]
     ▣ 재구성 오류(Reconstruction Error) : 복원된 데이터와 원본 데이터 간의 평균 제곱 오차(MSE)
