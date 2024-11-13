@@ -272,7 +272,7 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 <br>
 
 # [4] Multi-level Association Rules
-▣ 정의: 연관 규칙을 계층적으로 탐색하여 다중 수준에서 규칙을 생성하는 방식<br>
+▣ 정의: Apriori와 FP-Growth 확장버전으로 연관 규칙을 계층적으로 탐색하여 다중 수준에서 규칙을 생성하는 방식<br>
 ▣ 필요성: 제품 카테고리별 분석이 필요한 경우에 적합<br>
 ▣ 장점: 더 정교한 규칙을 생성<br>
 ▣ 단점: 복잡성이 증가하며, 해석이 어려워질 수 있음<br>
@@ -359,7 +359,7 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 
 # [5] Multi-dimensional Association Rules
 ▣ 정의: 여러 속성을 포함하여 다양한 차원의 규칙을 생성<br>
-▣ 필요성: 다양한 속성 간 관계를 탐색하는 데 적합<br>
+▣ 필요성: 연관 규칙을 데이터의 여러 차원에 걸쳐 분석하고자 할 때 유용하며, 특정 집단에 대한 특정 패턴을 탐지하는 데 적합<br>
 ▣ 장점: 규칙의 범위를 확장할 수 있어 더 세밀한 규칙 도출 가능.<br>
 ▣ 단점: 복잡성과 해석의 어려움<br>
 ▣ 응용분야: 사용자 속성 기반 추천 시스템, 마케팅 인텔리전스<br>
@@ -436,9 +436,9 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 # [6] AIS(Artificial Immune System)
 ▣ 정의: 거래 데이터를 순차적으로 결합하여 빈번한 항목 집합을 찾는 초기 연관규칙 알고리즘 중 하나<br>
 ▣ 필요성: 초기 연관 규칙 연구에서 활용되었으나, 성능의 한계로 현재는 거의 사용되지 않음<br>
-▣ 장점: 간단한 구조로 이해하기 쉽다.<br>
+▣ 장점: 간단한 구조로 이해하기 쉽고, 복잡한 비정형 데이터에서 이상 패턴을 감지하는 데 강점<br>
 ▣ 단점: 비효율적이며, Apriori보다 성능이 떨어짐<br>
-▣ 응용분야: 초기 연관 규칙 연구<br>
+▣ 응용분야: 초기 연관 규칙 연구, 이상탐지<br>
 
 	import pandas as pd
 	import numpy as np
