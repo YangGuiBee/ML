@@ -995,17 +995,20 @@ $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
     silhouette = silhouette_score(X_reduced, y_pred)
     print(f"Silhouette Score: {silhouette:.3f}")
 
-    # (2) Davies-Bouldin Index
+    # (2) Davies-Bouldin Index (DBI) - 클러스터들이 얼마나 잘 분리되고 응집되어 있는지 평가(DBI가 낮을수록 클러스터링 품질이 더 좋음)
     davies_bouldin = davies_bouldin_score(X_reduced, y_pred)
     print(f"Davies-Bouldin Index: {davies_bouldin:.3f}")
 
-    # (3) Adjusted Rand Index (ARI) - 실제 레이블과 예측 레이블 비교
+    # (3) Adjusted Rand Index (ARI) - 실제 레이블과 예측 레이블 비교(클러스터링 결과와 실제 레이블 간의 일치도를 측정: 1에 가까울 수록 유사)
     ari = adjusted_rand_score(y_true, y_pred)
     print(f"Adjusted Rand Index (ARI): {ari:.3f}")
 
-    # (4) Normalized Mutual Information (NMI) - 실제 레이블과 예측 레이블 비교
+    # (4) Normalized Mutual Information (NMI) - 실제 레이블과 예측 레이블 비교(클러스터링 결과와 실제 레이블 간의 정보량의 공유 정도를 측정: 1에 가까울 수록 유사)
     nmi = normalized_mutual_info_score(y_true, y_pred)
     print(f"Normalized Mutual Information (NMI): {nmi:.3f}")
 
 <br>
 
+![](./images/s.png)
+
+<br>
