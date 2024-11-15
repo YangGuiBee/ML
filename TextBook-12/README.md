@@ -69,6 +69,8 @@
 
 ![](./images/RL_algorithm.PNG)
 <br>
+(출처) Deep Learning Bible(https://wikidocs.net/169311)
+
 ![](./images/RL_table.PNG)
 <br>
 
