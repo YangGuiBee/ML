@@ -53,7 +53,7 @@
 <br><br> 
 
 ![](./images/rlp.png)
-<br>
+<br>(출처) Richard S. Sutton의 "Deconstructing Reinforcement Learning"(2009년 국제기계학습학회(ICML)에서 발표)
 
 강화학습의 대표적인 알고리즘 MDP(Markov Decision Process)
 
