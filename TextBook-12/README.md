@@ -21,6 +21,11 @@
 
 ---  
 # 강화 학습(Reinforcement Learning, RL)
+![](./images/RL1.png)
+<br>
+![](./images/RL2.png)
+<br>
+
 시행착오(Trial and Error)를 통하여 실수와 보상을 통해 학습을 하여 목표를 찾아가는 알고리즘.<br> 
 기존의 알고리즘이 라벨(정답)이 있는 데이터를 통해서 가중치와 편향을 학습하는 것과 비슷하게<br> 
 보상(Reward)이라는 개념을 사용하여 가중치와 편향을 학습하는 것으로 목적은 최적의 행동양식 또는 정책을 학습하는 것<br>
@@ -44,6 +49,10 @@
 
 (출처) https://github.com/YangGuiBee/ML/blob/main/TextBook-12/STAI.pdf
 <br><br> 
+
+![](./images/rlp.png)
+<br>
+
 강화학습의 대표적인 알고리즘 MDP(Markov Decision Process)
 
 ![](./images/MRP2.png)
@@ -64,8 +73,7 @@
 시나리오4 : -2 –1×0.5 –1×0.52 –2×0.53 –2×0.54 –2×0.55 +1×0.56 -2×0.57 –1×0.58 –1×0.59 –2×0.510 –2×0.511 –2×0.512 +1×0.513 –2×0.514 = -3.197<br>
 
 
-![](./images/rlp.png)
-<br>
+
 
 ![](./images/RL_algorithm.PNG)
 <br>
