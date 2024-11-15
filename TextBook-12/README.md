@@ -30,6 +30,11 @@
 ![](./images/RL_table.PNG)
 <br>
 
+![](./images/MRP2.png)
+<br>
+
+![](./images/MRP1.png)
+<br>
 
 시나리오1 : 알바→공부→수업→휴강→취침
 시나리오2 : 알바→SNS→SNS→알바→공부→취침
