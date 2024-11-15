@@ -27,10 +27,10 @@
 학습 중에 사람을 포함한 환경으로부터 피드백 지도를 받기 때문에 지도학습으로 분류되기도 하나,<br> 
 강화학습이 가지는 최적의 의사결정 프로세스가 정해진 레이블과 비교 판별식을 구하는 방식과는 구별되는 학습모델로 독립적으로 분류<br>
 ![](./images/RL1.png)
-(출처) Deep Learning Bible(https://wikidocs.net/169311)
+<br>(출처) Deep Learning Bible(https://wikidocs.net/169311)
 <br>
 ![](./images/RL2.png)
-(출처) Deep Learning Bible(https://wikidocs.net/169311)
+<br>(출처) Deep Learning Bible(https://wikidocs.net/169311)
 <br>
 
 강화학습에 영향을 끼친 학문분야는 인공지능 외에도 행동심리학, 신경과학, 제어이론, 운용과학 등이 있으며,<br> 
