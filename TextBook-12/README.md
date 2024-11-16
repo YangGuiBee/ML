@@ -59,7 +59,7 @@ Agent 기계는 환경(Environment)으로부터 상태(state)를 관측(observat
 (출처) https://github.com/YangGuiBee/ML/blob/main/TextBook-12/STAI.pdf
 <br><br> 
 
-**[강화학습의 응용분야]**
+**[강화학습의 응용분야]** <br>
 ![](./images/rlp.png)
 <br>(출처) Richard S. Sutton의 "Deconstructing Reinforcement Learning"(2009년 국제기계학습학회(ICML)에서 발표)<br>
 
