@@ -60,7 +60,7 @@ Agent 기계는 환경(Environment)으로부터 상태(state)를 관측(observat
 <br><br> 
 
 ## [강화학습의 응용분야] <br>
-<img width ='300' height = '300' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/rlp.png'>
+<img width ='400' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/rlp.png'>
 <br>(출처) Richard S. Sutton의 "Deconstructing Reinforcement Learning"(2009년 국제기계학습학회(ICML)에서 발표)<br>
 
 ### (1) 프로세스 제어 (24%)
