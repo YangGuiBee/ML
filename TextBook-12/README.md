@@ -28,7 +28,7 @@
 강화학습이 가지는 최적의 의사결정 프로세스가 정해진 레이블과 비교 판별식을 구하는 방식과는 구별되는 학습모델로 독립적으로 분류<br>
 ![](./images/RL1.png)
 <br>(출처) Deep Learning Bible(https://wikidocs.net/169311)
-<br>
+<br><br>
 Agent 기계는 환경(Environment)으로부터 상태(state)를 관측(observation)하고 이에 다른 적절한 행동(action)을 하면<br>
 이 행동을 기준으로 환경으로부터 보상(reward)을 받는 상호작용(관측→행동→보상)을 반복하면서 보상을 최대화하는 것이 목표<br><br>
 [Chat GPT가 그린 그림]<br>
@@ -123,7 +123,8 @@ DeepMind의 축구 AI: Google DeepMind는 축구 선수들의 최적의 움직�
 농기계 경로 최적화: 자율주행 농기계가 강화학습을 통해 농지 내에서 최적의 경로를 학습하여 연료 소비와 시간을 절감<br> 
 
 
-## [강화학습의 대표적인 알고리즘 MDP(Markov Decision Process)]
+## [강화학습의 프레임워크, MDP(Markov Decision Process)]
+마코프 특성(Markov Property)을 기반으로 하는 의사결정 프로세스. $P[S_{t+1}\S_t] = P[S_{t+1}\S_1, ..., S_t]$
 
 ![](./images/MRP2.png)
 <br>
