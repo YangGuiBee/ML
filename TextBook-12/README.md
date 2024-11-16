@@ -96,8 +96,6 @@ Agent 기계는 환경(Environment)으로부터 상태(state)를 관측(observat
 
 
 # [1] Q-learning
-![](./images/QT.PNG)
-<br>
 ![](./images/RL2.png)
 <br>(출처) Deep Learning Bible(https://wikidocs.net/169311)
 
