@@ -31,6 +31,12 @@
 <br>
 Agent 기계는 환경(Environment)으로부터 상태(state)를 관측(observation)하고 이에 다른 적절한 행동(action)을 하면<br>
 이 행동을 기준으로 환경으로부터 보상(reward)을 받는 상호작용(관측→행동→보상)을 반복하면서 보상을 최대화하는 것이 목표<br>
+[Chat GPT가 그린 그림]<br>
+![](./images/RL_m.png)
+<br>
+[Chat GPT가 찾은 그림]<br>
+![](./images/RL_mm.png)
+<br>
 
 ![](./images/RL2.png)
 <br>(출처) Deep Learning Bible(https://wikidocs.net/169311)
