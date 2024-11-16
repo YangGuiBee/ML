@@ -38,8 +38,6 @@ Agent 기계는 환경(Environment)으로부터 상태(state)를 관측(observat
 ![](./images/RL_mm.png)
 <br>
 
-![](./images/RL2.png)
-<br>(출처) Deep Learning Bible(https://wikidocs.net/169311)
 <br>
 
 강화학습에 영향을 끼친 학문분야는 인공지능 외에도 행동심리학, 신경과학, 제어이론, 운용과학 등이 있으며,<br> 
@@ -100,6 +98,9 @@ Agent 기계는 환경(Environment)으로부터 상태(state)를 관측(observat
 # [1] Q-learning
 ![](./images/QT.PNG)
 <br>
+![](./images/RL2.png)
+<br>(출처) Deep Learning Bible(https://wikidocs.net/169311)
+
 ▣ 정의 : 값 기반 강화 학습의 대표적인 알고리즘으로, 상태-행동 쌍에 대한 Q값을 학습해 최적의 정책을 찾는 방법. 상태에서 어떤 행동을 선택할지 결정하는 Q함수를 학습하며, 최적 정책을 따르기 위해 Q값을 최대화하는 방향으로 행동<br>
 ▣ 필요성 : 모델에 대한 사전 지식 없이 환경 내에서 에이전트가 스스로 학습할 수 있는 능력을 제공하며, 상태 공간이 클 때도 적합하게 사용할 수 있다.<br>
 ▣ 장점 : 모델 프리 방식이라 환경의 동작을 미리 알 필요가 없으며, 수렴할 경우 최적의 정책을 보장한다.<br>
