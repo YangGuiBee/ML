@@ -128,16 +128,19 @@ DeepMind의 축구 AI: Google DeepMind는 축구 선수들의 최적의 움직�
 
 
 강화학습의 초점은 학습 과정에서의(on-line) 성능이며, 이는 탐험(exploration)과 활용(exploitation)의 균형을 맞춤으로써 제고<br>
-탐험(exploration) : 에이전트가 새로운 행동을 시도하거나 덜 알려진 상태-행동 공간을 탐험하는 과정으로, 환경의 미지의 정보를 수집하여 학습 데이터를 풍부하게 하고 더 나은 장기적인 정책을 학습<br>
-활용(exploitation) : 에이전트가 현재까지 학습한 정보를 활용하여 최대 보상을 얻는 행동을 선택하는 과정으로, 현재 정책을 최대한 활용해 즉각적인 보상을 극대화<br>
+**탐험(exploration):** 에이전트가 새로운 행동을 시도하거나 덜 알려진 상태-행동 공간을 탐험하는 과정으로, 환경의 미지의 정보를 수집하여 학습 데이터를 풍부하게 하고 더 나은 장기적인 정책을 학습<br>
+**활용(exploitation):** 에이전트가 현재까지 학습한 정보를 활용하여 최대 보상을 얻는 행동을 선택하는 과정으로, 현재 정책을 최대한 활용해 즉각적인 보상을 극대화<br>
 
     제임스 마치(James G. March)의 정의("Exploration and Exploitation in Organizational Learning", 1991)
     탐험(exploration) : 탐색(search), 다양화(variation), 위험감수(risk taking), 실험(experimentation), 놀이(play), 유연성(flexibility), 새로운 발견(discovery), 혁신(innovation) 등의 의미
     활용(exploitation) : 기억(memory), 정교화(refinement), 선택(selection, choice), 생산(production), 효율(efficiency), 구현(implementation), 실행(execution) 등의 의미
 
   
-미국의 수학자 리처드 벨만(Richard Bellman)은 불연속적인 시간문제에 대해 MDP(Markov Decision Process)를 도입하여 동적시스템(dynamic system)에서 시간의 흐름에 따라 각 과정별 최적의 의사결정을 수행하는 최적제어(optimal control) 이론을 도입하였다.
-<br>
+미국의 수학자 리처드 벨만(Richard Bellman)은 불연속적인 시간문제에 대해 **MDP(Markov Decision Process)**를 기반으로 
+동적시스템(dynamic system)에서 시간의 흐름에 따라 각 과정별 최적의 의사결정을 수행하는 최적제어(optimal control) 이론을 도입
+1980년대말까지는 리처드 벨만이 제안한 최적가치함수(optimal value function) 기반의 동적 프로그래밍(dynamic programming)과 확률적인 시뮬레이션을 통해 의사결정을 내리는 몬테카를로 방법(Monte Carlo method)이 주류를 구성<br>
+1988년 리차드 서튼(Richard Sutton)이 발표한 시간차 방법 TD(Temporal Difference learning method)이 이 두가지를 결합하면서 지금까지 가장 많이 인용되는 알고리즘으로 자리매김함
+
 
 ## [강화학습의 프레임워크, MDP(Markov Decision Process)]
 마코프 특성(Markov Property)을 기반으로 하는 의사결정 프로세스<br>
@@ -428,16 +431,17 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
         return actor
 
 <br>
+『알고리즘으로 배우는 인공지능, 머신러닝, 딥러닝 입문』(김의중 지음, 위키북스)
 
 ---
 
 # 앙상블 학습(Ensemble Learning, EL)
 ▣ API : https://scikit-learn.org/stable/api/sklearn.ensemble.html<br>
-▣ 정의 : 앙상블 학습이란 다수의 기초 알고리즘(base algorithm)을 결합하여 더 나은 성능의 예측 모델을 형성하는 것을 말하며, 사용 목적에 따라 배깅(Bagging), 부스팅(Boosting), 스택킹(Stacking)으로 분류<br>
+▣ 정의 : 앙상블 학습이란 다수의 기초 알고리즘(base algorithm)을 결합하여 더 나은 성능의 예측 모델을 형성하는 것을 말하며, 사용 목적에 따라 스택킹(Stacking), 배깅(Bagging), 부스팅(Boosting), 으로 분류<br>
 
 # [6] 스태킹(Stacking)
-▣ 정의 : 서로 다른 종류의 기반 모델(base model) 여러 개를 학습한 후, 이들의 예측 결과를 결합하는 방식이다. 개별 모델의 예측 결과를 다시 하나의 메타 모델(meta-model)로 학습시켜 최종 예측을 수행<br>
-▣ 필요성 : 단일 모델의 약점을 보완하기 위해 서로 다른 유형의 모델을 조합함으로써 더 나은 성능을 도출할 수 있다. 예를 들어, 결정 트리, 서포트벡터머신(SVM), 신경망 등 다양한 모델을 결합<br>
+▣ 정의 : 서로 다른 종류의 기반 모델(base model) 여러 개를 학습한 후, 이들의 예측 결과를 결합하는 방식. 개별 모델의 예측 결과를 다시 하나의 메타 모델(meta-model)로 학습시켜 최종 예측을 수행<br>
+▣ 필요성 : 단일 모델의 약점을 보완하기 위해 서로 다른 유형의 모델을 조합함으로써 더 나은 성능을 도출. 예를 들어, knn, logistic regression, randomforest, xgboost 모델을 이용해서 4종류의 예측값을 구한 후, 이 예측값을 하나의 데이터 프레임으로 만들어 최종모델인 lightgbm의 학습데이터로 사용<br>
 ▣ 장점 : 서로 다른 모델의 장점을 결합하여 더욱 강력한 예측 성능을 낼 수 있으며, 다양한 모델의 편향과 분산을 보완<br>
 ▣ 단점 : 모델 조합이 복잡해질수록 계산 비용이 커지고, 메타 모델을 학습하는 데 추가적인 시간이 소요되며 과적합(overfitting)의 위험<br>
 ▣ 응용분야 : 여러 모델의 특성이 유용할 때 사용한다. 예를 들어, 금융 예측, 이미지 분류 등 다양한 문제에서 활용<br>
