@@ -104,6 +104,9 @@ DeepMind의 축구 AI: Google DeepMind는 축구 선수들의 최적의 움직�
 작물 성장 최적화: 강화학습을 통해 온도, 습도, 조명 등을 자동제어로 조절해 최적의 작물 성장 조건을 유지하는 기술 개발<br> 
 농기계 경로 최적화: 자율주행 농기계가 강화학습을 통해 농지 내에서 최적의 경로를 학습하여 연료 소비와 시간을 절감<br> 
 
+
+## [강화학습의 연구] <br>
+
 강화학습에 영향을 끼친 학문분야는 인공지능 외에도 행동심리학, 신경과학, 제어이론, 운용과학 등이 있으며,<br> 
 이 중 가장 근간이 되는 학문이 **행동심리학(Behavioral Psychology)**<br><br>
 미국의 심리학자 에드워드 손다이크(Edward Thorndike)는 1911년 동물이 어떤 행동을 선택할 때는 강화된 사건(reinforced event)에 영향을 받는 시행착오(Trial and Error)의 효과의 법칙(Law of Effect)을 발표했고, 프린스턴대학의 마빈 민스키(Marvin Minsky)가 1954년에 아날로그 컴퓨터인 SNARC(Stochastic Neural Analog Reinforcement Calculator)을 설계하여 쥐의 미로찾기 시뮬레이션을 개발함으로써 행동심리학 이론을 처음으로 컴퓨터공학에 적용<br>
@@ -121,7 +124,7 @@ DeepMind의 축구 AI: Google DeepMind는 축구 선수들의 최적의 움직�
     (6) 미래 전망: AI 연구가 나아가야 할 방향과 그 가능성을 제시하면서, AI가 다양한 분야에서 응용될 수 있을 것이라고 예측
 
 (출처) https://github.com/YangGuiBee/ML/blob/main/TextBook-12/STAI.pdf
-<br><br> 
+<br>
 
 
 강화학습의 초점은 학습 과정에서의(on-line) 성능이며, 이는 탐험(exploration)과 활용(exploitation)의 균형을 맞춤으로써 제고<br>
