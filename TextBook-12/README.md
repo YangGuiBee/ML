@@ -547,6 +547,14 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 	print(f"XGBoost Accuracy: {xgb_accuracy:.4f}")
 	print(f"Final Model (LightGBM) Accuracy: {lgb_accuracy:.4f}")
 
+<be>
+	
+	(결과)
+	KNN Accuracy: 0.9778
+	Logistic Regression Accuracy: 0.9333
+	Random Forest Accuracy: 0.9111
+	XGBoost Accuracy: 0.9333
+	Final Model (LightGBM) Accuracy: 0.9333
 
 <br>
 
