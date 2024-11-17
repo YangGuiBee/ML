@@ -447,27 +447,107 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 ▣ 응용분야 : 여러 모델의 특성이 유용할 때 사용한다. 예를 들어, 금융 예측, 이미지 분류 등 다양한 문제에서 활용<br>
 ▣ 모델식 : $𝑓_1$ 은 각각의 개별 모델, $𝑓_2$ 는 메타 모델, $\widehat{y}=f_2(f_1(x_1),f_1(x_2),...f_1(x_n))$<br>
 
-    from sklearn.ensemble import StackingClassifier
-    from sklearn.linear_model import LogisticRegression
-    from sklearn.svm import SVC
-    from sklearn.tree import DecisionTreeClassifier
-    from sklearn.datasets import load_iris
-    from sklearn.model_selection import train_test_split
 
-    # 데이터 로드 및 분할
-    X, y = load_iris(return_X_y=True)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+	#!pip install lightgbm
+	import pandas as pd
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score
+	from sklearn.neighbors import KNeighborsClassifier
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.ensemble import RandomForestClassifier
+	import xgboost as xgb
+	import lightgbm as lgb
+	from sklearn.datasets import load_iris
+	from sklearn.preprocessing import StandardScaler
+	
+	# 1. 데이터 로드
+	iris = load_iris()
+	X, y = iris.data, iris.target
+	
+	# 데이터 분할 (Train, Test)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
+	
+	# 2. Base Models 정의
+	knn = KNeighborsClassifier(n_neighbors=5)  # KNN 하이퍼파라미터 튜닝
+	logistic = LogisticRegression(max_iter=300)  # Logistic Regression 개선
+	rf = RandomForestClassifier(n_estimators=200, max_depth=10, random_state=42)  # Random Forest 개선
+	xgboost = xgb.XGBClassifier(n_estimators=200, learning_rate=0.1, eval_metric='mlogloss', random_state=42)  # XGBoost 개선
+	
+	# 3. Base Models 학습 및 예측
+	# KNN
+	knn.fit(X_train, y_train)
+	knn_pred_train = knn.predict_proba(X_train)
+	knn_pred_test = knn.predict_proba(X_test)
+	knn_accuracy = accuracy_score(y_test, knn.predict(X_test))  # 정확도 계산
+	
+	# Logistic Regression
+	logistic.fit(X_train, y_train)
+	logistic_pred_train = logistic.predict_proba(X_train)
+	logistic_pred_test = logistic.predict_proba(X_test)
+	logistic_accuracy = accuracy_score(y_test, logistic.predict(X_test))  # 정확도 계산
+	
+	# Random Forest
+	rf.fit(X_train, y_train)
+	rf_pred_train = rf.predict_proba(X_train)
+	rf_pred_test = rf.predict_proba(X_test)
+	rf_accuracy = accuracy_score(y_test, rf.predict(X_test))  # 정확도 계산
+	
+	# XGBoost
+	xgboost.fit(X_train, y_train)
+	xgb_pred_train = xgboost.predict_proba(X_train)
+	xgb_pred_test = xgboost.predict_proba(X_test)
+	xgb_accuracy = accuracy_score(y_test, xgboost.predict(X_test))  # 정확도 계산
+	
+	# 4. Base Models 예측값을 하나의 데이터프레임으로 합침
+	# 학습 데이터
+	stacked_train = pd.DataFrame({
+	    "knn_0": knn_pred_train[:, 0], "knn_1": knn_pred_train[:, 1], "knn_2": knn_pred_train[:, 2],
+	    "logistic_0": logistic_pred_train[:, 0], "logistic_1": logistic_pred_train[:, 1], "logistic_2": logistic_pred_train[:, 2],
+	    "rf_0": rf_pred_train[:, 0], "rf_1": rf_pred_train[:, 1], "rf_2": rf_pred_train[:, 2],
+	    "xgb_0": xgb_pred_train[:, 0], "xgb_1": xgb_pred_train[:, 1], "xgb_2": xgb_pred_train[:, 2],
+	})
+	
+	# 테스트 데이터
+	stacked_test = pd.DataFrame({
+	    "knn_0": knn_pred_test[:, 0], "knn_1": knn_pred_test[:, 1], "knn_2": knn_pred_test[:, 2],
+	    "logistic_0": logistic_pred_test[:, 0], "logistic_1": logistic_pred_test[:, 1], "logistic_2": logistic_pred_test[:, 2],
+	    "rf_0": rf_pred_test[:, 0], "rf_1": rf_pred_test[:, 1], "rf_2": rf_pred_test[:, 2],
+	    "xgb_0": xgb_pred_test[:, 0], "xgb_1": xgb_pred_test[:, 1], "xgb_2": xgb_pred_test[:, 2],
+	})
+	
+	# 데이터 정규화 (스케일링)
+	scaler = StandardScaler()
+	stacked_train_scaled = scaler.fit_transform(stacked_train)
+	stacked_test_scaled = scaler.transform(stacked_test)
+	
+	# 5. Final Model (LightGBM) 학습 및 예측
+	lgb_model = lgb.LGBMClassifier(
+	    random_state=42,
+	    min_data_in_leaf=30,        # 리프 노드 최소 데이터 수를 낮춤
+	    min_gain_to_split=0.1,      # 분할 수행 최소 정보 이득을 낮춤
+	    max_depth=7,                # 트리 최대 깊이를 늘림
+	    num_leaves=31,              # 리프 노드 개수를 늘림
+	    feature_fraction=0.9,       # 학습에 사용할 피처 비율 증가
+	    bagging_fraction=0.9        # 학습에 사용할 데이터 비율 증가
+	)
+	
+	# 모델 학습
+	lgb_model.fit(stacked_train_scaled, y_train)
+	
+	# 예측
+	lgb_pred = lgb_model.predict(stacked_test_scaled)
+	
+	# 최종 모델 정확도
+	lgb_accuracy = accuracy_score(y_test, lgb_pred)
+	
+	# 6. Base Model 및 최종 모델 정확도 출력
+	print(f"KNN Accuracy: {knn_accuracy:.4f}")
+	print(f"Logistic Regression Accuracy: {logistic_accuracy:.4f}")
+	print(f"Random Forest Accuracy: {rf_accuracy:.4f}")
+	print(f"XGBoost Accuracy: {xgb_accuracy:.4f}")
+	print(f"Final Model (LightGBM) Accuracy: {lgb_accuracy:.4f}")
 
-    # 개별 모델 정의
-    estimators = [('svc', SVC(probability=True)),('tree', DecisionTreeClassifier())]
 
-    # 스태킹 모델 정의
-    stacking_clf = StackingClassifier(estimators=estimators, final_estimator=LogisticRegression())
-    stacking_clf.fit(X_train, y_train)
-
-    # 성능 평가
-    print(stacking_clf.score(X_test, y_test))
-    
 <br>
 
 # [7] 배깅(Bagging)
