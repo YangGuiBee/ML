@@ -202,39 +202,43 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 ▣ 응용분야 : 게임 플레이, 로봇 제어, 자율 주행, 네트워크 트래픽 제어 등<br>
 ▣ 모델식 : Q-learning 업데이트식으로 Q(s,a)는 상태 𝑠에서 행동 𝑎를 선택할 때의 Q값, α는 학습률, 𝛾는 할인 계수,𝑟은 현재 보상, max_𝑎′𝑄(𝑠′,𝑎′)는 다음 상태 𝑠′ 에서 가능한 최대 Q값.<br>
 
-    import numpy as np
-
-    # 환경 설정 (간단한 그리드 월드 환경 가정)
-    n_states = 5
-    n_actions = 2
-    Q = np.zeros((n_states, n_actions))
-
-    alpha = 0.1  # 학습률
-    gamma = 0.9  # 할인 계수
-    epsilon = 0.1  # 탐험 확률
-
-    def choose_action(state):
-        if np.random.uniform(0, 1) < epsilon:
-           return np.random.choice(n_actions)
-        else:
-           return np.argmax(Q[state, :])
-
-    def update_q(state, action, reward, next_state):
-        predict = Q[state, action]
-        target = reward + gamma * np.max(Q[next_state, :])
-        Q[state, action] = predict + alpha * (target - predict)
-
-    # 예시 학습 반복
-    for episode in range(100):
-        state = np.random.randint(0, n_states)
-        while state != 4:  # 종료 상태 가정
-          action = choose_action(state)
-          next_state = np.random.randint(0, n_states)
-          reward = 1 if next_state == 4 else 0
-          update_q(state, action, reward, next_state)
-          state = next_state
-    print(Q)
-    
+	import numpy as np
+	
+	# 환경 설정 (간단한 그리드 월드 환경 가정)
+	n_states = 5  # 총 5개의 상태 (0~4)
+	n_actions = 2  # 각 상태에서 선택할 수 있는 2가지 행동 (예: 0, 1)
+	Q = np.zeros((n_states, n_actions))  # Q-테이블 초기화, 모든 상태-행동 값이 0으로 시작
+	
+	alpha = 0.1  # 학습률: Q-값 업데이트 시 새로운 정보 반영 비율
+	gamma = 0.9  # 할인 계수: 미래 보상의 중요도를 조정
+	epsilon = 0.1  # 탐험 확률: 랜덤 행동 선택 비율
+	
+	# 행동 선택 함수 (ε-greedy 정책)
+	def choose_action(state):
+	    if np.random.uniform(0, 1) < epsilon:  # ε 확률로 탐험
+	       return np.random.choice(n_actions)  # 랜덤으로 행동 선택
+	    else:  # 1-ε 확률로 활용
+	       return np.argmax(Q[state, :])  # Q-값이 가장 큰 행동 선택
+	
+	# Q-값 업데이트 함수
+	def update_q(state, action, reward, next_state):
+	    predict = Q[state, action]  # 현재 상태-행동 값 예측
+	    target = reward + gamma * np.max(Q[next_state, :])  # 보상 + 다음 상태에서의 최대 Q-값
+	    Q[state, action] = predict + alpha * (target - predict)  # Q-값 업데이트 공식
+	
+	# 학습 과정 반복
+	for episode in range(100):  # 100번의 학습 에피소드 실행
+	    state = np.random.randint(0, n_states)  # 임의의 상태에서 에피소드 시작
+	    while state != 4:  # 종료 상태(4)에 도달하면 에피소드 종료
+	        action = choose_action(state)  # 현재 상태에서 행동 선택 (탐험 또는 활용)
+	        next_state = np.random.randint(0, n_states)  # 랜덤으로 다음 상태로 전이
+	        reward = 1 if next_state == 4 else 0  # 보상 설정: 종료 상태로 전이 시 보상 1, 그 외 0
+	        update_q(state, action, reward, next_state)  # Q-값 업데이트
+	        state = next_state  # 다음 상태로 전이
+	
+	# 최종 Q-테이블 출력
+	print(Q)  # 학습 완료된 Q-테이블 출력
+	    
 <br>
 
 # [2] DQN(Deep Q-Network)
