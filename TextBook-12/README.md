@@ -125,13 +125,17 @@ DeepMind의 축구 AI: Google DeepMind는 축구 선수들의 최적의 움직�
 농기계 경로 최적화: 자율주행 농기계가 강화학습을 통해 농지 내에서 최적의 경로를 학습하여 연료 소비와 시간을 절감<br> 
 
 
-강화학습의 초점은 학습 과정에서의(on-line) 성능이며, 이는 탐험(exploration)과 활용(exploitation)의 균형을 맞춤으로써 제고
+강화학습의 초점은 학습 과정에서의(on-line) 성능이며, 이는 탐험(exploration)과 활용(exploitation)의 균형을 맞춤으로써 제고<br>
+탐험(exploration) : 에이전트가 새로운 행동을 시도하거나 덜 알려진 상태-행동 공간을 탐험하는 과정으로, 환경의 미지의 정보를 수집하여 학습 데이터를 풍부하게 하고 더 나은 장기적인 정책을 학습<br>
+활용(exploitation) : 에이전트가 현재까지 학습한 정보를 활용하여 최대 보상을 얻는 행동을 선택하는 과정으로, 현재 정책을 최대한 활용해 즉각적인 보상을 극대화<br>
 
+    제임스 마치(James G. March)의 정의("Exploration and Exploitation in Organizational Learning", 1991)
+    탐험(exploration) : 탐색(search), 다양화(variation), 위험감수(risk taking), 실험(experimentation), 놀이(play), 유연성(flexibility), 새로운 발견(discovery), 혁신(innovation) 등의 의미
+    활용(exploitation) : 기억(memory), 정교화(refinement), 선택(selection, choice), 생산(production), 효율(efficiency), 구현(implementation), 실행(execution) 등의 의미
 
-    탐험(exploration) : 에이전트가 새로운 행동을 시도하거나 덜 알려진 상태-행동 공간을 탐험하는 과정으로
-    탐색(search), 다양화(variation), 위험감수(risk taking), 실험(experimentation), 놀이(play), 유연성(flexibility), 새로운 발견(discovery), 혁신(innovation) 등의 의미
-    활용(exploitation) : 에이전트가 현재까지 학습한 정보를 활용하여 최대 보상을 얻는 행동을 선택하는 과정으로
-    정교화(refinement), 선택(selection, choice), 생산(production), 효율(efficiency), 구현(implementation), 실행(execution) 등의 의미
+  
+미국의 수학자 리처드 벨만(Richard Bellman)은 불연속적인 시간문제에 대해 MDP(Markov Decision Process)를 도입하여 동적시스템(dynamic system)에서 시간의 흐름에 따라 각 과정별 최적의 의사결정을 수행하는 최적제어(optimal control) 이론을 도입하였다.
+<br>
 
 ## [강화학습의 프레임워크, MDP(Markov Decision Process)]
 마코프 특성(Markov Property)을 기반으로 하는 의사결정 프로세스<br>
