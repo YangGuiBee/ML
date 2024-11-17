@@ -375,39 +375,77 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 ▣ 응용분야 : 게임, 로봇 제어, 자율 시스템, 물류 최적화<br>
 ▣ 모델식 : SARSA 업데이트 식, Q(s,a)는 상태 𝑠에서 행동 𝑎를 선택할 때의 Q값, 𝑎′ 는 다음 상태에서 선택<br>
 
-    import numpy as np
-
-    # SARSA 알고리즘을 위한 환경 설정
-    n_states = 5
-    n_actions = 2
-    Q = np.zeros((n_states, n_actions))
-    alpha = 0.1  # 학습률
-    gamma = 0.9  # 할인 계수
-    epsilon = 0.1  # 탐험 확률
-
-    def choose_action(state):
-    if np.random.uniform(0, 1) < epsilon: return np.random.choice(n_actions)
-    else: return np.argmax(Q[state, :])
-
-    def update_q(state, action, reward, next_state, next_action):
-        predict = Q[state, action]
-        target = reward + gamma * Q[next_state, next_action]
-        Q[state, action] = predict + alpha (target - predict)
-
-    # 예시 학습 반복
-    for episode in range(100):
-        state = np.random.randint(0, n_states)
-        action = choose_action(state)
-        while state != 4:  # 종료 상태 가정
-            next_state = np.random.randint(0, n_states)
-            reward = 1 if next_state == 4 else 0
-            next_action = choose_action(next_state)
-            update_q(state, action, reward, next_state, next_action)
-            state, action = next_state, next_action
-    print(Q)
-
+	import numpy as np
+	
+	# SARSA 알고리즘을 위한 환경 설정
+	n_states = 5  # 상태의 개수
+	n_actions = 2  # 행동의 개수
+	Q = np.zeros((n_states, n_actions))  # Q-테이블 초기화
+	alpha = 0.1  # 학습률
+	gamma = 0.9  # 할인 계수
+	epsilon = 0.1  # 탐험 확률
+	
+	# 행동 선택 함수 (ε-greedy)
+	def choose_action(state):
+	    if np.random.uniform(0, 1) < epsilon:  # 탐험
+	        return np.random.choice(n_actions)
+	    else:  # 활용
+	        return np.argmax(Q[state, :])
+	
+	# Q-값 업데이트 함수
+	def update_q(state, action, reward, next_state, next_action):
+	    predict = Q[state, action]  # 현재 상태-행동의 Q-값
+	    target = reward + gamma * Q[next_state, next_action]  # SARSA의 타겟 값
+	    Q[state, action] = predict + alpha * (target - predict)  # 업데이트 공식
+	
+	# 학습 반복
+	num_episodes = 100  # 에피소드 수
+	total_rewards = []  # 에피소드별 총 보상 기록
+	success_count = 0  # 종료 상태에 도달한 에피소드 수
+	
+	for episode in range(num_episodes):
+	    state = np.random.randint(0, n_states)  # 초기 상태를 무작위로 설정
+	    action = choose_action(state)  # 초기 행동 선택
+	    episode_reward = 0  # 에피소드별 총 보상
+	    
+	    while state != 4:  # 종료 상태(4)에 도달하면 종료
+	        next_state = np.random.randint(0, n_states)  # 다음 상태 무작위 생성
+	        reward = 1 if next_state == 4 else 0  # 종료 상태에 도달하면 보상 1
+	        next_action = choose_action(next_state)  # 다음 행동 선택
+	        update_q(state, action, reward, next_state, next_action)  # Q-값 업데이트
+	        state, action = next_state, next_action  # 상태와 행동 업데이트
+	        episode_reward += reward  # 보상 누적
+	        
+	        if reward == 1:  # 종료 상태에 도달
+	            success_count += 1
+	
+	    total_rewards.append(episode_reward)  # 에피소드별 총 보상 기록
+	
+	# 학습 결과 평가
+	print("학습 완료!")
+	print(f"총 에피소드: {num_episodes}")
+	print(f"성공적으로 종료 상태에 도달한 에피소드 수: {success_count}")
+	print(f"성공 비율: {success_count / num_episodes:.2f}")
+	print(f"평균 에피소드 보상: {np.mean(total_rewards):.2f}")
+	print("최종 Q-테이블:")
+	print(Q)
+	
 <br>
 
+	(결과)
+	학습 완료!
+	총 에피소드: 100
+	성공적으로 종료 상태에 도달한 에피소드 수: 77
+	성공 비율: 0.77
+	평균 에피소드 보상: 0.77
+	최종 Q-테이블:
+	[[0.63674193 0.25212404]
+ 	[0.33953311 0.59365598]
+ 	[0.59980783 0.05818173]
+ 	[0.47228527 0.21979548]
+ 	[0.         0.        ]]
+
+<br>
 ---
 
 # 앙상블 학습(Ensemble Learning, EL)
