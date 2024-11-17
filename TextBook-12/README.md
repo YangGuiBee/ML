@@ -437,7 +437,10 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 # 앙상블 학습(Ensemble Learning, EL)
 ▣ API : https://scikit-learn.org/stable/api/sklearn.ensemble.html<br>
-▣ 정의 : 앙상블 학습이란 다수의 기초 알고리즘(base algorithm)을 결합하여 더 나은 성능의 예측 모델을 형성하는 것을 말하며, 사용 목적에 따라 스택킹(Stacking), 배깅(Bagging), 부스팅(Boosting), 으로 분류<br>
+▣ 정의 : 앙상블 학습이란 다수의 기초 알고리즘(base algorithm)을 결합하여 더 나은 성능의 예측 모델을 형성하는 것을 말하며, 사용 목적에 따라 스택킹(Stacking), 배깅(Bagging), 부스팅(Boosting)으로 분류<br>
+![](./images/vs.png)
+
+<br>
 
 # [6] 스태킹(Stacking)
 ▣ 정의 : 서로 다른 종류의 기반 모델(base model) 여러 개를 학습한 후, 이들의 예측 결과를 결합하는 방식. 개별 모델의 예측 결과를 다시 하나의 메타 모델(meta-model)로 학습시켜 최종 예측을 수행<br>
