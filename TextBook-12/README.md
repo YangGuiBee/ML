@@ -2,22 +2,21 @@
 
 ---
 
-## 강화 학습(Reinforcement Learning, RL)
+## [1] 강화 학습(Reinforcement Learning, RL)
 <br>
 
-    [1] Q-learning
-    [2] DQN(Deep Q-Network)
-    [3] SARSA(State-Action-Reward-State-Action)
-    [4] GA(Genetic Algorithm)
-    [5] A3C(Asynchronous Advantage Actor-Critic)
+    [1-1] Q-learning
+    [1-2] DQN(Deep Q-Network)
+    [1-3] SARSA(State-Action-Reward-State-Action)
+    
   
 
-## 앙상블 학습(Ensemble Learning, EL)
+## [2] 앙상블 학습(Ensemble Learning, EL)
 <br>
 
-    [6] 스태킹(Stacking)
-    [7] 배깅(Bagging)
-    [8] 부스팅(Boosting)
+    [2-1] 스태킹(Stacking)
+    [2-2] 배깅(Bagging)
+    [2-3] 부스팅(Boosting)
 
 ---  
 # 강화 학습(Reinforcement Learning, RL)
@@ -191,7 +190,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-# [1] Q-learning
+# [1-1] Q-learning
 ![](./images/RL2.png)
 <br>(출처) Deep Learning Bible(https://wikidocs.net/169311)
 
@@ -250,7 +249,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
   
 <br>
 
-# [2] DQN(Deep Q-Network)
+# [1-2] DQN(Deep Q-Network)
 ▣ 정의 : Q-learning을 딥러닝에 결합한 알고리즘으로, Q-table 대신 심층 신경망을 사용해 Q값을 근사하며, 주로 상태 공간이 매우 크거나 연속적인 문제에서 사용<br>
 ▣ 필요성 : Q-table을 사용할 수 없는 고차원 환경에서 Q-learning을 효과적으로 적용하기 위해 신경망을 사용하여 Q값을 근사<br>
 ▣ 장점 : 고차원 연속 상태 공간에서 사용 가능하며, 경험 재플레이(experience replay)와 타깃 네트워크로 학습 안정성을 높일 수 있다.<br>
@@ -258,62 +257,117 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 ▣ 응용분야 : 비디오 게임(예: Atari 게임), 로봇 제어, 자율 주행 등<br>
 ▣ 모델식 : DQN에서 신경망을 사용한 Q-learning 업데이트 θ는 현재 신경망의 가중치,𝜃′ 는 타깃 신경망의 가중치<br>
 
-    import numpy as np
-    import tensorflow as tf
-    from collections import deque
-
-    n_states = 5
-    n_actions = 2
-
-    # 신경망 모델 정의
-    model = tf.keras.models.Sequential([
-    tf.keras.layers.Dense(24, input_dim=n_states, activation='relu'),
-    tf.keras.layers.Dense(24, activation='relu'),
-    tf.keras.layers.Dense(n_actions, activation='linear')])
-    model.compile(optimizer='adam', loss='mse')
-
-    # Q-learning 파라미터 설정
-    gamma = 0.95
-    epsilon = 1.0
-    epsilon_min = 0.01
-    epsilon_decay = 0.995
-    batch_size = 32
-    memory = deque(maxlen=2000)
-
-    def choose_action(state):
-    if np.random.rand() <= epsilon:
-        return np.random.choice(n_actions)
-    state = np.reshape(state, [1, n_states])
-    return np.argmax(model.predict(state))
-
-    def replay():
-        global epsilon
-        if len(memory) < batch_size: return
-        minibatch = np.random.choice(len(memory), batch_size)
-        for state, action, reward, next_state, done in minibatch:
-            target = reward
-            if not done: target = reward + gamma * np.amax(model.predict(next_state))
-            target_f = model.predict(state)
-            target_f[0][action] = target
-            model.fit(state, target_f, epochs=1, verbose=0)
-        if epsilon > epsilon_min: epsilon *= epsilon_decay
-
-    # 학습 반복 (예시)
-    for episode in range(1000):
-        state = np.random.rand(n_states)
-        done = False
-        while not done:
-            action = choose_action(state)
-            next_state = np.random.rand(n_states)
-            reward = 1 if np.random.rand() > 0.5 else 0
-            done = True if reward == 1 else False
-            memory.append((state, action, reward, next_state, done))
-            replay()
-    print("학습 완료")
+	import numpy as np
+	import tensorflow as tf
+	from collections import deque
+	
+	# 상태 및 행동 정의
+	n_states = 5  # 상태 공간 크기
+	n_actions = 2  # 행동 공간 크기
+	
+	# 신경망 모델 정의
+	model = tf.keras.models.Sequential([
+	    tf.keras.layers.Dense(16, input_dim=n_states, activation='relu'),
+	    tf.keras.layers.Dense(16, activation='relu'),
+	    tf.keras.layers.Dense(n_actions, activation='linear')
+	])
+	model.compile(optimizer='adam', loss='mse')
+	
+	# Q-learning 파라미터 설정
+	gamma = 0.95  # 할인율
+	epsilon = 0.5  # 초기 탐험 확률
+	epsilon_min = 0.01  # 최소 탐험 확률
+	epsilon_decay = 0.995  # 탐험 확률 감소율
+	batch_size = 32  # 배치 크기
+	memory = deque(maxlen=2000)  # 경험 재플레이 버퍼
+	
+	# 행동 선택 함수 (ε-greedy)
+	def choose_action(state):
+	    global epsilon
+	    if np.random.rand() <= epsilon:  # 탐험
+	        return np.random.choice(n_actions)
+	    state = np.reshape(state, [1, n_states])  # 상태를 신경망 입력 크기로 변환
+	    return np.argmax(model.predict(state, verbose=0))  # Q-값이 최대인 행동 선택
+	
+	# 경험 재플레이 함수 (배치 학습)
+	def replay():
+	    global epsilon
+	    if len(memory) < batch_size:
+	        return  # 메모리가 충분하지 않으면 학습하지 않음
+	    
+	    # 배치 샘플링
+	    minibatch = np.random.choice(len(memory), batch_size, replace=False)
+	    states, actions, rewards, next_states, dones = [], [], [], [], []
+	    for i in minibatch:
+	        state, action, reward, next_state, done = memory[i]
+	        states.append(state)
+	        actions.append(action)
+	        rewards.append(reward)
+	        next_states.append(next_state)
+	        dones.append(done)
+	    
+	    # 배열 변환
+	    states = np.array(states, dtype=np.float32)
+	    next_states = np.array(next_states, dtype=np.float32)
+	    rewards = np.array(rewards, dtype=np.float32)
+	    dones = np.array(dones, dtype=np.float32)
+	    
+	    # Q-값 업데이트
+	    target_q_values = model.predict(next_states, verbose=0)
+	    max_target_q_values = np.amax(target_q_values, axis=1)
+	    targets = model.predict(states, verbose=0)
+	    
+	    for i in range(batch_size):
+	        targets[i, actions[i]] = rewards[i] + (1 - dones[i]) * gamma * max_target_q_values[i]
+	    
+	    # 배치 학습
+	    model.fit(states, targets, epochs=1, verbose=0)
+	    
+	    # 탐험 확률 감소
+	    if epsilon > epsilon_min:
+	        epsilon *= epsilon_decay
+	
+	# 학습 반복 (에피소드 수 감소)
+	for episode in range(100):  # 에피소드 수 감소
+	    state = np.random.rand(n_states)  # 초기 상태를 임의로 설정
+	    done = False
+	    total_reward = 0
+	    step_count = 0
+	    while not done:
+	        action = choose_action(state)  # 행동 선택
+	        next_state = np.random.rand(n_states)  # 다음 상태 임의 생성
+	        reward = 1 if np.random.rand() > 0.5 else 0  # 보상 설정
+	        done = True if reward == 1 else False  # 보상이 1이면 종료
+	        memory.append((state, action, reward, next_state, done))  # 경험 저장
+	        state = next_state  # 상태 업데이트
+	        total_reward += reward
+	        step_count += 1
+	        replay()  # 경험 재플레이로 학습
+	    
+	    # 에피소드 결과 출력
+	    print(f"Episode {episode + 1}: Total Reward = {total_reward}, Steps = {step_count}, Epsilon = {epsilon:.4f}")
+	
+	print("학습 완료")
+	
+	# 최종 Q-값 확인 (랜덤 샘플)
+	test_state = np.random.rand(n_states)
+	test_q_values = model.predict(test_state[np.newaxis], verbose=0)
+	print(f"Test State: {test_state}")
+	print(f"Predicted Q-Values: {test_q_values}")
 
 <br>
 
-# [3] SARSA(State-Action-Reward-State-Action)
+	(결과)
+	Episode 1: Total Reward = 1, Steps = 1, Epsilon = 0.5000
+  	...
+	Episode 100: Total Reward = 1, Steps = 1, Epsilon = 0.2080
+	학습 완료
+	Test State: [0.25960352 0.06952445 0.82368307 0.0228719  0.90104538]
+	Predicted Q-Values: [[1.0298501 0.8123386]]
+
+<br>
+
+# [1-3] SARSA(State-Action-Reward-State-Action)
 ▣ 정의 : 상태-행동-보상-다음 상태-다음 행동(State-Action-Reward-State-Action)의 연속적인 관계에서 학습하는 방법. Q-learning과 달리 SARSA는 에이전트가 선택한 행동을 기반으로 학습하며 에이전트가 현재 행동과 다음 행동을 통해 학습하는 on-policy 방법<br>
 ▣ 필요성 : 정책을 미리 고정한 상태에서 Q-learning처럼 탐험과 학습을 분리하지 않고, 정책을 유지하며 학습할 때 유리. SARSA는 실제로 에이전트가 수행하는 행동을 기반으로 학습하므로, 정책에 따른 일관성을 유지. 특히 탐험(exploration) 중에도 안정적으로 학습이 가능<br>
 ▣ 장점 : 에이전트의 실제 정책을 기반으로 학습하므로 정책의 일관성을 유지할 수 있으며, Q-learning보다 안정적인 성능<br>
@@ -354,98 +408,6 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-# [4] GA(Genetic Algorithm)
-▣ 정의 : 유전 알고리즘은 자연 선택과 유전학의 원리에 기반한 최적화 알고리즘으로, 개체군(population) 내에서 개체들이 적응도(fitness)에 따라 선택되고, 교차(crossover)와 돌연변이(mutation)를 통해 새로운 세대를 형성하여 최적 해를 찾아가는 과정<br>
-▣ 필요성 : 해 공간이 매우 크거나 복잡한 문제에서 전통적인 탐색 방법으로는 최적해를 찾기 어렵기 때문에, 진화 과정을 모방한 유전 알고리즘을 사용해 빠르고 효율적으로 최적화<br>
-▣ 장점 : 다양한 해를 동시에 탐색하므로 전역 최적해에 도달할 가능성이 높으며, 문제의 구조에 대한 구체적인 지식 없이도 적용할 수 있고, 비선형 문제나 다목적 최적화 문제에도 적합<br>
-▣ 단점 : 계산 비용이 많이 들 수 있으며, 특정 문제에서는 수렴이 느릴 수 있으며, 너무 빠르게 수렴하면 지역 최적해에 갇힐 가능성<br>
-▣ 응용분야 : 최적화 문제, 로봇 공학, 머신 러닝에서의 하이퍼파라미터 튜닝, 경로 계획, 게임 디자인, 재무 최적화 등<br>
-▣ 모델식 : 적응도(fitness): 해의 품질을 측정. 선택(selection): 높은 적응도를 가진 개체를 우선적으로 선택. 교차(crossover): 두 부모로부터 자손을 생성. 돌연변이(mutation): 자손의 일부 유전자를 무작위로 변형.<br>
-
-    import numpy as np
-
-    def fitness(x):
-        return np.sum(x)  # 최대화할 함수 (예시)
-
-    def selection(pop, scores, k=3):
-        selected_idx = np.random.choice(len(pop), k, replace=False)
-        return pop[selected_idx[np.argmax(scores[selected_idx])]]
-
-    def crossover(p1, p2, r_cross):
-        if np.random.rand() < r_cross:
-            pt = np.random.randint(1, len(p1))
-            return np.hstack((p1[:pt], p2[pt:]))
-        return p1
-
-    def mutation(bitstring, r_mut):
-        for i in range(len(bitstring)):
-            if np.random.rand() < r_mut:
-                bitstring[i] = 1 - bitstring[i]
-
-    # 초기화
-    n_bits = 10
-    n_pop = 20
-    r_cross = 0.9
-    r_mut = 1.0 / n_bits
-    n_iter = 100
-    pop = np.random.randint(0, 2, (n_pop, n_bits))
-
-    for gen in range(n_iter):
-        scores = np.array([fitness(c) for c in pop])
-        best = pop[np.argmax(scores)]
-        print(f"Generation {gen}, Best: {best}, Fitness: {np.max(scores)}")
-    
-        new_pop = []
-        for _ in range(n_pop // 2):
-            p1, p2 = selection(pop, scores), selection(pop, scores)
-            child1, child2 = crossover(p1, p2, r_cross), crossover(p2, p1, r_cross)
-            mutation(child1, r_mut)
-            mutation(child2, r_mut)
-            new_pop += [child1, child2]
-        pop = np.array(new_pop)
-        
-<br>
-
-# [5] A3C(Asynchronous Advantage Actor-Critic)
-▣ 정의 : 병렬 환경에서 여러 에이전트가 동시에 학습하는 강화 학습 기법으로 액터-크리틱(Actor-Critic) 구조를 기반으로 하고 있으며, 에이전트들은 독립적으로 환경과 상호작용하면서 각각 정책과 가치 함수(critic)를 학습하고, 이를 전역 네트워크로 반영한다. A3C는 탐색(exploration)과 정책 수렴을 효과적으로 조절할 수 있어 강화 학습의 성능을 향상<br>
-▣ 필요성 : 기존 강화 학습 알고리즘은 계산 속도가 느리거나 수렴이 불안정할 수 있는데, A3C는 병렬 학습을 통해 이러한 문제를 해결하며, 병렬적으로 에이전트들이 학습하므로 다양한 상태와 행동을 더 빠르게 탐색하고, 학습 속도를 개선할 수 있다.<br>
-▣ 장점 : 병렬 학습으로 더 빠른 학습 속도를 제공하고, 다중 에이전트를 통해 더 다양한 경험을 수집하고, 수렴의 안정성을 높일 수 있으며, 정책 그라디언트와 가치 기반 방법의 장점을 결합해 효율적인 학습이 가능하다.<br>
-▣ 단점 : 병렬 환경을 구현하기 위한 추가적인 컴퓨팅 자원이 필요하며, 복잡한 알고리즘 구조로 인해 이해하고 구현하는 데 어려움이 있을 수 있고, 하이퍼파라미터 조정이 까다롭고, 자원 소모가 클 수 있다.<br>
-▣ 응용분야 : 비디오 게임 AI 학습 (Atari 게임, StarCraft II 등), 로봇 제어, 자율 주행, 금융 분야의 자동 매매<br>
-
-    import threading
-    import gym
-    import numpy as np
-    import tensorflow as tf
-
-    # A3C 클래스 정의
-    class A3C_Agent:
-        def __init__(self, state_size, action_size):
-            self.state_size = state_size
-            self.action_size = action_size
-            self.gamma = 0.99  # 할인 계수
-            self.actor, self.critic = self.build_model()
-
-        def build_model(self):
-            # 액터 모델
-            inputs = tf.keras.layers.Input(shape=(self.state_size,))
-            hidden = tf.keras.layers.Dense(24, activation='relu')(inputs)
-            policy = tf.keras.layers.Dense(self.action_size, activation='softmax')(hidden)
-        
-        # 크리틱 모델
-        value = tf.keras.layers.Dense(1, activation='linear')(hidden)
-
-        actor = tf.keras.models.Model(inputs=inputs, outputs=policy)
-        critic = tf.keras.models.Model(inputs=inputs, outputs=value)
-
-        actor.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001), loss='categorical_crossentropy')
-        critic.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001), loss='mse')
-
-        return actor
-
-<br>
-『알고리즘으로 배우는 인공지능, 머신러닝, 딥러닝 입문』(김의중 지음, 위키북스)
-
 ---
 
 # 앙상블 학습(Ensemble Learning, EL)
@@ -455,7 +417,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-# [6] 스태킹(Stacking)
+# [2-1] 스태킹(Stacking)
 ▣ 정의 : 서로 다른 종류의 기반 모델(base model) 여러 개를 학습한 후, 이들의 예측 결과를 결합하는 방식. 개별 모델의 예측 결과를 다시 하나의 메타 모델(meta-model)로 학습시켜 최종 예측을 수행<br>
 ▣ 필요성 : 단일 모델의 약점을 보완하기 위해 서로 다른 유형의 모델을 조합함으로써 더 나은 성능을 도출. 예를 들어, knn, logistic regression, randomforest, xgboost 모델을 이용해서 4종류의 예측값을 구한 후, 이 예측값을 하나의 데이터 프레임으로 만들어 최종모델인 lightgbm의 학습데이터로 사용<br>
 ▣ 장점 : 서로 다른 모델의 장점을 결합하여 더욱 강력한 예측 성능을 낼 수 있으며, 다양한 모델의 편향과 분산을 보완<br>
@@ -582,7 +544,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-# [7] 배깅(Bagging)
+# [2-2] 배깅(Bagging)
 ▣ 정의 : 동일한 모델을 여러 번 학습하되, 각 학습마다 다른 데이터 샘플을 사용 주로 부트스트랩(bootstrap) 방법으로 샘플링된 데이터로 모델을 학습하며, 최종 예측은 개별 모델의 예측 결과를 평균 또는 투표로 결합. 대표적인 알고리즘은 랜덤 포레스트(Random Forest)<br>
 ▣ 필요성 : 단일 모델이 데이터의 특정 부분에 과적합하는 것을 방지하고, 예측의 안정성을 높이기 위해 사용<br>
 ▣ 장점 : 분산을 줄여 예측 성능을 향상시키며, 과적합(overfitting)을 방지하는 데 도움<br>
@@ -647,7 +609,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-# [8] 부스팅(Boosting)
+# [2-3] 부스팅(Boosting)
 ▣ 정의 : 약한 학습기(weak learner)를 연속적으로 학습시키며, 이전 학습에서 잘못 예측한 데이터에 가중치를 부여하여 다음 모델이 이를 더 잘 학습할 수 있도록 한다. 대표적인 알고리즘으로는 AdaBoost, Gradient Boosting, XGBoost 등이 있다.<br>
 ▣ 필요성 : 약한 학습기를 여러 번 반복하여 강력한 학습기를 만들 수 있으며, 특히 잘못된 예측에 집중하여 성능을 점진적으로 개선한다.<br>
 ▣ 장점 : 모델이 연속적으로 개선되기 때문에 높은 예측 성능을 보일 수 있으며, 오류를 줄이는 데 매우 효과적이다.<br>
