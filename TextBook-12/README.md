@@ -577,22 +577,60 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 ▣ 응용분야 : 랜덤 포레스트처럼 결정 트리 기반 모델에서 이미지 분류, 텍스트 분류, 금융 예측 등에 널리 사용<br>
 ▣ 모델식 :  $𝑓_1$ 은 각각의 개별 모델, $\widehat{y}=\frac{1}{N}\sum_{i=1}^{N}f_i(x)$<br>
 
-    from sklearn.ensemble import BaggingClassifier
-    from sklearn.tree import DecisionTreeClassifier
-    from sklearn.datasets import load_iris
-    from sklearn.model_selection import train_test_split
+	from sklearn.ensemble import BaggingClassifier
+	from sklearn.tree import DecisionTreeClassifier
+	from sklearn.model_selection import train_test_split, cross_val_score
+	from sklearn.metrics import accuracy_score
+	from sklearn.datasets import load_iris
+	
+	# 1. 데이터 로드
+	iris = load_iris()
+	X, y = iris.data, iris.target
+	
+	# 데이터 분할 (Train, Test)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
+	
+	# 2. Base Estimator 설정
+	base_estimator = DecisionTreeClassifier(max_depth=5, random_state=42)
+	
+	# 3. Bagging Classifier 설정
+	bagging_clf = BaggingClassifier(
+	    estimator=base_estimator,
+	    n_estimators=50,  # 기본 모델 개수 증가
+	    max_samples=1.0,  # 전체 데이터를 사용
+	    max_features=1.0,  # 모든 피처를 사용
+	    bootstrap=True,
+	    random_state=42
+	)
+	
+	# 배깅 모델 학습 및 평가
+	bagging_clf.fit(X_train, y_train)
+	bagging_pred = bagging_clf.predict(X_test)
+	bagging_accuracy = accuracy_score(y_test, bagging_pred)
+	print(f"Bagging Classifier Accuracy: {bagging_accuracy:.4f}")
+	
+	# 교차 검증 (배깅)
+	bagging_cv_scores = cross_val_score(bagging_clf, X, y, cv=5)
+	print(f"Bagging Cross-Validation Accuracy: {bagging_cv_scores.mean():.4f}")
+	
+	# 4. 단일 DecisionTreeClassifier 학습 및 평가
+	single_tree = DecisionTreeClassifier(max_depth=5, random_state=42)
+	single_tree.fit(X_train, y_train)
+	single_tree_pred = single_tree.predict(X_test)
+	single_tree_accuracy = accuracy_score(y_test, single_tree_pred)
+	print(f"Single Decision Tree Accuracy: {single_tree_accuracy:.4f}")
+	
+	# 교차 검증 (단일 Decision Tree)
+	single_tree_cv_scores = cross_val_score(single_tree, X, y, cv=5)
+	print(f"Single Decision Tree Cross-Validation Accuracy: {single_tree_cv_scores.mean():.4f}")
+	
+<br>
 
-
-    # 데이터 로드 및 분할
-    X, y = load_iris(return_X_y=True)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-    # 배깅 모델 정의
-    bagging_clf = BaggingClassifier(base_estimator=DecisionTreeClassifier(), n_estimators=10, random_state=42)
-    bagging_clf.fit(X_train, y_train)
-
-    # 성능 평가
-    print(bagging_clf.score(X_test, y_test))
+	(결과)
+	Bagging Classifier Accuracy: 0.9333
+	Bagging Cross-Validation Accuracy: 0.9667
+	Single Decision Tree Accuracy: 0.9333
+	Single Decision Tree Cross-Validation Accuracy: 0.9533
 
 <br>
 
@@ -604,21 +642,95 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 ▣ 응용분야 : 금융 예측, 분류 문제, 회귀 분석 등에서 많이 사용되며, 특히 XGBoost는 대회에서 많이 사용된다.<br>
 ▣ 모델식 : $f_i$ 는 약한 학습기, $𝛼_𝑖$ 는 각 학습기의 가중치, $\widehat{y}=\sum_{i=1}^{N}\alpha_i f_i(x)$<br>
 
-    from sklearn.ensemble import AdaBoostClassifier
-    from sklearn.tree import DecisionTreeClassifier
-    from sklearn.datasets import load_iris
-    from sklearn.model_selection import train_test_split
+	from sklearn.ensemble import GradientBoostingClassifier
+	from sklearn.model_selection import train_test_split, cross_val_score
+	from sklearn.metrics import accuracy_score
+	from sklearn.datasets import load_iris
+	
+	# 1. 데이터 로드
+	iris = load_iris()
+	X, y = iris.data, iris.target
+	
+	# 데이터 분할 (Train, Test)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
+	
+	# 2. Gradient Boosting Classifier 설정 (하이퍼파라미터 조정)
+	gb_clf = GradientBoostingClassifier(
+	    n_estimators=200,      # 부스팅 스테이지 개수 증가
+	    learning_rate=0.05,    # 학습률 감소
+	    max_depth=5,           # 개별 트리의 최대 깊이 증가
+	    random_state=42
+	)
+	
+	# 3. 모델 학습
+	gb_clf.fit(X_train, y_train)
+	
+	# 4. 예측
+	y_pred = gb_clf.predict(X_test)
+	
+	# 5. 평가
+	accuracy = accuracy_score(y_test, y_pred)
+	print(f"Gradient Boosting Classifier Accuracy: {accuracy:.4f}")
+	
+	# 6. 교차 검증 (추가적인 평가)
+	cv_scores = cross_val_score(gb_clf, X, y, cv=5)
+	print(f"Cross-Validation Accuracy: {cv_scores.mean():.4f}")
 
-    # 데이터 로드 및 분할
-    X, y = load_iris(return_X_y=True)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+<br>
 
-    # 부스팅 모델 정의
-    boosting_clf = AdaBoostClassifier(base_estimator=DecisionTreeClassifier(), n_estimators=50, random_state=42)
-    boosting_clf.fit(X_train, y_train)
+	(결과)
+	Gradient Boosting Classifier Accuracy: 0.9333
+	Cross-Validation Accuracy: 0.9600
+  
+<br>
 
-    # 성능 평가
-    print(boosting_clf.score(X_test, y_test))
+	import xgboost as xgb
+	from sklearn.model_selection import train_test_split, cross_val_score
+	from sklearn.metrics import accuracy_score
+	from sklearn.datasets import load_iris
+	from sklearn.preprocessing import StandardScaler
+	
+	# 1. 데이터 로드 및 분할
+	iris = load_iris()
+	X, y = iris.data, iris.target
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
+	
+	# 스케일링 (선택 사항)
+	scaler = StandardScaler()
+	X_train_scaled = scaler.fit_transform(X_train)
+	X_test_scaled = scaler.transform(X_test)
+	
+	# 2. XGBoost 설정 (최적화된 설정 유지)
+	xgb_clf = xgb.XGBClassifier(
+	    n_estimators=300,         # 부스팅 스테이지 증가
+	    learning_rate=0.1,        # 기본 학습률 사용
+	    max_depth=5,              # 적당한 깊이로 조정
+	    min_child_weight=3,       # 분할의 최소 조건 강화
+	    subsample=0.8,            # 샘플링 비율
+	    colsample_bytree=0.8,     # 피처 샘플링 비율
+	    random_state=42,
+	    use_label_encoder=False,  # 경고 제거
+	    eval_metric="mlogloss"    # 다중 클래스 손실 함수
+	)
+	
+	# 3. 모델 학습
+	xgb_clf.fit(X_train_scaled, y_train)
+	
+	# 4. 예측
+	y_pred = xgb_clf.predict(X_test_scaled)
+	
+	# 5. 평가
+	accuracy = accuracy_score(y_test, y_pred)
+	print(f"Tuned XGBoost Classifier Accuracy: {accuracy:.4f}")
+	
+	# 6. 교차 검증
+	cv_scores = cross_val_score(xgb_clf, X, y, cv=5)
+	print(f"Tuned XGBoost Cross-Validation Accuracy: {cv_scores.mean():.4f}")
 
+ <br>
+
+	Tuned XGBoost Classifier Accuracy: 0.9333
+	Tuned XGBoost Cross-Validation Accuracy: 0.9467
+ 
 <br>
 
