@@ -655,6 +655,49 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 ▣ 응용분야 : 금융 예측, 분류 문제, 회귀 분석 등에서 많이 사용되며, 특히 XGBoost는 대회에서 많이 사용된다.<br>
 ▣ 모델식 : $f_i$ 는 약한 학습기, $𝛼_𝑖$ 는 각 학습기의 가중치, $\widehat{y}=\sum_{i=1}^{N}\alpha_i f_i(x)$<br>
 
+	from sklearn.ensemble import AdaBoostClassifier
+	from sklearn.tree import DecisionTreeClassifier
+	from sklearn.model_selection import train_test_split, cross_val_score
+	from sklearn.metrics import accuracy_score
+	from sklearn.datasets import load_iris
+	
+	# 1. 데이터 로드
+	iris = load_iris()
+	X, y = iris.data, iris.target
+	
+	# 데이터 분할 (Train, Test)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
+	
+	# 2. AdaBoost Classifier 설정 (하이퍼파라미터 조정)
+	ada_clf = AdaBoostClassifier(
+	    estimator=DecisionTreeClassifier(max_depth=5),  # 기본 학습기로 결정 트리 사용
+	    n_estimators=200,      # 부스팅 단계 수 증가
+	    learning_rate=0.05,    # 학습률 감소
+	    random_state=42
+	)
+	
+	# 3. 모델 학습
+	ada_clf.fit(X_train, y_train)
+	
+	# 4. 예측
+	y_pred = ada_clf.predict(X_test)
+	
+	# 5. 평가
+	accuracy = accuracy_score(y_test, y_pred)
+	print(f"AdaBoost Classifier Accuracy: {accuracy:.4f}")
+	
+	# 6. 교차 검증 (추가적인 평가)
+	cv_scores = cross_val_score(ada_clf, X, y, cv=5)
+	print(f"Cross-Validation Accuracy: {cv_scores.mean():.4f}")
+
+ <br>
+
+ 	(결과)
+	AdaBoost Classifier Accuracy: 0.9111
+	Cross-Validation Accuracy: 0.9533  
+
+ <br>
+
 	from sklearn.ensemble import GradientBoostingClassifier
 	from sklearn.model_selection import train_test_split, cross_val_score
 	from sklearn.metrics import accuracy_score
