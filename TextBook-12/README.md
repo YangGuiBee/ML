@@ -155,7 +155,7 @@ $S_t$는 시간 t에서의 상태, 과거 상태 $[S_1, ..., S_t]$ 모두를 고
 <br>
 (출처) Deep Learning Bible(https://wikidocs.net/169311)
 
-![](./images/RL_table.PNG)
+![](./images/RLs.png)
 <br>
 **Model-Free Algorithm**
 Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수행<br>
