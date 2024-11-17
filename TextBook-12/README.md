@@ -150,7 +150,6 @@ $S_t$는 시간 t에서의 상태, 과거 상태 $[S_1, ..., S_t]$ 모두를 고
 ![](./images/bellman.png)
 <br>
 
-
 ![](./images/RL_algorithm.PNG)
 <br>
 (출처) Deep Learning Bible(https://wikidocs.net/169311)
