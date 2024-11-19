@@ -3,7 +3,7 @@
 ---
 
 ## [1] 강화 학습(Reinforcement Learning, RL)
-<br>
+
 	[1-1] Model-free RL : Value Iteration
 	(1-1) Q-Learning: 작은 상태 공간에서 사용되는 표(Q-Table) 기반
 	(1-2) SARSA(State-Action-Reward-State-Action)
