@@ -207,10 +207,10 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 ![](./images/RL.PNG)
 <br>
 
-![](./images/R0.PNG)
+![](./images/RL0.PNG)
 <br>
 
-![](./images/R2.PNG)
+![](./images/RL2.PNG)
 <br>
 
 
