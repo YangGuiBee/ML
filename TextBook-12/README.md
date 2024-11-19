@@ -192,6 +192,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 모델은 Planning에 사용되며, 경험 전에 가능한 미래 상황을 고려하여 행동을 예측<br>
 모델과 Planning을 사용하여 해결하는 방식<br>
 
+![](./images/AC.PNG)
 <br>
 
 # [1-1] Q-learning
