@@ -4,13 +4,54 @@
 
 ## [1] 강화 학습(Reinforcement Learning, RL)
 <br>
+	[1-1] Model-free RL : Value Iteration
+	(1-1) Q-Learning: 작은 상태 공간에서 사용되는 표(Q-Table) 기반
+	(1-2) SARSA(State-Action-Reward-State-Action)
+	(1-3) Q-Network: 신경망을 사용하여 Q-값을 근사화하는 모델
+	(1-4) DQN(Deep Q-Network): 딥러닝을 활용한 Q-Learning의 발전된 형태 (2013, 2015)
+	(1-5) Double DQN: Q-Learning의 과대 평가 문제를 완화하기 위한 개선된 버전
+	(1-6) Dueling DQN: 상태 가치와 행동의 중요도를 분리하여 Q-값을 계산하는 모델
+	(1-7) DRQN(Deep Recurrent Q-Network): 순차적인 경험을 학습하기 위해 RNN 구조를 포함한 DQN
+	(1-8) C51: Q-값의 분포를 학습하는 DQN 확장
+	(1-9) IQN(Implicit Quantile Networks): Q-값의 분포를 세밀하게 조정하는 방식
+	(1-10) Rainbow: 여러 DQN 확장(PER, Double DQN, C51 등)을 결합한 통합 알고리즘 (DeepMind, 2017)
+	(1-11) SQL(Soft Q-Learning): 엔트로피를 추가하여 Q값 학습을 안정화하는 방식
+	(1-12) PER(Prioritized Experience Replay): 중요한 경험을 우선적으로 학습하는 경험 리플레이 전략
+	(1-13) HER(Hindsight Experience Replay): 목표 달성을 학습할 수 있도록 과거 경험을 재사용하는 기법
+	(1-14) NoisyNet: 신경망 가중치에 노이즈를 추가해 탐색 효율성을 높이는 방식
 
-    [1-1] Q-learning
-    [1-2] DQN(Deep Q-Network)
-    [1-3] SARSA(State-Action-Reward-State-Action)
-    
-  
+	[1-2] Model-free RL : Policy Iteration
+	(2-1) Policy Gradient: 기본적인 정책 직접 학습 알고리즘
+	(2-2) A2C/A3C(Advantage Actor-Critic): 분산형 Actor-Critic 모델
+	(2-3) PPO(Proximal Policy Optimization): 신뢰 구간을 사용해 안정적으로 정책을 업데이트
+	(2-4) TRPO(Trust Region Policy Optimization): 정책 급변을 방지하는 최적화 기법
+	(2-5) Actor-Critic: 기본적인 Actor-Critic 구조, Policy Gradient와 Critic의 Q값 평가 결합
+	(2-6) NAC(Natural Actor-Critic): Natural Gradient를 적용해 정책의 효율적 업데이트를 수행
+	(2-7) DDPG(Deep Deterministic Policy Gradient): 연속적 행동 공간에서 학습하는 Actor-Critic 모델
+	(2-8) TD3(Twin Delayed DDPG): DDPG의 한계점을 극복하기 위한 개선된 모델
+	(2-9) SAC(Soft Actor-Critic): 탐색과 활용의 균형을 유지하도록 설계된 정책 학습 모델 (2018, 2019)
+	(2-10) BC(Behavioral Cloning): 데이터를 기반으로 정책을 모방하는 방식
+	(2-11) DDPGfD(DDPG from Demonstrations): 전문가의 시범을 사용해 DDPG 성능을 개선
+	(2-12) REINFORCE: 정책 경사법의 기본 형태
+	(2-13) ACER(Actor-Critic with Experience Replay): 경험 리플레이를 추가한 Actor-Critic 방법
+	(2-14) IMPALA(Importance Weighted Actor-Learner Architecture): 분산 학습에 최적화된 구조
+	(2-15) Off-PAC(Off-Policy Actor-Critic): 오프폴리시 데이터를 활용하는 Actor-Critic 기법
 
+	[1-3] Model-based RL : Given the Model
+	(3-1) Dyna-Q: 모델 기반 RL과 모델-프리 RL을 조합한 알고리즘
+	(3-2) AlphaZero: 시뮬레이션을 통한 최적의 행동을 찾는 Monte Carlo Tree Search 기반 모델
+	(3-3) MuZero: 모델 없이 정책과 가치를 동시에 학습 (DeepMind, 2019)
+
+ 	[1-4] Model-based RL : Learn the Model
+	(4-1) World Models: 환경을 모델링하고 시뮬레이션을 통해 학습하는 방식
+	(4-2) I2A(Imagination-Augmented Agents): 상상된 상태에서 정책을 훈련시키는 기법
+	(4-3) MBMF(Model-Based Model-Free): 모델 기반 및 모델-프리 접근을 혼합하여 효율성 향상
+	(4-4) MBVE(Model-Based Value Expansion): 모델을 사용하여 예측된 미래 보상을 통해 학습하는 방법
+	(4-5) Dreamer: 잠재 공간에서의 예측과 학습을 결합한 최신 모델 기반 방법 (DeepMind, 2020)
+	(4-6) PlaNet: Dreamer의 전신인 모델 기반 강화 학습 알고리즘
+	(4-7) PETs(Probabilistic Ensembles with Trajectory Sampling): 확률적 모델 앙상블을 활용하는 강화학습 기법
+
+ 
 ## [2] 앙상블 학습(Ensemble Learning, EL)
 <br>
 
@@ -214,24 +255,24 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 ---
 
-## [Model-free RL] (1) Value Iteration
+# [1-1] Model-free RL : Value Iteration
 
-	(1-1) Q-Learning
- 	(1-2) SARSA(State-Action-Reward-State-Action)
-	(1-3) Q-Network
-	(1-4) DQN(Deep Q-Network)
-	(1-5) Double DQN
-	(1-6) Dueling DQN
-	(1-7) DRQN(Deep Recurrent Q-Network)
-	(1-8) C51
-	(1-9) IQN(Implicit Quantile Networks)
-	(1-10) Rainbow
-	(1-11) SQL
-	(1-12) PER
-	(1-13) HER
-	(1-14) NoisyNet
+	(1-1) Q-Learning: 작은 상태 공간에서 사용되는 표(Q-Table) 기반
+	(1-2) SARSA(State-Action-Reward-State-Action)
+	(1-3) Q-Network: 신경망을 사용하여 Q-값을 근사화하는 모델
+	(1-4) DQN(Deep Q-Network): 딥러닝을 활용한 Q-Learning의 발전된 형태 (2013, 2015)
+	(1-5) Double DQN: Q-Learning의 과대 평가 문제를 완화하기 위한 개선된 버전
+	(1-6) Dueling DQN: 상태 가치와 행동의 중요도를 분리하여 Q-값을 계산하는 모델
+	(1-7) DRQN(Deep Recurrent Q-Network): 순차적인 경험을 학습하기 위해 RNN 구조를 포함한 DQN
+	(1-8) C51: Q-값의 분포를 학습하는 DQN 확장
+	(1-9) IQN(Implicit Quantile Networks): Q-값의 분포를 세밀하게 조정하는 방식
+	(1-10) Rainbow: 여러 DQN 확장(PER, Double DQN, C51 등)을 결합한 통합 알고리즘 (DeepMind, 2017)
+	(1-11) SQL(Soft Q-Learning): 엔트로피를 추가하여 Q값 학습을 안정화하는 방식
+	(1-12) PER(Prioritized Experience Replay): 중요한 경험을 우선적으로 학습하는 경험 리플레이 전략
+	(1-13) HER(Hindsight Experience Replay): 목표 달성을 학습할 수 있도록 과거 경험을 재사용하는 기법
+	(1-14) NoisyNet: 신경망 가중치에 노이즈를 추가해 탐색 효율성을 높이는 방식
 
-### (1-1) Q-Learning
+## (1-1) Q-Learning : 작은 상태 공간에서 사용되는 표(Q-Table) 기반
 ![](./images/RL2.png)
 <br>(출처) Deep Learning Bible(https://wikidocs.net/169311)
 
@@ -291,7 +332,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
   
 <br>
 
-# (1-2) SARSA(State-Action-Reward-State-Action)
+## (1-2) SARSA(State-Action-Reward-State-Action)
 ▣ 정의 : 상태-행동-보상-다음 상태-다음 행동(State-Action-Reward-State-Action)의 연속적인 관계에서 학습하는 방법. Q-learning과 달리 SARSA는 에이전트가 선택한 행동을 기반으로 학습하며 에이전트가 현재 행동과 다음 행동을 통해 학습하는 on-policy 방법<br>
 ▣ 필요성 : 정책을 미리 고정한 상태에서 Q-learning처럼 탐험과 학습을 분리하지 않고, 정책을 유지하며 학습할 때 유리. SARSA는 실제로 에이전트가 수행하는 행동을 기반으로 학습하므로, 정책에 따른 일관성을 유지. 특히 탐험(exploration) 중에도 안정적으로 학습이 가능<br>
 ▣ 장점 : 에이전트의 실제 정책을 기반으로 학습하므로 정책의 일관성을 유지할 수 있으며, Q-learning보다 안정적인 성능<br>
@@ -371,7 +412,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-### (1-3) Q-Network
+## (1-3) Q-Network : 신경망을 사용하여 Q-값을 근사화하는 모델
 ▣ 정의 : 𝑄(𝑠,𝑎) 테이블을 신경망으로 대체하여 행동-가치 함수를 근사함으로써 큰 상태-행동 공간에서도 학습이 가능<br>
 ▣ 장점 : 큰 상태 공간이나 연속적인 상태 공간에 확장 가능하며, 상태와 행동 간의 복잡한 관계를 학습<br>
 ▣ 단점 : 높은 계산 자원이 필요하며, 학습이 불안정하거나 발산할 수 있음<br>
@@ -380,7 +421,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-### (1-4) DQN(Deep Q-Network)
+## (1-4) DQN(Deep Q-Network) : 딥러닝을 활용한 Q-Learning의 발전된 형태 (2013, 2015)
 ▣ 정의 : Q-learning을 딥러닝에 결합한 알고리즘. Q-table 대신 심층 신경망을 사용해 Q값을 근사하며 주로 상태 공간이 매우 크거나 연속적인 문제에서 사용<br>
 ▣ 필요성 : Q-table을 사용할 수 없는 고차원 환경에서 Q-learning을 효과적으로 적용하기 위해 신경망을 사용하여 Q값을 근사<br>
 ▣ 장점 : 고차원 연속 상태 공간에서 사용 가능하며, 경험 재플레이(experience replay)와 타깃 네트워크로 학습 안정성을 높일 수 있음<br>
@@ -499,7 +540,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-### (1-5) Double DQN
+## (1-5) Double DQN : Q-Learning의 과대 평가 문제를 완화하기 위한 개선된 버전
 ▣ 정의 : 행동 선택과 행동 평가를 분리하여 DQN의 과대 추정 편향 문제를 해결<br>
 ▣ 장점 : 과대 추정을 줄입니다. 정책의 안정성을 향상<br>
 ▣ 단점 : 계산 부담이 증가합니다. 하이퍼파라미터 튜닝이 필요<br>
@@ -508,15 +549,15 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-### (1-6) Dueling DQN
+## (1-6) Dueling DQN : 상태 가치와 행동의 중요도를 분리하여 Q-값을 계산하는 모델
 ▣ 정의 : 𝑄 값을 상태-가치 𝑉(𝑠)와 이점 𝐴(𝑠,𝑎)로 분리하여 학습<br>
 ▣ 장점 : 학습 효율성을 향상시키고 의사결정에 중요한 상태에 집중<br>
 ▣ 단점 : 네트워크 복잡도가 증가하며 모든 환경에서 이점이 있는 것은 아님<br>
 ▣ 적용 분야 : 희소 보상 환경<br>
 
 <br>
-
-### (1-7) DRQN(Deep Recurrent Q-Network)
+ 
+## (1-7) DRQN(Deep Recurrent Q-Network) : 순차적인 경험을 학습하기 위해 RNN 구조를 포함한 DQN
 ▣ 정의 : DQN에 순환 신경망(RNN)을 추가하여 부분 관찰 가능 환경에서 학습<br>
 ▣ 장점 : 순차적 데이터 또는 부분 관찰 데이터를 처리할 수 있으며, 비마르코프 설정에서도 정책을 개선<br>
 ▣ 단점 : 학습 시간이 증가하고 학습이 더 어려워질 수 있음<br>
@@ -524,7 +565,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-### (1-8) C51
+## (1-8) C51 : Q-값의 분포를 학습하는 DQN 확장
 ▣ 정의 : 단일 기대값 대신 보상의 범주형 분포를 추정하는 알고리즘<br>
 ▣ 장점 : 보상의 불확실성을 모델링할 수 있으며, 더 풍부한 표현을 제공<br>
 ▣ 단점 : 분포를 관리해야 하므로 복잡도가 증가하며 계산 비용이 큼<br>
@@ -532,7 +573,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-### (1-9) IQN(Implicit Quantile Networks)
+## (1-9) IQN(Implicit Quantile Networks) : Q-값의 분포를 세밀하게 조정하는 방식
 ▣ 정의 : 보상 분포의 분위수를 예측하여 보상의 변동성을 더 잘 모델링<br>
 ▣ 장점 : 다양한 보상 분포에 적응할 수 있으며 C51보다 표현력이 뛰어남<br>
 ▣ 단점 : 많은 계산 자원이 필요함에 따라 학습이 복잡<br>
@@ -540,7 +581,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-### (1-10) Rainbow
+## (1-10) Rainbow : 여러 DQN 확장(PER, Double DQN, C51 등)을 결합한 통합 알고리즘 (DeepMind, 2017)
 ▣ 정의 : DQN, Double DQN, PER, Dueling DQN, C51 등을 결합한 포괄적인 RL 알고리즘<br>
 ▣ 장점 : 최신 기술을 종합한 최고의 성능이 가능하고, 기존 알고리즘들의 장점을 모두 활용<br>
 ▣ 단점 : 구현이 복잡함에 따라 계산 비용이 높다<br>
@@ -548,7 +589,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-### (1-11) SQL
+## (1-11) SQL(Soft Q-Learning): 엔트로피를 추가하여 Q값 학습을 안정화하는 방식
 ▣ 정의 : SQL은 정책의 엔트로피를 극대화하여 탐색을 촉진<br>
 ▣ 장점 : 다양한 행동 선택을 장려하고 조기 수렴을 방지<br>
 ▣ 단점 : 결정론적 정책에는 비효율적<br>
@@ -556,7 +597,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-### (1-12) PER
+## (1-12) PER(Prioritized Experience Replay) : 중요한 경험을 우선적으로 학습하는 경험 리플레이 전략
 ▣ 정의 : 학습 중 중요한 경험에 우선순위를 부여<br>
 ▣ 장점 : 더 빠른 수렴하고 학습 효율성 향상<br>
 ▣ 단점 : 추가 계산 비용이 필요<br>
@@ -564,7 +605,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-### (1-13) HER(Hindsight Experience Replay)
+## (1-13) HER(Hindsight Experience Replay) : 목표 달성을 학습할 수 있도록 과거 경험을 재사용하는 기법
 ▣ 정의 : 실제로 달성한 목표와 다른 가상의 목표를 설정하여 학습 데이터를 수정하는 방식으로, 희소한 보상 환경에서 효율적으로 학습할 수 있도록 돕는 알고리즘<br>
 ▣ 장점 : 희소 보상 환경에서 샘플 효율성을 크게 향상시키고 목표 중심 환경에서 성능이 우수하며 기존 경험을 효과적으로 활용<br>
 ▣ 단점 : 목표가 명확히 정의된 환경에서만 사용할 수 있으며, 구현이 복잡<br>
@@ -572,7 +613,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-### (1-14) NoisyNet
+### (1-14) NoisyNet : 신경망 가중치에 노이즈를 추가해 탐색 효율성을 높이는 방식
 ▣ 정의 : 신경망 가중치에 학습 가능한 노이즈를 추가하여 탐색(exploration)을 자동화하는 알고리즘. 기존의 𝜖-탐욕적 정책 대신 학습 과정에서 노이즈를 조절하여 더 나은 탐색과 학습 균형을 제공<br>
 ▣ 장점 : 탐색-활용(trade-off) 문제를 자동으로 해결. 𝜖-탐욕적 정책에 대한 추가 튜닝이 필요하지 않으며, 학습 과정에서 더 효과적인 탐색<br>
 ▣ 단점 : 추가 학습 가능한 노이즈 매개변수를 관리해야 하므로 학습 시간이 증가하며, 환경에 따라 노이즈 설정이 비효율적<br>
@@ -584,21 +625,21 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 ## [Model-free RL] (2) Policy Iteration
 
-	(2-1) Policy Gradient
-	(2-2) A2C/A3C
-	(2-3) PPO
-	(2-4) TRPO
-	(2-5) Actor-Critic
-	(2-6) NAC
-	(2-7) DDPG
-	(2-8) TD3
-	(2-9) SAC
-	(2-10) BC
-	(2-11) DDPGfD
-	(2-12) REINFORCE
-	(2-13) ACER
-	(2-14) IMPALA
-	(2-15) Off-PAC
+	(2-1) Policy Gradient: 기본적인 정책 직접 학습 알고리즘
+	(2-2) A2C/A3C(Advantage Actor-Critic): 분산형 Actor-Critic 모델
+	(2-3) PPO(Proximal Policy Optimization): 신뢰 구간을 사용해 안정적으로 정책을 업데이트
+	(2-4) TRPO(Trust Region Policy Optimization): 정책 급변을 방지하는 최적화 기법
+	(2-5) Actor-Critic: 기본적인 Actor-Critic 구조, Policy Gradient와 Critic의 Q값 평가 결합
+	(2-6) NAC(Natural Actor-Critic): Natural Gradient를 적용해 정책의 효율적 업데이트를 수행
+	(2-7) DDPG(Deep Deterministic Policy Gradient): 연속적 행동 공간에서 학습하는 Actor-Critic 모델
+	(2-8) TD3(Twin Delayed DDPG): DDPG의 한계점을 극복하기 위한 개선된 모델
+	(2-9) SAC(Soft Actor-Critic): 탐색과 활용의 균형을 유지하도록 설계된 정책 학습 모델 (2018, 2019)
+	(2-10) BC(Behavioral Cloning): 데이터를 기반으로 정책을 모방하는 방식
+	(2-11) DDPGfD(DDPG from Demonstrations): 전문가의 시범을 사용해 DDPG 성능을 개선
+	(2-12) REINFORCE: 정책 경사법의 기본 형태
+	(2-13) ACER(Actor-Critic with Experience Replay): 경험 리플레이를 추가한 Actor-Critic 방법
+	(2-14) IMPALA(Importance Weighted Actor-Learner Architecture): 분산 학습에 최적화된 구조
+	(2-15) Off-PAC(Off-Policy Actor-Critic): 오프폴리시 데이터를 활용하는 Actor-Critic 기법
 
 ### (2-1) Policy Gradient
 ▣ 정의 : 정책(Policy) 자체를 직접 학습하는 강화 학습 알고리즘으로, 행동-가치 함수 𝑄(𝑠,𝑎)를 통해 정책의 성능을 측정하고 정책을 업데이트. 목표는 파라미터화된 정책 𝜋𝜃(𝑎∣𝑠)를 최대화하는 것<br>
@@ -727,9 +768,9 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 ## [Model-based RL] (3) Given the Model
 
-	(3-1) Dyna-Q
-	(3-2) AlphaZero
-	(3-3) MuZero
+	(3-1) Dyna-Q: 모델 기반 RL과 모델-프리 RL을 조합한 알고리즘
+	(3-2) AlphaZero: 시뮬레이션을 통한 최적의 행동을 찾는 Monte Carlo Tree Search 기반 모델
+	(3-3) MuZero: 모델 없이 정책과 가치를 동시에 학습 (DeepMind, 2019)
 
 ### (3-1) Dyna-Q
 ▣ 정의 : 강화학습에서 모델기반 접근법과 모델프리 접근법을 결합한 알고리즘. 환경모델을 학습하고 이 모델을 활용해 샘플데이터를 생성한 뒤 Q-Learning과 같은 알고리즘을 통해 학습. 실제환경과 가상의 환경 모두를 활용하여 효율적인 학습을 수행<br>
@@ -758,13 +799,13 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 ## [Model-based RL] (4) Learn the Model
 
-	(4-1) World Models
-	(4-2) I2A
-	(4-3) MBMF
-	(4-4) MBVE
-	(4-5) Dreamer
-	(4-6) PlaNet
-	(4-7) PETs
+	(4-1) World Models: 환경을 모델링하고 시뮬레이션을 통해 학습하는 방식
+	(4-2) I2A(Imagination-Augmented Agents): 상상된 상태에서 정책을 훈련시키는 기법
+	(4-3) MBMF(Model-Based Model-Free): 모델 기반 및 모델-프리 접근을 혼합하여 효율성 향상
+	(4-4) MBVE(Model-Based Value Expansion): 모델을 사용하여 예측된 미래 보상을 통해 학습하는 방법
+	(4-5) Dreamer: 잠재 공간에서의 예측과 학습을 결합한 최신 모델 기반 방법 (DeepMind, 2020)
+	(4-6) PlaNet: Dreamer의 전신인 모델 기반 강화 학습 알고리즘
+	(4-7) PETs(Probabilistic Ensembles with Trajectory Sampling): 확률적 모델 앙상블을 활용하는 강화학습 기법
 
 ### (4-1) World Models
 ▣ 정의 : World Models는 환경의 동작을 모델링하기 위해 신경망을 사용하여 시뮬레이션 환경을 학습하는 강화 학습 알고리즘입니다. 환경 모델은 세 가지 구성 요소로 나뉩니다: VAE (Variational 
