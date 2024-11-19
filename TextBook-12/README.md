@@ -448,8 +448,18 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-DavidSilver의 Reinforcement Learning 강의교재<br>
-https://github.com/YangGuiBee/ML/blob/main/TextBook-12/01_IntroductiontoReinforcementLearning.pdf<br>
+**DavidSilver의 Reinforcement Learning 강의교재**<br>
+	Lecture 1: Introduction to Reinforcement Learning
+	Lecture 2: Markov Decision Processes
+	Lecture 3: Planning by Dynamic Programming
+	Lecture 4: Model-Free Prediction
+	Lecture 5: Model-Free Control
+	Lecture 6: Value Function Approximation
+	Lecture 7: Policy Gradient Methods
+	Lecture 8: Integrating Learning and Planning
+	Lecture 9: Exploration and Exploitation
+	Lecture 10: Case Study: RL in Classic Games
+(교안) https://github.com/YangGuiBee/ML/blob/main/TextBook-12/
 (출처) https://www.davidsilver.uk/teaching/<br>
  
 
