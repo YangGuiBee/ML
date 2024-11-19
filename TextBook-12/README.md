@@ -188,8 +188,36 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 모델은 Planning에 사용되며, 경험 전에 가능한 미래 상황을 고려하여 행동을 예측<br>
 모델과 Planning을 사용하여 해결하는 방식<br>
 
-![](./images/AC.PNG)
+**DavidSilver의 Reinforcement Learning 강의교재**<br>
+
+	Lecture 1: Introduction to Reinforcement Learning
+	Lecture 2: Markov Decision Processes
+	Lecture 3: Planning by Dynamic Programming
+	Lecture 4: Model-Free Prediction
+	Lecture 5: Model-Free Control
+	Lecture 6: Value Function Approximation
+	Lecture 7: Policy Gradient Methods
+	Lecture 8: Integrating Learning and Planning
+	Lecture 9: Exploration and Exploitation
+	Lecture 10: Case Study: RL in Classic Games
+
+(교안) https://github.com/YangGuiBee/ML/blob/main/TextBook-12/<br>
+(출처) https://www.davidsilver.uk/teaching/<br>
+
+![](./images/RL.PNG)
 <br>
+
+![](./images/R0.PNG)
+<br>
+
+![](./images/R2.PNG)
+<br>
+
+
+
+
+
+
 
 # [1-1] Q-learning
 ![](./images/RL2.png)
@@ -447,24 +475,6 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
  	[0.         0.        ]]
 
 <br>
-
-**DavidSilver의 Reinforcement Learning 강의교재**<br>
-
-	Lecture 1: Introduction to Reinforcement Learning
-	Lecture 2: Markov Decision Processes
-	Lecture 3: Planning by Dynamic Programming
-	Lecture 4: Model-Free Prediction
-	Lecture 5: Model-Free Control
-	Lecture 6: Value Function Approximation
-	Lecture 7: Policy Gradient Methods
-	Lecture 8: Integrating Learning and Planning
-	Lecture 9: Exploration and Exploitation
-	Lecture 10: Case Study: RL in Classic Games
-
-(교안) https://github.com/YangGuiBee/ML/blob/main/TextBook-12/<br>
-(출처) https://www.davidsilver.uk/teaching/<br>
- 
-
 
 ---
 
