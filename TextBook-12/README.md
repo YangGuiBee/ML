@@ -213,6 +213,110 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 
 # [1-1] Q-learning
+
+
+# [1-2] DQN(Deep Q-Network)
+
+
+# [1-3] SARSA(State-Action-Reward-State-Action)
+▣ 정의 : 상태-행동-보상-다음 상태-다음 행동(State-Action-Reward-State-Action)의 연속적인 관계에서 학습하는 방법. Q-learning과 달리 SARSA는 에이전트가 선택한 행동을 기반으로 학습하며 에이전트가 현재 행동과 다음 행동을 통해 학습하는 on-policy 방법<br>
+▣ 필요성 : 정책을 미리 고정한 상태에서 Q-learning처럼 탐험과 학습을 분리하지 않고, 정책을 유지하며 학습할 때 유리. SARSA는 실제로 에이전트가 수행하는 행동을 기반으로 학습하므로, 정책에 따른 일관성을 유지. 특히 탐험(exploration) 중에도 안정적으로 학습이 가능<br>
+▣ 장점 : 에이전트의 실제 정책을 기반으로 학습하므로 정책의 일관성을 유지할 수 있으며, Q-learning보다 안정적인 성능<br>
+▣ 단점 : Q-learning보다 수렴 속도가 느릴 수 있으며, 잘못된 정책을 사용할 경우 학습 성능이 떨어질 수 있다.<br>
+▣ 응용분야 : 게임, 로봇 제어, 자율 시스템, 물류 최적화<br>
+▣ 모델식 : SARSA 업데이트 식, Q(s,a)는 상태 𝑠에서 행동 𝑎를 선택할 때의 Q값, 𝑎′ 는 다음 상태에서 선택<br>
+
+	import numpy as np
+	
+	# SARSA 알고리즘을 위한 환경 설정
+	n_states = 5  # 상태의 개수
+	n_actions = 2  # 행동의 개수
+	Q = np.zeros((n_states, n_actions))  # Q-테이블 초기화
+	alpha = 0.1  # 학습률
+	gamma = 0.9  # 할인 계수
+	epsilon = 0.1  # 탐험 확률
+	
+	# 행동 선택 함수 (ε-greedy)
+	def choose_action(state):
+	    if np.random.uniform(0, 1) < epsilon:  # 탐험
+	        return np.random.choice(n_actions)
+	    else:  # 활용
+	        return np.argmax(Q[state, :])
+	
+	# Q-값 업데이트 함수
+	def update_q(state, action, reward, next_state, next_action):
+	    predict = Q[state, action]  # 현재 상태-행동의 Q-값
+	    target = reward + gamma * Q[next_state, next_action]  # SARSA의 타겟 값
+	    Q[state, action] = predict + alpha * (target - predict)  # 업데이트 공식
+	
+	# 학습 반복
+	num_episodes = 100  # 에피소드 수
+	total_rewards = []  # 에피소드별 총 보상 기록
+	success_count = 0  # 종료 상태에 도달한 에피소드 수
+	
+	for episode in range(num_episodes):
+	    state = np.random.randint(0, n_states)  # 초기 상태를 무작위로 설정
+	    action = choose_action(state)  # 초기 행동 선택
+	    episode_reward = 0  # 에피소드별 총 보상
+	    
+	    while state != 4:  # 종료 상태(4)에 도달하면 종료
+	        next_state = np.random.randint(0, n_states)  # 다음 상태 무작위 생성
+	        reward = 1 if next_state == 4 else 0  # 종료 상태에 도달하면 보상 1
+	        next_action = choose_action(next_state)  # 다음 행동 선택
+	        update_q(state, action, reward, next_state, next_action)  # Q-값 업데이트
+	        state, action = next_state, next_action  # 상태와 행동 업데이트
+	        episode_reward += reward  # 보상 누적
+	        
+	        if reward == 1:  # 종료 상태에 도달
+	            success_count += 1
+	
+	    total_rewards.append(episode_reward)  # 에피소드별 총 보상 기록
+	
+	# 학습 결과 평가
+	print("학습 완료!")
+	print(f"총 에피소드: {num_episodes}")
+	print(f"성공적으로 종료 상태에 도달한 에피소드 수: {success_count}")
+	print(f"성공 비율: {success_count / num_episodes:.2f}")
+	print(f"평균 에피소드 보상: {np.mean(total_rewards):.2f}")
+	print("최종 Q-테이블:")
+	print(Q)
+	
+<br>
+
+	(결과)
+	학습 완료!
+	총 에피소드: 100
+	성공적으로 종료 상태에 도달한 에피소드 수: 77
+	성공 비율: 0.77
+	평균 에피소드 보상: 0.77
+	최종 Q-테이블:
+	[[0.63674193 0.25212404]
+ 	[0.33953311 0.59365598]
+ 	[0.59980783 0.05818173]
+ 	[0.47228527 0.21979548]
+ 	[0.         0.        ]]
+
+<br>
+
+---
+
+## [Model-free RL] (1) Value Iteration
+
+	(1-1) Q-Learning
+	(1-2) Q-Network
+	(1-3) DQN(Deep Q-Network)
+	(1-4) Double DQN
+	(1-5) Dueling DQN
+	(1-6) DRQN(Deep Recurrent Q-Network)
+	(1-7) C51
+	(1-8) IQN(Implicit Quantile Networks)
+	(1-9) Rainbow
+	(1-10) SQL
+	(1-11) PER
+	(1-12) HER
+	(1-13) NoisyNet
+
+### (1-1) Q-Learning
 ![](./images/RL2.png)
 <br>(출처) Deep Learning Bible(https://wikidocs.net/169311)
 
@@ -271,7 +375,15 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
   
 <br>
 
-# [1-2] DQN(Deep Q-Network)
+### (1-2) Q-Network
+▣ 정의 : 𝑄(𝑠,𝑎) 테이블을 신경망으로 대체하여 행동-가치 함수를 근사합니다. 이를 통해 큰 상태-행동 공간에서도 학습이 가능합니다.
+▣ 장점 : 큰 상태 공간이나 연속적인 상태 공간에 확장 가능합니다. 상태와 행동 간의 복잡한 관계를 학습할 수 있습니다.
+▣ 단점 : 높은 계산 자원이 필요합니다. 학습이 불안정하거나 발산할 수 있습니다.
+▣ 적용 분야 : 고차원 제어 작업. 자율 주행 차량.
+
+<br>
+
+### (1-3) DQN(Deep Q-Network)
 ▣ 정의 : Q-learning을 딥러닝에 결합한 알고리즘으로, Q-table 대신 심층 신경망을 사용해 Q값을 근사하며, 주로 상태 공간이 매우 크거나 연속적인 문제에서 사용<br>
 ▣ 필요성 : Q-table을 사용할 수 없는 고차원 환경에서 Q-learning을 효과적으로 적용하기 위해 신경망을 사용하여 Q값을 근사<br>
 ▣ 장점 : 고차원 연속 상태 공간에서 사용 가능하며, 경험 재플레이(experience replay)와 타깃 네트워크로 학습 안정성을 높일 수 있다.<br>
@@ -389,129 +501,190 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-# [1-3] SARSA(State-Action-Reward-State-Action)
-▣ 정의 : 상태-행동-보상-다음 상태-다음 행동(State-Action-Reward-State-Action)의 연속적인 관계에서 학습하는 방법. Q-learning과 달리 SARSA는 에이전트가 선택한 행동을 기반으로 학습하며 에이전트가 현재 행동과 다음 행동을 통해 학습하는 on-policy 방법<br>
-▣ 필요성 : 정책을 미리 고정한 상태에서 Q-learning처럼 탐험과 학습을 분리하지 않고, 정책을 유지하며 학습할 때 유리. SARSA는 실제로 에이전트가 수행하는 행동을 기반으로 학습하므로, 정책에 따른 일관성을 유지. 특히 탐험(exploration) 중에도 안정적으로 학습이 가능<br>
-▣ 장점 : 에이전트의 실제 정책을 기반으로 학습하므로 정책의 일관성을 유지할 수 있으며, Q-learning보다 안정적인 성능<br>
-▣ 단점 : Q-learning보다 수렴 속도가 느릴 수 있으며, 잘못된 정책을 사용할 경우 학습 성능이 떨어질 수 있다.<br>
-▣ 응용분야 : 게임, 로봇 제어, 자율 시스템, 물류 최적화<br>
-▣ 모델식 : SARSA 업데이트 식, Q(s,a)는 상태 𝑠에서 행동 𝑎를 선택할 때의 Q값, 𝑎′ 는 다음 상태에서 선택<br>
+### (1-4) Double DQN
+▣ 정의
+Double DQN은 행동 선택과 행동 평가를 분리하여 DQN의 과대 추정 편향 문제를 해결합니다.
+▣ 장점
 
-	import numpy as np
-	
-	# SARSA 알고리즘을 위한 환경 설정
-	n_states = 5  # 상태의 개수
-	n_actions = 2  # 행동의 개수
-	Q = np.zeros((n_states, n_actions))  # Q-테이블 초기화
-	alpha = 0.1  # 학습률
-	gamma = 0.9  # 할인 계수
-	epsilon = 0.1  # 탐험 확률
-	
-	# 행동 선택 함수 (ε-greedy)
-	def choose_action(state):
-	    if np.random.uniform(0, 1) < epsilon:  # 탐험
-	        return np.random.choice(n_actions)
-	    else:  # 활용
-	        return np.argmax(Q[state, :])
-	
-	# Q-값 업데이트 함수
-	def update_q(state, action, reward, next_state, next_action):
-	    predict = Q[state, action]  # 현재 상태-행동의 Q-값
-	    target = reward + gamma * Q[next_state, next_action]  # SARSA의 타겟 값
-	    Q[state, action] = predict + alpha * (target - predict)  # 업데이트 공식
-	
-	# 학습 반복
-	num_episodes = 100  # 에피소드 수
-	total_rewards = []  # 에피소드별 총 보상 기록
-	success_count = 0  # 종료 상태에 도달한 에피소드 수
-	
-	for episode in range(num_episodes):
-	    state = np.random.randint(0, n_states)  # 초기 상태를 무작위로 설정
-	    action = choose_action(state)  # 초기 행동 선택
-	    episode_reward = 0  # 에피소드별 총 보상
-	    
-	    while state != 4:  # 종료 상태(4)에 도달하면 종료
-	        next_state = np.random.randint(0, n_states)  # 다음 상태 무작위 생성
-	        reward = 1 if next_state == 4 else 0  # 종료 상태에 도달하면 보상 1
-	        next_action = choose_action(next_state)  # 다음 행동 선택
-	        update_q(state, action, reward, next_state, next_action)  # Q-값 업데이트
-	        state, action = next_state, next_action  # 상태와 행동 업데이트
-	        episode_reward += reward  # 보상 누적
-	        
-	        if reward == 1:  # 종료 상태에 도달
-	            success_count += 1
-	
-	    total_rewards.append(episode_reward)  # 에피소드별 총 보상 기록
-	
-	# 학습 결과 평가
-	print("학습 완료!")
-	print(f"총 에피소드: {num_episodes}")
-	print(f"성공적으로 종료 상태에 도달한 에피소드 수: {success_count}")
-	print(f"성공 비율: {success_count / num_episodes:.2f}")
-	print(f"평균 에피소드 보상: {np.mean(total_rewards):.2f}")
-	print("최종 Q-테이블:")
-	print(Q)
-	
-<br>
+과대 추정을 줄입니다.
+정책의 안정성을 향상시킵니다.
+▣ 단점
 
-	(결과)
-	학습 완료!
-	총 에피소드: 100
-	성공적으로 종료 상태에 도달한 에피소드 수: 77
-	성공 비율: 0.77
-	평균 에피소드 보상: 0.77
-	최종 Q-테이블:
-	[[0.63674193 0.25212404]
- 	[0.33953311 0.59365598]
- 	[0.59980783 0.05818173]
- 	[0.47228527 0.21979548]
- 	[0.         0.        ]]
+계산 부담이 증가합니다.
+하이퍼파라미터 튜닝이 필요합니다.
+▣ 적용 분야
+
+복잡한 의사결정 작업.
 
 <br>
 
----
+### (1-5) Dueling DQN
+▣ 정의
+Dueling DQN은 𝑄 값을 상태-가치 𝑉(𝑠)와 이점 𝐴(𝑠,𝑎)로 분리하여 학습합니다:
+▣ 장점
 
-## [Model-free RL] (1) Value Iteration
+학습 효율성을 향상시킵니다.
+의사결정에 중요한 상태에 집중합니다.
+▣ 단점
 
-	(1-1) Q-Learning
-	(1-2) Q-Network
-	(1-3) DQN(Deep Q-Network)
-	(1-4) Double DQN
-	(1-5) Dueling DQN
-	(1-6) DRQN(Deep Recurrent Q-Network)
-	(1-7) C51
-	(1-8) IQN(Implicit Quantile Networks)
-	(1-9) Rainbow
-	(1-10) SQL
-	(1-11) PER
-	(1-12) HER
-	(1-13) NoisyNet
+네트워크 복잡도가 증가합니다.
+모든 환경에서 이점이 있는 것은 아닙니다.
+▣ 적용 분야
 
-(1-1) Q-Learning
+희소 보상 환경.
 
-(1-2) Q-Network
+<br>
 
-(1-3) DQN(Deep Q-Network)
+### (1-6) DRQN(Deep Recurrent Q-Network)
+▣ 정의
+DRQN은 DQN에 순환 신경망(RNN)을 추가하여 부분 관찰 가능 환경에서 학습을 가능하게 합니다.
 
-(1-4) Double DQN
+▣ 장점
 
-(1-5) Dueling DQN
+순차적 데이터 또는 부분 관찰 데이터를 처리할 수 있습니다.
+비마르코프 설정에서도 정책을 개선합니다.
+▣ 단점
 
-(1-6) DRQN(Deep Recurrent Q-Network)
+학습 시간이 증가합니다.
+학습이 더 어려워질 수 있습니다.
+▣ 적용 분야
 
-(1-7) C51
+주식 거래.
+텍스트 기반 게임.
 
-(1-8) IQN(Implicit Quantile Networks)
+<br>
 
-(1-9) Rainbow
+### (1-7) C51
+▣ 정의
+C51은 단일 기대값 대신 보상의 범주형 분포를 추정하는 알고리즘입니다.
 
-(1-10) SQL
+▣ 장점
 
-(1-11) PER
+보상의 불확실성을 모델링할 수 있습니다.
+더 풍부한 표현을 제공합니다.
+▣ 단점
 
-(1-12) HER
+분포를 관리해야 하므로 복잡도가 증가합니다.
+계산 비용이 더 큽니다.
+▣ 적용 분야
 
-(1-13) NoisyNet
+위험 민감 의사결정.
+
+<br>
+
+### (1-8) IQN(Implicit Quantile Networks)
+▣ 정의
+IQN은 보상 분포의 분위수를 예측하여 보상의 변동성을 더 잘 모델링합니다.
+
+▣ 장점
+
+다양한 보상 분포에 적응할 수 있습니다.
+C51보다 표현력이 뛰어납니다.
+▣ 단점
+
+학습이 복잡합니다.
+많은 계산 자원이 필요합니다.
+▣ 적용 분야
+
+위험 인지 AI.
+전략적 계획.
+
+<br>
+
+### (1-9) Rainbow
+▣ 정의
+Rainbow는 DQN, Double DQN, PER, Dueling DQN, C51 등을 결합한 포괄적인 RL 알고리즘입니다.
+
+▣ 장점
+
+최신 기술을 종합한 최고의 성능.
+기존 알고리즘들의 장점을 모두 활용.
+▣ 단점
+
+구현이 복잡합니다.
+계산 비용이 높습니다.
+▣ 적용 분야
+
+범용 강화 학습 작업.
+
+<br>
+
+### (1-10) SQL
+▣ 정의
+SQL은 정책의 엔트로피를 극대화하여 탐색을 촉진합니다.
+
+▣ 장점
+
+다양한 행동 선택을 장려합니다.
+조기 수렴을 방지합니다.
+▣ 단점
+
+결정론적 정책에는 비효율적입니다.
+▣ 적용 분야
+
+로봇 공학.
+탐색이 중요한 작업.
+
+<br>
+
+### (1-11) PER
+▣ 정의
+PER은 학습 중 중요한 경험에 우선순위를 부여합니다.
+
+▣ 장점
+
+더 빠른 수렴.
+학습 효율성 향상.
+▣ 단점
+
+추가 계산 비용이 필요합니다.
+▣ 적용 분야
+
+게임.
+로봇 공학.
+
+<br>
+
+### (1-12) HER
+▣ 정의
+HER(Hindsight Experience Replay)은 실제로 달성한 목표와 다른 가상의 목표를 설정하여 학습 데이터를 수정하는 방식으로, 희소한 보상 환경에서 효율적으로 학습할 수 있도록 돕는 알고리즘입니다.
+
+▣ 장점
+
+희소 보상 환경에서 샘플 효율성을 크게 향상시킵니다.
+목표 중심 환경에서 성능이 우수합니다.
+기존 경험을 효과적으로 활용합니다.
+▣ 단점
+
+목표가 명확히 정의된 환경에서만 사용할 수 있습니다.
+구현이 복잡할 수 있습니다.
+▣ 적용 분야
+
+로봇 공학(예: 물체 조작 및 경로 계획).
+목표 지향적 학습 환경.
+<br>
+
+### (1-13) NoisyNet
+▣ 정의
+NoisyNet은 신경망 가중치에 학습 가능한 노이즈를 추가하여 탐색(exploration)을 자동화하는 알고리즘입니다. 기존의 
+𝜖
+ϵ-탐욕적 정책 대신 학습 과정에서 노이즈를 조절하여 더 나은 탐색과 학습 균형을 제공합니다.
+
+▣ 장점
+
+탐색-활용(trade-off) 문제를 자동으로 해결합니다.
+𝜖
+ϵ-탐욕적 정책에 대한 추가 튜닝이 필요하지 않습니다.
+학습 과정에서 더 효과적인 탐색을 가능하게 합니다.
+▣ 단점
+
+추가 학습 가능한 노이즈 매개변수를 관리해야 하므로 학습 시간이 증가합니다.
+환경에 따라 노이즈 설정이 비효율적일 수 있습니다.
+▣ 적용 분야
+
+연속적인 행동 공간을 가진 환경.
+다양한 보상을 가진 게임 환경.
+<br>
 
 ---
 
