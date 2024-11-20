@@ -349,10 +349,10 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 	success_count = 0  # 종료 상태(4)에 도달한 에피소드 수
 
 	for episode in range(num_episodes):  # 100번의 학습 에피소드 실행
-    		state = np.random.randint(0, n_states)  # 임의의 상태에서 에피소드 시작
-    		episode_reward = 0  # 현재 에피소드의 총 보상
+    	    state = np.random.randint(0, n_states)  # 임의의 상태에서 에피소드 시작
+    	    episode_reward = 0  # 현재 에피소드의 총 보상
 
-    	while state != 4:  # 종료 상태(4)에 도달하면 에피소드 종료
+    	    while state != 4:  # 종료 상태(4)에 도달하면 에피소드 종료
         	action = choose_action(state)  # 현재 상태에서 행동 선택 (탐험 또는 활용)
         	next_state = np.random.randint(0, n_states)  # 랜덤으로 다음 상태로 전이
         	reward = 1 if next_state == 4 else 0  # 보상 설정: 종료 상태로 전이 시 보상 1, 그 외 0
@@ -360,8 +360,8 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
         	state = next_state  # 다음 상태로 전이
         	episode_reward += reward  # 보상 누적
 
-        if reward == 1:  # 종료 상태에 도달한 경우
-            success_count += 1
+         	if reward == 1:  # 종료 상태에 도달한 경우
+                   success_count += 1
 
     	total_rewards.append(episode_reward)  # 에피소드별 총 보상 기록
 
