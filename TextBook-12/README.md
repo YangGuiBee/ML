@@ -351,7 +351,15 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 	        reward = 1 if next_state == 4 else 0  # 보상 설정: 종료 상태로 전이 시 보상 1, 그 외 0
 	        update_q(state, action, reward, next_state)  # Q-값 업데이트
 	        state = next_state  # 다음 상태로 전이
-	
+
+	# 학습 결과 평가 출력
+	print("학습 완료!")
+	print(f"총 에피소드: {num_episodes}")
+	print(f"성공적으로 종료 상태에 도달한 에피소드 수: {success_count}")
+	print(f"성공 비율: {success_count / num_episodes:.2f}")
+	print(f"평균 에피소드 보상: {np.mean(total_rewards):.2f}")
+	print("최종 Q-테이블:")
+	print(Q)
 	# 최종 Q-테이블 출력
 	print(Q)  # 학습 완료된 Q-테이블 출력
 
