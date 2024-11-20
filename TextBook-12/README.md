@@ -233,6 +233,9 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 모델은 Planning에 사용되며, 경험 전에 가능한 미래 상황을 고려하여 행동을 예측<br>
 모델과 Planning을 사용하여 해결하는 방식<br>
 
+![](./images/RL.PNG)
+<br>
+
 **DavidSilver의 Reinforcement Learning 강의교재**<br>
 
 	Lecture 1: Introduction to Reinforcement Learning
@@ -249,9 +252,31 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 (교안) https://github.com/YangGuiBee/ML/blob/main/TextBook-12/<br>
 (출처) https://www.davidsilver.uk/teaching/<br>
 
-![](./images/RL.PNG)
-<br>
+	▣ 강화학습(Reinforcement Learning)의 특징 
+	감독자(Supervisor)가 없고, 오직 보상 신호만 존재
+	피드백이 즉각적이지 않고 지연
+	시간이 중요(순차적이며, 비독립적이고 비동일 분포(i.i.d) 데이터)
+	에이전트의 행동이 이후에 받는 데이터에 영향
 
+	▣ 강화학습(Reinforcement Learning)의 예제
+	헬리콥터로 묘기 비행을 수행하기 : 원하는 경로를 따라가는 경우 긍정적 보상(+), 추락하는 경우 부정적 보상(-)
+	Backgammon에서 세계 챔피언을 이기기 : 게임에서 승리하면 긍정적 보상(+), 게임에서 패배하면 부정적 보상(-)
+	투자 포트폴리오 관리하기 : 은행 계좌에 돈이 증가하면 긍정적 보상(+)
+	발전소 제어하기 : 전력을 생산하면 긍정적 보상(+), 안전 기준을 초과하면 부정적 보상(-)
+	인간형 로봇을 걷게 만들기 : 앞으로 이동하면 긍정적 보상(+), 넘어지면 부정적 보상(-)
+	다양한 아타리(Atari) 게임을 인간보다 더 잘 플레이하기 : 점수가 증가하면 긍정적 보상(+), 점수가 감소하면 부정적 보상(-)
+
+	▣ 강화학습(Reinforcement Learning)의 보상(reward) 
+	$𝑅_𝑡$는 스칼라 형태의 피드백 신호
+	이는 에이전트가 𝑡 단계에서 얼마나 잘하고 있는지를 나타냄
+	에이전트의 목표는 누적 보상을 최대화하는 것
+	보상 가설(Reward Hypothesis) : 모든 목표는 기대 누적 보상의 극대화로 설명
+	다만, 보상은 지연될 수 있다
+
+	▣ Agent, Environment
+	Agent : 행동 $𝐴_𝑡$ 실행 → 관측 $𝑂_𝑡$ 받기 → 스칼라 보상 $𝑅_𝑡$ 받기
+	Environment : 행동 $𝐴_𝑡$ 입력 받기  → 관측 $𝑂_𝑡$ 출력  → 스칼라 보상 $𝑅_𝑡$ 출력
+	𝑡는 환경 단계가 진행될 때 증가
 
 ---
 
