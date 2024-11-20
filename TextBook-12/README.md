@@ -318,39 +318,52 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 ▣ 모델식 : Q-learning 업데이트식으로 Q(s,a)는 상태 𝑠에서 행동 𝑎를 선택할 때의 Q값, α는 학습률, 𝛾는 할인 계수,𝑟은 현재 보상, max_𝑎′𝑄(𝑠′,𝑎′)는 다음 상태 𝑠′ 에서 가능한 최대 Q값.<br>
 ![](./images/[1-1].PNG)
 
+
 	import numpy as np
-	
+
 	# 환경 설정 (간단한 그리드 월드 환경 가정)
 	n_states = 5  # 총 5개의 상태 (0~4)
 	n_actions = 2  # 각 상태에서 선택할 수 있는 2가지 행동 (예: 0, 1)
 	Q = np.zeros((n_states, n_actions))  # Q-테이블 초기화, 모든 상태-행동 값이 0으로 시작
-	
+
 	alpha = 0.1  # 학습률: Q-값 업데이트 시 새로운 정보 반영 비율
 	gamma = 0.9  # 할인 계수: 미래 보상의 중요도를 조정
 	epsilon = 0.1  # 탐험 확률: 랜덤 행동 선택 비율
-	
+
 	# 행동 선택 함수 (ε-greedy 정책)
 	def choose_action(state):
-	    if np.random.uniform(0, 1) < epsilon:  # ε 확률로 탐험
-	       return np.random.choice(n_actions)  # 랜덤으로 행동 선택
-	    else:  # 1-ε 확률로 활용
-	       return np.argmax(Q[state, :])  # Q-값이 가장 큰 행동 선택
-	
+    	if np.random.uniform(0, 1) < epsilon:  # ε 확률로 탐험
+        	return np.random.choice(n_actions)  # 랜덤으로 행동 선택
+    	else:  # 1-ε 확률로 활용
+        	return np.argmax(Q[state, :])  # Q-값이 가장 큰 행동 선택
+
 	# Q-값 업데이트 함수
 	def update_q(state, action, reward, next_state):
-	    predict = Q[state, action]  # 현재 상태-행동 값 예측
-	    target = reward + gamma * np.max(Q[next_state, :])  # 보상 + 다음 상태에서의 최대 Q-값
-	    Q[state, action] = predict + alpha * (target - predict)  # Q-값 업데이트 공식
-	
+    		predict = Q[state, action]  # 현재 상태-행동 값 예측
+    		target = reward + gamma * np.max(Q[next_state, :])  # 보상 + 다음 상태에서의 최대 Q-값
+    		Q[state, action] = predict + alpha * (target - predict)  # Q-값 업데이트 공식
+
 	# 학습 과정 반복
-	for episode in range(100):  # 100번의 학습 에피소드 실행
-	    state = np.random.randint(0, n_states)  # 임의의 상태에서 에피소드 시작
-	    while state != 4:  # 종료 상태(4)에 도달하면 에피소드 종료
-	        action = choose_action(state)  # 현재 상태에서 행동 선택 (탐험 또는 활용)
-	        next_state = np.random.randint(0, n_states)  # 랜덤으로 다음 상태로 전이
-	        reward = 1 if next_state == 4 else 0  # 보상 설정: 종료 상태로 전이 시 보상 1, 그 외 0
-	        update_q(state, action, reward, next_state)  # Q-값 업데이트
-	        state = next_state  # 다음 상태로 전이
+	num_episodes = 100  # 총 에피소드 수
+	total_rewards = []  # 각 에피소드의 총 보상 기록
+	success_count = 0  # 종료 상태(4)에 도달한 에피소드 수
+
+	for episode in range(num_episodes):  # 100번의 학습 에피소드 실행
+    		state = np.random.randint(0, n_states)  # 임의의 상태에서 에피소드 시작
+    		episode_reward = 0  # 현재 에피소드의 총 보상
+
+    	while state != 4:  # 종료 상태(4)에 도달하면 에피소드 종료
+        	action = choose_action(state)  # 현재 상태에서 행동 선택 (탐험 또는 활용)
+        	next_state = np.random.randint(0, n_states)  # 랜덤으로 다음 상태로 전이
+        	reward = 1 if next_state == 4 else 0  # 보상 설정: 종료 상태로 전이 시 보상 1, 그 외 0
+        	update_q(state, action, reward, next_state)  # Q-값 업데이트
+        	state = next_state  # 다음 상태로 전이
+        	episode_reward += reward  # 보상 누적
+
+        if reward == 1:  # 종료 상태에 도달한 경우
+            success_count += 1
+
+    	total_rewards.append(episode_reward)  # 에피소드별 총 보상 기록
 
 	# 학습 결과 평가 출력
 	print("학습 완료!")
@@ -360,17 +373,22 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 	print(f"평균 에피소드 보상: {np.mean(total_rewards):.2f}")
 	print("최종 Q-테이블:")
 	print(Q)
-	# 최종 Q-테이블 출력
-	print(Q)  # 학습 완료된 Q-테이블 출력
 
+ 
 <br>
 
 	(결과 분석) 
-	[[0.68279676 0.29722763] → 상태0 : 행동 0이 종료 상태로 전이될 가능성이 크므로 높은 Q-값을 가짐
- 	[0.61318348 0.18622236]  → 상태1 : 행동 0이 더 자주 종료 상태로 전이되었음을 나타냄
- 	[0.64308809 0.13316469]  → 상태2 : 행동 0이 종료 상태로 가는 주요 경로로 강화되었음을 보여줌
- 	[0.65223923 0.14596641]  → 상태3 : 종료 상태로의 전이가 비교적 높게 평가되며, 행동 0이 더 강화됨
- 	[0.         0.        ]] → 상태4 : 종료 상태이므로 Q-값 업데이트가 발생하지 않음
+	학습 완료!
+	총 에피소드: 100
+	성공적으로 종료 상태에 도달한 에피소드 수: 85
+	성공 비율: 0.85
+	평균 에피소드 보상: 0.85
+	최종 Q-테이블:
+	[[0.26696821 0.7079046 ]
+	 [0.67888428 0.20572514]
+	 [0.69863647 0.24839782]
+	 [0.67897106 0.06849709]
+	 [0.         0.        ]]
   
 <br>
 
