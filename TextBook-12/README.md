@@ -1,5 +1,8 @@
 #  12 : 강화학습, 앙상블학습
 
+![](./images/RLUL.png)
+<br>
+
 ---
 
 ## [1] 강화 학습(Reinforcement Learning, RL)
