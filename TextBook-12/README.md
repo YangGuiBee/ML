@@ -252,7 +252,18 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 (교안) https://github.com/YangGuiBee/ML/blob/main/TextBook-12/<br>
 (출처) https://www.davidsilver.uk/teaching/<br>
 
-	▣ 강화학습(Reinforcement Learning)의 특징 
+
+	▣ 항목 설명
+	Agent : 행동을 실행하고 관측을 받아서 스칼라 보상 받기
+	Environment : 행동을 입력 받아서 관측을 출력하고 스칼라 보상을 출력
+	𝑡는 환경 단계가 진행될 때 증가
+	히스토리(history) : 관측, 행동, 보상의 시퀀스
+	상태(state) : 이후에 발생할 일을 결정하는 데 사용되는 정보
+	정책(Policy): 에이전트의 행동 함수
+	가치 함수(Value function): 각 상태 또는 행동이 얼마나 좋은지 평가
+	모델(Model): 환경에 대한 에이전트의 표현
+
+ 	▣ 강화학습(Reinforcement Learning)의 특징 
 	감독자(Supervisor)가 없고, 오직 보상 신호만 존재
 	피드백이 즉각적이지 않고 지연
 	시간이 중요(순차적이며, 비독립적이고 비동일 분포(i.i.d) 데이터)
@@ -272,12 +283,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 	에이전트의 목표는 누적 보상을 최대화하는 것
 	보상 가설(Reward Hypothesis) : 모든 목표는 기대 누적 보상의 극대화로 설명
 	다만, 보상은 지연될 수 있다
-
-	▣ Agent, Environment
-	Agent : 행동 $𝐴_𝑡$ 실행 → 관측 $𝑂_𝑡$ 받기 → 스칼라 보상 $𝑅_𝑡$ 받기
-	Environment : 행동 $𝐴_𝑡$ 입력 받기  → 관측 $𝑂_𝑡$ 출력  → 스칼라 보상 $𝑅_𝑡$ 출력
-	𝑡는 환경 단계가 진행될 때 증가
-
+	
 ---
 
 # [1-1] Model-free RL : Value Iteration
