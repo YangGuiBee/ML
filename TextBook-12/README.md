@@ -1,6 +1,6 @@
 #  12 : 강화학습, 앙상블학습
 
-![](./images/RLUL.png)
+![](./images/RLUL.PNG)
 <br>
 
 ---
