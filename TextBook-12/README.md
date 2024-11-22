@@ -23,22 +23,27 @@
 	(1-13) HER(Hindsight Experience Replay): 목표 달성을 학습할 수 있도록 과거 경험을 재사용하는 기법
 	(1-14) NoisyNet: 신경망 가중치에 노이즈를 추가해 탐색 효율성을 높이는 방식
 
-	[1-2] Model-free RL : Policy Iteration
-	(2-1) Policy Gradient: 기본적인 정책 직접 학습 알고리즘
-	(2-2) A2C/A3C(Advantage Actor-Critic): 분산형 Actor-Critic 모델
-	(2-3) PPO(Proximal Policy Optimization): 신뢰 구간을 사용해 안정적으로 정책을 업데이트
-	(2-4) TRPO(Trust Region Policy Optimization): 정책 급변을 방지하는 최적화 기법
-	(2-5) Actor-Critic: 기본적인 Actor-Critic 구조, Policy Gradient와 Critic의 Q값 평가 결합
-	(2-6) NAC(Natural Actor-Critic): Natural Gradient를 적용해 정책의 효율적 업데이트를 수행
-	(2-7) DDPG(Deep Deterministic Policy Gradient): 연속적 행동 공간에서 학습하는 Actor-Critic 모델
-	(2-8) TD3(Twin Delayed DDPG): DDPG의 한계점을 극복하기 위한 개선된 모델
-	(2-9) SAC(Soft Actor-Critic): 탐색과 활용의 균형을 유지하도록 설계된 정책 학습 모델 (2018, 2019)
-	(2-10) BC(Behavioral Cloning): 데이터를 기반으로 정책을 모방하는 방식
-	(2-11) DDPGfD(DDPG from Demonstrations): 전문가의 시범을 사용해 DDPG 성능을 개선
-	(2-12) REINFORCE: 정책 경사법의 기본 형태
-	(2-13) ACER(Actor-Critic with Experience Replay): 경험 리플레이를 추가한 Actor-Critic 방법
-	(2-14) IMPALA(Importance Weighted Actor-Learner Architecture): 분산 학습에 최적화된 구조
-	(2-15) Off-PAC(Off-Policy Actor-Critic): 오프폴리시 데이터를 활용하는 Actor-Critic 기법
+	[1-2] Model-free RL : Policy Iteration 
+ 	기본 Policy Gradient 및 Actor-Critic 계열
+		(2-1) Policy Gradient: 기본적인 정책 직접 학습 알고리즘
+		(2-2) Actor-Critic: 기본적인 Actor-Critic 구조, Policy Gradient와 Critic의 Q값 평가 결합
+		(2-3) NAC(Natural Actor-Critic): Natural Gradient를 적용해 정책의 효율적 업데이트를 수행
+		(2-4) REINFORCE: 정책 경사법의 기본 형태
+	Advantage Actor-Critic 및 분산 학습 계열
+ 		(2-5) A2C/A3C(Advantage Actor-Critic): 분산형 Actor-Critic 모델
+		(2-6) ACER(Actor-Critic with Experience Replay): 경험 리플레이를 추가한 Actor-Critic 방법
+		(2-7) IMPALA(Importance Weighted Actor-Learner Architecture): 분산 학습에 최적화된 구조
+		(2-8) Off-PAC(Off-Policy Actor-Critic): 오프폴리시 데이터를 활용하는 Actor-Critic 기법
+	신뢰 구간 기반 정책 최적화 계열
+		(2-9) PPO(Proximal Policy Optimization): 신뢰 구간을 사용해 안정적으로 정책을 업데이트
+		(2-10) TRPO(Trust Region Policy Optimization): 정책 급변을 방지하는 최적화 기법
+	연속 행동 공간 최적화 계열 
+		(2-11) DDPG(Deep Deterministic Policy Gradient): 연속적 행동 공간에서 학습하는 Actor-Critic 모델
+		(2-12) TD3(Twin Delayed DDPG): DDPG의 한계점을 극복하기 위한 개선된 모델
+		(2-13) SAC(Soft Actor-Critic): 탐색과 활용의 균형을 유지하도록 설계된 정책 학습 모델 (2018, 2019) 
+	전문가 시범 데이터 활용 계열 
+		(2-14) BC(Behavioral Cloning): 데이터를 기반으로 정책을 모방하는 방식
+		(2-15) DDPGfD(DDPG from Demonstrations): 전문가의 시범을 사용해 DDPG 성능을 개선
 
 	[1-3] Model-based RL : Given the Model
 	(3-1) Dyna-Q: 모델 기반 RL과 모델-프리 RL을 조합한 알고리즘
@@ -725,21 +730,32 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 
 # [1-2] Model-free RL : Policy Iteration
 
+
+	기본 Policy Gradient 및 Actor-Critic 계열
 	(2-1) Policy Gradient: 기본적인 정책 직접 학습 알고리즘
-	(2-2) A2C/A3C(Advantage Actor-Critic): 분산형 Actor-Critic 모델
-	(2-3) PPO(Proximal Policy Optimization): 신뢰 구간을 사용해 안정적으로 정책을 업데이트
-	(2-4) TRPO(Trust Region Policy Optimization): 정책 급변을 방지하는 최적화 기법
-	(2-5) Actor-Critic: 기본적인 Actor-Critic 구조, Policy Gradient와 Critic의 Q값 평가 결합
-	(2-6) NAC(Natural Actor-Critic): Natural Gradient를 적용해 정책의 효율적 업데이트를 수행
-	(2-7) DDPG(Deep Deterministic Policy Gradient): 연속적 행동 공간에서 학습하는 Actor-Critic 모델
-	(2-8) TD3(Twin Delayed DDPG): DDPG의 한계점을 극복하기 위한 개선된 모델
-	(2-9) SAC(Soft Actor-Critic): 탐색과 활용의 균형을 유지하도록 설계된 정책 학습 모델 (2018, 2019)
-	(2-10) BC(Behavioral Cloning): 데이터를 기반으로 정책을 모방하는 방식
-	(2-11) DDPGfD(DDPG from Demonstrations): 전문가의 시범을 사용해 DDPG 성능을 개선
-	(2-12) REINFORCE: 정책 경사법의 기본 형태
-	(2-13) ACER(Actor-Critic with Experience Replay): 경험 리플레이를 추가한 Actor-Critic 방법
-	(2-14) IMPALA(Importance Weighted Actor-Learner Architecture): 분산 학습에 최적화된 구조
-	(2-15) Off-PAC(Off-Policy Actor-Critic): 오프폴리시 데이터를 활용하는 Actor-Critic 기법
+	(2-2) Actor-Critic: 기본적인 Actor-Critic 구조, Policy Gradient와 Critic의 Q값 평가 결합
+	(2-3) NAC(Natural Actor-Critic): Natural Gradient를 적용해 정책의 효율적 업데이트를 수행
+	(2-4) REINFORCE: 정책 경사법의 기본 형태
+
+	Advantage Actor-Critic 및 분산 학습 계열
+ 	(2-5) A2C/A3C(Advantage Actor-Critic): 분산형 Actor-Critic 모델
+	(2-6) ACER(Actor-Critic with Experience Replay): 경험 리플레이를 추가한 Actor-Critic 방법
+	(2-7) IMPALA(Importance Weighted Actor-Learner Architecture): 분산 학습에 최적화된 구조
+	(2-8) Off-PAC(Off-Policy Actor-Critic): 오프폴리시 데이터를 활용하는 Actor-Critic 기법
+
+	신뢰 구간 기반 정책 최적화 계열
+	(2-9) PPO(Proximal Policy Optimization): 신뢰 구간을 사용해 안정적으로 정책을 업데이트
+	(2-10) TRPO(Trust Region Policy Optimization): 정책 급변을 방지하는 최적화 기법
+
+	연속 행동 공간 최적화 계열 
+	(2-11) DDPG(Deep Deterministic Policy Gradient): 연속적 행동 공간에서 학습하는 Actor-Critic 모델
+	(2-12) TD3(Twin Delayed DDPG): DDPG의 한계점을 극복하기 위한 개선된 모델
+	(2-13) SAC(Soft Actor-Critic): 탐색과 활용의 균형을 유지하도록 설계된 정책 학습 모델 (2018, 2019)
+ 
+	전문가 시범 데이터 활용 계열 
+	(2-14) BC(Behavioral Cloning): 데이터를 기반으로 정책을 모방하는 방식
+	(2-15) DDPGfD(DDPG from Demonstrations): 전문가의 시범을 사용해 DDPG 성능을 개선
+
 
 
 ## (2-1) Policy Gradient : 기본적인 정책 직접 학습 알고리즘
@@ -751,32 +767,7 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 
 <br>
 
-## (2-2) A2C/A3C(Advantage Actor-Critic): 분산형 Actor-Critic 모델
-▣ 정의 : Actor-Critic 구조 기반으로, Actor는 정책을 업데이트하고 Critic은  𝑄-값 또는 𝑉-값을 평가. A3C는 비동기적(Asynchronous)으로 여러 에이전트가 동시에 학습하며, A2C는 동기적(Synchronous)으로 학습<br>
-▣ 장점 : 학습 속도 향상(A3C), 정책과 가치 함수 학습을 분리하여 안정성 제공하고 멀티 쓰레드로 효율적인 샘플 수집 가능<br>
-▣ 단점 : 비동기 학습으로 인해 복잡도가 증가(A3C), A2C는 샘플 효율성이 낮음<br>
-▣ 적용 분야 : 멀티 에이전트 환경, 연속적인 제어 문제<br>
-![](./images/(2-2)_1.PNG)
-<br>
-
-## (2-3) PPO(Proximal Policy Optimization): 신뢰 구간을 사용해 안정적으로 정책을 업데이트
-▣ 정의 : Policy Gradient를 안정적으로 학습하기 위해 손실 함수에 클리핑을 도입한 알고리즘. 기존 정책과 새로운 정책 간의 차이를 제한하여 학습 안정성을 확보<br>
-▣ 장점 : 구현이 간단하고 안정적이며, Hyperparameter에 덜 민감하고 높은 성능<br>
-▣ 단점 : 일부 환경에서 클리핑이 비효율적, 계산 비용이 높다<br>
-▣ 적용 분야 : 게임 AI, 로봇 공학, 자율적 제어 시스템<br>
-![](./images/[2-3].PNG)
-
-<br>
-
-## (2-4) TRPO(Trust Region Policy Optimization): 정책 급변을 방지하는 최적화 기법
-▣ 정의 : 정책 업데이트 시 큰 변화를 방지하기 위해 신뢰 영역(Trust Region)을 유지하며 학습. Kullback-Leibler (KL) 발산을 사용하여 정책 간 차이를 제한<br>
-▣ 장점 : 안정적인 정책 업데이트, 수렴이 빠르고 신뢰성이 높음
-▣ 단점 : 계산 비용이 매우 높고, 구현이 복잡<br>
-▣ 적용 분야 : 연속적인 제어 문제, 복잡한 로봇 학습<br>
-
-<br>
-
-## (2-5) Actor-Critic: 기본적인 Actor-Critic 구조, Policy Gradient와 Critic의 Q값 평가 결합
+## (2-2) Actor-Critic: 기본적인 Actor-Critic 구조, Policy Gradient와 Critic의 Q값 평가 결합
 ▣ 정의 : 정책(Actor)과 가치 함수(Critic)를 동시에 학습하는 구조로, Actor는 정책을 학습하고 Critic은 가치 함수로 피드백을 제공<br>
 ▣ 장점 : 빠른 학습 속도, 연속적 행동 공간에서 효과적<br>
 ▣ 단점 : Actor와 Critic 간 균형 조정이 어렵고, 불안정한 학습 가능성<br>
@@ -784,7 +775,7 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 
 <br>
 
-## (2-6) NAC(Natural Actor-Critic) : Natural Gradient를 적용해 정책의 효율적 업데이트를 수행
+## (2-3) NAC(Natural Actor-Critic) : Natural Gradient를 적용해 정책의 효율적 업데이트를 수행
 ▣ 정의 : 기존 그라디언트보다 빠르게 수렴하며 정책 변화의 효과를 극대화하는 자연 그라디언트(Natural Gradient)를 사용하여 정책 업데이트를 안정화함<br>
 ▣ 장점 : 더 빠른 수렴, 정책 안정성 보장<br>
 ▣ 단점 : 계산 비용 증가, 구현 복잡도<br>
@@ -792,47 +783,7 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 
 <br>
 
-## (2-7) DDPG(Deep Deterministic Policy Gradient) : 연속적 행동 공간에서 학습하는 Actor-Critic 모델
-▣ 정의: Actor-Critic 기반으로, 연속적인 행동 공간에서 작동하도록 설계된 모델. Actor는 행동을 생성하고, Critic은 행동의 𝑄-값을 평가<br>
-▣ 장점 : 연속적인 행동 공간에서 효율적, 고차원 작업에 적합<br>
-▣ 단점 : 샘플 효율성이 낮고 탐색 문제에 취약<br>
-▣ 적용 분야 : 로봇 학습, 자율 시스템 제어<br>
-
-<br>
-
-## (2-8) TD3(Twin Delayed DDPG) : DDPG의 한계점을 극복하기 위한 개선된 모델
-▣ 정의 : DDPG의 개선된 버전으로, 행동 가치 평가의 과대 추정을 방지하기 위해 두 개의 Critic 네트워크를 사용하고 행동 업데이트를 지연시켜 안정성을 강화<br>
-▣ 장점 : 과대 추정을 줄이고, 안정적인 학습 성능<br>
-▣ 단점 : 구현이 복잡, 추가 계산 비용<br>
-▣ 적용 분야 : 연속 제어 문제, 로봇 공학<br>
-
-<br>
-
-## (2-9) SAC(Soft Actor-Critic): 탐색과 활용의 균형을 유지하도록 설계된 정책 학습 모델 (2018, 2019)
-▣ 정의 : 정책 엔트로피를 최대화하여 탐색 성능을 높이고 안정성을 강화한 Actor-Critic 알고리즘<br>
-▣ 장점 : 안정적이고 강력한 성능, 샘플 효율성 우수<br>
-▣ 단점 : 계산 비용이 높고 복잡한 튜닝 필요<br>
-▣ 적용 분야 : 로봇 동작 학습, 복잡한 환경 학습<br>
-
-<br>
-
-## (2-10) BCBC(Behavioral Cloning) : 데이터를 기반으로 정책을 모방하는 방식
-▣ 정의 : 주어진 행동 데이터를 사용해 정책을 모방 학습(Imitation Learning)하며 지도 학습 접근법으로 주로 사용<br>
-▣ 장점 : 간단하고 구현이 용이하고 지도 학습 알고리즘을 활용 가능<br>
-▣ 단점 : 일반화가 어렵고 충분한 데이터가 없으면 성능이 저하<br>
-▣ 적용 분야 : 자율 주행 학습, 인간 행동 모방<br>
-
-<br>
-
-## (2-11) DDPGfD(DDPG from Demonstrations) : 전문가의 시범을 사용해 DDPG 성능을 개선
-▣ 정의 : DDPG(Deep Deterministic Policy Gradient)에 전문가 시연 데이터를 추가로 활용하여 초기 학습을 강화하는 알고리즘. 시연 데이터를 우선적으로 활용하여 학습 효율성을 높이는 경험 재생(Experience Replay) 기법을 포함<br>
-▣ 장점 : 학습 초기 성능이 향상, 샘플 효율성을 개선, 희소 보상 환경에서도 학습이 용이<br>
-▣ 단점 : 전문가 시연 데이터가 필수적, 추가 메모리 및 계산 비용이 필요<br>
-▣ 적용 분야 : 로봇 공학(시연 데이터를 활용한 로봇 작업), 자율 주행 및 복잡한 제어 작업<br>
-
-<br>
-
-## (2-12) REINFORCE : 정책 경사법의 기본 형태
+## (2-4) REINFORCE : 정책 경사법의 기본 형태
 ▣ 정의 : Policy Gradient의 기본 형태로, 매번 에피소드가 끝난 후 정책의 파라미터를 업데이트. 에피소드별로 누적 보상을 기반으로 정책을 학습. 여기서 𝐺𝑡는 시간 𝑡에서의 누적 보상<br>
 ▣ 장점 : 단순하고 구현이 용이, 정책 학습의 직관적 접근 방식을 제공<br>
 ▣ 단점 : 높은 분산(Variance)으로 인해 학습이 불안정, 샘플 효율성이 낮다<br>
@@ -841,7 +792,16 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 
 <br>
 
-## (2-13) ACER(Actor-Critic with Experience Replay): 경험 리플레이를 추가한 Actor-Critic 방법
+## (2-5) A2C/A3C(Advantage Actor-Critic): 분산형 Actor-Critic 모델
+▣ 정의 : Actor-Critic 구조 기반으로, Actor는 정책을 업데이트하고 Critic은  𝑄-값 또는 𝑉-값을 평가. A3C는 비동기적(Asynchronous)으로 여러 에이전트가 동시에 학습하며, A2C는 동기적(Synchronous)으로 학습<br>
+▣ 장점 : 학습 속도 향상(A3C), 정책과 가치 함수 학습을 분리하여 안정성 제공하고 멀티 쓰레드로 효율적인 샘플 수집 가능<br>
+▣ 단점 : 비동기 학습으로 인해 복잡도가 증가(A3C), A2C는 샘플 효율성이 낮음<br>
+▣ 적용 분야 : 멀티 에이전트 환경, 연속적인 제어 문제<br>
+![](./images/(2-2)_1.PNG)
+
+<br>
+
+## (2-6) ACER(Actor-Critic with Experience Replay): 경험 리플레이를 추가한 Actor-Critic 방법
 ▣ 정의 : Actor-Critic에 경험 재생(Experience Replay)을 추가하여 샘플 효율성을 높인 알고리즘. PPO의 클리핑 방식과 유사하게 정책 업데이트를 안정화하는 기법도 포함<br>
 ▣ 장점 : 샘플 효율성 향상, Actor-Critic 구조의 안정성과 효율성을 제공<br>
 ▣ 단점 : 구현이 복잡, 추가적인 메모리와 계산 비용이 요구<br>
@@ -849,7 +809,7 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 
 <br>
 
-## (2-14) IMPALA(Importance Weighted Actor-Learner Architecture): 분산 학습에 최적화된 구조
+## (2-7) IMPALA(Importance Weighted Actor-Learner Architecture): 분산 학습에 최적화된 구조
 ▣ 정의 : 분산 학습 환경에서 효과적인 Actor-Critic 알고리즘으로, 여러 Actor가 데이터를 수집하고 Learner가 이 데이터를 학습. 중요도 가중치(Importance Weighting)를 사용해 Actor와 Learner 간의 시간차를 보상<br>
 ▣ 장점 : 분산 환경에서 효율적, 데이터 수집과 학습 병렬화 가능, 샘플 효율성 우수<br>
 ▣ 단점 : 높은 계산 비용, 복잡한 구현<br>
@@ -857,11 +817,68 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 
 <br>
 
-## (2-15) Off-PAC(Off-Policy Actor-Critic): 오프폴리시 데이터를 활용하는 Actor-Critic 기법
+## (2-8) Off-PAC(Off-Policy Actor-Critic): 오프폴리시 데이터를 활용하는 Actor-Critic 기법
 ▣ 정의 : Off-Policy 데이터(정책 외부의 데이터)를 활용하여 Actor-Critic 학습을 수행하는 알고리즘. 행동 정책(Behavior Policy)과 학습 정책(Target Policy)을 분리하여 샘플 효율성을 개선<br>
 ▣ 장점 : 샘플 효율성이 높고 다양한 데이터 소스를 활용 가능<br>
 ▣ 단점 : 중요도 샘플링에 의존하여 학습이 불안정, 구현이 복잡<br>
 ▣ 적용 분야 : 대규모 데이터 기반 학습, 샘플 수집 비용이 높은 환경<br>
+
+<br>
+
+## (2-9) PPO(Proximal Policy Optimization): 신뢰 구간을 사용해 안정적으로 정책을 업데이트
+▣ 정의 : Policy Gradient를 안정적으로 학습하기 위해 손실 함수에 클리핑을 도입한 알고리즘. 기존 정책과 새로운 정책 간의 차이를 제한하여 학습 안정성을 확보<br>
+▣ 장점 : 구현이 간단하고 안정적이며, Hyperparameter에 덜 민감하고 높은 성능<br>
+▣ 단점 : 일부 환경에서 클리핑이 비효율적, 계산 비용이 높다<br>
+▣ 적용 분야 : 게임 AI, 로봇 공학, 자율적 제어 시스템<br>
+![](./images/[2-3].PNG)
+
+<br>
+
+## (2-10) TRPO(Trust Region Policy Optimization): 정책 급변을 방지하는 최적화 기법
+▣ 정의 : 정책 업데이트 시 큰 변화를 방지하기 위해 신뢰 영역(Trust Region)을 유지하며 학습. Kullback-Leibler (KL) 발산을 사용하여 정책 간 차이를 제한<br>
+▣ 장점 : 안정적인 정책 업데이트, 수렴이 빠르고 신뢰성이 높음
+▣ 단점 : 계산 비용이 매우 높고, 구현이 복잡<br>
+▣ 적용 분야 : 연속적인 제어 문제, 복잡한 로봇 학습<br>
+
+<br>
+
+## (2-11) DDPG(Deep Deterministic Policy Gradient) : 연속적 행동 공간에서 학습하는 Actor-Critic 모델
+▣ 정의: Actor-Critic 기반으로, 연속적인 행동 공간에서 작동하도록 설계된 모델. Actor는 행동을 생성하고, Critic은 행동의 𝑄-값을 평가<br>
+▣ 장점 : 연속적인 행동 공간에서 효율적, 고차원 작업에 적합<br>
+▣ 단점 : 샘플 효율성이 낮고 탐색 문제에 취약<br>
+▣ 적용 분야 : 로봇 학습, 자율 시스템 제어<br>
+
+<br>
+
+## (2-12) TD3(Twin Delayed DDPG) : DDPG의 한계점을 극복하기 위한 개선된 모델
+▣ 정의 : DDPG의 개선된 버전으로, 행동 가치 평가의 과대 추정을 방지하기 위해 두 개의 Critic 네트워크를 사용하고 행동 업데이트를 지연시켜 안정성을 강화<br>
+▣ 장점 : 과대 추정을 줄이고, 안정적인 학습 성능<br>
+▣ 단점 : 구현이 복잡, 추가 계산 비용<br>
+▣ 적용 분야 : 연속 제어 문제, 로봇 공학<br>
+
+<br>
+
+## (2-13) SAC(Soft Actor-Critic): 탐색과 활용의 균형을 유지하도록 설계된 정책 학습 모델 (2018, 2019)
+▣ 정의 : 정책 엔트로피를 최대화하여 탐색 성능을 높이고 안정성을 강화한 Actor-Critic 알고리즘<br>
+▣ 장점 : 안정적이고 강력한 성능, 샘플 효율성 우수<br>
+▣ 단점 : 계산 비용이 높고 복잡한 튜닝 필요<br>
+▣ 적용 분야 : 로봇 동작 학습, 복잡한 환경 학습<br>
+
+<br>
+
+## (2-14) BCBC(Behavioral Cloning) : 데이터를 기반으로 정책을 모방하는 방식
+▣ 정의 : 주어진 행동 데이터를 사용해 정책을 모방 학습(Imitation Learning)하며 지도 학습 접근법으로 주로 사용<br>
+▣ 장점 : 간단하고 구현이 용이하고 지도 학습 알고리즘을 활용 가능<br>
+▣ 단점 : 일반화가 어렵고 충분한 데이터가 없으면 성능이 저하<br>
+▣ 적용 분야 : 자율 주행 학습, 인간 행동 모방<br>
+
+<br>
+
+## (2-15) DDPGfD(DDPG from Demonstrations) : 전문가의 시범을 사용해 DDPG 성능을 개선
+▣ 정의 : DDPG(Deep Deterministic Policy Gradient)에 전문가 시연 데이터를 추가로 활용하여 초기 학습을 강화하는 알고리즘. 시연 데이터를 우선적으로 활용하여 학습 효율성을 높이는 경험 재생(Experience Replay) 기법을 포함<br>
+▣ 장점 : 학습 초기 성능이 향상, 샘플 효율성을 개선, 희소 보상 환경에서도 학습이 용이<br>
+▣ 단점 : 전문가 시연 데이터가 필수적, 추가 메모리 및 계산 비용이 필요<br>
+▣ 적용 분야 : 로봇 공학(시연 데이터를 활용한 로봇 작업), 자율 주행 및 복잡한 제어 작업<br>
 
 <br>
 
