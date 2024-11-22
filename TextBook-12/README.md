@@ -933,6 +933,10 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 	(4-6) PlaNet: Dreamer의 전신인 모델 기반 강화 학습 알고리즘
 	(4-7) PETs(Probabilistic Ensembles with Trajectory Sampling): 확률적 모델 앙상블을 활용하는 강화학습 기법
 
+
+![](./images/4vs.PNG)
+<br>
+
 ## (4-1) World Models : 환경을 모델링하고 시뮬레이션을 통해 학습하는 방식
 ▣ 정의 : 환경의 동작을 모델링하기 위해 신경망을 사용하여 시뮬레이션 환경을 학습하는 강화 학습 알고리즘. 환경 모델은 세 가지 구성 요소로 나뉨 : (1) VAE(Variational 
 Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent Neural Network): 상태 전이를 모델링, (3)Controller: 잠재 공간에서 행동을 선택<br>
