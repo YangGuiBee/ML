@@ -1012,3 +1012,114 @@ $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
 ![](./images/s.png)
 
 <br>
+
+---
+
+## [Q&A] t-SNE가 동심원 데이터셋을 제대로 분리하지 못하는 이유와 해결 방안
+**이유** : t-SNE는 국소적 구조(Local Structure)를 보존하는 데 집중하므로 전역적 구조(Global Structure)를 놓치는 경우가 많은데, 동심원 데이터는 전역적 구조(원과 원 간의 거리)를 잘 반영해야 하기 때문에 문제가 발생<br>
+
+**해결방안**<br>
+(1) UMAP 사용: 국소적 구조와 전역적 구조를 동시에 보존<br>
+(2) t-SNE 매개변수 튜닝: Perplexity, 학습률, 반복 횟수를 조정<br>
+(3) PCA와 결합: 전역적 구조를 먼저 반영한 뒤 t-SNE 적용<br>
+(4) 다른 차원 축소 기법: Kernel PCA, Spectral Embedding 등 사용<br>
+
+	#!pip install umap-learn
+	import os
+	import matplotlib.pyplot as plt
+	from matplotlib import font_manager, rc
+	from sklearn.datasets import make_circles
+	from sklearn.manifold import TSNE
+	from sklearn.decomposition import PCA
+	from umap import UMAP
+	from sklearn.preprocessing import StandardScaler
+	
+	# Windows 환경에서 사용할 한글 폰트 설정
+	font_path = 'C:/Windows/Fonts/malgun.ttf'  # Windows의 '맑은 고딕' 폰트 경로
+	font_name = font_manager.FontProperties(fname=font_path).get_name()
+	rc('font', family=font_name)
+	
+	# 1. 데이터 생성
+	X, y = make_circles(n_samples=500, factor=0.5, noise=0.05, random_state=42)
+	
+	# 2. 기본 t-SNE
+	tsne_basic = TSNE(n_components=2, random_state=42)
+	X_tsne_basic = tsne_basic.fit_transform(X)
+	
+	# 2-1. UMAP 하이퍼파라미터 최적화 (기존 설정 최적화)
+	umap_optimized = UMAP(n_neighbors=30, min_dist=0.05, n_components=2, random_state=42)
+	X_umap_optimized = umap_optimized.fit_transform(X)
+	
+	# 2-2. UMAP 하이퍼파라미터 재조정 (표준화 데이터 적용)
+	scaler = StandardScaler()
+	X_scaled = scaler.fit_transform(X)  # 데이터 표준화
+	umap_revised = UMAP(n_neighbors=20, min_dist=0.1, n_components=2, random_state=42)
+	X_umap_revised = umap_revised.fit_transform(X_scaled)
+	
+	# 3. UMAP (기본 설정)
+	umap = UMAP(n_neighbors=15, min_dist=0.1, n_components=2, random_state=42)
+	X_umap = umap.fit_transform(X)
+	
+	# 4. t-SNE 매개변수 튜닝
+	tsne_tuned = TSNE(n_components=2, perplexity=50, learning_rate=300, n_iter=5000, random_state=42)
+	X_tsne_tuned = tsne_tuned.fit_transform(X)
+	
+	# 5. PCA + t-SNE
+	pca = PCA(n_components=2)  # PCA로 차원 축소 (데이터의 차원 수 이하로 설정)
+	X_pca = pca.fit_transform(X)
+	tsne_pca = TSNE(n_components=2, perplexity=50, learning_rate=300, n_iter=5000, random_state=42)
+	X_tsne_pca = tsne_pca.fit_transform(X_pca)
+	
+	# 6. 시각화
+	fig, axs = plt.subplots(4, 2, figsize=(12, 20))
+	
+	# 원데이터 시각화
+	axs[0, 0].scatter(X[:, 0], X[:, 1], c=y, cmap='viridis', s=10)
+	axs[0, 0].set_title("원 데이터 (동심원)")
+	
+	# 기본 t-SNE
+	axs[0, 1].scatter(X_tsne_basic[:, 0], X_tsne_basic[:, 1], c=y, cmap='viridis', s=10)
+	axs[0, 1].set_title("기본 t-SNE")
+	
+	# UMAP (최적화: n_neighbors=30, min_dist=0.05)
+	axs[1, 0].scatter(X_umap_optimized[:, 0], X_umap_optimized[:, 1], c=y, cmap='viridis', s=10)
+	axs[1, 0].set_title("최적화된 UMAP (n_neighbors=30, min_dist=0.05)")
+	
+	# UMAP (재조정: n_neighbors=20, min_dist=0.1, 표준화 적용)
+	axs[1, 1].scatter(X_umap_revised[:, 0], X_umap_revised[:, 1], c=y, cmap='viridis', s=10)
+	axs[1, 1].set_title("UMAP (표준화, n_neighbors=20, min_dist=0.1)")
+	
+	# UMAP (기본 설정)
+	axs[2, 0].scatter(X_umap[:, 0], X_umap[:, 1], c=y, cmap='viridis', s=10)
+	axs[2, 0].set_title("UMAP (기본 설정)")
+	
+	# t-SNE 매개변수 튜닝
+	axs[2, 1].scatter(X_tsne_tuned[:, 0], X_tsne_tuned[:, 1], c=y, cmap='viridis', s=10)
+	axs[2, 1].set_title("t-SNE (매개변수 튜닝)")
+	
+	# PCA + t-SNE
+	axs[3, 0].scatter(X_tsne_pca[:, 0], X_tsne_pca[:, 1], c=y, cmap='viridis', s=10)
+	axs[3, 0].set_title("PCA + t-SNE")
+	
+	# 빈 플롯
+	axs[3, 1].axis('off')  # 마지막 빈 플롯 제거
+	
+	# 레이아웃 정리
+	plt.tight_layout()
+	plt.show()
+	
+	# 7. 평가 출력 (한글로 번역)
+	print("결과 분석:")
+	print("1. 기본 t-SNE: 동심원의 전역 구조를 잘 보존하지 못할 수 있으며, 데이터 포인트가 섞여 나타날 가능성이 큽니다.")
+	print("2. UMAP (최적화, n_neighbors=30, min_dist=0.05): 두 원의 분리가 명확하지 않으며, 전역 구조가 왜곡될 가능성이 있습니다.")
+	print("3. UMAP (표준화, n_neighbors=20, min_dist=0.1): 표준화 적용으로 전역 및 국소 구조가 개선되었을 가능성이 큽니다.")
+	print("4. UMAP (기본 설정): 두 원의 전역 구조 보존이 부족하며 왜곡이 발생할 수 있습니다.")
+	print("5. t-SNE (매개변수 튜닝): 두 원의 전역 구조와 국소 구조를 잘 보존하며, 분리가 명확합니다.")
+	print("6. PCA + t-SNE: 전역 구조와 국소 구조가 균형 있게 보존되며, 동심원의 구조를 명확히 표현합니다.")
+	
+
+---
+
+
+
+
