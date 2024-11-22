@@ -1024,7 +1024,6 @@ $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
 (3) PCA와 결합: 전역적 구조를 먼저 반영한 뒤 t-SNE 적용<br>
 (4) 다른 차원 축소 기법: Kernel PCA, Spectral Embedding 등 사용<br>
 
-	#!pip install umap-learn
 	import os
 	import matplotlib.pyplot as plt
 	from matplotlib import font_manager, rc
@@ -1038,6 +1037,9 @@ $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
 	font_path = 'C:/Windows/Fonts/malgun.ttf'  # Windows의 '맑은 고딕' 폰트 경로
 	font_name = font_manager.FontProperties(fname=font_path).get_name()
 	rc('font', family=font_name)
+	
+	# '-' 기호 깨짐 방지
+	plt.rcParams['axes.unicode_minus'] = False
 	
 	# 1. 데이터 생성
 	X, y = make_circles(n_samples=500, factor=0.5, noise=0.05, random_state=42)
@@ -1116,7 +1118,11 @@ $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
 	print("4. UMAP (기본 설정): 두 원의 전역 구조 보존이 부족하며 왜곡이 발생할 수 있습니다.")
 	print("5. t-SNE (매개변수 튜닝): 두 원의 전역 구조와 국소 구조를 잘 보존하며, 분리가 명확합니다.")
 	print("6. PCA + t-SNE: 전역 구조와 국소 구조가 균형 있게 보존되며, 동심원의 구조를 명확히 표현합니다.")
-	
+
+
+![](./images/result.png)
+
+<br>
 
 ---
 
