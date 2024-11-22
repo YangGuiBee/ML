@@ -34,6 +34,7 @@
     [7] Isomap  - ML
     [8] MDS(Multidimensional Scaling)
     [9] SOM(Self-Organizing Maps)  - ML
+    [10] NMF(Non-negative Matrix Factorization) 
 
     [차원 축소 알고리즘 평가방법]
     ▣ 재구성 오류(Reconstruction Error) : 복원된 데이터와 원본 데이터 간의 평균 제곱 오차(MSE)
@@ -902,8 +903,68 @@ $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
 ▣ 응용분야 : 얼굴 인식에서 이미지 구성 요소 추출, 텍스트 마이닝, 음원 분리 및 잡음 제거, 추천 시스템, 유전자 발현 데이터의 특징 추출 및 해석<br>
 (참고) https://angeloyeo.github.io/2020/10/15/NMF.html<br>
 
-
-
+	from sklearn.decomposition import NMF
+	import numpy as np
+	import matplotlib.pyplot as plt
+	
+	# 1. 데이터 생성 (예: 문서-단어 행렬)
+	V = np.array([[1, 2, 3],
+	              [4, 5, 6],
+	              [7, 8, 9]])
+	
+	# 2. NMF 모델 설정 및 학습
+	model = NMF(n_components=2, init='random', random_state=42)
+	W = model.fit_transform(V)
+	H = model.components_
+	
+	# 3. 근사 행렬 계산
+	V_approx = np.dot(W, H)
+	
+	# 4. 시각화
+	fig, axs = plt.subplots(2, 2, figsize=(12, 10))
+	
+	# 원본 데이터 시각화
+	axs[0, 0].imshow(V, cmap='viridis', aspect='auto')
+	axs[0, 0].set_title("원본 행렬 (V)")
+	axs[0, 0].set_xticks(range(V.shape[1]))
+	axs[0, 0].set_yticks(range(V.shape[0]))
+	
+	# 근사 행렬 시각화
+	axs[0, 1].imshow(V_approx, cmap='viridis', aspect='auto')
+	axs[0, 1].set_title("근사 행렬 (V_approx)")
+	axs[0, 1].set_xticks(range(V_approx.shape[1]))
+	axs[0, 1].set_yticks(range(V_approx.shape[0]))
+	
+	# 기저 행렬 (W) 시각화
+	axs[1, 0].imshow(W, cmap='viridis', aspect='auto')
+	axs[1, 0].set_title("기저 행렬 (W)")
+	axs[1, 0].set_xticks(range(W.shape[1]))
+	axs[1, 0].set_yticks(range(W.shape[0]))
+	
+	# 계수 행렬 (H) 시각화
+	axs[1, 1].imshow(H, cmap='viridis', aspect='auto')
+	axs[1, 1].set_title("계수 행렬 (H)")
+	axs[1, 1].set_xticks(range(H.shape[1]))
+	axs[1, 1].set_yticks(range(H.shape[0]))
+	
+	# 레이아웃 정리
+	plt.tight_layout()
+	plt.show()
+	
+	# 5. 출력 결과
+	print("원본 행렬 (V):")
+	print(V)
+	
+	print("\n기저 행렬 (W):")
+	print(W)
+	
+	print("\n계수 행렬 (H):")
+	print(H)
+	
+	print("\n근사 행렬 (V_approx):")
+	print(V_approx)
+	
+<br>
 
 	원본 행렬 (V): 원래의 데이터 행렬로, NMF를 수행하기 전에 입력된 값
 	[[1 2 3]
@@ -927,6 +988,12 @@ $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
 
 $𝑉[0,0]=1, 𝑉_{approx}[0,0] = 1.00085688$ : 오차는 약 0.0009<br>
 $𝑉[1,2]=6, 𝑉_{approx}[1,2]=5.99997718$ : 오차는 약 0.00002<br>
+
+![](./images/NMF.PNG)
+<br> 
+원본 행렬 (𝑉)의 크기: 3×3 → 𝑚=3, 𝑛=3 (데이터 포인트 3개, 특성 3개)<br>
+기저 행렬 (𝑊)의 크기: 3×2 → 𝑚=3, 𝑘=2 (3개의 데이터 포인트를 2개의 잠재 요인으로 표현)<br>
+계수 행렬 (𝐻)의 크기: 2×3 → 𝑘=2, 𝑛=3 (2개의 잠재 요인을 3개의 특성으로 표현)<br>
 
 <br>
 
