@@ -734,6 +734,12 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 	(2-14) IMPALA(Importance Weighted Actor-Learner Architecture): 분산 학습에 최적화된 구조
 	(2-15) Off-PAC(Off-Policy Actor-Critic): 오프폴리시 데이터를 활용하는 Actor-Critic 기법
 
+![](./images/Model_vs.PNG)
+<br>
+
+![](./images/Model_given.PNG)
+<br>
+
 ## (2-1) Policy Gradient : 기본적인 정책 직접 학습 알고리즘
 ▣ 정의 : 정책(Policy) 자체를 직접 학습하는 강화 학습 알고리즘으로, 행동-가치 함수 𝑄(𝑠,𝑎)를 통해 정책의 성능을 측정하고 정책을 업데이트. 목표는 파라미터화된 정책 𝜋𝜃(𝑎∣𝑠)를 최대화하는 것<br>
 ▣ 장점 : 연속적인 행동 공간을 처리할 수 있으며, 확률적 정책을 통해 다양한 행동 선택 가능하고, 탐색 문제를 효과적으로 해결<br>
