@@ -290,6 +290,9 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 	
 ---
 
+![](./images/Model_vs.PNG)
+<br>
+
 # [1-1] Model-free RL : Value Iteration
 
 	(1-1) Q-Learning: 작은 상태 공간에서 사용되는 표(Q-Table) 기반
@@ -716,6 +719,10 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 
 ---
 
+![](./images/Model_value.PNG)
+<br>
+
+
 # [1-2] Model-free RL : Policy Iteration
 
 	(2-1) Policy Gradient: 기본적인 정책 직접 학습 알고리즘
@@ -734,11 +741,6 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 	(2-14) IMPALA(Importance Weighted Actor-Learner Architecture): 분산 학습에 최적화된 구조
 	(2-15) Off-PAC(Off-Policy Actor-Critic): 오프폴리시 데이터를 활용하는 Actor-Critic 기법
 
-![](./images/Model_vs.PNG)
-<br>
-
-![](./images/Model_given.PNG)
-<br>
 
 ## (2-1) Policy Gradient : 기본적인 정책 직접 학습 알고리즘
 ▣ 정의 : 정책(Policy) 자체를 직접 학습하는 강화 학습 알고리즘으로, 행동-가치 함수 𝑄(𝑠,𝑎)를 통해 정책의 성능을 측정하고 정책을 업데이트. 목표는 파라미터화된 정책 𝜋𝜃(𝑎∣𝑠)를 최대화하는 것<br>
@@ -864,6 +866,10 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 <br>
 
 ---
+
+![](./images/Model_given.PNG)
+<br>
+
 
 # [1-3] Model-based RL : Given the Model
 
