@@ -252,4 +252,164 @@ SSE값은 오차(Error)에 대한 변동성을 나타내는데, 이 값이 작�
 	model.fit(X_train, y_train)
 	predictions = model.predict(X_test)
 
+---
 
+	# Install necessary packages
+	import subprocess
+	import sys
+	
+	def install(package):
+	    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+	
+	required_packages = ['pandas', 'scikit-learn', 'xgboost', 'numpy']
+	for package in required_packages:
+	    try:
+	        __import__(package)
+	    except ImportError:
+	        print(f"Installing {package}...")
+	        install(package)
+	
+	# Import libraries
+	import pandas as pd
+	import numpy as np
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import OneHotEncoder
+	from sklearn.linear_model import LinearRegression
+	from sklearn.tree import DecisionTreeRegressor
+	from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, mean_absolute_percentage_error
+	
+	# Load dataset from URL
+	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-13/insurance.csv"
+	df = pd.read_csv(data_url)
+	
+	# Check and handle missing values
+	print("Checking for missing values...")
+	print(df.isnull().sum())  # Display the count of NaN values per column
+	
+	# Ensure no missing values
+	assert not df.isnull().values.any(), "Data contains missing values!"
+	
+	# Preprocessing
+	X = df.drop("charges", axis=1)
+	y = df["charges"]
+	categorical_features = ["sex", "smoker", "region"]
+	numerical_features = ["age", "bmi", "children"]
+	
+	# Updated sparse_output instead of sparse
+	encoder = OneHotEncoder(sparse_output=False, drop="first")
+	X_encoded = encoder.fit_transform(X[categorical_features])
+	X_numerical = X[numerical_features]
+	
+	X_preprocessed = pd.DataFrame(
+	    np.hstack([X_numerical, X_encoded]),
+	    columns=numerical_features + encoder.get_feature_names_out().tolist()
+	)
+	
+	# Train-test split
+	X_train, X_test, y_train, y_test = train_test_split(X_preprocessed, y, test_size=0.2, random_state=42)
+	
+	# Evaluation metrics
+	def evaluate_model(y_true, y_pred):
+	    me = np.mean(y_pred - y_true)  # 평균 오차 (예측값 - 실제값)
+	    mae = mean_absolute_error(y_true, y_pred)  # 평균 절대 오차
+	    mse = mean_squared_error(y_true, y_pred)  # 평균 제곱 오차
+	    rmse = np.sqrt(mse)  # 평균 제곱근 오차
+	
+	    # Conditional MSLE calculation
+	    if (y_true > 0).all() and (y_pred > 0).all():
+	        msle = mean_squared_error(np.log1p(y_true), np.log1p(y_pred))  # 평균 제곱 오차 (로그 적용)
+	        rmsle = np.sqrt(msle)  # 평균 제곱근 오차 (로그 적용)
+	    else:
+	        msle = np.nan
+	        rmsle = np.nan
+	
+	    mpe = np.mean((y_pred - y_true) / y_true) * 100  # 평균 비율 오차
+	    mape = mean_absolute_percentage_error(y_true, y_pred) * 100  # 평균 절대 비율 오차
+	    r2 = r2_score(y_true, y_pred)  # R2 점수
+	
+	    return {
+	        "ME": me,
+	        "MAE": mae,
+	        "MSE": mse,
+	        "MSLE": msle,
+	        "RMSE": rmse,
+	        "RMSLE": rmsle,
+	        "MPE": mpe,
+	        "MAPE": mape,
+	        "R2": r2,
+	    }
+	
+	# Initialize models
+	models = {
+	    "Multiple Linear Regression": LinearRegression(),
+	    "Decision Tree Regression": DecisionTreeRegressor(),
+	}
+	
+	# Train and evaluate models
+	results = {}
+	for name, model in models.items():
+	    model.fit(X_train, y_train)
+	    y_pred = model.predict(X_test)
+	
+	    # Check for invalid prediction values
+	    if (y_pred < 0).any():
+	        print(f"Warning: Model {name} produced negative predictions. Adjusting values to zero.")
+	        y_pred = np.maximum(y_pred, 0)  # Replace negative predictions with 0
+	
+	    results[name] = evaluate_model(y_test, y_pred)
+	
+	# Format evaluation results for consistent decimal places
+	evaluation_results = pd.DataFrame(results)
+	evaluation_results = evaluation_results.applymap(lambda x: f"{x:.6f}" if pd.notnull(x) else "NaN")
+	
+	# Display formatted results
+	print("\nModel Evaluation Results:")
+	print(evaluation_results)
+	
+	# Add explanations for each metric in Korean
+	metric_explanations = {
+	    "ME": "평균 오차 (Mean Error): 예측값과 실제값의 평균 차이. 0에 가까울수록 좋음.",
+	    "MAE": "평균 절대 오차 (Mean Absolute Error): 예측값과 실제값의 절대적 차이의 평균. 낮을수록 좋음.",
+	    "MSE": "평균 제곱 오차 (Mean Squared Error): 예측값과 실제값의 제곱 차이 평균. 낮을수록 좋음.",
+	    "MSLE": "평균 제곱 오차 (로그 적용, Mean Squared Log Error): 로그 스케일에서의 평균 제곱 오차. 낮을수록 좋음.",
+	    "RMSE": "평균 제곱근 오차 (Root Mean Squared Error): 평균 제곱 오차의 제곱근. 낮을수록 좋음.",
+	    "RMSLE": "평균 제곱근 오차 (로그 적용, Root Mean Squared Log Error): 로그 스케일에서의 제곱근 오차. 낮을수록 좋음.",
+	    "MPE": "평균 비율 오차 (Mean Percentage Error): 예측값과 실제값의 비율 오차 평균. 0에 가까울수록 좋음.",
+	    "MAPE": "평균 절대 비율 오차 (Mean Absolute Percentage Error): 절대 비율 오차의 평균. 낮을수록 좋음.",
+	    "R2": "R2 점수 (Coefficient of Determination): 모델의 설명력을 나타냄. 1에 가까울수록 좋음.",
+	}
+	
+	# Append explanations to results
+	print("\nModel Evaluation Results with Explanations:")
+	for metric, explanation in metric_explanations.items():
+	    print(f"{metric}: {explanation}")
+	    print(evaluation_results.loc[metric])
+	    print()
+	
+	# Prediction
+	test_input = pd.DataFrame(
+	    [[55, 21, 2, "female", "no", "northeast"]],
+	    columns=["age", "bmi", "children", "sex", "smoker", "region"]
+	)
+	
+	# Encode and predict
+	test_encoded = encoder.transform(test_input[categorical_features])
+	test_numerical = test_input[numerical_features]
+	test_preprocessed = pd.DataFrame(
+	    np.hstack([test_numerical, test_encoded]),
+	    columns=numerical_features + encoder.get_feature_names_out().tolist()
+	)
+	
+	# Predictions for test input
+	predictions = {}
+	for name, model in models.items():
+	    predictions[name] = model.predict(test_preprocessed)[0]
+	
+	# Format predictions for consistent decimal places
+	predictions_df = pd.DataFrame(predictions, index=["Predicted Charges"]).applymap(lambda x: f"{x:.6f}")
+	
+	# Display predictions
+	print("\nPredicted Charges for Input:")
+	print(predictions_df)
+
+ 
