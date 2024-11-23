@@ -254,20 +254,26 @@ SSE값은 오차(Error)에 대한 변동성을 나타내는데, 이 값이 작�
 
 ---
 
-	# Install necessary packages
+	################################################################################
+	# Multiple Linear Regression 
+	# Decision Tree Regression
+	################################################################################
+	
+	# Check and install necessary packages
 	import subprocess
 	import sys
 	
 	def install(package):
-	    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-	
-	required_packages = ['pandas', 'scikit-learn', 'xgboost', 'numpy']
-	for package in required_packages:
 	    try:
 	        __import__(package)
 	    except ImportError:
 	        print(f"Installing {package}...")
-	        install(package)
+	        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+	
+	# List of required packages
+	required_packages = ['pandas', 'scikit-learn', 'xgboost', 'lightgbm', 'numpy']
+	for package in required_packages:
+	    install(package)
 	
 	# Import libraries
 	import pandas as pd
@@ -411,5 +417,163 @@ SSE값은 오차(Error)에 대한 변동성을 나타내는데, 이 값이 작�
 	# Display predictions
 	print("\nPredicted Charges for Input:")
 	print(predictions_df)
+	
+---
+
+	################################################################################
+	# Ridge Regression
+	# Lasso Regression
+	# Elastic Net Regression
+	# Random Forest Regression
+	# XGBoost
+	# LightGBM
+	################################################################################
+	
+	# Check and install necessary packages
+	import subprocess
+	import sys
+	
+	def install(package):
+	    try:
+	        __import__(package)
+	    except ImportError:
+	        print(f"Installing {package}...")
+	        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+	
+	# List of required packages
+	required_packages = ['pandas', 'scikit-learn', 'xgboost', 'lightgbm', 'numpy']
+	for package in required_packages:
+	    install(package)
+	
+	# Import libraries
+	import pandas as pd
+	import numpy as np
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import OneHotEncoder
+	from sklearn.linear_model import Ridge, Lasso, ElasticNet
+	from sklearn.ensemble import RandomForestRegressor
+	from xgboost import XGBRegressor
+	from lightgbm import LGBMRegressor
+	from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, mean_absolute_percentage_error
+	
+	# Load dataset from URL
+	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-13/insurance.csv"
+	df = pd.read_csv(data_url)
+	
+	# Check and handle missing values
+	print("Checking for missing values...")
+	print(df.isnull().sum())  # Display the count of NaN values per column
+	
+	# Ensure no missing values
+	assert not df.isnull().values.any(), "Data contains missing values!"
+	
+	# Preprocessing
+	X = df.drop("charges", axis=1)
+	y = df["charges"]
+	categorical_features = ["sex", "smoker", "region"]
+	numerical_features = ["age", "bmi", "children"]
+	
+	# Updated sparse_output instead of sparse
+	encoder = OneHotEncoder(sparse_output=False, drop="first")
+	X_encoded = encoder.fit_transform(X[categorical_features])
+	X_numerical = X[numerical_features]
+	
+	X_preprocessed = pd.DataFrame(
+	    np.hstack([X_numerical, X_encoded]),
+	    columns=numerical_features + encoder.get_feature_names_out().tolist()
+	)
+	
+	# Train-test split
+	X_train, X_test, y_train, y_test = train_test_split(X_preprocessed, y, test_size=0.2, random_state=42)
+	
+	# Evaluation metrics
+	def evaluate_model(y_true, y_pred):
+	    me = np.mean(y_pred - y_true)  # 평균 오차 (예측값 - 실제값)
+	    mae = mean_absolute_error(y_true, y_pred)  # 평균 절대 오차
+	    mse = mean_squared_error(y_true, y_pred)  # 평균 제곱 오차
+	    rmse = np.sqrt(mse)  # 평균 제곱근 오차
+	
+	    # Conditional MSLE calculation
+	    if (y_true > 0).all() and (y_pred > 0).all():
+	        msle = mean_squared_error(np.log1p(y_true), np.log1p(y_pred))  # 평균 제곱 오차 (로그 적용)
+	        rmsle = np.sqrt(msle)  # 평균 제곱근 오차 (로그 적용)
+	    else:
+	        msle = np.nan
+	        rmsle = np.nan
+	
+	    mpe = np.mean((y_pred - y_true) / y_true) * 100  # 평균 비율 오차
+	    mape = mean_absolute_percentage_error(y_true, y_pred) * 100  # 평균 절대 비율 오차
+	    r2 = r2_score(y_true, y_pred)  # R2 점수
+	
+	    return {
+	        "ME": me,
+	        "MAE": mae,
+	        "MSE": mse,
+	        "MSLE": msle,
+	        "RMSE": rmse,
+	        "RMSLE": rmsle,
+	        "MPE": mpe,
+	        "MAPE": mape,
+	        "R2": r2,
+	    }
+	
+	# Initialize models
+	models = {
+	    "Ridge Regression": Ridge(),
+	    "Lasso Regression": Lasso(),
+	    "Elastic Net Regression": ElasticNet(),
+	    "Random Forest Regression": RandomForestRegressor(random_state=42),
+	    "XGBoost": XGBRegressor(random_state=42),
+	    "LightGBM": LGBMRegressor(random_state=42),
+	}
+	
+	# Train and evaluate models
+	results = {}
+	for name, model in models.items():
+	    model.fit(X_train, y_train)
+	    y_pred = model.predict(X_test)
+	
+	    # Check for invalid prediction values
+	    if (y_pred < 0).any():
+	        print(f"Warning: Model {name} produced negative predictions. Adjusting values to zero.")
+	        y_pred = np.maximum(y_pred, 0)  # Replace negative predictions with 0
+	
+	    results[name] = evaluate_model(y_test, y_pred)
+	
+	# Format evaluation results for consistent decimal places
+	evaluation_results = pd.DataFrame(results)
+	evaluation_results = evaluation_results.applymap(lambda x: f"{x:.6f}" if pd.notnull(x) else "NaN")
+	
+	# Display formatted results
+	print("\nModel Evaluation Results:")
+	print(evaluation_results)
+	
+	# Prediction
+	test_input = pd.DataFrame(
+	    [[55, 21, 2, "female", "no", "northeast"]],
+	    columns=["age", "bmi", "children", "sex", "smoker", "region"]
+	)
+	
+	# Encode and predict
+	test_encoded = encoder.transform(test_input[categorical_features])
+	test_numerical = test_input[numerical_features]
+	test_preprocessed = pd.DataFrame(
+	    np.hstack([test_numerical, test_encoded]),
+	    columns=numerical_features + encoder.get_feature_names_out().tolist()
+	)
+	
+	# Predictions for test input
+	predictions = {}
+	for name, model in models.items():
+	    predictions[name] = model.predict(test_preprocessed)[0]
+	
+	# Format predictions for consistent decimal places
+	predictions_df = pd.DataFrame(predictions, index=["Predicted Charges"]).applymap(lambda x: f"{x:.6f}")
+	
+	# Display predictions
+	print("\nPredicted Charges for Input:")
+	print(predictions_df)
+
+---
 
  
