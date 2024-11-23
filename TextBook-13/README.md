@@ -259,6 +259,91 @@ SSE값은 오차(Error)에 대한 변동성을 나타내는데, 이 값이 작�
 (데이터셋) https://github.com/YangGuiBee/ML/blob/main/TextBook-13/insurance.csv
 <br>
 
+	################################################################################
+	# 데이터 시각화
+	################################################################################
+	
+	import pandas as pd
+	import seaborn as sns
+	import matplotlib.pyplot as plt
+	
+	# Load dataset from URL
+	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-13/insurance.csv"
+	df = pd.read_csv(data_url)
+	
+	# Ensure categorical columns are treated as categories
+	df['sex'] = df['sex'].astype('category')
+	df['smoker'] = df['smoker'].astype('category')
+	df['region'] = df['region'].astype('category')
+	
+	# Basic information about the dataset
+	print("Dataset Information:")
+	print(df.info())
+	print("\nBasic Statistics:")
+	print(df.describe())
+	
+	# Visualizations
+	plt.figure(figsize=(14, 10))
+	
+	# Distribution of Charges
+	plt.subplot(3, 2, 1)
+	sns.histplot(df['charges'], kde=True, bins=30, color='blue')
+	plt.title('Distribution of Charges')
+	plt.xlabel('Charges')
+	plt.ylabel('Frequency')
+	
+	# Age Distribution
+	plt.subplot(3, 2, 2)
+	sns.histplot(df['age'], kde=True, bins=20, color='green')
+	plt.title('Age Distribution')
+	plt.xlabel('Age')
+	plt.ylabel('Frequency')
+	
+	# BMI vs Charges
+	plt.subplot(3, 2, 3)
+	sns.scatterplot(x='bmi', y='charges', data=df, hue='smoker', palette='Set1', alpha=0.7)
+	plt.title('BMI vs Charges')
+	plt.xlabel('BMI')
+	plt.ylabel('Charges')
+	
+	# Region Counts
+	plt.subplot(3, 2, 4)
+	sns.countplot(x='region', data=df, palette='Set2')
+	plt.title('Region Counts')
+	plt.xlabel('Region')
+	plt.ylabel('Count')
+	
+	# Charges by Smoker
+	plt.subplot(3, 2, 5)
+	sns.boxplot(x='smoker', y='charges', data=df, palette='Set1')
+	plt.title('Charges by Smoker')
+	plt.xlabel('Smoker')
+	plt.ylabel('Charges')
+	
+	# Children Distribution
+	plt.subplot(3, 2, 6)
+	sns.countplot(x='children', data=df, palette='Set3')
+	plt.title('Children Distribution')
+	plt.xlabel('Number of Children')
+	plt.ylabel('Count')
+	
+	plt.tight_layout()
+	plt.show()
+	
+	# Correlation Heatmap (Numerical Columns Only)
+	plt.figure(figsize=(10, 8))
+	numerical_columns = df.select_dtypes(include=['float64', 'int64']).columns
+	sns.heatmap(df[numerical_columns].corr(), annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
+	plt.title('Correlation Heatmap')
+	plt.show()
+
+<br>
+
+![](./images/data.png)
+<br>
+
+![](./images/data2.png)
+<br>
 
 	################################################################################
 	# Multiple Linear Regression 
@@ -424,7 +509,7 @@ SSE값은 오차(Error)에 대한 변동성을 나타내는데, 이 값이 작�
 	print("\nPredicted Charges for Input:")
 	print(predictions_df)
 	
----
+<br>
 
 	################################################################################
 	# Ridge Regression
