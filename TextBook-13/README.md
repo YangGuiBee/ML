@@ -582,7 +582,7 @@ SSE값은 오차(Error)에 대한 변동성을 나타내는데, 이 값이 작�
 
 ---
 
-![](./images/score.png)
+![](./images/tscore.png)
 <br>
 
 
