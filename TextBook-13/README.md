@@ -254,6 +254,9 @@ SSE값은 오차(Error)에 대한 변동성을 나타내는데, 이 값이 작�
 
 ---
 
+(데이터셋) https://github.com/YangGuiBee/ML/blob/main/TextBook-13/insurance.csv
+
+
 	################################################################################
 	# Multiple Linear Regression 
 	# Decision Tree Regression
