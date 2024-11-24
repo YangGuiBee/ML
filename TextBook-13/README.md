@@ -189,89 +189,11 @@
 <br>
 
 
-	import numpy as np
-	import matplotlib.pyplot as plt
-	from sklearn.linear_model import LinearRegression
- 	from sklearn.metrics import r2_score
-
-	#해당 구문이 사용된 파이썬 파일을 직접 실행했을 때만 아래 코드를 실행
-	if __name__ == '__main__':
-    
-	    # 테스트용 데이터 생성
-	    x = np.random.rand(1000)*100
-	    y = 0.8*x+np.random.randn(1000)*30
-
-	    # Linear Regrssion model 생성
-	    model = LinearRegression() 
-    
-	    # Linear Regression model 학습
-	    model.fit(x.reshape(-1,1), y) 
-    
-	    # Prediction
-	    y_new = model.predict(np.array([6]).reshape((-1, 1))) 
-	    print("Data Prediction: ", y_new)
-    
-	    # Linear Regression model 평가
-	    r_sq = model.score(x.reshape(-1,1), y)  
-    	    print("결정 계수 (model.score): ", r_sq)
-    	    r2 = r2_score(y, model.predict(x.reshape(-1,1)))  
-    	    print("결정 계수 (r2_score): ", r2)
-    
-	    # Linear Model 식 
-	    b0,b1 = model.intercept_, model.coef_[0]   
-	    print("기울기", model.coef_[0])
-	    print("절편", model.intercept_)
-
-	    # 시각화
-	    plt.scatter(x, y, s=5)
-	    plt.plot(x, model.predict(x.reshape(-1,1)), color='red', linewidth=2)
-	    plt.annotate(f'y = {b1:.2f}x + {b0:.2f}', xy=(0.7*max(x), 0.8*max(y)))
-	    plt.show()
-
-
-
-# 경사하강법(Gradient Descent)을 활용한 회귀모델 최적화 기법
-
-**(1) LinearRegression :**  solver 매개변수에서 sag(Stochastic Average Gradient), lsqr 변형 사용<br>
-
-	from sklearn.linear_model import LinearRegression
-
-	model = LinearRegression(solver='sag')  # 경사하강법 기반 해법
-	model.fit(X_train, y_train)
-	predictions = model.predict(X_test)
-
-
-**(2) SGDRegressor (Stochastic Gradient Descent Regressor) :** 대규모 데이터에 적합, 정규화를 위한 L2, L1 및 ElasticNet 규제를 지원<br>
-
- 	from sklearn.linear_model import SGDRegressor
-
-	model = SGDRegressor()
-	model.fit(X_train, y_train)
-	predictions = model.predict(X_test)
-
-
-**(3) Ridge, Lasso, ElasticNet :** 대규모 데이터셋에서 solver 매개변수에서 sag(Stochastic Average Gradient) 선택<br>
-
-	from sklearn.linear_model import Ridge
-
-	model = Ridge(solver='saga')  # 경사하강법 기반 해법
-	model.fit(X_train, y_train)
-	predictions = model.predict(X_test)
-
-
-   **(4) PassiveAggressiveRegressor :** 대규모 데이터셋에서 빠르게 학습하기 위해 경사하강법의 변형 중 하나인 수동 공격적 학습(passive-aggressive learning)을 사용<br>
-   
-	from sklearn.linear_model import PassiveAggressiveRegressor
-
-	model = PassiveAggressiveRegressor()
-	model.fit(X_train, y_train)
-	predictions = model.predict(X_test)
-
 ---
 
-(데이터구조) ![](./images/db.png)
+**(데이터구조)** ![](./images/db.png)
 <br>
-(데이터셋) https://github.com/YangGuiBee/ML/blob/main/TextBook-13/insurance.csv
+**(데이터셋)** https://github.com/YangGuiBee/ML/blob/main/TextBook-13/insurance.csv
 <br>
 
 	################################################################################
