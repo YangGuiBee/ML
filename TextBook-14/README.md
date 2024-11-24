@@ -197,3 +197,159 @@ ROC 곡선 아래쪽 면적<br>
 	model.fit(X_train, y_train)
 	predictions = model.predict(X_test)
 
+
+---
+
+	import pandas as pd
+	import numpy as np
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import StandardScaler, LabelEncoder
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.naive_bayes import GaussianNB
+	from sklearn.neighbors import KNeighborsClassifier
+	from sklearn.svm import SVC
+	from sklearn.tree import DecisionTreeClassifier
+	from sklearn.ensemble import RandomForestClassifier
+	from sklearn.metrics import (confusion_matrix, accuracy_score, precision_score, recall_score, 
+	                             f1_score, roc_auc_score, roc_curve)
+	import matplotlib.pyplot as plt
+	
+	# 1. 데이터셋 불러오기
+	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-14/heart_disease_uci.csv"
+	df = pd.read_csv(data_url)
+	
+	# 2. 결측값 확인 및 처리
+	print("Missing values in dataset before processing:\n", df.isnull().sum())  # 결측값 확인
+	
+	# 결측값 처리
+	for col in df.columns:
+	    if df[col].dtype == 'object':  # 범주형 데이터
+	        df[col].fillna(df[col].mode()[0], inplace=True)  # 최빈값으로 대체
+	    else:  # 수치형 데이터
+	        df[col].fillna(df[col].mean(), inplace=True)  # 평균값으로 대체
+	
+	print("Missing values in dataset after processing:\n", df.isnull().sum())  # 결측값 확인
+	
+	# 3. 컬럼 이름 정리
+	if 'num' in df.columns:
+	    df.rename(columns={"num": "target"}, inplace=True)  # 'num' 열을 'target'으로 변경
+	else:
+	    raise ValueError("The dataset does not contain a 'num' column.")
+	
+	# 4. 타겟 변수 확인
+	assert 'target' in df.columns, "The dataset does not contain a 'target' column."
+	df['target'] = df['target'].astype(int)  # 보장: 타겟 변수는 정수
+	
+	# 독립 변수와 종속 변수 분리
+	X = df.drop(["target", "id", "dataset"], axis=1)  # 불필요한 열 제거
+	y = df["target"]
+	
+	# Train-Test Split 후 결측값 확인
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+	
+	# 최종적으로 결측값 확인
+	assert not X_train.isnull().values.any(), "X_train contains NaN values!"
+	assert not X_test.isnull().values.any(), "X_test contains NaN values!"
+	
+	# 범주형 변수 처리
+	label_encoders = {}
+	categorical_columns = ['sex', 'cp', 'restecg', 'slope', 'thal']  # 범주형 컬럼
+	for col in categorical_columns:
+	    le = LabelEncoder()
+	    X_train[col] = le.fit_transform(X_train[col])  # 범주형 변수를 수치형으로 변환
+	    X_test[col] = le.transform(X_test[col])  # 동일한 변환 적용
+	    label_encoders[col] = le
+	
+	# 데이터 스케일링 (k-NN, SVM에서 필요)
+	scaler = StandardScaler()
+	X_train_scaled = scaler.fit_transform(X_train)
+	X_test_scaled = scaler.transform(X_test)
+	
+	# 분류 알고리즘 초기화
+	models = {
+	    "Logistic Regression": LogisticRegression(),
+	    "Naive Bayes": GaussianNB(),
+	    "k-Nearest Neighbors": KNeighborsClassifier(n_neighbors=5),
+	    "Support Vector Classifier": SVC(probability=True),
+	    "Decision Tree": DecisionTreeClassifier(),
+	    "Random Forest": RandomForestClassifier(n_estimators=100, random_state=42)
+	}
+	
+	# 결과 저장용
+	results = {}
+	
+	# 모델 학습 및 평가
+	for name, model in models.items():
+	    if name in ["k-Nearest Neighbors", "Support Vector Classifier"]:
+	        model.fit(X_train_scaled, y_train)  # 스케일링된 데이터 사용
+	        y_pred = model.predict(X_test_scaled)
+	        y_prob = model.predict_proba(X_test_scaled)
+	    else:
+	        model.fit(X_train, y_train)
+	        y_pred = model.predict(X_test)
+	        y_prob = model.predict_proba(X_test)
+	    
+	    # 평가
+	    cm = confusion_matrix(y_test, y_pred)
+	    acc = accuracy_score(y_test, y_pred)
+	    prec = precision_score(y_test, y_pred, average='macro')  # 다중 클래스 처리
+	    rec = recall_score(y_test, y_pred, average='macro')      # 다중 클래스 처리
+	    f1 = f1_score(y_test, y_pred, average='macro')           # 다중 클래스 처리
+	    error_rate = 1 - acc
+	    auc = roc_auc_score(y_test, y_prob, multi_class='ovr')   # 다중 클래스 AUC
+	
+	    # 오차행렬에서 TP, FP, TN, FN 계산
+	    tp = np.diag(cm).sum()  # True Positives
+	    fp = cm.sum(axis=0) - np.diag(cm)  # False Positives
+	    fn = cm.sum(axis=1) - np.diag(cm)  # False Negatives
+	    tn = cm.sum() - (fp + fn + tp)  # True Negatives
+	
+	    # 클래스별 지표 평균 계산
+	    specificity = tn / (tn + fp)
+	    fall_out = fp / (fp + tn)
+	    recall = tp / (tp + fn)
+	
+	    # 결과 저장
+	    results[name] = {
+	        "Confusion Matrix (Numeric Values)": cm.tolist(),
+	        "Accuracy": acc,
+	        "Precision": prec,
+	        "Recall (TPR)": recall.mean(),
+	        "F1 Score": f1,
+	        "Error Rate": error_rate,
+	        "AUC": auc,
+	        "Specificity (TNR)": specificity.mean(),
+	        "Fall Out (FPR)": fall_out.mean(),
+	    }
+	
+	# 결과 출력
+	for name, metrics in results.items():
+	    print(f"\n{name} Results:")
+	    for metric, value in metrics.items():
+	        if metric == "Confusion Matrix (Numeric Values)":
+	            print(f"{metric}:\n{value}")
+	        else:
+	            print(f"{metric}: {value:.4f}")
+	
+	# ROC Curve 시각화
+	plt.figure(figsize=(10, 6))
+	for name, model in models.items():
+	    if name in ["k-Nearest Neighbors", "Support Vector Classifier"]:
+	        y_prob = model.predict_proba(X_test_scaled)
+	    else:
+	        y_prob = model.predict_proba(X_test)
+	    fpr = {}
+	    tpr = {}
+	    for i in range(len(np.unique(y_test))):  # 각 클래스별로 처리
+	        fpr[i], tpr[i], _ = roc_curve(y_test, y_prob[:, i], pos_label=i)
+	        plt.plot(fpr[i], tpr[i], label=f"{name} (Class {i})")
+	
+	plt.plot([0, 1], [0, 1], "k--", label="Random Guess")
+	plt.xlabel("False Positive Rate")
+	plt.ylabel("True Positive Rate")
+	plt.title("ROC Curve")
+	plt.legend()
+	plt.show()
+	
+
+---
