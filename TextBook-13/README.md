@@ -123,8 +123,7 @@
 <br>
 
 # [9] 평균 절대 규모 오차 (MASE(Mean Absolute Scaled Error)
-![](./images/MASE.svg) ![](./images/MASE1.svg)
-<br>
+<!-- ![](./images/MASE.svg) ![](./images/MASE1.svg) -->
 ![](./images/[9].png)
 <br>
 ▣ 정의: 예측값의 오차를 기준 시점의 오차와 비교하여 비율화(데이터를 척도화하여 이를 기준으로 예측오차의 절대값에 대한 평균)<br>
