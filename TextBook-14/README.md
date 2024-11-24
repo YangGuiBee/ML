@@ -199,7 +199,8 @@ ROC 곡선 아래쪽 면적<br>
 
 
 ---
-
+**(데이터 출처)** https://www.kaggle.com/datasets/redwankarimsony/heart-disease-data/data
+<br>
 **(데이터구조)** ![](./images/heart_disease_uci.png)
 <br>
 **(데이터셋)** https://github.com/YangGuiBee/ML/blob/main/TextBook-14/heart_disease_uci.csv
