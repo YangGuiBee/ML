@@ -149,6 +149,10 @@
 ![](./images/ff_SST.png)
 <br>
 
+![](./images/SST.png)
+<br>
+출처 : https://medium.com/coders-mojo/data-science-and-machine-learning-projects-mega-compilation-part-5-e50baa2faa85<br>
+
 ## SST(Total Sum of Squares) : 총 변동
 ▣ 정의 : 데이터의 총 변동량을 측정하는 지표로, 실제값($𝑦_𝑖$)과 평균값($\overline{y}$) 간의 차이를 제곱하여 합한 값으로 데이터가 얼마나 분산되어 있는지를 나타냄<br>
 ▣ 필요성 : 회귀 모델의 설명력을 평가하기 위한 기준선이 되고, 모델 없이도 데이터의 자연스러운 변동성을 계산<br>
@@ -177,17 +181,8 @@
 
 ---
 
-![](./images/SST_SSE.png)
-<br>
-출처 : https://devhwi.tistory.com/13
-
-![](./images/SST.png)
-<br>
-출처 : https://medium.com/coders-mojo/data-science-and-machine-learning-projects-mega-compilation-part-5-e50baa2faa85
-
 ![](./images/ff_R2.png)
 <br>
-
 
 ---
 
