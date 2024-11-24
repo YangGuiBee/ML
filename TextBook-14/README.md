@@ -355,5 +355,6 @@ ROC 곡선 아래쪽 면적<br>
 	plt.legend()
 	plt.show()
 	
+![](./images/result.png)
 
 ---
