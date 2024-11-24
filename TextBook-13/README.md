@@ -10,7 +10,7 @@
 	[6] 평균 제곱근 오차(로그적용) (Root Mean Squared Log Error, RMSLE)
  	[7] 평균 비율 오차 (Mean Percentage Error, MPE)
 	[8] 평균 절대 비율 오차 (Mean Absolute Percentage Error, MAPE)
-	[9] 평균 절대 규모 오차 (MASE(Mean Absolute Scaled Error)
+	[9] 평균 절대 규모 오차 (Mean Absolute Scaled Error, MASE)
 	[10] R2 score
 	  
 ---
@@ -122,7 +122,7 @@
 
 <br>
 
-# [9] 평균 절대 규모 오차 (MASE(Mean Absolute Scaled Error)
+# [9] 평균 절대 규모 오차 (Mean Absolute Scaled Error, MASE)
 <!-- ![](./images/MASE.svg) ![](./images/MASE1.svg) -->
 ![](./images/[9].png)
 <br>
