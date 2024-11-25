@@ -52,9 +52,6 @@
 	def MSE(y, t):
     	return ((y-t)**2).mean(axis=None)
 
-	def SSE(y, t):
-    	return 0.5*np.sum((y-t)**2)
-
 <br>
 
 # [4] 평균 제곱 오차(로그적용) (Mean Squared Log Error, MSLE)
