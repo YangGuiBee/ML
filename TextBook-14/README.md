@@ -31,7 +31,7 @@ FN(False Negative): 모델이 negative라고 예측했는데 실제로 정답이
 
 <br>
 
-# [1] 정확도 (Accurancy)
+# [2] 정확도 (Accurancy)
 $Accuracy = \frac{TP + TN}{TP + TN + FP + FN}$<br>
 <br>
 모델이 전체 문제 중에서 정답을 맞춘 비율<br>
