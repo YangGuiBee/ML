@@ -36,15 +36,13 @@ FN(False Negative): 모델이 negative라고 예측했는데 실제로 정답이
 <br>
 
 ## [2] 정확도 (Accurancy)
-▣ 정의: 전체 데이터 중 올바르게 예측된 비율<br>
+▣ 정의: 전체 데이터 중 올바르게 예측된 비율(데이터가 불균형할 때(positive:negative=9:1)는 Accuracy만으로 제대로 분류했는지는 알 수 없기 때문에 Recall과 Precision을 사용)<br>
 ▣ 필요성: 모델이 얼마나 잘 작동하는지 전반적인 성능을 평가<br>
 ▣ 장점: 단순하고 이해가 용이<br>
 ▣ 단점: 불균형 데이터에서는 성능을 잘못 평가할 가능성<br>
+<br>
 $Accuracy = \frac{TP + TN}{TP + TN + FP + FN}$<br>
 <br>
-모델이 전체 문제 중에서 정답을 맞춘 비율<br>
-0 ~ 1 사이의 값을 가지며, 1에 가까울수록 좋다.<br>
-데이터가 불균형할 때(positive:negative=9:1)는 Accuracy만으로 제대로 분류했는지는 알 수 없기 때문에 Recall과 Precision을 사용<br>
 
 	from sklearn.metrics import accuracy_score
 	accuracy_score(정답,  모델예측값)  # label과 predict
@@ -52,16 +50,13 @@ $Accuracy = \frac{TP + TN}{TP + TN + FP + FN}$<br>
 <br>
 
 ## [3] 정밀도 (Precision), PPV(Positive Predictive Value)
-▣ 정의: 모델이 예측한 긍정 클래스 중 실제로 긍정 클래스인 비율<br>
+▣ 정의: 모델이 예측한 긍정(positive) 클래스 중 실제로 긍정(positive) 클래스인 비율로, 실제 정답이 negative인 데이터를 positive라고 잘못 예측하면 안 되는 경우에 중요한 지표가 될 수 있으며 Precision을 높이기 위해선 FP(모델이 positive라고 예측했는데 정답은 negative인 경우)를 낮추는 것이 중요<br>
 ▣ 필요성: 잘못된 긍정 예측(FP)을 줄이는 데 중요한 지표<br>
 ▣ 장점: 정확한 예측을 강조<br>
 ▣ 단점: FN은 고려하지 않아 재현율과 함께 사용 필요<br>
+<br>
 $Precision = \frac{TP}{TP + FP}$<br>
 <br>
-모델이 positive라고 예측한 것들 중에서 실제로 정답이 positive인 비율<br>
-0 ~ 1 사이의 값을 가지며, 1에 가까울수록 좋다.<br>
-실제 정답이 negative인 데이터를 positive라고 잘못 예측하면 안 되는 경우에 중요한 지표가 될 수 있다.<br>
-Precision을 높이기 위해선 FP(모델이 positive라고 예측했는데 정답은 negative인 경우)를 낮추는 것이 중요하다.<br>
 
 	from sklearn.metrics import precision_score
 	precision_score(실제값, 예측값)
@@ -69,17 +64,14 @@ Precision을 높이기 위해선 FP(모델이 positive라고 예측했는데 정
 <br>
 
 # [4] 재현율 (Recall), 민감도 (Sensitivity), TPR (True Positive Rate)
-▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_precision_recall.html<br>
-▣ 정의: 실제 긍정 데이터 중에서 올바르게 예측한 비율<br>
+▣ 정의: 실제로 정답이 긍정(positive)인 것들 중에서 모델이 긍정(positive)이라고 예측한 비율로, 실제 정답이 positive인 데이터를 negative라고 잘못 예측하면 안 되는 경우에 중요한 지표가 될 수 있으며, Recall를 높이기 위해선 FN(모델이 negative라고 예측했는데 정답이 positive인 경우)을 낮추는 것이 중요<br>
 ▣ 필요성: 놓친 긍정 예측(FN)을 줄이는 데 중요<br>
 ▣ 장점: 실제 긍정 클래스에 대한 모델의 민감성을 나타냄<br>
 ▣ 단점: FP는 고려하지 않아 Precision과 함께 사용 필요<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_precision_recall.html<br>
+<br>
 $Recall = \frac{TP}{TP + FN}$<br>
 <br>
-실제로 정답이 positive인 것들 중에서 모델이 positive라고 예측한 비율<br>
-0 ~ 1 사이의 값을 가지며, 1에 가까울수록 좋다.<br>
-실제 정답이 positive인 데이터를 negative라고 잘못 예측하면 안 되는 경우에 중요한 지표가 될 수 있다.<br>
-Recall를 높이기 위해선 FN(모델이 negative라고 예측했는데 정답이 positive인 경우)을 낮추는 것이 중요하다.<br>
 
 	from sklearn.metrics import recall_score
 	recall_score(실제값, 예측값)
@@ -122,16 +114,13 @@ Recall를 높이기 위해선 FN(모델이 negative라고 예측했는데 정답
 <br>
 
 # [5] F1 score
-▣ 정의: Precision과 Recall의 조화 평균으로, 두 값의 균형을 평가<br>
+▣ 정의: Precision과 Recall의 조화 평균으로 두 값의 균형을 평가. Recall과 Precision은 상호 보완적인 평가 지표이기 때문에 F1 score를 사용하며, Precision과 Recall이 한쪽으로 치우쳐지지 않고 모두 클 때 큰 값<br>
 ▣ 필요성: 불균형 데이터에서 Precision과 Recall 간의 균형을 평가<br>
 ▣ 장점: 두 지표 간의 트레이드오프를 반영<br>
 ▣ 단점: 개별적인 성능을 평가하기 어려울 수 있음<br>
+<br>
 $F1 = \frac{2 \times Precision \times Recall}{Precision + Recall}$<br>
 <br>
-Recall과 Precision의 조화평균<br>
-0 ~ 1 사이의 값을 가지며, 1에 가까울수록 좋다.<br>
-Recall과 Precision은 상호 보완적인 평가 지표이기 때문에 F1 score를 사용한다.<br>
-Precision과 Recall이 한쪽으로 치우쳐지지 않고 모두 클 때 큰 값을 가진다.<br>
 
 	from sklearn.metrics import f1_score
 	f1_score(실제값, 예측값)
@@ -144,46 +133,37 @@ Precision과 Recall이 한쪽으로 치우쳐지지 않고 모두 클 때 큰 �
 ▣ 장점: 정확도의 보완 지표로 활용 가능<br>
 ▣ 단점: 불균형 데이터에서는 유의미하지 않을 가능성<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_train_error_vs_test_error.html<br>
+<br>
 $Accuracy = \frac{FP + FN}{TP + TN + FP + FN}$<br>
 <br>
 
-
-<br>
 
 # [7] 특이도 (Specificity), TNR(True Negative Rate)
 ▣ 정의: 실제 부정 데이터 중에서 올바르게 부정으로 예측한 비율<br>
 ▣ 필요성: 부정 클래스를 정확히 예측하는 능력을 평가<br>
 ▣ 장점: Negative class에 초점을 맞춘 분석이 가능<br>
 ▣ 단점: Positive class의 성능은 고려하지 않음<br>
+<br>
 $Specificity = \frac{TN}{TN + FP}$<br>
 <br>
 
 
-<br>
-
 # [8] 위양성률 (Fall Out), FPR(False Positive Rate)
-▣ 정의: 실제 부정 데이터 중에서 긍정으로 잘못 예측한 비율<br>
+▣ 정의: 실제 부정(negative) 데이터 중에서 긍정(positive)으로 잘못 예측한 비율<br>
 ▣ 필요성: 모델이 잘못된 긍정을 얼마나 생성하는지 평가<br>
 ▣ 장점: 특이도의 보완 지표로 사용<br>
 ▣ 단점: 긍정 클래스의 성능은 평가하지 못함<br>
-
+<br>
 $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br>
 <br>
-실제 정답이 negative인 것들 중에서 모델이 positive라고 예측한 비율<br>
-<br>
+
 
 # [9] ROC curve
-▣ 정의: TPR(재현율)과 FPR(위양성률)의 관계를 나타낸 곡선으로 다양한 임계값에서 모델 성능을 시각화<br>
+▣ 정의: TPR(재현율) Y축과 FPR(위양성률) X축의 관계를 나타낸 곡선으로 다양한 임계값에서 Recall-Fallout의 변화를 시각화한 것(Fallout은 실제 False인 data 중에서 모델이 True로 분류항 비율을, Recall은 실제 True인 data 중에서 모델이 True로 분류한 비율을 나타냄)<br>
 ▣ 필요성: 분류 모델의 성능을 시각적으로 평가<br>
 ▣ 장점: Threshold에 따른 성능 변화 확인이 가능<br>
 ▣ 단점: 곡선이 단일 숫자로 요약되지 않아 비교가 어려울 가능성<br>
-
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html<br>
-FPR을 X축, TPR을 Y축으로 놓고 임계값을 변경해서 FPR이 변할 때 TPR이 어떻게 변하는지 나타내는 곡선<br>
-여러 임계값들을 기준으로 Recall-Fallout의 변화를 시각화한 것<br>
-Fallout은 실제 False인 data 중에서 모델이 True로 분류항 비율을<br>
-Recall은 실제 True인 data 중에서 모델이 True로 분류한 비율을 나타낸 지표로써,<br> 
-이 두 지표를 각각 x, y의 축으로 놓고 그려지는 그래프를 해석<br>
 
 <br>
 
