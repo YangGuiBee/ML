@@ -15,7 +15,7 @@
 	  
 ---
 
-# [1] 오차행렬, 혼동행렬 (Confusion Matrix)
+## [1] 오차행렬, 혼동행렬 (Confusion Matrix)
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html<br>
 분류 모델의 평가 기준<br>
 ![](./images/CM_table.PNG)
@@ -31,7 +31,7 @@ FN(False Negative): 모델이 negative라고 예측했는데 실제로 정답이
 
 <br>
 
-# [2] 정확도 (Accurancy)
+## [2] 정확도 (Accurancy)
 $Accuracy = \frac{TP + TN}{TP + TN + FP + FN}$<br>
 <br>
 모델이 전체 문제 중에서 정답을 맞춘 비율<br>
@@ -43,7 +43,7 @@ $Accuracy = \frac{TP + TN}{TP + TN + FP + FN}$<br>
 
 <br>
 
-# [3] 정밀도 (Precision), PPV(Positive Predictive Value)
+## [3] 정밀도 (Precision), PPV(Positive Predictive Value)
 $Precision = \frac{TP}{TP + FP}$<br>
 <br>
 모델이 positive라고 예측한 것들 중에서 실제로 정답이 positive인 비율<br>
