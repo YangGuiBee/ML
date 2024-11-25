@@ -22,7 +22,7 @@
 ▣ 필요성: 분류 모델의 다양한 평가 지표 계산의 기초<br>
 ▣ 장점: 예측의 전체적인 분포를 한눈에 파악<br>
 ▣ 단점: 이진 분류에 적합하며 다중 클래스에 적용 시 복잡도가 증가<br>
-▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html<br>
+▣ 예제: https://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html<br>
 
 TP(True Positive): 모델이 positive라고 예측했는데 실제로 정답이 positive (정답)<br>
 TN(True Negative): 모델이 negative라고 예측했는데 실제로 정답이 negative (정답)<br>
@@ -42,6 +42,7 @@ $Accuracy = \frac{TP + TN}{TP + TN + FP + FN}$<br><br>
 ▣ 필요성: 모델이 얼마나 잘 작동하는지 전반적인 성능을 평가<br>
 ▣ 장점: 단순하고 이해가 용이<br>
 ▣ 단점: 불균형 데이터에서는 성능을 잘못 평가할 가능성<br>
+▣ 예제: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html<br>
 
 	from sklearn.metrics import accuracy_score
 	accuracy_score(정답,  모델예측값)  # label과 predict
@@ -55,6 +56,7 @@ $Precision = \frac{TP}{TP + FP}$<br><br>
 ▣ 필요성: 잘못된 긍정 예측(FP)을 줄이는 데 중요한 지표<br>
 ▣ 장점: 정확한 예측을 강조<br>
 ▣ 단점: FN은 고려하지 않아 재현율과 함께 사용 필요<br>
+▣ 예제: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html<br>
 
 	from sklearn.metrics import precision_score
 	precision_score(실제값, 예측값)
@@ -68,7 +70,7 @@ $Recall = \frac{TP}{TP + FN}$<br><br>
 ▣ 필요성: 놓친 긍정 예측(FN)을 줄이는 데 중요<br>
 ▣ 장점: 실제 긍정 클래스에 대한 모델의 민감성을 나타냄<br>
 ▣ 단점: FP는 고려하지 않아 Precision과 함께 사용 필요<br>
-▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_precision_recall.html<br>
+▣ 예제: https://scikit-learn.org/stable/auto_examples/model_selection/plot_precision_recall.html<br>
 
 	from sklearn.metrics import recall_score
 	recall_score(실제값, 예측값)
@@ -82,6 +84,7 @@ $F1 = \frac{2 \times Precision \times Recall}{Precision + Recall}$<br><br>
 ▣ 필요성: 불균형 데이터에서 Precision과 Recall 간의 균형을 평가<br>
 ▣ 장점: 두 지표 간의 트레이드오프를 반영<br>
 ▣ 단점: 개별적인 성능을 평가하기 어려울 수 있음<br>
+▣ 예제:https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html<br>
 
 	from sklearn.metrics import f1_score
 	f1_score(실제값, 예측값)
@@ -124,7 +127,7 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 ▣ 필요성: 분류 모델의 성능을 시각적으로 평가<br>
 ▣ 장점: Threshold에 따른 성능 변화 확인이 가능<br>
 ▣ 단점: 곡선이 단일 숫자로 요약되지 않아 비교가 어려울 가능성<br>
-▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html<br>
+▣ 예제: https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html<br>
 
 <br>
 
@@ -133,6 +136,7 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 ▣ 필요성: 모델의 분류 성능을 숫자로 간단히 나타냄<br>
 ▣ 장점: Threshold에 관계없이 모델 성능을 평가<br>
 ▣ 단점: 데이터 불균형이 심한 경우 왜곡될 가능성<br>
+▣ 예제: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html<br>
 
 
 1.0 ~ 0.9 : 아주 좋음<br>
