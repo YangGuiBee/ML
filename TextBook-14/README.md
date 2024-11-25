@@ -138,6 +138,7 @@ $Accuracy = \frac{FP + FN}{TP + TN + FP + FN}$<br>
 ▣ 단점: 불균형 데이터에서는 유의미하지 않을 가능성<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_train_error_vs_test_error.html<br>
 
+<br>
 
 # [7] 특이도 (Specificity), TNR(True Negative Rate)
 <br>
@@ -148,6 +149,7 @@ $Specificity = \frac{TN}{TN + FP}$<br>
 ▣ 장점: Negative class에 초점을 맞춘 분석이 가능<br>
 ▣ 단점: Positive class의 성능은 고려하지 않음<br>
 
+<br>
 
 # [8] 위양성률 (Fall Out), FPR(False Positive Rate)
 <br>
@@ -158,6 +160,7 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br>
 ▣ 장점: 특이도의 보완 지표로 사용<br>
 ▣ 단점: 긍정 클래스의 성능은 평가하지 못함<br>
 
+<br>
 
 # [9] ROC curve
 ▣ 정의: TPR(재현율) Y축과 FPR(위양성률) X축의 관계를 나타낸 곡선으로 다양한 임계값에서 Recall-Fallout의 변화를 시각화한 것(Fallout은 실제 False인 data 중에서 모델이 True로 분류항 비율을, Recall은 실제 True인 data 중에서 모델이 True로 분류한 비율을 나타냄)<br>
