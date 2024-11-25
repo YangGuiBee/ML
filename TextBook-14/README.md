@@ -16,11 +16,12 @@
 ---
 
 ## [1] 오차행렬, 혼동행렬 (Confusion Matrix)
-▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html<br>
 ▣ 정의: 실제 값과 예측 값 간의 분류 결과를 행렬 형태로 표현<br>
 ▣ 필요성: 분류 모델의 다양한 평가 지표 계산의 기초<br>
 ▣ 장점: 예측의 전체적인 분포를 한눈에 파악<br>
 ▣ 단점: 이진 분류에 적합하며 다중 클래스에 적용 시 복잡도가 증가<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html<br>
+<br>
 ![](./images/CM_table.PNG)
 <br>
 TP(True Positive): 모델이 positive라고 예측했는데 실제로 정답이 positive (정답)<br>
