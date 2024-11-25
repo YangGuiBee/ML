@@ -75,41 +75,6 @@ $Recall = \frac{TP}{TP + FN}$<br><br>
 
 <br>
 
-	from sklearn.metrics import *
-
-	y_true = [ 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 ]
-	y_pred = [ 0, 1, 1, 1, 1, 0, 0, 0, 1, 1 ]
-	cm =confusion_matrix(y_true, y_pred)
-	print(cm)
-
-	acc = accuracy_score(y_true, y_pred)
-	print('accuracy_score : ',acc)
-
-	pre = precision_score(y_true, y_pred)
-	print('precision_score : ', pre)
-
-	recall = recall_score(y_true, y_pred)
-	print('recall_score: ', recall)
-
- 	print(classification_report(y_true, y_pred))
-
-
-	# 3개 클래스 사례
-	y_true_m = [ 0, 0, 0, 1, 1, 1, 2, 2, 2 ]
-	y_pred_m = [ 0, 1, 1, 1, 1, 2, 2, 2, 2 ]
-
-	print(confusion_matrix(y_true_m, y_pred_m),'\n')
-
-	print('average=None : ', precision_score(y_true_m, y_pred_m, average=None))
-	print('average=\'macro\' : ', precision_score(y_true_m, y_pred_m, average='macro'))
-	print('average=\'micro\' : ', precision_score(y_true_m, y_pred_m, average='micro'))
-	print('average=\'weighted\' : ', precision_score(y_true_m, y_pred_m, average='weighted'))
-	print('\n')
-
-	print(classification_report(y_true_m, y_pred_m))
-
-<br>
-
 # [5] F1 score
 
 $F1 = \frac{2 \times Precision \times Recall}{Precision + Recall}$<br><br>
@@ -168,6 +133,8 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 ▣ 필요성: 모델의 분류 성능을 숫자로 간단히 나타냄<br>
 ▣ 장점: Threshold에 관계없이 모델 성능을 평가<br>
 ▣ 단점: 데이터 불균형이 심한 경우 왜곡될 가능성<br>
+
+
 1.0 ~ 0.9 : 아주 좋음<br>
 0.9 ~ 0.8 : 좋음<br>
 0.8 ~ 0.7 : 괜찮은 모델<br>
@@ -176,50 +143,8 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 
 <br>
 
-
-
-
-
-
-# 경사하강법(Gradient Descent)을 활용한 분류모델 최적화 기법
-
- **(1) LogisticRegression :** solver 옵션에서 sag, saga와 같은 경사하강법 변형을 선택<br>
-
- 	from sklearn.linear_model import LogisticRegression
-
-	model = LogisticRegression(solver='saga')  # 경사하강법 기반 해법
-	model.fit(X_train, y_train)
-	predictions = model.predict(X_test)
-
-
- **(2) SGDClassifier (Stochastic Gradient Descent Classifier) :** <br>
-
-	from sklearn.linear_model import SGDClassifier
-
-	model = SGDClassifier()
-	model.fit(X_train, y_train)
-	predictions = model.predict(X_test)
-
-
- **(3) Perceptron :** 이진분류 문제를 위한 단일 층 퍼셉트론 모델로, 기본적으로 경사하강법을 사용<br>
-
-	from sklearn.linear_model import Perceptron
-
-	model = Perceptron()
-	model.fit(X_train, y_train)
-	predictions = model.predict(X_test)
-
-
-**(4) PassiveAggressiveClassifier :** 대규모 데이터셋에서 빠르게 학습하기 위해 경사하강법의 변형 중 하나인 수동 공격적 학습(passive-aggressive learning)을 사용<br>
-
-	from sklearn.linear_model import PassiveAggressiveClassifier
-
-	model = PassiveAggressiveClassifier()
-	model.fit(X_train, y_train)
-	predictions = model.predict(X_test)
-
-
 ---
+
 **(데이터 출처)** https://www.kaggle.com/datasets/redwankarimsony/heart-disease-data/data
 <br>
 **(데이터구조)** ![](./images/heart_disease_uci.png)
