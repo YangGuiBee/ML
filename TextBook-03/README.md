@@ -1,4 +1,4 @@
-#  03 : Data Collection, Data Processing : Python, 라이브러리(NumPy, Pandas, Scikit-Learn, MNIST, TensorFlow...)
+#  03 : Data Collection, Data Processing : Python 라이브러리
 ---
 	 ▣ 데이터 수집
 	 ▣ 데이터 전처리	 
@@ -61,7 +61,7 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 <br><br>
 
 # ▣ 데이터 전처리
-데이터 전처리는 기존의 데이터를 머신러닝 알고리즘에 알맞은 데이터로 바꾸는 과정이다. 이 전처리 과정은 모델이 생성된 이후에도 예측하고자 하는 새로운 데이터에도 적용할 수 있는 과정으로 전처리 과정을 통해 더욱더 모델 학습의 성능을 높일 수 있다. 데이터 전처리는 Data Cleaning, Handling Text and Categorical Attributes, Custom Transformers, Feature Scaling, Transformation Pipelines등 5개의 과정으로 수행한다. 
+데이터 전처리는 기존의 데이터를 머신러닝 알고리즘에 알맞은 데이터로 바꾸는 과정이다. 이 전처리 과정은 모델이 생성된 이후에도 예측하고자 하는 새로운 데이터에도 적용할 수 있는 과정으로 전처리 과정을 통해 더욱더 모델 학습의 성능을 높일 수 있다. 데이터 전처리는 Data Cleaning, Data Encoding, Data Transform, Feature Scaling, ML Pipeline 등 5개의 과정으로 수행한다. 
 
 ## (1) Data Cleaning
 대부분의 머신러닝 알고리즘은 Missing feature, 즉 누락된 데이터가 있을 때, 제대로 역할을 하지 못한다. 그래서 먼저 Missing feature에 대해 처리해주어야 한다.<br>
@@ -70,7 +70,7 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 	학습에 방해가 되는 연관성 없는 전체 속성(특정 행 또는 열의 라벨) 제거 : pandas의 drop()<br>
 	누락 데이터에 0, 평균값, 중간값으로 채우기 : pandas의 fillna(), scikit-learn의 Imputer()<br>
  
-## (2) Handling Text and Categorical Attributes
+## (2) Data Encoding
 수집된 데이터는 컴퓨팅 학습을 위해서 기존 데이터 세트에 텍스트가 있는 경우 이것을 숫자형 데이터로 인코딩(Encoding)이 필요하다. 인코딩에는 레이블 인코딩(Label Encoding)과 원핫 인코딩(One-hot Encoding)을 통해 범주형 데이터를 수치형 데이터로 변환이 필요하다.<br>
 <br>
 **레이블 인코딩 :** 각 카테고리를 숫자로 대응시켜서 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"를 1로, "green"을 2로, "blue"를 3으로 변환하는 것이다. 이 방법은 간단하고 직관적이지만, 각 카테고리가 가지는 값의 크기 차이가 있을 경우 예측 결과에 영향을 미칠 수 있다. 텍스트를 숫자로 인코딩하는 메소드로는 Pandas에서 제공하는 factorize()와 OrdinalEncoder()이 있으며, sklearn.preprocessing.LabelEncoder를 사용할 수도 있다.<br>
@@ -139,7 +139,7 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 	print(type(ohv))
  	
 
-## (3) Custom Transformers
+## (3) Data Transform
 Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하는데, 이를 이용하여 커스텀 변환기를 만들 수 있다.
 
 **fit()** : 입력받은 데이터에 특정 알고리즘 또는 전처리를 적용하는 메서드를 통해 변환기에 알맞는 파라미터를 생성<br>
