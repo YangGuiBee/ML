@@ -1,4 +1,4 @@
-#  03 : Data Collection, Data Processing : Python 라이브러리
+#  03 : Data Management
 ---
 	 ▣ 데이터 수집
 	 ▣ 데이터 전처리	 
