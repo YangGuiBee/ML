@@ -18,41 +18,42 @@
 
 <br>
 
-  [1] 데이터 처리 및 변환
-    [1-1] 데이터 증강 (Data Augmentation)
-    [1-2] 교차 검증 (Cross-Validation)
-    [1-3] 데이터 스케일링 (Data Scaling)
-    [1-4] 데이터 불균형 처리 (Handling Imbalanced Data)
-    [1-5] 정보 병합 (Data Fusion Techniques)
+	[1] 데이터 처리 및 변환
+		[1-1] 데이터 증강 (Data Augmentation)
+		[1-2] 교차 검증 (Cross-Validation)
+		[1-3] 데이터 스케일링 (Data Scaling)
+		[1-4] 데이터 불균형 처리 (Handling Imbalanced Data)
+		[1-5] 정보 병합 (Data Fusion Techniques)
+	
+	[2] 모델 복잡도 및 일반화
+		[2-1] 과적합 방지 (Overfitting Prevention)
+		[2-2] 정규화 (L1, L2 Regularization)
+		[2-3] 드롭아웃 (Dropout)
+		[2-4] 조기 종료 (Early Stopping)
+		[2-5] 앙상블 학습 (Ensemble Learning)
+	
+	[3] 하이퍼파라미터 최적화
+		[3-1] 하이퍼파라미터 튜닝 (Hyperparameter Tuning)
+		[3-2] 그리드 서치 (Grid Search)
+		[3-3] 랜덤 서치 (Random Search)
+		[3-4] 베이즈 최적화 (Bayesian Optimization)
+		[3-5] 하이퍼파라미터 탐색 자동화 (Automated Hyperparameter Tuning)
+	
+	[4] 학습 과정 최적화
+		[4-1] 학습률 스케줄링 (Learning Rate Scheduling)
+		[4-2] 가중치 초기화 (Weight Initialization)
+		[4-3] 활성화 함수 선택 (Activation Function Selection)
+		[4-4] 전이 학습 (Transfer Learning)
+		[4-5] 모델 구조 최적화 (Model Architecture Optimization)
+		[4-6] 온라인 학습 (Online Learning)
+	
+	[5] 성능 향상
+		[5-1] 특성 중요도 분석 및 선택 (Feature Selection)
+		[5-2] 손실 함수 커스터마이징 (Custom Loss Function)
+		
+	[6] 하드웨어 및 시스템 최적화
+		[6-1] 하드웨어 최적화 (Hardware Optimization)
 
-  [2] 모델 복잡도 및 일반화
-    [2-1] 과적합 방지 (Overfitting Prevention)
-    [2-2] 정규화 (L1, L2 Regularization)
-    [2-3] 드롭아웃 (Dropout)
-    [2-4] 조기 종료 (Early Stopping)
-    [2-5] 앙상블 학습 (Ensemble Learning)
-
-  [3] 하이퍼파라미터 최적화
-    [3-1] 하이퍼파라미터 튜닝 (Hyperparameter Tuning)
-    [3-2] 그리드 서치 (Grid Search)
-    [3-3] 랜덤 서치 (Random Search)
-    [3-4] 베이즈 최적화 (Bayesian Optimization)
-    [3-5] 하이퍼파라미터 탐색 자동화 (Automated Hyperparameter Tuning)
-
-  [4] 학습 과정 최적화
-    [4-1] 학습률 스케줄링 (Learning Rate Scheduling)
-    [4-2] 가중치 초기화 (Weight Initialization)
-    [4-3] 활성화 함수 선택 (Activation Function Selection)
-    [4-4] 전이 학습 (Transfer Learning)
-    [4-5] 모델 구조 최적화 (Model Architecture Optimization)
-    [4-6] 온라인 학습 (Online Learning)
-
-  [5] 성능 향상
-    [5-1] 특성 중요도 분석 및 선택 (Feature Selection)
-    [5-2] 손실 함수 커스터마이징 (Custom Loss Function)
-
-  [6] 하드웨어 및 시스템 최적화
-    [6-1] 하드웨어 최적화 (Hardware Optimization)
 
 <br>
 
