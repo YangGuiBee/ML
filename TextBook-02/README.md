@@ -356,7 +356,7 @@ X(입력값) : 예측 변수(특성) vs Y(출력값) : 반응 변수(타깃)<br>
 
 ## 【ML 강의 구성】
 
-![](images/AI_Contents.png)
+![](images/Contents.png)
 
 <br><br><br>
 
