@@ -12,8 +12,11 @@
 
   참고 : https://github.com/dair-ai/ML-Course-Notes
 
+<br>
 
 # 최적화 방안
+
+<br>
 
   [1] 데이터 처리 및 변환
     [1-1] 데이터 증강 (Data Augmentation)
