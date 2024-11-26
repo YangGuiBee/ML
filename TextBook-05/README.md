@@ -3,17 +3,17 @@
 
 ---
 
-	[1] 경사하강법 기반 알고리즘 : 로지스틱 회귀 (Logistic Regression)
+	[1] 경사하강법 기반 알고리즘 : 로지스틱 회귀(Logistic Regression)
 
-	[2] 확률 기반 알고리즘 : 나이브 베이즈 분류기 (Naive Bayes Classifier, NBC)
+	[2] 확률 기반 알고리즘 : 나이브 베이즈 분류(Naive Bayes Classification, NBC)
 
 	[3] 거리 기반 알고리즘 
 		[3-1] k-최근접 이웃 분류(k-Nearest Neighbors Classification) → 분류+회귀(6강)
-		[3-2] 서포트 벡터 분류 (Support Vector Classification, SVC) → 분류+회귀(6강)
+		[3-2] 서포트 벡터 분류(Support Vector Classification, SVC) → 분류+회귀(6강)
 
 	[4] 트리기반 알고리즘
-		[4-1] 결정 트리 분류 (Decision Tree Classification) → 분류+회귀(6강)
-		[4-2] 랜덤 포레스트 분류 (Random Forest Classification) → 분류+회귀(6강)
+		[4-1] 결정 트리 분류(Decision Tree Classification) → 분류+회귀(6강)
+		[4-2] 랜덤 포레스트 분류(Random Forest Classification) → 분류+회귀(6강)
 		[4-3] 앙상블 기반 :  
   		      AdaBoost, Gradient Boosting Tree (GBT), lightGBM, XGBoost, CatBoost → 12강
   
@@ -24,7 +24,7 @@
 
 <br>
 
-# [1] 로지스틱 회귀 (Logistic Regression)
+# [1] 로지스틱 회귀(Logistic Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html<br><br>
 
@@ -133,7 +133,7 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 <br>
 
 
-# [2] 나이브 베이즈 분류기 (Naive Bayes Classifier, NBC)
+# [2] 나이브 베이즈 분류(Naive Bayes Classification, NBC)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/naive_bayes.html<br>
 
 ![](./images/nb.png)
