@@ -156,6 +156,15 @@ Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하
 
 ## (5) ML Pipeline
 매번 데이터 정제마다 위와 같은 순서를 반복하기 싫다면, Pipeline이라는 방식을 사용하면 된다. Pipeline은 Data Processing Component들의 순서를 정의해놓은 것이다. 데이터 변환을 조작하고 적용하는 방법으로 각각의 컴포넌트들과 교류하며 사용하고 ML 워크플로우의 자동화를 지원한다. Scikit-Learn에서는 Pipeline Class를 제공하는데, 이것은 데이터 변환 단계의 순서를 정리하고 만들기 쉽다.<br>
+### ML Pipeline의 일반적인 구성 
+① 데이터 수집 및 로딩 (Data Collection and Loading) : 데이터를 수집하고, 모델링에 적합한 형태로 로드하는 단계(CSV 파일, 데이터베이스, API 등에서 데이터 로드)<br>
+② 데이터 전처리 (Data Preprocessing) : 결측값 처리, 중복 제거, 이상치 탐지, 데이터 클리닝 등 텍스트나 범주형 데이터를 수치화하거나 표준화하는 변환<br>
+③ 특성 엔지니어링 (Feature Engineering) : 데이터를 모델링에 적합한 특성(feature)으로 변환(특성 선택, 특성 생성, 차원 축소, 스케일링, 인코딩)<br>
+④ 모델 학습 (Model Training) : 준비된 데이터를 사용하여 머신러닝 알고리즘을 훈련시키는 과정으로 다양한 하이퍼파라미터 조정을 통해 최적의 모델을 도출<br>
+⑤ 모델 검증 (Model Validation) : 교차 검증, 평가 지표(Accuracy, Precision, Recall, F1 등) 활용하여 훈련된 모델의 성능을 평가<br>
+⑥ 모델 테스트 (Model Testing) : 학습에 사용되지 않은 독립된 데이터셋으로 모델의 일반화 성능을 평가<br>
+⑦ 모델 배포 (Model Deployment) : 최종 모델을 서비스나 애플리케이션에 배포하여 실제 데이터를 처리하도록 설정<br>
+⑧ 모니터링 및 유지보수 (Monitoring and Maintenance) : 모델 성능을 지속적으로 모니터링하고 필요 시 재학습 및 업데이트를 수행<br>
 
 <br><br><br>
 
