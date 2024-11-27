@@ -57,7 +57,7 @@
 	(4-5) Dreamer: 사전에 환경 모델이 제공되지 않은 상태에서, 에이전트가 환경 데이터를 수집해 세계 모델을 학습하고 이를 활용해 정책과 가치 함수를 학습 (DeepMind, 2020)
 	(4-6) PlaNet: Dreamer의 전신인 모델 기반 강화 학습 알고리즘
 	(4-7) PETs(Probabilistic Ensembles with Trajectory Sampling): 확률적 모델 앙상블을 활용하는 강화학습 기법
-        (4-8) MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태로, 명시적 환경 모델 없이도 정책과 가치를 학습 (DeepMind, 2019)
+	(4-8) MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태로, 명시적 환경 모델 없이도 정책과 가치를 학습 (DeepMind, 2019)
 
  
 ## [2] 앙상블 학습(Ensemble Learning, EL)
