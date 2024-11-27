@@ -892,8 +892,7 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 
 	(3-1) Dyna-Q: 모델 기반 RL과 모델-프리 RL을 조합한 알고리즘
 	(3-2) AlphaZero: 시뮬레이션을 통한 최적의 행동을 찾는 Monte Carlo Tree Search 기반 모델
-	(3-3) MuZero: 모델 없이 정책과 가치를 동시에 학습 (DeepMind, 2019)
-
+	
 ![](./images/Given.PNG)
 <br>
 
