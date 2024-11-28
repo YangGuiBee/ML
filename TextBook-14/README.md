@@ -457,7 +457,10 @@ SVC는 높은 AUC와 낮은 FPR로 신뢰할 수 있는 두 번째 모델로 평
 	plt.title("ROC Curve")
 	plt.legend()
 	plt.show()
-	
+
+
+![](./images/result2.PNG)
+<br><br> 
 
 [1] 오차행렬, 혼동행렬(Confusion Matrix) : 각 모델이 클래스 간 데이터를 어떻게 분류했는지를 나타냄<br>
 [2] 정확도(Accurancy) : 가장 간단한 기준으로, 전체 데이터 중 올바르게 예측한 비율<br>
