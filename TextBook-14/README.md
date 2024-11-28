@@ -308,6 +308,157 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 	
 ![](./images/result.png)
 <br><br>
+
+Random Forest는 Accuracy, Error Rate, AUC 측면에서 전반적으로 우수하며, 최고의 모델로 평가<br>
+SVC는 높은 AUC와 낮은 FPR로 신뢰할 수 있는 두 번째 모델로 평가<br>
+
+---
+
+**데이터 전처리** <br>
+**num = 0 → target = 0 (심장병 없음)** <br>
+**num = 1, 2, 3, 4 → target = 1 (심장병 있음)** <br>
+
+	import pandas as pd
+	import numpy as np
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import StandardScaler, LabelEncoder
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.naive_bayes import GaussianNB
+	from sklearn.neighbors import KNeighborsClassifier
+	from sklearn.svm import SVC
+	from sklearn.tree import DecisionTreeClassifier
+	from sklearn.ensemble import RandomForestClassifier
+	from sklearn.metrics import (confusion_matrix, accuracy_score, precision_score, recall_score, 
+	                             f1_score, roc_auc_score, roc_curve)
+	import matplotlib.pyplot as plt
+	
+	# 1. 데이터셋 불러오기
+	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-14/heart_disease_uci.csv"
+	df = pd.read_csv(data_url)
+	
+	# 2. 결측값 확인 및 처리
+	print("Missing values in dataset before processing:\n", df.isnull().sum())  # 결측값 확인
+	
+	# 결측값 처리
+	for col in df.columns:
+	    if df[col].dtype == 'object':  # 범주형 데이터
+	        df[col].fillna(df[col].mode()[0], inplace=True)  # 최빈값으로 대체
+	    else:  # 수치형 데이터
+	        df[col].fillna(df[col].mean(), inplace=True)  # 평균값으로 대체
+	
+	print("Missing values in dataset after processing:\n", df.isnull().sum())  # 결측값 확인
+	
+	# 3. 타겟 변수 확인 및 이진 분류로 변환
+	if 'target' not in df.columns:
+	    df.rename(columns={"num": "target"}, inplace=True)  # 'num' 열을 'target'으로 변경
+	assert 'target' in df.columns, "The dataset does not contain a 'target' column."
+	
+	if df['target'].nunique() > 2:
+	    print("Warning: Detected multiclass target. Converting to binary classification (0/1).")
+	    df['target'] = (df['target'] > 0).astype(int)  # 0: 심장병 없음, 1: 심장병 있음
+	
+	# 독립 변수와 종속 변수 분리
+	X = df.drop(["target"], axis=1)  # 타겟 열 제거
+	y = df["target"]
+	
+	# 범주형 열 확인 및 고유값 확인
+	print("\nUnique values in categorical columns before encoding:")
+	for col in X.columns:
+	    if X[col].dtype == 'object':
+	        print(f"{col}: {X[col].unique()}")
+	
+	# 4. 범주형 변수 처리
+	label_encoders = {}
+	categorical_columns = [col for col in X.columns if X[col].dtype == 'object']  # 문자열 컬럼 자동 탐지
+	for col in categorical_columns:
+	    le = LabelEncoder()
+	    X[col] = le.fit_transform(X[col])  # 범주형 변수를 수치형으로 변환
+	    label_encoders[col] = le
+	
+	# 범주형 처리 후 확인
+	print("\nUnique values in categorical columns after encoding:")
+	for col in categorical_columns:
+	    print(f"{col}: {X[col].unique()}")
+	
+	# 5. Train-Test Split
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+	
+	# 6. 데이터 스케일링 (k-NN, SVM에서 필요)
+	scaler = StandardScaler()
+	X_train_scaled = scaler.fit_transform(X_train)
+	X_test_scaled = scaler.transform(X_test)
+	
+	# 7. 분류 알고리즘 초기화
+	models = {
+	    "Logistic Regression": LogisticRegression(),
+	    "Naive Bayes": GaussianNB(),
+	    "k-Nearest Neighbors": KNeighborsClassifier(n_neighbors=5),
+	    "Support Vector Classifier": SVC(probability=True),
+	    "Decision Tree": DecisionTreeClassifier(),
+	    "Random Forest": RandomForestClassifier(n_estimators=100, random_state=42)
+	}
+	
+	# 결과 저장용
+	results = {}
+	
+	# 8. 모델 학습 및 평가
+	for name, model in models.items():
+	    if name in ["k-Nearest Neighbors", "Support Vector Classifier"]:
+	        model.fit(X_train_scaled, y_train)  # 스케일링된 데이터 사용
+	        y_pred = model.predict(X_test_scaled)
+	        y_prob = model.predict_proba(X_test_scaled)[:, 1]
+	    else:
+	        model.fit(X_train, y_train)
+	        y_pred = model.predict(X_test)
+	        y_prob = model.predict_proba(X_test)[:, 1]
+	    
+	    # 평가
+	    cm = confusion_matrix(y_test, y_pred)
+	    acc = accuracy_score(y_test, y_pred)
+	    prec = precision_score(y_test, y_pred)
+	    rec = recall_score(y_test, y_pred)
+	    f1 = f1_score(y_test, y_pred)
+	    error_rate = 1 - acc
+	    auc = roc_auc_score(y_test, y_prob)
+	
+	    # 결과 저장
+	    results[name] = {
+	        "Confusion Matrix": cm.tolist(),
+	        "Accuracy": acc,
+	        "Precision": prec,
+	        "Recall (TPR)": rec,
+	        "F1 Score": f1,
+	        "Error Rate": error_rate,
+	        "AUC": auc
+	    }
+	
+	# 결과 출력
+	for name, metrics in results.items():
+	    print(f"\n{name} Results:")
+	    for metric, value in metrics.items():
+	        if metric == "Confusion Matrix":
+	            print(f"{metric}:\n{value}")
+	        else:
+	            print(f"{metric}: {value:.4f}")
+	
+	# 9. ROC Curve 시각화
+	plt.figure(figsize=(10, 6))
+	for name, model in models.items():
+	    if name in ["k-Nearest Neighbors", "Support Vector Classifier"]:
+	        y_prob = model.predict_proba(X_test_scaled)[:, 1]
+	    else:
+	        y_prob = model.predict_proba(X_test)[:, 1]
+	    fpr, tpr, _ = roc_curve(y_test, y_prob)
+	    plt.plot(fpr, tpr, label=f"{name} (AUC: {roc_auc_score(y_test, y_prob):.2f})")
+	
+	plt.plot([0, 1], [0, 1], "k--", label="Random Guess")
+	plt.xlabel("False Positive Rate")
+	plt.ylabel("True Positive Rate")
+	plt.title("ROC Curve")
+	plt.legend()
+	plt.show()
+	
+
 [1] 오차행렬, 혼동행렬(Confusion Matrix) : 각 모델이 클래스 간 데이터를 어떻게 분류했는지를 나타냄<br>
 [2] 정확도(Accurancy) : 가장 간단한 기준으로, 전체 데이터 중 올바르게 예측한 비율<br>
 [3] 정밀도(Precision), PPV(Positive Predictive Value) : 모델이 양성으로 예측한 데이터 중 실제로 양성인 비율<br>
@@ -318,10 +469,6 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 [8] 위양성률(Fall Out), FPR(False Positive Rate) : 음성 데이터를 양성 데이터로 잘못 분류한 비율<br>
 [9] ROC curve : 모든 임계값(threshold)에 대해 TPR(민감도, Recall)와 FPR(위양성률)의 관계 시각화<br>
 [10]AUC score : 모델이 클래스 분류에서 얼마나 잘 분리할 수 있는지 나타내는 지표<br>
-
-Random Forest는 Accuracy, Error Rate, AUC 측면에서 전반적으로 우수하며, 최고의 모델로 평가<br>
-SVC는 높은 AUC와 낮은 FPR로 신뢰할 수 있는 두 번째 모델로 평가<br>
-
 
 
 ---
