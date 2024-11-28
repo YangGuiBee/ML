@@ -892,7 +892,8 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 
 	(3-1) Dyna-Q: 모델 기반 RL과 모델-프리 RL을 조합한 알고리즘
 	(3-2) AlphaZero: 시뮬레이션을 통한 최적의 행동을 찾는 Monte Carlo Tree Search 기반 모델
-	
+
+아래 비교표에서 맨우측의 MuZero는 Given the Model 방식이 아니라, Learn the Model 방식으로 구분이 필요하여, (3-3)에서 (4-8)로 이동필요<br>
 ![](./images/Given.PNG)
 <br>
 
@@ -923,7 +924,7 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 	(4-5) Dreamer: 잠재 공간에서의 예측과 학습을 결합한 최신 모델 기반 방법 (DeepMind, 2020)
 	(4-6) PlaNet: Dreamer의 전신인 모델 기반 강화 학습 알고리즘
 	(4-7) PETs(Probabilistic Ensembles with Trajectory Sampling): 확률적 모델 앙상블을 활용하는 강화학습 기법
- 	(4-8) 알파고(AlphaGo) 시리즈의 발전된 형태로, 명시적 환경 모델 없이도 정책과 가치를 학습 (DeepMind, 2019)
+ 	(4-8) MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태로, 명시적 환경 모델 없이도 정책과 가치를 학습 (DeepMind, 2019)
 
 
 ![](./images/4vs.PNG)
@@ -986,7 +987,7 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 
 <br>
 
-## (4-8) 알파고(AlphaGo) 시리즈의 발전된 형태로, 명시적 환경 모델 없이도 정책과 가치를 학습 (DeepMind, 2019)
+## (4-8)  MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태로, 명시적 환경 모델 없이도 정책과 가치를 학습 (DeepMind, 2019)
 ▣ 정의 : AlphaZero의 확장 버전으로, 환경 모델을 사전에 제공받는 대신 학습 과정에서 환경 모델을 스스로 학습하는 알고리즘. 모델 기반 학습과 모델 프리 학습을 결합해 환경 모델이 없는 경우에도 높은 성능을 발휘<br>
 ▣ 장점 : AlphaZero와 달리 환경 모델이 없어도 동작 가능, 규칙 기반 게임뿐 아니라 다양한 환경에 적용 가능, 모델 기반 예측을 통해 데이터 효율성을 극대화<br>
 ▣ 단점 : 복잡한 구현: 환경 모델 학습과 RL을 결합해야 하므로 구현이 어렵고, 높은 계산 비용: 모델 학습 및 MCTS 사용으로 인해 연산 자원이 많이 요구<br>
