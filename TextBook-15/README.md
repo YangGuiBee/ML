@@ -56,18 +56,18 @@
 		[4-7] 온라인 학습(Online Learning)
 	
 	[5] 성능 향상
-		[5-1] 특성 중요도 분석 및 선택(Feature Importance & Selection) : XGBoost, LIME, SHAP
-		[5-2] 손실함수 커스터마이징(Custom Loss Function) : 다중클래스 손실함수(Multi-class Loss Function), 불균형 데이터셋을 위한 손실 함수(Loss Functions for Imbalanced Datasets)
-		
+		[5-1] 특성 중요도 분석 및 선택(Feature Importance & Selection)
+		[5-2] 손실함수 커스터마이징(Custom Loss Function)
+  
 	[6] 하드웨어 및 시스템 최적화
-		[6-1] 하드웨어 최적화(Hardware Optimization) : GPU/TPU 활용(GPU/TPU Utilization), 분산 학습(Distributed Learning)
+		[6-1] 하드웨어 최적화(Hardware Optimization)
 
 	[7] 모델 검증 및 비교
-		[7-1] 모델 검증(Model Validation) : 외부 데이터셋 테스트(Test on External Datasets)
-		[7-2] 모델 성능 비교(Model Performance Comparison) : 여러 모델 평가 및 비교(Evaluate and Compare Multiple Models)
+		[7-1] 모델 검증(Model Validation)
+		[7-2] 모델 성능 비교(Model Performance Comparison) 
 
 	[8] 기술 부채 관리
-		[8-1] 기술 부채(Technical Debt) 관리 : 코드 최적화 및 유지보수(Code Optimization & Maintenance)
+		[8-1] 기술 부채(Technical Debt) 관리
 
 <br>
 
