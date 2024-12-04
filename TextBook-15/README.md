@@ -35,70 +35,43 @@
 		[2-2] 정규화(L1, L2 Regularization)
 		[2-3] 드롭아웃(Dropout)
 		[2-4] 조기 종료(Early Stopping)
-		[2-5] 앙상블 학습(Ensemble Learning) : 배깅(Bagging), 부스팅(Boosting)
-		[2-6] 모델 해석성(Model Interpretability) : LIME, SHAP
+		[2-5] 앙상블 학습(Ensemble Learning)
+		[2-6] 모델 해석성(Model Interpretability)
 	
 	[3] 하이퍼파라미터 최적화
-		[3-1] 하이퍼파라미터 튜닝 (Hyperparameter Tuning)
-		[3-2] 그리드 서치 (Grid Search)
-		[3-3] 랜덤 서치 (Random Search)
-		[3-4] 베이즈 최적화 (Bayesian Optimization)
-		[3-5] 하이퍼파라미터 탐색 자동화 (Automated Hyperparameter Tuning)
+		[3-1] 하이퍼파라미터 튜닝(Hyperparameter Tuning)
+		[3-2] 그리드 서치(Grid Search)
+		[3-3] 랜덤 서치(Random Search)
+		[3-4] 베이즈 최적화(Bayesian Optimization)
+		[3-5] 하이퍼파라미터 탐색 자동화(Automated Hyperparameter Tuning)
+		[3-6] AutoML 활용(AutoML)
 	
 	[4] 학습 과정 최적화
-		[4-1] 학습률 스케줄링 (Learning Rate Scheduling)
-		[4-2] 가중치 초기화 (Weight Initialization)
-		[4-3] 활성화 함수 선택 (Activation Function Selection)
-		[4-4] 전이 학습 (Transfer Learning)
-		[4-5] 모델 구조 최적화 (Model Architecture Optimization)
-		[4-6] 온라인 학습 (Online Learning)
+		[4-1] 학습률 스케줄링(Learning Rate Scheduling)
+		[4-2] 가중치 초기화(Weight Initialization)
+		[4-3] 활성화 함수 선택(Activation Function Selection)
+		[4-4] 최적화 알고리즘 선택(Optimizer Selection) : Adam, SGD, RMSprop
+		[4-5] 전이 학습(Transfer Learning), 사전 훈련된 모델 활용(Pre-trained Model Utilization)
+		[4-6] 모델 구조 최적화(Model Architecture Optimization)
+		[4-7] 온라인 학습(Online Learning)
 	
 	[5] 성능 향상
-		[5-1] 특성 중요도 분석 및 선택 (Feature Selection)
-		[5-2] 손실 함수 커스터마이징 (Custom Loss Function)
+		[5-1] 특성 중요도 분석 및 선택(Feature Importance & Selection) : XGBoost, LIME, SHAP
+		[5-2] 손실함수 커스터마이징(Custom Loss Function) : 다중클래스 손실함수(Multi-class Loss Function), 불균형 데이터셋을 위한 손실 함수(Loss Functions for Imbalanced Datasets)
 		
 	[6] 하드웨어 및 시스템 최적화
-		[6-1] 하드웨어 최적화 (Hardware Optimization)
+		[6-1] 하드웨어 최적화(Hardware Optimization) : GPU/TPU 활용(GPU/TPU Utilization), 분산 학습(Distributed Learning)
 
+	[7] 모델 검증 및 비교
+		[7-1] 모델 검증(Model Validation) : 외부 데이터셋 테스트(Test on External Datasets)
+		[7-2] 모델 성능 비교(Model Performance Comparison) : 여러 모델 평가 및 비교(Evaluate and Compare Multiple Models)
+
+	[8] 기술 부채 관리
+		[8-1] 기술 부채(Technical Debt) 관리 : 코드 최적화 및 유지보수(Code Optimization & Maintenance)
 
 <br>
 
 --- 
-2. 모델 복잡도 및 일반화
-
-
-3. 하이퍼파라미터 최적화
-[3-1] 하이퍼파라미터 튜닝(Hyperparameter Tuning)
-[3-2] 그리드 서치(Grid Search)
-[3-3] 랜덤 서치(Random Search)
-[3-4] 베이즈 최적화(Bayesian Optimization)
-[3-5] 하이퍼파라미터 탐색 자동화(Automated Hyperparameter Tuning)
-[3-6] AutoML 활용(AutoML)
-
-4. 학습 과정 최적화
-[4-1] 학습률 스케줄링(Learning Rate Scheduling)
-[4-2] 가중치 초기화(Weight Initialization)
-[4-3] 활성화 함수 선택(Activation Function Selection)
-[4-4] 최적화 알고리즘 선택(Optimizer Selection) : Adam, SGD, RMSprop
-[4-5] 전이 학습(Transfer Learning), 사전 훈련된 모델 활용(Pre-trained Model Utilization)
-[4-6] 모델 구조 최적화(Model Architecture Optimization)
-[4-7] 온라인 학습(Online Learning)
-
-5. 성능 향상
-[5-1] 특성 중요도 분석 및 선택(Feature Importance & Selection) : XGBoost, LIME, SHAP
-[5-2] 손실함수 커스터마이징(Custom Loss Function) : 다중클래스 손실함수(Multi-class Loss Function), 불균형 데이터셋을 위한 손실 함수(Loss Functions for Imbalanced Datasets)
-
-6. 하드웨어 및 시스템 최적화
-[6-1] 하드웨어 최적화(Hardware Optimization) : GPU/TPU 활용(GPU/TPU Utilization), 분산 학습(Distributed Learning)
-
-7. 모델 검증 및 비교
-[7-1] 모델 검증(Model Validation) : 외부 데이터셋 테스트(Test on External Datasets)
-[7-2] 모델 성능 비교(Model Performance Comparison) : 여러 모델 평가 및 비교(Evaluate and Compare Multiple Models)
-
-8. 기술 부채 관리
-[8-1] 기술 부채(Technical Debt) 관리 : 코드 최적화 및 유지보수(Code Optimization & Maintenance)
-
-
 
 
 # [1] 데이터 처리 및 변환
