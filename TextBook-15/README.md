@@ -31,11 +31,12 @@
 		[1-10] 정보 병합(Data Fusion)
 	
 	[2] 모델 복잡도 및 일반화
-		[2-1] 과적합 방지 (Overfitting Prevention)
-		[2-2] 정규화 (L1, L2 Regularization)
-		[2-3] 드롭아웃 (Dropout)
-		[2-4] 조기 종료 (Early Stopping)
-		[2-5] 앙상블 학습 (Ensemble Learning)
+		[2-1] 과적합 방지(Overfitting Prevention)
+		[2-2] 정규화(L1, L2 Regularization)
+		[2-3] 드롭아웃(Dropout)
+		[2-4] 조기 종료(Early Stopping)
+		[2-5] 앙상블 학습(Ensemble Learning) : 배깅(Bagging), 부스팅(Boosting)
+		[2-6] 모델 해석성(Model Interpretability) : LIME, SHAP
 	
 	[3] 하이퍼파라미터 최적화
 		[3-1] 하이퍼파라미터 튜닝 (Hyperparameter Tuning)
@@ -64,12 +65,7 @@
 
 --- 
 2. 모델 복잡도 및 일반화
-[2-1] 과적합 방지(Overfitting Prevention)
-[2-2] 정규화(L1, L2 Regularization)
-[2-3] 드롭아웃(Dropout)
-[2-4] 조기 종료(Early Stopping)
-[2-5] 앙상블 학습(Ensemble Learning) : 배깅(Bagging), 부스팅(Boosting)
-[2-6] 모델 해석성(Model Interpretability) : LIME, SHAP
+
 
 3. 하이퍼파라미터 최적화
 [3-1] 하이퍼파라미터 튜닝(Hyperparameter Tuning)
@@ -228,45 +224,51 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 ---
 
 # [2] 모델 복잡도 및 일반화
-## [2-1] 과적합 방지 (Overfitting Prevention)
+## [2-1] 과적합 방지(Overfitting Prevention)
 ▣ 정의 : 모델이 학습 데이터에만 지나치게 적응하지 않도록 제어하여, 새로운 데이터에서도 일반화된 성능을 유지하도록 다양한 기법의 조합<br>
 ▣ 필요성 : 모델이 학습 데이터의 노이즈나 불필요한 패턴을 학습하지 않고 테스트 데이터나 실전 데이터에서도 높은 성능을 유지하도록 보장<br>
-▣ 장점 : 일반화 성능 향상, 예측 모델의 신뢰도 증가<br>
+▣ 주요 기법 : 데이터 관련(Data Augmentation, Cross Validation), 모델 관련(Model Simplification, Regularization, Dropout), 훈련 관련(Early Stopping)<br>
+▣ 장점 : 테스트 데이터에서의 안정적인 성능 확보, 일반화 성능 향상, 예측 모델의 신뢰도 증가<br>
 ▣ 단점 : 과적합 방지 기법이 과도하게 적용되면 과소적합(Underfitting), 최적의 설정을 찾기 위한 추가적인 실험과 조정이 필요<br>
 ▣ 적용대상 알고리즘 : 모든 머신러닝 및 딥러닝 알고리즘<br>
 
 <br>
 
-## [2-2] 정규화 (L1, L2 Regularization)
+## [2-2] 정규화(L1, L2 Regularization)
 ▣ 정의 : 모델의 복잡성을 줄이기 위해 손실 함수에 패널티를 추가하여 모델 파라미터의 크기를 제어(L1 정규화: 가중치의 절댓값 합, L2 정규화: 가중치의 제곱합)<br>
 ▣ 필요성 : 모델이 불필요하게 큰 가중치를 학습하여 과적합되는 것을 방지<br>
+▣ 주요 기법 : L1 정규화(Lasso Regression), L2 정규화(Ridge Regression), L1과 L2 혼합(Elastic Net)<br>
 ▣ 장점 : L1은 희소 모델(sparse model)을 생성하여 중요한 특성을 선택하는 데 유용, L2는 과도한 가중치를 줄여 모델 안정성 향상<br>
 ▣ 단점 : 과소적합 가능성, 정규화 강도를 조정하기 위한 하이퍼파라미터(λ) 선택 필요<br>
 ▣ 적용대상 알고리즘 : 선형 회귀(Linear Regression), 로지스틱 회귀(Logistic Regression), 서포트 벡터 머신(SVM), 뉴럴 네트워크<br>
 
 <br>
 
-## [2-3] 드롭아웃 (Dropout)
-▣ 정의 : 학습 과정에서 뉴런의 일부를 랜덤하게 비활성화하여(=드롭아웃) 네트워크가 특정 뉴런에 의존하지 않도록 하는 기법<br>
+## [2-3] 드롭아웃(Dropout)
+▣ 정의 : 학습 과정에서 뉴런의 일부를 랜덤하게 비활성화하여(=0으로 설정) 네트워크가 특정 뉴런에 의존하지 않도록 하는 기법<br>
 ▣ 필요성 : 신경망에서의 과적합 문제를 완화하여 더 일반화된 성능을 도모<br>
+▣ 주요 기법 : 표준 드롭아웃(훈련 중 무작위로 노드 비활성화), Spatial Dropout(CNN에서 특정 필터를 비활성화), DropConnect(가중치를 무작위로 제거)<br>
 ▣ 장점 : 과적합 방지, 네트워크 구조에 레이어별 다양성을 부여<br>
 ▣ 단점 : 학습 시간이 늘어날 수 있으며, 테스트 시 드롭아웃을 적용하지 않기 때문에 추가적인 처리 단계가 필요<br>
-▣ 적용대상 알고리즘 : 딥러닝 모델 (특히 CNN, RNN 등)<br>
+▣ 적용대상 알고리즘 : 신경망 기반 모델(CNN, RNN, Transformer 등)<br>
 
 <br>
 
-## [2-4] 조기 종료 (Early Stopping)
+## [2-4] 조기 종료(Early Stopping)
 ▣ 정의 : 학습 중 검증 세트의 성능이 더 이상 개선되지 않는 시점에서 학습을 중단<br>
 ▣ 필요성 : 학습을 너무 오래 진행할 경우 모델이 학습 데이터에 과적합될 위험을 줄이기 위함<br>
+▣ 주요 기법 : 검증 손실 모니터링(검증 손실이 감소하지 않을 경우 중단), Patience 설정(특정 에포크 동안 향상이 없을 때 종료)
 ▣ 장점 : 과적합 방지, 불필요한 학습 시간 절약<br>
 ▣ 단점 : 검증 데이터의 성능을 과도하게 의존하거나, 최적의 종료 시점 결정 곤란<br>
-▣ 적용대상 알고리즘 : 모든 딥러닝 모델, 일부 머신러닝 알고리즘에서도 사용 가능(Gradient Boosting)<br>
+▣ 적용대상 알고리즘 : 모든 딥러닝 모델, 일부 머신러닝(Gradient Boosting) 등 에폭(Epoch)*이 긴 경우<br>
+   * 모델 학습 과정에서 전체 데이터셋을 여러 번 반복해서 학습하는 횟수(데이터셋의 모든 샘플이 모델에 입력되어 가중치가 업데이트되는 과정을 한번 완료하는 것이 1 에폭)<br>
 
 <br>
 
-## [2-5] 앙상블 학습 (Ensemble Learning)
+## [2-5] 앙상블 학습(Ensemble Learning)
 ▣ 정의 : 여러 개의 모델을 결합(배깅: 각 모델의 독립적인 학습, 부스팅: 각 모델이 순차적으로 학습, 스태킹: 서로다른 모델의 예측결과 결합)<br>
 ▣ 필요성 : 단일 모델의 한계를 극복하고, 데이터의 다양한 패턴을 더 잘 학습<br>
+▣ 주요 기법 : 배깅(Random Forest), 부스팅(Gradient Boosting), XGBoost, LightGBM
 ▣ 장점 : 높은 성능과 일반화 능력, 다양한 데이터 및 모델 유형에 적용 가능<br>
 ▣ 단점 : 계산 비용 증가, 구현 복잡성<br>
 ▣ 적용대상 알고리즘 : 모든 지도 학습 알고리즘 (분류, 회귀 등)<br>
