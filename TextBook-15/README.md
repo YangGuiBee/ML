@@ -51,7 +51,7 @@
 		[4-2] 가중치 초기화(Weight Initialization)
 		[4-3] 활성화 함수 선택(Activation Function Selection)
 		[4-4] 최적화 알고리즘 선택(Optimizer Selection) : Adam, SGD, RMSprop
-		[4-5] 전이 학습(Transfer Learning), 사전 훈련된 모델 활용(Pre-trained Model Utilization)
+		[4-5] 전이 학습(Transfer Learning)
 		[4-6] 모델 구조 최적화(Model Architecture Optimization)
 		[4-7] 온라인 학습(Online Learning)
 	
@@ -311,9 +311,8 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 ---
 
 # [4] 학습 과정 최적화
-## [4-1] 학습률 스케줄링 (Learning Rate Scheduling)
-▣ 정의 : 학습률(Learning Rate)을 학습 과정 중에 동적으로 조정하여 최적화 성능과 속도를 향상시키는 방법<br>
-(Step Decay: 일정 에포크마다 학습률 감소, Exponential Decay: 학습률을 지수적으로 감소, Cosine Annealing: 학습률을 점진적으로 낮추는 방식)<br>
+## [4-1] 학습률 스케줄링(Learning Rate Scheduling)
+▣ 정의 : 학습률(Learning Rate)을 학습 과정 중에 동적으로 조정하여 최적화 성능과 속도를 향상시키는 방법(Step Decay: 일정 에포크마다 학습률 감소, Exponential Decay: 학습률을 지수적으로 감소, Cosine Annealing: 학습률을 점진적으로 낮추는 방식)<br>
 ▣ 필요성 : 고정된 학습률은 초기와 후반부 학습에 비효율적일 수 있으며, 초기에는 빠른 학습, 후반부에는 안정적인 수렴이 필요<br>
 ▣ 장점 : 학습 속도와 최적화 안정성을 모두 확보 가능하며, 과적합 방지에 도움<br>
 ▣ 단점 : 적절한 스케줄을 설정하지 않으면 성능 저하 가능성, 추가적인 하이퍼파라미터 조정 필요<br>
@@ -321,9 +320,8 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 
 <br>
 
-## [4-2] 가중치 초기화 (Weight Initialization)
-▣ 정의 : 모델의 가중치 값을 학습 초기에 적절히 설정하여 학습 과정을 안정화하는 기법(Xavier Initialization: 입력 및 출력 노드 수에 기반, 
-He Initialization: ReLU 계열 활성화 함수에 적합)<br>
+## [4-2] 가중치 초기화(Weight Initialization)
+▣ 정의 : 모델의 가중치 값을 학습 초기에 적절히 설정하여 학습 과정을 안정화하는 기법(Xavier Initialization: 입력 및 출력 노드 수에 기반, He Initialization: ReLU 계열 활성화 함수에 적합)<br>
 ▣ 필요성 : 잘못된 초기화는 기울기 소실(Vanishing Gradient)이나 폭발(Exploding Gradient)을 유발할 수 있음.<br>
 ▣ 장점 : 학습 초기 안정성 향상, 빠른 수렴 가능<br>
 ▣ 단점 : 일부 알고리즘에서 특정 초기화 전략이 더 적합하므로 적절한 선택 필요<br>
@@ -331,7 +329,7 @@ He Initialization: ReLU 계열 활성화 함수에 적합)<br>
 
 <br>
 
-## [4-3] 활성화 함수 선택 (Activation Function Selection)
+## [4-3] 활성화 함수 선택(Activation Function Selection)
 ▣ 정의 : 뉴런의 출력 값을 비선형적으로 변환하여 학습 가능한 패턴을 늘리는 역할을 하는 활성화 함수를 선택하는 과정<br>
 (Sigmoid: [0, 1] 출력, 이진 분류에서 사용, ReLU: 비선형성 제공, 기울기 소실 문제 완화, Leaky ReLU: ReLU의 변형, 음수 구간 기울기 보정, Softmax: 다중 클래스 확률 분포 출력)<br>
 ▣ 필요성 : 적절한 활성화 함수 선택은 학습 효율성과 성능에 큰 영향을 미침<br>
@@ -341,8 +339,35 @@ He Initialization: ReLU 계열 활성화 함수에 적합)<br>
 
 <br>
 
-## [4-4] 전이 학습 (Transfer Learning)
-▣ 정의 : 사전 학습된 모델의 가중치를 새로운 문제에 재사용하여 학습 시간을 단축하고 성능을 향상시키는 기법<br>
+## [4-4] 최적화 알고리즘 선택(Optimizer Selection) : Adam, SGD, RMSprop
+### [4-4-1] Adam (Adaptive Moment Estimation)
+▣ 정의: Stochastic Gradient Descent(SGD)의 확장으로 모멘텀과 적응 학습률(Adaptive Learning Rate)을 결합한 최적화 알고리즘. 딥러닝에서 널리 사용(과거의 그래디언트 정보를 활용하여 학습 속도를 가속화하고 안정성을 높임)<br>
+▣ 필요성 : 복잡한 비선형 함수에서 경사 하강법(SGD)이 수렴하기 어려운 문제를 해결하기 위해 사용<br>
+▣ 주요 기법 : 그래디언트의 과거 방향(누적)을 참고하여 업데이트를 가속화(Momentum), 각 매개변수의 그래디언트 크기에 따라 학습률을 조정하는 적응 학습률 (Adaptive Learning Rate), 이동 평균 (Exponential Moving Averages)<br>
+▣ 장점 : 학습률 조정이 자동으로 이루어짐, 빠른 수렴 속도, 스파스 데이터 처리에 효과적, 과거 그래디언트 정보를 활용해 진동(oscillation) 감소<br>
+▣ 단점 : 학습률이 점점 작아져, 수렴 속도가 느려질 수 있음, 추가 하이퍼파라미터 설정 필요, 과적합 가능성<br>
+▣ 적용대상 알고리즘 : 딥러닝에서 주로 사용(CNN, RNN, GAN, Transformer 등)<br>
+
+### [4-4-2] SGD(Stochastic Gradient Descent)
+▣ 정의 : 경사 하강법(Gradient Descent)의 변형으로, 각 배치(batch) 또는 샘플에 대해 손실 함수의 그래디언트를 계산하여 가중치를 업데이트하는 알고리즘<br>
+▣ 필요성 : 데이터가 클수록 전체 데이터셋에서 그래디언트를 계산하는 데 시간이 오래 걸리는 문제를 해결하기 위해 배치 단위로 업데이트하여 속도를 개선<br>
+▣ 주요 기법 : 배치에 대해 그래디언트를 계산하고 즉각적으로 업데이트, 전체 데이터가 아닌 일부 데이터(배치)를 활용한 확률적 접근<br>
+▣ 장점 : 대규모 데이터에서도 사용 가능한 계산 효율성, 간단한 구현으로 모델 일반화(generalization)에 유리<br>
+▣ 단점 : 손실 함수의 최저점 주변에서 진동(oscillation : 손실 함수의 그래프에서 최저점(최적값, Optimum) 주변에서 모델의 가중치 업데이트 방향이 계속 바뀌는 현상)이 발생할 수 있으며. 학습률 설정이 민감하고, 느린 수렴 속도<br>
+▣ 적용대상 알고리즘 : 머신러닝 및 딥러닝: Logistic Regression, Linear Regression, CNN, RNN<br>
+
+### [4-4-3] RMSprop
+▣ 정의 : 경사 하강법의 수렴 속도를 개선하기 위해 만들어진 학습률 감소(Adaptive Learning Rate)와 루트 평균 제곱(Root Mean Square Propagation) 개념을 활용한 최적화 알고리즘<br>
+▣ 필요성 : 학습 과정에서 그래디언트의 크기가 지나치게 크거나 작아지는 문제를 해결하기 위해 필요<br>
+▣ 주요 기법 : 각 매개변수의 그래디언트 크기를 기준으로 학습률을 조정, 그래디언트의 제곱 평균을 계산하고, 이를 사용해 학습률을 업데이트<br>
+▣ 장점 : 진동(oscillation) 감소, 학습률이 자동으로 조정되어 손실 함수의 좁은 골짜기를 빠르게 탐색, SGD보다 안정적<br>
+▣ 단점 : 장기적으로는 적응 학습률이 너무 작아져 학습이 중단될 수 있음, 하이퍼파라미터 설정 필요<br>
+▣ 적용대상 알고리즘 : RNN 및 LSTM 같은 시계열 데이터 처리 모델, CNN 기반 모델<br>
+
+<br>
+
+## [4-5] 전이 학습(Transfer Learning)
+▣ 정의 : 사전 학습된 모델의 가중치를 새로운 문제에 재사용하여 학습 시간을 단축하고 성능을 향상시키는 기법(Pre-trained Model Utilization)<br>
 ▣ 필요성 : 데이터 부족 상황에서 강력한 성능을 보장, 학습 시간을 크게 단축<br>
 ▣ 장점 : 적은 데이터로도 높은 성능 가능, 빠른 학습과 높은 초기 성능<br>
 ▣ 단점 : 사전 학습 모델이 새로운 문제에 최적화되지 않을 수 있으며, 사전 학습된 데이터셋과 도메인 차이가 클 경우 성능 저하<br>
@@ -350,7 +375,7 @@ He Initialization: ReLU 계열 활성화 함수에 적합)<br>
 
 <br>
 
-## [4-5] 모델 구조 최적화 (Model Architecture Optimization)
+## [4-6] 모델구조 최적화(Model Architecture Optimization)
 ▣ 정의 : 모델의 구조(레이어 수, 뉴런 수, 연결 방식 등)를 최적화하여 학습 성능을 극대화하는 과정<br>
 ▣ 필요성 : 복잡한 모델 구조는 과적합 위험 증가, 단순한 구조는 표현력이 부족하므로 적절한 균형 필요<br>
 ▣ 장점 : 데이터와 문제에 적합한 모델 설계 가능, 과적합 위험 감소<br>
@@ -359,7 +384,7 @@ He Initialization: ReLU 계열 활성화 함수에 적합)<br>
 
 <br>
 
-## [4-6] 온라인 학습 (Online Learning)
+## [4-7] 온라인 학습(Online Learning)
 ▣ 정의 : 점진적으로 데이터를 학습하며 새로운 데이터가 들어올 때마다 모델을 업데이트하는 기법<br>
 ▣ 필요성 : 데이터가 실시간으로 수집되거나, 저장 공간이 제한적인 경우<br>
 ▣ 장점 : 실시간 데이터 처리 가능, 메모리 사용량 감소<br>
