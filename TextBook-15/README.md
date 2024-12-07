@@ -30,13 +30,12 @@
 		[1-9] 특성 엔지니어링(Feature Engineering)
 		[1-10] 정보 병합(Data Fusion)
 	
-	[2] 모델 복잡도 및 일반화
-		[2-1] 과적합 방지(Overfitting Prevention)
-		[2-2] 정규화(L1, L2 Regularization)
-		[2-3] 드롭아웃(Dropout)
-		[2-4] 조기 종료(Early Stopping)
-		[2-5] 앙상블 학습(Ensemble Learning)
-		[2-6] 모델 해석성(Model Interpretability)
+	[2] 모델 복잡도 및 일반화 : 과적합 방지(Overfitting Prevention)
+		[2-1] 정규화(L1, L2 Regularization)
+		[2-2] 드롭아웃(Dropout)
+		[2-3] 조기 종료(Early Stopping)
+		[2-4] 앙상블 학습(Ensemble Learning)
+		[2-5] 모델 해석성(Model Interpretability)
 	
 	[3] 하이퍼파라미터 최적화
 		[3-1] 하이퍼파라미터 튜닝(Hyperparameter Tuning)
@@ -187,9 +186,8 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 <br>
 
 ---
-
-# [2] 모델 복잡도 및 일반화
-## [2-1] 과적합 방지(Overfitting Prevention)
+  
+# [2] 모델 복잡도 및 일반화 : 과적합 방지(Overfitting Prevention)
 ▣ 정의 : 모델이 학습 데이터에만 지나치게 적응하지 않도록 제어하여, 새로운 데이터에서도 일반화된 성능을 유지하도록 다양한 기법의 조합<br>
 ▣ 필요성 : 모델이 학습 데이터의 노이즈나 불필요한 패턴을 학습하지 않고 테스트 데이터나 실전 데이터에서도 높은 성능을 유지하도록 보장<br>
 ▣ 주요 기법 : 데이터 관련(Data Augmentation, Cross Validation), 모델 관련(Model Simplification, Regularization, Dropout), 훈련 관련(Early Stopping)<br>
@@ -199,7 +197,7 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 
 <br>
 
-## [2-2] 정규화(L1, L2 Regularization)
+## [2-1] 정규화(L1, L2 Regularization)
 ▣ 정의 : 모델의 복잡성을 줄이기 위해 손실 함수에 패널티를 추가하여 모델 파라미터의 크기를 제어(L1 정규화: 가중치의 절댓값 합, L2 정규화: 가중치의 제곱합)<br>
 ▣ 필요성 : 모델이 불필요하게 큰 가중치를 학습하여 과적합되는 것을 방지<br>
 ▣ 주요 기법 : L1 정규화(Lasso Regression), L2 정규화(Ridge Regression), L1과 L2 혼합(Elastic Net)<br>
@@ -209,7 +207,7 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 
 <br>
 
-## [2-3] 드롭아웃(Dropout)
+## [2-2] 드롭아웃(Dropout)
 ▣ 정의 : 학습 과정에서 뉴런의 일부를 랜덤하게 비활성화하여(=0으로 설정) 네트워크가 특정 뉴런에 의존하지 않도록 하는 기법<br>
 ▣ 필요성 : 신경망에서의 과적합 문제를 완화하여 더 일반화된 성능을 도모<br>
 ▣ 주요 기법 : 표준 드롭아웃(훈련 중 무작위로 노드 비활성화), Spatial Dropout(CNN에서 특정 필터를 비활성화), DropConnect(가중치를 무작위로 제거)<br>
@@ -219,7 +217,7 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 
 <br>
 
-## [2-4] 조기 종료(Early Stopping)
+## [2-3] 조기 종료(Early Stopping)
 ▣ 정의 : 학습 중 검증 세트의 성능이 더 이상 개선되지 않는 시점에서 학습을 중단<br>
 ▣ 필요성 : 학습을 너무 오래 진행할 경우 모델이 학습 데이터에 과적합될 위험을 줄이기 위함<br>
 ▣ 주요 기법 : 검증 손실 모니터링(검증 손실이 감소하지 않을 경우 중단), Patience 설정(특정 에포크 동안 향상이 없을 때 종료)<br>
@@ -230,7 +228,7 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 
 <br>
 
-## [2-5] 앙상블 학습(Ensemble Learning)
+## [2-4] 앙상블 학습(Ensemble Learning)
 ▣ 정의 : 여러 개의 모델을 결합(배깅: 각 모델의 독립적인 학습, 부스팅: 각 모델이 순차적으로 학습, 스태킹: 서로다른 모델의 예측결과 결합)<br>
 ▣ 필요성 : 단일 모델의 한계를 극복하고, 데이터의 다양한 패턴을 더 잘 학습<br>
 ▣ 주요 기법 : 스태킹, 배깅(Random Forest), 부스팅(AdaBoost, Gradient Boosting, XGBoost, LightGBM)<br>
@@ -240,7 +238,7 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 
 <br>
 
-## [2-6] 모델 해석성 (Model Interpretability)
+## [2-5] 모델 해석성 (Model Interpretability)
 ▣ 정의 : 모델이 내린 예측 결과에 대해 설명 가능하도록 하는 기법<br>
 ▣ 필요성 : 블랙박스 모델(딥러닝, 앙상블)의 투명성 확보, 비즈니스나 의료 등 고위험 분야에서 신뢰 확보<br>
 ▣ 주요 기법 : LIME(특정 예측 로컬 단위에서 단순 모델로 근사), SHAP(특징별 기여도를 계산하여 예측에 대한 글로벌 및 로컬 해석 제공)<br>
