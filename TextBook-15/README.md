@@ -163,6 +163,110 @@
 ▣ 단점 : 계산 비용이 증가하여 학습 시간이 오래 걸리며, 큰 데이터셋에서는 비효율적<br>
 ▣ 적용대상 알고리즘 : 모든 지도학습 알고리즘 (분류, 회귀 등), 특히 소규모 데이터셋에 적합<br>
 
+	#############################################################
+	# [1] 데이터 처리 및 변환
+	# [1-2] 교차 검증 (Cross-Validation) + 데이터증강
+	#############################################################
+	from sklearn.model_selection import cross_val_score, KFold, GridSearchCV, train_test_split
+	from sklearn.ensemble import RandomForestClassifier
+	from sklearn.datasets import load_wine
+	from sklearn.preprocessing import StandardScaler
+	from sklearn.pipeline import Pipeline
+	from sklearn.metrics import accuracy_score
+	import numpy as np
+	import pandas as pd
+
+	# 데이터 로드
+	data = load_wine()
+	X, y = data.data, data.target
+
+	# 데이터를 학습 데이터와 새로운 테스트 데이터로 분리
+	X_train, X_new, y_train, y_new = train_test_split(X, y, test_size=0.2, random_state=42)
+
+	# 데이터 증강: 노이즈 추가 및 특성 변형
+	np.random.seed(42)
+	noise = np.random.normal(0, 0.2, X_train.shape)  # 평균 0, 표준편차 0.2인 노이즈
+	X_augmented = X_train + noise  # 노이즈 추가
+	y_augmented = y_train  # 레이블은 동일
+
+	# 증강 데이터 합치기
+	X_combined = np.vstack((X_train, X_augmented))
+	y_combined = np.hstack((y_train, y_augmented))
+
+	# 기본 모델 생성
+	model = RandomForestClassifier(random_state=42)
+
+	# 교차 검증 없이 학습 및 새로운 데이터 평가 (기본 데이터)
+	model.fit(X_train, y_train)
+	new_predictions = model.predict(X_new)
+	accuracy_new_data = accuracy_score(y_new, new_predictions)
+
+	# 교차 검증 (기본 데이터)
+	kf = KFold(n_splits=5, shuffle=True, random_state=42)
+	scores_without_augmentation = cross_val_score(model, X_train, y_train, cv=kf)
+
+	# 교차 검증 (증강 데이터 포함)
+	scores_with_augmentation = cross_val_score(model, X_combined, y_combined, cv=kf)
+
+	# 데이터 스케일링 포함한 파이프라인 구성
+	pipeline = Pipeline([
+	    ('scaler', StandardScaler()),
+	    ('classifier', RandomForestClassifier(random_state=42))])
+
+	# 하이퍼파라미터 튜닝 (증강 데이터 포함)
+	param_grid = {
+	    'classifier__n_estimators': [50, 100, 150],
+	    'classifier__max_depth': [None, 10, 20],
+	    'classifier__min_samples_split': [2, 5, 10]}
+
+	grid_search = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy')
+	grid_search.fit(X_combined, y_combined)
+
+	# 최적 모델로 교차 검증
+	best_model = grid_search.best_estimator_
+	scores_with_tuning = cross_val_score(best_model, X_combined, y_combined, cv=kf)
+
+	# 결과 출력
+	print("=== 새로운 데이터로 평가 (기본 데이터) ===")
+	print(f"새로운 데이터 정확도: {accuracy_new_data:.4f}")
+
+	print("\n=== 기본 데이터 교차 검증 결과 ===")
+	print(f"교차 검증 점수 (기본 데이터): {scores_without_augmentation}")
+	print(f"평균 교차 검증 점수: {scores_without_augmentation.mean():.4f}")
+
+	print("\n=== 증강 데이터 포함 교차 검증 결과 ===")
+	print(f"교차 검증 점수 (증강 데이터 포함): {scores_with_augmentation}")
+	print(f"평균 교차 검증 점수: {scores_with_augmentation.mean():.4f}")
+
+	print("\n=== 하이퍼파라미터 튜닝 결과 (증강 데이터 포함) ===")
+	print(f"최적 파라미터: {grid_search.best_params_}")
+	print(f"최적 교차 검증 점수: {grid_search.best_score_:.4f}")
+
+	print("\n=== 최적 모델 교차 검증 점수 (증강 데이터 포함) ===")
+	print(f"교차 검증 점수: {scores_with_tuning}")
+	print(f"평균 교차 검증 점수: {scores_with_tuning.mean():.4f}")
+
+<br>
+
+	=== 새로운 데이터로 평가 (기본 데이터) ===
+	새로운 데이터 정확도: 1.0000
+
+	=== 기본 데이터 교차 검증 결과 ===
+	교차 검증 점수 (기본 데이터): [0.93103448 0.96551724 1.         1.         1.        ]
+	평균 교차 검증 점수: 0.9793
+
+	=== 증강 데이터 포함 교차 검증 결과 ===
+	교차 검증 점수 (증강 데이터 포함): [0.96491228 1.         0.96491228 0.98245614 0.98214286]
+	평균 교차 검증 점수: 0.9789
+
+	=== 하이퍼파라미터 튜닝 결과 (증강 데이터 포함) ===
+	최적 파라미터: {'classifier__max_depth': None, 'classifier__min_samples_split': 2, 'classifier__n_estimators': 100}
+	최적 교차 검증 점수: 0.9895
+
+	=== 최적 모델 교차 검증 점수 (증강 데이터 포함) ===
+	교차 검증 점수: [0.96491228 1.         0.96491228 0.98245614 0.98214286]
+	평균 교차 검증 점수: 0.9789
+
 <br>
 
 ## [1-3] 데이터 스케일링(Data Scaling)
