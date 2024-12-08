@@ -1764,9 +1764,12 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 
 <br>
 
+![](./images/2-4_1.png) 
+<br>
+
 	#############################################################
 	# [2] 모델 복잡도 및 일반화
-	# [2-6] 모델 해석성(Model Interpretability) : SHAP
+	# [2-4] 모델 해석성(Model Interpretability) : SHAP
 	#############################################################
 	import subprocess
 	import sys
@@ -1829,6 +1832,12 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 	# 특정 샘플에 대한 Bar Chart (SHAP 값의 크기)
 	shap.plots.bar(shap_values[i])
 
+<br>
+
+![](./images/2-4_2.png) 
+<br>
+
+![](./images/2-4_3.png) 
 <br>
 
 ---
