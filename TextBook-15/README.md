@@ -1128,12 +1128,12 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 	def evaluate_model(model, X_train, X_test, y_train, y_test):
 		model.fit(X_train, y_train)
 		y_pred = model.predict(X_test)
-    		mse = mean_squared_error(y_test, y_pred)
-   		mae = mean_absolute_error(y_test, y_pred)
-    		rmse = calculate_rmse(mse)
-    		r2 = r2_score(y_test, y_pred)
-    		evs = explained_variance_score(y_test, y_pred)
-    		return mse, mae, rmse, r2, evs
+		mse = mean_squared_error(y_test, y_pred)
+		mae = mean_absolute_error(y_test, y_pred)
+		rmse = calculate_rmse(mse)
+		r2 = r2_score(y_test, y_pred)
+		evs = explained_variance_score(y_test, y_pred)
+		return mse, mae, rmse, r2, evs
 
 	# 평가 결과 저장
 	results = {}
