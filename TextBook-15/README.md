@@ -152,7 +152,8 @@
 	plt.title("Original vs Augmented Data and Models")
 	plt.legend()
 	plt.show()
- 
+
+![](./images/1-1.png) 
 <br>
 
 ## [1-2] 교차 검증(Cross-Validation)
