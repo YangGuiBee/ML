@@ -678,6 +678,142 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 
 <br>
 
+	#############################################################
+	# [1] 데이터 처리 및 변환
+	# [1-6] 이상치 탐지(Outlier Detection) - 클래스별 이상치탐지
+	#############################################################
+	import pandas as pd
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.model_selection import train_test_split
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.metrics import accuracy_score
+
+	# 1. Iris 데이터 로드
+	iris = load_iris(as_frame=True)
+	iris_df = iris.frame
+
+	# 2. 데이터 준비 (입력 특성과 타겟 분리)
+	X = iris_df.iloc[:, :-1]  # 입력 특성 (꽃받침, 꽃잎)
+	y = iris_df['target']     # 타겟 (클래스)
+
+	# 3. 클래스별 IQR 기반 이상치 탐지
+	def detect_outliers_iqr_by_class(data, target):
+	    """클래스별 IQR을 사용하여 이상치 탐지"""
+	    outlier_mask = pd.Series(True, index=data.index)
+	    reasons = pd.Series("", index=data.index)
+
+	    for cls in target.unique():
+	        cls_data = data[target == cls]
+	        Q1 = cls_data.quantile(0.25)
+	        Q3 = cls_data.quantile(0.75)
+	        IQR = Q3 - Q1
+	        lower_bound = Q1 - 1.5 * IQR
+	        upper_bound = Q3 + 1.5 * IQR
+	        cls_outliers = ~((cls_data >= lower_bound) & (cls_data <= upper_bound)).all(axis=1)
+
+ 	       # 업데이트: 클래스별 마스크 및 이상치 사유 기록
+ 	       outlier_mask[cls_data.index] &= ~cls_outliers
+	       for idx, row in cls_data.iterrows():
+  	          if cls_outliers.at[idx]:
+      	             reason = []
+                     for column in data.columns:
+                        if row[column] < lower_bound[column]:
+                           reason.append(f"{column} below {lower_bound[column]:.2f}")
+                        elif row[column] > upper_bound[column]:
+                             reason.append(f"{column} above {upper_bound[column]:.2f}")
+                     reasons.at[idx] = ", ".join(reason)
+	       return outlier_mask, reasons
+
+	# 이상치 탐지 수행
+	class_outlier_mask, outlier_reasons = detect_outliers_iqr_by_class(X, y)
+	X_no_outliers = X[class_outlier_mask]
+	y_no_outliers = y[class_outlier_mask]
+
+	# 이상치 데이터 출력
+	outliers_detected = X[~class_outlier_mask].copy()
+	outliers_detected["Reason"] = outlier_reasons[~class_outlier_mask]
+
+	print("Outliers detected:")
+	print(outliers_detected)
+
+	# 이상치 개수 확인
+	print(f"\nOriginal data size: {X.shape[0]}")
+	print(f"Data size after removing outliers: {X_no_outliers.shape[0]}")
+	print(f"Number of outliers detected: {X.shape[0] - X_no_outliers.shape[0]}")
+
+	# 4. 데이터 분리 (학습/테스트 셋)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+	X_train_no_outliers, X_test_no_outliers, y_train_no_outliers, y_test_no_outliers = 	train_test_split(
+	    X_no_outliers, y_no_outliers, test_size=0.3, random_state=42)
+
+	# 5. 모델 학습 및 평가
+	# (1) 이상치 제거 전
+	model = LogisticRegression(max_iter=200)
+	model.fit(X_train, y_train)
+	y_pred = model.predict(X_test)
+	accuracy_before = accuracy_score(y_test, y_pred)
+
+	# (2) 이상치 제거 후
+	model_no_outliers = LogisticRegression(max_iter=200)
+	model_no_outliers.fit(X_train_no_outliers, y_train_no_outliers)
+	y_pred_no_outliers = model_no_outliers.predict(X_test_no_outliers)
+	accuracy_after = accuracy_score(y_test_no_outliers, y_pred_no_outliers)
+
+	# 6. 결과 출력
+	print(f"\nAccuracy before removing outliers: {accuracy_before:.2f}")
+	print(f"Accuracy after removing outliers: {accuracy_after:.2f}")
+
+	if accuracy_after > accuracy_before:
+	    print("Removing outliers improved the model's accuracy.")
+	elif accuracy_after == accuracy_before:
+	    print("Removing outliers had no effect on the model's accuracy.")
+	else:
+	    print("Removing outliers decreased the model's accuracy.")
+
+<br>    
+
+	Outliers detected:
+	     sepal length (cm)  sepal width (cm)  petal length (cm)  petal width (cm)  \
+	13                 4.3               3.0                1.1               0.1   
+	15                 5.7               4.4                1.5               0.4   
+	22                 4.6               3.6                1.0               0.2   
+	23                 5.1               3.3                1.7               0.5   
+	24                 4.8               3.4                1.9               0.2   
+	41                 4.5               2.3                1.3               0.3   
+	43                 5.0               3.5                1.6               0.6   
+	44                 5.1               3.8                1.9               0.4   
+	98                 5.1               2.5                3.0               1.1   
+	106                4.9               2.5                4.5               1.7   
+	117                7.7               3.8                6.7               2.2   
+	119                6.0               2.2                5.0               1.5   
+	131                7.9               3.8                6.4               2.0   
+
+ 	                          Reason  
+	13   petal length (cm) below 1.14  
+	15    sepal width (cm) above 4.39  
+	22   petal length (cm) below 1.14  
+	23    petal width (cm) above 0.45  
+	24   petal length (cm) above 1.84  
+	41    sepal width (cm) below 2.49  
+	43    petal width (cm) above 0.45  
+	44   petal length (cm) above 1.84  
+	98   petal length (cm) below 3.10  
+	106  sepal length (cm) below 5.21  
+	117   sepal width (cm) above 3.74  
+	119   sepal width (cm) below 2.24  
+	131   sepal width (cm) above 3.74  
+
+	Original data size: 150
+	Data size after removing outliers: 137
+	Number of outliers detected: 13
+
+	Accuracy before removing outliers: 1.00
+	Accuracy after removing outliers: 0.93
+	Removing outliers decreased the model's accuracy.
+
+<br>
+
 ## [1-7] 데이터 중복 제거(Data Deduplication)
 ▣ 정의 : 동일하거나 유사한 데이터를 탐지하고 제거하여 데이터셋의 일관성과 정확성을 높이는 과정<br>
 ▣ 필요성 : 중복 데이터는 분석 및 모델 학습에 편향을 초래, 데이터 크기를 줄여 처리 속도와 저장소 비용을 절감, 일관된 데이터셋을 확보하여 분석 신뢰성을 높임<br>
