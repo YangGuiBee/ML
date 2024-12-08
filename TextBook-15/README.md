@@ -822,7 +822,152 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 ▣ 단점 : 유사성 기준을 설정하기 어려울 수 있으며, 대규모 데이터에서 탐지 및 제거 과정이 비용이 많이 들 수 있음, 잘못된 제거는 중요한 데이터를 손실시킬 가능성<br>
 ▣ 적용대상 알고리즘 : 데이터베이스 관리 및 전처리 단계에서 활용, 데이터셋 크기에 민감한 알고리즘(KNN, 군집화)<br>
 
+	#############################################################
+	# [1] 데이터 처리 및 변환
+	# [1-7] 데이터 중복 제거(Data Deduplication) LogisticRegression
+	#############################################################
+	import pandas as pd
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.model_selection import train_test_split
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.metrics import accuracy_score
+
+	# 1. Iris 데이터 로드
+	iris = load_iris(as_frame=True)
+	iris_df = iris.frame
+
+	# 2. 중복 데이터 생성
+	# 첫 번째와 두 번째 행을 복사하여 데이터프레임에 추가 (중복 데이터)
+	duplicated_rows = iris_df.iloc[[0, 1]]
+	iris_with_duplicates = pd.concat([iris_df, duplicated_rows], ignore_index=True)
+
+	# 중복 데이터 확인
+	print("Data with duplicates:")
+	print(iris_with_duplicates.duplicated().sum(), "duplicate rows added.")
+
+	# 3. 데이터 준비 (입력 특성과 타겟 분리)
+	X = iris_with_duplicates.iloc[:, :-1]  # 입력 특성 (꽃받침, 꽃잎)
+	y = iris_with_duplicates['target']     # 타겟 (클래스)
+
+	# 4. 데이터 중복 제거
+	# 중복 데이터 제거
+	X_no_duplicates = X[~iris_with_duplicates.duplicated()]
+	y_no_duplicates = y[~iris_with_duplicates.duplicated()]
+
+	# 5. 데이터 분리 (중복 제거 전후)
+	# - 중복 데이터 포함
+	X_train_with_duplicates, X_test_with_duplicates, y_train_with_duplicates, 		y_test_with_duplicates = train_test_split(X, y, test_size=0.3, random_state=42)
+	# - 중복 데이터 제거
+	X_train_no_duplicates, X_test_no_duplicates, y_train_no_duplicates, y_test_no_duplicates = train_test_split(X_no_duplicates, y_no_duplicates, test_size=0.3, random_state=42)
+
+	# 6. 모델 학습 및 평가
+	# (1) 중복 데이터 포함
+	model_with_duplicates = LogisticRegression(max_iter=200)
+	model_with_duplicates.fit(X_train_with_duplicates, y_train_with_duplicates)
+	y_pred_with_duplicates = model_with_duplicates.predict(X_test_with_duplicates)
+	accuracy_with_duplicates = accuracy_score(y_test_with_duplicates, y_pred_with_duplicates)
+
+	# (2) 중복 데이터 제거
+	model_no_duplicates = LogisticRegression(max_iter=200)
+	model_no_duplicates.fit(X_train_no_duplicates, y_train_no_duplicates)
+	y_pred_no_duplicates = model_no_duplicates.predict(X_test_no_duplicates)
+	accuracy_no_duplicates = accuracy_score(y_test_no_duplicates, y_pred_no_duplicates)
+
+	# 7. 결과 출력
+	print(f"\nAccuracy with duplicates: {accuracy_with_duplicates:.2f}")
+	print(f"Accuracy without duplicates: {accuracy_no_duplicates:.2f}")
+
+	# 8. 결과 비교 분석
+	if accuracy_with_duplicates > accuracy_no_duplicates:
+	    print("Including duplicates improved accuracy, but it may indicate overfitting.")
+	elif accuracy_with_duplicates == accuracy_no_duplicates:
+	    print("Duplicates had no effect on the model's accuracy.")
+	else:
+	    print("Removing duplicates improved the model's accuracy.")
+
 <br>
+
+	Data with duplicates: 3 duplicate rows added.
+	Accuracy with duplicates: 1.00
+	Accuracy without duplicates: 1.00
+	Duplicates had no effect on the model's accuracy.
+
+<br>
+
+	#############################################################
+	# [1] 데이터 처리 및 변환
+	# [1-7] 데이터 중복 제거(Data Deduplication) RandomForestClassifier
+	#############################################################
+	import pandas as pd
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.model_selection import train_test_split
+	from sklearn.ensemble import RandomForestClassifier
+	from sklearn.metrics import accuracy_score
+
+	# 1. Iris 데이터 로드
+	iris = load_iris(as_frame=True)
+	iris_df = iris.frame
+
+	# 2. 중복 데이터 생성
+	# 첫 번째와 두 번째 행을 복사하여 데이터프레임에 추가 (중복 데이터)
+	duplicated_rows = iris_df.iloc[[0, 1]]
+	iris_with_duplicates = pd.concat([iris_df, duplicated_rows], ignore_index=True)
+
+	# 중복 데이터 확인
+	print("Data with duplicates:")
+	print(iris_with_duplicates.duplicated().sum(), "duplicate rows added.")
+
+	# 3. 데이터 준비 (입력 특성과 타겟 분리)
+	X = iris_with_duplicates.iloc[:, :-1]  # 입력 특성 (꽃받침, 꽃잎)
+	y = iris_with_duplicates['target']     # 타겟 (클래스)
+
+	# 4. 데이터 중복 제거
+	# 중복 데이터 제거
+	X_no_duplicates = X[~iris_with_duplicates.duplicated()]
+	y_no_duplicates = y[~iris_with_duplicates.duplicated()]
+
+	# 5. 데이터 분리 (중복 제거 전후)
+	# - 중복 데이터 포함
+	X_train_with_duplicates, X_test_with_duplicates, y_train_with_duplicates, 		y_test_with_duplicates = train_test_split(X, y, test_size=0.3, random_state=42)
+
+	# - 중복 데이터 제거
+	X_train_no_duplicates, X_test_no_duplicates, y_train_no_duplicates, y_test_no_duplicates = train_test_split(X_no_duplicates, y_no_duplicates, test_size=0.3, random_state=42)
+
+	# 6. 모델 학습 및 평가
+	# (1) 중복 데이터 포함
+	model_with_duplicates = RandomForestClassifier(random_state=42)
+	model_with_duplicates.fit(X_train_with_duplicates, y_train_with_duplicates)
+	y_pred_with_duplicates = model_with_duplicates.predict(X_test_with_duplicates)
+	accuracy_with_duplicates = accuracy_score(y_test_with_duplicates, y_pred_with_duplicates)
+
+	# (2) 중복 데이터 제거
+	model_no_duplicates = RandomForestClassifier(random_state=42)
+	model_no_duplicates.fit(X_train_no_duplicates, y_train_no_duplicates)
+	y_pred_no_duplicates = model_no_duplicates.predict(X_test_no_duplicates)
+	accuracy_no_duplicates = accuracy_score(y_test_no_duplicates, y_pred_no_duplicates)
+
+	# 7. 결과 출력
+	print(f"\nAccuracy with duplicates (Random Forest): {accuracy_with_duplicates:.2f}")
+	print(f"Accuracy without duplicates (Random Forest): {accuracy_no_duplicates:.2f}")
+
+# 8. 결과 비교 분석
+	if accuracy_with_duplicates > accuracy_no_duplicates:
+	    print("Including duplicates improved accuracy, but it may indicate overfitting.")
+	elif accuracy_with_duplicates == accuracy_no_duplicates:
+	    print("Duplicates had no effect on the model's accuracy.")
+	else:
+	    print("Removing duplicates improved the model's accuracy.")
+
+<br>
+
+	Data with duplicates:3 duplicate rows added.
+	Accuracy with duplicates (Random Forest): 0.96
+	Accuracy without duplicates (Random Forest): 1.00
+	Removing duplicates improved the model's accuracy.
+
+<br>    
 
 ## [1-8] 데이터 변환(Data Transformation)
 ▣ 정의 : 데이터를 모델에 적합한 형식으로 조정하거나, 성능 최적화를 위해 데이터를 변형<br>
