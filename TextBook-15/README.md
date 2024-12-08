@@ -80,6 +80,79 @@
 ▣ 단점 : 증강된 데이터가 실제 데이터를 충분히 반영하지 않을 수 있으며, 처리 시간이 증가하며, 비효율적인 증강은 성능에 부정적 영향<br>
 ▣ 적용대상 알고리즘 : 딥러닝 알고리즘 (CNN, RNN 등), 이미지, 텍스트, 음성 처리 모델<br>
 
+	#############################################################
+	# [1] 데이터 처리 및 변환
+	# [1-1] 데이터 증강 (Data Augmentation)
+	# 숫자 데이터 : 노이즈와 비선형성 추가
+	#############################################################
+	import numpy as np
+	import pandas as pd
+	from sklearn.model_selection import train_test_split
+	from sklearn.linear_model import LinearRegression
+	from sklearn.metrics import mean_squared_error, r2_score
+	import matplotlib.pyplot as plt
+
+	# 원본 데이터 생성
+	np.random.seed(42)
+	X = np.random.rand(100, 1) * 10  # Feature
+	y = 2.5 * X.flatten() + np.random.randn(100) * 2  # Target with noise
+
+	# 원본 데이터프레임
+	original_data = pd.DataFrame({"X": X.flatten(), "y": y})
+
+	# 데이터 증강: 노이즈와 비선형성 추가
+	augmented_X = X + np.random.randn(100, 1) * 0.2  # 작은 노이즈 추가
+	augmented_y = 2.5 * augmented_X.flatten() + np.random.randn(100) * 0.5 + 0.2 * 		np.sin(augmented_X.flatten())  # 비선형성 추가
+	augmented_data = pd.DataFrame({"X": augmented_X.flatten(), "y": augmented_y})
+
+	# 데이터 병합
+	combined_data = pd.concat([original_data, augmented_data], ignore_index=True)
+
+	# 데이터 분리: 원본 데이터
+	X_train_orig, X_test_orig, y_train_orig, y_test_orig = train_test_split(
+	    original_data["X"].values.reshape(-1, 1), original_data["y"], test_size=0.2, 	random_state=42)
+
+	# 데이터 분리: 증강 데이터
+	X_train_aug, X_test_aug, y_train_aug, y_test_aug = train_test_split(
+	    combined_data["X"].values.reshape(-1, 1), combined_data["y"], test_size=0.2, 	random_state=42)
+
+	# 모델 학습: 원본 데이터
+	model_orig = LinearRegression()
+	model_orig.fit(X_train_orig, y_train_orig)
+	y_pred_orig = model_orig.predict(X_test_orig)
+
+	# 모델 학습: 증강 데이터
+	model_aug = LinearRegression()
+	model_aug.fit(X_train_aug, y_train_aug)
+	y_pred_aug = model_aug.predict(X_test_aug)
+
+	# 성능 평가
+	mse_orig = mean_squared_error(y_test_orig, y_pred_orig)
+	r2_orig = r2_score(y_test_orig, y_pred_orig)
+
+	mse_aug = mean_squared_error(y_test_aug, y_pred_aug)
+	r2_aug = r2_score(y_test_aug, y_pred_aug)
+
+	# 결과 출력
+	print("=== 원본 데이터 성능 ===")
+	print(f"Mean Squared Error: {mse_orig:.4f}")
+	print(f"R2 Score: {r2_orig:.4f}")
+
+	print("\n=== 증강 데이터 성능 ===")
+	print(f"Mean Squared Error: {mse_aug:.4f}")
+	print(f"R2 Score: {r2_aug:.4f}")
+
+	# 시각화
+	plt.scatter(original_data["X"], original_data["y"], label="Original Data", color="blue", alpha=0.6)
+	plt.scatter(augmented_data["X"], augmented_data["y"], label="Augmented Data", color="orange", alpha=0.4)
+	plt.plot(X_test_orig, y_pred_orig, label="Model (Original)", color="green")
+	plt.plot(X_test_aug, y_pred_aug, label="Model (Augmented)", color="red")
+	plt.xlabel("X")
+	plt.ylabel("y")
+	plt.title("Original vs Augmented Data and Models")
+	plt.legend()
+	plt.show()
+ 
 <br>
 
 ## [1-2] 교차 검증(Cross-Validation)
