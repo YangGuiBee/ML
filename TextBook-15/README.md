@@ -1186,6 +1186,63 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 ▣ 적용대상 알고리즘 : 선형 모델, 의사결정 나무, 랜덤 포레스트, 딥러닝 등 대부분의 알고리즘<br>
 **LIM(Local Interpretable Model-agnostic Explanations)** : 모델에 관계없이 로컬(Local) 단위에서 특정 예측에 대해 모델이 왜 그와 같은 결정을 내렸는지를 설명(개별 데이터 포인트에 대해 각 특성(feature)이 예측값에 얼마나 기여했는지 나타냄)<br>
 **SHAP(SHapley Additive exPlanations)** : 각 특성이 예측값에 기여하는 정도를 공정하게 분배하는 방법론으로, 모든 특성 조합에서의 평균 기여도를 계산<br>
+
+	#############################################################
+	# [1] 데이터 처리 및 변환
+	# [1-9] 특성 엔지니어링(Feature Engineering)
+	#############################################################
+	from sklearn.datasets import load_iris
+	from sklearn.model_selection import train_test_split
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.metrics import accuracy_score
+	from sklearn.preprocessing import PolynomialFeatures
+	import numpy as np
+	import pandas as pd
+
+	# 1. 데이터 로드 및 노이즈 추가
+	iris = load_iris()
+	X = pd.DataFrame(iris.data, columns=iris.feature_names)
+	y = iris.target
+
+	# 노이즈 추가
+	np.random.seed(42)
+	X_noisy = X + np.random.normal(0, 0.5, X.shape)
+
+	# 2. 특성 엔지니어링 수행 전 평가
+	X_train_raw, X_test_raw, y_train, y_test = train_test_split(X_noisy, y, test_size=0.3, random_state=42)
+	model_raw = LogisticRegression(max_iter=500)
+	model_raw.fit(X_train_raw, y_train)
+	y_pred_raw = model_raw.predict(X_test_raw)
+	accuracy_raw = accuracy_score(y_test, y_pred_raw)
+
+	# 3. 특성 엔지니어링 수행: 상호작용 특성 추가
+	poly = PolynomialFeatures(degree=2, interaction_only=True, include_bias=False)
+	X_fe = pd.DataFrame(poly.fit_transform(X_noisy), columns=poly.get_feature_names_out(X.columns))
+
+	# 4. 특성 엔지니어링 후 평가
+	X_train_fe, X_test_fe, y_train, y_test = train_test_split(X_fe, y, test_size=0.3, random_state=42)
+	model_fe = LogisticRegression(max_iter=500)
+	model_fe.fit(X_train_fe, y_train)
+	y_pred_fe = model_fe.predict(X_test_fe)
+	accuracy_fe = accuracy_score(y_test, y_pred_fe)
+
+	# 5. 결과 출력
+	print(f"Accuracy before Feature Engineering: {accuracy_raw:.2f}")
+	print(f"Accuracy after Feature Engineering: {accuracy_fe:.2f}")
+
+	if accuracy_fe > accuracy_raw:
+	    print("\nFeature Engineering improved the model's performance!")
+	elif accuracy_fe == accuracy_raw:
+	    print("\nFeature Engineering did not affect the model's performance.")
+	else:
+	    print("\nFeature Engineering decreased the model's performance.")
+
+<br>
+
+	Accuracy before Feature Engineering: 0.89
+	Accuracy after Feature Engineering: 0.91
+	Feature Engineering improved the model's performance!
+
 <br>
 
 ## [1-10] 정보 병합(Data Fusion)
@@ -1196,6 +1253,94 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 ▣ 단점 : 데이터 소스 간 일치성 문제가 발생할 수 있음, 통합 규칙 설정과 변환 과정이 복잡<br>
 ▣ 적용대상 알고리즘 : 데이터 통합 후 모든 머신러닝 알고리즘에 적용 가능<br>
 
+	#############################################################
+	# [1] 데이터 처리 및 변환
+	# [1-10] 정보 병합(Data Fusion)
+	#############################################################
+	from sklearn.model_selection import train_test_split
+	from sklearn.linear_model import LinearRegression
+	from sklearn.metrics import r2_score
+	from sklearn.datasets import load_iris
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	import matplotlib.font_manager as fm
+
+	# 한글 폰트 설정
+	plt.rc('font', family='Malgun Gothic')  # Windows의 맑은 고딕 폰트
+	plt.rcParams['axes.unicode_minus'] = False  # 한글 폰트 설정 시 음수 부호 깨짐 방지
+
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	iris_df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
+	iris_df['target'] = iris.target
+
+	# 컬럼 이름을 간단하게 변경
+	iris_df.columns = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'target']
+
+	# 1단계: 'sepal_length'와 'sepal_width'를 사용하여 초기 선형 회귀 분석을 진행
+	X_initial = iris_df[['sepal_length', 'sepal_width']]
+	y = iris_df['target']
+
+	# 학습 데이터와 테스트 데이터로 분리
+	X_train_initial, X_test_initial, y_train, y_test = train_test_split(X_initial, y, test_size=0.2, random_state=42)
+
+	# 2단계: 초기 선형 회귀 모델 학습
+	linear_reg = LinearRegression()
+	linear_reg.fit(X_train_initial, y_train)
+
+	# 3단계: 테스트 데이터를 이용하여 예측하고 R2 점수 계산
+	y_pred_initial = linear_reg.predict(X_test_initial)
+	r2_initial = r2_score(y_test, y_pred_initial)
+
+	# 4단계: 'petal_length'와 'petal_width'를 추가하여 데이터 병합
+	X_combined = iris_df[['sepal_length', 'sepal_width', 'petal_length', 'petal_width']]
+
+	# 학습 데이터와 테스트 데이터로 분리
+	X_train_combined, X_test_combined, y_train, y_test = train_test_split(X_combined, y, test_size=0.2, random_state=42)
+
+	# 5단계: 다중 선형 회귀 모델 학습
+	multiple_linear_reg = LinearRegression()
+	multiple_linear_reg.fit(X_train_combined, y_train)
+
+	# 6단계: 테스트 데이터를 이용하여 예측하고 R2 점수 계산
+	y_pred_combined = multiple_linear_reg.predict(X_test_combined)
+	r2_combined = r2_score(y_test, y_pred_combined)
+
+	# 결과 출력
+	print("초기 모델의 R2 점수 (sepal_length, sepal_width):", r2_initial)
+	print("병합 모델의 R2 점수 (sepal_length, sepal_width, petal_length, petal_width):", r2_combined)
+
+	# 시각화
+	# 초기 데이터 시각화 (sepal_length와 sepal_width만 사용)
+	plt.figure(figsize=(12, 6))
+
+	# 초기 데이터 산점도
+	plt.subplot(1, 2, 1)
+	for target, color, label in zip([0, 1, 2], ['red', 'blue', 'green'], iris.target_names):
+	    subset = iris_df[iris_df['target'] == target]
+	    plt.scatter(subset['sepal_length'], subset['sepal_width'], c=color, label=label, edgecolor='k')
+	plt.title('초기 데이터 (Sepal Length vs. Sepal Width)')
+	plt.xlabel('Sepal Length')
+	plt.ylabel('Sepal Width')
+	plt.legend()
+	plt.colorbar(label='Target')
+
+	# 병합 데이터 시각화 (petal_length와 petal_width 사용)
+	plt.subplot(1, 2, 2)
+	for target, color, label in zip([0, 1, 2], ['red', 'blue', 'green'], iris.target_names):
+	    subset = iris_df[iris_df['target'] == target]
+	    plt.scatter(subset['petal_length'], subset['petal_width'], c=color, label=label, edgecolor='k')
+	plt.title('병합 데이터 (Sepal, Petal Length vs. Sepal, Petal Width)')
+	plt.xlabel('Sepal, Petal Length')
+	plt.ylabel('Sepal, Petal Width')
+	plt.legend()
+
+	plt.tight_layout()
+	plt.show()
+
+<br>
+
+![](./images/1-10.png) 
 <br>
 
 ---
