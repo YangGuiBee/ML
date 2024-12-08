@@ -576,6 +576,106 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 ▣ 단점 : 과도한 탐지 기준은 중요한 데이터를 제거할 위험, 고차원 데이터에서는 탐지가 어려움<br>
 ▣ 적용대상 알고리즘 : 회귀분석, PCA, 클러스터링, 랜덤 포레스트, 딥러닝 등<br>
 
+	#############################################################
+	# [1] 데이터 처리 및 변환
+	# [1-6] 이상치 탐지(Outlier Detection)
+	#############################################################
+	import pandas as pd
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.model_selection import train_test_split
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.metrics import accuracy_score
+
+	# 1. Iris 데이터 로드
+	iris = load_iris(as_frame=True)
+	iris_df = iris.frame
+
+	# 2. 데이터 준비 (입력 특성과 타겟 분리)
+	X = iris_df.iloc[:, :-1]  # 입력 특성 (꽃받침, 꽃잎)
+	y = iris_df['target']     # 타겟 (클래스)
+
+	# 3. 이상치 탐지 및 제거
+	def detect_outliers_iqr(data):
+	    """IQR(사분위 범위)을 사용하여 이상치 탐지"""
+	    Q1 = data.quantile(0.25)
+	    Q3 = data.quantile(0.75)
+	    IQR = Q3 - Q1
+	    lower_bound = Q1 - 1.5 * IQR
+	    upper_bound = Q3 + 1.5 * IQR
+	    outliers = (data < lower_bound) | (data > upper_bound)
+	    return ~outliers.any(axis=1), outliers
+
+	# 이상치 탐지
+	outlier_mask, outliers_boolean = detect_outliers_iqr(X)
+	X_no_outliers = X[outlier_mask]
+	y_no_outliers = y[outlier_mask]
+
+	# 이상치 데이터 추출
+	outliers_detected = X[~outlier_mask].copy()
+
+	# 이상치 사유 추가
+	reasons = []
+	for index, row in outliers_detected.iterrows():
+	    reason = []
+	    for column in X.columns:
+	        if outliers_boolean.at[index, column]:
+	            reason.append(f"{column} out of range")
+	    reasons.append(", ".join(reason))
+	outliers_detected['Reason'] = reasons
+
+	print("Outliers detected:")
+	print(outliers_detected)
+
+	# 이상치 개수 확인
+	print(f"\nOriginal data size: {X.shape[0]}")
+	print(f"Data size after removing outliers: {X_no_outliers.shape[0]}")
+	print(f"Number of outliers detected: {X.shape[0] - X_no_outliers.shape[0]}")
+
+	# 4. 데이터 분리 (학습/테스트 셋)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+	X_train_no_outliers, X_test_no_outliers, y_train_no_outliers, y_test_no_outliers = 	train_test_split(
+	    X_no_outliers, y_no_outliers, test_size=0.3, random_state=42)
+
+	# 5. 모델 학습 및 평가
+	# (1) 이상치 제거 전
+	model = LogisticRegression(max_iter=200)
+	model.fit(X_train, y_train)
+	y_pred = model.predict(X_test)
+	accuracy_before = accuracy_score(y_test, y_pred)
+
+	# (2) 이상치 제거 후
+	model_no_outliers = LogisticRegression(max_iter=200)
+	model_no_outliers.fit(X_train_no_outliers, y_train_no_outliers)
+	y_pred_no_outliers = model_no_outliers.predict(X_test_no_outliers)
+	accuracy_after = accuracy_score(y_test_no_outliers, y_pred_no_outliers)
+
+	# 6. 결과 출력
+	print(f"\nAccuracy before removing outliers: {accuracy_before:.2f}")
+	print(f"Accuracy after removing outliers: {accuracy_after:.2f}")
+
+<br>
+
+	Outliers detected:
+ 		   sepal length (cm)  sepal width (cm)  petal length (cm)  petal width (cm) 
+	15                5.7               4.4                1.5               0.4   
+	32                5.2               4.1                1.5               0.1   
+	33                5.5               4.2                1.4               0.2   
+	60                5.0               2.0                3.5               1.0   
+
+	                           Reason  
+	15  sepal width (cm) out of range  
+	32  sepal width (cm) out of range  
+	33  sepal width (cm) out of range  
+	60  sepal width (cm) out of range  
+
+	Original data size: 150
+	Data size after removing outliers: 146
+	Number of outliers detected: 4
+
+	Accuracy before removing outliers: 1.00
+	Accuracy after removing outliers: 0.95
+
 <br>
 
 ## [1-7] 데이터 중복 제거(Data Deduplication)
