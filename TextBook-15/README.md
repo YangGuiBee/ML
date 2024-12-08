@@ -102,7 +102,7 @@
 
 	# 데이터 증강: 노이즈와 비선형성 추가
 	augmented_X = X + np.random.randn(100, 1) * 0.2  # 작은 노이즈 추가
-	augmented_y = 2.5 * augmented_X.flatten() + np.random.randn(100) * 0.5 + 0.2 * 		np.sin(augmented_X.flatten())  # 비선형성 추가
+	augmented_y = 2.5 * augmented_X.flatten() + np.random.randn(100) * 0.5 + 0.2 * np.sin(augmented_X.flatten())  # 비선형성 추가
 	augmented_data = pd.DataFrame({"X": augmented_X.flatten(), "y": augmented_y})
 
 	# 데이터 병합
@@ -110,11 +110,11 @@
 
 	# 데이터 분리: 원본 데이터
 	X_train_orig, X_test_orig, y_train_orig, y_test_orig = train_test_split(
-	    original_data["X"].values.reshape(-1, 1), original_data["y"], test_size=0.2, 	random_state=42)
+	    original_data["X"].values.reshape(-1, 1), original_data["y"], test_size=0.2, random_state=42)
 
 	# 데이터 분리: 증강 데이터
 	X_train_aug, X_test_aug, y_train_aug, y_test_aug = train_test_split(
-	    combined_data["X"].values.reshape(-1, 1), combined_data["y"], test_size=0.2, 	random_state=42)
+	    combined_data["X"].values.reshape(-1, 1), combined_data["y"], test_size=0.2, random_state=42)
 
 	# 모델 학습: 원본 데이터
 	model_orig = LinearRegression()
