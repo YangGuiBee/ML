@@ -2113,15 +2113,6 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 ▣ 단점 : 도구 및 알고리즘의 제한 사항에 따라 최적 성능을 보장하지 못할 수도 있으며, 도구 사용에 따른 비용 발생 가능<br>
 ▣ 적용대상 알고리즘 : 모든 머신러닝 및 딥러닝 알고리즘, 특히 AutoML을 사용하는 대규모 프로젝트<br>
 
-<br>
-
-## [3-6] AutoML(Automated Machine Learning) 활용
-▣ 정의 : AutoML (Automated Machine Learning)은 머신러닝 모델 개발의 전 과정을 자동화하는 기술 또는 도구<br>
-▣ 필요성 : 전문가 부족 문제 해결, 시간과 자원 절약, 최적의 모델 탐색, 데이터 증가와 복잡성 대응, 초기 프로토타이핑<br>
-▣ 주요기법  : 자동 데이터 전처리, 모델 선택 (Algorithm Selection), 하이퍼파라미터 튜닝, 파이프라인 자동화 (Pipeline Optimization), 메타러닝 (Meta-Learning), 신경 아키텍처 검색 (Neural Architecture Search, NAS), 앙상블 기법<br>
-▣ 장점 : 사용 용이성, 시간 절약, 효율성, 범용성, 성능 최적화<br>
-▣ 단점 : 설명 가능성 부족, 제한된 커스터마이징, 계산 비용, 기술적 제약, 데이터 전처리 한계<br>
-▣ 적용대상 알고리즘 : 기본 머신러닝 알고리즘, 앙상블, 딥러닝, 신경 아키텍처 검색 (NAS), 시계열 예측, 강화학습<br>
 
 	#############################################################
 	# [3] 하이퍼파라미터 최적화
@@ -2206,6 +2197,16 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 	기본 선형 회귀 모델의 R2 점수: 0.9469
 	Automated Hyperparameter Tuning 후 Gradient Boosting Regressor의 R2 점수: 0.9986
 	최적 하이퍼파라미터: {'n_estimators': 71, 'learning_rate': 0.062404813201012564, 'max_depth': 4}
+
+<br>
+
+## [3-6] AutoML(Automated Machine Learning) 활용
+▣ 정의 : AutoML (Automated Machine Learning)은 머신러닝 모델 개발의 전 과정을 자동화하는 기술 또는 도구<br>
+▣ 필요성 : 전문가 부족 문제 해결, 시간과 자원 절약, 최적의 모델 탐색, 데이터 증가와 복잡성 대응, 초기 프로토타이핑<br>
+▣ 주요기법  : 자동 데이터 전처리, 모델 선택 (Algorithm Selection), 하이퍼파라미터 튜닝, 파이프라인 자동화 (Pipeline Optimization), 메타러닝 (Meta-Learning), 신경 아키텍처 검색 (Neural Architecture Search, NAS), 앙상블 기법<br>
+▣ 장점 : 사용 용이성, 시간 절약, 효율성, 범용성, 성능 최적화<br>
+▣ 단점 : 설명 가능성 부족, 제한된 커스터마이징, 계산 비용, 기술적 제약, 데이터 전처리 한계<br>
+▣ 적용대상 알고리즘 : 기본 머신러닝 알고리즘, 앙상블, 딥러닝, 신경 아키텍처 검색 (NAS), 시계열 예측, 강화학습<br>
 
 <br>
 
@@ -2548,13 +2549,98 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 <br>
 
 ## [4-4] 최적화 알고리즘 선택(Optimizer Selection) : Adam, SGD, RMSprop
-### [4-4-1] Adam (Adaptive Moment Estimation)
+### [4-4-1] Adam(Adaptive Moment Estimation)
 ▣ 정의: Stochastic Gradient Descent(SGD)의 확장으로 모멘텀과 적응 학습률(Adaptive Learning Rate)을 결합한 최적화 알고리즘. 딥러닝에서 널리 사용(과거의 그래디언트 정보를 활용하여 학습 속도를 가속화하고 안정성을 높임)<br>
 ▣ 필요성 : 복잡한 비선형 함수에서 경사 하강법(SGD)이 수렴하기 어려운 문제를 해결하기 위해 사용<br>
 ▣ 주요 기법 : 그래디언트의 과거 방향(누적)을 참고하여 업데이트를 가속화(Momentum), 각 매개변수의 그래디언트 크기에 따라 학습률을 조정하는 적응 학습률 (Adaptive Learning Rate), 이동 평균 (Exponential Moving Averages)<br>
 ▣ 장점 : 학습률 조정이 자동으로 이루어짐, 빠른 수렴 속도, 스파스 데이터 처리에 효과적, 과거 그래디언트 정보를 활용해 진동(oscillation) 감소<br>
 ▣ 단점 : 학습률이 점점 작아져, 수렴 속도가 느려질 수 있음, 추가 하이퍼파라미터 설정 필요, 과적합 가능성<br>
 ▣ 적용대상 알고리즘 : 딥러닝에서 주로 사용(CNN, RNN, GAN, Transformer 등)<br>
+
+	#############################################################
+	# [4] 학습 과정 최적화
+	# [4-4] 최적화 알고리즘 선택(Optimizer Selection) : Adam, SGD, RMSprop
+	# Adam(Adaptive Moment Estimation)
+	#############################################################
+	import pandas as pd
+	import numpy as np
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import StandardScaler, OneHotEncoder
+	from sklearn.compose import ColumnTransformer
+	from sklearn.pipeline import Pipeline
+	from sklearn.impute import SimpleImputer
+	from sklearn.metrics import r2_score
+	from tensorflow.keras.models import Sequential
+	from tensorflow.keras.layers import Dense
+	from tensorflow.keras.optimizers import Adam
+
+	# 데이터 로드
+	url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-15/housing.csv"
+	housing_data = pd.read_csv(url)
+
+	# 데이터 열 정의
+	categorical_columns = housing_data.select_dtypes(include=['object']).columns.tolist()
+	numerical_columns = housing_data.select_dtypes(include=['float64', 'int64']).columns.tolist()
+
+	if 'median_house_value' in numerical_columns:
+	    numerical_columns.remove('median_house_value')
+
+	# 결측치 처리 및 전처리 파이프라인 설정
+	numeric_imputer = SimpleImputer(strategy='mean')
+	categorical_imputer = SimpleImputer(strategy='most_frequent')
+
+	X = housing_data.drop(columns=['median_house_value'], errors='ignore')
+	y = housing_data['median_house_value']
+
+	preprocessor = ColumnTransformer(
+	    transformers=[
+	        ('num', Pipeline([('imputer', numeric_imputer), ('scaler', StandardScaler())]), numerical_columns),
+	        ('cat', Pipeline([('imputer', categorical_imputer), ('onehot', OneHotEncoder())]), categorical_columns)])
+
+	# 데이터 분리
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+	# 데이터 전처리
+	X_train_processed = preprocessor.fit_transform(X_train)
+	X_test_processed = preprocessor.transform(X_test)
+
+	# 데이터 정규화
+	y_train = np.log1p(y_train)  # 로그 변환으로 값을 스케일 조정
+	y_test = np.log1p(y_test)
+
+	# 기본 모델 학습 (Adam 없이 단순 선형 회귀 모델)
+	from sklearn.linear_model import LinearRegression
+
+	lr_model = LinearRegression()
+	lr_model.fit(X_train_processed, y_train)
+	y_pred_lr = lr_model.predict(X_test_processed)
+	r2_lr = r2_score(y_test, y_pred_lr)
+	print(f"기본 선형 회귀 모델 R² 점수: {r2_lr:.2f}")
+
+	# Adam Optimizer 기반 모델 구축
+	adam_model = Sequential()
+	adam_model.add(Dense(128, input_dim=X_train_processed.shape[1], activation='relu'))
+	adam_model.add(Dense(64, activation='relu'))
+	adam_model.add(Dense(1))  # 출력층
+
+	# Adam Optimizer 설정
+	adam_optimizer = Adam(learning_rate=0.001)
+	adam_model.compile(optimizer=adam_optimizer, loss='mean_squared_error', metrics=['mae'])
+
+	# Adam 기반 모델 학습
+	adam_model.fit(X_train_processed, y_train, epochs=50, batch_size=32, verbose=1)
+
+	# 평가 및 R² 점수 계산
+	y_pred_adam = adam_model.predict(X_test_processed)
+	r2_adam = r2_score(y_test, y_pred_adam)
+	print(f"Adam Optimizer 기반 모델 R² 점수: {r2_adam:.2f}")
+
+<br>
+
+	기본 선형 회귀 모델 R² 점수: 0.65
+	Adam Optimizer 기반 모델 R² 점수: 0.78
+
+<br>
 
 ### [4-4-2] SGD(Stochastic Gradient Descent)
 ▣ 정의 : 경사 하강법(Gradient Descent)의 변형으로, 각 배치(batch) 또는 샘플에 대해 손실 함수의 그래디언트를 계산하여 가중치를 업데이트하는 알고리즘<br>
@@ -2564,6 +2650,135 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 ▣ 단점 : 손실 함수의 최저점 주변에서 진동(oscillation : 손실 함수의 그래프에서 최저점(최적값, Optimum) 주변에서 모델의 가중치 업데이트 방향이 계속 바뀌는 현상)이 발생할 수 있으며. 학습률 설정이 민감하고, 느린 수렴 속도<br>
 ▣ 적용대상 알고리즘 : 머신러닝 및 딥러닝: Logistic Regression, Linear Regression, CNN, RNN<br>
 
+	#############################################################
+	# [4] 학습 과정 최적화
+	# [4-4] 최적화 알고리즘 선택(Optimizer Selection) : Adam, SGD, RMSprop
+	# SGD(Stochastic Gradient Descent)
+	#############################################################
+	import pandas as pd
+	import numpy as np
+	import matplotlib.pyplot as plt
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import StandardScaler, OneHotEncoder
+	from sklearn.compose import ColumnTransformer
+	from sklearn.pipeline import Pipeline
+	from sklearn.impute import SimpleImputer
+	from sklearn.metrics import r2_score
+	from sklearn.ensemble import RandomForestRegressor
+	from sklearn.linear_model import LinearRegression, SGDRegressor
+	import warnings
+
+	# matplotlib 경고 무시
+	warnings.filterwarnings("ignore", category=UserWarning, module="matplotlib.font_manager")
+
+	# 기본 폰트를 'DejaVu Sans'로 명시적으로 설정
+	plt.rcParams['font.family'] = 'DejaVu Sans'
+	plt.rcParams['axes.unicode_minus'] = False  # 마이너스 기호 깨짐 방지
+
+	# 데이터 로드
+	url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-15/housing.csv"
+	housing_data = pd.read_csv(url)
+
+	# 데이터 열 정의
+	categorical_columns = housing_data.select_dtypes(include=['object']).columns.tolist()
+	numerical_columns = housing_data.select_dtypes(include=['float64', 'int64']).columns.tolist()
+
+	if 'median_house_value' in numerical_columns:
+	    numerical_columns.remove('median_house_value')
+
+	# 결측치 처리 및 전처리 파이프라인 설정
+	numeric_imputer = SimpleImputer(strategy='mean')
+	categorical_imputer = SimpleImputer(strategy='most_frequent')
+
+	X = housing_data.drop(columns=['median_house_value'], errors='ignore')
+	y = housing_data['median_house_value']
+
+	# 이상치 제거 (상위 99% 값 제한)
+	upper_limit = np.percentile(y, 99)
+	y = np.clip(y, None, upper_limit)
+
+	# 전처리 파이프라인 설정
+	preprocessor = ColumnTransformer(
+	    transformers=[
+	        ('num', Pipeline([('imputer', numeric_imputer), ('scaler', StandardScaler())]), numerical_columns),
+	        ('cat', Pipeline([('imputer', categorical_imputer), ('onehot', OneHotEncoder())]), categorical_columns)])
+
+	# 데이터 분리
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+	# 데이터 전처리
+	X_train_processed = preprocessor.fit_transform(X_train)
+	X_test_processed = preprocessor.transform(X_test)
+
+	# 1. 선형 회귀 모델 학습
+	lr_model = LinearRegression()
+	lr_model.fit(X_train_processed, y_train)
+	y_pred_lr = lr_model.predict(X_test_processed)
+	r2_lr = r2_score(y_test, y_pred_lr)
+	print(f"Linear Regression R² score: {r2_lr:.2f}")
+
+	# 2. Random Forest 모델 학습
+	rf_model = RandomForestRegressor(
+	    n_estimators=100,    # 트리 개수
+	    max_depth=10,        # 최대 깊이
+	    random_state=42)
+	rf_model.fit(X_train_processed, y_train)
+	y_pred_rf = rf_model.predict(X_test_processed)
+	r2_rf = r2_score(y_test, y_pred_rf)
+	print(f"Random Forest R² score: {r2_rf:.2f}")
+
+	# 3. SGD Regressor 모델 학습
+	sgd_model = SGDRegressor(
+	    max_iter=3000,
+	    tol=1e-4,
+	    eta0=0.01,
+	    learning_rate='adaptive',
+	    shuffle=True,
+	    early_stopping=True,
+	    validation_fraction=0.1,
+	    random_state=42)
+	sgd_model.fit(X_train_processed, y_train)
+	y_pred_sgd = sgd_model.predict(X_test_processed)
+	r2_sgd = r2_score(y_test, y_pred_sgd)
+	print(f"SGD Regressor R² score: {r2_sgd:.2f}")
+
+	# 시각화
+	plt.figure(figsize=(18, 6))
+
+	# Linear Regression
+	plt.subplot(1, 3, 1)
+	plt.scatter(y_test, y_pred_lr, alpha=0.6, color='green', label='Linear Regression Predictions')
+	plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], '--r', label='Ideal Fit Line')
+	plt.xlabel("Actual Values")
+	plt.ylabel("Predicted Values")
+	plt.title("Linear Regression: Predicted vs Actual")
+	plt.legend()
+
+	# Random Forest
+	plt.subplot(1, 3, 2)
+	plt.scatter(y_test, y_pred_rf, alpha=0.6, color='blue', label='Random Forest Predictions')
+	plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], '--r', label='Ideal Fit Line')
+	plt.xlabel("Actual Values")
+	plt.ylabel("Predicted Values")
+	plt.title("Random Forest: Predicted vs Actual")
+	plt.legend()
+
+	# SGD Regressor
+	plt.subplot(1, 3, 3)
+	plt.scatter(y_test, y_pred_sgd, alpha=0.6, color='purple', label='SGD Predictions')
+	plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], '--r', label='Ideal Fit Line')
+	plt.xlabel("Actual Values")
+	plt.ylabel("Predicted Values")
+	plt.title("SGD Regressor: Predicted vs Actual")
+	plt.legend()
+	plt.tight_layout()
+	plt.show()
+
+<br>
+
+![](./images/442.png) 
+<br>
+
 ### [4-4-3] RMSprop
 ▣ 정의 : 경사 하강법의 수렴 속도를 개선하기 위해 만들어진 학습률 감소(Adaptive Learning Rate)와 루트 평균 제곱(Root Mean Square Propagation) 개념을 활용한 최적화 알고리즘<br>
 ▣ 필요성 : 학습 과정에서 그래디언트의 크기가 지나치게 크거나 작아지는 문제를 해결하기 위해 필요<br>
@@ -2571,7 +2786,6 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 ▣ 장점 : 진동(oscillation) 감소, 학습률이 자동으로 조정되어 손실 함수의 좁은 골짜기를 빠르게 탐색, SGD보다 안정적<br>
 ▣ 단점 : 장기적으로는 적응 학습률이 너무 작아져 학습이 중단될 수 있음, 하이퍼파라미터 설정 필요<br>
 ▣ 적용대상 알고리즘 : RNN 및 LSTM 같은 시계열 데이터 처리 모델, CNN 기반 모델<br>
-
 
 <br>
 
@@ -3252,7 +3466,7 @@ Scikit-learn에서는 주로 커스텀 손실 함수를 통합하려면 make_sco
 	    r2_gpu = r2_score(y_test, y_pred_gpu)
 	    print(f"GPU 기반 LightGBM 모델 R² 점수: {r2_gpu:.2f}")
 	    print(f"GPU 기반 모델 학습 시간: {gpu_time:.2f} 초")
-except Exception as e:
+	except Exception as e:
 	    print("GPU 지원이 감지되지 않아 CPU 기반으로 실행되었습니다.")
 	    print("오류 메시지:", e)
     
@@ -3289,6 +3503,8 @@ Bootstrap Method: 데이터를 무작위로 복원 샘플링하여 여러 학습
 ▣ 장점 : 일반화 능력 향상, 객관적 평가, 과적합/과소적합 확인<br>
 ▣ 단점 : 추가 데이터 필요, 시간 비용 증가, 과도한 최적화 위험<br>
 ▣ 적용대상 알고리즘 : 모든 머신러닝 및 딥러닝 모델에 적용<br>
+
+<br>
 
 ## [7-2] 모델 성능 비교(Model Performance Comparison) 
 ▣ 정의 : 여러 모델 간의 성능을 평가하고 가장 적합한 모델을 선택하는 과정<br>
