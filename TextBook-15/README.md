@@ -2787,6 +2787,133 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 ▣ 단점 : 장기적으로는 적응 학습률이 너무 작아져 학습이 중단될 수 있음, 하이퍼파라미터 설정 필요<br>
 ▣ 적용대상 알고리즘 : RNN 및 LSTM 같은 시계열 데이터 처리 모델, CNN 기반 모델<br>
 
+	#############################################################
+	# [4] 학습 과정 최적화
+	# [4-4] 최적화 알고리즘 선택(Optimizer Selection) : Adam, SGD, RMSprop
+	# RMSprop
+	#############################################################
+	import pandas as pd
+	import numpy as np
+	import matplotlib.pyplot as plt
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import StandardScaler, OneHotEncoder
+	from sklearn.compose import ColumnTransformer
+	from sklearn.pipeline import Pipeline
+	from sklearn.impute import SimpleImputer
+	from sklearn.metrics import r2_score
+	from sklearn.ensemble import RandomForestRegressor
+	from sklearn.linear_model import LinearRegression, SGDRegressor
+	import warnings
+
+	# matplotlib 경고 무시
+	warnings.filterwarnings("ignore", category=UserWarning, module="matplotlib.font_manager")
+
+	# 기본 폰트를 'DejaVu Sans'로 명시적으로 설정
+	plt.rcParams['font.family'] = 'DejaVu Sans'
+	plt.rcParams['axes.unicode_minus'] = False  # 마이너스 기호 깨짐 방지
+
+	# 데이터 로드
+	url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-15/housing.csv"
+	housing_data = pd.read_csv(url)
+
+	# 데이터 열 정의
+	categorical_columns = housing_data.select_dtypes(include=['object']).columns.tolist()
+	numerical_columns = housing_data.select_dtypes(include=['float64', 'int64']).columns.tolist()
+
+	if 'median_house_value' in numerical_columns:
+	    numerical_columns.remove('median_house_value')
+
+	# 결측치 처리 및 전처리 파이프라인 설정
+	numeric_imputer = SimpleImputer(strategy='mean')
+	categorical_imputer = SimpleImputer(strategy='most_frequent')
+
+	X = housing_data.drop(columns=['median_house_value'], errors='ignore')
+	y = housing_data['median_house_value']
+
+	# 이상치 제거 (상위 99% 값 제한)
+	upper_limit = np.percentile(y, 99)
+	y = np.clip(y, None, upper_limit)
+
+	# 전처리 파이프라인 설정
+	preprocessor = ColumnTransformer(
+	    transformers=[
+	        ('num', Pipeline([('imputer', numeric_imputer), ('scaler', StandardScaler())]), numerical_columns),
+	        ('cat', Pipeline([('imputer', categorical_imputer), ('onehot', OneHotEncoder())]), categorical_columns)])
+
+	# 데이터 분리
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+	# 데이터 전처리
+	X_train_processed = preprocessor.fit_transform(X_train)
+	X_test_processed = preprocessor.transform(X_test)
+
+	# 1. 선형 회귀 모델 학습
+	lr_model = LinearRegression()
+	lr_model.fit(X_train_processed, y_train)
+	y_pred_lr = lr_model.predict(X_test_processed)
+	r2_lr = r2_score(y_test, y_pred_lr)
+	print(f"Linear Regression R² score: {r2_lr:.2f}")
+
+	# 2. Random Forest 모델 학습
+	rf_model = RandomForestRegressor(
+	    n_estimators=100,    # 트리 개수
+	    max_depth=10,        # 최대 깊이
+	    random_state=42)
+	rf_model.fit(X_train_processed, y_train)
+	y_pred_rf = rf_model.predict(X_test_processed)
+	r2_rf = r2_score(y_test, y_pred_rf)
+	print(f"Random Forest R² score: {r2_rf:.2f}")
+
+	# 3. SGD Regressor 모델 학습
+	sgd_model = SGDRegressor(
+	    max_iter=3000,
+	    tol=1e-4,
+	    eta0=0.01,
+	    learning_rate='adaptive',
+	    shuffle=True,
+	    early_stopping=True,
+	    validation_fraction=0.1,
+	    random_state=42)
+	sgd_model.fit(X_train_processed, y_train)
+	y_pred_sgd = sgd_model.predict(X_test_processed)
+	r2_sgd = r2_score(y_test, y_pred_sgd)
+	print(f"SGD Regressor R² score: {r2_sgd:.2f}")
+
+	# 시각화
+	plt.figure(figsize=(18, 6))
+
+	# Linear Regression
+	plt.subplot(1, 3, 1)
+	plt.scatter(y_test, y_pred_lr, alpha=0.6, color='green', label='Linear Regression Predictions')
+	plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], '--r', label='Ideal Fit Line')
+	plt.xlabel("Actual Values")
+	plt.ylabel("Predicted Values")
+	plt.title("Linear Regression: Predicted vs Actual")
+	plt.legend()
+
+	# Random Forest
+	plt.subplot(1, 3, 2)
+	plt.scatter(y_test, y_pred_rf, alpha=0.6, color='blue', label='Random Forest Predictions')
+	plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], '--r', label='Ideal Fit Line')
+	plt.xlabel("Actual Values")
+	plt.ylabel("Predicted Values")
+	plt.title("Random Forest: Predicted vs Actual")
+	plt.legend()
+
+	# SGD Regressor
+	plt.subplot(1, 3, 3)
+	plt.scatter(y_test, y_pred_sgd, alpha=0.6, color='purple', label='SGD Predictions')
+	plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], '--r', label='Ideal Fit Line')
+	plt.xlabel("Actual Values")
+	plt.ylabel("Predicted Values")
+	plt.title("SGD Regressor: Predicted vs Actual")
+	plt.legend()
+	plt.tight_layout()
+	plt.show()
+
+<br>
+
+![](./images/443.png) 
 <br>
 
 ## [4-5] 전이 학습(Transfer Learning)
