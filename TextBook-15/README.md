@@ -2914,6 +2914,108 @@ Scikit-learn에서 주로 SGD 기반 모델(SGDClassifier, SGDRegressor, Passive
 ▣ 적용대상 알고리즘 : 모든 지도 학습 알고리즘, 특히 고차원 데이터셋이 포함된 문제<br>
 Scikit-learn에서 Variance Threshold(특성의 분산이 낮은 특성 제거), SelectKBest(가장 중요한 K개의 특성을 선택), SelectPercentile(상위 n%의 특성을 선택) 함수 제공<br>
 
+	#############################################################
+	# [5] 성능 향상
+	# [5-1] 특성 중요도 분석 및 선택(Feature Importance & Selection)
+	#############################################################
+	import numpy as np
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	from sklearn.model_selection import train_test_split
+	from sklearn.ensemble import GradientBoostingRegressor
+	from sklearn.metrics import r2_score
+	from sklearn.preprocessing import StandardScaler, OneHotEncoder
+	from sklearn.compose import ColumnTransformer
+	from sklearn.pipeline import Pipeline
+	from sklearn.impute import SimpleImputer
+
+	# 데이터 로드
+	url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-15/housing.csv"
+	housing_data = pd.read_csv(url)
+
+	# 데이터 열 이름 확인
+	print("데이터셋 열 이름:", housing_data.columns)
+
+	# 결측치 처리
+	categorical_columns = housing_data.select_dtypes(include=['object']).columns.tolist()
+	numerical_columns = housing_data.select_dtypes(include=['float64', 'int64']).columns.tolist()
+
+	# 타겟 열 제외
+	if 'median_house_value' in numerical_columns:
+	    numerical_columns.remove('median_house_value')
+
+	# 결측치 대체 (숫자형: 평균, 범주형: 최빈값)
+	numeric_imputer = SimpleImputer(strategy='mean')
+	categorical_imputer = SimpleImputer(strategy='most_frequent')
+
+	# 특성과 타겟 분리
+	X = housing_data.drop(columns=['median_house_value'], errors='ignore')
+	y = housing_data['median_house_value']
+
+	# 전처리 파이프라인
+	preprocessor = ColumnTransformer(
+	    transformers=[
+	        ('num', Pipeline([('imputer', numeric_imputer), ('scaler', StandardScaler())]), numerical_columns),
+	        ('cat', Pipeline([('imputer', categorical_imputer), ('onehot', OneHotEncoder())]), categorical_columns)])
+
+	# 데이터 분리
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+	# 데이터 전처리
+	X_train_processed = preprocessor.fit_transform(X_train)
+	X_test_processed = preprocessor.transform(X_test)
+
+	# Gradient Boosting Regressor 모델 학습
+	model = GradientBoostingRegressor(n_estimators=100, learning_rate=0.1, max_depth=3, random_state=42)
+	model.fit(X_train_processed, y_train)
+
+	# 기본 모델 R² 점수
+	y_pred = model.predict(X_test_processed)
+	r2_original = r2_score(y_test, y_pred)
+	print("기본 모델 R² 점수: {:.2f}".format(r2_original))
+
+	# 특성 중요도 분석 및 선택
+	feature_importances = model.feature_importances_
+
+	# 중요도 기준 없이 규제 적용
+	selected_features = feature_importances > 0  # 중요도가 0 이상인 모든 특성을 포함
+	X_train_selected = X_train_processed[:, selected_features]
+	X_test_selected = X_test_processed[:, selected_features]
+
+	# 선택된 특성으로 모델 학습
+	model_selected = GradientBoostingRegressor(n_estimators=150, learning_rate=0.08, max_depth=4, random_state=42)
+	model_selected.fit(X_train_selected, y_train)
+
+	# 특성 선택 후 모델 R² 점수
+	y_pred_selected = model_selected.predict(X_test_selected)
+	r2_selected = r2_score(y_test, y_pred_selected)
+	print("특성 선택 후 모델 R² 점수: {:.2f}".format(r2_selected))
+
+	# 특성 중요도 시각화
+	plt.figure(figsize=(10, 6))
+	plt.bar(range(len(feature_importances)), feature_importances, color="blue")
+	plt.title("Feature Importances")
+	plt.xlabel("Feature Index")
+	plt.ylabel("Importance Score")
+	plt.axhline(y=0, color='red', linestyle='--', label='Threshold: Include All Features')
+	plt.legend()
+	plt.show()
+
+	# 결과 출력
+	print("""
+	### 결과 분석
+	1. **기본 모델 R² 점수**: {:.2f}
+	   - 전체 특성을 사용하여 학습한 모델의 성능입니다.
+	2. **특성 선택 후 모델 R² 점수**: {:.2f}
+	   - 중요도를 기준으로 모든 특성을 유지하고 규제를 추가하여 학습한 모델의 성능입니다.
+	3. **결론**:
+	   - 특성을 유지하면서도 모델 구조 최적화를 통해 성능을 향상시켰습니다.
+	   - 규제와 하이퍼파라미터 튜닝이 효과적인 개선을 가져왔습니다.
+	""".format(r2_original, r2_selected))
+
+<br>
+
+![](./images/5-1.png) 
 <br>
 
 ## [5-2] 손실함수 커스터마이징(Custom Loss Function)
@@ -2924,6 +3026,134 @@ Scikit-learn에서 Variance Threshold(특성의 분산이 낮은 특성 제거),
 ▣ 적용대상 알고리즘 : 모든 머신러닝 및 딥러닝 알고리즘, 특히 비정형 데이터, 불균형 데이터 문제에 적합<br>
 Scikit-learn에서는 주로 커스텀 손실 함수를 통합하려면 make_scorer를 사용하여 평가 지표로 정의<br>
 
+	#############################################################
+	# [5] 성능 향상
+	# [5-2] 손실 함수 커스터마이징 (Custom Loss Function)
+	#############################################################
+	import numpy as np
+	import pandas as pd
+	from sklearn.ensemble import GradientBoostingRegressor
+	from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
+	from sklearn.model_selection import train_test_split, GridSearchCV
+	from sklearn.preprocessing import StandardScaler, OneHotEncoder
+	from sklearn.compose import ColumnTransformer
+	from sklearn.pipeline import Pipeline
+	from sklearn.impute import SimpleImputer
+
+	# 커스터마이징 손실 함수 모델 클래스 정의
+	class CustomLossGradientBoostingRegressor(GradientBoostingRegressor):
+	    def __init__(self, n_estimators=100, learning_rate=0.1, max_depth=3, alpha=0.5):
+	        super().__init__(
+ 	           n_estimators=n_estimators,
+ 	           learning_rate=learning_rate,
+ 	           max_depth=max_depth,
+  	          random_state=42)
+        	self.alpha = alpha  # MSE와 MAE의 혼합 비율
+
+    	def custom_loss(self, y_true, y_pred):
+        	# MSE와 MAE를 혼합한 손실 함수
+        	mse_loss = mean_squared_error(y_true, y_pred)
+        	mae_loss = mean_absolute_error(y_true, y_pred)
+        	return self.alpha * mse_loss + (1 - self.alpha) * mae_loss
+
+    	def fit(self, X, y):
+        	super().fit(X, y)
+       	 	return self
+
+	# 데이터 로드 및 전처리
+	url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-15/housing.csv"
+	housing_data = pd.read_csv(url)
+
+	# 데이터 열 정의
+	categorical_columns = housing_data.select_dtypes(include=['object']).columns.tolist()
+	numerical_columns = housing_data.select_dtypes(include=['float64', 'int64']).columns.tolist()
+
+	if 'median_house_value' in numerical_columns:
+	    numerical_columns.remove('median_house_value')
+
+	# 결측치 처리
+	numeric_imputer = SimpleImputer(strategy='mean')
+	categorical_imputer = SimpleImputer(strategy='most_frequent')
+
+	X = housing_data.drop(columns=['median_house_value'], errors='ignore')
+	y = housing_data['median_house_value']
+
+	# 전처리 파이프라인 설정
+	preprocessor = ColumnTransformer(
+	    transformers=[
+	        ('num', Pipeline([('imputer', numeric_imputer), ('scaler', StandardScaler())]), numerical_columns),
+	        ('cat', Pipeline([('imputer', categorical_imputer), ('onehot', OneHotEncoder())]), categorical_columns)])
+
+	# 데이터 분리
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+	# 데이터 전처리
+	X_train_processed = preprocessor.fit_transform(X_train)
+	X_test_processed = preprocessor.transform(X_test)
+
+	# 기본 모델 (MSE 기반)
+	base_model = GradientBoostingRegressor(n_estimators=100, learning_rate=0.1, max_depth=3, random_state=42)
+	base_model.fit(X_train_processed, y_train)
+	y_pred_base = base_model.predict(X_test_processed)
+	r2_base = r2_score(y_test, y_pred_base)
+	print("기본 모델 R² 점수: {:.2f}".format(r2_base))
+
+	# 하이퍼파라미터 튜닝을 위한 GridSearchCV 설정
+	param_grid = {
+	    "n_estimators": [100, 150, 200],
+ 	    "learning_rate": [0.05, 0.1, 0.2],
+  	    "max_depth": [3, 4, 5],}
+
+	custom_model = CustomLossGradientBoostingRegressor(alpha=0.7)
+
+	grid_search = GridSearchCV(
+	    estimator=custom_model,
+	    param_grid=param_grid,
+	    scoring="r2",
+ 	    cv=3,  # 3-Fold Cross-Validation
+	    verbose=2,
+	    n_jobs=-1)
+
+	# Grid Search 실행
+	grid_search.fit(X_train_processed, y_train)
+
+	# 최적의 하이퍼파라미터 출력
+	print("최적의 하이퍼파라미터:", grid_search.best_params_)
+
+	# 최적의 모델로 테스트 데이터 평가
+	best_model = grid_search.best_estimator_
+	y_pred_best = best_model.predict(X_test_processed)
+	r2_best = r2_score(y_test, y_pred_best)
+	print("최적화된 커스터마이징 손실 함수 모델 R² 점수: {:.2f}".format(r2_best))
+
+	# 결과 비교 출력
+	print("""
+	### 결과 분석
+	1. **기본 모델 R² 점수**: {:.2f}
+	   - 기본 손실 함수(MSE)를 사용하여 학습한 모델의 성능입니다.
+	2. **최적화된 커스터마이징 손실 함수 모델 R² 점수**: {:.2f}
+	   - MSE와 MAE의 혼합 손실 함수를 사용하고 하이퍼파라미터 튜닝을 통해 학습한 모델의 성능입니다.
+	3. **결론**:
+	   - 하이퍼파라미터 최적화를 통해 성능을 향상시킬 수 있습니다.
+	   - 데이터의 특성에 따라 최적의 `n_estimators`, `learning_rate`, `max_depth` 값을 선택하는 것이 중요합니다.
+	""".format(r2_base, r2_best))
+
+<br>
+
+	기본 모델 R² 점수: 0.76
+	Fitting 3 folds for each of 27 candidates, totalling 81 fits
+	최적의 하이퍼파라미터: {'learning_rate': 0.2, 'max_depth': 5, 'n_estimators': 200}
+	최적화된 커스터마이징 손실 함수 모델 R² 점수: 0.83
+
+	### 결과 분석
+	1. **기본 모델 R² 점수**: 0.76
+	   - 기본 손실 함수(MSE)를 사용하여 학습한 모델의 성능입니다.
+	2. **최적화된 커스터마이징 손실 함수 모델 R² 점수**: 0.83
+	   - MSE와 MAE의 혼합 손실 함수를 사용하고 하이퍼파라미터 튜닝을 통해 학습한 모델의 성능입니다.
+	3. **결론**:
+	   - 하이퍼파라미터 최적화를 통해 성능을 향상시킬 수 있습니다.
+	   - 데이터의 특성에 따라 최적의 `n_estimators`, `learning_rate`, `max_depth` 값을 선택하는 것이 중요합니다.
+  
 <br>
 
 ---
@@ -2935,6 +3165,111 @@ Scikit-learn에서는 주로 커스텀 손실 함수를 통합하려면 make_sco
 ▣ 장점 : 학습 속도 및 추론 속도 향상, 대규모 데이터와 모델을 처리할 수 있는 확장성 제공<br>
 ▣ 단점 : 하드웨어 장비의 초기 비용이 높으며, 하드웨어 최적화를 위한 추가적인 설정과 기술 지식 필요<br>
 ▣ 적용대상 알고리즘 : 딥러닝 모델 (CNN, RNN, Transformer 등), 대규모 데이터 처리 및 병렬화가 가능한 모든 알고리즘<br>
+
+	#############################################################
+	# [6] 하드웨어 및 시스템 최적화
+	# [6-1] 하드웨어 최적화 (Hardware Optimization)
+	#############################################################
+	from lightgbm import LGBMRegressor
+	import pandas as pd
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import StandardScaler, OneHotEncoder
+	from sklearn.compose import ColumnTransformer
+	from sklearn.pipeline import Pipeline
+	from sklearn.impute import SimpleImputer
+	from sklearn.metrics import r2_score
+	import time
+
+	# 데이터 로드 및 전처리
+	url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-15/housing.csv"
+	housing_data = pd.read_csv(url)
+
+	# 데이터 열 정의
+	categorical_columns = housing_data.select_dtypes(include=['object']).columns.tolist()
+	numerical_columns = housing_data.select_dtypes(include=['float64', 'int64']).columns.tolist()
+
+	if 'median_house_value' in numerical_columns:
+	    numerical_columns.remove('median_house_value')
+
+	# 결측치 처리
+	numeric_imputer = SimpleImputer(strategy='mean')
+	categorical_imputer = SimpleImputer(strategy='most_frequent')
+
+	X = housing_data.drop(columns=['median_house_value'], errors='ignore')
+	y = housing_data['median_house_value']
+
+	# 전처리 파이프라인 설정
+	preprocessor = ColumnTransformer(
+	    transformers=[
+	        ('num', Pipeline([('imputer', numeric_imputer), ('scaler', StandardScaler())]), numerical_columns),
+  	      ('cat', Pipeline([('imputer', categorical_imputer), ('onehot', OneHotEncoder())]), categorical_columns)])
+
+	# 데이터 분리
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+	# 데이터 전처리
+	X_train_processed = preprocessor.fit_transform(X_train)
+	X_test_processed = preprocessor.transform(X_test)
+
+	# 기본 CPU 기반 LightGBM 모델
+	cpu_model = LGBMRegressor(
+	    n_estimators=150,
+	    learning_rate=0.05,
+	    max_depth=7,
+	    num_leaves=31,
+ 	    min_child_samples=10,
+	    min_split_gain=0.001,
+	    random_state=42,
+	    device="cpu")
+	    start_time_cpu = time.time()
+	    cpu_model.fit(X_train_processed, y_train)
+	    cpu_time = time.time() - start_time_cpu
+
+	y_pred_cpu = cpu_model.predict(X_test_processed)
+	r2_cpu = r2_score(y_test, y_pred_cpu)
+	print(f"기본 CPU 기반 LightGBM 모델 R² 점수: {r2_cpu:.2f}")
+	print(f"CPU 기반 모델 학습 시간: {cpu_time:.2f} 초")
+
+	# GPU 기반 LightGBM 모델 (GPU가 있는 경우)
+	try:
+	    gpu_model = LGBMRegressor(
+  	        n_estimators=150,
+ 	        learning_rate=0.05,
+	        max_depth=7,
+	        num_leaves=31,
+	        min_child_samples=10,
+	        min_split_gain=0.001,
+	        random_state=42,
+	        device="gpu",  # GPU 설정
+	        gpu_platform_id=0,  # OpenCL 플랫폼 ID
+	        gpu_device_id=0     # GPU 디바이스 ID
+ 	   )
+	    start_time_gpu = time.time()
+	    gpu_model.fit(X_train_processed, y_train)
+	    gpu_time = time.time() - start_time_gpu
+
+	    y_pred_gpu = gpu_model.predict(X_test_processed)
+	    r2_gpu = r2_score(y_test, y_pred_gpu)
+	    print(f"GPU 기반 LightGBM 모델 R² 점수: {r2_gpu:.2f}")
+	    print(f"GPU 기반 모델 학습 시간: {gpu_time:.2f} 초")
+except Exception as e:
+	    print("GPU 지원이 감지되지 않아 CPU 기반으로 실행되었습니다.")
+	    print("오류 메시지:", e)
+    
+<br>
+
+	[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.002612 seconds.
+	You can set `force_col_wise=true` to remove the overhead.
+	[LightGBM] [Info] Total Bins 1846
+	[LightGBM] [Info] Number of data points in the train set: 16512, number of used features: 12
+	[LightGBM] [Info] Start training from score 207194.693738
+	기본 CPU 기반 LightGBM 모델 R² 점수: 0.81
+	CPU 기반 모델 학습 시간: 0.76 초
+	[LightGBM] [Info] This is the GPU trainer!!
+	[LightGBM] [Info] Total Bins 1846
+	[LightGBM] [Info] Number of data points in the train set: 16512, number of used features: 12
+	GPU 지원이 감지되지 않아 CPU 기반으로 실행되었습니다.
+	오류 메시지: No OpenCL device found
 
 <br>
 
