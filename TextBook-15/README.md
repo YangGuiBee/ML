@@ -481,6 +481,91 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 ▣ 단점 : 과도한 삭제는 데이터 손실 위험, 부정확한 대체는 모델 편향을 초래할 수 있음<br>
 ▣ 적용대상 알고리즘 : 선형 회귀, 의사결정 나무, 신경망 등 대부분의 머신러닝 알고리즘<br>
 
+	#############################################################
+	# [1] 데이터 처리 및 변환
+	# [1-5] 결측값 처리(Handling Missing Data)
+	#############################################################
+	import pandas as pd
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.model_selection import train_test_split
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.metrics import accuracy_score
+
+	# 1. Iris 데이터 로드
+	iris = load_iris(as_frame=True)
+	iris_df = iris.frame
+
+	# 2. 데이터 준비 (입력 특성과 타겟 분리)
+	X = iris_df.iloc[:, :-1]  # 입력 특성 (꽃받침, 꽃잎)
+	y = iris_df['target']     # 타겟 (클래스)
+
+	# 3. 결측값 생성 (예제용)
+	# 랜덤으로 10개의 값에 결측값(NaN)을 삽입
+	np.random.seed(42)
+	missing_indices = np.random.choice(X.size, 10, replace=False)
+	X_flat = X.values.flatten()
+	X_flat[missing_indices] = np.nan
+	X_with_missing = pd.DataFrame(X_flat.reshape(X.shape), columns=X.columns)
+
+	# 결측값 확인
+	print("Data with missing values:")
+	print(X_with_missing.isnull().sum())
+
+	# 4. 결측값 처리 방법
+	# (1) 결측값을 포함한 데이터를 그대로 사용 (결측값을 0으로 대체)
+	X_with_zeros = X_with_missing.fillna(0)
+	X_train_raw, X_test_raw, y_train_raw, y_test_raw = train_test_split(
+	    X_with_zeros, y, test_size=0.3, random_state=42)
+
+	# (2) 결측값이 있는 샘플 제거
+	X_dropped = X_with_missing.dropna()
+	y_dropped = y[X_with_missing.dropna().index]
+	X_train_dropped, X_test_dropped, y_train_dropped, y_test_dropped = train_test_split(
+	    X_dropped, y_dropped, test_size=0.3, random_state=42)
+
+	# (3) 결측값을 평균값으로 대체
+	X_imputed = X_with_missing.fillna(X_with_missing.mean())
+	X_train_imputed, X_test_imputed, y_train_imputed, y_test_imputed = train_test_split(
+	    X_imputed, y, test_size=0.3, random_state=42)
+
+	# 5. 모델 학습 및 평가
+	# (1) 결측값 처리 전 (0 대체)
+	model_raw = LogisticRegression(max_iter=200)
+	model_raw.fit(X_train_raw, y_train_raw)
+	y_pred_raw = model_raw.predict(X_test_raw)
+	accuracy_raw = accuracy_score(y_test_raw, y_pred_raw)
+
+	# (2) 결측값 제거 데이터 사용
+	model_dropped = LogisticRegression(max_iter=200)
+	model_dropped.fit(X_train_dropped, y_train_dropped)
+	y_pred_dropped = model_dropped.predict(X_test_dropped)
+	accuracy_dropped = accuracy_score(y_test_dropped, y_pred_dropped)
+
+	# (3) 결측값을 평균값으로 대체한 데이터 사용
+	model_imputed = LogisticRegression(max_iter=200)
+	model_imputed.fit(X_train_imputed, y_train_imputed)
+	y_pred_imputed = model_imputed.predict(X_test_imputed)
+	accuracy_imputed = accuracy_score(y_test_imputed, y_pred_imputed)
+
+	# 6. 결과 출력
+	print(f"\nAccuracy before handling missing values (0 imputation): {accuracy_raw:.2f}")
+	print(f"Accuracy after dropping missing samples: {accuracy_dropped:.2f}")
+	print(f"Accuracy after handling missing values (mean imputation): {accuracy_imputed:.2f}")
+
+<br>
+
+	Data with missing values:
+	sepal length (cm)    1
+	sepal width (cm)     5
+	petal length (cm)    3
+	petal width (cm)     1
+	dtype: int64
+
+	Accuracy before handling missing values (0 imputation): 0.96
+	Accuracy after dropping missing samples: 0.98
+	Accuracy after handling missing values (mean imputation): 0.96
+
 <br>
 
 ## [1-6] 이상치 탐지(Outlier Detection)
