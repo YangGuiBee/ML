@@ -1363,6 +1363,163 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 ▣ 단점 : 과소적합 가능성, 정규화 강도를 조정하기 위한 하이퍼파라미터(λ) 선택 필요<br>
 ▣ 적용대상 알고리즘 : 선형 회귀(Linear Regression), 로지스틱 회귀(Logistic Regression), 서포트 벡터 머신(SVM), 뉴럴 네트워크<br>
 
+	#############################################################
+	# [2] 모델 복잡도 및 일반화
+	# [2-1] 정규화 (L1, L2 Regularization) - iris data
+	#############################################################
+	from sklearn.model_selection import train_test_split, cross_val_score
+	from sklearn.linear_model import LinearRegression, Ridge, Lasso
+	from sklearn.metrics import r2_score
+	from sklearn.datasets import load_iris
+	import numpy as np
+
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	X = iris.data  # 특성: sepal_length, sepal_width, petal_length, petal_width
+	y = iris.target  # 타겟: 품종
+
+	# 학습 데이터와 테스트 데이터로 분리
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+	# (1) 기본 선형 회귀 분석
+	linear_reg = LinearRegression()
+	linear_reg.fit(X_train, y_train)
+	y_pred_basic = linear_reg.predict(X_test)
+	r2_basic = r2_score(y_test, y_pred_basic)
+
+	# (2) 정규화 (릿지 회귀와 라쏘 회귀)
+	ridge_reg = Ridge(alpha=1.0)  # 릿지 회귀
+	ridge_reg.fit(X_train, y_train)
+	y_pred_ridge = ridge_reg.predict(X_test)
+	r2_ridge = r2_score(y_test, y_pred_ridge)
+
+	lasso_reg = Lasso(alpha=0.1)  # 라쏘 회귀
+	lasso_reg.fit(X_train, y_train)
+	y_pred_lasso = lasso_reg.predict(X_test)
+	r2_lasso = r2_score(y_test, y_pred_lasso)
+
+	# (3) 드롭아웃 (드롭아웃은 딥러닝 모델에서 사용하는 방법으로, Scikit-learn에서는 직접 적용 불가)
+	# 대신 과적합 방지를 위한 특성 제거나 정규화를 사용할 수 있음.
+
+	# (4) 교차 검증 (기본 선형 회귀 모델에 대해 수행)
+	cv_scores = cross_val_score(LinearRegression(), X, y, cv=5, scoring='r2')
+	r2_cv = np.mean(cv_scores)
+
+	# 결과 출력
+	r2_results = {
+	    "기본 선형 회귀 (R2)": r2_basic,
+	    "릿지 회귀 (R2)": r2_ridge,
+	    "라쏘 회귀 (R2)": r2_lasso,
+	    "교차 검증 평균 (R2)": r2_cv}
+
+	# 결과 확인
+	print("R2 점수 결과:")
+	for method, r2 in r2_results.items():
+	    print(f"{method}: {r2}")
+
+<br>
+
+	R2 점수 결과:
+	기본 선형 회귀 (R2): 0.9468960016420045
+	릿지 회귀 (R2): 0.9440579987200237
+	라쏘 회귀 (R2): 0.9044577045136053
+	교차 검증 평균 (R2): 0.3225607248900085
+
+<br>
+
+	#############################################################
+	# [2] 모델 복잡도 및 일반화
+	# [2-1] 정규화 (L1, L2 Regularization) - titanic data
+	#############################################################
+	import pandas as pd
+	from sklearn.model_selection import train_test_split, cross_val_score
+	from sklearn.preprocessing import StandardScaler, OneHotEncoder
+	from sklearn.compose import ColumnTransformer
+	from sklearn.pipeline import Pipeline
+	from sklearn.impute import SimpleImputer
+	from sklearn.linear_model import LogisticRegression, Ridge, Lasso, ElasticNet
+	from sklearn.metrics import r2_score
+
+	# 1. 데이터 로드
+	url = 'https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-15/titanic_train.csv'
+	data = pd.read_csv(url)
+
+	# 2. 특징과 타겟 변수 분리
+	X = data.drop(columns=['Survived'])
+	y = data['Survived']
+
+	# 3. 수치형 및 범주형 변수 식별
+	numeric_features = ['Age', 'Fare', 'SibSp', 'Parch']
+	categorical_features = ['Pclass', 'Sex', 'Embarked']
+
+	# 4. 전처리 파이프라인 구성
+	numeric_transformer = Pipeline(steps=[
+	    ('imputer', SimpleImputer(strategy='median')),
+	    ('scaler', StandardScaler())])
+
+	categorical_transformer = Pipeline(steps=[
+	    ('imputer', SimpleImputer(strategy='most_frequent')),
+	    ('onehot', OneHotEncoder(handle_unknown='ignore'))])
+
+	preprocessor = ColumnTransformer(
+	    transformers=[
+	        ('num', numeric_transformer, numeric_features),
+	        ('cat', categorical_transformer, categorical_features)])
+
+	# 5. 기본 선형 회귀 모델 구성
+	linear_model = Pipeline(steps=[('preprocessor', preprocessor),
+	                               ('classifier', LogisticRegression(max_iter=1000))])
+
+	# 데이터 분할
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+	# 6. 기본 선형 회귀 모델 학습 및 평가
+	linear_model.fit(X_train, y_train)
+	y_pred = linear_model.predict(X_test)
+	r2_basic = r2_score(y_test, y_pred)
+
+	# 7. 정규화 적용 (릿지 회귀)
+	ridge_model = Pipeline(steps=[('preprocessor', preprocessor),
+	                              ('classifier', Ridge(alpha=1.0))])
+	ridge_model.fit(X_train, y_train)
+	y_pred_ridge = ridge_model.predict(X_test)
+	r2_ridge = r2_score(y_test, y_pred_ridge)
+
+	# 8. 정규화 적용 (라쏘 회귀)
+	lasso_model = Pipeline(steps=[('preprocessor', preprocessor),
+	                              ('classifier', Lasso(alpha=0.1))])
+	lasso_model.fit(X_train, y_train)
+	y_pred_lasso = lasso_model.predict(X_test)
+	r2_lasso = r2_score(y_test, y_pred_lasso)
+
+	# 9. 정규화 적용 (엘라스틱넷)
+	elastic_model = Pipeline(steps=[('preprocessor', preprocessor),
+	                                 ('classifier', ElasticNet(alpha=0.1, l1_ratio=0.5))])
+	elastic_model.fit(X_train, y_train)
+	y_pred_elastic = elastic_model.predict(X_test)
+	r2_elastic = r2_score(y_test, y_pred_elastic)
+
+	# 10. 교차 검증 적용
+	cv_scores = cross_val_score(linear_model, X, y, cv=5, scoring='r2')
+	r2_cv = cv_scores.mean()
+
+	# 11. 결과 출력
+	print("R² 점수 결과:")
+	print(f"기본 선형 회귀 모델의 R² 점수: {r2_basic:.4f}")
+	print(f"릿지 회귀 모델의 R² 점수: {r2_ridge:.4f}")
+	print(f"라쏘 회귀 모델의 R² 점수: {r2_lasso:.4f}")
+	print(f"엘라스틱넷 회귀 모델의 R² 점수: {r2_elastic:.4f}")
+	print(f"교차 검증을 통한 평균 R² 점수: {r2_cv:.4f}")
+
+<br>
+
+	R² 점수 결과:
+	기본 선형 회귀 모델의 R² 점수: 0.1707
+	릿지 회귀 모델의 R² 점수: 0.4334
+	라쏘 회귀 모델의 R² 점수: 0.1085
+	엘라스틱넷 회귀 모델의 R² 점수: 0.2678
+	교차 검증을 통한 평균 R² 점수: 0.1125
+
 <br>
 
 ## [2-2] 조기 종료(Early Stopping)
@@ -1374,6 +1531,89 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 ▣ 적용대상 알고리즘 : 모든 딥러닝 모델, 일부 머신러닝(Gradient Boosting) 등 에폭(Epoch)*이 긴 경우<br>
    * 모델 학습 과정에서 전체 데이터셋을 여러 번 반복해서 학습하는 횟수(데이터셋의 모든 샘플이 모델에 입력되어 가중치가 업데이트되는 과정을 한번 완료하는 것이 1 에폭)<br>
 
+	#############################################################
+	# [2] 모델 복잡도 및 일반화
+	# [2-2] 조기 종료 (Early Stopping)
+	#############################################################
+	import pandas as pd
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import StandardScaler, OneHotEncoder, PolynomialFeatures
+	from sklearn.compose import ColumnTransformer
+	from sklearn.pipeline import Pipeline
+	from sklearn.impute import SimpleImputer
+	from sklearn.linear_model import SGDRegressor
+	from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
+
+	# 1. 데이터 로드
+	url = 'https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-15/titanic_train.csv'
+	data = pd.read_csv(url)
+
+	# 2. 특징과 타겟 변수 분리
+	X = data.drop(columns=['Survived'])
+	y = data['Survived']
+
+	# 3. 수치형 및 범주형 변수 식별
+	numeric_features = ['Age', 'Fare', 'SibSp', 'Parch']
+	categorical_features = ['Pclass', 'Sex', 'Embarked']
+
+	# 4. 전처리 파이프라인 구성
+	numeric_transformer = Pipeline(steps=[
+	    ('imputer', SimpleImputer(strategy='median')),
+	    ('scaler', StandardScaler())])
+
+	categorical_transformer = Pipeline(steps=[
+	    ('imputer', SimpleImputer(strategy='most_frequent')),
+	    ('onehot', OneHotEncoder(handle_unknown='ignore'))])
+
+	preprocessor = ColumnTransformer(
+	    transformers=[('num', numeric_transformer, numeric_features),
+	        ('cat', categorical_transformer, categorical_features)])
+
+	# 데이터 분할
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+	# 5. 기본 다항 회귀 모델 구성 (SGDRegressor 사용)
+	polynomial_model = Pipeline(steps=[
+	    ('preprocessor', preprocessor),
+	    ('poly_features', PolynomialFeatures(degree=2, include_bias=False, interaction_only=False)),
+	    ('scaler', StandardScaler()),
+	    ('regressor', SGDRegressor(max_iter=1000, tol=1e-3, learning_rate='adaptive',
+	                               eta0=0.001, penalty='l2', alpha=0.0001, random_state=42))])
+
+	# 6. 기본 다항 회귀 모델 학습 및 평가
+	polynomial_model.fit(X_train, y_train)
+	y_pred_poly = polynomial_model.predict(X_test)
+	r2_poly_basic = r2_score(y_test, y_pred_poly)
+	mse_poly_basic = mean_squared_error(y_test, y_pred_poly)
+	mae_poly_basic = mean_absolute_error(y_test, y_pred_poly)
+
+	# 7. 조기 종료 적용 다항 회귀 모델 구성
+	early_stopping_poly_model = Pipeline(steps=[
+	    ('preprocessor', preprocessor),
+	    ('poly_features', PolynomialFeatures(degree=2, include_bias=False, interaction_only=False)),
+    	    ('scaler', StandardScaler()),
+	    ('regressor', SGDRegressor(max_iter=2000, tol=1e-3, early_stopping=True,
+	                               validation_fraction=0.2, n_iter_no_change=5,
+	                               learning_rate='adaptive', eta0=0.001, penalty='l2', alpha=0.0001, random_state=42))])
+
+	# 8. 조기 종료 적용 다항 회귀 모델 학습 및 평가
+	early_stopping_poly_model.fit(X_train, y_train)
+	y_pred_poly_early_stopping = early_stopping_poly_model.predict(X_test)
+	r2_poly_early_stopping = r2_score(y_test, y_pred_poly_early_stopping)
+	mse_poly_early_stopping = mean_squared_error(y_test, y_pred_poly_early_stopping)
+	mae_poly_early_stopping = mean_absolute_error(y_test, y_pred_poly_early_stopping)
+
+	# 결과 출력
+	print("다항 회귀 모델 결과 (SGDRegressor 사용):")
+	print(f"기본 다항 회귀 모델의 R² 점수: {r2_poly_basic:.4f}, MSE: {mse_poly_basic:.4f}, MAE: {mae_poly_basic:.4f}")
+	print(f"조기 종료 적용 다항 회귀 모델의 R² 점수: {r2_poly_early_stopping:.4f}, MSE: {mse_poly_early_stopping:.4f}, 	MAE: {mae_poly_early_stopping:.4f}")
+
+<br>
+
+	다항 회귀 모델 결과 (SGDRegressor 사용):
+	기본 다항 회귀 모델의 R² 점수: 0.4101, MSE: 0.1430, MAE: 0.2685
+	조기 종료 적용 다항 회귀 모델의 R² 점수: 0.4286, MSE: 0.1386, MAE: 0.2640
+
 <br>
 
 ## [2-3] 앙상블 학습(Ensemble Learning)
@@ -1384,6 +1624,73 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 ▣ 단점 : 계산 비용 증가, 구현 복잡성<br>
 ▣ 적용대상 알고리즘 : 모든 지도 학습 알고리즘(분류, 회귀 등)<br>
 
+	#############################################################
+	# [2] 모델 복잡도 및 일반화
+	# [2-3] 앙상블 학습 (Ensemble Learning)
+	#############################################################
+	from sklearn.datasets import load_iris
+	from sklearn.model_selection import train_test_split
+	from sklearn.ensemble import StackingRegressor, BaggingRegressor, GradientBoostingRegressor
+	from sklearn.linear_model import LinearRegression
+	from sklearn.tree import DecisionTreeRegressor
+	from sklearn.svm import SVR
+	from sklearn.metrics import r2_score
+
+	# 1. 데이터 로드 및 분할
+	iris = load_iris()
+	X = iris.data
+	y = iris.target
+
+	# 데이터 분할
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+	# 2. 기본 선형 회귀 모델
+	linear_model = LinearRegression()
+	linear_model.fit(X_train, y_train)
+	y_pred_linear = linear_model.predict(X_test)
+	r2_linear = r2_score(y_test, y_pred_linear)
+
+	# 3. Stacking 앙상블
+	stacking_model = StackingRegressor(
+	    estimators=[
+	        ('lr', LinearRegression()),
+	        ('dt', DecisionTreeRegressor()),
+	        ('svr', SVR())],
+	    final_estimator=LinearRegression())
+	stacking_model.fit(X_train, y_train)
+	y_pred_stacking = stacking_model.predict(X_test)
+	r2_stacking = r2_score(y_test, y_pred_stacking)
+
+	# 4. Bagging 앙상블
+	bagging_model = BaggingRegressor(
+	    estimator=DecisionTreeRegressor(),  # 수정된 파라미터 이름
+	    n_estimators=10,
+	    random_state=42)
+	bagging_model.fit(X_train, y_train)
+	y_pred_bagging = bagging_model.predict(X_test)
+	r2_bagging = r2_score(y_test, y_pred_bagging)
+
+	# 5. Boosting 앙상블 (Gradient Boosting)
+	boosting_model = GradientBoostingRegressor(random_state=42)
+	boosting_model.fit(X_train, y_train)
+	y_pred_boosting = boosting_model.predict(X_test)
+	r2_boosting = r2_score(y_test, y_pred_boosting)
+
+	# 결과 출력
+	print("R² 점수 결과:")
+	print(f"기본 선형 회귀 모델의 R² 점수: {r2_linear:.4f}")
+	print(f"Stacking 앙상블 모델의 R² 점수: {r2_stacking:.4f}")
+	print(f"Bagging 앙상블 모델의 R² 점수: {r2_bagging:.4f}")
+	print(f"Boosting 앙상블 모델의 R² 점수: {r2_boosting:.4f}")
+	
+<br>
+
+	R² 점수 결과:
+	기본 선형 회귀 모델의 R² 점수: 0.9469
+	Stacking 앙상블 모델의 R² 점수: 0.9623
+	Bagging 앙상블 모델의 R² 점수: 0.9990
+	Boosting 앙상블 모델의 R² 점수: 0.9938
+
 <br>
 
 ## [2-4] 모델 해석성 (Model Interpretability)
@@ -1393,6 +1700,134 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 ▣ 장점 : 사용자 신뢰 확보, 모델 디버깅 및 개선 가능<br>
 ▣ 단점 : 계산 비용이 높음, 높은 차원의 데이터에서 복잡성 증가<br>
 ▣ 적용대상 알고리즘 : 모든 블랙박스 모델 (e.g., 신경망, 앙상블 학습 모델)<br>
+
+	#############################################################
+	# [2] 모델 복잡도 및 일반화
+	# [2-4] 모델 해석성(Model Interpretability) : LIME
+	#############################################################
+	import subprocess
+	import sys
+	# 필요한 패키지가 설치되어 있는지 확인하고, 없으면 설치
+	required_packages = ['lime', 'xgboost', 'scikit-learn', 'matplotlib']
+	for package in required_packages:
+	    try:
+	        __import__(package)
+	    except ImportError:
+	        print(f"Package {package} not found. Installing...")
+	        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+	# 필수 라이브러리 import
+	import lime
+	import lime.lime_tabular
+	import xgboost as xgb
+	from sklearn.datasets import load_breast_cancer
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import StandardScaler
+	import matplotlib.pyplot as plt
+
+	# 데이터 로드
+	data = load_breast_cancer()
+	X = data.data
+	y = data.target
+
+	# 데이터 분할
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+	# 데이터 표준화
+	scaler = StandardScaler()
+	X_train_scaled = scaler.fit_transform(X_train)
+	X_test_scaled = scaler.transform(X_test)
+
+	# XGBoost 모델 학습
+	model = xgb.XGBClassifier(eval_metric='logloss')
+	model.fit(X_train_scaled, y_train)
+
+	# LIME explainer 생성 (training_sample_weight 인자 제거)
+	explainer = lime.lime_tabular.LimeTabularExplainer(
+	    training_data=X_train_scaled,
+	    training_labels=y_train,
+	    mode="classification",
+	    feature_names=data.feature_names,
+	    class_names=data.target_names,
+	    discretize_continuous=True)
+
+	# 테스트 데이터의 첫 번째 샘플을 선택하여 예측 설명
+	i = 0  # 첫 번째 샘플
+	explanation = explainer.explain_instance(X_test_scaled[i], model.predict_proba)
+
+	# 결과 시각화
+	explanation.show_in_notebook(show_table=True, show_all=False)
+
+	# 특정 샘플에 대한 LIME 해석 그래프 출력
+	explanation.as_pyplot_figure()
+	plt.show()
+
+<br>
+
+	#############################################################
+	# [2] 모델 복잡도 및 일반화
+	# [2-6] 모델 해석성(Model Interpretability) : SHAP
+	#############################################################
+	import subprocess
+	import sys
+	# 필요한 패키지가 설치되어 있는지 확인하고, 없으면 설치
+	required_packages = ['shap', 'xgboost', 'scikit-learn', 'matplotlib']
+	for package in required_packages:
+	    try:
+ 	       __import__(package)
+ 	   except ImportError:
+	        print(f"Package {package} not found. Installing...")
+	        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+	# 필수 라이브러리 import
+	import shap
+	import xgboost as xgb
+	from sklearn.datasets import load_breast_cancer
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import StandardScaler
+	import matplotlib.pyplot as plt
+
+	# 데이터 로드
+	data = load_breast_cancer()
+	X = data.data
+	y = data.target
+
+	# 데이터 분할
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+	# 데이터 표준화
+	scaler = StandardScaler()
+	X_train_scaled = scaler.fit_transform(X_train)
+	X_test_scaled = scaler.transform(X_test)
+
+	# XGBoost 모델 학습
+	model = xgb.XGBClassifier(eval_metric='logloss')
+	model.fit(X_train_scaled, y_train)
+
+	# SHAP Explainer 생성
+	explainer = shap.Explainer(model, X_train_scaled)
+
+	# 테스트 데이터에 대해 SHAP 값 계산
+	shap_values = explainer(X_test_scaled)
+
+	# 테스트 데이터의 첫 번째 샘플에 대해 SHAP 값 시각화
+	i = 0  # 첫 번째 샘플
+	print(f"SHAP values for test sample {i}:")
+	shap.initjs()
+
+	# 단일 클래스 분류의 SHAP 값 시각화
+	# 다중 클래스 분류가 아닌 경우, base_value와 shap_values는 1차원
+	shap.force_plot(
+	    base_value=shap_values[i].base_values,  # 기준값 (스칼라 값)
+	    shap_values=shap_values[i].values,     # SHAP 값 (특성별 값)
+	    features=X_test_scaled[i],             # 해당 샘플의 입력값
+	    feature_names=data.feature_names)
+
+	# 전체 테스트 데이터에서 중요도 요약 그래프
+	shap.summary_plot(shap_values.values, X_test_scaled, feature_names=data.feature_names)
+
+	# 특정 샘플에 대한 Bar Chart (SHAP 값의 크기)
+	shap.plots.bar(shap_values[i])
 
 <br>
 
