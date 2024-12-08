@@ -277,6 +277,89 @@
 ▣ 단점 : 데이터 분포를 잘못 조정하면 오히려 성능 저하, 스케일링 단계에서 추가적인 계산이 필요<br>
 ▣ 적용대상 알고리즘 : 거리 기반 알고리즘 (KNN, SVM 등), 선형 모델 (로지스틱 회귀, 선형 회귀), 딥러닝 모델<br>
 
+	#############################################################
+	# [1] 데이터 처리 및 변환
+	# [1-3] 데이터 스케일링 (Data Scaling)
+	# MinMaxScaler : 데이터를 특정 범위(기본값: [0, 1])로 정규화
+	# 𝑋 : 원본 데이터 값
+	# 𝑋_{min}  : 각 열의 최소값
+	# 𝑋_{max}  : 각 열의 최대값
+	# 𝑋′ : 변환된 데이터 값
+	# 𝑋′ = (𝑋 - 𝑋_{min}) / (𝑋_{max} - 𝑋_{min})
+	#############################################################
+	import numpy as np
+	from sklearn.datasets import make_classification
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import MinMaxScaler
+	from sklearn.neighbors import KNeighborsClassifier
+	from sklearn.metrics import accuracy_score
+
+	# 데이터 출력 형식 설정 (소수점 이하 4자리까지)
+	np.set_printoptions(precision=4, suppress=True)
+
+	# 데이터 생성
+	X, y = make_classification(
+	    n_samples=500,
+	    n_features=5,
+	    n_informative=3,
+	    n_redundant=0,
+	    random_state=42)
+
+	# 인위적으로 특성의 스케일 차이를 크게 만듦
+	X[:, 0] *= 1    # 첫 번째 특성: 0~1
+	X[:, 1] *= 100  # 두 번째 특성: 0~100
+	X[:, 2] *= 1000 # 세 번째 특성: 0~1000
+
+	print("원본 데이터 (일부):\n", X[:5])
+
+	# 데이터 분리
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+
+	# KNN 모델 생성
+	knn = KNeighborsClassifier()
+
+	# 1. 원본 데이터로 평가
+	knn.fit(X_train, y_train)
+	y_pred_original = knn.predict(X_test)
+	accuracy_original = accuracy_score(y_test, y_pred_original)
+
+	# 2. 데이터 스케일링
+	scaler = MinMaxScaler()
+	X_train_scaled = scaler.fit_transform(X_train)
+	X_test_scaled = scaler.transform(X_test)
+
+	print("\n스케일링된 데이터 (훈련 세트 일부):\n", X_train_scaled[:5])
+
+	# 스케일링된 데이터 학습 및 평가
+	knn.fit(X_train_scaled, y_train)
+	y_pred_scaled = knn.predict(X_test_scaled)
+	accuracy_scaled = accuracy_score(y_test, y_pred_scaled)
+
+	# 결과 출력
+	print("\n=== 평가 결과 ===")
+	print(f"원본 데이터 테스트 정확도: {accuracy_original:.4f}")
+	print(f"스케일링된 데이터 테스트 정확도: {accuracy_scaled:.4f}")
+
+<br>
+
+	원본 데이터 (일부):
+	 [[  -1.8306   -9.534  -654.0757    0.7241   -0.1813]
+	 [   0.2603    8.0151 -413.4652   -1.2733    1.4826]
+ 	 [  -1.3796    9.8744 -971.6567   -0.0728   -1.5796]
+	 [  -0.9981  -16.1506 1051.9476    2.3985    2.1207]
+	 [  -0.3696  122.3565  621.5719    0.0128   -1.4224]]
+
+	스케일링된 데이터 (훈련 세트 일부):
+	 [[0.5246 0.7534 0.5159 0.7898 0.714 ]
+	 [0.6738 0.2881 0.6199 0.4736 0.4592]
+	 [0.3458 0.3688 0.2804 0.1617 0.5876]
+	 [0.3992 0.5641 0.541  0.6432 0.4749]
+	 [0.5227 0.4134 0.4271 0.1323 0.6014]]
+
+	=== 평가 결과 ===
+	원본 데이터 테스트 정확도: 0.8480
+	스케일링된 데이터 테스트 정확도: 0.9360
+ 
 <br>
 
 ## [1-4] 데이터 불균형 처리(Handling Imbalanced Data)
@@ -298,6 +381,95 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 소수 클래스 샘플의 부족으로 인해 발생하는 불균형 데이터를 해결하기 위해 설계된 오버샘플링 기법<br>
 밀도가 낮은 영역에 더 많은 샘플을 생성하여 분류 경계에 가까운 학습하기 어려운 샘플에 초점<br>
 밀도 계산 → 가중치 계산 → 샘플생성 비율 결정 → 새로운 샘플 생성<br>
+
+	#############################################################
+	# [1] 데이터 처리 및 변환
+	# [1-4] 데이터 불균형 처리 (Handling Imbalanced Data)
+	# ADASYN + SMOTE(Synthetic Minority Over-sampling Technique)
+	#############################################################
+	from imblearn.over_sampling import SMOTE, ADASYN
+	from sklearn.datasets import make_classification
+	from sklearn.ensemble import RandomForestClassifier
+	from sklearn.model_selection import train_test_split, cross_val_score, StratifiedKFold
+	from sklearn.metrics import roc_auc_score, accuracy_score, classification_report
+	import pandas as pd
+
+	# 극단적인 불균형 데이터 생성
+	X, y = make_classification(
+	    n_classes=2,          # 이진 분류
+	    class_sep=2,          # 클래스 간 분리 정도
+	    weights=[0.005, 0.995], # 클래스 비율: 0.5% vs 99.5%
+	    n_informative=3,      # 정보가 있는 독립 변수 3개
+	    n_redundant=1,        # 중복된 독립 변수 1개
+	    flip_y=0,             # 라벨 뒤집기 비율 없음
+	    n_features=5,         # 총 특성 수: 5개
+	    n_clusters_per_class=1, # 각 클래스 하나의 클러스터
+	    n_samples=2000,       # 총 샘플 수: 2000개
+	    random_state=10       # 난수 고정
+	)
+	print("원본 클래스 분포:\n", pd.Series(y).value_counts())
+
+	# 교차 검증 설정
+	kf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+
+	# 1. 원본 데이터 교차 검증 평가
+	model = RandomForestClassifier(random_state=42)
+	scores_original = cross_val_score(model, X, y, cv=kf, scoring='roc_auc')
+	print("\n[교차 검증] 원본 데이터 ROC-AUC:", scores_original.mean())
+
+	# 데이터 분리 (훈련 세트와 테스트 세트)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+
+	# 2. 원본 데이터 분리 평가
+	model.fit(X_train, y_train)
+	y_pred_original = model.predict(X_test)
+	accuracy_original = accuracy_score(y_test, y_pred_original)
+
+	print("\n[분리 평가] === 원본 데이터 평가 결과 ===")
+	print(f"정확도: {accuracy_original:.4f}")
+	print("분류 리포트:\n", classification_report(y_test, y_pred_original, zero_division=0))
+
+	# ADASYN 적용
+	adasyn = ADASYN(sampling_strategy=0.5, random_state=42)
+	X_adasyn, y_adasyn = adasyn.fit_resample(X, y)
+	X_train_adasyn, y_train_adasyn = adasyn.fit_resample(X_train, y_train)
+	print("\nADASYN 적용 후 클래스 분포 (전체 데이터):\n", pd.Series(y_adasyn).value_counts())
+
+	# 3. ADASYN 교차 검증 평가
+	scores_adasyn = cross_val_score(model, X_adasyn, y_adasyn, cv=kf, scoring='roc_auc')
+	print("\n[교차 검증] ADASYN 데이터 ROC-AUC:", scores_adasyn.mean())
+
+	# 4. ADASYN 분리 평가
+	model.fit(X_train_adasyn, y_train_adasyn)
+	y_pred_adasyn = model.predict(X_test)
+	accuracy_adasyn = accuracy_score(y_test, y_pred_adasyn)
+
+	print("\n[분리 평가] === ADASYN 데이터 평가 결과 ===")
+	print(f"정확도: {accuracy_adasyn:.4f}")
+	print("분류 리포트:\n", classification_report(y_test, y_pred_adasyn, zero_division=0))
+
+	# SMOTE 적용
+	smote = SMOTE(sampling_strategy=0.5, random_state=42)
+	X_smote, y_smote = smote.fit_resample(X, y)
+	X_train_smote, y_train_smote = smote.fit_resample(X_train, y_train)
+	print("\nSMOTE 적용 후 클래스 분포 (전체 데이터):\n", pd.Series(y_smote).value_counts())
+
+	# 5. SMOTE 교차 검증 평가
+	scores_smote = cross_val_score(model, X_smote, y_smote, cv=kf, scoring='roc_auc')
+	print("\n[교차 검증] SMOTE 데이터 ROC-AUC:", scores_smote.mean())
+
+	# 6. SMOTE 분리 평가
+	model.fit(X_train_smote, y_train_smote)
+	y_pred_smote = model.predict(X_test)
+	accuracy_smote = accuracy_score(y_test, y_pred_smote)
+
+	print("\n[분리 평가] === SMOTE 데이터 평가 결과 ===")
+	print(f"정확도: {accuracy_smote:.4f}")
+	print("분류 리포트:\n", classification_report(y_test, y_pred_smote, zero_division=0))
+
+<br>
+
+![](./images/1-4.png) 
 
 <br>
 
