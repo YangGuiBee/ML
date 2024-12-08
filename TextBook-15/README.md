@@ -952,7 +952,7 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 	print(f"\nAccuracy with duplicates (Random Forest): {accuracy_with_duplicates:.2f}")
 	print(f"Accuracy without duplicates (Random Forest): {accuracy_no_duplicates:.2f}")
 
-# 8. 결과 비교 분석
+	# 8. 결과 비교 분석
 	if accuracy_with_duplicates > accuracy_no_duplicates:
 	    print("Including duplicates improved accuracy, but it may indicate overfitting.")
 	elif accuracy_with_duplicates == accuracy_no_duplicates:
@@ -977,6 +977,204 @@ SMOTE의 확장으로, 소수 클래스 주변의 밀도에 따라 새로운 샘
 ▣ 단점 : 적절한 변환 기법 선택이 어려울 수 있음, 원본 데이터의 의미가 왜곡될 가능성, 고차원 데이터에서는 변환 비용 증가<br>
 ▣ 적용대상 알고리즘 : 회귀 모델, 딥러닝, PCA, SVM 등<br>
 
+	#############################################################
+	# [1] 데이터 처리 및 변환
+	# [1-8] 데이터 변환(Data Transformation) - iris data
+	#############################################################
+	import pandas as pd
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.model_selection import train_test_split
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.metrics import accuracy_score
+	from sklearn.preprocessing import StandardScaler, MinMaxScaler
+
+	# 1. Iris 데이터 로드
+	iris = load_iris(as_frame=True)
+	iris_df = iris.frame
+
+	# 2. 데이터 준비 (입력 특성과 타겟 분리)
+	X = iris_df.iloc[:, :-1]  # 입력 특성 (꽃받침, 꽃잎)
+	y = iris_df['target']     # 타겟 (클래스)
+
+	# 3. 데이터 변환
+	# (1) 스케일링 (표준화)
+	scaler = StandardScaler()
+	X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
+
+	# (2) 로그 변환
+	X_log_transformed = np.log1p(X)
+
+	# 4. 데이터 분리 (학습/테스트 셋)
+	# 원본 데이터
+	X_train_raw, X_test_raw, y_train_raw, y_test_raw = train_test_split(X, y, test_size=0.3, random_state=42)
+	# 스케일링 데이터
+	X_train_scaled, X_test_scaled, y_train_scaled, y_test_scaled = 	train_test_split(X_scaled, y, test_size=0.3, random_state=42)
+	# 로그 변환 데이터
+	X_train_log, X_test_log, y_train_log, y_test_log = train_test_split(X_log_transformed, y, test_size=0.3, random_state=42)
+
+	# 5. 모델 학습 및 평가
+	# (1) 원본 데이터
+	model_raw = LogisticRegression(max_iter=200)
+	model_raw.fit(X_train_raw, y_train_raw)
+	y_pred_raw = model_raw.predict(X_test_raw)
+	accuracy_raw = accuracy_score(y_test_raw, y_pred_raw)
+
+	# (2) 스케일링 데이터
+	model_scaled = LogisticRegression(max_iter=200)
+	model_scaled.fit(X_train_scaled, y_train_scaled)
+	y_pred_scaled = model_scaled.predict(X_test_scaled)
+	accuracy_scaled = accuracy_score(y_test_scaled, y_pred_scaled)
+
+	# (3) 로그 변환 데이터
+	model_log = LogisticRegression(max_iter=200)
+	model_log.fit(X_train_log, y_train_log)
+	y_pred_log = model_log.predict(X_test_log)
+	accuracy_log = accuracy_score(y_test_log, y_pred_log)
+
+	# 6. 결과 출력
+	print(f"\nAccuracy with raw data: {accuracy_raw:.2f}")
+	print(f"Accuracy with scaled data (StandardScaler): {accuracy_scaled:.2f}")
+	print(f"Accuracy with log-transformed data: {accuracy_log:.2f}")
+
+	# 7. 결과 비교 분석
+	if max(accuracy_raw, accuracy_scaled, accuracy_log) == accuracy_raw:
+	    print("Raw data provided the highest accuracy.")
+	elif max(accuracy_raw, accuracy_scaled, accuracy_log) == accuracy_scaled:
+	    print("Scaled data provided the highest accuracy.")
+	elif max(accuracy_raw, accuracy_scaled, accuracy_log) == accuracy_log:
+	    print("Log-transformed data provided the highest accuracy.")
+	else:
+	    print("Multiple methods resulted in the same accuracy.")
+
+<br>
+
+	Accuracy with raw data: 1.00
+	Accuracy with scaled data (StandardScaler): 1.00
+	Accuracy with log-transformed data: 0.93
+	Raw data provided the highest accuracy.
+
+<br>
+
+	#############################################################
+	# [1] 데이터 처리 및 변환
+	# [1-8] 데이터 변환(Data Transformation) - housing.csv data
+	#############################################################
+	import pandas as pd
+	import numpy as np
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import StandardScaler, MinMaxScaler, OneHotEncoder
+	from sklearn.linear_model import LinearRegression
+	from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score, explained_variance_score
+	from sklearn.impute import SimpleImputer
+	import math
+
+	# 1. 데이터 로드
+	url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-15/housing.csv"
+	data = pd.read_csv(url)
+
+	# 데이터 확인
+	print("California housing dataset loaded successfully!")
+	print("\nFeature statistics before transformation:")
+	print(data.describe(include="all"))
+
+	# 2. 범주형 데이터 처리
+	encoder = OneHotEncoder(sparse_output=False, handle_unknown="ignore")
+	encoded_columns = encoder.fit_transform(data[["ocean_proximity"]])
+	encoded_df = pd.DataFrame(encoded_columns, columns=encoder.get_feature_names_out(["ocean_proximity"]))
+
+	# 원본 데이터에서 `ocean_proximity` 제거 후 인코딩된 데이터 추가
+	data = pd.concat([data.drop(columns=["ocean_proximity"]), encoded_df], axis=1)
+
+	# 3. 결측값 처리
+	imputer = SimpleImputer(strategy="mean")
+	data_imputed = pd.DataFrame(imputer.fit_transform(data), columns=data.columns)
+
+	# 데이터 준비
+	X = data_imputed.drop(columns=["median_house_value"])  # 특성 데이터
+	y = data_imputed["median_house_value"]  # 타깃 변수
+
+	# 4. 데이터 변환
+	# (1) 원본 데이터
+	X_raw = X.copy()
+
+	# (2) 스케일링 (표준화)
+	scaler = StandardScaler()
+	X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
+
+	# (3) 로그 변환
+	X_log_transformed = X.copy()
+	for column in X_log_transformed.columns:
+	    if (X_log_transformed[column] <= 0).any():
+	        X_log_transformed[column] += abs(X_log_transformed[column].min()) + 1
+	X_log_transformed = np.log1p(X_log_transformed)
+	X_log_transformed = pd.DataFrame(
+	    SimpleImputer(strategy="mean").fit_transform(X_log_transformed), columns=X.columns)
+
+	# (4) Min-Max Scaling
+	minmax_scaler = MinMaxScaler()
+	X_minmax_scaled = pd.DataFrame(minmax_scaler.fit_transform(X), columns=X.columns)
+
+	# 5. 데이터 분리
+	X_train_raw, X_test_raw, y_train_raw, y_test_raw = train_test_split(X_raw, y, test_size=0.3, random_state=42)
+	X_train_scaled, X_test_scaled, y_train_scaled, y_test_scaled = train_test_split(X_scaled, y, test_size=0.3, random_state=42)
+	X_train_log, X_test_log, y_train_log, y_test_log = train_test_split(X_log_transformed, y, test_size=0.3, random_state=42)
+	X_train_minmax, X_test_minmax, y_train_minmax, y_test_minmax = train_test_split(X_minmax_scaled, y, test_size=0.3, random_state=42)
+
+	# 6. 모델 학습 및 평가
+	def calculate_rmse(mse):
+	    return math.sqrt(mse)
+
+	def evaluate_model(model, X_train, X_test, y_train, y_test):
+		model.fit(X_train, y_train)
+		y_pred = model.predict(X_test)
+    		mse = mean_squared_error(y_test, y_pred)
+   		mae = mean_absolute_error(y_test, y_pred)
+    		rmse = calculate_rmse(mse)
+    		r2 = r2_score(y_test, y_pred)
+    		evs = explained_variance_score(y_test, y_pred)
+    		return mse, mae, rmse, r2, evs
+
+	# 평가 결과 저장
+	results = {}
+
+	# (1) 원본 데이터
+	model_raw = LinearRegression()
+	results["Raw"] = evaluate_model(model_raw, X_train_raw, X_test_raw, y_train_raw, y_test_raw)
+
+	# (2) 스케일링 데이터
+	model_scaled = LinearRegression()
+	results["Standard Scaled"] = evaluate_model(model_scaled, X_train_scaled, X_test_scaled, y_train_scaled, y_test_scaled)
+
+	# (3) 로그 변환 데이터
+	model_log = LinearRegression()
+	results["Log-transformed"] = evaluate_model(model_log, X_train_log, X_test_log, y_train_log, y_test_log)
+
+	# (4) Min-Max Scaling 데이터
+	model_minmax = LinearRegression()
+	results["Min-Max Scaled"] = evaluate_model(model_minmax, X_train_minmax, 	X_test_minmax, y_train_minmax, y_test_minmax)
+
+	# 7. 결과 출력
+	print("\nEvaluation Results (MSE, MAE, RMSE, R2 Score, Explained Variance Score):")
+	for key, (mse, mae, rmse, r2, evs) in results.items():
+	    print(f"{key}: MSE = {mse:.2f}, MAE = {mae:.2f}, RMSE = {rmse:.2f}, R2 = {r2:.4f}, EVS = {evs:.4f}")
+
+	# 8. 결과 비교 분석
+	best_r2 = max(results[key][3] for key in results)
+	if best_r2 == results["Raw"][3]:
+	    print("\nRaw data provided the best R² score.")
+	elif best_r2 == results["Standard Scaled"][3]:
+	    print("\nStandard scaling provided the best R² score.")
+	elif best_r2 == results["Log-transformed"][3]:
+	    print("\nLog transformation provided the best R² score.")
+	elif best_r2 == results["Min-Max Scaled"][3]:
+	    print("\nMin-Max scaling provided the best R² score.")
+	else:
+	    print("\nMultiple transformations resulted in the same R² score.")
+
+<br>
+
+![](./images/1-8.png) 
 <br>
 
 ## [1-9] 특성 엔지니어링(Feature Engineering)
