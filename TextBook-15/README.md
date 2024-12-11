@@ -362,6 +362,37 @@
  
 <br>
 
+
+**왜도(Skewness):** 데이터 분포의 비대칭성을 측정. 데이터가 평균을 기준으로 얼마나 대칭적인지, 또는 한쪽으로 치우쳤는지를 나타내는 척도로 정규분포는 대칭적이므로 왜도 값은 0에 가까워야 함<br>
+**첨도(Kurtosis):** 첨도는 데이터 분포의 중심부 뾰족함과 꼬리 두께를 측정. 데이터 분포의 중심부와 꼬리 부분이 정규분포와 얼마나 다른지를 나타냄<br>
+
+
+	import numpy as np
+	import pandas as pd
+	from scipy.stats import skew, kurtosis
+	from scipy.stats import boxcox
+	from sklearn.preprocessing import PowerTransformer
+
+	# 데이터 생성
+	data = np.random.exponential(scale=2, size=1000)  # 비정규 데이터
+
+	# 왜도와 첨도 계산
+	data_skewness = skew(data)
+	data_kurtosis = kurtosis(data, fisher=True)  # Excess Kurtosis
+
+	print(f"Before Transformation - Skewness: {data_skewness}, Kurtosis: {data_kurtosis}")
+
+	# Box-Cox 변환 (데이터가 양수일 경우)
+	data_boxcox, _ = boxcox(data + 1e-9)  # 0 방지용 작은 값 추가
+	print(f"After Box-Cox - Skewness: {skew(data_boxcox)}, Kurtosis: {kurtosis(data_boxcox, fisher=True)}")
+
+	# Yeo-Johnson 변환 (양수/음수 모두 가능)
+	transformer = PowerTransformer(method='yeo-johnson')
+	data_yeojohnson = transformer.fit_transform(data.reshape(-1, 1))
+	print(f"After Yeo-Johnson - Skewness: {skew(data_yeojohnson)}, Kurtosis: {kurtosis(data_yeojohnson, fisher=True)}")
+
+
+
 ## [1-4] 데이터 불균형 처리(Handling Imbalanced Data)
 ![](./images/DA_vs.png)<br>
 ▣ 정의 : 클래스 간 데이터 비율이 심각하게 불균형할 때, 모델의 학습 성능을 개선하기 위해 데이터를 조정<br>
