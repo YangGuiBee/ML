@@ -13,17 +13,15 @@
 
 # ▣ 2025년 10대 전략기술 트렌트
 
-2025-top-10-strategic-technology-trends.png
 ![](./images/2025-top-10-strategic-technology-trends.png)
-
+ (출처) Gartner 홈페이지(https://www.gartner.com/en/articles/top-technology-trends-2025)
+ 
 <br>
 
 ![](./images/top-strategic-technology-trends-2024.png)
  (출처) Gartner 홈페이지(https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-for-2024)
 
 <br>
-
- (출처) Gartner 홈페이지(https://www.gartner.com/en/articles/top-technology-trends-2025)
 
 <!--
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/top-strategic-technology-trends-2024.png'>
