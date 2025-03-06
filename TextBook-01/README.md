@@ -14,7 +14,7 @@
 # ▣ 2025년 10대 전략기술 트렌트
 
 ![](./images/2025-top-10-strategic-technology-trends.png)
- (출처) Gartner 홈페이지(https://www.gartner.com/en/articles/top-technology-trends-2025)
+ (출처) Gartner 홈페이지(https://www.gartner.com/en/articles/top-technology-trends-2025)<br>
 <br>
 ① 에이전틱 AI (Agentic AI) : AI가 단순한 자동화의 범위를 넘어, 스스로 계획을 세우고, 감지하며, 의사결정을 내리고, 업무를 실행하는 기술로 “나만의 비서“가 되어 일상과 업무를 간소화 시킨다.
 <br>
