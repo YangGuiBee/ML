@@ -1,7 +1,7 @@
 #  01 : 강의 소개(실습환경 준비), AI의 정의와 역사
 
 ---
-	 ▣ 2024년 10대 전략기술 트렌트
+	 ▣ 2025년 10대 전략기술 트렌트
 	 ▣ AI의 역사
 	 ▣ AI의 정의
 	 ▣ AI의 정의(최근 IT기업)
@@ -11,7 +11,7 @@
   	 ▣ 실습 준비
 ---
 
-# ▣ 2024년 10대 전략기술 트렌트
+# ▣ 2025년 10대 전략기술 트렌트
 
 2025-top-10-strategic-technology-trends.png
 ![](./images/2025-top-10-strategic-technology-trends.png)
