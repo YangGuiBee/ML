@@ -1,363 +1,508 @@
-#  02 : ML의 정의와 절차, 학습방법과 모델
-
+#  02 : Data Management
 ---
-	 ▣ ML의 정의
-	 ▣ ML의 절차
-	 ▣ ML의 구분
-	 ▣ ML의 학습별 알고리즘	 
-  	 ▣ ML의 모델 평가
-	 ▣ ML의 최적화 기법  	 
+	 ▣ 데이터 수집
+	 ▣ 데이터 전처리	 
+	 ▣ 데이터셋 분리  	  
+  	 ▣ Python 라이브러리	
 ---
 
+# ▣ 데이터 수집
+전통적인 데이터 분석을 위한 데이터 수집은 크게 세 단계로 진행된다. 첫 번째는 현업 사용자의 요청에 따라 여러 가지 데이터 소스에서 데이터를 추출(Extract)한다. 두 번째는 대상 데이터 시스템 및 해당 시스템의 다른 데이터와 통합할 수 있도록 정보의 구조를 변경하는 변환(Transform) 과정을 거친다. 마지막으로 세 번째 단계는 데이터 스토리지 시스템에 적재(Load)하는 방식으로 진행된다. 데이터 수집은 가장 많은 시간이 소요되며 방법에 따라 최종 결과물이 크게 달라지기도 한다. 머신러닝의 데이터 수집은 머신러닝 절차(분석 문제 정의 → 데이터 수집 → 탐색적 데이터 분석(EDA) → 피처 엔지니어링 → 예측 모델 개발 → 서비스 적용) 중 분석 문제 정의 다음의 단계이며, 이 단계에서는 정의한 문제를 해결하기 위한 데이터들을 수집하는 단계이다. 어떤 데이터를 수집하느냐에 따라 문제 해결을 위한 접근 방식이 달라지며, 이것은 데이터의 유형도 신경써야할 필요가 있다. 머신러닝 프로젝트에서 두 번째 단계인 '데이터 수집'은 분석의 기반이 되는 데이터를 확보하는 과정으로 다음과 같은 5가지 단계로 이루어진다.<br>
 
-![](images/Google_Trend.png)
-
+## (1) 원시 데이터 수집
+중요도에 비해 관심을 덜 받는 경우가 많지만 데이터 수집은 우수한 알고리즘을 얻기 위한 첫 걸음이다. 일반적으로 대량의 데이터 집합을 사용하는 단순한 모델이 소량의 데이터 집합을 사용하는 진보된 모델보다 성능이 더 우수하다.<br> 
 <br>
-현재까지 검색추가 : https://trends.google.com/trends/explore?date=2004-01-01%202024-09-06&q=Data%20Mining,Big%20Data,Machine%20Learning&hl=ko
-<br><br>
-딥러닝 검색추가 : https://trends.google.com/trends/explore?date=2004-01-01%202024-09-06&q=Data%20Mining,Big%20Data,Machine%20Learning,Deep%20Learning&hl=ko
-<br><br>
-2024년 MAD(ML, AI, DATA) 환경 : https://mad.firstmark.com/?utm_source=pytorchkr&ref=pytorchkr
+## (2) 데이터 마트 생성
+데이터 마트는 특정 주제나 부서에 초점을 맞춘 작은 규모의 데이터 웨어하우스를 의미하며, 이 단계에서는 필요한 데이터를 특정 주제나 목적에 맞게 분류하거나 구성한다. 이를 통해 필요한 데이터를 효율적으로 관리하고 사용할 수 있다. 예컨대, '고객 만족도'라는 주제는 고객 ID, 구매 이력, 제품 리뷰, 고객 서비스 이력 등을 포함하는 데이터 마트를 생성한다.<br>
+<br>
+## (3) 데이터 정합성 평가
+수집된 데이터의 질을 평가하는 과정으로 데이터의 정확성, 일관성, 완전성, 신뢰성 등을 검토하고, 이상치나 결측치, 중복 값 등이 있는지 확인한다. 이를 통해 데이터의 정합성을 보장하고, 분석의 신뢰성을 높일 수 있다. 예컨대, 고객 ID의 중복, 제품 리뷰의 결측치, 구매 이력의 이상치 등을 확인하고, 이를 수정하거나 제거하여 데이터의 정합성을 보장한다. <br>
+<br>
+## (4) 데이터 취합
+여러 출처에서 수집된 데이터를 하나의 데이터 세트로 합치는 과정으로 동일한 개체나 사건을 나타내는 데이터가 일관된 방식으로 표현되고 연결되어야야만 이를 통해 통합된 정보를 제공하고, 분석의 효율성을 높일 수 있다. 예컨대, 구매 이력 데이터, 제품 리뷰 데이터, 고객 서비스 이력 데이터 등을 고객 ID를 기준으로 합친다.<br>
+<br>
+## (5) 데이터 표준화
+서로 다른 소스에서 수집된 데이터는 종종 다른 형식이나 구조로 저장되어 있는 경우는 단계에서는 모든 데이터를 일관된 포맷으로 변환하여, 분석이나 처리가 쉽도록 한다.예컨대, 일자 데이터가 '년-월-일' 형식으로 저장된 곳도 있고, '월/일/년' 형식으로 저장된 곳도 있다면, 이를 일관된 형식으로 통일시킨다. “Garbage in, garbage out”라는 말이 있듯이, 무의미한 데이터가 들어오면 나가는 데이터도 무의미하다. 데이터의 출처에 따라 부가적인 포맷과 표준화가 필요할 수 있으며, 고품질의 대량의 데이터 집합이라도 해도 데이터 포맷이 잘못되면 힘을 발휘할 수 없다. 이 점은 여러 출처의 데이터를 집계할 때 특히 유의해야 한다.<br>
+이렇게 데이터 수집 단계를 통해 필요한 데이터를 효과적으로 확보하고, 그 데이터의 질을 보장하고, 데이터를 적절하게 관리하고 사용할 수 있으며, 이 단계를 잘 수행하면, 그 이후의 분석 과정에서 좀 더 정확하고 효율적인 결과를 얻을 수 있다다. 이렇게 데이터 수집 단계를 거친 후에는, 데이터의 질을 보장하고, 필요한 정보를 효율적으로 제공하는 '탐색적 데이터 분석(EDA)', '피처 엔지니어링', '예측 모델 개발', '서비스 적용' 등의 작업을 진행할 수 있다.<br>
 
+**open data repository**
+<br>
+https://archive.ics.uci.edu/
+<br>
+https://www.kaggle.com/datasets
+<br>
+https://registry.opendata.aws/
 <br>
 
-# ▣ ML의 정의
+**meta portal**
+<br>
+http://dataportals.org/
+<br>
+http://opendatamonitor.eu/
+<br>
+http://quandl.com/
 
+**DataSet**
+<br>
+https://en.wikipedia.org/wiki/List_of_datasets_for_machine-learning_research
+<br>
+https://www.quora.com/Where-can-I-find-large-datasets-open-to-the-public
+<br>
+https://www.reddit.com/r/datasets/
+<br>
+머신러닝 데이터셋(dataset) 사이트 40가지 모음 : https://kr.appen.com/blog/best-datasets/
+<br>
+Mushrooms Classification https://www.kaggle.com/uciml/mushroom-classification
+<br>
+Medical Costs Personal Dataset https://www.kaggle.com/mirichoi0218/insurance/data
+<br>
+Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswithkartik/red-white-wine-dataset 
 
-## 1959년, Arthur Samuel (아서 새뮤얼)
-정의 : "컴퓨터에 **명시적으로 프로그래밍되지 않고도 학습할 수 있는 능력을 부여**하는 연구 분야."<br>
-표현 : "Field of study that gives computers the ability to learn without being explicitly programmed."<br>
-설명 : 기계학습이라는 용어는 IBM 직원이자 컴퓨터 게임 및 인공 지능 분야의 선구자인 아서 새뮤얼이 처음 사용하였으며, 머신러닝이 기존의 명시적 프로그래밍 방식과 어떻게 다른지를 설명하면서 컴퓨터가 데이터를 통해 스스로 학습할 수 있는 능력을 강조<br>
-
-
-## 1983년, Herbert A. Simon (허버트 사이먼)
-정의 : "학습은 시스템이 **주어진 작업에 대해 이전보다 더 나은 성능**을 보일 때 발생한다."<br>
-표현 : "Learning is any process by which a system improves performance from experience."<br>
-설명 : 경험을 통한 성능 향상을 학습의 핵심으로 보았습니다. 이 정의는 특히 시스템이 경험을 통해 지속적으로 개선되는 과정을 강조<br>
-
-
-## 1997년, Tom M. Mitchell (톰 미첼) 
-정의 : "컴퓨터 프로그램이 경험(E)에서 학습하며, 작업(T)과 성능측정(P)과 관련하여 성능이 향상되었다면, 그 프로그램은 작업(T)에 대해 경험(E)로부터 학습한 것."<br>
-표현 : "A computer program is said to learn from experience EEE with respect to some task TTT and performance measure PPP, if its performance on TTT, as measured by PPP, improves with experience EEE."<br>
-설명 : "Machine Learning" 저서에서 학습의 세 가지 주요 요소(작업, 경험, 성능 측정)를 통해 머신러닝의 핵심 개념을 체계적으로 설명<br>
-
-
-## 2004년, Ethem Alpaydin (에텀 알파이딘)
-정의 : "머신러닝은 **데이터에서 패턴을 찾고, 이를 바탕으로 예측을 수행할 수 있는 알고리즘의 설계와 연구**."
-표현 : "Machine learning is the study of algorithms that learn from data and make predictions."
-설명 : "Introduction to Machine Learning" 저서에서 머신러닝의 예측 기능에 중점을 두며, 데이터에서 패턴을 발견하고 이를 기반으로 예측하는 과정의 중요성을 강조
-
-
-## 2008년, Andrew Ng (앤드류 응)
-정의 : "머신러닝은 **명시적으로 프로그래밍하지 않고 컴퓨터가 행동하는 방식을 학습**하는 학문이다."<br>
-표현 : "Machine learning is the field of study that enables computers to learn from data without being explicitly programmed."<br>
-설명 : "Stanford Machine Learning" 강의에서 데이터 기반 학습과 자율 학습 능력의 중요성을 강조하며, 현대의 대규모 데이터와 복잡한 문제를 해결하는 머신러닝의 필요성을 반영<br>
-Andrew Ng의 ML강의(Coursera) 정리 : https://junstar92.tistory.com/68<br>
-
-
-## 2012년, Kevin P. Murphy (케빈 머피)
-정의 : "머신러닝은 **데이터를 사용하여 예측 모델을 학습**하는 데 중점을 둔 컴퓨터 과학의 하위 분야이다."<br>
-표현 : "Machine learning is a subfield of computer science that focuses on the development of algorithms that can learn from and make predictions on data."<br>
-설명 : "Machine Learning: A Probabilistic Perspective" 저서에서 머신러닝의 이론적 연구와 실질적인 예측 모델의 개발을 강조<br>
-
-
-## 2016년, Joel Grus (조엘 그루스)
-정의 : "머신러닝은 **데이터를 이용해 명시적으로 프로그래밍하지 않고도 작업을 수행할 수 있는 모델을 만드는 과정**이다."<br>
-표현 : "Machine learning is the subfield of computer science that gives computers the ability to learn without explicitly being programmed."<br>
-설명 : "Data Science from Scratch" 저서에서 전통적인 프로그래밍과 구별되는, 데이터에 기반한 학습과 의사결정의 자동화 도구로 정의하고 머신러닝의 본질은 데이터를 통해 패턴을 학습하고, 이를 활용해 예측하거나 분류 등의 작업을 수행<br><br>
-
----
-
-## 배경<br> 
-현실세계의 복잡한 업무와 규칙을 구현하기 위한 매우 복잡하고 방대한 코드<br>
-수시로 변하는 업무환경, 정책, 사용자 성향에 따른 어플리케이션 구현의 어려움<br>
-많은 자원과 비용을 통해서 구현된 어플리케이션의 예측 정확성 문제<br>
-
-## 정리<br>  
-머신러닝은 인공지능의 하위 집합으로<br> 
-명시적으로 프로그래밍하지 않고<br> 
-많은 양의 데이터를 제공하여 많은 '경험'을 쌓으면서<br>
-시스템이 자율적으로 학습하고 개선할 수 있게 하는 것.<br>
-
-![](images/ML_dl.png)
-
-
----
 <br><br>
 
-## 【ML 개념】
+# ▣ 데이터 전처리
+데이터 전처리는 기존의 데이터를 머신러닝 알고리즘에 알맞은 데이터로 바꾸는 과정이다. 이 전처리 과정은 모델이 생성된 이후에도 예측하고자 하는 새로운 데이터에도 적용할 수 있는 과정으로 전처리 과정을 통해 더욱더 모델 학습의 성능을 높일 수 있다. 데이터 전처리는 Data Cleaning, Data Encoding, Data Transform, Feature Scaling, ML Pipeline 등 5개의 과정으로 수행한다. 
 
-![](images/ML_1.PNG)
+## (1) Data Cleaning
+대부분의 머신러닝 알고리즘은 Missing feature, 즉 누락된 데이터가 있을 때, 제대로 역할을 하지 못한다. 그래서 먼저 Missing feature에 대해 처리해주어야 한다.<br>
 
-![](images/ML_2.PNG)
-
-<br>
-
-# ▣ ML의 절차
-![](images/ML_Process.PNG)
-<br>
-(출처) https://www.sap.com/korea/products/artificial-intelligence/what-is-machine-learning.html
-<br><br>
-머신러닝은 다양한 알고리즘 기법을 적용하는 여러 유형의 머신러닝 모델로 구성<br>
-데이터의 특성과 원하는 결과에 따라 지도, 비지도, 준지도, 강화 등 학습모델 중 하나를 적용<br>
-사용 중인 데이터 세트와 원하는 결과에 따라 각 모델 내에서 하나 이상의 알고리즘 기법을 적용<br>
-머신러닝 알고리즘은 기본적으로 사물 분류, 패턴 발견, 결과 예측, 정보 기반 의사결정 등을 수행하도록 설계<br>
-알고리즘은 하나씩 사용할 수도 있고 복잡하고 예측불가능한 데이터의는 정확도를 극대화하기 위해 여러 알고리즘을 결합도 가능<br>
-![](images/01_09.png)
-
----
-## 【ML 수행 8단계 절차】
-
-### 데이터 처리 : (3강)
-(1) 데이터를 불러온다<br>
-(2) 데이터를 확인한다(시각화)<br>
-(3) 데이터를 전처리한다<br>
-
-### 모델 학습 : 지도학습(4-6강), 비지도학습(9-11강), 강화학습(12강)
-(4) 머신러닝 알고리즘에 적합한 형태로 데이터를 준비한다<br>
-(5) 머신러닝 알고리즘에 적용한다<br>
-
-### 평가, 개선 : (13-14강)
-(6) 머신러닝 알고리즘을 평가한다<br>
-(7) 머신러닝 알고리즘을 개선한다<br>
-(8) 원하는 결과가 나올때까지 (1~7)을 반복한다.
-
----
-
-## 【ML 용어】
-<img width ='600' height = '300' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_08.png'><br>
-**Sample** (샘플, 인스턴스, 관측치, 데이터셋)<br>
-**Feature** (특성, 속성, 측정치, 차원, 컬럼, 입력, 변수, 문제) **X** <br>
-**Label** (레이블, 타깃, 출력, 반응변수, 목표값, 답) **Y** <br>
-<br>
-
-<img width ='500' height = '500' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/iris_num.png'><br>
-
-<img width ='500' height = '250' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/ML_variable.png'><br>
-<br>
-model(모델) : 머신러닝이 찾은 규칙의 수학적 표현(수식), 학습 또는 훈련데이터로 학습된 머신러닝 알고리즘<br>
-모델의 규칙 : 가중치와 절편<br>
-규칙을 찾는 과정 : 모델을 통해서 훈련 또는 학습을 진행하면서 손실함수를 통해 규칙을 수정하는 과정<br>
-손실함수(비용함수) : 예측값과 실제값의 차이로 모델의 규칙을 수정하는 기준이 되는 함수<br>
-최적화 알고리즘 : 손실함수의 값을 최솟값에 수렴하도록 하는 효율적인 방법<br>
-차원축소 : feature의 수를 줄이기, 압축
-분류 : 단일값
-회귀 : 연속값(ex.주가, 매출 예측)
-train, val → training set / test → test set
-Train Dataset : 훈련/학습 데이터셋
-Validation Dataset : 검증 데이터셋, 중간 확인용
-Test Dataset : 평가 데이터셋, 마지막에 모델의 성능을 측정(한번만 사용, 두번이상 사용하면 검증 데이터셋, 학습 할 때 미적용)
-<br><br><br>
-
-# ▣ ML의 구분
-
-
-![](images/ML_wordpress.png)
-<br>출처 : https://favouriteblog.com/essential-cheat-sheets-for-machine-learning-python-and-maths/
-
-<br>
-
-![](images/ML_diagram.png)
-<br>출처 : https://medium.com/marketing-and-entrepreneurship/10-companies-using-machine-learning-in-cool-ways-887c25f913c3
-
-<br>
-
-<img width ='800' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_01.png'><br>
-
-## (1) 지도 학습 (Supervised Learning, SL)
-<img width ='600' height = '300' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_02.png'><br>
-지도 학습 알고리즘에서는 답이 포함된 예시를 통해 머신을 훈련한다. 지도 학습 모델은 '입력', '출력' 데이터 쌍으로 구성되며, 원하는 값으로 출력 레이블을 지정할 수 있다. 예를 들어 머신을 데이지꽃과 팬지꽃의 차이를 식별할 수 있도록 훈련하려고 한다. 하나의 이진 입력 데이터 쌍에는 데이지꽃의 이미지와 팬지꽃의 이미지가 모두 포함된다. 해당 특정 쌍에 원하는 결과는 데이지꽃을 선택하는 것이기 때문에, 이것이 올바른 결과로서 사전 식별된다.
-시스템은 알고리즘을 통해 시간에 따라 이 훈련 데이터를 모두 컴파일한 다음 상관관계가 있는 유사성, 차이점, 기타 논리 지점을 결정하기 시작하며, 이 작업은 데이지꽃인지 팬지꽃인지 묻는 질문에 대한 답을 스스로 예측할 수 있을 때까지 계속된다. 이는 어린 아이에게 일련의 문제를 정답 키와 함께 준 다음, 그들이 한 작업을 보여주고 논리를 설명하도록 하는 것과 같은 원리이다. 지도형 학습 모델은 제품 추천 엔진이나 교통량 분석 앱(예: 하루 중 다른 시간대에 가장 빠른 이동 경로를 예측하는 Waze( https://www.waze.com/ko/live-map/) ) 등 일상생활의 다양한 분야에서 사용된다.
-
-<br>
-
-## (2) 비지도 학습 (Unsupervised Learning, UL)
-비지도 학습 모델에는 정답 키가 없다. 머신이 입력 데이터(대부분 레이블이 없는 비정형 데이터)를 학습한 다음 관련성이 있고 액세스 가능한 데이터를 모두 사용해 패턴과 상관관계를 인식하기 시작한다. 비지도 학습은 사람이 세상을 관찰하는 방식을 기반으로 다양하게 모델링 된다. 사람은 직관과 경험에 의존해 사물을 그룹화 하는데, 어떤 사물에 대해 경험하는 예시의 수가 많을수록 그것을 분류하고 인식하는 능력이 더욱더 정확해진다. 머신에 있어서 '경험'은 '이용 가능한 입력 데이터의 양'이 된다. 비지도 학습 모델이 사용되는 대표적인 예는 안면 인식, 유전자 서열 분석, 시장 조사, 사이버 보안 등이 있다.
-
-<br> 
-
-##  (준지도 학습) (Semi-supervised learning)
-모든 데이터가 시스템에 입력되기 전에 정형화되고 레이블이 지정되어 있다면 더할 나위 없이 완벽할 것이다. 그러나 실제에서는 이러한 일이 불가능하기 때문에, 대량의 원시 비정형 데이터를 처리해야 하는 경우 준지도 학습은 유효한 해결책이 될 수 있다. 이 모델은 소량의 레이블이 지정된 데이터를 입력해 레이블이 없는 데이터 세트를 증강한다. 이 모델의 핵심은 레이블이 지정된 데이터를 통해 시스템이 학습을 시작하게 하며, 학습 속도와 정확성을 상당한 수준으로 개선하도록 하는 것이다. 준지도 학습 알고리즘은 레이블이 지정된 데이터를 분석해 레이블이 없는 데이터에 적용 가능한 상관관계가 있는 속성을 찾도록 머신을 훈련한다. 그러나 이 모델에는 시스템이 레이블이 지정된 데이터에 포함된 결함까지 학습해 복제할 위험이 있으므로 모범사례에 대한 프로토콜 구축이 필요하다. 준지도 학습은 음성 및 언어 분석, 단백질 분류와 같이 복잡한 의료 연구, 상위레벨 부정행위 감지 등에 사용된다.
-
-<br> 
-
-## (3) 강화학습 (Reinforcement Learning, EL)
-<img width ='600' height = '300' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_05.png'><br>
-Environment : 소프트웨어 시뮬레이션, Agent : 모델<br>
-지도형 학습에서는 머신에 정답 키를 제공해 모든 올바른 결과 중에서 상관관계를 찾아 학습하도록 하는데, 강화학습 모델에서는 정답 키는 제공되지 않지만 일련의 허용 가능한 행동, 규칙, 잠재적 최종 상태가 입력된다. 알고리즘의 원하는 목표가 고정되어 있거나 양자택일인 경우 머신은 예시를 통해 학습할 수 있다. 그러나 원하는 목표가 변동 가능한 경우에는 경험과 보상을 통해 학습해야 한다. 강화학습 모델에서 '보상'은 숫자이며, 시스템에서 수집하려는 항목으로 알고리즘에 프로그래밍된다. 예컨대, 사람에게 체스 게임을 하는 법을 가르치는 경우와 같이, 체스 말이 이동할 수 있는 경우를 모두 보여주는 것은 불가능하지만 규칙을 설명해주고 연습을 통해 기술을 습득하도록 하는 것이다. 보상은 게임을 이기는 것뿐 아니라 상대방의 말을 획득하는 형태로 이루어진다. 강화학습 적용 분야에는 온라인 광고 구매자의 자동 가격 입찰, 컴퓨터 게임 개발, 고위험 주식 시장 거래 등이 있다.
-
-<br><br><br>
-
-# ▣ ML의 학습별 알고리즘
-
-## (1) 지도 학습 (Supervised Learning, SL) : 회귀, 분류
-### (1-1) 회귀 (regression)<br>
-<img width ='700' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_04.png'><br>
-X(입력값) : 예측 변수(특성) vs Y(출력값) : 반응 변수(타깃)<br>
-
-회귀분석은 종속변수가 “급여” 혹은 “가중치”와 같이 실수 (real number) 또는 연속형 변수 (continuous variable)인 경우에 적용된다. 회귀의 목표는 연속형 변수의 값을 예측하는 것이다. 예를 들어, 임금 예측 문제를 고려해 본다면, 이때의 분석 목표는 교육 수준, 경력, 산업, 직책, 지역 등 다양한 요인을 고려하여 근로자의 임금을 예측하는 것이다. 이때 필요한 데이터는 다수의 근로자에 대한 과거 데이터로, 각 근로자의 상세 정보는 독립변수의 역할을 하며 임금은 종속변수의 역할을 한다. SL 모델은 이 과거 데이터를 통해 훈련되어, 주어진 독립변수에서 종속변수로의 매핑을 학습한다. 훈련이 완료된 후에는, 모델은 제공된 상세 정보를 기반으로 근로자의 임금을 예측하는 데 활용된다. 이를 통한 분석 결과는 기업의 경쟁력 있는 급여 수준을 설정하거나 다른 그룹간의 임금 공정성을 분석하는 등의 다양한 목적으로 사용될 수 있다.<br>
-
- **선형 회귀 (Linear Regression)** <br>
- **다항 회귀 (Polynomial Regression)** <br>
- **릿지 회귀 (Ridge Regression)** <br>
- **라쏘 회귀 (Lasso Regression)** <br>
- **엘라스틱넷 회귀 (Elastic Net Regression)** <br>
- **서포트 벡터 회귀 (Support Vector Regression, SVR)** <br>
- **결정 트리 회귀 (Decision Tree Regression)** <br>
- **랜덤 포레스트 회귀 (Random Forest Regression)** <br>
-
-### (1-2) 분류 (classification)<br>
-<img width ='700' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_03.png'><br>
-<img width ='900' height = '350' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/02_03.png'><br>
-이진 분류(binary classification) vs 다중 분류(multiclass classification)<br>
-양성 클래스(positive class) / 음성 클래스(negative class)<br>
-결정 경계(decision boundary)<br>
-
-분류는 출력 변수가 “Yes” 또는 “No”와 같은 이진법 적인 카테고리일 경우에 활용된다. 주 목적은 데이터를 사전에 지정된 클래스로 분류하는 것이다. 예컨대, 은행이 대출 신청자의 대출 채무 불이행 여부를 예측하는 신용 점수 시스템을 가지고 있다면, 이때 독립변수는 신청자의 개인적 특징인 소득, 신용 이력, 나이, 고용 상태 등이 될 수 있으며, 종속변수는 채무 불이행의 여부 등의 이진 결과가 된다. 이 분류 모델에서의 목표는 입력된 개인의 특징을 기반으로 채무 불이행 가능성을 최대한 정확하게 예측하는 매핑을 학습하는 것이며, 이 모델은 새로운 신청자를 분류하는 데 도움이 된다. 물론, 위의 분석에 포함된 독립변수가 반드시 외생적이라는 보장은 없다. 대부분의 변수들, 예를 들어 교육 수준은 내생적인 변수일 수 있다. 그러나 간단한 지도학습 분석에서는 이를 독립변수로 가정한다.<br>
-
- **로지스틱 회귀 (Logistic Regression)** <br>
- **서포트 벡터 분류 (Support Vector Classification, SVC)** <br>
- **결정 트리 분류 (Decision Tree Classification)** <br>
- **랜덤 포레스트 분류 (Random Forest Classification)** <br>
- **k-최근접 이웃 (k-Nearest Neighbors, k-NN)** <br>
- **나이브 베이즈 (Naive Bayes)** <br>
- **XGBoost (Extreme Gradient Boosting)** <br>
-
-<br>
-
-## (2) 비지도 학습 (Unsupervised Learning, UL) : 군집화, 차원축소
-### (2-1) 군집화 (Clustering)<br>
-<img width ='700' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_06.png'><br>
-<br>
-
-클러스터링은 특정 기준에 따라 서로 유사한 데이터 관찰값을 그룹화하는 방법이다. 이를 통해, 우리는 데이터를 클러스터로 분할하여 동일한 클러스터 내의 데이터가 다른 클러스터 내의 데이터보다 더 유사하도록 할 수 있다. 예컨대, 고객 세분화 (segmentation) 문제는 그룹별로 최적화된 마케팅 전략을 구현하기 위해 클러스터링이 활용된다. 소비자들의 연령, 소득, 소비 습관 등 다양한 요인에 따라 소비자를 그룹화하는 문제는 비지도 학습의 전형적인 적용 사례이다. 결과적으로, 하나의 그룹은 대량 구매를 드물게 하는 고소득 중년의 소비자로 구성되고, 다른 그룹은 소량 구매는 자주 하지만 젊은 저소득 소비자로 구성될 수 있다.<br>
-
- **KDE (Kernel Desity Estimation)** <br>
- **k-평균 클러스터링 (k-Means Clustering)** <br>
- **계층적 클러스터링 (Hierarchical Clustering)** <br>
- **DBSCAN (Density-Based Spatial Clustering of Applications with Noise)** <br>
- **가우시안 혼합 모델 (Gaussian Mixture Model, GMM)** <br>
-
-### (2-2) 연관 규칙 (Association Rule)<br>
-연관 규칙 학습은 대량의 데이터베이스에서 항목 집합 간의 관계나 연관성을 찾는 방법이다. 주로 시장 바구니 분석에 사용되며, 함께 구매되는 상품 간의 연관성을 찾는 것이 목적이다. 예를 들면, 식료품점에서 고객의 구매 이력을 연관 규칙 학습을 통해 분석하면, 빵과 버터를 함께 구매하는 고객이 우유도 함께 구매하는 경향이 있다는 사실을 찾아낼 수 있다. 이러한 규칙은 제품의 효율적인 배치, 고객의 동선 조정, 특정 제품 추천 등에 활용될 수 있다.<br>
-
- **FP Growth** <br>
- **이클렛 (Eclat)** <br> 
- **어프라이어리 (Apriori)** <br>
+	불필요한 누락 데이터 제거(처리) : pandas의 dropna()<br>
+	학습에 방해가 되는 연관성 없는 전체 속성(특정 행 또는 열의 라벨) 제거 : pandas의 drop()<br>
+	누락 데이터에 0, 평균값, 중간값으로 채우기 : pandas의 fillna(), scikit-learn의 Imputer()<br>
  
-### (2-3) 차원 축소 (Dimensionality Reduction)<br>
-<img width ='700' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_07.png'><br>
+## (2) Data Encoding
+수집된 데이터는 컴퓨팅 학습을 위해서 기존 데이터 세트에 텍스트가 있는 경우 이것을 숫자형 데이터로 인코딩(Encoding)이 필요하다. 인코딩에는 레이블 인코딩(Label Encoding)과 원핫 인코딩(One-hot Encoding)을 통해 범주형 데이터를 수치형 데이터로 변환이 필요하다.<br>
 <br>
-차원 축소는 가능한 한 많은 정보를 보존하면서 데이터에서 사용되는 변수의 수를 줄이는 방법이다. 고차원 데이터는 계산 복잡성과 차원의 저주 문제로 인해 분석이 어려울 수 있다. 따라서 차원 축소를 통해 고차원 데이터를 저차원 공간으로 표현하면 분석이 용이해집니다. 차원 축소는 수백 개의 잠재적 독립변수가 있는 기업의 미래 주가 예측 문제 등에서 활용될 수 있습니다. 예측 변수에는 회사의 과거 주가, 거래량, 매출, 수익, 비용, 그리고 GDP 성장률, 실업률, 인플레이션율, 금리 등의 거시경제 변수가 포함될 수 있습니다. 이러한 변수들은 주가와 관련성이 있을 수 있으며, 모든 변수들을 직접 사용하면 다중 공선성 문제가 발생할 수 있습니다. 따라서 PCA 등의 차원 축소 방법을 활용하여 고차원의 예측 변수를 저차원의 주성분으로 변환하여 주가 예측에 활용할 수 있습니다. 이를 통해 다중 공선성, 차원의 저주, 과적합 등의 문제를 방지할 수 있습니다. 비지도학습의 결과는 입력 데이터의 품질과 관련성, 사용된 알고리즘의 매개변수 선택, 그리고 결과 해석에 의존합니다. 따라서 이 결과는 확정적이지 않으며, 인과적인 통찰력을 제공하지 않습니다.<br> 
+**레이블 인코딩 :** 각 카테고리를 숫자로 대응시켜서 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"를 1로, "green"을 2로, "blue"를 3으로 변환하는 것이다. 이 방법은 간단하고 직관적이지만, 각 카테고리가 가지는 값의 크기 차이가 있을 경우 예측 결과에 영향을 미칠 수 있다. 텍스트를 숫자로 인코딩하는 메소드로는 Pandas에서 제공하는 factorize()와 OrdinalEncoder()이 있으며, sklearn.preprocessing.LabelEncoder를 사용할 수도 있다.<br>
+**원핫 인코딩 :** 각 카테고리를 벡터 형태로 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"는 [1, 0, 0], "green"은 [0, 1, 0], "blue"는 [0, 0, 1]로 변환하는 것이다. 이 방법은 각 카테고리를 독립적인 변수로 취급하기 때문에 각 카테고리가 가지는 값의 크기 차이를 고려하지 않기 때문에 범주형 변수의 카테고리가 많을수록 차원이 커지는 단점이 있지만, 예측 결과에 영향을 미치는 위험이 적다. 따라서, 레이블 인코딩은 카테고리가 서열을 가지는 경우(예: "bad", "average", "good")나 카테고리의 수가 적을 경우에 사용하고, 원핫 인코딩은 카테고리의 수가 많을 경우에 사용한다. 원핫 인코딩 메소드로는 OneHotEncoder()가 있다.<br>
 
- **주성분 분석 (Principal Component Analysis, PCA)** <br>
- **독립 성분 분석 (Independent Component Analysis, ICA)** <br>
- **자기 조직화 지도 (Self-Organizing Maps, SOM)** <br> 
- **잠재 의미 분석 (Latent Semantic Analysis, LSA)** <br>
- **특이값 분해 (Singular Value Decomposition, SVD)** <br>
- **잠재 디리클레 할당 (Latent Dirichlet Allocation, LDA)** <br>
- **t-distributed Stochastic Neighbor Embedding (t-SNE)** <br>
+![](./images/encoding.PNG)
 
+**sklearn.preprocessing.LabelEncoder**
+
+	#fit(): 어떻게 변환할 지 학습
+	#transform(): 문자열를 숫자로 변환
+	#fit_transform(): 학습과 변환을 한번에 처리
+	#inverse_transform():숫자를 문자열로 변환
+	#classes_ : 인코딩한 클래스 조회
+	
+	import numpy as np
+	from sklearn.preprocessing import LabelEncoder
+ 
+	items = ['TV','냉장고','컴퓨터', '컴퓨터','냉장고','에어콘', 'TV']
+	le = LabelEncoder()
+	le.fit(items) 
+	label = le.transform(items)
+	
+	print(label, type(label))
+	# ==> [0 1 2 2 1 3 0] <class 'numpy.ndarray'>
+	print(le.classes_)
+	# ==> ['TV' '냉장고' '컴퓨터' '에어콘']
+
+
+**sklearn.preprocessing.OneHotEncoder**
+
+	#fit(): 어떻게 변환할 지 학습
+	#transform(): 문자열를 숫자로 변환
+	#fit_transform(): 학습과 변환을 한번에 처리
+	#get_feature_names() : 원핫인코딩으로 변환된 컬럼의 이름을 반환
+	#DataFrame을 넣을 경우 모든 변수들을 변환한다. 범주형 컬럼만 처리하도록 해야 한다.
+	#sparse를 False로 주지 않으면 scipy의 csr_matrix(희소행렬 객체)로 반환
+	#희소행렬은 대부분 0으로 구성된 행렬과 계산이나 메모리 효율을 이용해 0이 아닌 값의 index만 관리한다.
+	#csr_matrix.toarray()로 ndarray로 바꿀수 있다.
+ 
+	import numpy as np
+	import pandas as pd
+	from sklearn.preprocessing import OneHotEncoder
+
+	# items 배열 정의
+	items = np.array(['TV', '냉장고', '컴퓨터', '컴퓨터', '냉장고', '에어컨', '에어컨', '선풍기'])
+
+	# 데이터프레임 생성
+	d = {
+    	'item': items,
+    	'cnt': np.arange(8)
+	}
+	df = pd.DataFrame(d)
+	df.info()
+
+	# 아이템 배열에 새로운 축 추가
+	items_expanded = items[..., np.newaxis]
+
+	# One-Hot Encoding 수행
+	ohe = OneHotEncoder(sparse_output=False)  # sparse_output=False: 결과를 배열 형태로 반환
+	ohe.fit(items_expanded)
+	ohv = ohe.transform(items_expanded)
+
+	# One-Hot Encoding 결과 확인
+	print(ohv)
+	print(type(ohv))
+ 	
+
+## (3) Data Transform
+Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하는데, 이를 이용하여 커스텀 변환기를 만들 수 있다.
+
+**fit()** : 입력받은 데이터에 특정 알고리즘 또는 전처리를 적용하는 메서드를 통해 변환기에 알맞는 파라미터를 생성<br>
+**transform()** : fit()을 통해 생성된 파라미터를 통해서 모델을 적용시켜 데이터 세트를 알맞게 변환시키는 메소드<br>
+**fit_transform()** : 같은 데이터 세트를 사용하여 fit과 transform을 한 번에 하는 메서드<br>
+ 	
+
+## (4) Feature Scaling
+일반적인 ML 알고리즘들은 아주 다양한 범위의 숫자형 데이터를 학습시킨다면 제대로 성능을 보여주지 못한다. 예컨대, 특정 데이터의 범위가 -500~39,320이라면 아주 다양한 데이터가 존재한다. 이러한 상태에서는 제대로 된 학습을 잘하지 못한다. 이를 방지하기 위해서 숫자형 데이터의 범위를 줄여주는 방법을 사용한다.<br>
+
+**Min-Max Scaling (Normalization)** : 최소와 최대를 확인하여 이 값들을 모두 지정한 범위(대체로 0과 1 사이)의 상대적인 값으로 변환, Scikit-learn에서는 MinMaxScaler(feature_range, copy) class를 제공<br>
+**Standardization** : 특정 범위에 값을 바인딩하지 않음으로써 특이점(이상점)의 영향을 제거, Scikit-learn에서는 StandardScaler() 클래스를 제공<br>
+
+
+## (5) ML Pipeline
+매번 데이터 정제마다 위와 같은 순서를 반복하기 싫다면, Pipeline이라는 방식을 사용하면 된다. Pipeline은 Data Processing Component들의 순서를 정의해놓은 것이다. 데이터 변환을 조작하고 적용하는 방법으로 각각의 컴포넌트들과 교류하며 사용하고 ML 워크플로우의 자동화를 지원한다. Scikit-Learn에서는 Pipeline Class를 제공하는데, 이것은 데이터 변환 단계의 순서를 정리하고 만들기 쉽다.<br>
+### ML Pipeline의 일반적인 구성 
+① 데이터 수집 및 로딩 (Data Collection and Loading) : 데이터를 수집하고, 모델링에 적합한 형태로 로드하는 단계(CSV 파일, 데이터베이스, API 등에서 데이터 로드)<br>
+② 데이터 전처리 (Data Preprocessing) : 결측값 처리, 중복 제거, 이상치 탐지, 데이터 클리닝 등 텍스트나 범주형 데이터를 수치화하거나 표준화하는 변환<br>
+③ 특성 엔지니어링 (Feature Engineering) : 데이터를 모델링에 적합한 특성(feature)으로 변환(특성 선택, 특성 생성, 차원 축소, 스케일링, 인코딩)<br>
+④ 모델 학습 (Model Training) : 준비된 데이터를 사용하여 머신러닝 알고리즘을 훈련시키는 과정으로 다양한 하이퍼파라미터 조정을 통해 최적의 모델을 도출<br>
+⑤ 모델 검증 (Model Validation) : 교차 검증, 평가 지표(Accuracy, Precision, Recall, F1 등) 활용하여 훈련된 모델의 성능을 평가<br>
+⑥ 모델 테스트 (Model Testing) : 학습에 사용되지 않은 독립된 데이터셋으로 모델의 일반화 성능을 평가<br>
+⑦ 모델 배포 (Model Deployment) : 최종 모델을 서비스나 애플리케이션에 배포하여 실제 데이터를 처리하도록 설정<br>
+⑧ 모니터링 및 유지보수 (Monitoring and Maintenance) : 모델 성능을 지속적으로 모니터링하고 필요 시 재학습 및 업데이트를 수행<br>
+
+<br><br><br>
+
+# ▣ 데이터셋 분리
+데이터를 적절히 포맷했고 품질을 확인했고 모든 관련 특성을 확보했다면, 이제 머신러닝을 위해 데이터 분할이 필요하다. 분할은 수집된 데이터를 훈련 데이터와 검정데이터<br>
+![](./images/DataSet.PNG)
+<br>
+분할의 단계는 총 3단계로 나누어 볼 수 있다.<br> 
+1 단계 : training과 test데이터로 분리한다.<br>
+2 단계 : training데이터를 training과 validation으로 분리한다.<br>
+3 단계 : training데이터로 모델을 만들고 validation데이터로 검증한다. 만족시 해당모델을 train과 validation데이터를 합쳐서 학습을 시킨후 test데이터를 넣어 확인한다.<br>
+
+데이터 셋의 비중은 정해진 것은 아니나 보통 Training set : Validation set : Test sets = 60 : 20 : 20 으로 설정한다.<br>
+한번의 학습으로 완전하게 모델을 학습시키기 어렵기 때문에, 다르게 튜닝된 여러 모델들을 학습한 후 어떤모델이 잘 학습되었는지 검증셋으로 검증하고 모델을 선택하는 과정이 필요하다. 이렇게 훈련/검증세트로 좋은 모델을 만들어 낸 후 최종적으로 테스트세트에는 단 한번의 예측테스트를 진행한다. 결과가 마음에 들지 않아도 또 수정하게되면 테스트 세트에 과적합되어 일반화의 성능이 떨어지게 된다. 훈련데이터는 모델을 Fit하는데 사용하며, 검증데이터트 예측 모델을 선택하기 위해 모델의 예측오류를 측정할 때 사용한다. 테스터데이터는 일반화 오류를 평가하기 위해 마지막에 단 한번만 사용해야한다. 이때 테스트 데이터는 한번도 공개된적 없는 데이터이어야 한다.<br>
+
+## (1) 훈련 데이터(Training set)
+모델을 학습하는데 사용된다. Training set으로 모델을 만든 뒤 동일한 데이터로 성능을 평가해보기도 하지만, 이는 cheating이 되기 때문에 유효한 평가는 아니다. 마치 모의고사와 동일한 수능 문제지를 만들어 대입 점수를 매기는 것과 같다. Training set은 Test set이 아닌 나머지 데이터 set을 의미하기도 하며, Training set 내에서 또 다시 쪼갠 Validation set이 아닌 나머지 데이터 set을 의미하기도 한다. 문맥상 Test set과 구분하기 위해 사용되는지, Validation과 구분하기 위해 사용되는지를 확인해야 한다.<br>
+<br>
+## (2) 테스트 데이터(Test set)
+validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한번 해당 모델의 예상되는 성능을 측정하기 위해 사용된다. 이미 validation set은 여러 모델에 반복적으로 사용되었고 그중 운 좋게 성능이 보다 더 뛰어난 것으로 측정되어 모델이 선택되었을 가능성이 있다. 때문에 이러한 오차를 줄이기 위해 한 번도 사용해본 적 없는 test set을 사용하여 최종 모델의 성능을 측정하게 된다.<br>
+<br>
+## (3) 검정 데이터(Validation set) 
+여러 모델들 각각에 적용되어 성능을 측정하며, 최종 모델을 선정하기 위해 사용된다. 반면 test set은 최종 모델에 대해 단 한번 성능을 측정하며, 앞으로 기대되는 성능을 예측하기 위해 사용된다. Training set으로 모델들을 만든 뒤, validation set으로 최종 모델을 선택하게 된다. 최종 모델의 예상되는 성능을 보기 위해 test set을 사용하여 마지막으로 성능을 평가한다. 그 뒤 실제 사용하기 전에는 쪼개서 사용하였던 training set, validation set, test set 을 모두 합쳐 다시 모델을 training 하여 최종 모델을 만든다. 기존 training set만을 사용하였던 모델의 파라미터와 구조는 그대로 사용하지만, 전체 데이터를 사용하여 다시 학습시킴으로써 모델이 조금 더 튜닝되도록 만든다. 혹은 data modeling을 진행하는 동안 새로운 데이터를 계속 축적하는 방법도 있다. 최종 모델이 결정되었을 때 새로 축적된 data를 test data로 사용하여 성능평가를 할 수도 있다.<br>
+
+![](./images/DataSet2.PNG)
+
+(소스코드)
 <br>
 
-## (3) 강화 학습 (Reinforcement Learning, RL)<br>
-강화학습은 학습하는 주체(모델)가 주어진 환경에서 보상을 최대화하기 위해 어떤 행동을 취해야 할지 스스로 결정하는 방법을 학습하는 머신러닝의 한 분야이다. 지도학습과는 다르게 정답 레이블(종속변수)이 제공되지 않으며, 대신 학습하는 주체는 행동의 결과로부터 학습해서 이를 통해 받는 보상(또는 처벌)에 따라 행동 전략인 정책(policy)을 조정한다. 강화학습에서 학습하는 주체는 어떤 행동을 취해야 할지 지시를 받지 않고, 어떤 행동을 시도하여 가장 많은 보상을 얻을 수 있는지 스스로 학습해야 한다. 이에 따라, 학습하는 주체의 행동은 이후 받게 될 데이터에 영향을 미치며, 이로 인해 능동적인 학습의 형태를 가지게 된다. 따라서, 강화학습의 핵심은 어떤 행동이 더 큰 보상을 주는지에 대한 탐험(exploration)과 이미 알고 있는 행동을 고수하는 착취(exploitation) 사이의 균형을 찾는 것이다. 실제 강화학습의 적용 예로는 우버(Uber)나 리프트(Lyft)와 같은 승차 공유 회사에서 동적 가격 전략을 결정하는 경우를 들 수 있다. 이러한 강화학습 환경에서 기업은 매 시간 단위마다 현재 상태(state(t))를 수신하고, 행동(action)을 선택하며, 보상(reward)을 얻고, 새로운 상태(state(t+1))로 전환한다. 상태는 시간, 요일, 수요, 공급, 날씨 등의 다양한 요인들에 의해 결정되며, 행동은 기업이 설정하는 가격 정책이다. 그리고 보상은 선택된 가격과 수요에 의해 직접적으로 영향을 받는 수익이다. 기업은 강화학습을 통해 누적 보상을 최대화하는 정책, 즉 상태에서 행동으로의 매핑을 학습할 수 있다. 다양한 가격 전략을 탐색하면서, 가장 높은 보상을 얻을 수 있는 전략을 활용하는 방법을 시간이 지남에 따라 학습한다. 예를 들어, 비가 오는 날에 가격을 높이는 것이 더 높은 수익을 가져온다는 사실을 발견할 수 있습니다.<br>
+ 	import pandas as pd
+	from sklearn.model_selection import train_test_split
+	
+	# 예시 데이터프레임 생성 (실제 데이터프레임이 이미 있다고 가정)
+	# 예시: df = pd.DataFrame({'feature': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'target': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]})
+	# 아래 예시 데이터프레임은 실행 가능성을 위해 추가됨
+	
+	# 데이터프레임 생성
+	df = pd.DataFrame({
+	    'feature': range(1, 11),  # 1~10까지의 숫자
+	    'target': [0, 1] * 5      # 0과 1이 반복되는 타겟값
+	})
+	
+	# 단일 피처를 2차원 배열로 변환
+	X = df[['feature']]  # X는 2차원 데이터프레임으로, [[ ]]를 사용하여 2차원으로 생성
+	y = df['target']     # y는 1차원 Series
+	
+	# train-test 분리
+ 	# 전체 데이터에서 80%를 학습 데이터로, 20%를 테스트 데이터로 분리
+  	# random_state=42 : 설정하지 않거나 'None'으로 설정시, 매번 다른 결과를 생성
+   	# shuffle=True : split 하기 전에 데이터를 섞을지 여부(default는 True)
+    	# stratify=y : target으로 지정하면 각 class 비율을 train/validation으로 유지. 한쪽에 쏠림 분배방지(default는 None)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=True, stratify=y,random_state=42)
+	
+	# train-validation 분리
+ 	# 학습 데이터에서 75%를 최종 학습 데이터로, 25%를 검증 데이터로 분리
+	X2_train, X2_val, y2_train, y2_val = train_test_split(X_train, y_train, test_size=0.25, random_state=42)
+	
+	# 각 데이터 세트의 크기를 출력
+	print(f"전체 데이터 크기: {len(df)}")
+	print(f"학습 데이터 크기 (Train): {len(X_train)}")
+	print(f"테스트 데이터 크기 (Test): {len(X_test)}")
+ 	print(f"검증을 제외한 학습 데이터 크기 (Train-Validation): {len(X2_train)}")
+ 	print(f"검증 데이터 크기 (Validation): {len(X2_val)}")
+	
+	# 데이터 분할 비율 확인
+	print(f"\n학습 데이터 비율: {len(X2_train) / len(df):.2f}")
+	print(f"테스트 데이터 비율: {len(X_test) / len(df):.2f}")
+ 	print(f"검증 데이터 비율: {len(X2_val) / len(df):.2f}")
 
- **Q-learning** <br>
- **Deep Q-Network (DQN)** <br>
- **State-Action-Reward-State-Action (SARSA)** <br>
- **유전 알고리즘 (Genetic Algorithm)** <br>
- **Asynchronous Advantage Actor-Critic (A3C)** <br> 
 
+(실행결과)
 <br>
 
-## (4) 앙상블 학습 (Ensemble Learning, EL)<br>
-앙상블 학습은 여러 모델을 동시에 훈련시켜 동일한 문제를 해결하고, 이들을 결합하여 더 우수한 결과를 도출하는 기계학습의 패러다임이다. 앙상블 학습의 기본 가정은 개별적으로는 성능이 떨어지는 모델들이 적절히 결합될 경우, 보다 정확하고 뛰어난 모델을 구축할 수 있다는 것이다. 앙상블 학습은 과적합, 편향, 분산 등의 문제를 완화하는 데 도움을 주며, 여러 모델을 구축하고 이를 통합함으로써 개별 모델의 오류를 보정하여 전체적으로 개별 모델보다 더 뛰어난 성능을 달성할 수 있다.<br> 
-
- **스태킹 (Stacking)** <br>
- **배깅 (Bagging)** <br>
- **부스팅 (Boosting)** <br>
-
-<br>
-
-## (5) 인공신경망(Artificial Neural Networks, ANN), 심층학습 (Deep Learning, DL)<br>
-인공신경망(ANNs)은 인간의 뇌 구조에서 영감을 받아 만들어진 계산 모델로 상호 연결된 인공 뉴런 집합으로 구성되며, 연결주의적 계산 방법을 통해 정보를 처리한다. 이는 인간처럼 경험을 통해 학습하고 성능을 개선할 수 있으며, 심층학습(Deep Learning)은 이러한 인공신경망을 보다 깊게 쌓아 복잡한 패턴과 구조를 모델링하는 발전된 형태이다.<br>
-
- **퍼셉트론 (Perceptrons)** <br>
- **Convolutional Neural Networks (CNN)** <br>
- **Recurrent Neural Networks (RNN)** <br>
- **오토인코더(Autoencoders)** <br>
- **생성적 적대 신경망(Generative Adversarial Networks, GAN)** <br>
+	전체 데이터 크기: 10
+	학습 데이터 크기 (Train): 8
+	테스트 데이터 크기 (Test): 2
+	검증을 제외한 학습 데이터 크기 (Train-Validation): 6
+	검증 데이터 크기 (Validation): 2
+	
+	학습 데이터 비율: 0.60
+	테스트 데이터 비율: 0.20
+	검증 데이터 비율: 0.20
 
 <br><br>
+
+## 【ML 예제】
+
+붓꽃 데이터(Iris Dataset)는 Setosa, Virginica, Versicolor 3개의 붓꽃 품종을 구분해내는 것을 목적으로 만들어졌으며, 머신러닝을 경험해볼 수 있는 아주 간단한 장난감 데이터(toy data set)이다.<br> 
+
+![](./images/iris_data.PNG)
+
+## (1) 전통적인 프로그래밍(Traditional Programming)
+ - 데이터 수집: 붓꽃 품종에 관련된 많은 데이터를 수집한다.<br>
+ - 변수 가공: 붓꽃 품종은 '꽃잎(Petal)의 길이'와 '꽃받침(Sepal)의 길이'로 구분 할 수 있다는 변수를 알아낸다.<br>
+ - 로직 정의: 꽃받침의 길이가 몇cm 이상이면 Versicolor, 이하면 Setosa라는 여러 세트의 rule들을 정의하여 모델을 만든다.<br>
+ - 모델 평가: 데이터를 모델에 넣어 정확도가 어느정도 인지 확인해본다.<br>
+
+## (2) 머신러닝(Machine Learning)
+ - 데이터 수집: 붓꽃 품종에 관련된 많은 데이터를 수집한다.<br>
+ - 변수 가공: 붓꽃 품종은 '꽃잎의 길이'와 '꽃받침의 길이'로 구분할 수 있다는 변수를 알아낸 뒤 해당 변수의 데이터를 잘 정리한다.<br>
+ - 모델 학습: Decision Tree, SVM 등 다양한 알고리즘에 데이터만을 입력해보며 적합한 모델을 생성한다.<br>
+ - 모델 평가: 학습에 사용되지 않은 데이터를 최종 모델에 넣어 정확도가 어느정도 인지 확인해본다.<br>
+
+## (3) 딥러닝(Deep Learning)
+ - 데이터 수집: 붓꽃 품종에 관련된 많은 이미지 데이터를 수집한다.<br>
+ - 변수 가공: 변수(feature)는 모델에서 자동 생성된다.<br>
+ - 모델 학습: 이미지 데이터를 입력하여 다양한 네트워크를 구성해보고 적합한 모델을 생성한다.<br>
+ - 모델 평가: 학습에 사용되지 않은 이미지 데이터를 최종 모델에 넣어 정확도가 어느 정도 인지 확인해본다.<br>
+<br>
+	
+	from sklearn import datasets
+	import matplotlib.pyplot as plt
+
+ 	#Iris 데이터셋 로드
+	iris = datasets.load_iris()
+
+	#서브플롯 생성
+	fig, ax = plt.subplots()
+
+	#산점도 그리기
+	scatter = ax.scatter(iris.data[:, 0], iris.data[:, 1], c=iris.target, cmap=plt.cm.Set1)
+
+	#축 레이블 설정
+	ax.set(xlabel=iris.feature_names[0], ylabel=iris.feature_names[1])
+
+	#고유한 클래스 타겟과 그에 해당하는 명칭 얻기
+	handles, _ = scatter.legend_elements()
+	labels = iris.target_names
+
+	#범례 추가: 클래스 코드 대신 명칭 표시
+	ax.legend(handles, labels, loc="lower right", title="Classes")
+
+	#그래프 표시
+	plt.show()
+
+
+# ▣ Python 라이브러리
+파이썬 전세계 점유율(티오베 지수) : https://www.tiobe.com/tiobe-index/
+<br>
+![](./images/python.PNG)
+<br>
+파이썬 자습서 : https://docs.python.org/ko/3/tutorial/
+<br>
+점프투파이썬 : https://wikidocs.net/book/1
+
+<br><br>
+
+## 【NumPy】
+행렬이나 일반적으로 대규모 다차원 배열을 쉽게 처리할 수 있도록 지원하는 파이썬의 라이브러리<br>
+NumPy는 데이터 구조 외에도 수치 계산을 위해 효율적으로 구현된 기능을 제공<br>
+NumPy 공식문서 : https://numpy.org/doc/stable/user/whatisnumpy.html
+<br>NumPy 실습 : http://ml-ko.kr/homl2/tools_numpy.html
+
+**numpy.ipynb 실습**
+
+	numpy.array() : ndarray 배열 생성
+	numpy.array().shape : 행렬 형태 정보
+	numpy.array().ndim : 차원 정보
+	type(numpy.array()) : 행렬의 타입
+	numpy.array().dtype : 행렬의 데이터 타입
+	numpy.array().astype : 행렬의 데이터 타입 변경, 
+	numpy.arrange() : 행렬 데이터 초기값 생성
+	numpy.zeros() : 기본값 0으로 채우기
+	numpy.ones() : 기본값 1로 채우기
+	ndarray.shape : 차원과 크기 변경
+	numpy.sort() : 행렬내 정렬(내림차순 [::-1], row방향 axis=0, column방향 axis=1)
+	numpy.argsort() : 정렬 행렬의 원본 행렬 인덱스를 ndarray로 반환
+	numpy.dot() : 선형대수 연산(행렬내적)
+	numpy.transpose() : 선형대수 연산(전치행렬)
+
+
+![](./images/array.png)
+
+![](./images/array2.png)
+
+![](./images/np.png)
+
+<br>
+
+## 【Pandas】
+데이터 조작 및 분석을 위한 파이썬 프로그래밍 언어 용으로 작성된 소프트웨어 라이브러리<br>
+숫자 테이블과 시계열을 조작하기 위한 데이터 구조와 연산을 제공<br>
+Pandas란 이름은 한 개인에 대해 여러 기간 동안 관찰을 한다는 데이터 세트에 대한 계량 경제학 용어인 "패널 데이터"에서 파생<br>
+또한 "Python 데이터 분석"이라는 문구 자체에서 따온 것이기도 하다.<br>
+Wes McKinney는 2007년부터 2010년까지 연구원으로 있을 때 AQR Capital에서 pandas를 만들기 시작했다.<br>
+Pandas 공식문서 : https://pandas.pydata.org/pandas-docs/stable/getting_started/index.html
+<br>사용현황 : https://www.datacamp.com/blog/top-data-science-tools
+
+**pandas.ipynb 실습**
+
+	객체명 = pandas.read_csv('파일명')
+	display(객체명) #객체명만 적거나 print(객체명)만 적어도 됨
+	객체명.head() #5개만 조회
+	객체명.tail() #5개만 조회
+	pandas.set_option('display.max_rows', 1000)
+	pandas.set_option('display.max_colwidth', 100)
+	pandas.set_option('display.max_columns', 100)
+	pandas.DataFrame()
+	객체명.shape : DataFrame의 행(Row)와 열(Column) 크기
+	객체명.colums
+	객체명.index
+	객체명.values : DataFrame의 값(numpy로 변환)
+	객체명.info() : DataFrame내의 컬럼명, 데이터 타입, Null건수, 데이터 건수 정보
+	객체명.describe() : 데이터값들의 평균,표준편차,4분위 분포도
+	객체명['특성명'].value_counts() : 개별 데이터값의 건수, 디폴트는 dropna=True 
+	객체명['특성명'].value_counts(dropna=False)) : null값도 표시
+	객체명=객체명.drop('특성명', axis=1(0은 row삭제), inplace=False)
+	indexes = 객체명.index
+	객체명.reset_index(inplace=False)
+	객체명.iloc[:, -1]) : 처음부터 마지막 컬럼까지
+	객체명.iloc[:, :-1]) : 처음부터 마지막 컬럼 전까지
+	객체명.sort_values(by=['특성명'], ascending=True)
+	객체명.count() : null값은 제외
+	객체명.mean() : average 대신 사용
+	객체명.sum()
+	객체명.groupby(by='특성명')
+	객체명.groupby('특성명').agg([max, min])
+	객체명.isna() : 모든 컬럼에 대하여 True(1)/False(0) 출력
+	객체명.isna().sum() : 모든 컬럼에 대하여 널값의 수를 출력
+	객체명['특성명'].fillna('채울값')
+	객체명['특성명'].unique() : 해당 컬럼내 고유값의 수
+	객체명['특성명'].replace() : 값 변경
+	객체명['특성명'].apply(lamda 입력값 : 함수)
+	객체명['특성명'].apply(lamda 입력값 : '출력값' if 입력값 조건식 else '또다른 출력값')
+
+<br>
+
+## 【Matplotlib】
+Python 프로그래밍 언어 및 수학적 확장 NumPy 라이브러리를 활용한 플로팅 라이브러리<br>
+Tkinter , wxPython , Qt 또는 GTK 와 같은 범용 GUI 툴킷을 사용하여 애플리케이션에 플롯을 포함 하기 위한 객체 지향 API를 제공<br> 
+Matplotlib 공식문서 : https://matplotlib.org/stable/
+<br>
+Matplotlib 가이드 : https://wikidocs.net/92071
+
+<br>
+
+## 【Scikit-Learn】
+Scikit-learn(이전 명칭: scikits.learn, sklearn)은 파이썬 프로그래밍 언어용 자유 소프트웨어 기계 학습 라이브러리<br>
+다양한 분류, 회귀, 그리고 서포트 벡터 머신, 랜덤 포레스트, 그라디언트 부스팅, k-평균, DBSCAN을 포함한 클러스터링 알고리즘<br>
+파이썬의 수치 및 과학 라이브러리 NumPy 및 SciPy와 함께 운용되도록 설계<br>
+Scikit-learn 공식문서 : https://scikit-learn.org/stable/user_guide.html
+<br>
+SciPy 공식문서 : https://docs.scipy.org/doc/scipy/
+<br>
+![](./images/sk_map.png)
+
+<br>Scikit-learn 모델 선정절차 : https://scikit-learn.org/1.3/tutorial/machine_learning_map/index.html<br>
+Scikit-learn 모델 선정절차(확대가능 map) : https://scikit-learn.org/stable/machine_learning_map.html
+
+<br>
+
+## 【MNIST】
+MNIST(Modified National Institute of Standards and Technology database)는 손으로 쓴 숫자들로 이루어진 대형 데이터베이스<br>
+다양한 화상처리시스템과 기계학습 분야의 트레이닝 및 테스트에 널리 사용<br>
+MNIST 데이터베이스는 60,000개의 트레이닝 이미지와 10,000개의 테스트 이미지를 포함<br>
+MNIST 사용가이드 : https://guide.ncloud-docs.com/docs/tensorflow-tensorflow-1-3
+
+<br>
+
+## 【TensorFlow】
+머신러닝 및 인공 지능을 위한 무료 오픈소스 소프트웨어 라이브러리<br>
+다양한 작업에 사용할 수 있지만 특히 심층 신경망의 교육 및 추론에 중점<br>
+연구 및 생산에서 Google의 내부 사용을 위해 Google Brain 팀에서 개발<br>
+TensorFlow는 Python, JavaScript, C++ 및 Java 등 다양한 프로그래밍 언어와 많은 분야의 다양한 애플리케이션에서 쉽게 사용가능<br>
+TensorFlow 공식문서 : https://www.tensorflow.org/?hl=ko
+
+<br>
+
+## 【Kaggle】
+2010년 설립된 예측모델 및 분석 대회 플랫폼으로 2017년 3월 구글에 인수됨<br>
+기업 및 단체에서 데이터와 해결과제를 등록하면, 데이터 과학자들이 이를 해결하는 모델을 개발하고 경쟁<br>
+Kaggle은 전 세계 데이터 사이언티스트들이 데이터를 분석할 수 있도록 대회를 개최하고, 분석 내용을 토론할 수 있는 커뮤니티를 제공하는 플랫폼<br>
+데이터분석 대회 뿐 아니라 데이터분석을 위한 데이터 셋, 파이썬, R 기반 개발 환경, 초보 데이터 분석가를 위한 무료 강의 등 다양한 기능 제공<br>
+Kaggle 공식사이트 : https://www.kaggle.com/
+Kaggle 가이드 : https://wikidocs.net/86304
+<br>
+
+<br><br>
+
+## 【ML 알고리즘/모델】
+
+![](./images/ML_2019.png)
+
+<br>
+
+출처 : https://www.kdnuggets.com/2019/04/top-data-science-machine-learning-methods-2018-2019.html
+
+<br>
+
+## 2024년 update
+1. Linear regression<br>
+2. Logistic regression<br>
+3. Naive Bayes<br> 
+4. Decision tree<br>
+5. Random forest<br>
+6. K-nearest neighbor (KNN)<br>
+7.  K-means<br>
+8. Support vector machine (SVM)<br>
+9. Apriori<br>
+10. Gradient boosting<br>
+출처 : https://www.coursera.org/articles/machine-learning-algorithms?msockid=0197f0fd39fb68c821f1e42d38db69bd
+
+---
+
+Anaconda 다운로드 : https://www.anaconda.com/download
+<br>
+
+	import sklearn
+ 	import pandas as pd
+	import numpy as np
+	import matplotlib.pyplot
+	import seaborn
+	import xgboost
+	import lightgbm
    
-# ▣ ML의 모델 평가
-## (1) 회귀 평가 지표
- **평균 절대 오차 (Mean Absolute Error, MAE)** <br> 
- **평균 제곱 오차 (Mean Squared Error, MSE)** <br> 
- **평균 제곱 오차(로그적용) (Mean Squared Log Error, MSLE)** <br>
- **평균 제곱근 오차 (Root Mean Squared Error, RMSE)** <br> 
- **평균 제곱근 오차(로그적용) (Root Mean Squared Log Error, RMSLE)** <br>
- **평균 절대 비율 오차 (Mean Absolute Percentage Error, MAPE)** <br> 
- **평균 절대 비율 오차(절대값제외) (Mean Percentage Error, MPE)** <br>
- **R2 score** <br>
-
- <br>
+	print(sklearn.__version__)
+ 	print(xgboost.__version__)
+  	print(lightgbm.__version__)
  
-## (2) 분류 평가 지표
- **정확도 (Accurancy)** <br> 
- **오차행렬 (Confusion Matrix)** <br> 
- **정밀도(Precision)** <br> 
- **재현율(Recall)** <br> 
- **F1 score** <br> 
- **ROC curve** <br> 
- **AUC score** <br> 
 
-<br><br><br>
+Scikit Learn 업데이트(1.0.2) : Anaconda Prompt(관리자권한)<br>
 
-# ▣ ML의 최적화 기법
-[1] 데이터 처리 및 변환
-[1-1] 데이터 증강 (Data Augmentation)
-[1-2] 교차 검증 (Cross-Validation)
-[1-3] 데이터 스케일링 (Data Scaling)
-[1-4] 데이터 불균형 처리 (Handling Imbalanced Data)
-[1-5] 정보 병합 (Data Fusion Techniques)
+	# scikit -learn 최신버전 설치
+	$ pip install -U scikit -learn
+ 	# scikit -learn 교재버전 고정
+ 	$ pip install -U scikit -learn==1.0.2
 
-[2] 모델 복잡도 및 일반화
-[2-1] 과적합 방지 (Overfitting Prevention)
-[2-2] 정규화 (L1, L2 Regularization)
-[2-3] 드롭아웃 (Dropout)
-[2-4] 조기 종료 (Early Stopping)
-[2-5] 앙상블 학습 (Ensemble Learning)
+XGBoost 설치 : Anaconda Prompt(관리자권한)<br>
+  
+  	# xgboost 설치
+ 	$ conda install -c anaconda py-xgboost
 
-[3] 하이퍼파라미터 최적화
-[3-1] 하이퍼파라미터 튜닝 (Hyperparameter Tuning)
-[3-2] 그리드 서치 (Grid Search)
-[3-3] 랜덤 서치 (Random Search)
-[3-4] 베이즈 최적화 (Bayesian Optimization)
-[3-5] 하이퍼파라미터 탐색 자동화 (Automated Hyperparameter Tuning)
+LightGBM 업데이트(3.3.2) : Anaconda Prompt(관리자권한)<br>
 
-[4] 학습 과정 최적화
-[4-1] 학습률 스케줄링 (Learning Rate Scheduling)
-[4-2] 가중치 초기화 (Weight Initialization)
-[4-3] 활성화 함수 선택 (Activation Function Selection)
-[4-4] 전이 학습 (Transfer Learning)
-[4-5] 모델 구조 최적화 (Model Architecture Optimization)
-[4-6] 온라인 학습 (Online Learning)
+	$ pip install lightgbm==3.3.2
 
-[5] 성능 향상
-[5-1] 특성 중요도 분석 및 선택 (Feature Selection)
-[5-2] 손실 함수 커스터마이징 (Custom Loss Function)
+ 
+Visual Studio 다운로드 : https://visualstudio.microsoft.com/ko/downloads/ <br>
+도구 - 빌드도구 - C++ 데스크톱
 
-[6] 하드웨어 및 시스템 최적화
-[6-1] 하드웨어 최적화 (Hardware Optimization)
-
-<br><br>
-
-## 【ML 강의 구성】
-
-![](images/Contents2024.png)
-
-<br><br><br>
-
-
+---
