@@ -1001,36 +1001,19 @@ X(입력값) : 예측 변수(특성) vs Y(출력값) : 반응 변수(타깃)<br>
 
 
 # ▣ 실습 준비
-3강에서 추가 설명 예정.
 
 
 ### 【구글 코랩】
-
 구글 계정으로 로그인하여 https://colab.research.google.com/?hl=ko 에서 [새노트]로 시작<br>
-본 강의 중에는 구글 코랩으로 실습을 시연할 예정인 바, 이하 설치는 선택사항임<br>
-구글코랩 실행창에서 필요한 패키지 업그레이드 방법<br> 
-
-	!pip install --upgrade scikit-learn
 
 <br>
 
 ### 【아나콘다】
-
 아나콘다는 데이터 과학, 수학, 공학용 파이썬 필수 패키지들을 모두 포함하고 있으며, 주요 운영 체제를 모두 지원<br>
 아나콘다 설치 파일 다운로드 : https://www.anaconda.com/download/
 <br>간단한 아나콘다 안내는 온라인 문서(https://docs.anaconda.com/anaconda/userguide/getting-started/) 참고<br> 
 
-	#아나콘다를 설치한 후 다음 명령으로 필요한 파이썬 패키지를 설치
-	conda install SomePackage
-	#설치한 패키지를 업데이트할 때는 다음 명령을 사용
-	conda update SomePackage
-	#SomePackage명에는 아래와 같이 핵심 패키지명을 각각 입력 
- 	- [NumPy](http://www.numpy.org) >= 1.18.5
- 	- [SciPy](http://www.scipy.org) >= 1.4.1
- 	- [scikit-learn](http://scikit-learn.org/stable/) >= 0.23.2
- 	- [matplotlib](http://matplotlib.org) >= 3.1.1
- 	- [pandas](http://pandas.pydata.org) >= 1.0.4
- 	- [TensorFlow](https://www.tensorflow.org) >= 2.3.0
+
 
 
 
