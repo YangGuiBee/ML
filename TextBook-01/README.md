@@ -132,6 +132,11 @@ AI가 단순한 자동화의 범위를 넘어, 스스로 계획을 세우고, �
 
 <br><br>
 
+
+## 2025년, Hype Cycle for AI
+![](./images/ai_2025.png)
+<br>
+<br>
 ## 2024년, Hype Cycle for AI
 ![](./images/HypeCycle_AI2024.png)
 <br>
