@@ -51,7 +51,7 @@ AI가 단순한 자동화의 범위를 넘어, 스스로 계획을 세우고, �
 <br>
 <br>
 
-# ▣ 2025년 10대 전략기술 트렌트
+# ▣ 2024년 10대 전략기술 트렌트
 
 ![](./images/top-strategic-technology-trends-2024.png)
  (출처) Gartner 홈페이지(https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-for-2024)<br>
