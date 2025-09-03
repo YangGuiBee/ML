@@ -824,7 +824,7 @@ Test Dataset : 평가 데이터셋, 마지막에 모델의 성능을 측정(한�
 <img width ='800' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/01_01.png'><br>
 
 ## (1) 지도 학습 (Supervised Learning, SL)
-<img width ='600' height = '300' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_02.png'><br>
+<img width ='600' height = '300' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/01_02.png'><br>
 지도 학습 알고리즘에서는 답이 포함된 예시를 통해 머신을 훈련한다. 지도 학습 모델은 '입력', '출력' 데이터 쌍으로 구성되며, 원하는 값으로 출력 레이블을 지정할 수 있다. 예를 들어 머신을 데이지꽃과 팬지꽃의 차이를 식별할 수 있도록 훈련하려고 한다. 하나의 이진 입력 데이터 쌍에는 데이지꽃의 이미지와 팬지꽃의 이미지가 모두 포함된다. 해당 특정 쌍에 원하는 결과는 데이지꽃을 선택하는 것이기 때문에, 이것이 올바른 결과로서 사전 식별된다.
 시스템은 알고리즘을 통해 시간에 따라 이 훈련 데이터를 모두 컴파일한 다음 상관관계가 있는 유사성, 차이점, 기타 논리 지점을 결정하기 시작하며, 이 작업은 데이지꽃인지 팬지꽃인지 묻는 질문에 대한 답을 스스로 예측할 수 있을 때까지 계속된다. 이는 어린 아이에게 일련의 문제를 정답 키와 함께 준 다음, 그들이 한 작업을 보여주고 논리를 설명하도록 하는 것과 같은 원리이다. 지도형 학습 모델은 제품 추천 엔진이나 교통량 분석 앱(예: 하루 중 다른 시간대에 가장 빠른 이동 경로를 예측하는 Waze( https://www.waze.com/ko/live-map/) ) 등 일상생활의 다양한 분야에서 사용된다.
 
