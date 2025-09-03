@@ -1,7 +1,7 @@
 #  01-1 : 강의 소개(실습환경 준비), AI의 정의와 역사
 
 ---
-	 ▣ 2025년 10대 전략기술 트렌트
+	 ▣ 전략기술 트렌트(Gartner)
 	 ▣ AI의 역사
 	 ▣ AI의 정의
 	 ▣ AI의 정의(최근 IT기업)
@@ -784,15 +784,15 @@ Andrew Ng의 ML강의(Coursera) 정리 : https://junstar92.tistory.com/68<br>
 ---
 
 ## 【ML 용어】
-<img width ='600' height = '300' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_08.png'><br>
+<img width ='600' height = '300' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/01_08.png'><br>
 **Sample** (샘플, 인스턴스, 관측치, 데이터셋)<br>
 **Feature** (특성, 속성, 측정치, 차원, 컬럼, 입력, 변수, 문제) **X** <br>
 **Label** (레이블, 타깃, 출력, 반응변수, 목표값, 답) **Y** <br>
 <br>
 
-<img width ='500' height = '500' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/iris_num.png'><br>
+<img width ='500' height = '500' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/iris_num.png'><br>
 
-<img width ='500' height = '250' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/ML_variable.png'><br>
+<img width ='500' height = '250' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/ML_variable.png'><br>
 <br>
 model(모델) : 머신러닝이 찾은 규칙의 수학적 표현(수식), 학습 또는 훈련데이터로 학습된 머신러닝 알고리즘<br>
 모델의 규칙 : 가중치와 절편<br>
@@ -821,7 +821,7 @@ Test Dataset : 평가 데이터셋, 마지막에 모델의 성능을 측정(한�
 
 <br>
 
-<img width ='800' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_01.png'><br>
+<img width ='800' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/01_01.png'><br>
 
 ## (1) 지도 학습 (Supervised Learning, SL)
 <img width ='600' height = '300' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_02.png'><br>
@@ -841,7 +841,7 @@ Test Dataset : 평가 데이터셋, 마지막에 모델의 성능을 측정(한�
 <br> 
 
 ## (3) 강화학습 (Reinforcement Learning, EL)
-<img width ='600' height = '300' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_05.png'><br>
+<img width ='600' height = '300' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/01_05.png'><br>
 Environment : 소프트웨어 시뮬레이션, Agent : 모델<br>
 지도형 학습에서는 머신에 정답 키를 제공해 모든 올바른 결과 중에서 상관관계를 찾아 학습하도록 하는데, 강화학습 모델에서는 정답 키는 제공되지 않지만 일련의 허용 가능한 행동, 규칙, 잠재적 최종 상태가 입력된다. 알고리즘의 원하는 목표가 고정되어 있거나 양자택일인 경우 머신은 예시를 통해 학습할 수 있다. 그러나 원하는 목표가 변동 가능한 경우에는 경험과 보상을 통해 학습해야 한다. 강화학습 모델에서 '보상'은 숫자이며, 시스템에서 수집하려는 항목으로 알고리즘에 프로그래밍된다. 예컨대, 사람에게 체스 게임을 하는 법을 가르치는 경우와 같이, 체스 말이 이동할 수 있는 경우를 모두 보여주는 것은 불가능하지만 규칙을 설명해주고 연습을 통해 기술을 습득하도록 하는 것이다. 보상은 게임을 이기는 것뿐 아니라 상대방의 말을 획득하는 형태로 이루어진다. 강화학습 적용 분야에는 온라인 광고 구매자의 자동 가격 입찰, 컴퓨터 게임 개발, 고위험 주식 시장 거래 등이 있다.
 
@@ -851,7 +851,7 @@ Environment : 소프트웨어 시뮬레이션, Agent : 모델<br>
 
 ## (1) 지도 학습 (Supervised Learning, SL) : 회귀, 분류
 ### (1-1) 회귀 (regression)<br>
-<img width ='700' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_04.png'><br>
+<img width ='700' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/01_04.png'><br>
 X(입력값) : 예측 변수(특성) vs Y(출력값) : 반응 변수(타깃)<br>
 
 회귀분석은 종속변수가 “급여” 혹은 “가중치”와 같이 실수 (real number) 또는 연속형 변수 (continuous variable)인 경우에 적용된다. 회귀의 목표는 연속형 변수의 값을 예측하는 것이다. 예를 들어, 임금 예측 문제를 고려해 본다면, 이때의 분석 목표는 교육 수준, 경력, 산업, 직책, 지역 등 다양한 요인을 고려하여 근로자의 임금을 예측하는 것이다. 이때 필요한 데이터는 다수의 근로자에 대한 과거 데이터로, 각 근로자의 상세 정보는 독립변수의 역할을 하며 임금은 종속변수의 역할을 한다. SL 모델은 이 과거 데이터를 통해 훈련되어, 주어진 독립변수에서 종속변수로의 매핑을 학습한다. 훈련이 완료된 후에는, 모델은 제공된 상세 정보를 기반으로 근로자의 임금을 예측하는 데 활용된다. 이를 통한 분석 결과는 기업의 경쟁력 있는 급여 수준을 설정하거나 다른 그룹간의 임금 공정성을 분석하는 등의 다양한 목적으로 사용될 수 있다.<br>
@@ -866,8 +866,8 @@ X(입력값) : 예측 변수(특성) vs Y(출력값) : 반응 변수(타깃)<br>
  **랜덤 포레스트 회귀 (Random Forest Regression)** <br>
 
 ### (1-2) 분류 (classification)<br>
-<img width ='700' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_03.png'><br>
-<img width ='900' height = '350' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/02_03.png'><br>
+<img width ='700' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/01_03.png'><br>
+<img width ='900' height = '350' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/02_03.png'><br>
 이진 분류(binary classification) vs 다중 분류(multiclass classification)<br>
 양성 클래스(positive class) / 음성 클래스(negative class)<br>
 결정 경계(decision boundary)<br>
@@ -886,7 +886,7 @@ X(입력값) : 예측 변수(특성) vs Y(출력값) : 반응 변수(타깃)<br>
 
 ## (2) 비지도 학습 (Unsupervised Learning, UL) : 군집화, 차원축소
 ### (2-1) 군집화 (Clustering)<br>
-<img width ='700' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_06.png'><br>
+<img width ='700' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/01_06.png'><br>
 <br>
 
 클러스터링은 특정 기준에 따라 서로 유사한 데이터 관찰값을 그룹화하는 방법이다. 이를 통해, 우리는 데이터를 클러스터로 분할하여 동일한 클러스터 내의 데이터가 다른 클러스터 내의 데이터보다 더 유사하도록 할 수 있다. 예컨대, 고객 세분화 (segmentation) 문제는 그룹별로 최적화된 마케팅 전략을 구현하기 위해 클러스터링이 활용된다. 소비자들의 연령, 소득, 소비 습관 등 다양한 요인에 따라 소비자를 그룹화하는 문제는 비지도 학습의 전형적인 적용 사례이다. 결과적으로, 하나의 그룹은 대량 구매를 드물게 하는 고소득 중년의 소비자로 구성되고, 다른 그룹은 소량 구매는 자주 하지만 젊은 저소득 소비자로 구성될 수 있다.<br>
@@ -905,7 +905,7 @@ X(입력값) : 예측 변수(특성) vs Y(출력값) : 반응 변수(타깃)<br>
  **어프라이어리 (Apriori)** <br>
  
 ### (2-3) 차원 축소 (Dimensionality Reduction)<br>
-<img width ='700' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/01_07.png'><br>
+<img width ='700' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/01_07.png'><br>
 <br>
 차원 축소는 가능한 한 많은 정보를 보존하면서 데이터에서 사용되는 변수의 수를 줄이는 방법이다. 고차원 데이터는 계산 복잡성과 차원의 저주 문제로 인해 분석이 어려울 수 있다. 따라서 차원 축소를 통해 고차원 데이터를 저차원 공간으로 표현하면 분석이 용이해집니다. 차원 축소는 수백 개의 잠재적 독립변수가 있는 기업의 미래 주가 예측 문제 등에서 활용될 수 있습니다. 예측 변수에는 회사의 과거 주가, 거래량, 매출, 수익, 비용, 그리고 GDP 성장률, 실업률, 인플레이션율, 금리 등의 거시경제 변수가 포함될 수 있습니다. 이러한 변수들은 주가와 관련성이 있을 수 있으며, 모든 변수들을 직접 사용하면 다중 공선성 문제가 발생할 수 있습니다. 따라서 PCA 등의 차원 축소 방법을 활용하여 고차원의 예측 변수를 저차원의 주성분으로 변환하여 주가 예측에 활용할 수 있습니다. 이를 통해 다중 공선성, 차원의 저주, 과적합 등의 문제를 방지할 수 있습니다. 비지도학습의 결과는 입력 데이터의 품질과 관련성, 사용된 알고리즘의 매개변수 선택, 그리고 결과 해석에 의존합니다. 따라서 이 결과는 확정적이지 않으며, 인과적인 통찰력을 제공하지 않습니다.<br> 
 
