@@ -463,7 +463,7 @@ https://www.ibm.com/kr-ko/topics/artificial-intelligence
 ## ASI(인공 슈퍼지능)
 인공 슈퍼지능을 갖춘 컴퓨터 시스템은 과학적 창의성, 통념 및 사회적 기술 등 거의 모든 분야에서 인간을 능가하는 능력을 얻게 됨
 
-<br><br>
+
 (출처) https://azure.microsoft.com/ko-kr/resources/cloud-computing-dictionary/what-is-artificial-intelligence#%EC%9D%98%EB%A3%8C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D
 
 ---
