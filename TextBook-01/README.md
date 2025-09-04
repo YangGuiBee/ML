@@ -296,6 +296,13 @@ AI가 단순한 자동화의 범위를 넘어, 스스로 계획을 세우고, �
 ![](./images/AI_Table.png)
 <br>
 (출처) 박태웅의「AI강의」(한빛비즈, 2023)
+<br>
+
+![](./images/AI_hst.png)
+<br>
+(출처) 김지현의「All Around AI」(SK 경영경제연구소, 2024), https://news.skhynix.co.kr/all-around-ai-1/
+<br>
+
 
 <br><br>
 
