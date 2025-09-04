@@ -151,9 +151,9 @@ AI가 단순한 자동화의 범위를 넘어, 스스로 계획을 세우고, �
 
 ## 1. AI의 태동기 (~ 1955년) <br>										
 **1936년:** 앨런 튜링(Alan Turing, 1912~1954)은 "On Computable Numbers, with an Application to the Entscheidungsproblem (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/TuringFullText.pdf) " 논문을 통해 계산할 수 있는 것과 없는 것을 구분하여, 어떤 문제들은 컴퓨터(또는 기계)가 풀 수 있지만, 어떤 문제들은 아무리 노력해도 풀 수 없다는 것을 증명한 연구로 튜링 머신 이론과 노이만형 컴퓨터에 있어서 이론적 토대를 제시하고 수십 년간 컴퓨터 과학과 인공지능 분야에서 이루어진 모든 연구의 기반이 됨<br>
-**1946년:** 세계 최초의 범용 디지털 컴퓨터(애니악) 탄생<br>
 **1943년:** 워런 맥컬록(Warren McCulloch)과 월터 피츠(Walter Pitts)는  "A Logical Calculus of the Ideas Immanent in Nervous Activity" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/McCulloch_Pitts.pdf) 논문을 통해 신경망 모델의 기초를 마련. 신경망의 수학적 모델을 제안. 신경세포(뉴런)를 이진(binary) 장치로 모델링하여 입력 신호가 일정한 임계값을 넘으면 뉴런이 활성화되어 출력을 생성하고, 그렇지 않으면 비활성 상태로 남는다는 뉴런의 "발화" 메커니즘을 설명한 것으로, 이 MCP(McCulloch & Pitts) 이론은 현재의 퍼셉트론(Perceptron) 개념의 기초가 됨<br>	
 ![](./images/1943.png)
+**1946년:** 세계 최초의 범용 디지털 컴퓨터(애니악) 탄생<br>
 **1950년:** 앨런 튜링(Alan Turing)은 클로드 섀넌(Claude Shannon)과 함께 철학 저널 '마인드(Mind)'에 "기계가 생각할 수 있는가?(https://github.com/YangGuiBee/ML/blob/main/TextBook-01/Computing%20Machinery%20and%20Intelligence.pdf)"라는 주제의 논문을 발표하고, 튜링 테스트라는 '기계가 생각하는 것이 가능한가?'라는 명제로 기계의 답이 얼마나 인간다운지 평가한 실험을 발표<br>
 ![](./images/TT.png)
 <a href="https://ko.wikipedia.org/wiki/%ED%8A%9C%EB%A7%81_%ED%85%8C%EC%8A%A4%ED%8A%B8" target="_blank">튜링테스트의 개념</a>
