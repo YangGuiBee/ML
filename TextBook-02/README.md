@@ -1,9 +1,24 @@
 #  02 : Data Management
 ---
-	 ▣ 데이터 수집
+	 ▣ 실습 준비
+  	 ▣ 데이터 수집
 	 ▣ 데이터 전처리	 
 	 ▣ 데이터셋 분리  	  
   	 ▣ Python 라이브러리	
+---
+
+# ▣ 실습 준비
+
+### 【구글 코랩】
+구글 계정으로 로그인하여 https://colab.research.google.com/?hl=ko 에서 [새노트]로 시작<br>
+
+<br>
+
+### 【아나콘다】
+아나콘다는 데이터 과학, 수학, 공학용 파이썬 필수 패키지들을 모두 포함하고 있으며, 주요 운영 체제를 모두 지원<br>
+아나콘다 설치 파일 다운로드 : https://www.anaconda.com/download/
+<br>간단한 아나콘다 안내는 온라인 문서(https://docs.anaconda.com/anaconda/userguide/getting-started/) 참고<br> 
+
 ---
 
 # ▣ 데이터 수집
@@ -59,6 +74,8 @@ Medical Costs Personal Dataset https://www.kaggle.com/mirichoi0218/insurance/dat
 Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswithkartik/red-white-wine-dataset 
 
 <br><br>
+
+---
 
 # ▣ 데이터 전처리
 데이터 전처리는 기존의 데이터를 머신러닝 알고리즘에 알맞은 데이터로 바꾸는 과정이다. 이 전처리 과정은 모델이 생성된 이후에도 예측하고자 하는 새로운 데이터에도 적용할 수 있는 과정으로 전처리 과정을 통해 더욱더 모델 학습의 성능을 높일 수 있다. 데이터 전처리는 Data Cleaning, Data Encoding, Data Transform, Feature Scaling, ML Pipeline 등 5개의 과정으로 수행한다. 
@@ -167,6 +184,8 @@ Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하
 ⑧ 모니터링 및 유지보수 (Monitoring and Maintenance) : 모델 성능을 지속적으로 모니터링하고 필요 시 재학습 및 업데이트를 수행<br>
 
 <br><br><br>
+
+---
 
 # ▣ 데이터셋 분리
 데이터를 적절히 포맷했고 품질을 확인했고 모든 관련 특성을 확보했다면, 이제 머신러닝을 위해 데이터 분할이 필요하다. 분할은 수집된 데이터를 훈련 데이터와 검정데이터<br>
@@ -300,6 +319,9 @@ validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한
 	#그래프 표시
 	plt.show()
 
+<br>
+
+---
 
 # ▣ Python 라이브러리
 파이썬 전세계 점유율(티오베 지수) : https://www.tiobe.com/tiobe-index/
