@@ -843,12 +843,6 @@ Test Dataset : 평가 데이터셋, 마지막에 모델의 성능을 측정(한�
 
 # ▣ ML의 구분
 
-
-![](images/ML_wordpress.png)
-<br>출처 : https://favouriteblog.com/essential-cheat-sheets-for-machine-learning-python-and-maths/
-
-<br>
-
 ![](images/ML_diagram.png)
 <br>출처 : https://medium.com/marketing-and-entrepreneurship/10-companies-using-machine-learning-in-cool-ways-887c25f913c3
 
@@ -1047,6 +1041,10 @@ X(입력값) : 예측 변수(특성) vs Y(출력값) : 반응 변수(타깃)<br>
 <br><br>
 
 ## 【ML 강의 구성】
+
+
+![](images/ML_wordpress.png)
+<br>출처 : https://favouriteblog.com/essential-cheat-sheets-for-machine-learning-python-and-maths/
 
 ![](images/Contents2025.png)
 
