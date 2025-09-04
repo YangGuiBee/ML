@@ -222,26 +222,44 @@ AI가 단순한 자동화의 범위를 넘어, 스스로 계획을 세우고, �
 
 <br><br><br>
 
-## 7. 머신러닝과 딥러닝의 발전 (2000년 ~)<br>											
-**2000년:** 엔비디아(NVIDIA)는 컴퓨터 시스템에서 그래픽 연산을 빠르게 처리하여 결과값을 모니터에 출력하는 연산 장치인 GPU(Graphic Processing Unit)를 최초로 출시, 컴퓨터 비전 패키지 OpenCV 공개<br>
-**2004년:** 제1회 그랜드 챌린지(고속도로 자율주행)<br>
-**2006년:** 컴퓨터 성능의 향상과 대량의 데이터, 그리고 새로운 알고리즘의 발전으로 인해 AI 연구가 재조명되고, 제프리 힌튼(Geoffrey Hinton)은 딥러닝 논문 "A Fast Learning Algorithm for Deep Belief Nets"  (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/fastnc.pdf) 을 발표<br>	
-**2007년:** GPU 프로그램 라이브러리(CUDA) 공개, 사이킷런(Scikit-Learn) 최초 공개<br>			
+## 7. 머신러닝과 딥러닝의 발전 (2000년 ~ 현재)<br>											
+
+**[2000년대 : GPU와 데이터의 등장]**
+**2000년:** 엔비디아(NVIDIA)는 컴퓨터 시스템에서 그래픽 연산을 빠르게 처리하여 결과값을 모니터에 출력하는 연산 장치인 GPU(Graphic Processing Unit)를 출시하며 그래픽 연산의 속도를 획기적으로 향상시켰고, 이는 훗날 딥러닝 학습의 핵심 인프라가 됨. 컴퓨터 비전 패키지 OpenCV 공개<br>
+**2004년:** 제1회 DARPA 그랜드 챌린지(고속도로 자율주행)가 열려 자율주행 기술 개발의 시작<br>
+**2006년:** 컴퓨터 성능의 향상과 대량의 데이터, 그리고 새로운 알고리즘의 발전으로 인해 AI 연구가 재조명되고, 제프리 힌튼(Geoffrey Hinton)은 딥러닝 논문 "A Fast Learning Algorithm for Deep Belief Nets" (https://github.com/YangGuiBee/ML/blob/main/TextBook-01/fastnc.pdf) 발표<br>	
+**2007년:** GPU 프로그램 라이브러리(CUDA) 공개, 머신러닝 라이브러리인 사이킷런(Scikit-Learn) 최초 공개<br>			
 **2009년:** 딥러닝 패키지(Theano) 서비스 개시<br>
+
+<br>
+
+**[2010년대 초반 : 딥러닝의 비약적 발전]**
 **2010년:** 스탠포드의 Fei-Fei Li 그룹에서 수백만 개의 레이블이 지정된 이미지를 포함하는 이미지넷(Imagenet) 이라는 대규모 데이터베이스 게시, 마이크로소프트 동작 인식 카메라 키넥트(Kinect) 시판<br>
 **2012년:** 제프리 힌튼(Geoffrey Hinton)은 알렉스 크리제브스키(Alex Krizhevsky), 일리아 수츠케버(Ilya Sutskever)와 함께 이미지넷이 주최하는 대규모 시각 인식 챌린지(LSVRC)에서 GPU를 기반으로 기존 오류율을 절반으로 16%로 줄임. 이 시기에 자율주행차, 음성 인식, 자연어 처리 등의 분야에서 혁신적인 성과.<br>
 ![](./images/IMAGENET.png)
 <br>**2014년:** 딥러닝 패키지(Caffe) 서비스 개시, 유진 구스트만(블라디미르 베셀로프, 유진 뎀첸코, 세르게이 울라센 등이 개발한 프로그램)이 튜링 테스트’를 통과한 첫 사례<br>
+
+<br>
+
+**[2010년대 후반 : 인공지능의 대중화와 산업화]**
 **2015년:** 클라우스 슈밥 "제4차 산업혁명" 언급, OpenAI 창립, 딥러닝 패키지(TensorFlow) 서비스 개시, ResNet이 사람보다 이미지 분류를 더욱 잘 수행<br>
 **2016년:** AlphaGo과 이세돌9단 바둑 대결 4:1로 승, 딥러닝 패키지(PyTorch, Keras) 서비스 개시<br>
 **2017년:** AlphaGo Zero가 AlphaGo를 100:0으로 승, 구글 Teachable Machine 공개, Transformer 모델 등장<br>
 **2018년:** GPT/BERT 생성형 인공지능 등장, GPT(GPT-1) : 117m 파라미터 (학습데이터 4.5GB), 인공지능이 그린 초상화(에드몽 벨라미)가 경매 시장에서 432,500달러에 판매<br>
 **2019년:** GPT-2 : 1,500m 파라미터 (학습데이터 40GB), 알프 스타 스타크래프르에서 그랜드마스터 수준 달성<br>
+
+<br>
+
+**[2020년대 초반 : 초거대 AI와 멀티모달 시대의 개막]**
 **2020년:** 대규모 언어 모델(GPT-3) 등장, GPT-3 : 175,000m 파라미터(학습데이터 570GB), 제약회사 엑센시아 인공지능이 개발한 후보 신약의 1상 시험 시작<br>
 **2021년:** 딥마인드는 자체 개발한 초거대 AI 언어모델 고퍼(Gopher) 공개(매개변수 2800억개), AlphaFold 딥마인드 단백질 접힘을 거의 완벽히 예측, OpenAI 그림 인공지능 DALL·E 출시<br>
 ![](./images/Gopher.png)
 **2022년:** 그림 인공지능 미드저니(Midjourney) 출시, Stability AI 오픈소스 라이선스 그림 인공지능 모델인 Stable diffusion 출시, OpenAI 대화형 인공지능 ChatGPT  초기베타 출시, GPT-3.5 미국 변호사 시험(Uniform Bar Exam)에서 213점(400점 만점)을 받아 하위 10%<br>
 **2023년:** 마이크로소프트 : 대화형 인공지능 Bing chat 출시, 구글 대화형 인공지능 Bard 출시, GPT-4 미국 변호사 시험(Uniform Bar Exam)에서 298점(400점 만점)을 받아 상위 10%로 통과, 인공지능 ‘특이점’ 돌파 이슈<br>	
+
+<br>
+
+**[2020년대 후반 : 최신이슈]**
 **2024년:** 구글 'Bard' 리브랜딩한 제미나이(Gemini) 출시, Open AI 동영상 생성 인공지능 소라(Sora) 공개, 오픈AI(챗GPT) 주간 사용자 2억명, 메타(라마) 월 사용자 4억명 돌파, 사카나 AI, 과학연구 자율수행하는 'AI 에이전트' 공개, 챗GPT가 튜링 테스트를 통과하지 못한 이유..."사람보다 탁월한 게 문제"(https://www.aitimes.com/news/articleView.html?idxno=159449)
 
 <br><br><br>
