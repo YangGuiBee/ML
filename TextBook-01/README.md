@@ -140,7 +140,9 @@ AI가 단순한 자동화의 범위를 넘어, 스스로 계획을 세우고, �
 ![](./images/HypeCycle_AI2024.png)
 <br>
 
-KRG 디지털 시장백서 <img width ='400' height = '400' src ="https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/KRG.png" target="_blank">
+## KRG 디지털 시장백서
+<br>
+<img width ='600' height = '600' src ="https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/KRG.png" target="_blank">
 
 <br><br><br>
 
