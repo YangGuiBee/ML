@@ -7,8 +7,7 @@
 	 ▣ AI의 정의(최근 IT기업)
 	 ▣ AI의 유형
 	 ▣ AI의 활용 분야
-  	 ▣ AI, ML, DL
-  	 ▣ 실습 준비
+  	 ▣ AI, ML, DL  	 
 ---
 
 # ▣ 2025년 10대 전략기술 트렌트
@@ -1044,25 +1043,4 @@ X(입력값) : 예측 변수(특성) vs Y(출력값) : 반응 변수(타깃)<br>
 
 <br><br><br>
 
-
 ---
-
-
-# ▣ 실습 준비
-
-
-### 【구글 코랩】
-구글 계정으로 로그인하여 https://colab.research.google.com/?hl=ko 에서 [새노트]로 시작<br>
-
-<br>
-
-### 【아나콘다】
-아나콘다는 데이터 과학, 수학, 공학용 파이썬 필수 패키지들을 모두 포함하고 있으며, 주요 운영 체제를 모두 지원<br>
-아나콘다 설치 파일 다운로드 : https://www.anaconda.com/download/
-<br>간단한 아나콘다 안내는 온라인 문서(https://docs.anaconda.com/anaconda/userguide/getting-started/) 참고<br> 
-
-
-
-
-
-
