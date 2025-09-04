@@ -142,7 +142,7 @@ AI가 단순한 자동화의 범위를 넘어, 스스로 계획을 세우고, �
 
 ## KRG 디지털 시장백서
 <br>
-<img width ='800' height = '600' src ="https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/KRG.png" target="_blank">
+<img width ='1000' height = '800' src ="https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/KRG.png" target="_blank">
 
 <br><br><br>
 
