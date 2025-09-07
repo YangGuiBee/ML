@@ -17,6 +17,7 @@
 ### 【아나콘다】
 아나콘다는 데이터 과학, 수학, 공학용 파이썬 필수 패키지들을 모두 포함하고 있으며, 주요 운영 체제를 모두 지원<br>
 아나콘다 설치 파일 다운로드 : https://www.anaconda.com/download/
+<br>아나콘다 설치 안내 : https://wikidocs.net/254434
 <br>간단한 아나콘다 안내는 온라인 문서(https://docs.anaconda.com/anaconda/userguide/getting-started/) 참고<br> 
 
 ---
