@@ -524,10 +524,10 @@ Kaggle 가이드 : https://wikidocs.net/86304
 ![](./images/Top10.png)
 <br>
 
-2000~2009: 공식 Top10 조사는 없으며, 통상적인 교과서·산업계 사용 알고리즘을 기반으로 정리<br>
-2010~2019: KDnuggets Polls, Kaggle Competition Results 등에서 반복 언급된 알고리즘 기준으로 정리<br>
-2020~2023: Kaggle Machine Learning & Data Science Survey (각 연도 공식 설문 결과) 기반<br>
-2024~2025: Kaggle Survey 2023 추세 + State of AI Report 등 최신 업계 보고서를 종합한 추정<br>
+2000 - 2009: 공식 Top10 조사는 없으며, 통상적인 교과서·산업계 사용 알고리즘을 기반으로 정리<br>
+2010 - 2019: KDnuggets Polls, Kaggle Competition Results 등에서 반복 언급된 알고리즘 기준으로 정리<br>
+2020 - 2023: Kaggle Machine Learning & Data Science Survey (각 연도 공식 설문 결과) 기반<br>
+2024 - 2025: Kaggle Survey 2023 추세 + State of AI Report 등 최신 업계 보고서를 종합한 추정<br>
 <br>
 LR : Linear Regression<br>
 LoR : Logistic Regression<br>
