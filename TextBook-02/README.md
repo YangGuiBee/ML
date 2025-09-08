@@ -106,20 +106,20 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 **sklearn.preprocessing.LabelEncoder**
 
 
-	import numpy as np
-	from sklearn.preprocessing import LabelEncoder
+	import numpy as np                                   # 수치 계산을 위한 numpy 라이브러리 불러오기
+	from sklearn.preprocessing import LabelEncoder       # 문자열 라벨을 숫자로 변환하기 위한 LabelEncoder 불러오기
 
 	# 원본 데이터
-	items = ['TV','냉장고','컴퓨터', '컴퓨터','냉장고','에어컨', 'TV']
-	prices = [1200000, 3500000, 700000, 1200000, 2300000, 1500000, 300000]
+	items = ['TV','냉장고','컴퓨터', '컴퓨터','냉장고','에어컨', 'TV']   		# 상품 분류(카테고리형 데이터)
+	prices = [1200000, 3500000, 700000, 1200000, 2300000, 1500000, 300000]  # 각 상품의 가격 데이터
 
 	# 1단계: Label Encoding
-	le = LabelEncoder()
-	le.fit(items)
-	labels = le.transform(items)
-
-	print("Label Encoding 결과:", labels)
-	print("클래스:", le.classes_)
+	le = LabelEncoder()                                  # LabelEncoder 객체 생성
+	le.fit(items)                                        # items 리스트의 고유한 클래스들을 학습시킴
+	labels = le.transform(items)                         # 학습된 클래스 기준으로 각 항목을 정수 인덱스로 변환
+	
+	print("Label Encoding 결과:", labels)                # 변환된 숫자 라벨 출력
+	print("클래스:", le.classes_)                        # LabelEncoder가 학습한 실제 클래스 이름(고유값 리스트) 출력
 
 
 **sklearn.preprocessing.OneHotEncoder**
