@@ -52,9 +52,9 @@
 
 **open data repository**
 <br>
-캘리포니아 대학교 어바인(UC Irvine) 이 1987년에 개설한, 머신러닝 연구·교육용 대표 공개 데이터셋 저장소 https://archive.ics.uci.edu/
+캘리포니아 대학교 어바인(UC Irvine)이 1987년에 개설한 머신러닝 연구·교육용 대표 공개 데이터셋 저장소 https://archive.ics.uci.edu/
 <br>
-https://www.kaggle.com/datasets
+Google이 2017년 인수한 데이터 과학·머신러닝 문제를 대회 형태로 공개해 전세계 인재의 집단지성으로 최고의 예측 모델을 찾는 커뮤니티 https://www.kaggle.com/datasets
 <br>
 https://registry.opendata.aws/
 <br>
