@@ -181,6 +181,8 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 
 **pandas만으로 Label Encoding + One-Hot Encoding**
 
+(소스코드)
+
 	import pandas as pd   # 데이터 분석 및 처리용 라이브러리 pandas 불러오기
 
 	# 원본 데이터
@@ -196,11 +198,38 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 	# 1단계: Label Encoding (pandas의 factorize 사용)
 	df["상품_Label"] = pd.factorize(df["상품"])[0]   # 각 고유 클래스에 정수값 부여
 	print("Label Encoding 결과:\n", df[["상품","상품_Label"]])
-
-	# 2단계: One-Hot Encoding (pandas의 get_dummies 사용)
-	df_onehot = pd.get_dummies(df, columns=["상품"])  # 지정한 컬럼을 원-핫 인코딩으로 변환
+ 
+	# 2단계: One-Hot Encoding (pandas의 get_dummies 사용) → 숫자(0/1)로 강제
+	try:
+    	df_onehot = pd.get_dummies(df, columns=["상품"], dtype=int)  # pandas 1.5+에서 권장
+	except TypeError:
+    	df_onehot = pd.get_dummies(df, columns=["상품"])              # 구버전 호환
+    	dummy_cols = [c for c in df_onehot.columns if c.startswith("상품_")]
+    	df_onehot[dummy_cols] = df_onehot[dummy_cols].astype(int)
+ 
 	print("\nOne-Hot 결과 DataFrame:\n", df_onehot)
 
+(실행결과)
+
+	Label Encoding 결과:
+     	상품  상품_Label
+	0   TV         0
+	1  냉장고         1
+	2  컴퓨터         2
+	3  컴퓨터         2
+	4  냉장고         1
+	5  에어컨         3
+	6   TV         0
+
+	One-Hot 결과 DataFrame:
+         가격  상품_Label  상품_TV  상품_냉장고  상품_에어컨  상품_컴퓨터
+	0  1200000         0      1       0       0       0
+	1  3500000         1      0       1       0       0
+	2   700000         2      0       0       0       1
+	3  1200000         2      0       0       0       1
+	4  2300000         1      0       1       0       0
+	5  1500000         3      0       0       1       0
+	6   300000         0      1       0       0       0
 
 
 ## (3) Data Transform
