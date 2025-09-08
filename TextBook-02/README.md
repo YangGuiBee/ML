@@ -131,6 +131,8 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 
 **sklearn.preprocessing.OneHotEncoder**
 
+(소스코드)
+
 	import numpy as np									# 수치 계산을 위한 numpy 라이브러리 불러오기
  	import pandas as pd								    # 데이터 분석 및 처리용 라이브러리 pandas를 불러오
 	from sklearn.preprocessing import OneHotEncoder		# 범주형 데이터를 원-핫 인코딩하기 위한 OneHotEncoder 불러오기
@@ -153,6 +155,28 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 	df = pd.DataFrame(onehot, columns=le.classes_)	# 인코딩된 결과를 DataFrame으로 변환, 컬럼명은 원래 클래스 이름 사용
 	df["가격"] = prices								# 가격 데이터를 새로운 열로 추가
 	print("\n최종 데이터프레임:\n", df)				# 최종 DataFrame 출력
+
+
+(실행결과)
+
+	One-Hot 결과:
+ 	[[1. 0. 0. 0.]
+ 	[0. 1. 0. 0.]
+ 	[0. 0. 0. 1.]
+ 	[0. 0. 0. 1.]
+ 	[0. 1. 0. 0.]
+ 	[0. 0. 1. 0.]
+ 	[1. 0. 0. 0.]]
+	
+	최종 데이터프레임:
+     	TV  냉장고  에어컨  컴퓨터       가격
+	0  1.0  0.0  0.0  0.0  1200000
+	1  0.0  1.0  0.0  0.0  3500000
+	2  0.0  0.0  0.0  1.0   700000
+	3  0.0  0.0  0.0  1.0  1200000
+	4  0.0  1.0  0.0  0.0  2300000
+	5  0.0  0.0  1.0  0.0  1500000
+	6  1.0  0.0  0.0  0.0   300000
 
 
 **pandas만으로 Label Encoding + One-Hot Encoding**
