@@ -504,6 +504,10 @@ Kaggle 가이드 : https://wikidocs.net/86304
 10. Gradient boosting<br>
 출처 : https://www.coursera.org/articles/machine-learning-algorithms?msockid=0197f0fd39fb68c821f1e42d38db69bd
 
+
+
+![](./images/Top10.png)
+
 ---
 
 Anaconda 다운로드 : https://www.anaconda.com/download
