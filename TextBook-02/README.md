@@ -61,11 +61,11 @@ https://registry.opendata.aws/ : AWS에서 2018년부터 공개한 메타 데이
 
 **meta portal**
 <br>
-http://dataportals.org/
+http://dataportals.org/ : NGO 소속 오픈데이터 전문가들이 2011년부터 공개한 가장 포괄적인 오픈 데이터 포털 목록
 <br>
-http://opendatamonitor.eu/
+http://opendatamonitor.eu/ : 유럽 전역의 오픈데이터 카탈로그/허브/리포지토리를 수집·표준화·분석·시각화하여 국가·지역·범EU 수준의 오픈데이터 현황을 모니터링하고 비교할 수 있도록 하는 플랫폼
 <br>
-http://quandl.com/
+http://quandl.com/ : Nasdaq에서 운영하는 금융/경제/대체 데이터를 쉽게 발견·사용·거래할 수 있도록 지원하는 플랫폼
 
 **DataSet**
 <br>
