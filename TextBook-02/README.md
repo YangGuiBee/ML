@@ -376,11 +376,12 @@ validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한
 
  	#Iris 데이터셋 로드
 	iris = datasets.load_iris()
- 
+
+  	# 데이터 그리드로 표시
 	df = pd.DataFrame(iris.data, columns=iris.feature_names)
 	df["target"] = iris.target
 	df["class"] = pd.Categorical.from_codes(iris.target, iris.target_names)
- 	display_dataframe_to_user("Iris Dataset (table)", df)  # 데이터 그리드로 표시
+ 	display_dataframe_to_user("Iris Dataset (table)", df) 
 
 	#서브플롯 생성
 	fig, ax = plt.subplots()
