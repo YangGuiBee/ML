@@ -341,6 +341,8 @@ validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한
 # ▣ Python 라이브러리
 파이썬 전세계 점유율(티오베 지수) : https://www.tiobe.com/tiobe-index/
 <br>
+![](./images/tiobe.png)
+<br>
 ![](./images/python.PNG)
 <br>
 파이썬 자습서 : https://docs.python.org/ko/3/tutorial/
