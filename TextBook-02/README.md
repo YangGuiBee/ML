@@ -109,8 +109,8 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 	from sklearn.preprocessing import LabelEncoder       # 문자열 라벨을 숫자로 변환하기 위한 LabelEncoder 불러오기
 
 	# 원본 데이터
-	items = ['TV','냉장고','컴퓨터', '컴퓨터','냉장고','에어컨', 'TV']   		# 상품 분류(카테고리형 데이터)
-	prices = [1200000, 3500000, 700000, 1200000, 2300000, 1500000, 300000]  # 각 상품의 가격 데이터
+	items = ['TV','냉장고','컴퓨터', '컴퓨터','냉장고','에어컨', 'TV'] # 상품 분류(카테고리형 데이터)
+	prices = [1200000, 3500000, 700000, 1200000, 2300000, 1500000, 300000] # 각 상품의 가격 데이터
 
 	# 1단계: Label Encoding
 	le = LabelEncoder()                                  # LabelEncoder 객체 생성
@@ -123,12 +123,12 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 
 **sklearn.preprocessing.OneHotEncoder**
 
-	import numpy as np                                                  # 수치 계산을 위한 numpy 라이브러리 불러오기
-	from sklearn.preprocessing import OneHotEncoder                     # 범주형 데이터를 원-핫 인코딩하기 위한 OneHotEncoder 불러오기
+	import numpy as np									# 수치 계산을 위한 numpy 라이브러리 불러오기
+	from sklearn.preprocessing import OneHotEncoder		# 범주형 데이터를 원-핫 인코딩하기 위한 OneHotEncoder 불러오기
 
 	# 원본 데이터
-	items = ['TV','냉장고','컴퓨터', '컴퓨터','냉장고','에어컨', 'TV']    		# 상품 분류(카테고리형 데이터)
-	prices = [1200000, 3500000, 700000, 1200000, 2300000, 1500000, 300000]  # 각 상품에 대응하는 가격 데이터
+	items = ['TV','냉장고','컴퓨터', '컴퓨터','냉장고','에어컨', 'TV']	# 상품 분류(카테고리형 데이터)
+	prices = [1200000, 3500000, 700000, 1200000, 2300000, 1500000, 300000] # 각 상품에 대응하는 가격 데이터
 
 	# 2단계: One-Hot Encoding (버전에 따라 다름)
 	try:
