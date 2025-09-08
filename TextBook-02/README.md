@@ -491,8 +491,22 @@ Kaggle 가이드 : https://wikidocs.net/86304
 
 <br>
 
+## Top 10 Machine Learning Algorithms in 2025(Sunil Ray, 2025.4.28)
+<br>1. Linear Regression<br>
+2. Logistic Regression<br>
+3. Decision Tree<br>
+4. Support Vector Machines (SVM)<br>
+5. Naive Bayes<br>
+6. K-Nearest Neighbors (KNN)<br>
+7. K-Means<br>
+8. Random Forest<br>
+9. Dimensionality Reduction Algorithms<br>
+10. Gradient Boosting Algorithms<br>
+출처 : https://www.analyticsvidhya.com/blog/2017/09/common-machine-learning-algorithms/
+<br>
+
 ## 10 Machine Learning Algorithms to Know in 2025(Coursera, 2025.5.21)
-1. Linear regression<br>
+<br>1. Linear regression<br>
 2. Logistic regression<br>
 3. Naive Bayes<br>
 4. Decision tree<br>
@@ -501,8 +515,7 @@ Kaggle 가이드 : https://wikidocs.net/86304
 7. K-means<br>
 8. Support vector machine (SVM)<br>
 9. Apriori<br>
-10. Gradient boosting<br>
-       
+10. Gradient boosting<br>      
 출처 : https://www.coursera.org/articles/machine-learning-algorithms?msockid=0197f0fd39fb68c821f1e42d38db69bd
 
 
