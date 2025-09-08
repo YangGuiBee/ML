@@ -52,7 +52,7 @@
 
 **open data repository**
 <br>
-https://archive.ics.uci.edu/
+캘리포니아 대학교 어바인(UC Irvine) 이 1987년에 개설한, 머신러닝 연구·교육용 대표 공개 데이터셋 저장소 https://archive.ics.uci.edu/
 <br>
 https://www.kaggle.com/datasets
 <br>
