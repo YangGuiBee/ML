@@ -491,22 +491,39 @@ Kaggle 가이드 : https://wikidocs.net/86304
 
 <br>
 
-## 2024년 update
+## 10 Machine Learning Algorithms to Know in 2025(Coursera, 2025.5.21)
 1. Linear regression<br>
 2. Logistic regression<br>
-3. Naive Bayes<br> 
+3. Naive Bayes<br>
 4. Decision tree<br>
 5. Random forest<br>
 6. K-nearest neighbor (KNN)<br>
-7.  K-means<br>
+7. K-means<br>
 8. Support vector machine (SVM)<br>
 9. Apriori<br>
 10. Gradient boosting<br>
+       
 출처 : https://www.coursera.org/articles/machine-learning-algorithms?msockid=0197f0fd39fb68c821f1e42d38db69bd
 
 
-
 ![](./images/Top10.png)
+<br>
+LR : Linear Regression<br>
+LoR : Logistic Regression<br>
+DT : Decision Trees<br>
+SVM : Support Vector Machine<br>
+NB : Naive Bayes<br>
+KNN : K-Nearest Neighbors<br>
+PCA : Principal Component Analysis<br>
+Apriori : Association Rules<br>
+HMM : Hidden Markov Models<br>
+GBM : Gradient Boosting Machines<br>
+RNN : Recurrent Neural Networks<br>
+CNN : Convolutional Neural Networks<br>
+MLP : Multi-layer Perceptron<br>
+GAN : Generative Adversarial Networks<br>
+RL : Reinforcement Learning<br>
+<br>
 
 ---
 
