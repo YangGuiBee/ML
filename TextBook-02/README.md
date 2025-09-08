@@ -124,41 +124,27 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 
 **sklearn.preprocessing.OneHotEncoder**
 
-	#fit(): 어떻게 변환할 지 학습
-	#transform(): 문자열를 숫자로 변환
-	#fit_transform(): 학습과 변환을 한번에 처리
-	#get_feature_names() : 원핫인코딩으로 변환된 컬럼의 이름을 반환
-	#DataFrame을 넣을 경우 모든 변수들을 변환한다. 범주형 컬럼만 처리하도록 해야 한다.
-	#sparse를 False로 주지 않으면 scipy의 csr_matrix(희소행렬 객체)로 반환
-	#희소행렬은 대부분 0으로 구성된 행렬과 계산이나 메모리 효율을 이용해 0이 아닌 값의 index만 관리한다.
-	#csr_matrix.toarray()로 ndarray로 바꿀수 있다.
- 
 	import numpy as np
-	import pandas as pd
-	from sklearn.preprocessing import OneHotEncoder
+	from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
-	# items 배열 정의
-	items = np.array(['TV', '냉장고', '컴퓨터', '컴퓨터', '냉장고', '에어컨', '에어컨', '선풍기'])
+	# 원본 데이터
+	items = ['TV','냉장고','컴퓨터', '컴퓨터','냉장고','에어컨', 'TV']
+	prices = [1200000, 3500000, 700000, 1200000, 2300000, 1500000, 300000]
 
-	# 데이터프레임 생성
-	d = {
-    	'item': items,
-    	'cnt': np.arange(8)
-	}
-	df = pd.DataFrame(d)
-	df.info()
+	# 2단계: One-Hot Encoding (버전에 따라 다름)
+	try:
+	    ohe = OneHotEncoder(sparse=False)   # 구버전 (1.1 이하)
+	except TypeError:
+	    ohe = OneHotEncoder(sparse_output=False)  # 최신버전 (1.2 이상)
 
-	# 아이템 배열에 새로운 축 추가
-	items_expanded = items[..., np.newaxis]
+	labels_reshaped = labels.reshape(-1,1)
+	onehot = ohe.fit_transform(labels_reshaped)
+	print("One-Hot 결과:\n", onehot)
 
-	# One-Hot Encoding 수행
-	ohe = OneHotEncoder(sparse_output=False)  # sparse_output=False: 결과를 배열 형태로 반환
-	ohe.fit(items_expanded)
-	ohv = ohe.transform(items_expanded)
-
-	# One-Hot Encoding 결과 확인
-	print(ohv)
-	print(type(ohv))
+	# 3단계: DataFrame으로 보기 좋게 정리
+	df = pd.DataFrame(onehot, columns=le.classes_)
+	df["가격"] = prices
+	print("\n최종 데이터프레임:\n", df)
  	
 
 ## (3) Data Transform
