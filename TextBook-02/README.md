@@ -287,7 +287,6 @@ validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한
 ![](./images/DataSet2.PNG)
 
 (소스코드)
-<br>
 
  	import pandas as pd
 	from sklearn.model_selection import train_test_split
@@ -331,7 +330,6 @@ validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한
 
 
 (실행결과)
-<br>
 
 	전체 데이터 크기: 10
 	학습 데이터 크기 (Train): 8
@@ -369,6 +367,8 @@ validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한
  - 모델 학습: 이미지 데이터를 입력하여 다양한 네트워크를 구성해보고 적합한 모델을 생성한다.<br>
  - 모델 평가: 학습에 사용되지 않은 이미지 데이터를 최종 모델에 넣어 정확도가 어느 정도 인지 확인해본다.<br>
 <br>
+
+(소스코드)
 	
 	from sklearn import datasets
 	import matplotlib.pyplot as plt
@@ -394,6 +394,11 @@ validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한
 
 	#그래프 표시
 	plt.show()
+
+
+(실행결과)
+
+	![](./images/matplotlib.png)
 
 <br>
 
