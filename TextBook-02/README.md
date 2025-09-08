@@ -124,6 +124,7 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 **sklearn.preprocessing.OneHotEncoder**
 
 	import numpy as np									# 수치 계산을 위한 numpy 라이브러리 불러오기
+ 	import pandas as pd								    # 데이터 분석 및 처리용 라이브러리 pandas를 불러오
 	from sklearn.preprocessing import OneHotEncoder		# 범주형 데이터를 원-핫 인코딩하기 위한 OneHotEncoder 불러오기
 
 	# 원본 데이터
