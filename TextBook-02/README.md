@@ -398,7 +398,7 @@ validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한
 
 (실행결과)
 
-	![](./images/matplotlib.png)
+![](./images/matplotlib.png)
 
 <br>
 
