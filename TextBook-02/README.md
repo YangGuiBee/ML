@@ -127,23 +127,23 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 	from sklearn.preprocessing import OneHotEncoder                     # 범주형 데이터를 원-핫 인코딩하기 위한 OneHotEncoder 불러오기
 
 	# 원본 데이터
-	items = ['TV','냉장고','컴퓨터', '컴퓨터','냉장고','에어컨', 'TV']    # 상품 분류(카테고리형 데이터)
+	items = ['TV','냉장고','컴퓨터', '컴퓨터','냉장고','에어컨', 'TV']    		# 상품 분류(카테고리형 데이터)
 	prices = [1200000, 3500000, 700000, 1200000, 2300000, 1500000, 300000]  # 각 상품에 대응하는 가격 데이터
 
 	# 2단계: One-Hot Encoding (버전에 따라 다름)
 	try:
-    	ohe = OneHotEncoder(sparse=False)                               # 구버전 sklearn(≤1.1)에서는 sparse=False 사용
+    	ohe = OneHotEncoder(sparse=False)                 # 구버전 sklearn(≤1.1)에서는 sparse=False 사용
 	except TypeError:
-    	ohe = OneHotEncoder(sparse_output=False)                        # 최신 sklearn(≥1.2)에서는 sparse_output=False 사용
+    	ohe = OneHotEncoder(sparse_output=False)          # 최신 sklearn(≥1.2)에서는 sparse_output=False 사용
 
-	labels_reshaped = labels.reshape(-1,1)                              # 라벨 인코딩 결과(labels)를 2차원 배열로 변환 (OneHotEncoder 입력 형식 맞추기)
-	onehot = ohe.fit_transform(labels_reshaped)                         # OneHotEncoder를 학습시키고 변환 실행 → 원-핫 인코딩 결과 생성
-	print("One-Hot 결과:\n", onehot)                                    # 원-핫 인코딩된 2차원 배열 출력
+	labels_reshaped = labels.reshape(-1,1)                # 라벨 인코딩 결과(labels)를 2차원 배열로 변환 (OneHotEncoder 입력 형식 맞추기)
+	onehot = ohe.fit_transform(labels_reshaped)           # OneHotEncoder를 학습시키고 변환 실행 → 원-핫 인코딩 결과 생성
+	print("One-Hot 결과:\n", onehot)                      # 원-핫 인코딩된 2차원 배열 출력
 
 	# 3단계: DataFrame으로 보기 좋게 정리
-	df = pd.DataFrame(onehot, columns=le.classes_)                      # 인코딩된 결과를 DataFrame으로 변환, 컬럼명은 원래 클래스 이름 사용
-	df["가격"] = prices                                                 # 가격 데이터를 새로운 열로 추가
-	print("\n최종 데이터프레임:\n", df)                                 # 최종 DataFrame 출력
+	df = pd.DataFrame(onehot, columns=le.classes_)        # 인코딩된 결과를 DataFrame으로 변환, 컬럼명은 원래 클래스 이름 사용
+	df["가격"] = prices                                   # 가격 데이터를 새로운 열로 추가
+	print("\n최종 데이터프레임:\n", df)                    # 최종 DataFrame 출력
 
 
 
