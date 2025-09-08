@@ -368,9 +368,6 @@ validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한
  - 모델 평가: 학습에 사용되지 않은 이미지 데이터를 최종 모델에 넣어 정확도가 어느 정도 인지 확인해본다.<br>
 <br>
 
-(데이터)
-
-![](./images/iris.png)
 
 (소스코드)
 	
@@ -379,6 +376,11 @@ validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한
 
  	#Iris 데이터셋 로드
 	iris = datasets.load_iris()
+ 
+	df = pd.DataFrame(iris.data, columns=iris.feature_names)
+	df["target"] = iris.target
+	df["class"] = pd.Categorical.from_codes(iris.target, iris.target_names)
+ 	display_dataframe_to_user("Iris Dataset (table)", df)  # 데이터 그리드로 표시
 
 	#서브플롯 생성
 	fig, ax = plt.subplots()
@@ -398,6 +400,11 @@ validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한
 
 	#그래프 표시
 	plt.show()
+
+
+(데이터)
+
+![](./images/iris.png)
 
 
 (실행결과)
