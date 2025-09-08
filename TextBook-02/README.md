@@ -136,7 +136,7 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 	except TypeError:
     	ohe = OneHotEncoder(sparse_output=False)          # 최신 sklearn(≥1.2)에서는 sparse_output=False 사용
 
-	labels_reshaped = labels.reshape(-1,1)                # 라벨 인코딩 결과(labels)를 2차원 배열로 변환 (OneHotEncoder 입력 형식 맞추기)
+	labels_reshaped = labels.reshape(-1,1)                # 라벨 인코딩 결과(labels)를 2차원 배열로 변환(OneHotEncoder 입력형식 맞추기)
 	onehot = ohe.fit_transform(labels_reshaped)           # OneHotEncoder를 학습시키고 변환 실행 → 원-핫 인코딩 결과 생성
 	print("One-Hot 결과:\n", onehot)                      # 원-핫 인코딩된 2차원 배열 출력
 
