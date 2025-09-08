@@ -107,7 +107,7 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 
 
 	import numpy as np
-	from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+	from sklearn.preprocessing import LabelEncoder
 
 	# 원본 데이터
 	items = ['TV','냉장고','컴퓨터', '컴퓨터','냉장고','에어컨', 'TV']
@@ -125,7 +125,7 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 **sklearn.preprocessing.OneHotEncoder**
 
 	import numpy as np
-	from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+	from sklearn.preprocessing import OneHotEncoder
 
 	# 원본 데이터
 	items = ['TV','냉장고','컴퓨터', '컴퓨터','냉장고','에어컨', 'TV']
