@@ -83,7 +83,7 @@ Medical Costs Personal Dataset https://www.kaggle.com/mirichoi0218/insurance/dat
 <br>
 Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswithkartik/red-white-wine-dataset 
 
-<br><br>
+<br>
 
 ---
 
