@@ -147,6 +147,29 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 	print("\n최종 데이터프레임:\n", df)				# 최종 DataFrame 출력
 
 
+**pandas만으로 Label Encoding + One-Hot Encoding**
+
+	import pandas as pd   # 데이터 분석 및 처리용 라이브러리 pandas 불러오기
+
+	# 원본 데이터
+	items = ['TV','냉장고','컴퓨터', '컴퓨터','냉장고','에어컨', 'TV']   # 상품 분류
+	prices = [1200000, 3500000, 700000, 1200000, 2300000, 1500000, 300000]  # 가격 데이터
+
+	# DataFrame 생성
+	df = pd.DataFrame({
+	    "상품": items,
+	    "가격": prices
+	})
+
+	# 1단계: Label Encoding (pandas의 factorize 사용)
+	df["상품_Label"] = pd.factorize(df["상품"])[0]   # 각 고유 클래스에 정수값 부여
+	print("Label Encoding 결과:\n", df[["상품","상품_Label"]])
+
+	# 2단계: One-Hot Encoding (pandas의 get_dummies 사용)
+	df_onehot = pd.get_dummies(df, columns=["상품"])  # 지정한 컬럼을 원-핫 인코딩으로 변환
+	print("\nOne-Hot 결과 DataFrame:\n", df_onehot)
+
+
 
 ## (3) Data Transform
 Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하는데, 이를 이용하여 커스텀 변환기를 만들 수 있다.
