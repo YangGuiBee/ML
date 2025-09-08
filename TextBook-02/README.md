@@ -115,11 +115,11 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 
 	# 1단계: Label Encoding
 	le = LabelEncoder()                                  # LabelEncoder 객체 생성
-	le.fit(items)                                        # items 리스트의 고유한 클래스들을 학습시킴
-	labels = le.transform(items)                         # 학습된 클래스 기준으로 각 항목을 정수 인덱스로 변환
-	
-	print("Label Encoding 결과:", labels)                # 변환된 숫자 라벨 출력
-	print("클래스:", le.classes_)                        # LabelEncoder가 학습한 실제 클래스 이름(고유값 리스트) 출력
+ 	print("고유 클래스:", le.classes_)                    # LabelEncoder가 학습한 실제 클래스 이름(고유값 리스트) 출력
+  
+	le.fit(items)                                        # items 리스트의 고유한 클래스들을 학습시킴	
+ 	print("인코딩 결과:", le.transform(items))            # 학습된 클래스 기준으로 각 항목을 정수 인덱스로 변환 출력
+  	print("역변환:",      le.inverse_transform([2,0,1,1,0,3,2]))
 
 
 **sklearn.preprocessing.OneHotEncoder**
