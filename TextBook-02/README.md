@@ -105,6 +105,8 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 
 **sklearn.preprocessing.LabelEncoder**
 
+(소스코드)
+
 	import numpy as np                                   # 수치 계산을 위한 numpy 라이브러리 불러오기
 	from sklearn.preprocessing import LabelEncoder       # 문자열 라벨을 숫자로 변환하기 위한 LabelEncoder 불러오기
 
@@ -119,6 +121,12 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
  	print("고유 클래스:", le.classes_)                    # LabelEncoder가 학습한 실제 클래스 이름(고유값 리스트) 출력	
  	print("인코딩 결과:", le.transform(items))            # 학습된 클래스 기준으로 각 항목을 정수 인덱스로 변환 출력
   	print("역변환:",      le.inverse_transform([2,0,1,1,0,3,2]))
+
+(실행결과)
+
+	고유 클래스: ['TV' '냉장고' '에어컨' '컴퓨터']
+	인코딩 결과: [0 1 3 3 1 2 0]
+	역변환: ['에어컨' 'TV' '냉장고' '냉장고' 'TV' '컴퓨터' '에어컨']
 
 
 **sklearn.preprocessing.OneHotEncoder**
