@@ -19,7 +19,40 @@
 아나콘다 설치 파일 다운로드 : https://www.anaconda.com/download/
 <br>아나콘다 설치 안내 : https://wikidocs.net/254434
 <br>아나콘다 안내(공식문서) :  https://docs.anaconda.com/anaconda/userguide/getting-started/
-<br> 
+<br>
+
+	import sklearn
+ 	import pandas as pd
+	import numpy as np
+	import matplotlib.pyplot
+	import seaborn
+	import xgboost
+	import lightgbm
+   
+	print(sklearn.__version__)
+ 	print(xgboost.__version__)
+  	print(lightgbm.__version__)
+ 
+
+Scikit Learn 업데이트(1.0.2) : Anaconda Prompt(관리자권한)<br>
+
+	# scikit -learn 최신버전 설치
+	$ pip install -U scikit -learn
+ 	# scikit -learn 교재버전 고정
+ 	$ pip install -U scikit -learn==1.0.2
+
+XGBoost 설치 : Anaconda Prompt(관리자권한)<br>
+  
+  	# xgboost 설치
+ 	$ conda install -c anaconda py-xgboost
+
+LightGBM 업데이트(3.3.2) : Anaconda Prompt(관리자권한)<br>
+
+	$ pip install lightgbm==3.3.2
+
+ 
+Visual Studio 다운로드 : https://visualstudio.microsoft.com/ko/downloads/ <br>
+도구 - 빌드도구 - C++ 데스크톱
 
 ---
 
@@ -623,43 +656,4 @@ MLP : Multi-layer Perceptron<br>
 GAN : Generative Adversarial Networks<br>
 RL : Reinforcement Learning<br>
 <br>
-
----
-
-Anaconda 다운로드 : https://www.anaconda.com/download
-<br>
-
-	import sklearn
- 	import pandas as pd
-	import numpy as np
-	import matplotlib.pyplot
-	import seaborn
-	import xgboost
-	import lightgbm
-   
-	print(sklearn.__version__)
- 	print(xgboost.__version__)
-  	print(lightgbm.__version__)
- 
-
-Scikit Learn 업데이트(1.0.2) : Anaconda Prompt(관리자권한)<br>
-
-	# scikit -learn 최신버전 설치
-	$ pip install -U scikit -learn
- 	# scikit -learn 교재버전 고정
- 	$ pip install -U scikit -learn==1.0.2
-
-XGBoost 설치 : Anaconda Prompt(관리자권한)<br>
-  
-  	# xgboost 설치
- 	$ conda install -c anaconda py-xgboost
-
-LightGBM 업데이트(3.3.2) : Anaconda Prompt(관리자권한)<br>
-
-	$ pip install lightgbm==3.3.2
-
- 
-Visual Studio 다운로드 : https://visualstudio.microsoft.com/ko/downloads/ <br>
-도구 - 빌드도구 - C++ 데스크톱
-
 ---
