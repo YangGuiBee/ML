@@ -113,8 +113,9 @@ Medical Costs Personal Dataset https://www.kaggle.com/mirichoi0218/insurance/dat
 <br>
 Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswithkartik/red-white-wine-dataset 
 <br><br>
-공공데이터포털  https://www.data.go.kr/index.do
-<br>통계청  https://kostat.go.kr/index.es?sid=a1
+**공공데이터포털**  https://www.data.go.kr/index.do
+<br>
+**통계청**  https://kostat.go.kr/index.es?sid=a1
 
 ---
 
