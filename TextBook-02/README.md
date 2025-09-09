@@ -106,12 +106,15 @@ https://www.quora.com/Where-can-I-find-large-datasets-open-to-the-public
 https://www.reddit.com/r/datasets/
 <br>
 머신러닝 데이터셋(dataset) 사이트 40가지 모음 : https://kr.appen.com/blog/best-datasets/
-<br>
+<br><br>
 Mushrooms Classification https://www.kaggle.com/uciml/mushroom-classification
 <br>
 Medical Costs Personal Dataset https://www.kaggle.com/mirichoi0218/insurance/data
 <br>
 Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswithkartik/red-white-wine-dataset 
+<br><br>
+공공데이터포털  https://www.data.go.kr/index.do
+<br>통계청  https://kostat.go.kr/index.es?sid=a1
 
 ---
 
