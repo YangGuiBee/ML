@@ -565,7 +565,11 @@ SciPy 공식문서 : https://docs.scipy.org/doc/scipy/
 ![](./images/sk_map.png)
 
 <br>Scikit-learn 모델 선정절차 : https://scikit-learn.org/1.3/tutorial/machine_learning_map/index.html<br>
-Scikit-learn 모델 선정절차(확대가능 map) : https://scikit-learn.org/stable/machine_learning_map.html
+Scikit-learn 모델 선정절차(확대가능 map) : https://scikit-learn.org/stable/machine_learning_map.html<br>
+<br>
+
+![](./images/map.png)
+
 
 <br>
 
