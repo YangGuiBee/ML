@@ -1,510 +1,366 @@
-#  03 : Data Management
+#  03 : Research Methodology 
 ---
-	 ▣ 데이터 수집
-	 ▣ 데이터 전처리	 
-	 ▣ 데이터셋 분리  	  
-  	 ▣ Python 라이브러리	
+	1. 연구의 개요
+	2. 연구 문제(Research Problem), 연구 질문(Research Question), 연구가설 (Research Hypothesis)
+	3. 선행 연구(문헌 연구)
+	4. 연구 설계(Research Design) 
+	5. 연구 데이터
+	6. 연구 결과 분석과 해석
+	7. 연구 보고 및 논문 작성
 ---
 
-# ▣ 데이터 수집
-전통적인 데이터 분석을 위한 데이터 수집은 크게 세 단계로 진행된다. 첫 번째는 현업 사용자의 요청에 따라 여러 가지 데이터 소스에서 데이터를 추출(Extract)한다. 두 번째는 대상 데이터 시스템 및 해당 시스템의 다른 데이터와 통합할 수 있도록 정보의 구조를 변경하는 변환(Transform) 과정을 거친다. 마지막으로 세 번째 단계는 데이터 스토리지 시스템에 적재(Load)하는 방식으로 진행된다. 데이터 수집은 가장 많은 시간이 소요되며 방법에 따라 최종 결과물이 크게 달라지기도 한다. 머신러닝의 데이터 수집은 머신러닝 절차(분석 문제 정의 → 데이터 수집 → 탐색적 데이터 분석(EDA) → 피처 엔지니어링 → 예측 모델 개발 → 서비스 적용) 중 분석 문제 정의 다음의 단계이며, 이 단계에서는 정의한 문제를 해결하기 위한 데이터들을 수집하는 단계이다. 어떤 데이터를 수집하느냐에 따라 문제 해결을 위한 접근 방식이 달라지며, 이것은 데이터의 유형도 신경써야할 필요가 있다. 머신러닝 프로젝트에서 두 번째 단계인 '데이터 수집'은 분석의 기반이 되는 데이터를 확보하는 과정으로 다음과 같은 5가지 단계로 이루어진다.<br>
-
-## (1) 원시 데이터 수집
-중요도에 비해 관심을 덜 받는 경우가 많지만 데이터 수집은 우수한 알고리즘을 얻기 위한 첫 걸음이다. 일반적으로 대량의 데이터 집합을 사용하는 단순한 모델이 소량의 데이터 집합을 사용하는 진보된 모델보다 성능이 더 우수하다.<br> 
-<br>
-## (2) 데이터 마트 생성
-데이터 마트는 특정 주제나 부서에 초점을 맞춘 작은 규모의 데이터 웨어하우스를 의미하며, 이 단계에서는 필요한 데이터를 특정 주제나 목적에 맞게 분류하거나 구성한다. 이를 통해 필요한 데이터를 효율적으로 관리하고 사용할 수 있다. 예컨대, '고객 만족도'라는 주제는 고객 ID, 구매 이력, 제품 리뷰, 고객 서비스 이력 등을 포함하는 데이터 마트를 생성한다.<br>
-<br>
-## (3) 데이터 정합성 평가
-수집된 데이터의 질을 평가하는 과정으로 데이터의 정확성, 일관성, 완전성, 신뢰성 등을 검토하고, 이상치나 결측치, 중복 값 등이 있는지 확인한다. 이를 통해 데이터의 정합성을 보장하고, 분석의 신뢰성을 높일 수 있다. 예컨대, 고객 ID의 중복, 제품 리뷰의 결측치, 구매 이력의 이상치 등을 확인하고, 이를 수정하거나 제거하여 데이터의 정합성을 보장한다. <br>
-<br>
-## (4) 데이터 취합
-여러 출처에서 수집된 데이터를 하나의 데이터 세트로 합치는 과정으로 동일한 개체나 사건을 나타내는 데이터가 일관된 방식으로 표현되고 연결되어야야만 이를 통해 통합된 정보를 제공하고, 분석의 효율성을 높일 수 있다. 예컨대, 구매 이력 데이터, 제품 리뷰 데이터, 고객 서비스 이력 데이터 등을 고객 ID를 기준으로 합친다.<br>
-<br>
-## (5) 데이터 표준화
-서로 다른 소스에서 수집된 데이터는 종종 다른 형식이나 구조로 저장되어 있는 경우는 단계에서는 모든 데이터를 일관된 포맷으로 변환하여, 분석이나 처리가 쉽도록 한다.예컨대, 일자 데이터가 '년-월-일' 형식으로 저장된 곳도 있고, '월/일/년' 형식으로 저장된 곳도 있다면, 이를 일관된 형식으로 통일시킨다. “Garbage in, garbage out”라는 말이 있듯이, 무의미한 데이터가 들어오면 나가는 데이터도 무의미하다. 데이터의 출처에 따라 부가적인 포맷과 표준화가 필요할 수 있으며, 고품질의 대량의 데이터 집합이라도 해도 데이터 포맷이 잘못되면 힘을 발휘할 수 없다. 이 점은 여러 출처의 데이터를 집계할 때 특히 유의해야 한다.<br>
-이렇게 데이터 수집 단계를 통해 필요한 데이터를 효과적으로 확보하고, 그 데이터의 질을 보장하고, 데이터를 적절하게 관리하고 사용할 수 있으며, 이 단계를 잘 수행하면, 그 이후의 분석 과정에서 좀 더 정확하고 효율적인 결과를 얻을 수 있다다. 이렇게 데이터 수집 단계를 거친 후에는, 데이터의 질을 보장하고, 필요한 정보를 효율적으로 제공하는 '탐색적 데이터 분석(EDA)', '피처 엔지니어링', '예측 모델 개발', '서비스 적용' 등의 작업을 진행할 수 있다.<br>
-
-**open data repository**
-<br>
-https://archive.ics.uci.edu/
-<br>
-https://www.kaggle.com/datasets
-<br>
-https://registry.opendata.aws/
-<br>
-
-**meta portal**
-<br>
-http://dataportals.org/
-<br>
-http://opendatamonitor.eu/
-<br>
-http://quandl.com/
-
-**DataSet**
-<br>
-https://en.wikipedia.org/wiki/List_of_datasets_for_machine-learning_research
-<br>
-https://www.quora.com/Where-can-I-find-large-datasets-open-to-the-public
-<br>
-https://www.reddit.com/r/datasets/
-<br>
-머신러닝 데이터셋(dataset) 사이트 40가지 모음 : https://kr.appen.com/blog/best-datasets/
-<br>
-Mushrooms Classification https://www.kaggle.com/uciml/mushroom-classification
-<br>
-Medical Costs Personal Dataset https://www.kaggle.com/mirichoi0218/insurance/data
-<br>
-Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswithkartik/red-white-wine-dataset 
-
-<br><br>
-
-# ▣ 데이터 전처리
-데이터 전처리는 기존의 데이터를 머신러닝 알고리즘에 알맞은 데이터로 바꾸는 과정이다. 이 전처리 과정은 모델이 생성된 이후에도 예측하고자 하는 새로운 데이터에도 적용할 수 있는 과정으로 전처리 과정을 통해 더욱더 모델 학습의 성능을 높일 수 있다. 데이터 전처리는 Data Cleaning, Data Encoding, Data Transform, Feature Scaling, ML Pipeline 등 5개의 과정으로 수행한다. 
-
-## (1) Data Cleaning
-대부분의 머신러닝 알고리즘은 Missing feature, 즉 누락된 데이터가 있을 때, 제대로 역할을 하지 못한다. 그래서 먼저 Missing feature에 대해 처리해주어야 한다.<br>
-
-	불필요한 누락 데이터 제거(처리) : pandas의 dropna()<br>
-	학습에 방해가 되는 연관성 없는 전체 속성(특정 행 또는 열의 라벨) 제거 : pandas의 drop()<br>
-	누락 데이터에 0, 평균값, 중간값으로 채우기 : pandas의 fillna(), scikit-learn의 Imputer()<br>
- 
-## (2) Data Encoding
-수집된 데이터는 컴퓨팅 학습을 위해서 기존 데이터 세트에 텍스트가 있는 경우 이것을 숫자형 데이터로 인코딩(Encoding)이 필요하다. 인코딩에는 레이블 인코딩(Label Encoding)과 원핫 인코딩(One-hot Encoding)을 통해 범주형 데이터를 수치형 데이터로 변환이 필요하다.<br>
-<br>
-**레이블 인코딩 :** 각 카테고리를 숫자로 대응시켜서 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"를 1로, "green"을 2로, "blue"를 3으로 변환하는 것이다. 이 방법은 간단하고 직관적이지만, 각 카테고리가 가지는 값의 크기 차이가 있을 경우 예측 결과에 영향을 미칠 수 있다. 텍스트를 숫자로 인코딩하는 메소드로는 Pandas에서 제공하는 factorize()와 OrdinalEncoder()이 있으며, sklearn.preprocessing.LabelEncoder를 사용할 수도 있다.<br>
-**원핫 인코딩 :** 각 카테고리를 벡터 형태로 변환한다. 예컨대, "red", "green", "blue"라는 3개의 카테고리가 있다면 "red"는 [1, 0, 0], "green"은 [0, 1, 0], "blue"는 [0, 0, 1]로 변환하는 것이다. 이 방법은 각 카테고리를 독립적인 변수로 취급하기 때문에 각 카테고리가 가지는 값의 크기 차이를 고려하지 않기 때문에 범주형 변수의 카테고리가 많을수록 차원이 커지는 단점이 있지만, 예측 결과에 영향을 미치는 위험이 적다. 따라서, 레이블 인코딩은 카테고리가 서열을 가지는 경우(예: "bad", "average", "good")나 카테고리의 수가 적을 경우에 사용하고, 원핫 인코딩은 카테고리의 수가 많을 경우에 사용한다. 원핫 인코딩 메소드로는 OneHotEncoder()가 있다.<br>
-
-![](./images/encoding.PNG)
-
-**sklearn.preprocessing.LabelEncoder**
-
-	#fit(): 어떻게 변환할 지 학습
-	#transform(): 문자열를 숫자로 변환
-	#fit_transform(): 학습과 변환을 한번에 처리
-	#inverse_transform():숫자를 문자열로 변환
-	#classes_ : 인코딩한 클래스 조회
-	
-	import numpy as np
-	from sklearn.preprocessing import LabelEncoder
- 
-	items = ['TV','냉장고','컴퓨터', '컴퓨터','냉장고','에어콘', 'TV']
-	le = LabelEncoder()
-	le.fit(items) 
-	label = le.transform(items)
-	
-	print(label, type(label))
-	# ==> [0 1 2 2 1 3 0] <class 'numpy.ndarray'>
-	print(le.classes_)
-	# ==> ['TV' '냉장고' '컴퓨터' '에어콘']
-
-
-**sklearn.preprocessing.OneHotEncoder**
-
-	#fit(): 어떻게 변환할 지 학습
-	#transform(): 문자열를 숫자로 변환
-	#fit_transform(): 학습과 변환을 한번에 처리
-	#get_feature_names() : 원핫인코딩으로 변환된 컬럼의 이름을 반환
-	#DataFrame을 넣을 경우 모든 변수들을 변환한다. 범주형 컬럼만 처리하도록 해야 한다.
-	#sparse를 False로 주지 않으면 scipy의 csr_matrix(희소행렬 객체)로 반환
-	#희소행렬은 대부분 0으로 구성된 행렬과 계산이나 메모리 효율을 이용해 0이 아닌 값의 index만 관리한다.
-	#csr_matrix.toarray()로 ndarray로 바꿀수 있다.
- 
-	import numpy as np
-	import pandas as pd
-	from sklearn.preprocessing import OneHotEncoder
-
-	# items 배열 정의
-	items = np.array(['TV', '냉장고', '컴퓨터', '컴퓨터', '냉장고', '에어컨', '에어컨', '선풍기'])
-
-	# 데이터프레임 생성
-	d = {
-    	'item': items,
-    	'cnt': np.arange(8)
-	}
-	df = pd.DataFrame(d)
-	df.info()
-
-	# 아이템 배열에 새로운 축 추가
-	items_expanded = items[..., np.newaxis]
-
-	# One-Hot Encoding 수행
-	ohe = OneHotEncoder(sparse_output=False)  # sparse_output=False: 결과를 배열 형태로 반환
-	ohe.fit(items_expanded)
-	ohv = ohe.transform(items_expanded)
-
-	# One-Hot Encoding 결과 확인
-	print(ohv)
-	print(type(ohv))
- 	
-
-## (3) Data Transform
-Scikit-learn에서는 다양한 데이터 변환기(Transformer)들을 제공하는데, 이를 이용하여 커스텀 변환기를 만들 수 있다.
-
-**fit()** : 입력받은 데이터에 특정 알고리즘 또는 전처리를 적용하는 메서드를 통해 변환기에 알맞는 파라미터를 생성<br>
-**transform()** : fit()을 통해 생성된 파라미터를 통해서 모델을 적용시켜 데이터 세트를 알맞게 변환시키는 메소드<br>
-**fit_transform()** : 같은 데이터 세트를 사용하여 fit과 transform을 한 번에 하는 메서드<br>
- 	
-
-## (4) Feature Scaling
-일반적인 ML 알고리즘들은 아주 다양한 범위의 숫자형 데이터를 학습시킨다면 제대로 성능을 보여주지 못한다. 예컨대, 특정 데이터의 범위가 -500~39,320이라면 아주 다양한 데이터가 존재한다. 이러한 상태에서는 제대로 된 학습을 잘하지 못한다. 이를 방지하기 위해서 숫자형 데이터의 범위를 줄여주는 방법을 사용한다.<br>
-
-**Min-Max Scaling (Normalization)** : 최소와 최대를 확인하여 이 값들을 모두 지정한 범위(대체로 0과 1 사이)의 상대적인 값으로 변환, Scikit-learn에서는 MinMaxScaler(feature_range, copy) class를 제공<br>
-**Standardization** : 특정 범위에 값을 바인딩하지 않음으로써 특이점(이상점)의 영향을 제거, Scikit-learn에서는 StandardScaler() 클래스를 제공<br>
-
-
-## (5) ML Pipeline
-매번 데이터 정제마다 위와 같은 순서를 반복하기 싫다면, Pipeline이라는 방식을 사용하면 된다. Pipeline은 Data Processing Component들의 순서를 정의해놓은 것이다. 데이터 변환을 조작하고 적용하는 방법으로 각각의 컴포넌트들과 교류하며 사용하고 ML 워크플로우의 자동화를 지원한다. Scikit-Learn에서는 Pipeline Class를 제공하는데, 이것은 데이터 변환 단계의 순서를 정리하고 만들기 쉽다.<br>
-### ML Pipeline의 일반적인 구성 
-① 데이터 수집 및 로딩 (Data Collection and Loading) : 데이터를 수집하고, 모델링에 적합한 형태로 로드하는 단계(CSV 파일, 데이터베이스, API 등에서 데이터 로드)<br>
-② 데이터 전처리 (Data Preprocessing) : 결측값 처리, 중복 제거, 이상치 탐지, 데이터 클리닝 등 텍스트나 범주형 데이터를 수치화하거나 표준화하는 변환<br>
-③ 특성 엔지니어링 (Feature Engineering) : 데이터를 모델링에 적합한 특성(feature)으로 변환(특성 선택, 특성 생성, 차원 축소, 스케일링, 인코딩)<br>
-④ 모델 학습 (Model Training) : 준비된 데이터를 사용하여 머신러닝 알고리즘을 훈련시키는 과정으로 다양한 하이퍼파라미터 조정을 통해 최적의 모델을 도출<br>
-⑤ 모델 검증 (Model Validation) : 교차 검증, 평가 지표(Accuracy, Precision, Recall, F1 등) 활용하여 훈련된 모델의 성능을 평가<br>
-⑥ 모델 테스트 (Model Testing) : 학습에 사용되지 않은 독립된 데이터셋으로 모델의 일반화 성능을 평가<br>
-⑦ 모델 배포 (Model Deployment) : 최종 모델을 서비스나 애플리케이션에 배포하여 실제 데이터를 처리하도록 설정<br>
-⑧ 모니터링 및 유지보수 (Monitoring and Maintenance) : 모델 성능을 지속적으로 모니터링하고 필요 시 재학습 및 업데이트를 수행<br>
-
-<br><br><br>
-
-# ▣ 데이터셋 분리
-데이터를 적절히 포맷했고 품질을 확인했고 모든 관련 특성을 확보했다면, 이제 머신러닝을 위해 데이터 분할이 필요하다. 분할은 수집된 데이터를 훈련 데이터와 검정데이터<br>
-![](./images/DataSet.PNG)
-<br>
-분할의 단계는 총 3단계로 나누어 볼 수 있다.<br> 
-1 단계 : training과 test데이터로 분리한다.<br>
-2 단계 : training데이터를 training과 validation으로 분리한다.<br>
-3 단계 : training데이터로 모델을 만들고 validation데이터로 검증한다. 만족시 해당모델을 train과 validation데이터를 합쳐서 학습을 시킨후 test데이터를 넣어 확인한다.<br>
-
-데이터 셋의 비중은 정해진 것은 아니나 보통 Training set : Validation set : Test sets = 60 : 20 : 20 으로 설정한다.<br>
-한번의 학습으로 완전하게 모델을 학습시키기 어렵기 때문에, 다르게 튜닝된 여러 모델들을 학습한 후 어떤모델이 잘 학습되었는지 검증셋으로 검증하고 모델을 선택하는 과정이 필요하다. 이렇게 훈련/검증세트로 좋은 모델을 만들어 낸 후 최종적으로 테스트세트에는 단 한번의 예측테스트를 진행한다. 결과가 마음에 들지 않아도 또 수정하게되면 테스트 세트에 과적합되어 일반화의 성능이 떨어지게 된다. 훈련데이터는 모델을 Fit하는데 사용하며, 검증데이터트 예측 모델을 선택하기 위해 모델의 예측오류를 측정할 때 사용한다. 테스터데이터는 일반화 오류를 평가하기 위해 마지막에 단 한번만 사용해야한다. 이때 테스트 데이터는 한번도 공개된적 없는 데이터이어야 한다.<br>
-
-## (1) 훈련 데이터(Training set)
-모델을 학습하는데 사용된다. Training set으로 모델을 만든 뒤 동일한 데이터로 성능을 평가해보기도 하지만, 이는 cheating이 되기 때문에 유효한 평가는 아니다. 마치 모의고사와 동일한 수능 문제지를 만들어 대입 점수를 매기는 것과 같다. Training set은 Test set이 아닌 나머지 데이터 set을 의미하기도 하며, Training set 내에서 또 다시 쪼갠 Validation set이 아닌 나머지 데이터 set을 의미하기도 한다. 문맥상 Test set과 구분하기 위해 사용되는지, Validation과 구분하기 위해 사용되는지를 확인해야 한다.<br>
-<br>
-## (2) 테스트 데이터(Test set)
-validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한번 해당 모델의 예상되는 성능을 측정하기 위해 사용된다. 이미 validation set은 여러 모델에 반복적으로 사용되었고 그중 운 좋게 성능이 보다 더 뛰어난 것으로 측정되어 모델이 선택되었을 가능성이 있다. 때문에 이러한 오차를 줄이기 위해 한 번도 사용해본 적 없는 test set을 사용하여 최종 모델의 성능을 측정하게 된다.<br>
-<br>
-## (3) 검정 데이터(Validation set) 
-여러 모델들 각각에 적용되어 성능을 측정하며, 최종 모델을 선정하기 위해 사용된다. 반면 test set은 최종 모델에 대해 단 한번 성능을 측정하며, 앞으로 기대되는 성능을 예측하기 위해 사용된다. Training set으로 모델들을 만든 뒤, validation set으로 최종 모델을 선택하게 된다. 최종 모델의 예상되는 성능을 보기 위해 test set을 사용하여 마지막으로 성능을 평가한다. 그 뒤 실제 사용하기 전에는 쪼개서 사용하였던 training set, validation set, test set 을 모두 합쳐 다시 모델을 training 하여 최종 모델을 만든다. 기존 training set만을 사용하였던 모델의 파라미터와 구조는 그대로 사용하지만, 전체 데이터를 사용하여 다시 학습시킴으로써 모델이 조금 더 튜닝되도록 만든다. 혹은 data modeling을 진행하는 동안 새로운 데이터를 계속 축적하는 방법도 있다. 최종 모델이 결정되었을 때 새로 축적된 data를 test data로 사용하여 성능평가를 할 수도 있다.<br>
-
-![](./images/DataSet2.PNG)
-
-(소스코드)
-<br>
-
- 	import pandas as pd
-	from sklearn.model_selection import train_test_split
-	
-	# 예시 데이터프레임 생성 (실제 데이터프레임이 이미 있다고 가정)
-	# 예시: df = pd.DataFrame({'feature': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'target': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]})
-	# 아래 예시 데이터프레임은 실행 가능성을 위해 추가됨
-	
-	# 데이터프레임 생성
-	df = pd.DataFrame({
-	    'feature': range(1, 11),  # 1~10까지의 숫자
-	    'target': [0, 1] * 5      # 0과 1이 반복되는 타겟값
-	})
-	
-	# 단일 피처를 2차원 배열로 변환
-	X = df[['feature']]  # X는 2차원 데이터프레임으로, [[ ]]를 사용하여 2차원으로 생성
-	y = df['target']     # y는 1차원 Series
-	
-	# train-test 분리
- 	# 전체 데이터에서 80%를 학습 데이터로, 20%를 테스트 데이터로 분리
-  	# random_state=42 : 설정하지 않거나 'None'으로 설정시, 매번 다른 결과를 생성
-   	# shuffle=True : split 하기 전에 데이터를 섞을지 여부(default는 True)
-    	# stratify=y : target으로 지정하면 각 class 비율을 train/validation으로 유지. 한쪽에 쏠림 분배방지(default는 None)
-	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=True, stratify=y,random_state=42)
-	
-	# train-validation 분리
- 	# 학습 데이터에서 75%를 최종 학습 데이터로, 25%를 검증 데이터로 분리
-	X2_train, X2_val, y2_train, y2_val = train_test_split(X_train, y_train, test_size=0.25, random_state=42)
-	
-	# 각 데이터 세트의 크기를 출력
-	print(f"전체 데이터 크기: {len(df)}")
-	print(f"학습 데이터 크기 (Train): {len(X_train)}")
-	print(f"테스트 데이터 크기 (Test): {len(X_test)}")
- 	print(f"검증을 제외한 학습 데이터 크기 (Train-Validation): {len(X2_train)}")
- 	print(f"검증 데이터 크기 (Validation): {len(X2_val)}")
-	
-	# 데이터 분할 비율 확인
-	print(f"\n학습 데이터 비율: {len(X2_train) / len(df):.2f}")
-	print(f"테스트 데이터 비율: {len(X_test) / len(df):.2f}")
- 	print(f"검증 데이터 비율: {len(X2_val) / len(df):.2f}")
-
-
-(실행결과)
-<br>
-
-	전체 데이터 크기: 10
-	학습 데이터 크기 (Train): 8
-	테스트 데이터 크기 (Test): 2
-	검증을 제외한 학습 데이터 크기 (Train-Validation): 6
-	검증 데이터 크기 (Validation): 2
-	
-	학습 데이터 비율: 0.60
-	테스트 데이터 비율: 0.20
-	검증 데이터 비율: 0.20
-
-<br><br>
-
-## 【ML 예제】
-
-붓꽃 데이터(Iris Dataset)는 Setosa, Virginica, Versicolor 3개의 붓꽃 품종을 구분해내는 것을 목적으로 만들어졌으며, 머신러닝을 경험해볼 수 있는 아주 간단한 장난감 데이터(toy data set)이다.<br> 
-
-![](./images/iris_data.PNG)
-
-## (1) 전통적인 프로그래밍(Traditional Programming)
- - 데이터 수집: 붓꽃 품종에 관련된 많은 데이터를 수집한다.<br>
- - 변수 가공: 붓꽃 품종은 '꽃잎(Petal)의 길이'와 '꽃받침(Sepal)의 길이'로 구분 할 수 있다는 변수를 알아낸다.<br>
- - 로직 정의: 꽃받침의 길이가 몇cm 이상이면 Versicolor, 이하면 Setosa라는 여러 세트의 rule들을 정의하여 모델을 만든다.<br>
- - 모델 평가: 데이터를 모델에 넣어 정확도가 어느정도 인지 확인해본다.<br>
-
-## (2) 머신러닝(Machine Learning)
- - 데이터 수집: 붓꽃 품종에 관련된 많은 데이터를 수집한다.<br>
- - 변수 가공: 붓꽃 품종은 '꽃잎의 길이'와 '꽃받침의 길이'로 구분할 수 있다는 변수를 알아낸 뒤 해당 변수의 데이터를 잘 정리한다.<br>
- - 모델 학습: Decision Tree, SVM 등 다양한 알고리즘에 데이터만을 입력해보며 적합한 모델을 생성한다.<br>
- - 모델 평가: 학습에 사용되지 않은 데이터를 최종 모델에 넣어 정확도가 어느정도 인지 확인해본다.<br>
-
-## (3) 딥러닝(Deep Learning)
- - 데이터 수집: 붓꽃 품종에 관련된 많은 이미지 데이터를 수집한다.<br>
- - 변수 가공: 변수(feature)는 모델에서 자동 생성된다.<br>
- - 모델 학습: 이미지 데이터를 입력하여 다양한 네트워크를 구성해보고 적합한 모델을 생성한다.<br>
- - 모델 평가: 학습에 사용되지 않은 이미지 데이터를 최종 모델에 넣어 정확도가 어느 정도 인지 확인해본다.<br>
-<br>
-	
-	from sklearn import datasets
-	import matplotlib.pyplot as plt
-
- 	#Iris 데이터셋 로드
-	iris = datasets.load_iris()
-
-	#서브플롯 생성
-	fig, ax = plt.subplots()
-
-	#산점도 그리기
-	scatter = ax.scatter(iris.data[:, 0], iris.data[:, 1], c=iris.target, cmap=plt.cm.Set1)
-
-	#축 레이블 설정
-	ax.set(xlabel=iris.feature_names[0], ylabel=iris.feature_names[1])
-
-	#고유한 클래스 타겟과 그에 해당하는 명칭 얻기
-	handles, _ = scatter.legend_elements()
-	labels = iris.target_names
-
-	#범례 추가: 클래스 코드 대신 명칭 표시
-	ax.legend(handles, labels, loc="lower right", title="Classes")
-
-	#그래프 표시
-	plt.show()
-
-
-# ▣ Python 라이브러리
-파이썬 전세계 점유율(티오베 지수) : https://www.tiobe.com/tiobe-index/
-<br>
-![](./images/python.PNG)
-<br>
-파이썬 자습서 : https://docs.python.org/ko/3/tutorial/
-<br>
-점프투파이썬 : https://wikidocs.net/book/1
-
-<br><br>
-
-## 【NumPy】
-행렬이나 일반적으로 대규모 다차원 배열을 쉽게 처리할 수 있도록 지원하는 파이썬의 라이브러리<br>
-NumPy는 데이터 구조 외에도 수치 계산을 위해 효율적으로 구현된 기능을 제공<br>
-NumPy 공식문서 : https://numpy.org/doc/stable/user/whatisnumpy.html
-<br>NumPy 실습 : http://ml-ko.kr/homl2/tools_numpy.html
-
-**numpy.ipynb 실습**
-
-	numpy.array() : ndarray 배열 생성
-	numpy.array().shape : 행렬 형태 정보
-	numpy.array().ndim : 차원 정보
-	type(numpy.array()) : 행렬의 타입
-	numpy.array().dtype : 행렬의 데이터 타입
-	numpy.array().astype : 행렬의 데이터 타입 변경, 
-	numpy.arrange() : 행렬 데이터 초기값 생성
-	numpy.zeros() : 기본값 0으로 채우기
-	numpy.ones() : 기본값 1로 채우기
-	ndarray.shape : 차원과 크기 변경
-	numpy.sort() : 행렬내 정렬(내림차순 [::-1], row방향 axis=0, column방향 axis=1)
-	numpy.argsort() : 정렬 행렬의 원본 행렬 인덱스를 ndarray로 반환
-	numpy.dot() : 선형대수 연산(행렬내적)
-	numpy.transpose() : 선형대수 연산(전치행렬)
-
-
-![](./images/array.png)
-
-![](./images/array2.png)
-
-![](./images/np.png)
+# 1. 연구의 개요
 
 <br>
 
-## 【Pandas】
-데이터 조작 및 분석을 위한 파이썬 프로그래밍 언어 용으로 작성된 소프트웨어 라이브러리<br>
-숫자 테이블과 시계열을 조작하기 위한 데이터 구조와 연산을 제공<br>
-Pandas란 이름은 한 개인에 대해 여러 기간 동안 관찰을 한다는 데이터 세트에 대한 계량 경제학 용어인 "패널 데이터"에서 파생<br>
-또한 "Python 데이터 분석"이라는 문구 자체에서 따온 것이기도 하다.<br>
-Wes McKinney는 2007년부터 2010년까지 연구원으로 있을 때 AQR Capital에서 pandas를 만들기 시작했다.<br>
-Pandas 공식문서 : https://pandas.pydata.org/pandas-docs/stable/getting_started/index.html
-<br>사용현황 : https://www.datacamp.com/blog/top-data-science-tools
+## 1.1. 연구의 정의
+새로운 지식·이론·기술을 창출하거나 기존 것을 개선하기 위한 체계적이고 반복 가능한 과정<br>
+AI 기술을 활용해 현실의 문제를 해결하는 체계적인 과정<br> 
 
-**pandas.ipynb 실습**
+	(1) 사전적 정의 (언어학적 관점)
+	어떤 현상이나 사실을 체계적으로 탐구하여 새로운 지식이나 이론을 얻는 일
+	Research: re-(다시, 반복) + search(탐색, 찾다) → “끊임없는 탐구와 재탐색의 과정.”
 
-	객체명 = pandas.read_csv('파일명')
-	display(객체명) #객체명만 적거나 print(객체명)만 적어도 됨
-	객체명.head() #5개만 조회
-	객체명.tail() #5개만 조회
-	pandas.set_option('display.max_rows', 1000)
-	pandas.set_option('display.max_colwidth', 100)
-	pandas.set_option('display.max_columns', 100)
-	pandas.DataFrame()
-	객체명.shape : DataFrame의 행(Row)와 열(Column) 크기
-	객체명.colums
-	객체명.index
-	객체명.values : DataFrame의 값(numpy로 변환)
-	객체명.info() : DataFrame내의 컬럼명, 데이터 타입, Null건수, 데이터 건수 정보
-	객체명.describe() : 데이터값들의 평균,표준편차,4분위 분포도
-	객체명['특성명'].value_counts() : 개별 데이터값의 건수, 디폴트는 dropna=True 
-	객체명['특성명'].value_counts(dropna=False)) : null값도 표시
-	객체명=객체명.drop('특성명', axis=1(0은 row삭제), inplace=False)
-	indexes = 객체명.index
-	객체명.reset_index(inplace=False)
-	객체명.iloc[:, -1]) : 처음부터 마지막 컬럼까지
-	객체명.iloc[:, :-1]) : 처음부터 마지막 컬럼 전까지
-	객체명.sort_values(by=['특성명'], ascending=True)
-	객체명.count() : null값은 제외
-	객체명.mean() : average 대신 사용
-	객체명.sum()
-	객체명.groupby(by='특성명')
-	객체명.groupby('특성명').agg([max, min])
-	객체명.isna() : 모든 컬럼에 대하여 True(1)/False(0) 출력
-	객체명.isna().sum() : 모든 컬럼에 대하여 널값의 수를 출력
-	객체명['특성명'].fillna('채울값')
-	객체명['특성명'].unique() : 해당 컬럼내 고유값의 수
-	객체명['특성명'].replace() : 값 변경
-	객체명['특성명'].apply(lamda 입력값 : 함수)
-	객체명['특성명'].apply(lamda 입력값 : '출력값' if 입력값 조건식 else '또다른 출력값')
+	(2) 철학적 정의 (인식론적 관점)
+	아리스토텔레스적 전통: 지식은 원인(Why)을 밝히는 과정에서 얻어진다. → 연구는 사물의 본질을 이해하려는 시도
+	칸트: 연구는 경험과 이성의 종합을 통해 새로운 진리를 탐구하는 행위.
+	현대 과학철학 (포퍼, 쿤): 연구는 가설-반증의 과정이며, 패러다임 전환을 통해 진보한다.
+
+	(3) 과학적 정의 (방법론적 관점)
+	연구는 체계적이고 검증 가능한 과정
+	문제 제기 → 가설 설정 → 자료 수집 → 분석 → 결론 도출
+	재현 가능성과 검증 가능성(replicability & falsifiability)을 핵심 가치로 삼는다.
+
+	(4) 실천적 정의 (사회·산업적 관점)
+	정책·산업 문제 해결 도구: 데이터를 기반으로 의사결정을 지원하고 사회적 가치를 창출
+	혁신의 원천: 신기술 개발, 프로세스 개선, 새로운 서비스 창출
+	예: AI 연구 = 단순히 알고리즘 제안이 아니라 금융, 의료, 교통 등 실제 문제 해결로 이어져야 함
+
+	(5) 교육적 정의 (연구자 개인의 관점)
+	연구는 지적 성장과 학문적 성숙의 과정
+	대학원생에게 연구는 “내 관심사 → 질문 → 데이터/이론 검증 → 학문 공동체와 소통”의 경험을 제공
+	자기 정체성과 전문성을 확립하는 과정
+
+	(6) 현대적/데이터 기반 정의
+	데이터 과학 시대의 연구는 전통적 방법론에 빅데이터·AI·머신러닝을 결합하는 것
+	연구는 문제를 정의하고, 데이터에서 패턴을 찾아, 재현 가능한 지식으로 환원하는 것
 
 <br>
 
-## 【Matplotlib】
-Python 프로그래밍 언어 및 수학적 확장 NumPy 라이브러리를 활용한 플로팅 라이브러리<br>
-Tkinter , wxPython , Qt 또는 GTK 와 같은 범용 GUI 툴킷을 사용하여 애플리케이션에 플롯을 포함 하기 위한 객체 지향 API를 제공<br> 
-Matplotlib 공식문서 : https://matplotlib.org/stable/
-<br>
-Matplotlib 가이드 : https://wikidocs.net/92071
+## 1.2. 연구의 목적
+(1) 학문적 기여: 새로운 이론(알고리즘/모델) 제시, 기존 이론의 확장, 기존 이론의 한계점 극복<br>
+(2) 실용적 기여: 정책 수립, 산업/사회 문제 해결 및 효율성(AI, 데이터 과학 기술을 통한 효율성·정확성 개선) 증대<br>
+(3) 개인적 기여: 연구자로서의 정체성 확립, 학문 공동체와의 소통 및 협업 능력 배양<br>
 
 <br>
 
-## 【Scikit-Learn】
-Scikit-learn(이전 명칭: scikits.learn, sklearn)은 파이썬 프로그래밍 언어용 자유 소프트웨어 기계 학습 라이브러리<br>
-다양한 분류, 회귀, 그리고 서포트 벡터 머신, 랜덤 포레스트, 그라디언트 부스팅, k-평균, DBSCAN을 포함한 클러스터링 알고리즘<br>
-파이썬의 수치 및 과학 라이브러리 NumPy 및 SciPy와 함께 운용되도록 설계<br>
-Scikit-learn 공식문서 : https://scikit-learn.org/stable/user_guide.html
-<br>
-SciPy 공식문서 : https://docs.scipy.org/doc/scipy/
-<br>
-![](./images/sk_map.png)
-
-<br>Scikit-learn 모델 선정절차 : https://scikit-learn.org/1.3/tutorial/machine_learning_map/index.html<br>
-Scikit-learn 모델 선정절차(확대가능 map) : https://scikit-learn.org/stable/machine_learning_map.html
+## 1.2. 연구의 목적
+(1) 학문적 기여: 새로운 이론(알고리즘/모델) 제시, 기존 이론의 확장, 기존 이론의 한계점 극복<br>
+(2) 실용적 기여: 정책 수립, 산업/사회 문제 해결 및 효율성(AI, 데이터 과학 기술을 통한 효율성·정확성 개선) 증대<br>
+(3) 개인적 기여: 연구자로서의 정체성 확립, 학문 공동체와의 소통 및 협업 능력 배양<br>
 
 <br>
 
-## 【MNIST】
-MNIST(Modified National Institute of Standards and Technology database)는 손으로 쓴 숫자들로 이루어진 대형 데이터베이스<br>
-다양한 화상처리시스템과 기계학습 분야의 트레이닝 및 테스트에 널리 사용<br>
-MNIST 데이터베이스는 60,000개의 트레이닝 이미지와 10,000개의 테스트 이미지를 포함<br>
-MNIST 사용가이드 : https://guide.ncloud-docs.com/docs/tensorflow-tensorflow-1-3
+## 1.3. 연구의 핵심
+단순히 새로운 것을 만드는 것을 넘어, 이 연구가 왜 필요한지, 어떤 가치를 창출할지 명확히 정의하는 것이 중요<br>
+아이디어(문제 인식) → 설계(방법론) → 수행(데이터·실험) → 결과(분석) → 기여(학문·사회)<br>
 
 <br>
 
-## 【TensorFlow】
-머신러닝 및 인공 지능을 위한 무료 오픈소스 소프트웨어 라이브러리<br>
-다양한 작업에 사용할 수 있지만 특히 심층 신경망의 교육 및 추론에 중점<br>
-연구 및 생산에서 Google의 내부 사용을 위해 Google Brain 팀에서 개발<br>
-TensorFlow는 Python, JavaScript, C++ 및 Java 등 다양한 프로그래밍 언어와 많은 분야의 다양한 애플리케이션에서 쉽게 사용가능<br>
-TensorFlow 공식문서 : https://www.tensorflow.org/?hl=ko
+## 1.4. 연구의 성격
+(1) 탐구적 성격: 새로운 질문 발굴<br>
+(2) 검증적 성격: 가설을 데이터·실험으로 입증<br>
+(3) 응용적 성격: 실제 문제 해결에 기여<br>
 
 <br>
 
-## 【Kaggle】
-2010년 설립된 예측모델 및 분석 대회 플랫폼으로 2017년 3월 구글에 인수됨<br>
-기업 및 단체에서 데이터와 해결과제를 등록하면, 데이터 과학자들이 이를 해결하는 모델을 개발하고 경쟁<br>
-Kaggle은 전 세계 데이터 사이언티스트들이 데이터를 분석할 수 있도록 대회를 개최하고, 분석 내용을 토론할 수 있는 커뮤니티를 제공하는 플랫폼<br>
-데이터분석 대회 뿐 아니라 데이터분석을 위한 데이터 셋, 파이썬, R 기반 개발 환경, 초보 데이터 분석가를 위한 무료 강의 등 다양한 기능 제공<br>
-Kaggle 공식사이트 : https://www.kaggle.com/
-Kaggle 가이드 : https://wikidocs.net/86304
-<br>
-
-<br><br>
-
-## 【ML 알고리즘/모델】
-
-![](./images/ML_2019.png)
+## 1.5. 연구의 특성
+(1) 실험적: 이론적 증명뿐 아니라 실제 데이터로 모델을 구현하고 성능을 평가하는 과정이 필수적<br>
+(2) 반복적: 가설 설정 → 실험 → 결과 분석 → 가설 재수립의 반복을 통해 최적의 결과를 도출<br>
 
 <br>
 
-출처 : https://www.kdnuggets.com/2019/04/top-data-science-machine-learning-methods-2018-2019.html
+## 1.6. AI/ML 시대의 연구
+전통적 연구방법론 + 데이터 기반 접근(Data-driven research)의 결합<br>
+예: 자연어처리 모델을 활용한 사회 현상 분석<br>
 
 <br>
 
-## 2024년 update
-1. Linear regression<br>
-2. Logistic regression<br>
-3. Naive Bayes<br> 
-4. Decision tree<br>
-5. Random forest<br>
-6. K-nearest neighbor (KNN)<br>
-7.  K-means<br>
-8. Support vector machine (SVM)<br>
-9. Apriori<br>
-10. Gradient boosting<br>
-출처 : https://www.coursera.org/articles/machine-learning-algorithms?msockid=0197f0fd39fb68c821f1e42d38db69bd
+## 1.7. 연구자
+(1) 연구자세: 호기심, 비판적 사고, 끈기, 객관성 유지, 열린 마음<br>
+(2) 연구윤리: 표절 금지, 데이터 조작·조작된 결과 해석 금지, 연구 결과의 투명한 공유<br>
+(3) 연구책임: 연구자는 기술 개발의 윤리적 책임과 사회적 영향에 대한 책임을 인식<br>
+예: 데이터 편향성(Bias): 학습 데이터에 인종, 성별 등의 편향이 포함되면 모델의 결과에도 편향이 나타날 수 있는 바, 이를 인지하고 해결 방안을 모색<br>
+예: AI의 사회적 영향: AI 기술이 사회에 미칠 긍정적/부정적 영향을 예측하고, 부정적 영향을 최소화하기 위한 노력이 필요<br>
+
+<br>
 
 ---
 
-Anaconda 다운로드 : https://www.anaconda.com/download
+# 1. 연구 문제(Research Problem), 연구 질문(Research Question), 연구가설 (Research Hypothesis)
+(1) 연구문제: 넓은 차원의 문제 상황<br>
+(2) 연구질문: 문제를 연구자가 실제로 탐구하고 답할 수 있게 만든 질문<br>
+(3) 연구가설: 질문에 대한 잠정적 답변(예측)<br>
+
 <br>
 
-	import sklearn
- 	import pandas as pd
-	import numpy as np
-	import matplotlib.pyplot
-	import seaborn
-	import xgboost
-	import lightgbm
-   
-	print(sklearn.__version__)
- 	print(xgboost.__version__)
-  	print(lightgbm.__version__)
- 
+## 2.1 연구 문제의 중요성 : 연구자가 해결하고자 하는 넓은 차원의 문제 상황
+(1) 연구의 출발점: 잘못된 문제 정의는 연구 전체를 흔들 수 있음(좋은 연구문제가 50%의 성공을 좌우)<br>
+(2) 연구 문제는 연구의 방향성, 방법론, 결과 해석 방식을 결정<br>
 
-Scikit Learn 업데이트(1.0.2) : Anaconda Prompt(관리자권한)<br>
+<br>
 
-	# scikit -learn 최신버전 설치
-	$ pip install -U scikit -learn
- 	# scikit -learn 교재버전 고정
- 	$ pip install -U scikit -learn==1.0.2
+## 2.2 좋은 연구문제의 조건
+(1) 명확성(Clarity): 애매하거나 모호하지 않아야 함 : 해결하려는 문제, 사용 데이터, 기대하는 성과를 구체화<br>
+(2) 연구 가능성(Feasibility): 시간, 자원, 데이터, 연구자의 능력 안에서 수행 가능해야 함<br>
+(3) 의의(Significance): 학문적/실무적 기여 가능성이 있어야 함<br>
+(4) 독창성(Originality): 기존 연구에서 다루지 않은 새로운 질문 포함<br>
+(5) 검증 가능성(Testability): 경험적 자료나 논리적 분석을 통해 입증할 수 있어야 함<br>
 
-XGBoost 설치 : Anaconda Prompt(관리자권한)<br>
-  
-  	# xgboost 설치
- 	$ conda install -c anaconda py-xgboost
+<br>
 
-LightGBM 업데이트(3.3.2) : Anaconda Prompt(관리자권한)<br>
+## 2.3 연구질문 : 연구자가 답하고자 하는 핵심 질문으로 연구문제를 구체적으로 풀어낸 명확하고 답할 수 있는 질문
+좋은 RQ는 “왜(Why), 어떻게(How), 무엇(What)”의 형태<br>
+예: “소비자 심리지수는 특정 산업군 주가에 유의미한 영향을 미치는가?”<br>
 
-	$ pip install lightgbm==3.3.2
+<br>
 
- 
-Visual Studio 다운로드 : https://visualstudio.microsoft.com/ko/downloads/ <br>
-도구 - 빌드도구 - C++ 데스크톱
+## 2.4 가설설정 : 연구 질문에 대한 잠정적 답변(예측)
+가설 = 독립변수(원인) → 종속변수(결과) 관계의 형태<br>
+예: “소비자 심리지수가 상승하면 유통업 주가는 단기적으로 상승할 것이다.”<br>
+
+<br>
+
+## 2.5 가설조건
+(1) 명확하고 단일한 주장일 것<br>
+(2) 검증 가능한 형태일 것<br>
+(3) 반증 가능(falsifiable)해야 함 (포퍼의 과학철학)<br>
+
+<br>
 
 ---
+
+# 3. 선행 연구(문헌연구)
+
+<br>
+
+## 3.1. 선행연구의 목적
+(1) 연구분야의 최신동향과 주요이슈 파악: 내가 연구하려는 주제가 지금까지 어떻게 연구되어 왔는지 확인, 연구 분야의 지도(map)를 그리는 과정<br>
+(2) 중복 연구 방지: 기존 연구에서 이미 답한 질문을 반복하지 않기 위함(내 연구의 독창성 및 차별점 명확화)<br>
+(3) 연구의 차별성 확보: 기존 연구의 한계점, 미흡한 부분을 기반으로 연구문제를 발전<br>
+(4) 연구 설계의 토대: 이론적 틀(Framework), 변수 선정, 방법론 선택의 근거 제공<br>
+
+<br>
+
+## 3.2. 선행연구의 접근방법
+(1) 체계적 분석: 관련 논문, 특허 등을 연도별, 주제별로 분류하여 분석<br>
+(2) 비판적 접근: '이 논문은 어떤 한계가 있는가?', '어떻게 개선할 수 있는가?'와 같은 질문을 통해 연구 아이디어 발굴<br>
+
+<br>
+
+## 3.3 선행연구 수행절차: 검색 → 정리 → 분류 → 분석 → 연구공백 도출
+(1) 검색 도구 활용<br>
+학술 데이터베이스: Google Scholar, Scopus, Web of Science, DBpia, RISS<br>
+키워드 검색 전략: 주요 개념(핵심 키워드), 동의어, Boolean 연산자(AND/OR/NOT) 활용<br>
+(2) 관련 연구 정리<br>
+논문, 학술지, 보고서, 학위논문, 학술회의 자료 등<br>
+연구 목적·방법·결과·한계를 중심으로 요약<br>
+(3) 체계적 분류<br>
+연도별, 주제별, 방법론별로 정리<br>
+표 또는 맵핑(mapping) 기법 활용<br>
+(4) 비교 및 분석<br>
+공통점과 차이점 파악<br>
+반복되는 주제와 연구 공백(Research Gap) 도출<br>
+
+<br>
+
+## 
+3.4 선행연구 유의사항
+(1) 비판적 시각 유지 : 단순 요약이 아니라 “무엇이 강점이고 무엇이 부족한가” 평가<br>
+(2) 최신성 확보 : 3~5년 이내 최신 논문 중심, 고전 연구는 배경 설명용<br>
+(3) 대표성 고려 : 영향력 있는 저널·컨퍼런스 논문 포함 (Impact Factor, Citation 기준)<br>
+(4) 연구공백(Research Gap) 찾기 : 기존 연구가 다루지 않은 분야, 연구 대상·방법·데이터의 한계, 상충되는 결과(Conflict Results) → 새로운 연구 필요성<br>
+
+<br>
+
+---
+
+# 4. 연구 설계(Research Design) : 연구 문제와 연구 질문을 해결하기 위한 체계적 절차와 전략
+
+<br>
+
+## 4.1 연구 설계의 유형
+(1) 접근 방식에 따른 구분<br>
+정성적 연구(Qualitative): 현상 이해, 인터뷰·사례 연구, 주관적 의미 탐구<br>
+정량적 연구(Quantitative): 수치 기반 검증, 통계·실험, 가설 검증<br>
+혼합 연구(Mixed Methods): 정성 + 정량 결합 → 보완적 시각 제공<br>
+(2) 방법론적 유형<br>
+실험 연구(Experiment): 변수 간 인과관계 검증 (통제 집단/실험 집단)<br>
+조사 연구(Survey): 설문, 인터뷰 → 태도·행동 패턴 분석<br>
+사례 연구(Case Study): 특정 사례 깊이 분석 (기업, 제도, 사건)<br>
+데이터 기반 연구(Data-driven): 대규모 데이터 분석, AI/ML 활용<br>
+
+<br>
+
+## 4.2 연구 절차 설계
+(1) 연구 변수 정의 : 독립변수(원인), 종속변수(결과), 통제변수(외부 영향 차단)<br>
+예: 정보취약점 관리 수준(독립변수) → 보안사고 발생 빈도(종속변수), 기업 규모, 산업군, IT 투자 수준(통제변수)<br>
+(2) 연구 대상 및 표본(Sample) 선정 : 모집단(Population) 정의 → 표본 추출 방법(random, stratified, convenience)<br>
+(3) 데이터 수집 방법 : 1차 데이터(실험, 설문, 관찰), 2차 데이터(기존 데이터셋, 공공 데이터, 기업 자료)<br>
+(4) 분석 방법 선택 : 통계 분석 (회귀, 분산분석), 머신러닝(분류, 예측), 내용분석(정성적)<br>
+
+<br>
+
+## 4.3 연구 타당성과 신뢰성 확보
+(1) 내적 타당성 (Internal Validity) : 연구 결과가 독립변수의 영향 때문임을 보장하는 정도 → 통제 집단 사용, 혼란변수 제거<br>
+(2) 외적 타당성 (External Validity) : 결과를 다른 상황/집단에 일반화할 수 있는 정도 → 다양한 표본, 현실성 있는 상황 설계<br>
+(3) 신뢰성 (Reliability) : 동일 조건에서 반복 연구 시 같은 결과 도출 가능성 → 측정 도구의 일관성 확보, 반복 검증<br>
+
+<br>
+
+---
+
+# 5. 연구 데이터
+
+<br>
+
+## 5.1 데이터의 유형
+(1) 정성적 데이터(Qualitative): 텍스트, 인터뷰, 관찰 기록<br>
+(2) 정량적 데이터(Quantitative): 숫자, 계량화된 측정값<br>
+(3) 구조화 데이터: DB, 엑셀, 센서 값<br>
+(4) 비구조화 데이터: 텍스트, 이미지, 로그 데이터, SNS 글<br>
+
+<br>
+
+## 5.2 데이터의 출처
+(1) 1차 데이터(Primary Data): 연구자가 직접 수집 (실험, 설문, 인터뷰 등)<br>
+(2) 2차 데이터(Secondary Data): 기존 데이터 활용 (공공 데이터, 통계청, Kaggle, UCI 등)<br>
+(3) 빅데이터/오픈데이터: API, 로그 데이터, 금융·의료·산업 데이터셋<br>
+
+<br>
+
+## 5.3 데이터의 수집
+(1) 표본 추출: 단순무작위, 층화추출, 편의추출<br>
+(2) 데이터 규모와 품질 고려<br>
+
+<br>
+
+## 5.4 데이터의 전처리
+(1) 결측치 처리: 삭제, 평균 대체, 다중 대체법(Multiple Imputation)<br>
+(2) 이상치(outlier) 탐지: 통계적 방법, 머신러닝 기반 방법<br>
+(3) 정규화/표준화: 변수 스케일 맞추기 (z-score, min-max scaling)<br>
+(4) 변수 변환: 로그 변환, 더미 변수 생성<br>
+(5) 레이블링/인코딩: 범주형 → 수치형 (Label Encoding, One-Hot Encoding)<br>
+(6) 정규화: 데이터 스케일을 통일하여 모델 학습 효율 증대<br>
+(7) 데이터 증강 (Data Augmentation): 이미지 회전, 뒤집기 등으로 데이터 다양성을 확보하여 모델 일반화 능력 향상<br>
+
+<br>
+
+## 5.5 데이터의 분석방법론
+(1) 통계적 기법<br>
+기초 통계: 기술통계, 상관관계 분석<br>
+추론 통계: 회귀분석, 분산분석(ANOVA), 요인분석<br>
+가설 검정: t-test, 카이제곱 검정, z-test<br>
+(2) 머신러닝/AI 기법<br>
+지도학습: 회귀(Linear/Logistic), 분류(SVM, Random Forest, Neural Network)<br>
+비지도학습: 군집분석(K-means, Hierarchical Clustering), 차원 축소(PCA)<br>
+딥러닝 응용: 이미지·텍스트 분석 (CNN, RNN, Transformer)<br>
+(3) 연구 설계와의 연계<br>
+연구 질문이 “인과관계 검증” → 통계적 기법(회귀분석, 실험 디자인)<br>
+연구 질문이 “예측” → 머신러닝 기법(랜덤포레스트, XGBoost, 신경망)<br>
+연구 질문이 “패턴 탐색” → 비지도학습 기법(클러스터링, 연관규칙 분석)<br>
+
+<br>
+
+## 5.6 데이터 사례
+(1) 금융 데이터 연구<br>
+연구질문: “소비자 심리지수가 주가에 영향을 미치는가?”<br>
+데이터: 한국은행 CSI 지수 + 코스피 주가<br>
+방법론: 다중회귀분석, 시계열 예측(ARIMA vs LSTM)<br>
+(2) 정보보안 연구<br>
+연구질문: “정보취약점 관리 수준은 보안사고 발생 가능성에 영향을 미치는가?”<br>
+데이터: 기업 보안 로그, 침해사고 통계<br>
+방법론: 로지스틱 회귀, 랜덤포레스트<br>
+
+<br>
+
+---
+
+# 6. 연구 결과 분석과 해석
+
+<br>
+
+## 6.1 연구 결과 제시
+(1) 데이터 시각화<br>
+표(Table): 숫자·비교 강조<br>
+그래프(Figure): 추세·관계 강조 (막대그래프, 선그래프, 산점도, 히트맵 등)<br>
+통계 검정 결과: 회귀분석 계수, 유의확률(p-value), 설명력(R²)<br>
+(2) 핵심 지표 제시<br>
+정확도(Accuracy), 정밀도(Precision), 재현율(Recall), F1 Score (ML 연구)<br>
+회귀분석 결과: β 계수, 신뢰구간, p-value<br>
+시계열 연구: 예측 오차(MAPE, RMSE)<br>
+
+<br>
+
+## 6.2 결과분석 및 의미도출
+(1) 연구 질문/가설과의 연결<br>
+단순히 “수치 결과”를 제시하는 게 아니라 → “이 결과가 연구 질문에 어떤 답을 주는가?” 연결<br>
+예: “소비자 심리지수 계수가 양(+)이고 통계적으로 유의 → 가설 H1 지지 → 심리지수가 주가 상승에 기여”<br>
+(2) 이론적 의미<br>
+기존 이론과 비교 (일치/불일치 여부 확인)<br>
+새로운 이론적 기여 제시 가능성<br>
+(3) 실무적 의미<br>
+정책, 기업 전략, 사회적 시사점 제시<br>
+예: 보안 연구라면 “정보취약점 관리 체계 강화가 실제 사고 예방으로 이어진다”라는 실무적 제언 가능<br>
+
+<br>
+
+## 6.3 해석
+(1) 가설이 지지되면 → 연구질문에 대한 답을 제시 → 연구문제 해결에 기여<br>
+(2) 가설이 기각되면 → 새로운 연구문제/질문 도출의 출발점<br>
+
+<br>
+
+## 6.4 해석시 유의사항
+(1) 통계적 유의성과 실제적 중요성 구분 : p < 0.05라 해도 효과 크기가 작으면 실제 의미는 제한적<br>
+(2) 과잉 해석 금지 : 상관관계 ≠ 인과관계, 데이터 범위/표본 제한 고려 필요<br>
+(3) 한계점 인식 : 표본 크기, 데이터 품질, 방법론적 제약을 솔직하게 인정<br>
+(4) 후속 연구 제안 : 연구의 한계에서 새로운 연구 문제 제시 가능<br>
+
+<br>
+
+---
+
+# 7. 연구 보고 및 논문 작성
+
+<br>
+
+## 7.1 논문 표준 구조 (IMRaD)
+(1) I (Introduction): 연구문제·연구질문 제시, 연구 필요성 설명<br>
+(2) M (Method): 연구 설계, 데이터, 분석 방법론 상세 기술<br>
+(3) R (Results): 핵심 결과 제시 (표·그래프, 검증 지표 포함)<br>
+(4) D (Discussion): 결과 해석, 기존 연구와의 비교, 한계 및 시사점<br>
+
+<br>
+
+## 7.2 작성 원칙
+(1) 명확성: 간결하고 일관된 용어 사용<br>
+(2) 논리성: 문제 → 질문 → 가설 → 결과 → 해석이 자연스럽게 이어져야 함<br>
+(3) 객관성: 결과는 사실로, 해석은 근거 기반으로 작성<br>
+(4) 가독성: 소제목, 표/그림, 번호 매김 활용<br>
+
+<br>
+
+## 7.3 인용, 참고문헌
+(1) 인용 방식<br>
+APA 스타일: (홍길동, 2023)<br>
+IEEE 스타일: [1], [2] 번호 기반<br>
+(2) 참고문헌 관리 도구<br>
+EndNote, Mendeley, Zotero → 논문 작성 시 자동 인용/참고문헌 생성<br>
+
+
+
+
+
 
 	
