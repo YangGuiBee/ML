@@ -415,6 +415,7 @@ validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한
 	
 	from sklearn import datasets
 	import matplotlib.pyplot as plt
+ 	import pandas as pd   # pandas 임포트 누락된 부분 추가
 
  	#Iris 데이터셋 로드
 	iris = datasets.load_iris()
@@ -423,7 +424,9 @@ validation set으로 사용할 모델이 결정 된 후, 마지막으로 딱 한
 	df = pd.DataFrame(iris.data, columns=iris.feature_names)
 	df["target"] = iris.target
 	df["class"] = pd.Categorical.from_codes(iris.target, iris.target_names)
- 	display_dataframe_to_user("Iris Dataset (table)", df) 
+ 	#display_dataframe_to_user("Iris Dataset (table)", df) 
+	display(df)   # Jupyter 환경이라면 display(), 일반 Python이라면 print(df)
+
 
 	#서브플롯 생성
 	fig, ax = plt.subplots()
