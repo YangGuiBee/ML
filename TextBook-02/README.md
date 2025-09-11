@@ -569,7 +569,7 @@ Scikit-learn 모델 선정절차(확대가능 map) : https://scikit-learn.org/st
 <br>
 
 ![](./images/map.png)
-
+<br>https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/map.xlsx<br>
 
 <br>
 
