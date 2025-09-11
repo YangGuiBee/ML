@@ -179,6 +179,10 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
 	items = ['TV','냉장고','컴퓨터', '컴퓨터','냉장고','에어컨', 'TV']	# 상품 분류(카테고리형 데이터)
 	prices = [1200000, 3500000, 700000, 1200000, 2300000, 1500000, 300000] # 각 상품에 대응하는 가격 데이터
 
+	# 1단계: Label Encoding
+	le = LabelEncoder()
+	labels = le.fit_transform(items)                    # 문자열 카테고리를 숫자로 변환
+
 	# 2단계: One-Hot Encoding (버전에 따라 다름)
 	try:
     	ohe = OneHotEncoder(sparse=False)			# 구버전 sklearn(≤1.1)에서는 sparse=False 사용
@@ -205,7 +209,7 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
  	[0. 1. 0. 0.]
  	[0. 0. 1. 0.]
  	[1. 0. 0. 0.]]
-	
+
 	최종 데이터프레임:
      	TV  냉장고  에어컨  컴퓨터       가격
 	0  1.0  0.0  0.0  0.0  1200000
