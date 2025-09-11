@@ -156,13 +156,15 @@ Wine Classification(Red & White wine Dataset) https://www.kaggle.com/numberswith
   
  	print("고유 클래스:", le.classes_)                    # LabelEncoder가 학습한 실제 클래스 이름(고유값 리스트) 출력	
  	print("인코딩 결과:", le.transform(items))            # 학습된 클래스 기준으로 각 항목을 정수 인덱스로 변환 출력
-  	print("역변환:",      le.inverse_transform([2,0,1,1,0,3,2]))
-
+  	#print("역변환:",      le.inverse_transform([2,0,1,1,0,3,2]))
+	print("역변환:",      le.inverse_transform([0,1,3,3,1,2,0]))
+ 
 (실행결과)
 
 	고유 클래스: ['TV' '냉장고' '에어컨' '컴퓨터']
 	인코딩 결과: [0 1 3 3 1 2 0]
-	역변환: ['에어컨' 'TV' '냉장고' '냉장고' 'TV' '컴퓨터' '에어컨']
+	#역변환: ['에어컨' 'TV' '냉장고' '냉장고' 'TV' '컴퓨터' '에어컨']
+	역변환: ['TV' '냉장고' '컴퓨터' '컴퓨터' '냉장고' '에어컨' 'TV']
 
 
 **sklearn.preprocessing.OneHotEncoder**
