@@ -180,6 +180,11 @@
 이 범위 내의 최소값~최대값 표시<br>
 (3) 동그라미(Outlier): 수염 밖에 있는 값 (극단치)<br>
 <br>
+
+![](./images/5_table.jpg)
+
+<br>
+
 ![](./images/05_BoxPlot.png)
 
 ▣ 소스코드(Matplotlib)<br>
