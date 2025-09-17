@@ -44,7 +44,7 @@
 	import seaborn as sns
 
 	# GitHub의 CSV 파일을 불러오기
-	titanic_df = pd.read_csv('https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-09/titanic_train.csv')
+	titanic_df = pd.read_csv('https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-04/titanic_train.csv')
  	# (CSV 불러오기 다른방법) GitHub의 CSV 파일을 나의 구글코랩에 불러와서 실행하는 경우는 다음과 같이 불러온후 소스작성
 	# from google.colab import files
 	# uploaded = files.upload()
