@@ -310,6 +310,7 @@ AI가 단순한 자동화의 범위를 넘어, 스스로 계획을 세우고, �
 (출처) SAS(https://www.sas.com/ko_kr/insights/analytics/what-is-artificial-intelligence.html)
 <br>
 
+<br><br>
 
 **2022~2025 (대화형 AI)** 기본적인 대화형 작업 수행<br>
 **2025~2028 (추론 AI)** 박사수준의 문제해결 수행<br>
