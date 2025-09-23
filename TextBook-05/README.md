@@ -1,4 +1,4 @@
-#  10 : 비지도 학습(Unsupervised Learning, UL) : 군집화
+#  05 : 비지도 학습(Unsupervised Learning, UL) : 군집화
 
 ---
 
