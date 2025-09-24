@@ -44,6 +44,8 @@
 
 ---  
 
+![](./images/6Cluster.jpg)
+
 https://scikit-learn.org/stable/unsupervised_learning.html
 <br>
 
