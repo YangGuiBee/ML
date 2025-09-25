@@ -140,6 +140,23 @@ https://scikit-learn.org/stable/unsupervised_learning.html
 	plt.show()  # 그래프 출력
 
  ![](./images/elbow.PNG)
+<br>
+
+x축: 클러스터 개수 𝑘<br>
+y축: WCSS (Within-Cluster Sum of Squares, 군집 내 제곱합) : 각 점이 속한 군집 중심까지의 제곱 거리의 합 = 군집 응집도 척도<br>
+<br>
+군집 수 𝑘를 늘리면, 각 군집이 더 세분화되므로 WCSS는 작아짐<br>
+(더 많은 클러스터 → 점들이 자기 중심과 가까워짐 → 응집도 증가 → 오차 감소)<br>
+<br>
+k=1→2: WCSS가 급격히 감소 (700 → 150 근처)<br>
+k=2→3: 또 크게 감소 (150 → 80 근처)<br>
+k=3→4: 여전히 눈에 띄게 감소 (80 → 60 근처)<br>
+k≥4: 감소 폭이 점점 작아져 “완만한 곡선”으로 변함<br>
+즉, 3~4 근처에서 급격한 감소가 멈추고 곡선이 완만해짐<br>
+
+이 데이터셋에서는 적절한 클러스터 수 k는 3 또는 4 정도로 판단<br>
+이후 k를 더 늘려도 WCSS 감소는 있지만, 얻는 이득이 크지 않음 → 과적합 위험 + 해석 복잡<br>
+ 
 
 	import numpy as np
 	import matplotlib.pyplot as plt
