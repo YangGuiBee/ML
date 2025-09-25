@@ -37,6 +37,8 @@
 
 <br>
 
+![](./images/MvsS.png)
+
 ▣ 소스코드(공통 준비)<br>
 
 	import pandas as pd	
