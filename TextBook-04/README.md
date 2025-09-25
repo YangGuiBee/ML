@@ -48,6 +48,12 @@
 
 <br>
 
+▣  Matplotlib만으로도 가능하지만 Seaborn을 쓰는 이유<br>
+예쁜 기본 스타일<br>
+EDA(탐색적 데이터 분석) 효율(통계 기능 내장 → 코드 간결성, Pandas DataFrame 친화적 → 코드 가독성)<br>
+
+<br>
+
 ▣  Seaborn이 강한 부분<br>
 분포 확인: histplot, kdeplot, distplot<br>
 범주형 비교: boxplot, violinplot, barplot, countplot<br>
