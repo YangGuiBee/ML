@@ -38,6 +38,15 @@
 <br>
 
 ![](./images/MvsS.png)
+<br>
+▣  Seaborn에서 직접 지원하지 않는 그래프 (Matplotlib 필요)
+파이 차트 (pie chart)
+3D 그래프 (3D surface, wireframe, contour 등)
+극좌표 플롯 (polar plot, radar chart 등)
+애니메이션 그래프 (FuncAnimation 같은 동적 시각화)
+아주 특수한 커스터마이즈 (세밀한 눈금 조정, 축 위치 변경, 복잡한 주석 등)
+
+<br>
 
 ▣ 소스코드(공통 준비)<br>
 
