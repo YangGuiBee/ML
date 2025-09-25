@@ -38,13 +38,21 @@
 <br>
 
 ![](./images/MvsS.png)
-<br>
+<br><br>
 ▣  Seaborn에서 직접 지원하지 않는 그래프 (Matplotlib 필요)<br>
 파이 차트 (pie chart)<br>
 3D 그래프 (3D surface, wireframe, contour 등)<br>
 극좌표 플롯 (polar plot, radar chart 등)<br>
 애니메이션 그래프 (FuncAnimation 같은 동적 시각화)<br>
 아주 특수한 커스터마이즈 (세밀한 눈금 조정, 축 위치 변경, 복잡한 주석 등)<br>
+
+<br>
+
+▣  Seaborn이 강한 부분<br>
+분포 확인: histplot, kdeplot, distplot<br>
+범주형 비교: boxplot, violinplot, barplot, countplot<br>
+상관관계: heatmap, pairplot, jointplot, scatterplot<br>
+회귀 분석: lmplot, regplot<br>
 
 <br>
 
