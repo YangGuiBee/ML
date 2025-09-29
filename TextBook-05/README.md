@@ -364,6 +364,98 @@ k=7 이상부터 0.95 이상의 매우 높은 정확도를 보임. k=8,9,10도 �
 ![](./images/1-2.PNG)
 <br>
 
+# PAM(Partitioning Around Medoids)
+▣ 정의: K-medoids 접근법을 구현하는 탐욕적 알고리즘으로 각 군집에서 가장 최적의 Medoid를 반복적으로 찾는다<br>
+▣ 필요성: 이상치가 많은 데이터셋에서도 안정적인 군집화를 수행할 수 있음<br>
+▣ 장점: K-means에 비해 이상치에 덜 민감하며 다양한 거리 측정 방법을 사용할 수 있음<br>
+▣ 단점: 대규모 데이터에서 계산 비용이 높고 군집 수(K)를 사전에 지정해야 함<br>
+▣ 응용분야: 범주형 데이터를 포함한 고객 세분화, 의료 데이터 분석<br>
+▣ 모델식: PAM은 각 군집의 중심으로 가장 대표적인 medoid를 선택하여 군집 내 비유사도를 최소화<br>
+
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.metrics import silhouette_score, accuracy_score
+	from scipy.spatial.distance import cdist
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	from scipy.stats import mode
+	
+	class PAM:
+	    def __init__(self, n_clusters=3, max_iter=300, random_state=None):
+	        self.n_clusters = n_clusters
+	        self.max_iter = max_iter
+	        self.random_state = random_state
+	
+	    def fit_predict(self, X):
+	        if self.random_state:
+	            np.random.seed(self.random_state)
+	        
+	        # 1. 초기 메도이드 선택 (랜덤 샘플링)
+	        medoids = np.random.choice(len(X), self.n_clusters, replace=False)
+	        
+	        for _ in range(self.max_iter):
+	            # 각 포인트와 모든 메도이드 간 거리 계산
+	            distances = cdist(X, X[medoids], metric='euclidean')
+	            labels = np.argmin(distances, axis=1)
+	            
+	            # 새로운 메도이드 계산
+	            new_medoids = np.copy(medoids)
+	            for i in range(self.n_clusters):
+	                # 현재 군집에 속한 데이터 포인트의 인덱스 추출
+	                cluster_points = np.where(labels == i)[0]
+	                
+	                # 군집 내 데이터 포인트 간 거리의 총합이 최소가 되는 포인트를 메도이드로 설정
+	                intra_cluster_distances = cdist(X[cluster_points], X[cluster_points], metric='euclidean').sum(axis=1)
+	                new_medoids[i] = cluster_points[np.argmin(intra_cluster_distances)]
+	            
+	            # 메도이드가 변화가 없으면 종료
+	            if np.array_equal(medoids, new_medoids):
+	                break
+	            medoids = new_medoids
+	        
+	        self.labels_ = labels
+	        self.medoids_ = medoids
+	        return self.labels_
+	
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = pd.DataFrame(iris.data, columns=iris.feature_names)
+	true_labels = iris.target
+	
+	# PAM 알고리즘 적용 (군집 수: 3)
+	pam = PAM(n_clusters=3, random_state=0)
+	clusters = pam.fit_predict(iris.data)  # 데이터에 맞춰 군집화 수행
+	
+	# 군집화 결과를 데이터프레임에 추가
+	data['Cluster'] = clusters  # 각 데이터 포인트의 군집 레이블 추가
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(iris.data, clusters)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(clusters)
+	for i in np.unique(clusters):
+	    mask = (clusters == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=data.iloc[:, 0], y=data.iloc[:, 1], hue='Cluster', data=data, palette='viridis', s=100)
+	plt.scatter(iris.data[pam.medoids_, 0], iris.data[pam.medoids_, 1], c='red', marker='X', s=200, label='Medoids')
+	plt.title("PAM (Partitioning Around Medoids) Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
+	
+![](./images/1-4.PNG)
+<br>
+
 # [1-3] K-modes
 ▣ 정의: 범주형 데이터를 클러스터링하기 위해 설계된 알고리즘으로, 각 군집의 중심은 최빈값(mode)으로 결정<br>
 ▣ 필요성: 범주형 데이터를 군집화하는 데 유용하며, 일반적인 K-means와는 다른 접근 방식이 필요<br>
@@ -456,99 +548,8 @@ k=7 이상부터 0.95 이상의 매우 높은 정확도를 보임. k=8,9,10도 �
 ![](./images/1-3.PNG)
 <br>
 
-# [1-4] PAM(Partitioning Around Medoids)
-▣ 정의: K-medoids 접근법을 구현하는 탐욕적 알고리즘으로 각 군집에서 가장 최적의 Medoid를 반복적으로 찾는다<br>
-▣ 필요성: 이상치가 많은 데이터셋에서도 안정적인 군집화를 수행할 수 있음<br>
-▣ 장점: K-means에 비해 이상치에 덜 민감하며 다양한 거리 측정 방법을 사용할 수 있음<br>
-▣ 단점: 대규모 데이터에서 계산 비용이 높고 군집 수(K)를 사전에 지정해야 함<br>
-▣ 응용분야: 범주형 데이터를 포함한 고객 세분화, 의료 데이터 분석<br>
-▣ 모델식: PAM은 각 군집의 중심으로 가장 대표적인 medoid를 선택하여 군집 내 비유사도를 최소화<br>
 
-	import numpy as np
-	from sklearn.datasets import load_iris
-	from sklearn.metrics import silhouette_score, accuracy_score
-	from scipy.spatial.distance import cdist
-	import pandas as pd
-	import matplotlib.pyplot as plt
-	import seaborn as sns
-	from scipy.stats import mode
-	
-	class PAM:
-	    def __init__(self, n_clusters=3, max_iter=300, random_state=None):
-	        self.n_clusters = n_clusters
-	        self.max_iter = max_iter
-	        self.random_state = random_state
-	
-	    def fit_predict(self, X):
-	        if self.random_state:
-	            np.random.seed(self.random_state)
-	        
-	        # 1. 초기 메도이드 선택 (랜덤 샘플링)
-	        medoids = np.random.choice(len(X), self.n_clusters, replace=False)
-	        
-	        for _ in range(self.max_iter):
-	            # 각 포인트와 모든 메도이드 간 거리 계산
-	            distances = cdist(X, X[medoids], metric='euclidean')
-	            labels = np.argmin(distances, axis=1)
-	            
-	            # 새로운 메도이드 계산
-	            new_medoids = np.copy(medoids)
-	            for i in range(self.n_clusters):
-	                # 현재 군집에 속한 데이터 포인트의 인덱스 추출
-	                cluster_points = np.where(labels == i)[0]
-	                
-	                # 군집 내 데이터 포인트 간 거리의 총합이 최소가 되는 포인트를 메도이드로 설정
-	                intra_cluster_distances = cdist(X[cluster_points], X[cluster_points], metric='euclidean').sum(axis=1)
-	                new_medoids[i] = cluster_points[np.argmin(intra_cluster_distances)]
-	            
-	            # 메도이드가 변화가 없으면 종료
-	            if np.array_equal(medoids, new_medoids):
-	                break
-	            medoids = new_medoids
-	        
-	        self.labels_ = labels
-	        self.medoids_ = medoids
-	        return self.labels_
-	
-	# Iris 데이터셋 로드
-	iris = load_iris()
-	data = pd.DataFrame(iris.data, columns=iris.feature_names)
-	true_labels = iris.target
-	
-	# PAM 알고리즘 적용 (군집 수: 3)
-	pam = PAM(n_clusters=3, random_state=0)
-	clusters = pam.fit_predict(iris.data)  # 데이터에 맞춰 군집화 수행
-	
-	# 군집화 결과를 데이터프레임에 추가
-	data['Cluster'] = clusters  # 각 데이터 포인트의 군집 레이블 추가
-	
-	# Silhouette Score 계산
-	silhouette_avg = silhouette_score(iris.data, clusters)
-	print(f"Silhouette Score: {silhouette_avg:.3f}")
-	
-	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
-	mapped_labels = np.zeros_like(clusters)
-	for i in np.unique(clusters):
-	    mask = (clusters == i)
-	    mapped_labels[mask] = mode(true_labels[mask])[0]
-	
-	accuracy = accuracy_score(true_labels, mapped_labels)
-	print(f"Accuracy: {accuracy:.3f}")
-	
-	# 시각화 (첫 번째와 두 번째 피처 사용)
-	plt.figure(figsize=(10, 5))
-	sns.scatterplot(x=data.iloc[:, 0], y=data.iloc[:, 1], hue='Cluster', data=data, palette='viridis', s=100)
-	plt.scatter(iris.data[pam.medoids_, 0], iris.data[pam.medoids_, 1], c='red', marker='X', s=200, label='Medoids')
-	plt.title("PAM (Partitioning Around Medoids) Clustering on Iris Dataset")
-	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
-	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
-	plt.legend(title='Cluster')
-	plt.show()
-	
-![](./images/1-4.PNG)
-<br>
-
-# [1-5] CLARANS(Clustering Large Applications based on RANdomized Search)
+# [1-4] CLARANS(Clustering Large Applications based on RANdomized Search)
 ▣ 정의: PAM(PAM과 K-medoids)의 확장판으로, 대규모 데이터셋에 효율적인 군집화를 제공하기 위해 랜덤화된 탐색 방식을 사용하는 알고리즘. PAM의 전체 데이터셋 탐색 방식 대신 샘플링과 랜덤 선택을 통해 최적의 medoid를 찾는다<br>
 ▣ 필요성: PAM의 느린 성능을 보완하여 대규모 데이터에서도 빠르게 클러스터링을 수행할 수 있도록 설계<br>
 ▣ 장점: 대규모 데이터셋에 적용할 수 있으며, PAM보다 훨씬 효율적이며, 랜덤 탐색 방식을 통해 최적의 medoid를 빠르게 검색<br>
@@ -657,7 +658,7 @@ k=7 이상부터 0.95 이상의 매우 높은 정확도를 보임. k=8,9,10도 �
 ![](./images/1-5.PNG)
 <br>
 
-# [1-6] CLARA(Clustering LARge Applications)
+# CLARA(Clustering LARge Applications)
 ▣ 정의: PAM을 대규모 데이터에 적용할 수 있도록 확장한 알고리즘으로, 데이터의 일부 샘플을 사용하여 군집화를 수행하는 데, 여러 번의 샘플링을 통해 가장 안정적인 medoid를 선택<br>
 ▣ 필요성: PAM의 높은 계산 비용을 줄이고자 개발되어 대규모 데이터셋에서도 빠르게 군집화를 수행<br>
 ▣ 장점: PAM보다 계산이 효율적이며, 대규모 데이터셋에 적합하며, 표본 기반 접근 방식을 통해 메모리와 시간 효율적<br>
@@ -767,7 +768,7 @@ k=7 이상부터 0.95 이상의 매우 높은 정확도를 보임. k=8,9,10도 �
 ![](./images/1-6.PNG)
 <br>
 
-# [1-7] FCM(Fuzzy C-means) 
+# [1-5] FCM(Fuzzy C-means) 
 ▣ 정의: 소프트 군집화 방법으로 각 데이터 포인트가 여러 군집에 속할 수 있으며, 군집 소속 확률을 계산하여 군집을 형성. 데이터가 명확하게 구분되지 않을 때 유용<br>
 ▣ 필요성: 데이터가 명확히 구분되지 않는 경우, 각 데이터가 여러 군집에 소속될 수 있도록 허용하여 더욱 유연한 군집화를 제공<br>
 ▣ 장점: 데이터를 여러 군집에 걸쳐 소속시킬 수 있어 유연한 군집화가 가능하며 군집 경계가 모호한 데이터에 적합<br>
