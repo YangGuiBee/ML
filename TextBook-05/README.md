@@ -207,6 +207,33 @@ k≥4: 감소 폭이 점점 작아져 “완만한 곡선”으로 변함<br>
 
 ![](./images/elbow3.PNG)
 
+<br>
+**주어진 결과**<br>
+n_clusters = 2<br>
+Silhouette score = 0.681 (상당히 높음 → 군집 응집도와 분리도가 좋음)<br>
+Accuracy = 0.667 (실제 라벨과의 일치율은 상대적으로 낮음)<br>
+<br>
+n_clusters = 3<br>
+Silhouette score = 0.551 (2개일 때보다 낮음 → 군집 품질이 조금 떨어짐)<br>
+Accuracy = 0.887 (실제 라벨과의 일치율이 매우 높음)<br>
+<br>
+**해석**<br>
+Silhouette score 기준<br>
+0.681 → “꽤 잘 분리된 군집”<br>
+0.551 → “군집 품질이 나쁘진 않지만, 응집/분리도가 다소 떨어짐”<br>
+→ 내부 평가(internal validation) 기준으로는 2개가 더 적합.<br>
+<br>
+Accuracy 기준<br>
+0.667 (라벨과 2/3 정도 맞음)<br>
+0.887 (거의 90% 가까이 맞음)<br>
+→ 외부 평가(external validation, 즉 ground truth 라벨 기준)로는 3개가 더 적합.<br>
+<br>
+**결론**<br>
+만약 라벨(정답)이 주어진 상황이라면 → Accuracy가 더 중요하므로 군집 수 = 3이 더 적합.<br>
+만약 라벨이 없는 순수 비지도 학습 상황이라면 → 내부 품질 지표(Silhouette)를 따라야 하므로 군집 수 = 2가 더 자연스러움.<br>
+즉, 지도학습적 평가(Accuracy)를 참고한다면 3개, 순수 클러스터링 품질만 본다면 2개<br>
+<br>
+
 **▣ Silhouette :** 각 군집 간의 거리가 얼마나 효율적으로 분리되어 응집력있게 군집화되었는지를 평가하는 지표. 각 데이터 포인트에 대해 실루엣 계수(Silhouette Coefficient)를 계산하며, 이 값은 데이터 포인트가 자신의 군집에 얼마나 잘 속해 있는지를 나타냄<br>
 
 	import matplotlib.pyplot as plt
