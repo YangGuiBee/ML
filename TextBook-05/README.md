@@ -1593,7 +1593,7 @@ k=7 이상부터 0.95 이상의 매우 높은 정확도를 보임. k=8,9,10도 �
 <br>
 -->
 
-# [3-4] DENCLUE(DENsity-based CLUstEring)
+# [3-3] DENCLUE(DENsity-based CLUstEring)
 ▣ 정의: 확률 밀도 함수를 기반으로 데이터의 밀도 분포를 모델링하여 군집을 형성하는 밀도 기반 클러스터링 알고리즘으로 핵심 아이디어는 데이터 포인트가 모여서 형성하는 밀도 함수에서 밀도가 높은 영역을 군집으로 형성하는 것<br>
 ▣ 필요성: 데이터의 밀도 구조를 기반으로 군집화하고, 노이즈나 이상치를 효과적으로 구분할 필요가 있을 때 유용<br>
 ▣ 장점: 명확하게 정의된 군집을 생성하고, 밀도가 낮은 지역을 노이즈로 구분할 수 있으며, 데이터 분포에 따라 다양한 밀도의 군집을 잘 탐지할 수 있음<br>
@@ -1670,7 +1670,7 @@ k=7 이상부터 0.95 이상의 매우 높은 정확도를 보임. k=8,9,10도 �
 ![](./images/3-4.PNG)
 <br>
 
-# [3-5] Mean-Shift Clustering
+# [3-4] Mean-Shift Clustering
 ▣ 정의 : 데이터의 밀도가 높은 방향으로 이동하며 군집의 중심을 찾는 비모수 군집화 방법<br>
 ▣ 필요성 : 군집의 개수를 사전 설정할 필요 없이 자연스러운 군집을 찾을 때 유용<br>
 ▣ 장점 : 군집 개수 사전 설정 불필요하며, 비선형적 분포에도 적합<br>
@@ -2094,7 +2094,63 @@ k=7 이상부터 0.95 이상의 매우 높은 정확도를 보임. k=8,9,10도 �
 
 ---
 
-# [5-1] EM(Expectation-Maximization)
+# [5-1] GMM(Gaussian Mixture Model)
+▣ 정의 : 여러 가우시안 분포(Gaussian Distribution)를 사용해 데이터를 모델링하고, 각 데이터 포인트가 각 분포에 속할 확률을 계산하는 군집화 방법<br>
+▣ 필요성 : 복잡한 데이터 분포를 유연하게 모델링하여 군집 경계를 확률적으로 표현할 수 있음<br>
+▣ 장점 : 데이터가 여러 분포를 따를 때 적합하며, 군집 간의 경계가 확률적으로 처리<br>
+▣ 단점 : 초기화에 민감하고 계산 비용이 높음<br>
+▣ 응용분야 : 패턴 인식, 이미지 세분화<br>
+▣ 모델식 : $π_k$는 가우시안의 가중치, $𝜇_𝑘$, $Σ_𝑘$는 각각 평균과 공분산<br>
+![](./images/GMM.PNG)
+
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.mixture import GaussianMixture
+	from sklearn.metrics import silhouette_score, accuracy_score
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	import pandas as pd
+	from scipy.stats import mode
+	
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = iris.data
+	true_labels = iris.target
+	
+	# GMM 모델 설정 및 학습
+	gmm = GaussianMixture(n_components=3, covariance_type='full', random_state=0)
+	predicted_labels = gmm.fit_predict(data)
+	
+	# 데이터프레임으로 변환하여 시각화 준비
+	df = pd.DataFrame(data, columns=iris.feature_names)
+	df['Cluster'] = predicted_labels
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(data, predicted_labels)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(predicted_labels)
+	for i in range(3):
+	    mask = (predicted_labels == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.title("Gaussian Mixture Model (GMM) Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
+
+![](./images/5-5.PNG)
+<br>
+
+# EM(Expectation-Maximization)
 ▣ 정의: 데이터가 여러 개의 잠재 확률 분포(보통 가우시안)에서 생성되었다고 가정하여, 데이터를 여러 분포로 모델링하는 방법으로 각 데이터 포인트가 여러 군집에 속할 확률을 계산해 소프트 군집화를 제공<br>
 ▣ 필요성: 데이터가 다양한 확률 분포로 구성되어 있을 때, 군집의 경계를 유연하게 설정할 수 있어 더욱 정확한 군집화가 가능<br>
 ▣ 장점: 소프트 군집화가 가능하여 데이터가 여러 군집에 속할 확률을 제공하며 군집의 크기와 모양이 다른 경우에도 적합<br>
@@ -2209,7 +2265,7 @@ k=7 이상부터 0.95 이상의 매우 높은 정확도를 보임. k=8,9,10도 �
 ![](./images/5-2.PNG)
 <br>
 
-# [5-3] CLASSIT
+# CLASSIT
 ▣ 정의: COBWEB을 확장하여 수치형 데이터를 지원하는 계층적 군집화 알고리즘으로 점진적으로 데이터를 군집화하여 계층적인 구조를 형성<br>
 ▣ 필요성: 데이터의 속성이 주기적으로 업데이트되는 환경에서 실시간 군집화를 수행<br>
 ▣ 장점: 수치형 데이터와 범주형 데이터 모두 처리할 수 있으며 점진적 학습이 가능하여 실시간 데이터에 적합<br>
@@ -2264,7 +2320,7 @@ k=7 이상부터 0.95 이상의 매우 높은 정확도를 보임. k=8,9,10도 �
 ![](./images/5-3.PNG)
 <br>
 
-# [5-4] SOMs(Self-Organizing Maps)
+# [5-3] SOMs(Self-Organizing Maps)
 ▣ 정의: 고차원 데이터를 저차원(주로 2D) 공간에 매핑하여 시각화하는 신경망 기반의 군집화 알고리즘으로 입력 데이터 간의 관계를 보존하며, 비지도 학습으로 데이터의 구조를 학습<br>
 ▣ 필요성: 고차원 데이터의 시각화가 필요할 때 유용하며, 데이터의 분포 및 구조를 이해하는 데 사용<br>
 ▣ 장점: 고차원 데이터를 저차원으로 변환하여 시각화할 수 있으며 데이터의 구조를 보존하여 패턴을 인식하기에 유리<br>
@@ -2361,62 +2417,6 @@ k=7 이상부터 0.95 이상의 매우 높은 정확도를 보임. k=8,9,10도 �
 	plt.show()
 	
 ![](./images/5-4.PNG)
-<br>
-
-# [5-5] GMM(Gaussian Mixture Model)
-▣ 정의 : 여러 가우시안 분포(Gaussian Distribution)를 사용해 데이터를 모델링하고, 각 데이터 포인트가 각 분포에 속할 확률을 계산하는 군집화 방법<br>
-▣ 필요성 : 복잡한 데이터 분포를 유연하게 모델링하여 군집 경계를 확률적으로 표현할 수 있음<br>
-▣ 장점 : 데이터가 여러 분포를 따를 때 적합하며, 군집 간의 경계가 확률적으로 처리<br>
-▣ 단점 : 초기화에 민감하고 계산 비용이 높음<br>
-▣ 응용분야 : 패턴 인식, 이미지 세분화<br>
-▣ 모델식 : $π_k$는 가우시안의 가중치, $𝜇_𝑘$, $Σ_𝑘$는 각각 평균과 공분산<br>
-![](./images/GMM.PNG)
-
-	import numpy as np
-	from sklearn.datasets import load_iris
-	from sklearn.mixture import GaussianMixture
-	from sklearn.metrics import silhouette_score, accuracy_score
-	import matplotlib.pyplot as plt
-	import seaborn as sns
-	import pandas as pd
-	from scipy.stats import mode
-	
-	# Iris 데이터셋 로드
-	iris = load_iris()
-	data = iris.data
-	true_labels = iris.target
-	
-	# GMM 모델 설정 및 학습
-	gmm = GaussianMixture(n_components=3, covariance_type='full', random_state=0)
-	predicted_labels = gmm.fit_predict(data)
-	
-	# 데이터프레임으로 변환하여 시각화 준비
-	df = pd.DataFrame(data, columns=iris.feature_names)
-	df['Cluster'] = predicted_labels
-	
-	# Silhouette Score 계산
-	silhouette_avg = silhouette_score(data, predicted_labels)
-	print(f"Silhouette Score: {silhouette_avg:.3f}")
-	
-	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
-	mapped_labels = np.zeros_like(predicted_labels)
-	for i in range(3):
-	    mask = (predicted_labels == i)
-	    mapped_labels[mask] = mode(true_labels[mask])[0]
-	
-	accuracy = accuracy_score(true_labels, mapped_labels)
-	print(f"Accuracy: {accuracy:.3f}")
-	
-	# 시각화 (첫 번째와 두 번째 피처 사용)
-	plt.figure(figsize=(10, 5))
-	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
-	plt.title("Gaussian Mixture Model (GMM) Clustering on Iris Dataset")
-	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
-	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
-	plt.legend(title='Cluster')
-	plt.show()
-
-![](./images/5-5.PNG)
 <br>
 
 ---
