@@ -158,6 +158,74 @@ k≥4: 감소 폭이 점점 작아져 “완만한 곡선”으로 변함<br>
 이 데이터셋에서는 적절한 클러스터 수 k는 3 또는 4 정도로 판단<br>
 이후 k를 더 늘려도 WCSS 감소는 있지만, 얻는 이득이 크지 않음 → 과적합 위험 + 해석 복잡<br>
  
+<br>
+
+**▣ Silhouette :** 각 군집 간의 거리가 얼마나 효율적으로 분리되어 응집력있게 군집화되었는지를 평가하는 지표. 각 데이터 포인트에 대해 실루엣 계수(Silhouette Coefficient)를 계산하며, 이 값은 데이터 포인트가 자신의 군집에 얼마나 잘 속해 있는지를 나타냄<br>
+
+	import matplotlib.pyplot as plt
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.cluster import KMeans
+	from sklearn.metrics import silhouette_score, accuracy_score
+	from scipy.stats import mode
+
+	# 데이터 로드
+	iris = load_iris()
+	data = iris.data
+	true_labels = iris.target
+
+	# 실루엣 분석 및 정확도를 통한 최적의 군집 수 찾기
+	silhouette_scores = []
+	accuracies = []
+
+	for k in range(2, 11):  # 군집 수는 최소 2개 이상이어야 실루엣 점수를 계산할 수 있음
+		kmeans = KMeans(n_clusters=k, init='k-means++', random_state=42)
+		predicted_labels = kmeans.fit_predict(data)
+    
+    		# Silhouette Score 계산
+    		silhouette = silhouette_score(data, predicted_labels)
+    		silhouette_scores.append(silhouette)
+    
+    		# Accuracy 계산 (군집 레이블과 실제 레이블을 매핑하여 정확도 계산)
+    		mapped_labels = np.zeros_like(predicted_labels)
+    		for i in range(k):
+			mask = (predicted_labels == i)
+			mapped_labels[mask] = mode(true_labels[mask])[0]
+    
+    		accuracy = accuracy_score(true_labels, mapped_labels)
+    		accuracies.append(accuracy)
+
+	# 실루엣 점수 그래프 시각화
+	plt.figure(figsize=(12, 5))
+
+	plt.subplot(1, 2, 1)
+	plt.plot(range(2, 11), silhouette_scores, marker='o')
+	plt.title('Silhouette Analysis')
+	plt.xlabel('Number of clusters')
+	plt.ylabel('Silhouette Score')
+
+	# 정확도 그래프 시각화
+	plt.subplot(1, 2, 2)
+	plt.plot(range(2, 11), accuracies, marker='o', color='orange')
+	plt.title('Accuracy by Number of Clusters')
+	plt.xlabel('Number of clusters')
+	plt.ylabel('Accuracy')
+	plt.tight_layout()
+	plt.show()
+
+![](./images/silhouette.PNG)
+<br>
+
+Silhouette Score (내부 평가 지표)<br>
+k=2에서 약 0.68로 가장 높음 → 데이터 자체 분포만 보면 2개의 큰 군집으로 나누는 것이 가장 “자연스럽다”는 뜻. k가 늘어날수록 점수가 꾸준히 하락 → 군집 간 경계가 불분명해지고, 응집력도 떨어진다는 의미.<br>
+<br>
+Accuracy (외부 평가 지표, 라벨 존재 가정)<br>
+k=7 이상부터 0.95 이상의 매우 높은 정확도를 보임. k=8,9,10도 비슷한 정확도지만, 더 많은 클러스터는 해석 복잡성만 늘리고 큰 이득 없음.<br>
+<br>
+비지도 상황(라벨 모름): k=2 선택이 합리적.<br>
+라벨을 알고 성능을 맞추는 상황: k=7 선택이 타당.<br>
+<br>
+
 
 	import numpy as np
 	import matplotlib.pyplot as plt
@@ -235,71 +303,6 @@ Accuracy 기준<br>
 즉, 지도학습적 평가(Accuracy)를 참고한다면 3개, 순수 클러스터링 품질만 본다면 2개<br>
 <br>
 
-**▣ Silhouette :** 각 군집 간의 거리가 얼마나 효율적으로 분리되어 응집력있게 군집화되었는지를 평가하는 지표. 각 데이터 포인트에 대해 실루엣 계수(Silhouette Coefficient)를 계산하며, 이 값은 데이터 포인트가 자신의 군집에 얼마나 잘 속해 있는지를 나타냄<br>
-
-	import matplotlib.pyplot as plt
-	import numpy as np
-	from sklearn.datasets import load_iris
-	from sklearn.cluster import KMeans
-	from sklearn.metrics import silhouette_score, accuracy_score
-	from scipy.stats import mode
-
-	# 데이터 로드
-	iris = load_iris()
-	data = iris.data
-	true_labels = iris.target
-
-	# 실루엣 분석 및 정확도를 통한 최적의 군집 수 찾기
-	silhouette_scores = []
-	accuracies = []
-
-	for k in range(2, 11):  # 군집 수는 최소 2개 이상이어야 실루엣 점수를 계산할 수 있음
-		kmeans = KMeans(n_clusters=k, init='k-means++', random_state=42)
-		predicted_labels = kmeans.fit_predict(data)
-    
-    		# Silhouette Score 계산
-    		silhouette = silhouette_score(data, predicted_labels)
-    		silhouette_scores.append(silhouette)
-    
-    		# Accuracy 계산 (군집 레이블과 실제 레이블을 매핑하여 정확도 계산)
-    		mapped_labels = np.zeros_like(predicted_labels)
-    		for i in range(k):
-			mask = (predicted_labels == i)
-			mapped_labels[mask] = mode(true_labels[mask])[0]
-    
-    		accuracy = accuracy_score(true_labels, mapped_labels)
-    		accuracies.append(accuracy)
-
-	# 실루엣 점수 그래프 시각화
-	plt.figure(figsize=(12, 5))
-
-	plt.subplot(1, 2, 1)
-	plt.plot(range(2, 11), silhouette_scores, marker='o')
-	plt.title('Silhouette Analysis')
-	plt.xlabel('Number of clusters')
-	plt.ylabel('Silhouette Score')
-
-	# 정확도 그래프 시각화
-	plt.subplot(1, 2, 2)
-	plt.plot(range(2, 11), accuracies, marker='o', color='orange')
-	plt.title('Accuracy by Number of Clusters')
-	plt.xlabel('Number of clusters')
-	plt.ylabel('Accuracy')
-	plt.tight_layout()
-	plt.show()
-
-![](./images/silhouette.PNG)
-<br>
-
-Silhouette Score (내부 평가 지표)<br>
-k=2에서 약 0.68로 가장 높음 → 데이터 자체 분포만 보면 2개의 큰 군집으로 나누는 것이 가장 “자연스럽다”는 뜻. k가 늘어날수록 점수가 꾸준히 하락 → 군집 간 경계가 불분명해지고, 응집력도 떨어진다는 의미.<br>
-<br>
-Accuracy (외부 평가 지표, 라벨 존재 가정)<br>
-k=7 이상부터 0.95 이상의 매우 높은 정확도를 보임. k=8,9,10도 비슷한 정확도지만, 더 많은 클러스터는 해석 복잡성만 늘리고 큰 이득 없음.<br>
-<br>
-비지도 상황(라벨 모름): k=2 선택이 합리적.<br>
-라벨을 알고 성능을 맞추는 상황: k=7 선택이 타당.<br>
-<br>
 
 # [1-2] K-medoids
 ▣ 정의: K-means와 유사하지만, 각 군집의 중심을 군집내 가장 중앙에 위치한 실제 데이터 포인트(medoid)로 설정함으로써 이상치(outlier)에 더 강하다.<br>
