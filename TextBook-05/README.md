@@ -208,6 +208,7 @@ k≥4: 감소 폭이 점점 작아져 “완만한 곡선”으로 변함<br>
 ![](./images/elbow3.PNG)
 
 <br>
+
 **주어진 결과**<br>
 n_clusters = 2<br>
 Silhouette score = 0.681 (상당히 높음 → 군집 응집도와 분리도가 좋음)<br>
