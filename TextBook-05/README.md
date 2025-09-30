@@ -313,9 +313,11 @@ Accuracy 기준<br>
 ▣ 모델식: K-medoids는 각 군집의 중심으로 가장 대표적인 포인트(medoid)를 선택하여 군집 내 데이터와의 총 비유사도를 최소화<br>
 ![](./images/k-medoids.png)
 
+
 	import numpy as np
 	from sklearn.datasets import load_iris
 	from sklearn.metrics import silhouette_score, accuracy_score
+	from sklearn.preprocessing import StandardScaler
 	from scipy.spatial.distance import cdist
 	import pandas as pd
 	import matplotlib.pyplot as plt
@@ -328,69 +330,100 @@ Accuracy 기준<br>
 	        self.max_iter = max_iter
 	        self.random_state = random_state
 	
-	    def fit_predict(self, X):
-	        if self.random_state:
+	    def _init_medoids_pp(self, X):
+	        """K-medoids++ 초기화"""
+	        n = len(X)
+	        medoids = [np.random.randint(n)]
+	        for _ in range(1, self.n_clusters):
+	            dist_to_nearest = cdist(X, X[medoids]).min(axis=1)
+	            probs = dist_to_nearest**2 / (dist_to_nearest**2).sum()
+	            medoids.append(np.random.choice(n, p=probs))
+	        return np.array(medoids)
+	
+	    def fit_predict(self, X, n_init=5):
+	        if self.random_state is not None:
 	            np.random.seed(self.random_state)
 	
-	        # 1. 초기 메도이드를 랜덤으로 선택
-	        medoids = np.random.choice(len(X), self.n_clusters, replace=False)
+	        best_labels, best_cost, best_medoids = None, np.inf, None
 	
-	        for _ in range(self.max_iter):
-	            # 각 데이터 포인트와 메도이드 간 거리 계산
-	            distances = cdist(X, X[medoids], metric='euclidean')
-	            labels = np.argmin(distances, axis=1)
+	        for _ in range(n_init):
+	            medoids = self._init_medoids_pp(X)
 	
-	            # 새로운 메도이드 계산
-	            new_medoids = np.copy(medoids)
-	            for i in range(self.n_clusters):
-	                cluster_points = np.where(labels == i)[0]
-	                intra_cluster_distances = cdist(X[cluster_points], X[cluster_points], metric='euclidean').sum(axis=1)
-	                new_medoids[i] = cluster_points[np.argmin(intra_cluster_distances)]
+	            for _ in range(self.max_iter):
+	                distances = cdist(X, X[medoids], metric='euclidean')
+	                labels = np.argmin(distances, axis=1)
 	
-	            # 메도이드가 변하지 않으면 종료
-	            if np.array_equal(medoids, new_medoids):
-	                break
-	            medoids = new_medoids
+	                new_medoids = medoids.copy()
+	                for i in range(self.n_clusters):
+	                    cluster_points = np.where(labels == i)[0]
+	                    if cluster_points.size == 0:   # 빈 클러스터 방지
+	                        new_medoids[i] = medoids[i]
+	                        continue
+	                    intra = cdist(X[cluster_points], X[cluster_points]).sum(axis=1)
+	                    new_medoids[i] = cluster_points[np.argmin(intra)]
 	
-	        self.labels_ = labels
-	        self.medoids_ = X[medoids]
+	                if np.array_equal(medoids, new_medoids):
+	                    break
+	                medoids = new_medoids
+	
+	            cost = cdist(X, X[medoids]).min(axis=1).sum()
+	            if cost < best_cost:
+	                best_cost, best_labels, best_medoids = cost, labels, medoids
+	
+	        self.labels_ = best_labels
+	        self.medoids_ = X[best_medoids]
 	        return self.labels_
+	
+	# --------------------------
+	# 메인 실행부
+	# --------------------------
 	
 	# Iris 데이터셋 로드
 	iris = load_iris()
 	data = iris.data
 	true_labels = iris.target
 	
+	# Feature scaling (표준화)
+	scaler = StandardScaler()
+	X = scaler.fit_transform(data)
+	
 	# KMedoids 알고리즘 적용
 	kmedoids = KMedoids(n_clusters=3, random_state=0)
-	clusters = kmedoids.fit_predict(data)
-	
-	# 데이터프레임으로 변환하여 시각화 준비
-	df = pd.DataFrame(data, columns=iris.feature_names)
-	df['Cluster'] = clusters  # 군집화 결과 추가
+	clusters = kmedoids.fit_predict(X, n_init=5)
 	
 	# Silhouette Score 계산
-	silhouette_avg = silhouette_score(data, clusters)
+	silhouette_avg = silhouette_score(X, clusters)
 	print(f"Silhouette Score: {silhouette_avg:.3f}")
 	
-	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	# Accuracy 계산 (군집 레이블과 실제 라벨 매핑)
 	mapped_labels = np.zeros_like(clusters)
 	for i in np.unique(clusters):
 	    mask = (clusters == i)
-	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	    mapped_labels[mask] = mode(true_labels[mask], keepdims=False).mode
 	
 	accuracy = accuracy_score(true_labels, mapped_labels)
 	print(f"Accuracy: {accuracy:.3f}")
 	
-	# 시각화
+	# 데이터프레임 변환
+	df = pd.DataFrame(X, columns=iris.feature_names)
+	df['Cluster'] = clusters
+	df['True'] = true_labels
+	
+	# 시각화 (Cluster=색, True=마커)
 	plt.figure(figsize=(10, 5))
-	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
-	plt.scatter(kmedoids.medoids_[:, 0], kmedoids.medoids_[:, 1], c='red', marker='X', s=200, label='Medoids')
-	plt.title("K-medoids Clustering on Iris Dataset")
-	plt.xlabel(iris.feature_names[0])  # X축: 첫 번째 특징
-	plt.ylabel(iris.feature_names[1])  # Y축: 두 번째 특징
-	plt.legend(title='Cluster')
+	sns.scatterplot(
+	    data=df, x=iris.feature_names[0], y=iris.feature_names[1],
+	    hue='Cluster', style='True', palette='viridis', s=90
+	)
+	plt.scatter(kmedoids.medoids_[:, 0], kmedoids.medoids_[:, 1],
+	            c='red', marker='X', s=200, label='Medoids')
+	plt.title("K-medoids Clustering on Iris Dataset (scaled, ++ init)")
+	plt.xlabel(iris.feature_names[0])
+	plt.ylabel(iris.feature_names[1])
+	plt.legend()
 	plt.show()
+
+
 
 ![](./images/1-2.PNG)
 <br>
