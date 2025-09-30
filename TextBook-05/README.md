@@ -1049,83 +1049,94 @@ Accuracy 기준<br>
 ▣ 모델식 : $𝐶_𝑖$와 $𝐶_𝑗$는 각각 두 군집이고, 𝑑(𝑥,𝑦)는 두 데이터 포인트 𝑥와 𝑦 간의 거리<br>
 ![](./images/Hclustering.PNG)
 
-	#(Agglomerative)
 	import numpy as np
-	from sklearn.datasets import load_iris
-	from sklearn.cluster import KMeans
-	from sklearn.metrics import silhouette_score, accuracy_score
+	import pandas as pd
 	import matplotlib.pyplot as plt
 	import seaborn as sns
-	import pandas as pd
-	from scipy.stats import mode
 	
-	# Divisive Clustering 함수
-	def divisive_clustering(data, num_clusters):
-	    clusters = {0: data}  # 초기 전체 데이터를 하나의 큰 군집으로 설정
-	    current_cluster_id = 0
-	    
-	    while len(clusters) < num_clusters:
-	        # 가장 큰 군집 선택
-	        largest_cluster_id = max(clusters, key=lambda k: len(clusters[k]))
-	        largest_cluster_data = clusters[largest_cluster_id]
-	        
-	        # 해당 군집을 두 개로 분할
-	        kmeans = KMeans(n_clusters=2, random_state=0).fit(largest_cluster_data)
-	        labels = kmeans.labels_
-	        
-	        # 새로운 군집에 데이터 할당
-	        new_cluster_id = max(clusters.keys()) + 1
-	        clusters[largest_cluster_id] = largest_cluster_data[labels == 0]
-	        clusters[new_cluster_id] = largest_cluster_data[labels == 1]
-	        
-	        # 클러스터 ID 증가
-	        current_cluster_id += 1
-	    
-	    # 최종 군집 레이블 생성
-	    predicted_labels = np.zeros(data.shape[0], dtype=int)
-	    for cluster_id, cluster_data in clusters.items():
-	        for idx in range(data.shape[0]):
-	            if data[idx] in cluster_data:
-	                predicted_labels[idx] = cluster_id
-	                
-	    return predicted_labels
+	from sklearn.datasets import load_iris
+	from sklearn.cluster import AgglomerativeClustering
+	from sklearn.preprocessing import StandardScaler
+	from sklearn.metrics import silhouette_score, accuracy_score, confusion_matrix
+	from scipy.optimize import linear_sum_assignment
 	
-	# Iris 데이터셋 로드
-	iris = load_iris()
-	data = iris.data
-	true_labels = iris.target
+	# ---------------------------
+	# 유틸: 헝가리안 매칭으로 군집-라벨 매핑
+	# ---------------------------
+	def clustering_accuracy(y_true, y_pred):
+	    cm = confusion_matrix(y_true, y_pred)
+	    # 최대 일치가 되도록 행렬을 비용행렬로 변환(-cm) 후 할당
+	    row_ind, col_ind = linear_sum_assignment(-cm)
+	    mapping = {pred: true for pred, true in zip(col_ind, row_ind)}
+	    y_mapped = np.array([mapping[p] for p in y_pred])
+	    return accuracy_score(y_true, y_mapped), mapping
 	
-	# Divisive Clustering 실행
-	num_clusters = 3
-	predicted_labels = divisive_clustering(data, num_clusters)
+	# ---------------------------
+	# Agglomerative 실행 함수
+	# ---------------------------
+	def run_agglomerative(n_clusters=3,
+	                      linkage="ward",          # "ward" | "complete" | "average" | "single"
+	                      scale=False,             # 스케일링 여부
+	                      plot_feat_idx=(0, 1),    # 시각화용 피처 인덱스 (sepal length, sepal width)
+	                      random_state=0):
+	    iris = load_iris()
+	    X = iris.data.copy()
+	    y = iris.target
+	    feat_names = iris.feature_names
 	
-	# 데이터프레임으로 변환하여 시각화 준비
-	df = pd.DataFrame(data, columns=iris.feature_names)
-	df['Cluster'] = predicted_labels
+	    # (선택) 스케일링
+	    if scale:
+	        X = StandardScaler().fit_transform(X)
 	
-	# Silhouette Score 계산
-	silhouette_avg = silhouette_score(data, predicted_labels)
-	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	    # Agglomerative 모델
+	    # ward는 유클리디안 거리만 가능. 다른 metric이 필요하면 linkage를 바꾸세요.
+	    agg = AgglomerativeClustering(n_clusters=n_clusters, linkage=linkage)
+	    labels = agg.fit_predict(X)
 	
-	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
-	mapped_labels = np.zeros_like(predicted_labels)
-	for i in range(num_clusters):
-	    mask = (predicted_labels == i)
-	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	    # 지표
+	    sil = silhouette_score(X, labels)
+	    acc, map_dict = clustering_accuracy(y, labels)
+	    print(f"[Agglomerative] linkage={linkage}, scale={scale}")
+	    print(f"Silhouette Score: {sil:.3f}")
+	    print(f"Accuracy:        {acc:.3f}")
+	    print(f"Label mapping (cluster -> true): {map_dict}")
 	
-	accuracy = accuracy_score(true_labels, mapped_labels)
-	print(f"Accuracy: {accuracy:.3f}")
+	    # 시각화 (첫 두 개 피처)
+	    i, j = plot_feat_idx
+	    df = pd.DataFrame({
+	        feat_names[i]: X[:, i],
+	        feat_names[j]: X[:, j],
+	        "Cluster": labels
+	    })
 	
-	# 시각화 (첫 번째와 두 번째 피처 사용)
-	plt.figure(figsize=(10, 5))
-	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
-	plt.title("Divisive Hierarchical Clustering on Iris Dataset")
-	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
-	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
-	plt.legend(title='Cluster')
-	plt.show()
+	    plt.figure(figsize=(10,5))
+	    sns.scatterplot(
+	        data=df, x=feat_names[i], y=feat_names[j],
+	        hue="Cluster", palette="viridis", s=100
+	    )
+	    plt.title(f"Agglomerative Clustering on Iris (linkage={linkage}, scale={scale})")
+	    plt.xlabel(feat_names[i]); plt.ylabel(feat_names[j])
+	    plt.legend(title="Cluster")
+	    plt.show()
+	
+	# ---------------------------
+	# 실행 예시
+	# ---------------------------
+	if __name__ == "__main__":
+	    # 1) 가장 많이 쓰이는 설정: ward + 비스케일 (Iris는 스케일 차이가 크지 않음)
+	    run_agglomerative(n_clusters=3, linkage="ward", scale=False)
+	
+	    # 2) complete 링크 + 스케일링 비교해 보고 싶다면:
+	    # run_agglomerative(n_clusters=3, linkage="complete", scale=True)
+	
+	    # 3) average 링크:
+	    # run_agglomerative(n_clusters=3, linkage="average", scale=True)
+	
+	    # 4) single 링크(체이닝 현상으로 성능이 낮을 수 있음):
+	    # run_agglomerative(n_clusters=3, linkage="single", scale=True)
 
-![](./images/2-51.PNG)
+
+![](./images/2-51.png)
 
 	#(Divisive)
  	import numpy as np
