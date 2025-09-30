@@ -2149,7 +2149,7 @@ import numpy as np
 	plt.legend(title='Cluster')
 	plt.show()
 
-![](./images/4-2.PNG)
+![](./images/4-2.png)
 <br>
 
 # [4-3] CLIQUE(CLustering In QUEst)
