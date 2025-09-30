@@ -2517,7 +2517,7 @@ import numpy as np
 	plt.legend(title='Cluster')
 	plt.show()
 	
-![](./images/5-2.PNG)
+![](./images/5-2.png)
 <br>
 
 # CLASSIT
