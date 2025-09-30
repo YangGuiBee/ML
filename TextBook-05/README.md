@@ -612,6 +612,101 @@ Accuracy 기준<br>
 ![](./images/1-3.png)
 <br>
 
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.metrics import silhouette_score, accuracy_score
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	from scipy.stats import mode
+	from sklearn.decomposition import PCA
+	
+	class SimpleKModes:
+	    def __init__(self, n_clusters=3, max_iter=100, random_state=None):
+	        self.n_clusters = n_clusters
+	        self.max_iter = max_iter
+	        self.random_state = random_state
+	
+	    def fit_predict(self, X):
+	        if self.random_state:
+	            np.random.seed(self.random_state)
+	        
+	        # 초기 클러스터 중심을 무작위로 선택
+	        centers = X.sample(n=self.n_clusters, random_state=self.random_state).to_numpy()
+	        
+	        for _ in range(self.max_iter):
+	            # 각 데이터 포인트와 중심 간 일치하지 않는 항목 수로 거리 계산
+	            distances = np.array([[np.sum(x != center) for center in centers] for x in X.to_numpy()])
+	            labels = np.argmin(distances, axis=1)
+	            
+	            # 각 클러스터에 대해 새로운 중심 계산
+	            new_centers = np.array([
+	                X[labels == i].mode().iloc[0].to_numpy() if len(X[labels == i]) > 0 else centers[i]
+	                for i in range(self.n_clusters)
+	            ])
+	            
+	            # 중심이 변하지 않으면 수렴
+	            if np.array_equal(centers, new_centers):
+	                break
+	            centers = new_centers
+	
+	        self.labels_ = labels
+	        self.centers_ = centers
+	        return labels
+	
+	# ------------------------
+	# 실행부
+	# ------------------------
+	
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = pd.DataFrame(iris.data, columns=iris.feature_names)
+	true_labels = iris.target
+	
+	# 데이터를 범주형으로 변환 (Low, Medium, High)
+	data_cat = data.apply(lambda x: pd.cut(x, bins=3, labels=["Low", "Medium", "High"]))
+	
+	# 범주형 데이터를 숫자로 인코딩
+	data_encoded = data_cat.apply(lambda x: x.cat.codes)
+	
+	# Simple K-Modes 클러스터링 적용 (4개 feature 모두 사용)
+	simple_kmodes = SimpleKModes(n_clusters=3, max_iter=100, random_state=0)
+	clusters = simple_kmodes.fit_predict(data_encoded)
+	
+	# 군집화 결과 추가
+	data["Cluster"] = clusters
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(data_encoded, clusters)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 라벨을 매핑하여 정확도 계산)
+	mapped_labels = np.zeros_like(clusters)
+	for i in np.unique(clusters):
+	    mask = (clusters == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# ------------------------
+	# 시각화 (PCA로 2차원 축소)
+	# ------------------------
+	pca = PCA(n_components=2)
+	X_pca = pca.fit_transform(data_encoded)
+	
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=X_pca[:, 0], y=X_pca[:, 1], hue="Cluster", data=data, palette="viridis", s=100)
+	plt.title("Simple K-Modes Clustering on Iris Dataset (All 4 Features, PCA 2D)")
+	plt.xlabel("PCA Component 1")
+	plt.ylabel("PCA Component 2")
+	plt.legend(title="Cluster")
+	plt.show()
+
+
+![](./images/pca.png)
+<br>
+
 
 # [1-4] CLARANS(Clustering Large Applications based on RANdomized Search)
 ▣ 정의: PAM(PAM과 K-medoids)의 확장판으로, 대규모 데이터셋에 효율적인 군집화를 제공하기 위해 랜덤화된 탐색 방식을 사용하는 알고리즘. PAM의 전체 데이터셋 탐색 방식 대신 샘플링과 랜덤 선택을 통해 최적의 medoid를 찾는다<br>
