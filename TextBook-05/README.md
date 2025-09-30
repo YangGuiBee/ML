@@ -707,9 +707,6 @@ Accuracy 기준<br>
 ![](./images/pca.png)
 <br>
 
-![](./images/vs_k.png)
-<br>
-
 
 # [1-4] CLARANS(Clustering Large Applications based on RANdomized Search)
 ▣ 정의: PAM(PAM과 K-medoids)의 확장판으로, 대규모 데이터셋에 효율적인 군집화를 제공하기 위해 랜덤화된 탐색 방식을 사용하는 알고리즘. PAM의 전체 데이터셋 탐색 방식 대신 샘플링과 랜덤 선택을 통해 최적의 medoid를 찾는다<br>
@@ -1035,6 +1032,10 @@ Accuracy 기준<br>
 	plt.show()
                                                                           
 ![](./images/1-7.png)
+<br>
+
+
+![](./images/vs_k.png)
 <br>
 
 ---
