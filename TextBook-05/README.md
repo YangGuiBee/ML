@@ -817,7 +817,7 @@ Accuracy 기준<br>
 	plt.legend(title='Cluster')
 	plt.show()
 
-![](./images/1-5.PNG)
+![](./images/1-5.png)
 <br>
 
 # CLARA(Clustering LARge Applications)
