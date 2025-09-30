@@ -1315,102 +1315,133 @@ Accuracy 기준<br>
 ▣ 응용분야: 지리적 데이터 분석, 대규모 네트워크 데이터에서 커뮤니티 탐색, 유전자 데이터의 군집화<br>
 ▣ 모델식: 각 군집의 대표 포인트를 지정하고, 이를 기반으로 다른 군집과의 거리를 계산하여 군집을 형성. 군집 내의 대표 포인트들은 군집 중심에서 일정 비율로 축소되며, 여러 개의 대표 포인트를 통해 군집의 분포를 표현<br>
 
-	import numpy as np
+import numpy as np
 	from sklearn.datasets import load_iris
-	from sklearn.cluster import AgglomerativeClustering
-	from sklearn.metrics import silhouette_score, accuracy_score
+	from sklearn.metrics import silhouette_score, accuracy_score, confusion_matrix
+	from scipy.optimize import linear_sum_assignment
+	from scipy.spatial.distance import cdist
 	import matplotlib.pyplot as plt
 	import seaborn as sns
 	import pandas as pd
-	from scipy.spatial.distance import cdist
-	from scipy.stats import mode
 	
-	# 간단한 CURE 알고리즘 구현
+	# ---------------------------
+	# 간단한 CURE 알고리즘 (안전한 병합 로직)
+	# ---------------------------
 	class CURE:
 	    def __init__(self, n_clusters=3, n_representatives=5, shrink_factor=0.5):
 	        self.n_clusters = n_clusters
 	        self.n_representatives = n_representatives
 	        self.shrink_factor = shrink_factor
 	        self.labels_ = None
-	    
+	
 	    def fit_predict(self, X):
-	        # 초기 군집 설정 (각 포인트가 하나의 군집)
 	        n_samples = X.shape[0]
-	        clusters = [[i] for i in range(n_samples)]
-	        cluster_centers = [X[i] for i in range(n_samples)]
-	        
-	        # 계층적 군집화 과정
+	        clusters = [[i] for i in range(n_samples)]  # 각 포인트가 하나의 군집
+	
+	        # k개가 될 때까지 병합
 	        while len(clusters) > self.n_clusters:
-	            # 각 군집에서 대표 포인트 샘플링
-	            representative_points = [self._get_representatives(X[cluster]) for cluster in clusters]
-	            
-	            # 군집 간 최소 거리 계산
-	            distances = cdist(np.vstack(representative_points), np.vstack(representative_points), metric='euclidean')
-	            np.fill_diagonal(distances, np.inf)
-	            min_idx = np.unravel_index(np.argmin(distances), distances.shape)
-	            cluster_a, cluster_b = min_idx[0] // self.n_representatives, min_idx[1] // self.n_representatives
-	            
-	            # 군집 병합
-	            clusters[cluster_a].extend(clusters[cluster_b])
-	            clusters.pop(cluster_b)
-	            
-	            # 병합된 군집의 중심 업데이트
-	            new_representative = self._get_representatives(X[clusters[cluster_a]])
-	            cluster_centers[cluster_a] = new_representative
-	            cluster_centers.pop(cluster_b)
-	        
-	        # 최종 군집 레이블 생성
-	        self.labels_ = np.empty(n_samples, dtype=int)
-	        for cluster_id, cluster in enumerate(clusters):
-	            for index in cluster:
-	                self.labels_[index] = cluster_id
-	                
-	        return self.labels_
-	    
+	            # 각 클러스터의 대표점 계산
+	            reps = [self._get_representatives(X[np.array(c)]) for c in clusters]
+	
+	            # 클러스터 쌍 중 대표점 사이 최소 거리 쌍 찾기 (안전한 O(k^2))
+	            best_d = np.inf
+	            best_pair = None
+	            for a in range(len(clusters) - 1):
+	                for b in range(a + 1, len(clusters)):
+	                    d = cdist(reps[a], reps[b]).min()  # 두 클러스터 대표점 집합 간 최단거리
+	                    if d < best_d:
+	                        best_d = d
+	                        best_pair = (a, b)
+	
+	            # 병합 수행 (인덱스가 어긋나지 않도록 큰 인덱스를 먼저 pop)
+	            a, b = best_pair
+	            if a > b:
+	                a, b = b, a
+	            clusters[a].extend(clusters[b])
+	            clusters.pop(b)
+	
+	        # 레이블 부여 (누락 방지)
+	        labels = np.full(n_samples, -1, dtype=int)
+	        for cid, idxs in enumerate(clusters):
+	            labels[np.asarray(idxs, dtype=int)] = cid
+	        if np.any(labels == -1):
+	            missing = np.where(labels == -1)[0]
+	            raise RuntimeError(f"CURE labeling incomplete; missing indices: {missing[:10]} ...")
+	
+	        self.labels_ = labels
+	        return labels
+	
 	    def _get_representatives(self, cluster_points):
-	        # 군집에서 대표 포인트를 샘플링하고 축소
-	        center = np.mean(cluster_points, axis=0)
-	        distances = cdist(cluster_points, [center], metric='euclidean').flatten()
-	        representative_indices = np.argsort(distances)[:self.n_representatives]
-	        representatives = cluster_points[representative_indices]
-	        return center + self.shrink_factor * (representatives - center)
+	        # 대표점 개수는 군집 크기를 넘을 수 없도록 제한
+	        k = min(self.n_representatives, len(cluster_points))
+	        center = cluster_points.mean(axis=0)
+	        d = cdist(cluster_points, [center]).ravel()
+	        rep_idx = np.argsort(d)[:k]              # 중심에 가장 가까운 k개
+	        reps = cluster_points[rep_idx]
+	        return center + self.shrink_factor * (reps - center)  # shrink
 	
-	# Iris 데이터셋 로드
+	# ---------------------------
+	# 유틸: 헝가리안 매칭 기반 정확도
+	# ---------------------------
+	def clustering_accuracy(y_true, y_pred):
+	    y_true = np.asarray(y_true)
+	    y_pred = np.asarray(y_pred)
+	
+	    true_vals = np.unique(y_true)
+	    pred_vals = np.unique(y_pred)
+	
+	    # contingency matrix (행: true, 열: pred)
+	    ct = np.zeros((true_vals.size, pred_vals.size), dtype=int)
+	    for i, t in enumerate(true_vals):
+	        for j, p in enumerate(pred_vals):
+	            ct[i, j] = np.sum((y_true == t) & (y_pred == p))
+	
+	    r, c = linear_sum_assignment(-ct)
+	    mapping = {pred_vals[j]: true_vals[i] for i, j in zip(r, c)}  # 실제 라벨 값으로 매핑
+	
+	    y_mapped = np.array([mapping[p] for p in y_pred], dtype=int)
+	    return accuracy_score(y_true, y_mapped), mapping
+	
+	# ---------------------------
+	# 데이터 로드 & 실행
+	# ---------------------------
 	iris = load_iris()
-	data = iris.data
-	true_labels = iris.target
+	X = iris.data
+	y = iris.target
 	
-	# CURE 알고리즘 적용
 	cure = CURE(n_clusters=3, n_representatives=5, shrink_factor=0.5)
-	predicted_labels = cure.fit_predict(data)
+	labels = cure.fit_predict(X)
 	
-	# 데이터프레임으로 변환하여 시각화 준비
-	df = pd.DataFrame(data, columns=iris.feature_names)
-	df['Cluster'] = predicted_labels
+	# 지표
+	sil = silhouette_score(X, labels)
+	acc, mapping = clustering_accuracy(y, labels)
+	print(f"Silhouette Score: {sil:.3f}")
+	print(f"Accuracy: {acc:.3f}")
+	print(f"Label mapping (cluster -> true): {mapping}")
 	
-	# Silhouette Score 계산
-	silhouette_avg = silhouette_score(data, predicted_labels)
-	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	# ---------------------------
+	# 시각화 (범례 정상화)
+	# ---------------------------
+	df = pd.DataFrame(X, columns=iris.feature_names)
+	df["Cluster"] = pd.Categorical(labels)  # 범주형으로 캐스팅해 0/1/2로 표기
 	
-	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
-	mapped_labels = np.zeros_like(predicted_labels)
-	for i in np.unique(predicted_labels):
-	    mask = (predicted_labels == i)
-	    mapped_labels[mask] = mode(true_labels[mask])[0]
-	
-	accuracy = accuracy_score(true_labels, mapped_labels)
-	print(f"Accuracy: {accuracy:.3f}")
-	
-	# 시각화 (첫 번째와 두 번째 피처 사용)
 	plt.figure(figsize=(10, 5))
-	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	sns.scatterplot(
+	    data=df,
+	    x=iris.feature_names[0],
+	    y=iris.feature_names[1],
+	    hue="Cluster",
+	    palette="viridis",
+	    s=100
+	)
 	plt.title("CURE Clustering on Iris Dataset")
-	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
-	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
-	plt.legend(title='Cluster')
+	plt.xlabel(iris.feature_names[0])
+	plt.ylabel(iris.feature_names[1])
+	plt.legend(title="Cluster")
 	plt.show()
+	
  
-![](./images/2-2.PNG)
+![](./images/2-2.png)
 <br>
 
 # [2-4] ROCK(Robust Clustering using Links)
