@@ -1138,83 +1138,95 @@ Accuracy 기준<br>
 
 ![](./images/2-51.png)
 
-	#(Divisive)
- 	import numpy as np
-	from sklearn.datasets import load_iris
-	from sklearn.cluster import KMeans
-	from sklearn.metrics import silhouette_score, accuracy_score
+	import numpy as np
+	import pandas as pd
 	import matplotlib.pyplot as plt
 	import seaborn as sns
-	import pandas as pd
-	from scipy.stats import mode
 	
-	# Divisive Clustering 함수
-	def divisive_clustering(data, num_clusters):
-	    clusters = {0: data}  # 초기 전체 데이터를 하나의 큰 군집으로 설정
-	    current_cluster_id = 0
-	    
-	    while len(clusters) < num_clusters:
-	        # 가장 큰 군집 선택
-	        largest_cluster_id = max(clusters, key=lambda k: len(clusters[k]))
-	        largest_cluster_data = clusters[largest_cluster_id]
-	        
-	        # 해당 군집을 두 개로 분할
-	        kmeans = KMeans(n_clusters=2, random_state=0).fit(largest_cluster_data)
-	        labels = kmeans.labels_
-	        
-	        # 새로운 군집에 데이터 할당
-	        new_cluster_id = max(clusters.keys()) + 1
-	        clusters[largest_cluster_id] = largest_cluster_data[labels == 0]
-	        clusters[new_cluster_id] = largest_cluster_data[labels == 1]
-	        
-	        # 클러스터 ID 증가
-	        current_cluster_id += 1
-	    
-	    # 최종 군집 레이블 생성
-	    predicted_labels = np.zeros(data.shape[0], dtype=int)
-	    for cluster_id, cluster_data in clusters.items():
-	        for idx in range(data.shape[0]):
-	            if data[idx] in cluster_data:
-	                predicted_labels[idx] = cluster_id
-	                
-	    return predicted_labels
+	from sklearn.datasets import load_iris
+	from sklearn.cluster import KMeans
+	from sklearn.metrics import silhouette_score, accuracy_score, confusion_matrix
+	from scipy.optimize import linear_sum_assignment
 	
-	# Iris 데이터셋 로드
+	# ---------------------------
+	# 유틸: 헝가리안 매칭으로 정확도 계산
+	# ---------------------------
+	def clustering_accuracy(y_true, y_pred):
+	    cm = confusion_matrix(y_true, y_pred)
+	    row_ind, col_ind = linear_sum_assignment(-cm)
+	    mapping = {pred: true for pred, true in zip(col_ind, row_ind)}
+	    y_mapped = np.array([mapping[p] for p in y_pred])
+	    return accuracy_score(y_true, y_mapped), mapping
+	
+	# ---------------------------
+	# Divisive Clustering (DIANA 스타일)
+	# ---------------------------
+	def divisive_clustering(X, n_clusters=3, random_state=0):
+	    n = X.shape[0]
+	    clusters = {0: np.arange(n)}   # 처음엔 전체를 하나의 클러스터로 시작
+	
+	    while len(clusters) < n_clusters:
+	        # 가장 큰 클러스터 선택
+	        largest_id = max(clusters, key=lambda k: clusters[k].size)
+	        idx = clusters[largest_id]
+	        subset = X[idx]
+	
+	        # 해당 부분 클러스터를 KMeans(2)로 분할
+	        km = KMeans(n_clusters=2, random_state=random_state, n_init=10)
+	        labels = km.fit_predict(subset)
+	
+	        # 새 클러스터 추가
+	        new_id = max(clusters.keys()) + 1
+	        clusters[largest_id] = idx[labels == 0]
+	        clusters[new_id]     = idx[labels == 1]
+	
+	    # 최종 예측 레이블 배열 생성
+	    predicted = np.zeros(n, dtype=int)
+	    for cid, idx in clusters.items():
+	        predicted[idx] = cid
+	    return predicted
+	
+	# ---------------------------
+	# 실행부
+	# ---------------------------
 	iris = load_iris()
-	data = iris.data
-	true_labels = iris.target
+	X = iris.data
+	y = iris.target
+	feat_names = iris.feature_names
 	
-	# Divisive Clustering 실행
-	num_clusters = 3
-	predicted_labels = divisive_clustering(data, num_clusters)
+	# Divisive 실행
+	pred_labels = divisive_clustering(X, n_clusters=3, random_state=0)
 	
-	# 데이터프레임으로 변환하여 시각화 준비
-	df = pd.DataFrame(data, columns=iris.feature_names)
-	df['Cluster'] = predicted_labels
+	# 성능 지표
+	sil = silhouette_score(X, pred_labels)
+	acc, mapping = clustering_accuracy(y, pred_labels)
+	print(f"[Divisive Hierarchical]")
+	print(f"Silhouette Score: {sil:.3f}")
+	print(f"Accuracy:        {acc:.3f}")
+	print(f"Label mapping (cluster -> true): {mapping}")
 	
-	# Silhouette Score 계산
-	silhouette_avg = silhouette_score(data, predicted_labels)
-	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	# 시각화 (첫 2개 feature)
+	df = pd.DataFrame(X, columns=feat_names)
+	df["Cluster"] = pred_labels
+	df["Cluster"] = df["Cluster"].astype("category")  # 선택사항: 범례 깔끔하게
 	
-	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
-	mapped_labels = np.zeros_like(predicted_labels)
-	for i in range(num_clusters):
-	    mask = (predicted_labels == i)
-	    mapped_labels[mask] = mode(true_labels[mask])[0]
-	
-	accuracy = accuracy_score(true_labels, mapped_labels)
-	print(f"Accuracy: {accuracy:.3f}")
-	
-	# 시각화 (첫 번째와 두 번째 피처 사용)
-	plt.figure(figsize=(10, 5))
-	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	plt.figure(figsize=(10,5))
+	sns.scatterplot(
+	    data=df,
+	    x=feat_names[0],
+	    y=feat_names[1],
+	    hue="Cluster",
+	    palette="viridis",
+	    s=100
+	)
 	plt.title("Divisive Hierarchical Clustering on Iris Dataset")
-	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
-	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
-	plt.legend(title='Cluster')
+	plt.xlabel(feat_names[0])
+	plt.ylabel(feat_names[1])
+	plt.legend(title="Cluster")
 	plt.show()
+	
 
-![](./images/2-52.PNG)
+![](./images/2-52.png)
 <br>
 
 # [2-2] BIRCH(Balanced Iterative Reducing and Clustering using Hierarchies)
