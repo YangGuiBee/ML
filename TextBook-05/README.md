@@ -2572,7 +2572,7 @@ import numpy as np
 	plt.legend(title='Cluster')
 	plt.show()
 
-![](./images/5-3.PNG)
+![](./images/5-3.png)
 <br>
 
 # [5-3] SOMs(Self-Organizing Maps)
@@ -2671,7 +2671,7 @@ import numpy as np
 	plt.legend(title='Cluster')
 	plt.show()
 	
-![](./images/5-4.PNG)
+![](./images/5-4.png)
 <br>
 
 ---
@@ -2729,7 +2729,7 @@ $𝐿=𝐷−𝐴$<br>
 	plt.legend(title='Cluster')
 	plt.show()
 
-![](./images/6-1.PNG)
+![](./images/6-1.png)
 <br>
 
 # [6-2] 친화도 전파(Affinity Propagation)
@@ -2785,7 +2785,7 @@ $𝐿=𝐷−𝐴$<br>
 	plt.legend(title='Cluster')
 	plt.show()
 
-![](./images/6-2.PNG)
+![](./images/6-2.png)
 <br>
 
 ![](./images/CA.PNG)
