@@ -2402,7 +2402,7 @@ import numpy as np
 	plt.legend(title='Cluster')
 	plt.show()
 
-![](./images/5-5.PNG)
+![](./images/5-5.png)
 <br>
 
 # EM(Expectation-Maximization)
