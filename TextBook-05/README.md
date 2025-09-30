@@ -425,7 +425,7 @@ Accuracy 기준<br>
 
 
 
-![](./images/1-2.PNG)
+![](./images/1-2.png)
 <br>
 
 # PAM(Partitioning Around Medoids)
