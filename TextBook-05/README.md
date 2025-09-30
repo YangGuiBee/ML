@@ -2247,7 +2247,7 @@ import numpy as np
 	plt.legend(title='Cluster')
 	plt.show()
 
-![](./images/4-3.PNG)
+![](./images/4-3.png)
 <br>
 
 # [4-4] OptiGrid
