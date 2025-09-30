@@ -2460,7 +2460,7 @@ import numpy as np
 	plt.legend(title='Cluster')
 	plt.show()
 
-![](./images/5-1.PNG)
+![](./images/5-1.png)
 <br>
 
 # [5-2] COBWEB
