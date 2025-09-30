@@ -1922,7 +1922,7 @@ import numpy as np
 	plt.legend(title='Cluster')
 	plt.show()
 
-![](./images/3-4.PNG)
+![](./images/3-4.png)
 <br>
 
 # [3-4] Mean-Shift Clustering
