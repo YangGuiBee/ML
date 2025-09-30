@@ -2344,7 +2344,7 @@ import numpy as np
 	plt.legend(title='Cluster')
 	plt.show()
 
-![](./images/4-4.PNG)
+![](./images/4-4.png)
 <br>
 
 ---
