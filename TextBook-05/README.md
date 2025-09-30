@@ -2051,7 +2051,7 @@ import numpy as np
 	plt.legend(title='Cluster')
 	plt.show()
 
-![](./images/4-1.PNG)
+![](./images/4-1.png)
 <br>
 
 # [4-2] STING(Statistical Information Grid-based method)
