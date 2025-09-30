@@ -927,7 +927,7 @@ Accuracy 기준<br>
 	plt.legend(title='Cluster')
 	plt.show()
 	
-![](./images/1-6.PNG)
+![](./images/1-6.png)
 <br>
 
 # [1-5] FCM(Fuzzy C-means) 
