@@ -1978,7 +1978,7 @@ import numpy as np
 	plt.legend(title='Cluster')
 	plt.show()
 
-![](./images/3-5.PNG)
+![](./images/3-5.png)
 <br>
 
 ---
