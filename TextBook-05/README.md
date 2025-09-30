@@ -1034,7 +1034,7 @@ Accuracy 기준<br>
 	plt.legend(title='Cluster')
 	plt.show()
                                                                           
-![](./images/1-7.PNG)
+![](./images/1-7.png)
 <br>
 
 ---
