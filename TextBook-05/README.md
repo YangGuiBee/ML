@@ -1691,7 +1691,7 @@ import numpy as np
 	plt.legend(title='Cluster')
 	plt.show()
 
-![](./images/3-1.PNG)
+![](./images/3-1.png)
 <br>
 
 # [3-2] OPTICS(Ordering Points To Identify the Clustering Structure)
