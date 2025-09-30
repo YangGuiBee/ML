@@ -1240,33 +1240,71 @@ Accuracy 기준<br>
 
 	from sklearn.datasets import load_iris
 	from sklearn.cluster import Birch
+	from sklearn.metrics import silhouette_score, accuracy_score, confusion_matrix
+	from scipy.optimize import linear_sum_assignment
 	import pandas as pd
 	import matplotlib.pyplot as plt
 	import seaborn as sns
+	import numpy as np
 	
+	# ---------------------------
+	# 유틸: 헝가리안 매칭으로 정확도 계산
+	# ---------------------------
+	def clustering_accuracy(y_true, y_pred):
+	    cm = confusion_matrix(y_true, y_pred)
+	    row_ind, col_ind = linear_sum_assignment(-cm)  # maximize matching
+	    mapping = {pred: true for pred, true in zip(col_ind, row_ind)}
+	    y_mapped = np.array([mapping[p] for p in y_pred])
+	    return accuracy_score(y_true, y_mapped), mapping
+	
+	# ---------------------------
 	# Iris 데이터셋 로드
+	# ---------------------------
 	iris = load_iris()
-	data = iris.data
+	X = iris.data
+	y = iris.target
 	
-	# BIRCH 알고리즘 적용 (군집 수: 3)
+	# ---------------------------
+	# BIRCH 알고리즘 적용
+	# ---------------------------
 	birch = Birch(n_clusters=3, threshold=0.5, branching_factor=50)
-	birch.fit(data)
-	labels = birch.predict(data)
+	birch.fit(X)
+	labels = birch.predict(X)
 	
-	# 데이터프레임으로 변환하여 시각화 준비
-	df = pd.DataFrame(data, columns=iris.feature_names)
-	df['Cluster'] = labels  # 각 포인트의 군집 라벨
+	# ---------------------------
+	# 성능 지표 계산
+	# ---------------------------
+	sil = silhouette_score(X, labels)
+	acc, mapping = clustering_accuracy(y, labels)
 	
-	# 시각화 (첫 번째와 두 번째 피처 사용)
+	print("[BIRCH Clustering]")
+	print(f"Silhouette Score: {sil:.3f}")
+	print(f"Accuracy:        {acc:.3f}")
+	print(f"Label mapping (cluster -> true): {mapping}")
+	
+	# ---------------------------
+	# 데이터프레임 변환 및 시각화
+	# ---------------------------
+	df = pd.DataFrame(X, columns=iris.feature_names)
+	df['Cluster'] = labels
+	
 	plt.figure(figsize=(10, 5))
-	sns.scatterplot(x=df.iloc[:, 0], y=df.iloc[:, 1], hue='Cluster', data=df, palette='viridis', s=100)
+	sns.scatterplot(
+	    data=df,
+	    x=iris.feature_names[0],
+	    y=iris.feature_names[1],
+	    hue='Cluster',
+	    palette='viridis',
+	    s=100
+	)
 	plt.title("BIRCH Clustering on Iris Dataset")
-	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
-	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 feature (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 feature (sepal width)
 	plt.legend(title='Cluster')
 	plt.show()
 
-![](./images/2-1.PNG)
+
+![](./images/2-1.png)
 <br>
 
 # [2-3] CURE(Clustering Using Representatives)
