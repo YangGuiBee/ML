@@ -152,6 +152,10 @@ https://nyamin9.github.io/data_mining/Data-Mining-Pattern-3/#-31-apriori-algorit
 **신뢰도(confidence):** 선행항이 등장했을 때, 결과항이 함께 등장할 확률, {butter}→{bread}: 0.75 (butter가 있으면 75% 확률로 bread도 함께 구매)<br>
 **향상도(lift):** 두 항목이 독립일 때 기대되는 확률 대비 함께 등장할 확률, {butter}→{bread}: 0.9375 < 1 → 독립적으로 발생할 때보다 같이 나타날 확률이 오히려 낮음<br>
 
+	support ≥ 0.4: 규칙 자체는 충분히 자주 등장
+	confidence ≥ 0.7: 규칙 신뢰도가 꽤 높음
+	lift > 1: 긍정적 연관성으로 판단 가능
+
 <br>
 
 # [2] FP-Growth(Frequent Pattern Growth)
