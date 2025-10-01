@@ -59,8 +59,10 @@
 "A를 선택하면(antecedent), B도 선택한다(Consequent)"는 규칙을 찾는다.<br>
 <br>
 
+<!--
 ![](./images/data.PNG)
 <br>
+-->
 
 # [AR-1] Apriori : 선험적 알고리즘
 
