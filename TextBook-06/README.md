@@ -32,23 +32,21 @@
 <br>
 
 	전통 통계·선형 알고리즘
-	[DR-1] PCA(Principal Component Analysis)
-	[DR-2] Kernel PCA
-	[DR-3] SVD(Singular Value Decomposition)
-	[DR-4] ICA(Independent Component Analysis) : 신호분리
-	[DR-5] LDA(Linear Discriminant Analysis) : 지도학습 기반
-	[DR-6] NMF(Non-negative Matrix Factorization) 
+	[DR-1] PCA(Principal Component Analysis)	
+	[DR-2] SVD(Singular Value Decomposition)
+	[DR-3] ICA(Independent Component Analysis) : 신호분리
+	[DR-4] LDA(Linear Discriminant Analysis) : 지도학습 기반
+	[DR-5] NMF(Non-negative Matrix Factorization) 
 
 	비선형/매니폴드 학습 알고리즘
-	[DR-7] t-SNE(t-distributed Stochastic Neighbor Embedding) - ML
-	[DR-8] UMAP(Uniform Manifold Approximation and Projection) - ML
-	[DR-9] Isomap  - ML
-	[DR-10] MDS(Multidimensional Scaling)
+	[DR-6] t-SNE(t-distributed Stochastic Neighbor Embedding) - ML
+	[DR-7] UMAP(Uniform Manifold Approximation and Projection) - ML
+	[DR-8] Isomap  - ML
+	[DR-9] MDS(Multidimensional Scaling)
 
 	신경망/딥러닝 알고리즘
-	[DR-11] SOM(Self-Organizing Maps)  - ML
-	[DR-12] Autoencoder
-
+	[DR-10] SOM(Self-Organizing Maps)  - ML
+	
 
     [차원 축소 알고리즘 평가방법]
     ▣ 재구성 오류(Reconstruction Error) : 복원된 데이터와 원본 데이터 간의 평균 제곱 오차(MSE)
