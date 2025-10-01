@@ -1,7 +1,7 @@
 ---
 
 
-### 중간고사(10.23)
+# 중간고사(10.23)
  
 (1) 머신러닝의 학습방법에 따라 구분되는 지도학습(Supervised Learning), 비지도학습(Unsupervised Learning) 및 강화학습 (Reinforcement Learning)의 차이에 대해 설명하시오.
 
@@ -17,7 +17,7 @@
 ---
 
 
-### 과제(12.04)
+# 과제1 (12.04)
 
 각자 아래 사이트(참조 연구사이트는 개인적으로 발굴가능) 중에서 머신러닝 관련 논문을 찾아 요약해서 발표하는 시간을 갖겠습니다.<br>
 https://www.dbpia.co.kr/<br>
@@ -35,7 +35,7 @@ https://www.riss.kr/<br>
 --- 
 
 
-# 과제(12.11)
+# 과제2 (12.11)
 
 (1) 캐글 데이터셋(https://www.kaggle.com/datasets) 불러오기<br>
 (2) 시각화 확인<br>
