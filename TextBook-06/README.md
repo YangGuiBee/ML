@@ -7,15 +7,15 @@
 
 	핵심 탐색 알고리즘
 	[AR-1] Apriori
-	[AR-2] FP-Growth(Frequent Pattern Growth) 
-	[AR-3] Eclat(Equivalence Class Transformation)
+	[AR-2] FP-Growth(Frequent Pattern Growth) : 빈발 패턴 성장
+	[AR-3] Eclat(Equivalence Class Transformation) : 동등 클래스 변환
 
 	규칙 확장/변형 알고리즘
-	[AR-4] 다계층 연관규칙(Multi-level Association Rules)
-	[AR-5] 다차원 연관규칙(Multi-dimensional Association Rules)
+	[AR-4] Multi-level Association Rules : 다계층 연관규칙
+	[AR-5] Multi-dimensional Association Rules : 다차원 연관규칙
 
 	추론/최적화 알고리즘
-	[AR-6] 인공면역시스템(Artificial Immune System)
+	[AR-6] Artificial Immune System : 인공면역시스템
 
 	   
     [연관 규칙 알고리즘 평가방법]
@@ -38,30 +38,7 @@
 	[DR-4] LDA(Linear Discriminant Analysis) : 지도학습 기반
 	[DR-5] NMF(Non-negative Matrix Factorization) 
 
-	비선형/매니폴드 학습 알고리즘
-	[DR-6] t-SNE(t-distributed Stochastic Neighbor Embedding) - ML
-	[DR-7] UMAP(Uniform Manifold Approximation and Projection) - ML
-	[DR-8] Isomap  - ML
-	[DR-9] MDS(Multidimensional Scaling)
-
-	신경망/딥러닝 알고리즘
-	[DR-10] SOM(Self-Organizing Maps)  - ML
-	
-
-    [차원 축소 알고리즘 평가방법]
-    ▣ 재구성 오류(Reconstruction Error) : 복원된 데이터와 원본 데이터 간의 평균 제곱 오차(MSE)
-    ▣ 분산 유지율(Explained Variance Ratio) : 각 주성분이 설명하는 분산 비율로 데이터의 정보 손실정도 파악
-    ▣ 상호 정보량(Mutual Information) :  차원 축소 전후 데이터의 정보량을 비교
-    ▣ 군집 평가 지표 : Silhouette Score, Davies-Bouldin Index, 실제 레이블과 예측 레이블 비교(ARI, NMI)
-
----  
-**연관 규칙 추천(Assocication Rule based Recommendation) :** 빅데이터 기반의 데이터 마이닝기법<br>
-"A를 선택하면(antecedent), B도 선택한다(Consequent)"는 규칙을 찾는다.<br>
-<br>
-![](./images/data.PNG)
-<br>
-
-# [AR-1] Apriori
+	비선형/즘
 ![](./images/apriori.png)
 <br>
 https://nyamin9.github.io/data_mining/Data-Mining-Pattern-3/#-31-apriori-algorithm---example<br><br>
@@ -143,7 +120,7 @@ https://nyamin9.github.io/data_mining/Data-Mining-Pattern-3/#-31-apriori-algorit
 
 <br>
 
-# [AR-2] FP-Growth(Frequent Pattern Growth)
+# [AR-2] FP-Growth(Frequent Pattern Growth) : 빈발 패턴 성장
 ▣ 정의: Apriori 알고리즘의 대안으로 FP-Tree(Frequent Pattern Tree)를 통해 빈발항목 집합을 생성하는 알고리즘으로, Apriori와 달리 매번 후보집합을 생성하지 않으며, 데이터의 트랜잭션을 직접 탐색하여 빈발항목 집합을 구한다.<br>
 ▣ 필요성: Apriori의 성능 문제를 해결하기 위해 고안<br>
 ▣ 장점: 메모리 효율이 높고, 대규모 데이터셋에서 빠르게 작동<br>
@@ -211,7 +188,7 @@ https://nyamin9.github.io/data_mining/Data-Mining-Pattern-3/#-31-apriori-algorit
 ![](./images/1-2.png)   
 <br>
 
-# [AR-3] Eclat(Equivalence Class Transformation)
+# [AR-3] Eclat(Equivalence Class Transformation) : 동등 클래스 변환
 ![](./images/eclat.png)  
 <br>
 chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournier-viger.com/COURSES/Pattern_mining/Eclat.pdf
@@ -300,7 +277,7 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 ![](./images/1-3.png)
 <br>
 
-# [AR-4] 다계층 연관규칙(Multi-level Association Rules)
+# [AR-4] Multi-level Association Rules : 다계층 연관규칙
 ▣ 정의: Apriori와 FP-Growth 확장버전으로 연관 규칙을 계층적으로 탐색하여 다중 수준에서 규칙을 생성하는 방식<br>
 ▣ 필요성: 제품 카테고리별 분석이 필요한 경우에 적합<br>
 ▣ 장점: 더 정교한 규칙을 생성<br>
@@ -386,7 +363,7 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 ![](./images/1-4.png)
 <br>
 
-# [AR-5] 다계층 연관규칙(Multi-dimensional Association Rules)
+# [AR-5] Multi-dimensional Association Rules : 다계층 연관규칙
 ▣ 정의: 여러 속성을 포함하여 다양한 차원의 규칙을 생성<br>
 ▣ 필요성: 연관 규칙을 데이터의 여러 차원에 걸쳐 분석하고자 할 때 유용하며, 특정 집단에 대한 특정 패턴을 탐지하는 데 적합<br>
 ▣ 장점: 규칙의 범위를 확장할 수 있어 더 세밀한 규칙 도출 가능.<br>
@@ -462,7 +439,7 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 ![](./images/1-5.png)
 <br>
 
-# [AR-6] AIS(Artificial Immune System)
+# [AR-6] AIS(Artificial Immune System) : 인공면역시스템
 ▣ 정의: 거래 데이터를 순차적으로 결합하여 빈번한 항목 집합을 찾는 초기 연관규칙 알고리즘 중 하나<br>
 ▣ 필요성: 초기 연관 규칙 연구에서 활용되었으나, 성능의 한계로 현재는 거의 사용되지 않음<br>
 ▣ 장점: 간단한 구조로 이해하기 쉽고, 복잡한 비정형 데이터에서 이상 패턴을 감지하는 데 강점<br>
