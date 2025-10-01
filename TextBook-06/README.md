@@ -32,20 +32,20 @@
 <br>
 
 	전통 통계·선형 알고리즘
-	[DR-1] PCA(Principal Component Analysis)	
-	[DR-2] SVD(Singular Value Decomposition)
-	[DR-3] ICA(Independent Component Analysis) : 신호분리
-	[DR-4] LDA(Linear Discriminant Analysis) : 지도학습 기반
-	[DR-5] NMF(Non-negative Matrix Factorization) 
+	[DR-1] PCA(Principal Component Analysis) : 주성분 분석	
+	[DR-2] SVD(Singular Value Decomposition) : 특이값 분해
+	[DR-3] ICA(Independent Component Analysis) : 독립성분 분석
+	[DR-4] LDA(Linear Discriminant Analysis) : 선형판별 분석(지도학습 기반)
+	[DR-5] NMF(Non-negative Matrix Factorization)  : 비음수 행렬 분해
 
 	비선형/매니폴드 학습 알고리즘
-	[DR-6] t-SNE(t-distributed Stochastic Neighbor Embedding) - ML
-	[DR-7] UMAP(Uniform Manifold Approximation and Projection) - ML
-	[DR-8] Isomap  - ML
-	[DR-9] MDS(Multidimensional Scaling)
+	[DR-6] t-SNE(t-distributed Stochastic Neighbor Embedding) : t-분포 확률적 이웃 임베딩
+	[DR-7] UMAP(Uniform Manifold Approximation and Projection) : 균일 매니폴드 근사적 사영
+	[DR-8] Isomap : 등거리 매핑
+	[DR-9] MDS(Multidimensional Scaling) : 다차원 척도
 
 	신경망/딥러닝 알고리즘
-	[DR-10] SOM(Self-Organizing Maps)  - ML
+	[DR-10] SOM(Self-Organizing Maps) : 자기 조직화
 	
 	
     [차원 축소 알고리즘 평가방법]
