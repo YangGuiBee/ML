@@ -38,7 +38,24 @@
 	[DR-4] LDA(Linear Discriminant Analysis) : 지도학습 기반
 	[DR-5] NMF(Non-negative Matrix Factorization) 
 
-	비선형/즘
+	비선형/매니폴드 학습 알고리즘
+	[DR-6] t-SNE(t-distributed Stochastic Neighbor Embedding) - ML
+	[DR-7] UMAP(Uniform Manifold Approximation and Projection) - ML
+	[DR-8] Isomap  - ML
+	[DR-9] MDS(Multidimensional Scaling)
+
+	신경망/딥러닝 알고리즘
+	[DR-10] SOM(Self-Organizing Maps)  - ML
+	
+	
+    [차원 축소 알고리즘 평가방법]
+    ▣ 재구성 오류(Reconstruction Error) : 복원된 데이터와 원본 데이터 간의 평균 제곱 오차(MSE)
+    ▣ 분산 유지율(Explained Variance Ratio) : 각 주성분이 설명하는 분산 비율로 데이터의 정보 손실정도 파악
+    ▣ 상호 정보량(Mutual Information) :  차원 축소 전후 데이터의 정보량을 비교
+    ▣ 군집 평가 지표 : Silhouette Score, Davies-Bouldin Index, 실제 레이블과 예측 레이블 비교(ARI, NMI)
+
+
+	
 ![](./images/apriori.png)
 <br>
 https://nyamin9.github.io/data_mining/Data-Mining-Pattern-3/#-31-apriori-algorithm---example<br><br>
