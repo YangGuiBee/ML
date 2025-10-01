@@ -5,32 +5,19 @@
 ## 연관 규칙(Association Rule)
 <br>
 
-    [1] Apriori
-    [2] FP-Growth(Frequent Pattern Growth) 
-    [3] Eclat(Equivalence Class Transformation)
-    [4] Multi-level Association Rules
-    [5] Multi-dimensional Association Rules
-    [6] AIS(Artificial Immune System)
-
 	핵심 탐색 알고리즘
-	[2-1] Apriori
-	[2-2] FP-Growth(Frequent Pattern Growth) 
-	[2-3] Eclat(Equivalence Class Transformation)
+	[AR-1] Apriori
+	[AR-2] FP-Growth(Frequent Pattern Growth) 
+	[AR-3] Eclat(Equivalence Class Transformation)
 
 	규칙 확장/변형 알고리즘
-	[2-4] 다계층 연관규칙(Multi-level Association Rules)
-	[2-5] 다차원 연관규칙(Multi-dimensional Association Rules)
+	[AR-4] 다계층 연관규칙(Multi-level Association Rules)
+	[AR-5] 다차원 연관규칙(Multi-dimensional Association Rules)
 
 	추론/최적화 알고리즘
-	[2-6] 인공면역시스템(Artificial Immune System)
-	[2-7] 유전자 알고리즘(GA: Genetic Algorithm)
-	[2-8] 개미군집(ACO: Ant Colony Optimization)
-	[2-9] 입자군집(PSO: Particle Swarm Optimization)
+	[AR-6] 인공면역시스템(Artificial Immune System)
 
-	실무 지향형 알고리즘
-	[2-10) 제약 기반 연관규칙(Constraint-based Association Rules)
-
-       
+	   
     [연관 규칙 알고리즘 평가방법]
     ▣ 지지도(Support) : 특정 항목 집합이 전체 거래에서 얼마나 자주 나타나는지 나타낸다.
     ▣ 신뢰도(Confidence) : A가 주어졌을 때 B가 발생할 확률
@@ -45,22 +32,22 @@
 <br>
 
 	전통 통계·선형 알고리즘
-	[3-1] PCA(Principal Component Analysis)
-	[3-2] Kernel PCA
-	[3-3] SVD(Singular Value Decomposition)
-	[3-4] ICA(Independent Component Analysis) : 신호분리
-	[3-5] LDA(Linear Discriminant Analysis) : 지도학습 기반
-	[3-6] NMF(Non-negative Matrix Factorization) 
+	[DR-1] PCA(Principal Component Analysis)
+	[DR-2] Kernel PCA
+	[DR-3] SVD(Singular Value Decomposition)
+	[DR-4] ICA(Independent Component Analysis) : 신호분리
+	[DR-5] LDA(Linear Discriminant Analysis) : 지도학습 기반
+	[DR-6] NMF(Non-negative Matrix Factorization) 
 
 	비선형/매니폴드 학습 알고리즘
-	[3-7] t-SNE(t-distributed Stochastic Neighbor Embedding) - ML
-	[3-8] UMAP(Uniform Manifold Approximation and Projection) - ML
-	[3-9] Isomap  - ML
-	[3-10] MDS(Multidimensional Scaling)
+	[DR-7] t-SNE(t-distributed Stochastic Neighbor Embedding) - ML
+	[DR-8] UMAP(Uniform Manifold Approximation and Projection) - ML
+	[DR-9] Isomap  - ML
+	[DR-10] MDS(Multidimensional Scaling)
 
 	신경망/딥러닝 알고리즘
-	[3-11] SOM(Self-Organizing Maps)  - ML
-	[3-12] Autoencoder
+	[DR-11] SOM(Self-Organizing Maps)  - ML
+	[DR-12] Autoencoder
 
 
     [차원 축소 알고리즘 평가방법]
@@ -76,7 +63,7 @@
 ![](./images/data.PNG)
 <br>
 
-# [1] Apriori
+# [AR-1] Apriori
 ![](./images/apriori.png)
 <br>
 https://nyamin9.github.io/data_mining/Data-Mining-Pattern-3/#-31-apriori-algorithm---example<br><br>
@@ -158,7 +145,7 @@ https://nyamin9.github.io/data_mining/Data-Mining-Pattern-3/#-31-apriori-algorit
 
 <br>
 
-# [2] FP-Growth(Frequent Pattern Growth)
+# [AR-2] FP-Growth(Frequent Pattern Growth)
 ▣ 정의: Apriori 알고리즘의 대안으로 FP-Tree(Frequent Pattern Tree)를 통해 빈발항목 집합을 생성하는 알고리즘으로, Apriori와 달리 매번 후보집합을 생성하지 않으며, 데이터의 트랜잭션을 직접 탐색하여 빈발항목 집합을 구한다.<br>
 ▣ 필요성: Apriori의 성능 문제를 해결하기 위해 고안<br>
 ▣ 장점: 메모리 효율이 높고, 대규모 데이터셋에서 빠르게 작동<br>
@@ -226,7 +213,7 @@ https://nyamin9.github.io/data_mining/Data-Mining-Pattern-3/#-31-apriori-algorit
 ![](./images/1-2.png)   
 <br>
 
-# [3] Eclat(Equivalence Class Transformation)
+# [AR-3] Eclat(Equivalence Class Transformation)
 ![](./images/eclat.png)  
 <br>
 chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournier-viger.com/COURSES/Pattern_mining/Eclat.pdf
@@ -315,7 +302,7 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 ![](./images/1-3.png)
 <br>
 
-# [4] Multi-level Association Rules
+# [AR-4] 다계층 연관규칙(Multi-level Association Rules)
 ▣ 정의: Apriori와 FP-Growth 확장버전으로 연관 규칙을 계층적으로 탐색하여 다중 수준에서 규칙을 생성하는 방식<br>
 ▣ 필요성: 제품 카테고리별 분석이 필요한 경우에 적합<br>
 ▣ 장점: 더 정교한 규칙을 생성<br>
@@ -401,7 +388,7 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 ![](./images/1-4.png)
 <br>
 
-# [5] Multi-dimensional Association Rules
+# [AR-5] Multi-dimensional Association Rules
 ▣ 정의: 여러 속성을 포함하여 다양한 차원의 규칙을 생성<br>
 ▣ 필요성: 연관 규칙을 데이터의 여러 차원에 걸쳐 분석하고자 할 때 유용하며, 특정 집단에 대한 특정 패턴을 탐지하는 데 적합<br>
 ▣ 장점: 규칙의 범위를 확장할 수 있어 더 세밀한 규칙 도출 가능.<br>
@@ -477,7 +464,7 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 ![](./images/1-5.png)
 <br>
 
-# [6] AIS(Artificial Immune System)
+# [AR-6] AIS(Artificial Immune System)
 ▣ 정의: 거래 데이터를 순차적으로 결합하여 빈번한 항목 집합을 찾는 초기 연관규칙 알고리즘 중 하나<br>
 ▣ 필요성: 초기 연관 규칙 연구에서 활용되었으나, 성능의 한계로 현재는 거의 사용되지 않음<br>
 ▣ 장점: 간단한 구조로 이해하기 쉽고, 복잡한 비정형 데이터에서 이상 패턴을 감지하는 데 강점<br>
