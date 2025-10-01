@@ -2,32 +2,22 @@
 
 
 ### 중간고사(10.23)
-
  
-
 (1) 머신러닝의 학습방법에 따라 구분되는 지도학습(Supervised Learning), 비지도학습(Unsupervised Learning) 및 강화학습 (Reinforcement Learning)의 차이에 대해 설명하시오.
 
- 
+(2) 머신러닝 학습에 앞서 데이터 전처리의 필요성과 중요성에 대해 설명하시오.
 
-(2) 로지스틱 회귀(Logistic Regression) 모델이 회귀(regression)가 아닌 분류(classification) 모델로 구분되는 이유를 설명하시오.
+(3) k-평균 클러스터링(k-Means Clustering)과 계층적 클러스터링(Hierarchical Clustering)의 차이점을 설명하시오.
 
- 
+(4) 분류(classification) 모델에 대한 3개 이상의 평가지표별 평가방법에 대해 설명하시오.
 
-(3) 결정 트리(Decision Tree) 모델의 단점과 이를 해소하기 위한 방식으로 도출된 모델에 대해 설명하시오.
-
- 
-
-(4) 선형회귀(Linear Regression), 다중선형회귀(Multiple Linear Regression) 및 다항선형회귀(Polynomial Linear Regression)의 차이점을 설명하시오.
-
- 
-
-(5) 정규화(Regularized) 및 벌점부여(Penalized) 선형회귀(Linear Regression) 방식의 대표적인 모델 3가지에 대해 설명하시오.
+(5) 연구 문제(Research Problem), 연구 질문(Research Question), 연구가설 (Research Hypothesis)의 차이점에 대해 설명하시오.
 
 
 ---
 
 
-### 과제(10.16)
+### 과제(12.04)
 
 각자 아래 사이트 등에서 머신러닝 관련 논문을 찾아 요약해서 발표하는 시간을 갖겠습니다.<br>
 https://www.dbpia.co.kr/<br>
