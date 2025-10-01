@@ -439,7 +439,7 @@ https://cloud.google.com/learn/what-is-artificial-intelligence?hl=ko
 
 
 
-## IBK :
+## IBM :
 인공지능은 **컴퓨터 과학과 강력한 데이터 세트를 결합하여 문제 해결을 가능하게 하는 분야**. 인공지능과 함께 자주 언급되는 머신 러닝, 딥 러닝 등의 하위 분야도 여기에 포함됨. 이러한 분야는 입력 데이터를 기반으로 예측 또는 분류를 수행하는 전문 시스템을 만들려는 AI 알고리즘으로 구성<br>
 https://www.ibm.com/kr-ko/topics/artificial-intelligence
 
