@@ -6,7 +6,7 @@
 <br>
 
 	핵심 탐색 알고리즘
-	[AR-1] Apriori
+	[AR-1] Apriori : 선험적 알고리즘
 	[AR-2] FP-Growth(Frequent Pattern Growth) : 빈발 패턴 성장
 	[AR-3] Eclat(Equivalence Class Transformation) : 동등 클래스 변환
 
@@ -55,7 +55,15 @@
     ▣ 군집 평가 지표 : Silhouette Score, Davies-Bouldin Index, 실제 레이블과 예측 레이블 비교(ARI, NMI)
 
 
-	
+**연관 규칙 추천(Assocication Rule based Recommendation) :** 빅데이터 기반의 데이터 마이닝기법<br>
+"A를 선택하면(antecedent), B도 선택한다(Consequent)"는 규칙을 찾는다.<br>
+<br>
+
+![](./images/data.PNG)
+<br>
+
+# [1] Apriori : 선험적 알고리즘
+
 ![](./images/apriori.png)
 <br>
 https://nyamin9.github.io/data_mining/Data-Mining-Pattern-3/#-31-apriori-algorithm---example<br><br>
