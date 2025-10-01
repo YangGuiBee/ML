@@ -386,7 +386,7 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 ![](./images/1-4.png)
 <br>
 
-# [AR-5] Multi-dimensional Association Rules
+# [AR-5] 다계층 연관규칙(Multi-dimensional Association Rules)
 ▣ 정의: 여러 속성을 포함하여 다양한 차원의 규칙을 생성<br>
 ▣ 필요성: 연관 규칙을 데이터의 여러 차원에 걸쳐 분석하고자 할 때 유용하며, 특정 집단에 대한 특정 패턴을 탐지하는 데 적합<br>
 ▣ 장점: 규칙의 범위를 확장할 수 있어 더 세밀한 규칙 도출 가능.<br>
