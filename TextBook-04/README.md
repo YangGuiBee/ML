@@ -548,6 +548,10 @@ EDA(탐색적 데이터 분석) 효율(통계 기능 내장 → 코드 간결성
 
 # [3] Orange3
 
+![](./images/Orange3_intro.png)
+
+<br>
+
 ![](./images/Orange3.png)
 
 
