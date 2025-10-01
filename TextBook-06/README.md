@@ -148,6 +148,12 @@ https://nyamin9.github.io/data_mining/Data-Mining-Pattern-3/#-31-apriori-algorit
 ![](./images/1-1.png)
 <br>
 
+**지지도(support):** 규칙 전체(A∪B)가 거래에서 차지하는 비율, {butter}→{bread}: 0.6 (거래의 60%에서 butter와 bread 동시 등장)<br>
+**신뢰도(confidence):** 선행항이 등장했을 때, 결과항이 함께 등장할 확률, {butter}→{bread}: 0.75 (butter가 있으면 75% 확률로 bread도 함께 구매)<br>
+**향상도(lift):** 두 항목이 독립일 때 기대되는 확률 대비 함께 등장할 확률, {butter}→{bread}: 0.9375 < 1 → 독립적으로 발생할 때보다 같이 나타날 확률이 오히려 낮음<br>
+
+<br>
+
 # [2] FP-Growth(Frequent Pattern Growth)
 ▣ 정의: Apriori 알고리즘의 대안으로 FP-Tree(Frequent Pattern Tree)를 통해 빈발항목 집합을 생성하는 알고리즘으로, Apriori와 달리 매번 후보집합을 생성하지 않으며, 데이터의 트랜잭션을 직접 탐색하여 빈발항목 집합을 구한다.<br>
 ▣ 필요성: Apriori의 성능 문제를 해결하기 위해 고안<br>
