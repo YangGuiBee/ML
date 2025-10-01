@@ -580,7 +580,7 @@ Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
 ---
 **차원축소의 필요성 :** 데이터에 포함된 노이즈(noise)를 제거할 때 사용하는 방법이 차원축소(dimension reduction)이다. 차원축소는 주어진 데이터의 정보손실을 최소화하면서 노이즈를 줄이는 것이 핵심이다. 차원축소를 통해 차원이 늘어날 수록 필요한 데이터가 기하급수적으로 많아지는 차원의 저주(curse of dimensionality) 문제를 해결할 수 있다. 지도학습의 대표적인 차원축소 방법은 선형판별분석(Linear Discriminant Analysis)이 있고, 비지도학습의 대표적인 차원축소 방법은 주성분분석(Principal Component Anaysis)이 있다.<br>
 
-# [1] PCA(Principal Component Analysis)
+# [DR-1] PCA(Principal Component Analysis)
 ![](./images/PCA_1.png)
 <br>
 ▣ 정의 : 데이터의 분산을 최대한 보존하면서 데이터의 주요 성분(주성분)을 찾기 위해 선형 변환을 적용하는 차원 축소 알고리즘. 여러 특성(Feature) 변수들이 통계적으로 서로 상관관계가 없도록 변환시키는 것으로 고차원 데이터를 저차원으로 변환하는 차원 축소 기법. 주성분분석은 오직 공분산행렬(convariance matrix) $\sum$ 에만 영향을 받는다.<br> 
@@ -628,72 +628,8 @@ Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
 ![](./images/PCA.png)
 <br>
 
-# [2] t-SNE(t-distributed Stochastic Neighbor Embedding)
-▣ 정의: 고차원 데이터의 국소 구조를 잘 보존하여 저차원으로 투영하는 비선형 차원 축소 알고리즘<br>
-▣ 필요성: 데이터의 클러스터 구조를 유지한 채 저차원으로 투영하여 데이터 간의 관계를 시각적으로 파악하기 위해 사용<br>
-▣ 장점 : 고차원 데이터의 군집 구조를 잘 반영하여 데이터의 숨겨진 패턴을 시각적으로 잘 드러내고, 비선형 구조를 가진 데이터에서도 효과적으로 작동<br>
-▣ 단점 : 데이터 포인트 수가 많아질수록 계산 시간이 급격히 증가하고, 초기 매개변수(예: σ 값 및 학습률)에 민감하게 반응<br> 
-▣ 응용 분야 : 이미지 데이터, 텍스트 데이터, 유전자 표현 데이터 등의 시각화, 클러스터링 분석, 데이터 전처리, 신경망 모델의 중간 출력을 시각화<br>
-▣ 모델식: 고차원 데이터의 유사도와 저차원 데이터의 유사도 분포를 맞추기 위해 코스트 함수 𝐾𝐿(𝑝∥𝑞)를 최소화<br>
 
-<br>
-
-    import matplotlib.pyplot as plt
-    from sklearn.manifold import TSNE
-    from sklearn.datasets import load_iris
-
-    # 데이터 로드
-    data = load_iris()
-    X = data.data
-
-    # t-SNE 적용
-    tsne = TSNE(n_components=2, random_state=42)
-    X_tsne = tsne.fit_transform(X)
-
-    # 결과 시각화
-    plt.scatter(X_tsne[:, 0], X_tsne[:, 1], c=data.target)
-    plt.xlabel("t-SNE Component 1")
-    plt.ylabel("t-SNE Component 2")
-    plt.title("t-SNE on Iris Dataset")
-    plt.colorbar()
-    plt.show()
-
-![](./images/tSNE.png)
-<br>
-
-# [3] UMAP(Uniform Manifold Approximation and Projection)
-▣ 정의: 데이터의 국소 구조와 전역 구조를 동시에 보존하면서 저차원으로 투영하는 비선형 차원 축소 알고리즘<br>
-▣ 필요성: 고차원 데이터를 저차원에서 시각화하면서 데이터의 전체적 및 국소적 관계를 동시에 보존하기 위해 사용<br>
-▣ 장점: t-SNE보다 계산이 빠르고, 대규모 데이터에서도 잘 작동, 데이터의 전역적 및 국소적 구조를 동시에 보존<br>
-▣ 단점: 일부 매개변수 조정이 필요하며, 결과가 매개변수에 민감할 수 있음<br>
-▣ 응용분야: 대용량 데이터 시각화, 생물정보학, 텍스트 분석 등<br>
-▣ 모델식: 이론적으로는 리만 거리와 초구 면적 개념을 이용하여 데이터의 근접성을 유지하면서 고차원에서 저차원으로 투영<br>
-
-    !pip install umap-learn
-    import umap
-    import matplotlib.pyplot as plt
-    from sklearn.datasets import load_iris
-
-    # 데이터 로드
-    data = load_iris()
-    X = data.data
-
-    # UMAP 적용
-    umap_model = umap.UMAP(n_components=2, random_state=42)
-    X_umap = umap_model.fit_transform(X)
-
-    # 결과 시각화
-    plt.scatter(X_umap[:, 0], X_umap[:, 1], c=data.target)
-    plt.xlabel("UMAP Component 1")
-    plt.ylabel("UMAP Component 2")
-    plt.title("UMAP on Iris Dataset")
-    plt.colorbar()
-    plt.show()
-
-![](./images/UMAP.png)
-<br>
-
-# [4] SVD(Singular Value Decomposition)
+# [DR-2] SVD(Singular Value Decomposition)
 ![](./images/SVD_1.png)
 <br>
 ▣ 정의: 임의의 행렬을 세 개의 행렬로 분해하는 방식으로 행렬의 특이값과 특이벡터를 통해 행렬의 구조를 파악하고, 이를 통해 데이터의 패턴을 찾거나 압축하는 데 사용<br> 
@@ -733,7 +669,8 @@ Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
 ![](./images/SVD.png)
 <br>
 
-# [5] ICA(Independent Component Analysis)
+
+# [DR-3] ICA(Independent Component Analysis)
 ▣ 정의 : 다변량 신호에서 통계적으로 독립적인 성분을 추출하는 비선형 차원 축소 기법. PCA는 데이터의 분산을 최대화하는 축을 찾는 반면, ICA는 신호 간의 독립성을 기반으로 성분을 찾는다. 또한 PCA는 가우시안 분포를 가정하고 데이터의 상관관계만을 이용해 차원을 축소하거나 성분을 찾는 반면, ICA는 신호들 간의 고차원적 통계적 독립성에 초점을 맞추기 때문에 더 복잡한 구조의 신호분리 문제를 해결<br>
 ▣ 필요성 : 관측된 신호가 여러 독립적인 원천 신호의 혼합으로 구성될 때 각 독립적인 신호를 복원하는 데 필요하며 특히 신호 처리 및 음성 분리에 유용<br>
 ▣ 응용분야 : 뇌파(EEG) 신호 분석, 음성 신호 분리, 이미지 처리<br>
@@ -768,7 +705,7 @@ Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
 ![](./images/ICA.png)
 <br> 
 
-# [6] LDA(Linear Discriminant Analysis)
+# [DR-4] LDA(Linear Discriminant Analysis)
 ![](./images/LDA_1.png)
 <br>
 ▣ 정의: 클래스 간 분산을 최대화하고 클래스 내 분산을 최소화하는 선형 차원 축소 기법으로 주로 지도 학습에서 사용<br>
@@ -806,118 +743,8 @@ Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
 https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysis-python/
 <br>
 
-# [7] Isomap
-▣ 정의: 데이터의 기하학적 구조를 보존하여 고차원 데이터를 저차원으로 투영하는 비선형 차원 축소 기법<br>
-▣ 필요성: 비선형적인 데이터 구조를 저차원에서도 유지하며 시각화할 때 유용<br>
-▣ 장점: 고차원 데이터의 매니폴드(저차원 다양체) 구조를 잘 보존하며, 국소적인 거리 정보를 기반으로 데이터의 구조를 유지<br>
-▣ 단점: 데이터가 고차원에서 매니폴드 구조를 형성하지 않는 경우 효과적이지 않으며, 계산 비용이 높아 대용량 데이터에는 부적합<br>
-▣ 응용분야: 시각화, 이미지 및 텍스트 데이터 분석, 생물정보학<br>
-▣ 모델식: 근접 그래프와 다차원 척도를 결합하여 비선형 구조를 보존<br>
 
-    from sklearn.manifold import Isomap
-    import matplotlib.pyplot as plt
-    from sklearn.datasets import load_iris
-
-    # 데이터 로드
-    data = load_iris()
-    X = data.data
-
-    # Isomap 적용
-    isomap = Isomap(n_components=2)
-    X_isomap = isomap.fit_transform(X)
-
-    # 결과 시각화
-    plt.scatter(X_isomap[:, 0], X_isomap[:, 1], c=data.target)
-    plt.xlabel("Isomap Component 1")
-    plt.ylabel("Isomap Component 2")
-    plt.title("Isomap on Iris Dataset")
-    plt.colorbar()
-    plt.show()
-
-![](./images/ISO.png)
-<br>
-
-# [8] MDS(Multidimensional Scaling)
-▣ 정의: MDS는 고차원 데이터 포인트 간의 거리를 보존하며 저차원으로 투영하는 차원 축소 기법<br>
-▣ 필요성: 데이터의 유사성 또는 거리 정보를 저차원에서도 유지하여 시각화하기 위해 사용<br>
-▣ 장점: 거리 정보를 보존하므로 데이터의 기하학적 관계를 잘 유지하며, 비선형 구조를 일부 보존<br>
-▣ 단점: 계산 비용이 높고, 대용량 데이터에는 적합하지 않으며, 초기화에 민감하여 결과가 다를 수 있음<br>
-▣ 응용분야: 심리학, 생물정보학, 마케팅 데이터 분석 등<br>
-▣ 모델식: 데이터 포인트 간의 거리 행렬을 유지하며 저차원에서 구성<br>
-
-    from sklearn.manifold import MDS
-    import matplotlib.pyplot as plt
-    from sklearn.datasets import load_iris
-
-    # 데이터 로드
-    data = load_iris()
-    X = data.data
-
-    # MDS 적용
-    mds = MDS(n_components=2, random_state=42)
-    X_mds = mds.fit_transform(X)
-
-    # 결과 시각화
-    plt.scatter(X_mds[:, 0], X_mds[:, 1], c=data.target)
-    plt.xlabel("MDS Component 1")
-    plt.ylabel("MDS Component 2")
-    plt.title("MDS on Iris Dataset")
-    plt.colorbar()
-    plt.show()
-
-![](./images/MDS.png)
-<br>
-
-
-# [9] SOM(Self-Organizing Maps)
-▣ 정의 : 고차원의 데이터를 저차원(일반적으로 2차원) 공간으로 투영하여 데이터의 구조를 시각화하는 데 사용. PCA는 선형 변환을 통해 차원 축소를 수행하지만, SOM은 비선형 변환을 사용하여 더 복잡한 데이터 구조를 반영할 수 있으며, k-평균은 각 군집의 중심을 찾는 방식으로 군집화를 수행하는 반면, SOM은 뉴런이 격자 형태로 조직되어 있어 더 직관적인 시각화가 가능<br> 
-▣ 절차
-(1) 초기화: SOM의 각 뉴런에 임의의 가중치 벡터를 할당(이 가중치 벡터는 입력 데이터와 같은 차원)<br>
-(2) 입력 데이터 선택: 학습 과정에서 입력 데이터 벡터 하나를 무작위로 선택<br>
-(3) 승자 뉴런(BMU, Best Matching Unit) 찾기: SOM의 모든 뉴런 중에서 현재 입력 벡터와 가장 유사한(가중치 벡터 간의 유클리드 거리로 측정) 뉴런을 찾는 경쟁 학습의 핵심 단계<br>
-(4) 가중치 벡터 갱신: 선택된 승자 뉴런과 그 주변 이웃 뉴런들의 가중치 벡터를 조정한다. 이때, 가중치 벡터는 입력 데이터에 더 가깝게 이동<br> 
-▣ 장점 : 데이터에 대한 사전 정보가 없어도 유용하게 사용 가능, 군집의 분포나 데이터의 경향성을 직관적으로 이해, 입력 데이터의 이웃 관계를 보존하면서 저차원으로 투영하므로 원래 데이터의 공간적 관계를 유지<br> 
-▣ 단점 : 학습률과 이웃 크기 등 여러 파라미터를 적절히 설정해야 하며, 대규모 데이터 학습에 비효율적, 변환된 맵을 해석하는 것이 PCA 등의 선형 변환보다 더 어려움<br> 
-▣ 응용분야 : 이미지 분석, 문서 분류, 음성 인식, 생물정보학<br>
-▣ 모델식 : 뉴런의 위치 𝑟와 입력 벡터 𝑥 간의 거리 함수로 클러스터를 형성(𝜂(𝑡)는 학습률, ℎ(𝑡)는 이웃 함수)<br>
-$W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
-
-    !pip install minisom
-
-    from minisom import MiniSom
-    import numpy as np
-    import matplotlib.pyplot as plt
-    from sklearn.datasets import load_iris
-    from sklearn.preprocessing import MinMaxScaler
-
-    # 데이터 로드 및 정규화
-    data = load_iris()
-    X = data.data
-    scaler = MinMaxScaler()
-    X_scaled = scaler.fit_transform(X)
-
-    # SOM 초기화 및 학습
-    som = MiniSom(x=10, y=10, input_len=4, sigma=1.0, learning_rate=0.5, random_seed=42)
-    som.train_random(X_scaled, 100)  # 100회 반복 학습
-
-    # SOM 시각화
-    plt.figure(figsize=(10, 10))
-    for i, x in enumerate(X_scaled):
-        w = som.winner(x)
-        plt.text(w[0] + 0.5, w[1] + 0.5, str(data.target[i]),
-        color=plt.cm.rainbow(data.target[i] / 2.0),
-        fontdict={'weight': 'bold', 'size': 11})
-
-    plt.title("SOM Clustering of Iris Data")
-    plt.xlim([0, 10])
-    plt.ylim([0, 10])
-    plt.grid()
-    plt.show()
-
-![](./images/SOM.png)
-<br> 
-
-# [10] NMF(Non-negative Matrix Factorization) 
+# [DR-5] NMF(Non-negative Matrix Factorization) 
 ▣ 정의 : 데이터를 비음수 행렬로 나타내고 이를 두 개의 비음수 행렬의 곱으로 분해하는 행렬 분해(Matrix Factorization) 기법<br>
 ▣ 필요성 : 원본 데이터를 두 개의 비음수(예: 픽셀 값, 주파수 스펙트럼, 사용자 평가 점수 등) 행렬의 곱으로 분해함으로써 비음수 데이터를 압축적으로 표현하여 중요한 구조적 특징을 발견<br>
 ▣ 장점 : 모든 요소가 비음수이므로 결과를 직관적으로 해석, 데이터의 저차원 표현을 효과적으로 학습하며, 각 데이터의 기여 요소를 명확히 구분<br>
@@ -1016,8 +843,189 @@ $𝑉[1,2]=6, 𝑉_{approx}[1,2]=5.99997718$ : 오차는 약 0.00002<br>
 원본 행렬 (𝑉)의 크기: 3×3 → 𝑚=3, 𝑛=3 (데이터 포인트 3개, 특성 3개)<br>
 기저 행렬 (𝑊)의 크기: 3×2 → 𝑚=3, 𝑘=2 (3개의 데이터 포인트를 2개의 잠재 요인으로 표현)<br>
 계수 행렬 (𝐻)의 크기: 2×3 → 𝑘=2, 𝑛=3 (2개의 잠재 요인을 3개의 특성으로 표현)<br>
+<br>
+
+
+# [DR-6] t-SNE(t-distributed Stochastic Neighbor Embedding)
+▣ 정의: 고차원 데이터의 국소 구조를 잘 보존하여 저차원으로 투영하는 비선형 차원 축소 알고리즘<br>
+▣ 필요성: 데이터의 클러스터 구조를 유지한 채 저차원으로 투영하여 데이터 간의 관계를 시각적으로 파악하기 위해 사용<br>
+▣ 장점 : 고차원 데이터의 군집 구조를 잘 반영하여 데이터의 숨겨진 패턴을 시각적으로 잘 드러내고, 비선형 구조를 가진 데이터에서도 효과적으로 작동<br>
+▣ 단점 : 데이터 포인트 수가 많아질수록 계산 시간이 급격히 증가하고, 초기 매개변수(예: σ 값 및 학습률)에 민감하게 반응<br> 
+▣ 응용 분야 : 이미지 데이터, 텍스트 데이터, 유전자 표현 데이터 등의 시각화, 클러스터링 분석, 데이터 전처리, 신경망 모델의 중간 출력을 시각화<br>
+▣ 모델식: 고차원 데이터의 유사도와 저차원 데이터의 유사도 분포를 맞추기 위해 코스트 함수 𝐾𝐿(𝑝∥𝑞)를 최소화<br>
 
 <br>
+
+    import matplotlib.pyplot as plt
+    from sklearn.manifold import TSNE
+    from sklearn.datasets import load_iris
+
+    # 데이터 로드
+    data = load_iris()
+    X = data.data
+
+    # t-SNE 적용
+    tsne = TSNE(n_components=2, random_state=42)
+    X_tsne = tsne.fit_transform(X)
+
+    # 결과 시각화
+    plt.scatter(X_tsne[:, 0], X_tsne[:, 1], c=data.target)
+    plt.xlabel("t-SNE Component 1")
+    plt.ylabel("t-SNE Component 2")
+    plt.title("t-SNE on Iris Dataset")
+    plt.colorbar()
+    plt.show()
+
+![](./images/tSNE.png)
+<br>
+
+
+# [DR-7] UMAP(Uniform Manifold Approximation and Projection)
+▣ 정의: 데이터의 국소 구조와 전역 구조를 동시에 보존하면서 저차원으로 투영하는 비선형 차원 축소 알고리즘<br>
+▣ 필요성: 고차원 데이터를 저차원에서 시각화하면서 데이터의 전체적 및 국소적 관계를 동시에 보존하기 위해 사용<br>
+▣ 장점: t-SNE보다 계산이 빠르고, 대규모 데이터에서도 잘 작동, 데이터의 전역적 및 국소적 구조를 동시에 보존<br>
+▣ 단점: 일부 매개변수 조정이 필요하며, 결과가 매개변수에 민감할 수 있음<br>
+▣ 응용분야: 대용량 데이터 시각화, 생물정보학, 텍스트 분석 등<br>
+▣ 모델식: 이론적으로는 리만 거리와 초구 면적 개념을 이용하여 데이터의 근접성을 유지하면서 고차원에서 저차원으로 투영<br>
+
+    !pip install umap-learn
+    import umap
+    import matplotlib.pyplot as plt
+    from sklearn.datasets import load_iris
+
+    # 데이터 로드
+    data = load_iris()
+    X = data.data
+
+    # UMAP 적용
+    umap_model = umap.UMAP(n_components=2, random_state=42)
+    X_umap = umap_model.fit_transform(X)
+
+    # 결과 시각화
+    plt.scatter(X_umap[:, 0], X_umap[:, 1], c=data.target)
+    plt.xlabel("UMAP Component 1")
+    plt.ylabel("UMAP Component 2")
+    plt.title("UMAP on Iris Dataset")
+    plt.colorbar()
+    plt.show()
+
+![](./images/UMAP.png)
+<br>
+
+
+# [DR-8] Isomap
+▣ 정의: 데이터의 기하학적 구조를 보존하여 고차원 데이터를 저차원으로 투영하는 비선형 차원 축소 기법<br>
+▣ 필요성: 비선형적인 데이터 구조를 저차원에서도 유지하며 시각화할 때 유용<br>
+▣ 장점: 고차원 데이터의 매니폴드(저차원 다양체) 구조를 잘 보존하며, 국소적인 거리 정보를 기반으로 데이터의 구조를 유지<br>
+▣ 단점: 데이터가 고차원에서 매니폴드 구조를 형성하지 않는 경우 효과적이지 않으며, 계산 비용이 높아 대용량 데이터에는 부적합<br>
+▣ 응용분야: 시각화, 이미지 및 텍스트 데이터 분석, 생물정보학<br>
+▣ 모델식: 근접 그래프와 다차원 척도를 결합하여 비선형 구조를 보존<br>
+
+    from sklearn.manifold import Isomap
+    import matplotlib.pyplot as plt
+    from sklearn.datasets import load_iris
+
+    # 데이터 로드
+    data = load_iris()
+    X = data.data
+
+    # Isomap 적용
+    isomap = Isomap(n_components=2)
+    X_isomap = isomap.fit_transform(X)
+
+    # 결과 시각화
+    plt.scatter(X_isomap[:, 0], X_isomap[:, 1], c=data.target)
+    plt.xlabel("Isomap Component 1")
+    plt.ylabel("Isomap Component 2")
+    plt.title("Isomap on Iris Dataset")
+    plt.colorbar()
+    plt.show()
+
+![](./images/ISO.png)
+<br>
+
+
+# [DR-9] MDS(Multidimensional Scaling)
+▣ 정의: MDS는 고차원 데이터 포인트 간의 거리를 보존하며 저차원으로 투영하는 차원 축소 기법<br>
+▣ 필요성: 데이터의 유사성 또는 거리 정보를 저차원에서도 유지하여 시각화하기 위해 사용<br>
+▣ 장점: 거리 정보를 보존하므로 데이터의 기하학적 관계를 잘 유지하며, 비선형 구조를 일부 보존<br>
+▣ 단점: 계산 비용이 높고, 대용량 데이터에는 적합하지 않으며, 초기화에 민감하여 결과가 다를 수 있음<br>
+▣ 응용분야: 심리학, 생물정보학, 마케팅 데이터 분석 등<br>
+▣ 모델식: 데이터 포인트 간의 거리 행렬을 유지하며 저차원에서 구성<br>
+
+    from sklearn.manifold import MDS
+    import matplotlib.pyplot as plt
+    from sklearn.datasets import load_iris
+
+    # 데이터 로드
+    data = load_iris()
+    X = data.data
+
+    # MDS 적용
+    mds = MDS(n_components=2, random_state=42)
+    X_mds = mds.fit_transform(X)
+
+    # 결과 시각화
+    plt.scatter(X_mds[:, 0], X_mds[:, 1], c=data.target)
+    plt.xlabel("MDS Component 1")
+    plt.ylabel("MDS Component 2")
+    plt.title("MDS on Iris Dataset")
+    plt.colorbar()
+    plt.show()
+
+![](./images/MDS.png)
+<br>
+
+
+# [DR-10] SOM(Self-Organizing Maps)
+▣ 정의 : 고차원의 데이터를 저차원(일반적으로 2차원) 공간으로 투영하여 데이터의 구조를 시각화하는 데 사용. PCA는 선형 변환을 통해 차원 축소를 수행하지만, SOM은 비선형 변환을 사용하여 더 복잡한 데이터 구조를 반영할 수 있으며, k-평균은 각 군집의 중심을 찾는 방식으로 군집화를 수행하는 반면, SOM은 뉴런이 격자 형태로 조직되어 있어 더 직관적인 시각화가 가능<br> 
+▣ 절차
+(1) 초기화: SOM의 각 뉴런에 임의의 가중치 벡터를 할당(이 가중치 벡터는 입력 데이터와 같은 차원)<br>
+(2) 입력 데이터 선택: 학습 과정에서 입력 데이터 벡터 하나를 무작위로 선택<br>
+(3) 승자 뉴런(BMU, Best Matching Unit) 찾기: SOM의 모든 뉴런 중에서 현재 입력 벡터와 가장 유사한(가중치 벡터 간의 유클리드 거리로 측정) 뉴런을 찾는 경쟁 학습의 핵심 단계<br>
+(4) 가중치 벡터 갱신: 선택된 승자 뉴런과 그 주변 이웃 뉴런들의 가중치 벡터를 조정한다. 이때, 가중치 벡터는 입력 데이터에 더 가깝게 이동<br> 
+▣ 장점 : 데이터에 대한 사전 정보가 없어도 유용하게 사용 가능, 군집의 분포나 데이터의 경향성을 직관적으로 이해, 입력 데이터의 이웃 관계를 보존하면서 저차원으로 투영하므로 원래 데이터의 공간적 관계를 유지<br> 
+▣ 단점 : 학습률과 이웃 크기 등 여러 파라미터를 적절히 설정해야 하며, 대규모 데이터 학습에 비효율적, 변환된 맵을 해석하는 것이 PCA 등의 선형 변환보다 더 어려움<br> 
+▣ 응용분야 : 이미지 분석, 문서 분류, 음성 인식, 생물정보학<br>
+▣ 모델식 : 뉴런의 위치 𝑟와 입력 벡터 𝑥 간의 거리 함수로 클러스터를 형성(𝜂(𝑡)는 학습률, ℎ(𝑡)는 이웃 함수)<br>
+$W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
+
+    !pip install minisom
+
+    from minisom import MiniSom
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from sklearn.datasets import load_iris
+    from sklearn.preprocessing import MinMaxScaler
+
+    # 데이터 로드 및 정규화
+    data = load_iris()
+    X = data.data
+    scaler = MinMaxScaler()
+    X_scaled = scaler.fit_transform(X)
+
+    # SOM 초기화 및 학습
+    som = MiniSom(x=10, y=10, input_len=4, sigma=1.0, learning_rate=0.5, random_seed=42)
+    som.train_random(X_scaled, 100)  # 100회 반복 학습
+
+    # SOM 시각화
+    plt.figure(figsize=(10, 10))
+    for i, x in enumerate(X_scaled):
+        w = som.winner(x)
+        plt.text(w[0] + 0.5, w[1] + 0.5, str(data.target[i]),
+        color=plt.cm.rainbow(data.target[i] / 2.0),
+        fontdict={'weight': 'bold', 'size': 11})
+
+    plt.title("SOM Clustering of Iris Data")
+    plt.xlim([0, 10])
+    plt.ylim([0, 10])
+    plt.grid()
+    plt.show()
+
+![](./images/SOM.png)
+<br> 
+
+
 
 ---
 ## [차원 축소 알고리즘 평가방법]
