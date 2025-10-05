@@ -1047,7 +1047,6 @@ Accuracy 기준<br>
 | **중심갱신** | 각 군집의 평균으로 갱신<br>$m_j = \frac{1}{\lvert C_j \rvert}\sum_{x_i \in C_j} x_i$ |
 | **목표** | 군집 내 분산(SSE) 최소화 — 컴팩트하고 원형 구조 추출 |
 
-<br>
 
 ## [1-2] K-medoids (PAM: Partitioning Around Medoids)
 
@@ -1059,7 +1058,6 @@ Accuracy 기준<br>
 | **중심갱신** | 군집 내에서 전체 거리합이 최소인 실제 데이터 포인트로 갱신<br>$m_j = \arg\min_{x_h \in C_j} \sum_{x_i \in C_j} d(x_i, x_h)$ |
 | **목표** | 이상치(Outlier)에 강건한 중심 선택 — 군집 내 거리합 최소화 |
 
-<br>
 
 ## [1-3] K-modes
 
@@ -1071,7 +1069,6 @@ Accuracy 기준<br>
 | **중심갱신** | 각 속성별로 최빈값(mode)으로 갱신<br>$m_{jk} = \arg\max_v \text{count}(x_{ik}=v, \; x_i \in C_j)$ |
 | **목표** | 군집 내 속성 불일치 최소화 — 범주형 속성 기반 패턴 탐색 |
 
-<br>
 
 ## [1-4] CLARANS / CLARA
 
@@ -1083,7 +1080,6 @@ Accuracy 기준<br>
 | **중심갱신** | **CLARA:** 전체 데이터 중 일부를 샘플링하여 PAM(K-medoids) 수행 후 대표 메도이드 선택<br>**CLARANS:** 무작위 탐색(Randomized Search)을 통해 메도이드 후보 교체 — 비용이 감소하면 새로운 메도이드로 채택 |
 | **목표** | K-medoids의 정확도를 유지하면서 대규모 데이터에서도 효율적으로 수행 — 샘플링 및 확률적 탐색으로 계산 복잡도 감소 |
 
-<br>
 
 ## [1-5] FCM (Fuzzy C-means)
 
@@ -1744,9 +1740,6 @@ Ward는 두 군집을 합쳤을 때 전체 군집 내 제곱오차합(SSE: Sum o
 가장 작은 𝐷(𝐴,𝐵)를 가진 두 군집만 병합<br>
 <br>
 
-# 📘 Hierarchical-based Clustering Algorithms Summary
-Agglomerative, Divisive, BIRCH, CURE, ROCK, Chameleon
-
 ---
 
 ## [2-1] Hierarchical (Agglomerative / Divisive)
@@ -1771,7 +1764,6 @@ Agglomerative, Divisive, BIRCH, CURE, ROCK, Chameleon
 | **중심갱신** | 새로운 샘플 삽입 시 가장 가까운 리프 노드에 병합, 해당 노드의 CF 갱신<br>필요 시 노드 분할(splitting) 수행 |
 | **목표** | 대규모 데이터의 점진적(Incremental) 계층 요약 — 메모리 효율적 군집화 및 후처리 단계에서 추가 군집 알고리즘 적용 가능 |
 
-<br>
 
 ## [2-3] CURE (Clustering Using Representatives)
 
@@ -1783,7 +1775,6 @@ Agglomerative, Divisive, BIRCH, CURE, ROCK, Chameleon
 | **중심갱신** | 각 군집에서 표본 대표점을 선택 후, 전체 중심으로 수축(shrinking factor $\alpha$)하여 대표점 재배치 |
 | **목표** | 다양한 형태(비구형·비균질)의 군집을 탐지하고, 이상치에 강건한 계층적 병합 구조 구현 |
 
-<br>
 
 ## [2-4] ROCK (Robust Clustering using Links)
 
@@ -1795,7 +1786,6 @@ Agglomerative, Divisive, BIRCH, CURE, ROCK, Chameleon
 | **중심갱신** | 병합 시 두 군집 간 링크 수 계산을 업데이트하여 결합 기준(link merge criterion) 적용 |
 | **목표** | 거리 대신 **연결성(link connectivity)** 을 활용해 범주형 데이터에서 강건한 군집 구조 탐색 |
 
-<br>
 
 ## [2-5] Chameleon
 
