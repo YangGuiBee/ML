@@ -2167,6 +2167,51 @@ Ward는 두 군집을 합쳤을 때 전체 군집 내 제곱오차합(SSE: Sum o
 ![](./images/3-5.png)
 <br>
 
+## [3-1] DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | 두 개의 파라미터 $(\varepsilon, \text{MinPts})$로 정의되는 밀도 기준 — 데이터 포인트, 핵심점(core), 경계점(border), 잡음(noise) |
+| **거리함수** | 일반적으로 유클리드 거리<br>$d(x_i, x_j) = \lVert x_i - x_j \rVert$ |
+| **목적함수** | 명시적 목적함수는 없으며, 지역 밀도가 $\text{MinPts}$ 이상인 포인트를 중심으로 군집 형성 |
+| **중심갱신** | 명시적 중심 개념 없음 — 군집은 밀도 연결(density reachability) 관계로 확장됨 |
+| **목표** | 밀도 기반으로 임의의 형태의 군집을 탐지하고, 잡음(outlier)을 자동 식별 — 군집 수 자동 결정 가능 |
+
+
+## [3-2] OPTICS (Ordering Points To Identify the Clustering Structure)
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | DBSCAN의 확장형 — 점들의 **도달 거리(reachability distance)** 를 기반으로 데이터 순서를 정렬하여 계층적 밀도 구조 표현 |
+| **거리함수** | 유클리드 거리 기반<br>도달 거리: $reachability(p, o) = \max(core\_dist(p), \; d(p,o))$ |
+| **목적함수** | 밀도 가변 데이터셋에서 다양한 스케일의 군집 구조를 발견하기 위해 도달 거리 최소화 순서 생성 |
+| **중심갱신** | 명시적 중심 없음 — 각 점의 도달 거리(reachability distance)와 핵심 거리(core distance)만 갱신 |
+| **목표** | $\varepsilon$ 값 선택에 민감한 DBSCAN의 한계를 보완 — **밀도 변화에 따른 연속적 군집 구조(Reachability Plot)** 탐색 |
+
+
+## [3-3] DENCLUE (DENsity-based CLUstEring)
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | 확률적 밀도 분포 함수를 커널(kernel) 함수로 모델링 — 데이터 공간의 밀도 함수로부터 군집 추출 |
+| **거리함수** | 유클리드 거리<br>커널 함수 예: $K(x, x_i) = e^{-\frac{\lVert x - x_i \rVert^2}{2\sigma^2}}$ |
+| **목적함수** | 전체 밀도 함수 $\displaystyle f(x) = \sum_i K(x, x_i)$ 의 지역 극대(local maximum) 탐색 — 밀도 흡인점(density attractor) 찾기 |
+| **중심갱신** | 데이터 포인트가 밀도 경사(gradient ascent)를 따라 이동하며 밀도 극대점으로 수렴<br>즉, $x_{t+1} = \frac{\sum_i x_i \, K(x_t, x_i)}{\sum_i K(x_t, x_i)}$ |
+| **목표** | 밀도 함수를 통해 연속적·매끄러운 군집 구조를 모델링 — 노이즈에 강건하고 비선형 경계 탐색 가능 |
+
+
+## [3-4] Mean-Shift Clustering
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | 커널 밀도 추정 기반의 비모수(non-parametric) 군집화 — 윈도우(밴드폭) 내 평균 이동(mean shift) 반복 |
+| **거리함수** | 유클리드 거리 기반의 커널 가중 평균<br>$m(x) = \frac{\sum_i K(x - x_i)x_i}{\sum_i K(x - x_i)}$ |
+| **목적함수** | 커널 밀도 함수의 **극대점(local maxima)** 을 찾기 위한 경사 상승(gradient ascent) 방식 |
+| **중심갱신** | 각 포인트를 밀도 중심 방향으로 이동<br>$x_{t+1} = m(x_t)$ (수렴 시 군집 중심이 됨) |
+| **목표** | 커널 밀도에서 **모드(mode)** 들을 식별하여 군집 형성 — 군집 수를 사전 지정하지 않고 자동 결정 가능 |
+
+<br>
+
 ---
 
 # [4-1] Wave-Cluster
