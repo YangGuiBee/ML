@@ -1613,6 +1613,71 @@ import numpy as np
 ![](./images/dendrogram.PNG)
 <br>
 
+(class별 색 조정)
+
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	from sklearn.datasets import load_iris
+	from sklearn.preprocessing import StandardScaler
+	from scipy.cluster.hierarchy import linkage, dendrogram
+	import matplotlib.patches as mpatches
+	
+	# 1) 데이터 로드 & 표준화
+	iris = load_iris()
+	X = pd.DataFrame(iris.data, columns=iris.feature_names)
+	y = iris.target  # 0=setosa, 1=versicolor, 2=virginica
+	
+	scaler = StandardScaler()
+	X_scaled = scaler.fit_transform(X)
+	
+	# 2) 계층적 군집 (Ward)
+	Z = linkage(X_scaled, method='ward')
+	
+	# 3) 덴드로그램: 가지(선)는 중립색(회색)으로, 리프 라벨은 클래스 색으로
+	#    - link_color_func로 선을 회색 처리 → 선 색이 클래스 의미를 오해하지 않도록
+	#    - labels는 보기 좋게 샘플 인덱스 대신 클래스명으로 표시(원하면 인덱스로 바꿔도 됨)
+	fig, ax = plt.subplots(figsize=(14, 6))
+	ddata = dendrogram(
+	    Z,
+	    labels=[iris.target_names[i] for i in y],
+	    leaf_rotation=90,
+	    leaf_font_size=9,
+	    link_color_func=lambda k: "lightgray"  # 가지(선) 회색
+	)
+	
+	# 4) 리프 라벨(틱) 색상을 실제 클래스별로 지정
+	#    ddata['leaves']는 덴드로그램 정렬 후의 원본 인덱스 순서
+	order = ddata['leaves']
+	# 클래스별 색 지정 (원하는 색상 코드로 바꿔도 됩니다)
+	cmap = {0: "#1f77b4",  # setosa  (파란색)
+	        1: "#ff7f0e",  # versicolor (주황)
+	        2: "#2ca02c"}  # virginica  (초록)
+	
+	# X축 ticklabel 가져와서 해당 순서의 클래스에 맞춰 색칠
+	xticklabels = ax.get_xmajorticklabels()
+	for lbl, idx in zip(xticklabels, order):
+	    cls = y[idx]
+	    lbl.set_color(cmap[cls])
+	    lbl.set_fontweight("bold")
+	
+	# 5) 범례 추가 (클래스 3개)
+	handles = [
+	    mpatches.Patch(color=cmap[0], label="setosa"),
+	    mpatches.Patch(color=cmap[1], label="versicolor"),
+	    mpatches.Patch(color=cmap[2], label="virginica"),
+	]
+	ax.legend(handles=handles, loc="upper right", title="True Class (leaf labels)")
+	
+	ax.set_title("Iris Dendrogram (Ward) — branches gray, leaves colored by true class")
+	ax.set_xlabel("Leaves (label colored by class)")
+	ax.set_ylabel("Ward Distance")
+	plt.tight_layout()
+	plt.show()
+	
+![](./images/ward.png)
+
+<br>
+
 ---
 
 # [3-1] DBSCAN(Density-Based Spatial Clustering of Applications with Noise)
