@@ -2959,22 +2959,22 @@ Ward는 두 군집을 합쳤을 때 전체 군집 내 제곱오차합(SSE: Sum o
 
 | 항목 | 내용 |
 |------|------|
-| **구성요소** | 혼합 정규분포 모델<br>$p(x)=\\sum_{k=1}^{K}\\pi_k\\mathcal{N}(x|\\mu_k,\\Sigma_k)$ |
-| **거리함수** | 확률밀도 기반 거리<br>$d(x,k)=-\\log\\mathcal{N}(x|\\mu_k,\\Sigma_k)$ |
-| **목적함수** | 로그 가능도 최대화<br>$\\log L=\\sum_i\\log\\sum_k\\pi_k\\mathcal{N}(x_i|\\mu_k,\\Sigma_k)$ |
-| **중심갱신** | EM 반복<br>E-step: $\\gamma_{ik}=\\frac{\\pi_k\\mathcal{N}(x_i|\\mu_k,\\Sigma_k)}{\\sum_j\\pi_j\\mathcal{N}(x_i|\\mu_j,\\Sigma_j)}$<br>M-step: $\\mu_k=\\frac{\\sum_i\\gamma_{ik}x_i}{\\sum_i\\gamma_{ik}}$ |
-| **목표** | 확률적 Soft Clustering 수행 |
+| **구성요소** | 혼합 정규분포(가우시안) 모델<br>$p(x) = \sum_{k=1}^{K} \pi_k \, \mathcal{N}(x \mid \mu_k, \Sigma_k)$<br>혼합계수 $\pi_k$ 는 $\sum_k \pi_k = 1$ |
+| **거리함수** | 유클리드 거리 대신 확률밀도 기반 유사도 사용<br>$d(x, k) = -\log \mathcal{N}(x \mid \mu_k, \Sigma_k)$ |
+| **목적함수** | 로그 가능도(log-likelihood) 최대화<br>$\log L = \sum_{i=1}^{N} \log \left( \sum_{k=1}^{K} \pi_k \, \mathcal{N}(x_i \mid \mu_k, \Sigma_k) \right)$ |
+| **중심갱신** | EM 알고리즘 반복 수행<br>**E-step:** $\gamma_{ik} = \dfrac{\pi_k \, \mathcal{N}(x_i \mid \mu_k, \Sigma_k)}{\sum_{j=1}^{K} \pi_j \, \mathcal{N}(x_i \mid \mu_j, \Sigma_j)}$<br>**M-step:** $\mu_k = \dfrac{\sum_i \gamma_{ik} x_i}{\sum_i \gamma_{ik}}$, &nbsp; $\Sigma_k = \dfrac{\sum_i \gamma_{ik} (x_i - \mu_k)(x_i - \mu_k)^T}{\sum_i \gamma_{ik}}$, &nbsp; $\pi_k = \dfrac{\sum_i \gamma_{ik}}{N}$ |
+| **목표** | 데이터가 여러 확률적 분포에 속할 수 있도록 혼합모델을 추정하고 **Soft Clustering** 수행 |
 
 
 ## [5-2] COBWEB / CLASSIT
 
 | 항목 | 내용 |
 |------|------|
-| **구성요소** | 속성(attribute) 기반 개념 트리 계층형 군집 |
-| **거리함수** | Category Utility(CU)<br>$CU=\\frac{1}{k}\\sum_{j=1}^{k}[P(A_j|C)^2+P(\\neg A_j|\\neg C)^2-P(A_j)^2-P(\\neg A_j)^2]$ |
-| **목적함수** | CU 최대화 |
-| **중심갱신** | CU 재계산 후 삽입·분할·병합 결정 |
-| **목표** | 온라인·설명가능한 계층형 군집 생성 |
+| **구성요소** | 속성(attribute) 기반 개념 트리 계층형 군집화 알고리즘<br>각 노드는 하나의 범주(category)를 의미하며, 자식 노드는 세분화된 하위 개념을 나타냄 |
+| **거리함수** | 명시적 거리 대신 Category Utility(CU)를 사용하여 범주 간 구분도 평가<br>$CU = \dfrac{1}{k} \sum_{j=1}^{k} \left[ \sum_{i} P(A_i \mid C_j)^2 + \sum_{i} P(\neg A_i \mid C_j)^2 - \sum_{i} P(A_i)^2 - \sum_{i} P(\neg A_i)^2 \right]$ |
+| **목적함수** | Category Utility(CU)를 최대화하여 트리의 분기(splitting) 또는 병합(merging) 구조 결정 |
+| **중심갱신** | 새 데이터가 들어올 때마다 CU 값을 다시 계산하여, 분할(split) / 병합(merge) / 삽입(insert) 중 최적의 구조 선택<br>CLASSIT은 수치형 속성에 대해 정규분포 기반 확률 추정으로 확장됨 |
+| **목표** | 온라인 환경에서도 실시간으로 설명가능하고 계층적인 군집 트리(concept hierarchy)를 생성 |
 
 
 ## [5-3] SOMs (Self-Organizing Maps)
