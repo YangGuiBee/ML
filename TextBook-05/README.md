@@ -1073,6 +1073,18 @@ Accuracy 기준<br>
 
 <br>
 
+## [1-4] CLARANS / CLARA
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | 대규모 데이터셋, 샘플링 기반 메도이드 탐색 알고리즘<br>CLARA(Clustering LARge Applications), CLARANS(Clustering Large Applications based on RANdomized Search) |
+| **거리함수** | K-medoids와 동일 (유클리드 거리, 맨해튼 거리 등 일반 거리 척도)<br>$d(x_i, m_j) = \lVert x_i - m_j \rVert$ |
+| **목적함수** | 군집 내 거리합 최소화<br>$J = \sum_{j=1}^{K}\sum_{x_i \in C_j} d(x_i, m_j)$ |
+| **중심갱신** | **CLARA:** 전체 데이터 중 일부를 샘플링하여 PAM(K-medoids) 수행 후 대표 메도이드 선택<br>**CLARANS:** 무작위 탐색(Randomized Search)을 통해 메도이드 후보 교체 — 비용이 감소하면 새로운 메도이드로 채택 |
+| **목표** | K-medoids의 정확도를 유지하면서 대규모 데이터에서도 효율적으로 수행 — 샘플링 및 확률적 탐색으로 계산 복잡도 감소 |
+
+<br>
+
 ---
 
 # [2-1] Hierarchical Clustering(Agglomerative / Divisive)
