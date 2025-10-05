@@ -2579,27 +2579,26 @@ Ward는 두 군집을 합쳤을 때 전체 군집 내 제곱오차합(SSE: Sum o
 <br>
 
 
-## [4-1] Wave-Cluster
 
-## [4-1] Wave-Cluster  (수식 및 중심갱신 수정판)
+## [4-1] Wave-Cluster  (수식 및 중심갱신 완전호환판)
 
 | 항목 | 내용 |
 |------|------|
 | **구성요소** | 데이터 공간을 격자(grid)로 양자화한 뒤, 웨이블릿 변환 $W_f$ 로 밀도 변화를 감지 |
-| **거리함수** | 명시적 점-점 거리 대신 웨이블릿 응답 사용<br>$W_f(\mathbf{s}) = (f * \psi)(\mathbf{s})$ |
-| **목적함수** | 웨이블릿 에너지의 임계 초과(superlevel) 연결 성분을 군집으로 선택<br>$\max_{\mathcal{C}} \sum_{C \in \mathcal{C}} \sum_{\mathbf{s} \in C} \lvert W_f(\mathbf{s}) \rvert^2$<br>단, $\mathbf{s}\in\Omega_\tau=\{\mathbf{s}:\lvert W_f(\mathbf{s})\rvert\ge\tau\}$, $C$는 연결 성분 |
-| **중심갱신** | 에너지 가중 중심(센트로이드)<br>$\mathbf{m}_C = \dfrac{\sum_{\mathbf{s}\in C} \lvert W_f(\mathbf{s}) \rvert^2 \, \mathbf{s}}{\sum_{\mathbf{s}\in C} \lvert W_f(\mathbf{s}) \rvert^2}$ |
+| **거리함수** | 명시적 점-점 거리 대신 웨이블릿 응답 사용<br>$W_f(s) = (f * \\psi)(s)$ |
+| **목적함수** | 웨이블릿 에너지의 임계 초과(superlevel) 연결 성분을 군집으로 선택<br>$\\max_{\\mathcal{C}} \\sum_{C \\in \\mathcal{C}} \\sum_{s \\in C} \\lvert W_f(s) \\rvert^2$<br>단, $s \\in \\Omega_\\tau = \\{ s : \\lvert W_f(s) \\rvert \\ge \\tau \\}$, $C$는 연결 성분 |
+| **중심갱신** | 에너지 가중 중심(센트로이드)<br>$m_C = \\dfrac{\\sum_{s \\in C} \\lvert W_f(s) \\rvert^2 \\, s}{\\sum_{s \\in C} \\lvert W_f(s) \\rvert^2}$ |
 | **목표** | 주파수 영역에서 노이즈(고주파)를 억제하고, 에너지가 높은 영역의 연결 성분을 임의 형태의 군집으로 추출 |
 
 
-## [4-2] STING (Statistical Information Grid-based method)  (거리함수 정리판)
+## [4-2] STING (Statistical Information Grid-based method)  (거리함수 완전호환판)
 
 | 항목 | 내용 |
 |------|------|
-| **구성요소** | 다단계 격자. 각 셀 $C_i$ 가 요약 통계 $(n_i,\;\boldsymbol{\mu}_i,\;\mathbf{\Sigma}_i)$ 를 보유 |
-| **거리함수** | 셀 간 통계 기반 거리 (두 표본 마할라노비스 형태)<br>$d(C_i, C_j) = \sqrt{(\boldsymbol{\mu}_i - \boldsymbol{\mu}_j)^{\top} \mathbf{S}_{ij}^{-1} (\boldsymbol{\mu}_i - \boldsymbol{\mu}_j)}$<br>단, $\mathbf{S}_{ij} = \dfrac{\mathbf{\Sigma}_i}{n_i} + \dfrac{\mathbf{\Sigma}_j}{n_j}$<br>(단변량 특수형) $d = \dfrac{|\mu_i - \mu_j|}{\sqrt{\dfrac{\sigma_i^2}{n_i} + \dfrac{\sigma_j^2}{n_j}}}$ |
+| **구성요소** | 다단계 격자. 각 셀 $C_i$ 가 요약 통계 $(n_i, \\mu_i, \\Sigma_i)$ 를 보유 |
+| **거리함수** | 셀 간 통계 기반 거리 (두 표본 마할라노비스 형태)<br>$d(C_i, C_j) = \\sqrt{(\\mu_i - \\mu_j)^T S_{ij}^{-1} (\\mu_i - \\mu_j)}$<br>단, $S_{ij} = \\dfrac{\\Sigma_i}{n_i} + \\dfrac{\\Sigma_j}{n_j}$<br>(단변량 특수형) $d = \\dfrac{|\\mu_i - \\mu_j|}{\\sqrt{\\dfrac{\\sigma_i^2}{n_i} + \\dfrac{\\sigma_j^2}{n_j}}}$ |
 | **목적함수** | 상위→하위 레벨로 내려가며 $d(C',C)$ 가 작고(유사), 밀도가 높은 하위 셀 선택 |
-| **중심갱신** | 병합된 상위 셀 통계 업데이트:<br>$\boldsymbol{\mu} = \dfrac{\sum_i n_i \boldsymbol{\mu}_i}{\sum_i n_i}$, &nbsp; $\mathbf{\Sigma} = \dfrac{\sum_i [\mathbf{\Sigma}_i + (\boldsymbol{\mu}_i - \boldsymbol{\mu})(\boldsymbol{\mu}_i - \boldsymbol{\mu})^{\top}]}{\sum_i n_i}$ |
+| **중심갱신** | 병합된 상위 셀 통계 업데이트:<br>$\\mu = \\dfrac{\\sum_i n_i \\mu_i}{\\sum_i n_i}$, &nbsp; $\\Sigma = \\dfrac{\\sum_i [\\Sigma_i + (\\mu_i - \\mu)(\\mu_i - \\mu)^T]}{\\sum_i n_i}$ |
 | **목표** | 통계 요약만으로 빠르고 확장성 높은 탐색을 하되, 통계적으로 유의한 유사 셀을 묶어 군집화 |
 
 
