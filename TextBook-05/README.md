@@ -1784,7 +1784,7 @@ Ward는 두 군집을 합쳤을 때 전체 군집 내 제곱오차합(SSE: Sum o
 | **거리함수** | 링크 수 기반 거리<br>$\text{link}(x_i, x_j)$ = 두 포인트가 공유하는 공통 이웃(neighbor)의 개수 |
 | **목적함수** | 링크 연결 수를 최대화하여 군집 내 결속도 강화<br>유사도 = $\frac{\text{link}(x_i, x_j)}{(\text{deg}(x_i)\,\text{deg}(x_j))^{f(\theta)}}$ |
 | **중심갱신** | 병합 시 두 군집 간 링크 수 계산을 업데이트하여 결합 기준(link merge criterion) 적용 |
-| **목표** | 거리 대신 **연결성(link connectivity)** 을 활용해 범주형 데이터에서 강건한 군집 구조 탐색 |
+| **목표** | 거리 대신 연결성(link connectivity)을 활용해 범주형 데이터에서 강건한 군집 구조 탐색 |
 
 
 ## [2-5] Chameleon
@@ -1795,7 +1795,7 @@ Ward는 두 군집을 합쳤을 때 전체 군집 내 제곱오차합(SSE: Sum o
 | **거리함수** | 그래프 유사도 기반 거리<br>두 군집 $C_i, C_j$ 간 상호 연결성(inter-connectivity)과 근접도(closeness) |
 | **목적함수** | 내부 연결도(Internal Connectivity)와 외부 연결도(Between Connectivity)의 비율 최적화 |
 | **중심갱신** | 군집 병합 시 그래프의 연결 간선 업데이트 — 지역적 특성(Local Structure)을 반영한 적응형 병합 수행 |
-| **목표** | 데이터 분포의 모양·밀도에 적응하는 **동적 군집화(Dynamic Modeling)** 실현 — 전통적 계층법의 한계 극복 |
+| **목표** | 데이터 분포의 모양·밀도에 적응하는 동적 군집화(Dynamic Modeling) 실현 — 전통적 계층법의 한계 극복 |
 
 <br>
 
@@ -2186,7 +2186,7 @@ Ward는 두 군집을 합쳤을 때 전체 군집 내 제곱오차합(SSE: Sum o
 | **거리함수** | 유클리드 거리 기반<br>도달 거리: $reachability(p, o) = \max(core\_dist(p), \; d(p,o))$ |
 | **목적함수** | 밀도 가변 데이터셋에서 다양한 스케일의 군집 구조를 발견하기 위해 도달 거리 최소화 순서 생성 |
 | **중심갱신** | 명시적 중심 없음 — 각 점의 도달 거리(reachability distance)와 핵심 거리(core distance)만 갱신 |
-| **목표** | $\varepsilon$ 값 선택에 민감한 DBSCAN의 한계를 보완 — **밀도 변화에 따른 연속적 군집 구조(Reachability Plot)** 탐색 |
+| **목표** | $\varepsilon$ 값 선택에 민감한 DBSCAN의 한계를 보완 — 밀도 변화에 따른 연속적 군집 구조(Reachability Plot) 탐색 |
 
 
 ## [3-3] DENCLUE (DENsity-based CLUstEring)
@@ -2206,9 +2206,9 @@ Ward는 두 군집을 합쳤을 때 전체 군집 내 제곱오차합(SSE: Sum o
 |------|------|
 | **구성요소** | 커널 밀도 추정 기반의 비모수(non-parametric) 군집화 — 윈도우(밴드폭) 내 평균 이동(mean shift) 반복 |
 | **거리함수** | 유클리드 거리 기반의 커널 가중 평균<br>$m(x) = \frac{\sum_i K(x - x_i)x_i}{\sum_i K(x - x_i)}$ |
-| **목적함수** | 커널 밀도 함수의 **극대점(local maxima)** 을 찾기 위한 경사 상승(gradient ascent) 방식 |
+| **목적함수** | 커널 밀도 함수의 극대점(local maxima)을 찾기 위한 경사 상승(gradient ascent) 방식 |
 | **중심갱신** | 각 포인트를 밀도 중심 방향으로 이동<br>$x_{t+1} = m(x_t)$ (수렴 시 군집 중심이 됨) |
-| **목표** | 커널 밀도에서 **모드(mode)** 들을 식별하여 군집 형성 — 군집 수를 사전 지정하지 않고 자동 결정 가능 |
+| **목표** | 커널 밀도에서 모드(mode)들을 식별하여 군집 형성 — 군집 수를 사전 지정하지 않고 자동 결정 가능 |
 
 <br>
 
@@ -2583,22 +2583,23 @@ Ward는 두 군집을 합쳤을 때 전체 군집 내 제곱오차합(SSE: Sum o
 
 | 항목 | 내용 |
 |------|------|
-| **구성요소** | 데이터 공간을 격자(grid) 형태로 변환한 후, 웨이블릿 변환(Wavelet Transform)을 통해 밀도 변화를 감지 |
-| **거리함수** | 명시적 거리함수 대신 웨이블릿 필터 기반 공간 주파수 분석<br>$f'(x, y) = f(x, y) * \psi(x, y)$ |
-| **목적함수** | 고주파(노이즈) 제거 후, 저주파 영역의 밀도 극대점(local maxima)을 탐색<br>$E(x, y) = |f'(x, y)|^2$ 를 최대화 |
-| **중심갱신** | 웨이블릿 변환 후 에너지가 높은 셀(밀도 중심)을 군집 중심으로 설정<br>에너지 임계값 $E(x, y) > \tau$ 인 셀 병합 |
-| **목표** | 주파수 영역에서 밀도 변화를 포착하여 노이즈를 제거하고 임의 형태의 군집 자동 탐지 |
+| **구성요소** | 데이터 공간을 격자(grid)로 양자화한 뒤, 웨이블릿 변환 $W_f$ 로 밀도 변화를 감지 |
+| **거리함수** | 명시적 점-점 거리 대신 웨이블릿 응답 사용<br>$W_f(\mathbf{s}) = (f * \psi)(\mathbf{s})$ |
+| **목적함수** | 웨이블릿 에너지의 임계 초과(superlevel) 연결 성분을 군집으로 선택<br>$\displaystyle \max_{\mathcal{C}} \sum_{C \in \mathcal{C}} \sum_{\mathbf{s} \in C} \lvert W_f(\mathbf{s}) \rvert^2 \quad\text{s.t.}\quad \mathbf{s}\in\Omega_\tau=\{\mathbf{s}:\lvert W_f(\mathbf{s})\rvert\ge\tau\},\; C\text{는 연결 성분}$ |
+| **중심갱신** | 에너지 가중 중심(센트로이드)<br>$\displaystyle \mathbf{m}_C=\frac{\sum_{\mathbf{s}\in C}\lvert W_f(\mathbf{s})\rvert^2\,\mathbf{s}}{\sum_{\mathbf{s}\in C}\lvert W_f(\mathbf{s})\rvert^2}$ |
+| **목표** | 주파수 영역에서 노이즈(고주파)를 억제하고, 에너지 높은 영역의 연결 성분을 **임의 형태의 군집**으로 추출 |
+
 
 
 ## [4-2] STING (Statistical Information Grid-based method)
 
 | 항목 | 내용 |
 |------|------|
-| **구성요소** | 다단계 격자 구조 — 각 셀(Cell)이 통계 요약값 $(n, \mu, \sigma^2, \min, \max)$ 보유 |
-| **거리함수** | 셀 간 평균 차이 또는 통계적 유사도<br>$d(C_i, C_j) = |\mu_i - \mu_j|$ |
-| **목적함수** | 셀의 확률밀도 추정값을 최대화하는 영역 탐색<br>$P(C_i) = \frac{n_i}{N}$, $E(C_i) = \frac{1}{\sqrt{2\pi\sigma_i^2}} e^{-\frac{(\mu_i - \mu_j)^2}{2\sigma_i^2}}$ |
-| **중심갱신** | 셀 통계값(평균, 분산)을 업데이트하며 유사 셀을 상위 레벨로 병합<br>통계 요약식: $\mu = \frac{\sum_i n_i \mu_i}{\sum_i n_i}$ |
-| **목표** | 계층적 통계 요약을 활용해 빠르고 효율적인 격자 기반 군집화 수행 |
+| **구성요소** | 다단계 격자. 각 셀 $C_i$ 가 요약 통계 $(n_i,\;\boldsymbol{\mu}_i,\;\mathbf{\Sigma}_i)$ 를 보유 |
+| **거리함수** | 셀-셀 통계 기반 거리(두-표본 마할라노비스 형태)<br>$\displaystyle d(C_i,C_j)=\sqrt{(\boldsymbol{\mu}_i-\boldsymbol{\mu}_j)^\top \mathbf{S}_{ij}^{-1}(\boldsymbol{\mu}_i-\boldsymbol{\mu}_j)},\quad \mathbf{S}_{ij}=\frac{\mathbf{\Sigma}_i}{n_i}+\frac{\mathbf{\Sigma}_j}{n_j}$<br>(단변량 특수형) $\displaystyle d=\frac{\lvert \mu_i-\mu_j\rvert}{\sqrt{\sigma_i^2/n_i+\sigma_j^2/n_j}}$ |
+| **목적함수** | 상위→하위 레벨로 내려가며 $d(C',C)$ 가 작고(유사), 밀도가 높은 하위 셀 선택 |
+| **중심갱신** | 병합된 상위 셀 통계 업데이트:<br>$\displaystyle \boldsymbol{\mu}=\frac{\sum_i n_i\boldsymbol{\mu}_i}{\sum_i n_i}$,  $\displaystyle \mathbf{\Sigma}=\frac{\sum_i\big[\mathbf{\Sigma}_i+( \boldsymbol{\mu}_i-\boldsymbol{\mu})( \boldsymbol{\mu}_i-\boldsymbol{\mu})^\top\big]}{\sum_i n_i}$ |
+| **목표** | 통계 요약만으로 **빠르고 확장성 높은** 탐색을 하되, 통계적으로 유의한 유사 셀을 묶어 군집화 |
 
 
 ## [4-3] CLIQUE (CLustering In QUEst)
@@ -2616,11 +2617,12 @@ Ward는 두 군집을 합쳤을 때 전체 군집 내 제곱오차합(SSE: Sum o
 
 | 항목 | 내용 |
 |------|------|
-| **구성요소** | 데이터 공간을 격자로 분할하고, **밀도 기울기(gradient)** 를 통해 군집 경계를 감지 |
+| **구성요소** | 데이터 공간을 격자로 분할하고, 밀도 기울기(gradient)를 통해 군집 경계를 감지 |
 | **거리함수** | 유클리드 거리 기반 밀도 기울기<br>$\nabla f(x) = \frac{\partial f}{\partial x}$ |
 | **목적함수** | 밀도 함수의 기울기 변화가 큰 경계선을 최소화<br>$J = \sum_{\text{grid}} \lVert \nabla f(x) \rVert^2$ |
 | **중심갱신** | 각 밀도 영역(gradient basin)의 평균 혹은 모드로 중심 갱신<br>$m_j = \frac{1}{n_j}\sum_{x_i \in C_j} x_i$ |
 | **목표** | 밀도 기울기 기반으로 자동 군집 경계를 탐색하고 균질한 내부 밀도를 유지 |
+
 
 
 <br>
