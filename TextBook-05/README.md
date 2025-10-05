@@ -1744,6 +1744,71 @@ Ward는 두 군집을 합쳤을 때 전체 군집 내 제곱오차합(SSE: Sum o
 가장 작은 𝐷(𝐴,𝐵)를 가진 두 군집만 병합<br>
 <br>
 
+# 📘 Hierarchical-based Clustering Algorithms Summary
+Agglomerative, Divisive, BIRCH, CURE, ROCK, Chameleon
+
+---
+
+## [2-1] Hierarchical (Agglomerative / Divisive)
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | 계층적 병합(Agglomerative) 또는 분할(Divisive) 방식의 트리 구조<br>데이터 포인트 간 거리 행렬, 군집 병합 기준(linkage method) |
+| **거리함수** | 유클리드 거리 또는 코사인 거리 등 일반 거리 척도<br>$d(x_i, x_j) = \lVert x_i - x_j \rVert$ |
+| **목적함수** | 명시적 목적함수 없음 — 군집 간 유사도(linkage)에 따라 병합 또는 분할<br>대표적인 linkage: Single, Complete, Average, Ward |
+| **중심갱신** | Agglomerative: 두 군집 병합 시 중심 또는 거리행렬 갱신<br>Divisive: 큰 군집을 분할하여 새로운 서브클러스터 생성 |
+| **목표** | 데이터 간의 계층적 관계를 덴드로그램(dendrogram)으로 표현 — 군집 수를 사전에 지정하지 않아도 구조적 관계 파악 가능 |
+
+<br>
+
+## [2-2] BIRCH (Balanced Iterative Reducing and Clustering using Hierarchies)
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | CF(Clustering Feature) 트리 구조로 대규모 데이터 요약 — 각 노드가 하위 클러스터 요약정보 $(N, LS, SS)$ 저장 |
+| **거리함수** | CF 벡터 간 거리 — 일반적으로 유클리드 거리<br>$d(CF_i, CF_j) = \lVert \frac{LS_i}{N_i} - \frac{LS_j}{N_j} \rVert$ |
+| **목적함수** | 트리의 리프 노드 간 거리 임계값(T) 이하인 데이터 병합으로 SSE 최소화 |
+| **중심갱신** | 새로운 샘플 삽입 시 가장 가까운 리프 노드에 병합, 해당 노드의 CF 갱신<br>필요 시 노드 분할(splitting) 수행 |
+| **목표** | 대규모 데이터의 점진적(Incremental) 계층 요약 — 메모리 효율적 군집화 및 후처리 단계에서 추가 군집 알고리즘 적용 가능 |
+
+<br>
+
+## [2-3] CURE (Clustering Using Representatives)
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | 각 군집을 다수의 대표점(representative points)으로 표현 — 비구형(non-spherical) 군집 처리 가능 |
+| **거리함수** | 두 군집 간 최소 대표점 거리<br>$d(C_i, C_j) = \min_{p \in R_i, \, q \in R_j} \lVert p - q \rVert$ |
+| **목적함수** | 군집 내 거리 최소화, 군집 간 거리 최대화 — Outlier에 덜 민감한 거리 기반 병합 |
+| **중심갱신** | 각 군집에서 표본 대표점을 선택 후, 전체 중심으로 수축(shrinking factor $\alpha$)하여 대표점 재배치 |
+| **목표** | 다양한 형태(비구형·비균질)의 군집을 탐지하고, 이상치에 강건한 계층적 병합 구조 구현 |
+
+<br>
+
+## [2-4] ROCK (Robust Clustering using Links)
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | 범주형 또는 이산형 데이터에 적합 — 데이터 간 “링크(link)” 기반 유사도 계산 |
+| **거리함수** | 링크 수 기반 거리<br>$\text{link}(x_i, x_j)$ = 두 포인트가 공유하는 공통 이웃(neighbor)의 개수 |
+| **목적함수** | 링크 연결 수를 최대화하여 군집 내 결속도 강화<br>유사도 = $\frac{\text{link}(x_i, x_j)}{(\text{deg}(x_i)\,\text{deg}(x_j))^{f(\theta)}}$ |
+| **중심갱신** | 병합 시 두 군집 간 링크 수 계산을 업데이트하여 결합 기준(link merge criterion) 적용 |
+| **목표** | 거리 대신 **연결성(link connectivity)** 을 활용해 범주형 데이터에서 강건한 군집 구조 탐색 |
+
+<br>
+
+## [2-5] Chameleon
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | 그래프 기반 계층 군집화 — K-최근접 이웃(KNN) 그래프 + 동적 병합 단계로 구성 |
+| **거리함수** | 그래프 유사도 기반 거리<br>두 군집 $C_i, C_j$ 간 상호 연결성(inter-connectivity)과 근접도(closeness) |
+| **목적함수** | 내부 연결도(Internal Connectivity)와 외부 연결도(Between Connectivity)의 비율 최적화 |
+| **중심갱신** | 군집 병합 시 그래프의 연결 간선 업데이트 — 지역적 특성(Local Structure)을 반영한 적응형 병합 수행 |
+| **목표** | 데이터 분포의 모양·밀도에 적응하는 **동적 군집화(Dynamic Modeling)** 실현 — 전통적 계층법의 한계 극복 |
+
+<br>
+
 ---
 
 # [3-1] DBSCAN(Density-Based Spatial Clustering of Applications with Noise)
