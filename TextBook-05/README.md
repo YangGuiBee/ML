@@ -3103,6 +3103,30 @@ $𝐿=𝐷−𝐴$<br>
 ![](./images/6-2.png)
 <br>
 
+
+## [6-1] Spectral Clustering
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | 데이터 간 유사도로부터 그래프 $G=(V,E)$ 구성<br>인접행렬 $W$, 차수행렬 $D$, 그리고 그래프 라플라시안 $L = D - W$ |
+| **거리함수** | 유사도(affinity) 함수<br>$w_{ij} = \exp \left( -\dfrac{\lVert x_i - x_j \rVert^2}{2\sigma^2} \right)$ |
+| **목적함수** | Normalized Cut (Ncut) 최소화<br>$\text{Ncut}(A,B) = \dfrac{\text{cut}(A,B)}{\text{assoc}(A,V)} + \dfrac{\text{cut}(A,B)}{\text{assoc}(B,V)}$<br>또는 라플라시안 행렬의 고유값 문제<br>$L_{sym} = D^{-\frac{1}{2}}LD^{-\frac{1}{2}}$, &nbsp; $L_{rw} = D^{-1}L$ |
+| **중심갱신** | 라플라시안의 하위 $k$개의 고유벡터를 새로운 표현 공간(feature space)으로 사용 후, K-means로 클러스터링<br>즉, $U = [u_1, u_2, \dots, u_k]$ → K-means 적용 |
+| **목표** | 그래프 구조를 반영하여 비선형 매니폴드 데이터의 군집 구조를 효과적으로 탐지 |
+
+
+## [6-2] Affinity Propagation
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | 데이터 포인트 간 **유사도 행렬 $S(i,k)$** 를 기반으로 대표점(exemplar)을 자동 선택<br>별도의 군집 수 $K$ 지정 불필요 |
+| **거리함수** | 입력 유사도 $S(i,k)$ 는 일반적으로 음의 거리 제곱값 사용<br>$S(i,k) = -\lVert x_i - x_k \rVert^2$ |
+| **목적함수** | 메시지 전달(message passing)을 통해 책임(responsibility)과 가용도(availability) 행렬을 반복 업데이트<br>$r(i,k) \leftarrow S(i,k) - \max_{k' \ne k}\{ a(i,k') + S(i,k') \}$<br>$a(i,k) \leftarrow \min\{0, r(k,k) + \sum_{i' \notin \{i,k\}} \max(0, r(i',k))\}$ |
+| **중심갱신** | 수렴 시 각 포인트의 대표점(exemplar) 결정<br>$k^* = \arg\max_k \{ a(i,k) + r(i,k) \}$ |
+| **목표** | 사전 군집 수 없이 데이터 간 유사도만으로 대표점 기반 군집 자동 탐색 수행 |
+
+
+
 ![](./images/CA.PNG)
 <br>
 
