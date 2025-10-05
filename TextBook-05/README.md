@@ -2954,6 +2954,41 @@ Ward는 두 군집을 합쳤을 때 전체 군집 내 제곱오차합(SSE: Sum o
 ![](./images/5-4.png)
 <br>
 
+
+## [5-1] GMM (Gaussian Mixture Model) / EM (Expectation–Maximization)
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | 혼합 정규분포 모델<br>$p(x)=\\sum_{k=1}^{K}\\pi_k\\mathcal{N}(x|\\mu_k,\\Sigma_k)$ |
+| **거리함수** | 확률밀도 기반 거리<br>$d(x,k)=-\\log\\mathcal{N}(x|\\mu_k,\\Sigma_k)$ |
+| **목적함수** | 로그 가능도 최대화<br>$\\log L=\\sum_i\\log\\sum_k\\pi_k\\mathcal{N}(x_i|\\mu_k,\\Sigma_k)$ |
+| **중심갱신** | EM 반복<br>E-step: $\\gamma_{ik}=\\frac{\\pi_k\\mathcal{N}(x_i|\\mu_k,\\Sigma_k)}{\\sum_j\\pi_j\\mathcal{N}(x_i|\\mu_j,\\Sigma_j)}$<br>M-step: $\\mu_k=\\frac{\\sum_i\\gamma_{ik}x_i}{\\sum_i\\gamma_{ik}}$ |
+| **목표** | 확률적 Soft Clustering 수행 |
+
+
+## [5-2] COBWEB / CLASSIT
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | 속성(attribute) 기반 개념 트리 계층형 군집 |
+| **거리함수** | Category Utility(CU)<br>$CU=\\frac{1}{k}\\sum_{j=1}^{k}[P(A_j|C)^2+P(\\neg A_j|\\neg C)^2-P(A_j)^2-P(\\neg A_j)^2]$ |
+| **목적함수** | CU 최대화 |
+| **중심갱신** | CU 재계산 후 삽입·분할·병합 결정 |
+| **목표** | 온라인·설명가능한 계층형 군집 생성 |
+
+
+## [5-3] SOMs (Self-Organizing Maps)
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | 격자형(neural lattice) 노드에 가중치 벡터 $w_j$ 존재 |
+| **거리함수** | 유클리드 거리<br>$d(x_i, w_j) = \lVert x_i - w_j \rVert$ |
+| **목적함수** | 인접 노드 간의 가중치 차이를 최소화<br>$E = \sum_i \sum_j h_{bj}(t) \, \lVert x_i - w_j \rVert^2$<br>($h_{bj}(t)$: BMU와 노드 $j$ 간의 이웃 함수) |
+| **중심갱신** | $w_j(t+1) = w_j(t) + \eta(t) \, h_{bj}(t) \, [x_i - w_j(t)]$ |
+| **목표** | **데이터의 위상(topology)과 분포 구조를 보존**하면서, 고차원 데이터를 2D 격자 상에 **비선형 차원 축소 및 시각화** 형태로 표현 |
+
+<br>
+
 ---
 
 # [6-1] Spectral Clustering
