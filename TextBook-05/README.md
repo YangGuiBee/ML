@@ -1085,6 +1085,18 @@ Accuracy 기준<br>
 
 <br>
 
+## [1-5] FCM (Fuzzy C-means)
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | 데이터 포인트 $x_i$, 퍼지 소속도 $u_{ij} \in [0,1]$, 군집 중심 $m_j$, 퍼지 계수 $m > 1$ |
+| **거리함수** | 유클리드 거리<br>$d(x_i, m_j) = \lVert x_i - m_j \rVert$ |
+| **목적함수** | 퍼지 가중 거리합 최소화<br>$J_m = \sum_{i=1}^{N}\sum_{j=1}^{K} u_{ij}^m \lVert x_i - m_j \rVert^2$ |
+| **중심갱신** | 각 군집 중심은 퍼지 소속도로 가중 평균하여 갱신<br>$m_j = \frac{\sum_i u_{ij}^m x_i}{\sum_i u_{ij}^m}$<br>또한 각 데이터의 소속도는 거리 비율에 따라 갱신됨:<br>$u_{ij} = \frac{1}{\sum_{r=1}^{K} \left( \frac{d(x_i, m_j)}{d(x_i, m_r)} \right)^{\frac{2}{m-1}}}$ |
+| **목표** | 각 데이터가 여러 군집에 부분적으로 속하도록 하여 모호한 경계(Soft Clustering) 표현 |
+
+<br>
+
 ---
 
 # [2-1] Hierarchical Clustering(Agglomerative / Divisive)
