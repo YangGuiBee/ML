@@ -1049,8 +1049,19 @@ Accuracy 기준<br>
 | **중심갱신** | 각 군집의 평균으로 갱신<br>$m_j = \frac{1}{\lvert C_j \rvert}\sum_{x_i \in C_j} x_i$ |
 | **목표** | 군집 내 분산(SSE) 최소화 — 컴팩트하고 원형 구조 추출 |
 
+<br>
 
+## [1-2] K-medoids (PAM: Partitioning Around Medoids)
 
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | 데이터 포인트 $x_i$, 군집 대표점(메도이드) $m_j$ (데이터 중 실제 샘플) |
+| **거리함수** | 일반 거리 (유클리드, 맨해튼 등)<br>$d(x_i, m_j) = \lVert x_i - m_j \rVert$ |
+| **목적함수** | 절댓값 거리합 최소화<br>$J = \sum_{j=1}^{K}\sum_{x_i \in C_j} d(x_i, m_j)$ |
+| **중심갱신** | 군집 내에서 전체 거리합이 최소인 실제 데이터 포인트로 갱신<br>$m_j = \arg\min_{x_h \in C_j} \sum_{x_i \in C_j} d(x_i, x_h)$ |
+| **목표** | 이상치(Outlier)에 강건한 중심 선택 — 군집 내 거리합 최소화 |
+
+<br>
 
 ---
 
