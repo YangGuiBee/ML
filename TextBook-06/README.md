@@ -576,8 +576,7 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 
 
 
-
-# 📘 연관규칙 알고리즘 수식 요약 (GitHub 렌더링 완결판)
+# 📘 연관규칙 알고리즘 수식 요약 (GitHub 렌더링 완결판 ✅)
 
 | 구분 | 알고리즘 | 핵심 아이디어 | 주요 수학식 (이미지 렌더링) | 목적함수 / 평가함수 (이미지 렌더링) |
 |------|-----------|----------------|-------------------------------|----------------------|
@@ -587,6 +586,7 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 | **[AR-4]** | **Multi-level Association Rules** (다계층 연관규칙) | 데이터의 계층(Level) 구조 반영 | ![](https://latex.codecogs.com/png.image?\dpi{140}Support\_l(X)=\frac{count\_l(X)}{N\_l})<br>![](https://latex.codecogs.com/png.image?\dpi{140}Confidence\_l(X\Rightarrow%20Y)=\frac{Support\_l(X\cup%20Y)}{Support\_l(X)})<br>![](https://latex.codecogs.com/png.image?\dpi{140}min\_sup\_1>min\_sup\_2>min\_sup\_3) | ![](https://latex.codecogs.com/png.image?\dpi{140}\text{Level-wise thresholds satisfied}) |
 | **[AR-5]** | **Multi-dimensional Association Rules** (다차원 연관규칙) | 다중 속성(Attribute) 간 연관 분석 | ![](https://latex.codecogs.com/png.image?\dpi{140}Support(A\_1=a\_1,\dots,A\_k=a\_k)=\frac{count(A\_1=a\_1,\dots,A\_k=a\_k)}{N})<br>![](https://latex.codecogs.com/png.image?\dpi{140}Confidence((A\_1=a\_1,\dots,A\_i=a\_i)\Rightarrow(A\_j=a\_j))=\frac{Support(A\_1=a\_1,\dots,A\_i=a\_i,A\_j=a\_j)}{Support(A\_1=a\_1,\dots,A\_i=a\_i)}) | ![](https://latex.codecogs.com/png.image?\dpi{140}\text{Rules across attribute combinations}) |
 | **[AR-6]** | **Artificial Immune System (AIS)** (인공면역시스템) | 항원–항체 친화도(Affinity) 기반의 진화 탐색 | ![](https://latex.codecogs.com/png.image?\dpi{140}Affinity(Ab,Ag)=\frac{match(Ab,Ag)}{|Ag|})<br>![](https://latex.codecogs.com/png.image?\dpi{140}P(Ab\_i)=\frac{Affinity(Ab\_i,Ag)}{\sum_{j}Affinity(Ab\_j,Ag)})<br>![](https://latex.codecogs.com/png.image?\dpi{140}P\_{clone}=\alpha\cdot%20Affinity(Ab\_i,Ag))<br>![](https://latex.codecogs.com/png.image?\dpi{140}P\_{mutation}=e^{-\beta\cdot%20Affinity(Ab\_i,Ag)}) | ![](https://latex.codecogs.com/png.image?\dpi{140}\max_{Ab}Affinity(Ab,Ag)) |
+
 
 
 ---
