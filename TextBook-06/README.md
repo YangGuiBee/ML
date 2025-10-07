@@ -563,13 +563,14 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 # 연관규칙 알고리즘 수식 요약
 
 | 구분 | 알고리즘 | 핵심 아이디어 | 주요 수학식 (모델 함수식 역할) | 목적함수 / 평가함수 |
-|------|------------|----------------|-------------------------------|----------------------|
-| **[AR-1]** | **Apriori**<br>(선험적 알고리즘) | 단조성(Apriori Property)을 이용해 빈발항목집합 탐색 | $$Support(X) = \frac{count(X)}{N}$$<br>$$Confidence(X \Rightarrow Y) = \frac{Support(X \cup Y)}{Support(X)}$$<br>$$Lift(X \Rightarrow Y) = \frac{Support(X \cup Y)}{Support(X)\cdot Support(Y)}$$ | $$\max Support(X), \quad Confidence(X \Rightarrow Y) \ge min\_conf$$ |
-| **[AR-2]** | **FP-Growth**<br>(Frequent Pattern Growth) | FP-Tree로 트랜잭션을 압축하여 조건부 패턴 확장 | $$FP = \{(I, Support(I)) \mid Support(I) \ge min\_sup\}$$<br>$$FP(I) = \bigcup_{i \in I} FP(\text{conditional\_pattern\_base}(i))$$ | 조건부 패턴베이스를 통해 $$Support \ge min\_sup$$ 인 빈발패턴 효율적 탐색 |
-| **[AR-3]** | **Eclat**<br>(Equivalence Class Transformation) | TID 집합의 교집합으로 Support 계산 | $$Support(X) = \left| \bigcap_{i \in X} T(i) \right|$$<br>단, \(T(i)\)는 항목 \(i\)가 포함된 트랜잭션 집합 | $$Support(X) \ge min\_sup$$ — 교집합 기반 탐색 효율화 |
-| **[AR-4]** | **Multi-level Association Rules**<br>(다계층 연관규칙) | 데이터의 계층(Level) 구조 반영 | $$Support_l(X) = \frac{count_l(X)}{N_l}$$<br>$$Confidence_l(X \Rightarrow Y) = \frac{Support_l(X \cup Y)}{Support_l(X)}$$<br>$$min\_sup_1 > min\_sup_2 > min\_sup_3$$ | 계층 수준별로 다른 $$min\_support$$ 조건 만족 탐색 |
-| **[AR-5]** | **Multi-dimensional Association Rules**<br>(다차원 연관규칙) | 다중 속성(Attribute) 간 연관 분석 | $$Support(A_1=a_1, \dots, A_k=a_k) = \frac{count(A_1=a_1, \dots, A_k=a_k)}{N}$$<br>$$Confidence((A_1=a_1, \dots, A_i=a_i) \Rightarrow (A_j=a_j)) = \frac{Support(A_1=a_1, \dots, A_i=a_i, A_j=a_j)}{Support(A_1=a_1, \dots, A_i=a_i)}$$ | 다차원 속성 조합 간 연관규칙 도출 |
-| **[AR-6]** | **Artificial Immune System (AIS)**<br>(인공면역시스템) | 항원–항체 친화도(Affinity) 기반의 진화 탐색 | $$Affinity(Ab, Ag) = \frac{match(Ab, Ag)}{|Ag|}$$<br>$$P(Ab_i) = \frac{Affinity(Ab_i, Ag)}{\sum_j Affinity(Ab_j, Ag)}$$<br>$$P_{\text{clone}} = \alpha \cdot Affinity(Ab_i, Ag)$$<br>$$P_{\text{mutation}} = e^{-\beta \cdot Affinity(Ab_i, Ag)}$$ | $$\max Affinity(Ab, Ag)$$ — 면역 선택·클론·돌연변이 기반 최적화 |
+|------|-----------|----------------|----------------------------------|----------------------|
+| **[AR-1]** | **Apriori**<br>(선험적 알고리즘) | 단조성(Apriori Property)을 이용해 빈발 항목집합 탐색 | $$Support(X)=\frac{count(X)}{N}$$<br>$$Confidence(X\Rightarrow Y)=\frac{Support(X\cup Y)}{Support(X)}$$<br>$$Lift(X\Rightarrow Y)=\frac{Support(X\cup Y)}{Support(X)\,Support(Y)}$$ | $$\max Support(X),\quad Confidence(X\Rightarrow Y)\ge min\_conf$$ |
+| **[AR-2]** | **FP-Growth**<br>(Frequent Pattern Growth) | FP-Tree로 트랜잭션을 압축 저장 후 조건부 패턴 확장 | $$FP=\{(I,\,Support(I))\;|\;Support(I)\ge min\_sup\}$$<br>$$FP(I)=\bigcup\_{i\in I}FP\!\left(\mathrm{conditional\_pattern\_base}(i)\right)$$ | 조건부 패턴베이스를 통해 $$Support\ge min\_sup$$ 인 빈발패턴 효율적 탐색 |
+| **[AR-3]** | **Eclat**<br>(Equivalence Class Transformation) | TID 집합의 교집합으로 Support 계산 | $$Support(X)=\left|\bigcap\_{i\in X}T(i)\right|$$<br>(\(T(i)\): 항목 \(i\)가 포함된 트랜잭션 집합) | $$Support(X)\ge min\_sup$$ — 교집합 기반 탐색 효율화 |
+| **[AR-4]** | **Multi-level Association Rules**<br>(다계층 연관규칙) | 데이터의 계층(Level) 구조 반영 | $$Support\_l(X)=\frac{count\_l(X)}{N\_l}$$<br>$$Confidence\_l(X\Rightarrow Y)=\frac{Support\_l(X\cup Y)}{Support\_l(X)}$$<br>$$min\_sup\_1>min\_sup\_2>min\_sup\_3$$ | 계층 수준별로 다른 $$min\_support$$ 조건 만족 탐색 |
+| **[AR-5]** | **Multi-dimensional Association Rules**<br>(다차원 연관규칙) | 다중 속성(Attribute) 간 연관 분석 | $$Support(A\_1=a\_1,\dots,A\_k=a\_k)=\frac{count(A\_1=a\_1,\dots,A\_k=a\_k)}{N}$$<br>$$Confidence((A\_1=a\_1,\dots,A\_i=a\_i)\Rightarrow(A\_j=a\_j))=\frac{Support(A\_1=a\_1,\dots,A\_i=a\_i,A\_j=a\_j)}{Support(A\_1=a\_1,\dots,A\_i=a\_i)}$$ | 다차원 속성 조합 간 연관규칙 도출 |
+| **[AR-6]** | **Artificial Immune System (AIS)**<br>(인공면역시스템) | 항원–항체 친화도(Affinity) 기반의 진화 탐색 | $$Affinity(Ab,Ag)=\frac{match(Ab,Ag)}{|Ag|}$$<br>$$P(Ab\_i)=\frac{Affinity(Ab\_i,Ag)}{\sum\_jAffinity(Ab\_j,Ag)}$$<br>$$P\_{\mathrm{clone}}=\alpha\,Affinity(Ab\_i,Ag)$$<br>$$P\_{\mathrm{mutation}}=e^{-\beta\,Affinity(Ab\_i,Ag)}$$ | $$\max Affinity(Ab,Ag)$$ — 면역 선택·클론·돌연변이 기반 최적화 |
+
 
 
 <br>
