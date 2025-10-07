@@ -1044,6 +1044,15 @@ $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
 <br> 
 
 
+| 번호 | 알고리즘 | 주요 수학식 (LaTeX 렌더링) | 목적함수 / 평가함수 (LaTeX 렌더링) |
+|:---:|:----------------------------|:----------------------------------|:----------------------------------|
+| 1 | **PCA (Principal Component Analysis)**<br>주성분 분석 | ![식1](https://latex.codecogs.com/svg.image?X=WZ^{T}\;\;\text{또는}\;\;C=\frac{1}{n}X^{T}X) | ![목적1](https://latex.codecogs.com/svg.image?\max_{W}\;W^{T}SW\;\;\text{s.t.}\;\;W^{T}W=I) |
+| 2 | **SVD (Singular Value Decomposition)**<br>특이값 분해 | ![식2](https://latex.codecogs.com/svg.image?X=U\Sigma V^{T}) | ![목적2](https://latex.codecogs.com/svg.image?\min_{U,\Sigma,V}\|X-U\Sigma V^{T}\|_{F}^{2}) |
+| 3 | **ICA (Independent Component Analysis)**<br>독립성분 분석 | ![식3](https://latex.codecogs.com/svg.image?X=AS,\;\;S=WX) | ![목적3](https://latex.codecogs.com/svg.image?\max_{W}\sum_{i=1}^{n}\text{NonGaussianity}(w_i^{T}X)\;\;\text{또는}\;\;\max_{W}|det(W)|) |
+| 4 | **LDA (Linear Discriminant Analysis)**<br>선형판별 분석 | ![식4](https://latex.codecogs.com/svg.image?\max_{W}\frac{|W^{T}S_BW|}{|W^{T}S_WW|}) | ![목적4](https://latex.codecogs.com/svg.image?\max_{W}\frac{W^{T}S_BW}{W^{T}S_WW}\;\;\text{s.t.}\;\;S_B,S_W\;\text{는 클래스 간/내 분산행렬}) |
+| 5 | **NMF (Non-negative Matrix Factorization)**<br>비음수 행렬 분해 | ![식5](https://latex.codecogs.com/svg.image?X\approx WH,\;\;W,H\ge0) | ![목적5](https://latex.codecogs.com/svg.image?\min_{W,H\ge0}\|X-WH\|_{F}^{2}) |
+
+
 
 ---
 ## [차원 축소 알고리즘 평가방법]
