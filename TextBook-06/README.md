@@ -575,14 +575,17 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 <br>
 
 
-| 구분 | 알고리즘 | 핵심 아이디어 | 주요 수학식 (GitHub 호환형) | 목적함수 / 평가함수 |
-|------|-----------|----------------|-------------------------------|----------------------|
-| **[AR-1]** | Apriori (선험적 알고리즘) | 단조성(Apriori Property)을 이용해 빈발항목집합 탐색 | Support(X) = count(X) / N<br>Confidence(X ⇒ Y) = Support(X ∪ Y) / Support(X)<br>Lift(X ⇒ Y) = Support(X ∪ Y) / (Support(X) × Support(Y)) | maximize Support(X)<br>subject to Confidence(X ⇒ Y) ≥ min_conf |
-| **[AR-2]** | FP-Growth (Frequent Pattern Growth) | FP-Tree로 트랜잭션을 압축 저장 후 조건부 패턴 확장 | FP = {(I, Support(I)) | Support(I) ≥ min_sup}<br>FP(I) = ⋃ FP(conditional_pattern_base(i)) | Support ≥ min_sup 인 패턴 효율적 탐색 |
-| **[AR-3]** | Eclat (Equivalence Class Transformation) | TID 집합의 교집합으로 Support 계산 | Support(X) = | ⋂ T(i) | ,  T(i): 항목 i 가 포함된 트랜잭션 집합 | maximize |⋂ T(i)|  subject to |⋂ T(i)| ≥ min_sup |
-| **[AR-4]** | Multi-level Association Rules (다계층 연관규칙) | 데이터의 계층(Level) 구조 반영 | Supportₗ(X) = countₗ(X)/Nₗ<br>Confidenceₗ(X ⇒ Y) = Supportₗ(X∪Y)/Supportₗ(X)<br>min_sup₁ > min_sup₂ > min_sup₃ | 계층별 서로 다른 min_support 조건 만족 탐색 |
-| **[AR-5]** | Multi-dimensional Association Rules (다차원 연관규칙) | 다중 속성 (Attribute) 간 연관 분석 | Support(A₁=a₁,…,Aₖ=aₖ) = count(A₁=a₁,…,Aₖ=aₖ)/N<br>Confidence((A₁=a₁,…,Aᵢ=aᵢ) ⇒ (Aⱼ=aⱼ)) = Support(A₁=a₁,…,Aᵢ=aᵢ,Aⱼ=aⱼ)/Support(A₁=a₁,…,Aᵢ=aᵢ) | 다차원 속성 조합 간 연관규칙 도출 |
-| **[AR-6]** | Artificial Immune System (AIS, 인공면역시스템) | 항원–항체 친화도 (Affinity) 기반 진화 탐색 | Affinity(Ab, Ag) = match(Ab, Ag) / |Ag|<br>P(Abᵢ) = Affinity(Abᵢ, Ag) / Σ Affinity(Abⱼ, Ag)<br>P_clone = α × Affinity(Abᵢ, Ag)<br>P_mutation = exp(−β × Affinity(Abᵢ, Ag)) | maximize Affinity(Ab, Ag)<br>subject to P_clone, P_mutation 조건 만족 |
+
+
+| 구분 | 알고리즘 | 핵심 아이디어 | 주요 수학식 (이미지 렌더링) | 목적함수 / 평가함수 (이미지 렌더링) |
+|---|---|---|---|---|
+| **[AR-1]** | **Apriori** (선험적 알고리즘) | 단조성(Apriori Property)을 이용해 빈발 항목집합 탐색 | ![](https://latex.codecogs.com/png.image?\dpi{140}Support(X)=\frac{count(X)}{N})<br>![](https://latex.codecogs.com/png.image?\dpi{140}Confidence(X\Rightarrow Y)=\frac{Support(X\cup Y)}{Support(X)})<br>![](https://latex.codecogs.com/png.image?\dpi{140}Lift(X\Rightarrow Y)=\frac{Support(X\cup Y)}{Support(X)\,Support(Y)}) | ![](https://latex.codecogs.com/png.image?\dpi{140}\max\;Support(X),\;\;Confidence(X\Rightarrow Y)\ge%20min\_conf) |
+| **[AR-2]** | **FP-Growth** (Frequent Pattern Growth) | FP-Tree로 트랜잭션을 압축 저장 후 조건부 패턴 확장 | ![](https://latex.codecogs.com/png.image?\dpi{140}FP=\{(I,\;Support(I))\mid%20Support(I)\ge%20min\_sup\})<br>![](https://latex.codecogs.com/png.image?\dpi{140}FP(I)=\bigcup_{i\in%20I}FP(\mathrm{CondBase}(i))) | ![](https://latex.codecogs.com/png.image?\dpi{140}Support\ge%20min\_sup\;\;\mathrm{patterns}) |
+| **[AR-3]** | **Eclat** (Equivalence Class Transformation) | TID 집합의 교집합으로 Support 계산 | ![](https://latex.codecogs.com/png.image?\dpi{140}Support(X)=\left|\bigcap_{i\in%20X}T(i)\right|) | ![](https://latex.codecogs.com/png.image?\dpi{140}\max_{X}\left|\bigcap_{i\in%20X}T(i)\right|\;\;\mathrm{s.t.}\;\;\left|\bigcap_{i\in%20X}T(i)\right|\ge%20min\_sup) |
+| **[AR-4]** | **Multi-level Association Rules** (다계층 연관규칙) | 데이터의 계층(Level) 구조 반영 | ![](https://latex.codecogs.com/png.image?\dpi{140}Support\_l(X)=\frac{count\_l(X)}{N\_l})<br>![](https://latex.codecogs.com/png.image?\dpi{140}Confidence\_l(X\Rightarrow Y)=\frac{Support\_l(X\cup%20Y)}{Support\_l(X)})<br>![](https://latex.codecogs.com/png.image?\dpi{140}min\_sup\_1>min\_sup\_2>min\_sup\_3) | ![](https://latex.codecogs.com/png.image?\dpi{140}\mathrm{level\text{-}wise\ thresholds\ satisfied}) |
+| **[AR-5]** | **Multi-dimensional Association Rules** (다차원 연관규칙) | 다중 속성(Attribute) 간 연관 분석 | ![](https://latex.codecogs.com/png.image?\dpi{140}Support(A\_1=a\_1,\dots,A\_k=a\_k)=\frac{count(A\_1=a\_1,\dots,A\_k=a\_k)}{N})<br>![](https://latex.codecogs.com/png.image?\dpi{140}Confidence((A\_1=a\_1,\dots,A\_i=a\_i)\Rightarrow(A\_j=a\_j))=\frac{Support(A\_1=a\_1,\dots,A\_i=a\_i,\;A\_j=a\_j)}{Support(A\_1=a\_1,\dots,A\_i=a\_i)}) | ![](https://latex.codecogs.com/png.image?\dpi{140}\mathrm{rules\ across\ attribute\ combinations}) |
+| **[AR-6]** | **Artificial Immune System (AIS)** (인공면역시스템) | 항원–항체 친화도(Affinity) 기반의 진화 탐색 | ![](https://latex.codecogs.com/png.image?\dpi{140}Affinity(Ab,Ag)=\frac{match(Ab,Ag)}{|Ag|})<br>![](https://latex.codecogs.com/png.image?\dpi{140}P(Ab\_i)=\frac{Affinity(Ab\_i,Ag)}{\sum_{j}Affinity(Ab\_j,Ag)})<br>![](https://latex.codecogs.com/png.image?\dpi{140}P\_{clone}=\alpha\cdot%20Affinity(Ab\_i,Ag))<br>![](https://latex.codecogs.com/png.image?\dpi{140}P\_{mutation}=e^{-\beta\cdot%20Affinity(Ab\_i,Ag)}) | ![](https://latex.codecogs.com/png.image?\dpi{140}\max_{Ab}\;Affinity(Ab,Ag)) |
+
 
 
 
