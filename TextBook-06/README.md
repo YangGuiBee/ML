@@ -574,6 +574,18 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 
 <br>
 
+
+| 구분 | 알고리즘 | 핵심 아이디어 | 주요 수학식 (GitHub 호환형) | 목적함수 / 평가함수 |
+|------|-----------|----------------|-------------------------------|----------------------|
+| **[AR-1]** | Apriori (선험적 알고리즘) | 단조성(Apriori Property)을 이용해 빈발항목집합 탐색 | Support(X) = count(X) / N<br>Confidence(X ⇒ Y) = Support(X ∪ Y) / Support(X)<br>Lift(X ⇒ Y) = Support(X ∪ Y) / (Support(X) × Support(Y)) | maximize Support(X)<br>subject to Confidence(X ⇒ Y) ≥ min_conf |
+| **[AR-2]** | FP-Growth (Frequent Pattern Growth) | FP-Tree로 트랜잭션을 압축 저장 후 조건부 패턴 확장 | FP = {(I, Support(I)) | Support(I) ≥ min_sup}<br>FP(I) = ⋃ FP(conditional_pattern_base(i)) | Support ≥ min_sup 인 패턴 효율적 탐색 |
+| **[AR-3]** | Eclat (Equivalence Class Transformation) | TID 집합의 교집합으로 Support 계산 | Support(X) = | ⋂ T(i) | ,  T(i): 항목 i 가 포함된 트랜잭션 집합 | maximize |⋂ T(i)|  subject to |⋂ T(i)| ≥ min_sup |
+| **[AR-4]** | Multi-level Association Rules (다계층 연관규칙) | 데이터의 계층(Level) 구조 반영 | Supportₗ(X) = countₗ(X)/Nₗ<br>Confidenceₗ(X ⇒ Y) = Supportₗ(X∪Y)/Supportₗ(X)<br>min_sup₁ > min_sup₂ > min_sup₃ | 계층별 서로 다른 min_support 조건 만족 탐색 |
+| **[AR-5]** | Multi-dimensional Association Rules (다차원 연관규칙) | 다중 속성 (Attribute) 간 연관 분석 | Support(A₁=a₁,…,Aₖ=aₖ) = count(A₁=a₁,…,Aₖ=aₖ)/N<br>Confidence((A₁=a₁,…,Aᵢ=aᵢ) ⇒ (Aⱼ=aⱼ)) = Support(A₁=a₁,…,Aᵢ=aᵢ,Aⱼ=aⱼ)/Support(A₁=a₁,…,Aᵢ=aᵢ) | 다차원 속성 조합 간 연관규칙 도출 |
+| **[AR-6]** | Artificial Immune System (AIS, 인공면역시스템) | 항원–항체 친화도 (Affinity) 기반 진화 탐색 | Affinity(Ab, Ag) = match(Ab, Ag) / |Ag|<br>P(Abᵢ) = Affinity(Abᵢ, Ag) / Σ Affinity(Abⱼ, Ag)<br>P_clone = α × Affinity(Abᵢ, Ag)<br>P_mutation = exp(−β × Affinity(Abᵢ, Ag)) | maximize Affinity(Ab, Ag)<br>subject to P_clone, P_mutation 조건 만족 |
+
+
+
 ---
 ## [연관 규칙 알고리즘 평가방법]
 
