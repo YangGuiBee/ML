@@ -562,7 +562,7 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 
 # 연관규칙 알고리즘 수식 요약
 
-| 알고리즘 | 주요 수학식 (이미지 렌더링) | 목적함수 / 평가함수 (이미지 렌더링) |
+| 알고리즘 | 주요 수학식 | 목적함수 / 평가함수 |
 |-----------|-------------------------------|----------------------|
 | **[1] Apriori** (선험적 알고리즘) | ![](https://latex.codecogs.com/png.image?\dpi{160}\Large%20Support(X)=\frac{count(X)}{N})<br>![](https://latex.codecogs.com/png.image?\dpi{160}\Large%20Confidence(X\Rightarrow%20Y)=\frac{Support(X\cup%20Y)}{Support(X)})<br>![](https://latex.codecogs.com/png.image?\dpi{160}\Large%20Lift(X\Rightarrow%20Y)=\frac{Support(X\cup%20Y)}{Support(X)\cdot%20Support(Y)}) | ![](https://latex.codecogs.com/png.image?\dpi{160}\Large%20\max%20Support(X),\;Confidence(X\Rightarrow%20Y)\ge%20min\_conf) |
 | **[2] FP-Growth** (Frequent Pattern Growth) | ![](https://latex.codecogs.com/png.image?\dpi{160}\Large%20FP=\{(I,Support(I))\mid%20Support(I)\ge%20min\_sup\})<br>![](https://latex.codecogs.com/png.image?\dpi{160}\Large%20FP(I)=\bigcup_{i\in%20I}FP(\mathrm{CondBase}(i))) | ![](https://latex.codecogs.com/png.image?\dpi{160}\Large%20Support\ge%20min\_sup;\;\text{patterns}) |
