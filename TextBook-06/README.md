@@ -559,6 +559,20 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 ![](./images/1-6.png)
 <br>
 
+
+# 연관규칙 알고리즘 수식 요약
+
+| 구분 | 알고리즘 | 핵심 아이디어 | 주요 수학식(모델 함수식 역할) | 목적함수 / 평가함수 |
+|------|------------|----------------|-------------------------------|----------------------|
+| **[AR-1]** | **Apriori**<br>(선험적 알고리즘) | 단조성(Apriori Property)을 이용해 빈발항목집합 탐색 | \(\displaystyle Support(X) = \frac{count(X)}{N}\)<br>\(\displaystyle Confidence(X \Rightarrow Y) = \frac{Support(X \cup Y)}{Support(X)}\)<br>\(\displaystyle Lift(X \Rightarrow Y) = \frac{Support(X \cup Y)}{Support(X) \cdot Support(Y)}\) | \(\displaystyle \max Support(X)\),<br>\(Confidence(X \Rightarrow Y) \geq min\_conf\) |
+| **[AR-2]** | **FP-Growth**<br>(Frequent Pattern Growth) | FP-Tree로 트랜잭션을 압축하여 조건부 패턴 확장 | \(\displaystyle FP = \{(I, Support(I)) \mid Support(I) \ge min\_sup\}\)<br>\(\displaystyle FP(I) = \bigcup_{i \in I} FP(\text{conditional\_pattern\_base}(i))\) | 조건부 패턴베이스를 통해<br>\(Support \ge min\_sup\)인 빈발패턴 효율적 탐색 |
+| **[AR-3]** | **Eclat**<br>(Equivalence Class Transformation) | TID 집합의 교집합으로 Support 계산 | \(\displaystyle Support(X) = \big|\bigcap_{i \in X} T(i)\big|\)<br>(단, \(T(i)\): 항목 i가 포함된 트랜잭션 집합) | \(\displaystyle Support(X) \ge min\_sup\)<br>— 교집합 기반 탐색 효율화 |
+| **[AR-4]** | **Multi-level Association Rules**<br>(다계층 연관규칙) | 데이터의 계층(Level) 구조 반영 | \(\displaystyle Support_l(X) = \frac{count_l(X)}{N_l}\)<br>\(\displaystyle Confidence_l(X \Rightarrow Y) = \frac{Support_l(X \cup Y)}{Support_l(X)}\)<br>\(\displaystyle min\_sup_1 > min\_sup_2 > min\_sup_3\) | 계층 수준별로 다른<br>min\_support 조건 만족 탐색 |
+| **[AR-5]** | **Multi-dimensional Association Rules**<br>(다차원 연관규칙) | 다중 속성(Attribute) 간 연관 분석 | \(\displaystyle Support(A_1=a_1, \dots, A_k=a_k) = \frac{count(A_1=a_1, \dots, A_k=a_k)}{N}\)<br>\(\displaystyle Confidence((A_1=a_1, \dots, A_i=a_i) \Rightarrow (A_j=a_j)) = \frac{Support(A_1=a_1, \dots, A_i=a_i, A_j=a_j)}{Support(A_1=a_1, \dots, A_i=a_i)}\) | 다차원 속성 조합 간<br>연관규칙 도출 |
+| **[AR-6]** | **Artificial Immune System (AIS)**<br>(인공면역시스템) | 항원–항체 친화도(Affinity) 기반의 진화 탐색 | \(\displaystyle Affinity(Ab, Ag) = \frac{match(Ab, Ag)}{|Ag|}\)<br>\(\displaystyle P(Ab_i) = \frac{Affinity(Ab_i, Ag)}{\sum_j Affinity(Ab_j, Ag)}\)<br>\(\displaystyle P_{clone} = \alpha \cdot Affinity(Ab_i, Ag)\)<br>\(\displaystyle P_{mutation} = e^{-\beta \cdot Affinity(Ab_i, Ag)}\) | \(\displaystyle \max Affinity(Ab, Ag)\)<br>— 면역 선택·클론·돌연변이 기반 최적화 |
+
+<br>
+
 ---
 ## [연관 규칙 알고리즘 평가방법]
 
