@@ -1043,19 +1043,19 @@ $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
 ![](./images/SOM.png)
 <br> 
 
-
 | 번호 | 알고리즘 | 주요 수학식 | 목적함수 / 평가함수 |
 |:---:|:--------------------------------------|:----------------------------------|:----------------------------------|
-| 1 | **PCA (Principal Component Analysis)**<br>주성분 분석 | \( X = WZ^{T}, \quad C = \frac{1}{n}X^{T}X \) | \( \max_{W} W^{T}SW \quad \text{s.t.} \quad W^{T}W = I \) |
-| 2 | **SVD (Singular Value Decomposition)**<br>특이값 분해 | \( X = U\Sigma V^{T} \) | \( \min_{U,\Sigma,V} \|X - U\Sigma V^{T}\|_{F}^{2} \) |
-| 3 | **ICA (Independent Component Analysis)**<br>독립성분 분석 | \( X = AS, \quad S = WX \) | \( \max_{W}\sum_{i}\text{NonGaussianity}(w_i^{T}X) \) |
-| 4 | **LDA (Linear Discriminant Analysis)**<br>선형판별 분석 | \( \max_{W}\frac{|W^{T}S_BW|}{|W^{T}S_WW|} \) | \( \max_{W}\frac{W^{T}S_BW}{W^{T}S_WW} \) |
-| 5 | **NMF (Non-negative Matrix Factorization)**<br>비음수 행렬 분해 | \( X \approx WH, \quad W,H \ge 0 \) | \( \min_{W,H \ge 0}\|X - WH\|_{F}^{2} \) |
-| 6 | **t-SNE (t-distributed Stochastic Neighbor Embedding)**<br>t-분포 확률적 이웃 임베딩 | \( p_{ij}=\frac{\exp(-\|x_i-x_j\|^2/2\sigma_i^2)}{\sum_{k\neq l}\exp(-\|x_k-x_l\|^2/2\sigma_k^2)}, \quad q_{ij}=\frac{(1+\|y_i-y_j\|^2)^{-1}}{\sum_{k\neq l}(1+\|y_k-y_l\|^2)^{-1}} \) | \( \min_{Y} KL(P\|Q)=\sum_{i\neq j}p_{ij}\log\frac{p_{ij}}{q_{ij}} \) |
-| 7 | **UMAP (Uniform Manifold Approximation and Projection)**<br>균일 매니폴드 근사적 사영 | \( w_{ij}=\exp\!\left(-\frac{d(x_i,x_j)-\rho_i}{\sigma_i}\right) \) | \( \min_{Y}\sum_{i<j}\Big[w_{ij}\log\frac{w_{ij}}{\hat{w}_{ij}}+(1-w_{ij})\log\frac{1-w_{ij}}{1-\hat{w}_{ij}}\Big] \) |
-| 8 | **Isomap (Isometric Mapping)**<br>등거리 매핑 | \( D_G(i,j)=\text{ShortestPathDistance}(x_i,x_j) \) | \( \min_{Y}\|D_G - D_Y\|_{F}^{2}, \quad D_Y(i,j)=\|y_i-y_j\| \) |
-| 9 | **MDS (Multidimensional Scaling)**<br>다차원 척도 | \( d_{ij}=\|x_i-x_j\| \) | \( \min_{Y}\sum_{i<j}(d_{ij}-\|y_i-y_j\|)^{2} \) |
-| 10 | **SOM (Self-Organizing Maps)**<br>자기 조직화 지도 | \( b=\arg\min_j\|x - w_j\| \) | \( \min_{w_j}\sum_{i}h_{b,j}\|x_i-w_j\|^{2}, \quad h_{b,j}=\exp\!\left(-\frac{\|r_b - r_j\|^2}{2\sigma^2}\right) \) |
+| 1 | **PCA (Principal Component Analysis)**<br>주성분 분석 | \( X = WZ^{T}, \quad C = \frac{1}{n}X^{T}X \) | \( \max_{W} W^{T}SW \;\; \text{s.t.} \;\; W^{T}W = I \) |
+| 2 | **SVD (Singular Value Decomposition)**<br>특이값 분해 | \( X = U\Sigma V^{T} \) | \( \min_{U,\Sigma,V} \,\lVert X - U\Sigma V^{T}\rVert_{F}^{2} \) |
+| 3 | **ICA (Independent Component Analysis)**<br>독립성분 분석 | \( X = AS, \quad S = WX \) | \( \max_{W}\sum_{i}\mathrm{NonGaussianity}(w_i^{T}X) \) |
+| 4 | **LDA (Linear Discriminant Analysis)**<br>선형판별 분석 | \( \max_{W}\dfrac{\,\lvert W^{T}S_BW\rvert\,}{\,\lvert W^{T}S_WW\rvert\,} \) | \( \max_{W}\dfrac{W^{T}S_BW}{W^{T}S_WW} \) |
+| 5 | **NMF (Non-negative Matrix Factorization)**<br>비음수 행렬 분해 | \( X \approx WH, \quad W,H \ge 0 \) | \( \min_{W,H \ge 0}\,\lVert X - WH\rVert_{F}^{2} \) |
+| 6 | **t-SNE (t-distributed Stochastic Neighbor Embedding)**<br>t-분포 확률적 이웃 임베딩 | \( p_{ij}=\dfrac{\exp(-\lVert x_i-x_j\rVert^{2}/2\sigma_i^{2})}{\sum_{k\ne l}\exp(-\lVert x_k-x_l\rVert^{2}/2\sigma_k^{2})}, \quad q_{ij}=\dfrac{(1+\lVert y_i-y_j\rVert^{2})^{-1}}{\sum_{k\ne l}(1+\lVert y_k-y_l\rVert^{2})^{-1}} \) | \( \min_{Y}\, KL(P\|Q)=\sum_{i\ne j}p_{ij}\log\frac{p_{ij}}{q_{ij}} \) |
+| 7 | **UMAP (Uniform Manifold Approximation and Projection)**<br>균일 매니폴드 근사적 사영 | \( w_{ij}=\exp\!\Big(-\frac{d(x_i,x_j)-\rho_i}{\sigma_i}\Big) \) | \( \min_{Y}\sum_{i<j}\!\Big[w_{ij}\log\!\frac{w_{ij}}{\hat{w}_{ij}}+(1-w_{ij})\log\!\frac{1-w_{ij}}{1-\hat{w}_{ij}}\Big] \) |
+| 8 | **Isomap (Isometric Mapping)**<br>등거리 매핑 | \( D_G(i,j)=\mathrm{ShortestPathDistance}(x_i,x_j) \) | \( \min_{Y}\,\lVert D_G - D_Y\rVert_{F}^{2}, \quad D_Y(i,j)=\lVert y_i-y_j\rVert \) |
+| 9 | **MDS (Multidimensional Scaling)**<br>다차원 척도 | \( d_{ij}=\lVert x_i-x_j\rVert \) | \( \min_{Y}\sum_{i<j}\big(d_{ij}-\lVert y_i-y_j\rVert\big)^{2} \) |
+| 10 | **SOM (Self-Organizing Maps)**<br>자기 조직화 지도 | \( b=\arg\min_{j}\lVert x - w_j\rVert \) | \( \min_{\{w_j\}}\sum_{i} h_{b,j}\,\lVert x_i-w_j\rVert^{2}, \quad h_{b,j}=\exp\!\Big(-\frac{\lVert r_b-r_j\rVert^{2}}{2\sigma^{2}}\Big) \) |
+
 
 
 
