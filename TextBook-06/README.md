@@ -1044,18 +1044,18 @@ $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
 <br> 
 
 
-| 번호 | 알고리즘 | 주요 수학식 (LaTeX 렌더링) | 목적함수 / 평가함수 (LaTeX 렌더링) |
+| 번호 | 알고리즘 | 주요 수학식 | 목적함수 / 평가함수 |
 |:---:|:--------------------------------------|:----------------------------------|:----------------------------------|
-| 1 | **PCA (Principal Component Analysis)**<br>주성분 분석 | ![식1](https://latex.codecogs.com/svg.image?X=WZ^{T},\;\;C=\frac{1}{n}X^{T}X) | ![목적1](https://latex.codecogs.com/svg.image?\max_{W}\;W^{T}SW\;\;\text{s.t.}\;\;W^{T}W=I) |
-| 2 | **SVD (Singular Value Decomposition)**<br>특이값 분해 | ![식2](https://latex.codecogs.com/svg.image?X=U\Sigma V^{T}) | ![목적2](https://latex.codecogs.com/svg.image?\min_{U,\Sigma,V}\|X-U\Sigma V^{T}\|_{F}^{2}) |
-| 3 | **ICA (Independent Component Analysis)**<br>독립성분 분석 | ![식3](https://latex.codecogs.com/svg.image?X=AS,\;\;S=WX) | ![목적3](https://latex.codecogs.com/svg.image?\max_{W}\sum_{i}\text{NonGaussianity}(w_i^{T}X)) |
-| 4 | **LDA (Linear Discriminant Analysis)**<br>선형판별 분석 | ![식4](https://latex.codecogs.com/svg.image?\max_{W}\frac{|W^{T}S_BW|}{|W^{T}S_WW|}) | ![목적4](https://latex.codecogs.com/svg.image?\max_{W}\frac{W^{T}S_BW}{W^{T}S_WW}\;\;\text{s.t.}\;\;S_B,S_W\text{는 클래스 간/내 분산}) |
-| 5 | **NMF (Non-negative Matrix Factorization)**<br>비음수 행렬 분해 | ![식5](https://latex.codecogs.com/svg.image?X\approx WH,\;\;W,H\ge0) | ![목적5](https://latex.codecogs.com/svg.image?\min_{W,H\ge0}\|X-WH\|_{F}^{2}) |
-| 6 | **t-SNE (t-distributed Stochastic Neighbor Embedding)**<br>t-분포 확률적 이웃 임베딩 | ![식6](https://latex.codecogs.com/svg.image?p_{ij}=\frac{\exp(-\|x_i-x_j\|^2/2\sigma_i^2)}{\sum_{k\neq l}\exp(-\|x_k-x_l\|^2/2\sigma_k^2)},\;\;q_{ij}=\frac{(1+\|y_i-y_j\|^2)^{-1}}{\sum_{k\neq l}(1+\|y_k-y_l\|^2)^{-1}}) | ![목적6](https://latex.codecogs.com/svg.image?\min_{Y}KL(P\|Q)=\sum_{i\neq j}p_{ij}\log\frac{p_{ij}}{q_{ij}}) |
-| 7 | **UMAP (Uniform Manifold Approximation and Projection)**<br>균일 매니폴드 근사적 사영 | ![식7](https://latex.codecogs.com/svg.image?w_{ij}=\exp\left(-\frac{d(x_i,x_j)-\rho_i}{\sigma_i}\right)) | ![목적7](https://latex.codecogs.com/svg.image?\min_{Y}\sum_{i<j}\left[w_{ij}\log\frac{w_{ij}}{\hat{w}_{ij}}+(1-w_{ij})\log\frac{1-w_{ij}}{1-\hat{w}_{ij}}\right]) |
-| 8 | **Isomap (Isometric Mapping)**<br>등거리 매핑 | ![식8](https://latex.codecogs.com/svg.image?D_G(i,j)=\text{ShortestPathDistance}(x_i,x_j)) | ![목적8](https://latex.codecogs.com/svg.image?\min_{Y}\|D_G-D_Y\|_{F}^{2},\;\;D_Y(i,j)=\|y_i-y_j\|) |
-| 9 | **MDS (Multidimensional Scaling)**<br>다차원 척도 | ![식9](https://latex.codecogs.com/svg.image?d_{ij}=\|x_i-x_j\|) | ![목적9](https://latex.codecogs.com/svg.image?\min_{Y}\sum_{i<j}(d_{ij}-\|y_i-y_j\|)^{2}) |
-| 10 | **SOM (Self-Organizing Maps)**<br>자기 조직화 지도 | ![식10](https://latex.codecogs.com/svg.image?b=\arg\min_j\|x-w_j\|) | ![목적10](https://latex.codecogs.com/svg.image?\min_{w_j}\sum_{i}h_{b,j}\|x_i-w_j\|^{2},\;\;h_{b,j}=\exp\left(-\frac{\|r_b-r_j\|^2}{2\sigma^2}\right)) |
+| 1 | **PCA (Principal Component Analysis)**<br>주성분 분석 | $X = WZ^{T}, \quad C = \frac{1}{n}X^{T}X$ | $\displaystyle \max_{W} W^{T}SW \quad \text{s.t.} \quad W^{T}W = I$ |
+| 2 | **SVD (Singular Value Decomposition)**<br>특이값 분해 | $X = U\Sigma V^{T}$ | $\displaystyle \min_{U,\Sigma,V} \|X - U\Sigma V^{T}\|_{F}^{2}$ |
+| 3 | **ICA (Independent Component Analysis)**<br>독립성분 분석 | $X = AS, \quad S = WX$ | $\displaystyle \max_{W}\sum_{i}\text{NonGaussianity}(w_i^{T}X)$ |
+| 4 | **LDA (Linear Discriminant Analysis)**<br>선형판별 분석 | $\displaystyle \max_{W}\frac{|W^{T}S_BW|}{|W^{T}S_WW|}$ | $\displaystyle \max_{W}\frac{W^{T}S_BW}{W^{T}S_WW}$ |
+| 5 | **NMF (Non-negative Matrix Factorization)**<br>비음수 행렬 분해 | $X \approx WH, \quad W,H \ge 0$ | $\displaystyle \min_{W,H \ge 0}\|X - WH\|_{F}^{2}$ |
+| 6 | **t-SNE (t-distributed Stochastic Neighbor Embedding)**<br>t-분포 확률적 이웃 임베딩 | $p_{ij}=\frac{\exp(-\|x_i-x_j\|^2/2\sigma_i^2)}{\sum_{k\neq l}\exp(-\|x_k-x_l\|^2/2\sigma_k^2)}, \quad q_{ij}=\frac{(1+\|y_i-y_j\|^2)^{-1}}{\sum_{k\neq l}(1+\|y_k-y_l\|^2)^{-1}}$ | $\displaystyle \min_{Y} KL(P\|Q)=\sum_{i\neq j}p_{ij}\log\frac{p_{ij}}{q_{ij}}$ |
+| 7 | **UMAP (Uniform Manifold Approximation and Projection)**<br>균일 매니폴드 근사적 사영 | $w_{ij}=\exp\!\left(-\frac{d(x_i,x_j)-\rho_i}{\sigma_i}\right)$ | $\displaystyle \min_{Y}\sum_{i<j}\left[w_{ij}\log\frac{w_{ij}}{\hat{w}_{ij}}+(1-w_{ij})\log\frac{1-w_{ij}}{1-\hat{w}_{ij}}\right]$ |
+| 8 | **Isomap (Isometric Mapping)**<br>등거리 매핑 | $D_G(i,j)=\text{ShortestPathDistance}(x_i,x_j)$ | $\displaystyle \min_{Y}\|D_G - D_Y\|_{F}^{2}, \quad D_Y(i,j)=\|y_i-y_j\|$ |
+| 9 | **MDS (Multidimensional Scaling)**<br>다차원 척도 | $d_{ij}=\|x_i-x_j\|$ | $\displaystyle \min_{Y}\sum_{i<j}(d_{ij}-\|y_i-y_j\|)^{2}$ |
+| 10 | **SOM (Self-Organizing Maps)**<br>자기 조직화 지도 | $b=\arg\min_j\|x - w_j\|$ | $\displaystyle \min_{w_j}\sum_{i}h_{b,j}\|x_i-w_j\|^{2}, \quad h_{b,j}=\exp\!\left(-\frac{\|r_b - r_j\|^2}{2\sigma^2}\right)$ |
 
 
 
