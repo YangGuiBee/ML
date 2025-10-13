@@ -1,6 +1,3 @@
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 
 
@@ -1224,23 +1221,28 @@ $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
 
 <br>
 
+# 📘 차원 축소 알고리즘 평가 지표별 수식 정리
 
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-| 번호       | 지표명                                        | 수식                                                                                                                                                                                                                                    | 설명                                                                              |                       |                                                    |
-| -------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | --------------------- | -------------------------------------------------- |
-| **(1)**  | **재구성 오류 (Reconstruction Error)**          | [\text{RE} = \frac{1}{n} \sum_{i=1}^{n} | x_i - \hat{x}_i |^2 ]                                                                                                                                                                       | 원본 데이터 (x_i)와 복원된 데이터 (\hat{x}_i)의 평균 제곱 오차(MSE). 값이 작을수록 복원력이 높음.              |                       |                                                    |
-| **(2)**  | **분산 유지율 (Explained Variance Ratio)**      | [\text{EVR}*k = \frac{\sum*{i=1}^{k} \lambda_i}{\sum_{i=1}^{n} \lambda_i}]                                                                                                                                                            | 전체 고유값 중 상위 (k)개의 고유값 (\lambda_i)가 설명하는 분산 비율. PCA 등에서 정보 손실 정도를 평가.            |                       |                                                    |
-| **(3)**  | **상호 정보량 (Mutual Information)**            | [\text{MI}(X, Y) = \sum_{x \in X}\sum_{y \in Y} p(x,y)\log\frac{p(x,y)}{p(x)p(y)}]                                                                                                                                                    | 축소 전 데이터 (X)와 축소 후 데이터 (Y)의 정보량(의존성)을 비교. 값이 클수록 정보 보존이 잘됨.                     |                       |                                                    |
-| **(4)**  | **근접도 보존 – Trustworthiness**               | [\text{T}(k) = 1 - \frac{2}{nk(2n - 3k - 1)} \sum_{i=1}^{n}\sum_{j \in U_k(i)} (r(i,j) - k)]                                                                                                                                          | 고차원 공간에서 이웃이 아니던 점이 저차원에서 k-이웃으로 잘못 나타나는 정도를 측정. 값이 1에 가까울수록 좋음.                |                       |                                                    |
-| **(5)**  | **근접도 보존 – Continuity**                    | [\text{C}(k) = 1 - \frac{2}{nk(2n - 3k - 1)} \sum_{i=1}^{n}\sum_{j \in V_k(i)} (r'(i,j) - k)]                                                                                                                                         | 저차원에서 이웃이던 점이 고차원에선 멀어지는 정도를 측정. Trustworthiness와 보완적 관계.                       |                       |                                                    |
-| **(6)**  | **거리/유사도 보존 – Stress (Kruskal’s Stress)**  | [\text{Stress} = \sqrt{\frac{\sum_{i<j} (d_{ij} - \hat{d}*{ij})^2}{\sum*{i<j} d_{ij}^2}}]                                                                                                                                             | 고차원 거리 (d_{ij})와 저차원 거리 (\hat{d}_{ij}) 간 차이의 제곱합 비율. 작을수록 거리 보존이 잘됨.            |                       |                                                    |
-| **(7)**  | **Sammon Error**                           | [\text{E}*{Sammon} = \frac{1}{\sum*{i<j} d_{ij}} \sum_{i<j} \frac{(d_{ij} - \hat{d}*{ij})^2}{d*{ij}}]                                                                                                                                 | 거리 보존의 가중평균 오차. 작은 거리(근접 관계)를 더 중요하게 반영함. t-SNE, Isomap 평가에 적합.                 |                       |                                                    |
-| **(8)**  | **LCMC (Local Continuity Meta Criterion)** | [\text{LCMC} = \frac{1}{n}\sum_{i=1}^{n} \frac{                                                                                                                                                                                       | N_H(i) \cap N_L(i)                                                              | }{k} - \frac{k}{n-1}] | 고차원/저차원 k-이웃의 겹침 비율을 계산. 지역적 구조와 전역 구조 보존을 동시에 평가. |
-| **(9)**  | **쌍의 상관계수 (Spearman’s ρ)**                 | [\rho = 1 - \frac{6 \sum_{i=1}^{N} (r_i - s_i)^2}{N(N^2 - 1)}]                                                                                                                                                                        | 고차원 거리순위 (r_i)와 저차원 거리순위 (s_i) 간의 일관성. ρ=1이면 순서가 완전히 동일.                        |                       |                                                    |
-| **(10)** | **Silhouette Score**                       | [s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}]                                                                                                                                                                                         | (a(i)): 같은 군집 내 평균거리, (b(i)): 가장 가까운 다른 군집과의 평균거리. (s(i))가 1에 가까울수록 군집 분리도가 좋음. |                       |                                                    |
-| **(11)** | **Davies–Bouldin Index (DBI)**             | [\text{DBI} = \frac{1}{k} \sum_{i=1}^{k} \max_{j \neq i} \frac{\sigma_i + \sigma_j}{d(c_i, c_j)}]                                                                                                                                     | 각 군집 내 분산 (\sigma_i) 대비 군집 중심 간 거리 (d(c_i, c_j)) 비율. 값이 낮을수록 군집 품질이 높음.         |                       |                                                    |
-| **(12)** | **Adjusted Rand Index (ARI)**              | [\text{ARI} = \frac{\sum_{ij} \binom{n_{ij}}{2} - [\sum_i \binom{a_i}{2}\sum_j \binom{b_j}{2}]/\binom{n}{2}}{\frac{1}{2}[\sum_i \binom{a_i}{2} + \sum_j \binom{b_j}{2}] - [\sum_i \binom{a_i}{2}\sum_j \binom{b_j}{2}]/\binom{n}{2}}] | 예측된 군집과 실제 군집 간의 일치도를 조정하여 평가. 1이면 완벽 일치, 0이면 무작위 수준.                           |                       |                                                    |
-| **(13)** | **Normalized Mutual Information (NMI)**    | [\text{NMI}(U,V) = \frac{2 I(U;V)}{H(U) + H(V)}]                                                                                                                                                                                      | 군집 결과 (U)와 참 레이블 (V) 간 상호 정보량을 정규화. 1에 가까울수록 유사도가 높음.                           |                       |                                                    |
+| 번호 | 지표명 | 수식 | 설명 |
+|------|---------|------|------|
+| (1) | **재구성 오류 (Reconstruction Error)** | $$ RE = \frac{1}{n} \sum_{i=1}^{n} \| x_i - \hat{x}_i \|^2 $$ | 원본 데이터 \(x_i\)와 복원된 데이터 \(\hat{x}_i\)의 평균제곱오차(MSE). 값이 작을수록 복원력이 높음. |
+| (2) | **분산 유지율 (Explained Variance Ratio)** | $$ EVR_k = \frac{\sum_{i=1}^{k} \lambda_i}{\sum_{i=1}^{n} \lambda_i} $$ | 상위 \(k\)개의 고유값이 전체 분산에서 차지하는 비율. PCA 등에서 정보 손실 정도 평가. |
+| (3) | **상호 정보량 (Mutual Information)** | $$ MI(X,Y) = \sum_{x \in X} \sum_{y \in Y} p(x,y)\log\frac{p(x,y)}{p(x)p(y)} $$ | 축소 전후 데이터의 정보량 비교. 값이 클수록 정보 보존이 잘됨. |
+| (4) | **근접도 보존 – Trustworthiness** | $$ T(k) = 1 - \frac{2}{nk(2n - 3k - 1)} \sum_{i=1}^{n} \sum_{j \in U_k(i)} (r(i,j) - k) $$ | 고차원에서 이웃이 아니던 점이 저차원에서 잘못 가까워지는 정도를 측정. |
+| (5) | **근접도 보존 – Continuity** | $$ C(k) = 1 - \frac{2}{nk(2n - 3k - 1)} \sum_{i=1}^{n} \sum_{j \in V_k(i)} (r'(i,j) - k) $$ | 저차원에서 이웃이던 점이 고차원에서 멀어지는 정도를 측정. |
+| (6) | **거리 보존 – Stress (Kruskal’s Stress)** | $$ Stress = \sqrt{\frac{\sum_{i<j}(d_{ij}-\hat{d}_{ij})^2}{\sum_{i<j}d_{ij}^2}} $$ | 고차원 거리와 저차원 거리 간의 차이 비율. 작을수록 거리 보존이 잘됨. |
+| (7) | **Sammon Error** | $$ E_{Sammon} = \frac{1}{\sum_{i<j} d_{ij}} \sum_{i<j} \frac{(d_{ij}-\hat{d}_{ij})^2}{d_{ij}} $$ | 근접 관계를 강조한 거리 보존 오차. |
+| (8) | **LCMC (Local Continuity Meta Criterion)** | $$ LCMC = \frac{1}{n}\sum_{i=1}^{n} \frac{|N_H(i)\cap N_L(i)|}{k} - \frac{k}{n-1} $$ | 고차원/저차원 k-이웃의 겹침 비율로 지역/전역 구조를 함께 평가. |
+| (9) | **쌍의 상관계수 (Spearman’s ρ)** | $$ \rho = 1 - \frac{6\sum_{i=1}^{N}(r_i - s_i)^2}{N(N^2 - 1)} $$ | 거리 순위 일관성을 평가. ρ=1이면 완전히 동일한 순서. |
+| (10) | **Silhouette Score** | $$ s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))} $$ | 군집 간 거리 대비 군집 내 밀집도 평가. |
+| (11) | **Davies–Bouldin Index (DBI)** | $$ DBI = \frac{1}{k}\sum_{i=1}^{k} \max_{j\ne i} \frac{\sigma_i+\sigma_j}{d(c_i,c_j)} $$ | 군집 내 분산과 군집 간 중심 거리의 비율. 낮을수록 좋음. |
+| (12) | **Adjusted Rand Index (ARI)** | $$ ARI = \frac{\sum_{ij} \binom{n_{ij}}{2} - [\sum_i \binom{a_i}{2}\sum_j \binom{b_j}{2}]/\binom{n}{2}}{\frac{1}{2}[\sum_i \binom{a_i}{2} + \sum_j \binom{b_j}{2}] - [\sum_i \binom{a_i}{2}\sum_j \binom{b_j}{2}]/\binom{n}{2}} $$ | 군집 일치도 평가. 1이면 완벽 일치, 0은 무작위 수준. |
+| (13) | **Normalized Mutual Information (NMI)** | $$ NMI(U,V) = \frac{2 I(U;V)}{H(U) + H(V)} $$ | 군집 결과와 실제 레이블 간의 상호 정보량을 정규화. 값이 1에 가까울수록 유사도가 높음. |
+                              |
 
 
 ---
