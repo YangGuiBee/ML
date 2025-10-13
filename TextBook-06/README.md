@@ -57,9 +57,13 @@
 
 <br>
 
+---
+
 **연관 규칙(Assocication Rule) :** 빅데이터 기반의 데이터 마이닝기법<br>
 "A를 선택하면(antecedent), B도 선택한다(Consequent)"는 규칙을 찾는다.<br>
 <br>
+
+---
 
 <!--
 ![](./images/data.PNG)
@@ -601,12 +605,13 @@ Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
 
 ---
 
-
 **차원축소(dimension reduction)의 필요성 :** 데이터에 포함된 노이즈(noise)를 제거할 때 사용하는 방법<br> 
 차원축소는 주어진 데이터의 정보손실을 최소화하면서 노이즈를 줄이는 것이 핵심<br>
 차원이 늘어날 수록 필요한 데이터가 기하급수적으로 많아지는 차원의 저주(curse of dimensionality) 문제를 해결<br>
 지도학습의 대표적인 차원축소 방법 : 선형판별분석(Linear Discriminant Analysis)<br>
 비지도학습의 대표적인 차원축소 방법 : 주성분분석(Principal Component Anaysis)<br>
+
+---
 
 <br>
 
