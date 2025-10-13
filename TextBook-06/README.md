@@ -1221,7 +1221,7 @@ $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
 
 <br>
 
-# 📘 차원 축소 알고리즘 평가 지표별 수식 정리
+# 차원 축소 알고리즘 평가 지표별 수식 정리
 
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async
@@ -1242,8 +1242,7 @@ $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
 | (11) | **Davies–Bouldin Index (DBI)** | $$ DBI = \frac{1}{k}\sum_{i=1}^{k} \max_{j\ne i} \frac{\sigma_i+\sigma_j}{d(c_i,c_j)} $$ | 군집 내 분산과 군집 간 중심 거리의 비율. 낮을수록 좋음. |
 | (12) | **Adjusted Rand Index (ARI)** | $$ ARI = \frac{\sum_{ij} \binom{n_{ij}}{2} - [\sum_i \binom{a_i}{2}\sum_j \binom{b_j}{2}]/\binom{n}{2}}{\frac{1}{2}[\sum_i \binom{a_i}{2} + \sum_j \binom{b_j}{2}] - [\sum_i \binom{a_i}{2}\sum_j \binom{b_j}{2}]/\binom{n}{2}} $$ | 군집 일치도 평가. 1이면 완벽 일치, 0은 무작위 수준. |
 | (13) | **Normalized Mutual Information (NMI)** | $$ NMI(U,V) = \frac{2 I(U;V)}{H(U) + H(V)} $$ | 군집 결과와 실제 레이블 간의 상호 정보량을 정규화. 값이 1에 가까울수록 유사도가 높음. |
-                              |
-
+                             
 
 ---
 
