@@ -55,7 +55,7 @@
     ▣ 군집 평가 지표 : Silhouette Score, Davies-Bouldin Index, 실제 레이블과 예측 레이블 비교(ARI, NMI)
 
 
-**연관 규칙 추천(Assocication Rule based Recommendation) :** 빅데이터 기반의 데이터 마이닝기법<br>
+**연관 규칙(Assocication Rule) :** 빅데이터 기반의 데이터 마이닝기법<br>
 "A를 선택하면(antecedent), B도 선택한다(Consequent)"는 규칙을 찾는다.<br>
 <br>
 
