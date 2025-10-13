@@ -1,4 +1,3 @@
-<img width="559" height="486" alt="image" src="https://github.com/user-attachments/assets/0a0705cd-4153-4ec3-ac8c-c1dada5538d9" /><img width="559" height="486" alt="image" src="https://github.com/user-attachments/assets/2d68fed4-ca34-4125-8d05-d61ec197d549" />#  06 : 비지도 학습(Unsupervised Learning, UL) : 연관규칙, 차원축소
 
 ---
 
