@@ -638,30 +638,70 @@ Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
  
 <br>
 
-    import numpy as np
-    import matplotlib.pyplot as plt
-    from sklearn.decomposition import PCA
-    from sklearn.datasets import load_iris
 
-    # 데이터 로드
-    data = load_iris()
-    X = data.data
+	# ---------------------------------------------
+	# PCA(주성분 분석)를 이용해 Iris 데이터셋 시각화하기
+	# ---------------------------------------------	
+	# 수학 계산과 배열 처리를 위한 NumPy 라이브러리
+	import numpy as np
+	
+	# 시각화를 위한 Matplotlib 라이브러리
+	import matplotlib.pyplot as plt
+	
+	# PCA(Principal Component Analysis) 클래스 불러오기
+	from sklearn.decomposition import PCA
+	
+	# Iris(붓꽃) 데이터셋 불러오기
+	from sklearn.datasets import load_iris
+		
+	# -------------------------
+	# 1. 데이터 로드 단계
+	# -------------------------	
+	# sklearn 내장 데이터셋 중 Iris 데이터를 로드
+	data = load_iris()
+	
+	# 입력 변수(X): 꽃받침/꽃잎의 길이와 너비 (총 4개 특성)
+	X = data.data
+		
+	# -------------------------
+	# 2. PCA(주성분 분석) 적용 단계
+	# -------------------------	
+	# PCA 객체 생성: 주성분 2개로 차원 축소 설정
+	pca = PCA(n_components=2)
+	
+	# fit_transform() : PCA 모델을 학습(fit)하고 데이터를 변환(transform)
+	# 즉, 원래 4차원 데이터를 2차원으로 투영(projection)
+	X_pca = pca.fit_transform(X)
+		
+	# -------------------------
+	# 3. 결과 시각화 단계
+	# -------------------------	
+	# 산점도(scatter plot)로 변환된 2차원 PCA 결과 시각화
+	# 각 점의 색상(c)은 데이터의 실제 품종(target)에 따라 다르게 표시
+	plt.scatter(X_pca[:, 0], X_pca[:, 1], c=data.target)
+	
+	# X, Y축 라벨 설정
+	plt.xlabel("Principal Component 1")  # 첫 번째 주성분
+	plt.ylabel("Principal Component 2")  # 두 번째 주성분
+	
+	# 그래프 제목 설정
+	plt.title("PCA on Iris Dataset")
+	
+	# 컬러바(colorbar): 색상에 대응되는 품종(label) 범위를 표시
+	plt.colorbar()
+	
+	# 그래프 표시
+	plt.show()
+		
+	# -------------------------
+	# 4. PCA 성능 지표 출력 단계
+	# -------------------------	
+	# 각 주성분이 설명하는 분산 비율 (각 주성분의 중요도)
+	print("Explained Variance Ratio:", pca.explained_variance_ratio_)
+	
+	# 두 주성분이 전체 데이터 분산의 몇 %를 보존하는지 합계 출력
+	print("Total Variance Retained:", sum(pca.explained_variance_ratio_))
 
-    # PCA 적용
-    pca = PCA(n_components=2)
-    X_pca = pca.fit_transform(X)
-
-    # 결과 시각화
-    plt.scatter(X_pca[:, 0], X_pca[:, 1], c=data.target)
-    plt.xlabel("Principal Component 1")
-    plt.ylabel("Principal Component 2")
-    plt.title("PCA on Iris Dataset")
-    plt.colorbar()
-    plt.show()
-
-    # 분산 유지율 출력
-    print("Explained Variance Ratio:", pca.explained_variance_ratio_)
-    print("Total Variance Retained:", sum(pca.explained_variance_ratio_))
 
 ![](./images/PCA.png)
 <br>
