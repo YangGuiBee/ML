@@ -34,18 +34,17 @@
 	전통 통계·선형 알고리즘
 	[DR-1] PCA(Principal Component Analysis) : 주성분 분석	
 	[DR-2] SVD(Singular Value Decomposition) : 특이값 분해
-	[DR-3] ICA(Independent Component Analysis) : 독립성분 분석
-	[DR-4] LDA(Linear Discriminant Analysis) : 선형판별 분석(지도학습 기반)
-	[DR-5] NMF(Non-negative Matrix Factorization)  : 비음수 행렬 분해
+	[DR-3] ICA(Independent Component Analysis) : 독립성분 분석	
+	[DR-4] NMF(Non-negative Matrix Factorization)  : 비음수 행렬 분해
 
 	비선형/매니폴드 학습 알고리즘
-	[DR-6] t-SNE(t-distributed Stochastic Neighbor Embedding) : t-분포 확률적 이웃 임베딩
-	[DR-7] UMAP(Uniform Manifold Approximation and Projection) : 균일 매니폴드 근사적 사영
-	[DR-8] Isomap : 등거리 매핑
-	[DR-9] MDS(Multidimensional Scaling) : 다차원 척도
+	[DR-5] t-SNE(t-distributed Stochastic Neighbor Embedding) : t-분포 확률적 이웃 임베딩
+	[DR-6] UMAP(Uniform Manifold Approximation and Projection) : 균일 매니폴드 근사적 사영
+	[DR-7] Isomap : 등거리 매핑
+	[DR-8] MDS(Multidimensional Scaling) : 다차원 척도
 
 	신경망/딥러닝 알고리즘
-	[DR-10] SOM(Self-Organizing Maps) : 자기 조직화
+	[DR-9] SOM(Self-Organizing Maps) : 자기 조직화
 	
 	
     [차원 축소 알고리즘 평가방법]
@@ -787,46 +786,8 @@ ICA는 신호들 간의 고차원적 통계적 독립성에 초점을 맞추기 
 ![](./images/ICA.png)
 <br> 
 
-# [DR-4] LDA(Linear Discriminant Analysis) : 선형판별 분석(지도학습 기반)
-![](./images/LDA_1.png)
-<br>
-▣ 정의: 클래스 간 분산을 최대화하고 클래스 내 분산을 최소화하는 선형 차원 축소 기법으로 주로 지도 학습에서 사용<br>
-▣ 필요성: 클래스 간 분리를 극대화하면서 데이터를 저차원으로 투영하여 분류 문제의 성능을 향상시키기 위해 필요<br>
-▣ 장점: 클래스 분리를 극대화하여 분류 성능을 개선할 수 있으며, 선형 변환을 통해 효율적으로 차원을 축소<br>
-▣ 단점: 데이터가 선형적으로 구분되지 않는 경우 성능이 저하될 수 있으며, 클래스 간 분포가 정규 분포를 따를 때 더 효과적<br>
-▣ 응용분야: 얼굴 인식, 이미지 분류, 텍스트 분류 등<br>
-▣ 모델식: 두 클래스 간의 분산 비율을 최대화하는 방향으로 데이터를 투영<br>
 
-    from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-    import matplotlib.pyplot as plt
-    from sklearn.datasets import load_iris
-
-    # 데이터 로드
-    data = load_iris()
-    X = data.data
-    y = data.target
-
-    # LDA 적용
-    lda = LinearDiscriminantAnalysis(n_components=2)
-    X_lda = lda.fit_transform(X, y)
-
-    # 결과 시각화
-    plt.scatter(X_lda[:, 0], X_lda[:, 1], c=y)
-    plt.xlabel("LDA Component 1")
-    plt.ylabel("LDA Component 2")
-    plt.title("LDA on Iris Dataset")
-    plt.colorbar()
-    plt.show()
-
-![](./images/LDA.png)
-<br><br>
-![](./images/PCA_LDA.png)
-<br>
-https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysis-python/
-<br>
-
-
-# [DR-5] NMF(Non-negative Matrix Factorization) : 비음수 행렬 분해
+# [DR-4] NMF(Non-negative Matrix Factorization) : 비음수 행렬 분해
 ▣ 정의 : 데이터를 비음수 행렬로 나타내고 이를 두 개의 비음수 행렬의 곱으로 분해하는 행렬 분해(Matrix Factorization) 기법<br>
 ▣ 필요성 : 원본 데이터를 두 개의 비음수(예: 픽셀 값, 주파수 스펙트럼, 사용자 평가 점수 등) 행렬의 곱으로 분해함으로써 비음수 데이터를 압축적으로 표현하여 중요한 구조적 특징을 발견<br>
 ▣ 장점 : 모든 요소가 비음수이므로 결과를 직관적으로 해석, 데이터의 저차원 표현을 효과적으로 학습하며, 각 데이터의 기여 요소를 명확히 구분<br>
@@ -928,7 +889,7 @@ $𝑉[1,2]=6, 𝑉_{approx}[1,2]=5.99997718$ : 오차는 약 0.00002<br>
 <br>
 
 
-# [DR-6] t-SNE(t-distributed Stochastic Neighbor Embedding) : t-분포 확률적 이웃 임베딩
+# [DR-5] t-SNE(t-distributed Stochastic Neighbor Embedding) : t-분포 확률적 이웃 임베딩
 ▣ 정의: 고차원 데이터의 국소 구조를 잘 보존하여 저차원으로 투영하는 비선형 차원 축소 알고리즘<br>
 ▣ 필요성: 데이터의 클러스터 구조를 유지한 채 저차원으로 투영하여 데이터 간의 관계를 시각적으로 파악하기 위해 사용<br>
 ▣ 장점 : 고차원 데이터의 군집 구조를 잘 반영하여 데이터의 숨겨진 패턴을 시각적으로 잘 드러내고, 비선형 구조를 가진 데이터에서도 효과적으로 작동<br>
@@ -962,7 +923,7 @@ $𝑉[1,2]=6, 𝑉_{approx}[1,2]=5.99997718$ : 오차는 약 0.00002<br>
 <br>
 
 
-# [DR-7] UMAP(Uniform Manifold Approximation and Projection) : 균일 매니폴드 근사적 사영
+# [DR-6] UMAP(Uniform Manifold Approximation and Projection) : 균일 매니폴드 근사적 사영
 ▣ 정의: 데이터의 국소 구조와 전역 구조를 동시에 보존하면서 저차원으로 투영하는 비선형 차원 축소 알고리즘<br>
 ▣ 필요성: 고차원 데이터를 저차원에서 시각화하면서 데이터의 전체적 및 국소적 관계를 동시에 보존하기 위해 사용<br>
 ▣ 장점: t-SNE보다 계산이 빠르고, 대규모 데이터에서도 잘 작동, 데이터의 전역적 및 국소적 구조를 동시에 보존<br>
@@ -995,7 +956,7 @@ $𝑉[1,2]=6, 𝑉_{approx}[1,2]=5.99997718$ : 오차는 약 0.00002<br>
 <br>
 
 
-# [DR-8] Isomap : 등거리 매핑
+# [DR-7] Isomap : 등거리 매핑
 ▣ 정의: 데이터의 기하학적 구조를 보존하여 고차원 데이터를 저차원으로 투영하는 비선형 차원 축소 기법<br>
 ▣ 필요성: 비선형적인 데이터 구조를 저차원에서도 유지하며 시각화할 때 유용<br>
 ▣ 장점: 고차원 데이터의 매니폴드(저차원 다양체) 구조를 잘 보존하며, 국소적인 거리 정보를 기반으로 데이터의 구조를 유지<br>
@@ -1027,7 +988,7 @@ $𝑉[1,2]=6, 𝑉_{approx}[1,2]=5.99997718$ : 오차는 약 0.00002<br>
 <br>
 
 
-# [DR-9] MDS(Multidimensional Scaling) : 다차원 척도
+# [DR-8] MDS(Multidimensional Scaling) : 다차원 척도
 ▣ 정의: MDS는 고차원 데이터 포인트 간의 거리를 보존하며 저차원으로 투영하는 차원 축소 기법<br>
 ▣ 필요성: 데이터의 유사성 또는 거리 정보를 저차원에서도 유지하여 시각화하기 위해 사용<br>
 ▣ 장점: 거리 정보를 보존하므로 데이터의 기하학적 관계를 잘 유지하며, 비선형 구조를 일부 보존<br>
@@ -1059,7 +1020,7 @@ $𝑉[1,2]=6, 𝑉_{approx}[1,2]=5.99997718$ : 오차는 약 0.00002<br>
 <br>
 
 
-# [DR-10] SOM(Self-Organizing Maps) : 자기 조직화
+# [DR-9] SOM(Self-Organizing Maps) : 자기 조직화
 ▣ 정의 : 고차원의 데이터를 저차원(일반적으로 2차원) 공간으로 투영하여 데이터의 구조를 시각화하는 데 사용. PCA는 선형 변환을 통해 차원 축소를 수행하지만, SOM은 비선형 변환을 사용하여 더 복잡한 데이터 구조를 반영할 수 있으며, k-평균은 각 군집의 중심을 찾는 방식으로 군집화를 수행하는 반면, SOM은 뉴런이 격자 형태로 조직되어 있어 더 직관적인 시각화가 가능<br> 
 ▣ 절차
 (1) 초기화: SOM의 각 뉴런에 임의의 가중치 벡터를 할당(이 가중치 벡터는 입력 데이터와 같은 차원)<br>
@@ -1113,13 +1074,12 @@ $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
 | **[1] PCA (Principal Component Analysis)** 주성분 분석 | ![](https://latex.codecogs.com/svg.image?X%3DWZ%5ET%2C%5C%3BC%3D%5Cfrac%7B1%7D%7Bn%7DX%5ETX) | ![](https://latex.codecogs.com/svg.image?%5Cmax_%7BW%7DW%5ETSW%5Cquad%5Ctext%7Bs.t.%7D%5Cquad%20W%5ETW%3DI) |
 | **[2] SVD (Singular Value Decomposition)** 특이값 분해 | ![](https://latex.codecogs.com/svg.image?X%3DU%5CSigma%20V%5ET) | ![](https://latex.codecogs.com/svg.image?%5Cmin_%7BU%2C%5CSigma%2CV%7D%5ClVert%20X-U%5CSigma%20V%5ET%5CrVert_F%5E2) |
 | **[3] ICA (Independent Component Analysis)** 독립성분 분석 | ![](https://latex.codecogs.com/svg.image?X%3DAS%2C%5Cquad%20S%3DWX) | ![](https://latex.codecogs.com/svg.image?%5Cmax_%7BW%7D%5Csum_i%5Ctext%7BNonGaussianity%7D(w_i%5ETX)) |
-| **[4] LDA (Linear Discriminant Analysis)** 선형판별 분석 | ![](https://latex.codecogs.com/svg.image?%5Cmax_%7BW%7D%5Cfrac%7B%7CW%5ETS_BW%7C%7D%7B%7CW%5ETS_WW%7C%7D) | ![](https://latex.codecogs.com/svg.image?%5Cmax_%7BW%7D%5Cfrac%7BW%5ETS_BW%7D%7BW%5ETS_WW%7D) |
-| **[5] NMF (Non-negative Matrix Factorization)** 비음수 행렬 분해 | ![](https://latex.codecogs.com/svg.image?X%5Capprox%20WH%2C%5Cquad%20W%2CH%5Cge0) | ![](https://latex.codecogs.com/svg.image?%5Cmin_%7BW%2CH%5Cge0%7D%5ClVert%20X-WH%5CrVert_F%5E2) |
-| **[6] t-SNE (t-distributed Stochastic Neighbor Embedding)** t-분포 확률적 이웃 임베딩 | ![](https://latex.codecogs.com/svg.image?p_%7Bij%7D%3D%5Cfrac%7B%5Cexp(-%5ClVert%20x_i-x_j%5CrVert%5E2%2F2%5Csigma_i%5E2)%7D%7B%5Csum_%7Bk%5Cne%20l%7D%5Cexp(-%5ClVert%20x_k-x_l%5CrVert%5E2%2F2%5Csigma_k%5E2)%7D%2C%5Cquad%20q_%7Bij%7D%3D%5Cfrac%7B(1%2B%5ClVert%20y_i-y_j%5CrVert%5E2)%5E-1%7D%7B%5Csum_%7Bk%5Cne%20l%7D(1%2B%5ClVert%20y_k-y_l%5CrVert%5E2)%5E-1%7D) | ![](https://latex.codecogs.com/svg.image?%5Cmin_Y%20KL(P%7CQ)%3D%5Csum_%7Bi%5Cne%20j%7Dp_%7Bij%7D%5Clog%5Cfrac%7Bp_%7Bij%7D%7D%7Bq_%7Bij%7D%7D) |
-| **[7] UMAP (Uniform Manifold Approximation and Projection)** 균일 매니폴드 근사적 사영 | ![](https://latex.codecogs.com/svg.image?w_%7Bij%7D%3D%5Cexp%5Cleft(-%5Cfrac%7Bd(x_i%2Cx_j)-%5Crho_i%7D%7B%5Csigma_i%7D%5Cright)) | ![](https://latex.codecogs.com/svg.image?%5Cmin_Y%5Csum_%7Bi%3Cj%7D%5BBig(w_%7Bij%7D%5Clog%5Cfrac%7Bw_%7Bij%7D%7D%7B%5Chat%7Bw%7D_%7Bij%7D%7D%2B(1-w_%7Bij%7D)%5Clog%5Cfrac%7B1-w_%7Bij%7D%7D%7B1-%5Chat%7Bw%7D_%7Bij%7D%7D%5CBig)%5D) |
-| **[8] Isomap (Isometric Mapping)** 등거리 매핑 | ![](https://latex.codecogs.com/svg.image?D_G(i%2Cj)%3D%5Cmathrm%7BShortestPathDistance%7D(x_i%2Cx_j)) | ![](https://latex.codecogs.com/svg.image?%5Cmin_Y%5ClVert%20D_G-D_Y%5CrVert_F%5E2%2C%5Cquad%20D_Y(i%2Cj)%3D%5ClVert%20y_i-y_j%5CrVert) |
-| **[9] MDS (Multidimensional Scaling)** 다차원 척도 | ![](https://latex.codecogs.com/svg.image?d_%7Bij%7D%3D%5ClVert%20x_i-x_j%5CrVert) | ![](https://latex.codecogs.com/svg.image?%5Cmin_Y%5Csum_%7Bi%3Cj%7D(d_%7Bij%7D-%5ClVert%20y_i-y_j%5CrVert)%5E2) |
-| **[10] SOM (Self-Organizing Maps)** 자기 조직화 지도 | ![](https://latex.codecogs.com/svg.image?b%3D%5Carg%5Cmin_j%5ClVert%20x-w_j%5CrVert) | ![](https://latex.codecogs.com/svg.image?%5Cmin_%7B%5C%7Bw_j%5C%7D%7D%5Csum_i%20h_%7Bb%2Cj%7D%5ClVert%20x_i-w_j%5CrVert%5E2%2C%5Cquad%20h_%7Bb%2Cj%7D%3D%5Cexp%5Cleft(-%5Cfrac%7B%5ClVert%20r_b-r_j%5CrVert%5E2%7D%7B2%5Csigma%5E2%7D%5Cright)) |
+| **[4] NMF (Non-negative Matrix Factorization)** 비음수 행렬 분해 | ![](https://latex.codecogs.com/svg.image?X%5Capprox%20WH%2C%5Cquad%20W%2CH%5Cge0) | ![](https://latex.codecogs.com/svg.image?%5Cmin_%7BW%2CH%5Cge0%7D%5ClVert%20X-WH%5CrVert_F%5E2) |
+| **[5] t-SNE (t-distributed Stochastic Neighbor Embedding)** t-분포 확률적 이웃 임베딩 | ![](https://latex.codecogs.com/svg.image?p_%7Bij%7D%3D%5Cfrac%7B%5Cexp(-%5ClVert%20x_i-x_j%5CrVert%5E2%2F2%5Csigma_i%5E2)%7D%7B%5Csum_%7Bk%5Cne%20l%7D%5Cexp(-%5ClVert%20x_k-x_l%5CrVert%5E2%2F2%5Csigma_k%5E2)%7D%2C%5Cquad%20q_%7Bij%7D%3D%5Cfrac%7B(1%2B%5ClVert%20y_i-y_j%5CrVert%5E2)%5E-1%7D%7B%5Csum_%7Bk%5Cne%20l%7D(1%2B%5ClVert%20y_k-y_l%5CrVert%5E2)%5E-1%7D) | ![](https://latex.codecogs.com/svg.image?%5Cmin_Y%20KL(P%7CQ)%3D%5Csum_%7Bi%5Cne%20j%7Dp_%7Bij%7D%5Clog%5Cfrac%7Bp_%7Bij%7D%7D%7Bq_%7Bij%7D%7D) |
+| **[6] UMAP (Uniform Manifold Approximation and Projection)** 균일 매니폴드 근사적 사영 | ![](https://latex.codecogs.com/svg.image?w_%7Bij%7D%3D%5Cexp%5Cleft(-%5Cfrac%7Bd(x_i%2Cx_j)-%5Crho_i%7D%7B%5Csigma_i%7D%5Cright)) | ![](https://latex.codecogs.com/svg.image?%5Cmin_Y%5Csum_%7Bi%3Cj%7D%5BBig(w_%7Bij%7D%5Clog%5Cfrac%7Bw_%7Bij%7D%7D%7B%5Chat%7Bw%7D_%7Bij%7D%7D%2B(1-w_%7Bij%7D)%5Clog%5Cfrac%7B1-w_%7Bij%7D%7D%7B1-%5Chat%7Bw%7D_%7Bij%7D%7D%5CBig)%5D) |
+| **[7] Isomap (Isometric Mapping)** 등거리 매핑 | ![](https://latex.codecogs.com/svg.image?D_G(i%2Cj)%3D%5Cmathrm%7BShortestPathDistance%7D(x_i%2Cx_j)) | ![](https://latex.codecogs.com/svg.image?%5Cmin_Y%5ClVert%20D_G-D_Y%5CrVert_F%5E2%2C%5Cquad%20D_Y(i%2Cj)%3D%5ClVert%20y_i-y_j%5CrVert) |
+| **[8] MDS (Multidimensional Scaling)** 다차원 척도 | ![](https://latex.codecogs.com/svg.image?d_%7Bij%7D%3D%5ClVert%20x_i-x_j%5CrVert) | ![](https://latex.codecogs.com/svg.image?%5Cmin_Y%5Csum_%7Bi%3Cj%7D(d_%7Bij%7D-%5ClVert%20y_i-y_j%5CrVert)%5E2) |
+| **[9] SOM (Self-Organizing Maps)** 자기 조직화 지도 | ![](https://latex.codecogs.com/svg.image?b%3D%5Carg%5Cmin_j%5ClVert%20x-w_j%5CrVert) | ![](https://latex.codecogs.com/svg.image?%5Cmin_%7B%5C%7Bw_j%5C%7D%7D%5Csum_i%20h_%7Bb%2Cj%7D%5ClVert%20x_i-w_j%5CrVert%5E2%2C%5Cquad%20h_%7Bb%2Cj%7D%3D%5Cexp%5Cleft(-%5Cfrac%7B%5ClVert%20r_b-r_j%5CrVert%5E2%7D%7B2%5Csigma%5E2%7D%5Cright)) |
 
 
 
