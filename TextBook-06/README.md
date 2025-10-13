@@ -1,3 +1,4 @@
+#  06 : 비지도 학습(Unsupervised Learning, UL) : 연관규칙, 차원축소
 
 ---
 
