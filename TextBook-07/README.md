@@ -213,14 +213,14 @@
 
 ## ▣ 연관규칙 평가지표 수식
 
-| 지표명                             | 의미                                             | 수식(확률 기반 정의)                                                                                                            |
-| ------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| **지지도 (Support)**               | (A)와 (B)가 **동시에 발생**할 비율                       | (\displaystyle \text{support}(A\Rightarrow B)=P(A\cap B)=\frac{#(A\cap B)}{N})                                          |
-| **신뢰도 (Confidence)**            | (A)가 발생했을 때 (B)가 **함께 발생할 조건부 확률**             | (\displaystyle \text{confidence}(A\Rightarrow B)=P(B\mid A)=\frac{P(A\cap B)}{P(A)})                                    |
-| **향상도 (Lift)**                  | (A)와 (B)의 **독립성 대비 연관 강도**                     | (\displaystyle \text{lift}(A\Rightarrow B)=\frac{P(A\cap B)}{P(A),P(B)}=\frac{\text{confidence}(A\Rightarrow B)}{P(B)}) |
-| **레버리지 (Leverage)**             | 실제 동시발생과 **기대 동시발생의 차이**                       | (\displaystyle \text{leverage}(A\Rightarrow B)=P(A\cap B)-P(A),P(B))                                                    |
-| **확신도 (Conviction)**            | 규칙이 없을 때의 (B) **부정 확률** 대비, 규칙 하에서의 **오류율 감소** | (\displaystyle \text{conviction}(A\Rightarrow B)=\frac{1-P(B)}{1-\text{confidence}(A\Rightarrow B)})                    |
-| **상관계수 (Correlation / (\phi))** | (A)–(B) **이진 상관(피어슨 (\phi))**                  | (\displaystyle \phi(A,B)=\frac{P(A\cap B)-P(A),P(B)}{\sqrt{P(A),(1-P(A)),P(B),(1-P(B))}})                               |
+| 지표명                         | 의미                                         | 수식(텍스트 표기)                                                                      |                         |
+| --------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------- | ----------------------- |
+| **지지도 (Support)**           | A와 B가 **동시에 발생**할 비율                       | `support(A->B) = P(A and B) = count(A and B) / N`                               |                         |
+| **신뢰도 (Confidence)**        | A가 발생했을 때 B가 **함께 발생**할 조건부 확률             | `confidence(A->B) = P(B                                                         | A) = P(A and B) / P(A)` |
+| **향상도 (Lift)**              | 독립 가정 대비 **연관 강도**                         | `lift(A->B) = P(A and B) / ( P(A) * P(B) ) = confidence(A->B) / P(B)`           |                         |
+| **레버리지 (Leverage)**         | 실제 동시발생과 **기대 동시발생의 차이**                   | `leverage(A,B) = P(A and B) - P(A)*P(B)`                                        |                         |
+| **확신도 (Conviction)**        | 규칙이 없을 때의 B **부정 확률** 대비, 규칙 하의 **오류율 감소** | `conviction(A->B) = (1 - P(B)) / (1 - confidence(A->B))`                        |                         |
+| **상관계수 (Correlation, phi)** | A–B **이진 상관(피어슨 φ)**                       | `phi(A,B) = ( P(A and B) - P(A)*P(B) ) / sqrt( P(A)*(1-P(A)) * P(B)*(1-P(B)) )` |                         |
 
 
 
