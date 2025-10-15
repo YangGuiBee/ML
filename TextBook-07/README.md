@@ -1,18 +1,70 @@
+---
+
 #  07-1 : 군집 평가지표
 
 ---
-	
+
 	[1] Silhouette Coefficient : 실루엣 계수
 	[2] Davies-Bouldin Index (DBI)
 	[3] Dunn Index (DI)
 	[4] Calinski-Harabasz Index (CHI)
 	[5] Within-Cluster Sum of Squares (WCSS) : 군집내 제곱합
+	  
+---
 
+#  07-2 : 연관규칙 평가지표
+
+---
+	
+	[1] 지지도(Support)
+	[2] 신뢰도(Confidence)
+	[3] 향상도(Lift)
+	[4] 레버리지(Leverage)
+	[5] 확신도(Conviction)
+	[6] 상관계수(Correlation Coefficient)
+	  
+---
+
+#  07-3 : 차원축소 평가지표
+
+---
+	
+	▣ 재구성 기반 : 원본 복원 능력
+	[1] 재구성 오류(Reconstruction Error) : 복원된 데이터와 원본 데이터 간의 평균 제곱 오차(MSE)
+	[2] 분산 유지율(Explained Variance Ratio) : 각 주성분이 설명하는 분산 비율로 데이터의 정보 손실정도 파악
+	[3] 상호 정보량(Mutual Information) :  차원 축소 전후 데이터의 정보량을 비교
+
+	▣ 구조 보존 기반 : 거리·이웃 관계 유지
+	[4] 근접도 보존 : Trustworthiness, Continuity
+	[5] 거리/유사도 보존 : Stress, Sammon Error
+	[6] 지역/전역구조 : LCMC(Local Continuity Meta Criterion)
+	[7] 쌍의 상관계수 : Spearman’s ρ
+
+	▣ 활용 성능 기반 : 축소된 표현의 유용성
+	[8] Silhouette Score
+	[9] Davies-Bouldin Index (DBI)
+	[10] Adjusted Rand Index (ARI)
+	[11] Normalized Mutual Information (NMI)
 	  
 ---
 
 
-## ▣ 평가지표 수식
+---
+
+#  07-1 : 군집 평가지표
+
+---
+
+	[1] Silhouette Coefficient : 실루엣 계수
+	[2] Davies-Bouldin Index (DBI)
+	[3] Dunn Index (DI)
+	[4] Calinski-Harabasz Index (CHI)
+	[5] Within-Cluster Sum of Squares (WCSS) : 군집내 제곱합
+	  
+---
+
+
+## ▣ 군집 평가지표 수식
 
 | 지표명 | 의미 | 수식(대표 정의) |
 |---|---|---|
@@ -26,7 +78,7 @@
 <br>
 
 
-## ▣ 평가지표 결과해석
+## ▣ 군집 평가지표 결과해석
 
 | 지표                                | 목표                    | 권장 해석 기준(경험치)                                                           | 비고                                                             |
 | --------------------------------- | --------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------- |
@@ -175,24 +227,21 @@
 	  
 ---
 
-**▣ 지지도(Support):** 특정 항목 집합이 전체 거래에서 얼마나 자주 나타나는지 나타낸다.<br>
-Support(A) = (거래에서 A가 발생한 횟수)/(전체 거래 수)<br>
+## ▣ 연관규칙 평가지표 수식
 
-**▣ 신뢰도(Confidence):** A가 주어졌을 때 B가 발생할 확률<br>
-Confidence(A ⇒ B) = Support(A ∩ B)/Support(A)<br>
+| 지표명                             | 의미                                             | 수식(확률 기반 정의)                                                                                                            |
+| ------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| **지지도 (Support)**               | (A)와 (B)가 **동시에 발생**할 비율                       | (\displaystyle \text{support}(A\Rightarrow B)=P(A\cap B)=\frac{#(A\cap B)}{N})                                          |
+| **신뢰도 (Confidence)**            | (A)가 발생했을 때 (B)가 **함께 발생할 조건부 확률**             | (\displaystyle \text{confidence}(A\Rightarrow B)=P(B\mid A)=\frac{P(A\cap B)}{P(A)})                                    |
+| **향상도 (Lift)**                  | (A)와 (B)의 **독립성 대비 연관 강도**                     | (\displaystyle \text{lift}(A\Rightarrow B)=\frac{P(A\cap B)}{P(A),P(B)}=\frac{\text{confidence}(A\Rightarrow B)}{P(B)}) |
+| **레버리지 (Leverage)**             | 실제 동시발생과 **기대 동시발생의 차이**                       | (\displaystyle \text{leverage}(A\Rightarrow B)=P(A\cap B)-P(A),P(B))                                                    |
+| **확신도 (Conviction)**            | 규칙이 없을 때의 (B) **부정 확률** 대비, 규칙 하에서의 **오류율 감소** | (\displaystyle \text{conviction}(A\Rightarrow B)=\frac{1-P(B)}{1-\text{confidence}(A\Rightarrow B)})                    |
+| **상관계수 (Correlation / (\phi))** | (A)–(B) **이진 상관(피어슨 (\phi))**                  | (\displaystyle \phi(A,B)=\frac{P(A\cap B)-P(A),P(B)}{\sqrt{P(A),(1-P(A)),P(B),(1-P(B))}})                               |
 
-**▣ 향상도(Lift):** A와 B가 서로 독립적으로 발생하는 경우에 비해 A가 발생했을 때 B가 발생할 가능성이 얼마나 높은지를 나타낸다. 1이면 두 항목이 독립적, 1보다 크면 양의 상관관계, 1보다 작으면 음의 상관관계<br>
-Lift(A ⇒ B) = Confidence(A ⇒ B)/Support(B)<br>
 
-**▣ 레버리지(Leverage):** A와 B의 결합 빈도가 두 항목이 독립적으로 발생하는 빈도와 얼마나 차이가 나는지 나타낸다. 0이면 두 항목이 독립적<br>
-Leverage(A ⇒ B) =  Support(A ∩ B) - (Support(A) × Support(B))<br>
 
-**▣ Conviction(확신도):** A가 발생할 때 B가 발생하지 않을 가능성이 독립적인 경우보다 얼마나 줄어드는지를 나타낸다. 1에 가까우면 A와 B는 서로 독립적<br>
-Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
+## ▣ 연관규칙 평가지표 결과해석
 
-**▣ 상관계수(Correlation Coefficient):** 0에 가까우면 두 항목 간에 상관관계가 없고, 양수나 음수로 갈수록 상관관계가 강하다.<br>
-
-<br>
 
 ---
 
