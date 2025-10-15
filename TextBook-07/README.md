@@ -142,7 +142,7 @@
 
 
 
-(소스 실행 결과)
+### (소스 실행 결과)
 
 	=== Iris + K-means (k=3) ===
 	[1] Silhouette Coefficient : 0.5528
