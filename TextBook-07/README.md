@@ -40,6 +40,14 @@
 
 <br>
 
+Iris 데이터 + K-means(k=3) 학습 후 평가지표 5종 출력
+[1] Silhouette Coefficient
+[2] Davies-Bouldin Index (DBI)
+[3] Dunn Index (DI)  *scikit-learn 미제공 → 커스텀 구현
+[4] Calinski-Harabasz Index (CHI)
+[5] Within-Cluster Sum of Squares (WCSS = inertia)
+
+
 	# ---------- 경고 방지용 환경변수: 반드시 상단에서 설정 ----------
 	import os
 	os.environ["OMP_NUM_THREADS"] = "1"       # OpenMP 스레드
@@ -125,6 +133,17 @@
 	
 	if __name__ == "__main__":
 	    main(k=3)
+
+
+
+(소스 실행 결과)
+
+	=== Iris + K-means (k=3) ===
+	[1] Silhouette Coefficient : 0.5528
+	[2] Davies-Bouldin Index   : 0.6620
+	[3] Dunn Index             : 0.0988
+	[4] Calinski-Harabasz     : 561.6278
+	[5] WCSS (Inertia)        : 78.8514
 
 ---
 
