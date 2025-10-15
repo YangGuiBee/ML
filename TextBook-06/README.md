@@ -20,15 +20,6 @@
 	추론/최적화 알고리즘
 	[AR-6] Artificial Immune System : 인공면역시스템
 
-	   
-    [연관 규칙 알고리즘 평가방법]
-    ▣ 지지도(Support) : 특정 항목 집합이 전체 거래에서 얼마나 자주 나타나는지 나타낸다.
-    ▣ 신뢰도(Confidence) : A가 주어졌을 때 B가 발생할 확률
-    ▣ 향상도(Lift) : A와 B가 서로 독립적으로 발생하는 경우에 비해 A가 발생했을 때 B가 발생할 가능성이 얼마나 높은지를 나타낸다.
-    ▣ 레버리지(Leverage) : A와 B의 결합 빈도가 두 항목이 독립적으로 발생하는 빈도와 얼마나 차이가 나는지 나타낸다.
-    ▣ Conviction(확신도) : A가 발생할 때 B가 발생하지 않을 가능성이 독립적인 경우보다 얼마나 줄어드는지를 나타낸다.
-    ▣ 상관계수(Correlation Coefficient)는 두 변수 간의 관계의 강도와 방향
-
     
 
 ## 차원 축소(Dimensionality Reduction)
@@ -50,26 +41,6 @@
 	[DR-9] SOM(Self-Organizing Maps) : 자기 조직화
 	
 	
-    [차원 축소 알고리즘 평가방법]
-	▣ 재구성 기반 : 원본 복원 능력
-	(1) 재구성 오류(Reconstruction Error) : 복원된 데이터와 원본 데이터 간의 평균 제곱 오차(MSE)
-	(2) 분산 유지율(Explained Variance Ratio) : 각 주성분이 설명하는 분산 비율로 데이터의 정보 손실정도 파악
-	(3) 상호 정보량(Mutual Information) :  차원 축소 전후 데이터의 정보량을 비교
-
-	▣ 구조 보존 기반 : 거리·이웃 관계 유지
-	(4) 근접도 보존 : Trustworthiness, Continuity
-	(5) 거리/유사도 보존 : Stress, Sammon Error
-	(6) 지역/전역구조 : LCMC(Local Continuity Meta Criterion)
-	(7) 쌍의 상관계수 : Spearman’s ρ
-
-	▣ 활용 성능 기반 : 축소된 표현의 유용성
-	(8) Silhouette Score
-	(9) Davies-Bouldin Index (DBI)
-	(10) Adjusted Rand Index (ARI)
-	(11) Normalized Mutual Information (NMI)
-
-
-
 <br>
 
 ---
@@ -590,32 +561,6 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 | **[4] Multi-level Association Rules : 다계층 연관규칙** | ![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7DSupport_%5Cell(X)%3D%5Cfrac%7Bcount_%5Cell(X)%7D%7BN_%5Cell%7D)<br>![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7DConfidence(X%5CRightarrow%20Y)%3D%5Cfrac%7BSupport(X%5Ccup%20Y)%7D%7BSupport(X)%7D)<br>![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7Dmin_%7Bsup1%7D%3E%20min_%7Bsup2%7D%3E%20min_%7Bsup3%7D) | ![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7D%5Cmax%20Support_%5Cell(X)%2C%5Cquad%20Confidence(X%5CRightarrow%20Y)%5Cge%20min_%7Bconf%2C%5Cell%7D%2C%5quad%20Support(X)%5Cge%20min_%7Bsup%7D) |
 | **[5] Multi-dimensional Association Rules : 다차원 연관규칙** | ![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7DSupport(A_1%3Da_1%2C%5Cldots%2C%20A_n%3Da_n)%3D%5Cfrac%7Bcount(A_1%3Da_1%2C%5Cldots%2C%20A_n%3Da_n)%7D%7BN%7D)<br>![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7DConfidence(A_1%3Da_1%2C%5Cldots%2C%20A_k%3Da_k%5CRightarrow%20A_j%3Da_j)%3D%5Cfrac%7BSupport(A_1%3Da_1%2C%5Cldots%2C%20A_n%3Da_n)%7D%7BSupport(A_1%3Da_1%2C%5Cldots%2C%20A_k%3Da_k)%7D) | ![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7D%5Cmax%20Support(A_1%3D%5Ccdots%2C%20A_n)%2C%5quad%20Confidence%5Cge%20min_%7Bconf%7D%2C%5quad%20Support%5Cge%20min_%7Bsup%7D) |
 | **[6] Artificial Immune System : 인공면역시스템** | ![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7DAffinity(Ab%2C%20Ag)%3D%5Cfrac%7Bmatch(Ab%2C%20Ag)%7D%7B%7CAg%7C%7D)<br>![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7DP(Ab_i)%3D%5Cfrac%7BAffinity(Ab_i%2C%20Ag)%7D%7B%5Csum_j%20Affinity(Ab_j%2C%20Ag)%7D)<br>![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7DP_%7Bclone%7D%3D%5Calpha%5Ccdot%20Affinity(Ab_i%2C%20Ag))<br>![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7DP_%7Bmutation%7D%3D%20e%5E%7B-%5Cbeta%5Ccdot%20Affinity(Ab_i%2C%20Ag)%7D) | ![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7D%5Cmax_%7BAb%7D%20Affinity(Ab%2C%20Ag)) |
-
-
-
-
----
-## [연관 규칙 알고리즘 평가방법]
-
-**▣ 지지도(Support):** 특정 항목 집합이 전체 거래에서 얼마나 자주 나타나는지 나타낸다.<br>
-Support(A) = (거래에서 A가 발생한 횟수)/(전체 거래 수)<br>
-
-**▣ 신뢰도(Confidence):** A가 주어졌을 때 B가 발생할 확률<br>
-Confidence(A ⇒ B) = Support(A ∩ B)/Support(A)<br>
-
-**▣ 향상도(Lift):** A와 B가 서로 독립적으로 발생하는 경우에 비해 A가 발생했을 때 B가 발생할 가능성이 얼마나 높은지를 나타낸다. 1이면 두 항목이 독립적, 1보다 크면 양의 상관관계, 1보다 작으면 음의 상관관계<br>
-Lift(A ⇒ B) = Confidence(A ⇒ B)/Support(B)<br>
-
-**▣ 레버리지(Leverage):** A와 B의 결합 빈도가 두 항목이 독립적으로 발생하는 빈도와 얼마나 차이가 나는지 나타낸다. 0이면 두 항목이 독립적<br>
-Leverage(A ⇒ B) =  Support(A ∩ B) - (Support(A) × Support(B))<br>
-
-**▣ Conviction(확신도):** A가 발생할 때 B가 발생하지 않을 가능성이 독립적인 경우보다 얼마나 줄어드는지를 나타낸다. 1에 가까우면 A와 B는 서로 독립적<br>
-Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
-
-**▣ 상관계수(Correlation Coefficient):** 0에 가까우면 두 항목 간에 상관관계가 없고, 양수나 음수로 갈수록 상관관계가 강하다.<br>
-
-<br>
-
 
 ---
 
