@@ -170,7 +170,7 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 	import matplotlib.pyplot as plt
 	
 	# 1. 데이터셋 불러오기
-	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-14/heart_disease_uci.csv"
+	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-07/heart_disease_uci.csv"
 	df = pd.read_csv(data_url)
 	
 	# 2. 결측값 확인 및 처리
