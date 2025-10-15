@@ -556,6 +556,9 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 | **[5] Multi-dimensional Association Rules : 다차원 연관규칙** | ![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7DSupport(A_1%3Da_1%2C%5Cldots%2C%20A_n%3Da_n)%3D%5Cfrac%7Bcount(A_1%3Da_1%2C%5Cldots%2C%20A_n%3Da_n)%7D%7BN%7D)<br>![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7DConfidence(A_1%3Da_1%2C%5Cldots%2C%20A_k%3Da_k%5CRightarrow%20A_j%3Da_j)%3D%5Cfrac%7BSupport(A_1%3Da_1%2C%5Cldots%2C%20A_n%3Da_n)%7D%7BSupport(A_1%3Da_1%2C%5Cldots%2C%20A_k%3Da_k)%7D) | ![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7D%5Cmax%20Support(A_1%3D%5Ccdots%2C%20A_n)%2C%5quad%20Confidence%5Cge%20min_%7Bconf%7D%2C%5quad%20Support%5Cge%20min_%7Bsup%7D) |
 | **[6] Artificial Immune System : 인공면역시스템** | ![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7DAffinity(Ab%2C%20Ag)%3D%5Cfrac%7Bmatch(Ab%2C%20Ag)%7D%7B%7CAg%7C%7D)<br>![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7DP(Ab_i)%3D%5Cfrac%7BAffinity(Ab_i%2C%20Ag)%7D%7B%5Csum_j%20Affinity(Ab_j%2C%20Ag)%7D)<br>![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7DP_%7Bclone%7D%3D%5Calpha%5Ccdot%20Affinity(Ab_i%2C%20Ag))<br>![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7DP_%7Bmutation%7D%3D%20e%5E%7B-%5Cbeta%5Ccdot%20Affinity(Ab_i%2C%20Ag)%7D) | ![](https://latex.codecogs.com/svg.image?%5Cdpi%7B120%7D%5Cmax_%7BAb%7D%20Affinity(Ab%2C%20Ag)) |
 
+
+<br>
+
 ---
 
 **차원축소(dimension reduction)의 필요성 :** 데이터에 포함된 노이즈(noise)를 제거할 때 사용하는 방법<br> 
@@ -565,8 +568,6 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 비지도학습의 대표적인 차원축소 방법 : 주성분분석(Principal Component Anaysis)<br>
 
 ---
-
-<br>
 
 # [DR-1] PCA(Principal Component Analysis) : 주성분 분석
 ![](./images/PCA_1.png)
