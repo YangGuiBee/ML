@@ -166,11 +166,12 @@
 
 ---
 	
-	[1] Silhouette Coefficient : 실루엣 계수
-	[2] Davies-Bouldin Index (DBI)
-	[3] Dunn Index (DI)
-	[4] Calinski-Harabasz Index (CHI)
-	[5] Within-Cluster Sum of Squares (WCSS) : 군집내 제곱합
+	[1] 지지도(Support) : 특정 항목 집합이 전체 거래에서 얼마나 자주 나타나는지 나타낸다.
+	[2] 신뢰도(Confidence) : A가 주어졌을 때 B가 발생할 확률
+	[3] 향상도(Lift) : A와 B가 서로 독립적으로 발생하는 경우에 비해 A가 발생했을 때 B가 발생할 가능성이 얼마나 높은지를 나타낸다.
+	[4] 레버리지(Leverage) : A와 B의 결합 빈도가 두 항목이 독립적으로 발생하는 빈도와 얼마나 차이가 나는지 나타낸다.
+	[5] Conviction(확신도) : A가 발생할 때 B가 발생하지 않을 가능성이 독립적인 경우보다 얼마나 줄어드는지를 나타낸다.
+	[6] 상관계수(Correlation Coefficient)는 두 변수 간의 관계의 강도와 방향
 
 	  
 ---
