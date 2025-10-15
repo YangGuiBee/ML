@@ -354,6 +354,5 @@ Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
 
 <br>
 
-![](./images/s.png)
-                             
+                        
 
