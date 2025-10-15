@@ -40,12 +40,18 @@
 
 <br>
 
-Iris 데이터 + K-means(k=3) 학습 후 평가지표 5종 출력
-[1] Silhouette Coefficient
-[2] Davies-Bouldin Index (DBI)
-[3] Dunn Index (DI)  *scikit-learn 미제공 → 커스텀 구현
-[4] Calinski-Harabasz Index (CHI)
-[5] Within-Cluster Sum of Squares (WCSS = inertia)
+### Iris 데이터 + K-means(k=3) 학습 후 평가지표 5종 출력 소스
+
+**[1] Silhouette Coefficient**
+<br>
+**[2] Davies-Bouldin Index(DBI)**
+<br>
+**[3] Dunn Index(DI)** scikit-learn 미제공으로 커스텀 구현
+<br>
+**[4] Calinski-Harabasz Index(CHI)**
+<br>
+**[5] Within-Cluster Sum of Squares(WCSS = inertia)**
+<br>
 
 
 	# ---------- 경고 방지용 환경변수: 반드시 상단에서 설정 ----------
