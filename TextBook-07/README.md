@@ -176,6 +176,26 @@
 	  
 ---
 
+## [연관 규칙 알고리즘 평가방법]
+
+**▣ 지지도(Support):** 특정 항목 집합이 전체 거래에서 얼마나 자주 나타나는지 나타낸다.<br>
+Support(A) = (거래에서 A가 발생한 횟수)/(전체 거래 수)<br>
+
+**▣ 신뢰도(Confidence):** A가 주어졌을 때 B가 발생할 확률<br>
+Confidence(A ⇒ B) = Support(A ∩ B)/Support(A)<br>
+
+**▣ 향상도(Lift):** A와 B가 서로 독립적으로 발생하는 경우에 비해 A가 발생했을 때 B가 발생할 가능성이 얼마나 높은지를 나타낸다. 1이면 두 항목이 독립적, 1보다 크면 양의 상관관계, 1보다 작으면 음의 상관관계<br>
+Lift(A ⇒ B) = Confidence(A ⇒ B)/Support(B)<br>
+
+**▣ 레버리지(Leverage):** A와 B의 결합 빈도가 두 항목이 독립적으로 발생하는 빈도와 얼마나 차이가 나는지 나타낸다. 0이면 두 항목이 독립적<br>
+Leverage(A ⇒ B) =  Support(A ∩ B) - (Support(A) × Support(B))<br>
+
+**▣ Conviction(확신도):** A가 발생할 때 B가 발생하지 않을 가능성이 독립적인 경우보다 얼마나 줄어드는지를 나타낸다. 1에 가까우면 A와 B는 서로 독립적<br>
+Conviction(A ⇒ B) = (1-Support(B))/(1-Confidence(A ⇒ B))<br>
+
+**▣ 상관계수(Correlation Coefficient):** 0에 가까우면 두 항목 간에 상관관계가 없고, 양수나 음수로 갈수록 상관관계가 강하다.<br>
+
+<br>
 
 ---
 
