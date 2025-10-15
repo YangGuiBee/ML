@@ -1,8 +1,5 @@
----
 
 #  07-1 : 군집 평가지표
-
----
 
 	[1] Silhouette Coefficient : 실루엣 계수
 	[2] Davies-Bouldin Index (DBI)
@@ -10,12 +7,9 @@
 	[4] Calinski-Harabasz Index (CHI)
 	[5] Within-Cluster Sum of Squares (WCSS) : 군집내 제곱합
 	  
----
 
 #  07-2 : 연관규칙 평가지표
 
----
-	
 	[1] 지지도(Support)
 	[2] 신뢰도(Confidence)
 	[3] 향상도(Lift)
@@ -23,12 +17,8 @@
 	[5] 확신도(Conviction)
 	[6] 상관계수(Correlation Coefficient)
 	  
----
-
 #  07-3 : 차원축소 평가지표
 
----
-	
 	▣ 재구성 기반 : 원본 복원 능력
 	[1] 재구성 오류(Reconstruction Error) : 복원된 데이터와 원본 데이터 간의 평균 제곱 오차(MSE)
 	[2] 분산 유지율(Explained Variance Ratio) : 각 주성분이 설명하는 분산 비율로 데이터의 정보 손실정도 파악
@@ -46,7 +36,6 @@
 	[10] Adjusted Rand Index (ARI)
 	[11] Normalized Mutual Information (NMI)
 	  
----
 
 
 ---
