@@ -21,7 +21,6 @@
 	[AR-6] Artificial Immune System : 인공면역시스템
 
     
-
 ## 차원 축소(Dimensionality Reduction)
 <br>
 
@@ -40,9 +39,6 @@
 	신경망/딥러닝 알고리즘
 	[DR-9] SOM(Self-Organizing Maps) : 자기 조직화
 	
-	
-<br>
-
 ---
 
 **연관 규칙(Assocication Rule) :** 빅데이터 기반의 데이터 마이닝기법<br>
