@@ -19,18 +19,13 @@
 	  
 #  07-3 : 차원축소 평가지표
 
-	▣ 재구성 기반 : 원본 복원 능력
 	[1] 재구성 오류(Reconstruction Error) : 복원된 데이터와 원본 데이터 간의 평균 제곱 오차(MSE)
 	[2] 분산 유지율(Explained Variance Ratio) : 각 주성분이 설명하는 분산 비율로 데이터의 정보 손실정도 파악
 	[3] 상호 정보량(Mutual Information) :  차원 축소 전후 데이터의 정보량을 비교
-
-	▣ 구조 보존 기반 : 거리·이웃 관계 유지
 	[4] 근접도 보존 : Trustworthiness, Continuity
 	[5] 거리/유사도 보존 : Stress, Sammon Error
 	[6] 지역/전역구조 : LCMC(Local Continuity Meta Criterion)
 	[7] 쌍의 상관계수 : Spearman’s ρ
-
-	▣ 활용 성능 기반 : 축소된 표현의 유용성
 	[8] Silhouette Score
 	[9] Davies-Bouldin Index (DBI)
 	[10] Adjusted Rand Index (ARI)
