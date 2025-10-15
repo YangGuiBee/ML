@@ -1,4 +1,4 @@
-#  07 : 군집 평가 지표
+#  07-1 : 군집 평가 지표
 
 ---
 	
@@ -162,5 +162,33 @@
 
 ---
 
+#  07-2 : 연관규칙 평가 지표
+
+---
+	
+	[1] Silhouette Coefficient : 실루엣 계수
+	[2] Davies-Bouldin Index (DBI)
+	[3] Dunn Index (DI)
+	[4] Calinski-Harabasz Index (CHI)
+	[5] Within-Cluster Sum of Squares (WCSS) : 군집내 제곱합
+
+	  
+---
+
+
+---
+
+#  07-3 : 차원축소 평가 지표
+
+---
+	
+	[1] Silhouette Coefficient : 실루엣 계수
+	[2] Davies-Bouldin Index (DBI)
+	[3] Dunn Index (DI)
+	[4] Calinski-Harabasz Index (CHI)
+	[5] Within-Cluster Sum of Squares (WCSS) : 군집내 제곱합
+
+	  
+---
 
 
