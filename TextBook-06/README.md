@@ -6,7 +6,6 @@
 ---
 
 ## 연관 규칙(Association Rule)
-<br>
 
 	핵심 탐색 알고리즘
 	[AR-1] Apriori : 선험적 알고리즘
@@ -22,7 +21,6 @@
 
     
 ## 차원 축소(Dimensionality Reduction)
-<br>
 
 	전통 통계·선형 알고리즘
 	[DR-1] PCA(Principal Component Analysis) : 주성분 분석	
