@@ -212,25 +212,15 @@
 ---
 
 ## ▣ 연관규칙 평가지표 수식
-
-| 지표명                         | 의미                                         | 수식(텍스트 표기)                                                                    |                       
-| --------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------- | 
-| **[1] 지지도 (Support)**           | A와 B가 동시에 발생할 비율                       | `support(A->B) = P(A and B) = count(A and B) / N`                               |                      
-| **[2] 신뢰도 (Confidence)**        | A가 발생했을 때 B가 함께 발생할 조건부 확률             | `confidence(A->B) = P(B | A) = P(A and B) / P(A)` |
-| **[3] 향상도 (Lift)**              | 독립 가정 대비 연관 강도                         | `lift(A->B) = P(A and B) / ( P(A) * P(B) ) = confidence(A->B) / P(B)`           |                      
-| **[4] 레버리지 (Leverage)**         | 실제 동시발생과 기대 동시발생의 차이                   | `leverage(A,B) = P(A and B) - P(A)*P(B)`                                        |                
-| **[5] 확신도 (Conviction)**        | 규칙이 없을 때의 B 부정 확률 대비, 규칙 하의 오류율 감소 | `conviction(A->B) = (1 - P(B)) / (1 - confidence(A->B))`                        |                
-| **[6] 상관계수 (Correlation, phi)** | A–B 이진 상관(피어슨 φ)                       | `phi(A,B) = ( P(A and B) - P(A)*P(B) ) / sqrt( P(A)*(1-P(A)) * P(B)*(1-P(B)) )` |                       
-
-
+           
 | 지표명                       | 의미                                         | 수식(텍스트 표기)                                                             |
 | ------------------------- | ------------------------------------------ | ---------------------------------------------------------------------- |
-| **지지도 (Support)**         | A와 B가 **동시에 발생**할 비율                       | `support(A→B) = P(A ∧ B) = count(A ∧ B) / N`                           |
-| **신뢰도 (Confidence)**      | A가 발생했을 때 B가 **함께 발생**할 조건부 확률             | `confidence(A→B) = P(B ∣ A) = P(A ∧ B) / P(A)`                         |
-| **향상도 (Lift)**            | 독립 가정 대비 **연관 강도**                         | `lift(A→B) = P(A ∧ B) / ( P(A) · P(B) ) = confidence(A→B) / P(B)`      |
-| **레버리지 (Leverage)**       | 실제 동시발생과 **기대 동시발생의 차이**                   | `leverage(A,B) = P(A ∧ B) − P(A)·P(B)`                                 |
-| **확신도 (Conviction)**      | 규칙이 없을 때의 B **부정 확률** 대비, 규칙 하의 **오류율 감소** | `conviction(A→B) = (1 − P(B)) / (1 − confidence(A→B))`                 |
-| **상관계수 (Correlation, φ)** | A–B **이진 상관(피어슨 φ)**                       | `φ(A,B) = ( P(A ∧ B) − P(A)·P(B) ) / √( P(A)(1−P(A)) · P(B)(1−P(B)) )` |
+| **[1] 지지도 (Support)**         | A와 B가 동시에 발생할 비율                       | `support(A→B) = P(A ∧ B) = count(A ∧ B) / N`                           |
+| **[2] 신뢰도 (Confidence)**      | A가 발생했을 때 B가 함께 발생할 조건부 확률             | `confidence(A→B) = P(B ∣ A) = P(A ∧ B) / P(A)`                         |
+| **[3] 향상도 (Lift)**            | 독립 가정 대비 연관 강도                         | `lift(A→B) = P(A ∧ B) / ( P(A) · P(B) ) = confidence(A→B) / P(B)`      |
+| **[4] 레버리지 (Leverage)**       | 실제 동시발생과 기대 동시발생의 차이                   | `leverage(A,B) = P(A ∧ B) − P(A)·P(B)`                                 |
+| **[5] 확신도 (Conviction)**      | 규칙이 없을 때의 B 부정 확률 대비, 규칙 하의 오류율 감소 | `conviction(A→B) = (1 − P(B)) / (1 − confidence(A→B))`                 |
+| **[6] 상관계수 (Correlation, φ)** | A–B 이진 상관(피어슨 φ)                       | `φ(A,B) = ( P(A ∧ B) − P(A)·P(B) ) / √( P(A)(1−P(A)) · P(B)(1−P(B)) )` |
 
 
 
