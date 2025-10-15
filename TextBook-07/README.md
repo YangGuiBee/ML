@@ -274,12 +274,12 @@
 | **[4-2] 근접도 보존 – Continuity** | ![](https://latex.codecogs.com/svg.image?C(k)%20%3D%201%20-%20%5Cfrac%7B2%7D%7Bnk(2n-3k-1)%7D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Csum_%7Bj%20%5Cin%20V_k(i)%7D%20(r'(i%2Cj)%20-%20k)) | 저차원에서 이웃이던 점이 고차원에서 멀어지는 정도를 측정. |
 | **[5-1] 거리 보존 – Stress (Kruskal’s Stress)** | ![](https://latex.codecogs.com/svg.image?Stress%20%3D%20%5Csqrt%7B%5Cfrac%7B%5Csum_%7Bi%3Cj%7D(d_%7Bij%7D-%5Chat%7Bd%7D_%7Bij%7D)%5E2%7D%7B%5Csum_%7Bi%3Cj%7Dd_%7Bij%7D%5E2%7D%7D) | 고차원 거리와 저차원 거리 간의 차이 비율. 작을수록 거리 보존이 잘됨. |
 | **[5-2] 거리 보존 - Sammon Error** | ![](https://latex.codecogs.com/svg.image?E_%7BSammon%7D%20%3D%20%5Cfrac%7B1%7D%7B%5Csum_%7Bi%3Cj%7D%20d_%7Bij%7D%7D%20%5Csum_%7Bi%3Cj%7D%20%5Cfrac%7B(d_%7Bij%7D-%5Chat%7Bd%7D_%7Bij%7D)%5E2%7D%7Bd_%7Bij%7D%7D) | 근접 관계를 강조한 거리 보존 오차. |
-| **[6] LCMC (Local Continuity Meta Criterion)** | ![](https://latex.codecogs.com/svg.image?LCMC%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Cfrac%7B%7CN_H(i)%5Ccap%20N_L(i)%7C%7D%7Bk%7D%20-%20%5Cfrac%7Bk%7D%7Bn-1%7D) | 고차원/저차원 k-이웃의 겹침 비율로 지역/전역 구조를 함께 평가. |
-| **[7] 쌍의 상관계수 (Spearman’s ρ)** | ![](https://latex.codecogs.com/svg.image?%5Crho%20%3D%201%20-%20%5Cfrac%7B6%5Csum_%7Bi%3D1%7D%5E%7BN%7D(r_i%20-%20s_i)%5E2%7D%7BN(N%5E2%20-%201)%7D) | 거리 순위 일관성을 평가. ρ=1이면 완전히 동일한 순서. |
+| **[6] 지역/전역 구조(LCMC)** | ![](https://latex.codecogs.com/svg.image?LCMC%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Cfrac%7B%7CN_H(i)%5Ccap%20N_L(i)%7C%7D%7Bk%7D%20-%20%5Cfrac%7Bk%7D%7Bn-1%7D) | 고차원/저차원 k-이웃의 겹침 비율로 지역/전역 구조를 함께 평가. |
+| **[7] 쌍의 상관계수(Spearman’s ρ)** | ![](https://latex.codecogs.com/svg.image?%5Crho%20%3D%201%20-%20%5Cfrac%7B6%5Csum_%7Bi%3D1%7D%5E%7BN%7D(r_i%20-%20s_i)%5E2%7D%7BN(N%5E2%20-%201)%7D) | 거리 순위 일관성을 평가. ρ=1이면 완전히 동일한 순서. |
 | **[8] Silhouette Score** | ![](https://latex.codecogs.com/svg.image?s(i)%20%3D%20%5Cfrac%7Bb(i)%20-%20a(i)%7D%7B%5Cmax(a(i)%2C%20b(i))%7D) | 군집 간 거리 대비 군집 내 밀집도 평가. |
-| **[9] Davies–Bouldin Index (DBI)** | ![](https://latex.codecogs.com/svg.image?DBI%20%3D%20%5Cfrac%7B1%7D%7Bk%7D%5Csum_%7Bi%3D1%7D%5E%7Bk%7D%20%5Cmax_%7Bj%5Cne%20i%7D%20%5Cfrac%7B%5Csigma_i%2B%5Csigma_j%7D%7Bd(c_i%2Cc_j)%7D) | 군집 내 분산과 군집 간 중심 거리의 비율. 낮을수록 좋음. |
-| **[10] Adjusted Rand Index (ARI)** | ![](https://latex.codecogs.com/svg.image?ARI%20%3D%20%5Cfrac%7B%5Csum_%7Bij%7D%20%5Cbinom%7Bn_%7Bij%7D%7D%7B2%7D%20-%20%5B%5Csum_i%20%5Cbinom%7Ba_i%7D%7B2%7D%5Csum_j%20%5Cbinom%7Bb_j%7D%7B2%7D%5D%2F%5Cbinom%7Bn%7D%7B2%7D%7D%7B%5Cfrac%7B1%7D%7B2%7D%5B%5Csum_i%20%5Cbinom%7Ba_i%7D%7B2%7D%20%2B%20%5Csum_j%20%5Cbinom%7Bb_j%7D%7B2%7D%5D%20-%20%5B%5Csum_i%20%5Cbinom%7Ba_i%7D%7B2%7D%5Csum_j%20%5Cbinom%7Bb_j%7D%7B2%7D%5D%2F%5Cbinom%7Bn%7D%7B2%7D%7D) | 군집 일치도 평가. 1이면 완벽 일치, 0은 무작위 수준. |
-| **[11] Normalized Mutual Information (NMI)** | ![](https://latex.codecogs.com/svg.image?NMI(U%2CV)%20%3D%20%5Cfrac%7B2I(U%3BV)%7D%7BH(U)%20%2B%20H(V)%7D) | 군집 결과와 실제 레이블 간의 상호 정보량을 정규화. 값이 1에 가까울수록 유사도가 높음. |
+| **[9] Davies–Bouldin Index(DBI)** | ![](https://latex.codecogs.com/svg.image?DBI%20%3D%20%5Cfrac%7B1%7D%7Bk%7D%5Csum_%7Bi%3D1%7D%5E%7Bk%7D%20%5Cmax_%7Bj%5Cne%20i%7D%20%5Cfrac%7B%5Csigma_i%2B%5Csigma_j%7D%7Bd(c_i%2Cc_j)%7D) | 군집 내 분산과 군집 간 중심 거리의 비율. 낮을수록 좋음. |
+| **[10] Adjusted Rand Index(ARI)** | ![](https://latex.codecogs.com/svg.image?ARI%20%3D%20%5Cfrac%7B%5Csum_%7Bij%7D%20%5Cbinom%7Bn_%7Bij%7D%7D%7B2%7D%20-%20%5B%5Csum_i%20%5Cbinom%7Ba_i%7D%7B2%7D%5Csum_j%20%5Cbinom%7Bb_j%7D%7B2%7D%5D%2F%5Cbinom%7Bn%7D%7B2%7D%7D%7B%5Cfrac%7B1%7D%7B2%7D%5B%5Csum_i%20%5Cbinom%7Ba_i%7D%7B2%7D%20%2B%20%5Csum_j%20%5Cbinom%7Bb_j%7D%7B2%7D%5D%20-%20%5B%5Csum_i%20%5Cbinom%7Ba_i%7D%7B2%7D%5Csum_j%20%5Cbinom%7Bb_j%7D%7B2%7D%5D%2F%5Cbinom%7Bn%7D%7B2%7D%7D) | 군집 일치도 평가. 1이면 완벽 일치, 0은 무작위 수준. |
+| **[11] Normalized Mutual Information(NMI)** | ![](https://latex.codecogs.com/svg.image?NMI(U%2CV)%20%3D%20%5Cfrac%7B2I(U%3BV)%7D%7BH(U)%20%2B%20H(V)%7D) | 군집 결과와 실제 레이블 간의 상호 정보량을 정규화. 값이 1에 가까울수록 유사도가 높음. |
 
 
 <br>
@@ -289,19 +289,19 @@
 
 | 지표명                                   | 목표      | 권장 해석 기준(경험치)                                       | 비고                                                      |
 | ------------------------------------- | ------- | --------------------------------------------------- | ------------------------------------------------------- |
-| 재구성 오류 (Reconstruction Error)     | 낮을수록 좋음 | 정규화 MSE 기준 ≤ 0.05 매우 우수, 0.05–0.10 양호, > 0.10 큼 | 주로 선형 DR(PCA)·오토인코더에서 사용. k 스윕 후 엘보우로 차원 결정 권장  |
-| 분산 유지율 (Explained Variance Ratio) | 높을수록 좋음 | 누적 EVR ≥ 0.95 매우 우수, 0.90–0.95 양호, < 0.90 보완 필요 | PCA 등 선형 DR에 특화. 도메인상 필요한 분산 비율을 사전에 정하면 좋음  |
-| 상호 정보량 (Mutual Information) | 높을수록 좋음 | 절대 임계치보다는 동일 조건 간 상대 비교. NMI 권장값: 0.6 이상 양호 | 라벨있을 때 원라벨 vs 임베딩 기반 군집/축의 정보량. 규격화(NMI)가 해석에 유리 |
-| 근접도 보존 – Trustworthiness  | 높을수록 좋음 | ≥ 0.95 매우 우수, 0.90–0.95 양호, 0.85–0.89 보통, < 0.85 낮음 | 저차원 이웃 중 거짓 이웃이 얼마나 적은지. t-SNE, UMAP 평가에 흔용   |
-| 근접도 보존 – Continuity   | 높을수록 좋음 | ≥ 0.95 매우 우수, 0.90–0.95 양호, 0.85–0.89 보통, < 0.85 낮음 | 고차원 이웃이 저차원에서도 유지되는 정도. Trustworthiness와 쌍둥이 지표|
-| 거리/유사도 보존 – Stress        | 낮을수록 좋음 | < 0.05 매우 우수, 0.05–0.10 우수, 0.10–0.20 보통, > 0.20 낮음 | Kruskal stress. 고전 MDS 기준. 거리 스케일에 민감하므로 표준화 권장 |
-| 거리/유사도 보존 – Sammon Error     | 낮을수록 좋음 | 절대 임계치보단 상대 비교 및 엘보우 권장. 0.1 내외면 양호한 편      | 짧은 거리 가중이 큼. 지역 구조 보존에 민감. outlier 영향에 주의  |
-| 지역/전역 구조 – LCMC                  | 높을수록 좋음 | ≥ 0.90 매우 우수, 0.80–0.89 양호, 0.70–0.79 보통            | Local Continuity Meta Criterion. k-NN 일치율 기반 종합 지표 |
-| 쌍의 상관계수 (Spearman’s ρ)           | 높을수록 좋음 | ≥ 0.90 매우 우수, 0.80–0.89 양호, 0.60–0.79 보통, < 0.60 낮음 | 고차원 vs 저차원 쌍거리 순위 상관. 전역 기하 보존 평가. 계산량 큼(n²) |
-| Silhouette Score                      | 높을수록 좋음 | ≥ 0.70 매우 좋음, 0.50–0.69 양호, 0.25–0.49 보통, < 0.25 낮음 | 임베딩에서 군집형성 품질 평가. 거리척도·스케일 영향.                      |
-| Davies-Bouldin Index (DBI)            | 낮을수록 좋음 | ≤ 0.50 매우 좋음, 0.51–0.99 양호, 1.00–1.49 보통, ≥ 1.50 낮음 | 군집 응집 대비 분리. 임베딩 스케일과 거리척도에 민감.                   |
-| Adjusted Rand Index (ARI)             | 높을수록 좋음 | ≥ 0.80 매우 우수, 0.60–0.79 양호, 0.40–0.59 보통, < 0.40 낮음 | 라벨이 있을 때 임베딩→군집 vs 정답라벨 합치도. 범위 −1~1.               |
-| Normalized Mutual Information (NMI)   | 높을수록 좋음 | ≥ 0.70 매우 우수, 0.50–0.69 양호, 0.30–0.49 보통, < 0.30 낮음 | 라벨이 있을 때 규격화된 정보량. 0~1. 군집 수 차이에 덜 민감.              |
+| **[1] 재구성 오류(Reconstruction Error)**  | **↓** 좋음 | 정규화 MSE 기준 ≤ 0.05 매우 우수, 0.05~0.10 양호, > 0.10 큼 | 주로 선형 DR(PCA)·오토인코더에서 사용. k 스윕 후 엘보우로 차원 결정 권장  |
+| **[2] 분산 유지율(Explained Variance Ratio)** | ↑ 좋음 | 누적 EVR ≥ 0.95 매우 우수, 0.90–0.95 양호, < 0.90 보완 필요 | PCA 등 선형 DR에 특화. 도메인상 필요한 분산 비율을 사전에 정하면 좋음  |
+| **[3] 상호 정보량(Mutual Information)** | ↑ 좋음 | 절대 임계치보다는 동일 조건 간 상대 비교. NMI 권장값: 0.6 이상 양호 | 라벨있을 때 원라벨 vs 임베딩 기반 군집/축의 정보량. 규격화(NMI)가 해석에 유리 |
+| **[4-1] 근접도 보존 – Trustworthiness**  | ↑ 좋음 | ≥ 0.95 매우 우수, 0.90–0.95 양호, 0.85–0.89 보통, < 0.85 낮음 | 저차원 이웃 중 거짓 이웃이 얼마나 적은지. t-SNE, UMAP 평가에 흔용   |
+| **[4-2] 근접도 보존 – Continuity** | ↑ 좋음 | ≥ 0.95 매우 우수, 0.90–0.95 양호, 0.85–0.89 보통, < 0.85 낮음 | 고차원 이웃이 저차원에서도 유지되는 정도. Trustworthiness와 쌍둥이 지표|
+| **[5-1] 거리 보존 – Stress**  | **↓** 좋음 | < 0.05 매우 우수, 0.05–0.10 우수, 0.10–0.20 보통, > 0.20 낮음 | Kruskal stress. 고전 MDS 기준. 거리 스케일에 민감하므로 표준화 권장 |
+| **[5-2] 거리 보존 – Sammon Error**  | **↓** 좋음 | 절대 임계치보단 상대 비교 및 엘보우 권장. 0.1 내외면 양호한 편      | 짧은 거리 가중이 큼. 지역 구조 보존에 민감. outlier 영향에 주의  |
+| **[6] 지역/전역 구조(LCMC)** | ↑ 좋음 | ≥ 0.90 매우 우수, 0.80–0.89 양호, 0.70–0.79 보통            | Local Continuity Meta Criterion. k-NN 일치율 기반 종합 지표 |
+| **[7] 쌍의 상관계수(Spearman’s ρ)**  | ↑ 좋음 | ≥ 0.90 매우 우수, 0.80–0.89 양호, 0.60–0.79 보통, < 0.60 낮음 | 고차원 vs 저차원 쌍거리 순위 상관. 전역 기하 보존 평가. 계산량 큼(n²) |
+| **[8] Silhouette Score**      | ↑ 좋음 | ≥ 0.70 매우 좋음, 0.50–0.69 양호, 0.25–0.49 보통, < 0.25 낮음 | 임베딩에서 군집형성 품질 평가. 거리척도·스케일 영향.                      |
+| **[9] Davies-Bouldin Index(DBI)**  | **↓** 좋음 | ≤ 0.50 매우 좋음, 0.51–0.99 양호, 1.00–1.49 보통, ≥ 1.50 낮음 | 군집 응집 대비 분리. 임베딩 스케일과 거리척도에 민감.                   |
+| **[10] Adjusted Rand Index(ARI)**   | ↑ 좋음 | ≥ 0.80 매우 우수, 0.60–0.79 양호, 0.40–0.59 보통, < 0.40 낮음 | 라벨이 있을 때 임베딩→군집 vs 정답라벨 합치도. 범위 −1~1.               |
+| **[11] Normalized Mutual Information(NMI)** | ↑ 좋음 | ≥ 0.70 매우 우수, 0.50–0.69 양호, 0.30–0.49 보통, < 0.30 낮음 | 라벨이 있을 때 규격화된 정보량. 0~1. 군집 수 차이에 덜 민감.              |
 
 
 
