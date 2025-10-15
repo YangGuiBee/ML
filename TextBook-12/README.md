@@ -197,7 +197,7 @@
 	import matplotlib.pyplot as plt
 	
 	# Load dataset from URL
-	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-13/insurance.csv"
+	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-12/insurance.csv"
 	df = pd.read_csv(data_url)
 	
 	# Ensure categorical columns are treated as categories
@@ -305,7 +305,7 @@
 	from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, mean_absolute_percentage_error
 	
 	# Load dataset from URL
-	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-13/insurance.csv"
+	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-12/insurance.csv"
 	df = pd.read_csv(data_url)
 	
 	# Check and handle missing values
@@ -477,7 +477,7 @@
 	from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, mean_absolute_percentage_error
 	
 	# Load dataset from URL
-	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-13/insurance.csv"
+	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-12/insurance.csv"
 	df = pd.read_csv(data_url)
 	
 	# Check and handle missing values
@@ -771,7 +771,7 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 	import matplotlib.pyplot as plt
 	
 	# 1. 데이터셋 불러오기
-	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-07/heart_disease_uci.csv"
+	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-12/heart_disease_uci.csv"
 	df = pd.read_csv(data_url)
 	
 	# 2. 결측값 확인 및 처리
@@ -934,7 +934,7 @@ SVC는 높은 AUC와 낮은 FPR로 신뢰할 수 있는 두 번째 모델로 평
 	import matplotlib.pyplot as plt
 	
 	# 1. 데이터셋 불러오기
-	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-14/heart_disease_uci.csv"
+	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-12/heart_disease_uci.csv"
 	df = pd.read_csv(data_url)
 	
 	# 2. 결측값 확인 및 처리
