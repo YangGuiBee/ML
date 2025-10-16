@@ -230,6 +230,39 @@
 | 지표                       | 목표                               | 권장 해석 기준                                                              | 비고                                                              |
 | -----장
 
+
+### Groceries 데이터 + Apriori 학습 후 평가지표 6종 출력 소스
+
+**[1] 지지도(Support)**
+<br>
+**[2] 신뢰도(Confidence)**
+<br> 
+**[3] 향상도(Lift)**
+<br> 
+**[4] 레버리지(Leverage)**
+<br> 
+**[5] 확신도(Conviction)**
+<br> 
+**[6] 상관계수(Correlation Coefficient)**
+<br>
+	
+	
+	import os
+	import io
+	import warnings
+	warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+	import numpy as np
+	import pandas as pd
+	from mlxtend.preprocessing import TransactionEncoder
+	from mlxtend.frequent_patterns import apriori, association_rules
+
+	# -------------------------------
+	# 0) 설정 (필요 시 조정)
+	# -------------------------------
+	DEFAULT_URL = "https://raw.githubusercontent.com/stedy/Machine-Learning-with-R-datasets/master/groceries.csv"
+	LOCAL_FILE  = "groceries.csv"   # 오프라인 사용 시 동일 파일명을 같은 폴더에 두세요
+	
 	# 채굴 파라미터 (규칙이 너무 적으면 min_support/min_confidence를 더 낮추세요)
 	MIN_SUPPORT    = 0.005   # 0.5% 이상 거래에서 등장하는 항목집합
 	MIN_CONFIDENCE = 0.10    # 10% 이상 신뢰도
