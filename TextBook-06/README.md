@@ -8,34 +8,34 @@
 ## 연관 규칙(Association Rule)
 
 	핵심 탐색 알고리즘
-	[AR-1] Apriori : 선험적 알고리즘
-	[AR-2] FP-Growth(Frequent Pattern Growth) : 빈발 패턴 성장
-	[AR-3] Eclat(Equivalence Class Transformation) : 동등 클래스 변환
+	[AR-1] Apriori : 선험적 알고리즘 (1위)
+	[AR-2] FP-Growth(Frequent Pattern Growth) : 빈발 패턴 성장 (2위)
+	[AR-3] Eclat(Equivalence Class Transformation) : 동등 클래스 변환 (3위)
 
 	규칙 확장/변형 알고리즘
-	[AR-4] Multi-level Association Rules : 다계층 연관규칙
-	[AR-5] Multi-dimensional Association Rules : 다차원 연관규칙
+	[AR-4] Multi-level Association Rules : 다계층 연관규칙 (4위)
+	[AR-5] Multi-dimensional Association Rules : 다차원 연관규칙 (5위)
 
 	추론/최적화 알고리즘
-	[AR-6] Artificial Immune System : 인공면역시스템
+	[AR-6] Artificial Immune System : 인공면역시스템 (6위)
 
     
 ## 차원 축소(Dimensionality Reduction)
 
 	전통 통계·선형 알고리즘
-	[DR-1] PCA(Principal Component Analysis) : 주성분 분석(1위)	
-	[DR-2] SVD(Singular Value Decomposition) : 특이값 분해(4위)
-	[DR-3] ICA(Independent Component Analysis) : 독립성분 분석(5위)	
-	[DR-4] NMF(Non-negative Matrix Factorization)  : 비음수 행렬 분해(6위)
+	[DR-1] PCA(Principal Component Analysis) : 주성분 분석 (1위)	
+	[DR-2] SVD(Singular Value Decomposition) : 특이값 분해 (4위)
+	[DR-3] ICA(Independent Component Analysis) : 독립성분 분석 (5위)	
+	[DR-4] NMF(Non-negative Matrix Factorization)  : 비음수 행렬 분해 (6위)
 
 	비선형/매니폴드 학습 알고리즘
-	[DR-5] t-SNE(t-distributed Stochastic Neighbor Embedding) : t-분포 확률적 이웃 임베딩(2위)
-	[DR-6] UMAP(Uniform Manifold Approximation and Projection) : 균일 매니폴드 근사적 사영(3위)
-	[DR-7] Isomap : 등거리 매핑(8위)
-	[DR-8] MDS(Multidimensional Scaling) : 다차원 척도(7위)
+	[DR-5] t-SNE(t-distributed Stochastic Neighbor Embedding) : t-분포 확률적 이웃 임베딩 (2위)
+	[DR-6] UMAP(Uniform Manifold Approximation and Projection) : 균일 매니폴드 근사적 사영 (3위)
+	[DR-7] Isomap : 등거리 매핑 (8위)
+	[DR-8] MDS(Multidimensional Scaling) : 다차원 척도 (7위)
 
 	신경망/딥러닝 알고리즘
-	[DR-9] SOM(Self-Organizing Maps) : 자기 조직화(9위)
+	[DR-9] SOM(Self-Organizing Maps) : 자기 조직화 (9위)
 	
 ---
 
