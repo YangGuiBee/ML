@@ -228,54 +228,7 @@
 ## ▣ 연관규칙 평가지표 결과해석
 
 | 지표                       | 목표                               | 권장 해석 기준                                                              | 비고                                                              |
-| ------------------------- | -------------------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| **[1] 지지도(Support)**         | 높을수록 좋음(빈도·보편성)                  | **≥ 5%**: 강함, **1~5%**: 유의미, **< 1%**: 약함                    | 데이터 크기·품목 수에 크게 의존. 너무 낮으면 우연 규칙 다수 → min_support 설정 필수.    |
-| **[2] 신뢰도(Confidence)**      | 높을수록 좋음(조건부 정확도)                 | **≥ 0.80**: 강함, **0.60~0.79**: 유의미, **< 0.60**: 약함                        | 빈발 후건(B)에 끌려 과대평가될 수 있음. Lift/Leverage와 함께 보정 필요.       |
-| **[3] 향상도(Lift)**            | 1보다 클수록 좋음(독립 대비 강화)             | **> 2.0**: 강함, **1.2~2.0**: 유의미, **≈1.0**: 약함, **< 1.0**: 음의 연관      | 희귀 아이템 조합에서 과대될 수 있음 → 최소 지지도와 함께 해석. 도메인 검증 필수.            |
-| **[4] 레버리지(Leverage)**       | 0에서 멀수록 강함(양수=양의 연관)             | **> 0.05**: 강함, **0.01~0.05**: 유의미, **≈ 0**: 약함                       | 절대적 “추가 동시발생 비율”. 빈도 민감도가 낮아 lift 보완에 유용. 표본 커질수록 작은 값도 의미. |
-| **[5] 확신도(Conviction)**      | 1보다 클수록 좋음(규칙 위반률 감소)            | **> 2.0**: 강함, **1.2~2.0**: 유의미, **≈1.0**: 약함                            | confidence=1이고 P(B)<1이면 ∞. 후건이 드문 규칙에서 왜곡 가능.       |
-| **[6] 상관계수(Correlation)** | **∣φ∣**(=abs(φ)) 클수록 강함 · 부호로 방향 | **≥ 0.5**: 강함, **0.3~0.49**: 중간, **0.1~0.29**: 약함, **< 0.1**: 매우 약함 | 대칭 지표(순서 무관). 음수(φ<0)는 상호 배타 성향 의미. 빈도·희소성 영향은 중간 정도.       |
-
-
-### Groceries dataset + Apriori로 연관규칙 학습 후 평가지표 6종 출력 소스
-
-**[1] 지지도(Support)**
-<br>
-**[2] 신뢰도(Confidence)**
-<br>
-**[3] 향상도(Lift)**
-<br> 
-**[4] 레버리지(Leverage)**
-<br> 
-**[5] 확신도(Conviction)**
-<br> 
-**[6] 상관계수(Correlation Coefficient)**
-<br>
-
-
-	# ============================================================
-	# Groceries + Apriori: 연관규칙 6가지 지표 출력 (견고한 로더 + 재채굴 파라미터)
-	# [1] Support, [2] Confidence, [3] Lift, [4] Leverage,
-	# [5] Conviction, [6] Correlation Coefficient (Phi)
-	#
-	# Requirements:
-	#   pip install pandas numpy mlxtend
-	# ============================================================
-
-	import os
-	import io
-	import warnings
-	warnings.filterwarnings("ignore", category=DeprecationWarning)	
-	import numpy as np
-	import pandas as pd
-	from mlxtend.preprocessing import TransactionEncoder
-	from mlxtend.frequent_patterns import apriori, association_rules
-
-	# -------------------------------
-	# 0) 설정 (필요 시 조정)
-	# -------------------------------
-	DEFAULT_URL = "https://raw.githubusercontent.com/stedy/Machine-Learning-with-R-datasets/master/groceries.csv"
-	LOCAL_FILE  = "groceries.csv"   # 오프라인 사용 시 동일 파일명을 같은 폴더에 두세요
+| -----장
 
 	# 채굴 파라미터 (규칙이 너무 적으면 min_support/min_confidence를 더 낮추세요)
 	MIN_SUPPORT    = 0.005   # 0.5% 이상 거래에서 등장하는 항목집합
