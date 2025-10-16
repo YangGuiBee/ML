@@ -301,7 +301,286 @@
 | **[8] Silhouette Score**      | ↑ | **≥ 0.70 우수**, **0.50~0.69 양호**, **0.25~0.49 보통**, **< 0.25 미흡** | 임베딩에서 군집형성 품질 평가. 거리척도·스케일 영향.                      |
 | **[9] Davies-Bouldin Index(DBI)**  | `↓` | **≤ 0.50 우수**, **0.51~0.99 양호**, **1.00~1.49 보통**, **≥ 1.50 미흡** | 군집 응집 대비 분리. 임베딩 스케일과 거리척도에 민감.                   |
 | **[10] Adjusted Rand Index(ARI)**   | ↑ | **≥ 0.80 우수**, **0.60~0.79 양호**, **0.40~0.59 보통**, **< 0.40 미흡** | 라벨이 있을 때 임베딩→군집 vs 정답라벨 합치도. 범위 −1~1.               |
-| **[11] Normalized Mutual Information(NMI)** | ↑ | **≥ 0.70 우수**, **0.50~0.69 양호**, **0.30–0.49 보통**, **< 0.30 미흡** | 라벨이 있을 때 규격화된 정보량. 0~1. 군집 수 차이에 덜 민감.              |
+| **[11] Normalized Mutual Information(NMI)** | ↑ | **≥ 0.70 우수**, **0.50~0.69 양호**, **0.30–0.49 보통**, **< 0.30 미흡** | 라벨이 있을 때 규격화된 정보량. 0~1. 군집 수 차이에 덜 민감.     |
+
+
+
+### Iris 데이터 + PCA(Principal Component Analysis) 학습 후 평가지표 11종 출력 소스
+
+**[1] 재구성 오류(Reconstruction Error)**
+<br>
+**[2] 분산 유지율(Explained Variance Ratio)**
+<br>
+**[3] 상호 정보량(Mutual Information)**
+<br>
+**[4-1] 근접도 보존(Trustworthiness, Continuity)**
+<br>
+**[4-2] 근접도 보존(Trustworthiness, Continuity)**
+<br>
+**[5-1] 거리/유사도 보존(Stress, Sammon Error)**
+<br>
+**[5-2] 거리/유사도 보존(Stress, Sammon Error)**
+<br>
+**[6] 지역/전역구조(Local Continuity Meta Criterion)**
+<br>
+**[7] 쌍의 상관계수(Spearman’s ρ)**
+<br>
+**[8] Silhouette Score**
+<br>
+**[9] Davies-Bouldin Index(DBI)**
+<br>
+**[10] Adjusted Rand Index(ARI)**
+<br>
+**[11] Normalized Mutual Information(NMI)**
+<br>
+
+
+
+	# ============================================================
+	# Iris + PCA(2D) 차원축소 후 11가지 평가지표 계산 (Windows 경고 억제 포함)
+	# Requirements:
+	#   pip install numpy pandas scikit-learn
+	# ============================================================
+	
+	# ==== Windows 경고/스레드 이슈 해결용 (맨 위에 두세요) ====
+	import os, warnings
+	
+	# (1) loky 물리코어 탐지 경고 억제: 논리 코어 수를 상한으로 지정
+	os.environ.setdefault("LOKY_MAX_CPU_COUNT", str(os.cpu_count() or 1))
+	
+	# (2) MKL/OpenMP 스레드 수 제한: KMeans 메모리릭 경고 방지
+	os.environ.setdefault("OMP_NUM_THREADS", "1")
+	os.environ.setdefault("MKL_NUM_THREADS", "1")
+	os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
+	os.environ.setdefault("NUMEXPR_NUM_THREADS", "1")
+	os.environ.setdefault("VECLIB_MAXIMUM_THREADS", "1")
+	
+	# (선택) 관련 경고 메시지 숨김
+	warnings.filterwarnings("ignore", message="Could not find the number of physical cores")
+	warnings.filterwarnings("ignore", message="KMeans is known to have a memory leak on Windows with MKL")
+	# ============================================================
+	
+	import numpy as np
+	import pandas as pd
+	from sklearn import datasets
+	from sklearn.decomposition import PCA
+	from sklearn.preprocessing import StandardScaler
+	from sklearn.metrics import (
+	    silhouette_score, davies_bouldin_score, adjusted_rand_score,
+	    normalized_mutual_info_score, pairwise_distances
+	)
+	from sklearn.cluster import KMeans
+	from sklearn.feature_selection import mutual_info_classif
+	
+	
+	# -----------------------------
+	# Utilities (no-scipy required)
+	# -----------------------------
+	def _pairwise_orders(X):
+	    """Return argsort indices (ascending distances) for each row, including self at position 0."""
+	    D = pairwise_distances(X, metric="euclidean")
+	    order = np.argsort(D, axis=1)
+	    return D, order
+	
+	def _inverse_order(order):
+	    """inv[i, j] = position of j in 'order[i]' (0=self, 1=nearest, ...)"""
+	    n = order.shape[0]
+	    inv = np.empty_like(order)
+	    for i in range(n):
+	        inv[i, order[i]] = np.arange(n)
+	    return inv
+	
+	def trustworthiness_custom(X_high, X_low, n_neighbors=10):
+	    """
+	    Trustworthiness (Venna & Kaski, scikit-learn과 동일 정의).
+	    저차원에서 k-이웃이지만 고차원에선 멀리 있는 '침입자' 페널티 합산.
+	    """
+	    n = X_high.shape[0]
+	    _, order_high = _pairwise_orders(X_high)
+	    _, order_low  = _pairwise_orders(X_low)
+	    inv_high = _inverse_order(order_high)
+	
+	    T = 0.0
+	    for i in range(n):
+	        Nl = set(order_low[i][1:n_neighbors+1])  # low-d k-NN
+	        Nh = set(order_high[i][1:n_neighbors+1]) # high-d k-NN
+	        V  = Nl - Nh  # intrusions
+	        for j in V:
+	            r_ij_high = int(inv_high[i, j])  # 1..n-1 (0=self)
+	            T += (r_ij_high - n_neighbors)
+	
+	    denom = n * n_neighbors * (2*n - 3*n_neighbors - 1)
+	    if denom <= 0:
+	        return np.nan
+	    return 1.0 - (2.0 / denom) * T
+	
+	def continuity_custom(X_high, X_low, n_neighbors=10):
+	    """
+	    Continuity: trustworthiness의 반대 방향(고차원 이웃이 저차원에서 누락되면 페널티).
+	    """
+	    n = X_high.shape[0]
+	    _, order_high = _pairwise_orders(X_high)
+	    _, order_low  = _pairwise_orders(X_low)
+	    inv_low = _inverse_order(order_low)
+	
+	    C = 0.0
+	    for i in range(n):
+	        Nh = set(order_high[i][1:n_neighbors+1]) # high-d k-NN
+	        Nl = set(order_low[i][1:n_neighbors+1])  # low-d k-NN
+	        U  = Nh - Nl  # omissions
+	        for j in U:
+	            r_ij_low = int(inv_low[i, j])  # 1..n-1 (0=self)
+	            C += (r_ij_low - n_neighbors)
+	
+	    denom = n * n_neighbors * (2*n - 3*n_neighbors - 1)
+	    if denom <= 0:
+	        return np.nan
+	    return 1.0 - (2.0 / denom) * C
+	
+	def kruskal_stress(X_high, X_low, eps=1e-12):
+	    """Kruskal's Stress-1: sqrt( sum (dY - dX)^2 / sum dX^2 ). Lower is better."""
+	    dX = pairwise_distances(X_high, metric="euclidean")
+	    dY = pairwise_distances(X_low,  metric="euclidean")
+	    iu = np.triu_indices_from(dX, k=1)
+	    num = np.sum((dY[iu] - dX[iu])**2)
+	    den = np.sum(dX[iu]**2) + eps
+	    return float(np.sqrt(num / den))
+	
+	def sammon_error(X_high, X_low, eps=1e-12):
+	    """
+	    Sammon’s stress (Sammon mapping error):
+	      E = (1 / sum dX) * sum ((dY - dX)^2 / dX), over i<j
+	    Lower is better.
+	    """
+	    dX = pairwise_distances(X_high, metric="euclidean")
+	    dY = pairwise_distances(X_low,  metric="euclidean")
+	    iu = np.triu_indices_from(dX, k=1)
+	    dX_u = dX[iu]
+	    dY_u = dY[iu]
+	    mask = dX_u > eps
+	    num = np.sum(((dY_u[mask] - dX_u[mask])**2) / dX_u[mask])
+	    den = np.sum(dX_u[mask]) + eps
+	    return float(num / den)
+	
+	def lcmc(X_high, X_low, n_neighbors=10):
+	    """
+	    Local Continuity Meta-Criterion at fixed k:
+	      Q_NX(k) = (1/(n*k)) * sum_i |N_high(i,k) ∩ N_low(i,k)|
+	      LCMC(k)  = Q_NX(k) - k/(n-1)
+	    """
+	    n = X_high.shape[0]
+	    _, order_high = _pairwise_orders(X_high)
+	    _, order_low  = _pairwise_orders(X_low)
+	
+	    inter_total = 0
+	    for i in range(n):
+	        Nh = set(order_high[i][1:n_neighbors+1])
+	        Nl = set(order_low[i][1:n_neighbors+1])
+	        inter_total += len(Nh & Nl)
+	    Q_NX = inter_total / (n * n_neighbors)
+	    LCMC_k = Q_NX - n_neighbors / (n - 1)
+	    return float(LCMC_k), float(Q_NX)
+	
+	def spearman_r_from_distances(X_high, X_low):
+	    """
+	    SciPy 없이 Spearman rho 계산(순위→피어슨).
+	    """
+	    dX = pairwise_distances(X_high, metric="euclidean")
+	    dY = pairwise_distances(X_low,  metric="euclidean")
+	    iu = np.triu_indices_from(dX, k=1)
+	    a = dX[iu]
+	    b = dY[iu]
+	
+	    # 동순위 평균을 고려한 간단 랭크 변환
+	    def rank_avg(v):
+	        order = np.argsort(v)
+	        ranks = np.empty_like(order, dtype=float)
+	        ranks[order] = np.arange(len(v), dtype=float)
+	        # 동순위 처리
+	        buckets = {}
+	        for idx, val in enumerate(v):
+	            buckets.setdefault(val, []).append(idx)
+	        for idxs in buckets.values():
+	            if len(idxs) > 1:
+	                avg = float(np.mean(ranks[idxs]))
+	                ranks[idxs] = avg
+	        return ranks
+	
+	    ra = rank_avg(a)
+	    rb = rank_avg(b)
+	    # 피어슨 상관
+	    ra = (ra - ra.mean()) / (ra.std() + 1e-12)
+	    rb = (rb - rb.mean()) / (rb.std() + 1e-12)
+	    return float(np.dot(ra, rb) / len(ra))
+	
+	
+	# -----------------------------
+	# Main
+	# -----------------------------
+	if __name__ == "__main__":
+	    # Parameters (원하시면 변경)
+	    n_components = 2
+	    k_neighbors  = 10
+	
+	    # Data
+	    iris = datasets.load_iris()
+	    X = iris.data
+	    y = iris.target
+	
+	    # Standardize
+	    scaler = StandardScaler()
+	    X_std = scaler.fit_transform(X)
+	
+	    # PCA (2D)
+	    pca = PCA(n_components=n_components, random_state=42)
+	    Z = pca.fit_transform(X_std)
+	
+	    # Reconstruction in standardized space
+	    X_rec = pca.inverse_transform(Z)
+	
+	    # ---- Metrics ----
+	    rec_err = float(np.mean((X_std - X_rec)**2))                         # [1] Reconstruction Error
+	    evr_sum = float(np.sum(pca.explained_variance_ratio_))               # [2] EVR sum
+	    mi_avg  = float(np.mean(mutual_info_classif(Z, y, random_state=42))) # [3] MI avg (components vs y)
+	    trust   = float(trustworthiness_custom(X_std, Z, n_neighbors=k_neighbors)) # [4-1] Trustworthiness
+	    cont    = float(continuity_custom(X_std, Z, n_neighbors=k_neighbors))      # [4-2] Continuity
+	    stress  = float(kruskal_stress(X_std, Z))                            # [5-1] Kruskal Stress-1 (↓)
+	    sammon  = float(sammon_error(X_std, Z))                              # [5-2] Sammon Error (↓)
+	    lcmc_k, qnx = lcmc(X_std, Z, n_neighbors=k_neighbors)                # [6]  LCMC@k (with Q_NX)
+	    rho     = float(spearman_r_from_distances(X_std, Z))                 # [7]  Spearman ρ
+	
+	    # Clustering-based metrics (on embedding)
+	    kmeans = KMeans(n_clusters=3, n_init=20, random_state=42)
+	    labels_pred = kmeans.fit_predict(Z)
+	
+	    sil = float(silhouette_score(Z, y, metric="euclidean"))              # [8] Silhouette (y on Z)
+	    dbi = float(davies_bouldin_score(Z, y))                              # [9] DBI (↓)
+	    ari = float(adjusted_rand_score(y, labels_pred))                     # [10] ARI
+	    nmi = float(normalized_mutual_info_score(y, labels_pred))            # [11] NMI
+	
+	    rows = [
+	        ("[1]  Reconstruction Error (MSE, std space)", rec_err),
+	        ("[2]  Explained Variance Ratio (sum, 2 comps)", evr_sum),
+	        ("[3]  Mutual Information avg(Z_i; y)", mi_avg),
+	        (f"[4-1] Trustworthiness@k={k_neighbors}", trust),
+	        (f"[4-2] Continuity@k={k_neighbors}", cont),
+	        ("[5-1] Kruskal Stress-1 (↓)", stress),
+	        ("[5-2] Sammon Error (↓)", sammon),
+	        (f"[6]  LCMC@k={k_neighbors}", lcmc_k),
+	        ("[7]  Spearman ρ (pairwise distances)", rho),
+	        ("[8]  Silhouette Score (using y on Z)", sil),
+	        ("[9]  Davies–Bouldin Index (using y on Z, ↓)", dbi),
+	        ("[10] Adjusted Rand Index (KMeans(Z) vs y)", ari),
+	        ("[11] Normalized Mutual Information (KMeans(Z) vs y)", nmi),
+	    ]
+	    df = pd.DataFrame(rows, columns=["Metric", "Value"])
+	
+	    print("\nIris PCA (2D) Evaluation Summary\n" + "-"*42)
+	    print(df.to_string(index=False))
+	
+	    print("\nExplained Variance Ratio per component:")
+	    for i, r in enumerate(pca.explained_variance_ratio_, start=1):
+	        print(f"  PC{i}: {r:.6f}")
 
 
 
