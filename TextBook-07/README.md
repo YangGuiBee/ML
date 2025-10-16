@@ -608,12 +608,24 @@
   	PC2: 0.228508
 
   
-
 ### (결과 분석)
 
+	[1]  Reconstruction Error (MSE, std space) 0.041868 → 우수
+	[2]  Explained Variance Ratio (sum, 2 comps) 0.958132 → 우수
+	[3]  Mutual Information avg(Z_i; y) 0.551648 → 양호
+	[4-1] Trustworthiness@k=10 0.977963 → 우수
+	[4-2] Continuity@k=10 0.990622 → 우수
+	[5-1] Kruskal Stress-1 (↓) 0.062736 → 우수
+	[5-2] Sammon Error (↓) 0.009755 → 우수
+	[6]  LCMC@k=10 0.665553 → 우수
+	[7]  Spearman ρ (pairwise distances) 0.993385 → 우수
+	[8]  Silhouette Score (using y on Z) 0.401387 → 양호
+	[9]  Davies–Bouldin Index (using y on Z, ↓) 0.955460 → 양호
+	[10] Adjusted Rand Index (KMeans(Z) vs y) 0.620135 → 양호
+	[11] Normalized Mutual Information (KMeans(Z) vs y) 0.659487 → 양호
 
 
-
+<!--
 
 ## [차원 축소 알고리즘 평가 사용방법]
 
@@ -728,6 +740,6 @@
     print(f"Normalized Mutual Information (NMI): {nmi:.3f}")
 
 <br>
-
+-->
                         
 
