@@ -435,13 +435,31 @@
 
 ### (소스 실행 결과)
 
-	=== Iris + K-means (k=3) ===
-	[1] Silhouette Coefficient : 0.5528
-	[2] Davies-Bouldin Index   : 0.6620
-	[3] Dunn Index             : 0.0988
-	[4] Calinski-Harabasz     : 561.6278
-	[5] WCSS (Inertia)        : 78.8514
+	Groceries + Apriori Association Rules (sorted by lift)
+	------------------------------------------------------------------------------------------
+	antecedents      					consequents  support  confidence     lift  leverage  conviction      phi
+	liquor     bottled beer 			0.005896    0.562500 8.459667  0.005199    2.133733 0.204901
+	root vegetables other vegetables 	0.007534    0.202643 2.330206  0.004301    1.145079 0.080669
+	frankfurter       rolls/buns 		0.008189    0.284091 2.252804  0.004554    1.220678 0.081988
+	sausage       rolls/buns 			0.013429    0.278912 2.211732  0.007358    1.211910 0.103527
+	rolls/buns          sausage 		0.013429    0.106494 2.211732  0.007358    1.065298 0.103527
+	citrus fruit other vegetables 		0.006060    0.177885 2.045506  0.003097    1.110594 0.060594
+	curd       whole milk 				0.005405    0.266129 1.891716  0.002548    1.170940 0.051946
+	root vegetables       whole milk 	0.007861    0.211454 1.503069  0.002631    1.089751 0.039997
+	brown bread       whole milk 		0.006387    0.200000 1.421653  0.001894    1.074148 0.030987
+	bottled water             soda 		0.010809    0.162562 1.284089  0.002391    1.042946 0.028866
+	pastry       whole milk 			0.008844    0.175325 1.246254  0.001747    1.042009 0.022965
+	pastry             soda 			0.007861    0.155844 1.231028  0.001475    1.034647 0.020272
+	tropical fruit       whole milk 	0.006715    0.168724 1.199337  0.001116    1.033735 0.016420
+	other vegetables       whole milk 	0.014576    0.167608 1.191404  0.002342    1.032349 0.023901
+	whole milk other vegetables 		0.014576    0.103609 1.191404  0.002342    1.018569 0.023901
+	newspapers       whole milk 		0.008025    0.165541 1.176706  0.001205    1.029791 0.016138
+	sausage             soda 			0.006878    0.142857 1.128442  0.000783    1.018970 0.010998
+	rolls/buns             soda 		0.017851    0.141558 1.118183  0.001887    1.017429 0.017092
+	soda       rolls/buns 				0.017851   	0.141009 1.118183  0.001887    1.017350 0.017092
+	shopping bags             soda 		0.006715    0.138514 1.094131  0.000578    1.013833 0.008089
 
+	[Summary] #rules: 20 | support∈[0.0054, 0.0179] | confidence∈[0.1036, 0.5625]
 
 ### (결과 분석)
 
