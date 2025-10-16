@@ -237,6 +237,215 @@
 | **[6] 상관계수(Correlation)** | **∣φ∣**(=abs(φ)) 클수록 강함 · 부호로 방향 | **≥ 0.5**: 강함, **0.3~0.49**: 중간, **0.1~0.29**: 약함, **< 0.1**: 매우 약함 | 대칭 지표(순서 무관). 음수(φ<0)는 상호 배타 성향 의미. 빈도·희소성 영향은 중간 정도.       |
 
 
+### Groceries dataset + Apriori로 연관규칙 학습 후 평가지표 6종 출력 소스
+
+**[1] 지지도(Support)**
+<br>
+**[2] 신뢰도(Confidence)**
+<br>
+**[3] 향상도(Lift)**
+<br> 
+**[4] 레버리지(Leverage)**
+<br> 
+**[5] 확신도(Conviction)**
+<br> 
+**[6] 상관계수(Correlation Coefficient)**
+<br>
+
+
+	# ============================================================
+	# Groceries + Apriori: 연관규칙 6가지 지표 출력 (견고한 로더 + 재채굴 파라미터)
+	# [1] Support, [2] Confidence, [3] Lift, [4] Leverage,
+	# [5] Conviction, [6] Correlation Coefficient (Phi)
+	#
+	# Requirements:
+	#   pip install pandas numpy mlxtend
+	# ============================================================
+
+	import os
+	import io
+	import warnings
+	warnings.filterwarnings("ignore", category=DeprecationWarning)	
+	import numpy as np
+	import pandas as pd
+	from mlxtend.preprocessing import TransactionEncoder
+	from mlxtend.frequent_patterns import apriori, association_rules
+
+	# -------------------------------
+	# 0) 설정 (필요 시 조정)
+	# -------------------------------
+	DEFAULT_URL = "https://raw.githubusercontent.com/stedy/Machine-Learning-with-R-datasets/master/groceries.csv"
+	LOCAL_FILE  = "groceries.csv"   # 오프라인 사용 시 동일 파일명을 같은 폴더에 두세요
+
+	# 채굴 파라미터 (규칙이 너무 적으면 min_support/min_confidence를 더 낮추세요)
+	MIN_SUPPORT    = 0.005   # 0.5% 이상 거래에서 등장하는 항목집합
+	MIN_CONFIDENCE = 0.10    # 10% 이상 신뢰도
+	PAIR_RULE_ONLY = True    # True면 X -> Y 한 항목씩(2-아이템 규칙)만 출력
+
+	# 품질 필터 (원치 않으면 False로)
+	FILTER_LIFT_GT      = 1.05   # 향상도 > 1.05 (독립보다 의미 있게 높음)
+	FILTER_LEVERAGE_POS = True   # 레버리지 > 0 (양의 연관만)
+
+	# -------------------------------
+	# 1) Groceries 로더 (견고 모드)
+	#    - 행마다 필드 개수 상이 → python 엔진/폴백 파싱
+	# -------------------------------
+	def robust_read_csv(path_or_buf):
+   	 """유연한 CSV 파서: 실패 시 raw 텍스트 라인 스플릿 폴백."""
+    	try:
+       		 df = pd.read_csv(
+            	path_or_buf,
+            	header=None,
+           	 	engine="python",
+            	sep=",",
+            	quotechar='"',
+            	skipinitialspace=True,
+            	on_bad_lines="skip",
+       	 )
+        	return df
+    	except Exception as e:
+        	# raw 텍스트 파싱
+        	try:
+            	if isinstance(path_or_buf, str) and path_or_buf.startswith("http"):
+                	import urllib.request
+               	 	with urllib.request.urlopen(path_or_buf) as resp:
+                    	raw = resp.read().decode("utf-8", errors="ignore")
+            	elif isinstance(path_or_buf, str):
+                	with open(path_or_buf, "r", encoding="utf-8", errors="ignore") as f:
+                    	raw = f.read()
+            	else:
+                	raw = path_or_buf.read()
+                	if isinstance(raw, bytes):
+                    	raw = raw.decode("utf-8", errors="ignore")
+
+            	rows = []
+            	for line in raw.splitlines():
+                	line = line.strip()
+                	if not line:
+                    	continue
+                	items = [x.strip().strip('"').strip("'") for x in line.split(",") if x.strip()]
+                	rows.append(items)
+            	max_len = max((len(r) for r in rows), default=0)
+            	rows_pad = [r + [None]*(max_len - len(r)) for r in rows]
+            	return pd.DataFrame(rows_pad)
+        	except Exception as e2:
+            	raise RuntimeError(f"Groceries CSV 파싱 실패: {e}\nFallback 오류: {e2}")
+
+	def load_groceries():
+    	# 로컬 우선, 없으면 URL
+    	if os.path.exists(LOCAL_FILE):
+        	df = robust_read_csv(LOCAL_FILE)
+    	else:
+        	df = robust_read_csv(DEFAULT_URL)
+
+    	# 각 행 → 아이템 리스트(트랜잭션)
+    	transactions = []
+    	for _, row in df.iterrows():
+        	items = [str(x).strip() for x in row.tolist() if pd.notna(x) and str(x).strip() != ""]
+       		# 중복 제거
+        	items = list(dict.fromkeys(items))
+       		if items:
+            	transactions.append(items)
+    	return transactions
+
+	# -------------------------------
+	# 2) 데이터 로드 & 원-핫 인코딩
+	# -------------------------------
+	transactions = load_groceries()
+	print(f"[INFO] Loaded transactions: {len(transactions):,}")
+
+	te = TransactionEncoder()
+	te_ary = te.fit(transactions).transform(transactions)
+	basket = pd.DataFrame(te_ary, columns=te.columns_).astype(bool)
+	print(f"[INFO] Unique items: {basket.shape[1]:,}")
+
+	# -------------------------------
+	# 3) Apriori → 빈발 항목집합
+	# -------------------------------
+	frequent_itemsets = apriori(basket, min_support=MIN_SUPPORT, use_colnames=True)
+
+	# itemset → support 맵 (버전 호환 및 φ 계산용)
+	support_map = {
+    	frozenset(items): supp
+    	for items, supp in zip(frequent_itemsets['itemsets'], frequent_itemsets['support'])
+	}
+
+	# -------------------------------
+	# 4) 연관규칙 + 지표 계산
+	# -------------------------------
+	rules = association_rules(frequent_itemsets, metric="confidence", min_threshold=MIN_CONFIDENCE)
+
+	# 구버전 호환: antecedent/consequent support 없으면 채움
+	if 'antecedent support' not in rules.columns:
+    	rules['antecedent support'] = rules['antecedents'].apply(lambda A: support_map.get(frozenset(A), np.nan))
+	if 'consequent support' not in rules.columns:
+    	rules['consequent support'] = rules['consequents'].apply(lambda B: support_map.get(frozenset(B), np.nan))
+
+	# (선택) 2-아이템 규칙만 (X→Y에서 X, Y 각각 단일 아이템)
+	if PAIR_RULE_ONLY:
+    	rules = rules[(rules['antecedents'].apply(len) == 1) & (rules['consequents'].apply(len) == 1)]
+
+	# 상관계수(φ) = (P(XY) - P(X)P(Y)) / sqrt(P(X)(1-P(X)) P(Y)(1-P(Y)))
+	def phi_coef(p_xy, p_x, p_y, eps=1e-12):
+    	num = p_xy - (p_x * p_y)
+    	den = np.sqrt(max(p_x * (1 - p_x) * p_y * (1 - p_y), 0.0)) + eps
+    	return num / den
+
+	rules['phi'] = rules.apply(
+    	lambda r: phi_coef(
+        	p_xy=r['support'],
+        	p_x=r['antecedent support'],
+        	p_y=r['consequent support']
+    	),
+    	axis=1
+	)
+
+	# 품질 필터 적용
+	if FILTER_LIFT_GT is not None:
+    	rules = rules[rules['lift'] > FILTER_LIFT_GT]
+	if FILTER_LEVERAGE_POS:
+    	rules = rules[rules['leverage'] > 0]
+
+	# -------------------------------
+	# 5) 출력 정리
+	# -------------------------------
+	def items_to_str(s):
+    	return ", ".join(sorted(map(str, s)))
+
+	cols_out = [
+    	'antecedents', 'consequents',
+    	'support', 'confidence', 'lift', 'leverage', 'conviction', 'phi'
+	]
+	view = rules[cols_out].copy() if len(rules) else pd.DataFrame(columns=cols_out)
+	if len(view):
+    	view['antecedents'] = view['antecedents'].apply(items_to_str)
+    	view['consequents'] = view['consequents'].apply(items_to_str)
+    	view = view.sort_values(['lift', 'confidence'], ascending=False).reset_index(drop=True)
+
+	pd.set_option('display.max_colwidth', 120)
+	print("\nGroceries + Apriori Association Rules (sorted by lift)\n" + "-"*90)
+	print(view.to_string(index=False) if len(view) else "(no rules)")
+
+	print("\n[Summary] #rules:", len(view),
+    	  "| support∈[%.4f, %.4f]" % (view['support'].min() if len(view) else 0,
+    	                              view['support'].max() if len(view) else 0),
+     	 "| confidence∈[%.4f, %.4f]" % (view['confidence'].min() if len(view) else 0,
+           	                          view['confidence'].max() if len(view) else 0))
+	
+
+### (소스 실행 결과)
+
+	=== Iris + K-means (k=3) ===
+	[1] Silhouette Coefficient : 0.5528
+	[2] Davies-Bouldin Index   : 0.6620
+	[3] Dunn Index             : 0.0988
+	[4] Calinski-Harabasz     : 561.6278
+	[5] WCSS (Inertia)        : 78.8514
+
+
+### (결과 분석)
+
+
 
 ---
 
