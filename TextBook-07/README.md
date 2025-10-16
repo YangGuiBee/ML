@@ -584,6 +584,37 @@
 
 
 
+### (소스 실행 결과)
+
+	Iris PCA (2D) Evaluation Summary
+	------------------------------------------
+	Metric    Value
+	[1]  Reconstruction Error (MSE, std space) 0.041868
+	[2]  Explained Variance Ratio (sum, 2 comps) 0.958132
+	[3]  Mutual Information avg(Z_i; y) 0.551648
+	[4-1] Trustworthiness@k=10 0.977963
+	[4-2] Continuity@k=10 0.990622
+	[5-1] Kruskal Stress-1 (↓) 0.062736
+	[5-2] Sammon Error (↓) 0.009755
+	[6]  LCMC@k=10 0.665553
+	[7]  Spearman ρ (pairwise distances) 0.993385
+	[8]  Silhouette Score (using y on Z) 0.401387
+	[9]  Davies–Bouldin Index (using y on Z, ↓) 0.955460
+	[10] Adjusted Rand Index (KMeans(Z) vs y) 0.620135
+	[11] Normalized Mutual Information (KMeans(Z) vs y) 0.659487
+
+	Explained Variance Ratio per component:
+  	PC1: 0.729624
+  	PC2: 0.228508
+
+  
+
+### (결과 분석)
+
+
+
+
+
 ## [차원 축소 알고리즘 평가 사용방법]
 
 **▣ 재구성 오류(Reconstruction Error) :** 차원 축소된 데이터를 원본 차원으로 복원하여 복원된 데이터와 원본 데이터 간의 평균 제곱 오차(MSE)를 통해 재구성 오류를 계산<br>
