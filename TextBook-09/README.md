@@ -38,11 +38,21 @@
 
 (머신러닝 회귀)
 
-	[7] k-최근접 이웃 회귀(k-Nearest Neighbors Regression, KNN) → 분류+회귀(11강) 
-	[8] 서포트 벡터 회귀 (Support Vector Regression, SVR) → 분류+회귀(11강) 
-	[9] 결정 트리 회귀 (Decision Tree Regression) → 분류+회귀(11강) 
-	랜덤 포레스트 회귀 (Random Forest Regression) → 분류+회귀(11강)   
- 	주성분 회귀 (Principal Component Regression, PCR) → 차원축소(6강)   
+	[7] 거리 기반
+		[7-1] k-최근접 이웃 회귀(k-Nearest Neighbors Regression, KNR) → 분류+회귀(11강) 
+		[7-2] 서포트 벡터 회귀 (Support Vector Regression, SVR) → 분류+회귀(11강) 
+	
+	[8] 트리 기반
+		[8-1] 결정 트리 회귀 (Decision Tree Regression, DTR) → 분류+회귀(11강) 
+		[8-2] 랜덤 포레스트 회귀 (Random Forest Regression, RFR) → 분류+회귀(11강)   
+		
+ 	[9] 차원축소 결합
+		[9-1] 주성분 회귀 (Principal Component Regression, PCR) → 차원축소(6강)   
+		[9-2] 부분 최소제곱 (PLS) → 차원축소(6강)   
+
+	[10] 앙상블
+		[10-1] Gradient Boosting
+		[10-2] XGBoost
 
 ---
 
