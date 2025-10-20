@@ -16,7 +16,7 @@
 	[1] 선형 회귀 (Linear Regression)
   
   	[2] 일반화 선형 회귀(Generalized Linear Regression, GLM)
-   		[2-1] 로지스틱 회귀 (Logistic Regression) → 분류(9강)
+   		[2-1] 로지스틱 회귀 (Logistic Regression) → 분류(10강)
 		[2-2] 포아송 회귀 (Poisson Regression)
 		[2-3] Cox의 비례위험 회귀(Cox's Proportional Hazard Regression)
      
