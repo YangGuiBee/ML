@@ -48,11 +48,7 @@
 		
  	[9] 차원축소 결합
 		[9-1] 주성분 회귀 (Principal Component Regression, PCR) → 차원축소(6강)   
-		[9-2] 부분 최소제곱 (PLS) → 차원축소(6강)   
-
-	[10] 앙상블
-		[10-1] Gradient Boosting
-		[10-2] XGBoost
+		[9-2] 부분 최소제곱 (Partial Least Squares, PLS)
 
 ---
 
