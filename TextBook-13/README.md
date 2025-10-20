@@ -65,7 +65,7 @@
 
     [2-1] 스태킹(Stacking)
     [2-2] 배깅(Bagging)
-    [2-3] 부스팅(Boosting)
+    [2-3] 부스팅(Boosting) : AdaBoost, Gradient Boosting, XGBoost 
 
 ---  
 # 강화 학습(Reinforcement Learning, RL)
