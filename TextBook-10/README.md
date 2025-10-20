@@ -12,13 +12,12 @@
 		[3-2] 이차 판별 분석(Quadratic Discriminant Analysis, QDA) 
 
 	[4] 거리 기반 알고리즘 
-		[4-1] k-최근접 이웃 분류(k-Nearest Neighbors Classification) → 분류+회귀(11강)
+		[4-1] k-최근접 이웃 분류(k-Nearest Neighbors Classification, KNC) → 분류+회귀(11강)
 		[4-2] 서포트 벡터 분류(Support Vector Classification, SVC) → 분류+회귀(11강)
 
 	[5] 트리기반 알고리즘
 		[5-1] 결정 트리 분류(Decision Tree Classification) → 분류+회귀(11강)
-		[5-2] 랜덤 포레스트 분류(Random Forest Classification) → 분류+회귀(11강)
-		[5-3] 앙상블 기반 : AdaBoost, Gradient Boosting Tree(GBT), lightGBM, XGBoost, CatBoost → 13강
+		[5-2] 랜덤 포레스트 분류(Random Forest Classification) → 분류+회귀(11강)		
   
 ---
 
