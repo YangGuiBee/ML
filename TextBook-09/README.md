@@ -13,6 +13,8 @@
 
 ---
 
+(전통 통계 회귀)
+
 	[1] 선형 회귀 (Linear Regression)
   
   	[2] 일반화 선형 회귀(Generalized Linear Regression, GLM)
@@ -33,19 +35,19 @@
 
   	[6] 비선형 회귀 (nonlinear regression)
 
----
 
-	k-최근접 이웃 회귀(k-Nearest Neighbors Regression) → 분류+회귀(11강) 
-	서포트 벡터 회귀 (Support Vector Regression, SVR) → 분류+회귀(11강) 
-	결정 트리 회귀 (Decision Tree Regression) → 분류+회귀(11강) 
+(머신러닝 회귀)
+
+	[7] k-최근접 이웃 회귀(k-Nearest Neighbors Regression, KNN) → 분류+회귀(11강) 
+	[8] 서포트 벡터 회귀 (Support Vector Regression, SVR) → 분류+회귀(11강) 
+	[9] 결정 트리 회귀 (Decision Tree Regression) → 분류+회귀(11강) 
 	랜덤 포레스트 회귀 (Random Forest Regression) → 분류+회귀(11강)   
- 	주성분 회귀 (Principal Component Regression) → 차원축소(6강)   
+ 	주성분 회귀 (Principal Component Regression, PCR) → 차원축소(6강)   
 
 ---
 
 <br>
 
----
 # [1] 선형 회귀 (Linear Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html<br>
