@@ -48,8 +48,8 @@
 		
  	[9] 차원축소
 		[9-1]	PLS (Partial Least Squares) 
-		[9-2]	CCA (Canonical Correlation Analysis) → 분류
-		[9-3]	Supervised PCA → 분류
+		[9-2]	CCA (Canonical Correlation Analysis) → 분류(10강)
+		[9-3]	Supervised PCA → 분류(10강)
 		[9-4]	LDA (Linear Discriminant Analysis) → 분류+회귀(11강) 
 		[9-5]	NCA (Neighborhood Component Analysis) → 분류+회귀(11강) 
 
@@ -622,6 +622,17 @@ L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회�
 <br>
 
 ---
+
+| 알고리즘                                      | 주된 학습 목적                                         | 핵심 아이디어                                                                              | 비고                                                   |
+| ----------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------ | ---------------------------------------------------- |
+| **(1) PLS (Partial Least Squares)**           | 독립변수 (X)와 종속변수 (Y) 간 공분산을 최대화하여 예측력 높은 잠재요인을 추출  | (X, Y)의 공통된 잠재요인(latent variable)을 찾아 회귀계수를 추정                                       | (Y)가 연속형일 때 주로 사용하며, 변형형 **PLS-DA**는 범주형 (Y)에도 적용 가능 |
+| **(2) LDA (Linear Discriminant Analysis)**    | 클래스 간 분산을 최대화하고 클래스 내 분산을 최소화하여 판별력이 높은 투영 축을 탐색 | Fisher의 판별기준 (\max_w \frac{w^T S_B w}{w^T S_W w})을 사용하여 선형 판별 경계 형성                  | 다중 클래스 분류 차원축소에 사용, 클래스 경계가 명확할 때 우수                 |
+| **(3) NCA (Neighborhood Component Analysis)** | 최근접이웃(kNN) 분류 정확도를 최대화하는 임베딩 공간을 학습              | 같은 클래스 샘플 간 거리를 줄이고, 다른 클래스 간 거리를 늘리는 확률적 거리학습                                       | 비선형 확장형(NNCA, MNCA) 존재, 주로 분류용으로 사용                  |
+| **(4) CCA (Canonical Correlation Analysis)**  | 두 데이터셋(또는 feature set) 간 상관관계를 최대화               | (X, Y) 각각에 대한 선형 결합 (w, v)를 찾아 (w^T X)와 (v^T Y)의 상관을 극대화                             | 다중모달(이미지↔텍스트 등) 표현학습에 적합, 회귀·분류 모두 응용 가능             |
+| **(5) Supervised PCA**                        | 라벨과 관련된 feature의 분산을 우선 보존                       | 라벨 정보 기반 가중치를 부여한 후 PCA 수행 ((\tilde{S} = \mathrm{diag}(s(y)) S \mathrm{diag}(s(y)))) | 일반 PCA보다 예측변수와 목표변수의 연관성 반영, 회귀·분류 모두 사용 가능          |
+
+
+
 
 # [9-2] 부분 최소제곱 (Partial Least Squares, PLS)
 설명변수 X 와 목표변수 Y 를 동시에 잘 설명하는 잠재요인(latent components)을 추출하고, 그 요인으로 회귀하는 방식<br>
