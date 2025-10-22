@@ -46,9 +46,12 @@
 		[8-1] 결정 트리 회귀 (Decision Tree Regression, DTR) → 분류+회귀(11강) 
 		[8-2] 랜덤 포레스트 회귀 (Random Forest Regression, RFR) → 분류+회귀(11강)   
 		
- 	[9] 차원축소 결합
-		[9-1] 주성분 회귀 (Principal Component Regression, PCR) → 차원축소(6강)   
-		[9-2] 부분 최소제곱 (Partial Least Squares, PLS)
+ 	[9] 차원축소
+		[9-1]	PLS (Partial Least Squares) 
+		[9-2]	CCA (Canonical Correlation Analysis) → 분류
+		[9-3]	Supervised PCA → 분류
+		[9-4]	LDA (Linear Discriminant Analysis) → 분류+회귀(11강) 
+		[9-5]	NCA (Neighborhood Component Analysis) → 분류+회귀(11강) 
 
 ---
 
