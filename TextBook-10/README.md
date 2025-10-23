@@ -1,4 +1,4 @@
-#  09 : 지도 학습 (Supervised Learning, SL) : 분류 (classification)
+#  10 : 지도 학습 (Supervised Learning, SL) : 분류 (classification)
 
 
 ---
