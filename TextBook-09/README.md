@@ -637,7 +637,7 @@ L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회�
 | **볼츠만 시그모이드 회귀 (*Boltzmann Sigmoidal Regression*)** | $y = \frac{A_1 - A_2}{1 + e^{(x-x_0)/dx}} + A_2$ | S-curve (단계적 포화) — 물질 전이, 온도 반응, 전기신호 변화    |
 | **래셔널 함수 회귀 (*Rational Function Regression*)**    | $y = \frac{a_0 + a_1x + \dots + a_m x^m}{1 + b_1x + \dots + b_n x^n}$ | 복합 비선형 곡선형 — 실험 데이터 근사, 제어모델  |
 | **스플라인 회귀 (*Spline Regression*)**     | $y = \sum_{j=1}^{K} \beta_j B_j(x)$ | Piecewise Smooth Curve — 복잡한 곡선 근사, 경제·기하 모델   |   
-| **구간별 회귀 (*Piecewise/Segmented Regression*)** | $y = \begin{cases} a_1 + b_1 x, & x < c \ a_2 + b_2 x, & x \ge c \end{cases}$ | Break-point형 — 구조적 변화 탐지, 정책효과 분석 |
+| **구간별 회귀 (*Piecewise/Segmented Regression*)** | $y = \begin{cases} a_1 + b_1 x, & x < c \\ a_2 + b_2 x, & x \ge c \end{cases}$ | Break-point형 — 구조적 변화 탐지, 정책효과 분석 |
 | **커널회귀 (*Kernel Regression*)**    | $\hat{y}(x) = \frac{\sum_i K(x - x_i) y_i}{\sum_i K(x - x_i)}$ | 부드러운 비모수 추세 — 시계열 평활화, 비선형 예측                  |    
 | **베이즈 비선형 회귀 (*Bayesian Nonlinear Regression*)**   | $p(\theta | D) \propto p(D | \theta) p(\theta) $ | 불확실성 반영형 — 소표본 데이터, 확률적 예측 모델 |
 | **신경망 회귀 (*Neural Network Regression, MLP*)**   | $\hat{y} = f(W_2 , \sigma(W_1 x + b_1) + b_2)$ | Universal Approximation — 복잡한 비선형 함수 학습, 예측·제어 |  
