@@ -13,8 +13,6 @@
 
 ---
 
-(전통 통계 회귀)
-
 	[1] 선형 회귀 (Linear Regression)
   
   	[2] 일반화 선형 회귀(Generalized Linear Regression, GLM)
@@ -35,6 +33,9 @@
 
   	[6] 비선형 회귀 (nonlinear regression)
 
+	[7] 차원축소
+		[7-1] PCR(Principal Component Regression)
+		[7-2] PLS(Partial Least Squares Regression)
 
 ---
 
