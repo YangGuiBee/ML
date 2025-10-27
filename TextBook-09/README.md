@@ -624,7 +624,7 @@ L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회�
 
 |  No              | 수식 (LaTeX)       | 곡선 형태 및 주요 적용 분야   |
 | --------------- | ------------------ | ---------------------------- |
-| **NLS**<br>(비선형 최소제곱 회귀, *Nonlinear Least Squares Regression*) | $\min_{\theta} \sum_{i=1}^{n} (y_i - f(x_i; \theta))^2$ | 모든 비선형 회귀의 기본 틀:물리·공학·경제모형 파라미터 추정 |
+| **NLS**<br>(비선형 최소제곱 회귀, *Nonlinear Least Squares Regression*) | $\min_{\theta} \sum_{i=1}^{n} (y_i - f(x_i; \theta))^2$ | 모든 비선형 회귀의 기본 틀—물리·공학·경제모형 파라미터 추정 |
 | **지수회귀 (*Exponential Regression*)**  | $y = a e^{b x}$ | 지수 성장/감쇠형 — 세균 성장, 방사능 붕괴, 수익률 감소              | 
 | **로그형 회귀 (*Logarithmic Regression*)**  | $y = a + b \ln(x)$ | 완만한 증가·감소형 (Concave/Convex) — 학습곡선, 효용함수       |
 | **전력회귀 (*Power Regression*)**  | $y = a x^{b}$ | 거듭제곱형 (Scaling law) — 물리량 관계, 생산함수, 탄성분석       |         
