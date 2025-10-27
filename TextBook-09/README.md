@@ -36,23 +36,6 @@
   	[6] 비선형 회귀 (nonlinear regression)
 
 
-(머신러닝 회귀)
-
-	[7] 거리 기반
-		[7-1] k-최근접 이웃 회귀(k-Nearest Neighbors Regression, KNR) → 분류+회귀(11강) 
-		[7-2] 서포트 벡터 회귀 (Support Vector Regression, SVR) → 분류+회귀(11강) 
-	
-	[8] 트리 기반
-		[8-1] 결정 트리 회귀 (Decision Tree Regression, DTR) → 분류+회귀(11강) 
-		[8-2] 랜덤 포레스트 회귀 (Random Forest Regression, RFR) → 분류+회귀(11강)   
-		
- 	[9] 차원축소
-		[9-1]	PLS (Partial Least Squares) 
-		[9-2]	CCA (Canonical Correlation Analysis) → 분류(10강)
-		[9-3]	Supervised PCA → 분류(10강)
-		[9-4]	LDA (Linear Discriminant Analysis) → 분류+회귀(11강) 
-		[9-5]	NCA (Neighborhood Component Analysis) → 분류+회귀(11강) 
-
 ---
 
 <br>
@@ -645,25 +628,7 @@ L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회�
 
 ---
 
-# [7] 거리 기반
-# [7-1] KNR (k-Nearest Neighbors Regression) → 분류+회귀(11강) 
-# [7-2] SVR (Support Vector Regression) → 분류+회귀(11강) 
 
----
-
-# [8] 트리 기반
-# [8-1] DTR (Decision Tree Regression) → 분류+회귀(11강) 
-# [8-2] RFR (Random Forest Regression) → 분류+회귀(11강)   
-
----
-
-# [9] 차원축소
-
-		[9-1]	PLS (Partial Least Squares) 
-		[9-2]	CCA (Canonical Correlation Analysis) → 분류(10강)
-		[9-3]	Supervised PCA → 분류(10강)
-		[9-4]	LDA (Linear Discriminant Analysis) → 분류+회귀(11강) 
-		[9-5]	NCA (Neighborhood Component Analysis) → 분류+회귀(11강) 
 
 
 
