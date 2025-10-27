@@ -54,6 +54,10 @@
 <br>
 
 ![](./images/LinearRegression.gif)
+
+<br>
+![](./images/mb.png)
+
 출처 : https://savannahar68.medium.com/getting-started-with-regression-a39aca03b75f
 <br>
 
