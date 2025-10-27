@@ -574,6 +574,7 @@ L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회�
 ---
 # [6] 비선형 회귀 (nonlinear regression)
 데이터를 어떻게 변형하더라도 파라미터를 선형 결합식으로 표현할 수 없는 모델로 회귀모형에 주어진 회귀식이 모수들의 비선형함수로 나타나는 경우 선형회귀에서 회귀계수는 설명변수의 변화량에 따른 반응변수의 평균변화량으로 해석되지만, 비선형회귀에서는 각 모수가 특정한 의미를 가지게 된다.<br>
+<!--
 (1) 다항 회귀 (Polynomial Regression)
  $y = β_0 + β_1X + β_2X^2 +⋯+ β_nX^n + ϵ$
 
@@ -618,32 +619,10 @@ L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회�
 (13) 구형 회귀 (Quadratic Regression)
  $y = β_0 + β_1x + β_2x^2 + ϵ$
  $∂y/∂x = β_1 + 2β_2x$
-
+-->
 <br>
 
-
-|  No              | 수식 (LaTeX)       | 곡선 형태 및 주요 적용 분야   |
-| --------------- | ------------------ | ---------------------------- |
-| **NLS**<br>(비선형 최소제곱 회귀, *Nonlinear Least Squares Regression*) | $\min_{\theta} \sum_{i=1}^{n} (y_i - f(x_i; \theta))^2$ | 모든 비선형 회귀의 기본 틀—물리·공학·경제모형 파라미터 추정 |
-| **지수회귀 (*Exponential Regression*)**  | $y = a e^{b x}$ | 지수 성장/감쇠형 — 세균 성장, 방사능 붕괴, 수익률 감소              | 
-| **로그형 회귀 (*Logarithmic Regression*)**  | $y = a + b \ln(x)$ | 완만한 증가·감소형 (Concave/Convex) — 학습곡선, 효용함수       |
-| **전력회귀 (*Power Regression*)**  | $y = a x^{b}$ | 거듭제곱형 (Scaling law) — 물리량 관계, 생산함수, 탄성분석       |         
-| **시그모이드 회귀 (*Sigmoid Regression*)**  | $y = \frac{L}{1 + e^{-k(x-x_0)}}$ | S-curve (대칭형) — 확산, 포화, 학습 진전 곡선     |
-| **다항식 회귀 (*Polynomial Regression, High-order*)**               | $y = \beta_0 + \beta_1 x + \beta_2 x^2 + \cdots + \beta_n x^n$ | 곡률 가변형 — 복잡한 추세 적합, 곡선 회귀 |
-| **로지스틱 성장 회귀 (*Logistic Growth Regression*)**                  | $y = \frac{K}{1 + A e^{-B x}}$ | S-curve (포화 성장형) — 인구·시장·바이러스 확산 모델            |    
-| **곰퍼츠 회귀 (*Gompertz Regression*)**                            | $y = a e^{-b e^{-c x}}$  | 비대칭 S-curve — 생물 성장, 약물 반응, 감염 전파 곡선           |  
-| **하이퍼볼릭 회귀 (*Hyperbolic Regression*)**                        | $y = \frac{a}{x + b} + c$ | 포화/역비례형 — 반응 속도, 농도-효과 관계, 수율 분석               |      
-| **가우시안 회귀 (*Gaussian Regression*)**  | $y = a \exp!\left[-\frac{(x-b)^2}{2c^2}\right]$ | Bell-shape (대칭형) — 분포형 반응, 최적점 탐색, 약물 농도 반응    |    
-| **볼츠만 시그모이드 회귀 (*Boltzmann Sigmoidal Regression*)** | $y = \frac{A_1 - A_2}{1 + e^{(x-x_0)/dx}} + A_2$ | S-curve (단계적 포화) — 물질 전이, 온도 반응, 전기신호 변화    |
-| **래셔널 함수 회귀 (*Rational Function Regression*)**    | $y = \frac{a_0 + a_1x + \dots + a_m x^m}{1 + b_1x + \dots + b_n x^n}$ | 복합 비선형 곡선형 — 실험 데이터 근사, 제어모델  |
-| **스플라인 회귀 (*Spline Regression*)**     | $y = \sum_{j=1}^{K} \beta_j B_j(x)$ | Piecewise Smooth Curve — 복잡한 곡선 근사, 경제·기하 모델   |   
-| **구간별 회귀 (*Piecewise/Segmented Regression*)** | $y = \left{ \begin{array}{ll} a_1 + b_1x, & x < c \\ a_2 + b_2x, & x \ge c \end{array} \right.$ | Break-point형 — 구조적 변화 탐지, 정책효과 분석 |
-| **커널회귀 (*Kernel Regression*)**    | $\hat{y}(x) = \frac{\sum_i K(x - x_i) y_i}{\sum_i K(x - x_i)}$ | 부드러운 비모수 추세 — 시계열 평활화, 비선형 예측                  |    
-| **베이즈 비선형 회귀 (*Bayesian Nonlinear Regression*)**   | $p(\theta | D) \propto p(D | \theta) p(\theta) $ | 불확실성 반영형 — 소표본 데이터, 확률적 예측 모델 |
-| **신경망 회귀 (*Neural Network Regression, MLP*)**   | $\hat{y} = f(W_2 , \sigma(W_1 x + b_1) + b_2)$ | Universal Approximation — 복잡한 비선형 함수 학습, 예측·제어 |  
-
-
-| No | 수식 | 곡선 형태 및 주요 적용 분야 |
+| 구분 | 수식 | 곡선 형태 및 주요 적용 분야 |
 |----|------|------------------------------|
 | [6-1] NLS(Nonlinear Least Squares Regression) | ![eq](https://latex.codecogs.com/png.latex?%5Cmin_%7B%5Ctheta%7D%5Csum_%7Bi%3D1%7D%5En%28y_i%20-%20f%28x_i%3B%5Ctheta%29%29%5E2) | 모든 비선형 회귀의 기본 틀 — 물리·공학·경제모형 파라미터 추정 |
 | [6-2] Exponential Regression | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20a%20e%5E%7Bb%20x%7D) | 지수 성장/감쇠형 — 세균 성장, 방사능 붕괴, 수익률 감소 |
