@@ -73,7 +73,11 @@ $y_i = β_1x_i + β_0 + ϵ_i$<br>
 <br>
 
 ---
-선형회귀는 학습을 통해 예측값과 실제관측값인 잔차 제곱들의 합인 <ins>**RSS(Residual Sum of Squares)**</ins>를 최소로 하는 회귀계수($W_0$과 $W_1$)를 찾는 것<br>
+선형회귀는 학습을 통해 예측값과 실제관측값의 <ins>**차이**</ins>를 최소로 하는 회귀계수($W_0$과 $W_1$)를 찾는 것<br>
+
+오차제곱합(Sum of Squared Errors, SSE) : 예측값과 실제값의 단순 차이로 모델의 “오차(Error)”<br>
+잔차제곱합(Residual Sum of Squares, RSS) : 회귀식이 데이터에 맞춰진 이후 남은 “잔차(Residual)”
+
 ![](./images/rss.png)
 
 <ins>**최소제곱법(Ordinary Least Squares, OLS)**</ins> : 통계학과 머신러닝에서 가장 기본적이고 중요한 회귀분석 방법으로<br>
