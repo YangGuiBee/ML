@@ -81,6 +81,9 @@ $y_i = β_1x_i + β_0 + ϵ_i$<br>
 <br>
 비용함수(Cost function), 손실함수(loss function) =<br>
 ![](./images/RSSd.svg)
+
+![](./images/rss.png)
+
 ​<br>
 
 **경사하강법 (Gradient Decent)**
