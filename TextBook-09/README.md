@@ -79,9 +79,6 @@ $y_i = β_1x_i + β_0 + ϵ_i$<br>
 <ins>최소제곱법(Ordinary Least Squares, OLS)</ins> : 통계학과 머신러닝에서 가장 기본적이고 중요한 회귀분석 방법으로<br>
 “데이터에 가장 잘 맞는 직선을 찾기 위해, 오차 제곱합이 최소가 되도록 직선의 기울기와 절편을 구하는 방법”<br>
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-09/images/LRd.png'>
-<br>
-출처 : https://blog.csdn.net/Amy_mm/article/details/79989722
-
 
 ​<br>
 
