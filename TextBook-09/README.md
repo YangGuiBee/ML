@@ -80,7 +80,8 @@ $y_i = β_1x_i + β_0 + ϵ_i$<br>
 출처 : https://blog.csdn.net/Amy_mm/article/details/79989722
 <br>
 비용함수(Cost function), 손실함수(loss function) =<br>
-![](./images/RSSd.svg)
+
+<!-- ![](./images/RSSd.svg) 오류 -->
 
 ![](./images/rss.png)
 
