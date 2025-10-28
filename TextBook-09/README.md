@@ -78,6 +78,16 @@ $y_i = β_1x_i + β_0 + ϵ_i$<br>
 오차제곱합(Sum of Squared Errors, SSE) : 예측값과 실제값의 단순 차이로 모델의 “오차(Error)”<br>
 잔차제곱합(Residual Sum of Squares, RSS) : 회귀식이 데이터에 맞춰진 이후 남은 “잔차(Residual)”
 
+
+| 구분 | 영문 명칭 | 수식 | 의미 / 역할 | 관계 |
+|------|------------|------|---------------|-------|
+| **SSE** | *Sum of Squared Errors* | ![eq](https://latex.codecogs.com/png.latex?SSE%20%3D%20%5Csum_%7Bi%3D1%7D%5En%20%28y_i%20-%20%5Chat%7By_i%7D%29%5E2) | 개별 데이터의 오차를 **제곱 후 합산**한 값 | 가장 기본적인 형태의 “오차 총합” |
+| **RSS** | *Residual Sum of Squares* | ![eq](https://latex.codecogs.com/png.latex?RSS%20%3D%20%5Csum_%7Bi%3D1%7D%5En%20%28y_i%20-%20%5Chat%7By_i%7D%29%5E2) | SSE와 동일 (단, “잔차” 관점에서 표현) | ![eq](https://latex.codecogs.com/png.latex?RSS%20%3D%20SSE) |
+| **MSE** | *Mean Squared Error* | ![eq](https://latex.codecogs.com/png.latex?MSE%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi%3D1%7D%5En%20%28y_i%20-%20%5Chat%7By_i%7D%29%5E2) | 오차 제곱합을 **평균**한 값 (데이터 수에 무관하게 비교 가능) | ![eq](https://latex.codecogs.com/png.latex?MSE%20%3D%20%5Cfrac%7BSSE%7D%7Bn%7D) |
+| **Loss Function** | *Per-sample Loss* | ![eq](https://latex.codecogs.com/png.latex?L_i%20%3D%20%28y_i%20-%20%5Chat%7By_i%7D%29%5E2) | **개별 샘플 단위의 오차** | 한 데이터의 손실 |
+| **Cost Function** | *Global Loss / Objective Function* | ![eq](https://latex.codecogs.com/png.latex?J%28%5Ctheta%29%20%3D%20%5Cfrac%7B1%7D%7B2n%7D%20%5Csum_%7Bi%3D1%7D%5En%20%28y_i%20-%20%5Chat%7By_i%7D%29%5E2) | 전체 데이터의 평균 손실, **모델이 최소화하려는 목적함수** | ![eq](https://latex.codecogs.com/png.latex?J%20%3D%20%5Cfrac%7BMSE%7D%7B2%7D%20%3D%20%5Cfrac%7BSSE%7D%7B2n%7D) |
+
+
 ![](./images/rss.png)
 
 <ins>**최소제곱법(Ordinary Least Squares, OLS)**</ins> : 통계학과 머신러닝에서 가장 기본적이고 중요한 회귀분석 방법으로<br>
