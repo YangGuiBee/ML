@@ -88,8 +88,6 @@ $y_i = β_1x_i + β_0 + ϵ_i$<br>
 | **Cost Function** | *Global Loss / Objective Function* | ![eq](https://latex.codecogs.com/png.latex?J%28%5Ctheta%29%20%3D%20%5Cfrac%7B1%7D%7B2n%7D%20%5Csum_%7Bi%3D1%7D%5En%20%28y_i%20-%20%5Chat%7By_i%7D%29%5E2) | 전체 데이터의 평균 손실, **모델이 최소화하려는 목적함수** | ![eq](https://latex.codecogs.com/png.latex?J%20%3D%20%5Cfrac%7BMSE%7D%7B2%7D%20%3D%20%5Cfrac%7BSSE%7D%7B2n%7D) |
 
 
-![](./images/rss.png)
-
 <ins>**최소제곱법(Ordinary Least Squares, OLS)**</ins> : 통계학과 머신러닝에서 가장 기본적이고 중요한 회귀분석 방법으로<br>
 “데이터에 가장 잘 맞는 직선을 찾기 위해, 오차 제곱합이 최소가 되도록 직선의 기울기와 절편을 구하는 방법”<br>
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-09/images/LRd.png'>
