@@ -120,7 +120,7 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 # [2] 일반화 선형 회귀(Generalized Linear Regression, GLM)
 일반화 선형 회귀의 경우 선형성, 독립성, 등분산성, 정규성의 가정을 갖고 있지만, 종속변수가 연속형이 아니라면 대표적으로 오차항의 정규성 가정이 깨지게 되는데, 종속변수를 적절한 함수로 변화시킨 f(y)를 독립변수와 회귀계수의 선형결합으로 모형화한 것이다.<br>
 
-# [2-1] 로지스틱 회귀 (Logistic Regression) → 분류(5강)
+# [2-1] 로지스틱 회귀 (Logistic Regression) → 분류(10강)
 
 <br>
 
