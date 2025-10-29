@@ -32,10 +32,23 @@
 		[5-3] 엘라스틱넷 회귀 (Elastic Net Regression)
 
   	[6] 비선형 회귀 (nonlinear regression)
-
-	[7] 차원축소
-		[7-1] PCR(Principal Component Regression)
-		[7-2] PLS(Partial Least Squares Regression)
+		[6-1] 비선형 최소제곱 회귀 (Nonlinear Least Squares Regression)
+		[6-2] 지수 회귀 (Exponential Regression)
+		[6-3] 로그형 회귀 (Logarithmic Regression)
+		[6-4] 전력 회귀 (Power Regression)
+		[6-5] 시그모이드 회귀 (Sigmoid Regression)
+		[6-6] 스플라인 회귀 (Spline Regression)
+		[6-7] 커널 회귀 (Kernel Regression)
+		[6-8] 다항식 회귀 (Polynomial Regression, High-order)
+		[6-9] 로지스틱 성장 회귀 (Logistic Growth Regression)
+		[6-10] 곰퍼츠 회귀 (Gompertz Regression)
+		[6-11] 하이퍼볼릭 회귀 (Hyperbolic Regression)
+		[6-12] 가우시안 회귀 (Gaussian Regression)
+		[6-13] 볼츠만 시그모이드 회귀 (Boltzmann Sigmoidal Regression)
+		[6-14] 래셔널 함수 회귀 (Rational Function Regression)
+		[6-15] 구간별 회귀 (Piecewise / Segmented Regression)
+		[6-16] 베이즈 비선형 회귀 (Bayesian Nonlinear Regression)
+		[6-17] 신경망 회귀 (Neural Network Regression)
 
 ---
 
