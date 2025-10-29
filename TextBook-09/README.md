@@ -75,11 +75,11 @@ $y_i = β_1x_i + β_0 + ϵ_i$<br>
 ---
 선형회귀는 학습을 통해 예측값과 실제관측값의 <ins>**차이**</ins>를 최소로 하는 회귀계수($W_0$과 $W_1$)를 찾는 것<br>
 
-오차제곱합(Sum of Squared Errors, SSE) : 예측값과 실제값의 단순 차이로 모델의 “오차(Error)”<br>
-잔차제곱합(Residual Sum of Squares, RSS) : 회귀식이 데이터에 맞춰진 이후 남은 “잔차(Residual)”<br>
-평균제곱오차(Mean Squared Error, MSE) : 실제값과 예측값의 차이(오차)를 제곱해서 평균낸 값<br>
-손실함수(Loss Function) : 한 샘플의 예측 오차<br>
-비용함수(Cost Function) : 전체 샘플의 평균 오차(손실)<br>
+오차제곱합(Sum of Squared Errors, **SSE**) : 예측값과 실제값의 단순 차이로 모델의 “오차(Error)”<br>
+잔차제곱합(Residual Sum of Squares, **RSS**) : 회귀식이 데이터에 맞춰진 이후 남은 “잔차(Residual)”<br>
+평균제곱오차(Mean Squared Error, **MSE**) : 실제값과 예측값의 차이(오차)를 제곱해서 평균낸 값<br>
+손실함수(**Loss Function**) : 한 샘플의 예측 오차<br>
+비용함수(**Cost Function**) : 전체 샘플의 평균 오차(손실)<br>
 
 
 | 구분 | 영문 명칭 | 수식 | 의미 / 역할 | 관계 |
