@@ -94,6 +94,7 @@ $y_i = β_1x_i + β_0 + ϵ_i$<br>
 
 **최소제곱법(Ordinary Least Squares, OLS)** : 데이터에 가장 잘 맞는 직선을 찾기 위해,<br>
 실제값과 예측값의 차이(오차=잔차)의 제곱합을 최소화하는 방식으로 회귀계수(기울기, 절편) 추정하는 방법<br>
+OLS는 회귀분석의 기본이며, MSE 기반 비용함수의 최소화와 동일한 원리<br>
 
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-09/images/LRd.png'>
 
