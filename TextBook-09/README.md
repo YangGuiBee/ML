@@ -52,6 +52,10 @@
 
 ---
 
+![](./images/Xy.png)
+
+---
+
 <br>
 
 # [1] 선형 회귀 (Linear Regression)
