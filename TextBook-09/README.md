@@ -135,6 +135,53 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 	print(lr.predict(([50]))
 
 ---
+
+	# -------------------------------
+	# Scikit-Learn LinearRegression 예제
+	# -------------------------------
+	
+	import numpy as np
+	import matplotlib.pyplot as plt
+	from sklearn.linear_model import LinearRegression
+	from sklearn.metrics import mean_squared_error, r2_score
+	
+	# 예제용 데이터 생성
+	# y = 3x + 5 + 약간의 잡음
+	np.random.seed(42)
+	X = 2 * np.random.rand(100, 1)   # 입력값 (100개 샘플, 1개 특성)
+	y = 3 * X + 5 + np.random.randn(100, 1)  # 타깃값
+	
+	# 모델 생성 및 학습
+	model = LinearRegression()
+	model.fit(X, y)
+	
+	# 학습된 모델의 계수(기울기, 절편) 출력
+	print("기울기 (coef_):", model.coef_)
+	print("절편 (intercept_):", model.intercept_)
+	
+	# 예측
+	X_new = np.array([[0], [2]])     # 0과 2에서 예측
+	y_pred = model.predict(X_new)
+	
+	# 평가
+	y_hat = model.predict(X)
+	mse = mean_squared_error(y, y_hat)
+	r2 = r2_score(y, y_hat)
+	
+	print(f"MSE (평균제곱오차): {mse:.3f}")
+	print(f"R² (결정계수): {r2:.3f}")
+	
+	# 시각화
+	plt.scatter(X, y, color='blue', label='Training data')
+	plt.plot(X_new, y_pred, color='red', linewidth=2, label='Regression line')
+	plt.xlabel('X')
+	plt.ylabel('y')
+	plt.title('Linear Regression Example')
+	plt.legend()
+	plt.show()
+	
+
+
 <br>
 
 # [2] 일반화 선형 회귀(Generalized Linear Regression, GLM)
