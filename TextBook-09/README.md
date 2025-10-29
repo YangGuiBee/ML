@@ -75,11 +75,11 @@ $y_i = β_1x_i + β_0 + ϵ_i$<br>
 ---
 선형회귀는 학습을 통해 예측값과 실제관측값의 <ins>**차이(손실)**</ins>를 최소로 하는 회귀계수($W_0$과 $W_1$)를 찾는 것<br>
 
-오차제곱합(Sum of Squared Errors, **SSE**) : 예측값과 실제값의 단순 차이로 모델의 “오차(Error)”<br>
-잔차제곱합(Residual Sum of Squares, **RSS**) : 회귀식이 데이터에 맞춰진 이후 남은 “잔차(Residual)”<br>
-평균제곱오차(Mean Squared Error, **MSE**) : 실제값과 예측값의 오차를 제곱해서 평균낸 값<br>
-손실함수(**Loss Function**) : 한 샘플의 예측 오차<br>
-비용함수(**Cost Function**) : 전체 샘플의 평균 오차<br>
+**오차제곱합(Sum of Squared Errors, SSE)** : 예측값과 실제값의 단순 차이로 모델의 “오차(Error)”<br>
+**잔차제곱합(Residual Sum of Squares, RSS)** : 회귀식이 데이터에 맞춰진 이후 남은 “잔차(Residual)”<br>
+**평균제곱오차(Mean Squared Error, MSE)** : 실제값과 예측값의 오차를 제곱해서 평균낸 값<br>
+**손실함수(Loss Function)** : 한 샘플의 예측 오차<br>
+**비용함수(Cost Function)** : 전체 샘플의 평균 오차<br>
 
 
 | 구분 | 영문 명칭 | 수식 | 의미 / 역할 | 관계 |
@@ -90,15 +90,16 @@ $y_i = β_1x_i + β_0 + ϵ_i$<br>
 | **Loss Function** | *Per-sample Loss* | ![eq](https://latex.codecogs.com/png.latex?L_i%20%3D%20%28y_i%20-%20%5Chat%7By_i%7D%29%5E2) | **개별 샘플 단위의 오차** | 한 데이터의 손실 |
 | **Cost Function** | *Global Loss / Objective Function* | ![eq](https://latex.codecogs.com/png.latex?J%28%5Ctheta%29%20%3D%20%5Cfrac%7B1%7D%7B2n%7D%20%5Csum_%7Bi%3D1%7D%5En%20%28y_i%20-%20%5Chat%7By_i%7D%29%5E2) | 전체 데이터의 평균 손실, **모델이 최소화하려는 목적함수** | ![eq](https://latex.codecogs.com/png.latex?J%20%3D%20%5Cfrac%7BMSE%7D%7B2%7D%20%3D%20%5Cfrac%7BSSE%7D%7B2n%7D) |
 
+<br>
 
-<ins>**최소제곱법(Ordinary Least Squares, OLS)**</ins> : 통계학과 머신러닝에서 가장 기본적이고 중요한 회귀분석 방법으로<br>
-“데이터에 가장 잘 맞는 직선을 찾기 위해, 오차 제곱합이 최소가 되도록 직선의 기울기와 절편을 구하는 방법”<br>
+**최소제곱법(Ordinary Least Squares, OLS)** : 데이터에 가장 잘 맞는 직선을 찾기 위해,<br>
+실제값과 예측값의 차이(오차=잔차)의 제곱합을 최소화하는 방식으로 회귀계수(기울기, 절편) 추정하는 방법<br>
+
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-09/images/LRd.png'>
 
 ​<br>
 
-**경사하강법 (Gradient Decent)**
-비용 함수 f의 함숫값이 줄어드는 방향으로 함수의 계수를 일정 크기(학습량)만큼 더해나가며 f의 최솟값을 찾는 최적화 기법이다.
+**경사하강법(Gradient Decent)** : 비용함수 f의 함수 값이 줄어드는 방향으로 함수의 계수를 일정 크기(학습량)만큼 더해나가며 f의 최소값을 찾는 최적화 기법<br>
 기울기 $Gradient(f)=∇f(x)=[ ∂f(x_0)/∂x_0, ∂f(x_1)/∂x_1,...,∂f(x_{N−1}/∂x_{N−1}]^T$
 ​미분 가능한 N개의 다변수 함수 f를 각 축에 대하여 편미분한 값으로, 스칼라 함수의 모든 축에 대응하는 벡터장을 생성하는 역할을 한다.
 손실 함수가 조금만 복잡해져도 Global Minimum을 발견하지 못한 채 Local Minimum에 빠지기 쉽고 학습 시간이 길다.
