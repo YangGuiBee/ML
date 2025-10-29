@@ -179,8 +179,18 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 	plt.title('Linear Regression Example')
 	plt.legend()
 	plt.show()
-	
 
+<br>
+(실행결과)
+
+	기울기 (coef_): [[2.77011339]]
+	절편 (intercept_): [5.21509616]
+	MSE (평균제곱오차): 0.807
+	R² (결정계수): 0.769
+
+<br>
+
+![](./images/lrs.png)
 
 <br>
 
