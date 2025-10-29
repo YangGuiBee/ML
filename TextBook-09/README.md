@@ -51,7 +51,7 @@
 		[6-17] 신경망 회귀 (Neural Network Regression)
 
 ---
-
+(참고)
 ![](./images/Xy.png)
 
 ---
