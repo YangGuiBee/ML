@@ -1087,8 +1087,6 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 
 비선형 관계를 선형회귀모델의 형태로 표현<br>
 $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
-<br>
-![](./images/PolynomialFeatures.png)
 
 <br>
 편향이 높으면 분산은 낮아짐 : 과소적합(Under fitting), 분산이 높으면 편향이 낮아짐 : 과대적합(Over fitting)<br>
@@ -1181,6 +1179,8 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 
 
 **(4 실행 결과)**
+
+![](./images/PolynomialFeatures.png)
 
 <br>
 
