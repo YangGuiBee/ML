@@ -961,6 +961,7 @@ $e∼N(0,σ^2I_N)$<br>
 <br>
 
 # [3-2] 분위수 회귀 (Quantile Regression)
+일반적인 평균중심회귀(OLS)와 달리, 데이터의 특정 분위수(quantile, 예: 중앙값·상위 90% 등)를 직접 추정하는 회귀모형<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.QuantileRegressor.html<br>
 반응 변수의 조건부 분위수를 모델링 할때 사용되는 선형 회귀의 확장 버전<br>
 1) 선형 회귀 조건이 충족되지 않는 경우<br>
