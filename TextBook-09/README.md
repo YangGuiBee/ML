@@ -27,7 +27,7 @@
   
 	[4] 다항 선형 회귀 (Polynomial Linear Regression)
 
-   	[5] 정규화 (Regularized), 벌점부여 (Penalized) 선형 회귀
+   	[5] 정규화 (Regularization) : 벌점부여 (Penalized) 선형 회귀
 		[5-1] 릿지 회귀 (Ridge Regression)
 		[5-2] 라쏘 회귀 (Lasso Regression)
 		[5-3] 엘라스틱넷 회귀 (Elastic Net Regression)
@@ -953,8 +953,8 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 
 <br>
 
-- **다중회귀 (Multiple Regression)** → X가 여러 개, 관계는 “직선적” : 폭을 넓히는 모델 (변수 수 확대)<br>  
-- **다항회귀 (Polynomial Regression)** → X는 적어도 하나지만 항이 여러 개, 관계는 “곡선적”: 깊이를 더하는 모델 (항의 차수 확대)
+**다중회귀 (Multiple Regression)** → X가 여러 개, 관계는 “직선적” : 폭을 넓히는 모델 (변수 수 확대)<br>  
+**다항회귀 (Polynomial Regression)** → X는 적어도 하나지만 항이 여러 개, 관계는 “곡선적”: 깊이를 더하는 모델 (항의 차수 확대)
 
 
 | 구분 | **다중회귀 (Multiple Regression)** | **다항회귀 (Polynomial Regression)** |
@@ -976,7 +976,7 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 
 ---
 
-# [5] 정규화 (Regularized), 벌점부여 (Penalized) 선형 회귀
+# [5] 정규화 (Regularization) : 벌점부여 (Penalized) 선형 회귀
 
 | 문제                            | 설명                                             | 결과                     |
 | ----------------------------- | ---------------------------------------------- | ---------------------- |
@@ -985,7 +985,15 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 | **노이즈 민감성**                   | 데이터의 작은 변화에도 계수가 크게 요동                         | 예측 불안정                 |
 
 규제(Regularization) : 비용함수에 alpha값으로 패널티를 부여해서 회귀계수값의 크기를 감소시켜서 과적합을 개선<br>
-비용함수의 목표 = $Min(RSS(W) + alpha * ||W||_2^2)$
+$∑(yᵢ - ŷᵢ)²  +  λ * Penalty(β)$ 최소화
+
+
+| 기법                            | 벌점항       | 효과                        | 특징                   |                                        |                     |
+| ----------------------------- | --------- | ------------------------- | -------------------- | -------------------------------------- | ------------------- |
+| **Ridge Regression (L2 정규화)** | `λ * ∑β²` | 큰 계수를 부드럽게 줄임 (Shrinkage) | 공선성 완화에 강함, 모든 변수 유지 |                                        |                     |
+| **Lasso Regression (L1 정규화)** | `λ * ∑    | β                         | `                    | 불필요한 계수를 0으로 만듦 (Feature Selection 효과) | 변수 선택 기능 내장         |
+| **Elastic Net**               | `λ₁∑      | β                         | + λ₂∑β²`             | L1+L2 혼합형                              | Ridge와 Lasso의 장점 결합 |
+
 
 # [5-1] 릿지 회귀 (Ridge Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification<br>
