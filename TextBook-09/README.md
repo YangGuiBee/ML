@@ -714,7 +714,7 @@ N개의 샘플에 대하여 확장한 후, vector-matrix 형태로 표기하면,
 <img width ='500' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-09/images/vectorMX.png'><br>
 $e∼N(0,σ^2I_N)$<br>
 
-**(예제 소스)**
+**(예제 소스) : 맨해튼 지역의 임대료(rent)를 여러 주거특성(feature)을 이용한 예측**
 
 	import pandas as pd
 	import matplotlib.pyplot as plt 
