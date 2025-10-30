@@ -714,6 +714,8 @@ N개의 샘플에 대하여 확장한 후, vector-matrix 형태로 표기하면,
 <img width ='500' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-09/images/vectorMX.png'><br>
 $e∼N(0,σ^2I_N)$<br>
 
+**(예제 소스)**
+
 	import pandas as pd
 	import matplotlib.pyplot as plt 
 	from sklearn.model_selection import train_test_split
@@ -746,6 +748,10 @@ $e∼N(0,σ^2I_N)$<br>
 	plt.ylabel('Predicted Rent')
 	plt.title('Multiple Linear Regression')
 	plt.show()
+
+**(소스 실행 결과)**
+
+![](./images/MLR.png)
 
 <br>
 
