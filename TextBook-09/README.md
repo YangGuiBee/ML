@@ -1392,6 +1392,9 @@ L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회�
 	print("LinearRegression R² 점수:", score_linear)
 	print("SGDRegressor R² 점수:", score_sgd)
 
+
+![](./images/LR_SGD.png)
+
 <br>
 
 ---
