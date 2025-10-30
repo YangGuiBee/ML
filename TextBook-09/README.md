@@ -566,6 +566,8 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 
 <br>
 
+(예제 소스) : 포아송 분포의 성질
+
 	# numpy 라이브러리 임포트 (수치 계산에 유용한 함수 제공)
 	import numpy as np                      
 	# seaborn 라이브러리 임포트 (데이터 시각화 라이브러리)
@@ -611,6 +613,9 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 	# 그래프를 화면에 출력
 	plt.show()                               
 
+(실행 결과) : 포아송 분포의 성질
+
+![](./images/PF.png)
 
 <br>
 
