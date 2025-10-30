@@ -900,7 +900,7 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 	from sklearn.linear_model import LinearRegression
 	from sklearn.metrics import r2_score
 	
-	df = pd.read_csv('https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-04/housing.data.txt',
+	df = pd.read_csv('https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-09/housing.data.txt',
                  header=None, sep='\s+')
 
 	df.columns = ['CRIM','ZN','INDUS','CHAS','NOX','RM','AGE','DIS','RAD','TAX','PTRATIO','B','LSTAT','MEDV']
