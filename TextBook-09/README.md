@@ -269,6 +269,7 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 |              | 학교별 사고(상해) 건수           | 시설 노후도·안전점검 여부 영향 평가                   |
 |              | 문화행사 관람객 수(시간 단위)       | 홍보 수준·기온·요일의 영향 예측                     |
 
+<br>
 
 (예제 소스) : 은행 창구 방문 고객 수(시간대별 고객 방문 수를 인력 배치 최적화에 활용)
 
@@ -506,8 +507,32 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 	#   (3) 13시, 주말, 중형지점 → 약 1명 미만 예상
 	# ------------------------------------------------------------
 	
+
 (실행 결과) : 은행 창구 방문 고객 수(시간대별 고객 방문 수를 인력 배치 최적화에 활용)
 
+	MAE: 1.196
+	Mean Poisson Deviance: 1.151
+	
+	Intercept (beta0): 1.3971  -> base rate = 4.0436
+	
+	Coefficients (rate ratios):
+	         feature    beta  rate_ratio (exp(beta))
+	0           hour  0.0173                  1.0174
+	1           temp  0.0160                  1.0161
+	2     is_weekend -0.8334                  0.4346
+	3      is_payday  0.6529                  1.9210
+	4           rain -0.2137                  0.8076
+	5  branch_Medium -0.5863                  0.5564
+	6   branch_Small -0.9201                  0.3985
+	
+	Sample inputs:
+	   hour  is_weekend  is_payday  rain  temp  branch
+	0    16           0          1     0    22   Large
+	1    11           0          0     1    18   Small
+	2    13           1          0     0    27  Medium
+	
+	Predicted visits (expected counts):
+	[7.96 1.28 0.99]
 
 <br>
 
