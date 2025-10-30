@@ -720,7 +720,7 @@ $e∼N(0,σ^2I_N)$<br>
 	from sklearn.linear_model import LinearRegression
 
  	# 데이터 수집
-	df = pd.read_csv('https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-04/manhattan.csv')
+	df = pd.read_csv('https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-09/manhattan.csv')
  	# 데이터 전처리(null겂이 많은 항목 삭제)
 	df = df.drop(['neighborhood','borough','rental_id'], axis=1)
 	
