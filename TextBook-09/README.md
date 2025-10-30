@@ -987,6 +987,8 @@ $MAD = \frac{1}{n} \sum_{i=1}^{n} \rho_{\tau}(y_{i} - (\beta_{0}(\tau) + \beta_{
 $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 <br>
 
+**(3-2 예제 소스)**
+
 	import pandas as pd
 	import numpy as np
 	import matplotlib.pyplot as plt
@@ -1052,6 +1054,16 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
     		mae = mean_absolute_error(pred_df['actual'], pred_df[f'pred_{quantile}'])
     		print(f'Mean Absolute Error (MAE) for quantile {quantile}: {mae:.4f}')
 
+
+**(3-2 실행 결과)**
+
+	(9000, 1)
+	(9000, 1)
+	(1000, 1)
+	(1000, 1)
+	Mean Absolute Error (MAE) for quantile 0.1: 6.3079
+	Mean Absolute Error (MAE) for quantile 0.5: 3.5775
+	Mean Absolute Error (MAE) for quantile 0.9: 6.1966
 
 <br>
 
