@@ -1302,6 +1302,7 @@ L2-norm 페널티항을 통해 일반 선형회귀 모델에 페널티를 부과
 	print("훈련 R^2: %.3f, 테스트 R^2: %.3f" % (r2_score(y_train, y_train_pred),
     	r2_score(y_test, y_test_pred)))
 
+<br>
 
 	회귀계수: [ 4.48510924e-01  9.72596535e-03 -1.23014157e-01  7.81416761e-01 -2.02581346e-06 -3.52585878e-03 -4.19786908e-01 -4.33680793e-01]
 	훈련 MSE: 0.518, 테스트 MSE: 0.556
@@ -1341,6 +1342,7 @@ L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회�
     	r2_score(y_train, y_train_pred),
     	r2_score(y_test, y_test_pred)))
 
+<br>
 
 	회귀계수: [ 0.392693  0.015081 -0.        0.        0.000016 -0.003149 -0.114291 -0.099308]
 	훈련 MSE: 0.603, 테스트 MSE: 0.614
@@ -1353,8 +1355,76 @@ L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회�
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html<br>
 릿지와 라쏘의 결합으로 L1규제로 Feature 수를 줄임과 동시에 L2규제로 계수값의 크기를 조정하는 패널티를 부과하여 회귀모델을 생성<br>
 
-	from sklearn.linear_model import ElasticNet
-	elanet = ElasticNet(alpha=1.0, l1_ratio=0.5)
+	# 회귀모델 비교: Linear vs Ridge vs Lasso vs ElasticNet
+	from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
+	from sklearn.datasets import load_diabetes
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import mean_squared_error, r2_score
+	import pandas as pd
+
+	# 데이터 불러오기
+	X, y = load_diabetes(return_X_y=True)
+
+	# 학습/테스트 데이터 분할
+	X_train, X_test, y_train, y_test = train_test_split(
+    	X, y, test_size=0.2, random_state=42)
+
+	# 모델 정의
+	models = {
+    	"Linear Regression": LinearRegression(),
+    	"Ridge Regression": Ridge(alpha=1.0),
+    	"Lasso Regression": Lasso(alpha=0.1),
+    	"Elastic Net Regression": ElasticNet(alpha=0.1, l1_ratio=0.5)}
+
+	# 각 모델 학습 및 평가
+	results = []
+
+	for name, model in models.items():
+    	model.fit(X_train, y_train)
+    	y_pred = model.predict(X_test)
+    	mse = mean_squared_error(y_test, y_pred)
+    	r2 = r2_score(y_test, y_pred)
+    	results.append({
+       	 "Model": name,
+        	"MSE": round(mse, 3),
+        	"R²": round(r2, 3)
+   	 })
+
+	# 결과 정리
+	df_results = pd.DataFrame(results)
+	print("회귀모델 비교 결과")
+	print(df_results)
+
+	# 선택: 각 모델의 가중치(계수) 비교 출력
+	print("\n 각 모델의 회귀계수 (일부만 표시)")
+	for name, model in models.items():
+    	model.fit(X_train, y_train)
+    	print(f"\n{name}")
+    	print(model.coef_[:5], "...")  # 상위 5개 계수만 표시
+
+
+<br>
+
+	회귀모델 비교 결과
+                    	Model       MSE     R²
+	0       Linear Regression  2900.194  0.453
+	1        Ridge Regression  3077.416  0.419
+	2        Lasso Regression  2798.193  0.472
+	3  Elastic Net Regression  4775.467  0.099
+
+	각 모델의 회귀계수 (일부만 표시)
+
+	Linear Regression
+	[  37.904021 -241.964362  542.428759  347.703844 -931.488846] ...
+
+	Ridge Regression
+	[ 45.367377 -76.666086 291.338832 198.995817  -0.53031 ] ...
+
+	Lasso Regression
+	[   0.       -152.664779  552.697775  303.365158  -81.365007] ...
+
+	Elastic Net Regression
+	[10.830921 -0.009514 38.906865 28.779233 10.372007] ...
 
 <br>
 
