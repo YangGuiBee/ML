@@ -270,6 +270,244 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 |              | 문화행사 관람객 수(시간 단위)       | 홍보 수준·기온·요일의 영향 예측                     |
 
 
+(예제 소스) : 은행 창구 방문 고객 수(시간대별 고객 방문 수를 인력 배치 최적화에 활용)
+
+	# ============================================================
+	# [은행 창구 방문 고객 수 예측 - Poisson Regression 예제]
+	# ============================================================
+	# 목적 : 단위 시간(예: 시간대) 동안 은행 창구 방문 고객 수(count)를 예측하여
+	#         인력(창구) 배치나 영업 효율성을 최적화
+	# 데이터 형태 : count data (0, 1, 2, ...)
+	# 모델 : 일반화 선형모형(GLM)의 하나인 Poisson Regression (로그 링크 사용)
+	# ============================================================
+	
+	# --------------------------
+	# (1) 환경 설정 : 경고 제거 및 스레드 제한
+	# --------------------------
+	import os, warnings
+	
+	# Windows 환경에서 loky(core 관리 모듈)가 물리 코어 탐지 실패 시 경고 발생
+	# → 논리 코어 수로 고정해 경고 방지
+	cores = os.cpu_count() or 4
+	os.environ["LOKY_MAX_CPU_COUNT"] = str(cores)
+	
+	# 수치 계산 라이브러리(NumPy, MKL 등)의 병렬 스레드 수 제한 (안정성 향상)
+	os.environ["OMP_NUM_THREADS"] = "1"
+	os.environ["MKL_NUM_THREADS"] = "1"
+	os.environ["OPENBLAS_NUM_THREADS"] = "1"
+	os.environ["NUMEXPR_NUM_THREADS"] = "1"
+	
+	# 불필요한 경고 메시지 무시 (옵션)
+	warnings.filterwarnings(
+	    "ignore",
+	    message="Could not find the number of physical cores",
+	    category=UserWarning,
+	)
+	
+	# --------------------------
+	# (2) 라이브러리 불러오기
+	# --------------------------
+	import numpy as np
+	import pandas as pd
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import OneHotEncoder, StandardScaler
+	from sklearn.compose import ColumnTransformer
+	from sklearn.pipeline import Pipeline
+	from sklearn.linear_model import PoissonRegressor
+	from sklearn.metrics import mean_absolute_error, mean_poisson_deviance
+	
+	# ============================================================
+	# (3) 합성 데이터 생성 (시뮬레이션)
+	# ============================================================
+	# Poisson 회귀는 count 데이터를 다루므로,
+	# 은행 창구의 시간대별 방문 고객 수를 가정해 샘플 데이터를 생성합니다.
+	
+	rng = np.random.default_rng(42)
+	n = 6000  # 데이터 샘플 수
+	
+	# --------------------------
+	# 입력 변수(설명 변수)
+	# --------------------------
+	hour = rng.integers(9, 18, size=n)                    # 영업시간대(9~17시)
+	is_weekend = rng.integers(0, 2, size=n, endpoint=False)  # 주중(0)/주말(1)
+	is_payday = rng.integers(0, 2, size=n)                # 월급날/연금날 여부
+	rain = rng.integers(0, 2, size=n)                     # 강수 여부
+	temp = rng.normal(20, 7, size=n)                      # 기온 (°C)
+	branch = rng.choice(["Small", "Medium", "Large"], size=n, p=[0.35, 0.45, 0.20])  # 지점 규모
+	
+	# --------------------------
+	# 각 변수별 효과 정의 (선형예측자 구성)
+	# --------------------------
+	# branch 규모별 baseline 효과
+	branch_base = np.select(
+	    [branch == "Small", branch == "Medium", branch == "Large"],
+	    [0.2, 0.5, 0.9], default=0.3
+	)
+	
+	# 시간대 효과: 11시(오전 피크), 16시(오후 피크), 12~13시는 점심 dip
+	rush_morning = np.exp(-0.5 * ((hour - 11) / 1.8) ** 2)   # Gaussian 형태의 피크
+	rush_afternoon = np.exp(-0.5 * ((hour - 16) / 1.8) ** 2)
+	lunch_dip = -0.25 * ((hour >= 12) & (hour <= 13)).astype(float)
+	
+	# 온도 효과: 20°C 기준에서 벗어날수록 방문 감소
+	temp_effect = -0.015 * np.abs(temp - 20)
+	
+	# 월급날 효과: 방문량 증가
+	payday_effect = 0.55 * is_payday
+	
+	# 주말 효과: 방문량 감소(또는 영업하지 않음)
+	weekend_effect = -0.8 * is_weekend
+	
+	# 강수 효과: 비 오면 감소
+	rain_effect = -0.25 * rain
+	
+	# 상호작용 : "월급날 × 대형지점"일 때 추가 프리미엄 효과
+	interaction_effect = 0.25 * (is_payday * (branch == "Large"))
+	
+	# --------------------------
+	# 선형예측자(η) 계산 및 λ 추정
+	# --------------------------
+	# Poisson 회귀는 log(λ) = η = Xβ
+	# 따라서 λ = exp(η)
+	eta = (
+	    -0.2                              # 절편(기본값)
+	    + 1.1 * branch_base               # 지점 규모 효과
+	    + 0.8 * rush_morning              # 오전 피크 효과
+	    + 0.7 * rush_afternoon            # 오후 피크 효과
+	    + lunch_dip                       # 점심시간 감소 효과
+	    + payday_effect                   # 월급날 효과
+	    + weekend_effect                  # 주말 효과
+	    + rain_effect                     # 비 효과
+	    + temp_effect                     # 기온 효과
+	    + interaction_effect              # 상호작용 효과
+	)
+	
+	lam = np.exp(eta)  # λ = exp(η) → 평균 방문률(λ는 항상 양수)
+	y = rng.poisson(lam)  # 실제 방문 고객 수를 포아송 분포로부터 샘플링
+	
+	# 데이터프레임으로 구성
+	data = pd.DataFrame({
+	    "hour": hour,
+	    "is_weekend": is_weekend,
+	    "is_payday": is_payday,
+	    "rain": rain,
+	    "temp": temp,
+	    "branch": branch,
+	    "visits": y,  # 종속변수(타깃): 방문 고객 수
+	})
+	
+	# ============================================================
+	# (4) 데이터 분리 (Train/Test)
+	# ============================================================
+	X = data[["hour", "is_weekend", "is_payday", "rain", "temp", "branch"]]
+	y = data["visits"]
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, test_size=0.25, random_state=7
+	)
+	
+	# ============================================================
+	# (5) 전처리 파이프라인 구성
+	# ============================================================
+	# 수치형: 표준화(StandardScaler)
+	# 범주형: 원-핫 인코딩(OneHotEncoder)
+	# 이진형(0/1): 그대로 통과(passthrough)
+	num_features = ["hour", "temp"]
+	bin_features = ["is_weekend", "is_payday", "rain"]
+	cat_features = ["branch"]
+	
+	preprocess = ColumnTransformer(
+	    transformers=[
+	        ("num", StandardScaler(), num_features),
+	        ("bin", "passthrough", bin_features),
+	        ("cat", OneHotEncoder(drop="first", handle_unknown="ignore"), cat_features),
+	    ]
+	)
+	
+	# ============================================================
+	# (6) 포아송 회귀 모델 생성 및 학습
+	# ============================================================
+	# Scikit-learn의 PoissonRegressor는 GLM의 log-link를 사용
+	# alpha: L2 정규화 계수(너무 작으면 완전 적합, 너무 크면 과소적합)
+	model = Pipeline(steps=[
+	    ("prep", preprocess),
+	    ("poisson", PoissonRegressor(alpha=1e-6, max_iter=1000))
+	])
+	
+	# 모델 학습
+	model.fit(X_train, y_train)
+	
+	# ============================================================
+	# (7) 모델 평가
+	# ============================================================
+	# 예측값 y_pred는 λ의 추정치(예상 방문 수)
+	y_pred = model.predict(X_test)
+	
+	# 평균절대오차 (MAE): 실제 방문수와 예측치의 절대차 평균
+	mae = mean_absolute_error(y_test, y_pred)
+	
+	# 포아송 deviance: GLM 적합도 평가 지표 (작을수록 좋음)
+	mpd = mean_poisson_deviance(y_test, y_pred)
+	
+	print(f"MAE: {mae:.3f}")
+	print(f"Mean Poisson Deviance: {mpd:.3f}")
+	
+	# ============================================================
+	# (8) 회귀계수 해석 (비율효과: exp(β))
+	# ============================================================
+	# exp(β)는 "비율(rate ratio)"로, 해당 변수가 1단위 증가할 때 λ가 몇 배로 변하는지 의미
+	ohe = model.named_steps["prep"].named_transformers_["cat"]
+	cat_names = ohe.get_feature_names_out(["branch"])  # ['branch_Medium','branch_Large']
+	feature_names = num_features + bin_features + list(cat_names)
+	
+	coef = model.named_steps["poisson"].coef_
+	intercept = model.named_steps["poisson"].intercept_
+	
+	coef_table = pd.DataFrame({
+	    "feature": feature_names,
+	    "beta": coef,
+	    "rate_ratio (exp(beta))": np.exp(coef)
+	}).round(4)
+	
+	print(f"\nIntercept (beta0): {intercept:.4f}  -> base rate = {np.exp(intercept):.4f}")
+	print("\nCoefficients (rate ratios):")
+	print(coef_table)
+	
+	# ------------------------------------------------------------
+	# 해석 예시:
+	#  - is_payday의 exp(beta)=1.9 → 월급날일 때 방문률이 약 1.9배 증가
+	#  - rain의 exp(beta)=0.8 → 비 오는 날 방문률이 약 20% 감소
+	#  - branch_Large의 exp(beta)=2.2 → 대형지점 방문률이 약 2.2배 높음
+	# ------------------------------------------------------------
+	
+	# ============================================================
+	# (9) 샘플 예측 (정책 시뮬레이션)
+	# ============================================================
+	# 특정 상황에서의 예상 방문 고객 수 예측
+	sample = pd.DataFrame({
+	    "hour": [16, 11, 13],
+	    "is_weekend": [0, 0, 1],
+	    "is_payday": [1, 0, 0],
+	    "rain": [0, 1, 0],
+	    "temp": [22, 18, 27],
+	    "branch": ["Large", "Small", "Medium"]
+	})
+	
+	pred = model.predict(sample)	
+	print("\nSample inputs:")
+	print(sample)
+	print("\nPredicted visits (expected counts):")
+	print(np.round(pred, 2))
+	
+	# ------------------------------------------------------------
+	# 예시 해석:
+	#   (1) 16시, 주중, 월급날, 대형지점 → 약 8명 방문 예상
+	#   (2) 11시, 주중, 비, 소형지점 → 약 1명 방문 예상
+	#   (3) 13시, 주말, 중형지점 → 약 1명 미만 예상
+	# ------------------------------------------------------------
+	
+(실행 결과) : 은행 창구 방문 고객 수(시간대별 고객 방문 수를 인력 배치 최적화에 활용)
+
 
 <br>
 
