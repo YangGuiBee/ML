@@ -274,7 +274,7 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 
 <br>
 
-**(2-1 예제 소스) : 은행 창구 방문 고객 수(시간대별 고객 방문 수를 인력 배치 최적화에 활용)**
+**(2-2 예제 소스) : 은행 창구 방문 고객 수(시간대별 고객 방문 수를 인력 배치 최적화에 활용)**
 
 	# ============================================================
 	# [은행 창구 방문 고객 수 예측 - Poisson Regression 예제]
@@ -682,6 +682,151 @@ Cox의 비례위험 회귀는 생존 분석(survival analysis)에서 주로 사�
 | **HR·조직**   | 퇴사(이직)까지의 시간               | 연봉수준, 승진·평가, 팀 리더십 지표의 위험비      |
 | **교통·도시**   | 신호교차로 사고 재발까지의 시간          | 교통량, 기상, 단속강도의 HR               |
 |             | 대중교통 지연 재발까지의 시간           | 차량노후도, 혼잡도, 운행스케줄의 영향           |
+
+
+
+**(2-3 예제 소스) : 보안사고(침해) 발생**
+
+	# ============================================================
+	#  Cox 비례위험 회귀 (statsmodels PHReg)
+	#  + Kaplan–Meier 생존곡선(간이 구현)
+	#  + Hazard Ratio Forest Plot
+	#  ─ lifelines 미사용 버전 (권한 제한 환경 호환)
+	# ============================================================
+	
+	import numpy as np
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	import statsmodels.api as sm
+	from statsmodels.duration.hazard_regression import PHReg
+	
+	np.random.seed(42)
+	
+	# -----------------------------
+	# 1) 데이터 생성
+	# -----------------------------
+	n = 300
+	df = pd.DataFrame({
+	    "time_to_incident": np.random.exponential(scale=200, size=n).astype(int),
+	    "incident_occurred": np.random.binomial(1, 0.7, size=n),
+	    "security_level": np.random.choice([1, 2, 3], size=n, p=[0.3, 0.4, 0.3]),
+	    "patch_cycle_days": np.random.randint(5, 60, size=n),
+	    "exposed_to_internet": np.random.choice([0, 1], size=n, p=[0.5, 0.5]),
+	    "num_admins": np.random.randint(1, 5, size=n)
+	})
+	# 보안등급 역변환(값이 클수록 위험 커지는 방향)
+	df["security_level_inv"] = 4 - df["security_level"]
+	
+	# -----------------------------
+	# 2) Cox 비례위험 회귀 (PHReg)
+	# -----------------------------
+	X = df[["security_level_inv", "patch_cycle_days", "exposed_to_internet", "num_admins"]]
+	X = sm.add_constant(X)  # 상수항 포함
+	model = PHReg(endog=df["time_to_incident"], exog=X, status=df["incident_occurred"])
+	result = model.fit()
+	
+	print("\n[Cox 비례위험 회귀 결과 요약]")
+	print(result.summary())
+	
+	# -----------------------------
+	# 3) HR 테이블 (const/NaN 안전 처리)
+	# -----------------------------
+	# result.params, result.conf_int()는 numpy 배열 → 변수명 부여
+	names = result.model.exog_names  # ['const', 'security_level_inv', ...]
+	params = pd.Series(result.params, index=names, name="coef")
+	ci_arr = result.conf_int()  # ndarray (k,2)
+	ci = pd.DataFrame(ci_arr, index=names, columns=["lower", "upper"])
+	
+	# 상수항과 NaN/Inf 제거
+	mask_valid = (pd.Index(names) != "const") & np.isfinite(params.values)
+	params = params.loc[mask_valid]
+	ci = ci.loc[mask_valid]
+	
+	# HR 및 95% CI
+	hr = np.exp(params)
+	hr_ci = np.exp(ci)
+	hr_table = pd.DataFrame({
+	    "HR": hr.round(3),
+	    "Lower 95%": hr_ci["lower"].round(3),
+	    "Upper 95%": hr_ci["upper"].round(3),
+	})
+	print("\n[변수별 Hazard Ratio (HR) Table]")
+	print(hr_table)
+	
+	# -----------------------------
+	# 4) Kaplan–Meier 생존곡선 (간이 구현)
+	# -----------------------------
+	def kaplan_meier(time, event):
+	    """
+	    간단한 KM 구현: 시간순 정렬 후 사건 발생마다 S *= (1 - d/n)
+	    (복수 동시 사건/검열 처리 등은 lifelines 대비 간이화)
+	    """
+	    data = pd.DataFrame({"time": time, "event": event}).sort_values("time")
+	    n = len(data)
+	    surv = []
+	    S = 1.0
+	    for i, row in enumerate(data.itertuples(), 1):
+	        if row.event == 1:
+	            S *= (1 - 1 / (n - i + 1))
+	        surv.append(S)
+	    data["survival"] = surv
+	    return data
+	
+	plt.figure(figsize=(7, 5))
+	for level in sorted(df["security_level"].unique()):
+	    sub = df[df["security_level"] == level]
+	    km = kaplan_meier(sub["time_to_incident"], sub["incident_occurred"])
+	    plt.step(km["time"], km["survival"], where="post", label=f"Security Level {level}")
+	
+	plt.title("Kaplan–Meier 생존곡선: 보안등급별 침해생존확률", fontsize=12)
+	plt.xlabel("경과일수 (Time)")
+	plt.ylabel("생존확률 (Survival Probability)")
+	plt.grid(True, linestyle="--", alpha=0.6)
+	plt.legend(title="보안등급", loc="best")
+	plt.tight_layout()
+	plt.show()
+	
+	# -----------------------------
+	# 5) HR Forest Plot
+	# -----------------------------
+	plt.figure(figsize=(7, 4))
+	y = np.arange(len(hr_table))
+	x = hr_table["HR"].values
+	xerr = np.vstack([
+	    x - hr_table["Lower 95%"].values,
+	    hr_table["Upper 95%"].values - x
+	])
+	plt.errorbar(x, y, xerr=xerr, fmt="o", color="navy", ecolor="gray", capsize=4)
+	plt.yticks(y, hr_table.index)
+	plt.axvline(1.0, color="red", linestyle="--", label="HR = 1 (중립)")
+	plt.xlabel("Hazard Ratio (HR)")
+	plt.title("Cox 회귀결과 Hazard Ratio Forest Plot", fontsize=12)
+	plt.grid(True, linestyle="--", alpha=0.5)
+	plt.legend()
+	plt.tight_layout()
+	plt.show()
+	
+
+**(2-3 실행 결과) : 보안사고(침해) 발생**
+
+	[Cox 비례위험 회귀 결과 요약]
+                             	Results: PHReg
+	=========================================================================
+	Model:                      PH Reg                 Sample size:       300
+	Dependent variable:         time_to_incident       Num. events:       205
+	Ties:                       Breslow                                      
+	-------------------------------------------------------------------------
+	                     log HR log HR SE   HR      t    P>|t|  [0.025 0.975]
+	-------------------------------------------------------------------------
+	const               -0.0000       nan 1.0000     nan    nan    nan    nan
+	security_level_inv  -0.0506    0.0630 0.9507 -0.8026 0.4222 0.8403 1.0756
+	patch_cycle_days     0.0007    0.0046 1.0007  0.1444 0.8851 0.9916 1.0098
+	exposed_to_internet -0.0532    0.1396 0.9482 -0.3809 0.7033 0.7213 1.2466
+	num_admins           0.0400    0.0526 1.0408  0.7602 0.4471 0.9388 1.1539
+	=========================================================================
+	Confidence intervals are for the hazard ratios
+
+**(2-3 실행 결과 해석) : 보안사고(침해) 발생**
 
 
 <br>
