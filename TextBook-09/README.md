@@ -1284,8 +1284,7 @@ L2-norm 페널티항을 통해 일반 선형회귀 모델에 페널티를 부과
 
 	# (2) 훈련/테스트 데이터 분리
 	X_train, X_test, y_train, y_test = train_test_split(
-	    X, y, test_size=0.2, random_state=42
-	)
+	    X, y, test_size=0.2, random_state=42)
 
 	# (3) Ridge 회귀 모델 학습
 	ridge = Ridge(alpha=1.0)
@@ -1299,11 +1298,17 @@ L2-norm 페널티항을 통해 일반 선형회귀 모델에 페널티를 부과
 	print("회귀계수:", ridge.coef_)
 	print("훈련 MSE: %.3f, 테스트 MSE: %.3f" % (
     	mean_squared_error(y_train, y_train_pred),
-    	mean_squared_error(y_test, y_test_pred)
-	))
+    	mean_squared_error(y_test, y_test_pred)))
 	print("훈련 R^2: %.3f, 테스트 R^2: %.3f" % (r2_score(y_train, y_train_pred),
-    	r2_score(y_test, y_test_pred)
-	))
+    	r2_score(y_test, y_test_pred)))
+
+
+	회귀계수: [ 4.48510924e-01  9.72596535e-03 -1.23014157e-01  7.81416761e-01 -2.02581346e-06 -3.52585878e-03 -4.19786908e-01 -4.33680793e-01]
+	훈련 MSE: 0.518, 테스트 MSE: 0.556
+	훈련 R^2: 0.613, 테스트 R^2: 0.576
+
+	print("회귀계수:", [f"{coef:.6f}" for coef in ridge.coef_])
+	회귀계수: ['0.448511', '0.009726', '-0.123014', '0.781417', '-0.000002', '-0.003526', '-0.419787', '-0.433681']
 
 
 <br>
@@ -1316,17 +1321,30 @@ L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회�
 (L1 norm : 실제값과 예측값의 오차의 절대값의 합)<br>
 
 	from sklearn.linear_model import Lasso
-	from sklearn.metrics import mean_squared_error
-	from sklearn.metrics import r2_score
-	
+	from sklearn.metrics import mean_squared_error, r2_score
+	import numpy as np
+
 	lasso = Lasso(alpha=0.1)
 	lasso.fit(X_train, y_train)
 	y_train_pred = lasso.predict(X_train)
 	y_test_pred = lasso.predict(X_test)
-	print(lasso.coef_)
-	
-	print('훈련 MSE: %.3f, 테스트 MSE: %.3f' % (mean_squared_error(y_train, y_train_pred), mean_squared_error(y_test, y_test_pred)))
-	print('훈련 R^2: %.3f, 테스트 R^2: %.3f' % (r2_score(y_train, y_train_pred),r2_score(y_test, y_test_pred)))
+
+	# 지수 표기 없이 출력되도록 설정
+	np.set_printoptions(suppress=True, precision=6)
+
+	print("회귀계수:", lasso.coef_)
+
+	print('훈련 MSE: %.3f, 테스트 MSE: %.3f' % (
+    	mean_squared_error(y_train, y_train_pred),
+    	mean_squared_error(y_test, y_test_pred)))
+	print('훈련 R^2: %.3f, 테스트 R^2: %.3f' % (
+    	r2_score(y_train, y_train_pred),
+    	r2_score(y_test, y_test_pred)))
+
+
+	회귀계수: [ 0.392693  0.015081 -0.        0.        0.000016 -0.003149 -0.114291 -0.099308]
+	훈련 MSE: 0.603, 테스트 MSE: 0.614
+	훈련 R^2: 0.549, 테스트 R^2: 0.532
 
 <br>
 
