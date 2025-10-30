@@ -1271,18 +1271,40 @@ $∑(yᵢ - ŷᵢ)²  +  λ * Penalty(β)$ 최소화
 L2-norm 페널티항을 통해 일반 선형회귀 모델에 페널티를 부과하는 방법으로 회귀계수를 축소<br>
 (L2 norm : 실제값과 예측값의 오차의 제곱의 합)<br>
 
+	from sklearn.datasets import fetch_california_housing
+	from sklearn.model_selection import train_test_split
 	from sklearn.linear_model import Ridge
-	from sklearn.metrics import mean_squared_error
-	from sklearn.metrics import r2_score
+	from sklearn.metrics import mean_squared_error, r2_score
+	import pandas as pd
 
+	# (1) 캘리포니아 주택 데이터 불러오기
+	data = fetch_california_housing(as_frame=True)
+	X = data.data
+	y = data.target
+
+	# (2) 훈련/테스트 데이터 분리
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, test_size=0.2, random_state=42
+	)
+
+	# (3) Ridge 회귀 모델 학습
 	ridge = Ridge(alpha=1.0)
 	ridge.fit(X_train, y_train)
+
+	# (4) 예측
 	y_train_pred = ridge.predict(X_train)
 	y_test_pred = ridge.predict(X_test)
-	print(ridge.coef_)
-	
-	print('훈련 MSE: %.3f, 테스트 MSE: %.3f' % (mean_squared_error(y_train, y_train_pred),mean_squared_error(y_test, y_test_pred)))
-	print('훈련 R^2: %.3f, 테스트 R^2: %.3f' % (r2_score(y_train, y_train_pred),r2_score(y_test, y_test_pred)))
+
+	# (5) 결과 출력
+	print("회귀계수:", ridge.coef_)
+	print("훈련 MSE: %.3f, 테스트 MSE: %.3f" % (
+    	mean_squared_error(y_train, y_train_pred),
+    	mean_squared_error(y_test, y_test_pred)
+	))
+	print("훈련 R^2: %.3f, 테스트 R^2: %.3f" % (r2_score(y_train, y_train_pred),
+    	r2_score(y_test, y_test_pred)
+	))
+
 
 <br>
 
