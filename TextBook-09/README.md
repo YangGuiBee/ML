@@ -1095,55 +1095,92 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
   
 ![](./images/ddd.PNG)
 
+**(4 예제 소스)**
 
-
+	# -----------------------------
+	# 라이브러리 임포트
+	# -----------------------------
 	import pandas as pd
 	import numpy as np
 	import matplotlib.pyplot as plt 
 	from sklearn.linear_model import LinearRegression
 	from sklearn.metrics import r2_score
+	from sklearn.preprocessing import PolynomialFeatures   # ✅ 추가됨!
 	
-	df = pd.read_csv('https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-09/housing.data.txt',
-                 header=None, sep='\s+')
-
-	df.columns = ['CRIM','ZN','INDUS','CHAS','NOX','RM','AGE','DIS','RAD','TAX','PTRATIO','B','LSTAT','MEDV']
+	# -----------------------------
+	# 데이터 로드 및 컬럼 설정
+	# -----------------------------
+	df = pd.read_csv(
+	    'https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-09/housing.data.txt',
+	    header=None, sep='\s+'
+	)
+	
+	df.columns = [
+	    'CRIM','ZN','INDUS','CHAS','NOX','RM','AGE','DIS','RAD','TAX',
+	    'PTRATIO','B','LSTAT','MEDV'
+	]
 	df.head()
 	
-	X = df[['LSTAT']].values
-	y = df['MEDV'].values
+	# -----------------------------
+	# 입력(X)과 출력(y) 설정
+	# -----------------------------
+	X = df[['LSTAT']].values   # 인구 중 저소득층 비율
+	y = df['MEDV'].values      # 주택가격 (단위: $1000)
 	
+	# -----------------------------
+	# 다항식 특성 변환
+	# -----------------------------
 	regr = LinearRegression()
-
-	# 이차, 삼차 다항식 특성을 만듭니다
+	
+	# 2차, 3차 다항식 변환기 생성
 	quadratic = PolynomialFeatures(degree=2)
 	cubic = PolynomialFeatures(degree=3)
+	
+	# X를 각각 다항식으로 변환
 	X_quad = quadratic.fit_transform(X)
 	X_cubic = cubic.fit_transform(X)
-
-	# 학습된 모델을 그리기 위해 특성 범위를 만듭니다
+	
+	# -----------------------------
+	# 학습용 X 범위 설정
+	# -----------------------------
 	X_fit = np.arange(X.min(), X.max(), 1)[:, np.newaxis]
 	
+	# -----------------------------
+	# 1차(선형), 2차, 3차 회귀 모델 학습 및 예측
+	# -----------------------------
+	# 선형 회귀
 	regr = regr.fit(X, y)
 	y_lin_fit = regr.predict(X_fit)
 	linear_r2 = r2_score(y, regr.predict(X))
 	
+	# 2차 회귀
 	regr = regr.fit(X_quad, y)
 	y_quad_fit = regr.predict(quadratic.fit_transform(X_fit))
 	quadratic_r2 = r2_score(y, regr.predict(X_quad))
 	
+	# 3차 회귀
 	regr = regr.fit(X_cubic, y)
 	y_cubic_fit = regr.predict(cubic.fit_transform(X_fit))
 	cubic_r2 = r2_score(y, regr.predict(X_cubic))
-		
-	# 결과 그래프를 그립니다
-	plt.scatter(X,y,label='Training points', color='lightgray')
-	plt.plot(X_fit,y_lin_fit,label='Linear(d=1),$R^2=%.2f$' % linear_r2,color='blue',lw=2,linestyle=':')
-	plt.plot(X_fit,y_quad_fit,label='Quadratic(d=2),$R^2=%.2f$' % quadratic_r2,color='red',lw=2,linestyle='-')
-	plt.plot(X_fit,y_cubic_fit,label='Cubic(d=3),$R^2=%.2f$' % cubic_r2,color='green',lw=2,linestyle='--')
+	
+	# -----------------------------
+	# 결과 시각화
+	# -----------------------------
+	plt.scatter(X, y, label='Training points', color='lightgray')
+	plt.plot(X_fit, y_lin_fit, label='Linear (d=1), $R^2=%.2f$' % linear_r2,
+	         color='blue', lw=2, linestyle=':')
+	plt.plot(X_fit, y_quad_fit, label='Quadratic (d=2), $R^2=%.2f$' % quadratic_r2,
+	         color='red', lw=2, linestyle='-')
+	plt.plot(X_fit, y_cubic_fit, label='Cubic (d=3), $R^2=%.2f$' % cubic_r2,
+	         color='green', lw=2, linestyle='--')
+	
 	plt.xlabel('% lower status of the population [LSTAT]')
 	plt.ylabel('Price in $1000s [MEDV]')
 	plt.legend(loc='upper right')
 	plt.show()
+
+
+**(4 실행 결과)**
 
 <br>
 
