@@ -684,19 +684,21 @@ Cox의 비례위험 회귀는 생존 분석(survival analysis)에서 주로 사�
 |             | 대중교통 지연 재발까지의 시간           | 차량노후도, 혼잡도, 운행스케줄의 영향           |
 
 
+<br>
 
 
 | 구분 | **포아송 회귀 (Poisson Regression)** | **Cox의 비례위험 회귀 (Cox’s Proportional Hazards Regression)** |
 |:--|:--|:--|
-| **정의** | 발생 횟수(count data)가 포아송 분포를 따른다고 가정하고, 독립변수 `X`가 평균 발생률(`λ`)에 미치는 영향을 로그 링크(log link)로 모형화하는 **일반화 선형모형(GLM)**. | 사건의 ‘발생할 시간(time-to-event)’에 초점을 두고, 시간 `t`에서의 위험률(hazard)을 공변량(`X`)의 함수로 표현하는 **생존분석(Survival Analysis)** 모형. |
-| **수학적 형태** | `log(λᵢ) = β₀ + β₁x₁ᵢ + ... + βpxpᵢ` <br> `λᵢ = exp(ηᵢ)` → 평균 사건수 | `h(t|X) = h₀(t) * exp(β₁x₁ + β₂x₂ + ... + βpxp)` <br> `h₀(t)`: 기저위험함수(baseline hazard) |
-| **목적 (필요성)** | - 일정 기간·공간 내 사건 발생 횟수 예측 <br> - 사건의 **빈도(frequency)** 나 **발생률(rate)** 을 설명 <br> - 독립변수가 사건수에 어떤 영향을 주는지 파악 | - 사건이 **언제 발생하는지(time-to-event)** 분석 <br> - **생존시간 분포**를 모형화하고, 공변량이 **위험(hazard)** 에 미치는 영향을 추정 <br> - **중도절단(censoring)** 데이터 처리 가능 |
-| **데이터 유형** | - 종속변수: 사건의 “횟수(count)” (정수 0,1,2,...) <br> - 예: 1시간 동안 콜 수, 하루 교통사고 건수 | - 종속변수: 사건의 “발생시간(time)” 또는 “생존여부(event indicator)” <br> - 예: 사망까지 시간, 고장까지 시간 |
+| **정의** | 발생 횟수(count data)가 포아송 분포를 따른다고 가정하고, 독립변수 X가 평균 발생률(λ)에 미치는 영향을 로그 링크(log link)로 모형화하는 **일반화 선형모형(GLM)**. | 사건의 ‘발생할 시간(time-to-event)’에 초점을 두고, 시간 t에서의 위험률(hazard)을 공변량(X)의 함수로 표현하는 **생존분석(Survival Analysis)** 모형. |
+| **수식** | ![Poisson](https://latex.codecogs.com/png.image?\dpi{110}\bg_white\large\log(\lambda_i)=\beta_0+\beta_1x_{1i}+\cdots+\beta_p x_{pi}) <br> ![Poisson2](https://latex.codecogs.com/png.image?\dpi{110}\bg_white\large\lambda_i=e^{\eta_i}) → 평균 사건수 | ![Cox](https://latex.codecogs.com/png.image?\dpi{110}\bg_white\large h(t|X)=h_0(t)\exp(\beta_1x_1+\beta_2x_2+\cdots+\beta_p x_p)) <br> ![Baseline](https://latex.codecogs.com/png.image?\dpi{110}\bg_white\large h_0(t):\text{기저위험함수(baseline%20hazard)}) |
+| **목적** | - 일정 기간·공간 내 사건 발생 횟수 예측 <br> - 사건의 **빈도(frequency)** 나 **발생률(rate)** 을 설명 <br> - 독립변수가 사건수에 어떤 영향을 주는지 파악 | - 사건이 **언제 발생하는지(time-to-event)** 분석 <br> - 생존시간 분포를 모형화하고, 공변량이 **위험(hazard)** 에 미치는 영향 추정 <br> - **중도절단(censoring)** 데이터 처리 가능 |
+| **데이터** | - 종속변수: 사건의 “횟수(count)” (정수 0,1,2,...) <br> - 예: 1시간 동안 콜 수, 하루 교통사고 건수 | - 종속변수: 사건의 “발생시간(time)” 또는 “생존여부(event indicator)” <br> - 예: 사망까지 시간, 고장까지 시간 |
 | **장점** | • 단순하고 계산 효율적 (GLM 기반) <br> • λ>0으로 자연스럽게 강제됨 <br> • 발생률(rate) 추정이 직관적 <br> • 로그링크(log link)로 효과 해석 용이 (`exp(β)` = 배수 효과) <br> • Overdispersion 시 Negative Binomial 등으로 확장 가능 | • 기저위험함수 `h₀(t)`를 명시하지 않아도 됨 (semi-parametric) <br> • 중도절단(censored data) 처리 가능 <br> • 위험비(Hazard Ratio) 해석이 직관적 <br> • 시간의존 공변량, 층화 등 확장 용이 <br> • 생존곡선(Survival Curve) 도출 가능 |
 | **단점** | • 사건 간 독립성·균등성 가정 필요 (Poisson 과정) <br> • Overdispersion(분산>평균) 문제 가능 <br> • 시간요소 반영 불가 (언제 발생했는가를 설명하지 않음) <br> • 중도절단 데이터 처리 불가 | • 비례위험 가정(Proportional Hazards)이 항상 성립하지 않음 <br> • 절대위험 예측보다는 상대위험비(HR)만 추정 <br> • 생존시간이 동일한 경우 tie 처리 필요 <br> • GLM보다 계산 복잡, 해석 어려움 |
-| **해석 포인트** | `exp(β)` : 사건발생률이 변수 1단위 증가 시 몇 배로 변하는가 (**Rate Ratio**) | `exp(β)` : 변수 1단위 증가 시 위험률이 몇 배로 변하는가 (**Hazard Ratio**) |
-| **적용사례 (연구분야별)** | **의료·보건:** 하루 응급실 내원 수, 감염 발생 건수 <br> **교통:** 교차로 교통사고 건수 <br> **산업공학:** 설비고장 횟수, 생산결함수 <br> **IT:** 웹 클릭 수, API 호출 수 <br> **금융:** 거래건수, 분당 결제수 | **의료·임상:** 생존시간, 재발·사망까지의 시간 <br> **공중보건:** 백신 접종 후 감염까지의 시간 <br> **산업·신뢰성:** 기계고장, 배터리 수명 <br> **금융:** 대출 부도까지의 기간 <br> **HR:** 직원 퇴사까지의 근속기간 |
-| **핵심 키워드** | “몇 번 발생했는가?” (Count) | “언제 발생했는가?” (Time) |
+| **해석** | `exp(β)` : 사건발생률이 변수 1단위 증가 시 몇 배로 변하는가 (**Rate Ratio**) | `exp(β)` : 변수 1단위 증가 시 위험률이 몇 배로 변하는가 (**Hazard Ratio**) |
+| **사례** | **의료·보건:** 하루 응급실 내원 수, 감염 발생 건수 <br> **교통:** 교차로 교통사고 건수 <br> **산업공학:** 설비고장 횟수, 생산결함수 <br> **IT:** 웹 클릭 수, API 호출 수 <br> **금융:** 거래건수, 분당 결제수 | **의료·임상:** 생존시간, 재발·사망까지의 시간 <br> **공중보건:** 백신 접종 후 감염까지의 시간 <br> **산업·신뢰성:** 기계고장, 배터리 수명 <br> **금융:** 대출 부도까지의 기간 <br> **HR:** 직원 퇴사까지의 근속기간 |
+| **핵심** | “몇 번 발생했는가?” (Count) | “언제 발생했는가?” (Time) |
+
 
 
 <br>
