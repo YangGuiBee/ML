@@ -57,9 +57,9 @@ $P(\beta|D)\propto P(D|\beta)P(\beta))$ <br>
 ▣ 정의 : 시그모이드 대신 정규분포의 누적분포함수(CDF)를 사용하여 확률을 계산하는 회귀 기반 이진 분류모델<br>
 ▣ 목적 : 잠재적인 연속 확률변수를 기준으로 이진 결과를 확률적으로 예측<br>
 ![eq](https://latex.codecogs.com/png.latex?P(y=1|x)=\Phi(\beta_0+\beta_1x_1+\cdots+\beta_kx_k)) <br>
-▣ 장점 : 정규분포 기반으로 통계적 엄밀성 높음,  이상치에 덜 민감<br>  
-▣ 단점 : 계산 복잡하고 직관성 낮음 , 로지스틱 회귀보다 구현 복잡<br>  
-▣ 적용분야 : 경제·금융 분야의 선택모형, 행동경제학, 구매의사 예측<br>  
+▣ 장점 : 정규분포 기반으로 통계적 엄밀성 높음,  이상치에 덜 민감<br>
+▣ 단점 : 계산 복잡하고 직관성 낮음 , 로지스틱 회귀보다 구현 복잡<br>
+▣ 적용분야 : 경제·금융 분야의 선택모형, 행동경제학, 구매의사 예측<br>
 ▣ Scikit-learn 클래스 : 직접 지원 없음 → `statsmodels.discrete.discrete_model.Probit` 사용<br>
 
 <br>
@@ -69,9 +69,9 @@ $P(\beta|D)\propto P(D|\beta)P(\beta))$ <br>
 ▣ 정의 : 로지스틱 회귀를 다중 클래스 분류로 확장한 모델로 각 클래스에 속할 확률을 동시에 계산<br>
 ▣ 목적 : 3개 이상의 클래스 중 어느 하나에 속할 확률을 추정<br>
 ![eq](https://latex.codecogs.com/png.latex?P(y=i|x)=\frac{e^{\beta_i^Tx}}{\sum_{j=1}^Ke^{\beta_j^Tx}}) <br>
-▣ 장점 : 다중 클래스 문제 해결 가능, 각 클래스 확률을 해석적으로 제공<br>  
-▣ 단점 : 클래스가 많을수록 계산량 증가, 데이터 불균형에 민감<br>  
-▣ 적용분야 : 문서 분류, 감정 분석, 이미지 라벨링, 음성인식<br> 
+▣ 장점 : 다중 클래스 문제 해결 가능, 각 클래스 확률을 해석적으로 제공<br>
+▣ 단점 : 클래스가 많을수록 계산량 증가, 데이터 불균형에 민감<br>
+▣ 적용분야 : 문서 분류, 감정 분석, 이미지 라벨링, 음성인식<br>
 ▣ Scikit-learn 클래스 : `sklearn.linear_model.LogisticRegression(multi_class='multinomial', solver='lbfgs')`<br>
 
 <br>
@@ -82,9 +82,9 @@ $P(\beta|D)\propto P(D|\beta)P(\beta))$ <br>
 ▣ 목적 : 인과 관계와 확률적 의존성을 명시적으로 표현하여 분류와 추론을 동시에 수행<br>
 ![eq](https://latex.codecogs.com/png.latex?P(X_1,\ldots,X_n)=\prod_iP(X_i|Pa(X_i))) <br>
 ▣ 장점 : 변수 간 인과관계 해석 가능, 결측치 처리에 강함, 확률적 추론 및 구조 해석 가능<br>
-▣ 단점 : 구조 학습 복잡도 매우 높음, 고차원 데이터에서는 비효율적<br>  
-▣ 적용분야 : 의료진단(질병–증상 관계), 리스크 분석, 인과 추론, 추천 시스템<br>  
-▣ Scikit-learn 클래스 : 없음 → `pgmpy.models.BayesianNetwork` 활용 가능<br>  
+▣ 단점 : 구조 학습 복잡도 매우 높음, 고차원 데이터에서는 비효율적<br>
+▣ 적용분야 : 의료진단(질병–증상 관계), 리스크 분석, 인과 추론, 추천 시스템<br>
+▣ Scikit-learn 클래스 : 없음 → `pgmpy.models.BayesianNetwork` 활용 가능<br>
 
 <br>
 
@@ -106,9 +106,9 @@ $P(\beta|D)\propto P(D|\beta)P(\beta))$ <br>
 EM(Expectation–Maximization) 알고리즘을 이용해 파라미터를 추정하는 확률적 분류<br>
 ▣ 목적 : 비선형적이고 복잡한 분포 구조를 확률적으로 모델링하여 소프트 분류 수행<br>
 ![eq](https://latex.codecogs.com/png.latex?p(x)=\sum_{k=1}^K\pi_k\mathcal{N}(x|\mu_k,\Sigma_k))<br>
-▣ 장점 : 복잡한 분포 구조 모델링 가능, 각 클래스에 대한 사후확률 계산 가능<br>  
-▣ 단점 : 초기값에 따라 수렴이 불안정, 지역 최적해에 빠질 수 있음, 계산량 많음<br> 
-▣ 적용분야 : 음성인식, 이미지 세분화, 이상치 탐지, 고객 세분화<br>  
+▣ 장점 : 복잡한 분포 구조 모델링 가능, 각 클래스에 대한 사후확률 계산 가능<br>
+▣ 단점 : 초기값에 따라 수렴이 불안정, 지역 최적해에 빠질 수 있음, 계산량 많음<br>
+▣ 적용분야 : 음성인식, 이미지 세분화, 이상치 탐지, 고객 세분화<br>
 ▣ Scikit-learn 클래스 : `sklearn.mixture.GaussianMixture`<br>
 
 <br>
@@ -118,9 +118,9 @@ EM(Expectation–Maximization) 알고리즘을 이용해 파라미터를 추정�
 ▣ 정의 : 각 클래스의 평균 벡터(centroid)를 계산하고, 새로운 데이터가 가장 가까운 중심에 속하는 클래스로 분류<br>
 ▣ 목적 : 클래스 중심과의 거리 최소화를 통해 빠르고 단순한 분류 수행.<br>
 ![eq](https://latex.codecogs.com/png.latex?\hat{y}=\arg\min_c\|x-\mu_c\|^2) <br>
-▣ 장점 : 계산이 단순하고 빠른 예측, 메모리 효율적, 고차원에서도 적용 가능<br>  
-▣ 단점 : 클래스 분산이 다른 경우 오분류 가능, 비선형 데이터에는 부적합<br>  
-▣ 적용분야 : 문서 분류, 얼굴 인식, 클러스터 레이블링<br>  
+▣ 장점 : 계산이 단순하고 빠른 예측, 메모리 효율적, 고차원에서도 적용 가능<br>
+▣ 단점 : 클래스 분산이 다른 경우 오분류 가능, 비선형 데이터에는 부적합<br>
+▣ 적용분야 : 문서 분류, 얼굴 인식, 클러스터 레이블링<br>
 ▣ Scikit-learn 클래스 : `sklearn.neighbors.NearestCentroid`<br>
 
 <br>
@@ -130,8 +130,8 @@ EM(Expectation–Maximization) 알고리즘을 이용해 파라미터를 추정�
 ▣ 정의 : 공분산을 고려한 거리 척도를 기반으로, 데이터 간 상관관계를 반영해 분류를 수행하는 거리 기반 모델<br>
 ▣ 목적 : 특성 간 상관관계를 고려한 정규화된 거리 계산을 통해 분류 정확도를 향상<br>
 ![eq](https://latex.codecogs.com/png.latex?D_M(x)=\sqrt{(x-\mu)^T\Sigma^{-1}(x-\mu)}) <br>
-▣ 장점 : 변수 간 상관관계 반영, 스케일 조정 불필요, 이상치 탐지에 효과적<br>  
-▣ 단점 : 공분산 추정이 어려움, 고차원 데이터에서는 계산량 증가<br> 
+▣ 장점 : 변수 간 상관관계 반영, 스케일 조정 불필요, 이상치 탐지에 효과적<br>
+▣ 단점 : 공분산 추정이 어려움, 고차원 데이터에서는 계산량 증가<br>
 ▣ 적용분야 : 패턴인식, 이상탐지, 품질관리, 금융리스크 평가<br>
 ▣ Scikit-learn 클래스 : `sklearn.covariance.EmpiricalCovariance` (직접 Mahalanobis 거리 계산: `scipy.spatial.distance.mahalanobis`)<br>
 
