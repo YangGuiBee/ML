@@ -42,110 +42,80 @@
 
 # [1-2] 베이즈 로지스틱 회귀 (Bayesian Logistic Regression)
 
-▣ 정의 : 로지스틱 회귀의 계수를 확률변수로 보고, 사전분포(prior)와 사후분포(posterior)를 이용해 불확실성을 반영하는 베이즈 확률 모델이다.
-▣ 목적 : 모델 파라미터의 불확실성을 고려하여 보다 안정적이고 신뢰도 있는 확률 예측을 수행한다.
+▣ 정의 : 로지스틱 회귀의 계수를 확률변수로 보고, 사전분포(prior)와 사후분포(posterior)를 이용해 불확실성을 반영하는 베이즈 확률 모델<br>
+▣ 목적 : 모델 파라미터의 불확실성을 고려하여 보다 안정적이고 신뢰도 있는 확률 예측을 수행<br>
 ![eq](https://latex.codecogs.com/png.latex?P(\beta|D)\propto P(D|\beta)P(\beta))
-▣ 장점 : 불확실성 정량화 가능, 과적합 방지 효과, 작은 데이터셋에서도 안정적 성능  
-▣ 단점 : 계산 복잡도 높음 (MCMC, VI 등 필요), 수렴 속도 느림  
-▣ 적용분야 : 의료 리스크 분석, 자율주행 의사결정, 금융 리스크 모델링  
-▣ Scikit-learn 클래스 : 직접 구현 없음 → PyMC / scikit-bayes (`sklearn_bayes.LogisticRegression`) 활용
+
+▣ 장점 : 불확실성 정량화 가능, 과적합 방지 효과, 작은 데이터셋에서도 안정적 성능<br>  
+▣ 단점 : 계산 복잡도 높음 (MCMC, VI 등 필요), 수렴 속도 느림<br>  
+▣ 적용분야 : 의료 리스크 분석, 자율주행 의사결정, 금융 리스크 모델링<br>  
+▣ Scikit-learn 클래스 : 직접 구현 없음 → PyMC / scikit-bayes (`sklearn_bayes.LogisticRegression`) 활용<br>
 
 
 
 # [1-3] 프로빗 회귀 (Probit Regression)
 
-▣ 정의 : 시그모이드 대신 정규분포의 누적분포함수(CDF)를 사용하여 확률을 계산하는 회귀 기반 이진 분류모델이다.
-▣ 목적 : 잠재적인 연속 확률변수를 기준으로 이진 결과를 확률적으로 예측한다.
+▣ 정의 : 시그모이드 대신 정규분포의 누적분포함수(CDF)를 사용하여 확률을 계산하는 회귀 기반 이진 분류모델<br>
+▣ 목적 : 잠재적인 연속 확률변수를 기준으로 이진 결과를 확률적으로 예측<br>
 ![eq](https://latex.codecogs.com/png.latex?P(y=1|x)=\Phi(\beta_0+\beta_1x_1+\cdots+\beta_kx_k))
-▣ 장점 : 정규분포 기반으로 통계적 엄밀성 높음,  이상치에 덜 민감  
-▣ 단점 : 계산 복잡하고 직관성 낮음 , 로지스틱 회귀보다 구현 복잡  
-▣ 적용분야 : 경제·금융 분야의 선택모형, 행동경제학, 구매의사 예측  
-▣ Scikit-learn 클래스 : 직접 지원 없음 → `statsmodels.discrete.discrete_model.Probit` 사용
+
+▣ 장점 : 정규분포 기반으로 통계적 엄밀성 높음,  이상치에 덜 민감<br>  
+▣ 단점 : 계산 복잡하고 직관성 낮음 , 로지스틱 회귀보다 구현 복잡<br>  
+▣ 적용분야 : 경제·금융 분야의 선택모형, 행동경제학, 구매의사 예측<br>  
+▣ Scikit-learn 클래스 : 직접 지원 없음 → `statsmodels.discrete.discrete_model.Probit` 사용<br>
 
 
 
 # [1-4] 소프트맥스 회귀 (Softmax Regression)
 
-▣ 정의 : 로지스틱 회귀를 다중 클래스 분류로 확장한 모델로 각 클래스에 속할 확률을 동시에 계산
-▣ 목적 : 3개 이상의 클래스 중 어느 하나에 속할 확률을 추정
+▣ 정의 : 로지스틱 회귀를 다중 클래스 분류로 확장한 모델로 각 클래스에 속할 확률을 동시에 계산<br>
+▣ 목적 : 3개 이상의 클래스 중 어느 하나에 속할 확률을 추정<br>
 ![eq](https://latex.codecogs.com/png.latex?P(y=i|x)=\frac{e^{\beta_i^Tx}}{\sum_{j=1}^Ke^{\beta_j^Tx}})
 
-▣ 장점 : 다중 클래스 문제 해결 가능, 각 클래스 확률을 해석적으로 제공  
-▣ 단점 : 클래스가 많을수록 계산량 증가, 데이터 불균형에 민감  
-▣ 적용분야 : 문서 분류, 감정 분석, 이미지 라벨링, 음성인식 
-▣ Scikit-learn 클래스 : `sklearn.linear_model.LogisticRegression(multi_class='multinomial', solver='lbfgs')`
+▣ 장점 : 다중 클래스 문제 해결 가능, 각 클래스 확률을 해석적으로 제공<br>  
+▣ 단점 : 클래스가 많을수록 계산량 증가, 데이터 불균형에 민감<br>  
+▣ 적용분야 : 문서 분류, 감정 분석, 이미지 라벨링, 음성인식<br> 
+▣ Scikit-learn 클래스 : `sklearn.linear_model.LogisticRegression(multi_class='multinomial', solver='lbfgs')`<br>
 
 
 
 # [2-1] 베이즈 네트워크 분류 (Bayesian Network Classification)
 
-▣ 정의 : 변수 간 조건부 의존관계를 방향성 비순환 그래프(DAG) 형태로 표현한 확률 그래픽 모델 기반 분류
-▣ 목적 : 인과 관계와 확률적 의존성을 명시적으로 표현하여 분류와 추론을 동시에 수행한다.
+▣ 정의 : 변수 간 조건부 의존관계를 방향성 비순환 그래프(DAG) 형태로 표현한 확률 그래픽 모델 기반 분류<br>
+▣ 목적 : 인과 관계와 확률적 의존성을 명시적으로 표현하여 분류와 추론을 동시에 수행<br>
 ![eq](https://latex.codecogs.com/png.latex?P(X_1,\ldots,X_n)=\prod_iP(X_i|Pa(X_i)))
 
-▣ 장점 : 변수 간 인과관계 해석 가능, 결측치 처리에 강함, 확률적 추론 및 구조 해석 가능
-▣ 단점  
-- 구조 학습 복잡도 매우 높음  
-- 고차원 데이터에서는 비효율적  
-
-▣ 적용분야  
-의료진단(질병–증상 관계), 리스크 분석, 인과 추론, 추천 시스템  
-
-▣ Scikit-learn 클래스  
-없음 → `pgmpy.models.BayesianNetwork` 활용 가능  
+▣ 장점 : 변수 간 인과관계 해석 가능, 결측치 처리에 강함, 확률적 추론 및 구조 해석 가능<br>
+▣ 단점 : 구조 학습 복잡도 매우 높음, 고차원 데이터에서는 비효율적<br>  
+▣ 적용분야 : 의료진단(질병–증상 관계), 리스크 분석, 인과 추론, 추천 시스템<br>  
+▣ Scikit-learn 클래스 : 없음 → `pgmpy.models.BayesianNetwork` 활용 가능<br>  
 
 
 
 # [2-2] 나이브 베이즈 분류 (Naive Bayes Classification)
 
-▣ 정의  
-입력 변수들이 서로 독립이라고 가정한 확률모형으로, 베이즈 정리를 이용해 각 클래스의 사후확률을 계산하는 단순하고 빠른 분류기이다.
-
-▣ 목적  
-주어진 입력이 특정 클래스에 속할 확률을 간단하고 빠르게 계산한다.
+▣ 정의 : 입력 변수들이 서로 독립이라고 가정한 확률모형으로, 베이즈 정리를 이용해 각 클래스의 사후확률을 계산하는 단순하고 빠른 분류<br>
+▣ 목적 : 주어진 입력이 특정 클래스에 속할 확률을 간단하고 빠르게 계산<br>
 ![eq](https://latex.codecogs.com/png.latex?P(C|X)=\frac{P(X|C)P(C)}{P(X)})
 
-▣ 장점  
-- 계산속도 빠르고 메모리 효율 높음  
-- 소량의 데이터에서도 높은 성능  
-- 텍스트 데이터에 특히 강함  
-
-▣ 단점  
-- 독립성 가정이 비현실적  
-- 연속형 변수 처리에 추가 전처리 필요  
-
-▣ 적용분야  
-스팸 필터링, 감정 분석, 뉴스/문서 분류, 텍스트 마이닝  
-
-▣ Scikit-learn 클래스  
-`sklearn.naive_bayes.GaussianNB`, `MultinomialNB`, `BernoulliNB`
+▣ 장점 : 계산속도 빠르고 메모리 효율 높음, 소량의 데이터에서도 높은 성능, 텍스트 데이터에 특히 강함<br>  
+▣ 단점 : 독립성 가정이 비현실적, 연속형 변수 처리에 추가 전처리 필요<br>  
+▣ 적용분야 : 스팸 필터링, 감정 분석, 뉴스/문서 분류, 텍스트 마이닝<br>
+▣ Scikit-learn 클래스 : `sklearn.naive_bayes.GaussianNB`, `MultinomialNB`, `BernoulliNB`<br>
 
 
 
 # [2-3] 혼합모형 기반 분류 (GMM + EM Classification)
 
-▣ 정의  
-각 클래스가 다변량 가우시안 혼합분포(GMM)를 따른다고 가정하고,  
-EM(Expectation–Maximization) 알고리즘을 이용해 파라미터를 추정하는 확률적 분류기이다.
-
-▣ 목적  
-비선형적이고 복잡한 분포 구조를 확률적으로 모델링하여 소프트 분류 수행.
+▣ 정의 : 각 클래스가 다변량 가우시안 혼합분포(GMM)를 따른다고 가정하고,<br>  
+EM(Expectation–Maximization) 알고리즘을 이용해 파라미터를 추정하는 확률적 분류<br>
+▣ 목적 : 비선형적이고 복잡한 분포 구조를 확률적으로 모델링하여 소프트 분류 수행<br>
 ![eq](https://latex.codecogs.com/png.latex?p(x)=\sum_{k=1}^K\pi_k\mathcal{N}(x|\mu_k,\Sigma_k))
 
-▣ 장점  
-- 복잡한 분포 구조 모델링 가능  
-- 각 클래스에 대한 사후확률 계산 가능  
-
-▣ 단점  
-- 초기값에 따라 수렴이 불안정  
-- 지역 최적해에 빠질 수 있음  
-- 계산량 많음  
-
-▣ 적용분야  
-음성인식, 이미지 세분화, 이상치 탐지, 고객 세분화  
-
-▣ Scikit-learn 클래스  
-`sklearn.mixture.GaussianMixture`
+▣ 장점 : 복잡한 분포 구조 모델링 가능, 각 클래스에 대한 사후확률 계산 가능<br>  
+▣ 단점 : 초기값에 따라 수렴이 불안정, 지역 최적해에 빠질 수 있음, 계산량 많음<br> 
+▣ 적용분야 : 음성인식, 이미지 세분화, 이상치 탐지, 고객 세분화<br>  
+▣ Scikit-learn 클래스 : `sklearn.mixture.GaussianMixture`<br>
 
 
 
@@ -164,14 +134,14 @@ EM(Expectation–Maximization) 알고리즘을 이용해 파라미터를 추정�
 
 # [3-2] 마할라노비스 거리 분류 (Mahalanobis Distance Classification)
 
-▣ 정의 : 공분산을 고려한 거리 척도를 기반으로, 데이터 간 상관관계를 반영해 분류를 수행하는 거리 기반 모델이다.
-▣ 목적 : 특성 간 상관관계를 고려한 정규화된 거리 계산을 통해 분류 정확도를 향상시킨다.
+▣ 정의 : 공분산을 고려한 거리 척도를 기반으로, 데이터 간 상관관계를 반영해 분류를 수행하는 거리 기반 모델<br>
+▣ 목적 : 특성 간 상관관계를 고려한 정규화된 거리 계산을 통해 분류 정확도를 향상<br>
 ![eq](https://latex.codecogs.com/png.latex?D_M(x)=\sqrt{(x-\mu)^T\Sigma^{-1}(x-\mu)})
 
-▣ 장점 : 변수 간 상관관계 반영, 스케일 조정 불필요, 이상치 탐지에 효과적  
-▣ 단점 : 공분산 추정이 어려움, 고차원 데이터에서는 계산량 증가 
-▣ 적용분야 : 패턴인식, 이상탐지, 품질관리, 금융리스크 평가
-▣ Scikit-learn 클래스 : `sklearn.covariance.EmpiricalCovariance` (직접 Mahalanobis 거리 계산: `scipy.spatial.distance.mahalanobis`)
+▣ 장점 : 변수 간 상관관계 반영, 스케일 조정 불필요, 이상치 탐지에 효과적<br>  
+▣ 단점 : 공분산 추정이 어려움, 고차원 데이터에서는 계산량 증가<br> 
+▣ 적용분야 : 패턴인식, 이상탐지, 품질관리, 금융리스크 평가<br>
+▣ Scikit-learn 클래스 : `sklearn.covariance.EmpiricalCovariance` (직접 Mahalanobis 거리 계산: `scipy.spatial.distance.mahalanobis`)<br>
 
 
 
