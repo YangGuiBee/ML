@@ -898,7 +898,7 @@ Cox의 비례위험 회귀는 생존 분석(survival analysis)에서 주로 사�
 
 <br>
 
-## 일반화 선형 회귀(Generalized Linear Regression, GLM) 알고리즘 모델
+## 일반화 선형 회귀(Generalized Linear Regression, GLM) 알고리즘 모델 정리
 
 
 | 모델                                                          | 기본 수식                                                                                                                                                                                               | 그래프 형태 및 주요 적용 분야                                                                  |
