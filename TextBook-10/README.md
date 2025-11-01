@@ -356,4 +356,123 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
 <br>
 
 
+<!--
+│ ├── [1] 판별 분석 (Discriminant Analysis)
+│ │ ├─ [1-1] LDA (Linear Discriminant Analysis)
+│ │ ├─ [1-2] QDA (Quadratic Discriminant Analysis)
+│ │ ├─ [1-3] CCA (Canonical Correlation Analysis)
+│ │ └─ [1-4] Supervised PCA
+│
+│ ├── [2] 차원축소 (Dimensionality Reduction)
+│ │ ├─ [2-1] PCR (Principal Component Regression) (회귀 전용)
+│ │ ├─ [2-2] PLS (Partial Least Squares)
+│ │ ├─ [2-3] PLS-DA (Partial Least Squares Discriminant Analysis)
+│ │ ├─ [2-4] LDA / QDA (Regression + Classification) (재참조)
+│ │ └─ [2-5] Supervised PCA
+│
+│ ├── [3] 트리 기반 (Tree-based)
+│ │ ├─ [3-1] 결정 트리 (Decision Tree)
+│ │ ├─ [3-2] 랜덤 포레스트 (Random Forest)
+│ │ └─ [3-3] 극단 트리 (Extra Trees)
+│
+│ └── [4] 거리 기반 (Distance-based)
+│ ├─ [4-1] k-최근접 이웃 (k-Nearest Neighbor, k-NN)
+│ ├─ [4-2] 서포트 벡터 머신 (SVM, Support Vector Machine)
+│ ├─ [4-3] One-Class SVM (Outlier / Novelty Detection)
+│ ├─ [4-4] 선형 SVM (Linear SVM)
+│ └─ [4-5] 커널 SVM (Polynomial / RBF / Sigmoid)
+
+
+[Ⅳ] 신경망 (Neural Networks)
+
+│ ├─ [4-1] MLP (Multilayer Perceptron)
+│ ├─ [4-2] CNN (Convolutional Neural Network)
+│ ├─ [4-3] RNN (Recurrent Neural Network)
+│ ├─ [4-4] LSTM (Long Short-Term Memory)
+│ └─ [4-5] Transformer (BERT, ViT 등)
+
+[Ⅴ] 앙상블 (Ensemble Methods)
+
+│ ├─ [5-1] 배깅 (Bagging)
+│ │ ├─ [5-1-1] 랜덤 포레스트 (Random Forest)
+│ │ └─ [5-1-2] 극단 트리 (Extra Trees)
+│ │
+│ ├─ [5-2] 부스팅 (Boosting)
+│ │ ├─ [5-2-1] AdaBoost
+│ │ ├─ [5-2-2] Gradient Boosting (GBT)
+│ │ ├─ [5-2-3] XGBoost
+│ │ ├─ [5-2-4] LightGBM
+│ │ └─ [5-2-5] CatBoost
+│ │
+│ ├─ [5-3] 스태킹 (Stacking)
+│ │ ├─ [5-3-1] 블렌딩 (Blending)
+│ │ ├─ [5-3-2] 메타 러너 (Meta-Learner)
+│ │ └─ [5-3-3] 크로스 밸리데이션 기반 스태킹 (CV-Stacking)
+│ │
+│ └─ [5-4] 보팅 (Voting)
+│ ├─ [5-4-1] 하드 보팅 (Hard Voting)
+│ └─ [5-4-2] 소프트 보팅 (Soft Voting)
+
+
+[Ⅵ] 부록: 학습방법 (Optimization & Estimation Methods)
+
+│
+│ ├── [1] 해석적 해법 (Analytical / Closed-form Solutions)
+│ │ ├─ [1-1] 최소제곱법 (Ordinary Least Squares, OLS)
+│ │ ├─ [1-2] 정규방정식 (Normal Equation)
+│ │ └─ [1-3] 선형대수 기반 해법 (SVD, QR, Eigen Decomposition)
+│
+│ ├── [2] 최적화 기반 학습 (Optimization-based Learning)
+│ │ ├─ [2-1] 경사하강법 (Gradient Descent, GD)
+│ │ ├─ [2-2] 확률적 경사하강법 (Stochastic Gradient Descent, SGD)
+│ │ ├─ [2-3] 모멘텀·적응형 경사 알고리즘
+│ │ │ ├─ [2-3-1] Momentum / Nesterov Accelerated Gradient
+│ │ │ ├─ [2-3-2] AdaGrad
+│ │ │ ├─ [2-3-3] RMSProp
+│ │ │ └─ [2-3-4] Adam / AdamW
+│ │ ├─ [2-4] 뉴턴 / 준-뉴턴법 (Newton & Quasi-Newton Methods)
+│ │ │ ├─ [2-4-1] Newton–Raphson
+│ │ │ ├─ [2-4-2] BFGS / L-BFGS
+│ │ │ └─ [2-4-3] Gauss–Newton (비선형 최소제곱용)
+│ │ ├─ [2-5] 좌표하강법 (Coordinate Descent)
+│ │ └─ [2-6] 근사 2차법 (Levenberg–Marquardt)
+│
+│ ├── [3] 확률적 추정 (Probabilistic / Bayesian Estimation)
+│ │ ├─ [3-1] 최대우도추정 (Maximum Likelihood Estimation, MLE)
+│ │ ├─ [3-2] 최대사후확률추정 (Maximum A Posteriori, MAP)
+│ │ ├─ [3-3] 베이즈 추정 (Bayesian Estimation)
+│ │ │ # 사전분포(prior)·사후분포(posterior)·예측분포(predictive)를 포함
+│ │ │ # 불확실성 정량화(Uncertainty Quantification) 개념 내포
+│ │ ├─ [3-4] 베이즈 회귀 프레임워크 (Bayesian Regression Framework)
+│ │ │ ├─ [3-4-1] 베이즈 선형 회귀 (Bayesian Linear Regression)
+│ │ │ ├─ [3-4-2] 베이즈 비선형 회귀 (Bayesian Nonlinear Regression)
+│ │ │ ├─ [3-4-3] 가우시안 프로세스 회귀 (Gaussian Process Regression, GPR)
+│ │ │ ├─ [3-4-4] 베이즈 신경망 회귀 (Bayesian Neural Network, BNN)
+│ │ │ └─ [3-4-5] 희소 베이즈 회귀 (Relevance Vector Machine, RVM)
+│ │ └─ [3-5] 베이즈 분류 프레임워크 (Bayesian Classification Framework)
+│ │ ├─ [3-5-1] 베이즈 로지스틱 회귀 (Bayesian Logistic Regression)
+│ │ ├─ [3-5-2] 베이즈 네트워크 분류 (Bayesian Network Classification)
+│ │ ├─ [3-5-3] 나이브 베이즈 분류 (Naive Bayes Classification)
+│ │ └─ [3-5-4] 혼합모형 기반 분류 (GMM + EM Classification)
+│
+│ ├── [4] 반복적 기대최대화 (Iterative Expectation–Maximization)
+│ │ ├─ [4-1] EM 알고리즘 (Expectation–Maximization Algorithm)
+│ │ ├─ [4-2] 변분추론 (Variational Inference, VI)
+│ │ └─ [4-3] MCMC (Markov Chain Monte Carlo)
+│ │ ├─ [4-3-1] Metropolis–Hastings
+│ │ ├─ [4-3-2] Gibbs Sampling
+│ │ └─ [4-3-3] Hamiltonian Monte Carlo
+│
+│   ├── [5] 조합·탐색 기반 최적화 (Combinatorial / Metaheuristic Optimization)
+│   │     ├─ [5-1] 유전자 알고리즘 (Genetic Algorithm, GA)
+│   │     ├─ [5-2] 입자군집 최적화 (Particle Swarm Optimization, PSO)
+│   │     ├─ [5-3] 개미군집 최적화 (Ant Colony Optimization, ACO)
+│   │     └─ [5-4] 시뮬레이티드 어닐링 (Simulated Annealing, SA)
+│
+│   └── [6] 혼합·하이브리드 추정 (Hybrid / Ensemble Estimation)
+│         ├─ [6-1] EM + GD 혼합 (예: GMM–EM with Gradient Updates)
+│         ├─ [6-2] Bayesian + Neural Hybrid (BNN, VI + GD)
+│         └─ [6-3] Reinforced Optimization (Meta-Learning Optimizer)
+
+-->
 
