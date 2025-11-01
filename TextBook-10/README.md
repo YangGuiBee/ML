@@ -45,7 +45,7 @@
  - 의료 : 의학 연구원들은 환자의 질병 발생 가능성을 예측하여 예방 진료와 치료를 계획하는데 이때 가족력이나 유전자가 질병에 미치는 영향을 비교하는 데 로지스틱 회귀 모델을 사용<br> 
  - 금융 : 금융 거래에서 사기 행위를 분석하고 대출 신청 및 보험 신청 건의 위험도를 평가해야 하는데 이러한 문제에는 고위험이거나 저위험이거나, 사기이거나 사기가 아닌 것과 같은 명확한 결과가 있기 때문에 로지스틱 회귀 모델에 적합<br>  
  - 마케팅 : 온라인 광고 도구는 로지스틱 회귀 모델을 사용하여 사용자가 광고를 클릭할지 여부를 예측한 결과를 활용하여 마케터는 다양한 단어와 이미지에 대한 사용자의 반응을 분석하고 고객이 관심을 가질 만한 효과적인 광고 제작<br>
-▣ Scikit-learn 클래스 : `sklearn.linear_model.LogisticRegression`<br>  
+▣ Scikit-learn 클래스 : `sklearn.linear_model.LogisticRegression`<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html<br><br>
 
@@ -191,16 +191,15 @@ $P(\beta|D)\propto P(D|\beta)P(\beta))$ <br>
 # [2-2] 나이브 베이즈 분류 (Naive Bayes Classification)
 
 ▣ 정의 : 입력 변수들이 서로 독립이라고 가정한 확률모형으로, 베이즈 정리를 이용해 각 클래스의 사후확률을 계산하는 단순하고 빠른 분류<br>
+ - 베이즈 정리 : 사건의 확률과 추가정보를 고려했을때 확률의 변화<br>
+ - 나이브 베이지안 알고리즘 : 사전확률을 통해 특징값이 제공하는 증거를 기반으로 사후확률을 예측(순진하고 때로는 잘못된 가정에도 불구하고 우수한 성능을 보임)<br>
 ▣ 목적 : 주어진 입력이 특정 클래스에 속할 확률을 간단하고 빠르게 계산<br>
 ![eq](https://latex.codecogs.com/png.latex?P(C|X)=\frac{P(X|C)P(C)}{P(X)})<br>
 ▣ 장점 : 계산속도 빠르고 메모리 효율 높음, 소량의 데이터에서도 높은 성능, 텍스트 데이터에 특히 강함<br>
 ▣ 단점 : 독립성 가정이 비현실적, 연속형 변수 처리에 추가 전처리 필요<br>
+feature 간의 독립성(feature간에 서로 상관관계 無)이어야 하므로 실생활에서 바로 적용하기는 곤란<br>
 ▣ 적용분야 : 스팸 필터링, 감정 분석, 뉴스/문서 분류, 텍스트 마이닝<br>
 ▣ Scikit-learn 클래스 : `sklearn.naive_bayes.GaussianNB`, `MultinomialNB`, `BernoulliNB`<br>
-
-
-
-# [2] 나이브 베이즈 분류(Naive Bayes Classification, NBC)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/naive_bayes.html<br>
 
 ![](./images/nb.png)
@@ -210,20 +209,6 @@ $P(\beta|D)\propto P(D|\beta)P(\beta))$ <br>
 <br>
 
 p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) = 0.8
-
-▣ 정의<br>
- - 베이즈 정리 : 사건의 확률과 추가정보를 고려했을때 확률의 변화<br>
- - 나이브 베이지안 알고리즘 : 사전확률을 통해 특징값이 제공하는 증거를 기반으로 사후확률을 예측(순진하고 때로는 잘못된 가정에도 불구하고 우수한 성능을 보임)<br>
-
-▣ 장점<br>
- - 간단하고, 빠르며, 정확하다.<br>
- - computation cost가 작아서 실행속도가 빠르다.<br>
- - 큰 데이터셋에 적합하다.<br>
- - 연속형보다 이산형 데이터에서 성능이 좋다.<br>
- - Multiple class 예측을 위해서도 사용할 수 있다.<br>
-
-▣ 단점<br>
- - feature 간의 독립성(feature간에 서로 상관관계 無)이어야 하므로 실생활에서 바로 적용하기는 곤란<br>
 
 ▣ 베이지안 최적화(Bayesian Optimization) 단계 : 미지의 함수가 반환하는 값의 최소 또는 최대값을 만드는 최적의 해를 짧은 반복을 통해 찾아내는 최적화 방식<br> 
 <br>
