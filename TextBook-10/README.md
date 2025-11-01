@@ -55,7 +55,6 @@ $P(\beta|D)\propto P(D|\beta)P(\beta))$ <br>
 ▣ 정의 : 시그모이드 대신 정규분포의 누적분포함수(CDF)를 사용하여 확률을 계산하는 회귀 기반 이진 분류모델<br>
 ▣ 목적 : 잠재적인 연속 확률변수를 기준으로 이진 결과를 확률적으로 예측<br><br>
 ![eq](https://latex.codecogs.com/png.latex?P(y=1|x)=\Phi(\beta_0+\beta_1x_1+\cdots+\beta_kx_k))<br>
-
 ▣ 장점 : 정규분포 기반으로 통계적 엄밀성 높음,  이상치에 덜 민감<br>  
 ▣ 단점 : 계산 복잡하고 직관성 낮음 , 로지스틱 회귀보다 구현 복잡<br>  
 ▣ 적용분야 : 경제·금융 분야의 선택모형, 행동경제학, 구매의사 예측<br>  
@@ -66,7 +65,7 @@ $P(\beta|D)\propto P(D|\beta)P(\beta))$ <br>
 # [1-4] 소프트맥스 회귀 (Softmax Regression)
 
 ▣ 정의 : 로지스틱 회귀를 다중 클래스 분류로 확장한 모델로 각 클래스에 속할 확률을 동시에 계산<br>
-▣ 목적 : 3개 이상의 클래스 중 어느 하나에 속할 확률을 추정<br><br>
+▣ 목적 : 3개 이상의 클래스 중 어느 하나에 속할 확률을 추정<br>
 ![eq](https://latex.codecogs.com/png.latex?P(y=i|x)=\frac{e^{\beta_i^Tx}}{\sum_{j=1}^Ke^{\beta_j^Tx}})<br>
 
 ▣ 장점 : 다중 클래스 문제 해결 가능, 각 클래스 확률을 해석적으로 제공<br>  
