@@ -32,7 +32,7 @@
 
 ▣ 정의 : 입력 변수의 선형 결합을 시그모이드(Sigmoid) 함수에 통과시켜 0~1 사이의 확률로 변환하는 이진 분류 모델<br>
 ▣ 목적 : 주어진 데이터가 특정 클래스(예: 1)에 속할 확률을 예측<br>
-![eq](https://latex.codecogs.com/png.latex?P(y=1|x)=\frac{1}{1+e^{-(\beta_0+\beta_1x_1+\cdots+\beta_kx_k)}})
+![eq](https://latex.codecogs.com/png.latex?P(y=1|x)=\frac{1}{1+e^{-(\beta_0+\beta_1x_1+\cdots+\beta_kx_k)}}) <br>
 ▣ 장점 : 계산이 간단하고 빠르며 해석이 용이, 확률 기반 예측으로 의사결정에 활용 가능, 정규화 적용 시 과적합 방지 가능<br>
 ▣ 단점 : 비선형 관계 데이터에는 부적합, 이상치(outlier)에 민감<br> 
 ▣ 적용분야 : 의료진단(질병 유무), 고객이탈 예측, 신용평가, 스팸메일 탐지 등<br>
