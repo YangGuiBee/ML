@@ -42,14 +42,13 @@
 # [1-2] 베이즈 로지스틱 회귀 (Bayesian Logistic Regression)
 
 ▣ 정의 : 로지스틱 회귀의 계수를 확률변수로 보고, 사전분포(prior)와 사후분포(posterior)를 이용해 불확실성을 반영하는 베이즈 확률 모델<br>
-▣ 목적 : 모델 파라미터의 불확실성을 고려하여 보다 안정적이고 신뢰도 있는 확률 예측을 수행<br><br>
+▣ 목적 : 모델 파라미터의 불확실성을 고려하여 보다 안정적이고 신뢰도 있는 확률 예측을 수행<br>
 <!--$![eq](https://latex.codecogs.com/png.latex?P(\beta|D)\propto P(D|\beta)P(\beta))$<br>-->
-$P(\beta|D)\propto P(D|\beta)P(\beta))$<br>
+$P(\beta|D)\propto P(D|\beta)P(\beta))$ <br>
 ▣ 장점 : 불확실성 정량화 가능, 과적합 방지 효과, 작은 데이터셋에서도 안정적 성능<br>  
 ▣ 단점 : 계산 복잡도 높음 (MCMC, VI 등 필요), 수렴 속도 느림<br>  
 ▣ 적용분야 : 의료 리스크 분석, 자율주행 의사결정, 금융 리스크 모델링<br>  
 ▣ Scikit-learn 클래스 : 직접 구현 없음 → PyMC / scikit-bayes (`sklearn_bayes.LogisticRegression`) 활용<br>
-
 
 
 # [1-3] 프로빗 회귀 (Probit Regression)
