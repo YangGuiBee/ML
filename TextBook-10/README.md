@@ -3,22 +3,21 @@
 
 ---
 
-	[1] 경사하강법 기반 알고리즘 : 로지스틱 회귀(Logistic Regression)
+	[1] 회귀 기반
+		[1-1] 로지스틱 회귀 (Logistic Regression)
+		[1-2] 베이즈 로지스틱 회귀 (Bayesian Logistic Regression)
+		[1-3] 프로빗 회귀 (Probit Regression)
+		[1-4] 소프트맥스 회귀 (Softmax Regression)
 
-	[2] 확률 기반 알고리즘 : 나이브 베이즈 분류(Naive Bayes Classification, NBC)
+	[2] 통계·확률 기반
+		[2-1] 베이즈 네트워크 분류 (Bayesian Network Classification)
+		[2-2] 나이브 베이즈 분류 (Naive Bayes Classification)
+		[2-3] 혼합모형 기반 분류 (GMM + EM Classification)
 
-	[3] 판별 기반 알고리즘
-		[3-1] 선형 판별 분석(Linear Discriminant Analysis, LDA)
-		[3-2] 이차 판별 분석(Quadratic Discriminant Analysis, QDA) 
-
-	[4] 거리 기반 알고리즘 
-		[4-1] k-최근접 이웃 분류(k-Nearest Neighbors Classification, KNC) → 분류+회귀(11강)
-		[4-2] 서포트 벡터 분류(Support Vector Classification, SVC) → 분류+회귀(11강)
-
-	[5] 트리기반 알고리즘
-		[5-1] 결정 트리 분류(Decision Tree Classification) → 분류+회귀(11강)
-		[5-2] 랜덤 포레스트 분류(Random Forest Classification) → 분류+회귀(11강)		
-  
+	[3] 거리 기반
+		[3-1] 최근접 중심 분류 (Nearest Centroid Classification)
+		[3-2] 마할라노비스 거리 분류 (Mahalanobis Distance Classification)
+		
 ---
 
 ![](./images/SLC.png)
