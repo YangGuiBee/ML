@@ -60,21 +60,19 @@
 		[6-8] 다항식 회귀 (Polynomial Regression, High-order)
 		[6-9] 로지스틱 성장 회귀 (Logistic Growth Regression)
 		[6-10] 곰퍼츠 회귀 (Gompertz Regression)
-		[6-11] 하이퍼볼릭 회귀 (Hyperbolic Regression)
-		[6-12] 가우시안 회귀 (Gaussian Regression)
-		[6-13] 볼츠만 시그모이드 회귀 (Boltzmann Sigmoidal Regression)
-		[6-14] 래셔널 함수 회귀 (Rational Function Regression)
-		[6-15] 구간별 회귀 (Piecewise / Segmented Regression)
-		[6-16] 베이즈 비선형 회귀 (Bayesian Nonlinear Regression)
-		[6-17] 신경망 회귀 (Neural Network Regression)
-		[6-18] 특수 형상 회귀 (Geometric Regression)											
-		[6-19] 로버스트 회귀 (Robust Regression)			 										
-		[6-20] 혼합 회귀 (Mixture of Regressions) 									
-		[6-21] 위치-규모-형상 회귀 (GAMLSS)																	
-		[6-22] 함수형 회귀 (Functional Regression)										 			
-		[6-23] 형상기반 회귀 (Shape-aware / Geodesic Regression)				 	
-		[6-24] 딥 가우시안 프로세스 회귀 (Deep Gaussian Process Regression)		
-		[6-25] 물리정보 회귀 (Physics-Informed Regression)					
+		[6-11] 가우시안 회귀 (Gaussian Regression)
+		[6-12] 볼츠만 시그모이드 회귀 (Boltzmann Sigmoidal Regression)
+		[6-13] 래셔널 함수 회귀 (Rational Function Regression)
+		[6-14] 구간별 회귀 (Piecewise / Segmented Regression)
+		[6-15] 베이즈 비선형 회귀 (Bayesian Nonlinear Regression)
+		[6-16] 신경망 회귀 (Neural Network Regression)
+		[6-17] 특수 형상 회귀 (Geometric Regression)											
+		[6-18] 로버스트 회귀 (Robust Regression)			 										
+		[6-19] 혼합 회귀 (Mixture of Regressions) 									
+		[6-20] 위치-규모-형상 회귀 (GAMLSS)																		[6-21] 함수형 회귀 (Functional Regression)										 			
+		[6-22] 형상기반 회귀 (Shape-aware / Geodesic Regression)				 	
+		[6-23] 딥 가우시안 프로세스 회귀 (Deep Gaussian Process Regression)		
+		[6-24] 물리정보 회귀 (Physics-Informed Regression)					
 
 ---
 (참고)
@@ -1621,21 +1619,20 @@ L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회�
 | [6-8] 다항식 회귀 (*Polynomial Regression, High-order*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cbeta_0%20%2B%20%5Cbeta_1%20x%20%2B%20%5Cbeta_2%20x%5E2%20%2B%20%5Ccdots%20%2B%20%5Cbeta_n%20x%5En) | 곡률 가변형 — 복잡한 추세 적합, 곡선 회귀 |
 | [6-9] 로지스틱 성장 회귀 (*Logistic Growth Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cfrac%7BK%7D%7B1%20%2B%20A%20e%5E%7B-Bx%7D%7D) | S-curve (포화 성장형) — 인구·시장·바이러스 확산 모델 |
 | [6-10] 곰퍼츠 회귀 (*Gompertz Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20a%20e%5E%7B-b%20e%5E%7B-cx%7D%7D) | 비대칭 S-curve — 생물 성장, 약물 반응, 감염 전파 곡선 |
-| [6-11] 하이퍼볼릭 회귀 (*Hyperbolic Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cfrac%7Ba%7D%7Bx%20%2B%20b%7D%20%2B%20c) | 포화/역비례형 — 반응 속도, 농도-효과 관계, 수율 분석 |
-| [6-12] 가우시안 회귀 (*Gaussian Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20a%20%5Cexp%5Cleft%28-%5Cfrac%7B%28x-b%29%5E2%7D%7B2c%5E2%7D%5Cright%29) | Bell-shape (대칭형) — 분포형 반응, 최적점 탐색, 약물 농도 반응 |
-| [6-13] 볼츠만 시그모이드 회귀 (*Boltzmann Sigmoidal Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cfrac%7BA_1-A_2%7D%7B1%20%2B%20e%5E%7B%28x-x_0%29%2Fd%7D%7D%20%2B%20A_2) | S-curve (단계적 포화) — 물질 전이, 온도 반응, 전기신호 변화 |
-| [6-14] 래셔널 함수 회귀 (*Rational Function Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cfrac%7Ba_0%2Ba_1x%2B...%2Ba_mx%5Em%7D%7B1%2Bb_1x%2B...%2Bb_nx%5En%7D) | 복합 비선형 곡선형 — 실험 데이터 근사, 제어모델 |
-| [6-15] 구간별 회귀 (*Piecewise / Segmented Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cbegin%7Bcases%7D%20a_1%2Bb_1x%2C%26x%3Cc%5C%5C%20a_2%2Bb_2x%2C%26x%5Cge%20c%5Cend%7Bcases%7D) | Break-point형 — 구조적 변화 탐지, 정책효과 분석 |
-| [6-16] 베이즈 비선형 회귀 (*Bayesian Nonlinear Regression*) | ![eq](https://latex.codecogs.com/png.latex?p%28%5Ctheta%7CD%29%5Cpropto%20p%28D%7C%5Ctheta%29p%28%5Ctheta%29) | 불확실성 반영형 — 소표본 데이터, 확률적 예측 모델 |
-| [6-17] 신경망 회귀 (*Neural Network Regression*) | ![eq](https://latex.codecogs.com/png.latex?%5Chat%7By%7D%20%3D%20f%28W_2%5Csigma%28W_1x%2Bb_1%29%2Bb_2%29) | Universal Approximation — 복잡한 비선형 함수 학습, 예측·제어 |
-| [6-18] 특수 형상 회귀 (*Geometric Regression*) | ![eq](https://latex.codecogs.com/png.latex?%5Cmin_%7BR%2Ct%7D%20%5Csum_i%20%7C%7C%20x_i-%28Ry_i%2Bt%29%20%7C%7C%5E2) | 공간 변환 기반 — 3D 포인트 정합, 기하 보정, 영상 정렬, 구조광 측정 |
-| [6-19] 로버스트 회귀 (*Robust Regression*) | ![eq](https://latex.codecogs.com/png.latex?%5Cmin_%7B%5Ctheta%7D%20%5Csum_i%20%5Crho%28y_i-f%28x_i%3B%5Ctheta%29%29) | 이상치·노이즈에 강건 — Huber, Tukey loss 사용, 실험데이터 보정 |
-| [6-20] 혼합 회귀 (*Mixture of Regressions*) | ![eq](https://latex.codecogs.com/svg.latex?p(y%7Cx)%20%3D%20%5Csum_%7Bk%3D1%7D%5EK%20%5Cpi_k%20%5Cmathcal%7BN%7D%5Cleft(y%3B%20f_k(x)%2C%20%5Csigma_k%5E2%5Cright)) | 여러 회귀모델의 혼합 — 군집별 이질적 패턴 모델링 |
-| [6-21] 위치-규모-형상 회귀 (*GAMLSS*) | ![eq](https://latex.codecogs.com/svg.latex?y%20%5Csim%20D(%5Clambda_1%2C%20%5Clambda_2%2C%20%5Clambda_3)%2C%20%5Clog%5Clambda_j%20%3D%20%5Ceta_j(x)) | 평균뿐 아니라 분산·왜도·첨도까지 설명 — 금융위험, 생존·보험분석 |
-| [6-22] 함수형 회귀 (*Functional Regression*) | ![eq](https://latex.codecogs.com/svg.latex?y(t)%20%3D%20%5Cint%20%5Cbeta(s%2C%20t)x(s)%5C%2Cds%20%2B%20%5Cepsilon(t)) | 입력·출력이 함수형(곡선형) — 생체신호, 시계열, 스펙트럼 분석 |
-| [6-23] 형상기반 회귀 (*Shape-aware / Geodesic Regression*) | ![eq](https://latex.codecogs.com/svg.latex?%5Cmin_%7B%5Cmu%2C%20v%7D%20%5Csum_i%20d_%7B%5Cmathcal%7BM%7D%7D%5E2%5Cleft(%5Cexp_%5Cmu(vt_i)%2C%20y_i%5Cright)) | 리만다양체 상 회귀 — 의료영상, 3D 형상·자세 추정 |
-| [6-24] 딥 가우시안 프로세스 회귀 (*Deep Gaussian Process Regression*) | ![eq](https://latex.codecogs.com/png.latex?f_L%28x%29%20%3D%20f_L%28f_%7BL-1%7D%28...f_1%28x%29%29%29) | 계층적 GP — 불확실성+복잡한 비선형 구조 학습 |
-| [6-25] 물리정보 회귀 (*Physics-Informed Regression*) | ![eq](https://latex.codecogs.com/png.latex?L%20%3D%20%5Calpha%20%5Csum_i%7C%7Cf%28x_i%3B%5Ctheta%29-y_i%7C%7C%5E2%20%2B%20%5Cbeta%20%5Csum_j%7C%7C%5Cmathcal%7BF%7D%28f%28x_j%3B%5Ctheta%29%29%7C%7C%5E2) | 물리제약 포함 회귀 — PDE/ODE 기반 공학·유체·재료 시뮬레이션 |
+| [6-11] 가우시안 회귀 (*Gaussian Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20a%20%5Cexp%5Cleft%28-%5Cfrac%7B%28x-b%29%5E2%7D%7B2c%5E2%7D%5Cright%29) | Bell-shape (대칭형) — 분포형 반응, 최적점 탐색, 약물 농도 반응 |
+| [6-12] 볼츠만 시그모이드 회귀 (*Boltzmann Sigmoidal Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cfrac%7BA_1-A_2%7D%7B1%20%2B%20e%5E%7B%28x-x_0%29%2Fd%7D%7D%20%2B%20A_2) | S-curve (단계적 포화) — 물질 전이, 온도 반응, 전기신호 변화 |
+| [6-13] 래셔널 함수 회귀 (*Rational Function Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cfrac%7Ba_0%2Ba_1x%2B...%2Ba_mx%5Em%7D%7B1%2Bb_1x%2B...%2Bb_nx%5En%7D) | 복합 비선형 곡선형 — 실험 데이터 근사, 제어모델 |
+| [6-14] 구간별 회귀 (*Piecewise / Segmented Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cbegin%7Bcases%7D%20a_1%2Bb_1x%2C%26x%3Cc%5C%5C%20a_2%2Bb_2x%2C%26x%5Cge%20c%5Cend%7Bcases%7D) | Break-point형 — 구조적 변화 탐지, 정책효과 분석 |
+| [6-15] 베이즈 비선형 회귀 (*Bayesian Nonlinear Regression*) | ![eq](https://latex.codecogs.com/png.latex?p%28%5Ctheta%7CD%29%5Cpropto%20p%28D%7C%5Ctheta%29p%28%5Ctheta%29) | 불확실성 반영형 — 소표본 데이터, 확률적 예측 모델 |
+| [6-16] 신경망 회귀 (*Neural Network Regression*) | ![eq](https://latex.codecogs.com/png.latex?%5Chat%7By%7D%20%3D%20f%28W_2%5Csigma%28W_1x%2Bb_1%29%2Bb_2%29) | Universal Approximation — 복잡한 비선형 함수 학습, 예측·제어 |
+| [6-17] 특수 형상 회귀 (*Geometric Regression*) | ![eq](https://latex.codecogs.com/png.latex?%5Cmin_%7BR%2Ct%7D%20%5Csum_i%20%7C%7C%20x_i-%28Ry_i%2Bt%29%20%7C%7C%5E2) | 공간 변환 기반 — 3D 포인트 정합, 기하 보정, 영상 정렬, 구조광 측정 |
+| [6-18] 로버스트 회귀 (*Robust Regression*) | ![eq](https://latex.codecogs.com/png.latex?%5Cmin_%7B%5Ctheta%7D%20%5Csum_i%20%5Crho%28y_i-f%28x_i%3B%5Ctheta%29%29) | 이상치·노이즈에 강건 — Huber, Tukey loss 사용, 실험데이터 보정 |
+| [6-19] 혼합 회귀 (*Mixture of Regressions*) | ![eq](https://latex.codecogs.com/svg.latex?p(y%7Cx)%20%3D%20%5Csum_%7Bk%3D1%7D%5EK%20%5Cpi_k%20%5Cmathcal%7BN%7D%5Cleft(y%3B%20f_k(x)%2C%20%5Csigma_k%5E2%5Cright)) | 여러 회귀모델의 혼합 — 군집별 이질적 패턴 모델링 |
+| [6-20] 위치-규모-형상 회귀 (*GAMLSS*) | ![eq](https://latex.codecogs.com/svg.latex?y%20%5Csim%20D(%5Clambda_1%2C%20%5Clambda_2%2C%20%5Clambda_3)%2C%20%5Clog%5Clambda_j%20%3D%20%5Ceta_j(x)) | 평균뿐 아니라 분산·왜도·첨도까지 설명 — 금융위험, 생존·보험분석 |
+| [6-21] 함수형 회귀 (*Functional Regression*) | ![eq](https://latex.codecogs.com/svg.latex?y(t)%20%3D%20%5Cint%20%5Cbeta(s%2C%20t)x(s)%5C%2Cds%20%2B%20%5Cepsilon(t)) | 입력·출력이 함수형(곡선형) — 생체신호, 시계열, 스펙트럼 분석 |
+| [6-22] 형상기반 회귀 (*Shape-aware / Geodesic Regression*) | ![eq](https://latex.codecogs.com/svg.latex?%5Cmin_%7B%5Cmu%2C%20v%7D%20%5Csum_i%20d_%7B%5Cmathcal%7BM%7D%7D%5E2%5Cleft(%5Cexp_%5Cmu(vt_i)%2C%20y_i%5Cright)) | 리만다양체 상 회귀 — 의료영상, 3D 형상·자세 추정 |
+| [6-23] 딥 가우시안 프로세스 회귀 (*Deep Gaussian Process Regression*) | ![eq](https://latex.codecogs.com/png.latex?f_L%28x%29%20%3D%20f_L%28f_%7BL-1%7D%28...f_1%28x%29%29%29) | 계층적 GP — 불확실성+복잡한 비선형 구조 학습 |
+| [6-24] 물리정보 회귀 (*Physics-Informed Regression*) | ![eq](https://latex.codecogs.com/png.latex?L%20%3D%20%5Calpha%20%5Csum_i%7C%7Cf%28x_i%3B%5Ctheta%29-y_i%7C%7C%5E2%20%2B%20%5Cbeta%20%5Csum_j%7C%7C%5Cmathcal%7BF%7D%28f%28x_j%3B%5Ctheta%29%29%7C%7C%5E2) | 물리제약 포함 회귀 — PDE/ODE 기반 공학·유체·재료 시뮬레이션 |
 
 
 ---
