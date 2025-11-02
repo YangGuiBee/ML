@@ -575,43 +575,6 @@ EM(Expectation–Maximization) 알고리즘을 이용해 파라미터를 추정�
 
 
 
-# [3-1] 선형판별 분석 : LDA(Linear Discriminant Analysis)
-![](./images/LDA_1.png)
-<br>
-▣ 정의: 클래스 간 분산을 최대화하고 클래스 내 분산을 최소화하는 선형 차원 축소 기법으로 주로 지도 학습에서 사용<br>
-▣ 필요성: 클래스 간 분리를 극대화하면서 데이터를 저차원으로 투영하여 분류 문제의 성능을 향상시키기 위해 필요<br>
-▣ 장점: 클래스 분리를 극대화하여 분류 성능을 개선할 수 있으며, 선형 변환을 통해 효율적으로 차원을 축소<br>
-▣ 단점: 데이터가 선형적으로 구분되지 않는 경우 성능이 저하될 수 있으며, 클래스 간 분포가 정규 분포를 따를 때 더 효과적<br>
-▣ 응용분야: 얼굴 인식, 이미지 분류, 텍스트 분류 등<br>
-▣ 모델식: 두 클래스 간의 분산 비율을 최대화하는 방향으로 데이터를 투영<br>
-
-    from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-    import matplotlib.pyplot as plt
-    from sklearn.datasets import load_iris
-
-    # 데이터 로드
-    data = load_iris()
-    X = data.data
-    y = data.target
-
-    # LDA 적용
-    lda = LinearDiscriminantAnalysis(n_components=2)
-    X_lda = lda.fit_transform(X, y)
-
-    # 결과 시각화
-    plt.scatter(X_lda[:, 0], X_lda[:, 1], c=y)
-    plt.xlabel("LDA Component 1")
-    plt.ylabel("LDA Component 2")
-    plt.title("LDA on Iris Dataset")
-    plt.colorbar()
-    plt.show()
-
-![](./images/LDA.png)
-<br><br>
-![](./images/PCA_LDA.png)
-<br>
-https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysis-python/
-<br>
 
 
 <!--
