@@ -5,18 +5,30 @@
 
 ---
 
-	[1] k-최근접 이웃(k-Nearest Neighbors, K-NN) 	
-		k-최근접 이웃 회귀(k-Nearest Neighbors Regression)
-		k-최근접 이웃 분류(k-Nearest Neighbors Classification)
- 	[2] 서포트 벡터 머신(Support Vector Machine, SVM)
-		서포트 벡터 회귀(Support Vector Regression, SVR)
-		서포트 벡터 분류(Support Vector Classification, SVC)
-	[3] 결정 트리(Decision Tree)
- 		결정 트리 회귀(Decision Tree Regression)
-   		결정 트리 분류(Decision Tree Classification)
- 	[4] 랜덤 포레스트(Random Forest) : 앙상블 학습(Ensemble Learning)에 해당(13강)
-		랜덤 포레스트 회귀(Random Forest Regression)  
-		랜덤 포레스트 분류(Random Forest Classification)    	  	
+	[1] 판별 분석 (Discriminant Analysis)
+		[1-1] LDA (Linear Discriminant Analysis)
+		[1-2] QDA (Quadratic Discriminant Analysis)
+		[1-3] CCA (Canonical Correlation Analysis)
+		[1-4] Supervised PCA
+
+	[2] 차원축소 (Dimensionality Reduction)
+		[2-1] PCR (Principal Component Regression) (회귀 전용)
+		[2-2] PLS (Partial Least Squares)
+		[2-3] PLS-DA (Partial Least Squares Discriminant Analysis)
+		[2-4] LDA / QDA (Regression + Classification) (재참조)
+		[2-5] Supervised PCA
+
+	[3] 트리 기반 (Tree-based)
+		[3-1] 결정 트리 (Decision Tree)
+		[3-2] 랜덤 포레스트 (Random Forest)
+		[3-3] 극단 트리 (Extra Trees)
+
+	[4] 거리 기반 (Distance-based)
+		[4-1] k-최근접 이웃 (k-Nearest Neighbor, k-NN)
+		[4-2] 서포트 벡터 머신 (SVM, Support Vector Machine)
+		[4-3] One-Class SVM (Outlier / Novelty Detection)
+		[4-4] 선형 SVM (Linear SVM)
+		[4-5] 커널 SVM (Polynomial / RBF / Sigmoid)		
 	
 ---  
 
