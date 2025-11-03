@@ -37,7 +37,6 @@
 선형회귀분석과 비슷한데 Y값이 확률로 되어 있기 때문에 하한, 상한이 [0, 1] 사이로 정해져 있으며,<br>
 특정 임계치(threshold)를 기준으로 삼아서 예측된 확률 값이 임계치 이상인 것과 미만인 것으로 분류<br>
 ▣ 목적 : 주어진 데이터가 특정 클래스(예: 1)에 속할 확률을 예측<br>
-![eq](https://latex.codecogs.com/png.latex?P(y=1|x)=\frac{1}{1+e^{-(\beta_0+\beta_1x_1+\cdots+\beta_kx_k)}}) <br>
 ▣ 장점 : 계산이 간단하고 빠르며 해석이 용이, 확률 기반 예측으로 의사결정에 활용 가능, 정규화 적용 시 과적합 방지 가능<br>
 ▣ 단점 : 비선형 관계 데이터에는 부적합, 이상치(outlier)에 민감<br> 
 ▣ Scikit-learn 클래스 : `sklearn.linear_model.LogisticRegression`<br>
@@ -52,6 +51,7 @@
  - **서수 로지스틱 회귀(Ordinal Logistic Regression) :** 서수 로지스틱 회귀 분석 또는 순서형 로짓 모델은 숫자가 실제 값이 아닌 순위를 나타내는 문제를 풀기 위한 특수한 유형의 다항 회귀 분석이다. 예를 들어 서수 회귀 분석을 사용하여 고객이 1년 동안 구매한 품목 수 등의 숫자 값을 기준으로, 서비스를 나쁨, 양호, 좋음 또는 우수 등급으로 평가하도록 요청하는 설문 조사 질문의 답을 예측할 수 있다.
 
 ▣ 회귀식<br>
+![eq](https://latex.codecogs.com/png.latex?P(y=1|x)=\frac{1}{1+e^{-(\beta_0+\beta_1x_1+\cdots+\beta_kx_k)}}) <br>
 Linear Regression : $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1x_1 + \hat{\beta}_2x_2 + ...+\hat{\beta}_dx_d$
 
 $0 ≤ P(y=1 | X) = p(성공확률) ≤ 1$<br>
