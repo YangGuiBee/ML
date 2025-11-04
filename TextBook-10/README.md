@@ -104,6 +104,7 @@ $\omega_{new}=\omega_{old}-\alpha f'(\omega), 0<\alpha<1$<br>
 
 $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\alpha\left|f'(\omega)\right|^2<f(\omega_{old})$
 
+**(1-1 로지스틱 회귀 예제 소스)**
 
 	import pandas as pd
 	from sklearn.datasets import load_iris
@@ -132,6 +133,40 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 	print("Probabilities: ", probabilities)
 	print("Model Score: ", score)
 
+**(1-1 로지스틱 회귀 실행 결)**
+
+	     sepal length (cm)  sepal width (cm)  petal length (cm)  petal width (cm)  \
+	0                  5.1               3.5                1.4               0.2   
+	1                  4.9               3.0                1.4               0.2   
+	2                  4.7               3.2                1.3               0.2   
+	3                  4.6               3.1                1.5               0.2   
+	4                  5.0               3.6                1.4               0.2   
+	..                 ...               ...                ...               ...   
+	145                6.7               3.0                5.2               2.3   
+	146                6.3               2.5                5.0               1.9   
+	147                6.5               3.0                5.2               2.0   
+	148                6.2               3.4                5.4               2.3   
+	149                5.9               3.0                5.1               1.8   
+	
+	     target  
+	0         0  
+	1         0  
+	2         0  
+	3         0  
+	4         0  
+	..      ...  
+	145       2  
+	146       2  
+	147       2  
+	148       2  
+	149       2  
+	
+	[150 rows x 5 columns]
+	Predictions:  [0 0]
+	Probabilities:  [[9.81688967e-01 1.83110187e-02 1.44420726e-08]
+	 [9.71557277e-01 2.84426927e-02 3.01886079e-08]]
+	Model Score:  0.9733333333333334
+	
 
 | 분야         | 대표 연구사례          | 연구 목적 / 문제 정의             | **독립변수 (X)**               | **종속변수 (y)**               | 주요 결과 또는 의의              |
 | :--------- | :--------------- | :------------------------ | :------------------------- | :------------------------- | :----------------------- |
