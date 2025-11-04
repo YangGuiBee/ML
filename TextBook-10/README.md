@@ -313,6 +313,55 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 	- versicolor는 두 클래스 사이 중간 경계 역할
 	======================================================================
 
+
+**(1-1 로지스틱 회귀 실행 결과 분석)**
+
+	======================================================================
+	Logistic Regression (Iris) 모델 평가 결과
+	======================================================================
+	정확도(Accuracy): 0.9733 (97.33%) ← (TP+TN)/전체샘플수 = 146/150
+	
+	혼동행렬(Confusion Matrix):
+	            setosa  versicolor  virginica
+	setosa          50           0          0   → setosa는 모두 완벽하게 예측
+	versicolor       0          47          3   → virginica로 3건 오분류
+	virginica        0           1         49   → versicolor로 1건 오분류
+	
+	클래스별 Precision / Recall / F1-score:
+	              precision    recall  f1-score   support
+				 (정확도)      (재현율) (조화평균) 	
+	      setosa     1.0000    1.0000    1.0000        50
+	  versicolor     0.9792    0.9400    0.9592        50
+	   virginica     0.9423    0.9800    0.9608        50
+	
+	    accuracy                         0.9733       150
+	   macro avg     0.9738    0.9733    0.9733       150
+	weighted avg     0.9738    0.9733    0.9733       150
+	
+	
+	모델 계수 (Weights):
+	            sepal length (cm)  sepal width (cm)  petal length (cm)  \
+	setosa              -0.419747          0.966869          -2.519351   
+	versicolor           0.531170         -0.315023          -0.202462   
+	virginica           -0.111423         -0.651847           2.721813   
+	
+	            petal width (cm)  
+	setosa             -1.084506  
+	versicolor         -0.944073  
+	virginica           2.028579  
+	
+	모델 절편 (Intercepts):
+	            intercept
+	setosa       9.839462
+	versicolor   2.222906
+	virginica  -12.062367
+	======================================================================
+	Interpretation Tips:
+	- setosa는 petal 길이/너비가 짧을수록 확률 ↑ (음의 계수)
+	- virginica는 petal 길이/너비가 클수록 확률 ↑ (양의 계수)
+	- versicolor는 두 클래스 사이 중간 경계 역할
+	======================================================================	
+
 	
 
 | 분야         | 대표 연구사례          | 연구 목적 / 문제 정의             | **독립변수 (X)**               | **종속변수 (y)**               | 주요 결과 또는 의의              |
