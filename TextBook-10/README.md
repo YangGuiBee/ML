@@ -106,66 +106,213 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 
 **(1-1 로지스틱 회귀 예제 소스)**
 
+	# ============================================================
+	# Logistic Regression (Iris dataset) 결과 저장 + 평가 출력
+	# - CSV / XLSX 모두 소수 10자리 고정
+	# - proba_2 지수표기 완전 차단
+	# ============================================================
+	
+	import sys
+	import subprocess
 	import pandas as pd
+	import numpy as np
+	from pathlib import Path
+	from datetime import datetime
 	from sklearn.datasets import load_iris
 	from sklearn.linear_model import LogisticRegression
-
-	# Iris 데이터 로드
+	from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+	
+	# ===== (1) 필요한 패키지 확인 및 설치 =====
+	try:
+	    import xlsxwriter
+	except ModuleNotFoundError:
+	    print("xlsxwriter 미설치 → 설치를 진행합니다...")
+	    subprocess.check_call([sys.executable, "-m", "pip", "install", "xlsxwriter"])
+	    import xlsxwriter
+	
+	# ===== (2) 출력 경로 설정 =====
+	out_dir = Path(r"C:\Temp")
+	out_dir.mkdir(parents=True, exist_ok=True)
+	csv_name = "iris_logreg_results_fixed.csv"
+	xlsx_name = "iris_logreg_results_fixed.xlsx"
+	
+	# ===== (3) 데이터/모델 =====
 	iris = load_iris()
 	X, y = iris.data, iris.target
-
-	# Feature 데이터와 Target 데이터를 DataFrame으로 변환
- 	# 0: setosa, 1: versicolor, 2: virginica
-	df = pd.DataFrame(data=X, columns=iris.feature_names)
-	df['target'] = y	
-	print(df)
-
-	# Logistic Regression 모델 반복 훈련
+	feature_names = iris.feature_names
+	class_names = iris.target_names
+	
 	clf = LogisticRegression(random_state=0, max_iter=200).fit(X, y)
-
-	# 예측
-	predictions = clf.predict(X[:2, :])
-	probabilities = clf.predict_proba(X[:2, :])
-	score = clf.score(X, y)
-
-	# 예측 결과 출력
-	print("Predictions: ", predictions)
-	print("Probabilities: ", probabilities)
-	print("Model Score: ", score)
-
-**(1-1 로지스틱 회귀 실행 결)**
-
-	     sepal length (cm)  sepal width (cm)  petal length (cm)  petal width (cm)  \
-	0                  5.1               3.5                1.4               0.2   
-	1                  4.9               3.0                1.4               0.2   
-	2                  4.7               3.2                1.3               0.2   
-	3                  4.6               3.1                1.5               0.2   
-	4                  5.0               3.6                1.4               0.2   
-	..                 ...               ...                ...               ...   
-	145                6.7               3.0                5.2               2.3   
-	146                6.3               2.5                5.0               1.9   
-	147                6.5               3.0                5.2               2.0   
-	148                6.2               3.4                5.4               2.3   
-	149                5.9               3.0                5.1               1.8   
+	pred = clf.predict(X)
+	proba = clf.predict_proba(X)
+	z = clf.decision_function(X)
+	exp_neg_z = np.exp(-z)
 	
-	     target  
-	0         0  
-	1         0  
-	2         0  
-	3         0  
-	4         0  
-	..      ...  
-	145       2  
-	146       2  
-	147       2  
-	148       2  
-	149       2  
+	# ===== (4) 기본 DataFrame =====
+	df_base = pd.DataFrame(X, columns=feature_names)
+	df_base["target"] = y
+	df_base["pred"] = pred
+	df_base["correct"] = (y == pred)
 	
-	[150 rows x 5 columns]
-	Predictions:  [0 0]
-	Probabilities:  [[9.81688967e-01 1.83110187e-02 1.44420726e-08]
-	 [9.71557277e-01 2.84426927e-02 3.01886079e-08]]
-	Model Score:  0.9733333333333334
+	# ===== (5) 열 이름 정의 =====
+	proba_cols = [f"proba_{i}" for i in range(proba.shape[1])]
+	z_cols     = [f"z_{i}" for i in range(z.shape[1])]
+	exp_cols   = [f"exp_neg_z_{i}" for i in range(exp_neg_z.shape[1])]
+	
+	# 숫자 버전 (계산용)
+	df_num = pd.concat([
+	    pd.DataFrame(proba, columns=proba_cols),
+	    pd.DataFrame(z, columns=z_cols),
+	    pd.DataFrame(exp_neg_z, columns=exp_cols)
+	], axis=1)
+	
+	# 텍스트 버전 (고정 소수점 10자리)
+	def fmt10(x): return f"{x:.10f}"
+	df_txt = pd.concat([
+	    pd.DataFrame([[fmt10(v) for v in row] for row in proba], columns=[c + "_str" for c in proba_cols]),
+	    pd.DataFrame([[fmt10(v) for v in row] for row in z],     columns=[c + "_str" for c in z_cols]),
+	    pd.DataFrame([[fmt10(v) for v in row] for row in exp_neg_z], columns=[c + "_str" for c in exp_cols]),
+	], axis=1)
+	
+	# CSV용: ' 접두사로 지수표기 완전 차단
+	df_txt_prefixed = df_txt.apply(lambda col: col.map(lambda s: "'" + s))
+	df_csv_out  = pd.concat([df_base, df_num, df_txt_prefixed], axis=1)
+	df_xlsx_out = pd.concat([df_base, df_num, df_txt], axis=1)
+	
+	# ===== (6) 안전 저장 함수 =====
+	def safe_save_csv(df: pd.DataFrame, directory: Path, filename: str) -> Path:
+	    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+	    path1 = directory / filename
+	    path2 = directory / f"{path1.stem}_{ts}{path1.suffix}"
+	    fallback = Path.home() / "Downloads" / f"{path1.stem}_{ts}{path1.suffix}"
+	    for path in [path1, path2, fallback]:
+	        try:
+	            df.to_csv(path, index=False, encoding="utf-8")
+	            return path
+	        except PermissionError:
+	            continue
+	    raise PermissionError("CSV 저장 실패: 파일이 열려 있거나 권한이 없습니다.")
+	
+	def safe_save_xlsx(df: pd.DataFrame, directory: Path, filename: str) -> Path:
+	    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+	    path1 = directory / filename
+	    path2 = directory / f"{path1.stem}_{ts}{path1.suffix}"
+	    fallback = Path.home() / "Downloads" / f"{path1.stem}_{ts}{path1.suffix}"
+	    for path in [path1, path2, fallback]:
+	        try:
+	            with pd.ExcelWriter(path, engine="xlsxwriter") as writer:
+	                df.to_excel(writer, index=False, sheet_name="results")
+	                wb = writer.book
+	                ws = writer.sheets["results"]
+	                numfmt_10 = wb.add_format({"num_format": "0.0000000000"})
+	                txtfmt = wb.add_format({"num_format": "@", "align": "left"})
+	                headers = list(df.columns)
+	                ws.set_column(0, len(headers)-1, 18)
+	                for col_idx, col_name in enumerate(headers):
+	                    if col_name.startswith(("proba_", "z_", "exp_neg_z_")) and not col_name.endswith("_str"):
+	                        ws.set_column(col_idx, col_idx, 18, numfmt_10)
+	                    if col_name.endswith("_str"):
+	                        ws.set_column(col_idx, col_idx, 22, txtfmt)
+	            return path
+	        except PermissionError:
+	            continue
+	    raise PermissionError("XLSX 저장 실패: 파일이 열려 있거나 권한이 없습니다.")
+	
+	# ===== (7) 실제 저장 =====
+	csv_saved = safe_save_csv(df_csv_out, out_dir, csv_name)
+	xlsx_saved = safe_save_xlsx(df_xlsx_out, out_dir, xlsx_name)
+	
+	print(f"[CSV 저장 완료] → {csv_saved}")
+	print(f"[XLSX 저장 완료] → {xlsx_saved}")
+	
+	# ===== (8) 모델 평가 결과 출력 =====
+	print("\n" + "="*70)
+	print("Logistic Regression (Iris) 모델 평가 결과")
+	print("="*70)
+	
+	# ① 정확도
+	acc = accuracy_score(y, pred)
+	print(f"정확도(Accuracy): {acc:.4f} ({acc*100:.2f}%)")
+	
+	# ② 혼동행렬
+	cm = confusion_matrix(y, pred)
+	cm_df = pd.DataFrame(cm, index=class_names, columns=class_names)
+	print("\n혼동행렬(Confusion Matrix):")
+	print(cm_df)
+	
+	# ③ 클래스별 Precision/Recall/F1
+	report = classification_report(y, pred, target_names=class_names, digits=4)
+	print("\n클래스별 Precision / Recall / F1-score:")
+	print(report)
+	
+	# ④ 회귀계수 및 절편
+	coef_df = pd.DataFrame(clf.coef_, columns=feature_names, index=class_names)
+	intercept_df = pd.DataFrame(clf.intercept_, columns=["intercept"], index=class_names)
+	print("\n모델 계수 (Weights):")
+	print(coef_df)
+	print("\n모델 절편 (Intercepts):")
+	print(intercept_df)
+	
+	print("="*70)
+	print("Interpretation Tips:")
+	print("- setosa는 petal 길이/너비가 짧을수록 확률 ↑ (음의 계수)")
+	print("- virginica는 petal 길이/너비가 클수록 확률 ↑ (양의 계수)")
+	print("- versicolor는 두 클래스 사이 중간 경계 역할")
+	print("="*70)
+
+
+
+**(1-1 로지스틱 회귀 실행 결과)**
+
+	[CSV 저장 완료] → C:\Temp\iris_logreg_results_fixed_20251104_145623.csv
+	[XLSX 저장 완료] → C:\Temp\iris_logreg_results_fixed.xlsx
+	
+	======================================================================
+	Logistic Regression (Iris) 모델 평가 결과
+	======================================================================
+	정확도(Accuracy): 0.9733 (97.33%)
+	
+	혼동행렬(Confusion Matrix):
+	            setosa  versicolor  virginica
+	setosa          50           0          0
+	versicolor       0          47          3
+	virginica        0           1         49
+	
+	클래스별 Precision / Recall / F1-score:
+	              precision    recall  f1-score   support
+	
+	      setosa     1.0000    1.0000    1.0000        50
+	  versicolor     0.9792    0.9400    0.9592        50
+	   virginica     0.9423    0.9800    0.9608        50
+	
+	    accuracy                         0.9733       150
+	   macro avg     0.9738    0.9733    0.9733       150
+	weighted avg     0.9738    0.9733    0.9733       150
+	
+	
+	모델 계수 (Weights):
+	            sepal length (cm)  sepal width (cm)  petal length (cm)  \
+	setosa              -0.419747          0.966869          -2.519351   
+	versicolor           0.531170         -0.315023          -0.202462   
+	virginica           -0.111423         -0.651847           2.721813   
+	
+	            petal width (cm)  
+	setosa             -1.084506  
+	versicolor         -0.944073  
+	virginica           2.028579  
+	
+	모델 절편 (Intercepts):
+	            intercept
+	setosa       9.839462
+	versicolor   2.222906
+	virginica  -12.062367
+	======================================================================
+	Interpretation Tips:
+	- setosa는 petal 길이/너비가 짧을수록 확률 ↑ (음의 계수)
+	- virginica는 petal 길이/너비가 클수록 확률 ↑ (양의 계수)
+	- versicolor는 두 클래스 사이 중간 경계 역할
+	======================================================================
+
 	
 
 | 분야         | 대표 연구사례          | 연구 목적 / 문제 정의             | **독립변수 (X)**               | **종속변수 (y)**               | 주요 결과 또는 의의              |
