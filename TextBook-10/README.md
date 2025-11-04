@@ -252,21 +252,12 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 	print(coef_df)
 	print("\n모델 절편 (Intercepts):")
 	print(intercept_df)
-	
-	print("="*70)
-	print("Interpretation Tips:")
-	print("- setosa는 petal 길이/너비가 짧을수록 확률 ↑ (음의 계수)")
-	print("- virginica는 petal 길이/너비가 클수록 확률 ↑ (양의 계수)")
-	print("- versicolor는 두 클래스 사이 중간 경계 역할")
-	print("="*70)
-
-
+		
 
 **(1-1 로지스틱 회귀 실행 결과)**
 
 	[CSV 저장 완료] → C:\Temp\iris_logreg_results_fixed_20251104_145623.csv
-	[XLSX 저장 완료] → C:\Temp\iris_logreg_results_fixed.xlsx
-	
+	[XLSX 저장 완료] → C:\Temp\iris_logreg_results_fixed.xlsx	
 	======================================================================
 	Logistic Regression (Iris) 모델 평가 결과
 	======================================================================
@@ -289,29 +280,15 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 	   macro avg     0.9738    0.9733    0.9733       150
 	weighted avg     0.9738    0.9733    0.9733       150
 	
+	모델 계수 (Weights): sepal length (cm)  sepal width (cm)  petal length (cm)  petal width (cm)
+	setosa              -0.419747          0.966869          -2.519351       -1.084506
+	versicolor           0.531170         -0.315023          -0.202462       -0.944073 
+	virginica           -0.111423         -0.651847           2.721813        2.028579
 	
-	모델 계수 (Weights):
-	            sepal length (cm)  sepal width (cm)  petal length (cm)  \
-	setosa              -0.419747          0.966869          -2.519351   
-	versicolor           0.531170         -0.315023          -0.202462   
-	virginica           -0.111423         -0.651847           2.721813   
-	
-	            petal width (cm)  
-	setosa             -1.084506  
-	versicolor         -0.944073  
-	virginica           2.028579  
-	
-	모델 절편 (Intercepts):
-	            intercept
+	모델 절편 (Intercepts):	            
 	setosa       9.839462
 	versicolor   2.222906
 	virginica  -12.062367
-	======================================================================
-	Interpretation Tips:
-	- setosa는 petal 길이/너비가 짧을수록 확률 ↑ (음의 계수)
-	- virginica는 petal 길이/너비가 클수록 확률 ↑ (양의 계수)
-	- versicolor는 두 클래스 사이 중간 경계 역할
-	======================================================================
 
 
 **(1-1 로지스틱 회귀 실행 결과 분석)**
@@ -327,39 +304,40 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 	versicolor       0          47          3   → virginica로 3건 오분류
 	virginica        0           1         49   → versicolor로 1건 오분류
 	
-	클래스별 Precision / Recall / F1-score:
-	              precision    recall  f1-score   support
-				 (정확도)      (재현율) (조화평균) 	
+	클래스별 Precision / Recall / F1-score:					→ precision = TP/(TP+FP)
+	              precision    recall  f1-score   support   → recall = TP/(TP+FN)
+				 (정밀도)      (재현율) (조화평균)  (샘플수)	→ F1 = 2* (precision * recall)/(precision + recall)
 	      setosa     1.0000    1.0000    1.0000        50
 	  versicolor     0.9792    0.9400    0.9592        50
 	   virginica     0.9423    0.9800    0.9608        50
 	
 	    accuracy                         0.9733       150
-	   macro avg     0.9738    0.9733    0.9733       150
-	weighted avg     0.9738    0.9733    0.9733       150
+	   macro avg     0.9738    0.9733    0.9733       150  → 세 클래스 각각의 평균 (가중치 X)
+	weighted avg     0.9738    0.9733    0.9733       150  → 각 클래스의 support(샘플 수)를 고려한 평균
 	
-	
-	모델 계수 (Weights):
-	            sepal length (cm)  sepal width (cm)  petal length (cm)  \
-	setosa              -0.419747          0.966869          -2.519351   
-	versicolor           0.531170         -0.315023          -0.202462   
-	virginica           -0.111423         -0.651847           2.721813   
-	
-	            petal width (cm)  
-	setosa             -1.084506  
-	versicolor         -0.944073  
-	virginica           2.028579  
-	
-	모델 절편 (Intercepts):
-	            intercept
-	setosa       9.839462
-	versicolor   2.222906
-	virginica  -12.062367
-	======================================================================
-	Interpretation Tips:
-	- setosa는 petal 길이/너비가 짧을수록 확률 ↑ (음의 계수)
-	- virginica는 petal 길이/너비가 클수록 확률 ↑ (양의 계수)
-	- versicolor는 두 클래스 사이 중간 경계 역할
+	모델 계수 (Weights): sepal length (cm)  sepal width (cm)  petal length (cm)  petal width (cm)
+	setosa              -0.419747          0.966869          -2.519351       -1.084506
+	versicolor           0.531170         -0.315023          -0.202462       -0.944073 
+	virginica           -0.111423         -0.651847           2.721813        2.028579
+	setosa : petal length, petal width → 음(-) 꽃잎이 짧고 좁을수록 setosa일 확률 증가
+   			 sepal width →	양(+) 꽃받침이 넓을수록 setosa 확률 증가
+	versicolor : sepal length → 양(+) 꽃받침이 길수록 versicolor 가능성 증가
+    			 petal width → 음(-) 꽃잎이 넓을수록 virginica로 갈 가능성 증가
+	virginica : petal length, petal width → 양(+) 꽃잎이 길고 넓을수록 virginica 가능성 증가
+		
+	모델 절편 (Intercepts): → setosa 쪽이 +9.8로 매우 높고, virginica가 -12로 매우 낮음
+	→ 전체적으로 모델이 초기에 setosa를 “기본값”으로 두고 시작하지만 
+	  입력 특징(특히 꽃잎 길이/너비)에 따라 가중치로 클래스가 달라짐
+	setosa       9.839462 → 매우 큰 양수로 초기 확률이 매우 높음
+	versicolor   2.222906 → 중간 수준
+	virginica  -12.062367 → 매우 큰 음수 → 기본 확률이 낮음
+	======================================================================	
+	정확도 : 97.33% (매우 우수한 분류 성능)
+    혼동영역 : versicolor ↔ virginica 사이 일부 (4건)
+    핵심 특성 : petal length, petal width (꽃잎 변수)
+    보조 특성 : sepal length, sepal width (꽃받침 변수)
+    계수 해석 : setosa: 음의 petal 계수 / virginica: 양의 petal 계수
+    결론 :  Logistic Regression이 Iris 데이터를 거의 완벽히 분리, softmax 확률 일관성도 매우 양호
 	======================================================================	
 
 	
