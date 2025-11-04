@@ -32,6 +32,8 @@
 	
 ---  
 
+![](./images/SLC.png)
+<br>출처 : https://towardsdatascience.com/top-machine-learning-algorithms-for-classification-2197870ff501
 
 # [3-1] 선형판별 분석 : LDA(Linear Discriminant Analysis)
 ![](./images/LDA_1.png)
