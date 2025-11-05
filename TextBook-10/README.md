@@ -65,7 +65,8 @@ $p = \frac{1}{1+e^{-(\hat{\beta}_0 + \hat{\beta}_1x_1 + \hat{\beta}_2x_2 + ...+\
 
 ![](./images/p.png)
 
-▣ 최대우도추정법(Maximum Likelihood Estimation, MLE)<br>
+## ▣ 최대우도추정법(Maximum Likelihood Estimation, MLE)
+관측된 데이터가 주어졌을 때, 그 데이터를 가장 그럴듯하게(우도, likelihood가 최대가 되도록) 만들어내는 모수(parameter) 를 추정하는 통계적 방법<br>
 ![](./images/likelihood.png)
 
 <br>
@@ -87,7 +88,7 @@ $logL(X,y|\beta) = \sum_{i=1}^{N}y_ilog(\sigma (X_i|\beta))+(1-y_i)log(1-\sigma 
 
 <br>
 
-▣ 경사하강법(Gradient Descent Algorithm)<br>
+## ▣ 경사하강법(Gradient Descent Algorithm)
 ![](./images/GD.png)
 
 $f(\omega +\Delta\omega)=f(\omega)+\frac{f'(\omega)}{1!}\Delta\omega+\frac{f''(\omega)}{2!}(\Delta\omega)^2+...$<br>
@@ -509,12 +510,6 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 ![](./images/step4.png)
 
 <br> 
-
-▣ 활용분야<br>
- - 스팸메일이나 감정분석 등 필터와 같은 텍스트 분류<br>
- - 고객의 구매 기록과 같은 이산적인 범주형 데이터 분류<br>
- - 컴퓨터 네트워크에서 침입이나 비정상행위 탐지<br>
- - 일련의 관찰된 증상을 통한 의학적 질병의 진단<br>
 
 ▣ 회귀식 : 독립변수의 조건부 확률에 조건부 독립가정을 추가한 베이즈 분류기가 나이브 베이즈 분류기<br>
 
