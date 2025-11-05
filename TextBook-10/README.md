@@ -341,11 +341,217 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 
 **(MLE, GDA 추가 예제 소스)**
 
+	# -*- coding: utf-8 -*-
+	import numpy as np
+	from sklearn.datasets import make_classification
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import StandardScaler
+	from sklearn.metrics import (
+	    accuracy_score, roc_auc_score, average_precision_score,
+	    log_loss, brier_score_loss
+	)
+	from sklearn.linear_model import LogisticRegression
+	
+	# -----------------------------
+	# 유틸 함수들
+	# -----------------------------
+	def sigmoid(z):
+	    # 수치 안정화(overflow 방지)
+	    z = np.clip(z, -40, 40)
+	    return 1.0 / (1.0 + np.exp(-z))
+	
+	def add_bias(X):
+	    return np.hstack([np.ones((X.shape[0], 1)), X])
+	
+	def predict_proba_beta(Xb, beta):
+	    return sigmoid(Xb @ beta)
+	
+	def predict_label_from_proba(p, thr=0.5):
+	    return (p >= thr).astype(int)
+	
+	def metrics_report(y_true, p):
+	    """확률 기반 평가 지표 계산"""
+	    y_pred = predict_label_from_proba(p)
+	    return {
+	        "Accuracy": accuracy_score(y_true, y_pred),
+	        "ROC-AUC": roc_auc_score(y_true, p),
+	        "PR-AUC": average_precision_score(y_true, p),
+	        "LogLoss": log_loss(y_true, p),      # sklearn이 내부적으로 clipping 처리
+	        "Brier": brier_score_loss(y_true, p)
+	    }
+	
+	def print_report(name, rep):
+	    print(f"{name:<30} | "
+	          f"Acc: {rep['Accuracy']:.3f}  "
+	          f"ROC-AUC: {rep['ROC-AUC']:.3f}  "
+	          f"PR-AUC: {rep['PR-AUC']:.3f}  "
+	          f"LogLoss: {rep['LogLoss']:.3f}  "
+	          f"Brier: {rep['Brier']:.3f}")
+	
+	# -----------------------------
+	# 경사 기반 최적화 루틴
+	# -----------------------------
+	def fit_mle_ascent(Xb, y, beta_init, lr=0.05, epochs=3000, l2=0.0):
+	    """
+	    (2) LR+MLE용: 로그우도 최대화(=Cross-Entropy의 음수 최대화)
+	    gradient ascent: beta += lr * grad
+	    grad = X^T (y - p) - l2 * [0, w1, ..., wd]  (bias는 L2 제외)
+	    """
+	    beta = beta_init.copy()
+	    n = Xb.shape[0]
+	    for t in range(epochs):
+	        p = predict_proba_beta(Xb, beta)
+	        grad = Xb.T @ (y - p) - l2 * np.r_[0, beta[1:]]
+	        beta += lr * grad / n
+	    return beta
+	
+	def fit_sse_descent(Xb, y, beta_init, lr=0.05, epochs=3000, l2=0.0):
+	    """
+	    (3) LR+GDA용: SSE(제곱오차) 최소화 (의도적으로 로지스틱에 비권장)
+	    gradient descent: beta -= lr * grad
+	    간단 근사 grad ≈ X^T (p - y) + l2 * [0, w1, ..., wd]
+	    """
+	    beta = beta_init.copy()
+	    n = Xb.shape[0]
+	    for t in range(epochs):
+	        p = predict_proba_beta(Xb, beta)
+	        grad = Xb.T @ (p - y) + l2 * np.r_[0, beta[1:]]
+	        beta -= lr * grad / n
+	    return beta
+	
+	def fit_ce_descent(Xb, y, beta_init, lr=0.05, epochs=3000, l2=0.0):
+	    """
+	    (4) LR+MLE+GDA용: Cross-Entropy(= -log-likelihood) 최소화
+	    gradient descent: beta -= lr * grad
+	    grad = X^T (p - y) + l2 * [0, w1, ..., wd]
+	    """
+	    beta = beta_init.copy()
+	    n = Xb.shape[0]
+	    for t in range(epochs):
+	        p = predict_proba_beta(Xb, beta)
+	        grad = Xb.T @ (p - y) + l2 * np.r_[0, beta[1:]]
+	        beta -= lr * grad / n
+	    return beta
+	
+	# -----------------------------
+	# 데이터 생성: 불균형 + 노이즈
+	# -----------------------------
+	RSEED = 123
+	X, y = make_classification(
+	    n_samples=3000, n_features=12, n_informative=5, n_redundant=3,
+	    n_clusters_per_class=2, weights=[0.88, 0.12], flip_y=0.06,
+	    class_sep=0.7, random_state=RSEED
+	)
+	
+	Xtr, Xte, ytr, yte = train_test_split(
+	    X, y, test_size=0.35, stratify=y, random_state=RSEED
+	)
+	
+	# 스케일링(수치 안정성에 매우 중요)
+	scaler = StandardScaler().fit(Xtr)
+	Xtr_s = scaler.transform(Xtr)
+	Xte_s = scaler.transform(Xte)
+	
+	# 편향항 추가
+	Xtr_b = add_bias(Xtr_s)
+	Xte_b = add_bias(Xte_s)
+	
+	# -----------------------------
+	# (1) LR: scikit-learn 기본 학습
+	# -----------------------------
+	lr_clf = LogisticRegression(solver='lbfgs', max_iter=2000, random_state=RSEED)
+	lr_clf.fit(Xtr_s, ytr)
+	
+	p1_tr = lr_clf.predict_proba(Xtr_s)[:, 1]
+	p1_te = lr_clf.predict_proba(Xte_s)[:, 1]
+	rep1_tr = metrics_report(ytr, p1_tr)
+	rep1_te = metrics_report(yte, p1_te)
+	print_report("(1) LR [train]", rep1_tr)
+	print_report("(1) LR [test ]", rep1_te)
+	print()
+	
+	# sklearn 파라미터를 beta로 변환(초기값)
+	beta_lr = np.r_[lr_clf.intercept_[0], lr_clf.coef_.ravel()]
+	
+	# -----------------------------
+	# (2) LR+MLE: LR 결과를 초기값으로, 로그우도 최대화(상승법)
+	# -----------------------------
+	beta_mle = fit_mle_ascent(
+	    Xtr_b, ytr, beta_init=beta_lr, lr=0.05, epochs=4000, l2=0.0
+	)
+	p2_tr = predict_proba_beta(Xtr_b, beta_mle)
+	p2_te = predict_proba_beta(Xte_b, beta_mle)
+	rep2_tr = metrics_report(ytr, p2_tr)
+	rep2_te = metrics_report(yte, p2_te)
+	print_report("(2) LR+MLE (ascent) [train]", rep2_tr)
+	print_report("(2) LR+MLE (ascent) [test ]", rep2_te)
+	print()
+	
+	# -----------------------------
+	# (3) LR+GDA: LR 결과를 초기값으로, SSE를 GD로 추가 학습(비권장)
+	# -----------------------------
+	beta_sse = fit_sse_descent(
+	    Xtr_b, ytr, beta_init=beta_lr, lr=0.03, epochs=4000, l2=0.0
+	)
+	p3_tr = predict_proba_beta(Xtr_b, beta_sse)
+	p3_te = predict_proba_beta(Xte_b, beta_sse)
+	rep3_tr = metrics_report(ytr, p3_tr)
+	rep3_te = metrics_report(yte, p3_te)
+	print_report("(3) LR+GDA (SSE) [train]", rep3_tr)
+	print_report("(3) LR+GDA (SSE) [test ]", rep3_te)
+	print()
+	
+	# -----------------------------
+	# (4) LR+MLE+GDA: LR 결과를 초기값으로, CE를 GD로 추가 학습(권장)
+	# -----------------------------
+	beta_ce = fit_ce_descent(
+	    Xtr_b, ytr, beta_init=beta_lr, lr=0.05, epochs=4000, l2=1.0  # L2로 일반화 향상
+	)
+	p4_tr = predict_proba_beta(Xtr_b, beta_ce)
+	p4_te = predict_proba_beta(Xte_b, beta_ce)
+	rep4_tr = metrics_report(ytr, p4_tr)
+	rep4_te = metrics_report(yte, p4_te)
+	print_report("(4) LR+MLE+GDA (CE) [train]", rep4_tr)
+	print_report("(4) LR+MLE+GDA (CE) [test ]", rep4_te)
+	
+	# 참고로 파라미터 변화량(노름)도 확인 가능
+	def l2_norm(v): return np.linalg.norm(v)
+	print("\n‣ ||beta(LR)||     =", f"{l2_norm(beta_lr):.4f}")
+	print("‣ ||beta(LR+MLE)|| =", f"{l2_norm(beta_mle):.4f}")
+	print("‣ ||beta(LR+GDA)|| =", f"{l2_norm(beta_sse):.4f}")
+	print("‣ ||beta(LR+MLE+GDA)|| =", f"{l2_norm(beta_ce):.4f}")
+
+
 
 **(MLE, GDA 추가 실행 결과)**
 
+	(1) LR [train]                 | Acc: 0.915  ROC-AUC: 0.871  PR-AUC: 0.699  LogLoss: 0.257  Brier: 0.070
+	(1) LR [test ]                 | Acc: 0.909  ROC-AUC: 0.878  PR-AUC: 0.705  LogLoss: 0.256  Brier: 0.071
+	(2) LR+MLE (ascent) [train]    | Acc: 0.914  ROC-AUC: 0.871  PR-AUC: 0.699  LogLoss: 0.257  Brier: 0.070
+	(2) LR+MLE (ascent) [test ]    | Acc: 0.909  ROC-AUC: 0.878  PR-AUC: 0.705  LogLoss: 0.256  Brier: 0.071
+	(3) LR+GDA (SSE) [train]       | Acc: 0.914  ROC-AUC: 0.871  PR-AUC: 0.700  LogLoss: 0.257  Brier: 0.070
+	(3) LR+GDA (SSE) [test ]       | Acc: 0.909  ROC-AUC: 0.878  PR-AUC: 0.705  LogLoss: 0.256  Brier: 0.071
+	(4) LR+MLE+GDA (CE) [train]    | Acc: 0.915  ROC-AUC: 0.872  PR-AUC: 0.699  LogLoss: 0.257  Brier: 0.070
+	(4) LR+MLE+GDA (CE) [test ]    | Acc: 0.909  ROC-AUC: 0.878  PR-AUC: 0.705  LogLoss: 0.256  Brier: 0.071
+
+	‣ ||beta(LR)||     = 3.6955
+	‣ ||beta(LR+MLE)|| = 3.7504
+	‣ ||beta(LR+GDA)|| = 3.7450
+	‣ ||beta(LR+MLE+GDA)|| = 3.6957
+
+
 
 **(MLE, GDA 추가 실행 결과 분석)**
+
+	(1) LR [test ]                 | Acc: 0.909  ROC-AUC: 0.878  PR-AUC: 0.705  LogLoss: 0.256  Brier: 0.071
+	(2) LR+MLE (ascent) [test ]    | Acc: 0.909  ROC-AUC: 0.878  PR-AUC: 0.705  LogLoss: 0.256  Brier: 0.071
+	(3) LR+GDA (SSE) [test ]       | Acc: 0.909  ROC-AUC: 0.878  PR-AUC: 0.705  LogLoss: 0.256  Brier: 0.071
+	(4) LR+MLE+GDA (CE) [test ]    | Acc: 0.909  ROC-AUC: 0.878  PR-AUC: 0.705  LogLoss: 0.256  Brier: 0.071
+
+	‣ ||beta(LR)||     = 3.6955
+	‣ ||beta(LR+MLE)|| = 3.7504
+	‣ ||beta(LR+GDA)|| = 3.7450
+	‣ ||beta(LR+MLE+GDA)|| = 3.6957
 
 
 	
