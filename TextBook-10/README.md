@@ -762,16 +762,10 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 
 **(1-3 예제 소스 실행 결과 분석)**
 
-	          X  y
-	0 -4.000000  0
-	1 -3.959799  0
-	2 -3.919598  0
-	3 -3.879397  0
-	4 -3.839196  0
-
-	=== 회귀 계수 비교 ===
-	Logistic β = const(절편) : -0.269938, X(기울기) : 2.237675
-	Probit β   = const(절편) : -0.167914, X(기울기) : 1.257213
+	=== 회귀 계수(β) 비교 ===
+	const(절편) : Logistic(-0.269938) < Probit(-0.167914)  →
+	X(기울기)   : Logistic(2.237675) > Probit(1.257213)    → Logistic이 1.78배 넓은 분포
+	
 	
 <br>
 
@@ -783,6 +777,7 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 ▣ 단점 : 클래스가 많을수록 계산량 증가, 데이터 불균형에 민감<br>
 ▣ Scikit-learn 클래스 : `sklearn.linear_model.LogisticRegression(multi_class='multinomial', solver='lbfgs')`<br>
 ▣ 회귀식 :  ![eq](https://latex.codecogs.com/png.latex?P(y=i|x)=\frac{e^{\beta_i^Tx}}{\sum_{j=1}^Ke^{\beta_j^Tx}}) <br>
+
 
 | 분야         | 대표 연구사례          | 연구 목적 / 문제 정의                   | **독립변수 (X)**                   | **종속변수 (y)**                  | 주요 결과 또는 의의                       |
 | :--------- | :--------------- | :------------------------------ | :----------------------------- | :---------------------------- | :-------------------------------- |
