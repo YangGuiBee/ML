@@ -578,7 +578,6 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 ▣ 목적 : 모델 파라미터의 불확실성을 고려하여 보다 안정적이고 신뢰도 있는 확률 예측을 수행<br>
 ▣ 장점 : 불확실성 정량화 가능, 과적합 방지 효과, 작은 데이터셋에서도 안정적 성능<br>
 ▣ 단점 : 계산 복잡도 높음 (MCMC, VI 등 필요), 수렴 속도 느림<br>
-▣ 적용분야 : 의료 리스크 분석, 자율주행 의사결정, 금융 리스크 모델링<br>
 ▣ Scikit-learn 클래스 : 직접 구현 없음 → PyMC / scikit-bayes (`sklearn_bayes.LogisticRegression`) 활용<br>
 ▣ 회귀식 : $P(\beta|D)\propto P(D|\beta)P(\beta))$ <br>
 
@@ -615,7 +614,6 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 ▣ 목적 : 잠재적인 연속 확률변수를 기준으로 이진 결과를 확률적으로 예측<br>
 ▣ 장점 : 정규분포 기반으로 통계적 엄밀성 높음,  이상치에 덜 민감<br>
 ▣ 단점 : 계산 복잡하고 직관성 낮음 , 로지스틱 회귀보다 구현 복잡<br>
-▣ 적용분야 : 경제·금융 분야의 선택모형, 행동경제학, 구매의사 예측<br>
 ▣ Scikit-learn 클래스 : 직접 지원 없음 → `statsmodels.discrete.discrete_model.Probit` 사용<br>
 ▣ 회귀식 :  ![eq](https://latex.codecogs.com/png.latex?P(y=1|x)=\Phi(\beta_0+\beta_1x_1+\cdots+\beta_kx_k)) <br>
 
@@ -641,7 +639,6 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 ▣ 목적 : 3개 이상의 클래스 중 어느 하나에 속할 확률을 추정<br>
 ▣ 장점 : 다중 클래스 문제 해결 가능, 각 클래스 확률을 해석적으로 제공<br>
 ▣ 단점 : 클래스가 많을수록 계산량 증가, 데이터 불균형에 민감<br>
-▣ 적용분야 : 문서 분류, 감정 분석, 이미지 라벨링, 음성인식<br>
 ▣ Scikit-learn 클래스 : `sklearn.linear_model.LogisticRegression(multi_class='multinomial', solver='lbfgs')`<br>
 ▣ 회귀식 :  ![eq](https://latex.codecogs.com/png.latex?P(y=i|x)=\frac{e^{\beta_i^Tx}}{\sum_{j=1}^Ke^{\beta_j^Tx}}) <br>
 
@@ -667,7 +664,6 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 ▣ 목적 : 인과 관계와 확률적 의존성을 명시적으로 표현하여 분류와 추론을 동시에 수행<br>
 ▣ 장점 : 변수 간 인과관계 해석 가능, 결측치 처리에 강함, 확률적 추론 및 구조 해석 가능<br>
 ▣ 단점 : 구조 학습 복잡도 매우 높음, 고차원 데이터에서는 비효율적<br>
-▣ 적용분야 : 의료진단(질병–증상 관계), 리스크 분석, 인과 추론, 추천 시스템<br>
 ▣ Scikit-learn 클래스 : 없음 → `pgmpy.models.BayesianNetwork` 활용 가능<br>
 ▣ 회귀식 :  ![eq](https://latex.codecogs.com/png.latex?P(X_1,\ldots,X_n)=\prod_iP(X_i|Pa(X_i))) <br>
 
@@ -696,7 +692,6 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 ▣ 장점 : 계산속도 빠르고 메모리 효율 높음, 소량의 데이터에서도 높은 성능, 텍스트 데이터에 특히 강함<br>
 ▣ 단점 : 독립성 가정이 비현실적, 연속형 변수 처리에 추가 전처리 필요<br>
 feature 간의 독립성(feature간에 서로 상관관계 無)이어야 하므로 실생활에서 바로 적용하기는 곤란<br>
-▣ 적용분야 : 스팸 필터링, 감정 분석, 뉴스/문서 분류, 텍스트 마이닝<br>
 ▣ Scikit-learn 클래스 : `sklearn.naive_bayes.GaussianNB`, `MultinomialNB`, `BernoulliNB`<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/naive_bayes.html<br>
 ▣ 회귀식 :  ![eq](https://latex.codecogs.com/png.latex?P(C|X)=\frac{P(X|C)P(C)}{P(X)})<br>
@@ -883,7 +878,6 @@ EM(Expectation–Maximization) 알고리즘을 이용해 파라미터를 추정�
 ![eq](https://latex.codecogs.com/png.latex?p(x)=\sum_{k=1}^K\pi_k\mathcal{N}(x|\mu_k,\Sigma_k))<br>
 ▣ 장점 : 복잡한 분포 구조 모델링 가능, 각 클래스에 대한 사후확률 계산 가능<br>
 ▣ 단점 : 초기값에 따라 수렴이 불안정, 지역 최적해에 빠질 수 있음, 계산량 많음<br>
-▣ 적용분야 : 음성인식, 이미지 세분화, 이상치 탐지, 고객 세분화<br>
 ▣ Scikit-learn 클래스 : `sklearn.mixture.GaussianMixture`<br>
 
 | 분야         | 대표 연구사례                               | 연구 목적 / 문제 정의                | **독립변수 (X)**                | **종속변수 (y)**                     | 주요 결과 또는 의의                    |
@@ -909,7 +903,6 @@ EM(Expectation–Maximization) 알고리즘을 이용해 파라미터를 추정�
 ![eq](https://latex.codecogs.com/png.latex?\hat{y}=\arg\min_c\|x-\mu_c\|^2) <br>
 ▣ 장점 : 계산이 단순하고 빠른 예측, 메모리 효율적, 고차원에서도 적용 가능<br>
 ▣ 단점 : 클래스 분산이 다른 경우 오분류 가능, 비선형 데이터에는 부적합<br>
-▣ 적용분야 : 문서 분류, 얼굴 인식, 클러스터 레이블링<br>
 ▣ Scikit-learn 클래스 : `sklearn.neighbors.NearestCentroid`<br>
 
 | 분야         | 대표 연구사례                  | 연구 목적 / 문제 정의           | **독립변수 (X)**          | **종속변수 (y)**           | 주요 결과 또는 의의                     |
@@ -935,7 +928,6 @@ EM(Expectation–Maximization) 알고리즘을 이용해 파라미터를 추정�
 ![eq](https://latex.codecogs.com/png.latex?D_M(x)=\sqrt{(x-\mu)^T\Sigma^{-1}(x-\mu)}) <br>
 ▣ 장점 : 변수 간 상관관계 반영, 스케일 조정 불필요, 이상치 탐지에 효과적<br>
 ▣ 단점 : 공분산 추정이 어려움, 고차원 데이터에서는 계산량 증가<br>
-▣ 적용분야 : 패턴인식, 이상탐지, 품질관리, 금융리스크 평가<br>
 ▣ Scikit-learn 클래스 : `sklearn.covariance.EmpiricalCovariance` (직접 Mahalanobis 거리 계산: `scipy.spatial.distance.mahalanobis`)<br>
 
 | 분야         | 대표 연구사례               | 연구 목적 / 문제 정의               | **독립변수 (X)**                 | **종속변수 (y)**          | 주요 결과 또는 의의                   |
