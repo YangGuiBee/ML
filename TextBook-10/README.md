@@ -1013,7 +1013,6 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 
 **▣ 나이브 베이즈 분류 적용분야 :**
 
-
 | 분야         | 대표 연구사례            | 연구 목적 / 문제 정의               | **독립변수 (X)**                     | **종속변수 (y)**             | 주요 결과 또는 의의               |
 | :--------- | :----------------- | :-------------------------- | :------------------------------- | :----------------------- | :------------------------ |
 | **의료·보건**  | **질병 예측 및 진단 자동화** | 환자의 기본검사 데이터로 질병 여부 예측      | 연령, 체온, 혈압, 증상, 혈액검사 결과          | 질병 여부 (1: 있음, 0: 없음)     | 단순한 확률모델로도 높은 진단 정확도 확보   |
@@ -1028,18 +1027,18 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 |            | **문서·뉴스 분류**       | 텍스트 데이터의 주제 자동 분류           | 단어빈도(TF-IDF), 문장길이, 문서형태         | 주제 (정치, 경제, 사회, 과학 등)    | NLP 기본 모델로 분류 효율 우수       |
 
 
-
 <br>
+
 
 # [2-3] 혼합모형 기반 분류 (GMM + EM Classification)
 
-▣ 정의 : 각 클래스가 다변량 가우시안 혼합분포(GMM)를 따른다고 가정하고,<br>
-EM(Expectation–Maximization) 알고리즘을 이용해 파라미터를 추정하는 확률적 분류<br>
-▣ 목적 : 비선형적이고 복잡한 분포 구조를 확률적으로 모델링하여 소프트 분류 수행<br>
-▣ 장점 : 복잡한 분포 구조 모델링 가능, 각 클래스에 대한 사후확률 계산 가능<br>
-▣ 단점 : 초기값에 따라 수렴이 불안정, 지역 최적해에 빠질 수 있음, 계산량 많음<br>
-▣ Scikit-learn 클래스 : `sklearn.mixture.GaussianMixture`<br>
-▣ 회귀식 :  ![eq](https://latex.codecogs.com/png.latex?p(x)=\sum_{k=1}^K\pi_k\mathcal{N}(x|\mu_k,\Sigma_k))<br>
+**▣ 정의 :** 각 클래스가 <ins>다변량 가우시안 혼합분포(GMM)</ins>를 따른다고 가정하고,<br>
+<ins>EM(Expectation–Maximization)</ins> 알고리즘을 이용해 파라미터를 추정하는 확률적 분류<br>
+**▣ 목적 :** 비선형적이고 복잡한 분포 구조를 확률적으로 모델링하여 소프트 분류 수행<br>
+**▣ 장점 :** 복잡한 분포 구조 모델링 가능, 각 클래스에 대한 사후확률 계산 가능<br>
+**▣ 단점 :** 초기값에 따라 수렴이 불안정, 지역 최적해에 빠질 수 있음, 계산량 많음<br>
+**▣ Scikit-learn 클래스 :** `sklearn.mixture.GaussianMixture`<br>
+**▣ 회귀식 :**  ![eq](https://latex.codecogs.com/png.latex?p(x)=\sum_{k=1}^K\pi_k\mathcal{N}(x|\mu_k,\Sigma_k))<br>
 
 
 **▣ 혼합모형 기반 분류 적용분야 :**
@@ -1064,12 +1063,12 @@ EM(Expectation–Maximization) 알고리즘을 이용해 파라미터를 추정�
 
 # [3-1] 최근접 중심 분류 (Nearest Centroid Classification)
 
-▣ 정의 : 각 클래스의 평균 벡터(centroid)를 계산하고, 새로운 데이터가 가장 가까운 중심에 속하는 클래스로 분류<br>
-▣ 목적 : 클래스 중심과의 거리 최소화를 통해 빠르고 단순한 분류 수행.<br>
-▣ 장점 : 계산이 단순하고 빠른 예측, 메모리 효율적, 고차원에서도 적용 가능<br>
-▣ 단점 : 클래스 분산이 다른 경우 오분류 가능, 비선형 데이터에는 부적합<br>
-▣ Scikit-learn 클래스 : `sklearn.neighbors.NearestCentroid`<br>
-▣ 회귀식 :  ![eq](https://latex.codecogs.com/png.latex?\hat{y}=\arg\min_c\|x-\mu_c\|^2) <br>
+**▣ 정의 :** 각 클래스의 평균 벡터(centroid)를 계산하고, 새로운 데이터가 가장 가까운 중심에 속하는 클래스로 분류<br>
+**▣ 목적 :** 클래스 중심과의 거리 최소화를 통해 빠르고 단순한 분류 수행.<br>
+**▣ 장점 :** 계산이 단순하고 빠른 예측, 메모리 효율적, 고차원에서도 적용 가능<br>
+**▣ 단점 :** 클래스 분산이 다른 경우 오분류 가능, 비선형 데이터에는 부적합<br>
+**▣ Scikit-learn 클래스 :** `sklearn.neighbors.NearestCentroid`<br>
+**▣ 회귀식 :**  ![eq](https://latex.codecogs.com/png.latex?\hat{y}=\arg\min_c\|x-\mu_c\|^2) <br>
 
 
 **▣ 최근접 중심 분류 적용분야 :**
@@ -1091,14 +1090,15 @@ EM(Expectation–Maximization) 알고리즘을 이용해 파라미터를 추정�
 
 <br>
 
+
 # [3-2] 마할라노비스 거리 분류 (Mahalanobis Distance Classification)
 
-▣ 정의 : 공분산을 고려한 거리 척도를 기반으로, 데이터 간 상관관계를 반영해 분류를 수행하는 거리 기반 모델<br>
-▣ 목적 : 특성 간 상관관계를 고려한 정규화된 거리 계산을 통해 분류 정확도를 향상<br>
-▣ 장점 : 변수 간 상관관계 반영, 스케일 조정 불필요, 이상치 탐지에 효과적<br>
-▣ 단점 : 공분산 추정이 어려움, 고차원 데이터에서는 계산량 증가<br>
-▣ Scikit-learn 클래스 : `sklearn.covariance.EmpiricalCovariance` (직접 Mahalanobis 거리 계산: `scipy.spatial.distance.mahalanobis`)<br>
-▣ 회귀식 :  ![eq](https://latex.codecogs.com/png.latex?D_M(x)=\sqrt{(x-\mu)^T\Sigma^{-1}(x-\mu)}) <br>
+**▣ 정의 :** 공분산을 고려한 거리 척도를 기반으로, 데이터 간 상관관계를 반영해 분류를 수행하는 거리 기반 모델<br>
+**▣ 목적 :** 특성 간 상관관계를 고려한 정규화된 거리 계산을 통해 분류 정확도를 향상<br>
+**▣ 장점 :** 변수 간 상관관계 반영, 스케일 조정 불필요, 이상치 탐지에 효과적<br>
+**▣ 단점 :** 공분산 추정이 어려움, 고차원 데이터에서는 계산량 증가<br>
+**▣ Scikit-learn 클래스 :** `sklearn.covariance.EmpiricalCovariance` (직접 Mahalanobis 거리 계산: `scipy.spatial.distance.mahalanobis`)<br>
+**▣ 회귀식 :**  ![eq](https://latex.codecogs.com/png.latex?D_M(x)=\sqrt{(x-\mu)^T\Sigma^{-1}(x-\mu)}) <br>
 
 
 **▣ 마할라노비스 거리 분류 적용분야 :**
