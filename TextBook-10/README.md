@@ -990,21 +990,21 @@ EM(Expectation–Maximization) 알고리즘을 이용해 파라미터를 추정�
 **(참고) 거리계산**
 
 
-| 구분 | 거리 이름 | 수식 | 특성 요약 | 장점 | 단점 | 주요 활용 분야 |
+| 거리 유형  | 수식 | 특성 요약 | 장점 | 단점 | 주요 활용 분야 |
 |------|------------|------|-------------|-------|-------|----------------|
-| **1** | **유클리드 거리 (Euclidean)** | $\sqrt{\sum_i (x_i - y_i)^2}$ | 가장 일반적인 “직선거리” | 계산 간단, 직관적 | 스케일 차이·상관관계 고려 X | KNN, K-means, 기본 거리 |
-| **2** | **맨해튼 거리 (Manhattan / L1)** | $\sum_i \lvert x_i - y_i \rvert$ | 축을 따라 이동하는 거리 (택시 거리) | 이상치에 강함, 계산 단순 | 방향 변화에 민감 | Lasso, Sparse 모델, Cityblock |
-| **3** | **민코프스키 거리 (Minkowski)** | $\left(\sum_i \lvert x_i - y_i \rvert^p \right)^{1/p}$ | 유클리드(p=2), 맨해튼(p=1)의 일반화 | 다양한 거리 표현 가능 | p 선택 필요 | 범용 거리 표현 |
-| **4** | **체비셰프 거리 (Chebyshev)** | $\max_i \lvert x_i - y_i \rvert$ | 가장 큰 축 차이만 반영 | 빠름, 단순 | 전체 모양 반영 부족 | 바둑판 거리, 게임 AI |
-| **5** | **코사인 거리 (Cosine)** | $1 - \dfrac{\mathbf{x} \cdot \mathbf{y}}{\|\mathbf{x}\|\|\mathbf{y}\|}$ | 두 벡터의 방향 차이(각도 기반) | 크기 무시, 방향 비교 | 크기 정보 손실 | 텍스트, 문서, NLP, 추천 |
-| **6** | **자카드 거리 (Jaccard)** | $1 - \dfrac{|A \cap B|}{|A \cup B|}$ | 집합 간 공통 비율 기반 | 범주형·이진 데이터 적합 | 수치형엔 부적합 | 이진 벡터, 추천, 클러스터링 |
-| **7** | **해밍 거리 (Hamming)** | $\sum_i [x_i \neq y_i]$ | 각 위치의 불일치 개수 | 문자열, 이진 비교 | 연속형엔 부적합 | 문자열 비교, 해시, 유전자 |
-| **8** | **마할라노비스 거리 (Mahalanobis)** | $\sqrt{(\mathbf{x} - \boldsymbol{\mu})^\top \Sigma^{-1} (\mathbf{x} - \boldsymbol{\mu})}$ | 공분산·상관관계 반영 거리 | 스케일·상관관계 보정 | 공분산 추정 필요, 느림 | 이상치 탐지, QDA, 통계 |
-| **9** | **카이제곱 거리 (Chi-square)** | $\sum_i \dfrac{(x_i - y_i)^2}{x_i + y_i}$ | 빈도·분포 간 차이 비교 | 빈도 데이터 적합 | 값 0에 민감 | 이미지 히스토그램, 분포 비교 |
-| **10** | **KL 발산 (Kullback–Leibler Divergence)** | $\sum_i p_i \log\dfrac{p_i}{q_i}$ | 두 확률분포 간 차이(비대칭) | 분포 기반 비교 | 대칭 아님, 로그 문제 | 정보이론, 확률모델 |
-| **11** | **Wasserstein 거리 (지구 이동 거리, EMD)** | $\inf_{\gamma \in \Pi(p,q)} \mathbb{E}_{(x,y)\sim \gamma} [\|x - y\|]$ | 확률분포 간 “이동량” 최소화 | 분포 비교 직관적 | 계산 복잡 | GAN, 분포 비교, 이미지 |
-| **12** | **Dynamic Time Warping (DTW)** | $\displaystyle \min_{\pi} \sum_{(i,j)\in\pi} d(x_i, y_j)$ | 시계열의 비선형 정렬 기반 거리 | 시간 왜곡 허용 | 계산량 많음 | 음성, ECG, 시계열 패턴 |
-| **13** | **Canberra 거리** | $\sum_i \dfrac{\lvert x_i - y_i \rvert}{\lvert x_i \rvert + \lvert y_i \rvert}$ | 상대적 비율 중심 거리 | 스케일 차이 완화 | 0 근처 불안정 | 생물정보학, 생화학 데이터 |
+| **1.유클리드 거리 (Euclidean)** | $\sqrt{\sum_i (x_i - y_i)^2}$ | 가장 일반적인 “직선거리” | 계산 간단, 직관적 | 스케일 차이·상관관계 고려 X | KNN, K-means, 기본 거리 |
+| **2.맨해튼 거리 (Manhattan / L1)** | $\sum_i \lvert x_i - y_i \rvert$ | 축을 따라 이동하는 거리 (택시 거리) | 이상치에 강함, 계산 단순 | 방향 변화에 민감 | Lasso, Sparse 모델, Cityblock |
+| **3.민코프스키 거리 (Minkowski)** | $\left(\sum_i \lvert x_i - y_i \rvert^p \right)^{1/p}$ | 유클리드(p=2), 맨해튼(p=1)의 일반화 | 다양한 거리 표현 가능 | p 선택 필요 | 범용 거리 표현 |
+| **4.체비셰프 거리 (Chebyshev)** | $\max_i \lvert x_i - y_i \rvert$ | 가장 큰 축 차이만 반영 | 빠름, 단순 | 전체 모양 반영 부족 | 바둑판 거리, 게임 AI |
+| **5.코사인 거리 (Cosine)** | $1 - \dfrac{\mathbf{x} \cdot \mathbf{y}}{\|\mathbf{x}\|\|\mathbf{y}\|}$ | 두 벡터의 방향 차이(각도 기반) | 크기 무시, 방향 비교 | 크기 정보 손실 | 텍스트, 문서, NLP, 추천 |
+| **6.자카드 거리 (Jaccard)** | $1 - \dfrac{|A \cap B|}{|A \cup B|}$ | 집합 간 공통 비율 기반 | 범주형·이진 데이터 적합 | 수치형엔 부적합 | 이진 벡터, 추천, 클러스터링 |
+| **7.해밍 거리 (Hamming)** | $\sum_i [x_i \neq y_i]$ | 각 위치의 불일치 개수 | 문자열, 이진 비교 | 연속형엔 부적합 | 문자열 비교, 해시, 유전자 |
+| **8.마할라노비스 거리 (Mahalanobis)** | $\sqrt{(\mathbf{x} - \boldsymbol{\mu})^\top \Sigma^{-1} (\mathbf{x} - \boldsymbol{\mu})}$ | 공분산·상관관계 반영 거리 | 스케일·상관관계 보정 | 공분산 추정 필요, 느림 | 이상치 탐지, QDA, 통계 |
+| **9.카이제곱 거리 (Chi-square)** | $\sum_i \dfrac{(x_i - y_i)^2}{x_i + y_i}$ | 빈도·분포 간 차이 비교 | 빈도 데이터 적합 | 값 0에 민감 | 이미지 히스토그램, 분포 비교 |
+| **10.KL 발산 (Kullback–Leibler Divergence)** | $\sum_i p_i \log\dfrac{p_i}{q_i}$ | 두 확률분포 간 차이(비대칭) | 분포 기반 비교 | 대칭 아님, 로그 문제 | 정보이론, 확률모델 |
+| **11.Wasserstein 거리 (지구 이동 거리, EMD)** | $\inf_{\gamma \in \Pi(p,q)} \mathbb{E}_{(x,y)\sim \gamma} [\|x - y\|]$ | 확률분포 간 “이동량” 최소화 | 분포 비교 직관적 | 계산 복잡 | GAN, 분포 비교, 이미지 |
+| **12.DTW (Dynamic Time Warping** | $\displaystyle \min_{\pi} \sum_{(i,j)\in\pi} d(x_i, y_j)$ | 시계열의 비선형 정렬 기반 거리 | 시간 왜곡 허용 | 계산량 많음 | 음성, ECG, 시계열 패턴 |
+| **13.Canberra 거리** | $\sum_i \dfrac{\lvert x_i - y_i \rvert}{\lvert x_i \rvert + \lvert y_i \rvert}$ | 상대적 비율 중심 거리 | 스케일 차이 완화 | 0 근처 불안정 | 생물정보학, 생화학 데이터 |
 
 
 
