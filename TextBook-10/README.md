@@ -65,39 +65,6 @@ $p = \frac{1}{1+e^{-(\hat{\beta}_0 + \hat{\beta}_1x_1 + \hat{\beta}_2x_2 + ...+\
 
 ![](./images/p.png)
 
-## ▣ 최대우도추정법(Maximum Likelihood Estimation, MLE)
-관측된 데이터가 주어졌을 때, 그 데이터를 가장 그럴듯하게(우도, likelihood가 최대가 되도록) 만들어내는 모수(parameter)를 추정하는 통계적 방법<br>
-최소제곱법(OLS)은 회귀식에서 오차 제곱합을 최소화하지만, 로지스틱 회귀의 출력은 0~1의 확률값으로 잔차 개념이 없으므로<br>
-관측된 레이블 Y가 주어진 X 하에서 나올 확률의 최대화를 위하여 최대우도추정법(MLE)을 사용하여 <ins>로그우도를 최대화하는 β 탐색</ins><br>
-![](./images/likelihood.png)
-
-<br>
-
-![](./images/PB.svg)
-
-<!--
-P(X_i,y_i|\beta) = \left\{\begin{matrix}
-\sigma(X_i|\beta), y_i=1\\
-1-\sigma(X_i|\beta), y_i=0
-\end{matrix}\right.
--->
-
-$P(X_i,y_i|\beta) = \sigma(X_i|\beta)^{y_i}(1-\sigma(X_i|\beta))^{1-y_i}$<br>
-
-$L(X,y|\beta) = \prod_{i=1}^{N}P(X_i,y_i|\beta)=\prod_{i=1}^{N}\sigma(X_i|\beta)^{y_i}(1-\sigma (X_i|\beta))^{1-y_i}$<br>
-
-$logL(X,y|\beta) = \sum_{i=1}^{N}y_ilog(\sigma (X_i|\beta))+(1-y_i)log(1-\sigma (X_i|\beta))$<br>
-
-<br>
-
-## ▣ 경사하강법(Gradient Descent Algorithm)
-![](./images/GD.png)
-
-$f(\omega +\Delta\omega)=f(\omega)+\frac{f'(\omega)}{1!}\Delta\omega+\frac{f''(\omega)}{2!}(\Delta\omega)^2+...$<br>
- 
-$\omega_{new}=\omega_{old}-\alpha f'(\omega), 0<\alpha<1$<br>
-
-$f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\alpha\left|f'(\omega)\right|^2<f(\omega_{old})$
 
 **(1-1 로지스틱 회귀 예제 소스)**
 
@@ -334,6 +301,52 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
     계수 해석 : setosa: 음의 petal 계수 / virginica: 양의 petal 계수
     결론 :  Logistic Regression이 Iris 데이터를 거의 완벽히 분리, softmax 확률 일관성도 매우 양호
 	======================================================================	
+
+
+## ▣ 최대우도추정법(Maximum Likelihood Estimation, MLE)
+관측된 데이터가 주어졌을 때, 그 데이터를 가장 그럴듯하게(우도, likelihood가 최대가 되도록) 만들어내는 모수(parameter)를 추정하는 통계적 방법<br>
+최소제곱법(OLS)은 회귀식에서 오차 제곱합을 최소화하지만, 로지스틱 회귀의 출력은 0~1의 확률값으로 잔차 개념이 없으므로<br>
+관측된 레이블 Y가 주어진 X 하에서 나올 확률의 최대화를 위하여 최대우도추정법(MLE)을 사용하여 <ins>로그우도를 최대화하는 β 탐색</ins><br>
+![](./images/likelihood.png)
+
+<br>
+
+![](./images/PB.svg)
+
+<!--
+P(X_i,y_i|\beta) = \left\{\begin{matrix}
+\sigma(X_i|\beta), y_i=1\\
+1-\sigma(X_i|\beta), y_i=0
+\end{matrix}\right.
+-->
+
+$P(X_i,y_i|\beta) = \sigma(X_i|\beta)^{y_i}(1-\sigma(X_i|\beta))^{1-y_i}$<br>
+
+$L(X,y|\beta) = \prod_{i=1}^{N}P(X_i,y_i|\beta)=\prod_{i=1}^{N}\sigma(X_i|\beta)^{y_i}(1-\sigma (X_i|\beta))^{1-y_i}$<br>
+
+$logL(X,y|\beta) = \sum_{i=1}^{N}y_ilog(\sigma (X_i|\beta))+(1-y_i)log(1-\sigma (X_i|\beta))$<br>
+
+<br>
+
+## ▣ 경사하강법(Gradient Descent Algorithm, GDA)
+![](./images/GD.png)
+
+$f(\omega +\Delta\omega)=f(\omega)+\frac{f'(\omega)}{1!}\Delta\omega+\frac{f''(\omega)}{2!}(\Delta\omega)^2+...$<br>
+ 
+$\omega_{new}=\omega_{old}-\alpha f'(\omega), 0<\alpha<1$<br>
+
+$f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\alpha\left|f'(\omega)\right|^2<f(\omega_{old})$
+
+
+
+**(MLE, GDA 추가 예제 소스)**
+
+
+**(MLE, GDA 추가 실행 결과)**
+
+
+**(MLE, GDA 추가 실행 결과 분석)**
+
 
 	
 
