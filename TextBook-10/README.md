@@ -543,16 +543,15 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 
 **(MLE, GDA 추가 실행 결과 분석)**
 
-	(1) LR [test ]                 | Acc: 0.909  ROC-AUC: 0.878  PR-AUC: 0.705  LogLoss: 0.256  Brier: 0.071
-	(2) LR+MLE (ascent) [test ]    | Acc: 0.909  ROC-AUC: 0.878  PR-AUC: 0.705  LogLoss: 0.256  Brier: 0.071
-	(3) LR+GDA (SSE) [test ]       | Acc: 0.909  ROC-AUC: 0.878  PR-AUC: 0.705  LogLoss: 0.256  Brier: 0.071
-	(4) LR+MLE+GDA (CE) [test ]    | Acc: 0.909  ROC-AUC: 0.878  PR-AUC: 0.705  LogLoss: 0.256  Brier: 0.071
-
-	‣ ||beta(LR)||     = 3.6955
-	‣ ||beta(LR+MLE)|| = 3.7504
-	‣ ||beta(LR+GDA)|| = 3.7450
-	‣ ||beta(LR+MLE+GDA)|| = 3.6957
-
+	| 구분              | 평가대상            | 값의 범위   | 낮을수록/높을수록 좋은가 | 주요 용도                 |
+	| --------------- | --------------- | ------- | ------------- | --------------------- |
+	| 정확도 (Accuracy)  | 전체 분류 결과        | 0 ~ 1   | 높을수록 좋음       | 일반적인 성능 척도            |
+	| ROC-AUC         | 분류 경계 구분능력      | 0.5 ~ 1 | 높을수록 좋음       | 전반적 분류력 평가            |
+	| PR-AUC          | 불균형 데이터의 양성 탐지력 | 0 ~ 1   | 높을수록 좋음       | 희귀 클래스 평가             |
+	| 로그 손실 (LogLoss) | 확률 예측의 품질       | 0 ~ ∞   | **낮을수록 좋음**   | 확률형 모델 평가             |
+	| 브라이어 점수 (Brier) | 확률 예측의 신뢰도      | 0 ~ 1   | **낮을수록 좋음**   | 확률 보정(Calibration) 평가 |
+	확률 품질(LogLoss, Brier) 동일이면 더 안정적인 최적화 방식을 선택
+	모델 복잡도↓(과도한 확신/과적합 위험이 낮음) : → ‖β‖ 최소값
 
 	
 
