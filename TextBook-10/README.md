@@ -7,7 +7,7 @@
 		[1-1] 로지스틱 회귀 (Logistic Regression)
 		[1-2] 베이즈 로지스틱 회귀 (Bayesian Logistic Regression)
 		[1-3] 프로빗 회귀 (Probit Regression)
-		[1-4] 소프트맥스 회귀 (Softmax Regression)
+		[1-4] 다항 로지스틱 회귀(Multinomial Logistic Regression) : 소프트맥스 회귀 (Softmax Regression)
 
 	[2] 통계·확률 기반
 		[2-1] 베이즈 네트워크 분류 (Bayesian Network Classification)
@@ -574,7 +574,7 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 
 # [1-2] 베이즈 로지스틱 회귀 (Bayesian Logistic Regression)
 
-▣ 정의 : 로지스틱 회귀의 계수를 확률변수로 보고, 사전분포(prior)와 사후분포(posterior)를 이용해 불확실성을 반영하는 베이즈 확률 모델<br>
+▣ 정의 : 로지스틱 회귀의 계수를 확률변수로 보고, 사전분포(prior)와 사후분포(posterior)를 이용해 불확실성을 반영하는 <ins>베이즈 확률 모델</ins><br>
 ▣ 목적 : 모델 파라미터의 불확실성을 고려하여 보다 안정적이고 신뢰도 있는 확률 예측을 수행<br>
 ▣ 장점 : 불확실성 정량화 가능, 과적합 방지 효과, 작은 데이터셋에서도 안정적 성능<br>
 ▣ 단점 : 계산 복잡도 높음 (MCMC, VI 등 필요), 수렴 속도 느림<br>
@@ -610,7 +610,7 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 
 # [1-3] 프로빗 회귀 (Probit Regression)
 
-▣ 정의 : 시그모이드 대신 정규분포의 누적분포함수(CDF)를 사용하여 확률을 계산하는 회귀 기반 이진 분류모델<br>
+▣ 정의 : 시그모이드 대신 <ins>정규분포의 누적분포함수(CDF)</ins>를 사용하여 확률을 계산하는 회귀 기반 이진 분류모델<br>
 ▣ 목적 : 잠재적인 연속 확률변수를 기준으로 이진 결과를 확률적으로 예측<br>
 ▣ 장점 : 정규분포 기반으로 통계적 엄밀성 높음,  이상치에 덜 민감<br>
 ▣ 단점 : 계산 복잡하고 직관성 낮음 , 로지스틱 회귀보다 구현 복잡<br>
@@ -769,9 +769,9 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 	
 <br>
 
-# [1-4] 소프트맥스 회귀 (Softmax Regression)
+# [1-4] 다항 로지스틱 회귀(Multinomial Logistic Regression) : 소프트맥스 회귀 (Softmax Regression)
 
-▣ 정의 : 로지스틱 회귀를 다중 클래스 분류로 확장한 모델로 각 클래스에 속할 확률을 동시에 계산<br>
+▣ 정의 : 로지스틱 회귀를 다중 클래스 분류로 확장한 모델로 각 클래스에 속할 확률을 동시에 계산하는 <ins>다항 로지스틱 회귀모델</ins><br>
 ▣ 목적 : 3개 이상의 클래스 중 어느 하나에 속할 확률을 추정<br>
 ▣ 장점 : 다중 클래스 문제 해결 가능, 각 클래스 확률을 해석적으로 제공<br>
 ▣ 단점 : 클래스가 많을수록 계산량 증가, 데이터 불균형에 민감<br>
