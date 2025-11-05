@@ -66,9 +66,9 @@ $p = \frac{1}{1+e^{-(\hat{\beta}_0 + \hat{\beta}_1x_1 + \hat{\beta}_2x_2 + ...+\
 ![](./images/p.png)
 
 ## ▣ 최대우도추정법(Maximum Likelihood Estimation, MLE)
-관측된 데이터가 주어졌을 때, 그 데이터를 가장 그럴듯하게(우도, likelihood가 최대가 되도록) 만들어내는 모수(parameter) 를 추정하는 통계적 방법<br>
+관측된 데이터가 주어졌을 때, 그 데이터를 가장 그럴듯하게(우도, likelihood가 최대가 되도록) 만들어내는 모수(parameter)를 추정하는 통계적 방법<br>
 최소제곱법(OLS)은 회귀식에서 오차 제곱합을 최소화하지만, 로지스틱 회귀의 출력은 0~1의 확률값으로 잔차 개념이 없으므로<br>
-관측된 레이블 Y가 주어진 X 하에서 나올 확률의 최대화를 위하여 최대우도추정법(MLE)을 사용<br>
+관측된 레이블 Y가 주어진 X 하에서 나올 확률의 최대화를 위하여 최대우도추정법(MLE)을 사용하여 <ins>무엇을 최적화할지를 결정</ins><br>
 ![](./images/likelihood.png)
 
 <br>
