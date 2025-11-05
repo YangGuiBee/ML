@@ -631,6 +631,138 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 |            | **모바일 앱 설치 결정요인 분석**   | 사용자 특성이 앱 설치 여부에 미치는 영향 분석            | 이용시간, 리뷰평점, 다운로드수, 요금유무        | 설치 여부 (1: 설치, 0: 미설치)      | 선택행동(install vs skip) 분석에 적합           |
 
 
+
+**(1-3 예제 소스 실행 결과)**
+	
+	import os
+	import subprocess
+	import matplotlib as mpl
+	from matplotlib import font_manager
+	import numpy as np
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	import statsmodels.api as sm
+	
+	# -------------------------------------------
+	# Windows 한글 폰트 자동 설정
+	# -------------------------------------------
+	def ensure_korean_font():
+	    candidates = [
+	        "Malgun Gothic", "맑은 고딕",
+	        "NanumGothic", "나눔고딕",
+	        "Noto Sans KR", "Noto Sans CJK KR",
+	        "AppleGothic"
+	    ]
+	    installed_fonts = set(f.name for f in font_manager.fontManager.ttflist)
+	    selected = None
+	
+	    for f in candidates:
+	        if f in installed_fonts:
+	            selected = f
+	            break
+	
+	    # 폰트가 없으면 나눔고딕 자동 설치 시도
+	    if selected is None:
+	        print("한글 폰트가 없어 '나눔고딕'을 설치합니다...")
+	        try:
+	            subprocess.run(
+	                'powershell -Command "choco install nanumgothic -y"',
+	                check=True,
+	                shell=True
+	            )
+	            print("나눔고딕 설치 완료. 런타임을 재시작해야 적용됩니다.")
+	        except Exception as e:
+	            print("폰폰트 자동 설치 실패:", e)
+	        selected = "NanumGothic"
+	
+	    mpl.rcParams["font.family"] = selected
+	    mpl.rcParams["axes.unicode_minus"] = False
+	    print(f"한글 폰트 설정 완료: {selected}")
+	
+	ensure_korean_font()
+	
+	# -------------------------------------------
+	# 가상 데이터 생성
+	# -------------------------------------------
+	np.random.seed(0)
+	n = 200
+	X = np.linspace(-4, 4, n)
+	z = -0.5 + 1.2 * X + np.random.normal(0, 1, n)
+	p = 1 / (1 + np.exp(-z))
+	y = (p > 0.5).astype(int)
+	df = pd.DataFrame({'X': X, 'y': y})
+	
+	print(df.head())
+	
+	# -------------------------------------------
+	# 로지스틱 회귀
+	# -------------------------------------------
+	logit_model = sm.Logit(df['y'], sm.add_constant(df['X']))
+	logit_result = logit_model.fit(disp=False)
+	
+	# -------------------------------------------
+	# 프로빗 회귀
+	# -------------------------------------------
+	probit_model = sm.Probit(df['y'], sm.add_constant(df['X']))
+	probit_result = probit_model.fit(disp=False)
+	
+	# -------------------------------------------
+	# 예측 확률 계산
+	# -------------------------------------------
+	X_pred = np.linspace(-4, 4, 400)
+	X_pred_df = sm.add_constant(X_pred)
+	p_logit = logit_result.predict(X_pred_df)
+	p_probit = probit_result.predict(X_pred_df)
+	
+	# -------------------------------------------
+	# 시각화
+	# -------------------------------------------
+	plt.figure(figsize=(10,6))
+	sns.scatterplot(x='X', y='y', data=df, color='gray', alpha=0.5, label='실제 데이터')
+	
+	plt.plot(X_pred, p_logit, color='red', linewidth=2, label='로지스틱 회귀 (Sigmoid)')
+	plt.plot(X_pred, p_probit, color='blue', linewidth=2, linestyle='--', label='프로빗 회귀 (정규 CDF)')
+	
+	plt.title('로지스틱 회귀 vs 프로빗 회귀 확률 곡선 비교', fontsize=14)
+	plt.xlabel('입력 변수 X')
+	plt.ylabel('P(Y=1|X)')
+	plt.legend()
+	plt.grid(True)
+	plt.show()
+	
+	# -------------------------------------------
+	# 회귀 계수 비교
+	# -------------------------------------------
+	print("\n=== 회귀 계수 비교 ===")
+	print("Logistic β:\n", logit_result.params)
+	print("\nProbit β:\n", probit_result.params)
+
+**(1-3 예제 소스 실행)**
+
+	          X  y
+	0 -4.000000  0
+	1 -3.959799  0
+	2 -3.919598  0
+	3 -3.879397  0
+	4 -3.839196  0
+
+	=== 회귀 계수 비교 ===
+	Logistic β:
+ 	const   -0.269938
+	X        2.237675
+	dtype: float64
+
+	Probit β:
+ 	const   -0.167914
+	X        1.257213
+	dtype: float64
+
+![](./images/probit.png)
+
+**(1-3 예제 소스 실행 결과 분석)**
+
+
 <br>
 
 # [1-4] 소프트맥스 회귀 (Softmax Regression)
