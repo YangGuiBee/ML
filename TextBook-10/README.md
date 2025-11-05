@@ -989,7 +989,6 @@ EM(Expectation–Maximization) 알고리즘을 이용해 파라미터를 추정�
 
 **(참고) 거리계산**
 
-## Ⅲ. 주요 거리 계산 방식별 특징 요약
 
 | 구분 | 거리 이름 | 수식 | 특성 요약 | 장점 | 단점 | 주요 활용 분야 |
 |------|------------|------|-------------|-------|-------|----------------|
@@ -1004,8 +1003,9 @@ EM(Expectation–Maximization) 알고리즘을 이용해 파라미터를 추정�
 | **9** | **카이제곱 거리 (Chi-square)** | $\sum_i \dfrac{(x_i - y_i)^2}{x_i + y_i}$ | 빈도·분포 간 차이 비교 | 빈도 데이터 적합 | 값 0에 민감 | 이미지 히스토그램, 분포 비교 |
 | **10** | **KL 발산 (Kullback–Leibler Divergence)** | $\sum_i p_i \log\dfrac{p_i}{q_i}$ | 두 확률분포 간 차이(비대칭) | 분포 기반 비교 | 대칭 아님, 로그 문제 | 정보이론, 확률모델 |
 | **11** | **Wasserstein 거리 (지구 이동 거리, EMD)** | $\inf_{\gamma \in \Pi(p,q)} \mathbb{E}_{(x,y)\sim \gamma} [\|x - y\|]$ | 확률분포 간 “이동량” 최소화 | 분포 비교 직관적 | 계산 복잡 | GAN, 분포 비교, 이미지 |
-| **12** | **Dynamic Time Warping (DTW)** | $\text{min}_{\pi} \sum_{(i,j)\in \pi} d(x_i, y_j)$ | 시계열의 비선형 정렬 기반 거리 | 시간 왜곡 허용 | 계산량 많음 | 음성, ECG, 시계열 패턴 |
+| **12** | **Dynamic Time Warping (DTW)** | $\displaystyle \min_{\pi} \sum_{(i,j)\in\pi} d(x_i, y_j)$ | 시계열의 비선형 정렬 기반 거리 | 시간 왜곡 허용 | 계산량 많음 | 음성, ECG, 시계열 패턴 |
 | **13** | **Canberra 거리** | $\sum_i \dfrac{\lvert x_i - y_i \rvert}{\lvert x_i \rvert + \lvert y_i \rvert}$ | 상대적 비율 중심 거리 | 스케일 차이 완화 | 0 근처 불안정 | 생물정보학, 생화학 데이터 |
+
 
 
 
