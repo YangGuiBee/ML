@@ -573,14 +573,16 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 
 <br>
 
+
 # [1-2] 베이즈 로지스틱 회귀 (Bayesian Logistic Regression)
 
 **▣ 정의 :** 로지스틱 회귀의 계수를 확률변수로 보고, 사전분포(prior)와 사후분포(posterior)를 이용해 불확실성을 반영하는 <ins>베이즈 확률 모델</ins><br>
-▣ 목적 : 모델 파라미터의 불확실성을 고려하여 보다 안정적이고 신뢰도 있는 확률 예측을 수행<br>
-▣ 장점 : 불확실성 정량화 가능, 과적합 방지 효과, 작은 데이터셋에서도 안정적 성능<br>
-▣ 단점 : 계산 복잡도 높음 (MCMC, VI 등 필요), 수렴 속도 느림<br>
-▣ Scikit-learn 클래스 : 직접 구현 없음 → PyMC / scikit-bayes (`sklearn_bayes.LogisticRegression`) 활용<br>
-▣ 회귀식 : $P(\beta|D)\propto P(D|\beta)P(\beta))$ <br>
+**▣ 목적 :** 모델 파라미터의 불확실성을 고려하여 보다 안정적이고 신뢰도 있는 확률 예측을 수행<br>
+**▣ 장점 :** 불확실성 정량화 가능, 과적합 방지 효과, 작은 데이터셋에서도 안정적 성능<br>
+**▣ 단점 :** 계산 복잡도 높음 (MCMC, VI 등 필요), 수렴 속도 느림<br>
+**▣ Scikit-learn 클래스 :** 직접 구현 없음 → PyMC / scikit-bayes (`sklearn_bayes.LogisticRegression`) 활용<br>
+**▣ 회귀식 :** $P(\beta|D)\propto P(D|\beta)P(\beta))$ <br>
+
 
 **▣ 베이즈 로지스틱 회귀 적용분야 :**
 
@@ -597,6 +599,7 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 | **IT·데이터** | **스팸메일 분류**      | 불균형 데이터에서 스팸 탐지 확률 추정         | 단어빈도, 제목 길이, 발신자 도메인, 첨부파일        | 스팸 여부 (1: 스팸, 0: 정상)     | 사전확률로 클래스 불균형 문제 완화           |
 |            | **사용자 행동 예측**    | 개인화된 사용자 행동 확률 모델링            | 접속빈도, 클릭수, 체류시간, 관심카테고리           | 행동 발생 여부 (1: 발생, 0: 미발생) | 개인 단위 불확실성 예측, 맞춤형 추천모델 적용 가능 |
 
+
 **(전통 로지스틱 회귀와 베이즈 로지스틱 회귀의 차이)**
 
 | 분야         | 전통 로지스틱 회귀 주요 사례                          | 베이즈 로지스틱 회귀 주요 사례                        |
@@ -610,14 +613,16 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 
 <br>
 
+
 # [1-3] 프로빗 회귀 (Probit Regression)
 
-▣ 정의 : 시그모이드 대신 <ins>정규분포의 누적분포함수(CDF)</ins>를 사용하여 확률을 계산하는 회귀 기반 이진 분류모델<br>
-▣ 목적 : 잠재적인 연속 확률변수를 기준으로 이진 결과를 확률적으로 예측<br>
-▣ 장점 : 정규분포 기반으로 통계적 엄밀성 높음,  이상치에 덜 민감<br>
-▣ 단점 : 계산 복잡하고 직관성 낮음 , 로지스틱 회귀보다 구현 복잡<br>
-▣ Scikit-learn 클래스 : 직접 지원 없음 → `statsmodels.discrete.discrete_model.Probit` 사용<br>
-▣ 회귀식 :  ![eq](https://latex.codecogs.com/png.latex?P(y=1|x)=\Phi(\beta_0+\beta_1x_1+\cdots+\beta_kx_k)) <br>
+**▣ 정의 :** 시그모이드 대신 <ins>정규분포의 누적분포함수(CDF)</ins>를 사용하여 확률을 계산하는 회귀 기반 이진 분류모델<br>
+**▣ 목적 :** 잠재적인 연속 확률변수를 기준으로 이진 결과를 확률적으로 예측<br>
+**▣ 장점 :** 정규분포 기반으로 통계적 엄밀성 높음,  이상치에 덜 민감<br>
+**▣ 단점 :** 계산 복잡하고 직관성 낮음 , 로지스틱 회귀보다 구현 복잡<br>
+**▣ Scikit-learn 클래스 :** 직접 지원 없음 → `statsmodels.discrete.discrete_model.Probit` 사용<br>
+**▣ 회귀식 :**  ![eq](https://latex.codecogs.com/png.latex?P(y=1|x)=\Phi(\beta_0+\beta_1x_1+\cdots+\beta_kx_k)) <br>
+
 
 **▣ 프로빗 회귀 적용분야 :**
 
@@ -775,18 +780,18 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 	
 <br>
 
+
 # [1-4] 다항 로지스틱 회귀(Multinomial Logistic Regression) : 소프트맥스 회귀 (Softmax Regression)
 
-▣ 정의 : 로지스틱 회귀를 다중 클래스 분류로 확장한 모델로 각 클래스에 속할 확률을 동시에 계산하는 <ins>다항 로지스틱 회귀모델</ins><br>
-▣ 목적 : 3개 이상의 클래스 중 어느 하나에 속할 확률을 추정<br>
-▣ 장점 : 다중 클래스 문제 해결 가능, 각 클래스 확률을 해석적으로 제공<br>
-▣ 단점 : 클래스가 많을수록 계산량 증가, 데이터 불균형에 민감<br>
-▣ Scikit-learn 클래스 : `sklearn.linear_model.LogisticRegression(multi_class='multinomial', solver='lbfgs')`<br>
-▣ 회귀식 :  ![eq](https://latex.codecogs.com/png.latex?P(y=i|x)=\frac{e^{\beta_i^Tx}}{\sum_{j=1}^Ke^{\beta_j^Tx}}) <br>
+**▣ 정의 :** 로지스틱 회귀를 다중 클래스 분류로 확장한 모델로 각 클래스에 속할 확률을 동시에 계산하는 <ins>다항 로지스틱 회귀모델</ins><br>
+**▣ 목적 :** 3개 이상의 클래스 중 어느 하나에 속할 확률을 추정<br>
+**▣ 장점 :** 다중 클래스 문제 해결 가능, 각 클래스 확률을 해석적으로 제공<br>
+**▣ 단점 :** 클래스가 많을수록 계산량 증가, 데이터 불균형에 민감<br>
+**▣ Scikit-learn 클래스 :** `sklearn.linear_model.LogisticRegression(multi_class='multinomial', solver='lbfgs')`<br>
+**▣ 회귀식 :**  ![eq](https://latex.codecogs.com/png.latex?P(y=i|x)=\frac{e^{\beta_i^Tx}}{\sum_{j=1}^Ke^{\beta_j^Tx}}) <br>
 
 
 **▣ 소프트맥스 회귀 적용분야 :**
-
 
 | 분야         | 대표 연구사례          | 연구 목적 / 문제 정의                   | **독립변수 (X)**                   | **종속변수 (y)**                  | 주요 결과 또는 의의                       |
 | :--------- | :--------------- | :------------------------------ | :----------------------------- | :---------------------------- | :-------------------------------- |
@@ -801,21 +806,20 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 | **IT·데이터** | **이미지 분류**       | 픽셀값·특징벡터로 객체를 다범주 분류            | 이미지 픽셀값, 색상, 모양 특징 등           | 클래스 (예: 고양이, 개, 자동차, 비행기 등)   | CNN의 출력층에 Softmax 사용, 대표적 다중분류 모델 |
 |            | **문서 주제 분류**     | 문서의 단어벡터를 이용해 주제 자동분류           | TF-IDF, 단어빈도, 문장길이, 키워드빈도      | 주제 (정치, 경제, 문화, 과학 등)         | NLP 분류의 기본기준 모델로 활용               |
 
-
 <br>
+
 
 # [2-1] 베이즈 네트워크 분류 (Bayesian Network Classification)
 
-▣ 정의 : 변수 간 조건부 의존관계를 방향성 비순환 그래프(DAG) 형태로 표현한 확률 그래픽 모델 기반 분류<br>
-▣ 목적 : 인과 관계와 확률적 의존성을 명시적으로 표현하여 분류와 추론을 동시에 수행<br>
-▣ 장점 : 변수 간 인과관계 해석 가능, 결측치 처리에 강함, 확률적 추론 및 구조 해석 가능<br>
-▣ 단점 : 구조 학습 복잡도 매우 높음, 고차원 데이터에서는 비효율적<br>
-▣ Scikit-learn 클래스 : 없음 → `pgmpy.models.BayesianNetwork` 활용 가능<br>
-▣ 회귀식 :  ![eq](https://latex.codecogs.com/png.latex?P(X_1,\ldots,X_n)=\prod_iP(X_i|Pa(X_i))) <br>
+**▣ 정의 :** 변수 간 조건부 의존관계를 방향성 비순환 그래프(DAG) 형태로 표현한 확률 그래픽 모델 기반 분류<br>
+**▣ 목적 :** 인과 관계와 확률적 의존성을 명시적으로 표현하여 분류와 추론을 동시에 수행<br>
+**▣ 장점 :** 변수 간 인과관계 해석 가능, 결측치 처리에 강함, 확률적 추론 및 구조 해석 가능<br>
+**▣ 단점 :** 구조 학습 복잡도 매우 높음, 고차원 데이터에서는 비효율적<br>
+**▣ Scikit-learn 클래스 :** 없음 → `pgmpy.models.BayesianNetwork` 활용 가능<br>
+**▣ 회귀식 :**  ![eq](https://latex.codecogs.com/png.latex?P(X_1,\ldots,X_n)=\prod_iP(X_i|Pa(X_i))) <br>
 
 
 **▣ 베이즈 네트워크 분류 적용분야 :**
-
 
 | 분야         | 대표 연구사례           | 연구 목적 / 문제 정의                          | **독립변수 (X)**                 | **종속변수 (y)**              | 주요 결과 또는 의의                 |
 | :--------- | :---------------- | :------------------------------------- | :--------------------------- | :------------------------ | :-------------------------- |
@@ -830,21 +834,21 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 | **IT·데이터** | **침입탐지 시스템(IDS)** | 네트워크 트래픽 변수 간 관계를 반영한 공격 탐지            | 패킷길이, 포트번호, 연결횟수, IP유형       | 공격 여부 (1: 공격, 0: 정상)      | 복잡한 상호작용을 확률그래프로 표현 가능      |
 |            | **추천시스템 사용자모델링**  | 사용자 특성과 아이템 속성 간 인과관계 기반 추천            | 연령, 관심사, 평점이력, 시간대           | 선택 아이템 (다항형)              | 개인화된 확률적 추천, 설명 가능한 추천모델 구현 |
 
-
 <br>
+
 
 # [2-2] 나이브 베이즈 분류 (Naive Bayes Classification)
 
-▣ 정의 : 입력 변수들이 서로 독립이라고 가정한 확률모형으로, 베이즈 정리를 이용해 각 클래스의 사후확률을 계산하는 단순하고 빠른 분류<br>
-베이즈 정리 : 사건의 확률과 추가정보를 고려했을때 확률의 변화<br>
-나이브 베이지안 알고리즘 : 사전확률을 통해 특징값이 제공하는 증거를 기반으로 사후확률을 예측(순진하고 때로는 잘못된 가정에도 불구하고 우수한 성능을 보임)<br>
-▣ 목적 : 주어진 입력이 특정 클래스에 속할 확률을 간단하고 빠르게 계산<br>
-▣ 장점 : 계산속도 빠르고 메모리 효율 높음, 소량의 데이터에서도 높은 성능, 텍스트 데이터에 특히 강함<br>
-▣ 단점 : 독립성 가정이 비현실적, 연속형 변수 처리에 추가 전처리 필요<br>
+**▣ 정의 :** 입력 변수들이 서로 독립이라고 가정한 확률모형으로, 베이즈 정리를 이용해 각 클래스의 사후확률을 계산하는 단순하고 빠른 분류<br>
+**<ins>베이즈 정리</ins> :** 사건의 확률과 추가정보를 고려했을때 확률의 변화<br>
+**<ins>나이브 베이지안 알고리즘</ins> :** 사전확률을 통해 특징값이 제공하는 증거를 기반으로 사후확률을 예측(순진하고 때로는 잘못된 가정에도 불구하고 우수한 성능을 보임)<br>
+**▣ 목적 :** 주어진 입력이 특정 클래스에 속할 확률을 간단하고 빠르게 계산<br>
+**▣ 장점 :** 계산속도 빠르고 메모리 효율 높음, 소량의 데이터에서도 높은 성능, 텍스트 데이터에 특히 강함<br>
+**▣ 단점 :** 독립성 가정이 비현실적, 연속형 변수 처리에 추가 전처리 필요<br>
 feature 간의 독립성(feature간에 서로 상관관계 無)이어야 하므로 실생활에서 바로 적용하기는 곤란<br>
-▣ Scikit-learn 클래스 : `sklearn.naive_bayes.GaussianNB`, `MultinomialNB`, `BernoulliNB`<br>
-▣ 가이드 : https://scikit-learn.org/stable/modules/naive_bayes.html<br>
-▣ 회귀식 :  ![eq](https://latex.codecogs.com/png.latex?P(C|X)=\frac{P(X|C)P(C)}{P(X)})<br>
+**▣ Scikit-learn 클래스 :** `sklearn.naive_bayes.GaussianNB`, `MultinomialNB`, `BernoulliNB`<br>
+**▣ 가이드 :** https://scikit-learn.org/stable/modules/naive_bayes.html<br>
+**▣ 회귀식 :**  ![eq](https://latex.codecogs.com/png.latex?P(C|X)=\frac{P(X|C)P(C)}{P(X)})<br>
 
 ![](./images/nb.png)
 <br>
@@ -854,7 +858,7 @@ feature 간의 독립성(feature간에 서로 상관관계 無)이어야 하므�
 
 p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) = 0.8
 
-▣ 베이지안 최적화(Bayesian Optimization) 단계 : 미지의 함수가 반환하는 값의 최소 또는 최대값을 만드는 최적의 해를 짧은 반복을 통해 찾아내는 최적화 방식<br> 
+**▣ 베이지안 최적화(Bayesian Optimization) 단계 :** 미지의 함수가 반환하는 값의 최소 또는 최대값을 만드는 최적의 해를 짧은 반복을 통해 찾아내는 최적화 방식<br> 
 <br>
 (1단계) 최초에는 랜덤하게 하이퍼파라미터들을 샘플링하여 성능결과를 관측
 
@@ -877,17 +881,17 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 
 <br> 
 
-▣ 회귀식 : 독립변수의 조건부 확률에 조건부 독립가정을 추가한 베이즈 분류기가 나이브 베이즈 분류기<br>
+**▣ 회귀식 :**  독립변수의 조건부 확률에 조건부 독립가정을 추가한 베이즈 분류기가 나이브 베이즈 분류기<br>
 
 ![](./images/NB.png)
 
 <br>
 
-▣ 유형<br>
+**▣ 유형**<br>
 
- - **가우시안 나이브 베이즈(Gaussian Naive Bayes, GaussianNB) :** 연속적인 값을 지닌 데이터를 처리 할때, 전형적으로 각 클래스의 연속적인 값들이 가우스 분포를 따른다고 가정한다.<br>
- - API : https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB<br>
- - 회귀식 : $P(x_i \mid y) = \frac{1}{\sqrt{2\pi\sigma^2_y}} \exp\left(-\frac{(x_i - \mu_y)^2}{2\sigma^2_y}\right)$<br>
+ **<ins>① 가우시안 나이브 베이즈(Gaussian Naive Bayes, GaussianNB)</ins> :** 연속적인 값을 지닌 데이터 처리시, 전형적으로 각 클래스의 연속적인 값들이 가우스 분포를 따른다고 가정<br>
+ **API :** https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB<br>
+ **회귀식 :** $P(x_i \mid y) = \frac{1}{\sqrt{2\pi\sigma^2_y}} \exp\left(-\frac{(x_i - \mu_y)^2}{2\sigma^2_y}\right)$<br>
 
 <br>
 
@@ -920,10 +924,28 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 
 <br>
 
- - **다항 나이브 베이즈(Multinomial Naive Bayes, MultinomialNB) :** 하나의 문서에서 단어의 출현을 나타내는 이벤트를 가지고 문서 분류를 하는데 사용되는 이벤트 모델이다.<br>
- - API : https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB<br>
-  <!-- $\hat{\theta}_{yi} = \frac{N_{yi} + \alpha}{N_y + \alpha n}$<br> -->
- - 회귀식 :   ![](./images/theta.svg)
+**<ins>② 다항 나이브 베이즈(Multinomial Naive Bayes, MultinomialNB)</ins> :** 하나의 문서에서 단어의 출현을 나타내는 이벤트를 가지고 문서 분류를 하는데 사용되는 이벤트 모델이다.<br>
+**API :**  https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB<br>
+<!-- $\hat{\theta}_{yi} = \frac{N_{yi} + \alpha}{N_y + \alpha n}$<br> -->
+**회귀식 :**   ![](./images/theta.svg)
+
+<br>
+
+**<ins>③ 베르누이 나이브 베이즈(Bernoulli Naive Bayes, Bernoulli NB)</ins> :** 다변량 베르누이 분포에 따라 분포된 데이터에 대한 나이브 베이즈 학습 및 분류 알고리즘으로, 특성들은 입력들을 설명하는 독립적인 부울 값(이진 변수)이다.<br>
+**API :** https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.BernoulliNB.html#sklearn.naive_bayes.BernoulliNB<br>
+**회귀식 :** $P(x_i \mid y) = P(x_i = 1 \mid y) x_i + (1 - P(x_i = 1 \mid y)) (1 - x_i)$<br>
+
+<br>
+
+**<ins>④ 보완 나이브 베이즈(Complement Naive Bayes, CNB)</ins> :** 불균형 데이터 세트에 특히 적합한 표준 다항 나이브 베이즈(MNB) 알고리즘의 변형<br>
+**API :** https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.ComplementNB.html#sklearn.naive_bayes.ComplementNB<br>
+
+<br>
+
+**<ins>⑤ 범주형 나이브 베이즈(Categorical Naive Bayes, CategoricalNB)</ins> :** 범주적으로 분포된 데이터에 대한 범주적 나이브 베이즈 알고리즘을 구현하고, 인덱스로 설명되는 각 기능이 고유한 범주형 분포를 갖는다.(결측치에서도 동작)<br>
+**API :** https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.CategoricalNB.html#sklearn.naive_bayes.CategoricalNB<br>
+
+
 <br>
 
 	import numpy as np
@@ -958,21 +980,6 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 
 	#학습 데이터(X, y)에 대한 정확도 출력 (모델의 성능 평가)
 	print('정확도 : ', clf.score(X, y))  # 성능 평가 점수 (Accuracy)
-
-
- - **베르누이 나이브 베이즈(Bernoulli Naive Bayes, Bernoulli NB) :** 다변량 베르누이 분포에 따라 분포된 데이터에 대한 나이브 베이즈 학습 및 분류 알고리즘으로, 특성들은 입력들을 설명하는 독립적인 부울 값(이진 변수)이다.<br>
- - API : https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.BernoulliNB.html#sklearn.naive_bayes.BernoulliNB<br>
- - 회귀식 : $P(x_i \mid y) = P(x_i = 1 \mid y) x_i + (1 - P(x_i = 1 \mid y)) (1 - x_i)$<br>
-
-<br>
-
- - **보완 나이브 베이즈(Complement Naive Bayes, CNB) :** 불균형 데이터 세트에 특히 적합한 표준 다항 나이브 베이즈(MNB) 알고리즘의 변형<br>
- - API : https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.ComplementNB.html#sklearn.naive_bayes.ComplementNB<br>
-
-<br>
-
- - **범주형 나이브 베이즈(Categorical Naive Bayes, CategoricalNB) :** 범주적으로 분포된 데이터에 대한 범주적 나이브 베이즈 알고리즘을 구현하고, 인덱스로 설명되는 각 기능이 고유한 범주형 분포를 갖는다.(결측치에서도 동작)<br>
- - API : https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.CategoricalNB.html#sklearn.naive_bayes.CategoricalNB<br>
 
 
 <br> 
