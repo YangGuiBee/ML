@@ -771,7 +771,7 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 ![](./images/probit.png)
 
 
-**(1-3 예제 소스 실행 결과 분석)**
+**([1-3] 프로빗 예제 소스 실행 결과 분석)**
 
 	=== 회귀 계수(β) 비교 ===
 	const(절편) : Logistic(-0.269938) < Probit(-0.167914)  →
