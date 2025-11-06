@@ -641,7 +641,7 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 
 
 
-**([1-3] 프로빗 예제 소스 실행 결과)**
+**([1-3] 프로빗 회귀 예제 소스)**
 	
 	import os
 	import subprocess
@@ -748,7 +748,7 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 	print("\nProbit β:\n", probit_result.params)
 
 
-**([1-3] 프로빗 예제 소스 실행)**
+**([1-3] 프로빗 회귀 예제 소스 실행 결과)**
 
 	          X  y
 	0 -4.000000  0
@@ -771,7 +771,7 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 ![](./images/probit.png)
 
 
-**([1-3] 프로빗 예제 소스 실행 결과 분석)**
+**([1-3] 프로빗 회귀 예제 소스 실행 결과 분석)**
 
 	=== 회귀 계수(β) 비교 ===
 	const(절편) : Logistic(-0.269938) < Probit(-0.167914)  →
