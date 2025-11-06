@@ -932,23 +932,6 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 
 <br>
 
-**<ins>③ 베르누이 나이브 베이즈(Bernoulli Naive Bayes, Bernoulli NB)</ins> :** 다변량 베르누이 분포에 따라 분포된 데이터에 대한 나이브 베이즈 학습 및 분류 알고리즘으로, 특성들은 입력들을 설명하는 독립적인 부울 값(이진 변수)이다.<br>
-**API :** https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.BernoulliNB.html#sklearn.naive_bayes.BernoulliNB<br>
-**회귀식 :** $P(x_i \mid y) = P(x_i = 1 \mid y) x_i + (1 - P(x_i = 1 \mid y)) (1 - x_i)$<br>
-
-<br>
-
-**<ins>④ 보완 나이브 베이즈(Complement Naive Bayes, CNB)</ins> :** 불균형 데이터 세트에 특히 적합한 표준 다항 나이브 베이즈(MNB) 알고리즘의 변형<br>
-**API :** https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.ComplementNB.html#sklearn.naive_bayes.ComplementNB<br>
-
-<br>
-
-**<ins>⑤ 범주형 나이브 베이즈(Categorical Naive Bayes, CategoricalNB)</ins> :** 범주적으로 분포된 데이터에 대한 범주적 나이브 베이즈 알고리즘을 구현하고, 인덱스로 설명되는 각 기능이 고유한 범주형 분포를 갖는다.(결측치에서도 동작)<br>
-**API :** https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.CategoricalNB.html#sklearn.naive_bayes.CategoricalNB<br>
-
-
-<br>
-
 	import numpy as np
 	from sklearn.naive_bayes import MultinomialNB
 
@@ -981,6 +964,22 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 
 	#학습 데이터(X, y)에 대한 정확도 출력 (모델의 성능 평가)
 	print('정확도 : ', clf.score(X, y))  # 성능 평가 점수 (Accuracy)
+
+<br>
+
+**<ins>③ 베르누이 나이브 베이즈(Bernoulli Naive Bayes, Bernoulli NB)</ins> :** 다변량 베르누이 분포에 따라 분포된 데이터에 대한 나이브 베이즈 학습 및 분류 알고리즘으로, 특성들은 입력들을 설명하는 독립적인 부울 값(이진 변수)이다.<br>
+**API :** https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.BernoulliNB.html#sklearn.naive_bayes.BernoulliNB<br>
+**회귀식 :** $P(x_i \mid y) = P(x_i = 1 \mid y) x_i + (1 - P(x_i = 1 \mid y)) (1 - x_i)$<br>
+
+<br>
+
+**<ins>④ 보완 나이브 베이즈(Complement Naive Bayes, CNB)</ins> :** 불균형 데이터 세트에 특히 적합한 표준 다항 나이브 베이즈(MNB) 알고리즘의 변형<br>
+**API :** https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.ComplementNB.html#sklearn.naive_bayes.ComplementNB<br>
+
+<br>
+
+**<ins>⑤ 범주형 나이브 베이즈(Categorical Naive Bayes, CategoricalNB)</ins> :** 범주적으로 분포된 데이터에 대한 범주적 나이브 베이즈 알고리즘을 구현하고, 인덱스로 설명되는 각 기능이 고유한 범주형 분포를 갖는다.(결측치에서도 동작)<br>
+**API :** https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.CategoricalNB.html#sklearn.naive_bayes.CategoricalNB<br>
 
 
 <br> 
