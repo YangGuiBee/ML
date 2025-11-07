@@ -38,6 +38,44 @@
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html
 ▣ 회귀식 : LDA는 회귀식이라기보다는 판별함수 형태입니다. 통상 다음과 같이 나타낼 수 있습니다.
 
+# 선형판별 분석 : LDA(Linear Discriminant Analysis)
+![](./images/LDA_1.png)
+<br>
+▣ 정의: 클래스 간 분산을 최대화하고 클래스 내 분산을 최소화하는 선형 차원 축소 기법으로 주로 지도 학습에서 사용<br>
+▣ 필요성: 클래스 간 분리를 극대화하면서 데이터를 저차원으로 투영하여 분류 문제의 성능을 향상시키기 위해 필요<br>
+▣ 장점: 클래스 분리를 극대화하여 분류 성능을 개선할 수 있으며, 선형 변환을 통해 효율적으로 차원을 축소<br>
+▣ 단점: 데이터가 선형적으로 구분되지 않는 경우 성능이 저하될 수 있으며, 클래스 간 분포가 정규 분포를 따를 때 더 효과적<br>
+▣ 응용분야: 얼굴 인식, 이미지 분류, 텍스트 분류 등<br>
+▣ 모델식: 두 클래스 간의 분산 비율을 최대화하는 방향으로 데이터를 투영<br>
+
+    from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+    import matplotlib.pyplot as plt
+    from sklearn.datasets import load_iris
+
+    # 데이터 로드
+    data = load_iris()
+    X = data.data
+    y = data.target
+
+    # LDA 적용
+    lda = LinearDiscriminantAnalysis(n_components=2)
+    X_lda = lda.fit_transform(X, y)
+
+    # 결과 시각화
+    plt.scatter(X_lda[:, 0], X_lda[:, 1], c=y)
+    plt.xlabel("LDA Component 1")
+    plt.ylabel("LDA Component 2")
+    plt.title("LDA on Iris Dataset")
+    plt.colorbar()
+    plt.show()
+
+![](./images/LDA.png)
+<br><br>
+![](./images/PCA_LDA.png)
+<br>
+https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysis-python/
+<br>
+
 <br>
 
 # [1-2] Quadratic Discriminant Analysis (QDA)
@@ -118,9 +156,214 @@
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html
 ▣ API : 위 각 클래스 링크 (Classifier/Regressor)
 
+# 결정 트리(Decision Tree)
+▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/index.html<br>
+▣ 정의 : 어떤 항목에 대한 관측값과 목표값을 연결시켜주는 예측 모델로, 대표적인 지도학습 분류 모델이며, 스무고개와 같이 질문에 대하여 '예' 또는 '아니오'를 결정하여 트리 구조를 나타낸다.<br> 
+
+![](./images/tree.png)
+
+| 장점                             | 단점                                              |
+|----------------------------------|---------------------------------------------------|
+| 시각화를 통한 해석의 용이성(나무 구조로 표현되어 이해가 쉬움, 새로운 개체 분류를 위해 루트 노드부터 끝 노트까지 따라가면 되므로 분석 용이) | 휴리스틱에 근거한 실용적 알고리즘으로 학습용 자료에 의존하기에 전역 최적화를 얻지 못할 수도 있음(검증용 데이터를 활용한 교차 타당성 평가를 진행하는 과정이 필요) |
+| 데이터 전처리, 가공작업이 불필요 | 자료에 따라 불안정함(적은 수의 자료나 클래스 수에 비교하여 학습 데이터가 적으면 높은 분류에러 발생) | 
+| 수치형, 범주형 데이터 모두 적용 가능 | 각 변수의 고유한 영향력을 해석하기 어려움 | 
+| 비모수적인 방법으로 선형성, 정규성 등의 가정이 필요없고 이상값에 민감하지 않음 | 자료가 복잡하면 실행시간이 급격하게 증가함 | 
+| 대량의 데이터 처리에도 적합하고 모형 분류 정확도가 높음 | 연속형 변수를 비연속적 값으로 취급하여 분리 경계점에서는 예측오류가 매우 커지는 현상 발생 | 
+
+![](./images/trees.png)
+
 <br>
 
-# [3-2] k‑Nearest Neighbor (k-최근접 이웃, k-NN)
+# 결정 트리 회귀(Decision Tree Regression)
+▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html#regression<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html<br>
+▣ 정의 : 데이터에 내재되어 있는 패턴을 비슷한 수치의 관측치 변수의 조합으로 예측 모델을 나무 형태로 만든다.<br>
+▣ 모델식 : $\widehat{f}(x) = \sum_{m=1}^{M}C_mI((x_1,x_2)\in R_m)$<br>
+비용함수(cost function)를 최소로 할때 최상의 분할 : 데이터를 M개로 분할($R_1,R_2,...R_M$)<br> 
+$\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{N}(y_i-\sum_{m=1}^{M}C_mI(x\in R_m))^2$<br>
+각 분할에 속해 있는 y값들의 평균으로 예측했을때 오류가 최소화 : $\widehat{C}_m=ave(y_i|x_i\in R_m)$<br>
+
+	from sklearn.tree import DecisionTreeRegressor
+ 	from sklearn.metrics import mean_squared_error
+ 
+ 	# 결정 트리 회귀 모델 생성 및 학습 (최대 깊이 5)
+	tree_reg = DecisionTreeRegressor(max_depth=5, random_state=42)
+	tree_reg.fit(X_train, y_train)
+
+	# 테스트 데이터에 대한 예측
+	y_pred = tree_reg.predict(X_test)
+
+	# 모델 성능 평가 (평균 제곱 오차)
+	mse = mean_squared_error(y_test, y_pred)
+	print(f"Mean Squared Error: {mse}")
+
+<br>
+
+# 결정 트리 분류(Decision Tree Classification)
+▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html#classification<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html<br>
+▣ 정의 : 데이터에 내재되어 있는 패턴을 비슷한 범주의 관측치 변수의 조합으로 분류 모델을 나무 형태로 만든다.<br>
+▣ 모델식 : $\widehat{f(x)} = \sum_{m=1}^{M}k(m)I((x_1,x_2)\in R_m)$<br>
+끝노드(m)에서 클래스(k)에 속할 관측치의 비율 : $\widehat{P_{mk}}=\frac{1}{N_m}\sum_{x_i\in R_m}^{}I(y_i=k)$<br>
+끝노드 m으로 분류된 관측치 : $k(m) = \underset{k}{argmax}\widehat{P_{mk}}$<br><br>
+▣ 비용함수(불순도 측정) : 불순도(Impurity)가 높을수록 다양한 클래스들이 섞여 있고, 불순도가 낮을수록 특정 클래스에 속한 데이터가 명확<br>
+(1) 오분류율(Misclassification rate, Error rate) : 분류 모델이 잘못 분류한 샘플의 비율로, 전체 샘플 중에서 실제 값과 예측 값이 일치하지 않는 샘플의 비율을 나타낸다.(0에서 100 사이의 값, 0%: 모델이 모든 샘플을 완벽하게 예측, 100%: 모델이 모든 샘플을 잘못 예측)<br><br>
+$\frac{FP+FN}{TP+TN+FP+FN}$ 
+###### FP(False Positive) : 실제 값이 Negative인데 Positive로 예측, FN(False Negative) : 실제 값이 Positive인데 Negative로 예측, TP(True Positive) : 실제 값이 Positive이고 Positive로 올바르게 예측, TN(True Negative) : 실제 값이 Negative이고 Negative로 올바르게 예측<br>
+(2) 지니계수(Gini Coefficient) : 데이터셋이 얼마나 혼합되어 있는지를 나타내는 불순도의 측정치(0에서 0.5 사이의 값, 0: 데이터가 완벽하게 한 클래스에 속해 있음을 의미하며, 불순도가 전혀 없는 상태, 0.5: 두 개의 클래스가 완벽하게 섞여 있는 상태)<br>
+$Gini(p)=1-\sum_{i=1}^{n}p_i^2$<br><br>
+(3) 엔트로피(Entropy) : 확률 이론에서 온 개념으로 불확실성 또는 정보의 무질서를 측정하는 또 다른 방식으로, 데이터가 얼마나 혼란스럽고 예측하기 어려운지를 측정(0에서 1 사이의 값, 0 : 데이터가 완벽하게 한 클래스에 속해 있으며, 불확실성이 없는 상태, 1 : 데이터가 완전히 섞여 있고, 가장 큰 불확실성을 가지고 있다.<br>
+$Entropy(p) = -\sum_{i=1}^{n}p_ilog_2p_i$<br> 
+
+▣ 유형 :  ID3, CART
+ - ID3 : 모든 독립변수가 범주형 데이터인 경우에만 분류가 가능하다. 정보획득량(Infomation Gain)이 높은 특징부터 분기해나가는데 정보획득량은 분기전 엔트로피와 분기후 엔트로피의 차이를 말한다.(엔트로피 사용)<br><br>
+$IG(S, A) = E(S) - E(S|A)$<br>
+ - CART : Classification and Regression Tree의 약자로, 이름 그대로 분류와 회귀가 모두 가능한 결정트리 알고리즘으로 yes 또는 no 두 가지로 분기한다.(지니계수 사용)<br><br> 
+$f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
+
+<br>
+
+	from sklearn.tree import DecisionTreeClassifier
+	from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+ 	#결정 트리 분류 모델 생성 (최대 깊이 3으로 설정)
+	clf = DecisionTreeClassifier(max_depth=3, random_state=42)
+	clf.fit(X_train, y_train)  # 학습 데이터를 이용해 모델 학습
+
+	#테스트 데이터에 대한 예측
+	y_pred = clf.predict(X_test)
+
+	#정확도 출력
+	accuracy = accuracy_score(y_test, y_pred)  # 정확도 계산
+	print(f"Accuracy: {accuracy * 100:.2f}%")  # 정확도 출력
+
+
+<br>
+
+	(개별 트리 모델의 단점)	
+ 	계층적 구조로 인해 중간에 에러가 발생하면 다음 단계로 에러가 계속 전파
+  	학습 데이터의 미세한 변동에도 최종결과에 큰 영향
+   	적은 개수의 노이즈에도 큰 영향
+	나무의 최종 노드 개수를 늘리면 과적합 위함(Low Bias, Large Variance)
+
+	(해결방안) 랜덤 포레스트(Random forest)
+
+
+<br>
+
+# [3-2] 랜덤 포레스트 (Random Forest)
+
+▣ 정의 : 많은 트리를 무작위로 만들어 다수결로 예측하는 방법
+랜덤 포레스트(Random Forest)는 여러 개의 **결정 트리(Decision Tree)**를
+배깅(Bagging, Bootstrap Aggregating) 방식으로 학습하여,
+그 예측값을 평균(회귀) 또는 **다수결(분류)**로 통합하는 앙상블(Ensemble) 학습 알고리즘입니다.
+각 트리는 서로 다른 부트스트랩 표본과 일부 특성(feature subset)을 사용하여
+모델 간 상관을 줄이고, 과적합(overfitting)을 완화합니다.
+▣ 목적 : 단일 결정 트리의 **불안정성(variance 높음)**을 보완하고
+**예측의 안정성(stability)**과 **정확도(accuracy)**를 높이기 위함입니다.
+데이터의 노이즈나 이상치에 강인한 모델을 구성하여
+일반화 성능을 향상시키는 것이 핵심 목적입니다.
+▣ 장점 : 과적합 방지 효과 — 트리 여러 개를 평균/투표함으로써 분산(variance)을 낮춤.
+변수 중요도(Feature Importance) 자동 산출 기능 — 어떤 변수가 예측에 중요한지 해석 가능.
+비선형 관계 및 변수 간 상호작용을 자연스럽게 포착 가능.
+데이터 스케일 조정 불필요, 결측값에도 비교적 강건.
+분류와 회귀 모두 사용 가능하며, 이상치(outlier)에 민감하지 않음.
+▣ 단점 : 모델 해석이 어렵다 — 개별 트리 수가 많아 ‘블랙박스’화됨.
+메모리 및 연산량 증가 — 트리 수가 많으면 훈련과 예측 시간이 길어짐.
+트리 간 상관성 완전 제거 불가 — 무작위화(randomness)로도 일부 상관 잔존 가능.
+**실시간 예측(online prediction)**이 필요한 경우에는 느릴 수 있음.
+▣ Scikit-learn 클래스명 : 분류용 sklearn.ensemble.RandomForestClassifier 회귀용 sklearn.ensemble.RandomForestRegressor
+▣ 가이드 : Scikit-learn Ensemble Methods Guide — Random Forests
+▣ API 링크주소 : 분류용 RandomForestClassifier API 회귀용 RandomForestRegressor API
+
+#  랜덤 포레스트(Random Forest)  
+▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#random-forests<br>
+▣ 정의 : 분류와 회귀에 사용되는 지도학습 알고리즘으로 여러 개의 의사결정나무(Decision Tree)를 조합한 **앙상블 학습(ensemble learning)** 을 적용한 모델이다. 여러개의 Training data를 생성하여 각 데이터마다 개별 의사결정나무모델을 구축하는 배깅(bootstrap aggregation, bagging)과 의사결정 모델 구축시 변수를 무작위로 선택하는 Random subspace가 특징.<br>
+▣ 모델식 : $\widehat{y}=\frac{1}{N}\sum_{i=1}^{N}T_i(X)$ ($N$ : 결정트리의 수, $T_i(X)$ : 각 결정트리 $i$가 입력값 $X$에 대해 예측한 값)
+
+![](./images/Bootstrap.png)
+출처: https://www.researchgate.net/figure/Schematic-of-the-RF-algorithm-based-on-the-Bagging-Bootstrap-Aggregating-method_fig1_309031320<br>
+
+
+| 장점                             | 단점                                              |
+|----------------------------------|---------------------------------------------------|
+| 모델이 단순, 과적합이 잘 일어나지 않음 | 여러개의 결정트리 사용으로 메모리 사용량 큼 |
+| 새로운 데이터에 일반화가 용이함 | 고차원 및 희소 데이터에 잘 작동하지 않음 |
+
+# 랜덤 포레스트 회귀(Random Forest Regression)  
+▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#randomforestregressor<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor<br>
+▣ 정의 : 랜덤 포레스트 회귀 모델은 각 트리가 예측한 값들의 평균을 통해 최종 예측값을 도출하는 모델로, 다수결 대신, 트리에서 얻은 예측값의 평균을 사용하여 연속적인 값을 예측한다.<br>
+▣ 모델식 : $\widehat{y}= \frac{1}{B}\sum_{i=1}^{B}T_i(x)$<br>
+###### $T_i(x)$: 입력 데이터 𝑥에 대한 𝑖번째 결정 트리의 예측값, B: 전체 트리의 개수
+
+
+	from sklearn.ensemble import RandomForestRegressor
+ 
+ 	# 트리 개수를 변화시키며 모델 학습 및 평가
+	for iTrees in nTreeList:
+    		depth = None  # 트리 깊이 제한 없음
+    		maxFeat = 4  # 사용할 최대 특징 수
+    		# 랜덤 포레스트 회귀 모델 생성 및 학습
+    		wineRFModel = ensemble.RandomForestRegressor(n_estimators=iTrees,
+			max_depth=depth, max_features=maxFeat,
+			oob_score=False, random_state=531)
+    		wineRFModel.fit(xTrain, yTrain)  # 모델 학습
+    		# 테스트 데이터에 대한 예측값 계산
+    		prediction = wineRFModel.predict(xTest)
+    		# MSE 계산 및 누적
+    		mseOos.append(mean_squared_error(yTest, prediction))
+     
+	# MSE 출력
+	print("MSE")
+	print(mseOos)
+
+
+<br>
+
+# 랜덤 포레스트 분류(Random Forest Classification)    	  	
+▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#randomforestclassifier<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier<br>
+▣ 정의 : 랜덤 포레스트 분류 모델은 다수의 의사결정나무(Decision Trees)를 기반으로 한 앙상블 모델로, 각 나무는 독립적으로 클래스를 예측한 후 다수결 투표를 통해 최종 클래스를 결정한다.<br>
+▣ 모델식 : $\widehat{y}=mode(T_1(x),T_2(x),...,T_B(x))$<br>
+###### $T_i(x)$: 입력 데이터 𝑥에 대한 𝑖번째 결정 트리의 예측값, B: 전체 트리의 개수, mode 함수 : 다수결 투표방식
+
+	from sklearn.ensemble import RandomForestClassifier
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score
+	from sklearn import datasets
+
+	# 붓꽃 데이터셋 로드
+	iris = datasets.load_iris()
+
+	# 독립 변수와 종속 변수 분리
+	X = iris.data
+	y = iris.target
+
+	# 학습용 데이터와 테스트용 데이터 분리
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+	# 랜덤 포레스트 모델 초기화
+	model = RandomForestClassifier()
+
+	# 모델 학습
+	model.fit(X_train, y_train)
+
+	# 테스트 데이터 예측
+	y_pred = model.predict(X_test)
+
+	# 정확도 계산
+	accuracy = accuracy_score(y_test, y_pred)
+	print("Accuracy:", accuracy)
+ 
+<br>
+
+
+<br>
+
+# [4-1] k‑Nearest Neighbor (k-최근접 이웃, k-NN)
 ▣  정의 : 새로운 입력 샘플에 대해 학습데이터 중 가장 가까운 𝑘개의 이웃을 찾아, 이들의 레이블(분류) 혹은 평균/가중평균(회귀)을 이용해 예측하는 비모수 기반의 지도학습 모델입니다. 
 ▣ 목적 : 단순하면서도 학습된 모델 구조가 거의 없으므로 빠르게 적용 가능하고, 데이터의 형태가 복잡하거나 비선형일 때 유연하게 대응하고자 할 때 사용됩니다.
 ▣ 장점 : 학습 단계가 거의 없고, 구현이 매우 간단합니다.
@@ -131,64 +374,7 @@
 ▣ 가이드 : https://scikit-learn.org/stable/modules/neighbors.html
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
 
-<br>
-
-# [4-1] Support Vector Machine (SVM)
-▣ 정의 : 데이터를 고차원 공간으로 매핑한 후, 클래스 간 마진(여유폭)을 최대화하는 초평면(hyperplane)을 찾아 분류 혹은 회귀(서포트벡터회귀, SVR)하는 지도학습 기법입니다. 
-▣ 목적 : 특히 경계가 선형이 아니거나, 고차원 공간에서 마진이 중요한 문제에 대해 강건한 분류/회귀 모델을 구축하기 위함입니다.
-▣ 장점 : 마진 최대화라는 견고한 이론 기반이 있으며, 커널을 사용해 비선형 데이터도 효과적으로 처리할 수 있습니다.
-고차원 특성 공간에서 비교적 잘 작동할 수 있습니다.
-▣ 단점 : 훈련 및 예측 시간이 샘플 수 및 특성 수에 따라 급격히 증가할 수 있으며, 커널 선정·하이퍼파라미터 튜닝이 까다롭습니다.
-결과 해석이 다른 단순 모델에 비해 어렵습니다.
-▣ Scikit-learn 클래스명 : 분류용 sklearn.svm.SVC 회귀용은 sklearn.svm.SVR
-▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html
- 
-
-
-![](./images/SLC.png)
-<br>출처 : https://towardsdatascience.com/top-machine-learning-algorithms-for-classification-2197870ff501
-
-# [3-1] 선형판별 분석 : LDA(Linear Discriminant Analysis)
-![](./images/LDA_1.png)
-<br>
-▣ 정의: 클래스 간 분산을 최대화하고 클래스 내 분산을 최소화하는 선형 차원 축소 기법으로 주로 지도 학습에서 사용<br>
-▣ 필요성: 클래스 간 분리를 극대화하면서 데이터를 저차원으로 투영하여 분류 문제의 성능을 향상시키기 위해 필요<br>
-▣ 장점: 클래스 분리를 극대화하여 분류 성능을 개선할 수 있으며, 선형 변환을 통해 효율적으로 차원을 축소<br>
-▣ 단점: 데이터가 선형적으로 구분되지 않는 경우 성능이 저하될 수 있으며, 클래스 간 분포가 정규 분포를 따를 때 더 효과적<br>
-▣ 응용분야: 얼굴 인식, 이미지 분류, 텍스트 분류 등<br>
-▣ 모델식: 두 클래스 간의 분산 비율을 최대화하는 방향으로 데이터를 투영<br>
-
-    from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-    import matplotlib.pyplot as plt
-    from sklearn.datasets import load_iris
-
-    # 데이터 로드
-    data = load_iris()
-    X = data.data
-    y = data.target
-
-    # LDA 적용
-    lda = LinearDiscriminantAnalysis(n_components=2)
-    X_lda = lda.fit_transform(X, y)
-
-    # 결과 시각화
-    plt.scatter(X_lda[:, 0], X_lda[:, 1], c=y)
-    plt.xlabel("LDA Component 1")
-    plt.ylabel("LDA Component 2")
-    plt.title("LDA on Iris Dataset")
-    plt.colorbar()
-    plt.show()
-
-![](./images/LDA.png)
-<br><br>
-![](./images/PCA_LDA.png)
-<br>
-https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysis-python/
-<br>
-
-
-# [1] k-최근접 이웃(k-Nearest Neighbors, K-NN) 	
+# k-최근접 이웃(k-Nearest Neighbors, K-NN) 	
 ▣ 가이드 : https://scikit-learn.org/stable/modules/neighbors.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/neighbors/index.html<br>
 ▣ 정의 : 머신러닝에서 데이터를 가장 가까운 유사속성에 따라 분류하여 데이터를 거리기반으로 분류분석하는 기법으로,<br>
@@ -260,8 +446,21 @@ $X_{new} = \frac{X-\mu}{\sigma}= \frac{X-min(X)}{StdDev(X)}$
 	print(kn.score(test_input, test_target))
 
 <br>
- 
-# [2] 서포트 벡터 머신(Support Vector Machine, SVM)
+
+<br>
+
+# [4-2] Support Vector Machine (SVM)
+▣ 정의 : 데이터를 고차원 공간으로 매핑한 후, 클래스 간 마진(여유폭)을 최대화하는 초평면(hyperplane)을 찾아 분류 혹은 회귀(서포트벡터회귀, SVR)하는 지도학습 기법입니다. 
+▣ 목적 : 특히 경계가 선형이 아니거나, 고차원 공간에서 마진이 중요한 문제에 대해 강건한 분류/회귀 모델을 구축하기 위함입니다.
+▣ 장점 : 마진 최대화라는 견고한 이론 기반이 있으며, 커널을 사용해 비선형 데이터도 효과적으로 처리할 수 있습니다.
+고차원 특성 공간에서 비교적 잘 작동할 수 있습니다.
+▣ 단점 : 훈련 및 예측 시간이 샘플 수 및 특성 수에 따라 급격히 증가할 수 있으며, 커널 선정·하이퍼파라미터 튜닝이 까다롭습니다.
+결과 해석이 다른 단순 모델에 비해 어렵습니다.
+▣ Scikit-learn 클래스명 : 분류용 sklearn.svm.SVC 회귀용은 sklearn.svm.SVR
+▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html
+
+# 서포트 벡터 머신(Support Vector Machine, SVM)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/svm/index.html<br>
 ▣ 정의 : SVM은 N차원 공간을 (N-1)차원으로 나눌 수 있는 초평면을 찾는 분류 기법으로 2개의 클래스를 분류할 수 있는 최적의 경계를 찾는다.<br>
@@ -358,182 +557,22 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 	scores = cross_val_score(svm_clf, X, y, cv = 5)
  	scores.mean()
 
-<br>
-
-# [3] 결정 트리(Decision Tree)
-▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html<br>
-▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/index.html<br>
-▣ 정의 : 어떤 항목에 대한 관측값과 목표값을 연결시켜주는 예측 모델로, 대표적인 지도학습 분류 모델이며, 스무고개와 같이 질문에 대하여 '예' 또는 '아니오'를 결정하여 트리 구조를 나타낸다.<br> 
-
-![](./images/tree.png)
-
-| 장점                             | 단점                                              |
-|----------------------------------|---------------------------------------------------|
-| 시각화를 통한 해석의 용이성(나무 구조로 표현되어 이해가 쉬움, 새로운 개체 분류를 위해 루트 노드부터 끝 노트까지 따라가면 되므로 분석 용이) | 휴리스틱에 근거한 실용적 알고리즘으로 학습용 자료에 의존하기에 전역 최적화를 얻지 못할 수도 있음(검증용 데이터를 활용한 교차 타당성 평가를 진행하는 과정이 필요) |
-| 데이터 전처리, 가공작업이 불필요 | 자료에 따라 불안정함(적은 수의 자료나 클래스 수에 비교하여 학습 데이터가 적으면 높은 분류에러 발생) | 
-| 수치형, 범주형 데이터 모두 적용 가능 | 각 변수의 고유한 영향력을 해석하기 어려움 | 
-| 비모수적인 방법으로 선형성, 정규성 등의 가정이 필요없고 이상값에 민감하지 않음 | 자료가 복잡하면 실행시간이 급격하게 증가함 | 
-| 대량의 데이터 처리에도 적합하고 모형 분류 정확도가 높음 | 연속형 변수를 비연속적 값으로 취급하여 분리 경계점에서는 예측오류가 매우 커지는 현상 발생 | 
-
-![](./images/trees.png)
 
 <br>
-
-# 결정 트리 회귀(Decision Tree Regression)
-▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html#regression<br>
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html<br>
-▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html<br>
-▣ 정의 : 데이터에 내재되어 있는 패턴을 비슷한 수치의 관측치 변수의 조합으로 예측 모델을 나무 형태로 만든다.<br>
-▣ 모델식 : $\widehat{f}(x) = \sum_{m=1}^{M}C_mI((x_1,x_2)\in R_m)$<br>
-비용함수(cost function)를 최소로 할때 최상의 분할 : 데이터를 M개로 분할($R_1,R_2,...R_M$)<br> 
-$\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{N}(y_i-\sum_{m=1}^{M}C_mI(x\in R_m))^2$<br>
-각 분할에 속해 있는 y값들의 평균으로 예측했을때 오류가 최소화 : $\widehat{C}_m=ave(y_i|x_i\in R_m)$<br>
-
-	from sklearn.tree import DecisionTreeRegressor
- 	from sklearn.metrics import mean_squared_error
  
- 	# 결정 트리 회귀 모델 생성 및 학습 (최대 깊이 5)
-	tree_reg = DecisionTreeRegressor(max_depth=5, random_state=42)
-	tree_reg.fit(X_train, y_train)
 
-	# 테스트 데이터에 대한 예측
-	y_pred = tree_reg.predict(X_test)
 
-	# 모델 성능 평가 (평균 제곱 오차)
-	mse = mean_squared_error(y_test, y_pred)
-	print(f"Mean Squared Error: {mse}")
+![](./images/SLC.png)
+<br>출처 : https://towardsdatascience.com/top-machine-learning-algorithms-for-classification-2197870ff501
 
-<br>
 
-# 결정 트리 분류(Decision Tree Classification)
-▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html#classification<br>
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html<br>
-▣ 정의 : 데이터에 내재되어 있는 패턴을 비슷한 범주의 관측치 변수의 조합으로 분류 모델을 나무 형태로 만든다.<br>
-▣ 모델식 : $\widehat{f(x)} = \sum_{m=1}^{M}k(m)I((x_1,x_2)\in R_m)$<br>
-끝노드(m)에서 클래스(k)에 속할 관측치의 비율 : $\widehat{P_{mk}}=\frac{1}{N_m}\sum_{x_i\in R_m}^{}I(y_i=k)$<br>
-끝노드 m으로 분류된 관측치 : $k(m) = \underset{k}{argmax}\widehat{P_{mk}}$<br><br>
-▣ 비용함수(불순도 측정) : 불순도(Impurity)가 높을수록 다양한 클래스들이 섞여 있고, 불순도가 낮을수록 특정 클래스에 속한 데이터가 명확<br>
-(1) 오분류율(Misclassification rate, Error rate) : 분류 모델이 잘못 분류한 샘플의 비율로, 전체 샘플 중에서 실제 값과 예측 값이 일치하지 않는 샘플의 비율을 나타낸다.(0에서 100 사이의 값, 0%: 모델이 모든 샘플을 완벽하게 예측, 100%: 모델이 모든 샘플을 잘못 예측)<br><br>
-$\frac{FP+FN}{TP+TN+FP+FN}$ 
-###### FP(False Positive) : 실제 값이 Negative인데 Positive로 예측, FN(False Negative) : 실제 값이 Positive인데 Negative로 예측, TP(True Positive) : 실제 값이 Positive이고 Positive로 올바르게 예측, TN(True Negative) : 실제 값이 Negative이고 Negative로 올바르게 예측<br>
-(2) 지니계수(Gini Coefficient) : 데이터셋이 얼마나 혼합되어 있는지를 나타내는 불순도의 측정치(0에서 0.5 사이의 값, 0: 데이터가 완벽하게 한 클래스에 속해 있음을 의미하며, 불순도가 전혀 없는 상태, 0.5: 두 개의 클래스가 완벽하게 섞여 있는 상태)<br>
-$Gini(p)=1-\sum_{i=1}^{n}p_i^2$<br><br>
-(3) 엔트로피(Entropy) : 확률 이론에서 온 개념으로 불확실성 또는 정보의 무질서를 측정하는 또 다른 방식으로, 데이터가 얼마나 혼란스럽고 예측하기 어려운지를 측정(0에서 1 사이의 값, 0 : 데이터가 완벽하게 한 클래스에 속해 있으며, 불확실성이 없는 상태, 1 : 데이터가 완전히 섞여 있고, 가장 큰 불확실성을 가지고 있다.<br>
-$Entropy(p) = -\sum_{i=1}^{n}p_ilog_2p_i$<br> 
 
-▣ 유형 :  ID3, CART
- - ID3 : 모든 독립변수가 범주형 데이터인 경우에만 분류가 가능하다. 정보획득량(Infomation Gain)이 높은 특징부터 분기해나가는데 정보획득량은 분기전 엔트로피와 분기후 엔트로피의 차이를 말한다.(엔트로피 사용)<br><br>
-$IG(S, A) = E(S) - E(S|A)$<br>
- - CART : Classification and Regression Tree의 약자로, 이름 그대로 분류와 회귀가 모두 가능한 결정트리 알고리즘으로 yes 또는 no 두 가지로 분기한다.(지니계수 사용)<br><br> 
-$f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
+
+ 
 
 <br>
 
-	from sklearn.tree import DecisionTreeClassifier
-	from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-
- 	#결정 트리 분류 모델 생성 (최대 깊이 3으로 설정)
-	clf = DecisionTreeClassifier(max_depth=3, random_state=42)
-	clf.fit(X_train, y_train)  # 학습 데이터를 이용해 모델 학습
-
-	#테스트 데이터에 대한 예측
-	y_pred = clf.predict(X_test)
-
-	#정확도 출력
-	accuracy = accuracy_score(y_test, y_pred)  # 정확도 계산
-	print(f"Accuracy: {accuracy * 100:.2f}%")  # 정확도 출력
-
-
-<br>
-
-	(개별 트리 모델의 단점)	
- 	계층적 구조로 인해 중간에 에러가 발생하면 다음 단계로 에러가 계속 전파
-  	학습 데이터의 미세한 변동에도 최종결과에 큰 영향
-   	적은 개수의 노이즈에도 큰 영향
-	나무의 최종 노드 개수를 늘리면 과적합 위함(Low Bias, Large Variance)
-
-	(해결방안) 랜덤 포레스트(Random forest)
 
 <br> 
 
-# [4] 랜덤 포레스트(Random Forest)  
-▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#random-forests<br>
-▣ 정의 : 분류와 회귀에 사용되는 지도학습 알고리즘으로 여러 개의 의사결정나무(Decision Tree)를 조합한 **앙상블 학습(ensemble learning)** 을 적용한 모델이다. 여러개의 Training data를 생성하여 각 데이터마다 개별 의사결정나무모델을 구축하는 배깅(bootstrap aggregation, bagging)과 의사결정 모델 구축시 변수를 무작위로 선택하는 Random subspace가 특징.<br>
-▣ 모델식 : $\widehat{y}=\frac{1}{N}\sum_{i=1}^{N}T_i(X)$ ($N$ : 결정트리의 수, $T_i(X)$ : 각 결정트리 $i$가 입력값 $X$에 대해 예측한 값)
 
-![](./images/Bootstrap.png)
-출처: https://www.researchgate.net/figure/Schematic-of-the-RF-algorithm-based-on-the-Bagging-Bootstrap-Aggregating-method_fig1_309031320<br>
-
-
-| 장점                             | 단점                                              |
-|----------------------------------|---------------------------------------------------|
-| 모델이 단순, 과적합이 잘 일어나지 않음 | 여러개의 결정트리 사용으로 메모리 사용량 큼 |
-| 새로운 데이터에 일반화가 용이함 | 고차원 및 희소 데이터에 잘 작동하지 않음 |
-
-# 랜덤 포레스트 회귀(Random Forest Regression)  
-▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#randomforestregressor<br>
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor<br>
-▣ 정의 : 랜덤 포레스트 회귀 모델은 각 트리가 예측한 값들의 평균을 통해 최종 예측값을 도출하는 모델로, 다수결 대신, 트리에서 얻은 예측값의 평균을 사용하여 연속적인 값을 예측한다.<br>
-▣ 모델식 : $\widehat{y}= \frac{1}{B}\sum_{i=1}^{B}T_i(x)$<br>
-###### $T_i(x)$: 입력 데이터 𝑥에 대한 𝑖번째 결정 트리의 예측값, B: 전체 트리의 개수
-
-
-	from sklearn.ensemble import RandomForestRegressor
- 
- 	# 트리 개수를 변화시키며 모델 학습 및 평가
-	for iTrees in nTreeList:
-    		depth = None  # 트리 깊이 제한 없음
-    		maxFeat = 4  # 사용할 최대 특징 수
-    		# 랜덤 포레스트 회귀 모델 생성 및 학습
-    		wineRFModel = ensemble.RandomForestRegressor(n_estimators=iTrees,
-			max_depth=depth, max_features=maxFeat,
-			oob_score=False, random_state=531)
-    		wineRFModel.fit(xTrain, yTrain)  # 모델 학습
-    		# 테스트 데이터에 대한 예측값 계산
-    		prediction = wineRFModel.predict(xTest)
-    		# MSE 계산 및 누적
-    		mseOos.append(mean_squared_error(yTest, prediction))
-     
-	# MSE 출력
-	print("MSE")
-	print(mseOos)
-
-
-<br>
-
-# 랜덤 포레스트 분류(Random Forest Classification)    	  	
-▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#randomforestclassifier<br>
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier<br>
-▣ 정의 : 랜덤 포레스트 분류 모델은 다수의 의사결정나무(Decision Trees)를 기반으로 한 앙상블 모델로, 각 나무는 독립적으로 클래스를 예측한 후 다수결 투표를 통해 최종 클래스를 결정한다.<br>
-▣ 모델식 : $\widehat{y}=mode(T_1(x),T_2(x),...,T_B(x))$<br>
-###### $T_i(x)$: 입력 데이터 𝑥에 대한 𝑖번째 결정 트리의 예측값, B: 전체 트리의 개수, mode 함수 : 다수결 투표방식
-
-	from sklearn.ensemble import RandomForestClassifier
-	from sklearn.model_selection import train_test_split
-	from sklearn.metrics import accuracy_score
-	from sklearn import datasets
-
-	# 붓꽃 데이터셋 로드
-	iris = datasets.load_iris()
-
-	# 독립 변수와 종속 변수 분리
-	X = iris.data
-	y = iris.target
-
-	# 학습용 데이터와 테스트용 데이터 분리
-	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-	# 랜덤 포레스트 모델 초기화
-	model = RandomForestClassifier()
-
-	# 모델 학습
-	model.fit(X_train, y_train)
-
-	# 테스트 데이터 예측
-	y_pred = model.predict(X_test)
-
-	# 정확도 계산
-	accuracy = accuracy_score(y_test, y_pred)
-	print("Accuracy:", accuracy)
- 
-<br>
