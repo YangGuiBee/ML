@@ -26,27 +26,19 @@
 ---  
 
 # [1-1] Linear Discriminant Analysis (LDA)
-▣ 정의 : 클래스를 구분짓기 위해 각 클래스의 조건부 정규분포를 가정하고, 공분산 행렬이 동일하다는 가정 하에 베이즈 규칙을 적용하여 선형 결정경계를 찾는 기법입니다. 
-▣ 목적 : 여러 클래스가 있을 때 **클래스 간 분리(구분)**을 극대화하고, 또한 차원축소 (특히 클래스별 평균 간 거리를 최대화하면서)에도 활용될 수 있습니다. 
-▣ 장점 : 계산이 비교적 단순하고 해석이 용이합니다.
-클래스 간 공분산이 동일하다는 가정이 맞으면 효과적으로 선형 경계를 찾을 수 있습니다.
-차원축소 기능도 겸비하여, 분류 전과정 또는 전처리로도 사용 가능합니다. 
-▣ 단점 : 클래스마다 공분산이 다르거나, 분포가 비정규적이거나, 선형으로 분리가 불가능한 경우에는 성능이 떨어질 수 있습니다. 
-다변량 정규성, 공분산 동일 등 통계적 가정이 많습니다 — 실제 데이터에서 위반될 가능성이 높습니다.
-▣ Scikit-learn 클래스명 : sklearn.discriminant_analysis.LinearDiscriminantAnalysis 
-▣ 가이드 : https://scikit-learn.org/stable/modules/lda_qda.html
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html
-▣ 회귀식 : LDA는 회귀식이라기보다는 판별함수 형태입니다. 통상 다음과 같이 나타낼 수 있습니다.
-
-# 선형판별 분석 : LDA(Linear Discriminant Analysis)
-![](./images/LDA_1.png)
-<br>
 ▣ 정의: 클래스 간 분산을 최대화하고 클래스 내 분산을 최소화하는 선형 차원 축소 기법으로 주로 지도 학습에서 사용<br>
 ▣ 필요성: 클래스 간 분리를 극대화하면서 데이터를 저차원으로 투영하여 분류 문제의 성능을 향상시키기 위해 필요<br>
 ▣ 장점: 클래스 분리를 극대화하여 분류 성능을 개선할 수 있으며, 선형 변환을 통해 효율적으로 차원을 축소<br>
 ▣ 단점: 데이터가 선형적으로 구분되지 않는 경우 성능이 저하될 수 있으며, 클래스 간 분포가 정규 분포를 따를 때 더 효과적<br>
 ▣ 응용분야: 얼굴 인식, 이미지 분류, 텍스트 분류 등<br>
-▣ 모델식: 두 클래스 간의 분산 비율을 최대화하는 방향으로 데이터를 투영<br>
+▣ Scikit-learn 클래스명 : sklearn.discriminant_analysis.LinearDiscriminantAnalysis<br> 
+▣ 가이드 : https://scikit-learn.org/stable/modules/lda_qda.html<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html<br>
+▣ 회귀식 : (판별함수 형태) 두 클래스 간의 분산 비율을 최대화하는 방향으로 데이터를 투영<br>
+
+![](./images/LDA_1.png)
+<br>
+
 
     from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
     import matplotlib.pyplot as plt
@@ -74,7 +66,7 @@
 ![](./images/PCA_LDA.png)
 <br>
 https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysis-python/
-<br>
+
 
 <br>
 
