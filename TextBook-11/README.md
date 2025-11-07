@@ -8,9 +8,7 @@
 	[1] 판별 분석 (Discriminant Analysis)
 		[1-1] LDA (Linear Discriminant Analysis)
 		[1-2] QDA (Quadratic Discriminant Analysis)
-		[1-3] CCA (Canonical Correlation Analysis)
-		[1-4] Supervised PCA
-
+		
 	[2] 차원축소 (Dimensionality Reduction)
 		[2-1] PCR (Principal Component Regression) (회귀 전용)
 		[2-2] PLS (Partial Least Squares)
@@ -20,14 +18,10 @@
 	[3] 트리 기반 (Tree-based)
 		[3-1] 결정 트리 (Decision Tree)
 		[3-2] 랜덤 포레스트 (Random Forest)
-		[3-3] 극단 트리 (Extra Trees)
 
 	[4] 거리 기반 (Distance-based)
 		[4-1] k-최근접 이웃 (k-Nearest Neighbor, k-NN)
 		[4-2] 서포트 벡터 머신 (SVM, Support Vector Machine)
-		[4-3] One-Class SVM (Outlier / Novelty Detection)
-		[4-4] 선형 SVM (Linear SVM)
-		[4-5] 커널 SVM (Polynomial / RBF / Sigmoid)		
 	
 ---  
 
