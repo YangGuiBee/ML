@@ -15,8 +15,7 @@
 		[2-1] PCR (Principal Component Regression) (회귀 전용)
 		[2-2] PLS (Partial Least Squares)
 		[2-3] PLS-DA (Partial Least Squares Discriminant Analysis)
-		[2-4] LDA / QDA (Regression + Classification) (재참조)
-		[2-5] Supervised PCA
+		[2-4] Supervised PCA
 
 	[3] 트리 기반 (Tree-based)
 		[3-1] 결정 트리 (Decision Tree)
