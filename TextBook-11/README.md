@@ -10,7 +10,7 @@
 		[1-2] QDA (Quadratic Discriminant Analysis)
 		
 	[2] 차원축소 (Dimensionality Reduction)
-		[2-1] PCR (Principal Component Regression) (회귀 전용)
+		[2-1] PCR (Principal Component Regression) : PCA(비지도학습의 차원축소) + 회귀
 		[2-2] PLS (Partial Least Squares)
 		[2-3] PLS-DA (Partial Least Squares Discriminant Analysis)
 		[2-4] Supervised PCA
@@ -98,7 +98,8 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
 
 # [2-1] Principal Component Regression (PCR)
 <br>
-▣ 정의 : 먼저 독립변수 𝑋에 대해 Principal Component Analysis(PCA)를 적용하여 차원축소(주성분)를 수행하고, 그 다음 주성분을 독립변수로 하여 선형회귀(OLS 등)를 수행하는 이중 단계 방식의 회귀기법<br> 
+▣ 정의 : 먼저 독립변수 𝑋에 대해 Principal Component Analysis(PCA)를 적용하여 비지도학습의 차원축소(주성분)를 수행하고,<br> 
+그 다음 주성분을 독립변수로 하여 선형회귀(OLS 등)를 수행하는 이중 단계 방식의 회귀기법<br> 
 ▣ 목적 : 다중공선성(multicollinearity) 문제가 크거나, 변수차원이 매우 큰 경우에 차원을 축소함으로써 회귀 안정성을 확보하고 과적합을 완화<br> 
 ▣ 장점 : 공선성이 심한 데이터나 변수수가 매우 많은 상황에서 유용, 차원축소→회귀 단계를 통해 모델 단순화 및 해석 가능성 제고<br>
 ▣ 단점 : 주성분 선택 시 ‘변동성(variance)’ 큰 주성분이 반드시 예측력(종속변수 설명력)이 높은 것은 아니라는 점에서, 중요한 정보가 사라질 가능성<br> 
@@ -111,59 +112,46 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
 
 # [2-2] Partial Least Squares (PLS)
 
-▣ 정의 : 독립변수 𝑋와 종속변수 𝑌 양쪽을 고려하여 새로운 잠재변수(성분)를 추출하고, 이 잠재변수를 기반으로 회귀모형을 적합하는 차원축소 회귀기법입니다. 
-▣ 목적 : 독립변수 수가 많고 다중공선성이 심하거나, 관측치 수 < 변수 수인 고차원 상황에서 𝑋와 𝑌 간의 공변량 구조를 최대한 반영하면서 회귀모형을 구축하기 위함입니다. 
-▣ 장점 : 𝑋와 𝑌 간의 상관/공변량을 고려하므로, PCR보다 종속변수 설명력을 더 잘 확보할 수 있습니다. 
-차원축소 및 회귀를 동시에 수행하기 때문에 고차원/공선성 데이터에서 안정적입니다.
-▣ 단점 : 해석이 다소 복잡할 수 있으며, 잠재변수 구성 방식이 덜 직관적일 수 있습니다.
-구성 성분 수(n_components) 선택이 중요하며, 과다하게 선택하면 과적합 위험도 존재합니다.
-▣ Scikit-learn 클래스명 : sklearn.cross_decomposition.PLSRegression 
-▣ 가이드 : https://scikit-learn.org/stable/modules/cross_decomposition.html
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.cross_decomposition.PLSRegression.html
+▣ 정의 : 독립변수 𝑋와 종속변수 y 양쪽을 고려하여 새로운 잠재변수(성분)를 추출하고, 이 잠재변수를 기반으로 회귀모형을 적합하는 차원축소 회귀기법<br> 
+▣ 목적 : 독립변수 수가 많고 다중공선성이 심하거나, 관측치 수 < 변수 수인 고차원 상황에서 𝑋와 y 간의 공변량 구조를 최대한 반영하면서 회귀모형을 구축<br> 
+▣ 장점 : 𝑋와 y 간의 상관/공변량을 고려하므로, PCR보다 종속변수 설명력을 더 잘 확보, 차원축소와 회귀를 동시에 수행하여 고차원/공선성 데이터에서 안정적<br>
+▣ 단점 : 해석이 다소 복잡하고, 잠재변수 구성 방식이 덜 직관적일 가능성, 구성 성분 수(n_components)가 과다하게 선택하면 과적합 위험도 존재<br>
+▣ Scikit-learn 클래스명 : sklearn.cross_decomposition.PLSRegression<br> 
+▣ 가이드 : https://scikit-learn.org/stable/modules/cross_decomposition.html<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.cross_decomposition.PLSRegression.html<br>
  
 <br>
 
 # [2-3] PLS‑DA (Partial Least Squares Discriminant Analysis)
-▣ 정의 : PLS 기법을 변형하여 **종속변수가 범주형(y가 클래스 레이블)**인 경우에 적용하는 판별분석 형태의 기법입니다. 
-▣ 목적 : PLS의 잠재변수 추출 방식과 판별분석 배치를 결합해, 고차원/공선성 있는 데이터에서 분류모델을 구축하기 위함입니다.
-▣ 장점 : 전통적인 판별모델(LDA/QDA)보다 변수 수가 많거나 특성 간 상관이 높을 때 유리할 수 있습니다.
-▣ 단점 : scikit-learn에서 공식적으로 독립된 “PLS-DA” 클래스가 제공되지 않으므로 구현이 다소 사용자화되어야 합니다.
-잠재변수 해석이 어렵고, 튜닝이 복잡할 수 있습니다.
-▣ Scikit-learn 클래스명 : 공식 클래스 없음 → 일반적으로 PLSRegression + 범주형 y → 후처리 판별분석 형태로 구현합니다.
-▣ 가이드 : https://scikit-learn.org/stable/modules/cross_decomposition.html
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.cross_decomposition.PLSRegression.html
+▣ 정의 : PLS 기법을 변형하여 **종속변수가 범주형(y가 클래스 레이블)**인 경우에 적용하는 판별분석 형태의 기법<br> 
+▣ 목적 : PLS의 잠재변수 추출 방식과 판별분석 배치를 결합해, 고차원/공선성 있는 데이터에서 분류모델을 구축<br>
+▣ 장점 : 전통적인 판별모델(LDA/QDA)보다 변수 수가 많거나 특성 간 상관이 높을 때 유리<br>
+▣ 단점 : scikit-learn에서 공식적으로 독립된 “PLS-DA” 클래스가 제공되지 않음. 잠재변수 해석이 어렵고, 튜닝이 복잡할 가능성<br>
+▣ Scikit-learn 클래스명 : 공식 클래스 없음 → 일반적으로 PLSRegression + 범주형 y → 후처리 판별분석 형태로 구현<br>
+▣ 가이드 : https://scikit-learn.org/stable/modules/cross_decomposition.html<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.cross_decomposition.PLSRegression.html<br>
 
 <br>
 
 # [2-4] Supervised PCA
-▣ 정의 : 일반 PCA가 독립변수 𝑋만을 고려해 주성분을 추출하는 데 반해, 종속변수 𝑦 정보까지 이용해 차원축소를 수행하는 방식입니다. (즉, 지도형 차원축소)
-▣ 목적 : 차원축소하면서도 𝑦와의 관계(예측력)를 보존하려는 목적으로 사용됩니다.
-▣ 장점 : 단순 PCA보다 예측모델 성능을 향상시킬 가능성이 있습니다.
-변수 수가 많고 예측변수→종속변수 간 관계가 복잡할 때 유리합니다.
-▣ 단점 : scikit-learn에서 하나의 표준 클래스명으로 제공되지는 않으며, 구현에 유연성이 필요합니다.
-해석이 다소 어려울 수 있고, 과적합 가능성이 존재합니다.
-▣ Scikit-learn 클래스명 : 공식 제공 없음
-▣ 가이드 : https://scikit-learn.org/stable/modules/decomposition.html
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html
+▣ 정의 : 일반 PCA가 독립변수 𝑋만을 고려해 주성분을 추출하는 데 반해, 종속변수 𝑦 정보까지 이용해 차원축소를 수행하는 방식(즉, 지도형 차원축소)<br>
+▣ 목적 : 차원축소하면서도 𝑦와의 관계(예측력)를 보존하려는 목적<br>
+▣ 장점 : 단순 PCA보다 예측모델 성능을 향상, 변수 수가 많고 예측변수→종속변수 간 관계가 복잡할 때 유리<br>
+▣ 단점 : scikit-learn에서 하나의 표준 클래스명으로 제공되지는 않아 구현에 유연성이 필요, 해석이 다소 어렵고, 과적합 가능성<br>
+▣ Scikit-learn 클래스명 : 공식 제공 없음<br>
+▣ 가이드 : https://scikit-learn.org/stable/modules/decomposition.html<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html<br>
  
 <br>
 
 # [3-1] 결정 트리 (Decision Tree)
-▣ 정의 : 독립변수 공간을 반복적으로 분할(split)하여 리프 노드(leaf)에서 예측값을 출력하는 트리구조의 지도학습 모델입니다. 회귀 및 분류 모두에 적용 가능합니다. 
-▣ 목적 : 입력 변수의 분할 기준을 찾아 복잡한 비선형 관계를 모델링하고, 직관적인 규칙 기반 예측모델을 제공하기 위함입니다.
-▣ 장점 : 해석이 쉽고 트리 시각화 등을 통해 설명 가능성이 높습니다.
-변수 변환이나 스케일링이 크게 필요 없는 경우 많습니다.
-비선형 관계나 변수 상호작용을 자연스럽게 반영 가능.
-▣ 단점 : 과적합 위험이 크고, 세세하게 튜닝하지 않으면 일반화 성능 저하가 쉽습니다.
-트리가 너무 깊거나 분할 기준이 복잡해지면 해석이 어려워질 수 있습니다.
-▣ Scikit-learn 클래스명 : 분류용 sklearn.tree.DecisionTreeClassifier, 회귀용 sklearn.tree.DecisionTreeRegressor 
-▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html
-▣ API : 위 각 클래스 링크 (Classifier/Regressor)
-
-# 결정 트리(Decision Tree)
+▣ 정의 : 독립변수 공간을 반복적으로 분할(split)하여 리프 노드(leaf)에서 예측값을 출력하는 트리구조의 지도학습 모델<br> 
+▣ 목적 : 입력 변수의 분할 기준을 찾아 복잡한 비선형 관계를 모델링하고, 직관적인 규칙 기반 예측모델을 제공<br>
+▣ 장점 : 해석이 쉽고 트리 시각화 등을 통해 설명 가능, 변수 변환이나 스케일링이 크게 필요 없으며, 비선형 관계나 변수 상호작용을 자연스럽게 반영<br>
+▣ 단점 : 과적합 위험이 크고, 세세하게 튜닝하지 않으면 일반화 성능 저하 가능성, 트리가 너무 깊거나 분할 기준이 복잡해지면 해석이 어려워질 가능성<br>
+▣ Scikit-learn 클래스명 : 분류용 sklearn.tree.DecisionTreeClassifier, 회귀용 sklearn.tree.DecisionTreeRegressor<br> 
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html<br>
-▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/index.html<br>
-▣ 정의 : 어떤 항목에 대한 관측값과 목표값을 연결시켜주는 예측 모델로, 대표적인 지도학습 분류 모델이며, 스무고개와 같이 질문에 대하여 '예' 또는 '아니오'를 결정하여 트리 구조를 나타낸다.<br> 
+▣ API : https://scikit-learn.org/stable/auto_examples/tree/index.html<br>
 
 ![](./images/tree.png)
 
@@ -258,13 +246,10 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 <br>
 
 # [3-2] 랜덤 포레스트 (Random Forest)
-
-▣ 정의 : 많은 트리를 무작위로 만들어 다수결로 예측하는 방법
-랜덤 포레스트(Random Forest)는 여러 개의 **결정 트리(Decision Tree)**를
-배깅(Bagging, Bootstrap Aggregating) 방식으로 학습하여,
-그 예측값을 평균(회귀) 또는 **다수결(분류)**로 통합하는 앙상블(Ensemble) 학습 알고리즘입니다.
-각 트리는 서로 다른 부트스트랩 표본과 일부 특성(feature subset)을 사용하여
-모델 간 상관을 줄이고, 과적합(overfitting)을 완화합니다.
+▣ 정의 : 많은 트리를 무작위로 만들어 다수결로 예측하는 방법<br>
+여러 개의 **결정 트리(Decision Tree)**를 배깅(Bagging, Bootstrap Aggregating) 방식으로 학습하여,<br>
+그 예측값을 평균(회귀) 또는 다수결(분류)로 통합하는 앙상블(Ensemble) 학습 알고리즘<br>
+각 트리는 서로 다른 부트스트랩 표본과 일부 특성(feature subset)을 사용하여 모델 간 상관을 줄이고, 과적합(overfitting)을 완화<br>
 ▣ 목적 : 단일 결정 트리의 **불안정성(variance 높음)**을 보완하고
 **예측의 안정성(stability)**과 **정확도(accuracy)**를 높이기 위함입니다.
 데이터의 노이즈나 이상치에 강인한 모델을 구성하여
