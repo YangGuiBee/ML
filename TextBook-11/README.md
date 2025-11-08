@@ -98,15 +98,14 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
 
 # [2-1] Principal Component Regression (PCR)
 <br>
-▣ 정의 : 먼저 독립변수 𝑋에 대해 Principal Component Analysis (PCA)를 적용해 차원축소(주성분)를 수행하고, 그 다음 주성분을 독립변수로 하여 선형회귀(OLS 등)를 수행하는 이중 단계 방식의 회귀기법입니다. 
-▣ 목적 : 다중공선성(multicollinearity) 문제가 크거나, 변수차원이 매우 큰 경우에 차원을 축소함으로써 회귀 안정성을 확보하고 과적합을 완화하기 위함입니다. 
-▣ 장점 : 공선성이 심한 데이터나 변수수가 매우 많은 상황에서 유용합니다.
-차원축소→회귀라는 단계를 통해 모델 단순화 및 해석 가능성 제고 가능성.
-▣ 단점 : 주성분 선택 시 ‘변동성 (variance)’가 큰 주성분이 반드시 예측력(종속변수 설명력)이 높은 것은 아니라는 점에서, 중요한 정보가 사라질 수 있습니다. 
-비지도 방식의 PCA를 먼저 수행하므로, 종속변수 𝑦 정보가 주성분 선정에 반영되지 않아 예측력이 떨어질 수 있습니다.
-▣ Scikit-learn 클래스명 : scikit-learn에는 “PCR”이라는 단일 클래스는 없고, 일반적으로 sklearn.decomposition.PCA + sklearn.linear_model.LinearRegression 등의 파이프라인 구성으로 구현합니다. 
-▣ 가이드 : PCR과 PLS 비교 예제 페이지 https://scikit-learn.org/stable/auto_examples/cross_decomposition/plot_pcr_vs_pls.html
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html
+▣ 정의 : 먼저 독립변수 𝑋에 대해 Principal Component Analysis(PCA)를 적용하여 차원축소(주성분)를 수행하고, 그 다음 주성분을 독립변수로 하여 선형회귀(OLS 등)를 수행하는 이중 단계 방식의 회귀기법<br> 
+▣ 목적 : 다중공선성(multicollinearity) 문제가 크거나, 변수차원이 매우 큰 경우에 차원을 축소함으로써 회귀 안정성을 확보하고 과적합을 완화<br> 
+▣ 장점 : 공선성이 심한 데이터나 변수수가 매우 많은 상황에서 유용, 차원축소→회귀 단계를 통해 모델 단순화 및 해석 가능성 제고<br>
+▣ 단점 : 주성분 선택 시 ‘변동성(variance)’ 큰 주성분이 반드시 예측력(종속변수 설명력)이 높은 것은 아니라는 점에서, 중요한 정보가 사라질 가능성<br> 
+비지도 방식의 PCA를 먼저 수행하므로, 종속변수 𝑦정보가 주성분 선정에 반영되지 않아 예측력이 떨어질 가능성<br>
+▣ Scikit-learn 클래스명 : (파이프라인) sklearn.decomposition.PCA + sklearn.linear_model.LinearRegression<br> 
+▣ 가이드 : https://scikit-learn.org/stable/auto_examples/cross_decomposition/plot_pcr_vs_pls.html<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html<br>
  
 <br>
 
