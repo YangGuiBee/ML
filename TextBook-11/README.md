@@ -247,29 +247,17 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 
 # [3-2] 랜덤 포레스트 (Random Forest)
 ▣ 정의 : 많은 트리를 무작위로 만들어 다수결로 예측하는 방법<br>
-여러 개의 **결정 트리(Decision Tree)**를 배깅(Bagging, Bootstrap Aggregating) 방식으로 학습하여,<br>
+여러 개의 결정 트리(Decision Tree)를 배깅(Bagging, Bootstrap Aggregating) 방식으로 학습하여,<br>
 그 예측값을 평균(회귀) 또는 다수결(분류)로 통합하는 앙상블(Ensemble) 학습 알고리즘<br>
 각 트리는 서로 다른 부트스트랩 표본과 일부 특성(feature subset)을 사용하여 모델 간 상관을 줄이고, 과적합(overfitting)을 완화<br>
-▣ 목적 : 단일 결정 트리의 **불안정성(variance 높음)**을 보완하고
-**예측의 안정성(stability)**과 **정확도(accuracy)**를 높이기 위함입니다.
-데이터의 노이즈나 이상치에 강인한 모델을 구성하여
-일반화 성능을 향상시키는 것이 핵심 목적입니다.
-▣ 장점 : 과적합 방지 효과 — 트리 여러 개를 평균/투표함으로써 분산(variance)을 낮춤.
-변수 중요도(Feature Importance) 자동 산출 기능 — 어떤 변수가 예측에 중요한지 해석 가능.
-비선형 관계 및 변수 간 상호작용을 자연스럽게 포착 가능.
-데이터 스케일 조정 불필요, 결측값에도 비교적 강건.
-분류와 회귀 모두 사용 가능하며, 이상치(outlier)에 민감하지 않음.
-▣ 단점 : 모델 해석이 어렵다 — 개별 트리 수가 많아 ‘블랙박스’화됨.
-메모리 및 연산량 증가 — 트리 수가 많으면 훈련과 예측 시간이 길어짐.
-트리 간 상관성 완전 제거 불가 — 무작위화(randomness)로도 일부 상관 잔존 가능.
-**실시간 예측(online prediction)**이 필요한 경우에는 느릴 수 있음.
+▣ 목적 : 단일 결정 트리의 불안정성(variance 높음)을 보완하고, 예측의 안정성(stability)과 정확도(accuracy)를 높이기<br>
+▣ 장점 : 트리 여러 개를 평균/투표함으로써 분산(variance)을 낮춰서 과적합 방지, 변수 중요도(Feature Importance) 자동 산출, 비선형 관계 및 변수 간 상호작용을 자연스럽게 포착, 데이터 스케일 조정 불필요, 결측값에도 비교적 강건, 분류와 회귀 모두 사용 가능하며, 이상치(outlier)에 민감하지 않음<br>
+▣ 단점 : 개별 트리 수가 많아 모델 해석이 어렵고, 많은 트리 수로 훈련과 예측시간이 길어짐(메모리 및 연산량 증가), 트리 간 상관성 완전 제거 불가<br>
 ▣ Scikit-learn 클래스명 : 분류용 sklearn.ensemble.RandomForestClassifier 회귀용 sklearn.ensemble.RandomForestRegressor
-▣ 가이드 : Scikit-learn Ensemble Methods Guide — Random Forests
-▣ API 링크주소 : 분류용 RandomForestClassifier API 회귀용 RandomForestRegressor API
-
-#  랜덤 포레스트(Random Forest)  
 ▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#random-forests<br>
-▣ 정의 : 분류와 회귀에 사용되는 지도학습 알고리즘으로 여러 개의 의사결정나무(Decision Tree)를 조합한 **앙상블 학습(ensemble learning)** 을 적용한 모델이다. 여러개의 Training data를 생성하여 각 데이터마다 개별 의사결정나무모델을 구축하는 배깅(bootstrap aggregation, bagging)과 의사결정 모델 구축시 변수를 무작위로 선택하는 Random subspace가 특징.<br>
+▣ API : 분류용 RandomForestClassifier API 회귀용 RandomForestRegressor API
+
+
 ▣ 모델식 : $\widehat{y}=\frac{1}{N}\sum_{i=1}^{N}T_i(X)$ ($N$ : 결정트리의 수, $T_i(X)$ : 각 결정트리 $i$가 입력값 $X$에 대해 예측한 값)
 
 ![](./images/Bootstrap.png)
