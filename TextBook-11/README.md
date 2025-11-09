@@ -212,20 +212,123 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
 $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{N}(y_i-\sum_{m=1}^{M}C_mI(x\in R_m))^2$<br>
 각 분할에 속해 있는 y값들의 평균으로 예측했을때 오류가 최소화 : $\widehat{C}_m=ave(y_i|x_i\in R_m)$<br>
 
+**(Decision Tree Regression 예제 소스)**
+
+	# ============================================
+	# 결정트리 회귀(DecisionTreeRegressor) 예제 (완전 실행형)
+	# 데이터: sklearn 내장 당뇨(회귀용) 데이터셋
+	# 절차: 데이터 로드 → 학습/테스트 분할 → 모델 학습 → 예측 → 평가
+	# 핵심 포인트: 트리계열은 스케일링이 필수는 아님(분할 기준이 순위/임계값 기반) max_depth 등 하이퍼파라미터로 과적합 제어
+	# ============================================
+	from sklearn.datasets import load_diabetes
+	from sklearn.model_selection import train_test_split
 	from sklearn.tree import DecisionTreeRegressor
- 	from sklearn.metrics import mean_squared_error
- 
- 	# 결정 트리 회귀 모델 생성 및 학습 (최대 깊이 5)
+	from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
+	import numpy as np
+
+	# --------------------------------------------------
+	# 1) 데이터 로드 (회귀용: 연속형 타깃 y)
+	# --------------------------------------------------
+	diabetes = load_diabetes()
+	X = diabetes.data        # shape (442, 10) — 10개의 수치형 특징
+	y = diabetes.target      # shape (442,)     — 질병 진행 정도(연속값)
+
+	# --------------------------------------------------
+	# 2) 학습/테스트 분할
+	#    - random_state 고정: 재현성 보장
+	#    - test_size=0.2: 20%를 테스트로 사용
+	# --------------------------------------------------
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=42)
+
+	# --------------------------------------------------
+	# 3) 모델 생성 및 학습
+	#    - max_depth=5: 트리 최대 깊이 제한(과적합 방지용)
+	#    - random_state=42: 분할/동작의 재현성
+	# --------------------------------------------------
 	tree_reg = DecisionTreeRegressor(max_depth=5, random_state=42)
 	tree_reg.fit(X_train, y_train)
 
-	# 테스트 데이터에 대한 예측
+	# --------------------------------------------------
+	# 4) 예측
+	# --------------------------------------------------
 	y_pred = tree_reg.predict(X_test)
 
-	# 모델 성능 평가 (평균 제곱 오차)
+	# --------------------------------------------------
+	# 5) 성능 평가
+	#    - MSE: 평균 제곱 오차 (작을수록 좋음)
+	#    - RMSE: 제곱근(해석 편의, y 단위와 동일)
+	#    - MAE: 평균 절대 오차 (이상치에 덜 민감)
+	#    - R2 : 결정계수 (1에 가까울수록 설명력 높음)
+	# --------------------------------------------------
 	mse = mean_squared_error(y_test, y_pred)
-	print(f"Mean Squared Error: {mse}")
+	rmse = np.sqrt(mse)
+	mae = mean_absolute_error(y_test, y_pred)
+	r2 = r2_score(y_test, y_pred)
 
+	print(f"Mean Squared Error (MSE): {mse:.3f}")
+	print(f"Root MSE (RMSE)        : {rmse:.3f}")
+	print(f"Mean Absolute Error    : {mae:.3f}")
+	print(f"R^2 Score              : {r2:.3f}")
+
+	# --------------------------------------------------
+	# (선택) 특징 중요도 확인: 어떤 변수로 분할을 많이 했는지
+	# --------------------------------------------------
+	importances = tree_reg.feature_importances_
+	# 중요도가 0이 아닌 상위 특징만 보기
+	top_idx = np.argsort(importances)[::-1]
+	print("\n[Feature Importances]")
+	for i in top_idx:
+    	if importances[i] > 0:
+	        print(f"- {diabetes.feature_names[i]:>6s}: {importances[i]:.3f}")
+
+	# ============================================
+	# [해설]
+	# - NameError 해결: train_test_split로 X_train, X_test, y_train, y_test를 먼저 생성해야 함.
+	# - 트리의 일반화 성능은 max_depth, min_samples_leaf, min_samples_split 등을 조절하며 개선 가능.
+	# - 트리는 스케일링 영향이 작지만, 데이터가 매우 잡음이 크거나 샘플이 적으면 과적합되기 쉬움.
+	#   필요 시 max_depth를 더 줄이거나 min_samples_leaf를 늘려 규제하세요.
+	# ============================================
+
+
+**(Decision Tree Regression 예제 소스 실행 결과)**
+
+	Mean Squared Error (MSE): 3526.016
+	Root MSE (RMSE)        : 59.380
+	Mean Absolute Error    : 45.937
+	R^2 Score              : 0.334
+
+	[Feature Importances]
+	-    bmi: 0.555
+	-     s5: 0.189
+	-     s1: 0.062
+	-     s6: 0.059
+	-     s4: 0.040
+	-    age: 0.032
+	-     s3: 0.023
+	-     bp: 0.022
+	-     s2: 0.017
+	-    sex: 0.002
+
+
+**(Decision Tree Regression 예제 소스 실행 결과 분석)**
+
+	Mean Squared Error(MSE) : 3526.016 → 예측값과 실제값의 평균 제곱 오차로 모델 오차가 다소 큰 편
+	Root MSE(RMSE)          : 59.380 → 예측 오차의 평균 크기가 약 ±59 단위 정도(당뇨 진행 지수는 0~300 정도이므로 오차가 중간 수준)
+	Mean Absolute Error(MAE): 45.937 → 평균적으로 약 45.9 정도 차이(MAE < 30 우수, 30 ≤ MAE ≤ 50 중간, MAE > 70 부정확)
+	R^2 Score(결정계수)       : 0.334 → 전체 분산의 약 33.4%만 설명(예측력이 제한적) 과적합없이 기본트리 모델로는 중간수준의 성능
+
+	[Feature Importances]
+	-    bmi: 0.555  → 가장 높은 중요도를 가짐. 비만도가 높을수록 인슐린 저항성과 혈당 수치가 증가하므로 당뇨 진행 정도 예측에 절대적 영향을 미침. 트리의 루트 분할(첫 기준)로 사용되었을 가능성
+	-     s5: 0.189  → 혈중 지질(특히 중성지방) 대사를 나타내며, 지질대사 이상과 인슐린 저항성 간의 연관성 반영. 혈지질 수치가 높을수록 당뇨 악화 위험 증가
+	-     s1: 0.062  → 총콜레스테롤 수치로, 고지혈증·혈관계 문제와 관련. 혈중 콜레스테롤이 높을수록 당뇨 합병증 위험 상승
+	-     s6: 0.059  → 혈당과 직접 관련된 변수. 실제 혈당 농도 변화가 당뇨 진행에 직접적으로 반영됨. s5와 함께 대사성 특징을 설명
+	-     s4: 0.040  → 혈청 인슐린 반응성을 나타내며, 인슐린 분비 기능 저하 여부를 반영. 당대사 불균형이 심한 환자에서 값이 크게 작용
+	-    age: 0.032  → 고령일수록 당뇨 발생 및 진행 위험이 커짐. 다만 다른 생리적 요인(BMI, 지질 수치 등)에 비해 직접적인 영향은 상대적으로 작음
+	-     s3: 0.023  → 좋은 콜레스테롤로 낮을수록 심혈관 질환 및 당뇨 합병증 위험이 증가. 모델에서는 보조적 지표로 사용
+	-     bp: 0.022  → 혈압은 인슐린 저항성과 연관. 고혈압·대사증후군 환자에서 당뇨 진행 속도 가속화. 모델에서 보조 설명변수로 작용
+	-     s2: 0.017  → 나쁜 콜레스테롤로 높을수록 혈관손상 및 당뇨합병증 유발 가능성 높음. 영향도는 크지 않지만 지질대사 요인의 일부로 반영
+	-    sex: 0.002  → 남녀 간 평균적 대사차는 있지만, 이 데이터셋에서는 큰 영향 없음. 모델에서 거의 사용되지 않음
+	
 <br>
 
 ## 결정 트리 분류(Decision Tree Classification)
