@@ -526,18 +526,6 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 ![](./images/SLC.png)
 <br>출처 : https://towardsdatascience.com/top-machine-learning-algorithms-for-classification-2197870ff501
 
-| 번호·모델명 | 대표 수식 | 주요 적용 분야 |
-|:--|:--|:--|
-| **[1-1] LDA (Linear Discriminant Analysis)** | <img src="https://latex.codecogs.com/svg.image?\delta_k%28x%29=x^\top\Sigma^{-1}\mu_k-\tfrac12\mu_k^\top\Sigma^{-1}\mu_k+\log\pi_k" height="30"/> | 다중 클래스 분류, 얼굴 인식, 문서 분류, 의료 데이터 |
-| **[1-2] QDA (Quadratic Discriminant Analysis)** | <img src="https://latex.codecogs.com/svg.image?\delta_k%28x%29=-\tfrac12\log|\Sigma_k|-\tfrac12%28x-\mu_k%29^\top\Sigma_k^{-1}%28x-\mu_k%29+\log\pi_k" height="30"/> | 공분산이 클래스별로 다른 분류, 생물정보, 금융 리스크 |
-| **[2-1] PCR (Principal Component Regression)** | <img src="https://latex.codecogs.com/svg.image?Z=XW_{PCA},\ \hat{y}=Z\hat{\beta}" height="25"/> | 다중공선성 완화 회귀, 스펙트럼 분석, 공정 데이터 예측 |
-| **[2-2] PLS (Partial Least Squares)** | <img src="https://latex.codecogs.com/svg.image?X=TP^\top+E,\ Y=UQ^\top+F,\ \max\operatorname{Cov}%28T,U%29" height="25"/> | X–Y 상관이 높은 예측, 화학계량학, 공정 모니터링 |
-| **[2-3] PLS-DA (Partial Least Squares Discriminant Analysis)** | <img src="https://latex.codecogs.com/svg.image?Y\in\{0,1,\dots\},\ T=XW,\ \max\operatorname{Cov}%28T,Y%29" height="25"/> | 다중 클래스 분류, 오믹스 분석, 품질 검사, 바이오마커 탐색 |
-| **[2-4] Supervised PCA** | <img src="https://latex.codecogs.com/svg.image?\max_{w:\|w\|=1}\operatorname{Corr}%28Xw,y%29" height="25"/> (라벨 연관성 가중 후 PCA 수행) | 라벨 정보 활용 차원축소, 이미지/텍스트 분류 전처리 |
-| **[3-1] 결정 트리 (Decision Tree)** | <img src="https://latex.codecogs.com/svg.image?I%28t%29=-\sum_i p_i%28t%29\log p_i%28t%29" height="25"/> (엔트로피 또는 지니지수 기준 분할) | 분류·회귀, 변수 중요도 분석, 해석 용이한 모델 |
-| **[3-2] 랜덤 포레스트 (Random Forest)** | <img src="https://latex.codecogs.com/svg.image?\hat{y}%28x%29=\tfrac1B\sum_{b=1}^B h_b%28x%29" height="25"/> | 대규모 데이터 분류·회귀, 변수 중요도 평가, 이상 탐지 |
-| **[4-1] K-NN (k-Nearest Neighbors)** | 분류: <img src="https://latex.codecogs.com/svg.image?\hat{y}=\operatorname{mode}\{y_i:x_i\in N_k%28x%29\}" height="25"/> <br> 회귀: <img src="https://latex.codecogs.com/svg.image?\hat{y}=\tfrac1k\sum_{x_i\in N_k%28x%29} y_i" height="25"/> | 패턴 인식, 추천 시스템, 비모수 근접 기반 예측 |
-| **[4-2] SVM (Support Vector Machine)** | <img src="https://latex.codecogs.com/svg.image?\min_{w,b}\tfrac12\|w\|^2\text{s.t. }y_i%28w^\top x_i+b%29\ge1" height="25"/> | 이진/다중 분류, 고차원 텍스트/이미지, 생체 신호 분석 |
 
 
 
