@@ -34,7 +34,6 @@
 ▣ Scikit-learn 클래스명 : sklearn.discriminant_analysis.LinearDiscriminantAnalysis<br> 
 ▣ 가이드 : https://scikit-learn.org/stable/modules/lda_qda.html<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html<br>
-▣ 회귀식 : (판별함수 형태) 두 클래스 간의 분산 비율을 최대화하는 방향으로 데이터를 투영<br>
 
 ![](./images/LDA_1.png)
 <br>
@@ -168,10 +167,10 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
 <br>
 
 ## 결정 트리 회귀(Decision Tree Regression)
+▣ 정의 : 데이터에 내재되어 있는 패턴을 비슷한 수치의 관측치 변수의 조합으로 예측 모델을 나무 형태로 만든다.<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html#regression<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html<br>
-▣ 정의 : 데이터에 내재되어 있는 패턴을 비슷한 수치의 관측치 변수의 조합으로 예측 모델을 나무 형태로 만든다.<br>
 ▣ 모델식 : $\widehat{f}(x) = \sum_{m=1}^{M}C_mI((x_1,x_2)\in R_m)$<br>
 비용함수(cost function)를 최소로 할때 최상의 분할 : 데이터를 M개로 분할($R_1,R_2,...R_M$)<br> 
 $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{N}(y_i-\sum_{m=1}^{M}C_mI(x\in R_m))^2$<br>
@@ -194,9 +193,9 @@ $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{
 <br>
 
 ## 결정 트리 분류(Decision Tree Classification)
+▣ 정의 : 데이터에 내재되어 있는 패턴을 비슷한 범주의 관측치 변수의 조합으로 분류 모델을 나무 형태로 만든다.<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html#classification<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html<br>
-▣ 정의 : 데이터에 내재되어 있는 패턴을 비슷한 범주의 관측치 변수의 조합으로 분류 모델을 나무 형태로 만든다.<br>
 ▣ 모델식 : $\widehat{f(x)} = \sum_{m=1}^{M}k(m)I((x_1,x_2)\in R_m)$<br>
 끝노드(m)에서 클래스(k)에 속할 관측치의 비율 : $\widehat{P_{mk}}=\frac{1}{N_m}\sum_{x_i\in R_m}^{}I(y_i=k)$<br>
 끝노드 m으로 분류된 관측치 : $k(m) = \underset{k}{argmax}\widehat{P_{mk}}$<br><br>
@@ -255,12 +254,10 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 ▣ 단점 : 개별 트리 수가 많아 모델 해석이 어렵고, 많은 트리 수로 훈련과 예측시간이 길어짐(메모리 및 연산량 증가), 트리 간 상관성 완전 제거 불가<br>
 ▣ Scikit-learn 클래스명 : 분류용 sklearn.ensemble.RandomForestClassifier 회귀용 sklearn.ensemble.RandomForestRegressor<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#random-forests<br>
-
-
-
 ▣ 모델식 : $\widehat{y}=\frac{1}{N}\sum_{i=1}^{N}T_i(X)$ ($N$ : 결정트리의 수, $T_i(X)$ : 각 결정트리 $i$가 입력값 $X$에 대해 예측한 값)
 
 ![](./images/Bootstrap.png)
+<br>
 출처: https://www.researchgate.net/figure/Schematic-of-the-RF-algorithm-based-on-the-Bagging-Bootstrap-Aggregating-method_fig1_309031320<br>
 
 
@@ -370,9 +367,9 @@ $X_{new} = \frac{X-\mu}{\sigma}= \frac{X-min(X)}{StdDev(X)}$
 <br>
 
 ## k-최근접 이웃 회귀(k-Nearest Neighbors Regression)
+▣ 정의 :주변의 가장 가까운 K개의 샘플 평균을 통해 값을 예측하는 방식<br> 
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html<br>
-주변의 가장 가까운 K개의 샘플 평균을 통해 값을 예측하는 방식이다.<br> 
-한계 : 테스트하고자 하는 샘플에 근접한 훈련 데이터가 없는 경우, 즉 훈련 셋의 범위를 많이 벗어나는 샘플인 경우 정확하게 예측하기 어렵다. 
+▣ 한계 : 테스트하고자 하는 샘플에 근접한 훈련 데이터가 없는 경우, 즉 훈련 셋의 범위를 많이 벗어나는 샘플인 경우 정확하게 예측하기 어렵다. 
 
 	class sklearn.neighbors.KNeighborsRegressor(n_neighbors=5, *, weights='uniform', algorithm='auto', 
 	leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
@@ -486,12 +483,11 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 <br>  
 
 ## 서포트 벡터 회귀(Support Vector Regression, SVR)
+▣ 정의 : 데이터 포인트들을 초평면 근처에 배치하면서, 허용 오차 $ϵ$ 내에서 예측 오차를 최소화하는 것.<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html#regression<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/svm/plot_svm_regression.html<br>
 ▣ 모델식 : https://scikit-learn.org/stable/modules/svm.html#svr<br>
-▣ 정의 : 데이터 포인트들을 초평면 근처에 배치하면서, 허용 오차 $ϵ$ 내에서 예측 오차를 최소화하는 것.<br>
-
 
 
 	from sklearn.svm import SVR
@@ -505,10 +501,11 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 <br> 
 
 ## 서포트 벡터 분류(Support Vector Classification, SVC)
+▣ 정의 : 두 클래스(또는 다수의 클래스)를 분류하기 위해 최대 마진을 가지는 초평면을 찾는 것.<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html#classification<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC<br>
 ▣ 모델식 : https://scikit-learn.org/stable/modules/svm.html#svc<br>
-▣ 정의 : 두 클래스(또는 다수의 클래스)를 분류하기 위해 최대 마진을 가지는 초평면을 찾는 것.<br>
+
 
 	import sklearn.svm as svm
 
