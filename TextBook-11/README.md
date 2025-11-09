@@ -20,8 +20,8 @@
 		[3-2] 랜덤 포레스트 (Random Forest)
 
 	[4] 거리 기반 (Distance-based)
-		[4-1] k-최근접 이웃(k-Nearest Neighbors, K-NN)
-		[4-2] 서포트 벡터 머신 (SVM, Support Vector Machine)
+		[4-1] k-최근접 이웃 (k-Nearest Neighbors, K-NN)
+		[4-2] 서포트 벡터 머신 (Support Vector Machine, SVM)
 	
 ---  
 
@@ -167,7 +167,7 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
 
 <br>
 
-# 결정 트리 회귀(Decision Tree Regression)
+## 결정 트리 회귀(Decision Tree Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html#regression<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html<br>
@@ -193,7 +193,7 @@ $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{
 
 <br>
 
-# 결정 트리 분류(Decision Tree Classification)
+## 결정 트리 분류(Decision Tree Classification)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html#classification<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html<br>
 ▣ 정의 : 데이터에 내재되어 있는 패턴을 비슷한 범주의 관측치 변수의 조합으로 분류 모델을 나무 형태로 만든다.<br>
@@ -281,7 +281,7 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 | 모델이 단순, 과적합이 잘 일어나지 않음 | 여러개의 결정트리 사용으로 메모리 사용량 큼 |
 | 새로운 데이터에 일반화가 용이함 | 고차원 및 희소 데이터에 잘 작동하지 않음 |
 
-# 랜덤 포레스트 회귀(Random Forest Regression)  
+## 랜덤 포레스트 회귀(Random Forest Regression)  
 ▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#randomforestregressor<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor<br>
 ▣ 정의 : 랜덤 포레스트 회귀 모델은 각 트리가 예측한 값들의 평균을 통해 최종 예측값을 도출하는 모델로, 다수결 대신, 트리에서 얻은 예측값의 평균을 사용하여 연속적인 값을 예측한다.<br>
@@ -312,7 +312,7 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 
 <br>
 
-# 랜덤 포레스트 분류(Random Forest Classification)    	  	
+## 랜덤 포레스트 분류(Random Forest Classification)    	  	
 ▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#randomforestclassifier<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier<br>
 ▣ 정의 : 랜덤 포레스트 분류 모델은 다수의 의사결정나무(Decision Trees)를 기반으로 한 앙상블 모델로, 각 나무는 독립적으로 클래스를 예측한 후 다수결 투표를 통해 최종 클래스를 결정한다.<br>
@@ -356,11 +356,9 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 ▣ 정의 : 머신러닝에서 데이터를 가장 가까운 유사속성에 따라 분류하여 데이터를 거리기반으로 분류분석하는 기법으로,<br>
 비지도학습인 군집화(Clustering)과 유사한 개념이나 기존 관측치의 y 값이 존재한다는 점에서 지도학습에 해당<br>
 새로운 입력 샘플에 대해 학습데이터 중 가장 가까운 𝑘개의 이웃을 찾아, 이들의 레이블(분류)이나 평균(회귀)을 이용해 예측하는 비모수 기반의 지도학습 모델<br> 
-▣ 목적 : 단순하면서도 학습된 모델 구조가 거의 없으므로 빠르게 적용 가능하고, 데이터의 형태가 복잡하거나 비선형일 때 유연하게 대응하고자 할 때 사용됩니다.
-▣ 장점 : 학습 단계가 거의 없고, 구현이 매우 간단합니다.
-비선형 경계나 복잡한 데이터 구조를 자연스럽게 모델링 가능합니다.
-▣ 단점 : 예측 시점(test) 비용이 상대적으로 크며, 고차원 특성공간에서는 거리 측정이 왜곡되어 (“차원의 저주”) 성능이 저하될 수 있습니다. 
-적절한 𝑘와 거리 메트릭 선택이 중요하며, 이상치나 노이즈 민감성이 있습니다.
+▣ 목적 : 단순하면서도 학습된 모델 구조가 거의 없으므로 빠르게 적용 가능하고, 데이터의 형태가 복잡하거나 비선형일 때 유연하게 대응하고자 할 때 사용<br>
+▣ 장점 : 학습 단계가 거의 없고, 구현이 매우 간단, 비선형 경계나 복잡한 데이터 구조를 자연스럽게 모델링 가능<br>
+▣ 단점 : 예측 시점(test) 비용이 상대적으로 크며, 고차원 특성공간에서는 거리 측정 왜곡(“차원의 저주”)으로 성능 저하 가능성과 적절한 𝑘와 거리 메트릭 선택이 중요하며, 이상치나 노이즈 민감성<br>
 ▣ Scikit-learn 클래스명 : 분류용 sklearn.neighbors.KNeighborsClassifier 회귀용 sklearn.neighbors.KNeighborsRegressor<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/neighbors.html<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html<br>
@@ -435,30 +433,24 @@ $X_{new} = \frac{X-\mu}{\sigma}= \frac{X-min(X)}{StdDev(X)}$
 
 <br>
 
-# [4-2] Support Vector Machine (SVM)
-▣ 정의 : 데이터를 고차원 공간으로 매핑한 후, 클래스 간 마진(여유폭)을 최대화하는 초평면(hyperplane)을 찾아 분류 혹은 회귀(서포트벡터회귀, SVR)하는 지도학습 기법입니다. 
-▣ 목적 : 특히 경계가 선형이 아니거나, 고차원 공간에서 마진이 중요한 문제에 대해 강건한 분류/회귀 모델을 구축하기 위함입니다.
-▣ 장점 : 마진 최대화라는 견고한 이론 기반이 있으며, 커널을 사용해 비선형 데이터도 효과적으로 처리할 수 있습니다.
-고차원 특성 공간에서 비교적 잘 작동할 수 있습니다.
-▣ 단점 : 훈련 및 예측 시간이 샘플 수 및 특성 수에 따라 급격히 증가할 수 있으며, 커널 선정·하이퍼파라미터 튜닝이 까다롭습니다.
-결과 해석이 다른 단순 모델에 비해 어렵습니다.
-▣ Scikit-learn 클래스명 : 분류용 sklearn.svm.SVC 회귀용은 sklearn.svm.SVR
-▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html
-
-# 서포트 벡터 머신(Support Vector Machine, SVM)
+# [4-2] 서포트 벡터 머신(Support Vector Machine, SVM)
+▣ 정의 : 데이터를 고차원 공간으로 매핑한 후, 클래스 간 마진(여유폭)을 최대화하는 초평면(hyperplane)을 찾아 분류 혹은 회귀하는 지도학습 기법<br> 
+N차원 공간을 (N-1)차원으로 나눌 수 있는 초평면을 찾는 분류 기법으로 2개의 클래스를 분류할 수 있는 최적의 경계를 찾는다.<br>
+▣ 목적 : 특히 경계가 선형이 아니거나, 고차원 공간에서 마진이 중요한 문제에 대해 강건한 분류/회귀 모델을 구축<br>
+▣ 장점 : 마진 최대화라는 견고한 이론 기반, 커널을 사용해 비선형 데이터도 효과적으로 처리, 고차원 특성 공간에서 비교적 잘 작동<br>
+▣ 단점 : 훈련 및 예측 시간이 샘플 수 및 특성 수에 따라 급격히 증가, 커널 선정·하이퍼파라미터 튜닝과 결과 해석이 까다롭다<br>
+▣ Scikit-learn 클래스명 : 분류용 sklearn.svm.SVC 회귀용 sklearn.svm.SVR<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html<br>
-▣ 예제 : https://scikit-learn.org/stable/auto_examples/svm/index.html<br>
-▣ 정의 : SVM은 N차원 공간을 (N-1)차원으로 나눌 수 있는 초평면을 찾는 분류 기법으로 2개의 클래스를 분류할 수 있는 최적의 경계를 찾는다.<br>
+▣ API : https://scikit-learn.org/stable/auto_examples/svm/index.html<br>
 
 ![](./images/margin.png)
 
-- 최적의 경계 : 각 클래스의 말단에 위치한 데이터들 사이의 거리를 최대화 할 수 있는 경계<br>
-- 초평면(hyper plane) : 고차원(N차원)에서 데이터를 두 분류로 나누는 결정 경계<br>
-- Support Vector : 데이터들 중에서 결정 경계에 가장 가까운 데이터들<br>
-- 마진(Margin) : 결정 경계와 support vector사이의 거리<br>
-- 비용(Cost) : 마진(Margin) 크기의 반비례<br>
-- 감마(Gamma) : train data 하나 당 결정 경계에 영향을 끼치는 범위를 조절하는 변수(크면 오버피팅, 작으면 언더피팅)<br>
+**최적의 경계 :** 각 클래스의 말단에 위치한 데이터들 사이의 거리를 최대화 할 수 있는 경계<br>
+**초평면(hyper plane) :** 고차원(N차원)에서 데이터를 두 분류로 나누는 결정 경계<br>
+**Support Vector :** 데이터들 중에서 결정 경계에 가장 가까운 데이터들<br>
+**마진(Margin) :** 결정 경계와 support vector사이의 거리<br>
+**비용(Cost) :** 마진(Margin) 크기의 반비례<br>
+**감마(Gamma) :** train data 하나 당 결정 경계에 영향을 끼치는 범위를 조절하는 변수(크면 오버피팅, 작으면 언더피팅)<br>
 
 
 | 장점                             | 단점                                              |
@@ -550,15 +542,4 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 
 ![](./images/SLC.png)
 <br>출처 : https://towardsdatascience.com/top-machine-learning-algorithms-for-classification-2197870ff501
-
-
-
-
- 
-
-<br>
-
-
-<br> 
-
 
