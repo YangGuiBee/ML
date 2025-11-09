@@ -38,27 +38,63 @@
 ![](./images/LDA_1.png)
 <br>
 
+	# ============================================
+	# [예제] Linear Discriminant Analysis (LDA)
+	#  데이터셋 : Iris (붓꽃 데이터)
+	#  4차원 데이터를 2차원으로 차원축소하여 클래스 간 분리가 최대가 되는 축 찾기
+	# ============================================
+	from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+	import matplotlib.pyplot as plt
+	from sklearn.datasets import load_iris
 
-    from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-    import matplotlib.pyplot as plt
-    from sklearn.datasets import load_iris
+	# --------------------------------------------------
+	# ① 데이터 로드
+	# --------------------------------------------------
+	data = load_iris()      # Iris 데이터셋 로드
+	X = data.data           # 입력 특성 (150 × 4) : sepal length, sepal width, petal length, petal width
+	y = data.target         # 출력 레이블 (150,) : 3개 클래스 (0=setosa, 1=versicolor, 2=virginica)
 
-    # 데이터 로드
-    data = load_iris()
-    X = data.data
-    y = data.target
+	# --------------------------------------------------
+	# ② LDA 모델 생성 및 학습
+	# --------------------------------------------------
+	# Linear Discriminant Analysis:
+	#   - 클래스 간 분산(S_b)을 크게 하고 클래스 내 분산(S_w)을 작게 하여
+	#     Fisher의 판별 기준 (J = |S_b| / |S_w|) 을 최대화하는 투영축 찾기
+	#   - C개의 클래스가 있으면 최대 C-1 차원으로 축소 가능
+	#     (여기서는 3클래스 → 최대 2차원으로 축소 가능)
+	lda = LinearDiscriminantAnalysis(n_components=2)
 
-    # LDA 적용
-    lda = LinearDiscriminantAnalysis(n_components=2)
-    X_lda = lda.fit_transform(X, y)
+	# fit_transform():
+	#   1) LDA 모델 학습 (fit)
+	#   2) 데이터를 새로운 LDA 공간으로 투영 (transform)
+	X_lda = lda.fit_transform(X, y)    # X_lda shape: (150, 2)
 
-    # 결과 시각화
-    plt.scatter(X_lda[:, 0], X_lda[:, 1], c=y)
-    plt.xlabel("LDA Component 1")
-    plt.ylabel("LDA Component 2")
-    plt.title("LDA on Iris Dataset")
-    plt.colorbar()
-    plt.show()
+	# --------------------------------------------------
+	# ③ 결과 시각화
+	# --------------------------------------------------
+	# LDA로 변환된 두 축(Component 1, 2)을 기준으로 산점도 작성
+	# 각 점은 하나의 샘플, 색상(c=y)은 클래스(붓꽃 품종)를 나타냄
+	plt.scatter(X_lda[:, 0], X_lda[:, 1], c=y)
+	plt.xlabel("LDA Component 1")
+	plt.ylabel("LDA Component 2")
+	plt.title("LDA on Iris Dataset")
+	plt.colorbar(label="Class label (0=setosa, 1=versicolor, 2=virginica)")
+	plt.show()
+
+	# --------------------------------------------------
+	# [그래프 해석]
+	# --------------------------------------------------
+	# 세 가지 품종(색상별로 구분)이 LDA 공간에서 서로 잘 분리되어 나타남
+	# LDA Component 1: 클래스 간 차이를 가장 잘 구분하는 주축 (주로 setosa vs 나머지)
+	# LDA Component 2: 두 번째로 중요한 구분 축 (versicolor vs virginica 구분 보조)
+	# 원래 4차원 데이터(꽃받침·꽃잎 길이/너비)가 2차원 선형결합(축소공간)으로 투영되었음에도 세 품종의 경계가 명확히 드러남
+	# --------------------------------------------------
+	# (추가 참고)
+	# print("Explained variance ratio:", lda.explained_variance_ratio_)
+	#   → 각 LDA 성분이 클래스 분리를 설명하는 비율
+	# print("Scalings:", lda.scalings_)
+	#   → 각 원변수(4개)가 LDA 축에 기여하는 가중치(선형결합 계수)
+
 
 ![](./images/LDA.png)
 <br><br>
