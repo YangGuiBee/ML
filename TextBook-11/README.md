@@ -246,7 +246,7 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 
 # [3-2] 랜덤 포레스트 (Random Forest)
 ▣ 정의 : 많은 트리를 무작위로 만들어 다수결로 예측하는 방법<br>
-여러 개의 결정 트리(Decision Tree)를 배깅(Bagging, Bootstrap Aggregating) 방식으로 학습하여,<br>
+여러 개의 Decision Tree를 배깅(Bagging, Bootstrap Aggregating) 방식으로 학습하여,<br>
 그 예측값을 평균(회귀) 또는 다수결(분류)로 통합하는 앙상블(Ensemble) 학습 알고리즘<br>
 각 트리는 서로 다른 부트스트랩 표본과 일부 특성(feature subset)을 사용하여 모델 간 상관을 줄이고, 과적합(overfitting)을 완화<br>
 ▣ 목적 : 단일 결정 트리의 불안정성(variance 높음)을 보완하고, 예측의 안정성(stability)과 정확도(accuracy)를 높이기<br>
@@ -267,7 +267,7 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 | 새로운 데이터에 일반화가 용이함 | 고차원 및 희소 데이터에 잘 작동하지 않음 |
 
 ## 랜덤 포레스트 회귀(Random Forest Regression)  
-▣ 정의 : 랜덤 포레스트 회귀 모델은 각 트리가 예측한 값들의 평균을 통해 최종 예측값을 도출하는 모델로, 다수결 대신 트리에서 얻은 예측값의 평균을 사용하여 연속값 예측<br>
+▣ 정의 : 각 트리가 예측한 값들의 평균을 통해 최종 예측값을 도출하는 모델로, 다수결 대신 트리에서 얻은 예측값의 평균을 사용하여 연속값 예측<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#randomforestregressor<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor<br>
 ▣ 모델식 : $\widehat{y}= \frac{1}{B}\sum_{i=1}^{B}T_i(x)$<br>
@@ -298,7 +298,7 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 <br>
 
 ## 랜덤 포레스트 분류(Random Forest Classification)    	  	
-▣ 정의 : 다수의 의사결정나무(Decision Trees)를 기반으로 한 앙상블 모델로, 각 나무는 독립적으로 클래스를 예측한 후 다수결 투표를 통해 최종 클래스를 결정<br>
+▣ 정의 : 다수의 Decision Trees를 기반으로 한 앙상블 모델로, 각 나무는 독립적으로 클래스를 예측한 후 다수결 투표를 통해 최종 클래스를 결정<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#randomforestclassifier<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier<br>
 ▣ 모델식 : $\widehat{y}=mode(T_1(x),T_2(x),...,T_B(x))$<br>
@@ -341,7 +341,7 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 새로운 입력 샘플에 대해 학습데이터 중 가장 가까운 𝑘개의 이웃을 찾아, 이들의 레이블(분류)이나 평균(회귀)을 이용해 예측하는 비모수 기반의 지도학습 모델<br> 
 ▣ 목적 : 단순하면서도 학습된 모델 구조가 거의 없으므로 빠르게 적용 가능하고, 데이터의 형태가 복잡하거나 비선형일 때 유연하게 대응하고자 할 때 사용<br>
 ▣ 장점 : 학습 단계가 거의 없고, 구현이 매우 간단, 비선형 경계나 복잡한 데이터 구조를 자연스럽게 모델링 가능<br>
-▣ 단점 : 예측 시점(test) 비용이 상대적으로 크며, 고차원 특성공간에서는 거리 측정 왜곡(“차원의 저주”)으로 성능 저하 가능성과 적절한 𝑘와 거리 메트릭 선택이 중요하며, 이상치나 노이즈 민감성<br>
+▣ 단점 : test 비용이 상대적으로 크며, 고차원 특성공간에서는 거리 측정왜곡(차원의 저주)으로 성능저하, 적절한 𝑘와 거리 메트릭 선택이 중요하며, 이상치나 노이즈 민감성<br>
 ▣ Scikit-learn 클래스명 : 분류용 sklearn.neighbors.KNeighborsClassifier 회귀용 sklearn.neighbors.KNeighborsRegressor<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/neighbors.html<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html<br>
@@ -369,7 +369,7 @@ $X_{new} = \frac{X-\mu}{\sigma}= \frac{X-min(X)}{StdDev(X)}$
 ## k-최근접 이웃 회귀(k-Nearest Neighbors Regression)
 ▣ 정의 :주변의 가장 가까운 K개의 샘플 평균을 통해 값을 예측하는 방식<br> 
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html<br>
-▣ 한계 : 테스트하고자 하는 샘플에 근접한 훈련 데이터가 없는 경우, 즉 훈련 셋의 범위를 많이 벗어나는 샘플인 경우 정확하게 예측하기 어렵다. 
+▣ 한계 : 테스트하고자 하는 샘플에 근접한 훈련 데이터가 없는 경우, 즉 훈련 셋의 범위를 많이 벗어나는 샘플인 경우 정확하게 예측하기 곤란<br> 
 
 	class sklearn.neighbors.KNeighborsRegressor(n_neighbors=5, *, weights='uniform', algorithm='auto', 
 	leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
@@ -464,7 +464,9 @@ $\displaystyle \min_{w}\frac{1}{2}\left\|\left\|w\right\|\right\|^2 + C\sum_{i=1
 	from sklearn.pipeline import Pipeline
 	from sklearn.preprocessing import PolynomialFeatures
 
-	polynomial_svm_clf = Pipeline([("poly_features", PolynomialFeatures(degree=3)),("scaler", StandardScaler()),("svm_clf", LinearSVC(C=10, loss="hinge", max_iter=2000, random_state=42))])
+	polynomial_svm_clf = 
+	Pipeline([("poly_features", PolynomialFeatures(degree=3)),("scaler", StandardScaler()),
+			("svm_clf", LinearSVC(C=10, loss="hinge", max_iter=2000, random_state=42))])
 	polynomial_svm_clf.fit(X, y)
 
 <br>
