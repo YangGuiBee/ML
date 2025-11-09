@@ -527,7 +527,6 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 <br>출처 : https://towardsdatascience.com/top-machine-learning-algorithms-for-classification-2197870ff501
 
 
-
 | 번호·모델명                                                         | 대표 수식                                                                                                          | 주요 적용 분야                           |
 | :------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------- | :--------------------------------- |
 | **[1-1] LDA (Linear Discriminant Analysis)**                   | ( \delta_k(x)=x^\top \Sigma^{-1}\mu_k-\tfrac12 \mu_k^\top \Sigma^{-1}\mu_k+\log \pi_k )                        | 다중 클래스 분류, 얼굴 인식, 문서 분류, 의료 데이터    |
@@ -540,7 +539,6 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 | **[3-2] 랜덤 포레스트 (Random Forest)**                              | ( \hat{y}(x)=\tfrac1B \sum_{b=1}^{B} h_b(x) )                                                                  | 대규모 데이터 분류·회귀, 변수 중요도 평가, 이상 탐지    |
 | **[4-1] K-NN (k-Nearest Neighbors)**                           | 분류: ( \hat{y}=\operatorname{mode}{y_i: x_i\in N_k(x)} ) <br> 회귀: ( \hat{y}=\tfrac1k\sum_{x_i\in N_k(x)} y_i )  | 패턴 인식, 추천 시스템, 비모수 근접 기반 예측        |
 | **[4-2] SVM (Support Vector Machine)**                         | ( \min_{w,b}\ \tfrac12\lVert w\rVert^2\ \text{s.t.}\ y_i(w^\top x_i+b)\ge 1 )                                  | 이진/다중 분류, 고차원 텍스트/이미지, 생체 신호 분석    |
-
 
 
 
