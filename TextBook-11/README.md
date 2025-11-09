@@ -253,9 +253,9 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 ▣ 목적 : 단일 결정 트리의 불안정성(variance 높음)을 보완하고, 예측의 안정성(stability)과 정확도(accuracy)를 높이기<br>
 ▣ 장점 : 트리 여러 개를 평균/투표함으로써 분산(variance)을 낮춰서 과적합 방지, 변수 중요도(Feature Importance) 자동 산출, 비선형 관계 및 변수 간 상호작용을 자연스럽게 포착, 데이터 스케일 조정 불필요, 결측값에도 비교적 강건, 분류와 회귀 모두 사용 가능하며, 이상치(outlier)에 민감하지 않음<br>
 ▣ 단점 : 개별 트리 수가 많아 모델 해석이 어렵고, 많은 트리 수로 훈련과 예측시간이 길어짐(메모리 및 연산량 증가), 트리 간 상관성 완전 제거 불가<br>
-▣ Scikit-learn 클래스명 : 분류용 sklearn.ensemble.RandomForestClassifier 회귀용 sklearn.ensemble.RandomForestRegressor
+▣ Scikit-learn 클래스명 : 분류용 sklearn.ensemble.RandomForestClassifier 회귀용 sklearn.ensemble.RandomForestRegressor<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#random-forests<br>
-▣ API : 분류용 RandomForestClassifier API 회귀용 RandomForestRegressor API
+
 
 
 ▣ 모델식 : $\widehat{y}=\frac{1}{N}\sum_{i=1}^{N}T_i(X)$ ($N$ : 결정트리의 수, $T_i(X)$ : 각 결정트리 $i$가 입력값 $X$에 대해 예측한 값)
@@ -270,9 +270,9 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 | 새로운 데이터에 일반화가 용이함 | 고차원 및 희소 데이터에 잘 작동하지 않음 |
 
 ## 랜덤 포레스트 회귀(Random Forest Regression)  
+▣ 정의 : 랜덤 포레스트 회귀 모델은 각 트리가 예측한 값들의 평균을 통해 최종 예측값을 도출하는 모델로, 다수결 대신 트리에서 얻은 예측값의 평균을 사용하여 연속값 예측<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#randomforestregressor<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor<br>
-▣ 정의 : 랜덤 포레스트 회귀 모델은 각 트리가 예측한 값들의 평균을 통해 최종 예측값을 도출하는 모델로, 다수결 대신, 트리에서 얻은 예측값의 평균을 사용하여 연속적인 값을 예측한다.<br>
 ▣ 모델식 : $\widehat{y}= \frac{1}{B}\sum_{i=1}^{B}T_i(x)$<br>
 ###### $T_i(x)$: 입력 데이터 𝑥에 대한 𝑖번째 결정 트리의 예측값, B: 전체 트리의 개수
 
@@ -301,9 +301,9 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 <br>
 
 ## 랜덤 포레스트 분류(Random Forest Classification)    	  	
+▣ 정의 : 다수의 의사결정나무(Decision Trees)를 기반으로 한 앙상블 모델로, 각 나무는 독립적으로 클래스를 예측한 후 다수결 투표를 통해 최종 클래스를 결정<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#randomforestclassifier<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier<br>
-▣ 정의 : 랜덤 포레스트 분류 모델은 다수의 의사결정나무(Decision Trees)를 기반으로 한 앙상블 모델로, 각 나무는 독립적으로 클래스를 예측한 후 다수결 투표를 통해 최종 클래스를 결정한다.<br>
 ▣ 모델식 : $\widehat{y}=mode(T_1(x),T_2(x),...,T_B(x))$<br>
 ###### $T_i(x)$: 입력 데이터 𝑥에 대한 𝑖번째 결정 트리의 예측값, B: 전체 트리의 개수, mode 함수 : 다수결 투표방식
 
@@ -335,8 +335,6 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 	accuracy = accuracy_score(y_test, y_pred)
 	print("Accuracy:", accuracy)
  
-<br>
-
 
 <br>
 
