@@ -20,7 +20,7 @@
 		[3-2] 랜덤 포레스트 (Random Forest)
 
 	[4] 거리 기반 (Distance-based)
-		[4-1] k-최근접 이웃 (k-Nearest Neighbor, k-NN)
+		[4-1] k-최근접 이웃(k-Nearest Neighbors, K-NN)
 		[4-2] 서포트 벡터 머신 (SVM, Support Vector Machine)
 	
 ---  
@@ -352,22 +352,19 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 
 <br>
 
-# [4-1] k‑Nearest Neighbor (k-최근접 이웃, k-NN)
-▣  정의 : 새로운 입력 샘플에 대해 학습데이터 중 가장 가까운 𝑘개의 이웃을 찾아, 이들의 레이블(분류) 혹은 평균/가중평균(회귀)을 이용해 예측하는 비모수 기반의 지도학습 모델입니다. 
+# [4-1] k-최근접 이웃(k-Nearest Neighbors, K-NN)
+▣ 정의 : 머신러닝에서 데이터를 가장 가까운 유사속성에 따라 분류하여 데이터를 거리기반으로 분류분석하는 기법으로,<br>
+비지도학습인 군집화(Clustering)과 유사한 개념이나 기존 관측치의 y 값이 존재한다는 점에서 지도학습에 해당<br>
+새로운 입력 샘플에 대해 학습데이터 중 가장 가까운 𝑘개의 이웃을 찾아, 이들의 레이블(분류)이나 평균(회귀)을 이용해 예측하는 비모수 기반의 지도학습 모델<br> 
 ▣ 목적 : 단순하면서도 학습된 모델 구조가 거의 없으므로 빠르게 적용 가능하고, 데이터의 형태가 복잡하거나 비선형일 때 유연하게 대응하고자 할 때 사용됩니다.
 ▣ 장점 : 학습 단계가 거의 없고, 구현이 매우 간단합니다.
 비선형 경계나 복잡한 데이터 구조를 자연스럽게 모델링 가능합니다.
 ▣ 단점 : 예측 시점(test) 비용이 상대적으로 크며, 고차원 특성공간에서는 거리 측정이 왜곡되어 (“차원의 저주”) 성능이 저하될 수 있습니다. 
 적절한 𝑘와 거리 메트릭 선택이 중요하며, 이상치나 노이즈 민감성이 있습니다.
-▣ Scikit-learn 클래스명 : 분류용 sklearn.neighbors.KNeighborsClassifier 회귀용 sklearn.neighbors.KNeighborsRegressor
-▣ 가이드 : https://scikit-learn.org/stable/modules/neighbors.html
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
-
-# k-최근접 이웃(k-Nearest Neighbors, K-NN) 	
+▣ Scikit-learn 클래스명 : 분류용 sklearn.neighbors.KNeighborsClassifier 회귀용 sklearn.neighbors.KNeighborsRegressor<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/neighbors.html<br>
-▣ 예제 : https://scikit-learn.org/stable/auto_examples/neighbors/index.html<br>
-▣ 정의 : 머신러닝에서 데이터를 가장 가까운 유사속성에 따라 분류하여 데이터를 거리기반으로 분류분석하는 기법으로,<br>
-비지도학습인 군집화(Clustering)과 유사한 개념이나 기존 관측치의 Y값이 존재한다는 점에서 지도학습에 해당한다.<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html<br>
+
 
 | 장점                             | 단점                                              |
 |----------------------------------|---------------------------------------------------|
@@ -376,7 +373,7 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 | 빠른 훈련 단계 | 데이터가 많아지면 느림 : 차원의 저주(curse of dimensionality) |
 | 수치기반 데이터 분류 성능우수 | 명목특징 및 누락데이터위한 추가처리 필요(이상치에 민감)|
 
-데이터로부터 거리가 가까운 'K'개의 다른 데이터의 레이블을 참조하여 분류할때 거리측정은 유클리디안 거리 계산법을 사용한다.<br>
+데이터로부터 거리가 가까운 'K'개의 다른 데이터의 레이블을 참조하여 분류할때 거리측정은 유클리디안 거리 계산법을 사용<br>
 ![](./images/distance.PNG)
 
 K-NN 모델은 각 변수들의 범위를 재조정(표준화, 정규화)하여 거리함수의 영향을 줄여야 한다.<br>
