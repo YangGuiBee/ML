@@ -317,9 +317,9 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
 
 # [2-2] PLS (Partial Least Squares)
 
-▣ 정의 : 독립변수 𝑋와 종속변수 y 양쪽을 고려하여 새로운 잠재변수(성분)를 추출하고, 이 잠재변수를 기반으로 회귀모형을 적합하는 차원축소 회귀기법<br> 
-▣ 목적 : 독립변수 수가 많고 다중공선성이 심하거나, 관측치 수 < 변수 수인 고차원 상황에서 𝑋와 y 간의 공변량 구조를 최대한 반영하면서 회귀모형을 구축<br> 
-▣ 장점 : 𝑋와 y 간의 상관/공변량을 고려하므로, PCR보다 종속변수 설명력을 더 잘 확보, 차원축소와 회귀를 동시에 수행하여 고차원/공선성 데이터에서 안정적<br>
+▣ 정의 : 독립변수 𝑋와 종속변수 y 양쪽을 고려하여 새로운 잠재변수(성분)를 추출하고, 이 변수를 기반으로 회귀모형을 적합하는 차원축소 회귀기법<br> 
+▣ 목적 : 독립변수가 많고 다중공선성이 심하거나, 관측치<변수인 고차원 상황에서 𝑋와 y 간의 공변량 구조를 최대한 반영하면서 회귀모형을 구축<br> 
+▣ 장점 : 𝑋와 y 간의 상관/공변량을 고려하므로, PCR보다 종속변수 설명력이 높고, 차원축소와 회귀를 동시에 수행하여 고차원/공선성 데이터에서 안정적<br>
 ▣ 단점 : 해석이 다소 복잡하고, 잠재변수 구성 방식이 덜 직관적일 가능성, 구성 성분 수(n_components)가 과다하게 선택하면 과적합 위험도 존재<br>
 ▣ Scikit-learn 클래스명 : sklearn.cross_decomposition.PLSRegression<br> 
 ▣ 가이드 : https://scikit-learn.org/stable/modules/cross_decomposition.html<br>
