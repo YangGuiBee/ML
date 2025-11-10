@@ -9,7 +9,7 @@
 		[1-1] LDA (Linear Discriminant Analysis)
 		[1-2] QDA (Quadratic Discriminant Analysis)
 		
-	[2] 차원축소 (Dimensionality Reduction)
+	[2] 차원 축소 (Dimensionality Reduction)
 		[2-1] PCR (Principal Component Regression) : PCA(비지도학습의 차원축소) + 회귀
 		[2-2] PLS (Partial Least Squares)
 		[2-3] PLS-DA (Partial Least Squares Discriminant Analysis)
@@ -25,9 +25,10 @@
 	
 ---  
 
-# [1-1] Linear Discriminant Analysis (LDA)
+# [1-1] LDA (Linear Discriminant Analysis)
 ▣ 정의: 데이터를 직선(또는 평면) 하나로 깔끔하게 나누는 방법으로<br>
-데이터가 여러 그룹으로 나뉘어 있을 때, 그룹 사이의 차이는 최대화하면서 같은 그룹 안의 차이는 최소화하도록 데이터를 잘 구분해주는 선(혹은 초평면)을 찾는 방법(가정 : 모든 클래스의 공분산이 같다. 모양이 같은 1차식 곡선)<br>
+데이터가 여러 그룹으로 나뉘어 있을 때, 그룹 사이의 차이는 최대화하면서 같은 그룹 안의 차이는 최소화하도록 데이터를 잘 구분해주는 선(혹은 초평면)을 찾는 방법<br>
+(가정 : 모든 클래스의 공분산이 같다. 모양이 같은 1차식 곡선)<br>
 ▣ 필요성: 클래스 간 분리를 극대화하면서 데이터를 저차원으로 투영하여 분류 문제의 성능을 향상시키기 위해 필요<br>
 ▣ 장점: 클래스 분리를 극대화하여 분류 성능을 개선할 수 있으며, 선형 변환을 통해 효율적으로 차원을 축소<br>
 ▣ 단점: 데이터가 선형적으로 구분되지 않는 경우 성능이 저하될 수 있으며, 클래스 간 분포가 정규 분포를 따를 때 더 효과적<br>
@@ -275,7 +276,7 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
 
 <br>
 
-# [1-2] Quadratic Discriminant Analysis (QDA)
+# [1-2] QDA (Quadratic Discriminant Analysis)
 ▣ 정의 : 새로운 데이터가 어느 클래스(집단)에 속할지 예측하는 분류 알고리즘으로<br>
 데이터가 여러 그룹으로 나뉘어 있을 때, 각 그룹의 확률 분포(특히 평균과 공분산)를 이용해서 “이 점은 어떤 그룹에서 나올 가능성이 가장 높을까?”를 계산하는 방식<br>
 (가정 : 각 클래스의 공분산이 다를 수 있다. 모양이 다른 2차식 곡선)<br>
@@ -302,7 +303,7 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
 
 <br>
 
-# [2-1] Principal Component Regression (PCR)
+# [2-1] PCR (Principal Component Regression)
 <br>
 ▣ 정의 : 먼저 독립변수 𝑋에 대해 Principal Component Analysis(PCA)를 적용하여 비지도학습의 차원축소(주성분)를 수행하고,<br> 
 그 다음 주성분을 독립변수로 하여 선형회귀(OLS 등)를 수행하는 이중 단계 방식의 회귀기법<br> 
@@ -316,7 +317,7 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
  
 <br>
 
-# [2-2] Partial Least Squares (PLS)
+# [2-2] PLS (Partial Least Squares)
 
 ▣ 정의 : 독립변수 𝑋와 종속변수 y 양쪽을 고려하여 새로운 잠재변수(성분)를 추출하고, 이 잠재변수를 기반으로 회귀모형을 적합하는 차원축소 회귀기법<br> 
 ▣ 목적 : 독립변수 수가 많고 다중공선성이 심하거나, 관측치 수 < 변수 수인 고차원 상황에서 𝑋와 y 간의 공변량 구조를 최대한 반영하면서 회귀모형을 구축<br> 
