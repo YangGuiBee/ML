@@ -377,10 +377,8 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html#regression<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html<br>
-▣ 모델식 : $\widehat{f}(x) = \sum_{m=1}^{M}C_mI((x_1,x_2)\in R_m)$<br>
-비용함수(cost function)를 최소로 할때 최상의 분할 : 데이터를 M개로 분할($R_1,R_2,...R_M$)<br> 
-$\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{N}(y_i-\sum_{m=1}^{M}C_mI(x\in R_m))^2$<br>
-각 분할에 속해 있는 y값들의 평균으로 예측했을때 오류가 최소화 : $\widehat{C}_m=ave(y_i|x_i\in R_m)$<br>
+▣ 모델식 : https://scikit-learn.org/stable/modules/tree.html#mathematical-formulation<br>
+
 
 **(Decision Tree Regression 예제 소스)**
 
@@ -497,9 +495,8 @@ $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{
 ▣ 정의 : 데이터에 내재되어 있는 패턴을 비슷한 범주의 관측치 변수의 조합으로 분류 모델을 나무 형태로 만든다.<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html#classification<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html<br>
-▣ 모델식 : $\widehat{f(x)} = \sum_{m=1}^{M}k(m)I((x_1,x_2)\in R_m)$<br>
-끝노드(m)에서 클래스(k)에 속할 관측치의 비율 : $\widehat{P_{mk}}=\frac{1}{N_m}\sum_{x_i\in R_m}^{}I(y_i=k)$<br>
-끝노드 m으로 분류된 관측치 : $k(m) = \underset{k}{argmax}\widehat{P_{mk}}$<br><br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/plot_iris_dtc.html<br>
+▣ 모델식 : https://scikit-learn.org/stable/modules/tree.html#mathematical-formulation<br>
 
 
 **(Decision Tree Regression 예제 소스)**
