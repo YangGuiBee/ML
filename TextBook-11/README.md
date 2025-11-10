@@ -101,7 +101,7 @@
 ![](./images/LDA.png)
 <br>
 
-<br>
+
 ![](./images/PCA_LDA.png)
 <br>
 https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysis-python/
