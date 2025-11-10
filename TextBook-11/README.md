@@ -1,6 +1,4 @@
 
-
-
 #  11 : 지도 학습(Supervised Learning, SL) : 회귀(regression) + 분류(classification)
 
 ---
