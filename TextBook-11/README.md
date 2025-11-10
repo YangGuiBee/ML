@@ -451,14 +451,6 @@ $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{
     	if importances[i] > 0:
 	        print(f"- {diabetes.feature_names[i]:>6s}: {importances[i]:.3f}")
 
-	# ============================================
-	# [해설]
-	# - NameError 해결: train_test_split로 X_train, X_test, y_train, y_test를 먼저 생성해야 함.
-	# - 트리의 일반화 성능은 max_depth, min_samples_leaf, min_samples_split 등을 조절하며 개선 가능.
-	# - 트리는 스케일링 영향이 작지만, 데이터가 매우 잡음이 크거나 샘플이 적으면 과적합되기 쉬움.
-	#   필요 시 max_depth를 더 줄이거나 min_samples_leaf를 늘려 규제하세요.
-	# ============================================
-
 
 **(Decision Tree Regression 예제 소스 실행 결과)**
 
@@ -612,13 +604,6 @@ $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{
 	plt.tight_layout()
 	plt.show()
 
-	# ============================================
-	# [해설]
-	# - 트리 분류기는 스케일링 영향이 작습니다(임계값 기반 분할).
-	# - 과적합 조절: max_depth, min_samples_leaf, min_samples_split, max_leaf_nodes 등
-	# - 클래스 불균형이 크면 class_weight="balanced" 옵션 고려
-	# - ROC-AUC은 임계값을 바꿔가며 전반적 분리력을 평가(0.5 무작위, 1.0 완벽)
-	# ============================================
 
 
 **(Decision Tree Regression 예제 소스 실행 결과)**
@@ -689,7 +674,7 @@ $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{
 	- worst symmetry (최악의 대칭도) : 0.011
 	- worst area (최악의 면적) : 0.009
 
-
+<!--
 ▣ 비용함수(불순도 측정) : 불순도(Impurity)가 높을수록 다양한 클래스들이 섞여 있고, 불순도가 낮을수록 특정 클래스에 속한 데이터가 명확<br>
 (1) 오분류율(Misclassification rate, Error rate) : 분류 모델이 잘못 분류한 샘플의 비율로, 전체 샘플 중에서 실제 값과 예측 값이 일치하지 않는 샘플의 비율을 나타낸다.(0에서 100 사이의 값, 0%: 모델이 모든 샘플을 완벽하게 예측, 100%: 모델이 모든 샘플을 잘못 예측)<br><br>
 $\frac{FP+FN}{TP+TN+FP+FN}$ 
@@ -720,7 +705,7 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 	#정확도 출력
 	accuracy = accuracy_score(y_test, y_pred)  # 정확도 계산
 	print(f"Accuracy: {accuracy * 100:.2f}%")  # 정확도 출력
-
+-->
 
 <br>
 
