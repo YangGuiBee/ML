@@ -38,10 +38,10 @@
 ![](./images/LDA_1.png)
 <br>
 
+**([1-1] LDA 예제 소스)**
+
 	# ============================================
-	# [예제] Linear Discriminant Analysis (LDA)
-	#  데이터셋 : Iris (붓꽃 데이터)
-	#  4차원 데이터를 2차원으로 차원축소하여 클래스 간 분리가 최대가 되는 축 찾기
+	#  4차원 Iris 데이터를 2차원으로 차원축소하여 클래스 간 분리가 최대가 되는 축 찾기
 	# ============================================
 	from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 	import matplotlib.pyplot as plt
@@ -96,8 +96,12 @@
 	#   → 각 원변수(4개)가 LDA 축에 기여하는 가중치(선형결합 계수)
 
 
+**([1-1] LDA 예제 소스 실행결과)**
+
 ![](./images/LDA.png)
-<br><br>
+<br>
+
+<br>
 ![](./images/PCA_LDA.png)
 <br>
 https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysis-python/
