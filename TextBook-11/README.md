@@ -635,14 +635,11 @@ $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{
 
 	[Classification Report]
 				precision    recall  f1-score   support
-
 	malignant    0.87      0.93      0.90        42
 	benign       0.96      0.92      0.94        72
-
 	accuracy                            0.92       114
 	macro avg       0.91      0.92      0.92       114
 	weighted avg    0.92      0.92      0.92       114
-
 
 	[Feature Importances] (Top-10)
 	- worst radius                  : 0.714
@@ -658,8 +655,39 @@ $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{
 
 ![](./images/dt.png)
 
+
 **(Decision Tree Regression 예제 소스 실행 결과 분석)**
 
+	Accuracy     : 0.921  → 전체 114건 중 105건(=39+66)을 맞춤
+	Precision    : 0.957  → 모델이 benign이라 예측한 69건(=66+3) 중 66건이 실제 benign(오탐 3건)
+	Recall       : 0.917  → 실제 benign 72건 중 66건을 맞춤(benign을 놓친 경우(FN)는 6건)
+	F1-score     : 0.936  → Precision(0.957)과 Recall(0.917)의 조화 평균
+	ROC-AUC      : 0.916  → 임계값 전 범위를 통틀어 양성과 음성을 잘 구분하는 분리력. 0.5(무작위) 대비 확실히 우수
+
+	[Confusion Matrix] → benign(양성종양, 1), Malignant(악성종양, 0)
+	                         Malignant예측   Benign예측           
+	[[39  3]  →  Malignant   TN=39          FP=3
+	 [ 6 66]] →  Benign      FN=6           TP=66
+
+	[Classification Report]
+				precision  recall  f1-score   support
+	malignant    0.87      0.93      0.90        42
+	benign       0.96      0.92      0.94        72
+	accuracy                         0.92       114
+	macro avg       0.91   0.92      0.92       114   → macro avg(클래스 크기 무시)
+	weighted avg    0.92   0.92      0.92       114   → weighted avg(표본수 가중평균)
+
+	[Feature Importances] (Top-10)
+	- worst radius (최악의 반경) : 0.714
+	- worst concave points (최악의 오목점) : 0.119
+	- texture error (질감 오차) : 0.054
+	- worst texture (최악의 질감) : 0.031
+	- worst concavity (최악의 오목도) : 0.017
+	- worst smoothness (최악의 매끄러움) : 0.013
+	- area error (면적 오차) : 0.012
+	- mean texture (평균 질감) : 0.012
+	- worst symmetry (최악의 대칭도) : 0.011
+	- worst area (최악의 면적) : 0.009
 
 
 ▣ 비용함수(불순도 측정) : 불순도(Impurity)가 높을수록 다양한 클래스들이 섞여 있고, 불순도가 낮을수록 특정 클래스에 속한 데이터가 명확<br>
