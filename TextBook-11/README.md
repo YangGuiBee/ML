@@ -832,9 +832,7 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 
 
 <br>
- 
-![](./images/SLC.png)
-<br>출처 : https://towardsdatascience.com/top-machine-learning-algorithms-for-classification-2197870ff501
+
 
 
 
@@ -851,3 +849,10 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 | **[4-1] K-NN (k-Nearest Neighbors)**                           | 분류: ![knn1](https://latex.codecogs.com/svg.image?%5Chat{y}%3D%5Coperatorname%7Bmode%7D%5C%7By_i%3A%20x_i%5Cin%20N_k%28x%29%5C%7D) <br> 회귀: ![knn2](https://latex.codecogs.com/svg.image?%5Chat{y}%3D%5Ctfrac1k%20%5Csum_%7Bx_i%5Cin%20N_k%28x%29%7D%20y_i) | 패턴 인식, 추천 시스템, 비모수 근접 예측(사용자 취향기반 영화 추천)           |
 | **[4-2] SVM (Support Vector Machine)**                         | ![svm](https://latex.codecogs.com/svg.image?%5Cmin_%7Bw%2Cb%7D%20%5Ctfrac12%20%5C%7Cw%5C%7C%5E2%20%5Ctext%7Bs.t.%7D%20%20y_i%28w%5E%5Ctop%20x_i%2Bb%29%5Cge%201)                                                                                           | 이진/다중 분류, 고차원 텍스트/이미지, 생체 신호(얼굴 감정 인식)      |
 
+
+
+
+
+ 
+![](./images/SLC.png)
+<br>출처 : https://towardsdatascience.com/top-machine-learning-algorithms-for-classification-2197870ff501
