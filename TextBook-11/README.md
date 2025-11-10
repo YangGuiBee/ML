@@ -737,17 +737,12 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 출처: https://www.researchgate.net/figure/Schematic-of-the-RF-algorithm-based-on-the-Bagging-Bootstrap-Aggregating-method_fig1_309031320<br>
 
 
-| 장점                             | 단점                                              |
-|----------------------------------|---------------------------------------------------|
-| 모델이 단순, 과적합이 잘 일어나지 않음 | 여러개의 결정트리 사용으로 메모리 사용량 큼 |
-| 새로운 데이터에 일반화가 용이함 | 고차원 및 희소 데이터에 잘 작동하지 않음 |
-
 ## 랜덤 포레스트 회귀(Random Forest Regression)  
 ▣ 정의 : 각 트리가 예측한 값들의 평균을 통해 최종 예측값을 도출하는 모델로, 다수결 대신 트리에서 얻은 예측값의 평균을 사용하여 연속값 예측<br>
-▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#randomforestregressor<br>
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor<br>
-▣ 모델식 : $\widehat{y}= \frac{1}{B}\sum_{i=1}^{B}T_i(x)$<br>
-###### $T_i(x)$: 입력 데이터 𝑥에 대한 𝑖번째 결정 트리의 예측값, B: 전체 트리의 개수
+▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#forest<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_importances.html<br>
+▣ 모델식 : https://scikit-learn.org/stable/modules/ensemble.html#random-forests<br>
 
 
 	from sklearn.ensemble import RandomForestRegressor
@@ -775,10 +770,11 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 
 ## 랜덤 포레스트 분류(Random Forest Classification)    	  	
 ▣ 정의 : 다수의 Decision Trees를 기반으로 한 앙상블 모델로, 각 나무는 독립적으로 클래스를 예측한 후 다수결 투표를 통해 최종 클래스를 결정<br>
-▣ 가이드 : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#randomforestclassifier<br>
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier<br>
-▣ 모델식 : $\widehat{y}=mode(T_1(x),T_2(x),...,T_B(x))$<br>
-###### $T_i(x)$: 입력 데이터 𝑥에 대한 𝑖번째 결정 트리의 예측값, B: 전체 트리의 개수, mode 함수 : 다수결 투표방식
+▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#forest<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_importances.html<br>
+▣ 모델식 : https://scikit-learn.org/stable/modules/ensemble.html#random-forests<br>
+
 
 	from sklearn.ensemble import RandomForestClassifier
 	from sklearn.model_selection import train_test_split
@@ -823,13 +819,6 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html<br>
 
 
-| 장점                             | 단점                                              |
-|----------------------------------|---------------------------------------------------|
-| 간단하고 이해하기 쉬움  | 모델 미생성으로 특징과 클래스 간 관계 이해가 제한적 |
-| 학습 데이터분포 고려 불요 | 적절한 K의 선택이 필요 |
-| 빠른 훈련 단계 | 데이터가 많아지면 느림 : 차원의 저주(curse of dimensionality) |
-| 수치기반 데이터 분류 성능우수 | 명목특징 및 누락데이터위한 추가처리 필요(이상치에 민감)|
-
 데이터로부터 거리가 가까운 'K'개의 다른 데이터의 레이블을 참조하여 분류할때 거리측정은 유클리디안 거리 계산법을 사용<br>
 ![](./images/distance.PNG)
 
@@ -843,9 +832,13 @@ $X_{new} = \frac{X-\mu}{\sigma}= \frac{X-min(X)}{StdDev(X)}$
 <br>
 
 ## k-최근접 이웃 회귀(k-Nearest Neighbors Regression)
-▣ 정의 :주변의 가장 가까운 K개의 샘플 평균을 통해 값을 예측하는 방식<br> 
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html<br>
-▣ 한계 : 테스트하고자 하는 샘플에 근접한 훈련 데이터가 없는 경우, 즉 훈련 셋의 범위를 많이 벗어나는 샘플인 경우 정확하게 예측하기 곤란<br> 
+▣ 정의 : 새로운 입력값이 주어졌을 때, 가장 가까운 k개의 이웃 데이터의 타깃값 평균(또는 가중평균) 으로 예측하는 비모수적 회귀 알고리즘<br>
+즉, 입력 공간에서 가까운 데이터들이 비슷한 출력값을 가진다는 가정에 기반<br>
+▣ 가이드 : https://scikit-learn.org/stable/modules/neighbors.html#regression<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/neighbors/plot_regression.html<br>
+▣ 모델식 : https://scikit-learn.org/stable/modules/neighbors.html#id6<br>
+
 
 	class sklearn.neighbors.KNeighborsRegressor(n_neighbors=5, *, weights='uniform', algorithm='auto', 
 	leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
@@ -878,7 +871,13 @@ $X_{new} = \frac{X-\mu}{\sigma}= \frac{X-min(X)}{StdDev(X)}$
 <br>
 
 ## k-최근접 이웃 분류(k-Nearest Neighbors Classification)
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
+▣ 정의 : 새로운 샘플이 주어졌을 때, 가장 가까운 k개의 이웃 중 다수결 투표로 클래스 라벨을 결정하는 거리 기반 비모수적 분류 알고리즘<br>
+즉, 근접한 데이터들이 같은 클래스로 분류될 가능성이 높다는 가정에 따름<br>
+▣ 가이드 : https://scikit-learn.org/stable/modules/neighbors.html#classification<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html<br>
+▣ 모델식 : https://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbors-classification<br>
+
 
 	from sklearn.neighbors import KNeighborsClassifier
 	kn = KNeighborsClassifier()
