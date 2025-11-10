@@ -258,9 +258,16 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
 
 **(PCA vs LDA 예제 소스 실행 결과)**
 
+	[Fisher 분리 점수] (값 ↑ = 분리 ↑)
+	PCA 축 : 8.604
+	LDA 축 : 21.683
+
 ![](./images/PCA_vs_LDA.png)
 
-	[Fisher 분리 점수] (값 ↑ = 분리 ↑)
+
+**(PCA vs LDA 예제 소스 실행 결과 분석)**
+
+	[Fisher 분리점수] (값 ↑ = 분리 ↑) : 두 클래스의 중심이 멀리 떨어져 있고, 각 클래스 내부의 분산이 작을수록 값이 커진다.(전처리에 사용)
 	PCA 축 : 8.604    → (비지도) PCA는 분산 최대가 되는 축 : 전체분산 최대화
 	                     빨강/파랑을 구분하지 않고, 가장 퍼져 보이는 방향(화살표)을 찾은 뒤 그 축 위로 직선 투영
 	LDA 축 : 21.683   → (지도) LDA는 집단 분리가 최대가 되는 축 : 집단간분산/집단내분산 최대화
