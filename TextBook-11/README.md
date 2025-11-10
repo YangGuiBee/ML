@@ -982,6 +982,7 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 ▣ 정의 : 두 클래스(또는 다수의 클래스)를 분류하기 위해 최대 마진을 가지는 초평면을 찾는 것.<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html#classification<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/svm/plot_iris_svc.html<br>
 ▣ 모델식 : https://scikit-learn.org/stable/modules/svm.html#svc<br>
 
 
