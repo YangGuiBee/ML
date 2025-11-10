@@ -107,6 +107,163 @@
 https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysis-python/
 
 
+**(PCA vs LDA 예제 소스)**
+
+	"""
+	Bream(도미) vs Smelt(빙어) 실데이터(원격 로드 실패 시 내장 표본)로 PCA vs LDA 비교
+	- 사용 특성: Length2(중간길이), Height
+	"""
+	
+	import io
+	import textwrap
+	import numpy as np
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	from sklearn.preprocessing import StandardScaler
+	from sklearn.decomposition import PCA
+	from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
+	
+	# -------------------- 1) 원격 로드 + 오프라인 폴백 --------------------
+	URLS = [
+	    "https://raw.githubusercontent.com/selva86/datasets/master/Fish.csv",
+	    "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/Fish.csv",  # 예비
+	]
+	
+	# 공개 Fish Market에서 Bream/Smelt 행 일부만 발췌(Length2, Height 중심)
+	FALLBACK_CSV = textwrap.dedent("""\
+	Species,Length2,Height
+	Bream,23.2,11.52
+	Bream,24.0,12.48
+	Bream,23.9,12.37
+	Bream,26.3,12.73
+	Bream,26.5,14.18
+	Bream,29.0,14.73
+	Bream,29.7,14.88
+	Bream,29.9,17.78
+	Bream,31.0,16.24
+	Bream,31.5,16.64
+	Bream,32.0,15.05
+	Bream,33.0,15.58
+	Bream,33.5,18.26
+	Bream,35.0,18.49
+	Bream,36.5,18.18
+	Bream,36.0,18.67
+	Bream,39.0,19.99
+	Bream,41.0,21.06
+	Smelt,12.9,3.52
+	Smelt,14.5,3.52
+	Smelt,13.2,4.30
+	Smelt,14.3,4.23
+	Smelt,15.0,5.14
+	Smelt,16.2,5.58
+	Smelt,17.4,5.52
+	Smelt,17.4,5.22
+	Smelt,19.0,5.20
+	Smelt,19.0,5.58
+	Smelt,20.0,5.69
+	Smelt,20.5,5.92
+	Smelt,21.0,6.11
+	Smelt,22.0,6.63
+	""")
+	
+	def load_fish_df():
+	    last_err = None
+	    for url in URLS:
+	        try:
+	            df = pd.read_csv(url)
+	            # 셀바86 데이터셋 스키마 확인
+	            if {"Species","Length2","Height"}.issubset(df.columns):
+	                return df
+	        except Exception as e:
+	            last_err = e
+	            continue
+	    # 폴백: 내장 표본 사용
+	    df = pd.read_csv(io.StringIO(FALLBACK_CSV))
+	    return df
+	
+	df = load_fish_df()
+	df = df[df["Species"].isin(["Bream","Smelt"])].copy()
+	
+	# -------------------- 2) 특징 선택/표준화 --------------------
+	features = ["Length2","Height"]
+	X = df[features].to_numpy().astype(float)
+	y = (df["Species"]=="Bream").astype(int).to_numpy()  # Bream=1, Smelt=0
+	
+	scaler = StandardScaler()
+	Xz = scaler.fit_transform(X)
+	
+	# -------------------- 3) PCA/LDA 축 계산 --------------------
+	pca = PCA(n_components=1).fit(Xz)
+	w_pca = pca.components_[0]  # (2,)
+	
+	lda = LDA(n_components=1).fit(Xz, y)
+	w_lda = lda.scalings_.ravel()
+	w_lda = w_lda / np.linalg.norm(w_lda)
+	
+	def project_perp(P, w):
+	    w = w / np.linalg.norm(w)
+	    t = P @ w
+	    return np.outer(t, w)
+	
+	def endpoints(w, span=5.5):
+	    w = w/np.linalg.norm(w)
+	    return np.vstack([-span*w, span*w])
+	
+	def plot_panel(ax, X, y, w, title, subtitle):
+	    P = X
+	    Pr = project_perp(P, w)
+	
+	    ax.scatter(P[y==1,0], P[y==1,1], c="crimson", s=36, label="Bream")
+	    ax.scatter(P[y==0,0], P[y==0,1], c="royalblue", s=36, label="Smelt")
+	
+	    ab = endpoints(w, 5.5)
+	    ax.plot(ab[:,0], ab[:,1], "k-", lw=2)
+	    ax.arrow(0,0, w[0]*2.2, w[1]*2.2, head_width=0.15, head_length=0.22, fc="k", ec="k")
+	
+	    # 수직투영(회색 점선)
+	    for p, q in zip(P, Pr):
+	        ax.plot([p[0], q[0]], [p[1], q[1]], ls="--", c="gray", lw=1, alpha=0.9)
+	
+	    ax.scatter(Pr[y==1,0], Pr[y==1,1], c="crimson", s=16)
+	    ax.scatter(Pr[y==0,0], Pr[y==0,1], c="royalblue", s=16)
+	
+	    ax.set_aspect("equal","box")
+	    ax.set_xlabel(f"{features[0]} (z-score)")
+	    ax.set_ylabel(f"{features[1]} (z-score)")
+	    ax.set_title(f"{title}\n{subtitle}", fontsize=11)
+	    ax.grid(False)
+	    ax.legend(fontsize=9, loc="upper left")
+	    ax.set_xlim(-3.5, 3.5); ax.set_ylim(-3.5, 3.5)
+	
+	# -------------------- 4) 플롯 --------------------
+	fig, axes = plt.subplots(1,2, figsize=(10,6))
+	plot_panel(axes[0], Xz, y, w_pca,
+	           "PCA projection:", "Maximising the variance of the whole set")
+	plot_panel(axes[1], Xz, y, w_lda,
+	           "LDA projection:", "Maximising the distance between groups")
+	plt.tight_layout(); plt.show()
+	
+	# -------------------- 5) 분리도 수치 비교 --------------------
+	def fisher_score_1d(z, y):
+	    m1, m0 = z[y==1].mean(), z[y==0].mean()
+	    s1, s0 = z[y==1].var(ddof=1), z[y==0].var(ddof=1)
+	    return (m1 - m0)**2 / (s1 + s0)
+	
+	z_pca = Xz @ (w_pca/np.linalg.norm(w_pca))
+	z_lda = Xz @ (w_lda/np.linalg.norm(w_lda))
+	print("[Fisher 분리 점수] (값 ↑ = 분리 ↑)")
+	print(f"PCA 축 : {fisher_score_1d(z_pca, y):.3f}")
+	print(f"LDA 축 : {fisher_score_1d(z_lda, y):.3f}")
+
+
+**(PCA vs LDA 예제 소스 실행 결과)**
+
+	[Fisher 분리 점수] (값 ↑ = 분리 ↑)
+	PCA 축 : 8.604
+	LDA 축 : 21.683
+
+![](./images/PCA_vs_LDA.png)
+
 <br>
 
 # [1-2] Quadratic Discriminant Analysis (QDA)
