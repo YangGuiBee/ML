@@ -508,6 +508,158 @@ $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{
 ▣ 모델식 : $\widehat{f(x)} = \sum_{m=1}^{M}k(m)I((x_1,x_2)\in R_m)$<br>
 끝노드(m)에서 클래스(k)에 속할 관측치의 비율 : $\widehat{P_{mk}}=\frac{1}{N_m}\sum_{x_i\in R_m}^{}I(y_i=k)$<br>
 끝노드 m으로 분류된 관측치 : $k(m) = \underset{k}{argmax}\widehat{P_{mk}}$<br><br>
+
+
+**(Decision Tree Regression 예제 소스)**
+
+	# ============================================
+	# 결정트리 분류(DecisionTreeClassifier) 예제 (완전 실행형)
+	# 데이터: sklearn 내장 유방암(분류용, binary) 데이터셋
+	# 절차: 데이터 로드 → 학습/테스트 분할 → 모델 학습 → 예측 → 평가
+	# 핵심 포인트: 트리 계열은 스케일링이 필수 아님(임계값 기반 분할). 
+	#             max_depth, min_samples_leaf 등 하이퍼파라미터로 과적합 제어.
+	# ============================================
+	from sklearn.datasets import load_breast_cancer
+	from sklearn.model_selection import train_test_split
+	from sklearn.tree import DecisionTreeClassifier, plot_tree
+	from sklearn.metrics import (
+    	accuracy_score, precision_score, recall_score, f1_score,
+    	roc_auc_score, confusion_matrix, classification_report)
+	import numpy as np
+	import matplotlib.pyplot as plt
+
+	# --------------------------------------------------
+	# 1) 데이터 로드 (분류용: 이진 타깃 y ∈ {0,1})
+	# --------------------------------------------------
+	data = load_breast_cancer()
+	X = data.data                # shape (569, 30) — 30개의 수치형 특징
+	y = data.target              # shape (569,)     — 0(악성), 1(양성)
+
+	# --------------------------------------------------
+	# 2) 학습/테스트 분할
+	#    - stratify=y: 클래스 비율 유지(분류에서 권장)
+	#    - random_state 고정: 재현성 보장
+	# --------------------------------------------------
+	X_train, X_test, y_train, y_test = train_test_split(
+    	X, y, test_size=0.20, random_state=42, stratify=y)
+
+	# --------------------------------------------------
+	# 3) 모델 생성 및 학습
+	#    - max_depth=5: 트리 최대 깊이 제한(과적합 방지용)
+	#    - random_state=42: 재현성
+	#    - (선택) class_weight="balanced": 클래스 불균형 시 가중치 자동 보정
+	# --------------------------------------------------
+	tree_clf = DecisionTreeClassifier(
+    	max_depth=5,
+    	random_state=42,
+    	# class_weight="balanced")
+	tree_clf.fit(X_train, y_train)
+
+	# --------------------------------------------------
+	# 4) 예측
+	# --------------------------------------------------
+	y_pred = tree_clf.predict(X_test)
+	y_proba = tree_clf.predict_proba(X_test)[:, 1]  # 양성(1) 확률
+
+	# --------------------------------------------------
+	# 5) 성능 평가
+	#    - Accuracy : 전체 정확도
+	#    - Precision: 양성으로 예측한 것 중 실제 양성 비율
+	#    - Recall   : 실제 양성 중 모델이 양성으로 잡은 비율(민감도)
+	#    - F1-score : Precision/Recall 조화평균
+	#    - ROC-AUC  : 임계값 전 범위에서의 분류 성능(1에 가까울수록 좋음)
+	# --------------------------------------------------
+	acc  = accuracy_score(y_test, y_pred)
+	prec = precision_score(y_test, y_pred, zero_division=0)
+	rec  = recall_score(y_test, y_pred, zero_division=0)
+	f1   = f1_score(y_test, y_pred, zero_division=0)
+	auc  = roc_auc_score(y_test, y_proba)
+
+	print(f"Accuracy     : {acc:.3f}")
+	print(f"Precision    : {prec:.3f}")
+	print(f"Recall       : {rec:.3f}")
+	print(f"F1-score     : {f1:.3f}")
+	print(f"ROC-AUC      : {auc:.3f}")
+
+	# 혼동행렬 & 상세 리포트
+	cm = confusion_matrix(y_test, y_pred)
+	print("\n[Confusion Matrix]")
+	print(cm)
+	print("\n[Classification Report]")
+	print(classification_report(y_test, y_pred, target_names=data.target_names))
+
+	# --------------------------------------------------
+	# (선택) 특징 중요도: 어떤 변수로 분할을 많이 했는지
+	# --------------------------------------------------
+	importances = tree_clf.feature_importances_
+	top_idx = np.argsort(importances)[::-1]
+	print("\n[Feature Importances] (Top-10)")
+	for i in top_idx[:10]:
+    	print(f"- {data.feature_names[i]:<30s}: {importances[i]:.3f}")
+
+	# --------------------------------------------------
+	# (선택) 트리 구조 시각화 (작은 깊이일 때 가독성 좋음)
+	# --------------------------------------------------
+	plt.figure(figsize=(14, 8))
+	plot_tree(
+    	tree_clf,
+    	feature_names=data.feature_names,
+    	class_names=data.target_names,
+    	filled=True,
+    	rounded=True,
+    	fontsize=8)
+	plt.title("Decision Tree (max_depth=5)")
+	plt.tight_layout()
+	plt.show()
+
+	# ============================================
+	# [해설]
+	# - 트리 분류기는 스케일링 영향이 작습니다(임계값 기반 분할).
+	# - 과적합 조절: max_depth, min_samples_leaf, min_samples_split, max_leaf_nodes 등
+	# - 클래스 불균형이 크면 class_weight="balanced" 옵션 고려
+	# - ROC-AUC은 임계값을 바꿔가며 전반적 분리력을 평가(0.5 무작위, 1.0 완벽)
+	# ============================================
+
+
+**(Decision Tree Regression 예제 소스 실행 결과)**
+
+	Accuracy     : 0.921
+	Precision    : 0.957
+	Recall       : 0.917
+	F1-score     : 0.936
+	ROC-AUC      : 0.916
+
+	[Confusion Matrix]
+	[[39  3]
+	 [ 6 66]]
+
+	[Classification Report]
+				precision    recall  f1-score   support
+
+	malignant    0.87      0.93      0.90        42
+	benign       0.96      0.92      0.94        72
+
+	accuracy                           0.92       114
+	macro avg       0.91      0.92      0.92       114
+	weighted avg       0.92      0.92      0.92       114
+
+
+	[Feature Importances] (Top-10)
+	- worst radius                  : 0.714
+	- worst concave points          : 0.119
+	- texture error                 : 0.054
+	- worst texture                 : 0.031
+	- worst concavity               : 0.017
+	- worst smoothness              : 0.013
+	- area error                    : 0.012
+	- mean texture                  : 0.012
+	- worst symmetry                : 0.011
+	- worst area                    : 0.009
+
+**(Decision Tree Regression 예제 소스 실행 결과 분석)**
+
+
+
 ▣ 비용함수(불순도 측정) : 불순도(Impurity)가 높을수록 다양한 클래스들이 섞여 있고, 불순도가 낮을수록 특정 클래스에 속한 데이터가 명확<br>
 (1) 오분류율(Misclassification rate, Error rate) : 분류 모델이 잘못 분류한 샘플의 비율로, 전체 샘플 중에서 실제 값과 예측 값이 일치하지 않는 샘플의 비율을 나타낸다.(0에서 100 사이의 값, 0%: 모델이 모든 샘플을 완벽하게 예측, 100%: 모델이 모든 샘플을 잘못 예측)<br><br>
 $\frac{FP+FN}{TP+TN+FP+FN}$ 
