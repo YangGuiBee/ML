@@ -639,9 +639,9 @@ $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{
 	malignant    0.87      0.93      0.90        42
 	benign       0.96      0.92      0.94        72
 
-	accuracy                           0.92       114
+	accuracy                            0.92       114
 	macro avg       0.91      0.92      0.92       114
-	weighted avg       0.92      0.92      0.92       114
+	weighted avg    0.92      0.92      0.92       114
 
 
 	[Feature Importances] (Top-10)
@@ -655,6 +655,8 @@ $\underset{C_m}{min}\sum_{i=1}^{N}(y_i-f(x_i))^2=\underset{C_m}{min}\sum_{i=1}^{
 	- mean texture                  : 0.012
 	- worst symmetry                : 0.011
 	- worst area                    : 0.009
+
+![](./images/dt.png)
 
 **(Decision Tree Regression 예제 소스 실행 결과 분석)**
 
