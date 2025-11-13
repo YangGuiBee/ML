@@ -587,7 +587,7 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
 ▣ 모델식 : https://scikit-learn.org/stable/modules/tree.html#mathematical-formulation<br>
 
 
-**(Decision Tree Regression 예제 소스)**
+**(Decision Tree Classification 예제 소스)**
 
 	# ============================================
 	# 결정트리 분류(DecisionTreeClassifier) 예제 (완전 실행형)
@@ -691,7 +691,7 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
 
 
 
-**(Decision Tree Regression 예제 소스 실행 결과)**
+**(Decision Tree Classification 예제 소스 실행 결과)**
 
 	Accuracy     : 0.921
 	Precision    : 0.957
@@ -726,7 +726,7 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
 ![](./images/dt.png)
 
 
-**(Decision Tree Regression 예제 소스 실행 결과 분석)**
+**(Decision Tree Classification 예제 소스 실행 결과 분석)**
 
 	Accuracy     : 0.921  → 전체 114건 중 105건(=39+66)을 맞춤
 	Precision    : 0.957  → 모델이 benign이라 예측한 69건(=66+3) 중 66건이 실제 benign(오탐 3건)
