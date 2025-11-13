@@ -46,6 +46,7 @@
 	#  - 원래 4차원 특징을 LDA로 2차원으로 차원축소
 	#  - LDA 공간(2차원)에서 다시 LDA 분류기를 학습
 	#  - 그 결과로 얻은 결정경계(선형 판별선)를 함께 시각화
+	#  - 각 LDA 성분의 설명 분산 비율과 원변수 가중치 출력
 	# ============================================
 	
 	from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
@@ -84,6 +85,18 @@
 	#   2) 학습된 선형 판별축으로 X를 투영하여 새로운 좌표로 변환(transform)
 	# X_lda의 크기 : (150, 2)  -> 2차원 LDA 공간의 좌표
 	X_lda = lda.fit_transform(X, y)
+	
+	# --------------------------------------------------
+	# 2-1. LDA 성분 정보 출력
+	# --------------------------------------------------
+	# 각 LDA 성분이 클래스 분리를 얼마나 설명하는지 비율
+	print("Explained variance ratio:", lda.explained_variance_ratio_)
+	
+	# 각 원변수(4개)가 LDA 축에 기여하는 가중치(선형결합 계수)
+	# 행: 원변수(sepal length, sepal width, petal length, petal width)
+	# 열: LDA Component 1, LDA Component 2
+	print("Scalings (coefficients for original features):")
+	print(lda.scalings_)
 	
 	# --------------------------------------------------
 	# 3. LDA 2차원 공간에서 다시 분류기 학습
@@ -183,6 +196,7 @@
 	
 	# 최종 그래프 출력
 	plt.show()
+
 
 
 
