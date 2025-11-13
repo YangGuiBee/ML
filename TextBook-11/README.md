@@ -16,8 +16,7 @@
 		[3-2] 서포트 벡터 머신 (Support Vector Machine, SVM)
 		
 	신경망 기반
-		MLP (Multi-Layer Perceptron)
-		CNN (Convolutional Neural Network)
+		MLP, CNN, RNN, LSTM, GRU, Attention Mechanism, Transformer, Autoencoder, VAE, GAN, GCN ...
 		
 	[4] 차원 축소 (Dimensionality Reduction)
 		[4-1] PCR (Principal Component Regression) : PCA(비지도학습의 차원축소) + 회귀
