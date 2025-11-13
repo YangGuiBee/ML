@@ -198,10 +198,15 @@
 	plt.show()
 
 
-
-
 **([1-1] LDA 예제 소스 실행 결과)**
 
+	Explained variance ratio: [0.9912126 0.0087874]
+	Scalings (coefficients for original features):
+	[[ 0.82937764  0.02410215]
+ 	[ 1.53447307  2.16452123]
+ 	[-2.20121166 -0.93192121]
+ 	[-2.81046031  2.83918785]]
+ 
 ![](./images/LDA2.png)
 <br>
 
@@ -216,12 +221,16 @@
 	# LDA Component 2: 두 번째로 중요한 구분 축 (versicolor vs virginica 구분 보조)
 	# 원래 4차원 데이터(꽃받침·꽃잎 길이/너비)가 2차원 선형결합(축소공간)으로 투영되었음에도 세 품종의 경계가 명확히 드러남
 	# --------------------------------------------------
-	# (추가 참고)
-	# print("Explained variance ratio:", lda.explained_variance_ratio_)
-	#   → 각 LDA 성분이 클래스 분리를 설명하는 비율
-	# print("Scalings:", lda.scalings_)
-	#   → 각 원변수(4개)가 LDA 축에 기여하는 가중치(선형결합 계수)
 
+	Explained variance ratio: [0.9912126 0.0087874]
+		→ LDA1: 99.12% 사실상 이 축 하나로 3개 품종 구분 가능
+		→ LDA2: 0.88% → 미세한 차이만 설명
+	Scalings (coefficients for original features): 특성별 기여도(부호랑 무관하게 절대값으로 판단)
+					LDA1			LDA2
+	sepal length	[[ 0.82937764  0.02410215]
+ 	sepal width		 [ 1.53447307  2.16452123]
+ 	petal length	 [-2.20121166 -0.93192121]
+ 	petal width		 [-2.81046031  2.83918785]]
 <br>
 
 
