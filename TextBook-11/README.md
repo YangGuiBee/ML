@@ -42,50 +42,153 @@
 **([1-1] LDA 예제 소스)**
 
 	# ============================================
-	#  4차원 Iris 데이터를 2차원으로 차원축소하여 클래스 간 분리가 최대가 되는 축 찾기
+	# Iris 데이터셋에 LDA 적용
+	#  - 원래 4차원 특징을 LDA로 2차원으로 차원축소
+	#  - LDA 공간(2차원)에서 다시 LDA 분류기를 학습
+	#  - 그 결과로 얻은 결정경계(선형 판별선)를 함께 시각화
 	# ============================================
+	
 	from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-	import matplotlib.pyplot as plt
 	from sklearn.datasets import load_iris
-
+	import matplotlib.pyplot as plt
+	import numpy as np
+	
 	# --------------------------------------------------
-	# ① 데이터 로드
+	# 1. 데이터 로드
 	# --------------------------------------------------
-	data = load_iris()      # Iris 데이터셋 로드
-	X = data.data           # 입력 특성 (150 × 4) : sepal length, sepal width, petal length, petal width
-	y = data.target         # 출력 레이블 (150,) : 3개 클래스 (0=setosa, 1=versicolor, 2=virginica)
-
+	# load_iris() 함수는 붓꽃(Iris) 데이터셋을 반환한다.
+	# 데이터 구조:
+	#   data.data   : (150, 4) 배열, 4개의 입력 특성
+	#   data.target : (150,) 배열, 3개 클래스(0, 1, 2)
+	data = load_iris()
+	
+	# X : 입력 특성 행렬 (150행, 4열)
+	#     [sepal length, sepal width, petal length, petal width]
+	X = data.data
+	
+	# y : 정답 레이블 벡터 (150개 샘플에 대한 클래스 번호)
+	#     0 = setosa, 1 = versicolor, 2 = virginica
+	y = data.target
+	
 	# --------------------------------------------------
-	# ② LDA 모델 생성 및 학습
+	# 2. LDA 모델 생성 및 학습 (4차원 -> 2차원 투영)
 	# --------------------------------------------------
-	# Linear Discriminant Analysis:
-	#   - 클래스 간 분산(S_b)을 크게 하고 클래스 내 분산(S_w)을 작게 하여
-	#     Fisher의 판별 기준 (J = |S_b| / |S_w|) 을 최대화하는 투영축 찾기
-	#   - C개의 클래스가 있으면 최대 C-1 차원으로 축소 가능
-	#     (여기서는 3클래스 → 최대 2차원으로 축소 가능)
+	# n_components=2
+	#   - LDA가 찾을 축(선형 판별축)의 개수
+	#   - 클래스가 C개라면 최대 C-1 차원까지 가능
+	#   - 여기서는 클래스가 3개이므로 최대 2차원까지 축소 가능
 	lda = LinearDiscriminantAnalysis(n_components=2)
-
-	# fit_transform():
-	#   1) LDA 모델 학습 (fit)
-	#   2) 데이터를 새로운 LDA 공간으로 투영 (transform)
-	X_lda = lda.fit_transform(X, y)    # X_lda shape: (150, 2)
-
+	
+	# fit_transform(X, y)
+	#   1) 주어진 X, y로 LDA 모델을 학습(fit)
+	#   2) 학습된 선형 판별축으로 X를 투영하여 새로운 좌표로 변환(transform)
+	# X_lda의 크기 : (150, 2)  -> 2차원 LDA 공간의 좌표
+	X_lda = lda.fit_transform(X, y)
+	
 	# --------------------------------------------------
-	# ③ 결과 시각화
+	# 3. LDA 2차원 공간에서 다시 분류기 학습
+	#    (이 모델의 결정경계를 2차원 평면에 그림)
 	# --------------------------------------------------
-	# LDA로 변환된 두 축(Component 1, 2)을 기준으로 산점도 작성
-	# 각 점은 하나의 샘플, 색상(c=y)은 클래스(붓꽃 품종)를 나타냄
-	plt.scatter(X_lda[:, 0], X_lda[:, 1], c=y)
+	# 여기서는 X_lda(2차원 좌표)와 y(클래스)를 사용하여
+	# 다시 한 번 LDA 분류기를 학습한다.
+	# 이렇게 학습된 lda_2d의 결정경계를 2차원 평면에 그릴 수 있다.
+	lda_2d = LinearDiscriminantAnalysis()
+	lda_2d.fit(X_lda, y)
+	
+	# --------------------------------------------------
+	# 4. 결정경계를 그리기 위한 그리드 생성
+	# --------------------------------------------------
+	# 산점도 범위를 기준으로 x, y 범위를 약간 확장하여
+	# 그리드 상의 점들을 촘촘하게 생성한다.
+	x_min, x_max = X_lda[:, 0].min() - 1.0, X_lda[:, 0].max() + 1.0
+	y_min, y_max = X_lda[:, 1].min() - 1.0, X_lda[:, 1].max() + 1.0
+	
+	# np.meshgrid:
+	#   - x축 방향으로 300개, y축 방향으로 300개의 점을 만들고
+	#   - 이를 통해 전체 평면을 덮는 격자 좌표(xx, yy)를 생성
+	xx, yy = np.meshgrid(
+	    np.linspace(x_min, x_max, 300),
+	    np.linspace(y_min, y_max, 300)
+	)
+	
+	# 그리드 위의 모든 점을 하나의 (N, 2) 배열로 합친다.
+	# 각 행은 [x좌표, y좌표] 한 점을 의미한다.
+	grid_points = np.c_[xx.ravel(), yy.ravel()]
+	
+	# lda_2d.predict(grid_points):
+	#   - 그리드 상의 각 점이 어떤 클래스(0, 1, 2)에 속하는지를 예측
+	# Z의 크기 : (300*300,) 의 1차원 배열
+	Z = lda_2d.predict(grid_points)
+	
+	# contour, contourf에서 사용하기 위해
+	# Z를 xx, yy와 같은 2차원 형태로 다시 변형한다.
+	Z = Z.reshape(xx.shape)
+	
+	# --------------------------------------------------
+	# 5. 결과 시각화 (산점도 + 결정경계)
+	# --------------------------------------------------
+	plt.figure(figsize=(6, 5))
+	
+	# (1) 배경 영역을 채우는 부분
+	# contourf:
+	#   - Z 값(클래스 번호)을 바탕으로 평면을 3개의 영역으로 색칠
+	#   - alpha=0.15 로 투명도를 줘서 배경만 옅게 표시
+	# levels:
+	#   - 클래스 0,1,2 사이의 경계를 구분하기 위해
+	#     [-0.5, 0.5, 1.5, 2.5] 4개의 경계값 사용
+	plt.contourf(xx, yy, Z, alpha=0.15, levels=[-0.5, 0.5, 1.5, 2.5])
+	
+	# (2) 결정 경계선 그리기
+	# contour:
+	#   - levels=[0.5, 1.5] 는
+	#       0과 1 사이의 경계, 1과 2 사이의 경계를 의미
+	#   - colors="k"  : 검은색 선
+	#   - linestyles="--" : 점선 스타일
+	#   - linewidths=1.0  : 선 두께
+	plt.contour(
+	    xx, yy, Z,
+	    levels=[0.5, 1.5],
+	    colors="k",
+	    linestyles="--",
+	    linewidths=1.0
+	)
+	
+	# (3) 실제 LDA 변환 데이터 산점도
+	# c=y 로 클래스에 따라 색을 다르게 표시
+	scatter = plt.scatter(
+	    X_lda[:, 0],    # x축: LDA Component 1
+	    X_lda[:, 1],    # y축: LDA Component 2
+	    c=y,            # 색상: 클래스 레이블
+	    edgecolor="k"   # 점 테두리를 검은색으로 설정
+	)
+	
+	# 축 이름과 제목 설정
 	plt.xlabel("LDA Component 1")
 	plt.ylabel("LDA Component 2")
-	plt.title("LDA on Iris Dataset")
-	plt.colorbar(label="Class label (0=setosa, 1=versicolor, 2=virginica)")
+	plt.title("LDA on Iris Dataset with Decision Boundaries")
+	
+	# (4) 범례 생성
+	# legend_elements() 는 산점도에서 자동으로 범례용 핸들/라벨을 추출
+	handles, _ = scatter.legend_elements()
+	
+	# 범례에 각 클래스 이름을 명시적으로 달아준다.
+	plt.legend(
+	    handles,
+	    ["setosa (0)", "versicolor (1)", "virginica (2)"],
+	    loc="best"
+	)
+	
+	# 레이아웃을 약간 정리하여 여백 조정
+	plt.tight_layout()
+	
+	# 최종 그래프 출력
 	plt.show()
+
 
 
 **([1-1] LDA 예제 소스 실행 결과)**
 
-![](./images/LDA.png)
+![](./images/LDA2.png)
 <br>
 
 
