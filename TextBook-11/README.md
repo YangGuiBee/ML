@@ -952,8 +952,19 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 	scores = cross_val_score(svm_clf, X, y, cv = 5)
  	scores.mean()
 
-
 <br>
+
+
+
+| 모델                                                         | 수식                                                                                                                                                                                                                                                      | 주요 적용 분야                           |
+| :------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------- |
+| **[1-1] LDA (Linear Discriminant Analysis)**                   | ![lda](https://latex.codecogs.com/svg.image?%5Cdelta_k%28x%29%3Dx%5E%5Ctop%20%5CSigma%5E%7B-1%7D%5Cmu_k-%5Ctfrac12%20%5Cmu_k%5E%5Ctop%20%5CSigma%5E%7B-1%7D%5Cmu_k%2B%5Clog%20%5Cpi_k)                                                                     | 다중 클래스 분류, 얼굴 인식, 문서 분류, 의료 데이터(당뇨환자의 혈액데이터 분류)    |
+| **[1-2] QDA (Quadratic Discriminant Analysis)**                | ![qda](https://latex.codecogs.com/svg.image?%5Cdelta_k%28x%29%3D-%5Ctfrac12%20%5Clog%7C%5CSigma_k%7C-%5Ctfrac12%20%28x-%5Cmu_k%29%5E%5Ctop%20%5CSigma_k%5E%7B-1%7D%20%28x-%5Cmu_k%29%2B%5Clog%20%5Cpi_k)                                                   | 공분산이 클래스별로 다른 분류, 생물정보, 금융 리스크(신용카드 부정거래 탐지)     |
+| **[2-1] 결정 트리 (Decision Tree)**                                | ![tree](https://latex.codecogs.com/svg.image?I%28t%29%3D-%5Csum_i%20p_i%28t%29%5Clog%20p_i%28t%29)                                                                                                                                                         | 분류·회귀, 변수 중요도 분석(고객 이탈 예측)            |
+| **[2-2] 랜덤 포레스트 (Random Forest)**                              | ![rf](https://latex.codecogs.com/svg.image?%5Chat{y}%28x%29%3D%5Ctfrac1B%20%5Csum_%7Bb%3D1%7D%5EB%20h_b%28x%29)                                                                                                                                            | 대규모 분류·회귀, 변수 중요도, 이상 탐지(신용 평가, 센서 데이터 이상탐지)           |
+| **[3-1] K-NN (k-Nearest Neighbors)**                           | 분류: ![knn1](https://latex.codecogs.com/svg.image?%5Chat{y}%3D%5Coperatorname%7Bmode%7D%5C%7By_i%3A%20x_i%5Cin%20N_k%28x%29%5C%7D) <br> 회귀: ![knn2](https://latex.codecogs.com/svg.image?%5Chat{y}%3D%5Ctfrac1k%20%5Csum_%7Bx_i%5Cin%20N_k%28x%29%7D%20y_i) | 패턴 인식, 추천 시스템, 비모수 근접 예측(사용자 취향기반 영화 추천)           |
+| **[3-2] SVM (Support Vector Machine)**                         | ![svm](https://latex.codecogs.com/svg.image?%5Cmin_%7Bw%2Cb%7D%20%5Ctfrac12%20%5C%7Cw%5C%7C%5E2%20%5Ctext%7Bs.t.%7D%20%20y_i%28w%5E%5Ctop%20x_i%2Bb%29%5Cge%201)                                                                                           | 이진/다중 분류, 고차원 텍스트/이미지, 생체 신호(얼굴 감정 인식)      |
+
 
 ---
 
@@ -997,7 +1008,7 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 
 	
 
-# [2-1] PCR (Principal Component Regression)
+# [4-1] PCR (Principal Component Regression)
 <br>
 ▣ 정의 : 먼저 독립변수 𝑋에 대해 Principal Component Analysis(PCA)를 적용하여 비지도학습의 차원축소(주성분)를 수행하고,<br> 
 그 다음 주성분을 독립변수로 하여 선형회귀(OLS 등)를 수행하는 이중 단계 방식의 회귀기법<br> 
@@ -1011,7 +1022,7 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
  
 <br>
 
-# [2-2] PLS (Partial Least Squares)
+# [4-2] PLS (Partial Least Squares)
 
 ▣ 정의 : 독립변수 𝑋와 종속변수 y 양쪽을 고려하여 새로운 잠재변수(성분)를 추출하고, 이 변수를 기반으로 회귀모형을 적합하는 차원축소 회귀기법<br> 
 ▣ 목적 : 독립변수가 많고 다중공선성이 심하거나, 관측치<변수인 고차원 상황에서 𝑋와 y 간의 공변량 구조를 최대한 반영하면서 회귀모형을 구축<br> 
@@ -1023,7 +1034,7 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
  
 <br>
 
-# [2-3] PLS‑DA (Partial Least Squares Discriminant Analysis)
+# [4-3] PLS‑DA (Partial Least Squares Discriminant Analysis)
 ▣ 정의 : PLS 기법을 변형하여 **종속변수가 범주형(y가 클래스 레이블)**인 경우에 적용하는 판별분석 형태의 기법<br> 
 ▣ 목적 : PLS의 잠재변수 추출 방식과 판별분석 배치를 결합해, 고차원/공선성 있는 데이터에서 분류모델을 구축<br>
 ▣ 장점 : 전통적인 판별모델(LDA/QDA)보다 변수 수가 많거나 특성 간 상관이 높을 때 유리<br>
@@ -1034,7 +1045,7 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 
 <br>
 
-# [2-4] Supervised PCA
+# [4-4] Supervised PCA
 ▣ 정의 : 일반 PCA가 독립변수 𝑋만을 고려해 주성분을 추출하는 데 반해, 종속변수 𝑦 정보까지 이용해 차원축소를 수행하는 방식(즉, 지도형 차원축소)<br>
 ▣ 목적 : 차원축소하면서도 𝑦와의 관계(예측력)를 보존하려는 목적<br>
 ▣ 장점 : 단순 PCA보다 예측모델 성능을 향상, 변수 수가 많고 예측변수→종속변수 간 관계가 복잡할 때 유리<br>
@@ -1047,20 +1058,13 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 
 | 모델                                                         | 수식                                                                                                                                                                                                                                                      | 주요 적용 분야                           |
 | :------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------- |
-| **[1-1] LDA (Linear Discriminant Analysis)**                   | ![lda](https://latex.codecogs.com/svg.image?%5Cdelta_k%28x%29%3Dx%5E%5Ctop%20%5CSigma%5E%7B-1%7D%5Cmu_k-%5Ctfrac12%20%5Cmu_k%5E%5Ctop%20%5CSigma%5E%7B-1%7D%5Cmu_k%2B%5Clog%20%5Cpi_k)                                                                     | 다중 클래스 분류, 얼굴 인식, 문서 분류, 의료 데이터(당뇨환자의 혈액데이터 분류)    |
-| **[1-2] QDA (Quadratic Discriminant Analysis)**                | ![qda](https://latex.codecogs.com/svg.image?%5Cdelta_k%28x%29%3D-%5Ctfrac12%20%5Clog%7C%5CSigma_k%7C-%5Ctfrac12%20%28x-%5Cmu_k%29%5E%5Ctop%20%5CSigma_k%5E%7B-1%7D%20%28x-%5Cmu_k%29%2B%5Clog%20%5Cpi_k)                                                   | 공분산이 클래스별로 다른 분류, 생물정보, 금융 리스크(신용카드 부정거래 탐지)     |
-| **[2-1] PCR (Principal Component Regression)**                 | ![pcr](https://latex.codecogs.com/svg.image?Z%3DXW_%7BPCA%7D%2C%20%5Chat{y}%3DZ%5Chat{%5Cbeta})                                                                                                                                                            | 다중공선성 완화 회귀, 스펙트럼 분석, 공정 데이터 예측(반도체 공정 결함 예측)    |
-| **[2-2] PLS (Partial Least Squares)**                          | ![pls](https://latex.codecogs.com/svg.image?X%3DTP%5E%5Ctop%2BE%2C%20Y%3DUQ%5E%5Ctop%2BF%2C%20%5Cmax%20%5Coperatorname%7BCov%7D%28T%2CU%29)                                                                                                                | X–Y 상관이 높은 예측, 화학계량학, 공정 모니터링(생산라인 품질관리)      |
-| **[2-3] PLS-DA (Partial Least Squares Discriminant Analysis)** | ![plsda](https://latex.codecogs.com/svg.image?Y%5Cin%7B0%2C1%2C%5Cdots%7D%2C%20T%3DXW%2C%20%5Cmax%20%5Coperatorname%7BCov%7D%28T%2CY%29)                                                                                                                   | 다중 클래스 분류, 오믹스 분석, 품질 검사, 바이오마커 탐색(암 단백질체 데이터 분석) |
-| **[2-4] Supervised PCA**                                       | ![spca](https://latex.codecogs.com/svg.image?%5Cmax_%7Bw%3A%5C%7Cw%5C%7C%3D1%7D%20%5Coperatorname%7BCorr%7D%28Xw%2C%20y%29)                                                                                                                                | 라벨 정보 활용 차원축소, 이미지/텍스트 분류 전처리(감정 분류, 뉴스기사 주제 분류)      |
-| **[3-1] 결정 트리 (Decision Tree)**                                | ![tree](https://latex.codecogs.com/svg.image?I%28t%29%3D-%5Csum_i%20p_i%28t%29%5Clog%20p_i%28t%29)                                                                                                                                                         | 분류·회귀, 변수 중요도 분석(고객 이탈 예측)            |
-| **[3-2] 랜덤 포레스트 (Random Forest)**                              | ![rf](https://latex.codecogs.com/svg.image?%5Chat{y}%28x%29%3D%5Ctfrac1B%20%5Csum_%7Bb%3D1%7D%5EB%20h_b%28x%29)                                                                                                                                            | 대규모 분류·회귀, 변수 중요도, 이상 탐지(신용 평가, 센서 데이터 이상탐지)           |
-| **[4-1] K-NN (k-Nearest Neighbors)**                           | 분류: ![knn1](https://latex.codecogs.com/svg.image?%5Chat{y}%3D%5Coperatorname%7Bmode%7D%5C%7By_i%3A%20x_i%5Cin%20N_k%28x%29%5C%7D) <br> 회귀: ![knn2](https://latex.codecogs.com/svg.image?%5Chat{y}%3D%5Ctfrac1k%20%5Csum_%7Bx_i%5Cin%20N_k%28x%29%7D%20y_i) | 패턴 인식, 추천 시스템, 비모수 근접 예측(사용자 취향기반 영화 추천)           |
-| **[4-2] SVM (Support Vector Machine)**                         | ![svm](https://latex.codecogs.com/svg.image?%5Cmin_%7Bw%2Cb%7D%20%5Ctfrac12%20%5C%7Cw%5C%7C%5E2%20%5Ctext%7Bs.t.%7D%20%20y_i%28w%5E%5Ctop%20x_i%2Bb%29%5Cge%201)                                                                                           | 이진/다중 분류, 고차원 텍스트/이미지, 생체 신호(얼굴 감정 인식)      |
+| **[4-1] PCR (Principal Component Regression)**                 | ![pcr](https://latex.codecogs.com/svg.image?Z%3DXW_%7BPCA%7D%2C%20%5Chat{y}%3DZ%5Chat{%5Cbeta})                                                                                                                                                            | 다중공선성 완화 회귀, 스펙트럼 분석, 공정 데이터 예측(반도체 공정 결함 예측)    |
+| **[4-2] PLS (Partial Least Squares)**                          | ![pls](https://latex.codecogs.com/svg.image?X%3DTP%5E%5Ctop%2BE%2C%20Y%3DUQ%5E%5Ctop%2BF%2C%20%5Cmax%20%5Coperatorname%7BCov%7D%28T%2CU%29)                                                                                                                | X–Y 상관이 높은 예측, 화학계량학, 공정 모니터링(생산라인 품질관리)      |
+| **[4-3] PLS-DA (Partial Least Squares Discriminant Analysis)** | ![plsda](https://latex.codecogs.com/svg.image?Y%5Cin%7B0%2C1%2C%5Cdots%7D%2C%20T%3DXW%2C%20%5Cmax%20%5Coperatorname%7BCov%7D%28T%2CY%29)                                                                                                                   | 다중 클래스 분류, 오믹스 분석, 품질 검사, 바이오마커 탐색(암 단백질체 데이터 분석) |
+| **[4-4] Supervised PCA**                                       | ![spca](https://latex.codecogs.com/svg.image?%5Cmax_%7Bw%3A%5C%7Cw%5C%7C%3D1%7D%20%5Coperatorname%7BCorr%7D%28Xw%2C%20y%29)                                                                                                                                | 라벨 정보 활용 차원축소, 이미지/텍스트 분류 전처리(감정 분류, 뉴스기사 주제 분류)      |
 
 
-
-
+<br>
 
  
 ![](./images/SLC.png)
