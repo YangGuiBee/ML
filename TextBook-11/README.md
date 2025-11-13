@@ -1210,8 +1210,9 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 | **[4-3] PLS-DA (Partial Least Squares Discriminant Analysis)** | 분류    | 유전자 데이터 분석, 분자 생물학 연구, 화학 분석, 약물 반응 예측, 마케팅 분석(고객 세분화 및 타깃 마케팅)            |
 | **[4-4] Supervised PCA**                                       | 회귀/분류 | 데이터 차원 축소 후 회귀 및 분류 예측(고차원 데이터 성능 향상), 이미지·음성 데이터 분석, 금융·의료 데이터 차원 축소 분석   |
 
+<br>
 
-
+**(분류 알고리즘 분석 절차차 사용예시)**
  
 ![](./images/SLC.png)
 <br>출처 : https://towardsdatascience.com/top-machine-learning-algorithms-for-classification-2197870ff501
