@@ -27,7 +27,7 @@
      
  	[3] 다중 선형 회귀 (Multiple Linear Regression)
 		[3-1] 단계적 회귀 (Stepwise Regression)
-		[3-2] 위계적 회귀 (Hierarchical Regression) : 일반통계계
+		[3-2] 위계적 회귀 (Hierarchical Regression) : 일반통계
 		[3-3] 분위수 회귀 (Quantile Regression)
   
 	[4] 다항 선형 회귀 (Polynomial Linear Regression)
