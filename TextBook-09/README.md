@@ -916,7 +916,7 @@ Cox의 비례위험 회귀는 생존 분석(survival analysis)에서 주로 사�
 <br>
 
 ---
-# [3] 다중회귀 (Multiple Regression)
+# [3] 다중 선형 회귀 (Multiple Linear Regression)
 독립변수 X가 2개 이상인 회귀<br>
 $y = w_1x_1 + w_2x_2 + ... + w_nx_n + w_0$ <br>
 $y_i = β_0 + β_1x_{i1} + β_2x_{i2} + ... + β_kx_{ik} + ϵ_i$<br>
@@ -1118,7 +1118,7 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 <br>
 
 ---
-# [4] 다항 회귀 (Polynomial Regression)
+# [4] 다항 선형 회귀 (Polynomial Linear Regression)
 독립변수𝑋 와 종속변수𝑦 사이의 관계가 직선이 아닌 곡선 형태일 때,<br> 
 이를 수학적으로 표현하기 위해 변수의 거듭제곱항이나 교차항을 추가하여 선형모델로 확장한 회귀분석 방법<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#polynomial-regression-extending-linear-models-with-basis-functions<br>
