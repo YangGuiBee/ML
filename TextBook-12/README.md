@@ -177,6 +177,355 @@
 	r2 = r2_score(y_true, y_pred)
 
 
+**(회귀 평가지표 10개 정리 예제 소스)**
+
+
+	# ============================================
+	# Iris 데이터 기반 회귀 평가지표 10개 + 해석표 출력 코드
+	#  - 타깃: sepal length (첫 번째 컬럼)
+	#  - 특징: 나머지 3개(sepal width, petal length, petal width)
+	# ============================================
+	
+	import numpy as np
+	
+	from sklearn.metrics import (
+	    mean_absolute_error,
+	    mean_squared_error,
+	    mean_squared_log_error,
+	    mean_absolute_percentage_error,
+	    r2_score
+	)
+	from sklearn.linear_model import LinearRegression
+	from sklearn.model_selection import train_test_split
+	from sklearn.datasets import load_iris
+	
+	
+	# ------------------------------------------------------------------
+	# 1. 사용자 정의 평가지표 함수들
+	# ------------------------------------------------------------------
+	
+	def mean_error(y_true, y_pred):
+	    """[1] 평균 오차 (ME, Mean Error)"""
+	    y_true = np.asarray(y_true)
+	    y_pred = np.asarray(y_pred)
+	    return np.mean(y_true - y_pred)
+	
+	
+	def rmse(y_true, y_pred):
+	    """[5] 평균 제곱근 오차 (RMSE)"""
+	    return np.sqrt(mean_squared_error(y_true, y_pred))
+	
+	
+	def rmsle(y_true, y_pred):
+	    """[6] 평균 제곱근 오차(로그적용) (RMSLE)"""
+	    return np.sqrt(mean_squared_log_error(y_true, y_pred))
+	
+	
+	def mean_percentage_error(y_true, y_pred):
+	    """[7] 평균 비율 오차 (MPE, Mean Percentage Error)"""
+	    y_true = np.asarray(y_true)
+	    y_pred = np.asarray(y_pred)
+	    return np.mean((y_true - y_pred) / y_true)
+	
+	
+	def mase(y_true, y_pred):
+	    """
+	    [9] 평균 절대 규모 오차 (MASE, Mean Absolute Scaled Error)
+	    - 본래는 시계열(time series)에서 많이 사용
+	    - 여기서는 예시를 위해 샘플 순서를 기준으로 naive forecast 사용
+	    """
+	    y_true = np.asarray(y_true)
+	    y_pred = np.asarray(y_pred)
+	
+	    mae = np.mean(np.abs(y_true - y_pred))
+	    # naive forecast: 한 시점 전 값(y_{t-1})을 예측으로 사용
+	    naive_mae = np.mean(np.abs(y_true[1:] - y_true[:-1]))
+	
+	    return mae / naive_mae
+	
+	
+	# ------------------------------------------------------------------
+	# 2. 해석 함수들 (좋음 / 보통 / 나쁨) + 기준 문자열
+	# ------------------------------------------------------------------
+	
+	CRITERIA_ERROR_RELATIVE = "ratio<0.25:좋음, 0.25≤ratio<0.5:보통, ratio≥0.5:나쁨"
+	CRITERIA_MSLE_RMSLE     = "RMSLE<0.1:좋음, 0.1≤RMSLE<0.2:보통, RMSLE≥0.2:나쁨"
+	CRITERIA_PERCENTAGE     = "|오차|<10%:좋음, 10~20%:보통, 20% 초과:나쁨"
+	CRITERIA_MASE           = "MASE<1:좋음, 1≤MASE<2:보통, MASE≥2:나쁨"
+	CRITERIA_R2             = "R2≥0.8:좋음, 0.5≤R2<0.8:보통, R2<0.5:나쁨"
+	
+	
+	def interpret_error_relative(value, scale):
+	    """
+	    오차 계열(ME, MAE, RMSE 등)을 타깃 스케일(scale = std(y_true))에 대해
+	    상대적으로 평가 (휴리스틱 기준)
+	    """
+	    if scale == 0:
+	        return "평가불가"
+	
+	    ratio = abs(value) / scale  # 상대오차 비율
+	
+	    if ratio < 0.25:
+	        return "좋음"
+	    elif ratio < 0.5:
+	        return "보통"
+	    else:
+	        return "나쁨"
+	
+	
+	def interpret_msle_rmsle(rmsle_value):
+	    """
+	    RMSLE 기반 해석 (로그 스케일 오차)
+	    """
+	    if rmsle_value < 0.1:
+	        return "좋음"
+	    elif rmsle_value < 0.2:
+	        return "보통"
+	    else:
+	        return "나쁨"
+	
+	
+	def interpret_percentage_metric(perc_value):
+	    """
+	    MPE, MAPE 등 퍼센트 계열 (0.1 = 10%)
+	    """
+	    perc = abs(perc_value) * 100  # %
+	
+	    if perc < 10:
+	        return "좋음"
+	    elif perc < 20:
+	        return "보통"
+	    else:
+	        return "나쁨"
+	
+	
+	def interpret_mase(mase_value):
+	    """
+	    MASE 해석
+	    """
+	    if mase_value < 1:
+	        return "좋음"
+	    elif mase_value < 2:
+	        return "보통"
+	    else:
+	        return "나쁨"
+	
+	
+	def interpret_r2(r2_value):
+	    """
+	    R2 score 해석
+	    """
+	    if r2_value >= 0.8:
+	        return "좋음"
+	    elif r2_value >= 0.5:
+	        return "보통"
+	    else:
+	        return "나쁨"
+	
+	
+	# ------------------------------------------------------------------
+	# 3. Iris 데이터 로드 및 회귀 문제로 구성
+	# ------------------------------------------------------------------
+	
+	iris = load_iris()
+	X_all = iris.data  # shape: (150, 4) -> [sepal length, sepal width, petal length, petal width]
+	
+	# 타깃: sepal length (0번째 컬럼)
+	y = X_all[:, 0]
+	
+	# 특징: 나머지 3개 (sepal width, petal length, petal width)
+	X = X_all[:, 1:]   # shape: (150, 3)
+	
+	# train / test 분할
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, test_size=0.3, random_state=42
+	)
+	
+	# 선형회귀 모델 학습
+	model = LinearRegression()
+	model.fit(X_train, y_train)
+	
+	# 예측값
+	y_pred = model.predict(X_test)
+	
+	# 타깃 스케일(표준편차) 계산 (오차 계열 해석 기준으로 사용)
+	y_std = np.std(y_test)
+	
+	
+	# ------------------------------------------------------------------
+	# 4. 10개 평가지표 계산
+	# ------------------------------------------------------------------
+	
+	# [1] ME
+	ME = mean_error(y_test, y_pred)
+	
+	# [2] MAE
+	MAE = mean_absolute_error(y_test, y_pred)
+	
+	# [3] MSE
+	MSE = mean_squared_error(y_test, y_pred)
+	
+	# [4] MSLE
+	MSLE = mean_squared_log_error(y_test, y_pred)
+	
+	# [5] RMSE
+	RMSE = rmse(y_test, y_pred)
+	
+	# [6] RMSLE
+	RMSLE = rmsle(y_test, y_pred)
+	
+	# [7] MPE
+	MPE = mean_percentage_error(y_test, y_pred)
+	
+	# [8] MAPE
+	MAPE = mean_absolute_percentage_error(y_test, y_pred)
+	
+	# [9] MASE
+	MASE = mase(y_test, y_pred)
+	
+	# [10] R2 score
+	R2 = r2_score(y_test, y_pred)
+	
+	
+	# ------------------------------------------------------------------
+	# 5. 해석 테이블 구성 (지표명, 값, 해석, 기준)
+	# ------------------------------------------------------------------
+	
+	rows = []
+	
+	rows.append((
+	    "[1] ME",
+	    ME,
+	    interpret_error_relative(ME, y_std),
+	    CRITERIA_ERROR_RELATIVE
+	))
+	rows.append((
+	    "[2] MAE",
+	    MAE,
+	    interpret_error_relative(MAE, y_std),
+	    CRITERIA_ERROR_RELATIVE
+	))
+	# MSE는 제곱 단위이므로 해석은 RMSE 기준 사용
+	rows.append((
+	    "[3] MSE",
+	    MSE,
+	    interpret_error_relative(np.sqrt(MSE), y_std),
+	    CRITERIA_ERROR_RELATIVE + " (RMSE 기준)"
+	))
+	rows.append((
+	    "[4] MSLE",
+	    MSLE,
+	    interpret_msle_rmsle(np.sqrt(MSLE)),
+	    CRITERIA_MSLE_RMSLE
+	))
+	rows.append((
+	    "[5] RMSE",
+	    RMSE,
+	    interpret_error_relative(RMSE, y_std),
+	    CRITERIA_ERROR_RELATIVE
+	))
+	rows.append((
+	    "[6] RMSLE",
+	    RMSLE,
+	    interpret_msle_rmsle(RMSLE),
+	    CRITERIA_MSLE_RMSLE
+	))
+	rows.append((
+	    "[7] MPE",
+	    MPE,
+	    interpret_percentage_metric(MPE),
+	    CRITERIA_PERCENTAGE
+	))
+	rows.append((
+	    "[8] MAPE",
+	    MAPE,
+	    interpret_percentage_metric(MAPE),
+	    CRITERIA_PERCENTAGE
+	))
+	rows.append((
+	    "[9] MASE",
+	    MASE,
+	    interpret_mase(MASE),
+	    CRITERIA_MASE
+	))
+	rows.append((
+	    "[10] R2",
+	    R2,
+	    interpret_r2(R2),
+	    CRITERIA_R2
+	))
+	
+	
+	# ------------------------------------------------------------------
+	# 6. 결과 출력
+	# ------------------------------------------------------------------
+	
+	print("=== Regression Metrics on Iris (Target: Sepal Length) ===\n")
+	
+	# 세부 값 먼저 출력
+	print(">> Raw Metric Values")
+	print(f"[1]  Mean Error (ME)                     : {ME:.4f}")
+	print(f"[2]  Mean Absolute Error (MAE)           : {MAE:.4f}")
+	print(f"[3]  Mean Squared Error (MSE)            : {MSE:.4f}")
+	print(f"[4]  Mean Squared Log Error (MSLE)       : {MSLE:.4f}")
+	print(f"[5]  Root Mean Squared Error (RMSE)      : {RMSE:.4f}")
+	print(f"[6]  Root Mean Squared Log Error (RMSLE) : {RMSLE:.4f}")
+	print(f"[7]  Mean Percentage Error (MPE)         : {MPE:.4f}")
+	print(f"[8]  Mean Abs Percentage Error (MAPE)    : {MAPE:.4f}")
+	print(f"[9]  Mean Abs Scaled Error (MASE)        : {MASE:.4f}")
+	print(f"[10] R2 Score                             : {R2:.4f}")
+	print()
+	
+	# 해석 표 출력
+	print(">> 해석 테이블 (휴리스틱 기준, 데이터 스케일에 따라 조정 가능)")
+	print("-" * 110)
+	print(f"{'지표':<10}{'값':>12}{'해석(좋음/보통/나쁨)':>16}{'기준':>70}")
+	print("-" * 110)
+	for name, value, interp, crit in rows:
+	    # 기준 문자열이 길어서 그대로 뒤에 붙여줌
+	    print(f"{name:<10}{value:>12.4f}{interp:>16}  {crit}")
+	print("-" * 110)
+	print("\n※ 기준은 예시용 휴리스틱이므로, 실제 도메인/데이터 스케일에 따라 조정해서 사용하세요.")
+
+
+<br>
+
+
+**(회귀 평가지표 10개 정리 예제 소스 실행 결)**
+
+	=== Regression Metrics on Iris (Target: Sepal Length) ===
+	>> Raw Metric Values
+	[1]  Mean Error (ME)                     : 0.0892
+	[2]  Mean Absolute Error (MAE)           : 0.2469
+	[3]  Mean Squared Error (MSE)            : 0.0981
+	[4]  Mean Squared Log Error (MSLE)       : 0.0021
+	[5]  Root Mean Squared Error (RMSE)      : 0.3132
+	[6]  Root Mean Squared Log Error (RMSLE) : 0.0454
+	[7]  Mean Percentage Error (MPE)         : 0.0123
+	[8]  Mean Abs Percentage Error (MAPE)    : 0.0419
+	[9]  Mean Abs Scaled Error (MASE)        : 0.2912
+	[10] R2 Score                             : 0.8526
+
+	>> 해석 테이블 (휴리스틱 기준, 데이터 스케일에 따라 조정 가능)
+	--------------------------------------------------------------------------------------------------------------
+	지표            값    해석(좋음/보통/나쁨)  기준
+	--------------------------------------------------------------------------------------------------------------
+	[1] ME          0.0892              좋음  ratio<0.25:좋음, 0.25≤ratio<0.5:보통, ratio≥0.5:나쁨
+	[2] MAE         0.2469              보통  ratio<0.25:좋음, 0.25≤ratio<0.5:보통, ratio≥0.5:나쁨
+	[3] MSE         0.0981              보통  ratio<0.25:좋음, 0.25≤ratio<0.5:보통, ratio≥0.5:나쁨 (RMSE 기준)
+	[4] MSLE        0.0021              좋음  RMSLE<0.1:좋음, 0.1≤RMSLE<0.2:보통, RMSLE≥0.2:나쁨
+	[5] RMSE        0.3132              보통  ratio<0.25:좋음, 0.25≤ratio<0.5:보통, ratio≥0.5:나쁨
+	[6] RMSLE       0.0454              좋음  RMSLE<0.1:좋음, 0.1≤RMSLE<0.2:보통, RMSLE≥0.2:나쁨
+	[7] MPE         0.0123              좋음  |오차|<10%:좋음, 10~20%:보통, 20% 초과:나쁨
+	[8] MAPE        0.0419              좋음  |오차|<10%:좋음, 10~20%:보통, 20% 초과:나쁨
+	[9] MASE        0.2912              좋음  MASE<1:좋음, 1≤MASE<2:보통, MASE≥2:나쁨
+	[10] R2         0.8526              좋음  R2≥0.8:좋음, 0.5≤R2<0.8:보통, R2<0.5:나쁨
+	--------------------------------------------------------------------------------------------------------------
+
+
+
+<br>
+
 ![](./images/SST.png)
 <br>
 출처 : https://medium.com/coders-mojo/data-science-and-machine-learning-projects-mega-compilation-part-5-e50baa2faa85<br>
