@@ -247,12 +247,9 @@
 	    else: return "나쁨"
 		
 	def interpret_msle_rmsle(rmsle_value):
-	    if rmsle_value < 0.1:
-	        return "좋음"
-	    elif rmsle_value < 0.2:
-	        return "보통"
-	    else:
-	        return "나쁨"
+	    if rmsle_value < 0.1: return "좋음"
+	    elif rmsle_value < 0.2: return "보통"
+	    else: return "나쁨"
 		
 	def interpret_percentage_metric(perc_value):
 	    perc = abs(perc_value) * 100  # %	
@@ -904,6 +901,12 @@ FN(False Negative): 모델이 negative라고 예측했는데 실제로 정답이
 
 <br>
 
+	from sklearn.metrics import confusion_matrix
+
+	cm = confusion_matrix(y_true, y_pred)
+
+<br>
+
 # [2] 정확도 (Accurancy)
 
 $Accuracy = \frac{TP + TN}{TP + TN + FP + FN}$<br><br>
@@ -913,8 +916,11 @@ $Accuracy = \frac{TP + TN}{TP + TN + FP + FN}$<br><br>
 ▣ 단점: 불균형 데이터에서는 성능을 잘못 평가할 가능성<br>
 ▣ 예제: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html<br>
 
+<br>
+
 	from sklearn.metrics import accuracy_score
-	accuracy_score(정답,  모델예측값)  # label과 predict
+
+	acc = accuracy_score(y_true, y_pred)
 
 <br>
 
@@ -927,8 +933,11 @@ $Precision = \frac{TP}{TP + FP}$<br><br>
 ▣ 단점: FN은 고려하지 않아 재현율과 함께 사용 필요<br>
 ▣ 예제: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html<br>
 
+<br>
+
 	from sklearn.metrics import precision_score
-	precision_score(실제값, 예측값)
+	
+	precision = precision_score(y_true, y_pred)
 
 <br>
 
@@ -941,8 +950,11 @@ $Recall = \frac{TP}{TP + FN}$<br><br>
 ▣ 단점: FP는 고려하지 않아 Precision과 함께 사용 필요<br>
 ▣ 예제: https://scikit-learn.org/stable/auto_examples/model_selection/plot_precision_recall.html<br>
 
+<br>
+
 	from sklearn.metrics import recall_score
-	recall_score(실제값, 예측값)
+	
+	recall = recall_score(y_true, y_pred)
 
 <br>
 
@@ -955,8 +967,11 @@ $F1 = \frac{2 \times Precision \times Recall}{Precision + Recall}$<br><br>
 ▣ 단점: 개별적인 성능을 평가하기 어려울 수 있음<br>
 ▣ 예제:https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html<br>
 
+<br>
+
 	from sklearn.metrics import f1_score
-	f1_score(실제값, 예측값)
+
+	f1 = f1_score(y_true, y_pred)
 
 <br>
 
@@ -971,6 +986,10 @@ $Accuracy = \frac{FP + FN}{TP + TN + FP + FN}$<br><br>
 
 <br>
 
+	error_rate = 1 - accuracy_score(y_true, y_pred)
+
+<br>
+
 # [7] 특이도 (Specificity), TNR(True Negative Rate)
 
 $Specificity = \frac{TN}{TN + FP}$<br><br>
@@ -978,6 +997,12 @@ $Specificity = \frac{TN}{TN + FP}$<br><br>
 ▣ 필요성: 부정 클래스를 정확히 예측하는 능력을 평가<br>
 ▣ 장점: Negative class에 초점을 맞춘 분석이 가능<br>
 ▣ 단점: Positive class의 성능은 고려하지 않음<br>
+
+<br>
+
+	tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
+	
+	specificity = tn / (tn + fp)
 
 <br>
 
@@ -991,6 +1016,12 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 
 <br>
 
+	tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
+	
+	fpr = fp / (fp + tn)
+
+<br>
+
 # [9] ROC curve
 ▣ 정의: TPR(재현율) Y축과 FPR(위양성률) X축의 관계를 나타낸 곡선으로 다양한 임계값에서 Recall-Fallout의 변화를 시각화한 것(Fallout은 실제 False인 data 중에서 모델이 True로 분류항 비율을, Recall은 실제 True인 data 중에서 모델이 True로 분류한 비율을 나타냄)<br>
 ▣ 필요성: 분류 모델의 성능을 시각적으로 평가<br>
@@ -1000,6 +1031,15 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 
 <br>
 
+	from sklearn.metrics import roc_curve
+
+	y_score = model.predict_proba(X_test)[:, 1]
+	fpr, tpr, thresholds = roc_curve(y_true, y_score)
+
+
+<br>	
+
+
 # [10] AUC (Area Under Curve) score
 ▣ 정의: ROC Curve의 아래 면적으로, 0에서 1 사이의 값을 가짐<br>
 ▣ 필요성: 모델의 분류 성능을 숫자로 간단히 나타냄<br>
@@ -1007,12 +1047,197 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 ▣ 단점: 데이터 불균형이 심한 경우 왜곡될 가능성<br>
 ▣ 예제: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html<br>
 
+<br>
+
+	from sklearn.metrics import roc_auc_score
+
+	auc = roc_auc_score(y_true, y_score)
+
+<br>
 
 1.0 ~ 0.9 : 아주 좋음<br>
 0.9 ~ 0.8 : 좋음<br>
 0.8 ~ 0.7 : 괜찮은 모델<br>
 0.7 ~ 0.6 : 의미는 있으나 좋은 모델은 아님<br>
 0.6 ~ 0.5 : 좋지 않은 모델<br>
+
+<br>
+
+
+**(분류 평가지표 10개 정리 예제 소스)**
+
+	# ============================================
+	# Iris 기반 이진분류 + 평가지표 10개 & 해석표
+	#  - 레이블: setosa(1) vs not-setosa(0)
+	# ============================================
+	import numpy as np
+	
+	from sklearn.datasets import load_iris
+	from sklearn.model_selection import train_test_split
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.metrics import (
+	    confusion_matrix,
+	    accuracy_score,
+	    precision_score,
+	    recall_score,
+	    f1_score,
+	    roc_curve,
+	    roc_auc_score,
+	)
+	
+	# ---------------------------------------------------------
+	# 1. 해석 기준 문자열 정의
+	# ---------------------------------------------------------
+	CRIT_HIGH_09 = "값 ≥ 0.90:좋음, 0.70 ≤ 값 < 0.90:보통, 값 < 0.70:나쁨"
+	CRIT_LOW_01  = "값 ≤ 0.10:좋음, 0.10 < 값 ≤ 0.30:보통, 값 > 0.30:나쁨"
+	CRIT_AUC     = "AUC ≥ 0.90:좋음, 0.80 ≤ AUC < 0.90:보통, AUC < 0.80:나쁨"
+	CRIT_ROC     = "곡선이 좌상단에 가까울수록 좋음 (AUC 기준: " + CRIT_AUC + ")"
+	
+	# ---------------------------------------------------------
+	# 2. 해석 함수들
+	# ---------------------------------------------------------
+	# 값이 클수록 좋은 지표(Acc, Precision, Recall, F1, TPR, TNR 등)
+	def interpret_high_good(v):
+	    if v >= 0.90: return "좋음"
+	    elif v >= 0.70: return "보통"
+	    else: return "나쁨"
+	
+	# 값이 작을수록 좋은 지표(Error Rate, FPR 등)
+	def interpret_low_good(v):
+	    if v <= 0.10: return "좋음"
+	    elif v <= 0.30: return "보통"
+	    else: return "나쁨"
+	
+	# AUC 및 ROC 해석용
+	def interpret_auc(v):
+	    if v >= 0.90: return "좋음"
+	    elif v >= 0.80: return "보통"
+	    else: return "나쁨"
+	
+	# ---------------------------------------------------------
+	# 3. 데이터 로드 & 이진 분류 문제 구성
+	# ---------------------------------------------------------
+	iris = load_iris()
+	X = iris.data               # (150, 4)
+	y_multi = iris.target       # 0:setosa, 1:versicolor, 2:virginica
+	
+	# 이진 분류: setosa(1) vs 나머지(0)
+	y = (y_multi == 0).astype(int)
+	
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
+	
+	# 간단한 로지스틱 회귀 분류기
+	clf = LogisticRegression(solver="liblinear")
+	clf.fit(X_train, y_train)
+	
+	# 예측 (레이블, 확률)
+	y_pred = clf.predict(X_test)
+	y_score = clf.predict_proba(X_test)[:, 1]   # 양성(1)일 확률
+	
+	# ---------------------------------------------------------
+	# 4. 분류 평가지표 10개 계산
+	# ---------------------------------------------------------
+	# [1] Confusion Matrix
+	cm = confusion_matrix(y_test, y_pred)
+	tn, fp, fn, tp = cm.ravel()
+	
+	# [2] Accuracy
+	acc = accuracy_score(y_test, y_pred)
+	
+	# [3] Precision (PPV)
+	precision = precision_score(y_test, y_pred)
+	
+	# [4] Recall / Sensitivity / TPR
+	recall = recall_score(y_test, y_pred)  # TPR
+	
+	# [5] F1 score
+	f1 = f1_score(y_test, y_pred)
+	
+	# [6] Error Rate
+	error_rate = 1 - acc
+	
+	# [7] Specificity / TNR
+	specificity = tn / (tn + fp)
+	
+	# [8] FPR (Fall-out)
+	fpr_value = fp / (fp + tn)
+	
+	# [9] ROC curve
+	fpr, tpr, thresholds = roc_curve(y_test, y_score)  # 곡선용 좌표
+	
+	# [10] AUC score
+	auc = roc_auc_score(y_test, y_score)
+	
+	# ---------------------------------------------------------
+	# 5. Raw 값 출력
+	# ---------------------------------------------------------
+	print("=== Classification Metrics on Iris (setosa vs others) ===\n")	
+	print(">> Raw Metric Values")
+	print(f"[1] Confusion Matrix:\n{cm}")
+	print(f"[2] Accuracy                : {acc:.4f}")
+	print(f"[3] Precision (PPV)         : {precision:.4f}")
+	print(f"[4] Recall (Sensitivity/TPR): {recall:.4f}")
+	print(f"[5] F1-score                : {f1:.4f}")
+	print(f"[6] Error Rate              : {error_rate:.4f}")
+	print(f"[7] Specificity (TNR)       : {specificity:.4f}")
+	print(f"[8] FPR (Fall-out)          : {fpr_value:.4f}")
+	print(f"[9] ROC curve points        : fpr.shape={fpr.shape}, tpr.shape={tpr.shape}")
+	print(f"[10] AUC score              : {auc:.4f}\n")
+	
+	# ---------------------------------------------------------
+	# 6. 해석용 테이블 구성 (지표명, 값, 해석, 기준)
+	# ---------------------------------------------------------
+	rows = []
+	
+	# [1] Confusion Matrix → 정확도를 기준으로 해석
+	rows.append((
+	    "[1] Confusion Matrix", f"TN={tn}, FP={fp}, FN={fn}, TP={tp}",
+	    interpret_high_good(acc), "대각합 비율(Accuracy) 기준: " + CRIT_HIGH_09))
+	
+	rows.append((
+	    "[2] Accuracy", f"{acc:.4f}", interpret_high_good(acc), CRIT_HIGH_09))
+	
+	rows.append((
+	    "[3] Precision (PPV)", f"{precision:.4f}", interpret_high_good(precision), CRIT_HIGH_09	))
+	
+	rows.append((
+	    "[4] Recall (Sensitivity/TPR)",f"{recall:.4f}", interpret_high_good(recall), CRIT_HIGH_09))
+	
+	rows.append((
+	    "[5] F1-score",f"{f1:.4f}", interpret_high_good(f1), CRIT_HIGH_09))
+	
+	rows.append((
+	    "[6] Error Rate", f"{error_rate:.4f}", interpret_low_good(error_rate), CRIT_LOW_01))
+	
+	rows.append((
+	    "[7] Specificity (TNR)", f"{specificity:.4f}", interpret_high_good(specificity), CRIT_HIGH_09))
+	
+	rows.append((
+	    "[8] FPR (Fall-out)", f"{fpr_value:.4f}", interpret_low_good(fpr_value), CRIT_LOW_01))
+	
+	rows.append((
+	    "[9] ROC curve", f"points={len(fpr)}개", interpret_auc(auc), CRIT_ROC))
+	
+	rows.append((
+	    "[10] AUC score", f"{auc:.4f}", interpret_auc(auc), CRIT_AUC))
+	
+	# ---------------------------------------------------------
+	# 7. 해석 테이블 출력
+	# ---------------------------------------------------------
+	print(">> 해석 테이블 (휴리스틱 기준, 데이터/도메인에 따라 조정 권장)")
+	print("-" * 120)
+	print(f"{'지표':<28}{'값':<24}{'해석':<10}{'기준'}")
+	print("-" * 120)
+	
+	for name, value, interp, crit in rows:
+	    print(f"{name:<28}{value:<24}{interp:<10}{crit}")
+	
+	print("-" * 120)
+	print("\n※ 위 구간값들은 실무·연구에서 자주 쓰는 휴리스틱 기준이며, 문제 난이도와 도메인에 따라 조정해서 사용하세요.")
+
+
+
+**(분류 평가지표 10개 정리 예제 소스 실행 결과)**
 
 <br>
 
