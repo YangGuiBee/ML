@@ -1250,6 +1250,21 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 
 <br>
 
+| No | 평가지표 | 좋음 | 보통 | 나쁨 |
+|----|----------|------|------|------|
+| [1] 오차행렬 (Confusion Matrix) | Accuracy ≥ 0.90 | 0.70 ≤ Accuracy < 0.90 | Accuracy < 0.70 |
+| [2] 정확도 (Accuracy) | Accuracy ≥ 0.90 | 0.70 ≤ Accuracy < 0.90 | Accuracy < 0.70 |
+| [3] 정밀도 (Precision, PPV) | Precision ≥ 0.90 | 0.70 ≤ Precision < 0.90 | Precision < 0.70 |
+| [4] 재현율 (Recall, Sensitivity, TPR) | Recall ≥ 0.90 | 0.70 ≤ Recall < 0.90 | Recall < 0.70 |
+| [5] F1 score | F1 ≥ 0.90 | 0.70 ≤ F1 < 0.90 | F1 < 0.70 |
+| [6] 오분류율 (Error Rate) | Error Rate ≤ 0.10 | 0.10 < Error Rate ≤ 0.30 | Error Rate > 0.30 |
+| [7] 특이도 (Specificity, TNR) | TNR ≥ 0.90 | 0.70 ≤ TNR < 0.90 | TNR < 0.70 |
+| [8] 위양성률 (Fall-out, FPR) | FPR ≤ 0.10 | 0.10 < FPR ≤ 0.30 | FPR > 0.30 |
+| [9] ROC curve | AUC ≥ 0.90 (좌상단에 가까움) | 0.80 ≤ AUC < 0.90 | AUC < 0.80 |
+| [10] AUC score | AUC ≥ 0.90 | 0.80 ≤ AUC < 0.90 | AUC < 0.80 |
+
+
+
 ---
 
 **(데이터 출처)** https://www.kaggle.com/datasets/redwankarimsony/heart-disease-data/data
