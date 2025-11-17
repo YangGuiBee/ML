@@ -171,6 +171,12 @@
 ![](./images/ff_SST.png)
 <br>
 
+
+	from sklearn.metrics import r2_score
+
+	r2 = r2_score(y_true, y_pred)
+
+
 ![](./images/SST.png)
 <br>
 출처 : https://medium.com/coders-mojo/data-science-and-machine-learning-projects-mega-compilation-part-5-e50baa2faa85<br>
