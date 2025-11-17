@@ -1190,36 +1190,17 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 	rows = []
 	
 	# [1] Confusion Matrix → 정확도를 기준으로 해석
-	rows.append((
-	    "[1] Confusion Matrix", f"TN={tn}, FP={fp}, FN={fn}, TP={tp}",
-	    interpret_high_good(acc), "대각합 비율(Accuracy) 기준: " + CRIT_HIGH_09))
-	
-	rows.append((
-	    "[2] Accuracy", f"{acc:.4f}", interpret_high_good(acc), CRIT_HIGH_09))
-	
-	rows.append((
-	    "[3] Precision (PPV)", f"{precision:.4f}", interpret_high_good(precision), CRIT_HIGH_09	))
-	
-	rows.append((
-	    "[4] Recall (Sensitivity/TPR)",f"{recall:.4f}", interpret_high_good(recall), CRIT_HIGH_09))
-	
-	rows.append((
-	    "[5] F1-score",f"{f1:.4f}", interpret_high_good(f1), CRIT_HIGH_09))
-	
-	rows.append((
-	    "[6] Error Rate", f"{error_rate:.4f}", interpret_low_good(error_rate), CRIT_LOW_01))
-	
-	rows.append((
-	    "[7] Specificity (TNR)", f"{specificity:.4f}", interpret_high_good(specificity), CRIT_HIGH_09))
-	
-	rows.append((
-	    "[8] FPR (Fall-out)", f"{fpr_value:.4f}", interpret_low_good(fpr_value), CRIT_LOW_01))
-	
-	rows.append((
-	    "[9] ROC curve", f"points={len(fpr)}개", interpret_auc(auc), CRIT_ROC))
-	
-	rows.append((
-	    "[10] AUC score", f"{auc:.4f}", interpret_auc(auc), CRIT_AUC))
+	rows.append(("[1] Confusion Matrix", f"TN={tn}, FP={fp}, FN={fn}, TP={tp}",
+	    interpret_high_good(acc), "대각합 비율(Accuracy) 기준: " + CRIT_HIGH_09))	
+	rows.append(("[2] Accuracy", f"{acc:.4f}", interpret_high_good(acc), CRIT_HIGH_09))	
+	rows.append(("[3] Precision (PPV)", f"{precision:.4f}", interpret_high_good(precision), CRIT_HIGH_09))	
+	rows.append(("[4] Recall (Sensitivity/TPR)",f"{recall:.4f}", interpret_high_good(recall), CRIT_HIGH_09))	
+	rows.append(("[5] F1-score",f"{f1:.4f}", interpret_high_good(f1), CRIT_HIGH_09))	
+	rows.append(("[6] Error Rate", f"{error_rate:.4f}", interpret_low_good(error_rate), CRIT_LOW_01))	
+	rows.append(("[7] Specificity (TNR)", f"{specificity:.4f}", interpret_high_good(specificity), CRIT_HIGH_09))	
+	rows.append(("[8] FPR (Fall-out)", f"{fpr_value:.4f}", interpret_low_good(fpr_value), CRIT_LOW_01))	
+	rows.append(("[9] ROC curve", f"points={len(fpr)}개", interpret_auc(auc), CRIT_ROC))
+	rows.append(("[10] AUC score", f"{auc:.4f}", interpret_auc(auc), CRIT_AUC))
 	
 	# ---------------------------------------------------------
 	# 7. 해석 테이블 출력
@@ -1230,14 +1211,42 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 	print("-" * 120)
 	
 	for name, value, interp, crit in rows:
-	    print(f"{name:<28}{value:<24}{interp:<10}{crit}")
-	
+	    print(f"{name:<28}{value:<24}{interp:<10}{crit}")	
 	print("-" * 120)
-	print("\n※ 위 구간값들은 실무·연구에서 자주 쓰는 휴리스틱 기준이며, 문제 난이도와 도메인에 따라 조정해서 사용하세요.")
-
-
+	
 
 **(분류 평가지표 10개 정리 예제 소스 실행 결과)**
+
+	=== Classification Metrics on Iris (setosa vs others) ===
+	>> Raw Metric Values
+	[1] Confusion Matrix:
+	[[30  0]
+ 	 [ 0 15]]
+	[2] Accuracy                : 1.0000
+	[3] Precision (PPV)         : 1.0000
+	[4] Recall (Sensitivity/TPR): 1.0000
+	[5] F1-score                : 1.0000
+	[6] Error Rate              : 0.0000
+	[7] Specificity (TNR)       : 1.0000
+	[8] FPR (Fall-out)          : 0.0000
+	[9] ROC curve points        : fpr.shape=(6,), tpr.shape=(6,)
+	[10] AUC score              : 1.0000
+
+	>> 해석 테이블 (휴리스틱 기준, 데이터/도메인에 따라 조정 권장)
+	------------------------------------------------------------------------------------------------------------------------
+	지표                         값                      해석        기준
+	------------------------------------------------------------------------------------------------------------------------
+	[1] Confusion Matrix        TN=30, FP=0, FN=0, TP=15좋음        대각합 비율(Accuracy) 기준: 값 ≥ 0.90:좋음, 0.70 ≤ 값 < 0.90:보통, 값 < 0.70:나쁨
+	[2] Accuracy                1.0000                  좋음        값 ≥ 0.90:좋음, 0.70 ≤ 값 < 0.90:보통, 값 < 0.70:나쁨
+	[3] Precision (PPV)         1.0000                  좋음        값 ≥ 0.90:좋음, 0.70 ≤ 값 < 0.90:보통, 값 < 0.70:나쁨
+	[4] Recall (Sensitivity/TPR)1.0000                  좋음        값 ≥ 0.90:좋음, 0.70 ≤ 값 < 0.90:보통, 값 < 0.70:나쁨
+	[5] F1-score                1.0000                  좋음        값 ≥ 0.90:좋음, 0.70 ≤ 값 < 0.90:보통, 값 < 0.70:나쁨
+	[6] Error Rate              0.0000                  좋음        값 ≤ 0.10:좋음, 0.10 < 값 ≤ 0.30:보통, 값 > 0.30:나쁨
+	[7] Specificity (TNR)       1.0000                  좋음        값 ≥ 0.90:좋음, 0.70 ≤ 값 < 0.90:보통, 값 < 0.70:나쁨
+	[8] FPR (Fall-out)          0.0000                  좋음        값 ≤ 0.10:좋음, 0.10 < 값 ≤ 0.30:보통, 값 > 0.30:나쁨
+	[9] ROC curve               points=6개               좋음        곡선이 좌상단에 가까울수록 좋음 (AUC 기준: AUC ≥ 0.90:좋음, 0.80 ≤ AUC < 0.90:보통, AUC < 0.80:나쁨)
+	[10] AUC score              1.0000                  좋음        AUC ≥ 0.90:좋음, 0.80 ≤ AUC < 0.90:보통, AUC < 0.80:나쁨
+	------------------------------------------------------------------------------------------------------------------------
 
 <br>
 
