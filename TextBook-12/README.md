@@ -439,7 +439,7 @@
 
 **(데이터구조)** ![](./images/db.png)
 <br>
-**(데이터셋)** https://github.com/YangGuiBee/ML/blob/main/TextBook-13/insurance.csv
+**(데이터셋)** https://github.com/YangGuiBee/ML/blob/main/TextBook-12/insurance.csv
 <br>
 
 	################################################################################
