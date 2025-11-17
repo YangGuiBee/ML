@@ -39,6 +39,7 @@
 	def MAE(y_true, y_pred):
     	return (abs(y_true - y_pred)).mean(axis=None)
 
+<br>
 
 	from sklearn.metrics import mean_absolute_error
 	
