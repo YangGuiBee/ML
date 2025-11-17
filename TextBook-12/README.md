@@ -136,6 +136,7 @@
 		return ((abs((y_true - y_pred)/y_true))*100).mean(axis=None)
 
 <br>
+	
 	from sklearn.metrics import mean_absolute_percentage_error
 	
 	mape = mean_absolute_percentage_error(y_true, y_pred)
