@@ -43,7 +43,7 @@
 
 	from sklearn.metrics import mean_absolute_error
 	
-	MAE = mean_absolute_error(y_true, y_pred)
+	mae = mean_absolute_error(y_true, y_pred)
    
 <br>
 
@@ -55,8 +55,14 @@
 ▣ 장점: 직관적이며, 모델의 큰 오차를 더 잘 식별 가능<br>
 ▣ 단점: 예측 변수와 단위가 다르며, 오차를 제곱하기 때문에 이상치에 민감(제곱하기 때문에 1미만의 에러는 작아지고 그 이상의 에러는 커짐), 제곱을 씌우게 되어 underestimates/overestimates인지 파악하기 힘들며, 스케일 의존적(scal dependency)이라 모델마다 에러러 크기가 동일해도 에러율은 동일하지 않은 단점. 오차제곱합(SSE)와 유사하지만 오차제곱합으로는 실제 오차가 커서 값이 커지는 것인지 데이터의 양이 많아서 값이 커지는 것인지를 구분할 수 없게 된다.<br>
 
-	def MSE(y, t):
-    	return ((y-t)**2).mean(axis=None)
+	def MSE(y_true, y_pred):
+    	return ((y_true - y_pred)**2).mean(axis=None)
+
+<br>
+
+	from sklearn.metrics import mean_squared_error
+	
+	mse = mean_squared_error(y_true, y_pred)
 
 <br>
 
@@ -68,8 +74,14 @@
 ▣ 장점: 작은 값에 집중하여 예측하는 모델에 적합(결정 값이 클수록 오류값도 커지기 때문에 일부 큰 오류값들로 인해 전체 오류값이 커지는 것을 막아준다)<br>
 ▣ 단점: 로그 연산으로 인해 음수 값은 처리 불가능<br>
 
-	def MSLE(y, t):
-		return np.log((y-t)**2).mean(axis=None)
+	def MSLE(y_true, y_pred):
+		return np.log((y_true - y_pred)**2).mean(axis=None)
+
+<br>
+
+	from sklearn.metrics import mean_squared_log_error
+
+	msle = mean_squared_log_error(y_true, y_pred)
 
 <br>
 
@@ -81,8 +93,8 @@
 ▣ 장점: 해석이 쉬우며, 큰 오차를 강조(MSE에 루트는 씌워서 에러를 제곱해서 생기는 값의 왜곡이 줄어든다)<br>
 ▣ 단점: 극단값에 민감하고, 제곱 후 루트를 씌우기 때문에 MAE처럼 실제 값에 대해 underestimates/overestimates인지 파악하기 힘들고, 스케일 의존적(scal dependency)으로 모델마다 에러 크기가 동일해도 에러율은 동일하지 않은 단점<br>
 
-	def RMSE(y, t):
-		return np.sqrt(((y - t) ** 2).mean(axis=None))
+	def RMSE(y_true, y_pred):
+		return np.sqrt(((y_true - y_pred) ** 2).mean(axis=None))
 
 <br>
 
@@ -94,8 +106,8 @@
 ▣ 장점: 상대적 오차에 강점(결정 값이 클 수록 오류 값도 커지기 때문에 일부 큰 오류 값들로인해 전체 오류값이 커지는 것을 막아준다)<br>
 ▣ 단점: 음수 값 불가<br>
 
-	def RMSLE(y, t):
-		return np.log(np.sqrt(((y - t) ** 2).mean(axis=None)))
+	def RMSLE(y_true, y_pred):
+		return np.log(np.sqrt(((y_true - y_pred) ** 2).mean(axis=None)))
 
 <br>
 
@@ -107,8 +119,8 @@
 ▣ 장점: 상대적 크기 비교 가능(음수면 overperformance, 양수면 underperformance으로 판단), 모델이 underestimates/overestimates인지 판단할 수 있다는 장점<br>
 ▣ 단점: 실제값이 0일 때 계산 불가<br>
 
-	def MPE(y, t):
-		return (((y-t)/y)*100).mean(axis=None)
+	def MPE(y_true, y_pred):
+		return (((y_true - y_pred)/y_true)*100).mean(axis=None)
 
 <br>
 
@@ -120,8 +132,13 @@
 ▣ 장점 : 직관적이고, 다른 모델과 에러율 비교가 쉬운 장점<br>
 ▣ 단점: 0값 문제와 극단값에 민감(실제 정답보다 낮게 예측했는지, 높게 했는지를 파악하기 힘들고 실제 정답이 1보다작을 경우,무한대의 값으로 수렴)<br>
 
-	def MAPE(y, t):
-		return ((abs((y-t)/y))*100).mean(axis=None)
+	def MAPE(y_true, y_pred):
+		return ((abs((y_true - y_pred)/y_true))*100).mean(axis=None)
+
+<br>
+	from sklearn.metrics import mean_absolute_percentage_error
+	
+	mape = mean_absolute_percentage_error(y_true, y_pred)
 
 <br>
 
@@ -134,11 +151,12 @@
 ▣ 장점: 스케일에 대한 의존성이 낮아서 안정적으로 비교 가능<br>
 ▣ 단점: 해석이 상대적으로 어렵다<br>
 
-	def MASE(y, t):
-		n = len(y)
-		d = np.abs(np.diff(y)).sum() / (n - 1)
-		errors = abs(y-t)
-		return errors.mean(axis=None)/d
+	def MASE(y_true, y_pred):
+    	mae = np.mean(np.abs(y_true - y_pred))
+    	naive_mae = np.mean(np.abs(y_true[1:] - y_true[:-1]))
+    	return mae / naive_mae
+
+	mase = MASE(y_true, y_pred)
 
 <br>
 
