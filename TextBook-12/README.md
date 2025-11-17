@@ -239,17 +239,12 @@
 	CRITERIA_R2             = "R2≥0.8:좋음, 0.5≤R2<0.8:보통, R2<0.5:나쁨"
 		
 	def interpret_error_relative(value, scale):
-	    if scale == 0:
-	        return "평가불가"
+	    if scale == 0: return "평가불가"
 	
-	    ratio = abs(value) / scale  # 상대오차 비율
-	
-	    if ratio < 0.25:
-	        return "좋음"
-	    elif ratio < 0.5:
-	        return "보통"
-	    else:
-	        return "나쁨"
+	    ratio = abs(value) / scale  # 상대오차 비율	
+	    if ratio < 0.25: return "좋음"
+	    elif ratio < 0.5: return "보통"
+	    else: return "나쁨"
 		
 	def interpret_msle_rmsle(rmsle_value):
 	    if rmsle_value < 0.1:
@@ -260,32 +255,20 @@
 	        return "나쁨"
 		
 	def interpret_percentage_metric(perc_value):
-	    perc = abs(perc_value) * 100  # %
-	
-	    if perc < 10:
-	        return "좋음"
-	    elif perc < 20:
-	        return "보통"
-	    else:
-	        return "나쁨"
-	
-	
+	    perc = abs(perc_value) * 100  # %	
+	    if perc < 10: return "좋음"
+	    elif perc < 20: return "보통"
+	    else: return "나쁨"
+		
 	def interpret_mase(mase_value):
-	    if mase_value < 1:
-	        return "좋음"
-	    elif mase_value < 2:
-	        return "보통"
-	    else:
-	        return "나쁨"
-	
-	
+	    if mase_value < 1: return "좋음"
+	    elif mase_value < 2: return "보통"
+	    else: return "나쁨"
+		
 	def interpret_r2(r2_value):	
-	    if r2_value >= 0.8:
-	        return "좋음"
-	    elif r2_value >= 0.5:
-	        return "보통"
-	    else:
-	        return "나쁨"
+	    if r2_value >= 0.8: return "좋음"
+	    elif r2_value >= 0.5: return "보통"
+	    else: return "나쁨"
 	
 	# ------------------------------------------------------------------
 	# 3. Iris 데이터 로드 및 회귀 문제로 구성
@@ -377,7 +360,7 @@
 	print("-" * 110)
 	for name, value, interp, crit in rows:
     # 기준 문자열이 길어서 그대로 뒤에 붙여줌
-    print(f"{name:<10}{value:>12.4f}{interp:>16}  {crit}")
+    	print(f"{name:<10}{value:>12.4f}{interp:>16}  {crit}")
 	print("-" * 110)
 
 <br>
