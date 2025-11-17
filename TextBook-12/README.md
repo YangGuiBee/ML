@@ -1256,7 +1256,7 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 
 | 평가지표 | 좋음 | 보통 | 나쁨 |
 |----------|------|------|------|
-| [1] 오차행렬 (Confusion Matrix) | Accuracy ≥ 0.90 | 0.70 ≤ Accuracy < 0.90 | Accuracy < 0.70 |
+| [1] 오차행렬 (Confusion Matrix) | TP, TN 비율이 매우 높고 FP, FN이 거의 없음 | TP, TN이 적당히 높고 FP, FN이 어느 정도 존재 | FP, FN이 많고 TP, TN이 낮음 (대각성분보다 비대각 성분이 크거나 비슷) |
 | [2] 정확도 (Accuracy) | Accuracy ≥ 0.90 | 0.70 ≤ Accuracy < 0.90 | Accuracy < 0.70 |
 | [3] 정밀도 (Precision, PPV) | Precision ≥ 0.90 | 0.70 ≤ Precision < 0.90 | Precision < 0.70 |
 | [4] 재현율 (Recall, Sensitivity, TPR) | Recall ≥ 0.90 | 0.70 ≤ Recall < 0.90 | Recall < 0.70 |
@@ -1264,8 +1264,9 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 | [6] 오분류율 (Error Rate) | Error Rate ≤ 0.10 | 0.10 < Error Rate ≤ 0.30 | Error Rate > 0.30 |
 | [7] 특이도 (Specificity, TNR) | TNR ≥ 0.90 | 0.70 ≤ TNR < 0.90 | TNR < 0.70 |
 | [8] 위양성률 (Fall-out, FPR) | FPR ≤ 0.10 | 0.10 < FPR ≤ 0.30 | FPR > 0.30 |
-| [9] ROC curve | AUC ≥ 0.90 (좌상단에 가까움) | 0.80 ≤ AUC < 0.90 | AUC < 0.80 |
+| [9] ROC curve | 대부분 구간에서 TPR이 높고 FPR이 낮아 곡선이 좌상단에 밀집 (대각선에서 충분히 위쪽) | 곡선이 대각선보다 약간 위, 일부 구간만 뚜렷한 구분 | 곡선이 대각선에 거의 붙거나 아래에 위치 (무작위 분류와 비슷/열등) |
 | [10] AUC score | AUC ≥ 0.90 | 0.80 ≤ AUC < 0.90 | AUC < 0.80 |
+
 
 
 
