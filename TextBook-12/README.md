@@ -23,8 +23,8 @@
 ▣ 장점: 오차의 방향성을 반영하여 모델의 편향(bias)을 분석<br>
 ▣ 단점: 양수와 음수가 상쇄되므로, 실제 오차의 크기를 판단하기 어렵다<br>
 
-	def ME(y, t):
-		return (y-t).mean(axis=None)
+	def ME(y_true, y_pred):
+		return (y_true - y_pred).mean(axis=None)
 
 <br>
 
@@ -36,8 +36,13 @@
 ▣ 장점: 직관적이고 정답 및 예측 값과 같은 단위를 가지고, MSE, RMSE에 비해 극단값(outlier)에 덜 민감<br>
 ▣ 단점: 절댓값을 취하므로 underestimates/overestimates인지에 대한 판단을 할 수 없으며, 스케일 의존적(scal dependency)으로 모델마다 에러 크기가 동일해도 에러율은 동일하지 않고, 오차의 방향성을 알 수 없다<br>
 
-	def MAE(y, t):
-    	return (abs(y - t)).mean(axis=None)
+	def MAE(y_true, y_pred):
+    	return (abs(y_true - y_pred)).mean(axis=None)
+
+
+	from sklearn.metrics import mean_absolute_error
+	
+	MAE = mean_absolute_error(y_true, y_pred)
    
 <br>
 
