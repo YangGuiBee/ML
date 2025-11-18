@@ -901,90 +901,124 @@
 	
 <br>
 
+
 	################################################################################
-	# Ridge Regression
-	# Lasso Regression
-	# Elastic Net Regression
-	# Random Forest Regression
-	# XGBoost
-	# LightGBM
+	# 보험료(charges)를 예측하기 위해 6개의 회귀모델을 학습·평가·예측하는 전체 코드
+	# Ridge / Lasso / ElasticNet Regression / Random Forest Regression / XGBoost / LightGBM
 	################################################################################
-	
-	# Check and install necessary packages
-	import subprocess
-	import sys
+	# ------------------------------ 패키지 설치 부분 ------------------------------
+	import subprocess   # pip install 등 외부 명령 호출
+	import sys          # python 실행 파일 위치 확인
 	
 	def install(package):
 	    try:
-	        __import__(package)
+	        __import__(package)  # Import 시도
 	    except ImportError:
 	        print(f"Installing {package}...")
 	        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 	
-	# List of required packages
-	required_packages = ['pandas', 'scikit-learn', 'xgboost', 'lightgbm', 'numpy']
-	for package in required_packages:
-	    install(package)
+	required_packages = ['pandas', 'scikit-learn', 'xgboost', 'lightgbm', 'numpy']	
+	for pkg in required_packages:
+	    install(pkg)
 	
-	# Import libraries
 	import pandas as pd
 	import numpy as np
 	from sklearn.model_selection import train_test_split
-	from sklearn.preprocessing import OneHotEncoder
-	from sklearn.linear_model import Ridge, Lasso, ElasticNet
-	from sklearn.ensemble import RandomForestRegressor
-	from xgboost import XGBRegressor
-	from lightgbm import LGBMRegressor
-	from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, mean_absolute_percentage_error
-	
-	# Load dataset from URL
+	from sklearn.preprocessing import OneHotEncoder	
+	from sklearn.linear_model import Ridge, Lasso, ElasticNet	# 선형 기반 회귀	
+	from sklearn.ensemble import RandomForestRegressor			# 앙상블 기반 회귀	
+	from xgboost import XGBRegressor							# 부스팅 기반 회귀
+	from lightgbm import LGBMRegressor							# 부스팅 기반 회귀	
+	# 회귀 평가지표
+	from sklearn.metrics import (
+	    mean_absolute_error,
+	    mean_squared_error,
+	    r2_score,
+	    mean_absolute_percentage_error	)
+		
+	# ------------------------------ 1. 데이터 로딩 ------------------------------
+	# GitHub의 보험료 데이터(csv) URL
 	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-12/insurance.csv"
+	# CSV 파일을 DataFrame으로 로드
 	df = pd.read_csv(data_url)
 	
-	# Check and handle missing values
+	# ------------------------------ 2. 결측치 검사 ------------------------------
 	print("Checking for missing values...")
-	print(df.isnull().sum())  # Display the count of NaN values per column
-	
-	# Ensure no missing values
-	assert not df.isnull().values.any(), "Data contains missing values!"
-	
-	# Preprocessing
+	print(df.isnull().sum())        # 각 컬럼별 결측치 개수
+	assert not df.isnull().values.any(), "데이터에 결측치가 있습니다!"
+		
+	# ------------------------------ 3. 전처리: 독립변수/타깃 분리 ------------------------------
+	# charges(보험료) = 타깃 y, 나머지 = X
 	X = df.drop("charges", axis=1)
 	y = df["charges"]
-	categorical_features = ["sex", "smoker", "region"]
-	numerical_features = ["age", "bmi", "children"]
 	
-	# Updated sparse_output instead of sparse
+	# 범주형 변수 목록 (문자열 → 원핫)
+	categorical_features = ["sex", "smoker", "region"]	
+	# 수치형 변수 목록
+	numerical_features = ["age", "bmi", "children"]	
+	
+	# ------------------------------ 4. 원-핫 인코딩 ------------------------------
+	# sparse_output=False : 희소행렬 대신 dense array 반환
+	# drop="first" : 각 범주의 첫 번째 카테고리를 제거 → 다중공선성 방지
 	encoder = OneHotEncoder(sparse_output=False, drop="first")
-	X_encoded = encoder.fit_transform(X[categorical_features])
+	
+	# 범주형 변수 인코딩
+	X_encoded = encoder.fit_transform(X[categorical_features])	
+	# 수치형 변수 그대로 가져오기
 	X_numerical = X[numerical_features]
 	
+	# 최종 입력데이터(X) 구성
 	X_preprocessed = pd.DataFrame(
 	    np.hstack([X_numerical, X_encoded]),
-	    columns=numerical_features + encoder.get_feature_names_out().tolist()
-	)
-	
-	# Train-test split
+	    columns=numerical_features + encoder.get_feature_names_out().tolist()	)
+		
+	# ------------------------------ 5. 학습/테스트 분할 ------------------------------
 	X_train, X_test, y_train, y_test = train_test_split(X_preprocessed, y, test_size=0.2, random_state=42)
-	
-	# Evaluation metrics
+		
+	# ------------------------------ 6. 회귀 평가지표 함수 ------------------------------
+	#    10개 회귀 평가지표를 계산하여 딕셔너리로 반환한다.
+	#    [1] ME, [2] MAE, [3] MSE, [4] MSLE, [5] RMSE, [6] RMSLE, [7] MPE, [8] MAPE, [9] MASE, [10] R2
 	def evaluate_model(y_true, y_pred):
-	    me = np.mean(y_pred - y_true)  # 평균 오차 (예측값 - 실제값)
-	    mae = mean_absolute_error(y_true, y_pred)  # 평균 절대 오차
-	    mse = mean_squared_error(y_true, y_pred)  # 평균 제곱 오차
-	    rmse = np.sqrt(mse)  # 평균 제곱근 오차
 	
-	    # Conditional MSLE calculation
-	    if (y_true > 0).all() and (y_pred > 0).all():
-	        msle = mean_squared_error(np.log1p(y_true), np.log1p(y_pred))  # 평균 제곱 오차 (로그 적용)
-	        rmsle = np.sqrt(msle)  # 평균 제곱근 오차 (로그 적용)
+	    # 1) Mean Error (편향 측정: 예측-실제)
+	    me = np.mean(y_pred - y_true)
+	
+	    # 2) Mean Absolute Error (절대 오차)
+	    mae = mean_absolute_error(y_true, y_pred)
+	
+	    # 3) Mean Squared Error (제곱 오차)
+	    mse = mean_squared_error(y_true, y_pred)
+	
+	    # 5) Root Mean Squared Error
+	    rmse = np.sqrt(mse)
+	
+	    # 4 & 6) 로그 기반 오차 (0 이상일 때 가능)
+	    if (y_true >= 0).all() and (y_pred >= 0).all():
+	        msle = mean_squared_error(np.log1p(y_true), np.log1p(y_pred))
+	        rmsle = np.sqrt(msle)
 	    else:
 	        msle = np.nan
 	        rmsle = np.nan
 	
-	    mpe = np.mean((y_pred - y_true) / y_true) * 100  # 평균 비율 오차
-	    mape = mean_absolute_percentage_error(y_true, y_pred) * 100  # 평균 절대 비율 오차
-	    r2 = r2_score(y_true, y_pred)  # R2 점수
+	    # 7) Mean Percentage Error (%)
+	    mpe = np.mean((y_pred - y_true) / y_true) * 100
+	
+	    # 8) Mean Absolute Percentage Error (%)
+	    mape = mean_absolute_percentage_error(y_true, y_pred) * 100
+	
+	    # 9) Mean Absolute Scaled Error (MASE)
+	    #    스케일 = 실제값의 연속 차이(|y_t - y_(t-1)|) 평균
+	    if len(y_true) > 1:
+	        scale = np.mean(np.abs(np.diff(y_true)))
+	        if scale == 0:
+	            mase = np.nan
+	        else:
+	            mase = mae / scale
+	    else:
+	        mase = np.nan
+	
+	    # 10) R²
+	    r2 = r2_score(y_true, y_pred)
 	
 	    return {
 	        "ME": me,
@@ -995,65 +1029,128 @@
 	        "RMSLE": rmsle,
 	        "MPE": mpe,
 	        "MAPE": mape,
-	        "R2": r2,
-	    }
-	
-	# Initialize models
+	        "MASE": mase,
+	        "R2": r2    }
+		
+	# ------------------------------ 7. 모델 정의 ------------------------------
 	models = {
 	    "Ridge Regression": Ridge(),
 	    "Lasso Regression": Lasso(),
 	    "Elastic Net Regression": ElasticNet(),
-	    "Random Forest Regression": RandomForestRegressor(random_state=42),
-	    "XGBoost": XGBRegressor(random_state=42),
-	    "LightGBM": LGBMRegressor(random_state=42),
-	}
 	
-	# Train and evaluate models
-	results = {}
+	    # n_jobs=1 → joblib의 physical core detection 경고 제거
+	    "Random Forest Regression": RandomForestRegressor( random_state=42, n_jobs=1 ),
+	
+	    # eval_metric="rmse" → XGB 경고 감소
+	    "XGBoost": XGBRegressor(random_state=42,eval_metric="rmse" ),
+	
+	    "LightGBM": LGBMRegressor( random_state=42)	}
+		
+	# ------------------------------ 8. 모델 학습 & 평가 ------------------------------
+	results = {}   # 각 모델의 지표 저장	
 	for name, model in models.items():
+	
+	    # 1) 모델 학습
 	    model.fit(X_train, y_train)
+	
+	    # 2) 테스트 예측
 	    y_pred = model.predict(X_test)
 	
-	    # Check for invalid prediction values
+	    # 3) 예측값 중 음수 제거 (보험료는 음수가 불가능)
 	    if (y_pred < 0).any():
-	        print(f"Warning: Model {name} produced negative predictions. Adjusting values to zero.")
-	        y_pred = np.maximum(y_pred, 0)  # Replace negative predictions with 0
+	        print(f"Warning: Model {name} produced negative predictions. Adjusting to zero.")
+	        y_pred = np.maximum(y_pred, 0)
 	
+	    # 4) 평가
 	    results[name] = evaluate_model(y_test, y_pred)
-	
-	# Format evaluation results for consistent decimal places
+		
+	# ------------------------------ 9. 평가 결과 DataFrame 변환 ------------------------------
 	evaluation_results = pd.DataFrame(results)
-	evaluation_results = evaluation_results.applymap(lambda x: f"{x:.6f}" if pd.notnull(x) else "NaN")
 	
-	# Display formatted results
+	# pandas 3.0+ : applymap 대신 map 사용
+	evaluation_results = evaluation_results.map(lambda x: f"{x:.6f}" if pd.notnull(x) else "NaN")
+	
 	print("\nModel Evaluation Results:")
 	print(evaluation_results)
+		
+	# ------------------------------ 10. 새로운 입력 1건에 대한 예측 ------------------------------
+	test_input = pd.DataFrame( [[55, 21, 2, "female", "no", "northeast"]],
+	    columns=["age", "bmi", "children", "sex", "smoker", "region"])
 	
-	# Prediction
-	test_input = pd.DataFrame(
-	    [[55, 21, 2, "female", "no", "northeast"]],
-	    columns=["age", "bmi", "children", "sex", "smoker", "region"]
-	)
-	
-	# Encode and predict
+	# 범주형 원핫 인코딩
 	test_encoded = encoder.transform(test_input[categorical_features])
 	test_numerical = test_input[numerical_features]
+	
 	test_preprocessed = pd.DataFrame(
 	    np.hstack([test_numerical, test_encoded]),
-	    columns=numerical_features + encoder.get_feature_names_out().tolist()
-	)
+	    columns=numerical_features + encoder.get_feature_names_out().tolist()	)
 	
-	# Predictions for test input
+	# 모델별 예측 수행
 	predictions = {}
 	for name, model in models.items():
 	    predictions[name] = model.predict(test_preprocessed)[0]
 	
-	# Format predictions for consistent decimal places
-	predictions_df = pd.DataFrame(predictions, index=["Predicted Charges"]).applymap(lambda x: f"{x:.6f}")
+	# DataFrame 변환 + 포맷팅
+	predictions_df = pd.DataFrame(
+	    predictions, index=["Predicted Charges"]
+	).map(lambda x: f"{x:.6f}")
 	
-	# Display predictions
 	print("\nPredicted Charges for Input:")
 	print(predictions_df)
+
+<br>
+
+	Installing scikit-learn...
+	Checking for missing values...
+	age         0
+	sex         0
+	bmi         0
+	children    0
+	smoker      0
+	region      0
+	charges     0
+	dtype: int64
+	Warning: Model Ridge Regression produced negative predictions. Adjusting to zero.
+	Warning: Model Lasso Regression produced negative predictions. Adjusting to zero.
+	Warning: Model XGBoost produced negative predictions. Adjusting to zero.
+	[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000141 seconds.
+	You can set `force_col_wise=true` to remove the overhead.
+	[LightGBM] [Info] Total Bins 319
+	[LightGBM] [Info] Number of data points in the train set: 1070, number of used features: 8
+	[LightGBM] [Info] Start training from score 13346.089733
+	
+	Model Evaluation Results:
+	      Ridge Regression Lasso Regression Elastic Net Regression  \
+	ME          230.704197       230.811984             318.771925   
+	MAE        4182.886840      4171.281194            7423.855423   
+	MSE    33592686.228366  33550700.878862        90268049.602763   
+	MSLE          1.138902         1.141031               0.609497   
+	RMSE       5795.919791      5792.296684            9500.949932   
+	RMSLE         1.067194         1.068191               0.780703   
+	MPE          24.045376        23.659480              82.541930   
+	MAPE         46.542872        46.308404             103.785761   
+	MASE          0.338739         0.337799               0.601199   
+	R2            0.783620         0.783891               0.418559   
+	
+	      Random Forest Regression          XGBoost         LightGBM  
+	ME                  476.141596       148.515254       160.277564  
+	MAE                2550.078471      2761.822751      2623.205455  
+	MSE            20942520.922620  23413960.743659  20557383.062015  
+	MSLE                  0.195473         0.475891         0.243531  
+	RMSE               4576.299916      4838.797448      4534.025040  
+	RMSLE                 0.442123         0.689848         0.493489  
+	MPE                  23.540036        16.037576        19.873116  
+	MAPE                 32.492433        34.807561        34.442284  
+	MASE                  0.206510         0.223658         0.212432  
+	R2                    0.865103         0.849184         0.867584  
+	
+	Predicted Charges for Input:
+	                  Ridge Regression Lasso Regression Elastic Net Regression  \
+	Predicted Charges     10149.160698     10119.933271           12916.033857   
+	
+	                  Random Forest Regression       XGBoost      LightGBM  
+	Predicted Charges             12901.765317  10175.989258  11811.794421  
+
 
 ---
 
