@@ -1161,16 +1161,16 @@
 #  12-2 : 분류 평가 지표
 ---
 	
- 	[1] 오차행렬, 혼동행렬 (Confusion Matrix)
-  	[2] 정확도 (Accurancy)
-	[3] 정밀도 (Precision), PPV (Positive Predictive Value)
-	[4] 재현율 (Recall), 민감도 (Sensitivity), TPR (True Positive Rate)
-	[5] F1 score
- 	[6] 오분류율 (Error Rate)
-  	[7] 특이도 (Specificity), TNR(True Negative Rate)
-   	[8] 위양성률 (Fall Out), FPR(False Positive Rate)
-	[9] ROC curve
-	[10]AUC score
+ 	[1] 오차행렬, 혼동행렬 (Confusion Matrix) : 각 모델이 클래스 간 데이터를 어떻게 분류했는지를 나타냄
+  	[2] 정확도 (Accurancy) : 가장 간단한 기준으로, 전체 데이터 중 올바르게 예측한 비율
+	[3] 정밀도 (Precision), PPV (Positive Predictive Value) : 모델이 양성으로 예측한 데이터 중 실제로 양성인 비율
+	[4] 재현율 (Recall), 민감도 (Sensitivity), TPR (True Positive Rate) : 실제 양성 데이터를 얼마나 잘 탐지했는지 나타냄
+	[5] F1 score : 정밀도와 재현율의 조화 평균으로, 두 지표의 균형을 평가
+ 	[6] 오분류율 (Error Rate) : 정확도의 보완 지표로, 전체 데이터 중 모델이 잘못 예측한 비율
+  	[7] 특이도 (Specificity), TNR(True Negative Rate) : 실제 음성 데이터를 얼마나 잘 탐지했는지 나타냄
+   	[8] 위양성률 (Fall Out), FPR(False Positive Rate) : 음성 데이터를 양성 데이터로 잘못 분류한 비율
+	[9] ROC curve : 모든 임계값(threshold)에 대해 TPR(민감도, Recall)와 FPR(위양성률)의 관계 시각화
+	[10]AUC score : 모델이 클래스 분류에서 얼마나 잘 분리할 수 있는지 나타내는 지표
 	  
 ---
 
@@ -1868,17 +1868,6 @@ SVC는 높은 AUC와 낮은 FPR로 신뢰할 수 있는 두 번째 모델로 평
 
 ![](./images/result2.PNG)
 <br><br> 
-
-[1] 오차행렬, 혼동행렬(Confusion Matrix) : 각 모델이 클래스 간 데이터를 어떻게 분류했는지를 나타냄<br>
-[2] 정확도(Accurancy) : 가장 간단한 기준으로, 전체 데이터 중 올바르게 예측한 비율<br>
-[3] 정밀도(Precision), PPV(Positive Predictive Value) : 모델이 양성으로 예측한 데이터 중 실제로 양성인 비율<br>
-[4] 재현율(Recall), 민감도(Sensitivity), TPR(True Positive Rate) : 실제 양성 데이터를 얼마나 잘 탐지했는지 나타냄<br>
-[5] F1 score : Precision과 Recall의 조화 평균으로, 두 지표의 균형을 평가<br>
-[6] 오분류율(Error Rate) : 정확도의 보완 지표로, 전체 데이터 중 모델이 잘못 예측한 비율<br>
-[7] 특이도(Specificity), TNR(True Negative Rate) : 실제 음성 데이터를 얼마나 잘 탐지했는지 나타냄<br>
-[8] 위양성률(Fall Out), FPR(False Positive Rate) : 음성 데이터를 양성 데이터로 잘못 분류한 비율<br>
-[9] ROC curve : 모든 임계값(threshold)에 대해 TPR(민감도, Recall)와 FPR(위양성률)의 관계 시각화<br>
-[10]AUC score : 모델이 클래스 분류에서 얼마나 잘 분리할 수 있는지 나타내는 지표<br>
 
 
 ---
