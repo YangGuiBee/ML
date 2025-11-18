@@ -1154,7 +1154,7 @@
 
 ---
 
-![](./images/tscore.png)
+![](./images/tscore2.png)
 <br>
 
 ---
