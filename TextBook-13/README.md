@@ -1,7 +1,108 @@
+
 #  13 : 강화학습, 앙상블학습
 
 ![](./images/RLUL.PNG)
 <br>
+
+
+[1] 모델-프리 강화학습 (Model-free Reinforcement Learning)
+
+    [1-1] 가치 기반 강화학습 (Value-based Reinforcement Learning)
+
+        (A) 테이블 기반 가치 학습 (Tabular Value-based RL)
+            - Q-러닝 (Q-Learning)
+            - 사르사 / 기대 사르사 (SARSA / Expected SARSA)
+            - 엔-스텝 Q-러닝 (n-step Q-learning)
+
+        (B) 심층 가치 기반 학습 (Deep Value-based RL)
+            - Q-네트워크 (Q-Network, Q-NN)
+            - 딥 Q-네트워크 (DQN, Deep Q-Network)
+            - 더블 DQN (Double DQN)
+            - 듀얼링 DQN (Dueling DQN)
+            - 순환형 DQN (DRQN, Recurrent DQN; LSTM/RNN 기반)
+
+        (C) 분포 기반 강화학습 (Distributional Reinforcement Learning)
+            - C51 (Categorical 51-atom DQN)
+            - QR-DQN (Quantile Regression DQN)
+            - IQN (Implicit Quantile Networks)
+            - 레인보우 (Rainbow: Double + Dueling + PER + NoisyNet + C51 결합)
+
+        (D) 소프트 Q-러닝 (Soft Q-learning)
+            - 소프트 Q-러닝 (Soft Q-Learning, Max-Entropy RL 기반)
+
+        (E) 리플레이 / 탐색 기법 (Replay / Exploration Techniques)
+            - 우선순위 경험 리플레이 (PER, Prioritized Experience Replay)
+            - 힌드사이트 경험 리플레이 (HER, Hindsight Experience Replay)
+            - 노이즈넷 탐색 (NoisyNet Exploration)
+            - 엡실론-그리디 변형 (ε-greedy Variants)
+            - 볼츠만 탐색 (Boltzmann Exploration)
+            - UCB 탐색 (UCB Exploration)
+
+
+    [1-2] 정책 기반 / 액터-크리틱 (Policy-based / Actor-Critic Methods)
+
+        (A) 기본 정책 경사법 (Basic Policy Gradient)
+            - 리인포스 (REINFORCE)
+            - 바닐라 정책 경사법 (Vanilla Policy Gradient)
+            - 자연 액터-크리틱 (NAC, Natural Actor-Critic)
+
+        (B) 어드밴티지 / 분산 액터-크리틱 (Advantage / Distributed Actor-Critic)
+            - 기본 액터-크리틱 (Actor-Critic)
+            - A2C (Advantage Actor-Critic)
+            - A3C (Asynchronous Advantage Actor-Critic)
+            - ACER (Actor-Critic with Experience Replay)
+            - 오프-정책 액터-크리틱 (Off-PAC, Off-policy Actor-Critic)
+            - 임팔라 (IMPALA, Distributed Actor-Learner Architecture)
+
+        (C) 트러스트 리전 기반 정책 최적화 (Trust Region Optimization Methods)
+            - TRPO (Trust Region Policy Optimization)
+            - PPO (Proximal Policy Optimization)
+
+        (D) 연속 행동 공간 알고리즘 (Continuous Action Methods)
+            - DDPG (Deep Deterministic Policy Gradient)
+            - TD3 (Twin Delayed DDPG)
+            - SAC (Soft Actor-Critic)
+
+        (E) 전문가 시범 / 모방 학습 (Expert Demonstration / Imitation Learning)
+            - 행동 모방 (BC, Behavioral Cloning)
+            - DDPGfD (DDPG from Demonstrations)
+            - GAIL (Generative Adversarial Imitation Learning)
+
+
+
+[2] 모델 기반 강화학습 (Model-based Reinforcement Learning)
+
+    [2-1] 주어진 환경 모델 기반 (Given-model Model-based RL)
+        - 가치 반복 (Value Iteration)
+        - 정책 반복 (Policy Iteration)
+        - 몬테카를로 트리 탐색 (MCTS, Monte Carlo Tree Search)
+        - 알파제로 (AlphaZero: MCTS + Neural Network)
+
+    [2-2] 환경 모델 학습 기반 (Learned-model Model-based RL)
+
+        (A) 잠재 세계 모델 계열 (Latent World Model Family)
+            - 월드 모델 (World Models)
+            - 플래닛 (PlaNet)
+            - 드리머 / 드리머V2 / 드리머V3 (Dreamer / DreamerV2 / DreamerV3)
+
+        (B) 상상 기반 에이전트 (Imagination-based Methods)
+            - I2A (Imagination-Augmented Agents)
+
+        (C) 하이브리드 모델 기반 강화학습 (Hybrid Model-based RL)
+            - 다이나-Q (Dyna-Q)
+            - MBMF (Model-Based Model-Free)
+            - MBVE (Model-Based Value Expansion)
+
+        (D) 확률적 앙상블 모델 (Probabilistic Ensemble Methods)
+            - PETS (Probabilistic Ensembles with Trajectory Sampling)
+            - MOPO / MBPO (Model-Based Policy Optimization 계열)
+
+        (E) 뮤제로 계열 (MuZero Family)
+            - 뮤제로 (MuZero)
+            - 뮤제로 언플러그드 (MuZero Unplugged)
+            - 이피션트제로 (EfficientZero)
+
+
 
 ---
 
