@@ -649,8 +649,8 @@
 	# [1] ME, [2] MAE, [3] MSE, [4] MSLE, [5] RMSE, [6] RMSLE, [7] MPE, [8] MAPE, [9] MASE, [10] R2
 	# ------------------------------------------------------------------------------	
 	def evaluate_model(y_true, y_pred):
-	    # 평균 오차 (Mean Error) : 예측값 - 실제값의 평균
-	    me = np.mean(y_pred - y_true)
+	    # 평균 오차 (Mean Error) : 실제값 - 예측값의 평균
+	    me = np.mean(y_true - y_pred )
 	
 	    # 평균 절대 오차 (MAE)
 	    mae = mean_absolute_error(y_true, y_pred)
@@ -672,8 +672,8 @@
 	        msle = np.nan
 	        rmsle = np.nan
 	
-	    # 평균 비율 오차 (MPE, %) : (예측 - 실제) / 실제 의 평균에 100을 곱해 %
-	    mpe = np.mean((y_pred - y_true) / y_true) * 100
+	    # 평균 비율 오차 (MPE, %) : (실제 - 예측) / 실제 의 평균에 100을 곱해 %
+	    mpe = np.mean((y_true - y_pred) / y_true) * 100
 	
 	    # 평균 절대 비율 오차 (MAPE, %) : 절대값 기준 비율 오차 평균
 	    mape = mean_absolute_percentage_error(y_true, y_pred) * 100
@@ -980,8 +980,8 @@
 	#    [1] ME, [2] MAE, [3] MSE, [4] MSLE, [5] RMSE, [6] RMSLE, [7] MPE, [8] MAPE, [9] MASE, [10] R2
 	def evaluate_model(y_true, y_pred):
 	
-	    # 1) Mean Error (편향 측정: 예측-실제)
-	    me = np.mean(y_pred - y_true)
+	    # 1) Mean Error (편향 측정: 실제-예측)
+	    me = np.mean(y_true - y_pred)
 	
 	    # 2) Mean Absolute Error (절대 오차)
 	    mae = mean_absolute_error(y_true, y_pred)
@@ -1001,7 +1001,7 @@
 	        rmsle = np.nan
 	
 	    # 7) Mean Percentage Error (%)
-	    mpe = np.mean((y_pred - y_true) / y_true) * 100
+	    mpe = np.mean((y_true - y_pred) / y_true) * 100
 	
 	    # 8) Mean Absolute Percentage Error (%)
 	    mape = mean_absolute_percentage_error(y_true, y_pred) * 100
