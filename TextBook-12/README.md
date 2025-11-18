@@ -548,82 +548,157 @@
 	################################################################################
 	# Multiple Linear Regression 
 	# Decision Tree Regression
+	# 보험료(Charges)를 예측하기 위한 다중 선형회귀 / 결정트리 회귀 모델 비교 실습 코드
 	################################################################################
 	
-	# Check and install necessary packages
-	import subprocess
-	import sys
+	# 필요한 패키지가 설치되어 있는지 확인하고, 없으면 pip로 설치하기 위한 모듈 임포트
+	import subprocess  # 파이썬에서 다른 프로세스(pip 명령 등)를 실행하기 위해 사용
+	import sys         # 현재 파이썬 실행 파일 경로(sys.executable) 등을 얻기 위해 사용
 	
+	# 패키지 설치를 담당하는 함수 정의
 	def install(package):
 	    try:
-	        __import__(package)
-	    except ImportError:
+	        __import__(package)      # 패키지를 임포트해보고
+	    except ImportError:          # 임포트가 실패하면 (패키지가 없으면)
 	        print(f"Installing {package}...")
+	        # 현재 파이썬 실행 파일로 pip 모듈을 호출해 해당 패키지 설치
 	        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 	
-	# List of required packages
+	# 필요한 패키지 리스트 정의
 	required_packages = ['pandas', 'scikit-learn', 'xgboost', 'lightgbm', 'numpy']
+	
+	# 필요한 패키지들이 모두 설치되어 있는지 확인하고, 없으면 install() 실행
 	for package in required_packages:
 	    install(package)
 	
-	# Import libraries
-	import pandas as pd
-	import numpy as np
-	from sklearn.model_selection import train_test_split
-	from sklearn.preprocessing import OneHotEncoder
-	from sklearn.linear_model import LinearRegression
-	from sklearn.tree import DecisionTreeRegressor
-	from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, mean_absolute_percentage_error
+	# ------------------------------------------------------------------------------
+	# 라이브러리 임포트
+	# ------------------------------------------------------------------------------
 	
-	# Load dataset from URL
+	import pandas as pd  # 데이터프레임 기반 데이터 처리
+	import numpy as np   # 수치 계산 및 배열 처리
+	from sklearn.model_selection import train_test_split  # 학습/테스트 데이터 분할
+	from sklearn.preprocessing import OneHotEncoder       # 범주형 변수 인코딩
+	from sklearn.linear_model import LinearRegression     # 다중 선형 회귀 모델
+	from sklearn.tree import DecisionTreeRegressor        # 결정 트리 회귀 모델
+	from sklearn.metrics import (                         # 회귀 평가 지표들
+	    mean_absolute_error,
+	    mean_squared_error,
+	    r2_score,
+	    mean_absolute_percentage_error
+	)
+	
+	# ------------------------------------------------------------------------------
+	# 1. 데이터 로딩
+	# ------------------------------------------------------------------------------
+	
+	# GitHub에 올라가 있는 보험 데이터셋(csv)의 URL
 	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-12/insurance.csv"
+	
+	# URL에서 csv 파일을 읽어와 DataFrame으로 로딩
 	df = pd.read_csv(data_url)
 	
-	# Check and handle missing values
-	print("Checking for missing values...")
-	print(df.isnull().sum())  # Display the count of NaN values per column
+	# ------------------------------------------------------------------------------
+	# 2. 결측치 확인
+	# ------------------------------------------------------------------------------
 	
-	# Ensure no missing values
+	print("Checking for missing values...")
+	# 각 컬럼별 결측치(NaN)의 개수를 출력
+	print(df.isnull().sum())
+	
+	# 전체 데이터에 결측치가 하나라도 있으면 AssertionError 발생
 	assert not df.isnull().values.any(), "Data contains missing values!"
 	
-	# Preprocessing
+	# ------------------------------------------------------------------------------
+	# 3. 입력(X) / 타깃(y) 분리 및 전처리
+	# ------------------------------------------------------------------------------
+	
+	# 예측 대상인 'charges' 컬럼을 제외한 나머지 컬럼들을 설명 변수 X로 사용
 	X = df.drop("charges", axis=1)
+	
+	# 'charges' 컬럼을 타깃 y로 사용
 	y = df["charges"]
+	
+	# 범주형 변수 목록 (문자열로 표현된 카테고리 변수)
 	categorical_features = ["sex", "smoker", "region"]
+	
+	# 수치형 변수 목록
 	numerical_features = ["age", "bmi", "children"]
 	
-	# Updated sparse_output instead of sparse
+	# OneHotEncoder 설정
+	# - sparse_output=False : 희소 행렬이 아닌 일반 배열 반환
+	# - drop="first"        : 각 범주형 변수에서 첫 번째 범주를 기준으로 제거(더미 변수 함정 방지)
 	encoder = OneHotEncoder(sparse_output=False, drop="first")
+	
+	# 범주형 변수에 대해 One-Hot 인코딩 수행 (fit + transform)
 	X_encoded = encoder.fit_transform(X[categorical_features])
+	
+	# 수치형 변수는 그대로 사용
 	X_numerical = X[numerical_features]
 	
+	# 수치형 + 인코딩된 범주형을 하나의 배열로 수평 결합
+	X_merged = np.hstack([X_numerical, X_encoded])
+	
+	# 결합 결과를 DataFrame으로 변환하고, 컬럼 이름 지정
 	X_preprocessed = pd.DataFrame(
-	    np.hstack([X_numerical, X_encoded]),
+	    X_merged,
 	    columns=numerical_features + encoder.get_feature_names_out().tolist()
 	)
 	
-	# Train-test split
-	X_train, X_test, y_train, y_test = train_test_split(X_preprocessed, y, test_size=0.2, random_state=42)
+	# ------------------------------------------------------------------------------
+	# 4. 학습용 / 테스트용 데이터 분할
+	# ------------------------------------------------------------------------------
 	
-	# Evaluation metrics
+	# train_test_split을 사용해 학습(80%) / 테스트(20%) 데이터로 분할
+	# random_state=42 : 매번 동일한 방식으로 분할되도록 시드 고정
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X_preprocessed, y, test_size=0.2, random_state=42
+	)
+	
+	# ------------------------------------------------------------------------------
+	# 5. 회귀 평가 지표 함수 정의
+	# ------------------------------------------------------------------------------
+	
 	def evaluate_model(y_true, y_pred):
-	    me = np.mean(y_pred - y_true)  # 평균 오차 (예측값 - 실제값)
-	    mae = mean_absolute_error(y_true, y_pred)  # 평균 절대 오차
-	    mse = mean_squared_error(y_true, y_pred)  # 평균 제곱 오차
-	    rmse = np.sqrt(mse)  # 평균 제곱근 오차
+	    """
+	    y_true : 실제 값 (정답)
+	    y_pred : 모델이 예측한 값
+	    9개의 회귀 평가 지표를 계산하여 딕셔너리 형태로 반환
+	    """
 	
-	    # Conditional MSLE calculation
+	    # 평균 오차 (Mean Error) : 예측값 - 실제값의 평균
+	    me = np.mean(y_pred - y_true)
+	
+	    # 평균 절대 오차 (MAE)
+	    mae = mean_absolute_error(y_true, y_pred)
+	
+	    # 평균 제곱 오차 (MSE)
+	    mse = mean_squared_error(y_true, y_pred)
+	
+	    # 평균 제곱근 오차 (RMSE) = MSE의 제곱근
+	    rmse = np.sqrt(mse)
+	
+	    # -------------------- 로그 기반 지표 (MSLE, RMSLE) --------------------
+	    # 모든 실제값과 예측값이 양수일 때만 로그를 적용할 수 있으므로 조건 검사
 	    if (y_true > 0).all() and (y_pred > 0).all():
-	        msle = mean_squared_error(np.log1p(y_true), np.log1p(y_pred))  # 평균 제곱 오차 (로그 적용)
-	        rmsle = np.sqrt(msle)  # 평균 제곱근 오차 (로그 적용)
+	        # log1p(x) = log(1 + x), 0 근처에서도 안정적으로 로그 사용 가능
+	        msle = mean_squared_error(np.log1p(y_true), np.log1p(y_pred))
+	        rmsle = np.sqrt(msle)
 	    else:
+	        # 하나라도 0 이하 값이 있으면 계산하지 않고 NaN으로 처리
 	        msle = np.nan
 	        rmsle = np.nan
 	
-	    mpe = np.mean((y_pred - y_true) / y_true) * 100  # 평균 비율 오차
-	    mape = mean_absolute_percentage_error(y_true, y_pred) * 100  # 평균 절대 비율 오차
-	    r2 = r2_score(y_true, y_pred)  # R2 점수
+	    # 평균 비율 오차 (MPE, %) : (예측 - 실제) / 실제 의 평균에 100을 곱해 %
+	    mpe = np.mean((y_pred - y_true) / y_true) * 100
 	
+	    # 평균 절대 비율 오차 (MAPE, %) : 절대값 기준 비율 오차 평균
+	    mape = mean_absolute_percentage_error(y_true, y_pred) * 100
+	
+	    # 결정계수 R2 : 모델이 데이터를 얼마나 잘 설명하는지 (1에 가까울수록 좋음)
+	    r2 = r2_score(y_true, y_pred)
+	
+	    # 계산한 모든 지표를 딕셔너리로 묶어서 반환
 	    return {
 	        "ME": me,
 	        "MAE": mae,
@@ -636,78 +711,130 @@
 	        "R2": r2,
 	    }
 	
-	# Initialize models
+	# ------------------------------------------------------------------------------
+	# 6. 사용할 회귀 모델 정의 (다중 선형회귀 / 결정트리 회귀)
+	# ------------------------------------------------------------------------------
+	
 	models = {
+	    # 모델 이름 : 모델 객체
 	    "Multiple Linear Regression": LinearRegression(),
 	    "Decision Tree Regression": DecisionTreeRegressor(),
 	}
 	
-	# Train and evaluate models
+	# ------------------------------------------------------------------------------
+	# 7. 각 모델 학습 및 평가
+	# ------------------------------------------------------------------------------
+	
+	# 결과를 저장할 딕셔너리 (모델 이름별 평가 지표)
 	results = {}
+	
+	# 딕셔너리에 들어있는 각 모델에 대해 반복
 	for name, model in models.items():
+	    # 학습용 데이터로 모델 훈련
 	    model.fit(X_train, y_train)
+	
+	    # 테스트 데이터에 대한 예측 수행
 	    y_pred = model.predict(X_test)
 	
-	    # Check for invalid prediction values
+	    # 예측 결과 중 음수 값이 있는 경우 경고 출력 후 0으로 보정
 	    if (y_pred < 0).any():
 	        print(f"Warning: Model {name} produced negative predictions. Adjusting values to zero.")
-	        y_pred = np.maximum(y_pred, 0)  # Replace negative predictions with 0
+	        # 음수인 예측값을 0으로 대체 (보험료는 음수가 될 수 없기 때문)
+	        y_pred = np.maximum(y_pred, 0)
 	
+	    # 위에서 정의한 evaluate_model() 함수로 각종 평가 지표 계산
 	    results[name] = evaluate_model(y_test, y_pred)
 	
-	# Format evaluation results for consistent decimal places
-	evaluation_results = pd.DataFrame(results)
-	evaluation_results = evaluation_results.applymap(lambda x: f"{x:.6f}" if pd.notnull(x) else "NaN")
+	# ------------------------------------------------------------------------------
+	# 8. 평가 결과를 표 형태로 정리 및 출력
+	# ------------------------------------------------------------------------------
 	
-	# Display formatted results
+	# results 딕셔너리를 DataFrame으로 변환 (행: 지표, 열: 모델명)
+	evaluation_results = pd.DataFrame(results)
+	
+	# 모든 값을 소수점 6자리까지 문자열로 포맷 (NaN은 그대로 'NaN')
+	evaluation_results = evaluation_results.applymap(
+	    lambda x: f"{x:.6f}" if pd.notnull(x) else "NaN"
+	)
+	
+	# 모델별 평가 결과 출력
 	print("\nModel Evaluation Results:")
 	print(evaluation_results)
 	
-	# Add explanations for each metric in Korean
+	# ------------------------------------------------------------------------------
+	# 9. 각 지표에 대한 한글 설명 사전 준비
+	# ------------------------------------------------------------------------------
+	
 	metric_explanations = {
-	    "ME": "평균 오차 (Mean Error): 예측값과 실제값의 평균 차이. 0에 가까울수록 좋음.",
-	    "MAE": "평균 절대 오차 (Mean Absolute Error): 예측값과 실제값의 절대적 차이의 평균. 낮을수록 좋음.",
-	    "MSE": "평균 제곱 오차 (Mean Squared Error): 예측값과 실제값의 제곱 차이 평균. 낮을수록 좋음.",
+	    "ME":   "평균 오차 (Mean Error): 예측값과 실제값의 평균 차이. 0에 가까울수록 좋음.",
+	    "MAE":  "평균 절대 오차 (Mean Absolute Error): 예측값과 실제값의 절대적 차이의 평균. 낮을수록 좋음.",
+	    "MSE":  "평균 제곱 오차 (Mean Squared Error): 예측값과 실제값의 제곱 차이 평균. 낮을수록 좋음.",
 	    "MSLE": "평균 제곱 오차 (로그 적용, Mean Squared Log Error): 로그 스케일에서의 평균 제곱 오차. 낮을수록 좋음.",
 	    "RMSE": "평균 제곱근 오차 (Root Mean Squared Error): 평균 제곱 오차의 제곱근. 낮을수록 좋음.",
-	    "RMSLE": "평균 제곱근 오차 (로그 적용, Root Mean Squared Log Error): 로그 스케일에서의 제곱근 오차. 낮을수록 좋음.",
-	    "MPE": "평균 비율 오차 (Mean Percentage Error): 예측값과 실제값의 비율 오차 평균. 0에 가까울수록 좋음.",
+	    "RMSLE":"평균 제곱근 오차 (로그 적용, Root Mean Squared Log Error): 로그 스케일에서의 제곱근 오차. 낮을수록 좋음.",
+	    "MPE":  "평균 비율 오차 (Mean Percentage Error): 예측값과 실제값의 비율 오차 평균. 0에 가까울수록 좋음.",
 	    "MAPE": "평균 절대 비율 오차 (Mean Absolute Percentage Error): 절대 비율 오차의 평균. 낮을수록 좋음.",
-	    "R2": "R2 점수 (Coefficient of Determination): 모델의 설명력을 나타냄. 1에 가까울수록 좋음.",
+	    "R2":   "R2 점수 (Coefficient of Determination): 모델의 설명력을 나타냄. 1에 가까울수록 좋음.",
 	}
 	
-	# Append explanations to results
-	print("\nModel Evaluation Results with Explanations:")
-	for metric, explanation in metric_explanations.items():
-	    print(f"{metric}: {explanation}")
-	    print(evaluation_results.loc[metric])
-	    print()
+	# ------------------------------------------------------------------------------
+	# 10. 지표 설명 + 모델별 값 함께 출력
+	# ------------------------------------------------------------------------------
 	
-	# Prediction
+	print("\nModel Evaluation Results with Explanations:")
+	
+	# metric_explanations 사전을 순회하면서
+	for metric, explanation in metric_explanations.items():
+	    # 먼저 지표 설명 출력
+	    print(f"{metric}: {explanation}")
+	    # 이어서 해당 지표에 대한 각 모델의 값(행) 출력
+	    print(evaluation_results.loc[metric])
+	    print()  # 보기 좋게 빈 줄
+	
+	# ------------------------------------------------------------------------------
+	# 11. 새로운 한 명의 고객 데이터에 대한 보험료 예측
+	# ------------------------------------------------------------------------------
+	
+	# 예측에 사용할 테스트 입력 한 건 생성
+	# [나이, BMI, 자녀 수, 성별, 흡연 여부, 지역]
 	test_input = pd.DataFrame(
 	    [[55, 21, 2, "female", "no", "northeast"]],
 	    columns=["age", "bmi", "children", "sex", "smoker", "region"]
 	)
 	
-	# Encode and predict
+	# test_input에서 범주형 컬럼만 뽑아 기존 인코더로 변환 (fit 아님, transform만 수행)
 	test_encoded = encoder.transform(test_input[categorical_features])
+	
+	# test_input에서 수치형 컬럼만 별도로 추출
 	test_numerical = test_input[numerical_features]
+	
+	# 수치형 + 인코딩된 범주형을 수평 결합하여 최종 입력 특징행렬 생성
 	test_preprocessed = pd.DataFrame(
 	    np.hstack([test_numerical, test_encoded]),
 	    columns=numerical_features + encoder.get_feature_names_out().tolist()
 	)
 	
-	# Predictions for test input
+	# ------------------------------------------------------------------------------
+	# 12. 각 모델로부터 예측값 얻기
+	# ------------------------------------------------------------------------------
+	
+	# 예측 결과를 저장할 딕셔너리 (모델명: 예측값)
 	predictions = {}
+	
+	# 앞서 정의한 models 딕셔너리의 각 모델에 대해
 	for name, model in models.items():
+	    # 하나의 샘플에 대한 예측값은 배열 형태로 나오므로 [0]으로 스칼라 추출
 	    predictions[name] = model.predict(test_preprocessed)[0]
 	
-	# Format predictions for consistent decimal places
-	predictions_df = pd.DataFrame(predictions, index=["Predicted Charges"]).applymap(lambda x: f"{x:.6f}")
+	# 예측값 딕셔너리를 DataFrame으로 만들어 보기 좋게 포맷
+	predictions_df = pd.DataFrame(predictions, index=["Predicted Charges"]).applymap(
+	    lambda x: f"{x:.6f}"
+	)
 	
-	# Display predictions
+	# 최종 예측 결과 출력
 	print("\nPredicted Charges for Input:")
 	print(predictions_df)
+
 	
 <br>
 
