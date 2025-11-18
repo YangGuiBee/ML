@@ -663,7 +663,10 @@
 	    """
 	    y_true : 실제 값 (정답)
 	    y_pred : 모델이 예측한 값
-	    9개의 회귀 평가 지표를 계산하여 딕셔너리 형태로 반환
+	
+	    10개의 회귀 평가 지표를 계산하여 딕셔너리 형태로 반환
+	    [1] ME, [2] MAE, [3] MSE, [4] MSLE, [5] RMSE,
+	    [6] RMSLE, [7] MPE, [8] MAPE, [9] MASE, [10] R2
 	    """
 	
 	    # 평균 오차 (Mean Error) : 예측값 - 실제값의 평균
@@ -695,6 +698,18 @@
 	    # 평균 절대 비율 오차 (MAPE, %) : 절대값 기준 비율 오차 평균
 	    mape = mean_absolute_percentage_error(y_true, y_pred) * 100
 	
+	    # -------------------- 평균 절대 규모 오차 (MASE) --------------------
+	    # 스케일링 기준(scale)은 y_true의 연속 차이 |y_t - y_{t-1}|의 평균으로 정의
+	    #  -> 시계열에서 "나이브 예측(y_{t-1})"의 MAE와 동일한 역할
+	    if len(y_true) > 1:
+	        scale = np.mean(np.abs(np.diff(y_true)))  # 연속 차이의 절대값 평균
+	        if scale == 0:
+	            mase = np.nan                         # 스케일이 0이면 정의 불가 → NaN
+	        else:
+	            mase = mae / scale                    # MASE = MAE / scale
+	    else:
+	        mase = np.nan                             # 데이터가 1개 이하면 계산 불가
+	
 	    # 결정계수 R2 : 모델이 데이터를 얼마나 잘 설명하는지 (1에 가까울수록 좋음)
 	    r2 = r2_score(y_true, y_pred)
 	
@@ -708,7 +723,8 @@
 	        "RMSLE": rmsle,
 	        "MPE": mpe,
 	        "MAPE": mape,
-	        "R2": r2,
+	        "MASE": mase,   # [9] 평균 절대 규모 오차
+	        "R2": r2,       # [10] 결정계수
 	    }
 	
 	# ------------------------------------------------------------------------------
@@ -766,15 +782,16 @@
 	# ------------------------------------------------------------------------------
 	
 	metric_explanations = {
-	    "ME":   "평균 오차 (Mean Error): 예측값과 실제값의 평균 차이. 0에 가까울수록 좋음.",
-	    "MAE":  "평균 절대 오차 (Mean Absolute Error): 예측값과 실제값의 절대적 차이의 평균. 낮을수록 좋음.",
-	    "MSE":  "평균 제곱 오차 (Mean Squared Error): 예측값과 실제값의 제곱 차이 평균. 낮을수록 좋음.",
-	    "MSLE": "평균 제곱 오차 (로그 적용, Mean Squared Log Error): 로그 스케일에서의 평균 제곱 오차. 낮을수록 좋음.",
-	    "RMSE": "평균 제곱근 오차 (Root Mean Squared Error): 평균 제곱 오차의 제곱근. 낮을수록 좋음.",
-	    "RMSLE":"평균 제곱근 오차 (로그 적용, Root Mean Squared Log Error): 로그 스케일에서의 제곱근 오차. 낮을수록 좋음.",
-	    "MPE":  "평균 비율 오차 (Mean Percentage Error): 예측값과 실제값의 비율 오차 평균. 0에 가까울수록 좋음.",
-	    "MAPE": "평균 절대 비율 오차 (Mean Absolute Percentage Error): 절대 비율 오차의 평균. 낮을수록 좋음.",
-	    "R2":   "R2 점수 (Coefficient of Determination): 모델의 설명력을 나타냄. 1에 가까울수록 좋음.",
+	    "ME":   "평균 오차 (Mean Error, ME): 예측값과 실제값의 평균 차이. 0에 가까울수록 좋음.",
+	    "MAE":  "평균 절대 오차 (Mean Absolute Error, MAE): 예측값과 실제값의 절대적 차이의 평균. 낮을수록 좋음.",
+	    "MSE":  "평균 제곱 오차 (Mean Squared Error, MSE): 예측값과 실제값의 제곱 차이 평균. 낮을수록 좋음.",
+	    "MSLE": "평균 제곱 오차 (로그 적용, Mean Squared Log Error, MSLE): 로그 스케일에서의 평균 제곱 오차. 낮을수록 좋음.",
+	    "RMSE": "평균 제곱근 오차 (Root Mean Squared Error, RMSE): 평균 제곱 오차의 제곱근. 낮을수록 좋음.",
+	    "RMSLE":"평균 제곱근 오차 (로그 적용, Root Mean Squared Log Error, RMSLE): 로그 스케일에서의 제곱근 오차. 낮을수록 좋음.",
+	    "MPE":  "평균 비율 오차 (Mean Percentage Error, MPE): 예측값과 실제값의 비율 오차 평균. 0에 가까울수록 좋음.",
+	    "MAPE": "평균 절대 비율 오차 (Mean Absolute Percentage Error, MAPE): 절대 비율 오차의 평균. 낮을수록 좋음.",
+	    "MASE": "평균 절대 규모 오차 (Mean Absolute Scaled Error, MASE): 나이브 예측 대비 상대적인 MAE. 1보다 작으면 나이브보다 우수.",
+	    "R2":   "R2 점수 (Coefficient of Determination, R2): 모델의 설명력을 나타냄. 1에 가까울수록 좋음.",
 	}
 	
 	# ------------------------------------------------------------------------------
@@ -834,6 +851,7 @@
 	# 최종 예측 결과 출력
 	print("\nPredicted Charges for Input:")
 	print(predictions_df)
+
 
 	
 <br>
