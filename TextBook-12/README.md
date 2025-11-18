@@ -1,3 +1,10 @@
+
+![](./images/NSML.png)
+
+
+![](./images/SML.png)
+
+
 #  12-1 : 회귀 평가 지표
 
 ---
