@@ -586,7 +586,7 @@
 	# ------------------------------------------------------------------------------
 	# 1. 데이터 로딩
 	# ------------------------------------------------------------------------------
-		# GitHub에 올라가 있는 보험 데이터셋(csv)의 URL
+	# GitHub에 올라가 있는 보험 데이터셋(csv)의 URL
 	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-12/insurance.csv"
 	
 	# URL에서 csv 파일을 읽어와 DataFrame으로 로딩
@@ -710,9 +710,8 @@
 	# 6. 사용할 회귀 모델 정의 (다중 선형회귀 / 결정트리 회귀)
 	# ------------------------------------------------------------------------------	
 	models = {
-	    # 모델 이름 : 모델 객체
 	    "Multiple Linear Regression": LinearRegression(),
-	    "Decision Tree Regression": DecisionTreeRegressor(),	}
+	    "Decision Tree Regression": DecisionTreeRegressor()	}
 	
 	# ------------------------------------------------------------------------------
 	# 7. 각 모델 학습 및 평가
@@ -744,8 +743,7 @@
 	evaluation_results = pd.DataFrame(results)
 	
 	# 모든 값을 소수점 6자리까지 문자열로 포맷 (NaN은 그대로 'NaN')
-	evaluation_results = evaluation_results.applymap(
-	    lambda x: f"{x:.6f}" if pd.notnull(x) else "NaN")
+	evaluation_results = evaluation_results.applymap(lambda x: f"{x:.6f}" if pd.notnull(x) else "NaN")
 	
 	# 모델별 평가 결과 출력
 	print("\nModel Evaluation Results:")
@@ -785,8 +783,7 @@
 	# ------------------------------------------------------------------------------	
 	# 예측에 사용할 테스트 입력 한 건 생성
 	# [나이, BMI, 자녀 수, 성별, 흡연 여부, 지역]
-	test_input = pd.DataFrame(
-	    [[55, 21, 2, "female", "no", "northeast"]],
+	test_input = pd.DataFrame( [[55, 21, 2, "female", "no", "northeast"]],
 	    columns=["age", "bmi", "children", "sex", "smoker", "region"]	)
 	
 	# test_input에서 범주형 컬럼만 뽑아 기존 인코더로 변환 (fit 아님, transform만 수행)
@@ -819,7 +816,88 @@
 	print("\nPredicted Charges for Input:")
 	print(predictions_df)
 
+<br>
 
+	Installing scikit-learn...
+	Checking for missing values...
+	age         0
+	sex         0
+	bmi         0
+	children    0
+	smoker      0
+	region      0
+	charges     0
+	dtype: int64
+	Warning: Model Multiple Linear Regression produced negative predictions. Adjusting values to zero.
+	
+	Model Evaluation Results:
+	      Multiple Linear Regression Decision Tree Regression
+	ME                    230.390130               954.400887
+	MAE                  4170.045013              3194.668083
+	MSE              33542077.406786          43411840.706491
+	MSLE                         NaN                 0.321182
+	RMSE                 5791.552245              6588.766251
+	RMSLE                        NaN                 0.566729
+	MPE                    23.612385                32.447466
+	MAPE                   46.264515                45.261403
+	MASE                    0.337699                 0.258711
+	R2                      0.783946                 0.720372
+	
+	Model Evaluation Results with Explanations:
+	ME: 평균 오차 (Mean Error, ME): 예측값과 실제값의 평균 차이. 0에 가까울수록 좋음.
+	Multiple Linear Regression    230.390130
+	Decision Tree Regression      954.400887
+	Name: ME, dtype: object
+	
+	MAE: 평균 절대 오차 (Mean Absolute Error, MAE): 예측값과 실제값의 절대적 차이의 평균. 낮을수록 좋음.
+	Multiple Linear Regression    4170.045013
+	Decision Tree Regression      3194.668083
+	Name: MAE, dtype: object
+	
+	MSE: 평균 제곱 오차 (Mean Squared Error, MSE): 예측값과 실제값의 제곱 차이 평균. 낮을수록 좋음.
+	Multiple Linear Regression    33542077.406786
+	Decision Tree Regression      43411840.706491
+	Name: MSE, dtype: object
+	
+	MSLE: 평균 제곱 오차 (로그 적용, Mean Squared Log Error, MSLE): 로그 스케일에서의 평균 제곱 오차. 낮을수록 좋음.
+	Multiple Linear Regression         NaN
+	Decision Tree Regression      0.321182
+	Name: MSLE, dtype: object
+	
+	RMSE: 평균 제곱근 오차 (Root Mean Squared Error, RMSE): 평균 제곱 오차의 제곱근. 낮을수록 좋음.
+	Multiple Linear Regression    5791.552245
+	Decision Tree Regression      6588.766251
+	Name: RMSE, dtype: object
+	
+	RMSLE: 평균 제곱근 오차 (로그 적용, Root Mean Squared Log Error, RMSLE): 로그 스케일에서의 제곱근 오차. 낮을수록 좋음.
+	Multiple Linear Regression         NaN
+	Decision Tree Regression      0.566729
+	Name: RMSLE, dtype: object
+	
+	MPE: 평균 비율 오차 (Mean Percentage Error, MPE): 예측값과 실제값의 비율 오차 평균. 0에 가까울수록 좋음.
+	Multiple Linear Regression    23.612385
+	Decision Tree Regression      32.447466
+	Name: MPE, dtype: object
+	
+	MAPE: 평균 절대 비율 오차 (Mean Absolute Percentage Error, MAPE): 절대 비율 오차의 평균. 낮을수록 좋음.
+	Multiple Linear Regression    46.264515
+	Decision Tree Regression      45.261403
+	Name: MAPE, dtype: object
+	
+	MASE: 평균 절대 규모 오차 (Mean Absolute Scaled Error, MASE): 나이브 예측 대비 상대적인 MAE. 1보다 작으면 나이브보다 우수.
+	Multiple Linear Regression    0.337699
+	Decision Tree Regression      0.258711
+	Name: MASE, dtype: object
+	
+	R2: R2 점수 (Coefficient of Determination, R2): 모델의 설명력을 나타냄. 1에 가까울수록 좋음.
+	Multiple Linear Regression    0.783946
+	Decision Tree Regression      0.720372
+	Name: R2, dtype: object
+	
+	
+	Predicted Charges for Input:
+	                  Multiple Linear Regression Decision Tree Regression
+	Predicted Charges               10131.945928             11881.969600
 	
 <br>
 
