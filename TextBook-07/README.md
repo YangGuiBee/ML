@@ -1,4 +1,6 @@
 
+![](./images/NSML.png)
+
 #  07-1 : 군집화 평가지표
 
 	[1] Silhouette Coefficient : 실루엣 계수
