@@ -1169,7 +1169,7 @@
 ---
 	
  	[1] 오차행렬, 혼동행렬 (Confusion Matrix) : 각 모델이 클래스 간 데이터를 어떻게 분류했는지를 나타냄
-  	[2] 정확도 (Accurancy) : 가장 간단한 기준으로, 전체 데이터 중 올바르게 예측한 비율
+  	[2] 정확도 (Accuracy) : 가장 간단한 기준으로, 전체 데이터 중 올바르게 예측한 비율
 	[3] 정밀도 (Precision), PPV (Positive Predictive Value) : 모델이 양성으로 예측한 데이터 중 실제로 양성인 비율
 	[4] 재현율 (Recall), 민감도 (Sensitivity), TPR (True Positive Rate) : 실제 양성 데이터를 얼마나 잘 탐지했는지 나타냄
 	[5] F1 score : 정밀도와 재현율의 조화 평균으로, 두 지표의 균형을 평가
@@ -1207,7 +1207,7 @@ FN(False Negative): 모델이 negative라고 예측했는데 실제로 정답이
 
 <br>
 
-# [2] 정확도 (Accurancy)
+# [2] 정확도 (Accuracy)
 
 $Accuracy = \frac{TP + TN}{TP + TN + FP + FN}$<br><br>
 ▣ 정의: 전체 데이터 중 올바르게 예측된 비율(데이터가 불균형할 때(positive:negative=9:1)는 Accuracy만으로 제대로 분류했는지는 알 수 없기 때문에 Recall과 Precision을 사용)<br>
