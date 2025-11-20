@@ -1560,10 +1560,6 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 | [10] AUC score | AUC ≥ 0.90 | 0.80 ≤ AUC < 0.90 | AUC < 0.80 |
 
 
-**(Confusion Matrix)**
-
-<img width ='600' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/cf_table.png'>
-
 ---
 
 **(데이터 출처)** https://www.kaggle.com/datasets/redwankarimsony/heart-disease-data/data
@@ -1772,6 +1768,12 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 <br>
 	
 ![](./images/Classification.png)
+<br>
+
+**(Confusion Matrix)**
+
+<img width ='600' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/cf_table.png'>
+
 <br>
 
 ROC로만 평가 했을때 분류모델의 평가순위<br>
