@@ -1562,7 +1562,8 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 | [10] AUC score | AUC ≥ 0.90 | 0.80 ≤ AUC < 0.90 | AUC < 0.80 |
 
 
-
+**(Confusion Matrix)**
+![](./images/cf_table.png)
 
 ---
 
