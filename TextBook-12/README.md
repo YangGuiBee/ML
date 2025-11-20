@@ -1561,11 +1561,8 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 
 
 **(Confusion Matrix)**
-![](./images/cf_table.png)
 
-
-<img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/cf_table.png'>
-
+<img width ='600' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/cf_table.png'>
 
 ---
 
