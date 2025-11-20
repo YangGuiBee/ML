@@ -1593,69 +1593,48 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 	df = pd.read_csv(data_url)
 	
 	# -----------------------------
-	# 2. 결측값 확인 및 처리
+	# 2. 결측값 처리
 	# -----------------------------
-	print("Missing values in dataset before processing:\n", df.isnull().sum())
-	
 	for col in df.columns:
-	    if df[col].dtype == 'object':  # 범주형 데이터
-	        df[col].fillna(df[col].mode()[0], inplace=True)  # 최빈값으로 대체
-	    else:  # 수치형 데이터
-	        df[col].fillna(df[col].mean(), inplace=True)     # 평균값으로 대체
-	
-	print("Missing values in dataset after processing:\n", df.isnull().sum())
+	    if df[col].dtype == 'object':
+	        df[col].fillna(df[col].mode()[0], inplace=True)
+	    else:
+	        df[col].fillna(df[col].mean(), inplace=True)
 	
 	# -----------------------------
-	# 3. 컬럼 이름 정리
+	# 3. 컬럼 정리
 	# -----------------------------
-	if 'num' in df.columns:
-	    df.rename(columns={"num": "target"}, inplace=True)
-	else:
-	    raise ValueError("The dataset does not contain a 'num' column.")
-	
-	# 타겟 변수를 정수형으로
-	assert 'target' in df.columns, "The dataset does not contain a 'target' column."
-	df['target'] = df['target'].astype(int)
+	df.rename(columns={"num": "target"}, inplace=True)
+	df["target"] = df["target"].astype(int)
 	
 	# -----------------------------
-	# 4. 독립 변수 / 종속 변수 분리
+	# 4. Train/Test Split
 	# -----------------------------
 	X = df.drop(["target", "id", "dataset"], axis=1)
 	y = df["target"]
 	
-	# Train/Test 분할
 	X_train, X_test, y_train, y_test = train_test_split(
-	    X, y,
-	    test_size=0.2,
-	    random_state=42,
-	    stratify=y
+	    X, y, test_size=0.2, random_state=42, stratify=y
 	)
 	
-	# 결측값 최종 확인
-	assert not X_train.isnull().values.any(), "X_train contains NaN values!"
-	assert not X_test.isnull().values.any(), "X_test contains NaN values!"
-	
 	# -----------------------------
-	# 5. 범주형 변수 Label Encoding
+	# 5. Label Encoding
 	# -----------------------------
-	label_encoders = {}
-	categorical_columns = ['sex', 'cp', 'restecg', 'slope', 'thal']  # 범주형 컬럼
-	
+	categorical_columns = ['sex', 'cp', 'restecg', 'slope', 'thal']
 	for col in categorical_columns:
 	    le = LabelEncoder()
 	    X_train[col] = le.fit_transform(X_train[col])
 	    X_test[col] = le.transform(X_test[col])
-	    label_encoders[col] = le
 	
 	# -----------------------------
-	# 6. 데이터 스케일링 (k-NN, SVM에서 사용)
+	# 6. 스케일링
 	# -----------------------------
 	scaler = StandardScaler()
 	X_train_scaled = scaler.fit_transform(X_train)
 	X_test_scaled = scaler.transform(X_test)
 	
 	# -----------------------------
-	# 7. 분류 알고리즘 초기화
+	# 7. 모델 정의
 	# -----------------------------
 	models = {
 	    "Logistic Regression": LogisticRegression(max_iter=1000),
@@ -1667,13 +1646,14 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 	}
 	
 	# -----------------------------
-	# 8. 모델 학습 및 평가
+	# 8. 모델 학습 + 평가지표 계산
 	# -----------------------------
 	results = {}
 	n_classes = len(np.unique(y_test))
 	
 	for name, model in models.items():
-	    # 스케일링 사용 여부
+	
+	    # 스케일링 적용 모델
 	    if name in ["k-Nearest Neighbors", "Support Vector Classifier"]:
 	        model.fit(X_train_scaled, y_train)
 	        y_pred = model.predict(X_test_scaled)
@@ -1683,16 +1663,18 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 	        y_pred = model.predict(X_test)
 	        y_prob = model.predict_proba(X_test)
 	
-	    # 기본 지표
+	    # 혼동행렬
 	    cm = confusion_matrix(y_test, y_pred)
-	    acc = accuracy_score(y_test, y_pred)
-	    prec = precision_score(y_test, y_pred, average='macro')
-	    rec_macro = recall_score(y_test, y_pred, average='macro')
-	    f1 = f1_score(y_test, y_pred, average='macro')
-	    error_rate = 1 - acc
-	    auc = roc_auc_score(y_test, y_prob, multi_class='ovr')
 	
-	    # --- 다중클래스용 TP/FP/FN/TN (one-vs-rest 방식) ---
+	    # Accuracy, Precision, Recall, F1
+	    accuracy = accuracy_score(y_test, y_pred)
+	    precision = precision_score(y_test, y_pred, average="macro")
+	    recall_macro = recall_score(y_test, y_pred, average="macro")
+	    f1 = f1_score(y_test, y_pred, average="macro")
+	    error_rate = 1 - accuracy
+	    auc_score = roc_auc_score(y_test, y_prob, multi_class="ovr")
+	
+	    # TP/FP/FN/TN (One-vs-Rest)
 	    TP = np.zeros(n_classes)
 	    FP = np.zeros(n_classes)
 	    FN = np.zeros(n_classes)
@@ -1704,40 +1686,38 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 	        FN[i] = cm[i, :].sum() - TP[i]
 	        TN[i] = cm.sum() - (TP[i] + FP[i] + FN[i])
 	
-	    specificity = TN / (TN + FP)   # TNR
-	    fall_out = FP / (FP + TN)      # FPR
-	    recall_per_class = TP / (TP + FN)  # TPR (per class)
+	    # Specificity (TNR), Fall-Out (FPR)
+	    specificity = (TN / (TN + FP)).mean()
+	    fall_out = (FP / (FP + TN)).mean()
 	
 	    results[name] = {
-	        "Confusion Matrix (Numeric Values)": cm.tolist(),
-	        "Accuracy": acc,
-	        "Precision": prec,
-	        "Recall (TPR, macro)": rec_macro,
+	        "Confusion Matrix": cm.tolist(),
+	        "Accuracy": accuracy,
+	        "Precision (PPV)": precision,
+	        "Recall (TPR)": recall_macro,
 	        "F1 Score": f1,
 	        "Error Rate": error_rate,
-	        "AUC": auc,
-	        "Specificity (TNR, mean)": specificity.mean(),
-	        "Fall Out (FPR, mean)": fall_out.mean(),
+	        "Specificity (TNR)": specificity,
+	        "Fall-Out (FPR)": fall_out,
+	        "AUC Score": auc_score,
 	    }
 	
 	# -----------------------------
-	# 9. 결과 출력
+	# 9. 평가지표 출력
 	# -----------------------------
 	for name, metrics in results.items():
-	    print(f"\n{name} Results:")
+	    print(f"\n{name} Evaluation Results:")
 	    for metric, value in metrics.items():
-	        if metric == "Confusion Matrix (Numeric Values)":
+	        if metric == "Confusion Matrix":
 	            print(f"{metric}:\n{value}")
 	        else:
 	            print(f"{metric}: {value:.4f}")
 	
 	# -----------------------------
-	# 10. ROC Curve 시각화
-	#     - 모델별 동일 색상, 클래스별 line style
+	# 10. ROC Curve (모델 동일색 + 클래스별 선스타일)
 	# -----------------------------
 	plt.figure(figsize=(12, 8))
 	
-	# 모델별 색상 6종
 	model_colors = {
 	    "Logistic Regression": "blue",
 	    "Naive Bayes": "orange",
@@ -1747,36 +1727,32 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 	    "Random Forest": "brown"
 	}
 	
-	# 클래스별 line style (최대 5개까지)
 	linestyles = ['-', '--', '-.', ':', (0, (3, 1, 1, 1))]
 	
 	for name, model in models.items():
-	    # 확률 예측값
+	    # 확률값 계산
 	    if name in ["k-Nearest Neighbors", "Support Vector Classifier"]:
 	        y_prob = model.predict_proba(X_test_scaled)
 	    else:
 	        y_prob = model.predict_proba(X_test)
 	
-	    color = model_colors[name]
+	    model_color = model_colors[name]
 	
-	    # 각 클래스별 ROC
 	    for i in range(n_classes):
 	        fpr, tpr, _ = roc_curve(y_test, y_prob[:, i], pos_label=i)
 	        plt.plot(
-	            fpr,
-	            tpr,
-	            color=color,
+	            fpr, tpr,
+	            color=model_color,
 	            linestyle=linestyles[i % len(linestyles)],
-	            linewidth=1.8,
+	            linewidth=1.7,
 	            label=f"{name} (Class {i})"
 	        )
 	
-	# 랜덤 추측선
 	plt.plot([0, 1], [0, 1], "k--", label="Random Guess")
 	
 	plt.xlabel("False Positive Rate")
 	plt.ylabel("True Positive Rate")
-	plt.title("ROC Curve (Model-wise same colors)")
+	plt.title("ROC Curve (Model-colors unified)")
 	plt.legend(loc="center left", bbox_to_anchor=(1, 0.5))
 	plt.tight_layout()
 	plt.show()
