@@ -1297,6 +1297,7 @@ $Specificity = \frac{TN}{TN + FP}$<br><br>
 ▣ 필요성: 부정 클래스를 정확히 예측하는 능력을 평가<br>
 ▣ 장점: Negative class에 초점을 맞춘 분석이 가능<br>
 ▣ 단점: Positive class의 성능은 고려하지 않음<br>
+▣ 예제: https://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html<br>
 
 <br>
 
@@ -1313,6 +1314,8 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 ▣ 필요성: 모델이 잘못된 긍정을 얼마나 생성하는지 평가<br>
 ▣ 장점: 특이도의 보완 지표로 사용<br>
 ▣ 단점: 긍정 클래스의 성능은 평가하지 못함<br>
+▣ 예제1 (FPR 제공되는 ROC 커브 API):https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_curve.html<br>
+▣ 예제2 (ROC 곡선 = FPR vs TPR):https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html<br>
 
 <br>
 
