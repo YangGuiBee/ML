@@ -1588,6 +1588,11 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 	
 	# -----------------------------
 	# 1. 데이터셋 불러오기
+	# Class 0 → 심장질환 없음(No heart disease)
+	# Class 1 → 경도 심장질환(Mild heart disease)
+	# Class 2 → 중간 심장질환(Moderate)
+	# Class 3 → 심함(Severe)
+	# Class 4 → 매우 심함(Very severe)
 	# -----------------------------
 	data_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-12/heart_disease_uci.csv"
 	df = pd.read_csv(data_url)
