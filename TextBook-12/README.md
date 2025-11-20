@@ -1763,7 +1763,7 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 
 <br>
 	
-![](./images/result.png)
+![](./images/Classification.png)
 <br><br>
 
 Random Forest는 Accuracy, Error Rate, AUC 측면에서 전반적으로 우수하며, 최고의 모델로 평가<br>
