@@ -1277,7 +1277,7 @@ $F1 = \frac{2 \times Precision \times Recall}{Precision + Recall}$<br><br>
 
 # [6] 오분류율 (Error Rate)
 
-$Accuracy = \frac{FP + FN}{TP + TN + FP + FN}$<br><br>
+$Error Rate = \frac{FP + FN}{TP + TN + FP + FN}$<br><br>
 ▣ 정의: 전체 데이터 중 잘못 예측된 비율<br>
 ▣ 필요성: 모델의 부정확도를 나타냄<br>
 ▣ 장점: 정확도의 보완 지표로 활용 가능<br>
