@@ -183,9 +183,7 @@
 
 	r2 = r2_score(y_true, y_pred)
 
-
-
-
+<br>
 
 ![](./images/SST.png)
 <br>
