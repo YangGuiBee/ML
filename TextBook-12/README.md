@@ -1567,7 +1567,7 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 <br>
 **(데이터구조)** ![](./images/heart_disease_uci.png)
 <br>
-**(데이터셋)** https://github.com/YangGuiBee/ML/blob/main/TextBook-14/heart_disease_uci.csv
+**(데이터셋)** https://github.com/YangGuiBee/ML/blob/main/TextBook-12/heart_disease_uci.csv
 
 
 	import pandas as pd
