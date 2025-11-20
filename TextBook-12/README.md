@@ -1764,10 +1764,25 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 <br>
 	
 ![](./images/Classification.png)
-<br><br>
+<br>
 
-Random Forest는 Accuracy, Error Rate, AUC 측면에서 전반적으로 우수하며, 최고의 모델로 평가<br>
-SVC는 높은 AUC와 낮은 FPR로 신뢰할 수 있는 두 번째 모델로 평가<br>
+ROC로만 평가 했을때 분류모델의 평가순위<br>
+(1위) Logistic Regression<br>
+(2위) Support Vector Classifier<br>
+(3위) Random Forest<br>
+(4위) kNN<br>
+(5위) Naive Bayes<br>
+(6위) Decision Tree<br>
+
+나머지 전체 평가지표의 분류모델의 평가순위<br>
+(1위)	Random Forest :	AUC·Accuracy·Specificity 모두 상위권, 안정적<br>
+(2위)	SVC :	AUC 최고, Accuracy 높음<br>
+(3위)	Logistic Regression : 단순하지만 성능 안정적<br>
+(4위)	Naive Bayes : AUC 높으나 Accuracy/F1 낮음<br>
+(5위)	kNN : AUC 낮고 데이터 스케일 민감<br>
+(6위)	Decision Tree : AUC/Accuracy 최하위, 과적합<br>
+
+=> 종합 판단 결과 : Random Forest가 1위<br>
 
 ---
 
