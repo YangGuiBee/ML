@@ -1,7 +1,6 @@
 
 #  13 : 강화학습, 앙상블학습
 
-
 | 구분  | 비지도학습<br>(Unsupervised Learning) | 지도학습<br>(Supervised Learning) | 강화학습<br>(Reinforcement Learning)    |
 | ---- | --------------------------------- | ------------------------------------- | -------------------------------- |
 | 핵심특징 | 탐색적 분석 | 예측 | 의사결정 최적화 |
@@ -16,117 +15,16 @@
 | 출력 | 클러스터, 잠재 feature, 밀도 구조 | 예측값(회귀), 클래스(분류 확률), ŷ  | 최적 정책 π*(s), Q값, 행동 전략     |
 | 적용분야 | 군집(K-means), 차원축소(PCA), 이상치 탐지    | 이미지 분류, 음성/자연어 처리, 수요 예측, 금융 리스크 모델   | 로봇 제어, 게임 AI, 자율주행, 광고 전략, 추천 시스템 최적화                               |
 
-
 <br>
-
-
-[1] 모델-프리 강화학습 (Model-free Reinforcement Learning)
-
-    [1-1] 가치 기반 강화학습 (Value-based Reinforcement Learning)
-
-        (A) 테이블 기반 가치 학습 (Tabular Value-based RL)
-            - Q-러닝 (Q-Learning)
-            - 사르사 / 기대 사르사 (SARSA / Expected SARSA)
-            - 엔-스텝 Q-러닝 (n-step Q-learning)
-
-        (B) 심층 가치 기반 학습 (Deep Value-based RL)
-            - Q-네트워크 (Q-Network, Q-NN)
-            - 딥 Q-네트워크 (DQN, Deep Q-Network)
-            - 더블 DQN (Double DQN)
-            - 듀얼링 DQN (Dueling DQN)
-            - 순환형 DQN (DRQN, Recurrent DQN; LSTM/RNN 기반)
-
-        (C) 분포 기반 강화학습 (Distributional Reinforcement Learning)
-            - C51 (Categorical 51-atom DQN)
-            - QR-DQN (Quantile Regression DQN)
-            - IQN (Implicit Quantile Networks)
-            - 레인보우 (Rainbow: Double + Dueling + PER + NoisyNet + C51 결합)
-
-        (D) 소프트 Q-러닝 (Soft Q-learning)
-            - 소프트 Q-러닝 (Soft Q-Learning, Max-Entropy RL 기반)
-
-        (E) 리플레이 / 탐색 기법 (Replay / Exploration Techniques)
-            - 우선순위 경험 리플레이 (PER, Prioritized Experience Replay)
-            - 힌드사이트 경험 리플레이 (HER, Hindsight Experience Replay)
-            - 노이즈넷 탐색 (NoisyNet Exploration)
-            - 엡실론-그리디 변형 (ε-greedy Variants)
-            - 볼츠만 탐색 (Boltzmann Exploration)
-            - UCB 탐색 (UCB Exploration)
-
-
-    [1-2] 정책 기반 / 액터-크리틱 (Policy-based / Actor-Critic Methods)
-
-        (A) 기본 정책 경사법 (Basic Policy Gradient)
-            - 리인포스 (REINFORCE)
-            - 바닐라 정책 경사법 (Vanilla Policy Gradient)
-            - 자연 액터-크리틱 (NAC, Natural Actor-Critic)
-
-        (B) 어드밴티지 / 분산 액터-크리틱 (Advantage / Distributed Actor-Critic)
-            - 기본 액터-크리틱 (Actor-Critic)
-            - A2C (Advantage Actor-Critic)
-            - A3C (Asynchronous Advantage Actor-Critic)
-            - ACER (Actor-Critic with Experience Replay)
-            - 오프-정책 액터-크리틱 (Off-PAC, Off-policy Actor-Critic)
-            - 임팔라 (IMPALA, Distributed Actor-Learner Architecture)
-
-        (C) 트러스트 리전 기반 정책 최적화 (Trust Region Optimization Methods)
-            - TRPO (Trust Region Policy Optimization)
-            - PPO (Proximal Policy Optimization)
-
-        (D) 연속 행동 공간 알고리즘 (Continuous Action Methods)
-            - DDPG (Deep Deterministic Policy Gradient)
-            - TD3 (Twin Delayed DDPG)
-            - SAC (Soft Actor-Critic)
-
-        (E) 전문가 시범 / 모방 학습 (Expert Demonstration / Imitation Learning)
-            - 행동 모방 (BC, Behavioral Cloning)
-            - DDPGfD (DDPG from Demonstrations)
-            - GAIL (Generative Adversarial Imitation Learning)
-
-
-
-[2] 모델 기반 강화학습 (Model-based Reinforcement Learning)
-
-    [2-1] 주어진 환경 모델 기반 (Given-model Model-based RL)
-        - 가치 반복 (Value Iteration)
-        - 정책 반복 (Policy Iteration)
-        - 몬테카를로 트리 탐색 (MCTS, Monte Carlo Tree Search)
-        - 알파제로 (AlphaZero: MCTS + Neural Network)
-
-    [2-2] 환경 모델 학습 기반 (Learned-model Model-based RL)
-
-        (A) 잠재 세계 모델 계열 (Latent World Model Family)
-            - 월드 모델 (World Models)
-            - 플래닛 (PlaNet)
-            - 드리머 / 드리머V2 / 드리머V3 (Dreamer / DreamerV2 / DreamerV3)
-
-        (B) 상상 기반 에이전트 (Imagination-based Methods)
-            - I2A (Imagination-Augmented Agents)
-
-        (C) 하이브리드 모델 기반 강화학습 (Hybrid Model-based RL)
-            - 다이나-Q (Dyna-Q)
-            - MBMF (Model-Based Model-Free)
-            - MBVE (Model-Based Value Expansion)
-
-        (D) 확률적 앙상블 모델 (Probabilistic Ensemble Methods)
-            - PETS (Probabilistic Ensembles with Trajectory Sampling)
-            - MOPO / MBPO (Model-Based Policy Optimization 계열)
-
-        (E) 뮤제로 계열 (MuZero Family)
-            - 뮤제로 (MuZero)
-            - 뮤제로 언플러그드 (MuZero Unplugged)
-            - 이피션트제로 (EfficientZero)
-
-
 
 ---
 
-## [1] 강화 학습(Reinforcement Learning, RL)
+## 강화 학습(Reinforcement Learning, RL)
 
-	[1-1] Model-free RL : Value Iteration
+	[1] Model-free RL : Value Iteration
 	테이블 기반
 		(1-1) Q-Learning: 작은 상태 공간에서 사용되는 표(Q-Table) 기반
-		(1-2) SARSA(State-Action-Reward-State-Action)
+		(1-2) SARSA(State Action Reward State Action)
 	심층 기반
 		(1-3) Q-Network: 신경망을 사용하여 Q-값을 근사화하는 모델
 		(1-4) DQN(Deep Q-Network): 딥러닝을 활용한 Q-Learning의 발전된 형태 (2013, 2015)
@@ -144,7 +42,7 @@
 		(1-13) HER(Hindsight Experience Replay): 목표 달성을 학습할 수 있도록 과거 경험을 재사용하는 기법
 		(1-14) NoisyNet: 신경망 가중치에 노이즈를 추가해 탐색 효율성을 높이는 방식
 
-	[1-2] Model-free RL : Policy Iteration 
+	[2] Model-free RL : Policy Iteration 
  	기본 Policy Gradient 및 Actor-Critic 계열
 		(2-1) Policy Gradient: 기본적인 정책 직접 학습 알고리즘
 		(2-2) Actor-Critic: 기본적인 Actor-Critic 구조, Policy Gradient와 Critic의 Q값 평가 결합
@@ -161,16 +59,16 @@
 	연속 행동 공간 최적화 계열 
 		(2-11) DDPG(Deep Deterministic Policy Gradient): 연속적 행동 공간에서 학습하는 Actor-Critic 모델
 		(2-12) TD3(Twin Delayed DDPG): DDPG의 한계점을 극복하기 위한 개선된 모델
-		(2-13) SAC(Soft Actor-Critic): 탐색과 활용의 균형을 유지하도록 설계된 정책 학습 모델 (2018, 2019) 
+		(2-13) SAC(Soft Actor-Critic): 탐색과 활용의 균형을 유지하도록 설계된 정책 학습 모델(2018, 2019) 
 	전문가 시범 데이터 활용 계열 
 		(2-14) BC(Behavioral Cloning): 데이터를 기반으로 정책을 모방하는 방식
 		(2-15) DDPGfD(DDPG from Demonstrations): 전문가의 시범을 사용해 DDPG 성능을 개선
 
-	[1-3] Model-based RL : Given the Model
+	[3] Model-based RL : Given the Model
 	(3-1) Dyna-Q: 모델 기반 RL과 모델-프리 RL을 조합한 알고리즘
 	(3-2) AlphaZero: 시뮬레이션을 통한 최적의 행동을 찾는 Monte Carlo Tree Search 기반 모델
 	
- 	[1-4] Model-based RL : Learn the Model
+ 	[4] Model-based RL : Learn the Model
 	(4-1) World Models: 환경을 모델링하고 시뮬레이션을 통해 학습하는 방식
 	(4-2) I2A(Imagination-Augmented Agents): 상상된 상태에서 정책을 훈련시키는 기법
 	(4-3) MBMF(Model-Based Model-Free): 모델기반 접근과 모델-프리 접근을 혼합한 기법으로, 모델을 사용하지만 모델-프리의 장점도 살리는 방식
@@ -180,15 +78,17 @@
 	(4-7) PETs(Probabilistic Ensembles with Trajectory Sampling): 확률적 모델 앙상블을 활용하는 강화학습 기법
 	(4-8) MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태로, 명시적 환경 모델 없이도 정책과 가치를 학습 (DeepMind, 2019)
 
+---  
  
-## [2] 앙상블 학습(Ensemble Learning, EL)
+## 앙상블 학습(Ensemble Learning, EL)
 <br>
 
-    [2-1] 스태킹(Stacking)
-    [2-2] 배깅(Bagging)
-    [2-3] 부스팅(Boosting) : AdaBoost, Gradient Boosting, XGBoost 
+    [1] 스태킹(Stacking)
+    [2] 배깅(Bagging)
+    [3] 부스팅(Boosting) : AdaBoost, Gradient Boosting, XGBoost 
 
 ---  
+
 # 강화 학습(Reinforcement Learning, RL)
 ![](./images/RL3.PNG)
 <br>
