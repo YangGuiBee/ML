@@ -321,7 +321,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 # [1-1] Model-free RL : Value Iteration
 
-테이블 기반
+	테이블 기반
 		(1-1) Q-Learning: 작은 상태 공간에서 사용되는 표(Q-Table) 기반
 		(1-2) SARSA(State Action Reward State Action)
 	심층 기반
