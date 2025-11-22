@@ -321,20 +321,26 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 # [1-1] Model-free RL : Value Iteration
 
-	(1-1) Q-Learning: 작은 상태 공간에서 사용되는 표(Q-Table) 기반
-	(1-2) SARSA(State-Action-Reward-State-Action)
-	(1-3) Q-Network: 신경망을 사용하여 Q-값을 근사화하는 모델
-	(1-4) DQN(Deep Q-Network): 딥러닝을 활용한 Q-Learning의 발전된 형태 (2013, 2015)
-	(1-5) Double DQN: Q-Learning의 과대 평가 문제를 완화하기 위한 개선된 버전
-	(1-6) Dueling DQN: 상태 가치와 행동의 중요도를 분리하여 Q-값을 계산하는 모델
-	(1-7) DRQN(Deep Recurrent Q-Network): 순차적인 경험을 학습하기 위해 RNN 구조를 포함한 DQN
-	(1-8) C51(Categorical DQN 51): Q-값의 분포를 학습하는 DQN 확장
-	(1-9) IQN(Implicit Quantile Networks): Q-값의 분포를 세밀하게 조정하는 방식
-	(1-10) Rainbow: 여러 DQN 확장(PER, Double DQN, C51 등)을 결합한 통합 알고리즘 (DeepMind, 2017)
-	(1-11) SQL(Soft Q-Learning): 엔트로피를 추가하여 Q값 학습을 안정화하는 방식
-	(1-12) PER(Prioritized Experience Replay): 중요한 경험을 우선적으로 학습하는 경험 리플레이 전략
-	(1-13) HER(Hindsight Experience Replay): 목표 달성을 학습할 수 있도록 과거 경험을 재사용하는 기법
-	(1-14) NoisyNet: 신경망 가중치에 노이즈를 추가해 탐색 효율성을 높이는 방식
+테이블 기반
+		(1-1) Q-Learning: 작은 상태 공간에서 사용되는 표(Q-Table) 기반
+		(1-2) SARSA(State Action Reward State Action)
+	심층 기반
+		(1-3) Q-Network: 신경망을 사용하여 Q-값을 근사화하는 모델
+		(1-4) DQN(Deep Q-Network): 딥러닝을 활용한 Q-Learning의 발전된 형태 (2013, 2015)
+		(1-5) Double DQN: Q-Learning의 과대 평가 문제를 완화하기 위한 개선된 버전
+		(1-6) Dueling DQN: 상태 가치와 행동의 중요도를 분리하여 Q-값을 계산하는 모델
+		(1-7) DRQN(Deep Recurrent Q-Network): 순차적인 경험을 학습하기 위해 RNN 구조를 포함한 DQN
+	분포 기반
+		(1-8) C51(Categorical DQN 51): Q-값의 분포를 학습하는 DQN 확장
+		(1-9) IQN(Implicit Quantile Networks): Q-값의 분포를 세밀하게 조정하는 방식
+		(1-10) Rainbow: 여러 DQN 확장(PER, Double DQN, C51 등)을 결합한 통합 알고리즘 (DeepMind, 2017)
+	소프트 기반
+		(1-11) SQL(Soft Q-Learning): 엔트로피를 추가하여 Q값 학습을 안정화하는 방식
+	리플레이/탐색 기반
+		(1-12) PER(Prioritized Experience Replay): 중요한 경험을 우선적으로 학습하는 경험 리플레이 전략
+		(1-13) HER(Hindsight Experience Replay): 목표 달성을 학습할 수 있도록 과거 경험을 재사용하는 기법
+		(1-14) NoisyNet: 신경망 가중치에 노이즈를 추가해 탐색 효율성을 높이는 방식
+		
 
 ## (1-1) Q-Learning : 작은 상태 공간에서 사용되는 표(Q-Table) 기반
 ![](./images/RL2.png)
