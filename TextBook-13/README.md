@@ -368,7 +368,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 ▣ 장점 : 모델 프리 방식이라 환경의 동작을 미리 알 필요가 없으며, 수렴할 경우 최적의 정책을 보장<br>
 ▣ 단점 : 상태 공간이 매우 크거나 연속적인 경우, Q-table이 메모리와 시간 측면에서 비효율적일 수 있으며, 학습 속도가 느리고, 보상이 주기적으로만 주어지는 경우 최적의 정책을 찾기 어려울 수 있다.<br>
 ▣ 응용분야 : 게임 플레이, 로봇 제어, 자율 주행, 네트워크 트래픽 제어 등<br>
-▣ 예제 : <br>
+▣ 예제 : https://www.gymlibrary.dev/tutorials/rl_basics/q_learning/<br>
 ▣ 모델식 : Q-learning 업데이트식으로 Q(s,a)는 상태 𝑠에서 행동 𝑎를 선택할 때의 Q값, α는 학습률, 𝛾는 할인 계수,𝑟은 현재 보상, max_𝑎′𝑄(𝑠′,𝑎′)는 다음 상태 𝑠′ 에서 가능한 최대 Q값.<br>
 ![](./images/[1-1].PNG)
 
@@ -456,7 +456,7 @@ Q-learning과 달리 SARSA는 에이전트가 선택한 행동을 기반으로 �
 ▣ 장점 : 에이전트의 실제 정책을 기반으로 학습하므로 정책의 일관성을 유지할 수 있으며, Q-learning보다 안정적인 성능<br>
 ▣ 단점 : Q-learning보다 수렴 속도가 느릴 수 있으며, 잘못된 정책을 사용할 경우 학습 성능이 떨어질 수 있다.<br>
 ▣ 응용분야 : 게임, 로봇 제어, 자율 시스템, 물류 최적화<br>
-▣ 예제 : <br>
+▣ 예제 : https://www.gymlibrary.dev/tutorials/rl_basics/sarsa/<br>
 ▣ 모델식 : SARSA 업데이트 식, Q(s,a)는 상태 𝑠에서 행동 𝑎를 선택할 때의 Q값, 𝑎′ 는 다음 상태에서 선택<br>
 ![](./images/(1-2).PNG)
 <br>
@@ -542,7 +542,7 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 ▣ 장점 : 큰 상태 공간이나 연속적인 상태 공간에 확장 가능하며, 상태와 행동 간의 복잡한 관계를 학습<br>
 ▣ 단점 : 높은 계산 자원이 필요하며, 학습이 불안정하거나 발산할 수 있음<br>
 ▣ 적용 분야 : 고차원 제어 작업, 자율 주행 차량<br>
-▣ 예제 : <br>
+▣ 예제 : https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html<br>
 ![](./images/[1-3].PNG)
 
 <br>
@@ -555,7 +555,8 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 ▣ 장점 : 고차원 연속 상태 공간에서 사용 가능하며, 경험 재플레이(experience replay)와 타깃 네트워크로 학습 안정성을 높일 수 있음<br>
 ▣ 단점 : 신경망 학습으로 인해 높은 계산 비용이 필요하며, 과적합 위험이 있으며, 잘못 설정된 하이퍼파라미터로 인해 학습이 불안정<br>
 ▣ 응용분야 : 비디오 게임(예: Atari 게임), 로봇 제어, 자율 주행 등<br>
-▣ 예제 : <br>
+▣ 예제 : https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html<br>
+https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 ▣ 모델식 : DQN에서 신경망을 사용한 Q-learning 업데이트 θ는 현재 신경망의 가중치,𝜃′ 는 타깃 신경망의 가중치<br>
 ![](./images/[1-4].PNG)
 
@@ -676,7 +677,7 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 ▣ 장점 : 과대 추정을 줄이고, 정책의 안정성을 향상<br>
 ▣ 단점 : 계산 부담이 증가하고, 하이퍼파라미터 튜닝이 필요<br>
 ▣ 적용 분야 : 복잡한 의사결정 작업<br>
-▣ 예제 : <br>
+▣ 예제 : https://stable-baselines3.readthedocs.io/en/master/guide/algos.html#double-dqn<br>
 ![](./images/[1-5].PNG)
 
 <br>
@@ -688,6 +689,7 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 ▣ 장점 : 학습 효율성을 향상시키고 의사결정에 중요한 상태에 집중<br>
 ▣ 단점 : 네트워크 복잡도가 증가하며 모든 환경에서 이점이 있는 것은 아님<br>
 ▣ 적용 분야 : 희소 보상 환경<br>
+▣ 예제 : https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html#dueling-network-architecture<br>
 ![](./images/(1-6).PNG)
 <br>
 
@@ -700,7 +702,7 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 ▣ 장점 : 순차적 데이터 또는 부분 관찰 데이터를 처리할 수 있으며, 비마르코프 설정에서도 정책을 개선<br>
 ▣ 단점 : 학습 시간이 증가하고 학습이 더 어려워질 수 있음<br>
 ▣ 적용 분야 : 주식 거래, 텍스트 기반 게임<br>
-▣ 예제 : <br>
+▣ 예제 : https://github.com/Kaixhin/Atari-DRQN<br>
 ![](./images/(1-7).PNG)
 <br>
 
@@ -713,7 +715,7 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 ▣ 장점 : 보상의 불확실성을 모델링할 수 있으며, 더 풍부한 표현을 제공<br>
 ▣ 단점 : 분포를 관리해야 하므로 복잡도가 증가하며 계산 비용이 큼<br>
 ▣ 적용 분야 : 위험 민감 의사결정<br>
-▣ 예제 : <br>
+▣ 예제 : https://github.com/google/dopamine/blob/master/dopamine/agents/c51/c51_agent.py<br>
 ![](./images/(1-8).PNG)
 <br>
 
@@ -726,6 +728,7 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 ▣ 장점 : 쿼타일 함수로 Q-값의 분포를 학습하므로, C51처럼 고정된 원자 기반의 분포 모델링보다 유연<br>
 ▣ 단점 : 많은 계산 자원이 필요함에 따라 학습이 복잡<br>
 ▣ 적용 분야 : 위험 인지 AI, 전략적 계획<br>
+▣ 예제 : https://github.com/google/dopamine/tree/master/dopamine/agents/implicit_quantile<br>
 ![](./images/(1-9).PNG)
 <br>
 
@@ -736,7 +739,7 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 ▣ 장점 : 최신 기술을 종합한 최고의 성능이 가능하고, 기존 알고리즘들의 장점을 모두 활용<br>
 ▣ 단점 : 구현이 복잡함에 따라 계산 비용이 높다<br>
 ▣ 적용 분야 : 범용 강화 학습 작업<br>
-▣ 예제 : <br>
+▣ 예제 : https://github.com/google/dopamine/tree/master/dopamine/agents/rainbow<br>
 
 <br>
 
@@ -745,7 +748,7 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 ▣ 장점 : 최적의 보상 뿐만 아니라 최적의 정책 다양성을 고려하여 학습함으로써 다양한 행동 선택을 장려하고 조기 수렴을 방지<br>
 ▣ 단점 : 결정론적 정책에는 비효율적<br>
 ▣ 적용 분야 : 로봇 공학, 탐색이 중요한 작업<br>
-▣ 예제 : <br>
+▣ 예제 : https://github.com/haarnoja/softqlearning<br>
 ![](./images/(1-11)_1.PNG)
 <br>
 
@@ -754,7 +757,7 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 ▣ 장점 : 더 빠른 수렴하고 학습 효율성 향상<br>
 ▣ 단점 : 추가 계산 비용이 필요<br>
 ▣ 적용 분야 : 게임, 로봇 공학<br>
-▣ 예제 : <br>
+▣ 예제 : https://github.com/rlcode/per<br>
 ![](./images/(1-12)_1.png)
 
 <br>
@@ -764,7 +767,7 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 ▣ 장점 : 희소 보상 환경에서 샘플 효율성을 크게 향상시키고 목표 중심 환경에서 성능이 우수하며 기존 경험을 효과적으로 활용<br>
 ▣ 단점 : 목표가 명확히 정의된 환경에서만 사용할 수 있으며, 구현이 복잡<br>
 ▣ 적용 분야 : 로봇 공학(물체 조작 및 경로 계획) 등 목표 지향적 학습 환경<br>
-▣ 예제 : <br>
+▣ 예제 : https://stable-baselines3.readthedocs.io/en/master/modules/her.html<br>
 ![](./images/(1-13)_1.PNG)
 <br>
 
@@ -773,7 +776,7 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 ▣ 장점 : 탐색-활용(trade-off) 문제를 자동으로 해결. 𝜖-탐욕적 정책에 대한 추가 튜닝이 필요하지 않으며, 학습 과정에서 더 효과적인 탐색<br>
 ▣ 단점 : 추가 학습 가능한 노이즈 매개변수를 관리해야 하므로 학습 시간이 증가하며, 환경에 따라 노이즈 설정이 비효율적<br>
 ▣ 적용 분야 : 연속적인 행동 공간을 가진 환경, 다양한 보상을 가진 게임 환경<br>
-▣ 예제 : <br>
+▣ 예제 : https://github.com/deepmind/noisynet<br>
 ![](./images/(1-14)_1.PNG)
 <br>
 
