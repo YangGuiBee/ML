@@ -222,11 +222,11 @@ DeepMind의 축구 AI: Google DeepMind는 축구 선수들의 최적의 움직�
 **활용(exploitation):** 에이전트가 현재까지 학습한 정보를 활용하여 최대 보상을 얻는 행동을 선택하는 과정으로,<br>
        현재 정책을 최대한 활용해 즉각적인 보상을 극대화<br>
 
-제임스 마치(James G. March)의 정의("Exploration and Exploitation in Organizational Learning", 1991)<br>
-탐험(exploration) : 탐색(search), 다양화(variation), 위험감수(risk taking), 실험(experimentation),<br> 
-                    놀이(play), 유연성(flexibility), 새로운 발견(discovery), 혁신(innovation) 등의 의미<br>
-활용(exploitation) : 기억(memory), 정교화(refinement), 선택(selection, choice), 생산(production),<br> 
-                     효율(efficiency), 구현(implementation), 실행(execution) 등의 의미<br>
+	제임스 마치(James G. March)의 정의("Exploration and Exploitation in Organizational Learning", 1991)<br>
+	탐험(exploration): 탐색(search), 다양화(variation), 위험감수(risk taking), 실험(experimentation),<br> 
+						놀이(play), 유연성(flexibility), 새로운 발견(discovery), 혁신(innovation) 등의 의미<br>
+	활용(exploitation): 기억(memory), 정교화(refinement), 선택(selection, choice), 생산(production),<br> 
+						효율(efficiency), 구현(implementation), 실행(execution) 등의 의미<br>
   
 미국의 수학자 리처드 벨만(Richard Bellman)은 불연속적인 시간문제에 대해 **MDP(Markov Decision Process)**를 기반으로<br> 
 동적시스템(dynamic system)에서 시간의 흐름에 따라 각 과정별 최적의 의사결정을 수행하는 최적제어(optimal control) 이론을 도입<br>
