@@ -115,7 +115,7 @@ Agent 기계는 환경(Environment)으로부터 상태(state)를 관측(observat
 
 
 ## [강화학습의 응용분야] <br>
-<ins>Richard S. Sutton, "Deconstructing Reinforcement Learning"(2009년 국제기계학습학회(ICML)에서 발표)</ins><br>
+**<ins>Richard S. Sutton, "Deconstructing Reinforcement Learning"(2009년 국제기계학습학회(ICML)에서 발표)</ins>**<br>
 (1위) 프로세스 제어 (24%)<br>
 (2위) 네트워크 관리 (21%)<br>
 (3위) 자산 관리 (18%)<br>
@@ -184,7 +184,7 @@ DeepMind의 축구 AI: Google DeepMind는 축구 선수들의 최적의 움직�
 작물 성장 최적화: 강화학습을 통해 온도, 습도, 조명 등을 자동제어로 조절해 최적의 작물 성장 조건을 유지하는 기술 개발<br> 
 농기계 경로 최적화: 자율주행 농기계가 강화학습을 통해 농지 내에서 최적의 경로를 학습하여 연료 소비와 시간을 절감<br> 
 
-<ins>D. Zhang 외, "A survey on applications of reinforcement learning in spatial resource allocation"(2024)</ins><br>
+**<ins>D. Zhang 외, "A survey on applications of reinforcement learning in spatial resource allocation"(2024)</ins>**<br>
 (1위) 로보틱스 / 자율제어 / 자율주행 (25-30%)<br>
 (2위) 산업 시스템 제어 / 제조 프로세스 최적화 (25-30%)<br>
 (3위) 네트워크・통신・클라우드 관리 (10-15%)<br>
@@ -197,8 +197,8 @@ DeepMind의 축구 AI: Google DeepMind는 축구 선수들의 최적의 움직�
 ## [강화학습의 연구] <br>
 
 강화학습에 영향을 끼친 학문분야는 인공지능 외에도 행동심리학, 신경과학, 제어이론, 운용과학 등이 있으며,<br> 
-이 중 가장 근간이 되는 학문이 **행동심리학(Behavioral Psychology)**<br><br>
-미국의 심리학자 에드워드 손다이크(Edward Thorndike)는 1911년 동물이 어떤 행동을 선택할 때는 강화된 사건(reinforced event)에 영향을 받는 시행착오(Trial and Error)의 효과의 법칙(Law of Effect)을 발표했고, 프린스턴대학의 마빈 민스키(Marvin Minsky)가 1954년에 아날로그 컴퓨터인 SNARC(Stochastic Neural Analog Reinforcement Calculator)을 설계하여 쥐의 미로찾기 시뮬레이션을 개발함으로써 행동심리학 이론을 처음으로 컴퓨터공학에 적용<br>
+이 중 가장 근간이 되는 학문이 **행동심리학(Behavioral Psychology)**
+<br>미국의 심리학자 에드워드 손다이크(Edward Thorndike): 1911년 동물이 어떤 행동을 선택할 때는 강화된 사건(reinforced event)에 영향을 받는 시행착오(Trial and Error)의 효과의 법칙(Law of Effect) 발표<br>프린스턴대학의 마빈 민스키(Marvin Minsky): 1954년 아날로그 컴퓨터인 SNARC(Stochastic Neural Analog Reinforcement Calculator)을 설계하여 쥐의 미로찾기 시뮬레이션을 개발함으로써 행동심리학 이론을 처음으로 컴퓨터공학에 적용<br>
 
 
     마빈 민스키(Marvin Minsky)의 1960년 논문 "Steps Toward Artificial Intelligence"
@@ -217,18 +217,22 @@ DeepMind의 축구 AI: Google DeepMind는 축구 선수들의 최적의 움직�
 
 
 강화학습의 초점은 학습 과정에서의(on-line) 성능이며, 이는 탐험(exploration)과 활용(exploitation)의 균형을 맞춤으로써 제고<br>
-**탐험(exploration):** 에이전트가 새로운 행동을 시도하거나 덜 알려진 상태-행동 공간을 탐험하는 과정으로, 환경의 미지의 정보를 수집하여 학습 데이터를 풍부하게 하고 더 나은 장기적인 정책을 학습<br>
-**활용(exploitation):** 에이전트가 현재까지 학습한 정보를 활용하여 최대 보상을 얻는 행동을 선택하는 과정으로, 현재 정책을 최대한 활용해 즉각적인 보상을 극대화<br>
+**탐험(exploration):** 에이전트가 새로운 행동을 시도하거나 덜 알려진 상태-행동 공간을 탐험하는 과정으로,<br> 
+       환경의 미지의 정보를 수집하여 학습 데이터를 풍부하게 하고 더 나은 장기적인 정책을 학습<br>
+**활용(exploitation):** 에이전트가 현재까지 학습한 정보를 활용하여 최대 보상을 얻는 행동을 선택하는 과정으로,<br>
+       현재 정책을 최대한 활용해 즉각적인 보상을 극대화<br>
 
-    제임스 마치(James G. March)의 정의("Exploration and Exploitation in Organizational Learning", 1991)
-    탐험(exploration) : 탐색(search), 다양화(variation), 위험감수(risk taking), 실험(experimentation), 놀이(play), 유연성(flexibility), 새로운 발견(discovery), 혁신(innovation) 등의 의미
-    활용(exploitation) : 기억(memory), 정교화(refinement), 선택(selection, choice), 생산(production), 효율(efficiency), 구현(implementation), 실행(execution) 등의 의미
-
+제임스 마치(James G. March)의 정의("Exploration and Exploitation in Organizational Learning", 1991)<br>
+탐험(exploration) : 탐색(search), 다양화(variation), 위험감수(risk taking), 실험(experimentation),<br> 
+                    놀이(play), 유연성(flexibility), 새로운 발견(discovery), 혁신(innovation) 등의 의미<br>
+활용(exploitation) : 기억(memory), 정교화(refinement), 선택(selection, choice), 생산(production),<br> 
+                     효율(efficiency), 구현(implementation), 실행(execution) 등의 의미<br>
   
-미국의 수학자 리처드 벨만(Richard Bellman)은 불연속적인 시간문제에 대해 **MDP(Markov Decision Process)**를 기반으로 
-동적시스템(dynamic system)에서 시간의 흐름에 따라 각 과정별 최적의 의사결정을 수행하는 최적제어(optimal control) 이론을 도입
-1980년대말까지는 리처드 벨만이 제안한 최적가치함수(optimal value function) 기반의 동적 프로그래밍(dynamic programming)과 확률적인 시뮬레이션을 통해 의사결정을 내리는 몬테카를로 방법(Monte Carlo method)이 주류를 구성<br>
-1988년 리차드 서튼(Richard Sutton)이 발표한 시간차 방법 TD(Temporal Difference learning method)이 이 두가지를 결합하면서 지금까지 가장 많이 인용되는 알고리즘으로 자리매김함
+미국의 수학자 리처드 벨만(Richard Bellman)은 불연속적인 시간문제에 대해 **MDP(Markov Decision Process)**를 기반으로<br> 
+동적시스템(dynamic system)에서 시간의 흐름에 따라 각 과정별 최적의 의사결정을 수행하는 최적제어(optimal control) 이론을 도입<br>
+1980년대말까지는 리처드 벨만이 제안한 최적가치함수(optimal value function) 기반의 동적 프로그래밍(dynamic programming)과<br> 
+확률적인 시뮬레이션을 통해 의사결정을 내리는 몬테카를로 방법(Monte Carlo method)이 주류를 구성<br>
+1988년 리차드 서튼(Richard Sutton)이 발표한 시간차 방법 TD(Temporal Difference learning method)이 이 두가지를 결합하면서 지금까지 가장 많이 인용되는 알고리즘으로 자리매김함<br>
 
 
 ## [강화학습의 프레임워크, MDP(Markov Decision Process)]
