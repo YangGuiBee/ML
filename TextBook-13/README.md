@@ -378,52 +378,64 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 
 	import numpy as np
-
-	# 환경 설정 (간단한 그리드 월드 환경 가정)
-	n_states = 5  # 총 5개의 상태 (0~4)
-	n_actions = 2  # 각 상태에서 선택할 수 있는 2가지 행동 (예: 0, 1)
-	Q = np.zeros((n_states, n_actions))  # Q-테이블 초기화, 모든 상태-행동 값이 0으로 시작
-
-	alpha = 0.1  # 학습률: Q-값 업데이트 시 새로운 정보 반영 비율(0=학습하지 않음, 1=새로운 정보만 반영하고 기존 정보는 무시)
-	gamma = 0.9  # 할인 계수: 미래 보상의 중요도를 조정(0=즉시 보상만 고려, 미래 보상을 현재와 동일하게 중요시)
-	epsilon = 0.1  # 탐험 확률: 랜덤 행동 선택 비율(0=활용(Exploitation)만 최적 행동, 1=탐험(Exploration)만 항상 무작위)
-
-	# 행동 선택 함수 (ε-greedy 정책)
+	
+	# ------------------------
+	# 1. 환경 및 파라미터 설정
+	# ------------------------
+	n_states = 5   # 상태: 0,1,2,3,4  (4번 상태를 종료 상태로 가정)
+	n_actions = 2  # 행동: 0,1 두 가지
+	Q = np.zeros((n_states, n_actions))  # Q-테이블 초기화
+	
+	alpha = 0.1   # 학습률
+	gamma = 0.9   # 할인 계수
+	epsilon = 0.1 # ε-greedy 탐험 확률
+	
+	# ------------------------
+	# 2. 행동 선택 함수 (ε-greedy)
+	# ------------------------
 	def choose_action(state):
-    	if np.random.uniform(0, 1) < epsilon:  # ε 확률로 탐험
-        	return np.random.choice(n_actions)  # 랜덤으로 행동 선택
-    	else:  # 1-ε 확률로 활용
-        	return np.argmax(Q[state, :])  # Q-값이 가장 큰 행동 선택
-
-	# Q-값 업데이트 함수
+	    if np.random.uniform(0, 1) < epsilon:   # ε 확률로 탐험
+	        return np.random.choice(n_actions)  # 무작위 행동
+	    else:                                   # 1-ε 확률로 활용
+	        return np.argmax(Q[state, :])       # Q값이 최대인 행동 선택
+	
+	# ------------------------
+	# 3. Q-값 업데이트 함수
+	# ------------------------
 	def update_q(state, action, reward, next_state):
-    		predict = Q[state, action]  # 현재 상태-행동 값 예측
-    		target = reward + gamma * np.max(Q[next_state, :])  # 보상 + 다음 상태에서의 최대 Q-값
-    		Q[state, action] = predict + alpha * (target - predict)  # Q-값 업데이트 공식
-
-	# 학습 과정 반복
-	num_episodes = 100  # 총 에피소드 수
-	total_rewards = []  # 각 에피소드의 총 보상 기록
+	    predict = Q[state, action]                      # 현재 Q(s,a)
+	    target = reward + gamma * np.max(Q[next_state, :])  # r + γ max_a' Q(s', a')
+	    Q[state, action] = predict + alpha * (target - predict)  # 업데이트
+	
+	# ------------------------
+	# 4. 학습 루프
+	# ------------------------
+	num_episodes = 100
+	total_rewards = []
 	success_count = 0  # 종료 상태(4)에 도달한 에피소드 수
-
-	for episode in range(num_episodes):  # 100번의 학습 에피소드 실행
-    	    state = np.random.randint(0, n_states)  # 임의의 상태에서 에피소드 시작
-    	    episode_reward = 0  # 현재 에피소드의 총 보상
-
-    	    while state != 4:  # 종료 상태(4)에 도달하면 에피소드 종료
-        	action = choose_action(state)  # 현재 상태에서 행동 선택 (탐험 또는 활용)
-        	next_state = np.random.randint(0, n_states)  # 랜덤으로 다음 상태로 전이
-        	reward = 1 if next_state == 4 else 0  # 보상 설정: 종료 상태로 전이 시 보상 1, 그 외 0
-        	update_q(state, action, reward, next_state)  # Q-값 업데이트
-        	state = next_state  # 다음 상태로 전이
-        	episode_reward += reward  # 보상 누적
-
-         	if reward == 1:  # 종료 상태에 도달한 경우
-                   success_count += 1
-
-    	total_rewards.append(episode_reward)  # 에피소드별 총 보상 기록
-
-	# 학습 결과 평가 출력
+	
+	for episode in range(num_episodes):
+	    state = np.random.randint(0, n_states)  # 임의의 초기 상태
+	    episode_reward = 0
+	
+	    while state != 4:  # 상태 4를 종료 상태로 가정
+	        action = choose_action(state)                 # 행동 선택
+	        next_state = np.random.randint(0, n_states)   # 다음 상태: 랜덤 전이
+	        reward = 1 if next_state == 4 else 0          # 다음 상태가 4이면 보상 1
+	
+	        update_q(state, action, reward, next_state)
+	
+	        state = next_state
+	        episode_reward += reward
+	
+	        if reward == 1:
+	            success_count += 1
+	
+	    total_rewards.append(episode_reward)
+	
+	# ------------------------
+	# 5. 결과 출력
+	# ------------------------
 	print("학습 완료!")
 	print(f"총 에피소드: {num_episodes}")
 	print(f"성공적으로 종료 상태에 도달한 에피소드 수: {success_count}")
@@ -431,6 +443,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 	print(f"평균 에피소드 보상: {np.mean(total_rewards):.2f}")
 	print("최종 Q-테이블:")
 	print(Q)
+
 
  
 <br>
