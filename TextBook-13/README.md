@@ -116,14 +116,15 @@ Agent 기계는 환경(Environment)으로부터 상태(state)를 관측(observat
 
 ## [강화학습의 응용분야] <br>
 **<ins>Richard S. Sutton, "Deconstructing Reinforcement Learning"(2009년 국제기계학습학회(ICML)에서 발표)</ins>**<br>
-(1위) 프로세스 제어 (24%)<br>
-(2위) 네트워크 관리 (21%)<br>
-(3위) 자산 관리 (18%)<br>
-(4위) 로보틱스 (13%)<br>
-(5위) 교통 (6%)<br>
-(6위) 자동 제어 (6%)<br>
-(7위) 금융 (4%)<br>
-(8위) 기타(8%)<br>
+
+	(1위) 프로세스 제어 (24%)<br>
+	(2위) 네트워크 관리 (21%)<br>
+	(3위) 자산 관리 (18%)<br>
+	(4위) 로보틱스 (13%)<br>
+	(5위) 교통 (6%)<br>
+	(6위) 자동 제어 (6%)<br>
+	(7위) 금융 (4%)<br>
+	(8위) 기타(8%)<br>
 
 ### (1) 프로세스 제어 (24%)
 강화학습이 제조 및 공정 산업에서 시스템의 상태를 최적화 및 자동화함으로써 복잡한 변수를 실시간으로 제어하여 안정적이고 효율적인 작업<br> 
@@ -185,13 +186,14 @@ DeepMind의 축구 AI: Google DeepMind는 축구 선수들의 최적의 움직�
 농기계 경로 최적화: 자율주행 농기계가 강화학습을 통해 농지 내에서 최적의 경로를 학습하여 연료 소비와 시간을 절감<br> 
 
 **<ins>D. Zhang 외, "A survey on applications of reinforcement learning in spatial resource allocation"(2024)</ins>**<br>
-(1위) 로보틱스 / 자율제어 / 자율주행 (25-30%)<br>
-(2위) 산업 시스템 제어 / 제조 프로세스 최적화 (25-30%)<br>
-(3위) 네트워크・통신・클라우드 관리 (10-15%)<br>
-(4위) 교통 / 스마트 인프라 관리 (8-12%)<br>
-(5위) 금융・자산 관리 / 알고리즘 트레이딩 (8-10%)<br>
-(6위) 추천 시스템・소프트웨어 엔지니어링 / 기타 IT 분야 (8-10%)<br>
-(7위) 헬스케어・의료영상・제약 (5-8%)<br>
+
+	(1위) 로보틱스 / 자율제어 / 자율주행 (25-30%)<br>
+	(2위) 산업 시스템 제어 / 제조 프로세스 최적화 (25-30%)<br>
+	(3위) 네트워크・통신・클라우드 관리 (10-15%)<br>
+	(4위) 교통 / 스마트 인프라 관리 (8-12%)<br>
+	(5위) 금융・자산 관리 / 알고리즘 트레이딩 (8-10%)<br>
+	(6위) 추천 시스템・소프트웨어 엔지니어링 / 기타 IT 분야 (8-10%)<br>
+	(7위) 헬스케어・의료영상・제약 (5-8%)<br>
 
 
 ## [강화학습의 연구] <br>
@@ -388,330 +390,197 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 	import numpy as np
 	
-	# ------------------------
-	# 1. 환경 및 파라미터 설정
-	# ------------------------
-	n_states = 5   # 상태: 0,1,2,3,4  (4번 상태를 종료 상태로 가정)
-	n_actions = 2  # 행동: 0,1 두 가지
-	Q = np.zeros((n_states, n_actions))  # Q-테이블 초기화
+	# ======================================
+	# 0. 난수 시드 고정 (항상 동일한 결과 보장)
+	# ======================================
+	np.random.seed(42)
 	
-	alpha = 0.1   # 학습률
-	gamma = 0.9   # 할인 계수
-	epsilon = 0.1 # ε-greedy 탐험 확률
+	# ======================================
+	# 1. 환경 설정 (1차원 선형 월드)
+	# ======================================
+	n_states = 5     # 상태(State) 개수: 0,1,2,3,4 (4가 목표 상태)
+	n_actions = 2    # 행동(Action) 개수: 0=왼쪽, 1=오른쪽
 	
-	# ------------------------
-	# 2. 행동 선택 함수 (ε-greedy)
-	# ------------------------
-	def choose_action(state):
-	    if np.random.uniform(0, 1) < epsilon:   # ε 확률로 탐험
-	        return np.random.choice(n_actions)  # 무작위 행동
-	    else:                                   # 1-ε 확률로 활용
-	        return np.argmax(Q[state, :])       # Q값이 최대인 행동 선택
+	# 상태 전이 및 보상 함수
+	def step(state, action):
+	    # 행동이 0이면 왼쪽으로 이동, 1이면 오른쪽으로 이동
+	    if action == 0:
+	        next_state = max(0, state - 1)              # 왼쪽 끝(0) 이하로 내려가지 않게 처리
+	    else:
+	        next_state = min(n_states - 1, state + 1)   # 오른쪽 끝(4) 이상으로 올라가지 않게 처리
 	
-	# ------------------------
-	# 3. Q-값 업데이트 함수
-	# ------------------------
-	def update_q(state, action, reward, next_state):
-	    predict = Q[state, action]                               # 현재 Q(s,a)
-	    target = reward + gamma * np.max(Q[next_state, :])       # r + γ max_a' Q(s', a')
-	    Q[state, action] = predict + alpha * (target - predict)  # 업데이트
-	
-	# ------------------------
-	# 4. 학습 루프
-	# ------------------------
-	num_episodes = 100
-	total_rewards = []
-	success_count = 0                                     # 종료 상태(4)에 도달한 에피소드 수
-	
-	for episode in range(num_episodes):
-	    state = np.random.randint(0, n_states)            # 임의의 초기 상태
-	    episode_reward = 0
-	
-	    while state != 4:                                 # 상태 4를 종료 상태로 가정
-	        action = choose_action(state)                 # 행동 선택
-	        next_state = np.random.randint(0, n_states)   # 다음 상태: 랜덤 전이
-	        reward = 1 if next_state == 4 else 0          # 다음 상태가 4이면 보상 1
-	
-	        update_q(state, action, reward, next_state)
-	
-	        state = next_state
-	        episode_reward += reward
-	
-	        if reward == 1:
-	            success_count += 1
-	
-	    total_rewards.append(episode_reward)
-	
-	# ------------------------
-	# 5. 결과 출력
-	# ------------------------
-	print("학습 완료!")
-	print(f"총 에피소드: {num_episodes}")
-	print(f"성공적으로 종료 상태에 도달한 에피소드 수: {success_count}")
-	print(f"성공 비율: {success_count / num_episodes:.2f}")
-	print(f"평균 에피소드 보상: {np.mean(total_rewards):.2f}")
-	print("최종 Q-테이블:")
-	print(Q)
-
-
- 
-<br>
-
-	(결과 분석) 
-	학습 완료!
-	총 에피소드: 100
-	성공적으로 종료 상태에 도달한 에피소드 수: 85
-	성공 비율: 0.85
-	평균 에피소드 보상: 0.85
-	최종 Q-테이블:
-	[[0.26696821 0.7079046 ]
-	 [0.67888428 0.20572514]
-	 [0.69863647 0.24839782]
-	 [0.67897106 0.06849709]
-	 [0.         0.        ]]
-  
-<br>
-
-
-
-	#############################################
-	5x5 GridWorld 환경에서 Tabular Q-Learning 예제
-	[환경 설명]
-	- 격자 크기: 5x5
-	- 시작 상태: (0, 0)
-	- 목표 상태: (4, 4)
-	- 행동: 0=위, 1=오른쪽, 2=아래, 3=왼쪽
-	- 보상: 목표 도달: +1.0, 그외: -0.01 (step penalty)
-	- 종료 조건: 목표 도달 or 최대 스텝 수 초과
-	[알고리즘]
-	- [1-1] Q-Learning (Tabular, off-policy)
-	#############################################
-	
-	import numpy as np		
-	# =========================================
-	# 1. 5x5 GridWorld 환경 정의
-	# =========================================
-	class GridWorldEnv:
-	    def __init__(self, size=5, max_steps=50):
-	        self.size = size
-	        self.max_steps = max_steps
-	        self.reset()
-	    @property
-	    def n_states(self):
-	        return self.size * self.size
-	    @property
-	    def n_actions(self):
-	        # 0: 위, 1: 오른쪽, 2: 아래, 3: 왼쪽
-	        return 4
-	    def coord_to_state(self, x, y):
-	        """(x, y) → 상태 ID(0~size*size-1)"""
-	        return x * self.size + y
-	    def state_to_coord(self, s):
-	        """상태 ID → (x, y)"""
-	        return divmod(s, self.size)  # (x, y)
-	    def reset(self):
-	        """에피소드 초기화, 시작 위치 (0,0)"""
-	        self.x = 0
-	        self.y = 0
-	        self.steps = 0
-	        return self.coord_to_state(self.x, self.y)
-	    def step(self, action):
-	        """action을 받아 다음 상태, 보상, 종료 여부 반환"""
-	        # 이동
-	        if action == 0:        # 위
-	            self.x = max(self.x - 1, 0)
-	        elif action == 1:      # 오른쪽
-	            self.y = min(self.y + 1, self.size - 1)
-	        elif action == 2:      # 아래
-	            self.x = min(self.x + 1, self.size - 1)
-	        elif action == 3:      # 왼쪽
-	            self.y = max(self.y - 1, 0)
-	        self.steps += 1
-	
+	    # 목표 상태(4)에 도달한 경우 보상 +1, 그 외에는 -0.01 패널티
+	    if next_state == n_states - 1:
+	        reward = 1.0
+	        done = True                                 # 목표 도달 → 에피소드 종료
+	    else:
+	        reward = -0.01                              # 빨리 도달하도록 작은 음수 보상
 	        done = False
-	        reward = -0.01  # 한 스텝당 약간의 패널티
 	
-	        # 목표 도달 시 보상 +1, 종료
-	        if self.x == self.size - 1 and self.y == self.size - 1:
-	            reward = 1.0
-	            done = True
-	
-	        # 너무 오래 헤매면 종료
-	        if self.steps >= self.max_steps:
-	            done = True
-	
-	        s = self.coord_to_state(self.x, self.y)
-	        info = {}
-	        return s, reward, done, info
-	
-	    def render_policy(self, Q):
-	        """
-	        학습된 Q-테이블을 이용해서,
-	        각 상태에서의 최적 행동을 화살표로 출력해 보는 함수.
-	        (목표 지점은 'G')
-	        """
-	        arrow = {0: '↑', 1: '→', 2: '↓', 3: '←'}
-	        print("\n=== Learned Policy (argmax Q) ===")
-	        for x in range(self.size):
-	            row_str = ""
-	            for y in range(self.size):
-	                if x == self.size - 1 and y == self.size - 1:
-	                    row_str += " G  "  # goal
-	                    continue
-	                s = self.coord_to_state(x, y)
-	                a = np.argmax(Q[s])
-	                row_str += f" {arrow[a]}  "
-	            print(row_str)
-	        print("===============================\n")
+	    return next_state, reward, done                 # 다음 상태, 보상, 종료 여부 반환
 	
 	
-	# =========================================
-	# 2. ε-greedy 정책 (탐험/이용)
-	# =========================================
-	def epsilon_greedy(Q, state, n_actions, epsilon):
-	    """
-	    ε의 확률로 랜덤 행동, (1-ε)의 확률로 Q가 최대인 행동 선택
-	    """
+	# 초기 상태 반환 함수
+	def reset():
+	    return 0                                        # 항상 state 0에서 에피소드 시작
+	
+	
+	# ======================================
+	# 2. Q-Learning 하이퍼파라미터 설정
+	# ======================================
+	alpha = 0.1         # 학습률 (Learning Rate)
+	gamma = 0.9         # 할인율 (Discount Factor)
+	epsilon = 1.0       # 초기 탐험 확률 (ε-greedy에서 ε)
+	epsilon_min = 0.05  # 탐험 최소값
+	epsilon_decay = 0.995  # 에피소드마다 ε 감소율
+	
+	n_episodes = 500    # 총 학습 반복(에피소드) 횟수
+	max_steps = 20      # 한 에피소드에서 최대 step (무한 루프 방지용)
+	
+	# Q-테이블 초기화: 모든 상태-행동 쌍을 0으로 시작
+	Q = np.zeros((n_states, n_actions))
+	
+	
+	# ======================================
+	# 3. ε-greedy 행동 선택 함수
+	# ======================================
+	def choose_action(state, epsilon):
+	    # 일정 확률 ε로 탐험(랜덤 행동 선택)
 	    if np.random.rand() < epsilon:
 	        return np.random.randint(n_actions)
+	    # 나머지 확률로 현재 Q값이 가장 큰 행동 선택 (exploitation)
 	    return np.argmax(Q[state])
 	
 	
-	# =========================================
-	# 3. Q-Learning 학습 루프
-	# =========================================
-	def train_q_learning(
-	    n_episodes=1000,
-	    alpha=0.1,
-	    gamma=0.99,
-	    epsilon_start=1.0,
-	    epsilon_end=0.05,
-	    epsilon_decay=0.995,
-	):
-	    env = GridWorldEnv()
-	    # Q-테이블 초기화: (상태 수, 행동 수)
-	    Q = np.zeros((env.n_states, env.n_actions))
+	# ======================================
+	# 4. Q-Learning 학습 루프
+	# ======================================
+	reward_history = []     # 에피소드별 총 보상을 저장할 리스트
 	
-	    epsilon = epsilon_start
-	    episode_rewards = []
+	print("=== 1차원 선형 월드에서의 Q-Learning 학습 시작 ===")
 	
-	    for ep in range(n_episodes):
-	        s = env.reset()
-	        done = False
-	        total_reward = 0.0
+	# 전체 에피소드 반복
+	for episode in range(1, n_episodes + 1):
 	
-	        while not done:
-	            # 1) 행동 선택
-	            a = epsilon_greedy(Q, s, env.n_actions, epsilon)
+	    state = reset()     # 매 에피소드마다 초기 상태로 리셋
+	    total_reward = 0.0  # 에피소드 누적 보상 초기화
 	
-	            # 2) 환경 상호작용
-	            s2, r, done, _ = env.step(a)
+	    # 한 에피소드 안에서 반복
+	    for step_idx in range(max_steps):
 	
-	            # 3) Q-Learning 업데이트
-	            #    Q(s,a) ← Q(s,a) + α [ r + γ max_a' Q(s',a') - Q(s,a) ]
-	            best_next = np.max(Q[s2])
-	            td_target = r + gamma * best_next
-	            Q[s, a] += alpha * (td_target - Q[s, a])
+	        # 1) ε-greedy 정책으로 행동 선택
+	        action = choose_action(state, epsilon)
 	
-	            # 4) 다음 스텝 준비
-	            s = s2
-	            total_reward += r
+	        # 2) 환경에 행동 적용 → 다음 상태, 보상, 종료 여부 반환
+	        next_state, reward, done = step(state, action)
 	
-	        # ε 감소 (초기에는 탐험 위주, 후반에는 이용 위주)
-	        epsilon = max(epsilon_end, epsilon * epsilon_decay)
-	        episode_rewards.append(total_reward)
+	        # 3) Q(s,a) 업데이트
+	        #    TD Target = r + γ * max(Q(s', a'))
+	        best_next_Q = np.max(Q[next_state])                 # 다음 상태에서의 최대 Q
+	        td_target = reward + gamma * best_next_Q            # TD Target 계산
+	        td_error = td_target - Q[state, action]             # TD Error 계산
+	        Q[state, action] += alpha * td_error                # 학습률 α 반영하여 업데이트
 	
-	        # 모니터링 로그
-	        if (ep + 1) % 100 == 0:
-	            avg_r = np.mean(episode_rewards[-100:])
-	            print(
-	                f"[Q-Learning] Episode {ep+1:4d} | "
-	                f"Avg Reward(last 100) = {avg_r:7.3f} | epsilon = {epsilon:6.3f}"
-	            )	
-	    return env, Q, episode_rewards
+	        # 4) 보상 누적
+	        total_reward += reward
+	
+	        # 5) 상태 업데이트
+	        state = next_state
+	
+	        # 종료 상태이면 반복 중단
+	        if done:
+	            break
+	
+	    # ε 감소 (탐험 → 이용 비중 증가)
+	    epsilon = max(epsilon_min, epsilon * epsilon_decay)
+	
+	    reward_history.append(total_reward)
+	
+	    # 50에피소드마다 최근 50개 평균 보상 출력
+	    if episode % 50 == 0:
+	        avg_reward = np.mean(reward_history[-50:])
+	        print(f"[Episode {episode:4d}] 최근 50 에피소드 평균 리워드 = {avg_reward:.3f},  epsilon = {epsilon:.3f}")
+	
+	print("\n=== 학습 종료 ===\n")
 	
 	
-	# =========================================
-	# 4. 학습된 정책 평가
-	# =========================================
-	def evaluate_greedy_policy(env, Q, n_episodes=10):
-	    """
-	    학습된 Q를 이용해 ε=0 (탐험 없음) 조건에서
-	    여러 에피소드를 돌려 평균 리턴을 확인
-	    """
-	    returns = []
-	    for ep in range(n_episodes):
-	        s = env.reset()
-	        done = False
-	        total_reward = 0.0
-	        steps = 0
-	
-	        while not done:
-	            a = np.argmax(Q[s])          # 완전 greedy
-	            s, r, done, _ = env.step(a)
-	            total_reward += r
-	            steps += 1
-	
-	        returns.append(total_reward)
-	        print(f"[Eval] Episode {ep+1}: return={total_reward:.3f}, steps={steps}")
-	
-	    print(f"\n[Eval] Average return over {n_episodes} episodes = {np.mean(returns):.3f}\n")
+	# ======================================
+	# 5. 학습된 Q테이블 출력
+	# ======================================
+	print("▶ 최종 Q-테이블 (행: 상태, 열: 행동[왼쪽, 오른쪽])")
+	for s in range(n_states):
+	    print(f"상태 {s}: {Q[s]}")
 	
 	
-	# =========================================
-	# 5. 메인 실행
-	# =========================================
-	if __name__ == "__main__":
-	    # 1) 학습
-	    env, Q, rewards = train_q_learning(
-	        n_episodes=1000,
-	        alpha=0.1,
-	        gamma=0.99,
-	        epsilon_start=1.0,
-	        epsilon_end=0.05,
-	        epsilon_decay=0.995,
-	    )
+	# ======================================
+	# 6. 학습된 최적 정책 출력
+	# ======================================
+	action_symbols = {0: "←", 1: "→"}    # 행동을 화살표로 표시
 	
-	    # 2) 학습된 정책(화살표) 출력
-	    env.render_policy(Q)
+	print("\n▶ 학습된 정책(Policy)")
 	
-	    # 3) 평가
-	    evaluate_greedy_policy(env, Q, n_episodes=10)
+	policy_str = ""
+	for s in range(n_states):
+	    if s == n_states - 1:            # 마지막 상태는 Goal
+	        policy_str += " G "
+	    else:
+	        best_a = np.argmax(Q[s])     # 각 상태에서 Q값이 가장 큰 행동 선택
+	        policy_str += f" {action_symbols[best_a]} "
+	
+	print("상태 0  1  2  3  4")
+	print("     " + policy_str)
+	
+	
+	# ======================================
+	# 7. 학습 결과 테스트 실행 (탐험 없이 greedy만)
+	# ======================================
+	print("\n▶ 학습된 정책으로 1회 에피소드 실행 예시")
+	
+	state = reset()               # 초기 상태
+	trajectory = [state]          # 방문한 상태 기록
+	
+	for step_idx in range(max_steps):
+	    action = np.argmax(Q[state])               # 탐험 없이 항상 최적 행동
+	    next_state, reward, done = step(state, action)
+	    trajectory.append(next_state)
+	    state = next_state
+	    if done:
+	        break
+	
+	print("방문한 상태들:", trajectory)
+	print("스텝 수:", len(trajectory)-1)
+	print("마지막 상태가 목표(4)면 학습 성공!")
 
 <br>
 
-	[Q-Learning] Episode  100 | Avg Reward(last 100) =   0.504 | epsilon =  0.606
-	[Q-Learning] Episode  200 | Avg Reward(last 100) =   0.861 | epsilon =  0.367
-	[Q-Learning] Episode  300 | Avg Reward(last 100) =   0.903 | epsilon =  0.222
-	[Q-Learning] Episode  400 | Avg Reward(last 100) =   0.913 | epsilon =  0.135
-	[Q-Learning] Episode  500 | Avg Reward(last 100) =   0.921 | epsilon =  0.082
-	[Q-Learning] Episode  600 | Avg Reward(last 100) =   0.925 | epsilon =  0.050
-	[Q-Learning] Episode  700 | Avg Reward(last 100) =   0.927 | epsilon =  0.050
-	[Q-Learning] Episode  800 | Avg Reward(last 100) =   0.926 | epsilon =  0.050
-	[Q-Learning] Episode  900 | Avg Reward(last 100) =   0.925 | epsilon =  0.050
-	[Q-Learning] Episode 1000 | Avg Reward(last 100) =   0.927 | epsilon =  0.050
-
-	=== Learned Policy (argmax Q) ===	(0,0) → (0,1) → (0,2) → (1,2) → (2,2) → (3,2) → (4,2) → (4,3) → (4,4)
- 	→   →   ↓   ↓   ↓  
- 	→   →   ↓   ↓   ↓  
- 	↓   →   ↓   ↓   ↓  
- 	→   →   →   ↓   ↓  
- 	→   →   →   →   G  
-	===============================
-
-	[Eval] Episode 1: return=0.930, steps=8
-	[Eval] Episode 2: return=0.930, steps=8
-	[Eval] Episode 3: return=0.930, steps=8
-	[Eval] Episode 4: return=0.930, steps=8
-	[Eval] Episode 5: return=0.930, steps=8
-	[Eval] Episode 6: return=0.930, steps=8
-	[Eval] Episode 7: return=0.930, steps=8
-	[Eval] Episode 8: return=0.930, steps=8
-	[Eval] Episode 9: return=0.930, steps=8
-	[Eval] Episode 10: return=0.930, steps=8
-
-	[Eval] Average return over 10 episodes = 0.930
-
+	=== 1차원 선형 월드에서의 Q-Learning 학습 시작 ===
+	[Episode   50] 최근 50 에피소드 평균 리워드 = 0.601,  epsilon = 0.778
+	[Episode  100] 최근 50 에피소드 평균 리워드 = 0.860,  epsilon = 0.606
+	[Episode  150] 최근 50 에피소드 평균 리워드 = 0.918,  epsilon = 0.471
+	[Episode  200] 최근 50 에피소드 평균 리워드 = 0.946,  epsilon = 0.367
+	[Episode  250] 최근 50 에피소드 평균 리워드 = 0.953,  epsilon = 0.286
+	[Episode  300] 최근 50 에피소드 평균 리워드 = 0.956,  epsilon = 0.222
+	[Episode  350] 최근 50 에피소드 평균 리워드 = 0.961,  epsilon = 0.173
+	[Episode  400] 최근 50 에피소드 평균 리워드 = 0.965,  epsilon = 0.135
+	[Episode  450] 최근 50 에피소드 평균 리워드 = 0.964,  epsilon = 0.105
+	[Episode  500] 최근 50 에피소드 평균 리워드 = 0.965,  epsilon = 0.082
+	=== 학습 종료 ===
+	
+	▶ 최종 Q-테이블 (행: 상태, 열: 행동[왼쪽, 오른쪽])
+	상태 0: [0.62170412 0.7019    ]
+	상태 1: [0.62170963 0.791     ]
+	상태 2: [0.70189422 0.89      ]
+	상태 3: [0.79099209 1.        ]
+	상태 4: [0. 0.]
+	
+	▶ 학습된 정책(Policy)
+	상태 0  1  2  3  4
+	      →  →  →  →  G 
+	
+	▶ 학습된 정책으로 1회 에피소드 실행 예시
+	방문한 상태들: [0, 1, 2, 3, 4]
+	스텝 수: 4
+	마지막 상태가 목표(4)면 학습 성공!
 
 
 ## (1-2) SARSA(State-Action-Reward-State-Action)
