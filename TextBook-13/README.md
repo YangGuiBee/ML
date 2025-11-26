@@ -596,6 +596,19 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 ## (1-2) SARSA(State-Action-Reward-State-Action)
 ![](./images/QL_SARSA.PNG)
 <br>
+
+| 항목        | Q-Learning        | SARSA           |
+| --------- | ----------------- | --------------- |
+| 학습 방식     | Off-policy        | On-policy       |
+| TD Target | r + γ max Q(s′,·) | r + γ Q(s′, a′) |
+| Q값        | 더 큼 (낙관적)         | 더 작음 (보수적)      |
+| 수렴 속도     | 빠른 경향             | 조금 느림           |
+| 위험 행동     | 과감하게 선택           | 안정적인 경로 선택      |
+| 정책        | 동일하게 최적 정책 도달     | 동일              |
+| 테스트 결과    | 동일                | 동일              |
+| 평균 리워드    | 거의 동일             | 거의 동일           |
+
+
 ▣ 정의 : 상태-행동-보상-다음 상태-다음 행동(State-Action-Reward-State-Action)의 연속적인 관계에서 학습하는 방법.<br>
 Q-learning과 달리 SARSA는 에이전트가 선택한 행동을 기반으로 학습하며 에이전트가 현재 행동과 다음 행동을 통해 학습하는 on-policy 방법<br>
 ▣ 필요성 : 정책을 미리 고정한 상태에서 Q-learning처럼 탐험과 학습을 분리하지 않고, 정책을 유지하며 학습할 때 유리.<br>
