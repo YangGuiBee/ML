@@ -116,15 +116,6 @@ Agent 기계는 환경(Environment)으로부터 상태(state)를 관측(observat
 ## [강화학습의 응용분야] <br>
 **<ins>Richard S. Sutton, "Deconstructing Reinforcement Learning"(2009년 국제기계학습학회(ICML)에서 발표)</ins>**<br>
 
-	(1위) 프로세스 제어 (24%)<br>
-	(2위) 네트워크 관리 (21%)<br>
-	(3위) 자산 관리 (18%)<br>
-	(4위) 로보틱스 (13%)<br>
-	(5위) 교통 (6%)<br>
-	(6위) 자동 제어 (6%)<br>
-	(7위) 금융 (4%)<br>
-	(8위) 기타(8%)<br>
-
 ### (1) 프로세스 제어 (24%)
 강화학습이 제조 및 공정 산업에서 시스템의 상태를 최적화 및 자동화함으로써 복잡한 변수를 실시간으로 제어하여 안정적이고 효율적인 작업<br> 
 **화학 공정 최적화:** MIT와 BASF는 강화학습을 사용해 화학반응 공정을 최적화하여 온도와 압력을 조정해 불순물 제거 효과를 극대화<br> 
@@ -184,6 +175,20 @@ DeepMind의 축구 AI: Google DeepMind는 축구 선수들의 최적의 움직�
 작물 성장 최적화: 강화학습을 통해 온도, 습도, 조명 등을 자동제어로 조절해 최적의 작물 성장 조건을 유지하는 기술 개발<br> 
 농기계 경로 최적화: 자율주행 농기계가 강화학습을 통해 농지 내에서 최적의 경로를 학습하여 연료 소비와 시간을 절감<br> 
 
+
+**<ins>Richard S. Sutton, "Deconstructing Reinforcement Learning"(2009년 국제기계학습학회(ICML)에서 발표)</ins>**<br>
+
+	(1위) 프로세스 제어 (24%)<br>
+	(2위) 네트워크 관리 (21%)<br>
+	(3위) 자산 관리 (18%)<br>
+	(4위) 로보틱스 (13%)<br>
+	(5위) 교통 (6%)<br>
+	(6위) 자동 제어 (6%)<br>
+	(7위) 금융 (4%)<br>
+	(8위) 기타(8%)<br>
+
+<br>
+	
 **<ins>D. Zhang 외, "A survey on applications of reinforcement learning in spatial resource allocation"(2024)</ins>**<br>
 
 	(1위) 로보틱스 / 자율제어 / 자율주행 (25-30%)<br>
