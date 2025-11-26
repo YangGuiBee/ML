@@ -269,23 +269,6 @@ $S_t$는 시간 t에서의 상태, 과거 상태 $[S_1, ..., S_t]$ 모두를 고
 <br>
 (출처) Deep Learning Bible(https://wikidocs.net/169311)
 
-![](./images/RL_table.png)
-<br>
-**Model-Free Algorithm**
-Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수행<br>
-에이전트(Agent)가 행동을 통해 보상 합의 기대값을 최대로 하는 Policy Function을 탐색<br>
-환경에 대해 알지 못하고, 다음의 상태와 보상을 수동적으로 행동하여 취득<br>
-환경 파악을 위해서 탐사(Exploration)<br>
-탐사는 시행착오(Trial and Error)를 통해서 Policy Function을 점차적으로 학습<br>
-
-**Model-Based Algorithm**
-환경(Environment)에 대한 모든 설명(Description)을 알고 문제를 푸는 방법<br>
-직접 행동을 하지 않고, 최적의 솔루션을 탐색<br>
-모델은 상태(State)와 행동(Action)을 받아서 다음 상태와 보상을 예측<br>
-모델은 Planning에 사용되며, 경험 전에 가능한 미래 상황을 고려하여 행동을 예측<br>
-모델과 Planning을 사용하여 해결하는 방식<br>
-
-![](./images/RL.PNG)
 <br>
 
 **DavidSilver의 Reinforcement Learning 강의교재**<br>
@@ -336,6 +319,27 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 	다만, 보상은 지연될 수 있다
 	
 ---
+
+
+![](./images/RL_table.png)
+<br>
+**Model-Free Algorithm**
+Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수행<br>
+에이전트(Agent)가 행동을 통해 보상 합의 기대값을 최대로 하는 Policy Function을 탐색<br>
+환경에 대해 알지 못하고, 다음의 상태와 보상을 수동적으로 행동하여 취득<br>
+환경 파악을 위해서 탐사(Exploration)<br>
+탐사는 시행착오(Trial and Error)를 통해서 Policy Function을 점차적으로 학습<br>
+
+**Model-Based Algorithm**
+환경(Environment)에 대한 모든 설명(Description)을 알고 문제를 푸는 방법<br>
+직접 행동을 하지 않고, 최적의 솔루션을 탐색<br>
+모델은 상태(State)와 행동(Action)을 받아서 다음 상태와 보상을 예측<br>
+모델은 Planning에 사용되며, 경험 전에 가능한 미래 상황을 고려하여 행동을 예측<br>
+모델과 Planning을 사용하여 해결하는 방식<br>
+
+![](./images/RL.PNG)
+
+<br>
 
 ![](./images/Model_vs.PNG)
 <br>
