@@ -178,33 +178,36 @@ DeepMind의 축구 AI: Google DeepMind는 축구 선수들의 최적의 움직�
 
 **<ins>Richard S. Sutton, "Deconstructing Reinforcement Learning"(2009년 국제기계학습학회(ICML)에서 발표)</ins>**<br>
 
-	(1위) 프로세스 제어 (24%)<br>
-	(2위) 네트워크 관리 (21%)<br>
-	(3위) 자산 관리 (18%)<br>
-	(4위) 로보틱스 (13%)<br>
-	(5위) 교통 (6%)<br>
-	(6위) 자동 제어 (6%)<br>
-	(7위) 금융 (4%)<br>
-	(8위) 기타(8%)<br>
+	(1위) 프로세스 제어 (24%)
+	(2위) 네트워크 관리 (21%)
+	(3위) 자산 관리 (18%)
+	(4위) 로보틱스 (13%)
+	(5위) 교통 (6%)
+	(6위) 자동 제어 (6%)
+	(7위) 금융 (4%)
+	(8위) 기타(8%)
 
 <br>
 	
 **<ins>D. Zhang 외, "A survey on applications of reinforcement learning in spatial resource allocation"(2024)</ins>**<br>
 
-	(1위) 로보틱스 / 자율제어 / 자율주행 (25-30%)<br>
-	(2위) 산업 시스템 제어 / 제조 프로세스 최적화 (25-30%)<br>
-	(3위) 네트워크・통신・클라우드 관리 (10-15%)<br>
-	(4위) 교통 / 스마트 인프라 관리 (8-12%)<br>
-	(5위) 금융・자산 관리 / 알고리즘 트레이딩 (8-10%)<br>
-	(6위) 추천 시스템・소프트웨어 엔지니어링 / 기타 IT 분야 (8-10%)<br>
-	(7위) 헬스케어・의료영상・제약 (5-8%)<br>
+	(1위) 로보틱스 / 자율제어 / 자율주행 (25-30%)
+	(2위) 산업 시스템 제어 / 제조 프로세스 최적화 (25-30%)
+	(3위) 네트워크・통신・클라우드 관리 (10-15%)
+	(4위) 교통 / 스마트 인프라 관리 (8-12%)
+	(5위) 금융・자산 관리 / 알고리즘 트레이딩 (8-10%)
+	(6위) 추천 시스템・소프트웨어 엔지니어링 / 기타 IT 분야 (8-10%)
+	(7위) 헬스케어・의료영상・제약 (5-8%)
 
 
 ## [강화학습의 연구] <br>
 
 강화학습에 영향을 끼친 학문분야는 인공지능 외에도 행동심리학, 신경과학, 제어이론, 운용과학 등이 있으며,<br> 
 이 중 가장 근간이 되는 학문이 **행동심리학(Behavioral Psychology)**
-<br>미국의 심리학자 에드워드 손다이크(Edward Thorndike): 1911년 동물이 어떤 행동을 선택할 때는 강화된 사건(reinforced event)에 영향을 받는 시행착오(Trial and Error)의 효과의 법칙(Law of Effect) 발표<br>프린스턴대학의 마빈 민스키(Marvin Minsky): 1954년 아날로그 컴퓨터인 SNARC(Stochastic Neural Analog Reinforcement Calculator)을 설계하여 쥐의 미로찾기 시뮬레이션을 개발함으로써 행동심리학 이론을 처음으로 컴퓨터공학에 적용<br>
+<br>미국의 심리학자 에드워드 손다이크(Edward Thorndike): 1911년 동물이 어떤 행동을 선택할 때는 강화된 사건(reinforced event)에 영향을 받는<br>
+시행착오(Trial and Error)의 효과의 법칙(Law of Effect) 발표<br>
+프린스턴대학의 마빈 민스키(Marvin Minsky): 1954년 아날로그 컴퓨터인 SNARC(Stochastic Neural Analog Reinforcement Calculator)을 설계하여<br> 
+쥐의 미로찾기 시뮬레이션을 개발함으로써 행동심리학 이론을 처음으로 컴퓨터공학에 적용<br>
 
 
     마빈 민스키(Marvin Minsky)의 1960년 논문 "Steps Toward Artificial Intelligence"
