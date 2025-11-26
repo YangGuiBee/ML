@@ -873,6 +873,309 @@ Q-Network는 신경망을 통해 복잡한 상태 공간에서도 효율적으�
 
 <br>
 
+	import numpy as np  # 수치 계산을 위한 numpy
+	
+	# 난수 시드 고정 (실행할 때마다 같은 결과를 얻기 위함)
+	np.random.seed(42)
+	
+	# ======================================
+	# 1. 환경 설정 (1차원 선형 월드)
+	# ======================================
+	n_states = 5     # 상태 개수: 0,1,2,3,4 (4가 목표 상태)
+	n_actions = 2    # 행동 개수: 0=왼쪽, 1=오른쪽
+	
+	def step(state, action):
+	    # action이 0이면 왼쪽으로 이동
+	    if action == 0:
+	        next_state = max(0, state - 1)              # 왼쪽 끝(0) 아래로 내려가지 않도록 제한
+	    # action이 1이면 오른쪽으로 이동
+	    else:
+	        next_state = min(n_states - 1, state + 1)   # 오른쪽 끝(4) 위로 넘어가지 않도록 제한
+	    
+	    # 목표 상태(4)에 도달한 경우
+	    if next_state == n_states - 1:
+	        reward = 1.0                                # 목표 도달 보상 +1
+	        done = True                                 # 에피소드 종료
+	    # 그 외의 경우
+	    else:
+	        reward = -0.01                              # 이동마다 작은 패널티 부여
+	        done = False                                # 에피소드 계속 진행
+	
+	    return next_state, reward, done                 # 다음 상태, 보상, 종료 여부 반환
+	
+	def reset():
+	    # 에피소드 시작 시 항상 상태 0에서 시작
+	    return 0
+	
+	def state_to_onehot(state):
+	    # 상태를 one-hot 벡터(1 x n_states)로 변환
+	    x = np.zeros((1, n_states), dtype=np.float32)   # 1행 n_states열의 0 벡터 생성
+	    x[0, state] = 1.0                               # 해당 상태 인덱스 위치만 1로 설정
+	    return x
+	
+	# ======================================
+	# 2. Q-Network 파라미터 설정 (순수 NumPy로 신경망 구성)
+	# ======================================
+	input_dim = n_states      # 입력 차원: 상태를 one-hot으로 표현하므로 n_states
+	hidden_dim = 16           # 은닉층 노드 수 (임의로 16으로 설정)
+	output_dim = n_actions    # 출력 차원: 각 행동에 대한 Q값 2개
+	
+	# 가중치와 편향을 작은 값으로 초기화
+	W1 = 0.1 * np.random.randn(input_dim, hidden_dim)   # 1층 가중치 (입력 → 은닉)
+	b1 = np.zeros((1, hidden_dim))                      # 1층 편향
+	W2 = 0.1 * np.random.randn(hidden_dim, output_dim)  # 2층 가중치 (은닉 → 출력)
+	b2 = np.zeros((1, output_dim))                      # 2층 편향
+	
+	def relu(x):
+	    # ReLU 활성화 함수: 0보다 작으면 0, 크면 그대로
+	    return np.maximum(0, x)
+	
+	def relu_deriv(x):
+	    # ReLU의 도함수: x>0이면 1, 아니면 0
+	    return (x > 0).astype(np.float32)
+	
+	def forward(x):
+	    # 신경망 순전파: 입력 x에 대해 Q값을 계산
+	    # x: (1, input_dim) 형태의 one-hot 상태 벡터
+	    z1 = x @ W1 + b1                # 1층 선형 결합 (1 x hidden_dim)
+	    a1 = relu(z1)                   # ReLU 활성화 (1 x hidden_dim)
+	    z2 = a1 @ W2 + b2               # 2층 선형 결합 (1 x output_dim)
+	    q_values = z2                   # 출력층: 각 행동에 대한 Q값
+	    return z1, a1, q_values         # 역전파 위해 중간값도 반환
+	
+	# ======================================
+	# 3. 하이퍼파라미터 설정 (Q-Learning과 동일 구조)
+	# ======================================
+	gamma = 0.9         # 할인율
+	epsilon = 1.0       # ε-greedy에서 탐험 비율 시작값
+	epsilon_min = 0.05  # ε의 최소값
+	epsilon_decay = 0.995  # 에피소드마다 ε 감소 비율
+	learning_rate = 0.01   # 신경망 파라미터 학습률 (gradient descent step 크기)
+	
+	n_episodes = 500    # 총 학습 에피소드 수
+	max_steps = 20      # 한 에피소드에서 최대 스텝 수
+	
+	# ======================================
+	# 4. ε-greedy 정책으로 행동 선택 함수
+	# ======================================
+	def choose_action(state, epsilon):
+	    # ε 확률로 랜덤 탐험
+	    if np.random.rand() < epsilon:
+	        return np.random.randint(n_actions)         # 0 또는 1 중 랜덤 선택
+	
+	    # 1-ε 확률로 Q값이 최대인 행동 선택
+	    x = state_to_onehot(state)                      # 상태를 one-hot으로 변환
+	    _, _, q_values = forward(x)                     # Q값 계산
+	    action = int(np.argmax(q_values, axis=1)[0])    # 가장 큰 Q값을 주는 행동 인덱스 선택
+	    return action
+	
+	# ======================================
+	# 5. Q-Network 기반 Q-Learning 학습 루프
+	# ======================================
+	reward_history = []  # 에피소드별 총 보상을 저장할 리스트
+	
+	print("=== 1차원 선형 월드에서의 Q-Network(NumPy) 학습 시작 ===")
+	
+	for episode in range(1, n_episodes + 1):
+	
+	    state = reset()          # 에피소드 시작 상태 초기화
+	    total_reward = 0.0       # 에피소드 누적 보상 초기화
+	
+	    for step_idx in range(max_steps):
+	
+	        # (1) ε-greedy 정책으로 행동 선택
+	        action = choose_action(state, epsilon)
+	
+	        # (2) 선택한 행동을 환경에 적용 → 다음 상태, 보상, 종료 여부 반환
+	        next_state, reward, done = step(state, action)
+	
+	        # (3) 현재 상태와 다음 상태를 one-hot 벡터로 변환
+	        x = state_to_onehot(state)                    # 현재 상태 (1 x n_states)
+	        x_next = state_to_onehot(next_state)          # 다음 상태 (1 x n_states)
+	
+	        # (4) 현재 상태에서의 Q값 계산 (순전파)
+	        z1, a1, q_values = forward(x)                 # q_values: (1 x n_actions)
+	        q_value = q_values[0, action]                 # 선택한 행동에 대한 Q값 (스칼라)
+	
+	        # (5) 다음 상태에서의 최대 Q값 계산 (Q-Learning 방식)
+	        _, _, q_values_next = forward(x_next)         # 다음 상태에서의 Q값들
+	        max_next_q = float(np.max(q_values_next, axis=1)[0])  # 그 중 최대값
+	
+	        # (6) TD Target 계산
+	        if done:
+	            target = reward                           # 종료 상태면 미래 보상 없음
+	        else:
+	            target = reward + gamma * max_next_q      # r + γ * max_a' Q(s', a')
+	
+	        # (7) TD Error 계산 (예측 - 타깃)
+	        #     손실 L = 0.5 * (q_value - target)^2 라고 두면
+	        #     dL/d(q_value) = (q_value - target)
+	        td_error = q_value - target                   # 스칼라
+	
+	        # (8) 출력층(z2)에서의 gradient 계산
+	        #     z2: (1 x n_actions), 그 중 action 인덱스만 영향을 받음
+	        dL_dz2 = np.zeros_like(q_values)              # (1 x n_actions) 0으로 초기화
+	        dL_dz2[0, action] = td_error                  # 선택한 행동 위치에만 td_error 반영
+	
+	        # (9) 2층 가중치와 편향에 대한 gradient
+	        #     dL/dW2 = a1^T @ dL_dz2  (hidden_dim x 1) x (1 x n_actions) = (hidden_dim x n_actions)
+	        dW2 = a1.T @ dL_dz2                           # (hidden_dim x n_actions)
+	        db2 = dL_dz2                                  # (1 x n_actions)
+	
+	        # (10) 1층으로 gradient 전파
+	        #      dL/da1 = dL_dz2 @ W2^T  → (1 x n_actions) @ (n_actions x hidden_dim) = (1 x hidden_dim)
+	        dL_da1 = dL_dz2 @ W2.T                        # (1 x hidden_dim)
+	        #      ReLU 미분: dz1 = dL/da1 * ReLU'(z1)
+	        dL_dz1 = dL_da1 * relu_deriv(z1)              # (1 x hidden_dim)
+	
+	        # (11) 1층 가중치와 편향에 대한 gradient
+	        #      dL/dW1 = x^T @ dL_dz1  (input_dim x 1) x (1 x hidden_dim) = (input_dim x hidden_dim)
+	        dW1 = x.T @ dL_dz1                            # (input_dim x hidden_dim)
+	        db1 = dL_dz1                                  # (1 x hidden_dim)
+	
+	        # (12) 파라미터 업데이트 (경사하강법: W ← W - η * dW)
+	        W2 -= learning_rate * dW2
+	        b2 -= learning_rate * db2
+	        W1 -= learning_rate * dW1
+	        b1 -= learning_rate * db1
+	
+	        # (13) 보상 누적
+	        total_reward += reward
+	
+	        # (14) 상태를 다음 상태로 업데이트
+	        state = next_state
+	
+	        # (15) 종료 상태면 에피소드 종료
+	        if done:
+	            break
+	
+	    # (16) 에피소드 종료 후 epsilon 감소 (탐험 비율을 점점 줄임)
+	    epsilon = max(epsilon_min, epsilon * epsilon_decay)
+	
+	    # (17) 에피소드별 총 보상을 기록
+	    reward_history.append(total_reward)
+	
+	    # (18) 50 에피소드마다 최근 50개 평균 리워드와 현재 epsilon 출력
+	    if episode % 50 == 0:
+	        avg_reward = np.mean(reward_history[-50:])
+	        print(f"[Episode {episode:4d}] 최근 50 에피소드 평균 리워드 = {avg_reward:.3f}, epsilon = {epsilon:.3f}")
+	
+	print("\n=== 학습 종료 ===\n")
+	
+	# ======================================
+	# 6. 학습된 Q-Network로부터 '근사 Q-테이블' 출력
+	# ======================================
+	print("▶ 근사 Q-테이블 (행: 상태, 열: 행동[←,→])")
+	
+	for s in range(n_states):
+	    x = state_to_onehot(s)                # 상태 s를 one-hot으로 변환
+	    _, _, q_vals = forward(x)             # Q값 계산
+	    q_vals_row = q_vals[0]                # (1 x n_actions) → (n_actions,)
+	    print(f"상태 {s}: {q_vals_row}")
+	
+	# ======================================
+	# 7. 학습된 정책(Policy) 확인 (greedy 정책)
+	# ======================================
+	action_symbols = {0: "←", 1: "→"}         # 행동 인덱스를 화살표로 표현하기 위한 매핑
+	
+	print("\n▶ 학습된 정책(Policy)")
+	
+	policy_str = ""
+	for s in range(n_states):
+	    if s == n_states - 1:
+	        policy_str += " G "               # 목표 상태는 G로 표시
+	    else:
+	        x = state_to_onehot(s)
+	        _, _, q_vals = forward(x)
+	        best_action = int(np.argmax(q_vals, axis=1)[0])
+	        policy_str += f" {action_symbols[best_action]} "
+	
+	print("상태 0  1  2  3  4")
+	print("     " + policy_str)
+	
+	# ======================================
+	# 8. 학습된 정책으로 1회 테스트 실행 (탐험 없이 greedy만 사용)
+	# ======================================
+	print("\n▶ 학습된 정책으로 1회 에피소드 실행 예시")
+	
+	state = reset()                       # 초기 상태 0
+	trajectory = [state]                  # 방문한 상태들을 저장할 리스트
+	
+	for step_idx in range(max_steps):
+	
+	    x = state_to_onehot(state)        # 현재 상태를 one-hot으로 변환
+	    _, _, q_vals = forward(x)         # Q값 계산
+	    action = int(np.argmax(q_vals))   # 탐험 없이 항상 greedy 행동 선택
+	
+	    next_state, reward, done = step(state, action)  # 환경에 행동 적용
+	    trajectory.append(next_state)     # 방문한 상태 기록
+	    state = next_state                # 상태 업데이트
+	
+	    if done:
+	        break                         # 목표 도달 시 종료
+	
+	print("방문한 상태들:", trajectory)
+	print("스텝 수:", len(trajectory) - 1)
+	print("마지막 상태가 목표(4)면 학습 성공!")
+
+<br>
+
+	=== 1차원 선형 월드에서의 Q-Network(NumPy) 학습 시작 ===
+	[Episode   50] 최근 50 에피소드 평균 리워드 = 0.634, epsilon = 0.778
+	[Episode  100] 최근 50 에피소드 평균 리워드 = 0.817, epsilon = 0.606
+	[Episode  150] 최근 50 에피소드 평균 리워드 = 0.939, epsilon = 0.471
+	[Episode  200] 최근 50 에피소드 평균 리워드 = 0.953, epsilon = 0.367
+	[Episode  250] 최근 50 에피소드 평균 리워드 = 0.951, epsilon = 0.286
+	[Episode  300] 최근 50 에피소드 평균 리워드 = 0.956, epsilon = 0.222
+	[Episode  350] 최근 50 에피소드 평균 리워드 = 0.964, epsilon = 0.173
+	[Episode  400] 최근 50 에피소드 평균 리워드 = 0.962, epsilon = 0.135
+	[Episode  450] 최근 50 에피소드 평균 리워드 = 0.963, epsilon = 0.105
+	[Episode  500] 최근 50 에피소드 평균 리워드 = 0.965, epsilon = 0.082
+	
+	=== 학습 종료 ===
+	
+	▶ 근사 Q-테이블 (행: 상태, 열: 행동[←,→])
+	상태 0: [0.61391433 0.71010196]
+	상태 1: [0.58996149 0.71413935]
+	상태 2: [0.57754957 0.76342132]
+	상태 3: [0.59451489 0.96636278]
+	상태 4: [0.63171271 0.72202013]
+	
+	▶ 학습된 정책(Policy)
+	상태 0  1  2  3  4
+	      →  →  →  →  G 
+	
+	▶ 학습된 정책으로 1회 에피소드 실행 예시
+	방문한 상태들: [0, 1, 2, 3, 4]
+	스텝 수: 4
+	마지막 상태가 목표(4)면 학습 성공!
+	
+<br>
+
+
+| 구분                      | **Q-Learning (Tabular)** | **SARSA (Tabular)** | **Q-Network (NumPy Function Approx.)** |
+| ----------------------- | ------------------------ | ------------------- | -------------------------------------- |
+| **학습 방식**               | Off-policy Q-Learning    | On-policy SARSA     | 신경망 기반 Q-Learning(근사)                  |
+| **TD Target**           | r + γ max Q(s’,·)        | r + γ Q(s’,a’)      | r + γ max Qθ(s’,·) (NN)                |
+| **학습 로그(초기)**           | 0.667 근처 → 빠르게 상승        | 0.518 근처(더 낮음)      | 0.63 근처(중간)                            |
+| **학습 로그(후반)**           | ~0.965                   | ~0.964              | ~0.965                                 |
+| **정책 수렴**               | → → → →                  | → → → →             | → → → →                                |
+| **최종 성능(경로)**           | 4 스텝                     | 4 스텝                | 4 스텝                                   |
+| **Q값의 크기 패턴**           | 가장 큼(낙관적)                | 중간(보수적)             | 불규칙·잡음 존재                              |
+| **목표 상태 Q값**            | 정확히 0,0                  | 정확히 0,0             | 0이 아님(근사오차)                            |
+| **Q값의 안정성**             | 매우 안정                    | 안정                  | 불안정(근사 함수 특성)                          |
+| **Q값 단조 증가 여부**         | 거의 단조 증가                 | 거의 단조 증가            | 단조 증가 아님(흩어짐)                          |
+| **근사 오차(Approx Error)** | 없음                       | 없음                  | 존재                                     |
+| **탐험 반영**               | 반영 안 함(낙관적)              | 반영함(보수적)            | 반영되지만 근사 노이즈 있음                        |
+| **초기 위험성 처리**           | 위험하게 행동                  | 안전하게 행동             | 애매함(학습 과정에 따라 달라짐)                     |
+| **수렴 속도**               | 가장 빠름                    | 중간                  | 느린 편 또는 변동                             |
+| **확장성(대규모 상태 공간)**      | 매우 낮음                    | 낮음                  | 매우 높음(신경망)                             |
+| **장점**                  | 정확·안정·빠름                 | 안전·보수적·안정           | 확장성·연속 공간 가능                           |
+| **단점**                  | 큰 상태 공간에서 불가             | 보수적이라 느릴 수도         | Q값 흔들림(근사오류)                           |
+| **최종적으로 학습한 정책**        | 동일                       | 동일                  | 동일                                     |
+
+<br>
+
 ## (1-4) DQN(Deep Q-Network) : 딥러닝을 활용한 Q-Learning의 발전된 형태 (2013, 2015)
 ![](./images/DQN_QL.PNG)
 <br>
