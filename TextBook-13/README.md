@@ -23,7 +23,7 @@
 
 	[1] Model-free RL : Value Iteration
 	테이블 기반
-		(1-1) Q-Learning: 작은 상태 공간에서 사용되는 표(Q-Table) 기반
+		(1-1) Q-Learning: 상태 공간에서 사용되는 표(Q-Table) 기반
 		(1-2) SARSA(State Action Reward State Action)
 	심층 기반
 		(1-3) Q-Network: 신경망을 사용하여 Q-값을 근사화하는 모델
@@ -364,7 +364,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 		(1-14) NoisyNet: 신경망 가중치에 노이즈를 추가해 탐색 효율성을 높이는 방식
 		
 
-## (1-1) Q-Learning : 작은 상태 공간에서 사용되는 표(Q-Table) 기반
+## (1-1) Q-Learning : 상태 공간에서 사용되는 표(Q-Table) 기반
 ![](./images/RL2.png)
 <br>(출처) Deep Learning Bible(https://wikidocs.net/169311)
 
