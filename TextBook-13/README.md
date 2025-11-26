@@ -418,8 +418,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 	        done = False
 	
 	    return next_state, reward, done                 # 다음 상태, 보상, 종료 여부 반환
-	
-	
+		
 	# 초기 상태 반환 함수
 	def reset():
 	    return 0                                        # 항상 state 0에서 에피소드 시작
@@ -553,7 +552,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 
 <br>
 
-	=== 1차원 선형 월드에서의 Q-Learning 학습 시작 ===
+	=== 1차원 선형 월드에서의 Q-Learning 학습 시작 === 
 	[Episode   50] 최근 50 에피소드 평균 리워드 = 0.601,  epsilon = 0.778
 	[Episode  100] 최근 50 에피소드 평균 리워드 = 0.860,  epsilon = 0.606
 	[Episode  150] 최근 50 에피소드 평균 리워드 = 0.918,  epsilon = 0.471
@@ -564,6 +563,7 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 	[Episode  400] 최근 50 에피소드 평균 리워드 = 0.965,  epsilon = 0.135
 	[Episode  450] 최근 50 에피소드 평균 리워드 = 0.964,  epsilon = 0.105
 	[Episode  500] 최근 50 에피소드 평균 리워드 = 0.965,  epsilon = 0.082
+	
 	=== 학습 종료 ===
 	
 	▶ 최종 Q-테이블 (행: 상태, 열: 행동[왼쪽, 오른쪽])
@@ -582,6 +582,16 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 	스텝 수: 4
 	마지막 상태가 목표(4)면 학습 성공!
 
+<br>
+
+	에피소드 진행에 따라 평균 리워드가 증가하고 있다 → 학습이 잘 되고 있다
+	ε(epsilon)이 감소할수록 탐험이 줄고 최적 행동을 더 많이 선택
+	평균 리워드가 0.96 정도로 수렴 → 96% 이상 에피소드에서 목표 도달 성공
+	Q-테이블의 상태값 : 왼쪽이동과 오른쪽이동의 보상값비교
+	탐험 없이 greedy 방식으로도 완벽히 성공
+	Q-Learning이 완전히 성공적으로 수렴
+
+<br>
 
 ## (1-2) SARSA(State-Action-Reward-State-Action)
 ![](./images/QL_SARSA.PNG)
@@ -607,73 +617,213 @@ Q-learning과 달리 SARSA는 에이전트가 선택한 행동을 기반으로 �
 
 	import numpy as np
 	
-	# SARSA 알고리즘을 위한 환경 설정
-	n_states = 5  # 상태의 개수
-	n_actions = 2  # 행동의 개수
-	Q = np.zeros((n_states, n_actions))  # Q-테이블 초기화
-	alpha = 0.1  # 학습률
-	gamma = 0.9  # 할인 계수
-	epsilon = 0.1  # 탐험 확률
+	# 난수 시드 고정 (결과 재현성 보장)
+	np.random.seed(42)
 	
-	# 행동 선택 함수 (ε-greedy)
-	def choose_action(state):
-	    if np.random.uniform(0, 1) < epsilon:  # 탐험
-	        return np.random.choice(n_actions)
-	    else:  # 활용
-	        return np.argmax(Q[state, :])
+	# ======================================
+	# 1. 환경 설정 (1차원 선형 월드)
+	# ======================================
+	n_states = 5     # 상태: 0,1,2,3,4 (4가 목표 상태)
+	n_actions = 2    # 행동: 0=왼쪽, 1=오른쪽
 	
-	# Q-값 업데이트 함수
-	def update_q(state, action, reward, next_state, next_action):
-	    predict = Q[state, action]  # 현재 상태-행동의 Q-값
-	    target = reward + gamma * Q[next_state, next_action]  # SARSA의 타겟 값
-	    Q[state, action] = predict + alpha * (target - predict)  # 업데이트 공식
-	
-	# 학습 반복
-	num_episodes = 100  # 에피소드 수
-	total_rewards = []  # 에피소드별 총 보상 기록
-	success_count = 0  # 종료 상태에 도달한 에피소드 수
-	
-	for episode in range(num_episodes):
-	    state = np.random.randint(0, n_states)  # 초기 상태를 무작위로 설정
-	    action = choose_action(state)  # 초기 행동 선택
-	    episode_reward = 0  # 에피소드별 총 보상
+	def step(state, action):
+	    # 행동이 0이면 왼쪽으로 이동
+	    if action == 0:
+	        next_state = max(0, state - 1)              # 왼쪽 끝 이하로 못 가게 처리
+	    # 행동이 1이면 오른쪽으로 이동
+	    else:
+	        next_state = min(n_states - 1, state + 1)   # 오른쪽 끝 이상으로 못 가게 처리
 	    
-	    while state != 4:  # 종료 상태(4)에 도달하면 종료
-	        next_state = np.random.randint(0, n_states)  # 다음 상태 무작위 생성
-	        reward = 1 if next_state == 4 else 0  # 종료 상태에 도달하면 보상 1
-	        next_action = choose_action(next_state)  # 다음 행동 선택
-	        update_q(state, action, reward, next_state, next_action)  # Q-값 업데이트
-	        state, action = next_state, next_action  # 상태와 행동 업데이트
-	        episode_reward += reward  # 보상 누적
+	    # 목표 상태에 도달하면 보상 +1
+	    if next_state == n_states - 1:
+	        reward = 1.0
+	        done = True                                 # 목표 도달 → 종료
+	    # 그 외에는 작은 패널티
+	    else:
+	        reward = -0.01
+	        done = False
+	
+	    return next_state, reward, done
+	
+	def reset():
+	    # 매 에피소드 시작 상태는 항상 0
+	    return 0
+	
+	
+	# ======================================
+	# 2. SARSA 하이퍼파라미터 설정
+	# ======================================
+	alpha = 0.1         # 학습률
+	gamma = 0.9         # 할인율
+	epsilon = 1.0       # 탐험 비율 시작값 (ε-greedy)
+	epsilon_min = 0.05  # 최소 탐험값
+	epsilon_decay = 0.995  # 탐험 감소 비율
+	
+	n_episodes = 500    # 학습 에피소드 수
+	max_steps = 20      # 한 에피소드에서 최대 스텝 수
+	
+	# Q 테이블 초기화 (상태 × 행동)
+	Q = np.zeros((n_states, n_actions))
+	
+	
+	# ======================================
+	# 3. ε-greedy 행동 선택 함수
+	# ======================================
+	def choose_action(state, epsilon):
+	    # ε 확률로 탐험
+	    if np.random.rand() < epsilon:
+	        return np.random.randint(n_actions)
+	    # 1-ε 확률로 현재 Q가 가장 큰 행동 선택
+	    return np.argmax(Q[state])
+	
+	
+	# ======================================
+	# 4. SARSA 학습 루프
+	#    (On-policy: TD Target에 실제 다음 행동 a' 를 사용)
+	# ======================================
+	reward_history = []
+	
+	print("=== 1차원 선형 월드에서의 SARSA 학습 시작 ===")
+	
+	for episode in range(1, n_episodes + 1):
+	
+	    # (1) 에피소드 시작: 상태 초기화
+	    state = reset()
+	    total_reward = 0.0
+	
+	    # (2) 초기 상태에서 첫 행동 선택 (SARSA는 s,a 쌍으로 시작)
+	    action = choose_action(state, epsilon)
+	
+	    for step_idx in range(max_steps):
 	        
-	        if reward == 1:  # 종료 상태에 도달
-	            success_count += 1
+	        # (3) 현재 상태 s 에서 행동 a 수행
+	        next_state, reward, done = step(state, action)
+	        
+	        # (4) 다음 상태 s' 에서 다음 행동 a' 선택 (ε-greedy)
+	        #     SARSA의 핵심: 여기서도 같은 정책(ε-greedy)을 사용
+	        if not done:
+	            next_action = choose_action(next_state, epsilon)
+	        else:
+	            next_action = None  # 종료 상태에서는 의미 없음
+	        
+	        # (5) SARSA TD Target 계산
+	        #     - done 이면 다음 상태의 Q는 0
+	        #     - 아니면 Q(s', a') 사용
+	        if done:
+	            td_target = reward                         # 마지막 상태 → 미래 보상 없음
+	        else:
+	            td_target = reward + gamma * Q[next_state, next_action]
+	        
+	        # (6) TD Error 및 Q 업데이트
+	        td_error = td_target - Q[state, action]
+	        Q[state, action] += alpha * td_error
+	        
+	        # (7) 보상 누적
+	        total_reward += reward
+	        
+	        # (8) 상태와 행동을 다음 시점으로 이동
+	        state = next_state
+	        action = next_action if not done else action  # done이면 action은 더 안 쓰지만 형식상 유지
+	        
+	        # (9) 종료 상태면 에피소드 정리
+	        if done:
+	            break
 	
-	    total_rewards.append(episode_reward)  # 에피소드별 총 보상 기록
+	    # (10) 에피소드 종료 후 ε 감소
+	    epsilon = max(epsilon_min, epsilon * epsilon_decay)
 	
-	# 학습 결과 평가
-	print("학습 완료!")
-	print(f"총 에피소드: {num_episodes}")
-	print(f"성공적으로 종료 상태에 도달한 에피소드 수: {success_count}")
-	print(f"성공 비율: {success_count / num_episodes:.2f}")
-	print(f"평균 에피소드 보상: {np.mean(total_rewards):.2f}")
-	print("최종 Q-테이블:")
-	print(Q)
+	    reward_history.append(total_reward)
+	
+	    # 50 에피소드마다 로그 출력
+	    if episode % 50 == 0:
+	        avg_reward = np.mean(reward_history[-50:])
+	        print(f"[Episode {episode:4d}] 최근 50 에피소드 평균 리워드 = {avg_reward:.3f}, epsilon = {epsilon:.3f}")
+	
+	print("\n=== 학습 종료 ===\n")
+	
+	
+	# ======================================
+	# 5. 학습된 Q-테이블 출력
+	# ======================================
+	print("▶ 최종 Q-테이블 (행: 상태, 열: 행동[←,→])")
+	for s in range(n_states):
+	    print(f"상태 {s}: {Q[s]}")
+	
+	
+	# ======================================
+	# 6. 학습된 정책 출력
+	# ======================================
+	action_symbols = {0: "←", 1: "→"}
+	
+	print("\n▶ 학습된 정책(Policy)")
+	
+	policy_str = ""
+	for s in range(n_states):
+	    if s == n_states - 1:
+	        policy_str += " G "
+	    else:
+	        best_a = np.argmax(Q[s])
+	        policy_str += f" {action_symbols[best_a]} "
+	
+	print("상태 0  1  2  3  4")
+	print("     " + policy_str)
+	
+	
+	# ======================================
+	# 7. 학습된 정책으로 1회 테스트 실행 (탐험 없이 greedy만)
+	# ======================================
+	print("\n▶ 학습된 정책으로 1회 에피소드 실행 예시")
+	
+	state = reset()
+	trajectory = [state]
+	
+	for step_idx in range(max_steps):
+	
+	    # 테스트에서는 탐험 없이 항상 greedy 정책 사용
+	    action = np.argmax(Q[state])
+	    next_state, reward, done = step(state, action)
+	    
+	    trajectory.append(next_state)
+	    state = next_state
+	    
+	    if done:
+	        break
+	
+	print("방문한 상태들:", trajectory)
+	print("스텝 수:", len(trajectory)-1)
+	print("마지막 상태가 목표(4)면 학습 성공!")
 	
 <br>
 
-	(결과)
-	학습 완료!
-	총 에피소드: 100
-	성공적으로 종료 상태에 도달한 에피소드 수: 77
-	성공 비율: 0.77
-	평균 에피소드 보상: 0.77
-	최종 Q-테이블:
-	[[0.63674193 0.25212404]
- 	[0.33953311 0.59365598]
- 	[0.59980783 0.05818173]
- 	[0.47228527 0.21979548]
- 	[0.         0.        ]]
+	=== 1차원 선형 월드에서의 SARSA 학습 시작 ===
+	[Episode   50] 최근 50 에피소드 평균 리워드 = 0.518, epsilon = 0.778
+	[Episode  100] 최근 50 에피소드 평균 리워드 = 0.884, epsilon = 0.606
+	[Episode  150] 최근 50 에피소드 평균 리워드 = 0.913, epsilon = 0.471
+	[Episode  200] 최근 50 에피소드 평균 리워드 = 0.949, epsilon = 0.367
+	[Episode  250] 최근 50 에피소드 평균 리워드 = 0.953, epsilon = 0.286
+	[Episode  300] 최근 50 에피소드 평균 리워드 = 0.958, epsilon = 0.222
+	[Episode  350] 최근 50 에피소드 평균 리워드 = 0.961, epsilon = 0.173
+	[Episode  400] 최근 50 에피소드 평균 리워드 = 0.965, epsilon = 0.135
+	[Episode  450] 최근 50 에피소드 평균 리워드 = 0.965, epsilon = 0.105
+	[Episode  500] 최근 50 에피소드 평균 리워드 = 0.964, epsilon = 0.082
+	
+	=== 학습 종료 ===
+	
+	▶ 최종 Q-테이블 (행: 상태, 열: 행동[←,→])
+	상태 0: [0.56804536 0.67414501]
+	상태 1: [0.55285797 0.77460095]
+	상태 2: [0.61751656 0.88120465]
+	상태 3: [0.7167551 1.       ]
+	상태 4: [0. 0.]
+	
+	▶ 학습된 정책(Policy)
+	상태 0  1  2  3  4
+	      →  →  →  →  G 
+	
+	▶ 학습된 정책으로 1회 에피소드 실행 예시
+	방문한 상태들: [0, 1, 2, 3, 4]
+	스텝 수: 4
+	마지막 상태가 목표(4)면 학습 성공!
 
 <br>
 
