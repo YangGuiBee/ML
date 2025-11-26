@@ -12,7 +12,7 @@
 | 학습과정    | 데이터 간 유사성·구조를 스스로 찾음              | 손실 함수(Loss)를 최소화하도록 매개변수를 조정          | 탐험(Explore)과 활용(Exploit) 균형을 잡으며 보상 극대화                             |
 | 학습대상 | 데이터 구조 | 입력 → 정답 | 행동 → 보상 |
 | 학습방식 | 정적분석 | 손실최소 | 정책/가치 반복개선 |
-| 출력 | 클러스터, 잠재 feature, 밀도 구조 | 예측값(회귀), 클래스(분류 확률), ŷ  | 최적 정책 π*(s), Q값, 행동 전략     |
+| Output | 클러스터, 잠재 feature, 밀도 구조 | 예측값(회귀), 클래스(분류 확률), ŷ  | 최적 정책 π*(s), Q값, 행동 전략     |
 | 적용분야 | 군집(K-means), 차원축소(PCA), 이상치 탐지    | 이미지 분류, 음성/자연어 처리, 수요 예측, 금융 리스크 모델   | 로봇 제어, 게임 AI, 자율주행, 광고 전략, 추천 시스템 최적화                               |
 
 <br>
@@ -1753,13 +1753,12 @@ MCTS(Monte Carlo Tree Search)를 사용하여 탐색하고 Neural Network를 통
 
 	(4-1) World Models: 환경을 모델링하고 시뮬레이션을 통해 학습하는 방식
 	(4-2) I2A(Imagination-Augmented Agents): 상상된 상태에서 정책을 훈련시키는 기법
-	(4-3) MBMF(Model-Based Model-Free): 모델 기반 및 모델-프리 접근을 혼합하여 효율성 향상
-	(4-4) MBVE(Model-Based Value Expansion): 모델을 사용하여 예측된 미래 보상을 통해 학습하는 방법
-	(4-5) Dreamer: 잠재 공간에서의 예측과 학습을 결합한 최신 모델 기반 방법
+	(4-3) MBMF(Model-Based Model-Free): 모델기반 접근과 모델-프리 접근을 혼합한 기법
+	(4-4) MBVE(Model-Based Value Expansion): 모델을 학습 보조수단으로 에이전트가 환경에서 수집한 데이터로 학습
+	(4-5) Dreamer: 에이전트가 환경 데이터를 수집하여 모델을 학습하고 이를 활용해 정책과 가치 함수를 학습
 	(4-6) PlaNet: Dreamer의 전신인 모델 기반 강화 학습 알고리즘
 	(4-7) PETs(Probabilistic Ensembles with Trajectory Sampling): 확률적 모델 앙상블을 활용하는 강화학습 기법
- 	(4-8) MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태로, 명시적 환경 모델 없이도 정책과 가치를 학습
-
+	(4-8) MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태로, 명시적 환경 모델 없이도 정책과 가치를 학습
 
 ![](./images/4vs.PNG)
 <br>
