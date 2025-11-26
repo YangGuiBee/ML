@@ -301,7 +301,6 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 	Lecture 9: Exploration and Exploitation
 	Lecture 10: Case Study: RL in Classic Games
 
-(교안) https://github.com/YangGuiBee/ML/blob/main/TextBook-12/<br>
 (출처) https://www.davidsilver.uk/teaching/<br>
 
 
