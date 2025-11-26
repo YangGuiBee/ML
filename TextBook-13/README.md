@@ -1391,7 +1391,7 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 
 <br>
 
-## (1-10) Rainbow : 여러 DQN 확장(PER, Double DQN, C51 등)을 결합한 통합 알고리즘 (DeepMind, 2017)
+## (1-10) Rainbow : 여러 DQN 확장(PER, Double DQN, C51 등)을 결합한 통합 알고리즘
 ▣ 정의 : DQN, Double DQN, PER, Dueling DQN, C51 등을 결합한 포괄적인 RL 알고리즘<br>
 ▣ 장점 : 최신 기술을 종합한 최고의 성능이 가능하고, 기존 알고리즘들의 장점을 모두 활용<br>
 ▣ 단점 : 구현이 복잡함에 따라 계산 비용이 높다<br>
