@@ -27,14 +27,14 @@
 		(1-2) SARSA(State Action Reward State Action)
 	심층 기반
 		(1-3) Q-Network: 신경망을 사용하여 Q-값을 근사화하는 모델
-		(1-4) DQN(Deep Q-Network): 딥러닝을 활용한 Q-Learning의 발전된 형태 (2013, 2015)
+		(1-4) DQN(Deep Q-Network): 딥러닝을 활용한 Q-Learning의 발전된 형태
 		(1-5) Double DQN: Q-Learning의 과대 평가 문제를 완화하기 위한 개선된 버전
 		(1-6) Dueling DQN: 상태 가치와 행동의 중요도를 분리하여 Q-값을 계산하는 모델
 		(1-7) DRQN(Deep Recurrent Q-Network): 순차적인 경험을 학습하기 위해 RNN 구조를 포함한 DQN
 	분포 기반
 		(1-8) C51(Categorical DQN 51): Q-값의 분포를 학습하는 DQN 확장
 		(1-9) IQN(Implicit Quantile Networks): Q-값의 분포를 세밀하게 조정하는 방식
-		(1-10) Rainbow: 여러 DQN 확장(PER, Double DQN, C51 등)을 결합한 통합 알고리즘 (DeepMind, 2017)
+		(1-10) Rainbow: 여러 DQN 확장(PER, Double DQN, C51 등)을 결합한 통합 알고리즘
 	소프트 기반
 		(1-11) SQL(Soft Q-Learning): 엔트로피를 추가하여 Q값 학습을 안정화하는 방식
 	리플레이/탐색 기반
@@ -59,7 +59,7 @@
 	연속 행동 공간 최적화 계열 
 		(2-11) DDPG(Deep Deterministic Policy Gradient): 연속적 행동 공간에서 학습하는 Actor-Critic 모델
 		(2-12) TD3(Twin Delayed DDPG): DDPG의 한계점을 극복하기 위한 개선된 모델
-		(2-13) SAC(Soft Actor-Critic): 탐색과 활용의 균형을 유지하도록 설계된 정책 학습 모델(2018, 2019) 
+		(2-13) SAC(Soft Actor-Critic): 탐색과 활용의 균형을 유지하도록 설계된 정책 학습 모델
 	전문가 시범 데이터 활용 계열 
 		(2-14) BC(Behavioral Cloning): 데이터를 기반으로 정책을 모방하는 방식
 		(2-15) DDPGfD(DDPG from Demonstrations): 전문가의 시범을 사용해 DDPG 성능을 개선
@@ -73,10 +73,10 @@
 	(4-2) I2A(Imagination-Augmented Agents): 상상된 상태에서 정책을 훈련시키는 기법
 	(4-3) MBMF(Model-Based Model-Free): 모델기반 접근과 모델-프리 접근을 혼합한 기법으로, 모델을 사용하지만 모델-프리의 장점도 살리는 방식
 	(4-4) MBVE(Model-Based Value Expansion): 모델은 학습 보조 수단으로 활용되며, 에이전트가 환경에서 수집한 데이터로 학습
-	(4-5) Dreamer: 사전에 환경 모델이 제공되지 않은 상태에서, 에이전트가 환경 데이터를 수집해 세계 모델을 학습하고 이를 활용해 정책과 가치 함수를 학습 (DeepMind, 2020)
+	(4-5) Dreamer: 사전에 환경 모델이 제공되지 않은 상태에서, 에이전트가 환경 데이터를 수집해 세계 모델을 학습하고 이를 활용해 정책과 가치 함수를 학습
 	(4-6) PlaNet: Dreamer의 전신인 모델 기반 강화 학습 알고리즘
 	(4-7) PETs(Probabilistic Ensembles with Trajectory Sampling): 확률적 모델 앙상블을 활용하는 강화학습 기법
-	(4-8) MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태로, 명시적 환경 모델 없이도 정책과 가치를 학습 (DeepMind, 2019)
+	(4-8) MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태로, 명시적 환경 모델 없이도 정책과 가치를 학습
 
 ---  
  
@@ -204,7 +204,8 @@ DeepMind의 축구 AI: Google DeepMind는 축구 선수들의 최적의 움직�
 
 
     마빈 민스키(Marvin Minsky)의 1960년 논문 "Steps Toward Artificial Intelligence"
-    초기 인공지능(AI) 연구에 큰 영향을 미친 중요한 문헌으로, AI가 해결해야 할 문제와 이를 위해 필요한 접근 방식에 대한 체계적인 개요를 제시.
+    초기 인공지능(AI) 연구에 큰 영향을 미친 중요한 문헌으로, 
+	AI가 해결해야 할 문제와 이를 위해 필요한 접근 방식에 대한 체계적인 개요를 제시.
     인공지능 연구가 다루어야 할 주요 문제들을 분류하고, 각 문제를 해결하기 위한 방법론을 제안
 
     (1) 지능의 구성 요소: 지능이 다양한 기능과 능력의 집합이라고 보고, 인공지능을 실현하기 위해 문제 해결, 학습, 패턴 인식, 언어 처리 등의 하위 기능으로 분류
@@ -348,14 +349,14 @@ Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수�
 		(1-2) SARSA(State Action Reward State Action)
 	심층 기반
 		(1-3) Q-Network: 신경망을 사용하여 Q-값을 근사화하는 모델
-		(1-4) DQN(Deep Q-Network): 딥러닝을 활용한 Q-Learning의 발전된 형태 (2013, 2015)
+		(1-4) DQN(Deep Q-Network): 딥러닝을 활용한 Q-Learning의 발전된 형태
 		(1-5) Double DQN: Q-Learning의 과대 평가 문제를 완화하기 위한 개선된 버전
 		(1-6) Dueling DQN: 상태 가치와 행동의 중요도를 분리하여 Q-값을 계산하는 모델
 		(1-7) DRQN(Deep Recurrent Q-Network): 순차적인 경험을 학습하기 위해 RNN 구조를 포함한 DQN
 	분포 기반
 		(1-8) C51(Categorical DQN 51): Q-값의 분포를 학습하는 DQN 확장
 		(1-9) IQN(Implicit Quantile Networks): Q-값의 분포를 세밀하게 조정하는 방식
-		(1-10) Rainbow: 여러 DQN 확장(PER, Double DQN, C51 등)을 결합한 통합 알고리즘 (DeepMind, 2017)
+		(1-10) Rainbow: 여러 DQN 확장(PER, Double DQN, C51 등)을 결합한 통합 알고리즘
 	소프트 기반
 		(1-11) SQL(Soft Q-Learning): 엔트로피를 추가하여 Q값 학습을 안정화하는 방식
 	리플레이/탐색 기반
@@ -1222,354 +1223,6 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 
 <br>
 
-	import numpy as np  # 수치 계산을 위한 numpy
-	
-	# 난수 시드 고정 (재현 가능한 결과를 위해)
-	np.random.seed(42)
-	
-	# ======================================
-	# 1. 환경 설정 (1차원 선형 월드)
-	# ======================================
-	n_states = 5     # 상태 개수: 0,1,2,3,4 (4가 목표 상태)
-	n_actions = 2    # 행동 개수: 0=왼쪽, 1=오른쪽
-	
-	def step(state, action):
-	    # action이 0이면 왼쪽으로 이동
-	    if action == 0:
-	        next_state = max(0, state - 1)              # 왼쪽 끝(0) 아래로 내려가지 않도록 제한
-	    # action이 1이면 오른쪽으로 이동
-	    else:
-	        next_state = min(n_states - 1, state + 1)   # 오른쪽 끝(4) 위로 넘어가지 않도록 제한
-	    
-	    # 목표 상태(4)에 도달한 경우
-	    if next_state == n_states - 1:
-	        reward = 1.0                                # 목표 도달 보상 +1
-	        done = True                                 # 에피소드 종료
-	    # 그 외의 경우
-	    else:
-	        reward = -0.01                              # 이동마다 작은 패널티 부여
-	        done = False                                # 에피소드 계속 진행
-	
-	    return next_state, reward, done                 # 다음 상태, 보상, 종료 여부 반환
-	
-	def reset():
-	    # 에피소드 시작 시 항상 상태 0에서 시작
-	    return 0
-	
-	def state_to_onehot(state):
-	    # 상태를 one-hot 벡터(1 x n_states)로 변환
-	    x = np.zeros((1, n_states), dtype=np.float32)   # 1행 n_states열의 0 벡터 생성
-	    x[0, state] = 1.0                               # 해당 상태 인덱스 위치만 1로 설정
-	    return x
-	
-	# ======================================
-	# 2. DQN용 Q-Network / Target Network 파라미터 정의
-	#    - 간단한 2층 완전연결 신경망 사용
-	# ======================================
-	input_dim = n_states      # 입력 차원: 상태를 one-hot으로 표현하므로 n_states
-	hidden_dim = 16           # 은닉층 노드 수 (임의로 16으로 설정)
-	output_dim = n_actions    # 출력 차원: 각 행동에 대한 Q값 2개
-	
-	# 온라인 네트워크(Online Q-Network) 파라미터
-	W1 = 0.1 * np.random.randn(input_dim, hidden_dim)   # 1층 가중치 (입력 → 은닉)
-	b1 = np.zeros((1, hidden_dim))                      # 1층 편향
-	W2 = 0.1 * np.random.randn(hidden_dim, output_dim)  # 2층 가중치 (은닉 → 출력)
-	b2 = np.zeros((1, output_dim))                      # 2층 편향
-	
-	# 타깃 네트워크(Target Q-Network) 파라미터 (초기에는 동일하게 복사)
-	W1_tgt = W1.copy()
-	b1_tgt = b1.copy()
-	W2_tgt = W2.copy()
-	b2_tgt = b2.copy()
-	
-	def relu(x):
-	    # ReLU 활성화 함수: 0보다 작으면 0, 크면 그대로
-	    return np.maximum(0, x)
-	
-	def relu_deriv(x):
-	    # ReLU의 도함수: x>0이면 1, 아니면 0
-	    return (x > 0).astype(np.float32)
-	
-	def forward(x, W1, b1, W2, b2):
-	    # 신경망 순전파: 입력 x에 대해 Q값을 계산
-	    # x: (배치크기, input_dim) 형태의 상태(one-hot) 벡터
-	    z1 = x @ W1 + b1                # 1층 선형 결합 (배치 x hidden_dim)
-	    a1 = relu(z1)                   # ReLU 활성화 (배치 x hidden_dim)
-	    z2 = a1 @ W2 + b2               # 2층 선형 결합 (배치 x output_dim)
-	    q_values = z2                   # 출력층: 각 행동에 대한 Q값
-	    return z1, a1, q_values         # 역전파를 위해 중간값도 함께 반환
-	
-	# ======================================
-	# 3. DQN 하이퍼파라미터 설정
-	# ======================================
-	gamma = 0.9             # 할인율
-	epsilon = 1.0           # ε-greedy에서 탐험 비율 시작값
-	epsilon_min = 0.05      # ε의 최소값
-	epsilon_decay = 0.995   # 에피소드마다 ε 감소 비율
-	learning_rate = 0.01    # 신경망 파라미터 학습률(경사하강 step 크기)
-	
-	n_episodes = 500        # 총 학습 에피소드 수
-	max_steps = 20          # 한 에피소드에서 최대 스텝 수
-	
-	buffer_capacity = 1000  # 리플레이 버퍼 최대 크기
-	batch_size = 32         # 미니배치 크기
-	warmup_steps = 100      # 최소 이 정도 샘플이 쌓인 후부터 학습 시작
-	target_update_freq = 20 # 타깃 네트워크를 몇 에피소드마다 한 번씩 갱신할지
-	
-	# ======================================
-	# 4. 리플레이 버퍼 구현 (간단한 리스트 버퍼)
-	# ======================================
-	replay_buffer = []  # (state, action, reward, next_state, done) 튜플을 저장
-	
-	def add_to_buffer(state, action, reward, next_state, done):
-	    # 버퍼에 새 transition 추가
-	    if len(replay_buffer) >= buffer_capacity:
-	        replay_buffer.pop(0)  # 가장 오래된 데이터 삭제 (FIFO)
-	    replay_buffer.append((state, action, reward, next_state, done))
-	
-	def sample_from_buffer(batch_size):
-	    # 버퍼에서 랜덤하게 batch_size 개 샘플 추출
-	    indices = np.random.choice(len(replay_buffer), size=batch_size, replace=False)
-	    batch = [replay_buffer[i] for i in indices]
-	    return batch
-	
-	# ======================================
-	# 5. ε-greedy 정책으로 행동 선택 함수 (Online Network 사용)
-	# ======================================
-	def choose_action(state, epsilon):
-	    # ε 확률로 랜덤 탐험
-	    if np.random.rand() < epsilon:
-	        return np.random.randint(n_actions)         # 0 또는 1 중 랜덤 선택
-	
-	    # 1-ε 확률로 Q값이 최대인 행동 선택 (Online Network 기준)
-	    x = state_to_onehot(state)                      # 상태를 one-hot으로 변환
-	    _, _, q_values = forward(x, W1, b1, W2, b2)     # Q값 계산
-	    action = int(np.argmax(q_values, axis=1)[0])    # 가장 큰 Q값을 주는 행동 인덱스 선택
-	    return action
-	
-	# ======================================
-	# 6. DQN 학습 함수: 리플레이 버퍼에서 미니배치 샘플 → 경사하강
-	# ======================================
-	def train_dqn(batch_size):
-	    global W1, b1, W2, b2   # 전역 파라미터 사용
-	
-	    # 버퍼에서 미니배치 샘플 추출
-	    batch = sample_from_buffer(batch_size)
-	    
-	    # 배치를 각 성분별로 나누어 numpy 배열로 변환
-	    states      = np.array([s for (s, a, r, ns, d) in batch], dtype=np.int32)
-	    actions     = np.array([a for (s, a, r, ns, d) in batch], dtype=np.int32)
-	    rewards     = np.array([r for (s, a, r, ns, d) in batch], dtype=np.float32)
-	    next_states = np.array([ns for (s, a, r, ns, d) in batch], dtype=np.int32)
-	    dones       = np.array([d for (s, a, r, ns, d) in batch], dtype=np.bool_)
-	
-	    # 상태, 다음 상태를 one-hot 벡터로 변환
-	    X      = np.vstack([state_to_onehot(s)  for s in states])      # (B, n_states)
-	    X_next = np.vstack([state_to_onehot(ns) for ns in next_states])# (B, n_states)
-	
-	    # 온라인 네트워크로 현재 상태의 Q값 계산
-	    z1, a1, q_values = forward(X, W1, b1, W2, b2)                  # q_values: (B, n_actions)
-	
-	    # 타깃 네트워크로 다음 상태의 Q값 계산
-	    _, _, q_values_next_tgt = forward(X_next, W1_tgt, b1_tgt, W2_tgt, b2_tgt)  # (B, n_actions)
-	
-	    # 다음 상태에서의 최대 Q값(max_a' Q_target(s', a')) 추출
-	    max_next_q = np.max(q_values_next_tgt, axis=1)                  # (B,)
-	
-	    # TD Target 계산: done이면 미래 보상 없음
-	    targets = rewards.copy()
-	    not_dones = (~dones)
-	    targets[not_dones] += gamma * max_next_q[not_dones]
-	
-	    # 예측 Q 중에서 실제로 선택한 행동의 Q값만 사용
-	    # dL/d(q_pred) = (q_pred - target) / B  (MSE 기준)
-	    B = batch_size
-	    dL_dz2 = np.zeros_like(q_values)                                # (B, n_actions)
-	    q_pred_selected = q_values[np.arange(B), actions]               # (B,)
-	    td_errors = (q_pred_selected - targets) / B                     # (B,)
-	
-	    # 선택한 행동 위치에만 gradient 반영
-	    dL_dz2[np.arange(B), actions] = td_errors                       # (B, n_actions)
-	
-	    # 2층(출력층) 가중치/편향에 대한 gradient
-	    dW2 = a1.T @ dL_dz2                                             # (hidden_dim x n_actions)
-	    db2 = np.sum(dL_dz2, axis=0, keepdims=True)                     # (1 x n_actions)
-	
-	    # 1층으로 gradient 전파
-	    dL_da1 = dL_dz2 @ W2.T                                          # (B x hidden_dim)
-	    dL_dz1 = dL_da1 * relu_deriv(z1)                                # (B x hidden_dim)
-	
-	    # 1층 가중치/편향에 대한 gradient
-	    dW1 = X.T @ dL_dz1                                              # (input_dim x hidden_dim)
-	    db1 = np.sum(dL_dz1, axis=0, keepdims=True)                     # (1 x hidden_dim)
-	
-	    # 파라미터 업데이트 (경사하강법)
-	    W2 -= learning_rate * dW2
-	    b2 -= learning_rate * db2
-	    W1 -= learning_rate * dW1
-	    b1 -= learning_rate * db1
-	
-	# ======================================
-	# 7. DQN 학습 루프
-	# ======================================
-	reward_history = []  # 에피소드별 총 보상을 저장할 리스트
-	total_steps = 0      # 전체 스텝 수(옵션, 여기서는 로그용으로만 사용)
-	
-	print("=== 1차원 선형 월드에서의 DQN(NumPy) 학습 시작 ===")
-	
-	for episode in range(1, n_episodes + 1):
-	
-	    state = reset()          # 에피소드 시작 상태 초기화
-	    total_reward = 0.0       # 에피소드 누적 보상 초기화
-	
-	    for step_idx in range(max_steps):
-	
-	        total_steps += 1
-	
-	        # (1) ε-greedy 정책으로 행동 선택 (Online Network 기준)
-	        action = choose_action(state, epsilon)
-	
-	        # (2) 선택한 행동을 환경에 적용 → 다음 상태, 보상, 종료 여부 반환
-	        next_state, reward, done = step(state, action)
-	
-	        # (3) 리플레이 버퍼에 transition 저장
-	        add_to_buffer(state, action, reward, next_state, done)
-	
-	        # (4) 일정 step 이상 쌓여야 학습 시작 (warmup_steps 이후)
-	        if len(replay_buffer) >= max(batch_size, warmup_steps):
-	            train_dqn(batch_size)
-	
-	        # (5) 보상 누적
-	        total_reward += reward
-	
-	        # (6) 상태를 다음 상태로 업데이트
-	        state = next_state
-	
-	        # (7) 종료 상태면 에피소드 종료
-	        if done:
-	            break
-	
-	    # (8) 에피소드 종료 후 epsilon 감소 (탐험 비율을 점점 줄임)
-	    epsilon = max(epsilon_min, epsilon * epsilon_decay)
-	
-	    # (9) 에피소드별 총 보상을 기록
-	    reward_history.append(total_reward)
-	
-	    # (10) 일정 에피소드마다 타깃 네트워크 파라미터 동기화
-	    if episode % target_update_freq == 0:
-	        W1_tgt = W1.copy()
-	        b1_tgt = b1.copy()
-	        W2_tgt = W2.copy()
-	        b2_tgt = b2.copy()
-	
-	    # (11) 50 에피소드마다 최근 50개 평균 리워드와 현재 epsilon 출력
-	    if episode % 50 == 0:
-	        avg_reward = np.mean(reward_history[-50:])
-	        print(f"[Episode {episode:4d}] 최근 50 에피소드 평균 리워드 = {avg_reward:.3f}, epsilon = {epsilon:.3f}")
-	
-	print("\n=== 학습 종료 ===\n")
-	
-	# ======================================
-	# 8. 학습된 Online Q-Network로부터 '근사 Q-테이블' 출력
-	# ======================================
-	print("▶ 근사 Q-테이블 (행: 상태, 열: 행동[←,→])")
-	
-	for s in range(n_states):
-	    x = state_to_onehot(s)                        # 상태 s를 one-hot으로 변환
-	    _, _, q_vals = forward(x, W1, b1, W2, b2)     # Q값 계산
-	    q_vals_row = q_vals[0]                        # (1 x n_actions) → (n_actions,)
-	    print(f"상태 {s}: {q_vals_row}")
-	
-	# ======================================
-	# 9. 학습된 정책(Policy) 확인 (greedy 정책)
-	# ======================================
-	action_symbols = {0: "←", 1: "→"}                 # 행동 인덱스를 화살표로 표현하기 위한 매핑
-	
-	print("\n▶ 학습된 정책(Policy)")
-	
-	policy_str = ""
-	for s in range(n_states):
-	    if s == n_states - 1:
-	        policy_str += " G "                       # 목표 상태는 G로 표시
-	    else:
-	        x = state_to_onehot(s)
-	        _, _, q_vals = forward(x, W1, b1, W2, b2)
-	        best_action = int(np.argmax(q_vals, axis=1)[0])
-	        policy_str += f" {action_symbols[best_action]} "
-	
-	print("상태 0  1  2  3  4")
-	print("     " + policy_str)
-	
-	# ======================================
-	# 10. 학습된 정책으로 1회 테스트 실행 (탐험 없이 greedy만 사용)
-	# ======================================
-	print("\n▶ 학습된 정책으로 1회 에피소드 실행 예시")
-	
-	state = reset()                       # 초기 상태 0
-	trajectory = [state]                  # 방문한 상태들을 저장할 리스트
-	
-	for step_idx in range(max_steps):
-	
-	    x = state_to_onehot(state)        # 현재 상태를 one-hot으로 변환
-	    _, _, q_vals = forward(x, W1, b1, W2, b2)  # Q값 계산
-	    action = int(np.argmax(q_vals))   # 탐험 없이 항상 greedy 행동 선택
-	
-	    next_state, reward, done = step(state, action)  # 환경에 행동 적용
-	    trajectory.append(next_state)     # 방문한 상태 기록
-	    state = next_state                # 상태 업데이트
-	
-	    if done:
-	        break                         # 목표 도달 시 종료
-	
-	print("방문한 상태들:", trajectory)
-	print("스텝 수:", len(trajectory) - 1)
-	print("마지막 상태가 목표(4)면 학습 성공!")
-
-<br>
-
-	=== 1차원 선형 월드에서의 DQN(NumPy) 학습 시작 ===
-	[Episode   50] 최근 50 에피소드 평균 리워드 = 0.691, epsilon = 0.778
-	[Episode  100] 최근 50 에피소드 평균 리워드 = 0.859, epsilon = 0.606
-	[Episode  150] 최근 50 에피소드 평균 리워드 = 0.916, epsilon = 0.471
-	[Episode  200] 최근 50 에피소드 평균 리워드 = 0.951, epsilon = 0.367
-	[Episode  250] 최근 50 에피소드 평균 리워드 = 0.955, epsilon = 0.286
-	[Episode  300] 최근 50 에피소드 평균 리워드 = 0.954, epsilon = 0.222
-	[Episode  350] 최근 50 에피소드 평균 리워드 = 0.960, epsilon = 0.173
-	[Episode  400] 최근 50 에피소드 평균 리워드 = 0.964, epsilon = 0.135
-	[Episode  450] 최근 50 에피소드 평균 리워드 = 0.967, epsilon = 0.105
-	[Episode  500] 최근 50 에피소드 평균 리워드 = 0.966, epsilon = 0.082
-	
-	=== 학습 종료 ===
-	
-	▶ 근사 Q-테이블 (행: 상태, 열: 행동[←,→])
-	상태 0: [0.55878423 0.68169877]
-	상태 1: [0.53764078 0.68297671]
-	상태 2: [0.52598826 0.73224926]
-	상태 3: [0.54513745 0.96248031]
-	상태 4: [0.57992423 0.69895181]
-	
-	▶ 학습된 정책(Policy)
-	상태 0  1  2  3  4
-	      →  →  →  →  G 
-	
-	▶ 학습된 정책으로 1회 에피소드 실행 예시
-	방문한 상태들: [0, 1, 2, 3, 4]
-	스텝 수: 4
-	마지막 상태가 목표(4)면 학습 성공!
-
-<br>
-
-
-| 상태    | Q-Learning       | SARSA            | Q-Network(NumPy) | DQN(NumPy)       |
-| ----- | ---------------- | ---------------- | ---------------- | ---------------- |
-| **0** | [0.6217, 0.7019] | [0.5680, 0.6741] | [0.6139, 0.7101] | [0.5588, 0.6817] |
-| **1** | [0.6217, 0.7910] | [0.5529, 0.7746] | [0.5900, 0.7141] | [0.5376, 0.6830] |
-| **2** | [0.7019, 0.8900] | [0.6175, 0.8812] | [0.5775, 0.7634] | [0.5260, 0.7322] |
-| **3** | [0.7910, 1.0000] | [0.7168, 1.0000] | [0.5945, 0.9664] | [0.5451, 0.9625] |
-| **4** | [0.0000, 0.0000] | [0.0000, 0.0000] | [0.6317, 0.7220] | [0.5799, 0.6990] |
-
-<br>
-
 ## (1-5) Double DQN : Q-Learning의 과대 평가 문제를 완화하기 위한 개선된 버전
 ![](./images/DQN_Double.PNG)
 <br>
@@ -1585,346 +1238,6 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 특징: online/target 네트워크 동시 활용<br>
 독립변수(X): 4차원 상태<br>
 종속변수(y): Q(s,a)<br>
-
-<br>
-
-	import numpy as np  # 수치 계산을 위한 numpy
-	
-	# 난수 시드 고정 (재현 가능한 결과를 위해)
-	np.random.seed(42)
-	
-	# ======================================
-	# 1. 환경 설정 (1차원 선형 월드)
-	# ======================================
-	n_states = 5     # 상태 개수: 0,1,2,3,4 (4가 목표 상태)
-	n_actions = 2    # 행동 개수: 0=왼쪽, 1=오른쪽
-	
-	def step(state, action):
-	    # action이 0이면 왼쪽으로 이동
-	    if action == 0:
-	        next_state = max(0, state - 1)              # 왼쪽 끝(0) 아래로 내려가지 않도록 제한
-	    # action이 1이면 오른쪽으로 이동
-	    else:
-	        next_state = min(n_states - 1, state + 1)   # 오른쪽 끝(4) 위로 넘어가지 않도록 제한
-	    
-	    # 목표 상태(4)에 도달한 경우
-	    if next_state == n_states - 1:
-	        reward = 1.0                                # 목표 도달 보상 +1
-	        done = True                                 # 에피소드 종료
-	    # 그 외의 경우
-	    else:
-	        reward = -0.01                              # 이동마다 작은 패널티 부여
-	        done = False                                # 에피소드 계속 진행
-	
-	    return next_state, reward, done                 # 다음 상태, 보상, 종료 여부 반환
-	
-	def reset():
-	    # 에피소드 시작 시 항상 상태 0에서 시작
-	    return 0
-	
-	def state_to_onehot(state):
-	    # 상태를 one-hot 벡터(1 x n_states)로 변환
-	    x = np.zeros((1, n_states), dtype=np.float32)   # 1행 n_states열의 0 벡터 생성
-	    x[0, state] = 1.0                               # 해당 상태 인덱스 위치만 1로 설정
-	    return x
-	
-	# ======================================
-	# 2. Double DQN용 Q-Network / Target Network 파라미터 정의
-	#    - 간단한 2층 완전연결 신경망 사용
-	# ======================================
-	input_dim = n_states      # 입력 차원: one-hot 상태
-	hidden_dim = 16           # 은닉층 노드 수
-	output_dim = n_actions    # 출력 차원: 각 행동에 대한 Q값 2개
-	
-	# 온라인 네트워크(Online Q-Network) 파라미터
-	W1 = 0.1 * np.random.randn(input_dim, hidden_dim)   # 1층 가중치 (입력 → 은닉)
-	b1 = np.zeros((1, hidden_dim))                      # 1층 편향
-	W2 = 0.1 * np.random.randn(hidden_dim, output_dim)  # 2층 가중치 (은닉 → 출력)
-	b2 = np.zeros((1, output_dim))                      # 2층 편향
-	
-	# 타깃 네트워크(Target Q-Network) 파라미터 (초기에는 동일하게 복사)
-	W1_tgt = W1.copy()
-	b1_tgt = b1.copy()
-	W2_tgt = W2.copy()
-	b2_tgt = b2.copy()
-	
-	def relu(x):
-	    # ReLU 활성화 함수: 0보다 작으면 0, 크면 그대로
-	    return np.maximum(0, x)
-	
-	def relu_deriv(x):
-	    # ReLU의 도함수: x>0이면 1, 아니면 0
-	    return (x > 0).astype(np.float32)
-	
-	def forward(x, W1, b1, W2, b2):
-	    # 신경망 순전파: 입력 x에 대해 Q값을 계산
-	    # x: (배치크기, input_dim) 형태의 상태(one-hot) 벡터
-	    z1 = x @ W1 + b1                # 1층 선형 결합 (배치 x hidden_dim)
-	    a1 = relu(z1)                   # ReLU 활성화 (배치 x hidden_dim)
-	    z2 = a1 @ W2 + b2               # 2층 선형 결합 (배치 x output_dim)
-	    q_values = z2                   # 출력층: 각 행동에 대한 Q값
-	    return z1, a1, q_values         # 역전파를 위해 중간값도 함께 반환
-	
-	# ======================================
-	# 3. Double DQN 하이퍼파라미터 설정
-	# ======================================
-	gamma = 0.9             # 할인율
-	epsilon = 1.0           # ε-greedy에서 탐험 비율 시작값
-	epsilon_min = 0.05      # ε의 최소값
-	epsilon_decay = 0.995   # 에피소드마다 ε 감소 비율
-	learning_rate = 0.01    # 신경망 파라미터 학습률(경사하강 step 크기)
-	
-	n_episodes = 500        # 총 학습 에피소드 수
-	max_steps = 20          # 한 에피소드에서 최대 스텝 수
-	
-	buffer_capacity = 1000  # 리플레이 버퍼 최대 크기
-	batch_size = 32         # 미니배치 크기
-	warmup_steps = 100      # 최소 이 정도 샘플이 쌓인 후부터 학습 시작
-	target_update_freq = 20 # 타깃 네트워크를 몇 에피소드마다 한 번씩 갱신할지
-	
-	# ======================================
-	# 4. 리플레이 버퍼 구현 (간단한 리스트 버퍼)
-	# ======================================
-	replay_buffer = []  # (state, action, reward, next_state, done) 튜플을 저장
-	
-	def add_to_buffer(state, action, reward, next_state, done):
-	    # 버퍼에 새 transition 추가
-	    if len(replay_buffer) >= buffer_capacity:
-	        replay_buffer.pop(0)  # 가장 오래된 데이터 삭제 (FIFO)
-	    replay_buffer.append((state, action, reward, next_state, done))
-	
-	def sample_from_buffer(batch_size):
-	    # 버퍼에서 랜덤하게 batch_size 개 샘플 추출
-	    indices = np.random.choice(len(replay_buffer), size=batch_size, replace=False)
-	    batch = [replay_buffer[i] for i in indices]
-	    return batch
-	
-	# ======================================
-	# 5. ε-greedy 정책으로 행동 선택 함수 (Online Network 사용)
-	# ======================================
-	def choose_action(state, epsilon):
-	    # ε 확률로 랜덤 탐험
-	    if np.random.rand() < epsilon:
-	        return np.random.randint(n_actions)         # 0 또는 1 중 랜덤 선택
-	
-	    # 1-ε 확률로 Q값이 최대인 행동 선택 (Online Network 기준)
-	    x = state_to_onehot(state)                      # 상태를 one-hot으로 변환
-	    _, _, q_values = forward(x, W1, b1, W2, b2)     # Q값 계산
-	    action = int(np.argmax(q_values, axis=1)[0])    # 가장 큰 Q값을 주는 행동 인덱스 선택
-	    return action
-	
-	# ======================================
-	# 6. Double DQN 학습 함수
-	#    - 다음 상태에서 행동 선택은 Online Network
-	#    - 그 행동의 Q값 평가는 Target Network
-	# ======================================
-	def train_double_dqn(batch_size):
-	    global W1, b1, W2, b2   # 전역 파라미터 사용
-	
-	    # 버퍼에서 미니배치 샘플 추출
-	    batch = sample_from_buffer(batch_size)
-	    
-	    # 배치를 각 성분별로 나누어 numpy 배열로 변환
-	    states      = np.array([s for (s, a, r, ns, d) in batch], dtype=np.int32)
-	    actions     = np.array([a for (s, a, r, ns, d) in batch], dtype=np.int32)
-	    rewards     = np.array([r for (s, a, r, ns, d) in batch], dtype=np.float32)
-	    next_states = np.array([ns for (s, a, r, ns, d) in batch], dtype=np.int32)
-	    dones       = np.array([d for (s, a, r, ns, d) in batch], dtype=bool)
-	
-	    # 상태, 다음 상태를 one-hot 벡터로 변환
-	    X      = np.vstack([state_to_onehot(s)  for s in states])      # (B, n_states)
-	    X_next = np.vstack([state_to_onehot(ns) for ns in next_states])# (B, n_states)
-	
-	    # 온라인 네트워크로 현재 상태의 Q값 계산
-	    z1, a1, q_values = forward(X, W1, b1, W2, b2)                  # q_values: (B, n_actions)
-	
-	    # 다음 상태에서의 Q값 (Online Network) 계산 → argmax용
-	    _, _, q_values_next_online = forward(X_next, W1, b1, W2, b2)   # (B, n_actions)
-	    best_next_actions = np.argmax(q_values_next_online, axis=1)    # (B,)
-	
-	    # 타깃 네트워크로 다음 상태의 Q값 계산 → 선택된 행동의 값만 사용
-	    _, _, q_values_next_tgt = forward(X_next, W1_tgt, b1_tgt, W2_tgt, b2_tgt)  # (B, n_actions)
-	    next_q_selected = q_values_next_tgt[np.arange(len(batch)), best_next_actions]  # (B,)
-	
-	    # TD Target 계산: done이면 미래 보상 없음
-	    targets = rewards.copy()
-	    not_dones = (~dones)
-	    targets[not_dones] += gamma * next_q_selected[not_dones]
-	
-	    # 예측 Q 중에서 실제로 선택한 행동의 Q값만 사용
-	    B = batch_size
-	    dL_dz2 = np.zeros_like(q_values)                                # (B, n_actions)
-	    q_pred_selected = q_values[np.arange(B), actions]               # (B,)
-	    td_errors = (q_pred_selected - targets) / B                     # (B,)
-	
-	    # 선택한 행동 위치에만 gradient 반영
-	    dL_dz2[np.arange(B), actions] = td_errors                       # (B, n_actions)
-	
-	    # 2층(출력층) 가중치/편향에 대한 gradient
-	    dW2 = a1.T @ dL_dz2                                             # (hidden_dim x n_actions)
-	    db2 = np.sum(dL_dz2, axis=0, keepdims=True)                     # (1 x n_actions)
-	
-	    # 1층으로 gradient 전파
-	    dL_da1 = dL_dz2 @ W2.T                                          # (B x hidden_dim)
-	    dL_dz1 = dL_da1 * relu_deriv(z1)                                # (B x hidden_dim)
-	
-	    # 1층 가중치/편향에 대한 gradient
-	    dW1 = X.T @ dL_dz1                                              # (input_dim x hidden_dim)
-	    db1 = np.sum(dL_dz1, axis=0, keepdims=True)                     # (1 x hidden_dim)
-	
-	    # 파라미터 업데이트 (경사하강법)
-	    W2 -= learning_rate * dW2
-	    b2 -= learning_rate * db2
-	    W1 -= learning_rate * dW1
-	    b1 -= learning_rate * db1
-	
-	# ======================================
-	# 7. Double DQN 학습 루프
-	# ======================================
-	reward_history = []  # 에피소드별 총 보상을 저장할 리스트
-	total_steps = 0      # 전체 스텝 수(옵션)
-	
-	print("=== 1차원 선형 월드에서의 Double DQN(NumPy) 학습 시작 ===")
-	
-	for episode in range(1, n_episodes + 1):
-	
-	    state = reset()          # 에피소드 시작 상태 초기화
-	    total_reward = 0.0       # 에피소드 누적 보상 초기화
-	
-	    for step_idx in range(max_steps):
-	
-	        total_steps += 1
-	
-	        # (1) ε-greedy 정책으로 행동 선택 (Online Network 기준)
-	        action = choose_action(state, epsilon)
-	
-	        # (2) 선택한 행동을 환경에 적용 → 다음 상태, 보상, 종료 여부 반환
-	        next_state, reward, done = step(state, action)
-	
-	        # (3) 리플레이 버퍼에 transition 저장
-	        add_to_buffer(state, action, reward, next_state, done)
-	
-	        # (4) 일정 step 이상 쌓여야 학습 시작 (warmup_steps 이후)
-	        if len(replay_buffer) >= max(batch_size, warmup_steps):
-	            train_double_dqn(batch_size)
-	
-	        # (5) 보상 누적
-	        total_reward += reward
-	
-	        # (6) 상태를 다음 상태로 업데이트
-	        state = next_state
-	
-	        # (7) 종료 상태면 에피소드 종료
-	        if done:
-	            break
-	
-	    # (8) 에피소드 종료 후 epsilon 감소 (탐험 비율을 점점 줄임)
-	    epsilon = max(epsilon_min, epsilon * epsilon_decay)
-	
-	    # (9) 에피소드별 총 보상을 기록
-	    reward_history.append(total_reward)
-	
-	    # (10) 일정 에피소드마다 타깃 네트워크 파라미터 동기화
-	    if episode % target_update_freq == 0:
-	        W1_tgt = W1.copy()
-	        b1_tgt = b1.copy()
-	        W2_tgt = W2.copy()
-	        b2_tgt = b2.copy()
-	
-	    # (11) 50 에피소드마다 최근 50개 평균 리워드와 현재 epsilon 출력
-	    if episode % 50 == 0:
-	        avg_reward = np.mean(reward_history[-50:])
-	        print(f"[Episode {episode:4d}] 최근 50 에피소드 평균 리워드 = {avg_reward:.3f}, epsilon = {epsilon:.3f}")
-	
-	print("\n=== 학습 종료 ===\n")
-	
-	# ======================================
-	# 8. 학습된 Online Q-Network로부터 '근사 Q-테이블' 출력
-	# ======================================
-	print("▶ 근사 Q-테이블 (행: 상태, 열: 행동[←,→])")
-	
-	for s in range(n_states):
-	    x = state_to_onehot(s)                        # 상태 s를 one-hot으로 변환
-	    _, _, q_vals = forward(x, W1, b1, W2, b2)     # Q값 계산
-	    q_vals_row = q_vals[0]                        # (1 x n_actions) → (n_actions,)
-	    print(f"상태 {s}: {q_vals_row}")
-	
-	# ======================================
-	# 9. 학습된 정책(Policy) 확인 (greedy 정책)
-	# ======================================
-	action_symbols = {0: "←", 1: "→"}                 # 행동 인덱스를 화살표로 표현하기 위한 매핑
-	
-	print("\n▶ 학습된 정책(Policy)")
-	
-	policy_str = ""
-	for s in range(n_states):
-	    if s == n_states - 1:
-	        policy_str += " G "                       # 목표 상태는 G로 표시
-	    else:
-	        x = state_to_onehot(s)
-	        _, _, q_vals = forward(x, W1, b1, W2, b2)
-	        best_action = int(np.argmax(q_vals, axis=1)[0])
-	        policy_str += f" {action_symbols[best_action]} "
-	
-	print("상태 0  1  2  3  4")
-	print("     " + policy_str)
-	
-	# ======================================
-	# 10. 학습된 정책으로 1회 테스트 실행 (탐험 없이 greedy만 사용)
-	# ======================================
-	print("\n▶ 학습된 정책으로 1회 에피소드 실행 예시")
-	
-	state = reset()                       # 초기 상태 0
-	trajectory = [state]                  # 방문한 상태들을 저장할 리스트
-	
-	for step_idx in range(max_steps):
-	
-	    x = state_to_onehot(state)        # 현재 상태를 one-hot으로 변환
-	    _, _, q_vals = forward(x, W1, b1, W2, b2)  # Q값 계산
-	    action = int(np.argmax(q_vals))   # 탐험 없이 항상 greedy 행동 선택
-	
-	    next_state, reward, done = step(state, action)  # 환경에 행동 적용
-	    trajectory.append(next_state)     # 방문한 상태 기록
-	    state = next_state                # 상태 업데이트
-	
-	    if done:
-	        break                         # 목표 도달 시 종료
-	
-	print("방문한 상태들:", trajectory)
-	print("스텝 수:", len(trajectory) - 1)
-	print("마지막 상태가 목표(4)면 학습 성공!")
-
-<br>
-
-	=== 1차원 선형 월드에서의 Double DQN(NumPy) 학습 시작 ===
-	[Episode   50] 최근 50 에피소드 평균 리워드 = 0.691, epsilon = 0.778
-	[Episode  100] 최근 50 에피소드 평균 리워드 = 0.859, epsilon = 0.606
-	[Episode  150] 최근 50 에피소드 평균 리워드 = 0.916, epsilon = 0.471
-	[Episode  200] 최근 50 에피소드 평균 리워드 = 0.951, epsilon = 0.367
-	[Episode  250] 최근 50 에피소드 평균 리워드 = 0.955, epsilon = 0.286
-	[Episode  300] 최근 50 에피소드 평균 리워드 = 0.954, epsilon = 0.222
-	[Episode  350] 최근 50 에피소드 평균 리워드 = 0.960, epsilon = 0.173
-	[Episode  400] 최근 50 에피소드 평균 리워드 = 0.964, epsilon = 0.135
-	[Episode  450] 최근 50 에피소드 평균 리워드 = 0.967, epsilon = 0.105
-	[Episode  500] 최근 50 에피소드 평균 리워드 = 0.966, epsilon = 0.082
-	
-	=== 학습 종료 ===
-	
-	▶ 근사 Q-테이블 (행: 상태, 열: 행동[←,→])
-	상태 0: [0.55874722 0.6816946 ]
-	상태 1: [0.53761728 0.68297569]
-	상태 2: [0.52602922 0.73223193]
-	상태 3: [0.54516807 0.96246224]
-	상태 4: [0.57990547 0.69895713]
-	
-	▶ 학습된 정책(Policy)
-	상태 0  1  2  3  4
-	      →  →  →  →  G 
-	
-	▶ 학습된 정책으로 1회 에피소드 실행 예시
-	방문한 상태들: [0, 1, 2, 3, 4]
-	스텝 수: 4
-	마지막 상태가 목표(4)면 학습 성공!
 
 <br>
 
@@ -2145,7 +1458,7 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 	연속 행동 공간 최적화 계열 
 	(2-11) DDPG(Deep Deterministic Policy Gradient): 연속적 행동 공간에서 학습하는 Actor-Critic 모델
 	(2-12) TD3(Twin Delayed DDPG): DDPG의 한계점을 극복하기 위한 개선된 모델
-	(2-13) SAC(Soft Actor-Critic): 탐색과 활용의 균형을 유지하도록 설계된 정책 학습 모델 (2018, 2019)
+	(2-13) SAC(Soft Actor-Critic): 탐색과 활용의 균형을 유지하도록 설계된 정책 학습 모델
  
 	전문가 시범 데이터 활용 계열 
 	(2-14) BC(Behavioral Cloning): 데이터를 기반으로 정책을 모방하는 방식
@@ -2284,7 +1597,8 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 <br>
 
 ## (2-15) DDPGfD(DDPG from Demonstrations) : 전문가의 시범을 사용해 DDPG 성능을 개선
-▣ 정의 : DDPG(Deep Deterministic Policy Gradient)에 전문가 시연 데이터를 추가로 활용하여 초기 학습을 강화하는 알고리즘. 시연 데이터를 우선적으로 활용하여 학습 효율성을 높이는 경험 재생(Experience Replay) 기법을 포함<br>
+▣ 정의 : DDPG(Deep Deterministic Policy Gradient)에 전문가 시연 데이터를 추가로 활용하여 초기 학습을 강화하는 알고리즘<br>
+시연 데이터를 우선적으로 활용하여 학습 효율성을 높이는 경험 재생(Experience Replay) 기법을 포함<br>
 ▣ 장점 : 학습 초기 성능이 향상, 샘플 효율성을 개선, 희소 보상 환경에서도 학습이 용이<br>
 ▣ 단점 : 전문가 시연 데이터가 필수적, 추가 메모리 및 계산 비용이 필요<br>
 ▣ 적용 분야 : 로봇 공학(시연 데이터를 활용한 로봇 작업), 자율 주행 및 복잡한 제어 작업<br>
@@ -2308,8 +1622,10 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 <br>
 
 ## (3-1) Dyna-Q : 모델 기반 RL과 모델-프리 RL을 조합한 알고리즘
-▣ 정의 : 강화학습에서 모델기반 접근법과 모델프리 접근법을 결합한 알고리즘. 환경모델을 학습하고 이 모델을 활용해 샘플데이터를 생성한 뒤 Q-Learning과 같은 알고리즘을 통해 학습. 실제환경과 가상의 환경 모두를 활용하여 효율적인 학습을 수행<br>
-▣ 장점 : 환경모델을 활용해 가상 샘플데이터를 생성하므로 학습데이터의 양을 늘릴 수 있으며, 가상의 경험을 통해 Q-값을 더욱 빠르게 갱신하고 환경이 불확실한 경우에도 모델을 통해 추정 가능<br>
+▣ 정의 : 강화학습에서 모델기반 접근법과 모델프리 접근법을 결합한 알고리즘. 환경모델을 학습하고 이 모델을 활용해서<br> 
+샘플데이터를 생성한 뒤 Q-Learning과 같은 알고리즘을 통해 학습. 실제환경과 가상의 환경 모두를 활용하여 효율적인 학습을 수행<br>
+▣ 장점 : 환경모델을 활용해 가상 샘플데이터를 생성하므로 학습데이터의 양을 늘릴 수 있으며,<br> 
+가상의 경험을 통해 Q-값을 더욱 빠르게 갱신하고 환경이 불확실한 경우에도 모델을 통해 추정 가능<br>
 ▣ 단점 : 환경모델이 부정확하면 학습 성능이 저하되고, 실제샘플과 가상샘플 모두 처리해야 하므로 계산비용이 증가<br>
 ▣ 적용 분야 : 로봇 경로 계획 및 최적화, 시뮬레이션이 가능한 환경(환경 모델이 존재하거나 쉽게 추정 가능한 작업)<br>
 ▣ 예제 : <br>
@@ -2317,7 +1633,8 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 <br>
 
 ## (3-2) AlphaZero : 시뮬레이션을 통한 최적의 행동을 찾는 Monte Carlo Tree Search 기반 모델
-▣ 정의 : 강화학습 및 심층신경망을 사용해 체스, 바둑, 장기와 같은 게임에서 스스로 학습하는 알고리즘. MCTS(Monte Carlo Tree Search)를 사용하여 탐색하고 Neural Network를 통해 정책 및 가치 함수를 근사하며, 환경모델은 게임규칙에 기반하여 제공<br>
+▣ 정의 : 강화학습 및 심층신경망을 사용해 체스, 바둑, 장기와 같은 게임에서 스스로 학습하는 알고리즘.<br>
+MCTS(Monte Carlo Tree Search)를 사용하여 탐색하고 Neural Network를 통해 정책 및 가치 함수를 근사하며, 환경모델은 게임규칙에 기반하여 제공<br>
 ▣ 장점 : 다양한 규칙 기반 게임에 적용 가능하고, MCTS와 Neural Network를 결합해 효과적인 탐색, 체스나 바둑 등에서 인간 전문가를 능가하는 성능<br>
 ▣ 단점 : MCTS와 Neural Network의 결합으로 대규모 연산이 필요하며, 게임의 정확한 규칙이 모델로 제공되어야 함<br>
 ▣ 적용 분야 : 규칙 기반 게임(체스, 바둑, 장기), 규칙 기반의 시뮬레이션 환경<br>
@@ -2333,10 +1650,10 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 	(4-2) I2A(Imagination-Augmented Agents): 상상된 상태에서 정책을 훈련시키는 기법
 	(4-3) MBMF(Model-Based Model-Free): 모델 기반 및 모델-프리 접근을 혼합하여 효율성 향상
 	(4-4) MBVE(Model-Based Value Expansion): 모델을 사용하여 예측된 미래 보상을 통해 학습하는 방법
-	(4-5) Dreamer: 잠재 공간에서의 예측과 학습을 결합한 최신 모델 기반 방법 (DeepMind, 2020)
+	(4-5) Dreamer: 잠재 공간에서의 예측과 학습을 결합한 최신 모델 기반 방법
 	(4-6) PlaNet: Dreamer의 전신인 모델 기반 강화 학습 알고리즘
 	(4-7) PETs(Probabilistic Ensembles with Trajectory Sampling): 확률적 모델 앙상블을 활용하는 강화학습 기법
- 	(4-8) MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태로, 명시적 환경 모델 없이도 정책과 가치를 학습 (DeepMind, 2019)
+ 	(4-8) MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태로, 명시적 환경 모델 없이도 정책과 가치를 학습
 
 
 ![](./images/4vs.PNG)
@@ -2379,7 +1696,7 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 
 <br>
 
-## (4-5) Dreamer : 사전에 환경 모델이 제공되지 않은 상태에서, 에이전트가 환경 데이터를 수집해 세계 모델을 학습하고 이를 활용해 정책과 가치 함수를 학습 (DeepMind, 2020)
+## (4-5) Dreamer : 사전에 환경 모델이 제공되지 않은 상태에서, 에이전트가 환경 데이터를 수집해 세계 모델을 학습하고 이를 활용해 정책과 가치 함수를 학습
 ▣ 정의 : 환경 모델을 학습하여 잠재 공간에서 정책을 최적화하는 알고리즘. PlaNet의 확장 버전으로, 단기 및 장기 보상을 고려하여 정책을 학습<br>
 ▣ 장점 : 잠재 공간에서 학습하여 데이터 효율성을 극대화, 샘플 효율성이 높으며 복잡한 환경에서도 잘 작동<br>
 ▣ 단점 : 환경 모델 학습의 복잡도가 높고 모델 학습에 필요한 계산 자원이 큼<br>
@@ -2406,7 +1723,7 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 
 <br>
 
-## (4-8)  MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태로, 명시적 환경 모델 없이도 정책과 가치를 학습 (DeepMind, 2019)
+## (4-8)  MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태로, 명시적 환경 모델 없이도 정책과 가치를 학습
 ▣ 정의 : AlphaZero의 확장 버전으로, 환경 모델을 사전에 제공받는 대신 학습 과정에서 환경 모델을 스스로 학습하는 알고리즘. 모델 기반 학습과 모델 프리 학습을 결합해 환경 모델이 없는 경우에도 높은 성능을 발휘<br>
 ▣ 장점 : AlphaZero와 달리 환경 모델이 없어도 동작 가능, 규칙 기반 게임뿐 아니라 다양한 환경에 적용 가능, 모델 기반 예측을 통해 데이터 효율성을 극대화<br>
 ▣ 단점 : 복잡한 구현: 환경 모델 학습과 RL을 결합해야 하므로 구현이 어렵고, 높은 계산 비용: 모델 학습 및 MCTS 사용으로 인해 연산 자원이 많이 요구<br>
@@ -2426,7 +1743,8 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 
 # [1] 스태킹(Stacking)
 ▣ 정의 : 서로 다른 종류의 기반 모델(base model) 여러 개를 학습한 후, 이들의 예측 결과를 결합하는 방식. 개별 모델의 예측 결과를 다시 하나의 메타 모델(meta-model)로 학습시켜 최종 예측을 수행<br>
-▣ 필요성 : 단일 모델의 약점을 보완하기 위해 서로 다른 유형의 모델을 조합함으로써 더 나은 성능을 도출. 예를 들어, knn, logistic regression, randomforest, xgboost 모델을 이용해서 4종류의 예측값을 구한 후, 이 예측값을 하나의 데이터 프레임으로 만들어 최종모델인 lightgbm의 학습데이터로 사용<br>
+▣ 필요성 : 단일 모델의 약점을 보완하기 위해 서로 다른 유형의 모델을 조합함으로써 더 나은 성능을 도출.<br> 
+예를 들어, knn, logistic regression, randomforest, xgboost 모델을 이용해서 4종류의 예측값을 구한 후, 이 예측값을 하나의 데이터 프레임으로 만들어 최종모델인 lightgbm의 학습데이터로 사용<br>
 ▣ 장점 : 서로 다른 모델의 장점을 결합하여 더욱 강력한 예측 성능을 낼 수 있으며, 다양한 모델의 편향과 분산을 보완<br>
 ▣ 단점 : 모델 조합이 복잡해질수록 계산 비용이 커지고, 메타 모델을 학습하는 데 추가적인 시간이 소요되며 과적합(overfitting)의 위험<br>
 ▣ 응용분야 : 여러 모델의 특성이 유용할 때 사용한다. 예를 들어, 금융 예측, 이미지 분류 등 다양한 문제에서 활용<br>
@@ -2552,7 +1870,8 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 <br>
 
 # [2] 배깅(Bagging)
-▣ 정의 : 동일한 모델을 여러 번 학습하되, 각 학습마다 다른 데이터 샘플을 사용 주로 부트스트랩(bootstrap) 방법으로 샘플링된 데이터로 모델을 학습하며, 최종 예측은 개별 모델의 예측 결과를 평균 또는 투표로 결합. 대표적인 알고리즘은 랜덤 포레스트(Random Forest)<br>
+▣ 정의 : 동일한 모델을 여러 번 학습하되, 각 학습마다 다른 데이터 샘플을 사용 주로 부트스트랩(bootstrap) 방법으로 샘플링된 데이터로 모델을 학습하며,<br> 
+최종 예측은 개별 모델의 예측 결과를 평균 또는 투표로 결합. 대표적인 알고리즘은 랜덤 포레스트(Random Forest)<br>
 ![](./images/vb.PNG)
 <br>
 ▣ 필요성 : 단일 모델이 데이터의 특정 부분에 과적합하는 것을 방지하고, 예측의 안정성을 높이기 위해 사용<br>
@@ -2619,7 +1938,8 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 <br>
 
 # [3] 부스팅(Boosting)
-▣ 정의 : 약한 학습기(weak learner)를 연속적으로 학습시키며, 이전 학습에서 잘못 예측한 데이터에 가중치를 부여하여 다음 모델이 이를 더 잘 학습할 수 있도록 한다. 대표적인 알고리즘으로는 AdaBoost, Gradient Boosting, XGBoost 등이 있다.<br>
+▣ 정의 : 약한 학습기(weak learner)를 연속적으로 학습시키며, 이전 학습에서 잘못 예측한 데이터에 가중치를 부여하여 다음 모델이 이를 더 잘 학습할 수 있도록 한다.<br> 
+대표적인 알고리즘으로는 AdaBoost, Gradient Boosting, XGBoost 등이 있다.<br>
 ![](./images/Boost.PNG)
 ▣ 필요성 : 약한 학습기를 여러 번 반복하여 강력한 학습기를 만들 수 있으며, 특히 잘못된 예측에 집중하여 성능을 점진적으로 개선한다.<br>
 ▣ 장점 : 모델이 연속적으로 개선되기 때문에 높은 예측 성능을 보일 수 있으며, 오류를 줄이는 데 매우 효과적이다.<br>
