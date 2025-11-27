@@ -2849,16 +2849,261 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 
 
 # [3] 부스팅(Boosting)
-▣ 정의 :
-▣ 필요성 : 
-▣ 장점 : 
-▣ 단점 : 
-▣ 적용분야 : 
+▣ 정의 : 약한 학습기(weak learner)를 여러 개 순차적으로 학습시키고 이전 모델이 틀린 데이터를 다음 모델이 보완하도록 만드는 강력한 앙상블 기법<br>
+▣ 대표 알고리즘 : AdaBoost, Gradient Boosting, XGBoost, LightGBM, CatBoost<br>
+▣ 필요성 : 복잡한 패턴을 강력하게 학습해야 할 때, 편향(Bias)을 줄여야 할 때, 정확도가 높은 모델이 필요한 실제 산업 문제, 클래스 불균형(Imbalance) 대응<br>
+▣ 장점 : 매우 높은 예측 성능, 복잡한 비선형 관계도 훌륭히 학습, 과적합 방지 기능 탑재, 클래스 불균형 데이터에 강함, 다양한 모델에 확장 가능<br>
+▣ 단점 : 학습 속도가 느릴 수 있음, 과적합 가능성, 튜닝 난이도 높음, 이상치(Outlier)에 민감<br>
+▣ 적용분야 : 실제 산업에서 가장 널리 쓰이는 실전형 알고리즘<br>
 ![](./images/EL_3.PNG)
 
 <br>	
 
+	# ==========================================
+	# Boosting Ensemble Example (Full Version)
+	#  - Dataset: Breast Cancer (scikit-learn)
+	#  - Models:
+	#    (1) GradientBoostingClassifier
+	#    (2) XGBoost (선택)
+	#    (3) LightGBM (선택)
+	# ==========================================
+	
+	import numpy as np
+	from sklearn.datasets import load_breast_cancer
+	from sklearn.model_selection import train_test_split
+	from sklearn.ensemble import GradientBoostingClassifier
+	from sklearn.metrics import (
+	    accuracy_score, precision_score, recall_score,
+	    f1_score, roc_auc_score, confusion_matrix
+	)
+	
+	# ---------------------------------------------------
+	# 0. XGBoost / LightGBM 설치 여부 체크
+	# ---------------------------------------------------
+	xgboost_available = False
+	lightgbm_available = False
+	
+	try:
+	    from xgboost import XGBClassifier
+	    xgboost_available = True
+	except:
+	    print("[알림] XGBoost 패키지가 설치되어 있지 않습니다. (pip install xgboost)")
+	    
+	try:
+	    from lightgbm import LGBMClassifier
+	    lightgbm_available = True
+	except:
+	    print("[알림] LightGBM 패키지가 설치되어 있지 않습니다. (pip install lightgbm)")
+	
+	
+	# ---------------------------------------------------
+	# 1. 데이터 로드
+	# ---------------------------------------------------
+	data = load_breast_cancer()
+	X, y = data.data, data.target
+	target_names = data.target_names
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y,
+	    test_size=0.2,
+	    random_state=42,
+	    stratify=y
+	)
+	
+	print("\n데이터 Shape:", X.shape)
+	print("클래스:", target_names)
+	
+	
+	# ---------------------------------------------------
+	# 2. 모델 정의
+	# ---------------------------------------------------
+	models = []
+	
+	# (1) Gradient Boosting
+	gb_clf = GradientBoostingClassifier(random_state=42)
+	models.append(("GradientBoosting", gb_clf))
+	
+	# (2) XGBoost
+	if xgboost_available:
+	    xgb_clf = XGBClassifier(
+	        n_estimators=300,
+	        learning_rate=0.05,
+	        max_depth=4,
+	        subsample=0.9,
+	        colsample_bytree=0.9,
+	        eval_metric="logloss",
+	        random_state=42
+	    )
+	    models.append(("XGBoost", xgb_clf))
+	
+	# (3) LightGBM
+	if lightgbm_available:
+	    lgb_clf = LGBMClassifier(
+	        n_estimators=300,
+	        learning_rate=0.05,
+	        max_depth=-1,
+	        num_leaves=31,
+	        subsample=0.9,
+	        colsample_bytree=0.9,
+	        random_state=42
+	    )
+	    models.append(("LightGBM", lgb_clf))
+	
+	
+	# ---------------------------------------------------
+	# 3. 평가 함수
+	# ---------------------------------------------------
+	def evaluate(name, model):
+	    model.fit(X_train, y_train)
+	    y_pred = model.predict(X_test)
+	
+	    # ROC-AUC 계산
+	    if hasattr(model, "predict_proba"):
+	        y_proba = model.predict_proba(X_test)[:, 1]
+	        roc = roc_auc_score(y_test, y_proba)
+	    else:
+	        roc = None
+	
+	    acc = accuracy_score(y_test, y_pred)
+	    prec = precision_score(y_test, y_pred)
+	    rec = recall_score(y_test, y_pred)
+	    f1 = f1_score(y_test, y_pred)
+	    cm = confusion_matrix(y_test, y_pred)
+	
+	    return {
+	        "Model": name,
+	        "Accuracy": acc,
+	        "Precision": prec,
+	        "Recall": rec,
+	        "F1": f1,
+	        "ROC-AUC": roc,
+	        "CM": cm
+	    }
+	
+	
+	# ---------------------------------------------------
+	# 4. 모델 실행
+	# ---------------------------------------------------
+	results = []
+	for name, model in models:
+	    results.append(evaluate(name, model))
+	
+	
+	# ---------------------------------------------------
+	# 5. 성능 비교표 출력
+	# ---------------------------------------------------
+	print("\n====================== 성능 비교표 (Boosting) ======================")
+	print("{:<20} {:>10} {:>10} {:>10} {:>10} {:>10}".format(
+	    "Model", "Acc", "Prec", "Recall", "F1", "ROC-AUC"
+	))
+	
+	for r in results:
+	    print("{:<20} {:>10.4f} {:>10.4f} {:>10.4f} {:>10.4f} {:>10}".format(
+	        r["Model"],
+	        r["Accuracy"],
+	        r["Precision"],
+	        r["Recall"],
+	        r["F1"],
+	        f"{r['ROC-AUC']:.4f}" if r["ROC-AUC"] else "N/A"
+	    ))
+	
+	
+	# ---------------------------------------------------
+	# 6. Confusion Matrix 출력
+	# ---------------------------------------------------
+	print("\n====================== Confusion Matrix ======================")
+	for r in results:
+	    print(f"\n[{r['Model']}]")
+	    print(r["CM"])
+	
+	
+	# ---------------------------------------------------
+	# 7. 자동 분석
+	# ---------------------------------------------------
+	print("\n====================== 자동 성능 분석 (Boosting) ======================")
+	
+	# Accuracy 최고
+	best_acc = max(results, key=lambda x: x["Accuracy"])
+	print(f"▶ Accuracy 최고 모델: {best_acc['Model']} ({best_acc['Accuracy']:.4f})")
+	
+	# ROC-AUC 최고
+	best_auc = max(results, key=lambda x: x["ROC-AUC"])
+	print(f"▶ ROC-AUC 최고 모델: {best_auc['Model']} ({best_auc['ROC-AUC']:.4f})")
+	
+	# 모델별 설명
+	for r in results:
+	    print(f"\n▶ {r['Model']} 분석:")
+	    print(f"- Accuracy: {r['Accuracy']:.4f}")
+	    print(f"- Recall:   {r['Recall']:.4f}")
+	    print(f"- FN(악성 놓침) 최소화 정도를 Recall로 판단 가능")
+	    print(f"- ROC-AUC:  {r['ROC-AUC']:.4f}")
+	
+	print("\n※ 결론 요약:")
+	print("- Boosting 계열은 일반적으로 Tree 기반 Model-Free 계열 중 가장 성능이 높음")
+	print("- 특히 XGBoost/LightGBM은 고성능 + 높은 Recall을 보여 의료 데이터와 잘 맞음")
+	print("- 단일 모델보다 안정적이며 과적합 방지 기능이 강화되어 있음")
+	print("=====================================================================\n")
+	
 <br>
+
+	데이터 Shape: (569, 30)
+	클래스: ['malignant' 'benign']
+	[LightGBM] [Info] Number of positive: 285, number of negative: 170
+	[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.000374 seconds.
+	You can set `force_row_wise=true` to remove the overhead.
+	And if memory is not enough, you can set `force_col_wise=true`.
+	[LightGBM] [Info] Total Bins 4542
+	[LightGBM] [Info] Number of data points in the train set: 455, number of used features: 30
+	[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.626374 -> initscore=0.516691
+	[LightGBM] [Info] Start training from score 0.516691
+	
+	====================== 성능 비교표 (Boosting) ======================
+	Model                       Acc       Prec     Recall         F1    ROC-AUC
+	GradientBoosting         0.9561     0.9467     0.9861     0.9660     0.9907
+	XGBoost                  0.9561     0.9467     0.9861     0.9660     0.9944
+	LightGBM                 0.9649     0.9595     0.9861     0.9726     0.9901
+	
+	====================== Confusion Matrix ======================
+	
+	[GradientBoosting]
+	[[38  4]
+	 [ 1 71]]
+	
+	[XGBoost]
+	[[38  4]
+	 [ 1 71]]
+	
+	[LightGBM]
+	[[39  3]
+	 [ 1 71]]
+	
+	====================== 자동 성능 분석 (Boosting) ======================
+	▶ Accuracy 최고 모델: LightGBM (0.9649)
+	▶ ROC-AUC 최고 모델: XGBoost (0.9944)
+	
+	▶ GradientBoosting 분석:
+	- Accuracy: 0.9561
+	- Recall:   0.9861
+	- FN(악성 놓침) 최소화 정도를 Recall로 판단 가능
+	- ROC-AUC:  0.9907
+	
+	▶ XGBoost 분석:
+	- Accuracy: 0.9561
+	- Recall:   0.9861
+	- FN(악성 놓침) 최소화 정도를 Recall로 판단 가능
+	- ROC-AUC:  0.9944
+	
+	▶ LightGBM 분석:
+	- Accuracy: 0.9649
+	- Recall:   0.9861
+	- FN(악성 놓침) 최소화 정도를 Recall로 판단 가능
+	- ROC-AUC:  0.9901
+	
+	※ 결론 요약:
+	- Boosting 계열은 일반적으로 Tree 기반 Model-Free 계열 중 가장 성능이 높음
+	- 특히 XGBoost/LightGBM은 고성능 + 높은 Recall을 보여 의료 데이터와 잘 맞음
+	- 단일 모델보다 안정적이며 과적합 방지 기능이 강화되어 있음
+	=====================================================================
 
 <br>
 
@@ -2873,17 +3118,259 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 
 <br>	
 
+	# ==========================================
+	# Stacking Ensemble Example (Full Version)
+	#  - Dataset: Breast Cancer (scikit-learn)
+	#  - Base Models:
+	#      (1) Logistic Regression
+	#      (2) Random Forest
+	#      (3) SVC
+	#      (4) Gradient Boosting
+	#  - Meta Model:
+	#      (5) Logistic Regression (Stacking Final Estimator)
+	# ==========================================
+	
+	import numpy as np
+	from sklearn.datasets import load_breast_cancer
+	from sklearn.model_selection import train_test_split
+	from sklearn.pipeline import Pipeline
+	from sklearn.preprocessing import StandardScaler
+	
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.svm import SVC
+	from sklearn.ensemble import (
+	    RandomForestClassifier,
+	    GradientBoostingClassifier,
+	    StackingClassifier
+	)
+	
+	from sklearn.metrics import (
+	    accuracy_score, precision_score, recall_score,
+	    f1_score, roc_auc_score, confusion_matrix
+	)
+	
+	# ------------------------------------------
+	# 1. 데이터 로드 및 분할
+	# ------------------------------------------
+	data = load_breast_cancer()
+	X, y = data.data, data.target
+	target_names = data.target_names
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y,
+	    test_size=0.2,
+	    random_state=42,
+	    stratify=y
+	)
+	
+	print("데이터 Shape:", X.shape)
+	print("클래스:", target_names)
+	
+	# ------------------------------------------
+	# 2. 개별 모델 정의
+	#    - Logistic, SVC는 스케일링 포함 Pipeline
+	# ------------------------------------------
+	
+	# (1) Logistic Regression
+	log_clf = Pipeline([
+	    ("scaler", StandardScaler()),
+	    ("logreg", LogisticRegression(max_iter=1000, random_state=42))
+	])
+	
+	# (2) SVC
+	svc_clf = Pipeline([
+	    ("scaler", StandardScaler()),
+	    ("svc", SVC(probability=True, kernel="rbf", C=1.0, gamma="scale", random_state=42))
+	])
+	
+	# (3) Random Forest
+	rf_clf = RandomForestClassifier(
+	    n_estimators=200,
+	    max_depth=None,
+	    random_state=42,
+	    n_jobs=-1
+	)
+	
+	# (4) Gradient Boosting
+	gb_clf = GradientBoostingClassifier(
+	    random_state=42
+	)
+	
+	# ------------------------------------------
+	# 3. StackingClassifier 정의
+	#    - Base: 위 4개 모델
+	#    - Meta: Logistic Regression
+	# ------------------------------------------
+	estimators = [
+	    ("lr", log_clf),
+	    ("rf", rf_clf),
+	    ("svc", svc_clf),
+	    ("gb", gb_clf),
+	]
+	
+	stack_clf = StackingClassifier(
+	    estimators=estimators,
+	    final_estimator=LogisticRegression(max_iter=1000, random_state=42),
+	    stack_method="auto",   # predict_proba / decision_function / predict 중 자동 선택
+	    passthrough=False,
+	    n_jobs=-1
+	)
+	
+	models = [
+	    ("Logistic Regression", log_clf),
+	    ("Random Forest", rf_clf),
+	    ("SVC", svc_clf),
+	    ("Gradient Boosting", gb_clf),
+	    ("Stacking", stack_clf)
+	]
+	
+	# ------------------------------------------
+	# 4. 평가 함수
+	# ------------------------------------------
+	def evaluate(name, model):
+	    model.fit(X_train, y_train)
+	    y_pred = model.predict(X_test)
+	
+	    # ROC-AUC 계산
+	    if hasattr(model, "predict_proba"):
+	        y_proba = model.predict_proba(X_test)[:, 1]
+	        roc = roc_auc_score(y_test, y_proba)
+	    else:
+	        roc = None
+	
+	    acc = accuracy_score(y_test, y_pred)
+	    prec = precision_score(y_test, y_pred)
+	    rec = recall_score(y_test, y_pred)
+	    f1 = f1_score(y_test, y_pred)
+	    cm = confusion_matrix(y_test, y_pred)
+	
+	    return {
+	        "Model": name,
+	        "Accuracy": acc,
+	        "Precision": prec,
+	        "Recall": rec,
+	        "F1": f1,
+	        "ROC-AUC": roc,
+	        "CM": cm
+	    }
+	
+	# ------------------------------------------
+	# 5. 모델 평가 실행
+	# ------------------------------------------
+	results = []
+	for name, model in models:
+	    results.append(evaluate(name, model))
+	
+	# ------------------------------------------
+	# 6. 성능 비교표 출력
+	# ------------------------------------------
+	print("\n====================== 성능 비교표 (Stacking) ======================")
+	print("{:<20} {:>10} {:>10} {:>10} {:>10} {:>10}".format(
+	    "Model", "Acc", "Prec", "Recall", "F1", "ROC-AUC"
+	))
+	
+	for r in results:
+	    print("{:<20} {:>10.4f} {:>10.4f} {:>10.4f} {:>10.4f} {:>10}".format(
+	        r["Model"],
+	        r["Accuracy"],
+	        r["Precision"],
+	        r["Recall"],
+	        r["F1"],
+	        f"{r['ROC-AUC']:.4f}" if r["ROC-AUC"] else "N/A"
+	    ))
+	
+	# ------------------------------------------
+	# 7. Confusion Matrix 출력
+	# ------------------------------------------
+	print("\n====================== Confusion Matrix ======================")
+	for r in results:
+	    print(f"\n[{r['Model']}]")
+	    print(r["CM"])
+	
+	# ------------------------------------------
+	# 8. 자동 분석
+	# ------------------------------------------
+	print("\n====================== 자동 성능 분석 (Stacking) ======================")
+	
+	# Accuracy 최고 모델
+	best_acc = max(results, key=lambda x: x["Accuracy"])
+	print(f"▶ Accuracy 최고 모델: {best_acc['Model']} ({best_acc['Accuracy']:.4f})")
+	
+	# ROC-AUC 최고 모델
+	best_auc = max(results, key=lambda x: x["ROC-AUC"])
+	print(f"▶ ROC-AUC 최고 모델: {best_auc['Model']} ({best_auc['ROC-AUC']:.4f})")
+	
+	# Stacking 상세 분석
+	stack_res = [r for r in results if r["Model"] == "Stacking"][0]
+	print("\n▶ Stacking 분석:")
+	print(f"- Accuracy: {stack_res['Accuracy']:.4f}")
+	print(f"- Recall:   {stack_res['Recall']:.4f}")
+	print(f"- F1-score: {stack_res['F1']:.4f}")
+	print(f"- ROC-AUC:  {stack_res['ROC-AUC']:.4f}")
+	print("- Base 모델(Logistic, RF, SVC, GB)의 예측을 입력으로 받아")
+	print("  메타모델(Logistic)이 '언제 어떤 모델을 더 신뢰할지'를 학습하는 구조.")
+	print("- 개별 모델보다 성능이 개선되었는지 위 지표로 확인 가능.")
+	
+	print("\n※ 결론 요약:")
+	print("- Stacking은 서로 다른 유형의 모델(선형/비선형/트리/부스팅)을 조합하여")
+	print("  각 모델의 장점을 결합하고, 단일 모델의 약점을 보완하는 앙상블 기법.")
+	print("- Voting/Bagging/Boosting과 함께 비교하면, 어떤 문제에서 어떤 앙상블이")
+	print("  더 적합한지 실험적으로 확인하는 좋은 예제가 됨.")
+	print("=====================================================================\n")
+	
 <br>
 
+	데이터 Shape: (569, 30)
+	클래스: ['malignant' 'benign']
+	
+	====================== 성능 비교표 (Stacking) ======================
+	Model                       Acc       Prec     Recall         F1    ROC-AUC
+	Logistic Regression      0.9825     0.9861     0.9861     0.9861     0.9954
+	Random Forest            0.9561     0.9589     0.9722     0.9655     0.9931
+	SVC                      0.9825     0.9861     0.9861     0.9861     0.9950
+	Gradient Boosting        0.9561     0.9467     0.9861     0.9660     0.9907
+	Stacking                 0.9737     0.9859     0.9722     0.9790     0.9964
+	
+	====================== Confusion Matrix ======================
+	
+	[Logistic Regression]
+	[[41  1]
+	 [ 1 71]]
+	
+	[Random Forest]
+	[[39  3]
+	 [ 2 70]]
+	
+	[SVC]
+	[[41  1]
+	 [ 1 71]]
+	
+	[Gradient Boosting]
+	[[38  4]
+	 [ 1 71]]
+	
+	[Stacking]
+	[[41  1]
+	 [ 2 70]]
+	
+	====================== 자동 성능 분석 (Stacking) ======================
+	▶ Accuracy 최고 모델: Logistic Regression (0.9825)
+	▶ ROC-AUC 최고 모델: Stacking (0.9964)
+	
+	▶ Stacking 분석:
+	- Accuracy: 0.9737
+	- Recall:   0.9722
+	- F1-score: 0.9790
+	- ROC-AUC:  0.9964
+	- Base 모델(Logistic, RF, SVC, GB)의 예측을 입력으로 받아
+	  메타모델(Logistic)이 '언제 어떤 모델을 더 신뢰할지'를 학습하는 구조.
+	- 개별 모델보다 성능이 개선되었는지 위 지표로 확인 가능.
+	
+	※ 결론 요약:
+	- Stacking은 서로 다른 유형의 모델(선형/비선형/트리/부스팅)을 조합하여
+	  각 모델의 장점을 결합하고, 단일 모델의 약점을 보완하는 앙상블 기법.
+	- Voting/Bagging/Boosting과 함께 비교하면, 어떤 문제에서 어떤 앙상블이
+	  더 적합한지 실험적으로 확인하는 좋은 예제가 됨.
+	=====================================================================
+
 <br>
-
-	(시사점)
- 	스태킹은 반드시 성능을 향상시키는 보장이 없으며, Base Models의 조합이 서로 보완적이고 충분히 학습되었을 때 효과적이다.  
-	(1) Base Models 다양화: 완전히 다른 특성을 가진 모델(예: SVM, GradientBoosting)을 추가하여 스태킹의 다양성을 개선
-	(2) LightGBM 하이퍼파라미터 최적화: LightGBM의 하이퍼파라미터를 더욱 최적화하여 성능을 개선(optuna와 같은 하이퍼파라미터 튜닝 라이브러리를 사용)
-	(3) Cross-Validation 기반 평가: 데이터를 분할하는 방식에 따른 성능 변화를 확인
-
-<br>
-
-
-
