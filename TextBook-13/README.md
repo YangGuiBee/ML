@@ -1733,7 +1733,7 @@ https://www.kaggle.com/code/hugomathien/behavioral-cloning<br>
 	(3-2) AlphaZero: 시뮬레이션을 통한 최적의 행동을 찾는 Monte Carlo Tree Search 기반 모델
 
 아래 비교표에서 맨우측의 MuZero는 Given the Model 방식이 아니라, Learn the Model 방식으로 구분이 필요하여, (3-3)에서 (4-8)로 이동필요<br>
-![](./images/Given.PNG)
+![](./images/DynaQvs.png)
 <br>
 
 ## (3-1) Dyna-Q : 모델 기반 RL과 모델-프리 RL을 조합한 알고리즘
