@@ -1744,6 +1744,181 @@ https://www.kaggle.com/code/hugomathien/behavioral-cloning<br>
 ▣ 적용 분야 : 로봇 경로 계획 및 최적화, 시뮬레이션이 가능한 환경(환경 모델이 존재하거나 쉽게 추정 가능한 작업)<br>
 ▣ 예제 : <br>
 
+	import numpy as np
+	import random
+	
+	# ======================
+	# 1. 간단 GridWorld 환경
+	# ======================
+	class GridWorld:
+	    def __init__(self, size=4):
+	        self.size = size
+	        self.start = (0, 0)
+	        self.goal = (size-1, size-1)
+	        self.reset()
+	
+	    def reset(self):
+	        self.pos = self.start
+	        return self._state_id(self.pos)
+	
+	    def _state_id(self, pos):
+	        """(x,y) -> 정수 state index"""
+	        x, y = pos
+	        return x * self.size + y
+	
+	    def _id_to_pos(self, s):
+	        return divmod(s, self.size)
+	
+	    def step(self, action):
+	        """
+	        action: 0=up, 1=down, 2=left, 3=right
+	        반환: next_state, reward, done, info
+	        """
+	        x, y = self.pos
+	        if action == 0:   # up
+	            x = max(0, x-1)
+	        elif action == 1: # down
+	            x = min(self.size-1, x+1)
+	        elif action == 2: # left
+	            y = max(0, y-1)
+	        elif action == 3: # right
+	            y = min(self.size-1, y+1)
+	
+	        self.pos = (x, y)
+	        done = (self.pos == self.goal)
+	        reward = 1.0 if done else -0.01  # 목표+1, 그 외 -0.01
+	
+	        return self._state_id(self.pos), reward, done, {}
+	
+	    @property
+	    def n_states(self):
+	        return self.size * self.size
+	
+	    @property
+	    def n_actions(self):
+	        return 4
+	
+	
+	# ======================
+	# 2. Dyna-Q 에이전트
+	# ======================
+	class DynaQAgent:
+	    def __init__(self, n_states, n_actions,
+	                 alpha=0.1, gamma=0.99,
+	                 epsilon=0.1, n_planning=10):
+	        self.n_states = n_states
+	        self.n_actions = n_actions
+	        self.alpha = alpha
+	        self.gamma = gamma
+	        self.epsilon = epsilon
+	        self.n_planning = n_planning
+	
+	        # Q-table
+	        self.Q = np.zeros((n_states, n_actions))
+	        # 모델 (s,a) -> (r, s')
+	        self.model = {}  # key: (s,a), value: (r, s_next)
+	
+	        self.rng = np.random.default_rng(0)
+	
+	    def choose_action(self, s):
+	        # ε-greedy
+	        if self.rng.random() < self.epsilon:
+	            return self.rng.integers(self.n_actions)
+	        else:
+	            return np.argmax(self.Q[s])
+	
+	    def update_q(self, s, a, r, s_next):
+	        # Q-learning 업데이트
+	        best_next = np.max(self.Q[s_next])
+	        td_target = r + self.gamma * best_next
+	        td_error = td_target - self.Q[s, a]
+	        self.Q[s, a] += self.alpha * td_error
+	
+	    def remember_model(self, s, a, r, s_next):
+	        self.model[(s, a)] = (r, s_next)
+	
+	    def planning(self):
+	        """저장된 모델에서 n_planning번 샘플링하여 Q 업데이트"""
+	        if not self.model:
+	            return
+	        keys = list(self.model.keys())
+	        for _ in range(self.n_planning):
+	            s, a = random.choice(keys)
+	            r, s_next = self.model[(s, a)]
+	            self.update_q(s, a, r, s_next)
+	
+	    def train_episode(self, env, max_steps=100):
+	        s = env.reset()
+	        total_reward = 0.0
+	        for t in range(max_steps):
+	            a = self.choose_action(s)
+	            s_next, r, done, _ = env.step(a)
+	
+	            # 1) 실제 경험으로 Q 업데이트
+	            self.update_q(s, a, r, s_next)
+	            # 2) 모델 저장
+	            self.remember_model(s, a, r, s_next)
+	            # 3) 모델 기반 planning 업데이트
+	            self.planning()
+	
+	            s = s_next
+	            total_reward += r
+	            if done:
+	                break
+	        return total_reward, t+1
+	
+	
+	# ======================
+	# 3. 학습 실행
+	# ======================
+	if __name__ == "__main__":
+	    env = GridWorld(size=4)
+	    agent = DynaQAgent(env.n_states, env.n_actions,
+	                       alpha=0.1, gamma=0.99,
+	                       epsilon=0.1, n_planning=20)
+	
+	    n_episodes = 200
+	    for ep in range(1, n_episodes+1):
+	        G, steps = agent.train_episode(env)
+	        if ep % 20 == 0:
+	            print(f"[Episode {ep:3d}] return={G:.2f}, steps={steps}")
+	
+	    # 학습 후 정책 확인 (각 state에서 best action)
+	    print("\n=== Learned policy (0:U,1:D,2:L,3:R) ===")
+	    for s in range(env.n_states):
+	        print(f"s={s:2d} -> a*={np.argmax(agent.Q[s])}")
+
+<br>
+
+	[Episode  20] return=0.93, steps=8
+	[Episode  40] return=0.95, steps=6
+	[Episode  60] return=0.92, steps=9
+	[Episode  80] return=0.95, steps=6
+	[Episode 100] return=0.95, steps=6
+	[Episode 120] return=0.93, steps=8
+	[Episode 140] return=0.95, steps=6
+	[Episode 160] return=0.95, steps=6
+	[Episode 180] return=0.95, steps=6
+	[Episode 200] return=0.95, steps=6
+	
+	=== Learned policy (0:U,1:D,2:L,3:R) ===
+	s= 0 -> a*=1
+	s= 1 -> a*=1
+	s= 2 -> a*=1
+	s= 3 -> a*=1
+	s= 4 -> a*=3
+	s= 5 -> a*=3
+	s= 6 -> a*=3
+	s= 7 -> a*=1
+	s= 8 -> a*=0
+	s= 9 -> a*=0
+	s=10 -> a*=0
+	s=11 -> a*=1
+	s=12 -> a*=0
+	s=13 -> a*=0
+	s=14 -> a*=0
+	s=15 -> a*=0
+	
 <br>
 
 ## (3-2) AlphaZero : 시뮬레이션을 통한 최적의 행동을 찾는 Monte Carlo Tree Search 기반 모델
