@@ -96,8 +96,7 @@
 # 강화 학습(Reinforcement Learning, RL)
 ![](./images/RL3.PNG)
 <br>
-(출처) https://github.com/YangGuiBee/ML/blob/main/TextBook-13/01_IntroductiontoReinforcementLearning.pdf<br>
-<br>
+
 시행착오(Trial and Error)를 통하여 실수와 보상을 통해 학습을 하여 목표를 찾아가는 알고리즘으로,<br> 
 어떤 환경 안에서 정의된 에이전트가 현재의 상태를 인식하여, 선택가능한 행동들 중 보상을 최대화하는 행동 혹은 행동순서를 선택하는 방법.<br>
 기존의 알고리즘이 라벨(정답)이 있는 데이터를 통해서 가중치와 편향을 학습하는 것과 비슷하게<br> 
@@ -297,6 +296,8 @@ $S_t$는 시간 t에서의 상태, 과거 상태 $[S_1, ..., S_t]$ 모두를 고
 	Lecture 10: Case Study: RL in Classic Games
 
 (출처) https://www.davidsilver.uk/teaching/<br>
+(교안) https://github.com/YangGuiBee/ML/blob/main/TextBook-13/01_IntroductiontoReinforcementLearning.pdf<br>
+<br>
 
 
 	▣ 항목 설명
