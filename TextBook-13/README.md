@@ -1929,8 +1929,400 @@ MCTS(Monte Carlo Tree Search)를 사용하여 탐색하고 Neural Network를 통
 ▣ 적용 분야 : 규칙 기반 게임(체스, 바둑, 장기), 규칙 기반의 시뮬레이션 환경<br>
 ▣ 예제 : <br>
 
+	"""
+	AlphaZero-style TicTacToe (Self-play + MCTS + Policy/Value Network)
+	
+	1. PyTorch 설치 여부 확인 (없으면 pip로 CPU 버전 설치 시도)
+	2. TicTacToe 환경 정의
+	3. Policy+Value 네트워크 정의
+	4. MCTS(PUCT) 정의
+	5. Self-play + 학습 루프
+	6. 학습 곡선 & 빈 보드 정책 시각화
+	"""
+	
+	import sys
+	import subprocess
+	import importlib
+	import numpy as np
+	import math
+	from collections import defaultdict
+	import matplotlib.pyplot as plt
+	
+	# ============================================================
+	# 0. PyTorch 설치 확인 및 자동 설치 함수
+	# ============================================================
+	def ensure_torch():
+	    try:
+	        torch = importlib.import_module("torch")
+	        print(f"[INFO] PyTorch already installed. version = {torch.__version__}")
+	        return torch
+	    except ModuleNotFoundError:
+	        print("[INFO] PyTorch not found. Trying to install CPU version via pip ...")
+	        # CPU 전용 휠 설치 (Windows/리눅스 공통 사용 가능)
+	        subprocess.check_call([
+	            sys.executable, "-m", "pip", "install",
+	            "torch", "torchvision", "torchaudio",
+	            "--index-url", "https://download.pytorch.org/whl/cpu"
+	        ])
+	        torch = importlib.import_module("torch")
+	        print(f"[INFO] PyTorch installed successfully. version = {torch.__version__}")
+	        return torch
+	
+	# PyTorch import/설치
+	torch = ensure_torch()
+	import torch.nn as nn
+	import torch.optim as optim
+	
+	
+	# ============================================================
+	# 1. TicTacToe 환경
+	# ============================================================
+	class TicTacToe:
+	    """
+	    상태 표현: 길이 9 벡터
+	      1  : 현재 플레이어의 돌
+	     -1  : 상대 돌
+	      0  : 비어 있음
+	    """
+	    def __init__(self):
+	        self.reset()
+	
+	    def reset(self):
+	        self.board = np.zeros(9, dtype=int)
+	        self.current_player = 1  # 1 또는 -1
+	        return self.get_state()
+	
+	    def get_state(self):
+	        # 항상 "현재 수를 둘 플레이어" 기준으로 보드를 표현
+	        return self.board.astype(np.float32) * self.current_player
+	
+	    def legal_moves(self):
+	        return [i for i in range(9) if self.board[i] == 0]
+	
+	    def step(self, action):
+	        # action: 0~8 (보드 인덱스)
+	        if self.board[action] != 0:
+	            raise ValueError("Illegal move")
+	        self.board[action] = self.current_player
+	        winner = self.check_winner()
+	        done = winner is not None or len(self.legal_moves()) == 0
+	
+	        if winner == self.current_player:
+	            reward = 1.0
+	        elif winner == -self.current_player:
+	            reward = -1.0
+	        else:
+	            reward = 0.0
+	
+	        self.current_player *= -1  # 턴 변경
+	        return self.get_state(), reward, done
+	
+	    def check_winner(self):
+	        lines = [
+	            (0,1,2),(3,4,5),(6,7,8),  # 가로
+	            (0,3,6),(1,4,7),(2,5,8),  # 세로
+	            (0,4,8),(2,4,6)           # 대각
+	        ]
+	        for a,b,c in lines:
+	            s = self.board[a] + self.board[b] + self.board[c]
+	            if s == 3:
+	                return 1
+	            if s == -3:
+	                return -1
+	        return None
+	
+	
+	# ============================================================
+	# 2. 정책 + 가치 네트워크 (AlphaZero의 f_theta)
+	# ============================================================
+	class Net(nn.Module):
+	    def __init__(self):
+	        super().__init__()
+	        self.fc1 = nn.Linear(9, 64)
+	        self.fc2 = nn.Linear(64, 64)
+	        self.policy_head = nn.Linear(64, 9)   # 각 칸의 정책 logits
+	        self.value_head = nn.Linear(64, 1)    # 상태가치 v(s)
+	
+	    def forward(self, x):
+	        x = torch.relu(self.fc1(x))
+	        x = torch.relu(self.fc2(x))
+	        p_logits = self.policy_head(x)
+	        v = torch.tanh(self.value_head(x))    # -1 ~ 1
+	        return p_logits, v.squeeze(-1)
+	
+	
+	# ============================================================
+	# 3. MCTS (PUCT 기반)
+	# ============================================================
+	class MCTS:
+	    def __init__(self, net, c_puct=1.0, n_simulations=50):
+	        self.net = net
+	        self.c_puct = c_puct
+	        self.n_simulations = n_simulations
+	        self.Q = defaultdict(float)   # Q(s,a)
+	        self.N = defaultdict(int)     # 방문수 N(s,a)
+	        self.P = {}                   # 정책 prior P(s,a)
+	        self.Ns = defaultdict(int)    # 상태 방문수 N(s)
+	
+	    def _hash_state(self, state):
+	        # numpy array -> bytes (key)
+	        return state.tobytes()
+	
+	    def run(self, env):
+	        """현재 env에서 MCTS n_simulations 번 수행 후 정책 π 반환"""
+	        root_state = env.get_state()
+	        state_key_root = self._hash_state(root_state)
+	
+	        for _ in range(self.n_simulations):
+	            self._simulate(env)
+	
+	        # 루트에서의 π: N(s,a)에 비례
+	        Ns_root = self.Ns[state_key_root]
+	        legal = env.legal_moves()
+	        pi = np.zeros(9, dtype=np.float32)
+	        for a in legal:
+	            pi[a] = self.N[(state_key_root, a)] / max(1, Ns_root)
+	        return pi
+	
+	    def _simulate(self, env):
+	        # 환경 복사 (간단하게 deep copy)
+	        tmp_env = TicTacToe()
+	        tmp_env.board = env.board.copy()
+	        tmp_env.current_player = env.current_player
+	
+	        path = []  # (state_key, a) 경로
+	        while True:
+	            state = tmp_env.get_state()
+	            state_key = self._hash_state(state)
+	            legal = tmp_env.legal_moves()
+	
+	            if len(legal) == 0:
+	                v = 0.0
+	                break
+	
+	            # leaf?
+	            if state_key not in self.P:
+	                # 네트워크로부터 P, v 예측
+	                state_tensor = torch.from_numpy(state).unsqueeze(0)
+	                with torch.no_grad():
+	                    p_logits, v_tensor = self.net(state_tensor)
+	                    p = torch.softmax(p_logits, dim=-1).numpy()[0]
+	                    v = float(v_tensor.item())
+	
+	                # 합법 수만 남기기
+	                mask = np.zeros_like(p)
+	                mask[legal] = 1.0
+	                p = p * mask
+	                if p.sum() <= 0:
+	                    p[legal] = 1.0 / len(legal)
+	                else:
+	                    p /= p.sum()
+	
+	                self.P[state_key] = p
+	                # leaf 노드에서 값 v 반환
+	                break
+	
+	            # PUCT로 액션 선택
+	            best_score, best_action = -1e9, None
+	            for a in legal:
+	                q = self.Q[(state_key, a)]
+	                n_sa = self.N[(state_key, a)]
+	                n_s = self.Ns[state_key]
+	                u = self.c_puct * self.P[state_key][a] * math.sqrt(n_s + 1) / (1 + n_sa)
+	                score = q + u
+	                if score > best_score:
+	                    best_score, best_action = score, a
+	
+	            a = best_action
+	            path.append((state_key, a))
+	            next_state, reward, done = tmp_env.step(a)
+	            if done:
+	                v = reward  # terminal value
+	                break
+	
+	        # 백업: 경로 따라 Q, N 업데이트
+	        for state_key, a in reversed(path):
+	            self.N[(state_key, a)] += 1
+	            self.Ns[state_key] += 1
+	            q = self.Q[(state_key, a)]
+	            # 현재 플레이어 기준이 번갈아 바뀌므로 -v
+	            q += (v - q) / self.N[(state_key, a)]
+	            self.Q[(state_key, a)] = q
+	            v = -v  # 상대 관점으로 전환
+	
+	
+	# ============================================================
+	# 4. Self-play + 학습 루프
+	# ============================================================
+	def self_play_episode(net, n_sim=50, temperature=1.0):
+	    env = TicTacToe()
+	    mcts = MCTS(net, n_simulations=n_sim)
+	    states, pis, rewards = [], [], []
+	    while True:
+	        state = env.get_state()
+	        pi = mcts.run(env)
+	
+	        # temperature 적용 (훈련 초기에는 exploration)
+	        if temperature > 0:
+	            probs = pi ** (1.0 / temperature)
+	            probs /= probs.sum()
+	            action = np.random.choice(9, p=probs)
+	        else:
+	            action = np.argmax(pi)
+	
+	        states.append(state)
+	        pis.append(pi)
+	
+	        next_state, reward, done = env.step(action)
+	        if done:
+	            # 최종 보상 reward (현재 player 기준)를
+	            # state별 z (승패값)로 저장
+	            z = reward
+	            for _ in range(len(states)):
+	                rewards.append(z)
+	                z = -z  # 턴이 바뀌므로 부호 반전
+	            break
+	
+	    return np.array(states), np.array(pis), np.array(rewards, dtype=np.float32)
+	
+	
+	def train_step(net, optimizer, states, pis, zs):
+	    net.train()
+	    states_t = torch.from_numpy(states)
+	    target_pis = torch.from_numpy(pis)
+	    target_zs = torch.from_numpy(zs)
+	
+	    p_logits, v = net(states_t)
+	    log_probs = torch.log_softmax(p_logits, dim=-1)
+	
+	    # policy loss: cross-entropy(-π·log p)
+	    policy_loss = -torch.mean(torch.sum(target_pis * log_probs, dim=-1))
+	    # value loss: MSE
+	    value_loss = torch.mean((v - target_zs)**2)
+	    loss = policy_loss + value_loss
+	
+	    optimizer.zero_grad()
+	    loss.backward()
+	    optimizer.step()
+	
+	    return float(loss.item()), float(policy_loss.item()), float(value_loss.item())
+	
+	
+	# ============================================================
+	# 5. 간단 시각화 함수들
+	# ============================================================
+	def plot_training_curves(loss_hist, pol_hist, val_hist):
+	    plt.figure(figsize=(8, 4))
+	    plt.plot(loss_hist, label="Total loss")
+	    plt.plot(pol_hist, label="Policy loss")
+	    plt.plot(val_hist, label="Value loss")
+	    plt.xlabel("Iteration")
+	    plt.ylabel("Loss")
+	    plt.title("AlphaZero-style TicTacToe Training Loss")
+	    plt.legend()
+	    plt.grid(True)
+	    plt.tight_layout()
+	    plt.show()
+	
+	
+	def plot_policy_on_empty_board(net):
+	    """빈 보드(시작 상태)에 대한 π를 3x3 heatmap으로 표시"""
+	    env = TicTacToe()
+	    state = env.get_state()
+	    state_t = torch.from_numpy(state).unsqueeze(0)
+	    net.eval()
+	    with torch.no_grad():
+	        p_logits, v = net(state_t)
+	        probs = torch.softmax(p_logits, dim=-1).numpy()[0]
+	
+	    grid = probs.reshape(3, 3)
+	
+	    plt.figure(figsize=(4, 4))
+	    im = plt.imshow(grid, vmin=0.0, vmax=grid.max())
+	    plt.title("Policy π on Empty Board\n(각 칸에 둘 확률)")
+	
+	    for i in range(3):
+	        for j in range(3):
+	            plt.text(j, i, f"{grid[i, j]:.2f}",
+	                     ha="center", va="center", color="white")
+	
+	    plt.xticks([0,1,2], ["0","1","2"])
+	    plt.yticks([0,1,2], ["3","4","5"])
+	    plt.colorbar(im)
+	    plt.tight_layout()
+	    plt.show()
+	
+	
+	# ============================================================
+	# 6. 메인 실행
+	# ============================================================
+	if __name__ == "__main__":
+	    print("[INFO] Using PyTorch version:", torch.__version__)
+	
+	    net = Net()
+	    optimizer = optim.Adam(net.parameters(), lr=1e-3)
+	
+	    n_iterations = 20      # self-play + 학습 반복 횟수
+	    games_per_iter = 20   # iteration당 self-play 게임 수
+	
+	    loss_hist, pol_hist, val_hist = [], [], []
+	
+	    for it in range(1, n_iterations+1):
+	        all_states, all_pis, all_zs = [], [], []
+	        for _ in range(games_per_iter):
+	            states, pis, zs = self_play_episode(net, n_sim=30, temperature=1.0)
+	            all_states.append(states)
+	            all_pis.append(pis)
+	            all_zs.append(zs)
+	
+	        all_states = np.concatenate(all_states, axis=0)
+	        all_pis = np.concatenate(all_pis, axis=0)
+	        all_zs = np.concatenate(all_zs, axis=0)
+	
+	        loss, pl, vl = train_step(net, optimizer, all_states, all_pis, all_zs)
+	        loss_hist.append(loss)
+	        pol_hist.append(pl)
+	        val_hist.append(vl)
+	
+	        print(f"[Iter {it:2d}] loss={loss:.3f}, policy={pl:.3f}, value={vl:.3f}, samples={len(all_states)}")
+	
+	    # 학습 곡선 + 빈 보드 정책 시각화
+	    plot_training_curves(loss_hist, pol_hist, val_hist)
+	    plot_policy_on_empty_board(net)
+
 <br>
 
+	[INFO] PyTorch not found. Trying to install CPU version via pip ...
+	[INFO] PyTorch installed successfully. version = 2.9.1+cpu
+	[INFO] Using PyTorch version: 2.9.1+cpu
+	[Iter  1] loss=2.934, policy=2.195, value=0.739, samples=136
+	[Iter  2] loss=2.915, policy=2.197, value=0.719, samples=132
+	[Iter  3] loss=3.050, policy=2.197, value=0.853, samples=129
+	[Iter  4] loss=3.001, policy=2.199, value=0.802, samples=134
+	[Iter  5] loss=2.820, policy=2.203, value=0.618, samples=146
+	[Iter  6] loss=2.665, policy=2.186, value=0.479, samples=140
+	[Iter  7] loss=3.039, policy=2.195, value=0.844, samples=135
+	[Iter  8] loss=2.936, policy=2.197, value=0.739, samples=141
+	[Iter  9] loss=2.870, policy=2.192, value=0.678, samples=140
+	[Iter 10] loss=2.863, policy=2.198, value=0.666, samples=142
+	[Iter 11] loss=2.920, policy=2.199, value=0.721, samples=137
+	[Iter 12] loss=2.804, policy=2.189, value=0.616, samples=143
+	[Iter 13] loss=2.972, policy=2.199, value=0.773, samples=140
+	[Iter 14] loss=2.946, policy=2.187, value=0.760, samples=131
+	[Iter 15] loss=2.917, policy=2.203, value=0.713, samples=143
+	[Iter 16] loss=2.965, policy=2.195, value=0.771, samples=141
+	[Iter 17] loss=2.775, policy=2.186, value=0.588, samples=141
+	[Iter 18] loss=2.951, policy=2.187, value=0.764, samples=135
+	[Iter 19] loss=2.831, policy=2.189, value=0.642, samples=142
+	[Iter 20] loss=2.882, policy=2.193, value=0.689, samples=145
+
+
+![](./images/(3-2)_1.png)
+<br>
+![](./images/(3-2)_2.png)
+<br>
+
+<br>
 ---
 
 # [4] Model-based RL : Learn the Model
