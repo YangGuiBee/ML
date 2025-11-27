@@ -1555,7 +1555,7 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 ▣ 장점 : 단순하고 구현이 용이, 정책 학습의 직관적 접근 방식을 제공<br>
 ▣ 단점 : 높은 분산(Variance)으로 인해 학습이 불안정, 샘플 효율성이 낮다<br>
 ▣ 적용 분야 : 간단한 제어 환경, 정책 탐색 문제<br>
-▣ 예제 : <br>
+▣ 캐글예제 : https://www.kaggle.com/code/lalitharajesh/reinforce-algorithm<br>
 ![](./images/[2-12].PNG)
 
 <br>
@@ -1565,7 +1565,7 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 ▣ 장점 : 빠른 학습 속도, 연속적 행동 공간에서 효과적<br>
 ▣ 단점 : Actor와 Critic 간 균형 조정이 어렵고, 불안정한 학습 가능성<br>
 ▣ 적용 분야 : 로봇 제어, 고차원 학습 환경<br>
-▣ 예제 : <br>
+▣ 캐글예제 : https://www.kaggle.com/code/satishgunjal/actor-critic-method<br>
 
 <br>
 
@@ -1574,7 +1574,7 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 ▣ 장점 : 더 빠른 수렴, 정책 안정성 보장<br>
 ▣ 단점 : 계산 비용 증가, 구현 복잡도<br>
 ▣ 적용 분야 : 복잡한 연속 제어 문제<br>
-▣ 예제 : <br>
+▣ 캐글예제 : https://github.com/ShangtongZhang/DeepRL<br>
 
 <br>
 
@@ -1583,7 +1583,8 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 ▣ 장점 : 학습 속도 향상(A3C), 정책과 가치 함수 학습을 분리하여 안정성 제공하고 멀티 쓰레드로 효율적인 샘플 수집 가능<br>
 ▣ 단점 : 비동기 학습으로 인해 복잡도가 증가(A3C), A2C는 샘플 효율성이 낮음<br>
 ▣ 적용 분야 : 멀티 에이전트 환경, 연속적인 제어 문제<br>
-▣ 예제 : <br>
+▣ 캐글예제 : https://www.kaggle.com/code/samratp/a2c-advantage-actor-critic-implementation<br>
+https://www.kaggle.com/code/marvivek/a3c-implementation<br>
 ![](./images/(2-2)_1.PNG)
 
 <br>
@@ -1593,7 +1594,7 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 ▣ 장점 : 샘플 효율성 향상, Actor-Critic 구조의 안정성과 효율성을 제공<br>
 ▣ 단점 : 구현이 복잡, 추가적인 메모리와 계산 비용이 요구<br>
 ▣ 적용 분야 : 복잡한 연속 제어 환경, 로봇 공학<br>
-▣ 예제 : <br>
+▣ 예제 : https://github.com/tensorflow/agents/tree/master/tf_agents/agents/acer<br>
 
 <br>
 
@@ -1602,7 +1603,7 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 ▣ 장점 : 분산 환경에서 효율적, 데이터 수집과 학습 병렬화 가능, 샘플 효율성 우수<br>
 ▣ 단점 : 높은 계산 비용, 복잡한 구현<br>
 ▣ 적용 분야 : 대규모 학습 환경, 분산 강화 학습<br>
-▣ 예제 : <br>
+▣ 예제 : https://github.com/deepmind/scalable_agent<br>
 
 <br>
 
@@ -1611,7 +1612,7 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 ▣ 장점 : 샘플 효율성이 높고 다양한 데이터 소스를 활용 가능<br>
 ▣ 단점 : 중요도 샘플링에 의존하여 학습이 불안정, 구현이 복잡<br>
 ▣ 적용 분야 : 대규모 데이터 기반 학습, 샘플 수집 비용이 높은 환경<br>
-▣ 예제 : <br>
+▣ 예제 : https://github.com/sweetice/Deep-reinforcement-learning-with-pytorch<br>
 
 <br>
 
@@ -1620,7 +1621,8 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 ▣ 장점 : 구현이 간단하고 안정적이며, Hyperparameter에 덜 민감하고 높은 성능<br>
 ▣ 단점 : 일부 환경에서 클리핑이 비효율적, 계산 비용이 높다<br>
 ▣ 적용 분야 : 게임 AI, 로봇 공학, 자율적 제어 시스템<br>
-▣ 예제 : <br>
+▣ 캐글예제 : https://www.kaggle.com/code/samratp/ppo-proximal-policy-optimization<br>
+https://www.kaggle.com/code/borisdee/proximal-policy-optimization-ppo<br>
 ![](./images/[2-3].PNG)
 
 <br>
@@ -1630,7 +1632,7 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 ▣ 장점 : 안정적인 정책 업데이트, 수렴이 빠르고 신뢰성이 높음
 ▣ 단점 : 계산 비용이 매우 높고, 구현이 복잡<br>
 ▣ 적용 분야 : 연속적인 제어 문제, 복잡한 로봇 학습<br>
-▣ 예제 : <br>
+▣ 캐글예제 : https://www.kaggle.com/code/samratp/trpo-trust-region-policy-optimization<br>
 
 <br>
 
@@ -1639,7 +1641,7 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 ▣ 장점 : 연속적인 행동 공간에서 효율적, 고차원 작업에 적합<br>
 ▣ 단점 : 샘플 효율성이 낮고 탐색 문제에 취약<br>
 ▣ 적용 분야 : 로봇 학습, 자율 시스템 제어<br>
-▣ 예제 : <br>
+▣ 캐글예제 : https://www.kaggle.com/code/farhanhubble/ddpg-deep-deterministic-policy-gradient<br>
 
 <br>
 
@@ -1648,7 +1650,7 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 ▣ 장점 : 과대 추정을 줄이고, 안정적인 학습 성능<br>
 ▣ 단점 : 구현이 복잡, 추가 계산 비용<br>
 ▣ 적용 분야 : 연속 제어 문제, 로봇 공학<br>
-▣ 예제 : <br>
+▣ 캐글예제 : https://www.kaggle.com/code/farhanhubble/td3-twin-delayed-deep-deterministic-policy-grad<br>
 
 <br>
 
@@ -1657,7 +1659,8 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 ▣ 장점 : 안정적이고 강력한 성능, 샘플 효율성 우수<br>
 ▣ 단점 : 계산 비용이 높고 복잡한 튜닝 필요<br>
 ▣ 적용 분야 : 로봇 동작 학습, 복잡한 환경 학습<br>
-▣ 예제 : <br>
+▣ 캐글예제 : https://www.kaggle.com/code/harlfoxem/soft-actor-critic-sac-pytorch<br>
+https://www.kaggle.com/code/sz8416/soft-actor-critic-sac-lunarlandercontinuous<br>
 
 <br>
 
@@ -1666,7 +1669,8 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 ▣ 장점 : 간단하고 구현이 용이하고 지도 학습 알고리즘을 활용 가능<br>
 ▣ 단점 : 일반화가 어렵고 충분한 데이터가 없으면 성능이 저하<br>
 ▣ 적용 분야 : 자율 주행 학습, 인간 행동 모방<br>
-▣ 예제 : <br>
+▣ 캐글예제 : https://www.kaggle.com/code/pablotab/bc-behavioral-cloning<br>
+https://www.kaggle.com/code/hugomathien/behavioral-cloning<br>
 
 <br>
 
@@ -1676,7 +1680,7 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 ▣ 장점 : 학습 초기 성능이 향상, 샘플 효율성을 개선, 희소 보상 환경에서도 학습이 용이<br>
 ▣ 단점 : 전문가 시연 데이터가 필수적, 추가 메모리 및 계산 비용이 필요<br>
 ▣ 적용 분야 : 로봇 공학(시연 데이터를 활용한 로봇 작업), 자율 주행 및 복잡한 제어 작업<br>
-▣ 예제 : <br>
+▣ 예제 : https://arxiv.org/abs/1709.10087<br>
 
 <br>
 
