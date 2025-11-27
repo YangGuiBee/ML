@@ -56,7 +56,7 @@
 		(2-8) PPO(Proximal Policy Optimization): 신뢰 구간을 사용해 안정적으로 정책을 업데이트
 		(2-9) TRPO(Trust Region Policy Optimization): 정책 급변을 방지하는 최적화 기법
 	연속 행동 공간 최적화 계열 
-		(2-10) DDPG(Deep Deterministic Policy Gradient): 연속적 행동 공간에서 학습하는 Actor-Critic 모델
+		(2-10) DDPG(Deep Deterministic Policy Gradient): 연속적 행동 공간에서 학습
 		(2-11) TD3(Twin Delayed DDPG): DDPG의 한계점을 극복하기 위한 개선된 모델
 		(2-12) SAC(Soft Actor-Critic): 탐색과 활용의 균형을 유지하도록 설계된 정책 학습 모델
 	전문가 시범 데이터 활용 계열 
@@ -1543,7 +1543,7 @@ https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html<br>
 		(2-8) PPO(Proximal Policy Optimization): 신뢰 구간을 사용해 안정적으로 정책을 업데이트
 		(2-9) TRPO(Trust Region Policy Optimization): 정책 급변을 방지하는 최적화 기법
 	연속 행동 공간 최적화 계열 
-		(2-10) DDPG(Deep Deterministic Policy Gradient): 연속적 행동 공간에서 학습하는 Actor-Critic 모델
+		(2-10) DDPG(Deep Deterministic Policy Gradient): 연속적 행동 공간에서 학습
 		(2-11) TD3(Twin Delayed DDPG): DDPG의 한계점을 극복하기 위한 개선된 모델
 		(2-12) SAC(Soft Actor-Critic): 탐색과 활용의 균형을 유지하도록 설계된 정책 학습 모델
 	전문가 시범 데이터 활용 계열 
@@ -1637,7 +1637,7 @@ https://www.kaggle.com/code/borisdee/proximal-policy-optimization-ppo<br>
 
 <br>
 
-## (2-10) DDPG(Deep Deterministic Policy Gradient) : 연속적 행동 공간에서 학습하는 Actor-Critic 모델
+## (2-10) DDPG(Deep Deterministic Policy Gradient) : 연속적 행동 공간에서 학습
 ▣ 정의: Actor-Critic 기반으로, 연속적인 행동 공간에서 작동하도록 설계된 모델. Actor는 행동을 생성하고, Critic은 행동의 𝑄-값을 평가<br>
 ▣ 장점 : 연속적인 행동 공간에서 효율적, 고차원 작업에 적합<br>
 ▣ 단점 : 샘플 효율성이 낮고 탐색 문제에 취약<br>
