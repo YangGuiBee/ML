@@ -64,18 +64,18 @@
 		(2-14) DDPGfD(DDPG from Demonstrations): 전문가의 시범을 사용해 DDPG 성능을 개선
 	
 	[3] Model-based RL : Given the Model
-	(3-1) Dyna-Q: 모델 기반 RL과 모델-프리 RL을 조합한 알고리즘
-	(3-2) AlphaZero: 시뮬레이션을 통한 최적의 행동을 찾는 Monte Carlo Tree Search 기반 모델
+		(3-1) Dyna-Q: 모델 기반 RL과 모델-프리 RL을 조합한 알고리즘
+		(3-2) AlphaZero: 시뮬레이션을 통한 최적의 행동을 찾는 Monte Carlo Tree Search 기반 모델
 	
  	[4] Model-based RL : Learn the Model
-	(4-1) World Models: 환경을 모델링하고 시뮬레이션을 통해 학습하는 방식
-	(4-2) I2A(Imagination-Augmented Agents): 상상된 상태에서 정책을 훈련시키는 기법
-	(4-3) MBMF(Model-Based Model-Free): 모델기반 접근과 모델-프리 접근을 혼합한 기법
-	(4-4) MBVE(Model-Based Value Expansion): 모델을 학습 보조수단으로 에이전트가 환경에서 수집한 데이터로 학습
-	(4-5) Dreamer: 에이전트가 환경 데이터를 수집하여 모델을 학습하고 이를 활용해 정책과 가치 함수를 학습
-	(4-6) PlaNet: Dreamer의 전신인 모델 기반 강화 학습 알고리즘
-	(4-7) PETs(Probabilistic Ensembles with Trajectory Sampling): 확률적 모델 앙상블을 활용하는 강화학습 기법
-	(4-8) MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태로, 명시적 환경 모델 없이도 정책과 가치를 학습
+		(4-1) World Models: 환경을 모델링하고 시뮬레이션을 통해 학습
+		(4-2) I2A(Imagination-Augmented Agents): 상상된 상태에서 정책을 훈련
+		(4-3) MBMF(Model-Based Model-Free): 모델기반 접근과 모델-프리 접근을 혼합
+		(4-4) MBVE(Model-Based Value Expansion): 모델을 학습 보조수단으로 에이전트가 환경에서 수집한 데이터로 학습
+		(4-5) Dreamer: 에이전트가 환경 데이터를 수집하여 모델을 학습하고 이를 활용해 정책과 가치 함수를 학습
+		(4-6) PlaNet: Dreamer의 전신
+		(4-7) PETs(Probabilistic Ensembles with Trajectory Sampling): 확률적 모델 앙상블을 활용
+		(4-8) MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태(명시적 환경 모델 없이도 정책과 가치를 학습)
 
 ---  
  
@@ -1760,19 +1760,19 @@ MCTS(Monte Carlo Tree Search)를 사용하여 탐색하고 Neural Network를 통
 
 # [4] Model-based RL : Learn the Model
 
-	(4-1) World Models: 환경을 모델링하고 시뮬레이션을 통해 학습하는 방식
-	(4-2) I2A(Imagination-Augmented Agents): 상상된 상태에서 정책을 훈련시키는 기법
-	(4-3) MBMF(Model-Based Model-Free): 모델기반 접근과 모델-프리 접근을 혼합한 기법
+	(4-1) World Models: 환경을 모델링하고 시뮬레이션을 통해 학습
+	(4-2) I2A(Imagination-Augmented Agents): 상상된 상태에서 정책을 훈련
+	(4-3) MBMF(Model-Based Model-Free): 모델기반 접근과 모델-프리 접근을 혼합
 	(4-4) MBVE(Model-Based Value Expansion): 모델을 학습 보조수단으로 에이전트가 환경에서 수집한 데이터로 학습
 	(4-5) Dreamer: 에이전트가 환경 데이터를 수집하여 모델을 학습하고 이를 활용해 정책과 가치 함수를 학습
-	(4-6) PlaNet: Dreamer의 전신인 모델 기반 강화 학습 알고리즘
-	(4-7) PETs(Probabilistic Ensembles with Trajectory Sampling): 확률적 모델 앙상블을 활용하는 강화학습 기법
-	(4-8) MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태로, 명시적 환경 모델 없이도 정책과 가치를 학습
+	(4-6) PlaNet: Dreamer의 전신
+	(4-7) PETs(Probabilistic Ensembles with Trajectory Sampling): 확률적 모델 앙상블을 활용
+	(4-8) MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태(명시적 환경 모델 없이도 정책과 가치를 학습)
 
 ![](./images/4vs.PNG)
 <br>
 
-## (4-1) World Models : 환경을 모델링하고 시뮬레이션을 통해 학습하는 방식
+## (4-1) World Models : 환경을 모델링하고 시뮬레이션을 통해 학습
 ▣ 정의 : 환경의 동작을 모델링하기 위해 신경망을 사용하여 시뮬레이션 환경을 학습하는 강화 학습 알고리즘. 환경 모델은 세 가지 구성 요소로 나뉨 : (1) VAE(Variational 
 Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent Neural Network): 상태 전이를 모델링, (3)Controller: 잠재 공간에서 행동을 선택<br>
 ▣ 장점 : 환경 모델이 학습되면 실제 환경과 상호작용하지 않고도 학습 가능하고 데이터 효율성이 높아짐. 환경의 복잡한 동작을 압축 표현으로 학습<br>
@@ -1782,7 +1782,7 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 
 <br>
 
-## (4-2) I2A(Imagination-Augmented Agents) : 상상된 상태에서 정책을 훈련시키는 기법
+## (4-2) I2A(Imagination-Augmented Agents) : 상상된 상태에서 정책을 훈련
 ▣ 정의 : 상상 기반 학습을 도입한 알고리즘으로, 환경 모델을 학습하고 이를 사용해 행동의 결과를 상상(imagine). 행동의 상상된 결과를 정책 학습에 활용하여 샘플 효율성을 강화<br>
 ▣ 장점 : 실제 상호작용 없이 상상된 데이터를 사용해 학습 가능하고 모델 기반 접근법과 모델 프리 접근법의 장점을 결합<br>
 ▣ 단점 : 상상 모델의 품질에 따라 성능이 크게 달라지며, 계산 비용이 증가<br>
@@ -1791,7 +1791,7 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 
 <br>
 
-## (4-3) MBMF(Model-Based Model-Free) : 모델기반 접근과 모델-프리 접근을 혼합한 기법
+## (4-3) MBMF(Model-Based Model-Free) : 모델기반 접근과 모델-프리 접근을 혼합
 ▣ 정의 : 환경 모델(Model-Based)과 모델 프리 학습(Model-Free)을 결합하여 보완적인 방식으로 작동하는 알고리즘. 환경 모델을 통해 빠르게 초기 정책을 학습하고, 이후 모델 프리 방식으로 정책을 미세 조정<br>
 ▣ 장점 : 샘플 효율성을 높이며, 안정적인 정책 학습 가능, 초기 학습 속도가 빠름<br>
 ▣ 단점 : 환경 모델의 품질에 따라 초기 성능이 영향을 받으며, 모델 기반 및 모델 프리 학습 모두 구현해야 하므로 복잡도 증가<br>
@@ -1809,7 +1809,7 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 
 <br>
 
-## (4-5) Dreamer : 에이전트가 환경 데이터를 수집해 세계 모델을 학습하고 이를 활용해 정책과 가치 함수를 학습
+## (4-5) Dreamer : 에이전트가 환경 데이터를 수집하여 모델을 학습하고 이를 활용해 정책과 가치 함수를 학습
 ▣ 정의 : 환경 모델을 학습하여 잠재 공간에서 정책을 최적화하는 알고리즘. PlaNet의 확장 버전으로, 단기 및 장기 보상을 고려하여 정책을 학습<br>
 ▣ 장점 : 잠재 공간에서 학습하여 데이터 효율성을 극대화, 샘플 효율성이 높으며 복잡한 환경에서도 잘 작동<br>
 ▣ 단점 : 환경 모델 학습의 복잡도가 높고 모델 학습에 필요한 계산 자원이 큼<br>
@@ -1818,7 +1818,7 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 
 <br>
 
-## (4-6) PlaNet : Dreamer의 전신인 모델 기반 강화 학습 알고리즘
+## (4-6) PlaNet : Dreamer의 전신
 ▣ 정의 : 잠재 공간 계획(Latent Space Planning)을 수행하는 강화 학습 알고리즘. 관측 데이터를 잠재 공간으로 변환하고 이 공간에서 환경 모델을 학습하여 행동을 계획<br>
 ▣ 장점 : 환경 모델을 잠재 공간에서 학습하여 계산 효율성이 높고 장기 계획이 가능한 정책 학습<br>
 ▣ 단점 : 복잡한 환경에서는 잠재 공간 모델링이 어렵고 부정확할 수 있으며, 계산 자원 요구가 큼<br>
@@ -1827,7 +1827,7 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 
 <br>
 
-## (4-7) PETs(Probabilistic Ensembles with Trajectory Sampling) : 확률적 모델 앙상블을 활용하는 강화학습 기법
+## (4-7) PETs(Probabilistic Ensembles with Trajectory Sampling) : 확률적 모델 앙상블을 활용
 ▣ 정의 : 여러 환경 모델의 앙상블을 사용하여 샘플링 기반 예측을 수행하는 알고리즘. 모델 불확실성을 감소시키기 위해 앙상블 접근법을 사용하며, 예측 결과를 정책 학습에 활용<br>
 ▣ 장점 : 모델 불확실성을 효과적으로 처리하고 샘플 효율성과 안정성이 높음.<br>
 ▣ 단점 : 여러 모델을 학습해야 하므로 계산 비용이 크고 모델 앙상블 관리가 복잡.<br>
@@ -1836,7 +1836,7 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 
 <br>
 
-## (4-8)  MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태로, 명시적 환경 모델 없이도 정책과 가치를 학습
+## (4-8)  MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태(명시적 환경 모델 없이도 정책과 가치를 학습)
 ▣ 정의 : AlphaZero의 확장 버전으로, 환경 모델을 사전에 제공받는 대신 학습 과정에서 환경 모델을 스스로 학습하는 알고리즘. 모델 기반 학습과 모델 프리 학습을 결합해 환경 모델이 없는 경우에도 높은 성능을 발휘<br>
 ▣ 장점 : AlphaZero와 달리 환경 모델이 없어도 동작 가능, 규칙 기반 게임뿐 아니라 다양한 환경에 적용 가능, 모델 기반 예측을 통해 데이터 효율성을 극대화<br>
 ▣ 단점 : 복잡한 구현: 환경 모델 학습과 RL을 결합해야 하므로 구현이 어렵고, 높은 계산 비용: 모델 학습 및 MCTS 사용으로 인해 연산 자원이 많이 요구<br>
