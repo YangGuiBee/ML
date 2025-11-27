@@ -332,6 +332,9 @@ $S_t$는 시간 t에서의 상태, 과거 상태 $[S_1, ..., S_t]$ 모두를 고
 	
 ---
 
+![](./images/model.png)
+<br>
+
 **Model-Free Algorithm**
 Model-Based와 달리 환경(Environment)을 모르는 상태에서 직접 수행<br>
 에이전트(Agent)가 행동을 통해 보상 합의 기대값을 최대로 하는 Policy Function을 탐색<br>
