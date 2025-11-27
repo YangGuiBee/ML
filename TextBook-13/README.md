@@ -1742,7 +1742,7 @@ https://www.kaggle.com/code/hugomathien/behavioral-cloning<br>
 가상의 경험을 통해 Q-값을 더욱 빠르게 갱신하고 환경이 불확실한 경우에도 모델을 통해 추정 가능<br>
 ▣ 단점 : 환경모델이 부정확하면 학습 성능이 저하되고, 실제샘플과 가상샘플 모두 처리해야 하므로 계산비용이 증가<br>
 ▣ 적용 분야 : 로봇 경로 계획 및 최적화, 시뮬레이션이 가능한 환경(환경 모델이 존재하거나 쉽게 추정 가능한 작업)<br>
-▣ 예제 : <br>
+
 
 	import numpy as np
 	import random
@@ -1927,7 +1927,7 @@ MCTS(Monte Carlo Tree Search)를 사용하여 탐색하고 Neural Network를 통
 ▣ 장점 : 다양한 규칙 기반 게임에 적용 가능하고, MCTS와 Neural Network를 결합해 효과적인 탐색, 체스나 바둑 등에서 인간 전문가를 능가하는 성능<br>
 ▣ 단점 : MCTS와 Neural Network의 결합으로 대규모 연산이 필요하며, 게임의 정확한 규칙이 모델로 제공되어야 함<br>
 ▣ 적용 분야 : 규칙 기반 게임(체스, 바둑, 장기), 규칙 기반의 시뮬레이션 환경<br>
-▣ 예제 : <br>
+▣ 캐글예제 : https://www.kaggle.com/code/quicksilver0218/alphazero-tic-tac-toe-demo<br>
 
 	"""
 	AlphaZero-style TicTacToe (Self-play + MCTS + Policy/Value Network)
@@ -2345,7 +2345,7 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 ▣ 장점 : 환경 모델이 학습되면 실제 환경과 상호작용하지 않고도 학습 가능하고 데이터 효율성이 높아짐. 환경의 복잡한 동작을 압축 표현으로 학습<br>
 ▣ 단점 : 복잡한 환경에서는 모델 학습이 어렵고 부정확, 환경 모델이 불완전하면 성능이 저하<br>
 ▣ 적용분야 : 게임과 같은 시뮬레이션 환경, 로봇 제어, 데이터가 제한된 환경에서 강화 학습<br>
-▣ 예제 : <br>
+▣ 예제 : https://github.com/hardmaru/world-models<br>
 
 <br>
 
@@ -2354,7 +2354,7 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 ▣ 장점 : 실제 상호작용 없이 상상된 데이터를 사용해 학습 가능하고 모델 기반 접근법과 모델 프리 접근법의 장점을 결합<br>
 ▣ 단점 : 상상 모델의 품질에 따라 성능이 크게 달라지며, 계산 비용이 증가<br>
 ▣ 적용분야 : 게임 환경, 복잡한 의사결정 문제, 희소 보상 환경<br>
-▣ 예제 : <br>
+▣ 예제 : https://github.com/vora/deepmind-i2a<br>
 
 <br>
 
@@ -2363,7 +2363,7 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 ▣ 장점 : 샘플 효율성을 높이며, 안정적인 정책 학습 가능, 초기 학습 속도가 빠름<br>
 ▣ 단점 : 환경 모델의 품질에 따라 초기 성능이 영향을 받으며, 모델 기반 및 모델 프리 학습 모두 구현해야 하므로 복잡도 증가<br>
 ▣ 적용분야 : 로봇 제어. 대규모 시뮬레이션 환경<br>
-▣ 예제 : <br>
+▣ 예제 : https://github.com/nagaban2/mbmf<br>
 
 <br>
 
@@ -2372,7 +2372,7 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 ▣ 장점 : 샘플 효율성이 높으며, 가치 함수의 품질이 개선. 단기 예측을 통해 모델 학습의 불확실성을 감소<br>
 ▣ 단점 : 환경 모델의 품질에 따라 성능이 좌우. 단기 예측에만 적합하며, 장기적 의사결정에는 한계<br>
 ▣ 적용분야 : 게임 AI, 가치 함수 학습이 중요한 환경<br>
-▣ 예제 : <br>
+▣ 예제 : https://github.com/xinghaochen/MBVE<br>
 
 <br>
 
@@ -2381,7 +2381,7 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 ▣ 장점 : 잠재 공간에서 학습하여 데이터 효율성을 극대화, 샘플 효율성이 높으며 복잡한 환경에서도 잘 작동<br>
 ▣ 단점 : 환경 모델 학습의 복잡도가 높고 모델 학습에 필요한 계산 자원이 큼<br>
 ▣ 적용분야 : 시뮬레이션 및 물리 기반 환경, 연속적인 제어 문제<br>
-▣ 예제 : <br>
+▣ 예제 : https://github.com/danijar/dreamer<br>
 
 <br>
 
@@ -2390,7 +2390,7 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 ▣ 장점 : 환경 모델을 잠재 공간에서 학습하여 계산 효율성이 높고 장기 계획이 가능한 정책 학습<br>
 ▣ 단점 : 복잡한 환경에서는 잠재 공간 모델링이 어렵고 부정확할 수 있으며, 계산 자원 요구가 큼<br>
 ▣ 적용분야 : 로봇 제어, 물리 시뮬레이션<br>
-▣ 예제 : <br>
+▣ 예제 : https://github.com/google-research/planet<br>
 
 <br>
 
@@ -2399,7 +2399,7 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 ▣ 장점 : 모델 불확실성을 효과적으로 처리하고 샘플 효율성과 안정성이 높음.<br>
 ▣ 단점 : 여러 모델을 학습해야 하므로 계산 비용이 크고 모델 앙상블 관리가 복잡.<br>
 ▣ 적용분야 : 로봇 공학, 희소 보상 환경.<br>
-▣ 예제 : <br>
+▣ 예제 : https://github.com/kchua/handful-of-trials<br>
 
 <br>
 
@@ -2408,7 +2408,21 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 ▣ 장점 : AlphaZero와 달리 환경 모델이 없어도 동작 가능, 규칙 기반 게임뿐 아니라 다양한 환경에 적용 가능, 모델 기반 예측을 통해 데이터 효율성을 극대화<br>
 ▣ 단점 : 복잡한 구현: 환경 모델 학습과 RL을 결합해야 하므로 구현이 어렵고, 높은 계산 비용: 모델 학습 및 MCTS 사용으로 인해 연산 자원이 많이 요구<br>
 ▣ 적용 분야 : 체스, 바둑, 장기 등 규칙 기반 게임. 비디오 게임과 같은 복잡한 환경<br>
-▣ 예제 : <br>
+▣ 예제 : https://github.com/deepmind/muzero<br>
+
+<br>
+
+
+| 모델 | 요약 | 핵심 수식 | 적용 분야 |
+|------|-------|------------|-------------|
+| **4-1 World Models** | VAE + RNN(MDN-RNN)으로 latent world 생성 후 controller가 상상으로 학습 | VAE: <img src="https://latex.codecogs.com/png.latex?z%20%5Csim%20q%28z%7Co%29"/> , Dynamics: <img src="https://latex.codecogs.com/png.latex?z_%7Bt%2B1%7D%20%5Csim%20p%28z_%7Bt%2B1%7D%7Cz_t%2C%20a_t%29"/> , Policy: <img src="https://latex.codecogs.com/png.latex?a_t%3D%5Cpi%28z_t%29"/> | CarRacing, Doom, 픽셀 기반 제어 |
+| **4-2 I2A** | 상상된 rollouts 요약을 policy 입력에 사용 | Imagination summary: <img src="https://latex.codecogs.com/png.latex?e_t=f_%7Benc%7D%28rollout%29"/> , Policy: <img src="https://latex.codecogs.com/png.latex?a_t%3D%5Cpi%28o_t%2C%20e_t%29"/> | Atari, Gridworld |
+| **4-3 MBMF** | 모델 기반 planning + model-free RL 결합 hybrid | Model rollout: <img src="https://latex.codecogs.com/png.latex?s_%7Bt%2B1%7D=%5Chat%7Bf%7D%28s_t,a_t%29"/> , Hybrid Q: <img src="https://latex.codecogs.com/png.latex?Q_%7BMBMF%7D=%5Clambda%20Q_%7BMF%7D+(1-%5Clambda)%5Chat%7BV%7D"/> | MuJoCo, 로봇제어 |
+| **4-4 MBVE** | 단기 모델 rollout(H-step)로 value target 강화 | Value Expansion: <img src="https://latex.codecogs.com/png.latex?V_%7Bexp%7D=%5Csum_%7Bi=0%7D%5EH%20%5Cgamma%5Ei%20r_i+%5Cgamma%5E%7BH%2B1%7D%20%5Chat%7BV%7D%28s_%7BH%2B1%7D%29"/> | DDPG, TD3, SAC |
+| **4-5 Dreamer** | RSSM latent model + imagination actor-critic | RSSM: <img src="https://latex.codecogs.com/png.latex?h_t%2C%20s_t=g(h_%7Bt-1%7D%2C%20s_%7Bt-1%7D%2C%20a_%7Bt-1%7D)"/> , AC: <img src="https://latex.codecogs.com/png.latex?%5Cnabla_%5Ctheta%20J=%5Cmathbb%7BE%7D_%7Bimagined%7D%5B%20%5Cnabla_%5Ctheta%20log%5Cpi(a|s)%20A(s%2Ca)%20%5D"/> | DM Control Suite, Atari |
+| **4-6 PlaNet** | RSSM latent model + MPC planning | RSSM transition: <img src="https://latex.codecogs.com/png.latex?z_t%20%5Csim%20p%28z_t%7Ch_%7Bt-1%7D%29"/> , MPC: <img src="https://latex.codecogs.com/png.latex?a_t=argmax_a%20%5Cmathbb%7BE%7D[G|z_t]"/> | 로봇제어, DM Control Suite |
+| **4-7 PETS** | 앙상블 dynamics + trajectory sampling + CEM(MPC) | Ensemble: <img src="https://latex.codecogs.com/png.latex?s_%7Bt%2B1%7D%20%5Csim%20PE(f_k)"/> , CEM: <img src="https://latex.codecogs.com/png.latex?%5Ctheta^*=argmax_%5Ctheta%20%5Cmathbb{E}[G]"/> | 로봇제어, continuous control |
+| **4-8 MuZero** | 관측 모델 없이 latent dynamics + MCTS planning | Representation: <img src="https://latex.codecogs.com/png.latex?h_0=r(o_0)"/> , Dynamics: <img src="https://latex.codecogs.com/png.latex?h_%7Bt%2B1%7D=g(h_t%2Ca_t)"/> , Prediction: <img src="https://latex.codecogs.com/png.latex?p_t%2Cv_t=f(h_t)"/> | 바둑·체스·쇼기, Atari |
 
 <br>
 
