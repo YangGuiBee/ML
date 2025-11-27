@@ -2435,19 +2435,29 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 ▣ 정의 : 앙상블 학습이란 다수의 기초 알고리즘(base algorithm)을 결합하여 더 나은 성능의 예측 모델을 형성하는 것을 말하며,<br> 
 사용 목적에 따라 보팅(Voting), 배깅(Bagging), 부스팅(Boosting), 스태킹(Stacking)으로 분류<br>
 ![](./images/vs.PNG)
+<br>
+
+
+# [1] 보팅(Voting)
+▣ 정의 : 여러 개의 다른 분류/회귀 모델의 예측을 평균(회귀) 또는 다수결(분류) 방식으로 결합하여 최종 예측을 만드는 가장 단순한 앙상블 방식<br>
+▣ 필요성 : 각 모델의 한계를 다른 모델이 보완, 단일 모델에 비해 안정성 증가(variance 감소), 쉽고 구현 부담이 적음<br>
+▣ 장점 : 해석이 단순하고 직관적, 다른 앙상블 기법보다 계산 비용이 적음, 서로 매우 다른 모델 조합에서도 효과적<br>
+▣ 단점 : 모델 간 상관관계가 높으면 효과가 낮음, 개별 모델 성능이 낮으면 큰 개선이 어려움, 가중치 설정이 수동일 경우 최적화가 어려움<br>
+▣ 적용분야 : 기본 baseline 모델, Kaggle 대회에서 간단한 모델 조합, VotingClassifier / VotingRegressor 기반 ML 파이프라인<br>
+![](./images/EL_1.PNG)
 
 <br>
 
-# [2] 배깅(Bagging)
-▣ 정의 : 동일한 모델을 여러 번 학습하되, 각 학습마다 다른 데이터 샘플을 사용 주로 부트스트랩(bootstrap) 방법으로 샘플링된 데이터로 모델을 학습하며,<br> 
-최종 예측은 개별 모델의 예측 결과를 평균 또는 투표로 결합. 대표적인 알고리즘은 랜덤 포레스트(Random Forest)<br>
-![](./images/vb.PNG)
+# [2] 배깅(Bagging) 
+▣ 정의 : 훈련 데이터를 bootstrap sampling하여 여러 모델을 병렬 학습시키고, 이들의 평균 또는 다수결을 통해 최종 예측을 수행하는 앙상블 방식<br>
+▣ 필요성 : 모델의 분산(Variance)을 크게 줄여 과적합을 방지하기 위함, 작은 변화에도 예측이 불안정한 모델(Decision Tree 등)에 필수적<br>
+▣ 장점 : 고분산 모델 안정화, 샘플링으로 인해 데이터 부족 문제를 완화, 병렬화가 가능하므로 속도가 빨라짐, Random Forest처럼 매우 강력한 성능을 보임<br>
+▣ 단점 : 순차적 성능 개선은 어렵고, 개별 모델 성능보다 큰 향상은 제한적, 데이터 크기가 커지면 bootstrap 비용 증가<br>
+▣ 적용분야 : Random Forest (배깅의 대표 모델), 불안정한 base learner(Decision Tree, KNN, SVM 등)<br>
+![](./images/EL_2.PNG)
+
 <br>
-▣ 필요성 : 단일 모델이 데이터의 특정 부분에 과적합하는 것을 방지하고, 예측의 안정성을 높이기 위해 사용<br>
-▣ 장점 : 분산을 줄여 예측 성능을 향상시키며, 과적합(overfitting)을 방지하는 데 도움<br>
-▣ 단점 : 편향을 줄이는 데는 효과적이지 않을 수 있으며, 많은 모델을 학습하므로 계산 자원이 많이 필요<br>
-▣ 응용분야 : 랜덤 포레스트처럼 결정 트리 기반 모델에서 이미지 분류, 텍스트 분류, 금융 예측 등에 널리 사용<br>
-▣ 모델식 :  $𝑓_1$ 은 각각의 개별 모델, $\widehat{y}=\frac{1}{N}\sum_{i=1}^{N}f_i(x)$<br>
+
 
 	from sklearn.ensemble import BaggingClassifier
 	from sklearn.tree import DecisionTreeClassifier
@@ -2507,14 +2517,14 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 <br>
 
 # [3] 부스팅(Boosting)
-▣ 정의 : 약한 학습기(weak learner)를 연속적으로 학습시키며, 이전 학습에서 잘못 예측한 데이터에 가중치를 부여하여 다음 모델이 이를 더 잘 학습할 수 있도록 한다.<br> 
-대표적인 알고리즘으로는 AdaBoost, Gradient Boosting, XGBoost 등이 있다.<br>
 ![](./images/Boost.PNG)
-▣ 필요성 : 약한 학습기를 여러 번 반복하여 강력한 학습기를 만들 수 있으며, 특히 잘못된 예측에 집중하여 성능을 점진적으로 개선한다.<br>
-▣ 장점 : 모델이 연속적으로 개선되기 때문에 높은 예측 성능을 보일 수 있으며, 오류를 줄이는 데 매우 효과적이다.<br>
-▣ 단점 : 연속적인 학습 과정에서 모델이 과적합할 위험이 있으며, 학습 속도가 느릴 수 있다.<br>
-▣ 응용분야 : 금융 예측, 분류 문제, 회귀 분석 등에서 많이 사용되며, 특히 XGBoost는 대회에서 많이 사용된다.<br>
-▣ 모델식 : $f_i$ 는 약한 학습기, $𝛼_𝑖$ 는 각 학습기의 가중치, $\widehat{y}=\sum_{i=1}^{N}\alpha_i f_i(x)$<br>
+▣ 정의 : 약한 학습기(weak learner)를 순차적으로 학습시키면서 이전 학습기가 틀린 데이터를 더 잘 맞추도록 가중치를 조정하는 앙상블 기법<br>
+▣ 필요성 : 데이터의 복잡한 decision boundary 학습, 바이어스(Bias)를 감소시키고 강한 학습기(strong learner) 생성, 높은 예측력을 위해 필수적(특히 XGBoost, LightGBM 등)<br>
+▣ 장점 : 매우 높은 성능 (Kaggle 최강 모델 계열), 오류에 집중하는 방식으로 효율적 학습, 회귀/분류 모두에서 동작 우수<br>
+▣ 단점 : 순차적(직렬) 학습 → 병렬화가 어렵고 속도가 느림, 노이즈에 민감해 과적합 발생 가능, 하이퍼파라미터 많음 (튜닝 필요)<br>
+▣ 적용분야 : XGBoost / LightGBM / CatBoost, Tabular 데이터 분석, 금융, 추천 시스템, Manufacturing, 의료 ML 등<br>
+![](./images/EL_3.PNG)
+
 
 	from sklearn.ensemble import AdaBoostClassifier
 	from sklearn.tree import DecisionTreeClassifier
@@ -2652,13 +2662,13 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 <br>
 
 # [4] 스태킹(Stacking)
-▣ 정의 : 서로 다른 종류의 기반 모델(base model) 여러 개를 학습한 후, 이들의 예측 결과를 결합하는 방식. 개별 모델의 예측 결과를 다시 하나의 메타 모델(meta-model)로 학습시켜 최종 예측을 수행<br>
-▣ 필요성 : 단일 모델의 약점을 보완하기 위해 서로 다른 유형의 모델을 조합함으로써 더 나은 성능을 도출.<br> 
-예를 들어, knn, logistic regression, randomforest, xgboost 모델을 이용해서 4종류의 예측값을 구한 후, 이 예측값을 하나의 데이터 프레임으로 만들어 최종모델인 lightgbm의 학습데이터로 사용<br>
-▣ 장점 : 서로 다른 모델의 장점을 결합하여 더욱 강력한 예측 성능을 낼 수 있으며, 다양한 모델의 편향과 분산을 보완<br>
-▣ 단점 : 모델 조합이 복잡해질수록 계산 비용이 커지고, 메타 모델을 학습하는 데 추가적인 시간이 소요되며 과적합(overfitting)의 위험<br>
-▣ 응용분야 : 여러 모델의 특성이 유용할 때 사용한다. 예를 들어, 금융 예측, 이미지 분류 등 다양한 문제에서 활용<br>
-▣ 모델식 : $𝑓_1$ 은 각각의 개별 모델, $𝑓_2$ 는 메타 모델, $\widehat{y}=f_2(f_1(x_1),f_1(x_2),...f_1(x_n))$<br>
+▣ 정의 : 여러 모델의 예측값을 특징(feature)으로 삼아 메타 모델(meta-learner) 이 최종 예측을 학습하는 고급 앙상블 방<br>
+▣ 필요성 : 서로 다른 모델의 장점을 메타모델이 스스로 “학습하여 조합”하게 함, 가장 높은 수준의 일반화 성능 확보, Voting, Bagging보다 유연하고 강력함<br>
+▣ 장점 : 다양한 모델 조합에 따라 성능 상승 폭이 매우 큼, 메타모델이 가중치/결합 규칙을 자동으로 학습, 오버피팅 방지를 위해 K-fold stacking 가능<br>
+▣ 단점 : 구현 복잡도 증가, 잘못 구성하면 overfitting 가능, 훈련 및 예측 시간이 증가<br>
+▣ 적용분야 : Kaggle 상위권 앙상블 기법, 여러 모델의 예측을 결합할 때, 금융·의료·전력예측·시계열 등 high-level ML 파이프라인<br>
+![](./images/EL_4.PNG)
+
 
 
 	#!pip install lightgbm
