@@ -2338,25 +2338,6 @@ MCTS(Monte Carlo Tree Search)를 사용하여 탐색하고 Neural Network를 통
 	(4-8) MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태(명시적 환경 모델 없이도 정책과 가치를 학습)
 
 
-
-
-| 모델 | 핵심 개념 | 정책 학습 방식 | 적용 분야 | 장점 | 단점 |
-|------|-----------|----------------|-----------|-------|--------|
-| **World Models** | VAE+RNN 기반 latent world 생성 후 시뮬레이션으로 학습 | 시뮬레이터 기반 Controller 학습 | CarRacing, Doom, 픽셀 기반 환경 | 단순·효율적, 빠르게 학습 가능 | 모델 품질에 민감, 복잡 환경에 취약 |
-| **I2A** | 상상된 rollouts를 요약하여 정책 입력으로 활용 | Model-free 정책 + imagination summary | Atari, Gridworld | 추가적인 “상상 정보”로 성능 향상 | 구조가 복잡, rollout 품질 의존 |
-| **MBMF** | 모델 기반 계획과 모델-프리 RL의 Hybrid 접근 | Trajectory planning + Policy Gradient | 로봇 제어, MuJoCo | MB와 MF 장점을 동시에 활용 | 모델 오차 누적, 튜닝 어려움 |
-| **MBVE** | 단기(H-step) 모델 rollout로 value target 강화 | Model-free value 학습 보조 | DDPG, TD3 | Value 안정성↑, 샘플 효율↑ | 모델의 정확도에 따라 성능 차이 |
-| **Dreamer** | RSSM latent world에서 imagination actor-critic 학습 | Latent imagination policy/value 학습 | DMControl Suite, 연속 제어 | 연속제어 SOTA 성능 | 매우 복잡, 계산 자원 많이 필요 |
-| **PlaNet** | RSSM 기반 latent dynamics + MPC planning | Policy 없이 latent MPC로 행동 선택 | 로봇 제어, planning | 모델 정확시 매우 강력한 planning | Long-horizon 안정성 약함 |
-| **PETS** | Probabilistic ensemble dynamics + trajectory sampling | 정책 학습 없이 MPC 기반 의사결정 | 로봇 제어, 연속 환경 | 앙상블로 불확실성 처리 우수 | 데이터 요구량 많음 |
-| **MuZero** | 관측 모델 없이 latent representation+dynamics+prediction 학습 → MCTS | Policy + Value + Reward 학습 + MCTS | 바둑, 체스, Atari, 일반 MDP | 환경 모델 없이 planning 가능 (혁신적) | 가장 복잡, 훈련 비용 매우 큼 |
-
-
-
-
-![](./images/4vs.PNG)
-<br>
-
 ## (4-1) World Models : 환경을 모델링하고 시뮬레이션을 통해 학습
 ▣ 정의 : 환경의 동작을 모델링하기 위해 신경망을 사용하여 시뮬레이션 환경을 학습하는 강화 학습 알고리즘. 환경 모델은 세 가지 구성 요소로 나뉨 : (1) VAE(Variational 
 Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent Neural Network): 상태 전이를 모델링, (3)Controller: 잠재 공간에서 행동을 선택<br>
