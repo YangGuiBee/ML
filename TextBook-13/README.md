@@ -2678,13 +2678,13 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 	# (2) BaggingClassifier (Base: Decision Tree)
 	bagging_clf = BaggingClassifier(
 	    estimator=DecisionTreeClassifier(random_state=42),  # 최신 버전: estimator=
-	    n_estimators=100,
-	    max_samples=0.8,      
-	    max_features=1.0,
-	    bootstrap=True,
-	    bootstrap_features=False,
-	    random_state=42,
-	    n_jobs=-1
+	    n_estimators=100,									# 100개의 Decision Tree 를 학습
+	    max_samples=0.8,     								# train 데이터에서 80%의 샘플(행)을 사용 
+	    max_features=1.0,									# 열(feature)은 그대로 전부 사용
+	    bootstrap=True,										# 복원추출(같은 샘플 여러 번 뽑힐 수 있음)
+	    bootstrap_features=False,							# 열(feature)은 bootstrap 안 함
+	    random_state=42,									# 랜덤성 전체를 고정하는 시드(seed)
+	    n_jobs=-1											# 사용할 수 있는 모든 코어를 다 사용(트리 100개를 병렬로 학습속도 향상)
 	)
 	
 	# (3) Random Forest (Bagging + Feature Subsampling)
