@@ -2633,9 +2633,244 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 
 <br>
 
+	# ==========================================
+	# Bagging Ensemble Example (Clean Full Version)
+	#  - Dataset: Breast Cancer (scikit-learn)
+	#  - Models:
+	#    (1) Decision Tree (Base)
+	#    (2) BaggingClassifier(DecisionTree 기반)
+	#    (3) Random Forest (Bagging 계열 대표)
+	# ==========================================
+	
+	import numpy as np
+	from sklearn.datasets import load_breast_cancer
+	from sklearn.model_selection import train_test_split
+	from sklearn.tree import DecisionTreeClassifier
+	from sklearn.ensemble import BaggingClassifier, RandomForestClassifier
+	from sklearn.metrics import (
+	    accuracy_score, precision_score, recall_score, f1_score,
+	    roc_auc_score, confusion_matrix
+	)
+	
+	# ------------------------------------------
+	# 1. 데이터 로드 및 분할
+	# ------------------------------------------
+	data = load_breast_cancer()
+	X, y = data.data, data.target
+	target_names = data.target_names
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y,
+	    test_size=0.2,
+	    random_state=42,
+	    stratify=y
+	)
+	
+	print("데이터 Shape:", X.shape)
+	print("클래스:", target_names)
+	
+	# ------------------------------------------
+	# 2. 모델 정의
+	# ------------------------------------------
+	
+	# (1) 단일 Decision Tree (Base Learner)
+	dt_clf = DecisionTreeClassifier(
+	    max_depth=None,
+	    random_state=42
+	)
+	
+	# (2) BaggingClassifier (Base: Decision Tree)
+	bagging_clf = BaggingClassifier(
+	    estimator=DecisionTreeClassifier(random_state=42),  # 최신 버전: estimator=
+	    n_estimators=100,
+	    max_samples=0.8,      
+	    max_features=1.0,
+	    bootstrap=True,
+	    bootstrap_features=False,
+	    random_state=42,
+	    n_jobs=-1
+	)
+	
+	# (3) Random Forest (Bagging + Feature Subsampling)
+	rf_clf = RandomForestClassifier(
+	    n_estimators=200,
+	    max_depth=None,
+	    random_state=42,
+	    n_jobs=-1
+	)
+	
+	models = [
+	    ("Decision Tree", dt_clf),
+	    ("Bagging (DT)", bagging_clf),
+	    ("Random Forest", rf_clf)
+	]
+	
+	# ------------------------------------------
+	# 3. 평가 함수
+	# ------------------------------------------
+	def evaluate(name, model):
+	    model.fit(X_train, y_train)
+	    y_pred = model.predict(X_test)
+	
+	    # ROC-AUC 계산
+	    if hasattr(model, "predict_proba"):
+	        y_proba = model.predict_proba(X_test)[:, 1]
+	        roc = roc_auc_score(y_test, y_proba)
+	    else:
+	        roc = None
+	
+	    acc = accuracy_score(y_test, y_pred)
+	    prec = precision_score(y_test, y_pred)
+	    rec = recall_score(y_test, y_pred)
+	    f1 = f1_score(y_test, y_pred)
+	    cm = confusion_matrix(y_test, y_pred)
+	
+	    return {
+	        "Model": name,
+	        "Accuracy": acc,
+	        "Precision": prec,
+	        "Recall": rec,
+	        "F1": f1,
+	        "ROC-AUC": roc,
+	        "CM": cm
+	    }
+	
+	# ------------------------------------------
+	# 4. 모델 평가 실행
+	# ------------------------------------------
+	results = []
+	for name, model in models:
+	    results.append(evaluate(name, model))
+	
+	# ------------------------------------------
+	# 5. 성능 비교 표 출력
+	# ------------------------------------------
+	print("\n====================== 성능 비교표 (Bagging) ======================")
+	print("{:<18} {:>10} {:>10} {:>10} {:>10} {:>10}".format(
+	    "Model", "Acc", "Prec", "Recall", "F1", "ROC-AUC"
+	))
+	
+	for r in results:
+	    print("{:<18} {:>10.4f} {:>10.4f} {:>10.4f} {:>10.4f} {:>10}".format(
+	        r["Model"],
+	        r["Accuracy"],
+	        r["Precision"],
+	        r["Recall"],
+	        r["F1"],
+	        f"{r['ROC-AUC']:.4f}" if r["ROC-AUC"] else "N/A"
+	    ))
+	
+	# ------------------------------------------
+	# 6. Confusion Matrix 출력
+	# ------------------------------------------
+	print("\n====================== Confusion Matrix ======================")
+	for r in results:
+	    print(f"\n[{r['Model']}]")
+	    print(r["CM"])
+	
+	# ------------------------------------------
+	# 7. 자동 분석섹션
+	# ------------------------------------------
+	print("\n====================== 자동 성능 분석 ======================")
+	
+	# Accuracy 최고 모델
+	best_acc = max(results, key=lambda x: x["Accuracy"])
+	print(f"▶ Accuracy 최고 모델: {best_acc['Model']} ({best_acc['Accuracy']:.4f})")
+	
+	# ROC-AUC 최고 모델
+	best_auc = max(results, key=lambda x: x["ROC-AUC"])
+	print(f"▶ ROC-AUC 최고 모델: {best_auc['Model']} ({best_auc['ROC-AUC']:.4f})")
+	
+	dt_res = [r for r in results if r["Model"] == "Decision Tree"][0]
+	bag_res = [r for r in results if r["Model"] == "Bagging (DT)"][0]
+	rf_res = [r for r in results if r["Model"] == "Random Forest"][0]
+	
+	print("\n▶ Decision Tree 분석:")
+	print(f"- 단일 트리는 분산(Variance)이 크고 과적합이 쉽게 발생.")
+	print(f"- Accuracy = {dt_res['Accuracy']:.4f}, F1 = {dt_res['F1']:.4f}")
+	
+	print("\n▶ Bagging (DT) 분석:")
+	print(f"- 여러 bootstrap 샘플에서 학습된 결정트리를 평균해 분산 감소.")
+	print(f"- 단일 트리 대비 성능 향상 여부 확인 가능.")
+	print(f"- Accuracy = {bag_res['Accuracy']:.4f}, F1 = {bag_res['F1']:.4f}")
+	
+	print("\n▶ Random Forest 분석:")
+	print(f"- Bagging + Feature Subsampling → Tree 간 상관성 감소 → 일반화 능력 상승.")
+	print(f"- 실제로 성능이 Bagging보다 좋거나 비슷하게 나타나는지 관찰.")
+	print(f"- Accuracy = {rf_res['Accuracy']:.4f}, F1 = {rf_res['F1']:.4f}")
+	
+	print("\n※ 결론 요약:")
+	print("- Decision Tree → Bagging → Random Forest 순으로")
+	print("  일반적으로 과적합이 줄고 성능이 안정적으로 향상되는 경향.")
+	print("- 이 데이터에서도 같은 패턴이 나타나는지 위 지표로 분석 가능.")
+	print("====================================================================\n")
+
+<br>
+
+	데이터 Shape: (569, 30)
+	클래스: ['malignant' 'benign']
+	
+	====================== 성능 비교표 (Bagging) ======================
+	Model                     Acc       Prec     Recall         F1    ROC-AUC
+	Decision Tree          0.9123     0.9559     0.9028     0.9286     0.9157
+	Bagging (DT)           0.9474     0.9583     0.9583     0.9583     0.9949
+	Random Forest          0.9561     0.9589     0.9722     0.9655     0.9931
+	
+	====================== Confusion Matrix ======================
+	
+	[Decision Tree]
+	[[39  3]
+	 [ 7 65]]
+	
+	[Bagging (DT)]
+	[[39  3]
+	 [ 3 69]]
+	
+	[Random Forest]
+	[[39  3]
+	 [ 2 70]]
+	
+	====================== 자동 성능 분석 ======================
+	▶ Accuracy 최고 모델: Random Forest (0.9561)
+	▶ ROC-AUC 최고 모델: Bagging (DT) (0.9949)
+	
+	▶ Decision Tree 분석:
+	- 단일 트리는 분산(Variance)이 크고 과적합이 쉽게 발생.
+	- Accuracy = 0.9123, F1 = 0.9286
+	
+	▶ Bagging (DT) 분석:
+	- 여러 bootstrap 샘플에서 학습된 결정트리를 평균해 분산 감소.
+	- 단일 트리 대비 성능 향상 여부 확인 가능.
+	- Accuracy = 0.9474, F1 = 0.9583
+	
+	▶ Random Forest 분석:
+	- Bagging + Feature Subsampling → Tree 간 상관성 감소 → 일반화 능력 상승.
+	- 실제로 성능이 Bagging보다 좋거나 비슷하게 나타나는지 관찰.
+	- Accuracy = 0.9561, F1 = 0.9655
+	
+	※ 결론 요약:
+	- Decision Tree → Bagging → Random Forest 순으로
+	  일반적으로 과적합이 줄고 성능이 안정적으로 향상되는 경향.
+	- 이 데이터에서도 같은 패턴이 나타나는지 위 지표로 분석 가능.
+	====================================================================
+
+<br>
+
+
+# [3] 부스팅(Boosting)
+▣ 정의 :
+▣ 필요성 : 
+▣ 장점 : 
+▣ 단점 : 
+▣ 적용분야 : 
+![](./images/EL_3.PNG)
+
+<br>	
+
 <br>
 
 <br>
+
 
 # [4] 스태킹(Stacking)
 ▣ 정의 : 여러 모델의 예측값을 특징(feature)으로 삼아 메타 모델(meta-learner) 이 최종 예측을 학습하는 고급 앙상블 방<br>
