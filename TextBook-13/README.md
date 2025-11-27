@@ -2339,28 +2339,17 @@ MCTS(Monte Carlo Tree Search)를 사용하여 탐색하고 Neural Network를 통
 
 
 
-| 모델 | 핵심 개념 | 환경 모델 필요 여부 | 정책 학습 방식 | 탐색 방식 | 샘플 효율성 | 계산 복잡도 | 적용 분야 | 장점 | 단점 |
-|------|-----------|----------------------|----------------|------------|--------------|--------------|-----------|-------|--------|
-| **World Models** | 환경의 특징을 latent 공간에 압축하여 시뮬레이터로 활용 | 환경 모델 명시적 필요 (VAE+RNN) | 시뮬레이션 기반 Controller 학습 | 시뮬레이션 기반 예측 | 높음 | 낮음 | CarRacing, Doom | 간단·효율적, 고속 학습 | 환경 적합성 의존, 단순함으로 인한 한계 |
-| **I2A** | 상상된 rollouts 요약값을 policy 입력으로 사용 | 필요함 (rollout model 기반) | 외부 모델-free 정책 + imagination summary | 상상된 trajectory 기반 탐색 | 중간 | 중간 | Atari, Gridworld | 모델 정보 활용하여 성능 향상 | 복잡, rollout 품질 의존 |
-| **MBMF** | 모델 기반 planning + 모델 프리 RL 결합 | 필요함 (dynamics 모델 필수) | 모델 기반 trajectory + Policy Gradient 혼합 | 계획 기반 탐색 + RL | 높음 | 높음 | 로봇 제어, MuJoCo | MB+MF 장점 결합 | 모델 오차 누적, tuning 어려움 |
-| **MBVE** | 단기 모델 rollout로 value bootstrap 강화 | 필요함 | Model-free value 학습 보조 | 짧은 horizon 예측 | 높음 | 중간 | DDPG, TD3 | 안정적 value 향상 | 모델 신뢰도 낮으면 성능 저하 |
-| **Dreamer** | RSSM latent world에서 imagination actor-critic 학습 | 필요함 (RSSM 모델 사용) | Latent imagination에서 policy/value 학습 | latent rollout | 매우 높음 | 높음 | DMControl Suite, 연속 제어 | 표준 SOTA 수준 성능 | 모델 및 학습 구조 복잡 |
-| **PlaNet** | RSSM 기반 모델 + MPC planning | 필요함 | 정책 없음, MPC로 직접 행동 결정 | Latent space MPC | 중간~높음 | 높음 | 로봇제어, 시뮬레이션 제어 | 모델 정확하면 매우 강력 | long-horizon 안정성 낮음 |
-| **PETS** | 확률적 앙상블 dynamics + trajectory sampling | 필요함 | 모델-free 정책 없음, MPC로 계획 | Ensemble sampling | 높음 | 중간 | 로봇 제어, 연속제어 | 앙상블 확률성으로 강력한 탐색 | 데이터 요구량 많음 |
-| **MuZero** | 관측 모델 없이 latent representation + latent dynamics + prediction만으로 MCTS 수행 | “환경 모델 불필요 (관측모델 없음)” → latent dynamics만 학습 | Policy + Value + Reward head + MCTS | Latent MCTS planning | 중간~높음 | 매우 높음 | 바둑, 체스, Atari, 일반 MDP planning | 환경 모델 없이 planning 가능 (혁신적) | 복잡한 구조, 훈련 비용 매우 큼 |
 
-
-| 모델 | 핵심 개념 | 환경 모델 필요 여부 | 정책 학습 방식 | 적용 분야 | 장점 | 단점 |
-|------|-----------|----------------------|----------------|-----------|-------|--------|
-| **World Models** | 환경의 특징을 latent 공간(VAE+RNN)으로 압축하여 시뮬레이터로 활용 | 필요함 | 시뮬레이션 기반 Controller 학습 | CarRacing, Doom, 픽셀 기반 환경 | 단순·효율적, 빠른 학습 | 모델 품질 의존, 복잡 환경에 취약 |
-| **I2A** | 상상된 rollouts를 요약해(policy input) 사용하는 imagination-augmented 구조 | 필요함 | 모델-free 정책 + imagination summary | Atari, Gridworld | 모델 정보 활용하여 성능 향상 | 복잡 구조, rollout 품질에 의존 |
-| **MBMF** | 모델 기반 planning + 모델 프리 RL의 hybrid 접근 | 필요함 | Trajectory planning + Policy Gradient 결합 | 로봇 제어, MuJoCo | MB+MF 장점 결합, 성능 개선 | 모델 오차 누적, 튜닝 난이도 |
-| **MBVE** | 단기 rollout(H-step)을 사용해 value target 강화 | 필요함 | Model-free value 학습 보조 | DDPG, TD3 | 안정적인 value 향상 | 모델 신뢰도 낮으면 성능 저하 |
-| **Dreamer** | RSSM 기반 latent world에서 imagination actor-critic 학습 | 필요함 | Latent imagination policy/value 학습 | DMControl Suite, 연속 제어 | 고성능(SOTA), 연속제어 최강 | 구조 복잡, 계산 비용 큼 |
-| **PlaNet** | RSSM 기반 latent dynamics + MPC planning | 필요함 | 정책 없이 MPC로 직접 행동 결정 | 로봇 제어, planning | 모델 정확하면 매우 강력 | 장기 계획 안정성 낮음 |
-| **PETS** | 확률적 앙상블 dynamics + trajectory sampling(MPC) | 필요함 | 정책 학습 없이 MPC 기반 의사결정 | 로봇 제어, 연속 제어 | 앙상블로 강력한 불확실성 처리 | 데이터 필요량 많음 |
-| **MuZero** | 관측 모델 없이 latent representation+dynamics+prediction만 학습하여 MCTS 수행 | 관측 모델 불필요, latent dynamics만 필요 | Policy+Value+Reward 학습 + MCTS | 바둑, 체스, Atari, 일반 MDP planning | 환경 모델 부재에서도 planning 가능 | 구조 복잡, 훈련 비용 매우 큼 |
+| 모델 | 핵심 개념 | 정책 학습 방식 | 적용 분야 | 장점 | 단점 |
+|------|-----------|----------------|-----------|-------|--------|
+| **World Models** | VAE+RNN 기반 latent world 생성 후 시뮬레이션으로 학습 | 시뮬레이터 기반 Controller 학습 | CarRacing, Doom, 픽셀 기반 환경 | 단순·효율적, 빠르게 학습 가능 | 모델 품질에 민감, 복잡 환경에 취약 |
+| **I2A** | 상상된 rollouts를 요약하여 정책 입력으로 활용 | Model-free 정책 + imagination summary | Atari, Gridworld | 추가적인 “상상 정보”로 성능 향상 | 구조가 복잡, rollout 품질 의존 |
+| **MBMF** | 모델 기반 계획과 모델-프리 RL의 Hybrid 접근 | Trajectory planning + Policy Gradient | 로봇 제어, MuJoCo | MB와 MF 장점을 동시에 활용 | 모델 오차 누적, 튜닝 어려움 |
+| **MBVE** | 단기(H-step) 모델 rollout로 value target 강화 | Model-free value 학습 보조 | DDPG, TD3 | Value 안정성↑, 샘플 효율↑ | 모델의 정확도에 따라 성능 차이 |
+| **Dreamer** | RSSM latent world에서 imagination actor-critic 학습 | Latent imagination policy/value 학습 | DMControl Suite, 연속 제어 | 연속제어 SOTA 성능 | 매우 복잡, 계산 자원 많이 필요 |
+| **PlaNet** | RSSM 기반 latent dynamics + MPC planning | Policy 없이 latent MPC로 행동 선택 | 로봇 제어, planning | 모델 정확시 매우 강력한 planning | Long-horizon 안정성 약함 |
+| **PETS** | Probabilistic ensemble dynamics + trajectory sampling | 정책 학습 없이 MPC 기반 의사결정 | 로봇 제어, 연속 환경 | 앙상블로 불확실성 처리 우수 | 데이터 요구량 많음 |
+| **MuZero** | 관측 모델 없이 latent representation+dynamics+prediction 학습 → MCTS | Policy + Value + Reward 학습 + MCTS | 바둑, 체스, Atari, 일반 MDP | 환경 모델 없이 planning 가능 (혁신적) | 가장 복잡, 훈련 비용 매우 큼 |
 
 
 
