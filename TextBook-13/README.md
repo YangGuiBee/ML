@@ -88,7 +88,7 @@
 
     [1] 보팅(Voting)
 	[2] 배깅(Bagging)
-    [3] 부스팅(Boosting) : AdaBoost, Gradient Boosting, XGBoost 
+    [3] 부스팅(Boosting) :  AdaBoost, Gradient Boosting, XGBoost, LightGBM, CatBoost
 	[4] 스태킹(Stacking)
 
 ---  
