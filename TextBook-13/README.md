@@ -2434,7 +2434,6 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 ▣ 정의 : 앙상블 학습이란 다수의 기초 알고리즘(base algorithm)을 결합하여 더 나은 성능의 예측 모델을 형성하는 것을 말하며,<br> 
 사용 목적에 따라 보팅(Voting), 배깅(Bagging), 부스팅(Boosting), 스태킹(Stacking)으로 분류<br>
 ![](./images/vs.PNG)
-<br>
 
 
 # [1] 보팅(Voting)
@@ -2447,216 +2446,194 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 
 <br>
 
+	# ==========================================
+	# Voting Ensemble + Performance Comparison
+	# ==========================================
+	
+	import numpy as np
+	from sklearn.datasets import load_breast_cancer
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import StandardScaler
+	from sklearn.pipeline import Pipeline
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.ensemble import RandomForestClassifier, VotingClassifier
+	from sklearn.svm import SVC
+	from sklearn.metrics import (
+	    accuracy_score, precision_score, recall_score, f1_score,
+	    roc_auc_score, confusion_matrix
+	)
+	
+	#---------------------------------------------
+	# 1. 데이터 로드
+	#---------------------------------------------
+	data = load_breast_cancer()
+	X, y = data.data, data.target
+	target_names = data.target_names
+	
+	# Train/Test split
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, test_size=0.2, random_state=42, stratify=y
+	)
+	
+	#---------------------------------------------
+	# 2. 개별 모델 구성 (Logistic, SVC, RF)
+	#---------------------------------------------
+	log_clf = Pipeline([
+	    ("scaler", StandardScaler()),
+	    ("logreg", LogisticRegression(max_iter=1000, random_state=42))
+	])
+	
+	svc_clf = Pipeline([
+	    ("scaler", StandardScaler()),
+	    ("svc", SVC(probability=True, kernel="rbf", C=1.0, gamma="scale", random_state=42))
+	])
+	
+	rf_clf = RandomForestClassifier(
+	    n_estimators=200, random_state=42
+	)
+	
+	# Voting models
+	hard_voting = VotingClassifier(
+	    estimators=[("lr", log_clf), ("rf", rf_clf), ("svc", svc_clf)],
+	    voting="hard"
+	)
+	
+	soft_voting = VotingClassifier(
+	    estimators=[("lr", log_clf), ("rf", rf_clf), ("svc", svc_clf)],
+	    voting="soft"
+	)
+	
+	#---------------------------------------------
+	# 3. 평가 함수
+	#---------------------------------------------
+	def evaluate(name, model):
+	    model.fit(X_train, y_train)
+	    y_pred = model.predict(X_test)
+	
+	    # ROC-AUC
+	    if hasattr(model, "predict_proba"):
+	        y_proba = model.predict_proba(X_test)[:, 1]
+	        roc = roc_auc_score(y_test, y_proba)
+	    else:
+	        roc = None
+	
+	    acc = accuracy_score(y_test, y_pred)
+	    prec = precision_score(y_test, y_pred)
+	    rec = recall_score(y_test, y_pred)
+	    f1 = f1_score(y_test, y_pred)
+	
+	    return {
+	        "Model": name,
+	        "Accuracy": acc,
+	        "Precision": prec,
+	        "Recall": rec,
+	        "F1": f1,
+	        "ROC-AUC": roc
+	    }
+	
+	#---------------------------------------------
+	# 4. 모델 평가 실행
+	#---------------------------------------------
+	results = []
+	results.append(evaluate("Logistic Regression", log_clf))
+	results.append(evaluate("SVC", svc_clf))
+	results.append(evaluate("Random Forest", rf_clf))
+	results.append(evaluate("Hard Voting", hard_voting))
+	results.append(evaluate("Soft Voting", soft_voting))
+	
+	#---------------------------------------------
+	# 5. 결과 테이블 출력
+	#---------------------------------------------
+	print("\n====================== 성능 비교표 ======================")
+	print("{:<18} {:>10} {:>10} {:>10} {:>10} {:>10}".format(
+	    "Model", "Acc", "Prec", "Recall", "F1", "ROC-AUC"
+	))
+	
+	for r in results:
+	    print("{:<18} {:>10.4f} {:>10.4f} {:>10.4f} {:>10.4f} {:>10}".format(
+	        r["Model"], r["Accuracy"], r["Precision"], r["Recall"], r["F1"],
+	        f"{r['ROC-AUC']:.4f}" if r["ROC-AUC"] else "N/A"
+	    ))
+	
+	#---------------------------------------------
+	# 6. 자동 분석
+	#---------------------------------------------
+	print("\n====================== 자동 성능 분석 ======================")
+	
+	# 최고 정확도 모델
+	best_acc_model = max(results, key=lambda x: x["Accuracy"])
+	print(f"▶ Accuracy 최고 모델: {best_acc_model['Model']} ({best_acc_model['Accuracy']:.4f})")
+	
+	# 최고 ROC-AUC 모델
+	best_auc_model = max([r for r in results if r["ROC-AUC"] is not None],
+	                     key=lambda x: x["ROC-AUC"])
+	print(f"▶ ROC-AUC 최고 모델: {best_auc_model['Model']} ({best_auc_model['ROC-AUC']:.4f})")
+	
+	# Hard Voting 분석
+	hard = [r for r in results if r["Model"] == "Hard Voting"][0]
+	print(f"\n▶ Hard Voting 분석:")
+	print(f"- Logistic/SVC와 동일한 Accuracy = {hard['Accuracy']:.4f}")
+	print(f"- 이유: Logistic과 SVC가 높은 성능을 보이며 동일한 예측을 하는 경우가 많기 때문")
+	
+	# Soft Voting 분석
+	soft = [r for r in results if r["Model"] == "Soft Voting"][0]
+	print(f"\n▶ Soft Voting 분석:")
+	print(f"- Accuracy는 Hard Voting보다 약간 낮음 ({soft['Accuracy']:.4f})")
+	print(f"- 그러나 ROC-AUC는 가장 높음 ({soft['ROC-AUC']:.4f})")
+	print(f"- 이유: 확률 평균 방식이 Decision Boundary를 더 정교하게 조정해주기 때문")
+	
+	# Random Forest 분석
+	rf = [r for r in results if r["Model"] == "Random Forest"][0]
+	print(f"\n▶ Random Forest 분석:")
+	print(f"- Accuracy 다른 모델 대비 낮음 ({rf['Accuracy']:.4f})")
+	print(f"- Breast Cancer 데이터는 스케일 민감 → Linear/SVM 유리")
+	print(f"- RF가 Voting 성능을 살짝 떨어뜨리는 요인")
+	
+	print("\n============================================================\n")
+
+<br>
+
+	====================== 성능 비교표 ======================
+	Model                     Acc       Prec     Recall         F1    ROC-AUC
+	Logistic Regression    0.9825     0.9861     0.9861     0.9861     0.9954
+	SVC                    0.9825     0.9861     0.9861     0.9861     0.9950
+	Random Forest          0.9561     0.9589     0.9722     0.9655     0.9931
+	Hard Voting            0.9825     0.9861     0.9861     0.9861        N/A
+	Soft Voting            0.9737     0.9859     0.9722     0.9790     0.9970
+	
+	====================== 자동 성능 분석 ======================
+	▶ Accuracy 최고 모델: Logistic Regression (0.9825)
+	▶ ROC-AUC 최고 모델: Soft Voting (0.9970)
+	
+	▶ Hard Voting 분석:
+	- Logistic/SVC와 동일한 Accuracy = 0.9825
+	- 이유: Logistic과 SVC가 높은 성능을 보이며 동일한 예측을 하는 경우가 많기 때문
+	
+	▶ Soft Voting 분석:
+	- Accuracy는 Hard Voting보다 약간 낮음 (0.9737)
+	- 그러나 ROC-AUC는 가장 높음 (0.9970)
+	- 이유: 확률 평균 방식이 Decision Boundary를 더 정교하게 조정해주기 때문
+	
+	▶ Random Forest 분석:
+	- Accuracy 다른 모델 대비 낮음 (0.9561)
+	- Breast Cancer 데이터는 스케일 민감 → Linear/SVM 유리
+	- RF가 Voting 성능을 살짝 떨어뜨리는 요인
+	
+	============================================================
+
+<br>
+
 # [2] 배깅(Bagging) 
 ▣ 정의 : 훈련 데이터를 bootstrap sampling하여 여러 모델을 병렬 학습시키고, 이들의 평균 또는 다수결을 통해 최종 예측을 수행하는 앙상블 방식<br>
 ▣ 필요성 : 모델의 분산(Variance)을 크게 줄여 과적합을 방지하기 위함, 작은 변화에도 예측이 불안정한 모델(Decision Tree 등)에 필수적<br>
-▣ 장점 : 고분산 모델 안정화, 샘플링으로 인해 데이터 부족 문제를 완화, 병렬화가 가능하므로 속도가 빨라짐, Random Forest처럼 매우 강력한 성능을 보임<br>
+▣ 장점 : 고분산 모델 안정화, 샘플링으로 인해 데이터 부족 문제를 완화, 병렬화가 가능하므로 속도가 빨라짐, Random Forest처럼 매우 강력한 성능<br>
 ▣ 단점 : 순차적 성능 개선은 어렵고, 개별 모델 성능보다 큰 향상은 제한적, 데이터 크기가 커지면 bootstrap 비용 증가<br>
 ▣ 적용분야 : Random Forest (배깅의 대표 모델), 불안정한 base learner(Decision Tree, KNN, SVM 등)<br>
 ![](./images/EL_2.PNG)
 
 <br>
 
-
-	from sklearn.ensemble import BaggingClassifier
-	from sklearn.tree import DecisionTreeClassifier
-	from sklearn.model_selection import train_test_split, cross_val_score
-	from sklearn.metrics import accuracy_score
-	from sklearn.datasets import load_iris
-	
-	# 1. 데이터 로드
-	iris = load_iris()
-	X, y = iris.data, iris.target
-	
-	# 데이터 분할 (Train, Test)
-	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
-	
-	# 2. Base Estimator 설정
-	base_estimator = DecisionTreeClassifier(max_depth=5, random_state=42)
-	
-	# 3. Bagging Classifier 설정
-	bagging_clf = BaggingClassifier(
-	    estimator=base_estimator,
-	    n_estimators=50,  # 기본 모델 개수 증가
-	    max_samples=1.0,  # 전체 데이터를 사용
-	    max_features=1.0,  # 모든 피처를 사용
-	    bootstrap=True,
-	    random_state=42
-	)
-	
-	# 배깅 모델 학습 및 평가
-	bagging_clf.fit(X_train, y_train)
-	bagging_pred = bagging_clf.predict(X_test)
-	bagging_accuracy = accuracy_score(y_test, bagging_pred)
-	print(f"Bagging Classifier Accuracy: {bagging_accuracy:.4f}")
-	
-	# 교차 검증 (배깅)
-	bagging_cv_scores = cross_val_score(bagging_clf, X, y, cv=5)
-	print(f"Bagging Cross-Validation Accuracy: {bagging_cv_scores.mean():.4f}")
-	
-	# 4. 단일 DecisionTreeClassifier 학습 및 평가
-	single_tree = DecisionTreeClassifier(max_depth=5, random_state=42)
-	single_tree.fit(X_train, y_train)
-	single_tree_pred = single_tree.predict(X_test)
-	single_tree_accuracy = accuracy_score(y_test, single_tree_pred)
-	print(f"Single Decision Tree Accuracy: {single_tree_accuracy:.4f}")
-	
-	# 교차 검증 (단일 Decision Tree)
-	single_tree_cv_scores = cross_val_score(single_tree, X, y, cv=5)
-	print(f"Single Decision Tree Cross-Validation Accuracy: {single_tree_cv_scores.mean():.4f}")
-	
 <br>
-
-	(결과)
-	Bagging Classifier Accuracy: 0.9333
-	Bagging Cross-Validation Accuracy: 0.9667
-	Single Decision Tree Accuracy: 0.9333
-	Single Decision Tree Cross-Validation Accuracy: 0.9533
-
-<br>
-
-# [3] 부스팅(Boosting)
-![](./images/Boost.PNG)
-▣ 정의 : 약한 학습기(weak learner)를 순차적으로 학습시키면서 이전 학습기가 틀린 데이터를 더 잘 맞추도록 가중치를 조정하는 앙상블 기법<br>
-▣ 필요성 : 데이터의 복잡한 decision boundary 학습, 바이어스(Bias)를 감소시키고 강한 학습기(strong learner) 생성, 높은 예측력을 위해 필수적(특히 XGBoost, LightGBM 등)<br>
-▣ 장점 : 매우 높은 성능 (Kaggle 최강 모델 계열), 오류에 집중하는 방식으로 효율적 학습, 회귀/분류 모두에서 동작 우수<br>
-▣ 단점 : 순차적(직렬) 학습 → 병렬화가 어렵고 속도가 느림, 노이즈에 민감해 과적합 발생 가능, 하이퍼파라미터 많음 (튜닝 필요)<br>
-▣ 적용분야 : XGBoost / LightGBM / CatBoost, Tabular 데이터 분석, 금융, 추천 시스템, Manufacturing, 의료 ML 등<br>
-![](./images/EL_3.PNG)
-
-
-	from sklearn.ensemble import AdaBoostClassifier
-	from sklearn.tree import DecisionTreeClassifier
-	from sklearn.model_selection import train_test_split, cross_val_score
-	from sklearn.metrics import accuracy_score
-	from sklearn.datasets import load_iris
-	
-	# 1. 데이터 로드
-	iris = load_iris()
-	X, y = iris.data, iris.target
-	
-	# 데이터 분할 (Train, Test)
-	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
-	
-	# 2. AdaBoost Classifier 설정 (하이퍼파라미터 조정)
-	ada_clf = AdaBoostClassifier(
-	    estimator=DecisionTreeClassifier(max_depth=5),  # 기본 학습기로 결정 트리 사용
-	    n_estimators=200,      # 부스팅 단계 수 증가
-	    learning_rate=0.05,    # 학습률 감소
-	    random_state=42
-	)
-	
-	# 3. 모델 학습
-	ada_clf.fit(X_train, y_train)
-	
-	# 4. 예측
-	y_pred = ada_clf.predict(X_test)
-	
-	# 5. 평가
-	accuracy = accuracy_score(y_test, y_pred)
-	print(f"AdaBoost Classifier Accuracy: {accuracy:.4f}")
-	
-	# 6. 교차 검증 (추가적인 평가)
-	cv_scores = cross_val_score(ada_clf, X, y, cv=5)
-	print(f"Cross-Validation Accuracy: {cv_scores.mean():.4f}")
-
- <br>
-
- 	(결과)
-	AdaBoost Classifier Accuracy: 0.9111
-	Cross-Validation Accuracy: 0.9533  
-
- <br>
-
-	from sklearn.ensemble import GradientBoostingClassifier
-	from sklearn.model_selection import train_test_split, cross_val_score
-	from sklearn.metrics import accuracy_score
-	from sklearn.datasets import load_iris
-	
-	# 1. 데이터 로드
-	iris = load_iris()
-	X, y = iris.data, iris.target
-	
-	# 데이터 분할 (Train, Test)
-	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
-	
-	# 2. Gradient Boosting Classifier 설정 (하이퍼파라미터 조정)
-	gb_clf = GradientBoostingClassifier(
-	    n_estimators=200,      # 부스팅 스테이지 개수 증가
-	    learning_rate=0.05,    # 학습률 감소
-	    max_depth=5,           # 개별 트리의 최대 깊이 증가
-	    random_state=42
-	)
-	
-	# 3. 모델 학습
-	gb_clf.fit(X_train, y_train)
-	
-	# 4. 예측
-	y_pred = gb_clf.predict(X_test)
-	
-	# 5. 평가
-	accuracy = accuracy_score(y_test, y_pred)
-	print(f"Gradient Boosting Classifier Accuracy: {accuracy:.4f}")
-	
-	# 6. 교차 검증 (추가적인 평가)
-	cv_scores = cross_val_score(gb_clf, X, y, cv=5)
-	print(f"Cross-Validation Accuracy: {cv_scores.mean():.4f}")
-
-<br>
-
-	(결과)
-	Gradient Boosting Classifier Accuracy: 0.9333
-	Cross-Validation Accuracy: 0.9600
-  
-<br>
-
-	import xgboost as xgb
-	from sklearn.model_selection import train_test_split, cross_val_score
-	from sklearn.metrics import accuracy_score
-	from sklearn.datasets import load_iris
-	from sklearn.preprocessing import StandardScaler
-	
-	# 1. 데이터 로드 및 분할
-	iris = load_iris()
-	X, y = iris.data, iris.target
-	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
-	
-	# 스케일링 (선택 사항)
-	scaler = StandardScaler()
-	X_train_scaled = scaler.fit_transform(X_train)
-	X_test_scaled = scaler.transform(X_test)
-	
-	# 2. XGBoost 설정 (최적화된 설정 유지)
-	xgb_clf = xgb.XGBClassifier(
-	    n_estimators=300,         # 부스팅 스테이지 증가
-	    learning_rate=0.1,        # 기본 학습률 사용
-	    max_depth=5,              # 적당한 깊이로 조정
-	    min_child_weight=3,       # 분할의 최소 조건 강화
-	    subsample=0.8,            # 샘플링 비율
-	    colsample_bytree=0.8,     # 피처 샘플링 비율
-	    random_state=42,
-	    use_label_encoder=False,  # 경고 제거
-	    eval_metric="mlogloss"    # 다중 클래스 손실 함수
-	)
-	
-	# 3. 모델 학습
-	xgb_clf.fit(X_train_scaled, y_train)
-	
-	# 4. 예측
-	y_pred = xgb_clf.predict(X_test_scaled)
-	
-	# 5. 평가
-	accuracy = accuracy_score(y_test, y_pred)
-	print(f"Tuned XGBoost Classifier Accuracy: {accuracy:.4f}")
-	
-	# 6. 교차 검증
-	cv_scores = cross_val_score(xgb_clf, X, y, cv=5)
-	print(f"Tuned XGBoost Cross-Validation Accuracy: {cv_scores.mean():.4f}")
-
- <br>
-
-	Tuned XGBoost Classifier Accuracy: 0.9333
-	Tuned XGBoost Cross-Validation Accuracy: 0.9467
 
 <br>
 
@@ -2668,115 +2645,9 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 ▣ 적용분야 : Kaggle 상위권 앙상블 기법, 여러 모델의 예측을 결합할 때, 금융·의료·전력예측·시계열 등 high-level ML 파이프라인<br>
 ![](./images/EL_4.PNG)
 
+<br>	
 
-
-	#!pip install lightgbm
-	import pandas as pd
-	from sklearn.model_selection import train_test_split
-	from sklearn.metrics import accuracy_score
-	from sklearn.neighbors import KNeighborsClassifier
-	from sklearn.linear_model import LogisticRegression
-	from sklearn.ensemble import RandomForestClassifier
-	import xgboost as xgb
-	import lightgbm as lgb
-	from sklearn.datasets import load_iris
-	from sklearn.preprocessing import StandardScaler
-	
-	# 1. 데이터 로드
-	iris = load_iris()
-	X, y = iris.data, iris.target
-	
-	# 데이터 분할 (Train, Test)
-	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
-	
-	# 2. Base Models 정의
-	knn = KNeighborsClassifier(n_neighbors=5)  # KNN 하이퍼파라미터 튜닝
-	logistic = LogisticRegression(max_iter=300)  # Logistic Regression 개선
-	rf = RandomForestClassifier(n_estimators=200, max_depth=10, random_state=42)  # Random Forest 개선
-	xgboost = xgb.XGBClassifier(n_estimators=200, learning_rate=0.1, eval_metric='mlogloss', random_state=42)  # XGBoost 개선
-	
-	# 3. Base Models 학습 및 예측
-	# KNN
-	knn.fit(X_train, y_train)
-	knn_pred_train = knn.predict_proba(X_train)
-	knn_pred_test = knn.predict_proba(X_test)
-	knn_accuracy = accuracy_score(y_test, knn.predict(X_test))  # 정확도 계산
-	
-	# Logistic Regression
-	logistic.fit(X_train, y_train)
-	logistic_pred_train = logistic.predict_proba(X_train)
-	logistic_pred_test = logistic.predict_proba(X_test)
-	logistic_accuracy = accuracy_score(y_test, logistic.predict(X_test))  # 정확도 계산
-	
-	# Random Forest
-	rf.fit(X_train, y_train)
-	rf_pred_train = rf.predict_proba(X_train)
-	rf_pred_test = rf.predict_proba(X_test)
-	rf_accuracy = accuracy_score(y_test, rf.predict(X_test))  # 정확도 계산
-	
-	# XGBoost
-	xgboost.fit(X_train, y_train)
-	xgb_pred_train = xgboost.predict_proba(X_train)
-	xgb_pred_test = xgboost.predict_proba(X_test)
-	xgb_accuracy = accuracy_score(y_test, xgboost.predict(X_test))  # 정확도 계산
-	
-	# 4. Base Models 예측값을 하나의 데이터프레임으로 합침
-	# 학습 데이터
-	stacked_train = pd.DataFrame({
-	    "knn_0": knn_pred_train[:, 0], "knn_1": knn_pred_train[:, 1], "knn_2": knn_pred_train[:, 2],
-	    "logistic_0": logistic_pred_train[:, 0], "logistic_1": logistic_pred_train[:, 1], "logistic_2": logistic_pred_train[:, 2],
-	    "rf_0": rf_pred_train[:, 0], "rf_1": rf_pred_train[:, 1], "rf_2": rf_pred_train[:, 2],
-	    "xgb_0": xgb_pred_train[:, 0], "xgb_1": xgb_pred_train[:, 1], "xgb_2": xgb_pred_train[:, 2],
-	})
-	
-	# 테스트 데이터
-	stacked_test = pd.DataFrame({
-	    "knn_0": knn_pred_test[:, 0], "knn_1": knn_pred_test[:, 1], "knn_2": knn_pred_test[:, 2],
-	    "logistic_0": logistic_pred_test[:, 0], "logistic_1": logistic_pred_test[:, 1], "logistic_2": logistic_pred_test[:, 2],
-	    "rf_0": rf_pred_test[:, 0], "rf_1": rf_pred_test[:, 1], "rf_2": rf_pred_test[:, 2],
-	    "xgb_0": xgb_pred_test[:, 0], "xgb_1": xgb_pred_test[:, 1], "xgb_2": xgb_pred_test[:, 2],
-	})
-	
-	# 데이터 정규화 (스케일링)
-	scaler = StandardScaler()
-	stacked_train_scaled = scaler.fit_transform(stacked_train)
-	stacked_test_scaled = scaler.transform(stacked_test)
-	
-	# 5. Final Model (LightGBM) 학습 및 예측
-	lgb_model = lgb.LGBMClassifier(
-	    random_state=42,
-	    min_data_in_leaf=30,        # 리프 노드 최소 데이터 수를 낮춤
-	    min_gain_to_split=0.1,      # 분할 수행 최소 정보 이득을 낮춤
-	    max_depth=7,                # 트리 최대 깊이를 늘림
-	    num_leaves=31,              # 리프 노드 개수를 늘림
-	    feature_fraction=0.9,       # 학습에 사용할 피처 비율 증가
-	    bagging_fraction=0.9        # 학습에 사용할 데이터 비율 증가
-	)
-	
-	# 모델 학습
-	lgb_model.fit(stacked_train_scaled, y_train)
-	
-	# 예측
-	lgb_pred = lgb_model.predict(stacked_test_scaled)
-	
-	# 최종 모델 정확도
-	lgb_accuracy = accuracy_score(y_test, lgb_pred)
-	
-	# 6. Base Model 및 최종 모델 정확도 출력
-	print(f"KNN Accuracy: {knn_accuracy:.4f}")
-	print(f"Logistic Regression Accuracy: {logistic_accuracy:.4f}")
-	print(f"Random Forest Accuracy: {rf_accuracy:.4f}")
-	print(f"XGBoost Accuracy: {xgb_accuracy:.4f}")
-	print(f"Final Model (LightGBM) Accuracy: {lgb_accuracy:.4f}")
-
-<be>
-	
-	(결과)
-	KNN Accuracy: 0.9778
-	Logistic Regression Accuracy: 0.9333
-	Random Forest Accuracy: 0.9111
-	XGBoost Accuracy: 0.9333
-	Final Model (LightGBM) Accuracy: 0.9333
+<br>
 
 <br>
 
