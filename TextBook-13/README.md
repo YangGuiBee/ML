@@ -2442,16 +2442,17 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 <br>
 
 
-| 모델 | 요약 | 핵심 수식 | 주요 적용 분야 |
-|------|-------|------------|----------------|
-| **4-1 World Models** | VAE + RNN(MDN-RNN) 기반 latent world 생성 후 controller가 상상 공간에서 학습 | VAE: <img src="https://latex.codecogs.com/png.latex?z%20%5Csim%20q(z%7Co)" /> , Dynamics: <img src="https://latex.codecogs.com/png.latex?z_%7Bt%2B1%7D%20%5Csim%20p(z_%7Bt%2B1%7D%7Cz_t%2C%20a_t)" /> , Policy: <img src="https://latex.codecogs.com/png.latex?a_t%20=%20%5Cpi(z_t)" /> | CarRacing, Doom, 픽셀 기반 제어 |
-| **4-2 I2A (Imagination-Augmented Agents)** | 학습된 환경 모델로 rollouts 생성, 요약된 상상 정보를 policy 입력에 결합 | Summary: <img src="https://latex.codecogs.com/png.latex?e_t=f_%7Benc%7D(rollout)" /> , Policy: <img src="https://latex.codecogs.com/png.latex?a_t=%5Cpi(o_t%2C%20e_t)" /> | Atari, Gridworld |
-| **4-3 MBMF (Model-Based Model-Free)** | 모델 기반 planning + model-free RL hybrid | Model rollout: <img src="https://latex.codecogs.com/png.latex?s_%7Bt%2B1%7D=%5Chat{f}(s_t%2C%20a_t)" /> , Hybrid Q: <img src="https://latex.codecogs.com/png.latex?Q_%7BMBMF%7D=%5Clambda%20Q_%7BMF%7D%20+%20(1-%5Clambda)%5Chat{V}" /> | MuJoCo, 로봇 제어 |
-| **4-4 MBVE (Model-Based Value Expansion)** | H-step short rollout 기반 value target 향상 | Value Expansion: <img src="https://latex.codecogs.com/png.latex?V_%7Bexp%7D=%5Csum_%7Bi=0%7D%5EH%20%5Cgamma%5Ei%20r_i%20+%20%5Cgamma%5E%7BH%2B1%7D%5Chat{V}(s_%7BH%2B1%7D)" /> | DDPG, TD3, SAC value 개선 |
-| **4-5 Dreamer / DreamerV2** | RSSM 기반 latent world model 학습 + imagination actor-critic | RSSM: <img src="https://latex.codecogs.com/png.latex?h_t%2C%20s_t=g(h_%7Bt-1%7D%2C%20s_%7Bt-1%7D%2C%20a_%7Bt-1%7D)" /> , AC: <img src="https://latex.codecogs.com/png.latex?%5Cnabla_%5Ctheta%20J=E%5B%20%5Cnabla_%5Ctheta%20log%5Cpi(a%7Cs)%20A(s%2C%20a)%20%5D" /> | DM Control Suite, Atari |
-| **4-6 PlaNet** | RSSM latent model + MPC 기반 planning | Transition: <img src="https://latex.codecogs.com/png.latex?z_t%20%5Csim%20p(z_t%7Ch_%7Bt-1%7D)" /> , MPC: <img src="https://latex.codecogs.com/png.latex?a_t=argmax_a%20E[G%7Cz_t]" /> | DM Control Suite, 로봇 예측 제어 |
-| **4-7 PETS (Probabilistic Ensembles + TS)** | 확률적 앙상블 dynamics + CEM(MPC) trajectory sampling | Ensemble: <img src="https://latex.codecogs.com/png.latex?s_%7Bt%2B1%7D%20%5Csim%20PE(f_k)" /> , CEM: <img src="https://latex.codecogs.com/png.latex?%5Ctheta^*=argmax_%5Ctheta%20E[G]" /> | 연속제어, 로봇 제어, 모델 기반 MPC |
-| **4-8 MuZero** | 관측 모델 없이 latent representation·dynamics·prediction 학습 + MCTS | Representation: <img src="https://latex.codecogs.com/png.latex?h_0=r(o_0)" /> , Dynamics: <img src="https://latex.codecogs.com/png.latex?h_%7Bt%2B1%7D=g(h_t%2C%20a_t)" /> , Prediction: <img src="https://latex.codecogs.com/png.latex?p_t%2C%20v_t=f(h_t)" /> | 바둑·체스·쇼기, Atari, 일반 MDP planning |
+| 모델 | 핵심 개념 | 정책 학습 방식 | 적용 분야 | 장점 | 단점 |
+|------|-----------|----------------|-----------|-------|--------|
+| **World Models** | VAE+RNN 기반 latent world 생성 후 시뮬레이션으로 학습 | 시뮬레이터 기반 Controller 학습 | CarRacing, Doom, 픽셀 기반 환경 | 단순·효율적, 빠르게 학습 가능 | 모델 품질에 민감, 복잡 환경에 취약 |
+| **I2A** | 상상된 rollouts를 요약하여 정책 입력으로 활용 | Model-free 정책 + imagination summary | Atari, Gridworld | 추가적인 “상상 정보”로 성능 향상 | 구조가 복잡, rollout 품질 의존 |
+| **MBMF** | 모델 기반 계획과 모델-프리 RL의 Hybrid 접근 | Trajectory planning + Policy Gradient | 로봇 제어, MuJoCo | MB와 MF 장점을 동시에 활용 | 모델 오차 누적, 튜닝 어려움 |
+| **MBVE** | 단기(H-step) 모델 rollout로 value target 강화 | Model-free value 학습 보조 | DDPG, TD3 | Value 안정성↑, 샘플 효율↑ | 모델의 정확도에 따라 성능 차이 |
+| **Dreamer** | RSSM latent world에서 imagination actor-critic 학습 | Latent imagination policy/value 학습 | DMControl Suite, 연속 제어 | 연속제어 SOTA 성능 | 매우 복잡, 계산 자원 많이 필요 |
+| **PlaNet** | RSSM 기반 latent dynamics + MPC planning | Policy 없이 latent MPC로 행동 선택 | 로봇 제어, planning | 모델 정확시 매우 강력한 planning | Long-horizon 안정성 약함 |
+| **PETS** | Probabilistic ensemble dynamics + trajectory sampling | 정책 학습 없이 MPC 기반 의사결정 | 로봇 제어, 연속 환경 | 앙상블로 불확실성 처리 우수 | 데이터 요구량 많음 |
+| **MuZero** | 관측 모델 없이 latent representation+dynamics+prediction 학습 → MCTS | Policy + Value + Reward 학습 + MCTS | 바둑, 체스, Atari, 일반 MDP | 환경 모델 없이 planning 가능 (혁신적) | 가장 복잡, 훈련 비용 매우 큼 |
+
 
 <br>
 
