@@ -2426,6 +2426,20 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 
 <br>
 
+
+| 모델 | 환경 모델 방식 | 정책 학습 방식 | Rollout/Planning 방식 | Latent Space | 핵심 특징(차이점) |
+|------|----------------|----------------|------------------------|--------------|---------------------|
+| **4-1 World Models** | VAE + MDN-RNN (RNN 기반 dynamics) | 단순 Controller (linear/MLP) | Latent rollouts 내부에서 policy학습 | ✔ 있음 (VAE) | 환경을 ‘상상 세계’로 압축하여 RNN으로 미래 예측, 매우 효율적이지만 단순 |
+| **4-2 I2A** | CNN 기반 환경 모델 (rollout decoder 포함) | External Model-free Policy + imagination summary | 짧은 rollout을 상상→summary로 policy 입력 | ✔ 있음 | 상상된 trajectory 자체를 정책 입력에 반영하는 독특한 구조 |
+| **4-3 MBMF** | NN dynamics 모델 | Model-free RL(PPO/DQN 등) + model-based planning | Model-based trajectory optimization + MF fine-tuning | △ 선택적 | Model-based + Model-free 하이브리드 접근의 대표 |
+| **4-4 MBVE** | NN dynamics 모델 | Model-free RL의 Value 학습 강화 | H-step short rollout로 value target 개선 | △ 선택적 | 모델이 value bootstrap을 개선하는 데만 활용되는 안전하고 효율적인 구조 |
+| **4-5 Dreamer / V2** | RSSM (Recurrent State-Space Model) | Imagination Actor-Critic (latent AC) | Latent imagination rollout | ✔ 강력한 latent | Dreamer 계열의 핵심: latent dynamics + imagination policy learning (SOTA) |
+| **4-6 PlaNet** | RSSM (stochastic & deterministic) | MPC (CEM 기반) | Latent rollout + MPC | ✔ 있음 | Dreamer의 전신. Latent + MPC 기반 decision-making |
+| **4-7 PETS** | Probabilistic Ensemble (MLP 앙상블 dynamics) | Planning only(MPC) | Ensemble rollout + CEM trajectory sampling | ✖ 없음(관측 기반 dynamics) | 실전 로봇제어에서 매우 강력. 불확실성 처리 우수 |
+| **4-8 MuZero** | Learned latent representation + latent dynamics (no observation model) | Policy & Value network + MCTS | Latent MCTS planning | ✔ 강력한 latent | 관측 모델 없이 representation/dynamics/prediction만으로 planning 수행 |
+
+<br>
+
 ---
 
 # 앙상블 학습(Ensemble Learning, EL)
