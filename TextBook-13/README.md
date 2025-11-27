@@ -2337,6 +2337,20 @@ MCTS(Monte Carlo Tree Search)를 사용하여 탐색하고 Neural Network를 통
 	(4-7) PETs(Probabilistic Ensembles with Trajectory Sampling): 확률적 모델 앙상블을 활용
 	(4-8) MuZero: 알파고(AlphaGo) 시리즈의 발전된 형태(명시적 환경 모델 없이도 정책과 가치를 학습)
 
+
+
+| 모델 | 핵심 개념 | 환경 모델 필요 여부 | 정책 학습 방식 | 탐색 방식 | 샘플 효율성 | 계산 복잡도 | 적용 분야 | 장점 | 단점 |
+|------|-----------|----------------------|----------------|------------|--------------|--------------|-----------|-------|--------|
+| **World Models** | 환경의 특징을 latent 공간에 압축하여 시뮬레이터로 활용 | 환경 모델 명시적 필요 (VAE+RNN) | 시뮬레이션 기반 Controller 학습 | 시뮬레이션 기반 예측 | 높음 | 낮음 | CarRacing, Doom | 간단·효율적, 고속 학습 | 환경 적합성 의존, 단순함으로 인한 한계 |
+| **I2A** | 상상된 rollouts 요약값을 policy 입력으로 사용 | 필요함 (rollout model 기반) | 외부 모델-free 정책 + imagination summary | 상상된 trajectory 기반 탐색 | 중간 | 중간 | Atari, Gridworld | 모델 정보 활용하여 성능 향상 | 복잡, rollout 품질 의존 |
+| **MBMF** | 모델 기반 planning + 모델 프리 RL 결합 | 필요함 (dynamics 모델 필수) | 모델 기반 trajectory + Policy Gradient 혼합 | 계획 기반 탐색 + RL | 높음 | 높음 | 로봇 제어, MuJoCo | MB+MF 장점 결합 | 모델 오차 누적, tuning 어려움 |
+| **MBVE** | 단기 모델 rollout로 value bootstrap 강화 | 필요함 | Model-free value 학습 보조 | 짧은 horizon 예측 | 높음 | 중간 | DDPG, TD3 | 안정적 value 향상 | 모델 신뢰도 낮으면 성능 저하 |
+| **Dreamer** | RSSM latent world에서 imagination actor-critic 학습 | 필요함 (RSSM 모델 사용) | Latent imagination에서 policy/value 학습 | latent rollout | 매우 높음 | 높음 | DMControl Suite, 연속 제어 | 표준 SOTA 수준 성능 | 모델 및 학습 구조 복잡 |
+| **PlaNet** | RSSM 기반 모델 + MPC planning | 필요함 | 정책 없음, MPC로 직접 행동 결정 | Latent space MPC | 중간~높음 | 높음 | 로봇제어, 시뮬레이션 제어 | 모델 정확하면 매우 강력 | long-horizon 안정성 낮음 |
+| **PETS** | 확률적 앙상블 dynamics + trajectory sampling | 필요함 | 모델-free 정책 없음, MPC로 계획 | Ensemble sampling | 높음 | 중간 | 로봇 제어, 연속제어 | 앙상블 확률성으로 강력한 탐색 | 데이터 요구량 많음 |
+| **MuZero** | 관측 모델 없이 latent representation + latent dynamics + prediction만으로 MCTS 수행 | “환경 모델 불필요 (관측모델 없음)” → latent dynamics만 학습 | Policy + Value + Reward head + MCTS | Latent MCTS planning | 중간~높음 | 매우 높음 | 바둑, 체스, Atari, 일반 MDP planning | 환경 모델 없이 planning 가능 (혁신적) | 복잡한 구조, 훈련 비용 매우 큼 |
+
+
 ![](./images/4vs.PNG)
 <br>
 
@@ -2788,11 +2802,6 @@ Autoencoder): 관측 데이터를 잠재 공간으로 압축, (2)RNN (Recurrent 
 	(3) Cross-Validation 기반 평가: 데이터를 분할하는 방식에 따른 성능 변화를 확인
 
 <br>
-
-
- 
-<br>
-
 
 
 
