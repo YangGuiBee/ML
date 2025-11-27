@@ -1,4 +1,8 @@
 
+**[1][2] 예제 참고 => https://github.com/YangGuiBee/ML/blob/main/TextBook-13/TextBook_13.ipynb**
+
+<br>
+
 #  13 : 강화학습, 앙상블학습
 
 | 구분  | 비지도학습<br>(Unsupervised Learning) | 지도학습<br>(Supervised Learning) | 강화학습<br>(Reinforcement Learning)    |
