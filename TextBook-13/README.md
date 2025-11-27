@@ -231,7 +231,7 @@ DeepMind의 축구 AI: Google DeepMind는 축구 선수들의 최적의 움직�
     (5) 추론 및 의미: 단순히 기호를 조작하는 것 이상의 기호적 추론과 의미론적 이해의 중요성을 설명
     (6) 미래 전망: AI 연구가 나아가야 할 방향과 그 가능성을 제시, AI가 다양한 분야에서 응용될 수 있을 것이라고 예측
 
-(출처) https://github.com/YangGuiBee/ML/blob/main/TextBook-12/STAI.pdf
+(출처) https://github.com/YangGuiBee/ML/blob/main/TextBook-13/STAI.pdf
 <br>
 
 
