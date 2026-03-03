@@ -12,7 +12,7 @@
 
 # ▣ 2026년 10대 전략기술 트렌트
 
-![](./images/2026-top-10-strategic-technology-trends.png)
+![](./images/gartner-top-strategic-technology-trends-for-2026.png)
  (출처) Gartner 홈페이지(https://www.gartner.com/en/articles/top-technology-trends-2026)<br>
 
 <br>
