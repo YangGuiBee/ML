@@ -17,23 +17,23 @@
 
 <br>
 
-10대 전략적 기술 트렌드 (3개 테마)
+## 10대 전략적 기술 트렌드 (3개 테마) 
 
-Theme 1: The Architect (설계자) - AI 플랫폼 및 인프라
-AI-Native Development Platforms - 생성형 AI 기반 빠른 개발
-AI Supercomputing Platforms - 초고성능 AI 훈련 인프라
-Confidential Computing - 데이터 사용 중 보호 기술
-
-Theme 2: The Synthesist (통합자) - AI 애플리케이션 및 오케스트레이션
-Multiagent Systems - AI 에이전트 협업 시스템
-Domain-Specific Language Models - 산업 특화 AI 모델
-Physical AI - 실세계와 연결된 지능형 로봇/장비
-
-Theme 3: The Vanguard (선봉) - 보안, 신뢰 및 거버넌스
-Preemptive Cybersecurity - AI 기반 선제적 보안
-Digital Provenance - 디지털 출처 및 무결성 검증
-AI Security Platforms - AI 전용 보안 플랫폼
-Geopatriation - 지정학적 리스크 완화 전략
+Theme 1: The Architect (설계자) - AI 플랫폼 및 인프라<br>
+AI-Native Development Platforms - 생성형 AI 기반 빠른 개발<br>
+AI Supercomputing Platforms - 초고성능 AI 훈련 인프라<br>
+Confidential Computing - 데이터 사용 중 보호 기술<br>
+<br>
+Theme 2: The Synthesist (통합자) - AI 애플리케이션 및 오케스트레이션<br>
+Multiagent Systems - AI 에이전트 협업 시스템<br>
+Domain-Specific Language Models - 산업 특화 AI 모델<br>
+Physical AI - 실세계와 연결된 지능형 로봇/장비<br>
+<br>
+Theme 3: The Vanguard (선봉) - 보안, 신뢰 및 거버넌스<br>
+Preemptive Cybersecurity - AI 기반 선제적 보안<br>
+Digital Provenance - 디지털 출처 및 무결성 검증<br>
+AI Security Platforms - AI 전용 보안 플랫폼<br>
+Geopatriation - 지정학적 리스크 완화 전략<br>
 
 
 <br>
