@@ -37,6 +37,8 @@ Theme 3: The Vanguard (선봉) - 보안, 신뢰 및 거버넌스<br>
 
 <br>
 
+**연구주제**
+
 	AI 거버넌스
 	AI Security Platforms의 효과성 분석
 	Geopatriation과 데이터 주권의 관계 연구
