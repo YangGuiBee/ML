@@ -122,6 +122,7 @@ Theme 3: The Vanguard (선봉) - 보안, 신뢰 및 거버넌스<br>
 	Confidential Computing의 실효성 평가
 	Preemptive Cybersecurity의 위협 모델 연구
 
+Geopatriation : 지정학적(Geopolitical) + 본국 송환(Repatriation)의 합성어로, 지정학적 불안정과 규제 강화로 인해 기업이 데이터를 글로벌 퍼블릭 클라우드에서 자국 또는 지역 내의 Sovereign Cloud나 온프레미스(사내 서버)로 이전하는 전략<br>
 
 <br>
 
