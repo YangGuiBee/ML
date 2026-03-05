@@ -273,6 +273,11 @@ Spatial Computing: Apple Vision Pro 등장에도 불구하고 10년 소요예측
 ## 2025년, Hype Cycle for AI
 ![](./images/ai_2025.png)
 <br>
+
+GenAI 관련 기술들이 Peak를 지나 Trough로 진입<br>
+AI 인프라 및 엔지니어링 기술들이 Innovation Trigger에서 상승 중<br>
+실용적 AI 응용 기술들의 부상<br>
+
 <br>
 ## 2024년, Hype Cycle for AI
 ![](./images/HypeCycle_AI2024.png)
