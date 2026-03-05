@@ -1,6 +1,8 @@
 # Machine Learning Study
 
-<img width ='150' height = '80' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/CI.png'> 2026년 1학기 Plan 
+<img width ='150' height = '80' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/CI.png'>
+
+# 2026년 1학기 Plan 
 <br>
 
 <img width ='900' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/2026plan.png'>
