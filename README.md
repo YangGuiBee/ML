@@ -4,7 +4,7 @@
 
 <br>
 
-<img width ='900' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/2026plan.png'>
+<img width ='900' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-01/images/2026plan1.png'>
 
 <br>
 
