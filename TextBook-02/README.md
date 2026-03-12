@@ -21,7 +21,7 @@
 
 <br>
 
-<img width ='900' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/ML02_6.PNG'> 
+<img width ='900' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/ML02_6_1.PNG'> 
 
 <br>
 
