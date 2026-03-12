@@ -5,6 +5,12 @@
 	 ▣ 데이터 전처리	 
 	 ▣ 데이터셋 분리  	  
   	 ▣ Python 라이브러리	
+	 ▣ 실습 준비 : 구글코랩, 아나콘다
+	 ▣ 데이터 수집 : (1) 원시 데이터 수집, (2) 데이터 마트 생성, (3) 데이터 정합성 평가, (4) 데이터 취합, (5) 데이터 표준화
+	 ▣ 데이터 전처리 : (1) Data Cleaning, (2) Data Encoding, (3) Data Transform, (4) Feature Scaling, (5) ML Pipeline	 
+	 ▣ 데이터셋 분리 : (1) 훈련 데이터(Training set), (2) 테스트 데이터(Test set), (3) 검정 데이터(Validation set)	  
+	 ▣ Python 라이브러리 : NumPy, Pandas, Matplotlib, Scikit-Learn, MNIST, TensorFlow, Kaggle	
+
 ---
 
 # ▣ 실습 준비
