@@ -1,5 +1,4 @@
 
-# 머신러닝 기반의 연구방법론 : 제2강 
 
 <img width ='900' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-02/images/ML02_1.PNG'> 
 
