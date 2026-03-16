@@ -142,7 +142,7 @@ AI 기술을 활용해 현실의 문제를 해결하는 체계적인 과정<br>
 
 ---
 
-# 3. 연구 문제(Research Problem), 연구 질문(Research Question), 연구가설 (Research Hypothesis)
+# 3. 연구 문제(Research Problem), 연구 질문(Research Question), 연구 가설 (Research Hypothesis)
 ![](./images/3R.png)
 <br>
 **(1) 연구문제 :** 넓은 차원의 문제 상황<br>
