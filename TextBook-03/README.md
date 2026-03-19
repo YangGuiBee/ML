@@ -1,5 +1,5 @@
 
-<img width ='1000' height = '700' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-03/images/ML03_01.PNG'> 
+<img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-03/images/ML03_01.PNG'> 
 
 <br>
 
