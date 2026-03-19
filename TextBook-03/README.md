@@ -1,3 +1,9 @@
+
+<img width ='900' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-03/images/ML02_01.PNG'> 
+
+<br>
+
+
 #  03 : Research Methodology 
 ---
 	1. 연구의 개요
