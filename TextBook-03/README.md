@@ -11,10 +11,6 @@
 
 <br>
 
-<img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-03/images/ML03_04.PNG'> 
-
-<br>
-
 <img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-03/images/ML03_05.PNG'> 
 
 <br>
