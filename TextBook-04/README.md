@@ -172,6 +172,29 @@ Pclass 3 : 고도로 규격화된 저가(금의 표준 오차(Standard Error)나
 	sns.set(rc={'figure.figsize':(8, 6)})
 	sns.barplot(x='Pclass', y='Fare', data=titanic_df).set(title='Average Fare by Class')
 
+▣ 소스코드(Matplotlib)<br>
+
+	import matplotlib.pyplot as plt
+
+	# 1. 등급별 평균과 '표준 오차(SEM)' 계산
+	group_data = titanic_df.groupby('Pclass')['Fare']
+	avg_fare = group_data.mean()
+	sem_fare = group_data.sem()  # std() 대신 sem() 사용! 훨씬 짧아집니다.
+
+	# 2. 그래프 그리기
+	plt.figure(figsize=(8, 6))
+	# capsize : 에러 바 끝에 가로선 추가
+	avg_fare.plot(kind='bar', yerr=sem_fare, capsize=6, color='skyblue', edgecolor='black')
+
+	# 3. 세부 설정
+	plt.title('Average Fare by Class (Standard Error)', fontsize=14)
+	plt.xlabel('Passenger Class', fontsize=12)
+	plt.ylabel('Average Fare', fontsize=12)
+	plt.xticks(rotation=0)
+	plt.grid(axis='y', linestyle='--', alpha=0.5)
+
+	plt.show()
+
 <br>
 
 # 4. 히스토그램 (Histogram)
