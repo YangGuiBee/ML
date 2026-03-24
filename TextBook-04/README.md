@@ -1,3 +1,28 @@
+
+<img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/ML04_1.PNG'> 
+
+<br>
+
+<img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/ML04_2.PNG'> 
+
+<br>
+
+<img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/ML04_3.PNG'> 
+
+<br>
+
+<img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/ML04_4.PNG'> 
+
+<br>
+
+<img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/ML04_5.PNG'> 
+
+<br>
+
+<img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-04/images/ML04_6.PNG'> 
+
+<br>
+
 #  04 : 비지도 학습 (Unsupervised Learning, UL) : 시각화
 
 머신러닝 연구에서 시각화는 단순한 결과 장식이 아니라 연구 주장을 입증하는 증거 장치에 해당하며, 시각화는 '보여주기 위한 그림'이 아니라 연구 질문과 직접 연결된 분석 도구로 설계되는 것이 중요함.<br>
