@@ -946,39 +946,82 @@ Accuracy 기준<br>
 ▣ 응용분야 : 고객 데이터(나이/소득 같은 수치 + 지역/등급 같은 범주), 의료 데이터(측정치 + 범주형 진단 코드), 기업 리스크/신용 데이터(연속 + 등급/범주) 등<br>
 
 
-	#iris는 원래 전부 수치형이므로, 시연을 위해 일부 특성을 범주화해 “혼합 데이터”를 만들고 적용
-	# (1) 혼합 데이터 구성:
-	#     - 앞의 2개 특성은 수치형(표준화된 값 사용)
-	#     - 뒤의 2개 특성은 3분위수로 범주화하여 범주형으로 사용
+	from sklearn.datasets import load_iris
+	from sklearn.preprocessing import StandardScaler
+	from sklearn.metrics import silhouette_score
+	import numpy as np
+	from collections import Counter
+	
+	# ── 데이터 로드 및 전처리 ──────────────────────────────────────
+	iris = load_iris()
+	X, y = iris.data, iris.target
+	
+	# 표준화
+	scaler = StandardScaler()
+	X_std = scaler.fit_transform(X)
+	
+	# ── 헬퍼 함수 정의 ────────────────────────────────────────────
+	def bin_quantiles(arr, bins=3):
+	    """각 열을 분위수 기준으로 bins개 범주로 이산화"""
+	    result = np.zeros_like(arr, dtype=int)
+	    for j in range(arr.shape[1]):
+	        quantiles = np.percentile(arr[:, j], np.linspace(0, 100, bins + 1))
+	        quantiles = np.unique(quantiles)
+	        result[:, j] = np.digitize(arr[:, j], quantiles[1:-1])
+	    return result
+	
+	def best_map_accuracy(labels, y):
+	    """헝가리안 매핑 없이 최적 순열로 정확도 계산"""
+	    from itertools import permutations
+	    classes = np.unique(y)
+	    clusters = np.unique(labels)
+	    best_acc, best_mapping = 0, {}
+	    for perm in permutations(classes):
+	        mapping = {c: p for c, p in zip(clusters, perm)}
+	        mapped = np.array([mapping[l] for l in labels])
+	        acc = np.mean(mapped == y)
+	        if acc > best_acc:
+	            best_acc, best_mapping = acc, mapping
+	    return best_acc, best_mapping
+	
+	def plot_pca_scatter(X, labels, title=""):
+	    """PCA 2D 산점도"""
+	    from sklearn.decomposition import PCA
+	    import matplotlib.pyplot as plt
+	    pca = PCA(n_components=2)
+	    X2 = pca.fit_transform(X)
+	    plt.figure(figsize=(6, 4))
+	    for k in np.unique(labels):
+	        mask = labels == k
+	        plt.scatter(X2[mask, 0], X2[mask, 1], label=f"Cluster {k}", s=40)
+	    plt.title(title)
+	    plt.xlabel("PC1"); plt.ylabel("PC2")
+	    plt.legend(); plt.tight_layout(); plt.show()
+	
+	# ── 혼합 데이터 구성 ──────────────────────────────────────────
 	X_num = X_std[:, :2]
 	X_cat2 = bin_quantiles(X[:, 2:], bins=3)
 	
+	# ── K-Prototypes 구현 ─────────────────────────────────────────
 	def kprototypes(X_num, X_cat, K, gamma=1.0, n_init=20, max_iter=200, seed=42):
 	    rng = np.random.default_rng(seed)
 	    n, pnum = X_num.shape
 	    pcat = X_cat.shape[1]
-	
 	    best_cost = np.inf
 	    best = None
-	
 	    for _ in range(n_init):
 	        idx = rng.choice(n, size=K, replace=False)
 	        cent_num = X_num[idx].copy()
 	        cent_cat = X_cat[idx].copy()
-	
 	        for _ in range(max_iter):
-	            # 혼합 거리: 수치(제곱거리) + gamma * 범주 불일치 개수
 	            dist = np.zeros((n, K))
 	            for k in range(K):
 	                dn = np.sum((X_num - cent_num[k])**2, axis=1)
 	                dc = np.sum(X_cat != cent_cat[k], axis=1)
 	                dist[:, k] = dn + gamma * dc
-	
 	            labels = np.argmin(dist, axis=1)
-	
 	            new_cent_num = cent_num.copy()
 	            new_cent_cat = cent_cat.copy()
-	
 	            for k in range(K):
 	                members = np.where(labels == k)[0]
 	                if len(members) == 0:
@@ -990,40 +1033,33 @@ Accuracy 기준<br>
 	                    for j in range(pcat):
 	                        vals = X_cat[members, j]
 	                        new_cent_cat[k, j] = Counter(vals).most_common(1)[0][0]
-	
 	            if np.allclose(new_cent_num, cent_num) and np.array_equal(new_cent_cat, cent_cat):
 	                break
-	
 	            cent_num, cent_cat = new_cent_num, new_cent_cat
-	
 	        final_dist = np.zeros((n, K))
 	        for k in range(K):
 	            dn = np.sum((X_num - cent_num[k])**2, axis=1)
 	            dc = np.sum(X_cat != cent_cat[k], axis=1)
 	            final_dist[:, k] = dn + gamma * dc
-	
 	        cost = np.sum(np.min(final_dist, axis=1))
 	        if cost < best_cost:
 	            best_cost = cost
 	            best = {"labels": labels, "cent_num": cent_num, "cent_cat": cent_cat, "gamma": gamma}
-	
 	    return best
 	
-	# (2) 튜닝: gamma 후보 중 silhouette가 가장 높은 결과 선택(참고로 accuracy도 함께 출력)
+	# ── gamma 튜닝 ────────────────────────────────────────────────
 	best = None
 	for gamma in [0.2, 0.5, 1.0, 2.0, 5.0]:
 	    result = kprototypes(X_num, X_cat2, K=3, gamma=gamma, n_init=30, max_iter=300, seed=42)
 	    labels = result["labels"]
 	    sil = silhouette_score(X_std, labels)
 	    acc, mapping = best_map_accuracy(labels, y)
-	
 	    if (best is None) or (sil > best["sil"]):
 	        best = {"labels": labels, "sil": sil, "acc": acc, "mapping": mapping, "gamma": gamma}
 	
 	print("K-prototypes best gamma:", best["gamma"])
 	print(f"Silhouette: {best['sil']:.4f}")
 	print(f"Accuracy(best mapping): {best['acc']:.4f}, mapping={best['mapping']}")
-	
 	plot_pca_scatter(X_std, best["labels"], "K-prototypes (mixed Iris) (PCA 2D)")
 
 <br>
