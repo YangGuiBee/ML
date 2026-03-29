@@ -90,15 +90,15 @@ https://scikit-learn.org/stable/unsupervised_learning.html
 ![](./images/kmeans.PNG)
 <br>출처 : https://www.saedsayad.com/clustering_kmeans.htm<br>
 
-	from sklearn.cluster import KMeans  # KMeans 군집화 알고리즘을 사용하기 위해 sklearn의 cluster 모듈에서 KMeans 클래스를 임포트
-	from sklearn.datasets import load_iris  # 예제 데이터로 iris 데이터셋을 불러오기 위해 sklearn의 datasets 모듈에서 load_iris 함수를 임포트
-	from sklearn.metrics import silhouette_score, accuracy_score  # Silhouette Score와 Accuracy 계산을 위해 임포트
-	import matplotlib.pyplot as plt  # 데이터를 시각화하기 위해 matplotlib의 pyplot 모듈을 plt로 임포트
+	from sklearn.cluster import KMeans
+	from sklearn.datasets import load_iris
+	from sklearn.metrics import silhouette_score, accuracy_score
+	import matplotlib.pyplot as plt
 	import numpy as np  # 배열 계산을 위해 numpy를 임포트
 	from scipy.stats import mode  # Accuracy 계산 시 군집과 실제 라벨을 매핑하기 위해 mode 함수를 임포트
 	
 	# 데이터 로드
-	iris = load_iris()  # load_iris 함수를 호출하여 iris 데이터셋을 로드하고, 이를 iris 변수에 저장
+	iris = load_iris()
 	X = iris.data  # iris 데이터셋의 속성값(피처)들만 X에 저장(shape: [150, 4])
 	true_labels = iris.target  # 실제 라벨을 저장
 	
@@ -108,7 +108,7 @@ https://scikit-learn.org/stable/unsupervised_learning.html
 	labels = kmeans.labels_  # 학습 후, 각 데이터 포인트가 속하는 군집의 레이블을 labels에 저장
 	
 	# Silhouette Score 계산
-	silhouette_avg = silhouette_score(X, labels)  # Silhouette Score 계산
+	silhouette_avg = silhouette_score(X, labels)
 	print(f"Silhouette Score: {silhouette_avg:.3f}")
 	
 	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
@@ -124,8 +124,8 @@ https://scikit-learn.org/stable/unsupervised_learning.html
 	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis', s=50)  # X[:, 0] 모든행의 첫번째 열을 X좌표, X[:, 1] 모든행의 두번째 열을 Y좌표로 산점도 그리기
 	plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], c='red', marker='X', s=200, label='Centroids')  # 군집 중심을 'X'로 표시
 	plt.title("K-Means Clustering on Iris Dataset")  # 그래프의 제목을 설정
-	plt.xlabel("Feature 1")  # X축 레이블을 'Feature 1'로 설정
-	plt.ylabel("Feature 2")  # Y축 레이블을 'Feature 2'로 설정
+	plt.xlabel("Feature 1")  # Feature 1 (X축) X[:, 0] Sepal Length (꽃받침 길이cm)
+	plt.ylabel("Feature 2")  # Feature 2 (Y축) X[:, 1] Sepal Width (꽃받침 너비cm)
 	plt.legend()
 	plt.show()  # 그래프를 화면에 출력
 
