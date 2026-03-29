@@ -79,20 +79,29 @@ https://scikit-learn.org/stable/unsupervised_learning.html
 ▣ 응용분야 : 고객 세분화, 이미지 분할, 추천 시스템<br>
 ▣ 모델식 : 𝐾는 군집의 개수, $𝐶_𝑖$는 i번째 군집, $𝜇_𝑖$는 i번째 군집의 중심, 𝑥는 데이터 포인트<br>
 
-목표: K개의 클러스터로 나누되, 클러스터 내부 제곱거리 합(WCSS, inertia)을 최소화
+\begin{aligned}
+&\textbf{목표(Objective)} \\
+&\quad K\text{개의 클러스터로 데이터를 분할하여 클러스터 내부 제곱거리 합(WCSS, inertia)을 최소화한다.} \\[6pt]
 
-데이터: X = {x_1, ..., x_n},  x_i ∈ R^d
-클러스터: C_1, ..., C_K
-중심점(centroid): μ_1, ..., μ_K
+&\textbf{데이터(Data)} \\
+&\quad X = \{x_1, x_2, \dots, x_n\}, \quad x_i \in \mathbb{R}^d \\[4pt]
 
-(목적함수)
-min  Σ_{k=1..K}  Σ_{x_i ∈ C_k}  || x_i - μ_k ||^2
+&\textbf{클러스터(Clusters)} \\
+&\quad C_1, C_2, \dots, C_K \\[4pt]
 
-(1) 할당 단계(Assignment)
-c_i = argmin_{k ∈ {1..K}}  || x_i - μ_k ||^2
+&\textbf{중심점(Centroids)} \\
+&\quad \mu_1, \mu_2, \dots, \mu_K \\[8pt]
 
-(2) 업데이트 단계(Update)
-μ_k = (1 / |C_k|)  Σ_{x_i ∈ C_k}  x_i
+&\textbf{목적함수(Objective Function)} \\
+&\quad \min \sum_{k=1}^{K} \sum_{x_i \in C_k} \lVert x_i - \mu_k \rVert^2 \\[10pt]
+
+&\textbf{(1) 할당 단계(Assignment Step)} \\
+&\quad c_i = \arg\min_{k \in \{1, \dots, K\}} \lVert x_i - \mu_k \rVert^2 \\[10pt]
+
+&\textbf{(2) 업데이트 단계(Update Step)} \\
+&\quad \mu_k = \frac{1}{|C_k|} \sum_{x_i \in C_k} x_i
+\end{aligned}
+
 
 
 ![](./images/kmeans.PNG)
