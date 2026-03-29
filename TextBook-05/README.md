@@ -1084,6 +1084,7 @@ Accuracy 기준<br>
 | **목적함수** | 전체 제곱거리 최소화<br>$J = \sum_{j=1}^{K}\sum_{x_i \in C_j} \lVert x_i - m_j \rVert^2$ |
 | **중심갱신** | 각 군집의 평균으로 갱신<br>$m_j = \frac{1}{\lvert C_j \rvert}\sum_{x_i \in C_j} x_i$ |
 | **목표** | 군집 내 분산(SSE) 최소화 — 컴팩트하고 원형 구조 추출 |
+| **할당규칙** | 가장 가까운 중심에 할당&lt;br&gt;$c_i = \arg\min_{j \in \{1,\dots,K\}} \lVert x_i - m_j \rVert^2$ |
 
 
 ## [1-2] K-medoids (PAM: Partitioning Around Medoids)
