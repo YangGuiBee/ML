@@ -78,6 +78,23 @@ https://scikit-learn.org/stable/unsupervised_learning.html
 ▣ 단점 : 군집의 개수(K)를 사전에 정의해야 하며, 구형 군집이 아니거나 이상치(outliers)가 있을 경우 성능 저하(거리기반 알고리즘으로 속성의 수가 많을 경우 군집의 정확도가 떨어지는 단점을 보완하기 위해 PCA로 차원축소 필요)<br>
 ▣ 응용분야 : 고객 세분화, 이미지 분할, 추천 시스템<br>
 ▣ 모델식 : 𝐾는 군집의 개수, $𝐶_𝑖$는 i번째 군집, $𝜇_𝑖$는 i번째 군집의 중심, 𝑥는 데이터 포인트<br>
+
+목표: K개의 클러스터로 나누되, 클러스터 내부 제곱거리 합(WCSS, inertia)을 최소화
+
+데이터: X = {x_1, ..., x_n},  x_i ∈ R^d
+클러스터: C_1, ..., C_K
+중심점(centroid): μ_1, ..., μ_K
+
+(목적함수)
+min  Σ_{k=1..K}  Σ_{x_i ∈ C_k}  || x_i - μ_k ||^2
+
+(1) 할당 단계(Assignment)
+c_i = argmin_{k ∈ {1..K}}  || x_i - μ_k ||^2
+
+(2) 업데이트 단계(Update)
+μ_k = (1 / |C_k|)  Σ_{x_i ∈ C_k}  x_i
+
+
 ![](./images/kmeans.PNG)
 <br>출처 : https://www.saedsayad.com/clustering_kmeans.htm<br>
 
