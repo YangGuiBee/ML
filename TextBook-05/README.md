@@ -111,8 +111,8 @@ https://scikit-learn.org/stable/unsupervised_learning.html
 	plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis', s=50)  # X[:, 0] 모든행의 첫번째 열을 X좌표, X[:, 1] 모든행의 두번째 열을 Y좌표로 산점도 그리기
 	plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], c='red', marker='X', s=200, label='Centroids')  # 군집 중심을 'X'로 표시
 	plt.title("K-Means Clustering on Iris Dataset")  # 그래프의 제목을 설정
-	plt.xlabel("Feature 1")  # Feature 1 (X축) X[:, 0] Sepal Length (꽃받침 길이cm)
-	plt.ylabel("Feature 2")  # Feature 2 (Y축) X[:, 1] Sepal Width (꽃받침 너비cm)
+	plt.xlabel("Sepal Length")  # Feature 1 (X축) X[:, 0] Sepal Length (꽃받침 길이cm)
+	plt.ylabel("Sepal Width")  # Feature 2 (Y축) X[:, 1] Sepal Width (꽃받침 너비cm)
 	plt.legend()
 	plt.show()  # 그래프를 화면에 출력
 
