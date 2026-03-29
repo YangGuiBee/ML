@@ -1,5 +1,10 @@
 #  05 : 비지도 학습(Unsupervised Learning, UL) : 군집화(Clustering)
 
+**군집화(Clustering)란?**
+데이터 포인트들을 별개의 군집으로 그룹화하는 것<br>
+유사성이 높은 데이터들을 동일한 그룹으로 분류하고 서로다른 군집들이 상이성을 가지도록 그룹화<br>
+군집화 활용분야 : 고객, 시장, 상품, 경제 및 사회활동 등의 세분화(Segmentation) → 이미지 식별, 이상검출 등<br>
+
 ---
 
 	[1] Partitioning-Based Clustering : 데이터셋을 사전에 정의된 클러스터 개수로 분할하며, 각 클러스터에 데이터를 배정하고 이를 반복적으로 최적화하는 방식
@@ -62,10 +67,7 @@
 https://scikit-learn.org/stable/unsupervised_learning.html
 <br>
 
-### 군집화(Clustering)란?
-데이터 포인트들을 별개의 군집으로 그룹화하는 것<br>
-유사성이 높은 데이터들을 동일한 그룹으로 분류하고 서로다른 군집들이 상이성을 가지도록 그룹화<br>
-군집화 활용분야 : 고객, 시장, 상품, 경제 및 사회활동 등의 세분화(Segmentation) → 이미지 식별, 이상검출 등<br>
+
 
 <br>
 
