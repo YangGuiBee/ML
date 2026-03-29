@@ -79,31 +79,6 @@ https://scikit-learn.org/stable/unsupervised_learning.html
 ▣ 응용분야 : 고객 세분화, 이미지 분할, 추천 시스템<br>
 ▣ 모델식 : 𝐾는 군집의 개수, $𝐶_𝑖$는 i번째 군집, $𝜇_𝑖$는 i번째 군집의 중심, 𝑥는 데이터 포인트<br>
 
-\begin{aligned}
-&\textbf{목표(Objective)} \\
-&\quad K\text{개의 클러스터로 데이터를 분할하여 클러스터 내부 제곱거리 합(WCSS, inertia)을 최소화한다.} \\[6pt]
-
-&\textbf{데이터(Data)} \\
-&\quad X = \{x_1, x_2, \dots, x_n\}, \quad x_i \in \mathbb{R}^d \\[4pt]
-
-&\textbf{클러스터(Clusters)} \\
-&\quad C_1, C_2, \dots, C_K \\[4pt]
-
-&\textbf{중심점(Centroids)} \\
-&\quad \mu_1, \mu_2, \dots, \mu_K \\[8pt]
-
-&\textbf{목적함수(Objective Function)} \\
-&\quad \min \sum_{k=1}^{K} \sum_{x_i \in C_k} \lVert x_i - \mu_k \rVert^2 \\[10pt]
-
-&\textbf{(1) 할당 단계(Assignment Step)} \\
-&\quad c_i = \arg\min_{k \in \{1, \dots, K\}} \lVert x_i - \mu_k \rVert^2 \\[10pt]
-
-&\textbf{(2) 업데이트 단계(Update Step)} \\
-&\quad \mu_k = \frac{1}{|C_k|} \sum_{x_i \in C_k} x_i
-\end{aligned}
-
-
-
 ![](./images/kmeans.PNG)
 <br>출처 : https://www.saedsayad.com/clustering_kmeans.htm<br>
 
@@ -1084,7 +1059,7 @@ Accuracy 기준<br>
 | **목적함수** | 전체 제곱거리 최소화<br>$J = \sum_{j=1}^{K}\sum_{x_i \in C_j} \lVert x_i - m_j \rVert^2$ |
 | **중심갱신** | 각 군집의 평균으로 갱신<br>$m_j = \frac{1}{\lvert C_j \rvert}\sum_{x_i \in C_j} x_i$ |
 | **목표** | 군집 내 분산(SSE) 최소화 — 컴팩트하고 원형 구조 추출 |
-| **할당규칙** | 가장 가까운 중심에 할당&lt;br&gt;$c_i = \arg\min_{j \in \{1,\dots,K\}} \lVert x_i - m_j \rVert^2$ |
+| **할당규칙** | 가장 가까운 중심에 할당&amp;lt;br&amp;gt;$c_i = \arg\min_{j \in \{1,\dots,K\}} \lVert x_i - m_j \rVert^2$ |
 
 
 ## [1-2] K-medoids (PAM: Partitioning Around Medoids)
