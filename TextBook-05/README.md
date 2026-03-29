@@ -61,17 +61,13 @@
 https://scikit-learn.org/stable/unsupervised_learning.html
 <br>
 
-
-
-<br>
-
 ---
 
 # [1-1] k-Means
 
 ▣ 정의 : 데이터를 미리 정한 K개 클러스터로 나누고, 각 클러스터의 중심점(centroid)을 평균으로 두어 클러스터 내부 제곱거리 합(WCSS)을 최소화하도록 반복 최적화하는 알고리즘<br>
-▣ 장점 : 계산이 빠르고 구현이 단순해 대규모 데이터의 기본 베이스라인으로 적합, 중심점이 평균이므로 대표 패턴 해석이 직관적, 다양한 변형으로 확장 가능<br>
-▣ 단점 : K를 사전에 정해야 함, 초기 중심에 민감(로컬 최적)하며 이상치에 취약, 비구형(비선형) 클러스터에 약함<br>
+▣ 장점 : 계산이 빠르고 구현이 단순해 대규모 데이터의 기본 베이스라인으로 적합, 중심점이 평균이므로 대표 패턴 해석이 직관적, 다양한 변형으로 확장<br>
+▣ 단점 : K를 사전에 정해야 함, 초기 중심에 민감하며 이상치에 취약, 비구형(비선형) 클러스터에 약함<br>
 ▣ 응용분야 : 고객 세분화, 임베딩(문서/이미지) 군집, 센서 상태 패턴 그룹화, 이미지 색상 양자화, 추천시스템의 사용자/아이템 그룹화 등<br>
 
 ![](./images/kmeans.PNG)
@@ -142,7 +138,8 @@ https://scikit-learn.org/stable/unsupervised_learning.html
 	# 엘보 기법을 사용한 최적의 군집 수 찾기
 	wcss = []  # 각 군집 수에 대한 WCSS 값을 저장할 리스트 초기화
 	for k in range(1, 10):  # 군집 수를 1부터 9까지 변경하며 반복
-    	kmeans = KMeans(n_clusters=k, init='k-means++', random_state=42)  # k개의 군집을 가지는 KMeans 모델 생성
+	    # k개의 군집을 가지는 KMeans 모델 생성
+    	kmeans = KMeans(n_clusters=k, init='k-means++', random_state=42)  
     	kmeans.fit(data)  # KMeans 모델을 데이터에 학습시킴
     	wcss.append(kmeans.inertia_)  # 학습된 모델의 관성 값(WCSS)을 리스트에 추가
 
@@ -159,7 +156,6 @@ https://scikit-learn.org/stable/unsupervised_learning.html
 
 x축: 클러스터 개수 𝑘<br>
 y축: WCSS (Within-Cluster Sum of Squares, 군집 내 제곱합) : 각 점이 속한 군집 중심까지의 제곱 거리의 합 = 군집 응집도 척도<br>
-<br>
 군집 수 𝑘를 늘리면, 각 군집이 더 세분화되므로 WCSS는 작아짐(더 많은 클러스터 → 점들이 자기 중심과 가까워짐 → 응집도 증가 → 오차 감소)<br>
 <br>
 k=1→2: WCSS가 급격히 감소 (700 → 150 근처)<br>
