@@ -11,7 +11,7 @@
 
 ---
 
-![](./images/7table.png)
+![](./images/7table_1.png)
 
 ---
 
