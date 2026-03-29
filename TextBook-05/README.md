@@ -139,26 +139,27 @@ https://scikit-learn.org/stable/unsupervised_learning.html
 ## 군집화 알고리즘의 평가 방법(Elbow, Silhouette)
 **▣ Elbow :** 군집 수를 결정하기 위한 시각적 방법으로 군집 수를 변화시키면서 각 군집 수에 따른 관성(Inertia), 즉 군집 내 SSE(Sum of Squared Errors) 또는 WCSS(Within-Cluster Sum of Squares) 값을 계산(군집의 개수가 증가할수록 각 군집이 더 작아지고, 데이터 포인트들이 군집 중심에 더 가까워지기 때문에 WCSS이 감소하며, 군집 수를 계속 증가시키다 보면, 어느 순간부터 오차가 크게 줄어들지 않는 구간이 나타나는데 이때의 군집 수를 최적의 군집 수로 선택)<br>
 
-	import matplotlib.pyplot as plt  # 데이터 시각화를 위한 matplotlib 라이브러리 import
-	from sklearn.datasets import load_iris  # iris 데이터셋을 로드하기 위한 모듈 import
-	from sklearn.cluster import KMeans  # KMeans 군집화 알고리즘을 사용하기 위한 모듈 import
+	import matplotlib.pyplot as plt 
+	from sklearn.datasets import load_iris
+	from sklearn.cluster import KMeans 
 
 	# 데이터 로드
-	iris = load_iris()  # iris 데이터셋 로드
-	data = iris.data  # iris 데이터셋에서 입력 데이터(features) 추출
+	iris = load_iris()  
+	data = iris.data 
 
 	# 엘보 기법을 사용한 최적의 군집 수 찾기
 	wcss = []  # 각 군집 수에 대한 WCSS 값을 저장할 리스트 초기화
-	for k in range(1, 5):  # 군집 수를 1부터 10까지 변경하며 반복
+	for k in range(1, 10):  # 군집 수를 1부터 9까지 변경하며 반복
     	kmeans = KMeans(n_clusters=k, init='k-means++', random_state=42)  # k개의 군집을 가지는 KMeans 모델 생성
     	kmeans.fit(data)  # KMeans 모델을 데이터에 학습시킴
     	wcss.append(kmeans.inertia_)  # 학습된 모델의 관성 값(WCSS)을 리스트에 추가
 
 	# 그래프 시각화
-	plt.plot(range(1, 5), wcss, marker='o')  # 군집 수에 따른 WCSS 값을 선 그래프로 시각화
+	plt.plot(range(1, 10), wcss, marker='o')  # 군집 수에 따른 WCSS 값을 선 그래프로 시각화
 	plt.title('Elbow Method')  # 그래프 제목 설정
 	plt.xlabel('Number of clusters')  # x축 레이블 설정
 	plt.ylabel('WCSS')  # y축 레이블 설정
+	plt.xticks(range(1, 10))  # x축 정수 설정
 	plt.show()  # 그래프 출력
 
  ![](./images/elbow.PNG)
@@ -167,15 +168,13 @@ https://scikit-learn.org/stable/unsupervised_learning.html
 x축: 클러스터 개수 𝑘<br>
 y축: WCSS (Within-Cluster Sum of Squares, 군집 내 제곱합) : 각 점이 속한 군집 중심까지의 제곱 거리의 합 = 군집 응집도 척도<br>
 <br>
-군집 수 𝑘를 늘리면, 각 군집이 더 세분화되므로 WCSS는 작아짐<br>
-(더 많은 클러스터 → 점들이 자기 중심과 가까워짐 → 응집도 증가 → 오차 감소)<br>
+군집 수 𝑘를 늘리면, 각 군집이 더 세분화되므로 WCSS는 작아짐(더 많은 클러스터 → 점들이 자기 중심과 가까워짐 → 응집도 증가 → 오차 감소)<br>
 <br>
 k=1→2: WCSS가 급격히 감소 (700 → 150 근처)<br>
 k=2→3: 또 크게 감소 (150 → 80 근처)<br>
 k=3→4: 여전히 눈에 띄게 감소 (80 → 60 근처)<br>
-k≥4: 감소 폭이 점점 작아져 “완만한 곡선”으로 변함<br>
+k≥4: 감소 폭이 점점 작아져 완만한 곡선으로 변함<br>
 즉, 3~4 근처에서 급격한 감소가 멈추고 곡선이 완만해짐<br>
-
 이 데이터셋에서는 적절한 클러스터 수 k는 3 또는 4 정도로 판단<br>
 이후 k를 더 늘려도 WCSS 감소는 있지만, 얻는 이득이 크지 않음 → 과적합 위험 + 해석 복잡<br>
  
