@@ -238,9 +238,6 @@ k=5: 0.90<br>
 ...<br>
 k=7: 0.97  ← 최고점<br>
 <br>
-비지도 상황(라벨 모름): k=2 선택이 합리적.<br>
-라벨을 알고 성능을 맞추는 상황: k=7 선택이 타당.<br>
-<br>
 
 
 	import numpy as np
@@ -326,7 +323,10 @@ Accuracy 기준<br>
 ▣ 장점 : 중심이 실제 데이터이므로 이상치 영향이 평균보다 작아 상대적으로 강건, 거리 함수(유클리드/맨해튼/임의의 비유사도)를 유연하게 사용할 수 있음, 해석 시 대표 실제 사례를 medoid로 제시 가능<br>
 ▣ 단점 : K-means보다 구현이 복잡하고 초기 medoid에 따라 결과가 달라질 수 있음, PAM(Partitioning Around Medoids)은 계산량이 커서 대규모 데이터에 느릴 경우 CLARA/CLARANS로 완화<br>
 ▣ 응용분야 : 이상치가 많은 데이터의 군집, 대표 사례(프로토타입) 추출이 중요한 고객/설문/사례 기반 분석, 다양한 거리 기반 군집(특수 유사도) 등<br>
-▣ 종류 : <ins>PAM(Partitioning Around Medoids)</ins> : K-medoids의 대표적인 구현으로 각 클러스터 중심을 실제 데이터 포인트로 설정, <ins>CLARA(Clustering LARge Applications)</ins> : PAM을 대규모 데이터셋에 적용하기 위해 샘플링 기반으로 클러스터링, <ins>CLARANS(Clustering Large Applications based on RANdomized Search)</ins>: PAM의 개선 알고리즘으로 랜덤 탐색 기반 클러스터링<br>
+▣ 종류 : <br>
+<ins>PAM(Partitioning Around Medoids)</ins> : K-medoids의 대표적인 구현으로 각 클러스터 중심을 실제 데이터 포인트로 설정<br>
+<ins>CLARA(Clustering LARge Applications)</ins> : PAM을 대규모 데이터셋에 적용하기 위해 샘플링 기반으로 클러스터링<br>
+<ins>CLARANS(Clustering Large Applications based on RANdomized Search)</ins>: PAM의 개선 알고리즘으로 랜덤 탐색 기반 클러스터링<br>
 
 	import numpy as np
 	from sklearn.datasets import load_iris
@@ -442,7 +442,7 @@ Accuracy 기준<br>
 ![](./images/1-2.png)
 <br>
 
-# PAM(Partitioning Around Medoids)
+# [1-2-1] PAM(Partitioning Around Medoids)
 ▣ 정의: K-medoids 접근법을 구현하는 탐욕적 알고리즘으로 각 군집에서 가장 최적의 Medoid를 반복적으로 찾는다<br>
 ▣ 필요성: 이상치가 많은 데이터셋에서도 안정적인 군집화를 수행할 수 있음<br>
 ▣ 장점: K-means에 비해 이상치에 덜 민감하며 다양한 거리 측정 방법을 사용할 수 있음<br>
@@ -534,14 +534,232 @@ Accuracy 기준<br>
 ![](./images/1-4.png)
 <br>
 
-# [1-3] K-modes
-▣ 정의: 범주형 데이터를 클러스터링하기 위해 설계된 알고리즘으로, 각 군집의 중심은 최빈값(mode)으로 결정<br>
-▣ 필요성: 범주형 데이터를 군집화하는 데 유용하며, 일반적인 K-means와는 다른 접근 방식이 필요<br>
-▣ 장점: 범주형 데이터에 특화되어 있으며, K-means와 유사하게 빠르게 계산<br>
-▣ 단점: 범주형이 아닌 수치형 데이터에는 부적합하며, K 값을 사전에 설정해야 함<br>
-▣ 응용분야: 설문 데이터 분석, 고객 세분화에서 범주형 특성을 포함한 군집화<br>
-▣ 모델식: 범주형 데이터의 유사도를 측정하기 위해 헴밍 거리(Hamming distance)를 사용(군집의 중심은 각 속성의 최빈값으로 설정)
+# [1-2-2] CLARANS(Clustering Large Applications based on RANdomized Search)
+▣ 정의: PAM(PAM과 K-medoids)의 확장판으로, 대규모 데이터셋에 효율적인 군집화를 제공하기 위해 랜덤화된 탐색 방식을 사용하는 알고리즘. PAM의 전체 데이터셋 탐색 방식 대신 샘플링과 랜덤 선택을 통해 최적의 medoid를 찾는다<br>
+▣ 필요성: PAM의 느린 성능을 보완하여 대규모 데이터에서도 빠르게 클러스터링을 수행할 수 있도록 설계<br>
+▣ 장점: 대규모 데이터셋에 적용할 수 있으며, PAM보다 훨씬 효율적이며, 랜덤 탐색 방식을 통해 최적의 medoid를 빠르게 검색<br>
+▣ 단점: 랜덤화된 탐색을 사용하기 때문에 실행 결과가 매번 다를 수 있으며, PAM과 동일하게 군집 수(K)를 사전에 지정해야 함<br>
+▣ 응용분야: 대규모 고객 세분화, 금융 데이터 분석, 대규모 이미지 및 문서 분류<br>
+▣ 모델식: 전체 데이터셋에서 일부를 랜덤하게 샘플링하여 최적의 medoid를 찾는 방식으로, 기존 PAM의 개념을 대규모 데이터셋에 맞게 확장. 이를 통해 데이터 탐색 과정을 줄이고 효율성을 강화<br>
 
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.metrics import silhouette_score, accuracy_score
+	from scipy.spatial.distance import cdist
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	from scipy.stats import mode
+	
+	class CLARANS:
+	    def __init__(self, n_clusters=3, numlocal=5, maxneighbor=10, random_state=None):
+	        self.n_clusters = n_clusters
+	        self.numlocal = numlocal  # 랜덤 초기화 반복 횟수
+	        self.maxneighbor = maxneighbor  # 각 초기화 당 랜덤 탐색 이웃 수
+	        self.random_state = random_state
+	
+	    def fit_predict(self, X):
+	        if self.random_state:
+	            np.random.seed(self.random_state)
+	        
+	        best_medoids = None
+	        best_score = float('inf')
+	        labels = None
+	
+	        # numlocal번의 랜덤 초기화 반복
+	        for _ in range(self.numlocal):
+	            # 초기 메도이드 랜덤 선택
+	            medoids = np.random.choice(len(X), self.n_clusters, replace=False)
+	            current_score = self._calculate_total_cost(X, medoids)
+	
+	            improved = True
+	            while improved:
+	                improved = False
+	                # maxneighbor 번 만큼 랜덤으로 이웃 탐색
+	                for _ in range(self.maxneighbor):
+	                    # 현재 메도이드 중 하나와 비메도이드 중 하나를 교환
+	                    new_medoids = np.copy(medoids)
+	                    non_medoids = [i for i in range(len(X)) if i not in medoids]
+	                    new_medoids[np.random.randint(0, self.n_clusters)] = np.random.choice(non_medoids)
+	                    
+	                    # 새로운 메도이드 셋으로 비용 계산
+	                    new_score = self._calculate_total_cost(X, new_medoids)
+	                    if new_score < current_score:
+	                        medoids = new_medoids
+	                        current_score = new_score
+	                        improved = True
+	                        break
+	            
+	            # 최적의 메도이드 셋 업데이트
+	            if current_score < best_score:
+	                best_medoids = medoids
+	                best_score = current_score
+	                labels = np.argmin(cdist(X, X[best_medoids]), axis=1)
+	
+	        self.medoids_ = best_medoids
+	        self.labels_ = labels
+	        return self.labels_
+	
+	    def _calculate_total_cost(self, X, medoids):
+	        # 메도이드 셋에 대한 총 비용(거리 합계) 계산
+	        distances = cdist(X, X[medoids], metric='euclidean')
+	        return np.sum(np.min(distances, axis=1))
+	
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = pd.DataFrame(iris.data, columns=iris.feature_names)
+	true_labels = iris.target
+	
+	# CLARANS 알고리즘 적용 (군집 수: 3)
+	clarans = CLARANS(n_clusters=3, numlocal=5, maxneighbor=10, random_state=0)
+	clusters = clarans.fit_predict(iris.data)  # 데이터에 맞춰 군집화 수행
+	
+	# 군집화 결과를 데이터프레임에 추가
+	data['Cluster'] = clusters  # 각 데이터 포인트의 군집 레이블 추가
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(iris.data, clusters)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(clusters)
+	for i in np.unique(clusters):
+	    mask = (clusters == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=data.iloc[:, 0], y=data.iloc[:, 1], hue='Cluster', data=data, palette='viridis', s=100)
+	plt.scatter(iris.data[clarans.medoids_, 0], iris.data[clarans.medoids_, 1], c='red', marker='X', s=200, label='Medoids')
+	plt.title("CLARANS Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
+
+![](./images/1-5.png)
+<br>
+
+# [1-2-3] CLARA(Clustering LARge Applications)
+▣ 정의: PAM을 대규모 데이터에 적용할 수 있도록 확장한 알고리즘으로, 데이터의 일부 샘플을 사용하여 군집화를 수행하는 데, 여러 번의 샘플링을 통해 가장 안정적인 medoid를 선택<br>
+▣ 필요성: PAM의 높은 계산 비용을 줄이고자 개발되어 대규모 데이터셋에서도 빠르게 군집화를 수행<br>
+▣ 장점: PAM보다 계산이 효율적이며, 대규모 데이터셋에 적합하며, 표본 기반 접근 방식을 통해 메모리와 시간 효율적<br>
+▣ 단점: 샘플링을 통해 결과의 신뢰도가 낮아질 수 있으며, 전체 데이터셋을 반영하지 못할 가능성. 군집 수(K)를 사전에 지정해야 함<br>
+▣ 응용분야: 대규모 고객 데이터의 군집화, 생물학적 데이터 분석, 시장 조사 데이터의 분석 및 군집화<br>
+▣ 모델식: 데이터셋에서 일부 샘플을 선택하여 PAM을 적용하고, 여러 번 반복 수행하여 최적의 medoid를 찾는다<br>
+
+	import numpy as np	
+	from sklearn.datasets import load_iris
+	from sklearn.metrics import silhouette_score, accuracy_score
+	from scipy.spatial.distance import cdist
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	from scipy.stats import mode
+	
+	class CLARA:
+	    def __init__(self, n_clusters=3, n_samples=25, numlocal=5, max_iter=300, random_state=None):
+	        self.n_clusters = n_clusters
+	        self.n_samples = n_samples  # 각 샘플의 크기
+	        self.numlocal = numlocal    # PAM 반복 횟수
+	        self.max_iter = max_iter    # 최대 반복 횟수
+	        self.random_state = random_state
+	
+	    def fit_predict(self, X):
+	        if self.random_state:
+	            np.random.seed(self.random_state)
+	
+	        best_medoids = None
+	        best_score = float('inf')
+	        best_labels = None
+	
+	        # numlocal 번의 샘플링 반복
+	        for _ in range(self.numlocal):
+	            # 데이터에서 무작위로 샘플링
+	            sample_indices = np.random.choice(len(X), self.n_samples, replace=False)
+	            sample = X[sample_indices]
+	
+	            # PAM을 샘플에 적용하여 최적의 메도이드 찾기
+	            medoids = self._initialize_medoids(sample)
+	            for _ in range(self.max_iter):
+	                distances = cdist(sample, sample[medoids], metric='euclidean')
+	                labels = np.argmin(distances, axis=1)
+	                
+	                new_medoids = np.copy(medoids)
+	                for i in range(self.n_clusters):
+	                    cluster_points = np.where(labels == i)[0]
+	                    intra_cluster_distances = cdist(sample[cluster_points], sample[cluster_points], metric='euclidean').sum(axis=1)
+	                    new_medoids[i] = cluster_points[np.argmin(intra_cluster_distances)]
+	
+	                if np.array_equal(medoids, new_medoids):
+	                    break
+	                medoids = new_medoids
+	
+	            # 전체 데이터에 대한 비용 계산
+	            full_distances = cdist(X, sample[medoids], metric='euclidean')
+	            full_score = np.sum(np.min(full_distances, axis=1))
+	
+	            # 더 나은 메도이드 셋이 발견되면 갱신
+	            if full_score < best_score:
+	                best_medoids = medoids
+	                best_score = full_score
+	                best_labels = np.argmin(full_distances, axis=1)
+	
+	        self.medoids_ = sample[best_medoids]  # 최적의 메도이드를 전체 데이터셋에서 인덱싱
+	        self.labels_ = best_labels
+	        return self.labels_
+	
+	    def _initialize_medoids(self, X):
+	        return np.random.choice(len(X), self.n_clusters, replace=False)
+	
+	# Iris 데이터셋 로드
+	iris = load_iris()
+	data = pd.DataFrame(iris.data, columns=iris.feature_names)
+	true_labels = iris.target
+	
+	# CLARA 알고리즘 적용 (군집 수: 3)
+	clara = CLARA(n_clusters=3, n_samples=30, numlocal=5, max_iter=300, random_state=0)
+	clusters = clara.fit_predict(iris.data)  # 전체 데이터에 대해 군집화 수행
+	
+	# 군집화 결과를 데이터프레임에 추가
+	data['Cluster'] = clusters  # 각 데이터 포인트의 군집 레이블 추가
+	
+	# Silhouette Score 계산
+	silhouette_avg = silhouette_score(iris.data, clusters)
+	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	
+	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
+	mapped_labels = np.zeros_like(clusters)
+	for i in np.unique(clusters):
+	    mask = (clusters == i)
+	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	
+	accuracy = accuracy_score(true_labels, mapped_labels)
+	print(f"Accuracy: {accuracy:.3f}")
+	
+	# 시각화 (첫 번째와 두 번째 피처 사용)
+	plt.figure(figsize=(10, 5))
+	sns.scatterplot(x=data.iloc[:, 0], y=data.iloc[:, 1], hue='Cluster', data=data, palette='viridis', s=100)
+	plt.scatter(clara.medoids_[:, 0], clara.medoids_[:, 1], c='red', marker='X', s=200, label='Medoids')
+	plt.title("CLARA Clustering on Iris Dataset")
+	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
+	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
+	plt.legend(title='Cluster')
+	plt.show()
+	
+![](./images/1-6.png)
+<br>
+
+# [1-3] K-modes
+▣ 정의 : K-modes는 범주형(categorical) 데이터에 맞춘 K-means 변형이다. 평균 대신 최빈값(mode)을 중심으로 사용하며, 유클리드 거리 대신 불일치 개수(Hamming-like dissimilarity)로 군집을 만든다.<br>
+▣ 장점 : 범주형 데이터에서 평균이 의미 없다는 문제를 해결, 중심이 “최빈값 조합”이라 해석이 쉬움(전형적 범주 패턴)<br>
+▣ 단점 : 연속형 데이터에는 부적합(범주화 필요), 범주화 방식(구간 수/경계)에 따라 결과가 달라질 수 있음, K와 초기 모드에 민감할 수 있음<br>
+▣ 응용분야 : 설문조사(리커트 척도), 고객 속성(지역/직업/등급), 로그의 이벤트 타입 등 범주형 특징이 중심인 데이터 군집<br>
+
+	# iris는 원래 연속형 수치 데이터이므로, K-modes를 적용하려면 값을 구간화(범주화)하여 범주형으로 변경
 	import numpy as np
 	from sklearn.datasets import load_iris
 	from sklearn.metrics import silhouette_score, accuracy_score
@@ -721,233 +939,160 @@ Accuracy 기준<br>
 ![](./images/pca.png)
 <br>
 
+# [1-4] K-prototypes
+▣ 정의 : K-prototypes는 수치형(연속형)과 범주형(카테고리)이 섞인 혼합 데이터에 대해, 수치형은 K-means(평균), 범주형은 K-modes(최빈값) 방식으로 중심을 갱신하는 알고리즘이다. 혼합 거리에서 범주형 불일치 항의 가중치로 gamma를 사용한다.<br>
+▣ 장점 : 수치형+범주형 혼합 데이터를 하나의 모델로 자연스럽게 군집화 가능, 데이터 타입별로 적절한 중심 갱신(평균/최빈값)을 사용<br>
+▣ 단점 : gamma(범주형 항 가중치) 선택이 결과에 영향, 범주화 방식과 가중치 설정이 임의적일 수 있음(해석/재현성 이슈), 구현 및 튜닝이 K-means보다 복잡<br>
+▣ 응용분야 : 고객 데이터(나이/소득 같은 수치 + 지역/등급 같은 범주), 의료 데이터(측정치 + 범주형 진단 코드), 기업 리스크/신용 데이터(연속 + 등급/범주) 등<br>
 
-# [1-4] CLARANS(Clustering Large Applications based on RANdomized Search)
-▣ 정의: PAM(PAM과 K-medoids)의 확장판으로, 대규모 데이터셋에 효율적인 군집화를 제공하기 위해 랜덤화된 탐색 방식을 사용하는 알고리즘. PAM의 전체 데이터셋 탐색 방식 대신 샘플링과 랜덤 선택을 통해 최적의 medoid를 찾는다<br>
-▣ 필요성: PAM의 느린 성능을 보완하여 대규모 데이터에서도 빠르게 클러스터링을 수행할 수 있도록 설계<br>
-▣ 장점: 대규모 데이터셋에 적용할 수 있으며, PAM보다 훨씬 효율적이며, 랜덤 탐색 방식을 통해 최적의 medoid를 빠르게 검색<br>
-▣ 단점: 랜덤화된 탐색을 사용하기 때문에 실행 결과가 매번 다를 수 있으며, PAM과 동일하게 군집 수(K)를 사전에 지정해야 함<br>
-▣ 응용분야: 대규모 고객 세분화, 금융 데이터 분석, 대규모 이미지 및 문서 분류<br>
-▣ 모델식: 전체 데이터셋에서 일부를 랜덤하게 샘플링하여 최적의 medoid를 찾는 방식으로, 기존 PAM의 개념을 대규모 데이터셋에 맞게 확장. 이를 통해 데이터 탐색 과정을 줄이고 효율성을 강화<br>
 
-	import numpy as np
-	from sklearn.datasets import load_iris
-	from sklearn.metrics import silhouette_score, accuracy_score
-	from scipy.spatial.distance import cdist
-	import pandas as pd
-	import matplotlib.pyplot as plt
-	import seaborn as sns
-	from scipy.stats import mode
+	#iris는 원래 전부 수치형이므로, 시연을 위해 일부 특성을 범주화해 “혼합 데이터”를 만들고 적용
+	# (1) 혼합 데이터 구성:
+	#     - 앞의 2개 특성은 수치형(표준화된 값 사용)
+	#     - 뒤의 2개 특성은 3분위수로 범주화하여 범주형으로 사용
+	X_num = X_std[:, :2]
+	X_cat2 = bin_quantiles(X[:, 2:], bins=3)
 	
-	class CLARANS:
-	    def __init__(self, n_clusters=3, numlocal=5, maxneighbor=10, random_state=None):
-	        self.n_clusters = n_clusters
-	        self.numlocal = numlocal  # 랜덤 초기화 반복 횟수
-	        self.maxneighbor = maxneighbor  # 각 초기화 당 랜덤 탐색 이웃 수
-	        self.random_state = random_state
+	def kprototypes(X_num, X_cat, K, gamma=1.0, n_init=20, max_iter=200, seed=42):
+	    rng = np.random.default_rng(seed)
+	    n, pnum = X_num.shape
+	    pcat = X_cat.shape[1]
 	
-	    def fit_predict(self, X):
-	        if self.random_state:
-	            np.random.seed(self.random_state)
-	        
-	        best_medoids = None
-	        best_score = float('inf')
-	        labels = None
+	    best_cost = np.inf
+	    best = None
 	
-	        # numlocal번의 랜덤 초기화 반복
-	        for _ in range(self.numlocal):
-	            # 초기 메도이드 랜덤 선택
-	            medoids = np.random.choice(len(X), self.n_clusters, replace=False)
-	            current_score = self._calculate_total_cost(X, medoids)
+	    for _ in range(n_init):
+	        idx = rng.choice(n, size=K, replace=False)
+	        cent_num = X_num[idx].copy()
+	        cent_cat = X_cat[idx].copy()
 	
-	            improved = True
-	            while improved:
-	                improved = False
-	                # maxneighbor 번 만큼 랜덤으로 이웃 탐색
-	                for _ in range(self.maxneighbor):
-	                    # 현재 메도이드 중 하나와 비메도이드 중 하나를 교환
-	                    new_medoids = np.copy(medoids)
-	                    non_medoids = [i for i in range(len(X)) if i not in medoids]
-	                    new_medoids[np.random.randint(0, self.n_clusters)] = np.random.choice(non_medoids)
-	                    
-	                    # 새로운 메도이드 셋으로 비용 계산
-	                    new_score = self._calculate_total_cost(X, new_medoids)
-	                    if new_score < current_score:
-	                        medoids = new_medoids
-	                        current_score = new_score
-	                        improved = True
-	                        break
-	            
-	            # 최적의 메도이드 셋 업데이트
-	            if current_score < best_score:
-	                best_medoids = medoids
-	                best_score = current_score
-	                labels = np.argmin(cdist(X, X[best_medoids]), axis=1)
+	        for _ in range(max_iter):
+	            # 혼합 거리: 수치(제곱거리) + gamma * 범주 불일치 개수
+	            dist = np.zeros((n, K))
+	            for k in range(K):
+	                dn = np.sum((X_num - cent_num[k])**2, axis=1)
+	                dc = np.sum(X_cat != cent_cat[k], axis=1)
+	                dist[:, k] = dn + gamma * dc
 	
-	        self.medoids_ = best_medoids
-	        self.labels_ = labels
-	        return self.labels_
+	            labels = np.argmin(dist, axis=1)
 	
-	    def _calculate_total_cost(self, X, medoids):
-	        # 메도이드 셋에 대한 총 비용(거리 합계) 계산
-	        distances = cdist(X, X[medoids], metric='euclidean')
-	        return np.sum(np.min(distances, axis=1))
+	            new_cent_num = cent_num.copy()
+	            new_cent_cat = cent_cat.copy()
 	
-	# Iris 데이터셋 로드
-	iris = load_iris()
-	data = pd.DataFrame(iris.data, columns=iris.feature_names)
-	true_labels = iris.target
+	            for k in range(K):
+	                members = np.where(labels == k)[0]
+	                if len(members) == 0:
+	                    r = rng.integers(0, n)
+	                    new_cent_num[k] = X_num[r]
+	                    new_cent_cat[k] = X_cat[r]
+	                else:
+	                    new_cent_num[k] = X_num[members].mean(axis=0)
+	                    for j in range(pcat):
+	                        vals = X_cat[members, j]
+	                        new_cent_cat[k, j] = Counter(vals).most_common(1)[0][0]
 	
-	# CLARANS 알고리즘 적용 (군집 수: 3)
-	clarans = CLARANS(n_clusters=3, numlocal=5, maxneighbor=10, random_state=0)
-	clusters = clarans.fit_predict(iris.data)  # 데이터에 맞춰 군집화 수행
+	            if np.allclose(new_cent_num, cent_num) and np.array_equal(new_cent_cat, cent_cat):
+	                break
 	
-	# 군집화 결과를 데이터프레임에 추가
-	data['Cluster'] = clusters  # 각 데이터 포인트의 군집 레이블 추가
+	            cent_num, cent_cat = new_cent_num, new_cent_cat
 	
-	# Silhouette Score 계산
-	silhouette_avg = silhouette_score(iris.data, clusters)
-	print(f"Silhouette Score: {silhouette_avg:.3f}")
+	        final_dist = np.zeros((n, K))
+	        for k in range(K):
+	            dn = np.sum((X_num - cent_num[k])**2, axis=1)
+	            dc = np.sum(X_cat != cent_cat[k], axis=1)
+	            final_dist[:, k] = dn + gamma * dc
 	
-	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
-	mapped_labels = np.zeros_like(clusters)
-	for i in np.unique(clusters):
-	    mask = (clusters == i)
-	    mapped_labels[mask] = mode(true_labels[mask])[0]
+	        cost = np.sum(np.min(final_dist, axis=1))
+	        if cost < best_cost:
+	            best_cost = cost
+	            best = {"labels": labels, "cent_num": cent_num, "cent_cat": cent_cat, "gamma": gamma}
 	
-	accuracy = accuracy_score(true_labels, mapped_labels)
-	print(f"Accuracy: {accuracy:.3f}")
+	    return best
 	
-	# 시각화 (첫 번째와 두 번째 피처 사용)
-	plt.figure(figsize=(10, 5))
-	sns.scatterplot(x=data.iloc[:, 0], y=data.iloc[:, 1], hue='Cluster', data=data, palette='viridis', s=100)
-	plt.scatter(iris.data[clarans.medoids_, 0], iris.data[clarans.medoids_, 1], c='red', marker='X', s=200, label='Medoids')
-	plt.title("CLARANS Clustering on Iris Dataset")
-	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
-	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
-	plt.legend(title='Cluster')
-	plt.show()
+	# (2) 튜닝: gamma 후보 중 silhouette가 가장 높은 결과 선택(참고로 accuracy도 함께 출력)
+	best = None
+	for gamma in [0.2, 0.5, 1.0, 2.0, 5.0]:
+	    result = kprototypes(X_num, X_cat2, K=3, gamma=gamma, n_init=30, max_iter=300, seed=42)
+	    labels = result["labels"]
+	    sil = silhouette_score(X_std, labels)
+	    acc, mapping = best_map_accuracy(labels, y)
+	
+	    if (best is None) or (sil > best["sil"]):
+	        best = {"labels": labels, "sil": sil, "acc": acc, "mapping": mapping, "gamma": gamma}
+	
+	print("K-prototypes best gamma:", best["gamma"])
+	print(f"Silhouette: {best['sil']:.4f}")
+	print(f"Accuracy(best mapping): {best['acc']:.4f}, mapping={best['mapping']}")
+	
+	plot_pca_scatter(X_std, best["labels"], "K-prototypes (mixed Iris) (PCA 2D)")
 
-![](./images/1-5.png)
 <br>
 
-# CLARA(Clustering LARge Applications)
-▣ 정의: PAM을 대규모 데이터에 적용할 수 있도록 확장한 알고리즘으로, 데이터의 일부 샘플을 사용하여 군집화를 수행하는 데, 여러 번의 샘플링을 통해 가장 안정적인 medoid를 선택<br>
-▣ 필요성: PAM의 높은 계산 비용을 줄이고자 개발되어 대규모 데이터셋에서도 빠르게 군집화를 수행<br>
-▣ 장점: PAM보다 계산이 효율적이며, 대규모 데이터셋에 적합하며, 표본 기반 접근 방식을 통해 메모리와 시간 효율적<br>
-▣ 단점: 샘플링을 통해 결과의 신뢰도가 낮아질 수 있으며, 전체 데이터셋을 반영하지 못할 가능성. 군집 수(K)를 사전에 지정해야 함<br>
-▣ 응용분야: 대규모 고객 데이터의 군집화, 생물학적 데이터 분석, 시장 조사 데이터의 분석 및 군집화<br>
-▣ 모델식: 데이터셋에서 일부 샘플을 선택하여 PAM을 적용하고, 여러 번 반복 수행하여 최적의 medoid를 찾는다<br>
+	gamma가 너무 작으면 범주형 정보가 거의 무시되고(수치형 중심), 너무 크면 범주 불일치가 과도하게 지배한다.
+	iris를 인위적으로 혼합형으로 만든 경우, 특정 gamma에서 군집이 실제 라벨과 더 잘 맞아 Accuracy가 높게 나올 수 있다.
+	단, 이것은 “데이터를 범주화하여 구성한 실험적 시연”이므로, 연구에서는 원 데이터의 타입과 의미에 맞추어 혼합 데이터가 실제로 존재할 때 쓰는 것이 정석이다.
 
-	import numpy as np	
-	from sklearn.datasets import load_iris
-	from sklearn.metrics import silhouette_score, accuracy_score
-	from scipy.spatial.distance import cdist
-	import pandas as pd
-	import matplotlib.pyplot as plt
-	import seaborn as sns
-	from scipy.stats import mode
-	
-	class CLARA:
-	    def __init__(self, n_clusters=3, n_samples=25, numlocal=5, max_iter=300, random_state=None):
-	        self.n_clusters = n_clusters
-	        self.n_samples = n_samples  # 각 샘플의 크기
-	        self.numlocal = numlocal    # PAM 반복 횟수
-	        self.max_iter = max_iter    # 최대 반복 횟수
-	        self.random_state = random_state
-	
-	    def fit_predict(self, X):
-	        if self.random_state:
-	            np.random.seed(self.random_state)
-	
-	        best_medoids = None
-	        best_score = float('inf')
-	        best_labels = None
-	
-	        # numlocal 번의 샘플링 반복
-	        for _ in range(self.numlocal):
-	            # 데이터에서 무작위로 샘플링
-	            sample_indices = np.random.choice(len(X), self.n_samples, replace=False)
-	            sample = X[sample_indices]
-	
-	            # PAM을 샘플에 적용하여 최적의 메도이드 찾기
-	            medoids = self._initialize_medoids(sample)
-	            for _ in range(self.max_iter):
-	                distances = cdist(sample, sample[medoids], metric='euclidean')
-	                labels = np.argmin(distances, axis=1)
-	                
-	                new_medoids = np.copy(medoids)
-	                for i in range(self.n_clusters):
-	                    cluster_points = np.where(labels == i)[0]
-	                    intra_cluster_distances = cdist(sample[cluster_points], sample[cluster_points], metric='euclidean').sum(axis=1)
-	                    new_medoids[i] = cluster_points[np.argmin(intra_cluster_distances)]
-	
-	                if np.array_equal(medoids, new_medoids):
-	                    break
-	                medoids = new_medoids
-	
-	            # 전체 데이터에 대한 비용 계산
-	            full_distances = cdist(X, sample[medoids], metric='euclidean')
-	            full_score = np.sum(np.min(full_distances, axis=1))
-	
-	            # 더 나은 메도이드 셋이 발견되면 갱신
-	            if full_score < best_score:
-	                best_medoids = medoids
-	                best_score = full_score
-	                best_labels = np.argmin(full_distances, axis=1)
-	
-	        self.medoids_ = sample[best_medoids]  # 최적의 메도이드를 전체 데이터셋에서 인덱싱
-	        self.labels_ = best_labels
-	        return self.labels_
-	
-	    def _initialize_medoids(self, X):
-	        return np.random.choice(len(X), self.n_clusters, replace=False)
-	
-	# Iris 데이터셋 로드
-	iris = load_iris()
-	data = pd.DataFrame(iris.data, columns=iris.feature_names)
-	true_labels = iris.target
-	
-	# CLARA 알고리즘 적용 (군집 수: 3)
-	clara = CLARA(n_clusters=3, n_samples=30, numlocal=5, max_iter=300, random_state=0)
-	clusters = clara.fit_predict(iris.data)  # 전체 데이터에 대해 군집화 수행
-	
-	# 군집화 결과를 데이터프레임에 추가
-	data['Cluster'] = clusters  # 각 데이터 포인트의 군집 레이블 추가
-	
-	# Silhouette Score 계산
-	silhouette_avg = silhouette_score(iris.data, clusters)
-	print(f"Silhouette Score: {silhouette_avg:.3f}")
-	
-	# Accuracy 계산 (군집 레이블과 실제 레이블을 매칭하여 정확도 계산)
-	mapped_labels = np.zeros_like(clusters)
-	for i in np.unique(clusters):
-	    mask = (clusters == i)
-	    mapped_labels[mask] = mode(true_labels[mask])[0]
-	
-	accuracy = accuracy_score(true_labels, mapped_labels)
-	print(f"Accuracy: {accuracy:.3f}")
-	
-	# 시각화 (첫 번째와 두 번째 피처 사용)
-	plt.figure(figsize=(10, 5))
-	sns.scatterplot(x=data.iloc[:, 0], y=data.iloc[:, 1], hue='Cluster', data=data, palette='viridis', s=100)
-	plt.scatter(clara.medoids_[:, 0], clara.medoids_[:, 1], c='red', marker='X', s=200, label='Medoids')
-	plt.title("CLARA Clustering on Iris Dataset")
-	plt.xlabel(iris.feature_names[0])  # 첫 번째 피처 (sepal length)
-	plt.ylabel(iris.feature_names[1])  # 두 번째 피처 (sepal width)
-	plt.legend(title='Cluster')
-	plt.show()
-	
-![](./images/1-6.png)
 <br>
 
-# [1-5] FCM(Fuzzy C-means) 
-▣ 정의: 소프트 군집화 방법으로 각 데이터 포인트가 여러 군집에 속할 수 있으며, 군집 소속 확률을 계산하여 군집을 형성. 데이터가 명확하게 구분되지 않을 때 유용<br>
-▣ 필요성: 데이터가 명확히 구분되지 않는 경우, 각 데이터가 여러 군집에 소속될 수 있도록 허용하여 더욱 유연한 군집화를 제공<br>
-▣ 장점: 데이터를 여러 군집에 걸쳐 소속시킬 수 있어 유연한 군집화가 가능하며 군집 경계가 모호한 데이터에 적합<br>
-▣ 단점: 이상치에 민감하고 초기 중심 설정에 따라 결과가 달라질 수 있으며, 군집 개수와 퍼지 지수(m)를 미리 설정해야 함<br>
-▣ 응용분야: 이미지 분할 및 패턴 인식, 생물학에서 유전자 데이터 군집화, 고객 세분화와 같은 마케팅 분야<br>
-▣ 모델식: 각 데이터 포인트가 군집에 속할 확률(소속도, membership value)을 계산하여 군집화함. 이때 각 군집의 중심과 데이터 포인트 사이의 거리의 역수에 따라 소속도가 결정되며, 목적 함수를 최소화 함. 여기서 $𝑢_{𝑖𝑗}$는 데이터 포인트 $𝑥_𝑖$가 군집 $𝑐_𝑗$에 속할 확률이며, 𝑚은 퍼지 지수로, 군집의 경계를 조정하는 역할을 수행<br>
+# [1-5] Mini-Batch K-means
+▣ 정의 : Mini-Batch K-means는 K-means를 대규모 데이터에 적용하기 위해, 전체 데이터를 매 반복마다 쓰지 않고 작은 배치(mini-batch)만 샘플링해 중심을 업데이트하는 방식이다. 계산량을 크게 줄이는 대신 근사 최적해를 얻는다.<br>
+▣ 장점 : 매우 큰 데이터에서 학습 속도가 크게 빨라짐, 스트리밍/온라인 학습처럼 데이터가 순차적으로 들어오는 환경에도 유리, K-means와 유사한 해석 가능(centroid 기반)<br>
+▣ 단점 : 배치 샘플링으로 인해 결과 변동(분산)이 커질 수 있음, 배치 크기, 학습률 성격 파라미터에 민감할 수 있음, 작은 데이터에서는 일반 K-means 대비 장점이 크지 않음<br>
+▣ 응용분야 : 대규모 고객/로그/임베딩 데이터 군집, 실시간 이벤트 스트리밍 군집, 대규모 문서/이미지 임베딩의 빠른 군집화<br>
+
+	# MiniBatchKMeans 튜닝: batch_size, max_iter, n_init 후보 탐색
+	best = None
+	for batch_size in [10, 20, 40, 80]:
+	    for max_iter in [300, 600, 1000]:
+	        model = MiniBatchKMeans(
+	            n_clusters=3,
+	            init="k-means++",
+	            batch_size=batch_size,
+	            max_iter=max_iter,
+	            n_init=50,
+	            reassignment_ratio=0.01,
+	            random_state=42
+	        )
+	        labels = model.fit_predict(X_std)
+	
+	        sil = silhouette_score(X_std, labels)
+	        acc, mapping = best_map_accuracy(labels, y)
+	
+	        if (best is None) or (sil > best["sil"]):
+	            best = {
+	                "model": model,
+	                "labels": labels,
+	                "sil": sil,
+	                "acc": acc,
+	                "mapping": mapping,
+	                "batch_size": batch_size,
+	                "max_iter": max_iter
+	            }
+	
+	pca = PCA(n_components=2, random_state=42)
+	X_2d = pca.fit_transform(X_std)
+	centers_2d = pca.transform(best["model"].cluster_centers_)
+	
+	print("Mini-Batch K-means tuned params:", "batch_size=", best["batch_size"], ", max_iter=", best["max_iter"])
+	print(f"Silhouette: {best['sil']:.4f}")
+	print(f"Accuracy(best mapping): {best['acc']:.4f}, mapping={best['mapping']}")
+	
+	plot_pca_scatter(X_std, best["labels"], "Mini-Batch K-means on Iris (PCA 2D)", centers_2d=centers_2d)
+	
+<br>
+
+	iris처럼 작은 데이터에서는 Mini-Batch가 일반 K-means와 성능이 거의 비슷하게 나오는 경우가 많다.
+	차이는 주로 “대규모 데이터에서 속도”이며, iris에서는 그 장점이 크게 드러나지 않는다.
+	다만 batch_size가 너무 작으면 중심 업데이트가 불안정해질 수 있으므로, silhouette 변화를 보고 적절한 배치 크기를 선택한다.
+
+<br>	
+
+# [1-6] FCM(Fuzzy C-means) 
+▣ 정의 : Fuzzy C-means(FCM)는 각 데이터가 하나의 클러스터에만 속한다고 가정하지 않고, 여러 클러스터에 속할 “소속도(membership)”를 0~1 사이로 부여하는 퍼지 군집화 방법이다.<br> 
+▣ 장점 : 군집 경계가 모호한 경우에도 소속도로 표현 가능, “부분적으로 여러 군집에 속하는” 현상을 자연스럽게 모델링, hard clustering(K-means)보다 유연한 해석 가능<br>
+▣ 단점 : fuzzifier(m) 등 하이퍼파라미터에 민감, 이상치에 취약할 수 있으며, 계산량이 K-means보다 큼, 최종적으로 hard label이 필요하면 소속도에서 argmax로 변환해야 함(정보 일부 손실)<br>
+▣ 응용분야 : 의료/생물 데이터(경계가 모호한 군집), 이미지 분할(픽셀이 여러 영역 성격을 가질 때), 고객 세그먼트의 혼합 소속(충성 고객과 가격 민감 고객 특성이 동시에 존재) 등<br>
+
 
 	import numpy as np
 	from sklearn.datasets import load_iris
