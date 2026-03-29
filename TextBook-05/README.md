@@ -121,6 +121,10 @@ https://scikit-learn.org/stable/unsupervised_learning.html
 
 ![](./images/1-1.png)
 
+	iris에서는 Setosa가 다른 종과 비교적 뚜렷이 분리되지만 Versicolor/ Virginica가 일부 겹치기 때문에 K-means의 Accuracy가 1.0에 도달하기 어렵다.
+	표준화 후 K=3에서 Silhouette는 보통 0.45 전후, Accuracy는 대략 0.83 수준.
+	PCA 시각화에서 Setosa 군집은 뚜렷하지만 나머지 두 군집 경계가 섞여 보이는 것이 일반적이다.
+
 <br>
 
 ## 군집화 알고리즘의 평가 방법(Elbow, Silhouette)
