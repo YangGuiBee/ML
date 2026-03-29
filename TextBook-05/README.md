@@ -119,7 +119,7 @@ https://scikit-learn.org/stable/unsupervised_learning.html
 
 ![](./images/kmeans_param.PNG)
 
-![](./images/1-1.PNG)
+![](./images/1-1.png)
 
 <br>
 
