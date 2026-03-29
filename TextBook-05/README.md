@@ -87,8 +87,6 @@ https://scikit-learn.org/stable/unsupervised_learning.html
 ▣ 단점 : K를 사전에 정해야 함, 초기 중심에 민감(로컬 최적)하며 이상치에 취약, 비구형(비선형) 클러스터에 약함<br>
 ▣ 응용분야 : 고객 세분화, 임베딩(문서/이미지) 군집, 센서 상태 패턴 그룹화, 이미지 색상 양자화, 추천시스템의 사용자/아이템 그룹화 등<br>
 
-▣ 모델식 : 𝐾는 군집의 개수, $𝐶_𝑖$는 i번째 군집, $𝜇_𝑖$는 i번째 군집의 중심, 𝑥는 데이터 포인트<br>
-
 ![](./images/kmeans.PNG)
 <br>출처 : https://www.saedsayad.com/clustering_kmeans.htm<br>
 
@@ -328,13 +326,11 @@ Accuracy 기준<br>
 
 
 # [1-2] K-medoids
-▣ 정의: K-means와 유사하지만, 각 군집의 중심을 군집내 가장 중앙에 위치한 실제 데이터 포인트(medoid)로 설정함으로써 이상치(outlier)에 더 강하다.<br>
-▣ 필요성: 이상치가 많은 데이터나 노이즈가 있는 데이터에서 K-means의 단점을 보완하여 안정적인 군집화를 제공<br>
-▣ 장점: K-means에 비해 이상치에 덜 민감하고, 군집 중심이 실제 데이터 포인트이기 때문에 해석이 용이<br>
-▣ 단점: 계산(유클리디안 거리 뿐 아니라 맨허튼 거리, 민코프스키 거리 등 사용가능)에 따라 복잡하고 느릴 가능성이 있으며, 비구형 군집을 잘 분류하지 못함<br>
-▣ 응용분야: 의료 데이터 분석, 범주형 데이터가 포함된 고객 세분화<br>
-▣ 모델식: K-medoids는 각 군집의 중심으로 가장 대표적인 포인트(medoid)를 선택하여 군집 내 데이터와의 총 비유사도를 최소화<br>
-
+▣ 정의 : 중심을 평균(가상점)이 아니라 실제 데이터 포인트 중 하나(medoid)로 선택한다. 총 비유사도(거리 합)를 최소화하도록 medoid를 교체(swap)하며 최적화한다.<br>
+▣ 장점 : 중심이 실제 데이터이므로 이상치 영향이 평균보다 작아 상대적으로 강건, 거리 함수(유클리드/맨해튼/임의의 비유사도)를 유연하게 사용할 수 있음, 해석 시 대표 실제 사례를 medoid로 제시 가능<br>
+▣ 단점 : K-means보다 구현이 복잡하고 초기 medoid에 따라 결과가 달라질 수 있음, PAM(Partitioning Around Medoids)은 계산량이 커서 대규모 데이터에 느릴 경우 CLARA/CLARANS로 완화<br>
+▣ 응용분야 : 이상치가 많은 데이터의 군집, 대표 사례(프로토타입) 추출이 중요한 고객/설문/사례 기반 분석, 다양한 거리 기반 군집(특수 유사도) 등<br>
+▣ 종류 : <ins>PAM(Partitioning Around Medoids)</ins> : K-medoids의 대표적인 구현으로 각 클러스터 중심을 실제 데이터 포인트로 설정, <ins>CLARA(Clustering LARge Applications)</ins> : PAM을 대규모 데이터셋에 적용하기 위해 샘플링 기반으로 클러스터링, <ins>CLARANS(Clustering Large Applications based on RANdomized Search)</ins>: PAM의 개선 알고리즘으로 랜덤 탐색 기반 클러스터링<br>
 
 	import numpy as np
 	from sklearn.datasets import load_iris
