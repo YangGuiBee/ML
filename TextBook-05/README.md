@@ -438,9 +438,13 @@ Accuracy 기준<br>
 	plt.show()
 
 
-
 ![](./images/1-2.png)
 <br>
+
+	0 : Setosa, 1: Versicolor, 2 : Virginica
+	O(circle) : 실제 Setosa, X(cross) : 실제 Versicolor, (square) : 실제 Virginica
+
+<br>	
 
 # [1-2-1] PAM(Partitioning Around Medoids)
 ▣ 정의: K-medoids 접근법을 구현하는 탐욕적 알고리즘으로 각 군집에서 가장 최적의 Medoid를 반복적으로 찾는다<br>
