@@ -121,13 +121,14 @@ https://scikit-learn.org/stable/unsupervised_learning.html
 
 ![](./images/1-1.png)
 
-	iris에서는 Setosa가 다른 종과 비교적 뚜렷이 분리되지만 Versicolor/ Virginica가 일부 겹치기 때문에 K-means의 Accuracy가 1.0에 도달하기 어렵다.
-	표준화 후 K=3에서 Silhouette는 보통 0.45 전후, Accuracy는 대략 0.83 수준.
-	PCA 시각화에서 Setosa 군집은 뚜렷하지만 나머지 두 군집 경계가 섞여 보이는 것이 일반적이다.
-
 <br>
 
+---
+
 ## 군집화 알고리즘의 평가 방법(Elbow, Silhouette)
+
+---
+
 **▣ Elbow :** 군집 수를 결정하기 위한 시각적 방법으로 군집 수를 변화시키면서 각 군집 수에 따른 관성(Inertia), 즉 군집 내 SSE(Sum of Squared Errors) 또는 WCSS(Within-Cluster Sum of Squares) 값을 계산(군집의 개수가 증가할수록 각 군집이 더 작아지고, 데이터 포인트들이 군집 중심에 더 가까워지기 때문에 WCSS이 감소하며, 군집 수를 계속 증가시키다 보면, 어느 순간부터 오차가 크게 줄어들지 않는 구간이 나타나는데 이때의 군집 수를 최적의 군집 수로 선택)<br>
 
 	import matplotlib.pyplot as plt 
@@ -170,6 +171,8 @@ k≥4: 감소 폭이 점점 작아져 완만한 곡선으로 변함<br>
 이후 k를 더 늘려도 WCSS 감소는 있지만, 얻는 이득이 크지 않음 → 과적합 위험 + 해석 복잡<br>
  
 <br>
+
+---
 
 **▣ Silhouette :** 각 군집 간의 거리가 얼마나 효율적으로 분리되어 응집력있게 군집화되었는지를 평가하는 지표. 각 데이터 포인트에 대해 실루엣 계수(Silhouette Coefficient)를 계산하며, 이 값은 데이터 포인트가 자신의 군집에 얼마나 잘 속해 있는지를 나타냄<br>
 
@@ -314,6 +317,7 @@ Accuracy 기준<br>
 즉, 지도학습적 평가(Accuracy)를 참고한다면 3개, 순수 클러스터링 품질만 본다면 2개<br>
 <br>
 
+---
 
 # [1-2] K-medoids
 ▣ 정의 : 중심을 평균(가상점)이 아니라 실제 데이터 포인트 중 하나(medoid)로 선택한다. 총 비유사도(거리 합)를 최소화하도록 medoid를 교체(swap)하며 최적화한다.<br>
