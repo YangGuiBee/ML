@@ -3365,5 +3365,26 @@ https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.ht
 
 
 
+|한글명칭|영문명칭|정의|수식|장점|단점|적용분야|
+|---|---|---|---|---|---|---|
+|유클리드 거리|Euclidean Distance|두 점 사이 직선 거리|<img src="https://latex.codecogs.com/svg.image?d=\sqrt{\sum_i(x_i-y_i)^2}">|직관적|이상치에 민감|KNN, K-means|
+|맨해튼 거리|Manhattan Distance|축 방향 거리 합|<img src="https://latex.codecogs.com/svg.image?d=\sum_i|x_i-y_i|">|안정적|직선거리 아님|L1 회귀|
+|민코프스키 거리|Minkowski Distance|L1~L2 일반화|<img src="https://latex.codecogs.com/svg.image?d=(\sum_i|x_i-y_i|^p)^{1/p}">|유연함|p 선택 필요|ML 전반|
+|체비쇼프 거리|Chebyshev Distance|좌표 차이 최대값|<img src="https://latex.codecogs.com/svg.image?d=\max_i|x_i-y_i|">|간단|범용성 낮음|QC, 체스|
+|코사인 거리|Cosine Distance|벡터 방향 기반|<img src="https://latex.codecogs.com/svg.image?d=1-\cos\theta">|고차원 적합|크기 무시|NLP|
+|해밍 거리|Hamming Distance|문자/비트 차이 수|<img src="https://latex.codecogs.com/svg.image?d=\sum_i[x_i\neq y_i]">|비트 비교 우수|연속값 부적합|오류 검출|
+|자카드 거리|Jaccard Distance|집합 유사도 기반|<img src="https://latex.codecogs.com/svg.image?d=1-\frac{|A\cap B|}{|A\cup B|}">|집합 비교 강함|희소|텍스트|
+|브레이-커티스 거리|Bray–Curtis Distance|구성 비율 차이|<img src="https://latex.codecogs.com/svg.image?d=\frac{\sum|x_i-y_i|}{\sum(x_i+y_i)}">|비율 비교|음수 불가|생태학|
+|마할라노비스 거리|Mahalanobis Distance|공분산 고려|<img src="https://latex.codecogs.com/svg.image?d=\sqrt{(x-\mu)^TS^{-1}(x-\mu)}">|분포 반영|행렬 필요|이상치 탐지|
+|캔버라 거리|Canberra Distance|작은 값 민감|<img src="https://latex.codecogs.com/svg.image?d=\sum\frac{|x_i-y_i|}{|x_i|+|y_i|}">|희소 적합|0 민감|환경 데이터|
+|DTW 거리|Dynamic Time Warping|비선형 시계열 정렬|수식 복잡(표준 없음)|시계열 강력|계산 비용|음성, 센서|
+|편집 거리|Levenshtein Distance|삽입/삭제/교체 최소|수식 X, 알고리즘 기반|문자 비교 강함|비용 큼|NLP|
+|소렌슨 거리|Sørensen Distance|집합 기반|<img src="https://latex.codecogs.com/svg.image?d=\frac{2|A\Delta B|}{|A|+|B|}">|집합 크기 반영|민감|문서 비교|
+|러셀–라오 거리|Russell–Rao Distance|공통 1 비율|<img src="https://latex.codecogs.com/svg.image?d=1-\frac{n_{11}}{n}">|단순|정보 부족|이진 데이터|
+|카이제곱 거리|Chi-Square Distance|확률/히스토그램 기반|<img src="https://latex.codecogs.com/svg.image?d=\sum\frac{(x_i-y_i)^2}{x_i+y_i}">|분포 비교 우수|0 민감|컴퓨터 비전|
+|워서슈타인 거리|Wasserstein Distance|분포 이동 비용|<img src="https://latex.codecogs.com/svg.image?d=\inf_\gamma\int|x-y|d\gamma(x,y)">|강력한 분포 비교|계산 무거움|GAN|
+|KL 발산|KL Divergence|비대칭 분포 거리|<img src="https://latex.codecogs.com/svg.image?D_{KL}(P||Q)=\sum P\log\frac{P}{Q}">|이론적 의미 강함|비대칭|확률 모델|
+|JS 발산|Jensen–Shannon Divergence|KL의 대칭화|<img src="https://latex.codecogs.com/svg.image?JS=\frac12KL(P||M)+\frac12KL(Q||M)">|대칭·안정|비용 있음|NLP|
+
 
 
