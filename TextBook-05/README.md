@@ -4488,49 +4488,25 @@ https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.ht
 
 ---
 
-|한글명칭|영문명칭|정의|수식|장점|단점|적용분야|
-|---|---|---|---|---|---|---|
-|유클리드 거리|Euclidean Distance|두 점 사이의 직선 거리|$ d=\sqrt{\sum_i (x_i - y_i)^2} $|직관적, 기하학적으로 명확|스케일·이상치에 민감|KNN, K-means, 기하학|
-|맨해튼 거리|Manhattan Distance|축을 따라 이동한 거리의 합|$ d=\sum_i |x_i - y_i| $|이상치 영향 적음|직선 거리 직관성 낮음|L1 회귀, 고차원 데이터|
-|민코프스키 거리|Minkowski Distance|유클리드·맨해튼의 일반화|$ d=(\sum_i |x_i-y_i|^p)^{1/p} $|거리 특성 조절 가능|p 값 튜닝 필요|거리 기반 ML 전반|
-|체비쇼프 거리|Chebyshev Distance|좌표 차이 중 최대값|$ d=\max_i |x_i - y_i| $|간단, 특정 패턴에 유용|범용성 낮음|체스, 품질 관리|
-|코사인 거리|Cosine Distance|벡터 방향 기반 거리|$ d = 1 - \cos(\theta) $|문서·고차원 데이터에 강함|벡터 크기 반영 불가|NLP, 추천 시스템|
-|해밍 거리|Hamming Distance|다른 비트/문자의 개수|$ d=\sum_i [x_i \neq y_i] $|이산 데이터에 적합|연속값 적용 어려움|이진 데이터, 오류 검출|
-|자카드 거리|Jaccard Distance|집합 간 차이 기반 거리|$ d = 1 - \frac{|A \cap B|}{|A \cup B|} $|집합 비교에 강함|수치형 데이터 부적합|텍스트, 집합 유사도|
-|브레이-커티스 거리|Bray–Curtis Distance|두 벡터의 구성비 차이|$ d=\frac{\sum |x_i-y_i|}{\sum (x_i+y_i)} $|비율 비교 적합|음수값 사용 불가|생태학, 환경 데이터|
-|마할라노비스 거리|Mahalanobis Distance|공분산을 고려한 통계적 거리|$ d=\sqrt{(x-\mu)^T S^{-1} (x-\mu)} $|상관·스케일 반영|공분산 행렬 필요|이상치 탐지, 통계|
-|캔버라 거리|Canberra Distance|작은 값 차이에 민감|$ d=\sum \frac{|x_i-y_i|}{|x_i|+|y_i|} $|희소 데이터 적합|0 값 처리 필요|환경 데이터, 희소 벡터|
-|DTW 거리|Dynamic Time Warping|비선형 시계열 간 유사도|표준 단일식 없음 (동적 계획법 기반)|시계열 유사성 강력|계산 비용 큼|음성, 시계열 분석|
-|편집 거리|Levenshtein Distance|삽입/삭제/치환 최소 횟수|(절차 기반)|문자열 비교 강력|계산량 큼|NLP, 철자 교정|
-|소렌슨 거리|Sørensen Distance|집합 크기 기반 거리|$ d=\frac{2|A \Delta B|}{|A|+|B|} $|집합 크기 차이 반영|과도 민감 가능|문서 비교, 클러스터링|
-|러셀–라오 거리|Russell–Rao Distance|공통 1 비율 기반|$ d=1-\frac{n_{11}}{n} $|단순 계산|정보 손실 큼|이진 데이터|
-|카이제곱 거리|Chi-square Distance|히스토그램 기반 거리|$ d=\sum \frac{(x_i-y_i)^2}{x_i+y_i} $|분포 비교에 강함|0 값에서 불안정|컴퓨터 비전, 통계|
-|워서슈타인 거리|Wasserstein Distance|분포 간 이동 비용 기반 거리|$ d = \inf_\gamma \int |x-y| d\gamma(x,y) $|분포 비교 강력|계산 비용 큼|GAN, 확률 분포|
-|KL 발산|KL Divergence|두 확률 분포의 차이|$ D_{KL}(P||Q)=\sum P \log \frac{P}{Q} $|이론적 의미 강함|비대칭, metric 아님|NLP, 확률 모델|
-|JS 발산|Jensen–Shannon Divergence|KL을 대칭화한 거리|$ JS(P,Q)=\frac12 KL(P||M)+\frac12 KL(Q||M) $|대칭적·안정적|다소 무거움|NLP, 분포 비교|
-
-
-
-|한글명칭|영문명칭|정의|수식|장점|단점|적용분야|
-|---|---|---|---|---|---|---|
-|유클리드 거리|Euclidean Distance|두 점 사이 직선 거리|<img src="https://latex.codecogs.com/svg.image?d=\sqrt{\sum_i(x_i-y_i)^2}">|직관적|이상치에 민감|KNN, K-means|
-|맨해튼 거리|Manhattan Distance|축 방향 거리 합|<img src="https://latex.codecogs.com/svg.image?d=\sum_i|x_i-y_i|">|안정적|직선거리 아님|L1 회귀|
-|민코프스키 거리|Minkowski Distance|L1~L2 일반화|<img src="https://latex.codecogs.com/svg.image?d=(\sum_i|x_i-y_i|^p)^{1/p}">|유연함|p 선택 필요|ML 전반|
-|체비쇼프 거리|Chebyshev Distance|좌표 차이 최대값|<img src="https://latex.codecogs.com/svg.image?d=\max_i|x_i-y_i|">|간단|범용성 낮음|QC, 체스|
-|코사인 거리|Cosine Distance|벡터 방향 기반|<img src="https://latex.codecogs.com/svg.image?d=1-\cos\theta">|고차원 적합|크기 무시|NLP|
-|해밍 거리|Hamming Distance|문자/비트 차이 수|<img src="https://latex.codecogs.com/svg.image?d=\sum_i[x_i\neq y_i]">|비트 비교 우수|연속값 부적합|오류 검출|
-|자카드 거리|Jaccard Distance|집합 유사도 기반|<img src="https://latex.codecogs.com/svg.image?d=1-\frac{|A\cap B|}{|A\cup B|}">|집합 비교 강함|희소|텍스트|
-|브레이-커티스 거리|Bray–Curtis Distance|구성 비율 차이|<img src="https://latex.codecogs.com/svg.image?d=\frac{\sum|x_i-y_i|}{\sum(x_i+y_i)}">|비율 비교|음수 불가|생태학|
-|마할라노비스 거리|Mahalanobis Distance|공분산 고려|<img src="https://latex.codecogs.com/svg.image?d=\sqrt{(x-\mu)^TS^{-1}(x-\mu)}">|분포 반영|행렬 필요|이상치 탐지|
-|캔버라 거리|Canberra Distance|작은 값 민감|<img src="https://latex.codecogs.com/svg.image?d=\sum\frac{|x_i-y_i|}{|x_i|+|y_i|}">|희소 적합|0 민감|환경 데이터|
-|DTW 거리|Dynamic Time Warping|비선형 시계열 정렬|수식 복잡(표준 없음)|시계열 강력|계산 비용|음성, 센서|
-|편집 거리|Levenshtein Distance|삽입/삭제/교체 최소|수식 X, 알고리즘 기반|문자 비교 강함|비용 큼|NLP|
-|소렌슨 거리|Sørensen Distance|집합 기반|<img src="https://latex.codecogs.com/svg.image?d=\frac{2|A\Delta B|}{|A|+|B|}">|집합 크기 반영|민감|문서 비교|
-|러셀–라오 거리|Russell–Rao Distance|공통 1 비율|<img src="https://latex.codecogs.com/svg.image?d=1-\frac{n_{11}}{n}">|단순|정보 부족|이진 데이터|
-|카이제곱 거리|Chi-Square Distance|확률/히스토그램 기반|<img src="https://latex.codecogs.com/svg.image?d=\sum\frac{(x_i-y_i)^2}{x_i+y_i}">|분포 비교 우수|0 민감|컴퓨터 비전|
-|워서슈타인 거리|Wasserstein Distance|분포 이동 비용|<img src="https://latex.codecogs.com/svg.image?d=\inf_\gamma\int|x-y|d\gamma(x,y)">|강력한 분포 비교|계산 무거움|GAN|
-|KL 발산|KL Divergence|비대칭 분포 거리|<img src="https://latex.codecogs.com/svg.image?D_{KL}(P||Q)=\sum P\log\frac{P}{Q}">|이론적 의미 강함|비대칭|확률 모델|
-|JS 발산|Jensen–Shannon Divergence|KL의 대칭화|<img src="https://latex.codecogs.com/svg.image?JS=\frac12KL(P||M)+\frac12KL(Q||M)">|대칭·안정|비용 있음|NLP|
-
+| 한글명칭 | 영문명칭 | 정의 | 수식 | 장점 | 단점 | 적용분야 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **유클리드 거리** | Euclidean Distance | 두 점 사이 직선 거리 | $d = \sqrt{\sum_i(x_i-y_i)^2}$ | 직관적 | 이상치에 민감 | KNN, K-means |
+| **맨해튼 거리** | Manhattan Distance | 축 방향 거리 합 | $d = \sum_i \vert x_i-y_i \vert$ | 안정적 | 직선거리가 아님 | L1 회귀 |
+| **민코프스키 거리** | Minkowski Distance | L1~L2 일반화 | $d = (\sum_i \vert x_i-y_i \vert^p)^{1/p}$ | 유연함 | $p$ 선택 필요 | ML 전반 |
+| **체비쇼프 거리** | Chebyshev Distance | 좌표 차이 최대값 | $d = \max_i \vert x_i-y_i \vert$ | 간단 | 범용성 낮음 | QC, 체스 |
+| **코사인 거리** | Cosine Distance | 벡터 방향 기반 | $d = 1 - \frac{\sum x_iy_i}{\sqrt{\sum x_i^2}\sqrt{\sum y_i^2}}$ | 고차원 적합 | 크기 무시 | NLP |
+| **해밍 거리** | Hamming Distance | 문자/비트 차이 수 | $d = \sum_i [x_i \neq y_i]$ | 비트 비교 우수 | 연속값 부적합 | 오류 검출 |
+| **자카드 거리** | Jaccard Distance | 집합 유사도 기반 | $d = 1 - \frac{\vert A \cap B \vert}{\vert A \cup B \vert}$ | 집합 비교 강함 | 희소 데이터에 취약 | 텍스트 분석 |
+| **브레이-커티스** | Bray–Curtis Distance | 구성 비율 차이 | $d = \frac{\sum \vert x_i-y_i \vert}{\sum (x_i+y_i)}$ | 비율 비교 가능 | 음수 데이터 불가 | 생태학 |
+| **마할라노비스** | Mahalanobis Distance | 공분산 고려 | $d = \sqrt{(x-\mu)^T S^{-1} (x-\mu)}$ | 데이터 분포 반영 | 공분산 행렬 필요 | 이상치 탐지 |
+| **캔버라 거리** | Canberra Distance | 작은 값에 민감 | $d = \sum \frac{\vert x_i-y_i \vert}{\vert x_i \vert + \vert y_i \vert}$ | 희소 데이터 적합 | $0$값에 민감 | 환경 데이터 |
+| **DTW 거리** | Dynamic Time Warping | 비선형 시계열 정렬 | 알고리즘 기반 최적 경로 | 시계열에 강력 | 계산 비용 높음 | 음성, 센서 |
+| **편집 거리** | Levenshtein Distance | 삽입/삭제/교체 최소 | 동적 계획법 기반 | 문자열 비교 강함 | 연산 비용 큼 | NLP |
+| **소렌슨 거리** | Sørensen Distance | 집합 기반 | $d = \frac{2 \vert A \cap B \vert}{\vert A \vert + \vert B \vert}$ | 집합 크기 반영 | 특정 상황에 민감 | 문서 비교 |
+| **러셀–라오 거리** | Russell–Rao Distance | 공통 1 비율 | $d = 1 - \frac{n_{11}}{n}$ | 계산이 매우 단순 | 정보 손실 많음 | 이진 데이터 |
+| **카이제곱 거리** | Chi-Square Distance | 확률/히스토그램 기반 | $d = \sum \frac{(x_i-y_i)^2}{x_i+y_i}$ | 분포 비교 우수 | $0$값에 민감 | 컴퓨터 비전 |
+| **워서슈타인** | Wasserstein Distance | 분포 이동 최적 비용 | $d = \inf_{\gamma} \int \vert x-y \vert d\gamma(x,y)$ | 강력한 분포 비교 | 계산 복잡도 높음 | GAN, 생성 모델 |
+| **KL 발산** | KL Divergence | 비대칭 분포 거리 | $D_{KL}(P \parallel Q) = \sum P \log \frac{P}{Q}$ | 이론적 의미 강함 | 비대칭성 | 확률 모델 |
+| **JS 발산** | Jensen–Shannon | KL의 대칭화 | $JS = \frac{1}{2}KL(P \parallel M) + \frac{1}{2}KL(Q \parallel M)$ | 대칭성 및 안정성 | 추가 연산 비용 | NLP, GAN |
 
 
