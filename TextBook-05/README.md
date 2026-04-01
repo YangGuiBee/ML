@@ -7,8 +7,6 @@
 
 ---
 
-![](./images/23.jpg)
-<br>
 https://scikit-learn.org/stable/unsupervised_learning.html
 <br>
 
@@ -22,102 +20,58 @@ https://scikit-learn.org/stable/unsupervised_learning.html
 
 ---
 
-[1] Partitioning-Based Clustering (분할 기반 군집화)
-[1-1] K-means Clustering : 데이터셋을 $K$개의 군집으로 나누며, 각 군집의 평균(Centroid)과 데이터 간의 거리 합을 최소화하는 방식
-[1-2] K-medoids Clustering (PAM/CLARANS/CLARA) : 중심점 대신 실제 데이터 포인트인 메도이드(Medoid)를 대표값으로 사용하여 이상치(Outlier)에 대한 민감도를 낮춤
-[1-3] K-modes Clustering : 수치형 데이터가 아닌 범주형(Categorical) 데이터를 위해 평균 대신 최빈값(Mode)을 기준으로 군집을 형성
-[1-4] K-prototypes Clustering : 수치형 변수와 범주형 변수가 혼합(Mixed)된 데이터셋에서 K-means와 K-modes의 장점을 결합하여 적용
-[1-5] Mini-Batch K-means Clustering : 전체 데이터 대신 무작위로 추출한 소규모 배치(Mini-Batch)만 업데이트하여 대용량 데이터 처리 속도를 획기적으로 개선
-[1-6] FCM (Fuzzy C-means Clustering) : 엄격한 분할 대신 데이터가 각 군집에 속할 소속 확률(Membership Degree)을 부여하는 소프트 군집화 방식
+[1] Partitioning-Based Clustering (분할 기반 군집화)<br>
+[1-1] K-means Clustering : 데이터셋을 $K$개의 군집으로 나누며, 각 군집의 평균(Centroid)과 데이터 간의 거리 합을 최소화하는 방식<br>
+[1-2] K-medoids Clustering (PAM/CLARANS/CLARA) : 중심점 대신 실제 데이터 포인트인 메도이드(Medoid)를 대표값으로 사용하여 이상치(Outlier)에 대한 민감도를 낮춤<br>
+[1-3] K-modes Clustering : 수치형 데이터가 아닌 범주형(Categorical) 데이터를 위해 평균 대신 최빈값(Mode)을 기준으로 군집을 형성<br>
+[1-4] K-prototypes Clustering : 수치형 변수와 범주형 변수가 혼합(Mixed)된 데이터셋에서 K-means와 K-modes의 장점을 결합하여 적용<br>
+[1-5] Mini-Batch K-means Clustering : 전체 데이터 대신 무작위로 추출한 소규모 배치(Mini-Batch)만 업데이트하여 대용량 데이터 처리 속도를 획기적으로 개선<br>
+[1-6] FCM (Fuzzy C-means Clustering) : 엄격한 분할 대신 데이터가 각 군집에 속할 소속 확률(Membership Degree)을 부여하는 소프트 군집화 방식<br>
 
 ---
 
 ---
-[2] Hierarchical-Based Clustering (계층 기반 군집화)
-[2-1] Agglomerative / Divisive Clustering : 개별 점을 병합해가는 응집형과 전체를 쪼개 나가는 분할형 방식을 통해 트리 형태의 덴드로그램(Dendrogram)을 형성
-[2-2] BIRCH (Balanced Iterative Reducing and Clustering using Hierarchies) : CF-Tree(Clustering Feature Tree)를 구축하여 대규모 데이터를 압축적으로 요약하고 계층적으로 처리
-[2-3] CURE (Clustering Using Representatives) : 하나의 중심점 대신 여러 개의 대표점을 사용하여 구형(Spherical)이 아닌 임의의 복잡한 모양의 군집도 잘 탐색
-[2-4] ROCK (Robust Clustering using Links) : 데이터 간의 직접적인 거리 대신 공통 이웃의 수인 링크(Links)를 기준으로 범주형 데이터의 유사성을 측정
-[2-5] Chameleon Clustering : 두 군집 간의 상호 연결성(Interconnectivity)과 근접성(Closeness)을 동적으로 평가하여 최적의 병합 지점을 탐색
-[2-6] HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) : DBSCAN에 계층적 구조를 결합하여 서로 다른 밀도를 가진 군집들을 안정적으로 추출
+[2] Hierarchical-Based Clustering (계층 기반 군집화)<br>
+[2-1] Agglomerative / Divisive Clustering : 개별 점을 병합해가는 응집형과 전체를 쪼개 나가는 분할형 방식을 통해 트리 형태의 덴드로그램(Dendrogram)을 형성<br>
+[2-2] BIRCH (Balanced Iterative Reducing and Clustering using Hierarchies) : CF-Tree(Clustering Feature Tree)를 구축하여 대규모 데이터를 압축적으로 요약하고 계층적으로 처리<br>
+[2-3] CURE (Clustering Using Representatives) : 하나의 중심점 대신 여러 개의 대표점을 사용하여 구형(Spherical)이 아닌 임의의 복잡한 모양의 군집도 잘 탐색<br>
+[2-4] ROCK (Robust Clustering using Links) : 데이터 간의 직접적인 거리 대신 공통 이웃의 수인 링크(Links)를 기준으로 범주형 데이터의 유사성을 측정<br>
+[2-5] Chameleon Clustering : 두 군집 간의 상호 연결성(Interconnectivity)과 근접성(Closeness)을 동적으로 평가하여 최적의 병합 지점을 탐색<br>
+[2-6] HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) : DBSCAN에 계층적 구조를 결합하여 서로 다른 밀도를 가진 군집들을 안정적으로 추출<br>
 ---
 
-[3] Density-Based Clustering (밀도 기반 군집화)
-[3-1] DBSCAN (Density-Based Spatial Clustering of Applications with Noise) : 특정 반경($\epsilon$) 내에 최소 데이터 개수($MinPts$)가 모여 있는 밀집 영역을 하나의 군집으로 정의하고 나머지는 노이즈로 처리
-[3-2] OPTICS (Ordering Points To Identify the Clustering Structure) : 밀도가 다양한 데이터셋에서 군집을 찾기 위해 데이터 포인트를 도달 가능 거리(Reachability Distance) 순으로 정렬하여 시각화
-[3-3] DENCLUE (Density-based Clustering) : 커널 밀도 함수(Kernel Density Function)를 사용하여 데이터의 영향력을 계산하고 밀도가 가장 높은 지점을 향해 군집화 수행
-[3-4] Mean-Shift Clustering : 데이터의 밀도가 가장 높은 곳(Mode)을 찾아 무게 중심을 반복적으로 이동시키며 군집의 경계를 탐색
-[3-5] DPC (Density Peaks Clustering) : 국소적 밀도가 높으면서, 자신보다 밀도가 더 높은 점과의 거리가 상대적으로 먼 점을 군집의 정점(Peak)으로 정의
+[3] Density-Based Clustering (밀도 기반 군집화)<br>
+[3-1] DBSCAN (Density-Based Spatial Clustering of Applications with Noise) : 특정 반경($\epsilon$) 내에 최소 데이터 개수($MinPts$)가 모여 있는 밀집 영역을 하나의 군집으로 정의하고 나머지는 노이즈로 처리<br>
+[3-2] OPTICS (Ordering Points To Identify the Clustering Structure) : 밀도가 다양한 데이터셋에서 군집을 찾기 위해 데이터 포인트를 도달 가능 거리(Reachability Distance) 순으로 정렬하여 시각화<br>
+[3-3] DENCLUE (Density-based Clustering) : 커널 밀도 함수(Kernel Density Function)를 사용하여 데이터의 영향력을 계산하고 밀도가 가장 높은 지점을 향해 군집화 수행<br>
+[3-4] Mean-Shift Clustering : 데이터의 밀도가 가장 높은 곳(Mode)을 찾아 무게 중심을 반복적으로 이동시키며 군집의 경계를 탐색<br>
+[3-5] DPC (Density Peaks Clustering) : 국소적 밀도가 높으면서, 자신보다 밀도가 더 높은 점과의 거리가 상대적으로 먼 점을 군집의 정점(Peak)으로 정의<br>
 
-[4] Grid-Based Clustering (그리드 기반 군집화)
-[4-1] Wave-Cluster : 데이터 공간을 그리드로 나눈 후 웨이브렛 변환(Wavelet Transform)을 적용하여 신호 처리 관점에서 밀집 영역을 탐색
-[4-2] STING (Statistical Information Grid-based method) : 공간을 사각형 셀로 분할하고 각 셀의 통계 정보(평균, 분산 등)를 계층적으로 관리하여 질의 응답 속도를 극대화
-[4-3] CLIQUE (Clustering In Quest) : 그리드와 밀도 개념을 결합하여 고차원 데이터의 부분 공간(Subspace)에서 밀집된 영역을 찾아내는 방식
-[4-4] OptiGrid (Optimal Grid-based Clustering) : 데이터 분포의 밀도가 낮은 최적의 절단 평면을 찾아 그리드를 재귀적으로 분할하여 군집화
-[4-5] MAFIA (Merging of Adaptive Finite Intervals) : 데이터 분포에 따라 그리드 간격을 유연하게 조절하는 적응형 그리드를 사용하여 연산 효율을 높인 방식
+[4] Grid-Based Clustering (그리드 기반 군집화)<br>
+[4-1] Wave-Cluster : 데이터 공간을 그리드로 나눈 후 웨이브렛 변환(Wavelet Transform)을 적용하여 신호 처리 관점에서 밀집 영역을 탐색<br>
+[4-2] STING (Statistical Information Grid-based method) : 공간을 사각형 셀로 분할하고 각 셀의 통계 정보(평균, 분산 등)를 계층적으로 관리하여 질의 응답 속도를 극대화<br>
+[4-3] CLIQUE (Clustering In Quest) : 그리드와 밀도 개념을 결합하여 고차원 데이터의 부분 공간(Subspace)에서 밀집된 영역을 찾아내는 방식<br>
+[4-4] OptiGrid (Optimal Grid-based Clustering) : 데이터 분포의 밀도가 낮은 최적의 절단 평면을 찾아 그리드를 재귀적으로 분할하여 군집화<br>
+[4-5] MAFIA (Merging of Adaptive Finite Intervals) : 데이터 분포에 따라 그리드 간격을 유연하게 조절하는 적응형 그리드를 사용하여 연산 효율을 높인 방식<br>
 
-[5] Model-Based Clustering (모델 기반 군집화)
-[5-1] GMM (Gaussian Mixture Model) with EM (Expectation-Maximization) : 데이터가 여러 개의 가우시안 확률 분포의 혼합으로 생성되었다고 가정하고 확률적으로 군집에 할당
-[5-2] COBWEB : 범주형 데이터를 위해 카테고리 효용(Category Utility)을 최대화하는 방향으로 계층적 트리 구조를 생성하는 점진적 군집화
-[5-3] CLASSIT (Classification Incremental Learning System) : COBWEB 모델을 수치형(연속형) 데이터로 확장하여 실시간 데이터 스트림 처리에 적용
-[5-4] LDA (Latent Dirichlet Allocation) : 문서 집합에서 잠재적인 주제(Topic)를 찾아내기 위해 단어들의 확률 분포를 모델링하는 주제 모델링 방식
+[5] Model-Based Clustering (모델 기반 군집화)<br>
+[5-1] GMM (Gaussian Mixture Model) with EM (Expectation-Maximization) : 데이터가 여러 개의 가우시안 확률 분포의 혼합으로 생성되었다고 가정하고 확률적으로 군집에 할당<br>
+[5-2] COBWEB : 범주형 데이터를 위해 카테고리 효용(Category Utility)을 최대화하는 방향으로 계층적 트리 구조를 생성하는 점진적 군집화<br>
+[5-3] CLASSIT (Classification Incremental Learning System) : COBWEB 모델을 수치형(연속형) 데이터로 확장하여 실시간 데이터 스트림 처리에 적용<br>
+[5-4] LDA (Latent Dirichlet Allocation) : 문서 집합에서 잠재적인 주제(Topic)를 찾아내기 위해 단어들의 확률 분포를 모델링하는 주제 모델링 방식<br>
 
-[6] Graph-Based Clustering (그래프 기반 군집화)
-[6-1] Spectral Clustering : 데이터 간 유사도 행렬의 고유값 분해(Eigen-decomposition)를 통해 차원을 축소한 후 저차원 공간에서 군집화 수행
-[6-2] Affinity Propagation : 데이터 포인트 간에 책임감(Responsibility)과 가용성(Availability)이라는 메시지를 주고받으며 대표 샘플을 결정
-[6-3] MCL (Markov Clustering) : 그래프 내에서 무작위 보행(Random Walk)의 확산(Expansion)과 강화(Inflation) 과정을 반복하여 자연스러운 군집을 분리
-[6-4] Louvain / Leiden Algorithm : 네트워크의 전체적인 연결 강도를 측정하는 모듈성(Modularity) 지표를 최적화하여 대규모 커뮤니티 구조를 탐색
+[6] Graph-Based Clustering (그래프 기반 군집화)<br>
+[6-1] Spectral Clustering : 데이터 간 유사도 행렬의 고유값 분해(Eigen-decomposition)를 통해 차원을 축소한 후 저차원 공간에서 군집화 수행<br>
+[6-2] Affinity Propagation : 데이터 포인트 간에 책임감(Responsibility)과 가용성(Availability)이라는 메시지를 주고받으며 대표 샘플을 결정<br>
+[6-3] MCL (Markov Clustering) : 그래프 내에서 무작위 보행(Random Walk)의 확산(Expansion)과 강화(Inflation) 과정을 반복하여 자연스러운 군집을 분리<br>
+[6-4] Louvain / Leiden Algorithm : 네트워크의 전체적인 연결 강도를 측정하는 모듈성(Modularity) 지표를 최적화하여 대규모 커뮤니티 구조를 탐색<br>
 
-[7] Subspace / Representation-Based Clustering (부분 공간 및 표현 학습 기반 군집화)
-[7-1] PROCLUS (Projected Clustering) : 고차원 공간에서 각 군집마다 데이터가 밀집된 특정 축(Dimensions)들을 선별하여 투영하는 방식
-[7-2] ORCLUS (Oriented projected Clustering) : 고정된 축이 아닌 데이터의 상관관계에 따라 기울어진 임의의 부분 공간을 찾아 투영하는 방식
-[7-3] SUBCLU (Subspace Clustering) : 밀도 기반의 특성을 활용하여 1차원부터 고차원까지 상향식(Bottom-up)으로 모든 밀집 부분 공간을 탐색
-[7-4] SOMs (Self-Organizing Maps) : 고차원 데이터의 위상 구조를 유지하면서 인공신경망을 통해 2차원 격자(Map)로 시각화 및 군집화 수행
-[7-5] DEC (Deep Embedded Clustering) : 심층 신경망(Autoencoder)으로 비선형적 특징을 추출하는 동시에 군집화 손실 함수를 함께 학습하여 임베딩 공간을 최적화
-
-
-
-	[1] Partitioning-Based Clustering : 데이터셋을 사전에 정의된 클러스터 개수로 분할하며, 각 클러스터에 데이터를 배정하고 이를 반복적으로 최적화하는 방식
-	[1-1] K-means : 각 클러스터의 중심(centroid)을 기준으로 데이터를 분할
-	[1-2] K-medoids : K-means와 유사하지만 클러스터의 중심으로 평균값 대신 데이터 포인트 중 하나를 대표로 선택
-	      PAM(Partitioning Around Medoids) : K-medoids의 대표적인 구현으로 각 클러스터 중심을 데이터를 대표하는 데이터 포인트로 설정하고 중심을 이동하며 클러스터링
-	[1-3] K-modes : 범주형 데이터에 특화된 K-means 변형	
-	[1-4] CLARANS(Clustering Large Applications based on RANdomized Search) : PAM의 개선 알고리즘으로, 랜덤 샘플링을 통해 클러스터링
-	      CLARA(Clustering LARge Applications) : PAM을 대규모 데이터셋에 적용하기 위해 샘플링 기반으로 클러스터링
-	[1-5] FCM(Fuzzy C-means) : 퍼지 클러스터링으로 중첩 클러스터에서 유연하게 적용
-
-	[2] Hierarchical-Based Clustering : 데이터의 계층적 구조를 바탕으로 클러스터링
-	[2-1] Agglomerative / Divisive : 상향식(Agglomerative)은 각 데이터 포인트에서 시작하여 점차 합쳐가는 방식, 하향식(Divisive)은 전체에서 시작하여 점차 분할.
-	[2-2] BIRCH(Balanced Iterative Reducing and Clustering using Hierarchies) : 데이터 압축을 활용. CF(Clustering Feature) 트리라는 데이터 구조를 통해 클러스터링
-	[2-3] CURE(Clustering Using Representatives) : 각 클러스터를 여러 대표 포인트로 요약하여 클러스터링
-	[2-4] ROCK(Robust Clustering using Links) : 데이터 포인트 간의 연결 수(링크 수)를 바탕으로 클러스터
-	[2-5] Chameleon : 클러스터 간의 내부 및 외부 관계를 모두 고려하여 클러스터링 	
-	
-	[3] Density-Based Clustering : 데이터의 밀도에 따라 클러스터를 형성
-	[3-1] DBSCAN(Density-Based Spatial Clustering of Applications with Noise) : 주어진 반경 내에 특정 수 이상의 포인트가 있는 경우 이를 클러스터의 일부로 간주하여 연결된 고밀도 지역을 클러스터로 형성	
-	[3-2] OPTICS(Ordering Points To Identify the Clustering Structure) : DBSCAN과 유사하나, 클러스터의 밀도가 변동하는 데이터에 대해 더 유연하게 클러스터링
-	[3-3] DENCLUE(DENsity-based CLUstEring) : 밀도를 가우시안 커널로 모델링하여, 밀도 함수의 국소적 극대값을 중심으로 클러스터를 형성
- 	[3-4] Mean-Shift Clustering : 데이터 공간에서 각 포인트가 데이터의 밀도가 높은 방향으로 이동하여 수렴할 때까지 반복하여 클러스터링
-
- 	[4] Grid-Based Clustering : 데이터 공간을 격자(grid)로 나누고 각 격자의 특성을 바탕으로 클러스터를 형성
-	[4-1] Wave-Cluster : 웨이블렛 변환(주파수 분석 도구로, 시간이나 공간에서 신호의 국소적인 변화를 포착)으로 데이터의 밀도를 측정하고, 고밀도 지역을 클러스터로 분류
-	[4-2] STING(Statistical Information Grid-based method) : 데이터 공간을 계층적 격자로 나누고, 각 격자의 통계 정보를 바탕으로 클러스터
-	[4-3] CLIQUE(CLustering In QUEst) : 데이터 공간을 격자화하고, 밀도가 높은 격자들을 클러스터
-	[4-4] OptiGrid : 데이터 분포를 기준으로 최적의 격자를 생성하고, 이를 바탕으로 클러스터링
-
-	[5] Model-Based Clustering : 각 모델은 데이터의 특성과 요구사항에 따라, EM과 GMM은 확률적 모델링, COBWEB과 CLASSIT는 계층적 구조, SOM은 고차원 데이터를 저차원으로 표현하거나 시각화할 때 유용
- 	[5-1] GMM(Gaussian Mixture Model) : 여러 개의 정규 분포를 통해 데이터를 모델링하는 혼합 모델(EM 알고리즘을 사용하여 파라미터를 최적화)
-	      EM(Expectation-Maximization) : 데이터의 숨겨진 변수(클러스터 레이블)에 대한 확률 분포를 최적화
-	[5-2] COBWEB : 트리 구조를 사용하여 점진적으로 클러스터를 생성
-	      CLASSIT : COBWEB의 변형으로 연속적인 수치 데이터를 다루는 데 초점
-	[5-3] SOMs(Self-Organizing Maps) : 인공신경망의 일종으로 고차원 데이터를 저차원으로 표현
-
-	[6] Graph-Based Clustering : 그래프 기반 접근법을 사용하여 데이터의 유사성을 활용
-	[6-1] Spectral Clustering : 비선형 데이터의 그래프 표현을 통해 데이터의 연결성을 기반으로 클러스터링
-	[6-2] Affinity Propagation : 데이터 포인트 간의 "유사도"와 "우선도"에 따라 클러스터의 중심점(대표 포인트)을 자동으로 선택
-
-
-
+[7] Subspace / Representation-Based Clustering (부분 공간 및 표현 학습 기반 군집화)<br>
+[7-1] PROCLUS (Projected Clustering) : 고차원 공간에서 각 군집마다 데이터가 밀집된 특정 축(Dimensions)들을 선별하여 투영하는 방식<br>
+[7-2] ORCLUS (Oriented projected Clustering) : 고정된 축이 아닌 데이터의 상관관계에 따라 기울어진 임의의 부분 공간을 찾아 투영하는 방식<br>
+[7-3] SUBCLU (Subspace Clustering) : 밀도 기반의 특성을 활용하여 1차원부터 고차원까지 상향식(Bottom-up)으로 모든 밀집 부분 공간을 탐색<br>
+[7-4] SOMs (Self-Organizing Maps) : 고차원 데이터의 위상 구조를 유지하면서 인공신경망을 통해 2차원 격자(Map)로 시각화 및 군집화 수행<br>
+[7-5] DEC (Deep Embedded Clustering) : 심층 신경망(Autoencoder)으로 비선형적 특징을 추출하는 동시에 군집화 손실 함수를 함께 학습하여 임베딩 공간을 최적화<br>
 
 ---
 
@@ -5059,3 +5013,5 @@ https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.ht
 | **JS 발산** | Jensen–Shannon | KL의 대칭화 | $JS = \frac{1}{2}KL(P \parallel M) + \frac{1}{2}KL(Q \parallel M)$ | 대칭성 및 안정성 | 추가 연산 비용 | NLP, GAN |
 
 
+![](./images/23.jpg)
+<br>
