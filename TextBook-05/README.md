@@ -4022,6 +4022,222 @@ $𝐿=𝐷−𝐴$<br>
 ![](./images/6-2.png)
 <br>
 
+# [6-3] MCL (Markov Clustering)
+▣ 정의 : MCL은 그래프 이론을 기반으로 하는 비지도 군집화 알고리즘으로, <ins>네트워크 내에서의 무작위 보행(Random Walk) 시뮬레이션을 통해 군집을 찾는다.</ins> 그래프 상에서 밀집된 영역(군집) 내부에서는 무작위 보행자가 오래 머물고, 군집 사이의 희소한 연결은 잘 통과하지 못한다는 원리를 이용<br>
+▣ 필요성 : 복잡한 네트워크 구조에서 사전에 군집의 개수를 알기 어렵거나, 데이터 간의 관계가 비선형적이고 복잡한 연결망 형태로 존재할 때 이를 효과적으로 분리하기 위해 필요. 특히 단백질 상호작용이나 사회적 네트워크와 같은 그래프 데이터 분석에 필수<br>
+▣ 장점 :<br>
+군집 수 자동 결정: 인플레이션(Inflation) 파라미터를 통해 군집의 입도를 조절할 뿐, 군집 수를 직접 지정 불필요<br>
+확장성: 행렬 연산을 기반으로 하므로 대규모 그래프 데이터에 대해 비교적 빠른 연산이 가능<br>
+강건성: 노이즈나 미세한 연결 오류에 대해 비교적 안정적인 군집 결과를 보여준다<br>
+▣ 단점 :<br>
+메모리 소모: 그래프의 크기가 커질수록 인접 행렬의 제곱 연산에 따른 메모리 사용량이 급격히 증가<br>
+파라미터 민감도: 인플레이션 값에 따라 군집이 너무 잘게 쪼개지거나 하나로 뭉치는 현상이 발생할 수 있어 적절한 튜닝이 필요<br>
+▣ 응용분야 :<br>
+생물정보학: 단백질-단백질 상호작용 네트워크(PPI) 분석 및 유전자 군집화<br>
+소셜 네트워크 분석: 커뮤니티 탐지 및 영향력 있는 그룹 식별<br>
+이미지 세분화: 픽셀 간의 유사도를 그래프로 구성하여 사물 영역 분리<br>
+▣ 모델식 : MCL은 두 가지(서로 다른 노드 간의 보행 확률을 확산, 정규화하여 강한 연결은 강화하고 약한 연결은 소멸) 주요 행렬 연산을 수렴할 때까지 반복<br>
+
+	import sys
+	import subprocess
+	
+	# 1. 라이브러리 설치 확인 및 자동 설치 로직
+	def install_and_import(package):
+	    try:
+	        # 패키지 이름과 임포트 이름이 다를 수 있음을 고려
+	        import_name = package.replace("-", "_")
+	        __import__(import_name)
+	    except ImportError:
+	        print(f"{package} 라이브러리가 없습니다. 설치를 시작합니다...")
+	        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+	        print(f"{package} 설치가 완료되었습니다.")
+	
+	# markov-clustering 라이브러리 설치 실행
+	install_and_import("markov-clustering")
+	
+	import numpy as np
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	import markov_clustering as mc
+	from sklearn.datasets import load_iris
+	from sklearn.neighbors import kneighbors_graph
+	from sklearn.metrics import silhouette_score, accuracy_score
+	from sklearn.preprocessing import StandardScaler
+	from sklearn.decomposition import PCA
+	from scipy.stats import mode
+	
+	# 2. 데이터 로드 및 전처리
+	iris = load_iris()
+	X = iris.data
+	y = iris.target
+	target_names = iris.target_names
+	
+	# 거리 기반 그래프 생성을 위한 표준화 스케일링
+	scaler = StandardScaler()
+	X_scaled = scaler.fit_transform(X)
+	
+	# 3. 데이터를 그래프 인접 행렬로 변환 (KNN 그래프)
+	# n_neighbors는 데이터 간의 연결 강도를 결정합니다.
+	A = kneighbors_graph(X_scaled, n_neighbors=15, mode='connectivity', include_self=True)
+	matrix = A.toarray()
+	
+	# 4. MCL 알고리즘 수행 및 파라미터 튜닝
+	# inflation: 클러스터의 입도를 조절 (높을수록 더 많은 군집 생성)
+	inflation_val = 1.8 
+	result = mc.run_mcl(matrix, inflation=inflation_val)
+	clusters = mc.get_clusters(result)
+	
+	# 5. 결과 매핑 및 성능 평가
+	y_pred = np.zeros(len(X), dtype=int)
+	for cluster_idx, nodes in enumerate(clusters):
+	    for node in nodes:
+	        y_pred[node] = cluster_idx
+	
+	# 군집 라벨을 실제 타겟 라벨과 매칭하여 정확도 계산
+	def get_clustered_accuracy(y_true, y_pred):
+	    matched_labels = np.zeros_like(y_pred)
+	    for i in np.unique(y_pred):
+	        mask = (y_pred == i)
+	        if np.any(mask):
+	            # 군집 내 최빈값(mode)을 해당 군집의 대표 라벨로 설정
+	            m = mode(y_true[mask], keepdims=True)
+	            matched_labels[mask] = m.mode[0]
+	    return accuracy_score(y_true, matched_labels)
+	
+	acc = get_clustered_accuracy(y, y_pred)
+	sil = silhouette_score(X_scaled, y_pred) if len(np.unique(y_pred)) > 1 else 0
+	
+	# 6. 시각화 (PCA 2D Projection)
+	pca = PCA(n_components=2)
+	X_pca = pca.fit_transform(X_scaled)
+	
+	plt.figure(figsize=(10, 6))
+	colors = ['navy', 'turquoise', 'darkorange']
+	
+	# 오류 수정 부분: zip을 사용하여 인덱스, 색상, 이름을 동시에 반복
+	for i, (color, name) in enumerate(zip(colors, target_names)):
+	    mask = (y == i)
+	    plt.scatter(X_pca[mask, 0], X_pca[mask, 1], 
+	                color=color, alpha=0.8, lw=2, label=f'Actual: {name}')
+	
+	plt.title(f'MCL Analysis on Iris (Inflation: {inflation_val})\nAccuracy: {acc:.3f} | Silhouette Score: {sil:.3f}')
+	plt.xlabel('Principal Component 1')
+	plt.ylabel('Principal Component 2')
+	plt.legend(loc='best')
+	plt.grid(True, linestyle=':', alpha=0.5)
+	plt.show()
+	
+
+![](./images/6-3_MCL.png)	
+
+
+# [6-4] Louvain / Leiden Algorithm
+▣ 정의 : Louvain 알고리즘과 그 개선판인 Leiden 알고리즘은 <ins>대규모 네트워크에서 커뮤니티(군집)를 탐색하기 위한 휴리스틱 방법론.</ins> 네트워크 내의 연결 밀도를 측정하는 지표인 모듈성(Modularity)을 최대화하는 방향으로 노드들을 그룹화하며, 계층적인 최적화 과정을 거쳐 최종적인 군집 구조를 찾아낸다.<br>
+▣ 필요성 : 데이터가 수백만 개의 노드와 간선으로 이루어진 초거대 네트워크 형태인 경우에 매우 빠른 속도로 거대 네트워크의 숨겨진 구조를 파악하기 위해 필수적<br>
+▣ 장점 :<br> 
+빠른 속도: 수억 개의 간선을 가진 그래프도 수분 내에 처리할 수 있을 만큼 효율적<br>
+계층적 구조 추출: 작은 커뮤니티부터 이를 포함하는 더 큰 커뮤니티까지 계층적으로 파악이 가능<br>
+자동 군집 수 결정: 사용자가 군집 개수를 미리 지정할 필요가 없슴<br>
+Leiden의 개선: Louvain에서 발생하던 연결되지 않은 커뮤니티 생성 문제(Disconnected communities)를 해결하여 더욱 견고한 결과를 보장<br>
+▣ 단점 : <br>
+해상도 한계 (Resolution Limit): 너무 작은 크기의 커뮤니티는 큰 커뮤니티에 흡수되어 발견하지 못하는 경우<br>
+무작위성: 노드 방문 순서에 따라 결과가 미세하게 달라질 가능성<br>
+▣ 응용분야 :<br>
+사회관계망 분석: 페이스북, 트위터 내의 사용자 관심사 그룹 추출<br>
+금융 사기 탐지: 이상 거래 네트워크 내에서 조직적인 사기 그룹 식별<br>
+생물학적 네트워크: 단백질 기능 그룹 및 대사 경로 분석<br>
+▣ 모델식 : 핵심은 모듈성(Modularity, $Q$)의 최대화<br>
+	
+
+	import sys
+	import subprocess
+	
+	# 1. 라이브러리 설치 확인 및 자동 설치 로직
+	def install_and_import(package, import_name=None):
+	    if import_name is None:
+	        import_name = package
+	    try:
+	        __import__(import_name)
+	    except ImportError:
+	        print(f"{package} 라이브러리가 없습니다. 설치를 시작합니다...")
+	        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+	        print(f"{package} 설치가 완료되었습니다.")
+	
+	# 필요한 패키지 설치 (leidenalg는 igraph 기반임)
+	install_and_import("python-igraph", "igraph")
+	install_and_import("leidenalg")
+	
+	import numpy as np
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	import igraph as ig
+	import leidenalg as la
+	from sklearn.datasets import load_iris
+	from sklearn.neighbors import kneighbors_graph
+	from sklearn.metrics import silhouette_score, accuracy_score
+	from sklearn.preprocessing import StandardScaler
+	from sklearn.decomposition import PCA
+	from scipy.stats import mode
+	
+	# 2. 데이터 로드 및 전처리
+	iris = load_iris()
+	X, y = iris.data, iris.target
+	target_names = iris.target_names
+	
+	# 데이터 표준화
+	scaler = StandardScaler()
+	X_scaled = scaler.fit_transform(X)
+	
+	# 3. 데이터를 그래프로 변환 (KNN 그래프 생성)
+	# n_neighbors를 조절하여 그래프의 연결성을 제어 (파라미터 튜닝의 핵심)
+	n_neighbors = 15
+	adj_matrix = kneighbors_graph(X_scaled, n_neighbors=n_neighbors, mode='connectivity', include_self=False)
+	
+	# igraph 객체로 변환
+	sources, targets = adj_matrix.nonzero()
+	edges = list(zip(sources, targets))
+	g = ig.Graph(n=len(X), edges=edges)
+	
+	# 4. Leiden 알고리즘 수행 (모듈성 최적화)
+	# resolution_parameter: 높을수록 더 많은(작은) 커뮤니티를 생성함
+	partition = la.find_partition(g, la.ModularityVertexPartition, seed=42)
+	y_pred = np.array(partition.membership)
+	
+	# 5. 성능 평가
+	def get_clustered_accuracy(y_true, y_pred):
+	    matched_labels = np.zeros_like(y_pred)
+	    for i in np.unique(y_pred):
+	        mask = (y_pred == i)
+	        if np.any(mask):
+	            m = mode(y_true[mask], keepdims=True)
+	            matched_labels[mask] = m.mode[0]
+	    return accuracy_score(y_true, matched_labels)
+	
+	acc = get_clustered_accuracy(y, y_pred)
+	sil = silhouette_score(X_scaled, y_pred) if len(np.unique(y_pred)) > 1 else 0
+	
+	# 6. 시각화 (PCA 2D Projection)
+	pca = PCA(n_components=2)
+	X_pca = pca.fit_transform(X_scaled)
+	
+	plt.figure(figsize=(10, 6))
+	colors = ['navy', 'turquoise', 'darkorange']
+	
+	for i, (color, name) in enumerate(zip(colors, target_names)):
+	    mask = (y == i)
+	    plt.scatter(X_pca[mask, 0], X_pca[mask, 1], color=color, alpha=0.8, lw=2, label=f'Actual: {name}')
+	
+	plt.title(f'Leiden Community Detection on Iris\nAccuracy: {acc:.3f} | Silhouette: {sil:.3f} | Communities: {len(np.unique(y_pred))}')
+	plt.xlabel('PC 1')
+	plt.ylabel('PC 2')
+	plt.legend(loc='best')
+	plt.grid(True, linestyle=':', alpha=0.5)
+	plt.show()
+	
+	print(f"발견된 커뮤니티 수: {len(np.unique(y_pred))}")
+
+![](./images/6-4_LL.png)		
+
 
 ## [6-1] Spectral Clustering
 
@@ -4045,6 +4261,28 @@ $𝐿=𝐷−𝐴$<br>
 | **목표** | 사전 군집 수 없이 데이터 간 유사도만으로 대표점 기반 군집 자동 탐색 수행 |
 
 
+## [6-3] MCL (Markov Clustering)
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | 그래프 내의 **무작위 보행(Random Walk)** 시뮬레이션 — 인접 행렬(Adjacency Matrix) 기반 연산 |
+| **거리함수** | 노드 간 전이 확률(Transition Probability)<br>$M_{ij} = \dfrac{w_{ij}}{\sum_k w_{kj}}$ |
+| **목적함수** | 행렬의 확장(Expansion)과 인플레이션(Inflation) 반복을 통한 행렬 수렴<br>$\text{Expansion}: M \times M$ (확률 확산)<br>$\text{Inflation}: M_{ij} \leftarrow \dfrac{(M_{ij})^r}{\sum_k (M_{kj})^r}$ (강한 연결 강화) |
+| **중심갱신** | 명시적 중심 없음 — 행렬이 수렴(Convergence)한 후 연결된 성분(Connected Components)을 군집으로 추출 |
+| **목표** | 네트워크 내 밀집 영역에서는 보행자가 오래 머문다는 원리를 이용하여 군집 수를 자동 결정하고 복잡한 그래프 구조 분석 |
+
+
+## [6-4] Louvain / Leiden Algorithm
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | 네트워크의 연결 밀도를 측정하는 **모듈성(Modularity)** 기반 계층적 군집화 |
+| **거리함수** | 노드 간 간선 가중치 및 차수(Degree) 기반 관계도<br>$k_i = \sum_j A_{ij}$ |
+| **목적함수** | 모듈성($Q$) 최대화<br>$Q = \dfrac{1}{2m} \sum_{i,j} \left[ A_{ij} - \dfrac{k_i k_j}{2m} \right] \delta(c_i, c_j)$<br>(Leiden은 여기에 연결성 보강 알고리즘 추가) |
+| **중심갱신** | 1단계: 각 노드를 인접 커뮤니티로 이동하며 $Q$ 증가분($\Delta Q$) 최대화<br>2단계: 동일 커뮤니티 노드들을 하나의 거대 노드(Super-node)로 병합하여 그래프 재구성 |
+| **목표** | 초대형 네트워크에서 매우 빠른 속도로 커뮤니티 구조를 탐색하고, 계층적인 군집 관계를 자동 식별 |
+
+---
 
 # [7-4] SOMs(Self-Organizing Maps)
 ▣ 정의: 고차원 데이터를 저차원(주로 2D) 공간에 매핑하여 시각화하는 신경망 기반의 군집화 알고리즘으로 입력 데이터 간의 관계를 보존하며, 비지도 학습으로 데이터의 구조를 학습<br>
