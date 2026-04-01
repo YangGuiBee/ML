@@ -15,6 +15,10 @@
 
 ---
 
+![](./images/total.png)
+
+---
+
 **[1] Partitioning-Based Clustering** (분할 기반 군집화)<br>
 **[1-1] K-means Clustering** : 데이터셋을 $K$개의 군집으로 나누며, 각 군집의 평균(Centroid)과 데이터 간의 거리 합을 최소화하는 방식<br>
 **[1-2] K-medoids Clustering (PAM/CLARANS/CLARA)** : 중심점 대신 실제 데이터 포인트인 메도이드(Medoid)를 대표값으로 사용하여 이상치(Outlier)에 대한 민감도를 낮춤<br>
