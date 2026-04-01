@@ -1094,46 +1094,150 @@ Accuracy 기준<br>
 ▣ 단점 : 배치 샘플링으로 인해 결과 변동(분산)이 커질 수 있음, 배치 크기, 학습률 성격 파라미터에 민감할 수 있음, 작은 데이터에서는 일반 K-means 대비 장점이 크지 않음<br>
 ▣ 응용분야 : 대규모 고객/로그/임베딩 데이터 군집, 실시간 이벤트 스트리밍 군집, 대규모 문서/이미지 임베딩의 빠른 군집화<br>
 
-	# MiniBatchKMeans 튜닝: batch_size, max_iter, n_init 후보 탐색
+	# ─────────────────────────────────────────────
+	# 필수 라이브러리 import
+	# ─────────────────────────────────────────────
+	import numpy as np
+	import matplotlib.pyplot as plt
+	from sklearn.datasets import load_iris
+	from sklearn.preprocessing import StandardScaler
+	from sklearn.cluster import MiniBatchKMeans          # ← 누락된 핵심 import
+	from sklearn.decomposition import PCA
+	from sklearn.metrics import silhouette_score
+	from scipy.optimize import linear_sum_assignment    # 클러스터-레이블 최적 매핑용
+	
+	# ─────────────────────────────────────────────
+	# 데이터 로드 및 표준화
+	# ─────────────────────────────────────────────
+	iris = load_iris()
+	X, y = iris.data, iris.target
+	
+	scaler = StandardScaler()
+	X_std = scaler.fit_transform(X)   # 평균 0, 분산 1로 정규화
+	
+	# ─────────────────────────────────────────────
+	# 클러스터 레이블 ↔ 실제 레이블 최적 매핑 정확도 계산 함수
+	# Hungarian Algorithm으로 최적 순열 탐색
+	# ─────────────────────────────────────────────
+	def best_map_accuracy(labels, y):
+	    n_clusters = len(np.unique(labels))
+	    n_classes  = len(np.unique(y))
+	    size       = max(n_clusters, n_classes)
+	
+	    # 혼동 행렬(cost matrix) 생성
+	    cost_matrix = np.zeros((size, size), dtype=int)
+	    for pred, true in zip(labels, y):
+	        cost_matrix[pred][true] += 1
+	
+	    # 비용 최소화 → 정확도 최대화를 위해 음수 변환
+	    row_ind, col_ind = linear_sum_assignment(-cost_matrix)
+	
+	    # 최적 매핑 딕셔너리 및 정확도 계산
+	    mapping  = {r: c for r, c in zip(row_ind, col_ind)}
+	    accuracy = cost_matrix[row_ind, col_ind].sum() / len(y)
+	    return accuracy, mapping
+	
+	# ─────────────────────────────────────────────
+	# PCA 2D 산점도 시각화 함수
+	# ─────────────────────────────────────────────
+	def plot_pca_scatter(X_std, labels, title, centers_2d=None):
+	    pca  = PCA(n_components=2, random_state=42)
+	    X_2d = pca.fit_transform(X_std)
+	
+	    colors = ["steelblue", "tomato", "seagreen"]
+	    plt.figure(figsize=(7, 5))
+	
+	    # 클러스터별 색상 구분 산점도
+	    for cluster_id in np.unique(labels):
+	        mask = labels == cluster_id
+	        plt.scatter(
+	            X_2d[mask, 0], X_2d[mask, 1],
+	            c=colors[cluster_id % len(colors)],
+	            label=f"Cluster {cluster_id}",
+	            alpha=0.7, edgecolors="k", linewidths=0.4
+	        )
+	
+	    # 클러스터 중심점 표시 (전달된 경우)
+	    if centers_2d is not None:
+	        plt.scatter(
+	            centers_2d[:, 0], centers_2d[:, 1],
+	            c="gold", marker="*", s=280,
+	            edgecolors="k", linewidths=0.8,
+	            label="Centers", zorder=5
+	        )
+	
+	    plt.title(title, fontsize=13)
+	    plt.xlabel("PC 1")
+	    plt.ylabel("PC 2")
+	    plt.legend()
+	    plt.tight_layout()
+	    plt.show()
+	
+	# ─────────────────────────────────────────────
+	# MiniBatchKMeans 하이퍼파라미터 튜닝
+	# batch_size × max_iter 조합 중 Silhouette 최고 모델 선택
+	# ─────────────────────────────────────────────
 	best = None
+	
 	for batch_size in [10, 20, 40, 80]:
 	    for max_iter in [300, 600, 1000]:
+	
 	        model = MiniBatchKMeans(
 	            n_clusters=3,
-	            init="k-means++",
-	            batch_size=batch_size,
-	            max_iter=max_iter,
-	            n_init=50,
-	            reassignment_ratio=0.01,
+	            init="k-means++",        # 초기 중심점 스마트 선택
+	            batch_size=batch_size,   # 미니배치 크기
+	            max_iter=max_iter,       # 최대 반복 횟수
+	            n_init=50,               # 초기화 반복 횟수 (안정성 향상)
+	            reassignment_ratio=0.01, # 재배정 비율 (소규모 클러스터 방지)
 	            random_state=42
 	        )
+	
 	        labels = model.fit_predict(X_std)
 	
+	        # 실루엣 점수: 클러스터 내 응집도 vs 분리도 (-1 ~ 1, 높을수록 좋음)
 	        sil = silhouette_score(X_std, labels)
+	
+	        # 실제 레이블과의 최적 매핑 정확도 계산
 	        acc, mapping = best_map_accuracy(labels, y)
 	
+	        # 실루엣 기준 최적 모델 갱신
 	        if (best is None) or (sil > best["sil"]):
 	            best = {
-	                "model": model,
-	                "labels": labels,
-	                "sil": sil,
-	                "acc": acc,
-	                "mapping": mapping,
+	                "model"     : model,
+	                "labels"    : labels,
+	                "sil"       : sil,
+	                "acc"       : acc,
+	                "mapping"   : mapping,
 	                "batch_size": batch_size,
-	                "max_iter": max_iter
+	                "max_iter"  : max_iter
 	            }
 	
-	pca = PCA(n_components=2, random_state=42)
-	X_2d = pca.fit_transform(X_std)
+	# ─────────────────────────────────────────────
+	# 최적 모델 결과 출력 및 시각화
+	# ─────────────────────────────────────────────
+	
+	# PCA로 클러스터 중심도 2D 변환 (시각화용)
+	pca        = PCA(n_components=2, random_state=42)
+	X_2d       = pca.fit_transform(X_std)
 	centers_2d = pca.transform(best["model"].cluster_centers_)
 	
-	print("Mini-Batch K-means tuned params:", "batch_size=", best["batch_size"], ", max_iter=", best["max_iter"])
-	print(f"Silhouette: {best['sil']:.4f}")
-	print(f"Accuracy(best mapping): {best['acc']:.4f}, mapping={best['mapping']}")
+	print("── MiniBatch K-Means 최적 파라미터 ──")
+	print(f"  batch_size : {best['batch_size']}")
+	print(f"  max_iter   : {best['max_iter']}")
+	print(f"  Silhouette : {best['sil']:.4f}")
+	print(f"  Accuracy   : {best['acc']:.4f}  (mapping={best['mapping']})")
 	
-	plot_pca_scatter(X_std, best["labels"], "Mini-Batch K-means on Iris (PCA 2D)", centers_2d=centers_2d)
+	plot_pca_scatter(
+	    X_std,
+	    best["labels"],
+	    "Mini-Batch K-Means on Iris (PCA 2D)",
+	    centers_2d=centers_2d
+	)
 	
 <br>
+
+![](./images/1-5_batch.png)
+
 
 	iris처럼 작은 데이터에서는 Mini-Batch가 일반 K-means와 성능이 거의 비슷하게 나오는 경우가 많다.
 	차이는 주로 “대규모 데이터에서 속도”이며, iris에서는 그 장점이 크게 드러나지 않는다.
