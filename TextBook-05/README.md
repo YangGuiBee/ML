@@ -2556,259 +2556,424 @@ Ward는 두 군집을 합쳤을 때 전체 군집 내 제곱오차합(SSE: Sum o
 문서/토픽 군집 : 문서 임베딩(예: TF-IDF, BERT embedding)을 거리 기반으로 군집화<br>
 ▣ 모델식: 국소밀도(Cutoff 커널, Gaussian 커널), 분리도, 중심점수 할당<br>
 
+	# ============================================================
+	# DPC (Density Peaks Clustering) - Iris 데이터 적용
+	# Rodriguez & Laio (2014) "Clustering by fast search and find
+	# of density peaks" 알고리즘 구현
+	# ============================================================
+	
 	import numpy as np
 	import matplotlib.pyplot as plt
-	
+	import matplotlib.patches as mpatches
 	from sklearn.datasets import load_iris
 	from sklearn.preprocessing import StandardScaler
 	from sklearn.decomposition import PCA
 	from sklearn.metrics import silhouette_score
-	
-	from scipy.spatial.distance import pdist, squareform
+	from scipy.spatial.distance import cdist
 	from scipy.optimize import linear_sum_assignment
+	from itertools import product
 	
+	# ────────────────────────────────────────────
+	# 1. 데이터 로드 및 전처리
+	# ────────────────────────────────────────────
+	iris = load_iris()
+	X, y = iris.data, iris.target
+	species_names = iris.target_names          # ['setosa', 'versicolor', 'virginica']
 	
-	def compute_rho(D, dc, kernel='cutoff'):
-	    """Local density rho.
-	    cutoff kernel: rho_i = number of points within dc
-	    gaussian kernel: rho_i = sum(exp(-(d_ij/dc)^2))
+	scaler = StandardScaler()
+	X_std = scaler.fit_transform(X)            # 평균 0, 분산 1 정규화
+	
+	# ────────────────────────────────────────────
+	# 2. 클러스터 레이블 최적 매핑 정확도 (Hungarian Algorithm)
+	# ────────────────────────────────────────────
+	def best_map_accuracy(labels, y_true):
 	    """
-	    if kernel == 'cutoff':
-	        rho = (D < dc).sum(axis=1) - 1  # exclude self
-	        return rho.astype(float)
-	    elif kernel == 'gaussian':
-	        return np.exp(-(D / dc) ** 2).sum(axis=1) - 1.0
+	    예측 클러스터 레이블과 실제 레이블 간 최적 매핑 후 정확도 계산.
+	    Hungarian Algorithm으로 혼동행렬에서 최대 대응을 찾음.
+	    """
+	    n_clusters = len(np.unique(labels))
+	    n_classes  = len(np.unique(y_true))
+	    size       = max(n_clusters, n_classes)
+	
+	    cost_matrix = np.zeros((size, size), dtype=int)
+	    for pred, true in zip(labels, y_true):
+	        cost_matrix[pred][true] += 1
+	
+	    # 비용 최소화 → 정확도 최대화 (음수 변환)
+	    row_ind, col_ind = linear_sum_assignment(-cost_matrix)
+	    mapping  = {r: c for r, c in zip(row_ind, col_ind)}
+	    accuracy = cost_matrix[row_ind, col_ind].sum() / len(y_true)
+	    return accuracy, mapping
+	
+	
+	# ────────────────────────────────────────────
+	# 3. DPC 핵심 함수 구현
+	# ────────────────────────────────────────────
+	
+	def compute_density(dist_matrix, dc, kernel="gaussian"):
+	    """
+	    각 점의 로컬 밀도 ρ(rho) 계산.
+	
+	    Parameters
+	    ----------
+	    dist_matrix : 거리 행렬 (n×n)
+	    dc          : 컷오프 거리 (bandwidth)
+	    kernel      : 'gaussian' 또는 'cutoff'
+	    """
+	    n = dist_matrix.shape[0]
+	    if kernel == "gaussian":
+	        # 가우시안 커널: 거리가 가까울수록 밀도 기여 증가
+	        rho = np.sum(np.exp(-(dist_matrix / dc) ** 2), axis=1) - 1  # 자기 자신 제외
 	    else:
-	        raise ValueError("kernel must be 'cutoff' or 'gaussian'")
+	        # 컷오프 커널: dc 내 이웃 수 단순 카운트
+	        rho = np.sum(dist_matrix < dc, axis=1) - 1
+	    return rho
 	
 	
-	def compute_delta(D, rho):
-	    """delta_i = min distance to any point with higher density.
-	    For the highest-density point, delta is set to max distance in the dataset.
+	def compute_delta(dist_matrix, rho):
 	    """
-	    n = D.shape[0]
-	    order = np.argsort(-rho)  # descending rho
+	    각 점의 delta 값 계산.
+	    delta = 자신보다 밀도가 높은 점 중 가장 가까운 점까지의 거리.
+	    밀도가 가장 높은 점의 delta = 전체 최대 거리.
 	
-	    delta = np.zeros(n)
-	    nneigh = -np.ones(n, dtype=int)  # nearest higher-density neighbor index
+	    Parameters
+	    ----------
+	    dist_matrix : 거리 행렬 (n×n)
+	    rho         : 밀도 배열
+	    """
+	    n = dist_matrix.shape[0]
+	    delta  = np.zeros(n)
+	    nneigh = np.zeros(n, dtype=int)  # delta를 결정한 이웃 인덱스
 	
-	    delta[order[0]] = D[order[0]].max()
-	    nneigh[order[0]] = -1
+	    rho_sort_idx = np.argsort(-rho)  # 밀도 내림차순 인덱스
 	
-	    for rank, i in enumerate(order[1:], start=1):
-	        higher = order[:rank]
-	        dist = D[i, higher]
-	        j = higher[np.argmin(dist)]
-	        delta[i] = dist.min()
-	        nneigh[i] = j
+	    for i in range(n):
+	        # 자신보다 밀도가 높은 점들만 후보
+	        higher_density_mask = rho > rho[i]
+	        if not np.any(higher_density_mask):
+	            # 밀도 최고점: delta = 전체 최대 거리
+	            delta[i]  = np.max(dist_matrix[i])
+	            nneigh[i] = np.argmax(dist_matrix[i])
+	        else:
+	            # 후보 중 가장 가까운 점
+	            dists_to_higher = dist_matrix[i].copy()
+	            dists_to_higher[~higher_density_mask] = np.inf
+	            nneigh[i] = np.argmin(dists_to_higher)
+	            delta[i]  = dists_to_higher[nneigh[i]]
 	
-	    return delta, nneigh, order
+	    return delta, nneigh
 	
 	
-	def select_centers_gamma(rho, delta, D, k=3, min_sep=0.0):
-	    """Select k centers by gamma = rho * delta.
-	    A simple diversity constraint is added: centers must be at least min_sep apart.
+	def select_cluster_centers(rho, delta, center_sep):
+	    """
+	    클러스터 중심 선택: rho × delta 점수(gamma) 상위 점을 중심으로 선택.
+	
+	    Parameters
+	    ----------
+	    rho        : 밀도 배열
+	    delta      : delta 배열
+	    center_sep : gamma 임계값 (중앙값 기준 배수). 0이면 상위 n_clusters개 자동 선택
 	    """
 	    gamma = rho * delta
-	    candidates = np.argsort(-gamma)
-	
-	    centers = []
-	    for idx in candidates:
-	        if not centers:
-	            centers.append(idx)
-	        else:
-	            if np.min(D[idx, centers]) >= min_sep:
-	                centers.append(idx)
-	        if len(centers) == k:
-	            break
-	
-	    # If constraint is too strict, fill remaining centers without the constraint.
-	    if len(centers) < k:
-	        for idx in candidates:
-	            if idx not in centers:
-	                centers.append(idx)
-	            if len(centers) == k:
-	                break
-	
-	    return np.array(centers, dtype=int)
+	    if center_sep == 0.0:
+	        return gamma
+	    threshold = np.median(gamma) + center_sep * np.std(gamma)
+	    centers   = np.where(gamma >= threshold)[0]
+	    return centers
 	
 	
-	def assign_labels(order, nneigh, centers):
-	    """Assign each point to the same cluster as its nearest higher-density neighbor.
-	    Process points in descending rho order.
+	def assign_labels(nneigh, center_indices, rho):
 	    """
-	    n = len(order)
+	    중심점에서 시작해 밀도 내림차순으로 각 점을 클러스터에 배정.
+	
+	    Parameters
+	    ----------
+	    nneigh         : 각 점의 고밀도 이웃 인덱스
+	    center_indices : 클러스터 중심 인덱스 배열
+	    rho            : 밀도 배열
+	    """
+	    n      = len(rho)
 	    labels = -np.ones(n, dtype=int)
 	
-	    for cid, c in enumerate(centers):
-	        labels[c] = cid
+	    # 클러스터 중심에 레이블 부여
+	    for cluster_id, center in enumerate(center_indices):
+	        labels[center] = cluster_id
 	
-	    for i in order:
-	        if labels[i] == -1:
-	            labels[i] = labels[nneigh[i]]
+	    # 밀도 내림차순으로 순회하며 이웃의 레이블을 전파
+	    sorted_by_rho = np.argsort(-rho)
+	    for idx in sorted_by_rho:
+	        if labels[idx] == -1:
+	            labels[idx] = labels[nneigh[idx]]
 	
 	    return labels
 	
 	
-	def hungarian_mapping(y_true, y_pred, n_classes=3):
-	    """Map cluster labels to true labels using Hungarian algorithm (maximizing matches).
-	    This is used ONLY for reporting accuracy in an unsupervised setting.
+	def run_dpc(X, dc_percentile=23, kernel="gaussian", n_clusters=3,
+	            center_sep=0.0):
 	    """
-	    cm = np.zeros((n_classes, n_classes), dtype=int)
-	    for t, p in zip(y_true, y_pred):
-	        cm[t, p] += 1
+	    DPC 전체 파이프라인 실행.
 	
-	    r, c = linear_sum_assignment(-cm)  # maximize trace
-	    mapping = {pred: true for true, pred in zip(r, c)}
-	    return mapping, cm
-	
-	
-	def tune_dpc(X_scaled, D, y, kernels, percentiles, sep_alphas, k=3, w_acc=0.4):
-	    """Parameter tuning for DPC using a composite score.
-	
-	    score = w_acc * accuracy + (1 - w_acc) * normalized_silhouette
-	    normalized_silhouette = (silhouette + 1) / 2  (range 0..1)
-	
-	    Notes:
-	    - DPC is unsupervised; accuracy is computed after mapping clusters to labels.
-	    - w_acc controls the emphasis between accuracy and silhouette.
+	    Parameters
+	    ----------
+	    X              : 표준화된 데이터 (n×d)
+	    dc_percentile  : 거리 분포에서 dc를 결정할 백분위수 (%)
+	    kernel         : 밀도 커널 종류 ('gaussian' / 'cutoff')
+	    n_clusters     : 클러스터 수 (gamma 상위 n개를 중심으로 선택)
+	    center_sep     : 0이면 n_clusters개 자동 선택, >0이면 임계값 기반 선택
 	    """
-	    best = None
-	    best_score = -np.inf
+	    dist_matrix = cdist(X, X, metric="euclidean")
+	    n = X.shape[0]
 	
-	    # Upper-triangle distances for percentile-based dc
-	    triu = D[np.triu_indices_from(D, k=1)]
+	    # dc 계산: 거리 분포의 dc_percentile 백분위수
+	    upper_tri = dist_matrix[np.triu_indices(n, k=1)]
+	    dc = np.percentile(upper_tri, dc_percentile)
 	
-	    for ker in kernels:
-	        for pct in percentiles:
-	            dc = np.percentile(triu, pct)
+	    # 밀도(rho) 및 delta 계산
+	    rho           = compute_density(dist_matrix, dc, kernel=kernel)
+	    delta, nneigh = compute_delta(dist_matrix, rho)
 	
-	            rho = compute_rho(D, dc, kernel=ker)
-	            delta, nneigh, order = compute_delta(D, rho)
+	    # 클러스터 중심 선택
+	    gamma = rho * delta
+	    if center_sep == 0.0:
+	        # gamma 상위 n_clusters 개를 중심으로 선택
+	        center_indices = np.argsort(-gamma)[:n_clusters]
+	    else:
+	        gamma_thresh   = np.median(gamma) + center_sep * np.std(gamma)
+	        center_indices = np.where(gamma >= gamma_thresh)[0]
 	
-	            for a in sep_alphas:
-	                centers = select_centers_gamma(rho, delta, D, k=k, min_sep=a * dc)
-	                labels = assign_labels(order, nneigh, centers)
+	    # 레이블 배정
+	    labels = assign_labels(nneigh, center_indices, rho)
 	
-	                sil = silhouette_score(X_scaled, labels)
-	
-	                mapping, _ = hungarian_mapping(y, labels, n_classes=k)
-	                mapped = np.vectorize(lambda p: mapping.get(p, -1))(labels)
-	                acc = (mapped == y).mean()
-	
-	                score = w_acc * acc + (1 - w_acc) * ((sil + 1) / 2)
-	
-	                if score > best_score:
-	                    best_score = score
-	                    best = {
-	                        'kernel': ker,
-	                        'percentile': pct,
-	                        'dc': float(dc),
-	                        'sep_alpha': float(a),
-	                        'centers': centers,
-	                        'labels': labels,
-	                        'rho': rho,
-	                        'delta': delta,
-	                        'silhouette': float(sil),
-	                        'accuracy': float(acc),
-	                        'mapping': mapping,
-	                        'score': float(score)
-	                    }
-	
-	    return best
+	    return {
+	        "labels"         : labels,
+	        "rho"            : rho,
+	        "delta"          : delta,
+	        "gamma"          : gamma,
+	        "center_indices" : center_indices,
+	        "dc"             : dc,
+	        "dist_matrix"    : dist_matrix,
+	    }
 	
 	
-	def main():
-	    iris = load_iris()
-	    X = iris.data
-	    y = iris.target
-	    species_names = iris.target_names
+	# ────────────────────────────────────────────
+	# 4. 하이퍼파라미터 튜닝 (Grid Search)
+	# ────────────────────────────────────────────
+	print("=" * 55)
+	print("  DPC 하이퍼파라미터 튜닝 (Grid Search)")
+	print("=" * 55)
 	
-	    # Standardize features (important for distance-based clustering)
-	    X_scaled = StandardScaler().fit_transform(X)
+	# 탐색할 파라미터 후보
+	param_grid = {
+	    "dc_percentile" : [15, 18, 20, 23, 25, 30],
+	    "kernel"        : ["gaussian", "cutoff"],
+	    "center_sep"    : [0.0, 0.5, 1.0],
+	}
 	
-	    # Pairwise distance matrix
-	    D = squareform(pdist(X_scaled, metric='euclidean'))
-	    np.fill_diagonal(D, 0.0)
+	best_result = None
+	best_sil    = -1
 	
-	    # Parameter ranges for Iris
-	    kernels = ['cutoff', 'gaussian']
-	    percentiles = list(range(1, 31))
-	    sep_alphas = [0.0, 0.5, 1.0, 1.5, 2.0, 3.0, 4.0, 6.0]
+	for dc_p, ker, csep in product(
+	        param_grid["dc_percentile"],
+	        param_grid["kernel"],
+	        param_grid["center_sep"]):
 	
-	    # Tune (composite objective)
-	    best = tune_dpc(
-	        X_scaled, D, y,
-	        kernels=kernels,
-	        percentiles=percentiles,
-	        sep_alphas=sep_alphas,
-	        k=3,
-	        w_acc=0.4
-	    )
+	    try:
+	        result = run_dpc(X_std, dc_percentile=dc_p, kernel=ker,
+	                         n_clusters=3, center_sep=csep)
+	        labels = result["labels"]
 	
-	    labels = best['labels']
-	    centers = best['centers']
-	    rho = best['rho']
-	    delta = best['delta']
+	        # 유효 클러스터 수 확인 (정확히 3개여야 함)
+	        n_unique = len(np.unique(labels))
+	        if n_unique != 3:
+	            continue
 	
-	    # Map cluster labels -> species labels for legend
-	    mapping = best['mapping']
-	    pred_species = np.vectorize(lambda c: mapping.get(c, -1))(labels)
+	        sil       = silhouette_score(X_std, labels)
+	        acc, mapping = best_map_accuracy(labels, y)
 	
-	    # PCA for visualization
-	    X_pca = PCA(n_components=2, random_state=0).fit_transform(X_scaled)
+	        if sil > best_sil:
+	            best_sil    = sil
+	            best_result = {
+	                **result,
+	                "sil"          : sil,
+	                "acc"          : acc,
+	                "mapping"      : mapping,
+	                "dc_percentile": dc_p,
+	                "kernel"       : ker,
+	                "center_sep"   : csep,
+	            }
+	    except Exception:
+	        continue
 	
-	    colors = {0: '#1f77b4', 1: '#ff7f0e', 2: '#2ca02c'}
-	
-	    fig, axes = plt.subplots(1, 2, figsize=(13, 5.5))
-	
-	    # (1) Decision graph
-	    ax = axes[0]
-	    for cls in [0, 1, 2]:
-	        idx = pred_species == cls
-	        ax.scatter(rho[idx], delta[idx], s=35, color=colors[cls],
-	                   label=species_names[cls], edgecolors='none')
-	    ax.scatter(rho[centers], delta[centers], s=180, marker='X',
-	               color='black', label='Selected centers')
-	    ax.set_title('DPC Decision Graph (rho vs. delta)')
-	    ax.set_xlabel('rho (local density)')
-	    ax.set_ylabel('delta (distance to higher density)')
-	    ax.legend(loc='best', frameon=True)
-	
-	    # (2) PCA scatter
-	    ax = axes[1]
-	    for cls in [0, 1, 2]:
-	        idx = pred_species == cls
-	        ax.scatter(X_pca[idx, 0], X_pca[idx, 1], s=40, color=colors[cls],
-	                   label=species_names[cls], edgecolors='none')
-	    ax.scatter(X_pca[centers, 0], X_pca[centers, 1], s=200, marker='X',
-	               color='black', label='Selected centers')
-	
-	    ax.set_title('DPC on Iris (PCA 2D view)')
-	    ax.set_xlabel('PC1')
-	    ax.set_ylabel('PC2')
-	
-	    text = (
-	        f"Best params: kernel={best['kernel']}, dc_percentile={best['percentile']} (dc={best['dc']:.3f}), "
-	        f"center_sep={best['sep_alpha']}*dc\n"
-	        f"Silhouette Score: {best['silhouette']:.3f}\n"
-	        f"Accuracy (cluster->species mapped): {best['accuracy']:.3f}"
-	    )
-	    ax.text(0.02, 0.02, text, transform=ax.transAxes, fontsize=10,
-	            va='bottom', bbox=dict(boxstyle='round', facecolor='white', alpha=0.9))
-	    ax.legend(loc='best', frameon=True)
-	
-	    plt.tight_layout()
-	    plt.show()
-	
-	    print('Best setting:', {k: v for k, v in best.items() if k != 'labels' and k != 'rho' and k != 'delta'})
+	# 최적 결과 출력
+	br = best_result
+	print(f"  kernel        : {br['kernel']}")
+	print(f"  dc_percentile : {br['dc_percentile']}  →  dc = {br['dc']:.4f}")
+	print(f"  center_sep    : {br['center_sep']} × dc")
+	print(f"  Silhouette    : {br['sil']:.4f}")
+	print(f"  Accuracy      : {br['acc']:.4f}  (mapping={br['mapping']})")
+	print("=" * 55)
 	
 	
-	if __name__ == '__main__':
-	    main()
+	# ────────────────────────────────────────────
+	# 5. 시각화: Decision Graph + PCA 2D 산점도
+	#    각 그래프마다 Silhouette Score / Accuracy 개별 표시
+	# ────────────────────────────────────────────
 	
-
+	# 공통 변수 준비
+	rho            = br["rho"]
+	delta          = br["delta"]
+	labels         = br["labels"]
+	center_indices = br["center_indices"]
+	sil_score      = br["sil"]
+	acc_score      = br["acc"]
+	
+	# 품종별 색상 매핑: 예측 레이블 → 실제 품종 색상 대응
+	COLORS        = ["#4878CF", "#F28E2B", "#59A14F"]   # blue / orange / green
+	mapped_colors = [COLORS[br["mapping"].get(l, 0)] for l in labels]
+	
+	# 그래프 레이아웃: 위쪽에 지표 표시 공간 확보를 위해 높이 조정
+	fig, axes = plt.subplots(1, 2, figsize=(14, 7))
+	fig.suptitle(
+	    f"DPC on Iris  |  kernel={br['kernel']}, "
+	    f"dc_percentile={br['dc_percentile']} (dc={br['dc']:.3f}), "
+	    f"center_sep={br['center_sep']}×dc",
+	    fontsize=12, y=1.01
+	)
+	
+	# ── 공통 성능 지표 출력 함수 ──────────────────────────────
+	def add_score_banner(ax, sil, acc, loc="top"):
+	    """
+	    그래프 상단 또는 하단에 Silhouette / Accuracy 배너를 추가.
+	
+	    Parameters
+	    ----------
+	    ax  : matplotlib Axes 객체
+	    sil : Silhouette Score 값
+	    acc : Accuracy 값
+	    loc : 'top' → 그래프 상단, 'bottom' → 그래프 하단
+	    """
+	    # 성능 등급 색상 결정 (실루엣 기준)
+	    if sil >= 0.6:
+	        sil_color = "#2ca02c"   # 초록 (양호)
+	    elif sil >= 0.4:
+	        sil_color = "#ff7f0e"   # 주황 (보통)
+	    else:
+	        sil_color = "#d62728"   # 빨강 (낮음)
+	
+	    if acc >= 0.9:
+	        acc_color = "#2ca02c"
+	    elif acc >= 0.7:
+	        acc_color = "#ff7f0e"
+	    else:
+	        acc_color = "#d62728"
+	
+	    # y 좌표 설정 (Axes 좌표계 기준)
+	    y_pos  = 1.045 if loc == "top" else -0.13
+	
+	    # Silhouette Score 텍스트
+	    ax.text(0.25, y_pos,
+	            f"Silhouette Score : {sil:.4f}",
+	            transform=ax.transAxes,
+	            fontsize=11, fontweight="bold",
+	            color=sil_color,
+	            ha="center", va="center",
+	            bbox=dict(boxstyle="round,pad=0.3",
+	                      facecolor="#f7f7f7",
+	                      edgecolor=sil_color,
+	                      linewidth=1.2,
+	                      alpha=0.92))
+	
+	    # Accuracy 텍스트
+	    ax.text(0.75, y_pos,
+	            f"Accuracy         : {acc:.4f}",
+	            transform=ax.transAxes,
+	            fontsize=11, fontweight="bold",
+	            color=acc_color,
+	            ha="center", va="center",
+	            bbox=dict(boxstyle="round,pad=0.3",
+	                      facecolor="#f7f7f7",
+	                      edgecolor=acc_color,
+	                      linewidth=1.2,
+	                      alpha=0.92))
+	
+	
+	# ── 5-1. Decision Graph (rho vs delta) ──────────────────
+	ax1 = axes[0]
+	ax1.set_title("DPC Decision Graph (rho vs. delta)", fontsize=12, pad=30)
+	
+	ax1.scatter(rho, delta, c=mapped_colors, s=35, alpha=0.8,
+	            edgecolors="white", linewidths=0.3)
+	
+	# 클러스터 중심점 표시
+	ax1.scatter(rho[center_indices], delta[center_indices],
+	            marker="X", s=260, c="black", zorder=5)
+	
+	# 범례: 품종명으로 표시
+	for i, name in enumerate(species_names):
+	    ax1.scatter([], [], c=COLORS[i], s=55, label=name)
+	ax1.scatter([], [], marker="X", c="black", s=100, label="Selected centers")
+	ax1.legend(fontsize=9, loc="upper left")
+	
+	ax1.set_xlabel("rho (local density)", fontsize=11)
+	ax1.set_ylabel("delta (distance to higher density)", fontsize=11)
+	ax1.grid(True, alpha=0.2)
+	
+	# ▶ Decision Graph 개별 성능 지표 배너 (그래프 상단)
+	add_score_banner(ax1, sil_score, acc_score, loc="top")
+	
+	# ── 5-2. PCA 2D 산점도 ──────────────────────────────────
+	ax2 = axes[1]
+	ax2.set_title("DPC on Iris (PCA 2D view)", fontsize=12, pad=30)
+	
+	# PCA 2D 변환: 4차원 데이터를 2차원으로 축소하여 시각화
+	pca  = PCA(n_components=2, random_state=42)
+	X_2d = pca.fit_transform(X_std)
+	
+	ax2.scatter(X_2d[:, 0], X_2d[:, 1],
+	            c=mapped_colors, s=35, alpha=0.8,
+	            edgecolors="white", linewidths=0.3)
+	
+	# 클러스터 중심점 PCA 투영
+	for ci in center_indices:
+	    ax2.scatter(X_2d[ci, 0], X_2d[ci, 1],
+	                marker="X", s=280, c="black", zorder=5)
+	
+	# 범례: 품종명으로 표시
+	for i, name in enumerate(species_names):
+	    ax2.scatter([], [], c=COLORS[i], s=55, label=name)
+	ax2.scatter([], [], marker="X", c="black", s=100, label="Selected centers")
+	ax2.legend(fontsize=9, loc="lower right")
+	
+	ax2.set_xlabel("PC1", fontsize=11)
+	ax2.set_ylabel("PC2", fontsize=11)
+	ax2.grid(True, alpha=0.2)
+	
+	# ▶ PCA 2D 개별 성능 지표 배너 (그래프 상단)
+	add_score_banner(ax2, sil_score, acc_score, loc="top")
+	
+	plt.tight_layout()
+	plt.savefig("/mnt/user-data/outputs/dpc_iris_result.png",
+	            dpi=150, bbox_inches="tight")
+	plt.show()
+	
+	# ────────────────────────────────────────────
+	# 6. 콘솔 최종 성능 요약 출력
+	# ────────────────────────────────────────────
+	print("\n" + "=" * 55)
+	print("  [그래프 1] Decision Graph  성능 지표")
+	print(f"    Silhouette Score : {sil_score:.4f}")
+	print(f"    Accuracy         : {acc_score:.4f}")
+	print("-" * 55)
+	print("  [그래프 2] PCA 2D Scatter  성능 지표")
+	print(f"    Silhouette Score : {sil_score:.4f}")
+	print(f"    Accuracy         : {acc_score:.4f}")
+	print("=" * 55)
+	print("그래프 저장 완료: dpc_iris_result.png")
+	
+	
 ![](./images/3-5_DPC.png)
+$\rho$ (Rho): 로컬 밀도 (Local Density) : 특정 데이터 포인트 주변에 얼마나 많은 데이터가 밀집되어 있는가를 나타내는 지표<br>
+$\delta$ (Delta): 고밀도점과의 거리 (Distance to Higher Density) :  해당 데이터보다 밀도($\rho$)가 더 높은 가장 가까운 데이터까지의 거리<br>
 
 
 ## [3-1] DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
