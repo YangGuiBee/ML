@@ -1350,10 +1350,9 @@ Accuracy 기준<br>
 ![](./images/1-7.png)
 <br>
 
-
+<!--
 ![](./images/vs_k.png)
-<br>
-
+-->
 
 ## [1-1] K-means
 
@@ -1367,15 +1366,23 @@ Accuracy 기준<br>
 | **할당규칙** | 가장 가까운 중심에 할당<br>$c_i = \arg\min_{j \in \{1,\dots,K\}} \lVert x_i - m_j \rVert^2$ |
 
 
-## [1-2] K-medoids (PAM: Partitioning Around Medoids)
+## [1-2] K-medoids
 
-| 항목 | 내용 |
+| 항목 | PAM: Partitioning Around Medoids |
 |------|------|
 | **구성요소** | 데이터 포인트 $x_i$, 군집 대표점(메도이드) $m_j$ (데이터 중 실제 샘플) |
 | **거리함수** | 일반 거리 (유클리드, 맨해튼 등)<br>$d(x_i, m_j) = \lVert x_i - m_j \rVert$ |
 | **목적함수** | 절댓값 거리합 최소화<br>$J = \sum_{j=1}^{K}\sum_{x_i \in C_j} d(x_i, m_j)$ |
 | **중심갱신** | 군집 내에서 전체 거리합이 최소인 실제 데이터 포인트로 갱신<br>$m_j = \arg\min_{x_h \in C_j} \sum_{x_i \in C_j} d(x_i, x_h)$ |
 | **목표** | 이상치(Outlier)에 강건한 중심 선택 — 군집 내 거리합 최소화 |
+
+| 항목 | CLARANS / CLARA |
+|------|------|
+| **구성요소** | 대규모 데이터셋, 샘플링 기반 메도이드 탐색 알고리즘<br>CLARA(Clustering LARge Applications), CLARANS(Clustering Large Applications based on RANdomized Search) |
+| **거리함수** | K-medoids와 동일 (유클리드 거리, 맨해튼 거리 등 일반 거리 척도)<br>$d(x_i, m_j) = \lVert x_i - m_j \rVert$ |
+| **목적함수** | 군집 내 거리합 최소화<br>$J = \sum_{j=1}^{K}\sum_{x_i \in C_j} d(x_i, m_j)$ |
+| **중심갱신** | **CLARA:** 전체 데이터 중 일부를 샘플링하여 PAM(K-medoids) 수행 후 대표 메도이드 선택<br>**CLARANS:** 무작위 탐색(Randomized Search)을 통해 메도이드 후보 교체 — 비용이 감소하면 새로운 메도이드로 채택 |
+| **목표** | K-medoids의 정확도를 유지하면서 대규모 데이터에서도 효율적으로 수행 — 샘플링 및 확률적 탐색으로 계산 복잡도 감소 |
 
 
 ## [1-3] K-modes
@@ -1389,18 +1396,29 @@ Accuracy 기준<br>
 | **목표** | 군집 내 속성 불일치 최소화 — 범주형 속성 기반 패턴 탐색 |
 
 
-## [1-4] CLARANS / CLARA
+## [1-4] K-prototypes
 
 | 항목 | 내용 |
 |------|------|
-| **구성요소** | 대규모 데이터셋, 샘플링 기반 메도이드 탐색 알고리즘<br>CLARA(Clustering LARge Applications), CLARANS(Clustering Large Applications based on RANdomized Search) |
-| **거리함수** | K-medoids와 동일 (유클리드 거리, 맨해튼 거리 등 일반 거리 척도)<br>$d(x_i, m_j) = \lVert x_i - m_j \rVert$ |
-| **목적함수** | 군집 내 거리합 최소화<br>$J = \sum_{j=1}^{K}\sum_{x_i \in C_j} d(x_i, m_j)$ |
-| **중심갱신** | **CLARA:** 전체 데이터 중 일부를 샘플링하여 PAM(K-medoids) 수행 후 대표 메도이드 선택<br>**CLARANS:** 무작위 탐색(Randomized Search)을 통해 메도이드 후보 교체 — 비용이 감소하면 새로운 메도이드로 채택 |
-| **목표** | K-medoids의 정확도를 유지하면서 대규모 데이터에서도 효율적으로 수행 — 샘플링 및 확률적 탐색으로 계산 복잡도 감소 |
+| **구성요소** | 수치형 $x_i^r$, 범주형 $x_i^c$, 가중치 $\gamma$, 프로토타입 $Q_j$ |
+| **거리함수** | 혼합 거리 (유클리드 + 불일치 거리)<br>$d(x_i, Q_j) = \sum_{k=1}^{p}(x_{ik}^r - q_{jk}^r)^2 + \gamma \sum_{l=1}^{q} \delta(x_{il}^c, q_{jl}^c)$ |
+| **목적함수** | 수치형 분산과 범주형 불일치 합의 가중 결합 최소화<br>$J = \sum_{j=1}^{K}\sum_{x_i \in C_j} d(x_i, Q_j)$ |
+| **중심갱신** | 수치형은 **평균(Mean)**, 범주형은 **최빈값(Mode)**으로 갱신 |
+| **목표** | 수치형과 범주형이 혼합된 데이터셋(Mixed Attributes) 처리 |
 
 
-## [1-5] FCM (Fuzzy C-means)
+## [1-5] Mini-Batch K-means
+
+| 항목 | 내용 |
+|------|------|
+| **구성요소** | 대규모 데이터셋 $X$, 무작위 추출된 미니배치 $B$, 군집 중심 $m_j$ |
+| **거리함수** | 유클리드 거리 (K-means와 동일)<br>$d(x_i, m_j) = \lVert x_i - m_j \rVert^2$ |
+| **목적함수** | 미니배치 샘플에 대한 제곱거리 합 최소화<br>$J = \sum_{x_i \in B} \lVert x_i - m_{c(x_i)} \rVert^2$ |
+| **중심갱신** | 매 단계 미니배치를 사용하여 점진적(Incremental) 가중 평균 갱신 |
+| **목표** | 대용량 데이터에서 메모리 효율성 및 수렴 속도 극대화 |
+
+
+## [1-6] FCM (Fuzzy C-means)
 
 | 항목 | 내용 |
 |------|------|
