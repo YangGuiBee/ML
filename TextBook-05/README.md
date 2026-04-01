@@ -5021,6 +5021,7 @@ https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.ht
 | **KL 발산** | KL Divergence | 비대칭 분포 거리 | $D_{KL}(P \parallel Q) = \sum P \log \frac{P}{Q}$ | 이론적 의미 강함 | 비대칭성 | 확률 모델 |
 | **JS 발산** | Jensen–Shannon | KL의 대칭화 | $JS = \frac{1}{2}KL(P \parallel M) + \frac{1}{2}KL(Q \parallel M)$ | 대칭성 및 안정성 | 추가 연산 비용 | NLP, GAN |
 
-
+<!--
 ![](./images/23.jpg)
-<br>
+-->
+
