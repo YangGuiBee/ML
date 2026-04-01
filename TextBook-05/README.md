@@ -11,6 +11,8 @@
 
 ---
 
+![](./images/7table_1.png)
+
 <img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-05/images/7table_1.png'> 
 
 ---
