@@ -1,3 +1,23 @@
+![](./images/ML05-1.PNG)
+
+<br>
+
+![](./images/ML05-2.PNG)
+
+<br>
+
+![](./images/ML05-3.PNG)
+
+<br>
+
+![](./images/ML05-4.PNG)
+
+<br>
+
+![](./images/ML05-5.PNG)
+
+<br>
+
 #  05 : 비지도 학습(Unsupervised Learning, UL) : 군집화(Clustering)
 
 **군집화(Clustering)란?**
