@@ -446,7 +446,7 @@ Accuracy 기준<br>
 
 <br>	
 
-# [1-2-1] PAM(Partitioning Around Medoids)
+## [1-2-1] PAM(Partitioning Around Medoids)
 ▣ 정의: K-medoids 접근법을 구현하는 탐욕적 알고리즘으로 각 군집에서 가장 최적의 Medoid를 반복적으로 찾는다<br>
 ▣ 필요성: 이상치가 많은 데이터셋에서도 안정적인 군집화를 수행할 수 있음<br>
 ▣ 장점: K-means에 비해 이상치에 덜 민감하며 다양한 거리 측정 방법을 사용할 수 있음<br>
@@ -538,7 +538,7 @@ Accuracy 기준<br>
 ![](./images/1-4.png)
 <br>
 
-# [1-2-2] CLARANS(Clustering Large Applications based on RANdomized Search)
+## [1-2-2] CLARANS(Clustering Large Applications based on RANdomized Search)
 ▣ 정의: PAM(PAM과 K-medoids)의 확장판으로, 대규모 데이터셋에 효율적인 군집화를 제공하기 위해 랜덤화된 탐색 방식을 사용하는 알고리즘. PAM의 전체 데이터셋 탐색 방식 대신 샘플링과 랜덤 선택을 통해 최적의 medoid를 찾는다<br>
 ▣ 필요성: PAM의 느린 성능을 보완하여 대규모 데이터에서도 빠르게 클러스터링을 수행할 수 있도록 설계<br>
 ▣ 장점: 대규모 데이터셋에 적용할 수 있으며, PAM보다 훨씬 효율적이며, 랜덤 탐색 방식을 통해 최적의 medoid를 빠르게 검색<br>
@@ -647,7 +647,7 @@ Accuracy 기준<br>
 ![](./images/1-5.png)
 <br>
 
-# [1-2-3] CLARA(Clustering LARge Applications)
+## [1-2-3] CLARA(Clustering LARge Applications)
 ▣ 정의: PAM을 대규모 데이터에 적용할 수 있도록 확장한 알고리즘으로, 데이터의 일부 샘플을 사용하여 군집화를 수행하는 데, 여러 번의 샘플링을 통해 가장 안정적인 medoid를 선택<br>
 ▣ 필요성: PAM의 높은 계산 비용을 줄이고자 개발되어 대규모 데이터셋에서도 빠르게 군집화를 수행<br>
 ▣ 장점: PAM보다 계산이 효율적이며, 대규모 데이터셋에 적합하며, 표본 기반 접근 방식을 통해 메모리와 시간 효율적<br>
