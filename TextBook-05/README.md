@@ -1,23 +1,21 @@
 
-![](./images/ML05-1.PNG)
-
 <img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-05/images/ML05_1.PNG'> 
 
 <br>
 
-![](./images/ML05-2.PNG)
+<img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-05/images/ML05_2.PNG'> 
 
 <br>
 
-![](./images/ML05-3.PNG)
+<img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-05/images/ML05_3.PNG'> 
 
 <br>
 
-![](./images/ML05-4.PNG)
+<img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-05/images/ML05_4.PNG'> 
 
 <br>
 
-![](./images/ML05-5.PNG)
+<img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-05/images/ML05_5.PNG'> 
 
 <br>
 
