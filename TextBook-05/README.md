@@ -1433,7 +1433,7 @@ Accuracy 기준<br>
 ---
 
 # [2-1] Hierarchical Clustering(Agglomerative / Divisive)
-▣ 정의 : 데이터를 병합(bottom-up)하거나 분할(top-down)하여 계층적인 군집 구조를 만드는 방법<br>
+▣ 정의 : 데이터를 병합(Agglomerative : bottom-up)하거나 분할(Divisive : top-down)하여 계층적인 군집 구조화<br>
 ▣ 필요성 : 군집의 개수를 사전에 정할 필요 없이 계층적 관계를 파악할 때 사용<br>
 ▣ 장점 : 군집 수를 미리 정할 필요 없으며, 덴드로그램(dendrogram)을 통한 군집 분석 가능<br>
 ▣ 단점 : 계산 복잡도가 높으며, 초기 병합 또는 분할 결정이 최종 결과에 영향을 줄 수 있음<br>
