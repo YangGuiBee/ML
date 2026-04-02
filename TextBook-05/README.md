@@ -37,8 +37,7 @@
 ---
 
 ▣ 2026.1학기
-![](./images/total.png)
-
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-05/images/total.png'> 
 <br>
 
 ▣ 2025.2학기
