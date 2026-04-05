@@ -1,7 +1,52 @@
 
+#  06 : 비지도 학습(Unsupervised Learning, UL)
+
+## 1. 클러스터링 (Clustering)
+▣ 정의: 데이터 간의 **유사성(Similarity)**을 측정하여 비슷한 특성을 가진 데이터들끼리 그룹(군집)으로 묶는 기법.<br>
+▣ 특징: 그룹의 수($K$)를 미리 정하거나 데이터 분포에 따라 자동으로 결정.<br>
+▣ 대표 알고리즘: K-Means, DBSCAN, 계층적 군집 분석(Hierarchical Clustering).<br>
+▣ 활용: 고객 세분화, 이미지 분할, 문서 분류.<br>
+<br>
+## 2. 연관 규칙 학습 (Association Rule Learning)
+▣ 정의: 데이터셋 내의 변수들 간에 존재하는 **흥미로운 관계(IF-THEN 규칙)**를 발견하는 방법.<br>
+▣ 특징: "A를 구매한 사람은 B도 구매한다"와 같은 항목 간의 공생 관계를 찾는다. 지지도(Support), 신뢰도(Confidence), 향상도(Lift) 지표를 사용.<br>
+▣ 대표 알고리즘: Apriori, FP-Growth.<br>
+▣ 활용: 장바구니 분석, 추천 시스템, 웹 로그 분석.<br>
+<br>
+## 3. 차원 축소 (Dimensionality Reduction)
+▣ 정의: 고차원의 데이터를 정보 손실을 최소화하면서 저차원(2D, 3D 등)으로 변환하는 기법.<br>
+▣ 특징: 변수가 너무 많아 발생하는 '차원의 저주'를 해결하고, 데이터 시각화 및 모델 성능 향상을 위해 사용.<br>
+▣ 대표 알고리즘: PCA(주성분 분석), t-SNE, LDA.<br>
+▣ 활용: 데이터 시각화, 노이즈 제거, 전처리.<br>
+<br>
+## 4. 이상치 탐지 (Anomaly/Outlier Detection)
+▣ 정의: 대다수의 데이터와 비교했을 때 현저히 다른 특성을 보이는 드문 샘플을 찾아내는 기법.<br>
+▣ 특징: '정상' 데이터의 패턴을 학습한 뒤, 이 패턴에서 벗어나는 데이터를 '이상치'로 판정.<br>
+▣ 대표 알고리즘: Isolation Forest, Local Outlier Factor (LOF), One-Class SVM.<br>
+▣ 활용: 금융 사기 탐지(FDS), 제조 공정 불량 탐지, 네트워크 침입 탐지.<br>
+<br>
+## 5. 밀도 추정 (Density Estimation)
+▣ 정의: 데이터가 생성된 바탕이 되는 **확률 밀도 함수(Probability Density Function)**를 추정하는 기법.<br>
+▣ 특징: 데이터가 특정 영역에 얼마나 집중되어 있는지를 수학적으로 모델링.<br>
+▣ 대표 알고리즘: 가우시안 혼합 모델(GMM), 커널 밀도 추정(KDE).<br>
+▣ 활용: 데이터 생성 모델링, 군집 분석의 기초 작업.<br>
+<br>
+## 6. 신경망 기반 비지도학습 (Neural Network-based)
+▣ 정의: 딥러닝 구조를 활용하여 데이터의 복잡한 계층적 특징을 스스로 추출하는 방식.<br>
+▣ 특징: 데이터를 압축했다가 복원하는 과정에서 핵심 특징(Latent Space)을 학습하거나, 데이터의 분포를 흉내 내는 가상의 데이터를 생성.<br>
+▣ 대표 알고리즘: Autoencoder (AE), Generative Adversarial Networks (GAN).<br>
+▣ 활용: 딥페이크, 이미지 복원, 특징 추출.<br>
+<br>
+## 7. 공분산 추정 (Covariance Estimation)
+▣ 정의: 여러 변수 사이의 상관관계와 변동성을 나타내는 공분산 행렬을 데이터로부터 추정하는 기법.<br>
+▣ 특징: 데이터 내 변수들이 서로 어떻게 연결되어 움직이는지 파악. 특히 데이터가 부족하거나 노이즈가 많을 때 안정적인 행렬을 얻는 것이 중요.<br>
+▣ 대표 알고리즘: Ledoit-Wolf 추정, Graphical Lasso.<br>
+▣ 활용: 포트폴리오 최적화(금융), 신호 처리, 마할라노비스 거리를 이용한 이상치 탐지 보조.<br>
+<br>
 
 
-#  06 : 비지도 학습(Unsupervised Learning, UL) : 연관규칙, 차원축소
+
+
 
 ---
 
