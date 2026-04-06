@@ -69,7 +69,6 @@
 ▣ 특징: 계층적 방식과 달리 전체 구조를 한 번에 파악하며 계산 속도가 매우 빠름. 하지만 군집의 개수(K)를 사전에 지정해야 하며, 구형(Spherical)이 아닌 복잡한 형태의 군집 탐색에는 한계가 존재함.<br>
 ▣ 원리: 각 군집의 중심점(Centroid)을 설정하고 각 데이터를 가장 가까운 중심에 할당한 뒤, 할당된 데이터를 바탕으로 중심점을 반복적으로 갱신하여 최적의 위치를 탐색함.<br>
 ▣ 적용분야: 고객 세분화, 이미지 압축 등 데이터 분포가 비교적 균일하고 대용량인 경우에 주로 사용됨.<br>
-▣ 주요 알고리즘 종류: <br>
 [1.1.1] K-means (K-평균)<br>
 [1.1.2] K-means++ (K-평균 ++)<br>
 [1.1.3] Mini-Batch K-means (미니배치 K-평균)<br>
@@ -86,7 +85,6 @@
 ▣ 특징: 분할 기반 방식과 달리 군집 수(K)를 사전에 정할 필요가 없으며 데이터 간의 상하 관계 파악이 용이함. 그러나 계산 복잡도가 높아 대규모 데이터셋 적용에는 무리가 있음.<br>
 ▣ 원리: 개별 데이터에서 시작해 유사한 것끼리 병합하는 상향식(Agglomerative) 또는 전체에서 시작해 나누어가는 하향식(Divisive) 방식으로 거리를 측정하여 계층을 형성함.<br>
 ▣ 적용분야: 생물 계통도 분석, 문헌 분류 등 데이터 간의 계층적 구조 파악이 중요한 연구 분야.<br>
-▣ 주요 알고리즘 종류: <br>
 [1.2.1] Agglomerative Clustering (Bottom-up) (병합적 클러스터링, 상향식)<br>
 [1.2.2] Divisive Clustering (Top-down) (분할적 클러스터링, 하향식)<br>
 [1.2.3] BIRCH (Balanced Iterative Reducing and Clustering using Hierarchies) (계층을 이용한 균형 반복 축소 클러스터링)<br>
@@ -101,7 +99,6 @@
 ▣ 특징: 분할 기반 방식이 찾지 못하는 기하학적이고 복잡한 형태의 군집을 탐색 가능함. 또한 이상치(Outlier)를 노이즈로 간주하여 효과적으로 제거할 수 있는 장점이 있음.<br>
 ▣ 원리: 특정 반경 내에 최소 데이터 개수가 포함되는지 확인하여 밀집 지역을 정의하고, 이를 연결하여 군집을 확장해 나감.<br>
 ▣ 적용분야: 지리 정보 시스템(GIS) 데이터 분석, 천체 관측 데이터, 노이즈가 많은 센서 데이터 분석.<br>
-▣ 주요 알고리즘 종류: <br>
 [1.3.1] DBSCAN (Density-Based Spatial Clustering of Applications with Noise) (잡음을 포함한 밀도 기반 공간 클러스터링)<br>
 [1.3.2] OPTICS (Ordering Points To Identify the Clustering Structure) (클러스터 구조 식별을 위한 점 순서화)<br>
 [1.3.3] HDBSCAN (Hierarchical DBSCAN) (계층적 DBSCAN)<br>
@@ -115,7 +112,6 @@
 ▣ 정의: 데이터 분포의 밀도가 가장 높은 지점(Mode)을 찾아 중심점을 이동시키며 군집화하는 방식.<br>
 ▣ 특징: K-means와 유사하게 중심을 활용하지만, 고정된 K값이 아닌 데이터 분포에 따라 군집 수가 자동으로 결정됨. 밀도 기반 방식의 특성과 중심점 기반 방식의 특성을 동시에 보유함.<br>
 ▣ 원리: 특정 커널 함수를 사용하여 데이터 밀도가 높아지는 방향으로 윈도우를 반복 이동시키며 최종적으로 수렴하는 지점을 군집 중심으로 설정함.<br>
-▣ 주요 알고리즘 종류: Mean-Shift Clustering, Affinity Propagation.<br>
 ▣ 적용분야: 이미지 분할(Segmentation), 컴퓨터 비전 내 객체 추적.<br>
 [1.4.1] Mean-Shift Clustering (평균 이동 클러스터링)<br>
 [1.4.2] Affinity Propagation (친화도 전파)<br>
@@ -126,7 +122,6 @@
 ▣ 정의: 데이터 공간을 유한한 수의 격자(Grid) 셀 구조로 분할하여 군집화를 수행하는 방식.<br>
 ▣ 특징: 연산 속도가 데이터 포인트의 개수가 아닌 격자의 개수에 의존하므로, 다른 방식들에 비해 데이터 양에 관계없이 처리 속도가 매우 빠름.<br>
 ▣ 원리: 다차원 공간을 격자로 나누고 각 격자 내 데이터의 통계 정보를 수집한 뒤, 밀도가 높은 인접 격자들을 병합하여 군집을 형성함.<br>
-▣ 주요 알고리즘 종류: STING, WaveCluster, CLIQUE, OptiGrid.<br>
 ▣ 적용분야: 대규모 다차원 공간 데이터베이스 분석, 실시간 스트리밍 데이터 처리.<br>
 [1.5.1] STING (STatistical INformation Grid) (통계 정보 격자)<br>
 [1.5.2] WaveCluster (웨이브 클러스터)<br>
@@ -139,7 +134,6 @@
 ▣ 정의: 데이터가 특정한 확률 분포(주로 가우시안 분포)들의 혼합으로 생성되었다고 가정하고 이를 추정하는 방식.<br>
 ▣ 특징: 데이터를 특정 군집에 확정적으로 할당하는 대신, 속할 확률을 계산하는 소프트 클러스터링(Soft Clustering)이 가능함. 수학적 근거가 명확하지만 초기 모델 설정이 중요함.<br>
 ▣ 원리: 확률 모델(예: GMM)의 파라미터를 최댓값으로 만드는 EM(Expectation-Maximization) 알고리즘을 통해 데이터 분포의 최적 파라미터를 도출함.<br>
-▣ 주요 알고리즘 종류: GMM (Gaussian Mixture Model), EM Algorithm, VBGM (Variational Bayesian Gaussian Mixture).<br>
 ▣ 적용분야: 불확실성이 포함된 고객 성향 분석, 텍스트 문서의 주제 분포 모델링.<br>
 [1.6.1] GMM (Gaussian Mixture Model) (가우시안 혼합 모델)<br>
 [1.6.2] EM (Expectation-Maximization) (기대값 최대화 알고리즘)<br>
@@ -154,7 +148,6 @@
 ▣ 정의: 데이터 간의 관계를 그래프로 표현하고, 행렬의 고유값(Eigenvalue) 성질을 이용하여 군집화하는 방식.<br>
 ▣ 특징: 데이터 공간의 전역적 구조를 파악하는 데 유리하며, 비선형적인 구조를 가진 데이터도 저차원으로 투영하여 효과적으로 분리 가능함.<br>
 ▣ 원리: 데이터 간 유사도 행렬을 생성하고 라플라시안 행렬(Laplacian Matrix)의 고유벡터를 추출하여 차원을 축소한 뒤, 축소된 공간에서 기존 클러스터링 기법을 적용함.<br>
-▣ 주요 알고리즘 종류: Spectral Clustering, Louvain Algorithm, Leiden Algorithm, MCL (Markov Clustering).<br>
 ▣ 적용분야: 사회 관계망 서비스(SNS) 커뮤니티 탐지, 화합물 구조 분석, 뇌 네트워크 연결성 분석.<br>
 [1.7.1] Spectral Clustering (Normalized Cuts) (스펙트럴 클러스터링, 정규화 컷)<br>
 [1.7.2] Ratio Cuts (비율 컷)<br>
@@ -164,14 +157,12 @@
 [1.7.6] Louvain Algorithm (루뱅 알고리즘)<br>
 [1.7.7] Leiden Algorithm (라이덴 알고리즘)<br>
 [1.7.8] Girvan-Newman Algorithm (거반-뉴먼 알고리즘)<br>
-[1.7.9] Label Propagation (레이블 전파)<br>
-[1.7.10] Infomap (인포맵)<br>
+[1.7.9] Infomap (인포맵)<br>
 <br>
 ## 1.8 Subspace/Representation Clustering (부분공간/표현 기반 클러스터링)
 ▣ 정의: 전체 차원이 아닌 특정 부분공간(Subspace)이나 학습된 잠재 표현 공간에서 군집을 찾는 방식.<br>
 ▣ 특징: 고차원 데이터에서 발생하는 '차원의 저주' 문제를 극복하기 위해 설계됨. 특정 변수 조합에서만 나타나는 군집을 탐색할 수 있음.<br>
 ▣ 원리: 차원 축소와 군집화를 동시에 수행하거나, 데이터의 희소 표현(Sparse Representation)을 학습하여 유사한 특성을 공유하는 공간을 식별함.<br>
-▣ 주요 알고리즘 종류: PROCLUS, SUBCLU, DEC (Deep Embedded Clustering), SSC (Sparse Subspace Clustering).<br>
 ▣ 적용분야: 고차원 유전자 데이터 분석, 딥러닝 기반 이미지 표현 군집화.<br>
 [1.8.1] PROCLUS (PROjected CLUStering) (투영 클러스터링)<br>
 [1.8.2] ORCLUS (ORiented projected CLUStering) (방향성 투영 클러스터링)<br>
@@ -186,7 +177,6 @@
 ▣ 정의: 데이터 행렬에서 행(데이터)과 열(변수)을 동시에 군집화하는 방식.<br>
 ▣ 특징: 일반적인 군집화가 전체 변수를 기준으로 데이터를 묶는 것과 달리, 특정 변수 집합 내에서만 유사성을 보이는 데이터 부분 집합을 찾아낼 수 있음.<br>
 ▣ 원리: 행렬 내에서 특정 부분 행렬(Submatrix)이 일관된 패턴이나 유사한 값을 가지도록 최적화하는 영역을 탐색함.<br>
-▣ 주요 알고리즘 종류: Cheng and Church Algorithm, ISA (Iterative Signature Algorithm), Bimax, Plaid Model.<br>
 ▣ 적용분야: 특정 약물 조건(열)에 반응하는 유전자(행) 분석, 전자상거래의 고도화된 추천 시스템.<br>
 [1.9.1] Spectral Co-Clustering (스펙트럴 동시 클러스터링)<br>
 [1.9.2] Spectral Biclustering (스펙트럴 이중 클러스터링)<br>
@@ -210,7 +200,6 @@
 ▣ 정의: 데이터베이스에서 설정된 최소 지지도(Minimum Support) 이상의 빈도로 발생하는 아이템 집합을 찾아내는 가장 기초적인 마이닝 방식.<br>
 ▣ 특징: 연관 규칙 학습의 모태가 되는 분야로, 이후 등장하는 고급(2.2)이나 시퀀스(2.3) 마이닝의 기반 기술로 활용됨. 데이터 간의 발생 순서보다는 '함께 발생하는 조합' 자체에 집중함.<br>
 ▣ 원리: 전체 데이터셋을 스캔하여 각 아이템의 빈도를 계산하고, 지지도 임계값을 넘지 못하는 조합을 후보군에서 제거(Pruning)하며 유의미한 패턴을 확장함.<br>
-▣ 주요 알고리즘 종류: Apriori, FP-Growth (Frequent Pattern Growth), Eclat (Equivalence Class Transformation), H-Mine.<br>
 ▣ 적용분야: 대형 마트의 장바구니 분석(Market Basket Analysis), 동시 구매 상품 추천, 단순 아이템 연관성 파악.<br>
 [2.1.1] Apriori Algorithm (선험적 알고리즘)<br>
 [2.1.2] FP-Growth (Frequent Pattern Growth) (빈발 패턴 성장)<br>
@@ -225,7 +214,6 @@
 ▣ 정의: 기본적인 빈발 패턴 탐색을 넘어 데이터의 계층 구조, 다차원 속성, 또는 양적 속성을 반영하여 더 정교한 규칙을 추출하는 방식.<br>
 ▣ 특징: 단순 아이템 조합만 보는 기본 알고리즘(2.1)과 달리 데이터의 속성(시간, 장소, 가격 등)이나 범주형 계층을 고려하므로 훨씬 구체적이고 실행 가능한 통찰을 제공함.<br>
 ▣ 원리: 데이터를 속성별로 다차원 큐브 형태로 구성하거나, 상위 개념(예: 과일)에서 하위 개념(예: 사과)으로 내려가며 단계적으로 마이닝을 수행함.<br>
-▣ 주요 알고리즘 종류: Multi-level Association Rules, Quantitative Association Rules, Multi-dimensional Association Rules, Rare Association Rules.<br>
 ▣ 적용분야: 재고 관리 시스템의 품목 분류별 연관 분석, 인구 통계학적 특성을 결합한 타겟 마케팅.<br>
 [2.2.1] Multi-level Association Rules (다계층 연관규칙)<br>
 [2.2.2] Multi-dimensional Association Rules (다차원 연관규칙)<br>
@@ -240,7 +228,6 @@
 ▣ 정의: 데이터 간의 '시간적 순서' 또는 '사건의 선후 관계'를 고려하여 발생하는 빈발 패턴을 찾아내는 방식.<br>
 ▣ 특징: 단순히 함께 발생하는 조합을 찾는 기본 마이닝(2.1)과 달리 'A 발생 후 B가 발생'하는 인과적 흐름을 포착함. 따라서 시간 흐름이 중요한 로그 데이터 분석에 필수적임.<br>
 ▣ 원리: 시간 정보가 포함된 트랜잭션에서 시퀀스 데이터베이스를 구축하고, 특정 순서를 유지하면서 반복적으로 나타나는 부분 시퀀스(Subsequence)를 탐색함.<br>
-▣ 주요 알고리즘 종류: GSP (Generalized Sequential Patterns), PrefixSpan, SPADE, CloSpan, BIDE.<br>
 ▣ 적용분야: 웹 브라우징 경로 분석(Clickstream Analysis), 고객의 구매 여정 추적, 질병 발생 순서 예측.<br>
 [2.3.1] GSP (Generalized Sequential Patterns) (일반화 순차 패턴)<br>
 [2.3.2] PrefixSpan (Prefix-projected Sequential pattern mining) (접두사 투영 순차 패턴 마이닝)<br>
@@ -253,7 +240,6 @@
 ▣ 정의: 그래프 구조, 시공간 데이터, 또는 데이터의 유용성(이익) 등 특정한 제약 조건이나 데이터 형태에 특화된 패턴을 탐색하는 방식.<br>
 ▣ 특징: 일반적인 텍스트나 수치형 데이터를 다루는 다른 방식들과 달리 비정형 구조(그래프)나 동적인 데이터 스트림, 또는 단순 빈도가 아닌 '가치(Utility)' 중심의 분석을 수행함.<br>
 ▣ 원리: 데이터의 구조적 특성(노드와 간선)을 유지하면서 부분 그래프를 탐색하거나, 각 아이템에 가중치(가격, 수익 등)를 부여하여 총 효용성을 계산하는 알고리즘을 적용함.<br>
-▣ 주요 알고리즘 종류: Graph Pattern Mining, Stream Pattern Mining, Utility Mining, Episode Mining, Negative Association Rules.<br>
 ▣ 적용분야: 화합물 분자 구조의 공통 패턴 탐색, 금융 사기 탐지(스트림 분석), 수익성 극대화를 위한 고부가가치 상품 조합 분석.<br>
 [2.4.1] Graph Pattern Mining (그래프 패턴 마이닝)<br>
 [2.4.2] Tree Pattern Mining (트리 패턴 마이닝)<br>
@@ -270,7 +256,6 @@
 ▣ 정의: 고차원 데이터를 원본 변수들의 선형 결합을 통해 저차원 공간으로 투영하거나, 하나의 행렬을 여러 개의 행렬 곱으로 분해하는 방식.<br>
 ▣ 특징: 비선형 방식(3.2)에 비해 계산 복잡도가 낮고 결과의 해석이 상대적으로 용이함. 데이터의 전역적인 분산이나 구조를 보존하는 데 최적화되어 있으나, 복잡한 곡면 구조를 가진 데이터 처리에는 한계가 있음.<br>
 ▣ 원리: 데이터의 분산을 최대화하는 방향(주성분)을 찾거나, 원래의 행렬을 근사하는 기저 행렬과 계수 행렬을 찾아 차원을 축소함.<br>
-▣ 주요 알고리즘 종류: PCA (Principal Component Analysis), SVD (Singular Value Decomposition), ICA (Independent Component Analysis), NMF (Non-negative Matrix Factorization), FA (Factor Analysis).<br>
 ▣ 적용분야: 노이즈 제거, 데이터 시각화, 특징 추출 등 가장 일반적이고 광범위한 전처리 단계.<br>
 [3.1.1] PCA (Principal Component Analysis) (주성분 분석)<br>
 [3.1.2] Kernel PCA (커널 주성분 분석)<br>
@@ -299,7 +284,6 @@
 ▣ 정의: 고차원 공간에 복잡하게 꼬여 있거나 휘어져 있는 저차원 구조(매니폴드)를 펼쳐서 데이터를 저차원으로 투영하는 방식.<br>
 ▣ 특징: 선형 방식(3.1)으로는 분리할 수 없는 비선형 구조를 효과적으로 파악함. 데이터 포인트 간의 국소적(Local) 거리를 보존하는 데 집중하며, 데이터가 특정 기하학적 형태를 띠고 있을 때 매우 강력함.<br>
 ▣ 원리: 데이터 포인트들 사이의 근접 이웃 관계를 유지하면서, 고차원에서의 기하학적 거리를 저차원에서도 최대한 보존하도록 좌표를 재구성함.<br>
-▣ 주요 알고리즘 종류: Isomap, LLE (Locally Linear Embedding), t-SNE (t-distributed Stochastic Neighbor Embedding), UMAP (Uniform Manifold Approximation and Projection), MDS (Multidimensional Scaling).<br>
 ▣ 적용분야: 복잡한 이미지 데이터의 군집 시각화, 유전자 발현 패턴 분석 등 비선형 관계가 지배적인 고차원 데이터 분석.<br>
 [3.2.1] Isomap (Isometric Mapping) (등거리 매핑)<br>
 [3.2.2] Landmark Isomap (랜드마크 등거리 매핑)<br>
@@ -325,21 +309,18 @@
 ▣ 정의: 특정 도메인의 지식이나 정답 레이블(Label), 또는 다중 뷰 데이터 간의 관계를 활용하여 특수한 목적에 맞게 차원을 축소하는 방식.<br>
 ▣ 특징: 일반적인 비지도 학습 기반 차원 축소와 달리 분류 성능 극대화(지도 학습형)나 문서의 주제 추출 등 특정한 분석 목표에 최적화되어 있음.<br>
 ▣ 원리: 클래스 간 분별력을 최대화하는 축을 찾거나(LDA), 단어와 문서 간의 잠재적인 의미 관계를 확률적으로 모델링함(Topic Modeling).<br>
-▣ 주요 알고리즘 종류: LDA (Linear Discriminant Analysis), Topic Modeling (LDA/pLSA), CCA (Canonical Correlation Analysis), Random Projection.<br>
 ▣ 적용분야: 분류 모델 성능 향상을 위한 전처리, 대규모 텍스트 데이터의 주제 분류, 서로 다른 성격의 데이터셋(이미지-텍스트) 결합 분석.<br>
 [3.2.19] PaCMAP (Pairwise Controlled Manifold Approximation) (쌍별 제어 매니폴드 근사)<br>
 [3.3.1] LDA (Latent Dirichlet Allocation) - Topic Modeling (잠재 디리클레 할당 - 토픽 모델링)<br>
 [3.3.2] pLSA (Probabilistic Latent Semantic Analysis) (확률적 잠재 의미 분석)<br>
 [3.3.3] HDP (Hierarchical Dirichlet Process) (계층적 디리클레 프로세스)<br>
-[3.3.4] LDA (Linear Discriminant Analysis) - Supervised (선형 판별 분석 - 지도학습 기반)<br>
-[3.3.5] CCA (Canonical Correlation Analysis) (정준 상관 분석)<br>
-[3.3.6] Multi-view Learning (다중 뷰 학습)<br>
+[3.3.4] CCA (Canonical Correlation Analysis) (정준 상관 분석)<br>
+[3.3.5] Multi-view Learning (다중 뷰 학습)<br>
 <br>
 ## 3.4 Neural Network-based Dimensionality Reduction (신경망 기반 차원 축소)
 ▣ 정의: 딥러닝 아키텍처를 활용하여 비선형적인 특징 추출과 차원 축소를 수행하는 방식.<br>
 ▣ 특징: 매니폴드 학습(3.2)보다 더 방대한 양의 데이터를 처리할 수 있으며, 학습된 모델을 통해 새로운 데이터에 대한 차원 축소(OOS, Out-of-Sample)가 매우 용이함. 생성 모델과 결합하여 데이터 복원 및 생성이 가능함.<br>
 ▣ 원리: 데이터를 압축하는 인코더(Encoder)와 다시 복원하는 디코더(Decoder)를 구성하고, 입력과 출력의 차이를 최소화하는 과정에서 잠재 공간(Latent Space)의 핵심 특징을 학습함.<br>
-▣ 주요 알고리즘 종류: AE (Autoencoder), VAE (Variational Autoencoder), RBM (Restricted Boltzmann Machine), Self-Supervised Contrastive Learning (SimCLR/MoCo).<br>
 ▣ 적용분야: 고해상도 이미지 특징 임베딩, 이상 탐지(Anomaly Detection), 대규모 비정형 데이터의 잠재 표현 학습.<br>
 [3.4.1] AE (Autoencoder) (오토인코더)<br>
 [3.4.2] DAE (Denoising Autoencoder) (잡음 제거 오토인코더)<br>
@@ -347,12 +328,11 @@
 [3.4.4] CAE (Contractive Autoencoder) (수축 오토인코더)<br>
 [3.4.5] VAE (Variational Autoencoder) (변분 오토인코더)<br>
 [3.4.6] β-VAE (베타-변분 오토인코더)<br>
-[3.4.7] CVAE (Conditional VAE) (조건부 변분 오토인코더)<br>
-[3.4.8] SOM (Self-Organizing Maps) (자기조직화지도)<br>
-[3.4.9] GSOM (Growing Self-Organizing Maps) (성장하는 자기조직화지도)<br>
-[3.4.10] Neural Gas (뉴럴 가스)<br>
-[3.4.11] Growing Neural Gas (성장하는 뉴럴 가스)<br>
-[3.4.12] CPC (Contrastive Predictive Coding) (대조 예측 코딩)<br>
+[3.4.7] SOM (Self-Organizing Maps) (자기조직화지도)<br>
+[3.4.8] GSOM (Growing Self-Organizing Maps) (성장하는 자기조직화지도)<br>
+[3.4.9] Neural Gas (뉴럴 가스)<br>
+[3.4.10] Growing Neural Gas (성장하는 뉴럴 가스)<br>
+[3.4.11] CPC (Contrastive Predictive Coding) (대조 예측 코딩)<br>
 
 ---
 # 4. 이상치 탐지 (Anomaly/Outlier Detection)
@@ -360,7 +340,6 @@
 ▣ 정의: 데이터가 특정 확률 분포를 따른다고 가정하고, 해당 분포에서 발생 확률이 매우 낮은 데이터를 이상치로 판정하는 방식.<br>
 ▣ 특징: 데이터의 통계적 특성이 명확할 때 가장 강력하며 모델이 단순하여 연산 비용이 매우 낮음. 그러나 데이터 분포가 가정과 다를 경우 성능이 급격히 저하되는 한계가 있음.<br>
 ▣ 원리: 평균과 표준편차를 이용해 데이터의 위치를 점수화하거나(Z-Score), 가설 검정을 통해 유의 수준 밖의 관측치를 식별함.<br>
-▣ 주요 알고리즘 종류: Z-Score Method, IQR (Interquartile Range) Method, Grubbs' Test, Chi-Square Test.<br>
 ▣ 적용분야: 단변량 데이터의 단순 오류 제거, 공정 관리(SPC)의 임계치 설정.<br>
 [4.1.1] Z-Score Method (Z-점수 방법)<br>
 [4.1.2] Modified Z-Score (Median Absolute Deviation) (수정된 Z-점수, 중앙값 절대편차)<br>
@@ -375,7 +354,6 @@
 ▣ 정의: 데이터 포인트 간의 거리를 측정하여 주변에 다른 데이터가 멀리 떨어져 있는 객체를 이상치로 분류하는 방식.<br>
 ▣ 특징: 통계 기반 방식(4.1)과 달리 데이터의 분포를 가정할 필요가 없음. 하지만 데이터 양이 많아질수록 모든 쌍의 거리를 계산해야 하므로 연산 복잡도가 크게 증가함.<br>
 ▣ 원리: 각 데이터 포인트에서 k개의 가장 가까운 이웃까지의 거리를 계산하여, 이 거리가 사전에 설정한 임계값보다 큰 경우를 이상치로 간주함.<br>
-▣ 주요 알고리즘 종류: KNN-based Outlier Detection, Mahalanobis Distance, Euclidean Distance-based Detection.<br>
 ▣ 적용분야: 일반적인 다변량 데이터의 군집 외곽 포인트 탐지, 유사도가 중요한 추천 시스템의 노이즈 제거.<br>
 [4.2.1] Euclidean Distance-based Detection (유클리드 거리 기반 탐지)<br>
 [4.2.2] Mahalanobis Distance (마할라노비스 거리)<br>
@@ -391,7 +369,6 @@
 ▣ 정의: 각 데이터 포인트 주변의 국소적 밀도를 측정하여 이웃에 비해 밀도가 현저히 낮은 데이터를 찾아내는 방식.<br>
 ▣ 특징: 거리 기반 방식(4.2)이 처리하기 힘든 '다양한 밀도를 가진 데이터셋'에서도 효과적임. 즉, 국소적인 관점에서의 상대적 이상치 탐지가 가능함.<br>
 ▣ 원리: 특정 포인트의 주변 밀도를 계산한 뒤, 해당 포인트 이웃들의 주변 밀도와 비교하여 상대적인 비율(Local Outlier Factor)을 산출함.<br>
-▣ 주요 알고리즘 종류: LOF (Local Outlier Factor), COF (Connectivity-based Outlier Factor), LoOP (Local Outlier Probability).<br>
 ▣ 적용분야: 복잡한 구조를 가진 데이터 내의 미세한 이상 징후 포착, 사기 탐지(Fraud Detection).<br>
 [4.3.1] DBSCAN-based Outlier Detection (DBSCAN 기반 이상치 탐지)<br>
 [4.3.2] OPTICS-based Outlier Detection (OPTICS 기반 이상치 탐지)<br>
@@ -405,7 +382,6 @@
 ▣ 정의: 정상 데이터를 설명하는 모델을 학습시키거나 데이터를 고립시키는 알고리즘을 통해 이상치를 구별하는 방식.<br>
 ▣ 특징: 밀도 기반(4.3)이나 거리 기반(4.2)에 비해 고차원 데이터 처리에 효율적이며, 특히 Isolation Forest는 대용량 데이터에서 매우 빠른 속도를 자랑함.<br>
 ▣ 원리: 데이터를 랜덤하게 분할하여 특정 데이터를 고립시키기까지 필요한 분할 횟수를 측정함. 이상치는 정상 데이터보다 쉽게 고립(짧은 경로)되는 특성을 이용함.<br>
-▣ 주요 알고리즘 종류: Isolation Forest, OC-SVM (One-Class SVM), SVDD (Support Vector Data Description), Elliptic Envelope.<br>
 ▣ 적용분야: 대규모 보안 로그 분석, 네트워크 침입 탐지 시스템.<br>
 [4.4.1] OC-SVM (One-Class SVM) (일클래스 서포트 벡터 머신)<br>
 [4.4.2] SVDD (Support Vector Data Description) (서포트 벡터 데이터 설명)<br>
@@ -421,7 +397,6 @@
 ▣ 정의: 여러 개의 이상치 탐지 모델을 결합하여 개별 모델의 편향이나 분산을 줄이고 탐지 정확도를 높이는 방식.<br>
 ▣ 특징: 단일 모델을 사용할 때보다 과적합 위험이 낮고 안정적인 성능을 보임. 다양한 알고리즘의 장점을 결합할 수 있으나 구조가 복잡해지는 단점이 있음.<br>
 ▣ 원리: 서로 다른 부분 집합이나 변수를 사용하여 여러 모델을 생성하고, 각 모델의 이상치 점수를 평균내거나 최대값을 취하는 방식으로 최종 판단함.<br>
-▣ 주요 알고리즘 종류: Feature Bagging, LSCP (Locally Selective Combination), SUOD (Scalable Unsupervised Outlier Detection).<br>
 ▣ 적용분야: 높은 신뢰도가 요구되는 금융 거래 모니터링, 복합적인 변수가 얽힌 시스템 오류 진단.<br>
 [4.5.1] Feature Bagging (특징 배깅)<br>
 [4.5.2] Isolation Forest Ensemble (고립 포레스트 앙상블)<br>
@@ -435,7 +410,6 @@
 ▣ 정의: 신경망을 통해 데이터의 복잡한 비선형 특징을 학습하여 정상 패턴에서 벗어난 데이터를 탐지하는 방식.<br>
 ▣ 특징: 고차원 비정형 데이터(이미지, 음성 등) 처리에 독보적임. 특징 추출과 이상 탐지를 동시에 수행할 수 있으나 학습을 위해 많은 양의 데이터와 연산 자원이 필요함.<br>
 ▣ 원리: 오토인코더를 통해 데이터를 압축 후 복원할 때, 정상 데이터는 복원 오차가 작고 이상치는 복원 오차가 크다는 원리를 주로 활용함.<br>
-▣ 주요 알고리즘 종류: AE (Autoencoder)-based Detection, VAE (Variational Autoencoder), GAN (Generative Adversarial Networks), Deep SVDD.<br>
 ▣ 적용분야: 제조 공정의 비전 검사(이미지 결함 탐지), 복잡한 센서 신호의 이상 거동 분석.<br>
 [4.6.1] Autoencoder-based Detection (오토인코더 기반 탐지)<br>
 [4.6.2] VAE (Variational Autoencoder) for Anomaly Detection (이상치 탐지를 위한 변분 오토인코더)<br>
@@ -452,7 +426,6 @@
 ▣ 정의: 시간 흐름에 따라 수집된 데이터에서 추세(Trend), 계절성(Seasonality) 등의 패턴을 벗어난 시점을 찾아내는 방식.<br>
 ▣ 특징: 데이터의 순서와 시점 간의 상관관계가 핵심이며, 특정 시점의 단기적인 급증(Spike)뿐만 아니라 장기적인 패턴의 변화를 탐지해야 함.<br>
 ▣ 원리: 과거 데이터를 바탕으로 현재 값을 예측하고, 실제 값과 예측값 사이의 잔차(Residual)가 허용 범위를 넘어서는 지점을 식별함.<br>
-▣ 주요 알고리즘 종류: ARIMA-based Residual Analysis, Prophet Anomaly Detection, LSTM-based Anomaly Detection, Matrix Profile.<br>
 ▣ 적용분야: 주가 폭락 탐지, 서버 트래픽 급증 모니터링, 심전도(ECG) 이상 신호 탐지.<br>
 [4.7.1] Moving Average/Median (이동 평균/중앙값)<br>
 [4.7.2] Exponential Smoothing (지수 평활)<br>
@@ -466,7 +439,6 @@
 ▣ 정의: 변수의 개수가 매우 많은 고차원 공간에서 '차원의 저주' 문제를 극복하며 이상치를 탐지하는 특화 방식.<br>
 ▣ 특징: 고차원에서는 모든 데이터 간의 거리가 멀어지는 현상이 발생하여 일반적인 거리 기반 방식(4.2)이 무력화됨. 이를 해결하기 위해 부분 공간이나 각도를 활용함.<br>
 ▣ 원리: 전체 변수 중 유의미한 변수 조합(부분 공간)을 찾거나, 데이터 포인트 간의 거리가 아닌 각도(Angle)의 분산을 측정하여 이상치를 판별함.<br>
-▣ 주요 알고리즘 종류: ABOD (Angle-based Outlier Detection), HiCS (High-dimensional Outlier Detection), Subspace Outlier Detection.<br>
 ▣ 적용분야: 수천 개의 변수를 가진 유전자 데이터 분석, 다변수 화학 공정의 이상 상태 감시.<br>
 [4.8.1] Subspace Outlier Detection (부분공간 이상치 탐지)<br>
 [4.8.2] HiCS (High-dimensional Outlier Detection) (고차원 이상치 탐지)<br>
@@ -480,7 +452,6 @@
 ▣ 정의: 데이터 공간을 일정한 간격의 빈(Bin)으로 나누고 각 빈에 속하는 데이터의 개수를 측정하여 불연속적인 밀도를 추정하는 방식.<br>
 ▣ 특징: 가장 단순하고 직관적인 방식으로 연산 비용이 매우 낮음. 그러나 빈의 경계에서 밀도가 불연속적으로 변하며, 빈의 너비 설정에 따라 결과의 왜곡이 심하게 발생할 수 있음.<br>
 ▣ 원리: 전체 데이터 범위를 구간으로 나누어 각 구간의 높이를 해당 구간에 포함된 데이터 포인트의 빈도수에 비례하게 설정함.<br>
-▣ 주요 알고리즘 종류: Equal-Width Histogram, Equal-Frequency Histogram, Bayesian Blocks.<br>
 ▣ 적용분야: 단변량 데이터의 대략적인 분포 확인, 실시간 데이터 스트림의 기초적인 통계 요약.<br>
 [5.1.1] Equal-Width Histogram (등간격 히스토그램)<br>
 [5.1.2] Equal-Frequency Histogram (등빈도 히스토그램)<br>
@@ -492,7 +463,6 @@
 ▣ 정의: 각 데이터 포인트에 커널 함수를 배치하고 이들을 합산하여 매끄러운(Smooth) 확률 밀도 함수를 생성하는 방식.<br>
 ▣ 특징: 히스토그램 기반 방식(5.1)의 불연속성 문제를 해결하여 부드러운 곡선 형태의 밀도를 제공함. 데이터 분포에 대한 사전 가정이 필요 없는 비파라메트릭 방식의 대표 주자임.<br>
 ▣ 원리: 개별 데이터 포인트마다 종 모양의 커널 함수를 적용하고, 전체 영역에서 이 함수들을 평균하여 누적된 밀도 값을 도출함.<br>
-▣ 주요 알고리즘 종류: Univariate KDE, Multivariate KDE, Gaussian Kernel, Epanechnikov Kernel.<br>
 ▣ 적용분야: 데이터 시각화(산점도의 밀도 표현), 이상치 탐지를 위한 임계치 설정, 통계적 가설 검정의 분포 추정.<br>
 [5.2.1] Univariate KDE (일변량 커널 밀도 추정)<br>
 [5.2.2] Multivariate KDE (다변량 커널 밀도 추정)<br>
@@ -513,7 +483,6 @@
 ▣ 정의: 데이터가 특정한 수학적 확률 분포(정규분포 등)를 따른다고 가정하고, 해당 분포를 결정하는 매개변수(평균, 분산 등)를 추정하는 방식.<br>
 ▣ 특징: 비파라메트릭 방식(5.4)에 비해 적은 양의 데이터로도 효율적인 추정이 가능하며 모델이 매우 간결함. 단, 실제 데이터가 가정된 분포와 다를 경우 오차가 매우 큼.<br>
 ▣ 원리: 주어진 데이터를 바탕으로 확률 모델의 우도(Likelihood)를 최대화하거나 모멘트를 일치시키는 파라미터를 계산함.<br>
-▣ 주요 알고리즘 종류: MLE (Maximum Likelihood Estimation), Method of Moments, Bayesian Parameter Estimation.<br>
 ▣ 적용분야: 정규성이 보장된 공정 데이터 분석, 경제 지표의 장기적 추세 모델링.<br>
 [5.2.14] Variable Bandwidth KDE (가변 대역폭 커널 밀도 추정)<br>
 [5.3.1] Variational Inference for GMM (GMM을 위한 변분 추론)<br>
@@ -525,7 +494,6 @@
 ▣ 정의: 데이터의 특정 분포 형태를 사전에 가정하지 않고, 오직 주어진 데이터의 구조만을 이용하여 밀도를 직접 추정하는 방식.<br>
 ▣ 특징: 파라메트릭 방식(5.3)보다 유연하여 복잡하고 다봉형(Multimodal)인 분포도 정확하게 묘사 가능함. 다만, 추정을 위해 대규모 데이터셋이 요구되며 차원이 높아질수록 성능이 저하됨.<br>
 ▣ 원리: 특정 지점 주변의 이웃 데이터 개수를 세거나 공간을 데이터 밀도에 맞게 가변적으로 분할하여 밀도를 측정함.<br>
-▣ 주요 알고리즘 종류: k-Nearest Neighbors Density Estimation, Local Likelihood Density Estimation, Orthogonal Series Density Estimation.<br>
 ▣ 적용분야: 분포 형상을 예측하기 어려운 탐색적 데이터 분석(EDA), 기계학습의 비지도 학습 전처리.<br>
 [5.4.1] k-Nearest Neighbors Density Estimation (k-최근접 이웃 밀도 추정)
 [5.4.2] Local Likelihood Density Estimation (지역 우도 밀도 추정)
@@ -535,7 +503,6 @@
 ▣ 정의: 신경망이나 복잡한 수학적 변환을 활용하여 고차원 공간의 복잡한 데이터 분포를 정교하게 모델링하는 방식.<br>
 ▣ 특징: 기존 KDE(5.2)나 비파라메트릭 방식(5.4)이 해결하지 못하는 초고차원 데이터(이미지, 음성 등)의 밀도를 효과적으로 추정함. 생성 모델과의 연관성이 매우 높음.<br>
 ▣ 원리: 단순한 분포를 복잡한 가역 변환(Reversible Transformation)을 통해 실제 데이터 분포로 변환하거나, 딥러닝 잠재 공간에서 밀도를 학습함.<br>
-▣ 주요 알고리즘 종류: Normalizing Flows (Real NVP/MAF), GMM (Gaussian Mixture Model), Dirichlet Process Mixture Model, Neural Density Estimation.<br>
 ▣ 적용분야: 생성형 AI의 데이터 샘플링, 고차원 이상 탐지, 베이지안 추론을 위한 복잡한 사후 분포 근사.<br>
 [5.5.1] Copula-based Density Estimation (코퓰라 기반 밀도 추정)<br>
 [5.5.2] Vine Copula (바인 코퓰라)<br>
@@ -550,30 +517,26 @@
 ▣ 정의: 학습 데이터의 확률 분포를 학습하여 그와 유사한 새로운 데이터를 생성해내는 신경망 모델.<br>
 ▣ 특징: 표현 학습(6.2)이 데이터의 특징 추출에 집중하는 것과 달리, 데이터 전체의 생성 프로세스를 모델링함. 결과물의 품질과 다양성이 성능 평가의 핵심 지표임.<br>
 ▣ 원리: 잠재 변수로부터 데이터를 복원하거나(VAE), 생성자와 판별자가 서로 대립하며 정교한 데이터를 생성하도록 유도함(GAN). 최근에는 노이즈를 점진적으로 제거하는 역과정을 학습함(Diffusion).<br>
-▣ 주요 알고리즘 종류: GAN (Generative Adversarial Networks), VAE (Variational Autoencoder), Diffusion Models, PixelCNN, Normalizing Flows.<br>
 ▣ 적용분야: 이미지 및 영상 합성, 데이터 증강(Data Augmentation), 예술 콘텐츠 생성.<br>
 [6.1.1] RBM (Restricted Boltzmann Machine) (제한 볼츠만 머신)<br>
 [6.1.2] CD (Contrastive Divergence) Algorithm (대조 발산 알고리즘)<br>
 [6.1.3] PCD (Persistent Contrastive Divergence) (지속 대조 발산)<br>
 [6.1.4] DBN (Deep Belief Networks) (심층 신념 신경망)<br>
-[6.1.5] CVAE (Conditional VAE) (조건부 변분 오토인코더)<br>
-[6.1.6] β-VAE (베타 변분 오토인코더)<br>
-[6.1.7] Disentangled VAE (분리 표현 변분 오토인코더)<br>
-[6.1.8] GAN (Generative Adversarial Networks) (생성적 적대 신경망)<br>
-[6.1.9] DCGAN (Deep Convolutional GAN) (심층 합성곱 생성적 적대 신경망)<br>
-[6.1.10] WGAN (Wasserstein GAN) (바서슈타인 생성적 적대 신경망)<br>
-[6.1.11] cGAN (Conditional GAN) (조건부 생성적 적대 신경망)<br>
-[6.1.12] StyleGAN (스타일 생성적 적대 신경망)<br>
-[6.1.13] CycleGAN (사이클 생성적 적대 신경망)<br>
-[6.1.14] Diffusion Models (확산 모델)<br>
-[6.1.15] DDPM (Denoising Diffusion Probabilistic Models) (잡음 제거 확산 확률 모델)<br>
-[6.1.16] Score-based Generative Models (점수 기반 생성 모델)<br>
+[6.1.5] β-VAE (베타 변분 오토인코더)<br>
+[6.1.6] Disentangled VAE (분리 표현 변분 오토인코더)<br>
+[6.1.7] GAN (Generative Adversarial Networks) (생성적 적대 신경망)<br>
+[6.1.8] DCGAN (Deep Convolutional GAN) (심층 합성곱 생성적 적대 신경망)<br>
+[6.1.9] WGAN (Wasserstein GAN) (바서슈타인 생성적 적대 신경망)<br>
+[6.1.10] StyleGAN (스타일 생성적 적대 신경망)<br>
+[6.1.11] CycleGAN (사이클 생성적 적대 신경망)<br>
+[6.1.12] Diffusion Models (확산 모델)<br>
+[6.1.13] DDPM (Denoising Diffusion Probabilistic Models) (잡음 제거 확산 확률 모델)<br>
+[6.1.14] Score-based Generative Models (점수 기반 생성 모델)<br>
 <br>
 ## 6.2 Representation Learning (표현 학습)
 ▣ 정의: 로우 데이터(Raw Data)로부터 다운스트림 태스크(분류, 회귀 등)에 유용한 핵심 특징(Feature)을 스스로 추출하도록 학습하는 방식.<br>
 ▣ 특징: 생성 모델(6.1)처럼 데이터를 복원하는 데 목적을 두기보다, 데이터 간의 유사성과 차이점을 효과적으로 구별하는 임베딩 공간 구축에 집중함.<br>
 ▣ 원리: 데이터의 일부를 가리고 맞히거나(Masking), 같은 데이터에서 변형된 개체끼리는 가깝게, 다른 데이터와는 멀게 배치하는 대조 학습(Contrastive Learning)을 수행함.<br>
-▣ 주요 알고리즘 종류: SimCLR, MoCo (Momentum Contrast), BERT (Masked LM), MAE (Masked Autoencoders), BYOL.<br>
 ▣ 적용분야: 사전 학습(Pre-training) 모델 구축, 전이 학습(Transfer Learning)을 위한 특징 추출기.<br>
 [6.2.1] Stacked Autoencoder (적층 오토인코더)
 [6.2.2] DAE (Denoising Autoencoder) (잡음 제거 오토인코더)<br>
@@ -596,7 +559,6 @@
 ▣ 정의: 신경망을 통해 고차원 데이터를 저차원 잠재 공간으로 투영함과 동시에 최적의 군집을 할당하는 방식.<br>
 ▣ 특징: 전통적인 클러스터링(1.1~1.9)이 차원의 저주에 취약한 것과 달리, 비선형 특징 추출을 통해 복잡한 비정형 데이터에서도 명확한 군집화가 가능함.<br>
 ▣ 원리: 오토인코더 등으로 특징을 압축하면서, 잠재 공간 상의 데이터 분포가 특정 중심점(Centroid)에 뭉치도록 군집화 손실 함수(Clustering Loss)를 함께 최적화함.<br>
-▣ 주요 알고리즘 종류: DEC (Deep Embedded Clustering), IDEC, JUMP (Joint Unsupervised Learning), Deep Adaptive Clustering (DAC).<br>
 ▣ 적용분야: 대규모 이미지 라이브러리 자동 분류, 복잡한 사용자 행동 패턴 그룹화.<br>
 [6.3.1] SOM (Self-Organizing Maps) for Clustering (클러스터링을 위한 자기조직화지도)<br>
 [6.3.2] DEC (Deep Embedded Clustering) (심층 임베디드 클러스터링)<br>
@@ -614,7 +576,6 @@
 ▣ 정의: 고차원 입력 데이터를 정보 손실을 최소화하면서 저차원의 압축된 표현으로 변환하는 신경망 기술.<br>
 ▣ 특징: 선형 차원 축소(3.1)인 PCA 등에 비해 훨씬 복잡한 비선형 상관관계를 포착할 수 있으며, 학습된 모델을 새 데이터에 즉시 적용 가능한 확장성을 가짐.<br>
 ▣ 원리: 입력 데이터를 압축하는 인코더와 복원하는 디코더를 대칭적으로 구성하고, 입력과 출력의 차이(Reconstruction Error)를 최소화하는 과정에서 병목 지점(Bottleneck)의 차원을 제한함.<br>
-▣ 주요 알고리즘 종류: Autoencoder (AE), Stacked Autoencoder, Denoising Autoencoder, Contractive Autoencoder.<br>
 ▣ 적용분야: 고차원 데이터의 시각화 전처리, 데이터 압축 및 통신 효율화, 이상 탐지용 특징 추출.<br>
 [6.4.1] Neural Network Embeddings (신경망 임베딩)<br>
 [6.4.2] Graph Neural Networks for Dimensionality Reduction (차원 축소를 위한 그래프 신경망)<br>
@@ -623,7 +584,6 @@
 ▣ 정의: 데이터의 각 상태에 '에너지'라는 스칼라 값을 부여하여, 관측된 데이터에는 낮은 에너지를, 비정상 데이터에는 높은 에너지를 할당하도록 학습하는 방식.<br>
 ▣ 특징: 확률 분포를 명시적으로 계산해야 하는 생성 모델(6.1)보다 유연하며, 정규화 상수 계산 없이도 복잡한 종속 관계를 모델링할 수 있음.<br>
 ▣ 원리: 에너지 함수(Energy Function)를 정의하고, 학습 데이터의 에너지는 낮추고 그 외 지역의 에너지는 높이는 대조적 다이버전스(Contrastive Divergence) 등의 기법으로 파라미터를 조정함.<br>
-▣ 주요 알고리즘 종류: RBM (Restricted Boltzmann Machine), Deep Belief Networks (DBN), Deep Boltzmann Machines (DBM), Contrastive Divergence (CD).<br>
 ▣ 적용분야: 협업 필터링 추천 시스템, 다변량 데이터의 결합 분포 모델링, 노이즈 제거 및 데이터 복원.<br>
 [6.5.1] Boltzmann Machines (볼츠만 머신)<br>
 [6.5.2] Hopfield Networks (홉필드 신경망)<br>
@@ -636,7 +596,6 @@
 ▣ 정의: 주어진 표본 데이터를 이용하여 변수 간의 선형적 상관관계를 나타내는 공분산 행렬을 직접 계산하는 방식.<br>
 ▣ 특징: 가장 단순하고 계산량이 적으나, 표본 수가 변수 개수보다 적을 경우 행렬이 특이 행렬(Singular Matrix)이 되어 역행렬을 구할 수 없는 문제가 있음.<br>
 ▣ 원리: 각 변수의 평균으로부터의 편차 곱을 합산한 뒤 표본 크기($N-1$)로 나누어 표본 공분산을 산출함.<br>
-▣ 주요 알고리즘 종류: Sample Covariance Matrix (SCM), Maximum Likelihood Estimator (MLE).<br>
 ▣ 적용분야: 데이터 차원이 낮고 표본이 충분한 일반적인 통계 분석 및 기초 전처리.<br>
 [7.1.1] Empirical Covariance (경험적 공분산)<br>
 [7.1.2] Sample Covariance Matrix (표본 공분산 행렬)<br>
@@ -646,7 +605,6 @@
 ▣ 정의: 표본 공분산 행렬과 항등 행렬(Identity Matrix)과 같은 구조적 타겟 행렬을 가중 결합하여 추정치의 분산을 줄이는 방식.<br>
 ▣ 특징: 기본 추정 방식(7.1)의 불안정성을 해결하여 항상 역행렬이 존재하는 정칙 행렬(Invertible Matrix)을 보장함. 고차원 데이터에서 편향-분산 트레이드오프를 조절하는 데 탁월함.<br>
 ▣ 원리: 표본 공분산에 일정 비율의 편향을 주입하여 극단적인 고유값(Eigenvalue)을 중앙으로 수축시킴으로써 추정의 안정성을 높임.<br>
-▣ 주요 알고리즘 종류: Ledoit-Wolf Estimator, Oracle Approximating Shrinkage (OAS), James-Stein Estimator.<br>
 ▣ 적용분야: 포트폴리오 최적화(Markowitz 모델), 변수 개수가 많은 금융 데이터 분석.<br>
 [7.2.1] Ledoit-Wolf Shrinkage (르두와-울프 축소)<br>
 [7.2.2] OAS (Oracle Approximating Shrinkage) (오라클 근사 축소)<br>
@@ -658,7 +616,6 @@
 ▣ 정의: 변수 간의 관계가 대부분 0(독립)이라고 가정하고, 유의미한 관계만을 남겨 행렬 내의 많은 원소를 0으로 만드는 방식.<br>
 ▣ 특징: 고차원 데이터에서 불필요한 노이즈 관계를 제거하여 모델의 해석력을 높임. 특히 정밀도 행렬(Precision Matrix)을 추정할 때 변수 간의 조건부 독립성을 파악하기 용이함.<br>
 ▣ 원리: $L_1$ 규제화(Regularization)를 공분산 또는 정밀도 행렬 추정식에 추가하여 작은 값들을 0으로 수축시킴.<br>
-▣ 주요 알고리즘 종류: Graphical Lasso (Glasso), Thresholding Methods, Hard/Soft Thresholding.<br>
 ▣ 적용분야: 유전자 조절 네트워크 분석, 뇌 연결성 지도 작성, 변수 간 인과 관계 파악.<br>
 [7.3.1] GLASSO (Graphical Lasso) (그래프 라쏘)<br>
 [7.3.2] Sparse Inverse Covariance Estimation (희소 역공분산 추정)<br>
@@ -670,7 +627,6 @@
 ▣ 정의: 데이터 내에 포함된 이상치(Outlier)나 오염된 샘플의 영향을 최소화하여 공분산을 추정하는 방식.<br>
 ▣ 특징: 일반적인 추정 방식(7.1)이 이상치에 매우 민감하여 결과가 왜곡되는 단점을 보완함. 데이터가 정규분포를 따르지 않거나 꼬리가 두꺼운 경우에도 안정적임.<br>
 ▣ 원리: 데이터 중 가장 밀집된 부분 집합만을 선택하여 공분산을 계산하거나, 극단값에 낮은 가중치를 부여하는 가중치 함수를 사용함.<br>
-▣ 주요 알고리즘 종류: Minimum Covariance Determinant (MCD), M-Estimator, S-Estimator, Stahel-Donoho Estimator.<br>
 ▣ 적용분야: 이상치가 포함된 공정 센서 데이터 분석, 통계적 품질 관리, 강건한 주성분 분석(Robust PCA).<br>
 [7.4.1] MCD (Minimum Covariance Determinant) (최소 공분산 행렬식)<br>
 [7.4.2] FastMCD (Robust Covariance) (강건 공분산, 고속 MCD)<br>
@@ -681,7 +637,6 @@
 ▣ 정의: 데이터의 물리적 성질이나 도메인 지식을 바탕으로 공분산 행렬이 특정한 수학적 구조(Toeplitz, Block-diagonal 등)를 가진다고 가정하고 추정하는 방식.<br>
 ▣ 특징: 임의의 행렬을 추정하는 다른 방식들과 달리 추정해야 할 파라미터 수를 획기적으로 줄여 추정 정밀도를 높임.<br>
 ▣ 원리: 공분산 행렬의 형태를 사전에 정의된 대칭성이나 순환성 구조로 고정하고, 해당 구조 내에서 최적의 파라미터를 탐색함.<br>
-▣ 주요 알고리즘 종류: Toeplitz Structure Estimation, Autoregressive (AR) Structure, Factor Analysis Model.<br>
 ▣ 적용분야: 시공간 데이터 분석(기상, 지계), 신호 처리의 스펙트럼 분석, 반복 측정된 임상 데이터 분석.<br>
 [7.5.1] Block Diagonal Covariance (블록 대각 공분산)<br>
 [7.5.2] Banded Covariance (밴드 공분산)<br>
@@ -693,7 +648,6 @@
 ▣ 정의: 변수의 수($p$)가 표본의 수($n$)보다 훨씬 많은 'Large $p$, Small $n$' 상황에서 공분산 행렬을 정확하게 추정하기 위한 특화 기법.<br>
 ▣ 특징: 차원의 저주로 인해 발생하는 고유값 왜곡 현상을 전문적으로 교정함. 축소 방법(7.2)이나 희소 방법(7.3)의 원리를 고차원 이론에 맞게 통합 및 확장한 형태임.<br>
 ▣ 원리: 랜덤 행렬 이론(Random Matrix Theory)을 적용하여 표본 고유값 분포의 편향을 보정하거나, 저차원 구조(Low-rank)와 희소 구조(Sparse)의 결합 모델을 사용함.<br>
-▣ 주요 알고리즘 종류: Nonlinear Shrinkage, Latent Variable Graphical Model, Banding/Tapering Methods.<br>
 ▣ 적용분야: 유전체학(Genomics), 고해상도 위성 이미지 분석, 초고차원 특징 기반 머신러닝 모델링.<br>
 [7.6.1] Regularized Covariance Estimation (정규화 공분산 추정)<br>
 [7.6.2] Random Matrix Theory Approaches (무작위 행렬 이론 접근법)<br>
