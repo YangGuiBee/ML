@@ -53,6 +53,17 @@
 
 ---
 # 1. 클러스터링 (Clustering)
+**1.1 Partitioning-Based Clustering (분할 기반 클러스터링)** <br>
+**1.2 Hierarchical Clustering (계층적 클러스터링)** <br>
+**1.3 Density-Based Clustering (밀도 기반 클러스터링)** <br>
+**1.4 Centroid/Shift-Based Clustering (중심점/이동 기반 클러스터링)** <br>
+**1.5 Grid-Based Clustering (격자 기반 클러스터링)** <br>
+**1.6 Model-Based Clustering (모델 기반 클러스터링)** <br>
+**1.7 Graph/Spectral Clustering (그래프/스펙트럴 클러스터링)** <br>
+**1.8 Subspace/Representation Clustering (부분공간/표현 기반 클러스터링)** <br>
+**1.9 Biclustering (이중 클러스터링)** <br>
+---
+
 ## 1.1 Partitioning-Based Clustering (분할 기반 클러스터링)
 ▣ 정의: 데이터를 사전에 정해진 K개의 배타적인 집합으로 나누는 방식.<br>
 ▣ 특징: 계층적 방식과 달리 전체 구조를 한 번에 파악하며 계산 속도가 매우 빠름. 하지만 군집의 개수(K)를 사전에 지정해야 하며, 구형(Spherical)이 아닌 복잡한 형태의 군집 탐색에는 한계가 존재함.<br>
