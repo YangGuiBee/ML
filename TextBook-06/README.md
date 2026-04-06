@@ -1,7 +1,7 @@
 
 #  06 : 비지도 학습(Unsupervised Learning, UL)
 ---
-## 1. 클러스터링 (Clustering)
+**1. 클러스터링 (Clustering)** <br>
 ## 2. 연관 규칙 학습 (Association Rule Learning)
 ## 3. 차원 축소 (Dimensionality Reduction)
 ## 4. 이상치 탐지 (Anomaly/Outlier Detection)
