@@ -1,6 +1,14 @@
 
 #  06 : 비지도 학습(Unsupervised Learning, UL)
-
+---
+# 1. 클러스터링 (Clustering)
+# 2. 연관 규칙 학습 (Association Rule Learning)
+# 3. 차원 축소 (Dimensionality Reduction)
+# 4. 이상치 탐지 (Anomaly/Outlier Detection)
+# 5. 밀도 추정 (Density Estimation)
+# 6. 신경망 기반 비지도학습 (Neural Network-based)
+# 7. 공분산 추정 (Covariance Estimation)
+---
 # 1. 클러스터링 (Clustering)
 ▣ 정의: 데이터 간의 유사성(Similarity)을 측정하여 비슷한 특성을 가진 데이터들끼리 그룹(군집)으로 묶는 기법.<br>
 ▣ 특징: 그룹의 수($K$)를 미리 정하거나 데이터 분포에 따라 자동으로 결정.<br>
