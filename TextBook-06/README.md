@@ -129,6 +129,12 @@
 
 ---
 # 2. 연관 규칙 학습 (Association Rule Learning)
+**2.1 Frequent Pattern Mining Algorithms (빈발 패턴 탐색 알고리즘)** <br>
+**2.2 Advanced Pattern Mining (고급 패턴 탐색)** <br>
+**2.3 Sequential Pattern Mining (시퀀스 패턴 마이닝)** <br>
+**2.4 Specialized Pattern Mining (특수 패턴 마이닝)** <br>
+---
+
 ## 2.1 Frequent Pattern Mining Algorithms (빈발 패턴 탐색 알고리즘)
 ▣ 정의: 데이터베이스에서 설정된 최소 지지도(Minimum Support) 이상의 빈도로 발생하는 아이템 집합을 찾아내는 가장 기초적인 마이닝 방식.<br>
 ▣ 특징: 연관 규칙 학습의 모태가 되는 분야로, 이후 등장하는 고급(2.2)이나 시퀀스(2.3) 마이닝의 기반 기술로 활용됨. 데이터 간의 발생 순서보다는 '함께 발생하는 조합' 자체에 집중함.<br>
@@ -159,6 +165,9 @@
 
 ---
 # 3. 차원 축소 (Dimensionality Reduction)
+
+---
+
 ## 3.1 Linear Dimensionality Reduction / Matrix Factorization (선형 차원 축소 / 행렬 분해)
 ▣ 정의: 고차원 데이터를 원본 변수들의 선형 결합을 통해 저차원 공간으로 투영하거나, 하나의 행렬을 여러 개의 행렬 곱으로 분해하는 방식.<br>
 ▣ 특징: 비선형 방식(3.2)에 비해 계산 복잡도가 낮고 결과의 해석이 상대적으로 용이함. 데이터의 전역적인 분산이나 구조를 보존하는 데 최적화되어 있으나, 복잡한 곡면 구조를 가진 데이터 처리에는 한계가 있음.<br>
