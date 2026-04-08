@@ -249,7 +249,10 @@
 
 ---
 # 3. 차원 축소 (Dimensionality Reduction)
-
+**3.1 Linear Dimensionality Reduction / Matrix Factorization (선형 차원 축소 / 행렬 분해)** <br>
+**3.2 Nonlinear Manifold Learning (비선형 매니폴드 학습)** <br>
+**3.3 Special Purpose Dimensionality Reduction (특수 목적 차원 축소)** <br>
+**3.4 Neural Network-based Dimensionality Reduction (신경망 기반 차원 축소)** <br>
 ---
 
 ## 3.1 Linear Dimensionality Reduction / Matrix Factorization (선형 차원 축소 / 행렬 분해)
