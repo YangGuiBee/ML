@@ -6,7 +6,7 @@
 **3. 차원 축소 (Dimensionality Reduction)** <br>
 **4. 이상치 탐지 (Anomaly/Outlier Detection)** <br>
 **5. 밀도 추정 (Density Estimation)** <br>
-**6. 신경망 기반 비지도학습 (Neural Network-based)** <br>
+**6. 신경망 기반 (Neural Network-based)** <br>
 **7. 공분산 추정 (Covariance Estimation)** <br>
 ---
 # 1. 클러스터링 (Clustering)
@@ -39,7 +39,7 @@
 ▣ 대표 알고리즘: 가우시안 혼합 모델(GMM), 커널 밀도 추정(KDE).<br>
 ▣ 활용: 데이터 생성 모델링, 군집 분석의 기초 작업.<br>
 <br>
-# 6. 신경망 기반 비지도학습 (Neural Network-based)
+# 6. 신경망 기반 (Neural Network-based)
 ▣ 정의: 딥러닝 구조를 활용하여 데이터의 복잡한 계층적 특징을 스스로 추출하는 방식.<br>
 ▣ 특징: 데이터를 압축했다가 복원하는 과정에서 핵심 특징(Latent Space)을 학습하거나, 데이터의 분포를 흉내 내는 가상의 데이터를 생성.<br>
 ▣ 대표 알고리즘: Autoencoder (AE), Generative Adversarial Networks (GAN).<br>
