@@ -151,24 +151,23 @@
 ▣ 특징: 고차원 데이터에서 발생하는 '차원의 저주' 문제를 극복하기 위해 설계됨. 특정 변수 조합에서만 나타나는 군집을 탐색할 수 있음.<br>
 ▣ 원리: 차원 축소와 군집화를 동시에 수행하거나, 데이터의 희소 표현(Sparse Representation)을 학습하여 유사한 특성을 공유하는 공간을 식별함.<br>
 ▣ 적용분야: 고차원 유전자 데이터 분석, 딥러닝 기반 이미지 표현 군집화.<br>
-[1.8.1] PROCLUS (PROjected CLUStering) (투영 클러스터링)<br>
-[1.8.2] ORCLUS (ORiented projected CLUStering) (방향성 투영 클러스터링)<br>
-[1.8.3] SUBCLU (SUBspace CLUstering) (부분공간 클러스터링)<br>
-
-[1.8.4] FIRES (FIlter REfinement Subspace clustering) (필터 정제 부분공간 클러스터링)<br>
-[1.8.5] PreDeCon (Preference weighted DEnsity CONnected clustering) (선호도 가중 밀도 연결 클러스터링)<br>
-[1.8.6] P3C (Probabilistic and Projected Clustering) (확률적 투영 클러스터링)<br>
-[1.8.7] LRR (Low-Rank Representation) (저계수 표현)<br>
-[1.8.8] EnSC (Elastic Net Subspace Clustering) (엘라스틱 넷 부분 공간 군집화)<br>
-[1.8.9] Spectral Co-Clustering (스펙트럴 동시 클러스터링)<br>
-[1.8.10] Spectral Biclustering (스펙트럴 이중 클러스터링)<br>
-[1.8.11] Cheng and Church Algorithm (청-처치 알고리즘)<br>
-[1.8.12] ISA (Iterative Signature Algorithm) (반복 서명 알고리즘)<br>
-[1.8.13] OPSM (Order-Preserving Submatrix) (순서 보존 부분행렬)<br>
-[1.8.14] Plaid Model (플래드 모델)<br>
-[1.8.15] xMOTIFs (확장 모티프)<br>
-[1.8.16] Bimax (바이맥스)<br>
-[1.8.17] FABIA (Factor Analysis for Bicluster Acquisition) (바이클러스터 획득을 위한 요인 분석)<br>
+<ins>[1.7.1] PROCLUS (PROjected CLUStering) (투영 클러스터링)</ins><br>
+<ins>[1.7.2] ORCLUS (ORiented projected CLUStering) (방향성 투영 클러스터링)</ins><br>
+<ins>[1.7.3] SUBCLU (SUBspace CLUstering) (부분공간 클러스터링)</ins><br>
+[1.7.4] FIRES (FIlter REfinement Subspace clustering) (필터 정제 부분공간 클러스터링)<br>
+[1.7.5] PreDeCon (Preference weighted DEnsity CONnected clustering) (선호도 가중 밀도 연결 클러스터링)<br>
+[1.7.6] P3C (Probabilistic and Projected Clustering) (확률적 투영 클러스터링)<br>
+[1.7.7] LRR (Low-Rank Representation) (저계수 표현)<br>
+[1.7.8] EnSC (Elastic Net Subspace Clustering) (엘라스틱 넷 부분 공간 군집화)<br>
+[1.7.9] Spectral Co-Clustering (스펙트럴 동시 클러스터링)<br>
+[1.7.10] Spectral Biclustering (스펙트럴 이중 클러스터링)<br>
+[1.7.11] Cheng and Church Algorithm (청-처치 알고리즘)<br>
+[1.7.12] ISA (Iterative Signature Algorithm) (반복 서명 알고리즘)<br>
+[1.7.13] OPSM (Order-Preserving Submatrix) (순서 보존 부분행렬)<br>
+[1.7.14] Plaid Model (플래드 모델)<br>
+[1.7.15] xMOTIFs (확장 모티프)<br>
+[1.7.16] Bimax (바이맥스)<br>
+[1.7.17] FABIA (Factor Analysis for Bicluster Acquisition) (바이클러스터 획득을 위한 요인 분석)<br>
 <br>
 
 ---
