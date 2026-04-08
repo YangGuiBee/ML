@@ -84,7 +84,7 @@
 ▣ 특징: 분할 기반 방식과 달리 군집 수(K)를 사전에 정할 필요가 없으며 데이터 간의 상하 관계 파악이 용이함. 그러나 계산 복잡도가 높아 대규모 데이터셋 적용에는 무리가 있음.<br>
 ▣ 원리: 개별 데이터에서 시작해 유사한 것끼리 병합하는 상향식(Agglomerative) 또는 전체에서 시작해 나누어가는 하향식(Divisive) 방식으로 거리를 측정하여 계층을 형성함.<br>
 ▣ 적용분야: 생물 계통도 분석, 문헌 분류 등 데이터 간의 계층적 구조 파악이 중요한 연구 분야.<br>
-<ins>[1.2.1] Agglomerative Clustering (Bottom-up) (병합적 클러스터링, 상향식), Divisive Clustering (Top-down) (분할적 클러스터링, 하향식)</ins><br>
+<ins>[1.2.1] Agglomerative(Bottom-up)/Divisive(Top-down) Clustering  (병합적(상향식)/분할적(하향식) 클러스터링)</ins><br>
 <ins>[1.2.2] BIRCH (Balanced Iterative Reducing and Clustering using Hierarchies) (계층을 이용한 균형 반복 축소 클러스터링)</ins><br>
 <ins>[1.2.3] CURE (Clustering Using Representatives) (대표점 기반 클러스터링)</ins><br>
 <ins>[1.2.4] ROCK (Robust Clustering using Links) (링크 기반 강건 클러스터링)</ins><br>
