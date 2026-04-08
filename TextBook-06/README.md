@@ -67,20 +67,18 @@
 ▣ 특징: 계층적 방식과 달리 전체 구조를 한 번에 파악하며 계산 속도가 매우 빠름. 하지만 군집의 개수(K)를 사전에 지정해야 하며, 구형(Spherical)이 아닌 복잡한 형태의 군집 탐색에는 한계가 존재함.<br>
 ▣ 원리: 각 군집의 중심점(Centroid)을 설정하고 각 데이터를 가장 가까운 중심에 할당한 뒤, 할당된 데이터를 바탕으로 중심점을 반복적으로 갱신하여 최적의 위치를 탐색함.<br>
 ▣ 적용분야: 고객 세분화, 이미지 압축 등 데이터 분포가 비교적 균일하고 대용량인 경우에 주로 사용됨.<br>
-[1.1.1] K-means (K-평균)<br>
-[1.1.2] K-means++ (K-평균 ++)<br>
-[1.1.3] Mini-Batch K-means (미니배치 K-평균)<br>
-[1.1.4] K-medoids (K-중앙점)<br>
-[1.1.5] CLARA (Clustering LARge Applications) (대규모 응용 클러스터링)<br>
-[1.1.6] CLARANS (Clustering Large Applications based on RANdomized Search) (무작위 탐색 기반 대규모 응용 클러스터링)<br>
-[1.1.7] K-modes (K-최빈값)<br>
-[1.1.8] K-prototypes (K-프로토타입)<br>
-[1.1.9] FCM (Fuzzy C-means) (퍼지 C-평균)<br>
-[1.1.10] PCM (Possibilistic C-means) (가능성 C-평균)<br>
-[1.1.11] Mean-Shift Clustering (평균 이동 클러스터링)<br>
-[1.1.12] Affinity Propagation (친화도 전파)<br>
-[1.1.13] X-means (X-평균)<br>
-[1.1.14] G-means (G-평균)<br>
+<ins>[1.1.1] K-means (K-평균)</ins><br>
+<ins>[1.1.2] K-medoids (K-중앙점) : CLARA (Clustering LARge Applications), CLARANS (Clustering Large Applications based on RANdomized Search)</ins><br>
+<ins>[1.1.3] K-modes (K-최빈값)</ins><br>
+<ins>[1.1.4] K-prototypes (K-프로토타입)</ins><br>
+<ins>[1.1.5] Mini-Batch K-means (미니배치 K-평균)</ins><br>
+<ins>[1.1.6] FCM (Fuzzy C-means) (퍼지 C-평균)</ins><br>
+[1.1.7] K-means++ (K-평균 ++)<br>
+[1.1.8] PCM (Possibilistic C-means) (가능성 C-평균)<br>
+[1.1.9] Mean-Shift Clustering (평균 이동 클러스터링)<br>
+[1.1.10] Affinity Propagation (친화도 전파)<br>
+[1.1.11] X-means (X-평균)<br>
+[1.1.12] G-means (G-평균)<br>
 <br>
 ## 1.2 Hierarchical Clustering (계층적 클러스터링)
 ▣ 정의: 데이터 간의 유사도를 바탕으로 나무 모양의 계층 구조(Dendrogram)를 형성하는 방식.<br>
