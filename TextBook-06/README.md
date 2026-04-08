@@ -56,12 +56,10 @@
 **1.1 Partitioning-Based Clustering (분할 기반 클러스터링)** <br>
 **1.2 Hierarchical Clustering (계층적 클러스터링)** <br>
 **1.3 Density-Based Clustering (밀도 기반 클러스터링)** <br>
-**1.4 Centroid/Shift-Based Clustering (중심점/이동 기반 클러스터링)** <br>
-**1.5 Grid-Based Clustering (격자 기반 클러스터링)** <br>
-**1.6 Model-Based Clustering (모델 기반 클러스터링)** <br>
-**1.7 Graph/Spectral Clustering (그래프/스펙트럴 클러스터링)** <br>
-**1.8 Subspace/Representation Clustering (부분공간/표현 기반 클러스터링)** <br>
-**1.9 Biclustering (이중 클러스터링)** <br>
+**1.4 Grid-Based Clustering (격자 기반 클러스터링)** <br>
+**1.5 Model-Based Clustering (모델 기반 클러스터링)** <br>
+**1.6 Graph/Spectral Clustering (그래프/스펙트럴 클러스터링)** <br>
+**1.7 Subspace/Representation Clustering (부분공간/표현 기반 클러스터링)** <br>
 ---
 
 ## 1.1 Partitioning-Based Clustering (분할 기반 클러스터링)
@@ -79,6 +77,10 @@
 [1.1.8] K-prototypes (K-프로토타입)<br>
 [1.1.9] FCM (Fuzzy C-means) (퍼지 C-평균)<br>
 [1.1.10] PCM (Possibilistic C-means) (가능성 C-평균)<br>
+[1.1.11] Mean-Shift Clustering (평균 이동 클러스터링)<br>
+[1.1.12] Affinity Propagation (친화도 전파)<br>
+[1.1.13] X-means (X-평균)<br>
+[1.1.14] G-means (G-평균)<br>
 <br>
 ## 1.2 Hierarchical Clustering (계층적 클러스터링)
 ▣ 정의: 데이터 간의 유사도를 바탕으로 나무 모양의 계층 구조(Dendrogram)를 형성하는 방식.<br>
@@ -108,17 +110,14 @@
 [1.3.7] ST-DBSCAN (Spatial-Temporal DBSCAN) (시공간 DBSCAN)<br>
 [1.3.8] ADBSCAN (Adaptive DBSCAN) (적응형 DBSCAN)<br>
 <br>
-## 1.4 Centroid/Shift-Based Clustering (중심점/이동 기반 클러스터링)
+<!-- ## 1.4 Centroid/Shift-Based Clustering (중심점/이동 기반 클러스터링)
 ▣ 정의: 데이터 분포의 밀도가 가장 높은 지점(Mode)을 찾아 중심점을 이동시키며 군집화하는 방식.<br>
 ▣ 특징: K-means와 유사하게 중심을 활용하지만, 고정된 K값이 아닌 데이터 분포에 따라 군집 수가 자동으로 결정됨. 밀도 기반 방식의 특성과 중심점 기반 방식의 특성을 동시에 보유함.<br>
 ▣ 원리: 특정 커널 함수를 사용하여 데이터 밀도가 높아지는 방향으로 윈도우를 반복 이동시키며 최종적으로 수렴하는 지점을 군집 중심으로 설정함.<br>
 ▣ 적용분야: 이미지 분할(Segmentation), 컴퓨터 비전 내 객체 추적.<br>
-[1.4.1] Mean-Shift Clustering (평균 이동 클러스터링)<br>
-[1.4.2] Affinity Propagation (친화도 전파)<br>
-[1.4.3] X-means (X-평균)<br>
-[1.4.4] G-means (G-평균)<br>
+[1-1-10] - [1-1-14] -->
 <br>
-## 1.5 Grid-Based Clustering (격자 기반 클러스터링)
+## 1.4 Grid-Based Clustering (격자 기반 클러스터링)
 ▣ 정의: 데이터 공간을 유한한 수의 격자(Grid) 셀 구조로 분할하여 군집화를 수행하는 방식.<br>
 ▣ 특징: 연산 속도가 데이터 포인트의 개수가 아닌 격자의 개수에 의존하므로, 다른 방식들에 비해 데이터 양에 관계없이 처리 속도가 매우 빠름.<br>
 ▣ 원리: 다차원 공간을 격자로 나누고 각 격자 내 데이터의 통계 정보를 수집한 뒤, 밀도가 높은 인접 격자들을 병합하여 군집을 형성함.<br>
@@ -130,7 +129,7 @@
 [1.5.5] MAFIA (Merging of Adaptive Finite Intervals) (적응적 유한 구간 병합)<br>
 [1.5.6] GridClus (격자 클러스터)<br>
 <br>
-## 1.6 Model-Based Clustering (모델 기반 클러스터링)
+## 1.5 Model-Based Clustering (모델 기반 클러스터링)
 ▣ 정의: 데이터가 특정한 확률 분포(주로 가우시안 분포)들의 혼합으로 생성되었다고 가정하고 이를 추정하는 방식.<br>
 ▣ 특징: 데이터를 특정 군집에 확정적으로 할당하는 대신, 속할 확률을 계산하는 소프트 클러스터링(Soft Clustering)이 가능함. 수학적 근거가 명확하지만 초기 모델 설정이 중요함.<br>
 ▣ 원리: 확률 모델(예: GMM)의 파라미터를 최댓값으로 만드는 EM(Expectation-Maximization) 알고리즘을 통해 데이터 분포의 최적 파라미터를 도출함.<br>
@@ -144,7 +143,7 @@
 [1.6.7] LDA (Latent Dirichlet Allocation) for Clustering (클러스터링을 위한 잠재 디리클레 할당)<br>
 [1.6.8] Mixture of von Mises-Fisher Distributions (폰 미제스-피셔 분포 혼합)<br>
 <br>
-## 1.7 Graph/Spectral Clustering (그래프/스펙트럴 클러스터링)
+## 1.6 Graph/Spectral Clustering (그래프/스펙트럴 클러스터링)
 ▣ 정의: 데이터 간의 관계를 그래프로 표현하고, 행렬의 고유값(Eigenvalue) 성질을 이용하여 군집화하는 방식.<br>
 ▣ 특징: 데이터 공간의 전역적 구조를 파악하는 데 유리하며, 비선형적인 구조를 가진 데이터도 저차원으로 투영하여 효과적으로 분리 가능함.<br>
 ▣ 원리: 데이터 간 유사도 행렬을 생성하고 라플라시안 행렬(Laplacian Matrix)의 고유벡터를 추출하여 차원을 축소한 뒤, 축소된 공간에서 기존 클러스터링 기법을 적용함.<br>
@@ -159,7 +158,7 @@
 [1.7.8] Girvan-Newman Algorithm (거반-뉴먼 알고리즘)<br>
 [1.7.9] Infomap (인포맵)<br>
 <br>
-## 1.8 Subspace/Representation Clustering (부분공간/표현 기반 클러스터링)
+## 1.7 Subspace/Representation Clustering (부분공간/표현 기반 클러스터링)
 ▣ 정의: 전체 차원이 아닌 특정 부분공간(Subspace)이나 학습된 잠재 표현 공간에서 군집을 찾는 방식.<br>
 ▣ 특징: 고차원 데이터에서 발생하는 '차원의 저주' 문제를 극복하기 위해 설계됨. 특정 변수 조합에서만 나타나는 군집을 탐색할 수 있음.<br>
 ▣ 원리: 차원 축소와 군집화를 동시에 수행하거나, 데이터의 희소 표현(Sparse Representation)을 학습하여 유사한 특성을 공유하는 공간을 식별함.<br>
@@ -172,21 +171,22 @@
 [1.8.6] P3C (Probabilistic and Projected Clustering) (확률적 투영 클러스터링)<br>
 [1.8.7] LRR (Low-Rank Representation) (저계수 표현)<br>
 [1.8.8] EnSC (Elastic Net Subspace Clustering) (엘라스틱 넷 부분 공간 군집화)<br>
+[1.8.9] Spectral Co-Clustering (스펙트럴 동시 클러스터링)<br>
+[1.8.10] Spectral Biclustering (스펙트럴 이중 클러스터링)<br>
+[1.8.11] Cheng and Church Algorithm (청-처치 알고리즘)<br>
+[1.8.12] ISA (Iterative Signature Algorithm) (반복 서명 알고리즘)<br>
+[1.8.13] OPSM (Order-Preserving Submatrix) (순서 보존 부분행렬)<br>
+[1.8.14] Plaid Model (플래드 모델)<br>
+[1.8.15] xMOTIFs (확장 모티프)<br>
+[1.8.16] Bimax (바이맥스)<br>
+[1.8.17] FABIA (Factor Analysis for Bicluster Acquisition) (바이클러스터 획득을 위한 요인 분석)<br>
 <br>
-## 1.9 Biclustering (이중 클러스터링)
+<!-- ## 1.9 Biclustering (이중 클러스터링)
 ▣ 정의: 데이터 행렬에서 행(데이터)과 열(변수)을 동시에 군집화하는 방식.<br>
 ▣ 특징: 일반적인 군집화가 전체 변수를 기준으로 데이터를 묶는 것과 달리, 특정 변수 집합 내에서만 유사성을 보이는 데이터 부분 집합을 찾아낼 수 있음.<br>
 ▣ 원리: 행렬 내에서 특정 부분 행렬(Submatrix)이 일관된 패턴이나 유사한 값을 가지도록 최적화하는 영역을 탐색함.<br>
 ▣ 적용분야: 특정 약물 조건(열)에 반응하는 유전자(행) 분석, 전자상거래의 고도화된 추천 시스템.<br>
-[1.9.1] Spectral Co-Clustering (스펙트럴 동시 클러스터링)<br>
-[1.9.2] Spectral Biclustering (스펙트럴 이중 클러스터링)<br>
-[1.9.3] Cheng and Church Algorithm (청-처치 알고리즘)<br>
-[1.9.4] ISA (Iterative Signature Algorithm) (반복 서명 알고리즘)<br>
-[1.9.5] OPSM (Order-Preserving Submatrix) (순서 보존 부분행렬)<br>
-[1.9.6] Plaid Model (플래드 모델)<br>
-[1.9.7] xMOTIFs (확장 모티프)<br>
-[1.9.8] Bimax (바이맥스)<br>
-[1.9.9] FABIA (Factor Analysis for Bicluster Acquisition) (바이클러스터 획득을 위한 요인 분석)<br>
+[1-8-9] - [1-8-17]-->
 
 ---
 # 2. 연관 규칙 학습 (Association Rule Learning)
