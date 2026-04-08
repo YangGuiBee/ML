@@ -486,7 +486,6 @@
 ▣ 특징: 비파라메트릭 방식(5.4)에 비해 적은 양의 데이터로도 효율적인 추정이 가능하며 모델이 매우 간결함. 단, 실제 데이터가 가정된 분포와 다를 경우 오차가 매우 큼.<br>
 ▣ 원리: 주어진 데이터를 바탕으로 확률 모델의 우도(Likelihood)를 최대화하거나 모멘트를 일치시키는 파라미터를 계산함.<br>
 ▣ 적용분야: 정규성이 보장된 공정 데이터 분석, 경제 지표의 장기적 추세 모델링.<br>
-[5.2.14] Variable Bandwidth KDE (가변 대역폭 커널 밀도 추정)<br>
 [5.3.1] Variational Inference for GMM (GMM을 위한 변분 추론)<br>
 [5.3.2] Dirichlet Process Mixture Model (디리클레 프로세스 혼합 모델)<br>
 [5.3.3] MLE (Maximum Likelihood Estimation) (최대우도 추정)<br>
