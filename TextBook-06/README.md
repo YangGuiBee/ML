@@ -112,12 +112,12 @@
 ▣ 특징: 연산 속도가 데이터 포인트의 개수가 아닌 격자의 개수에 의존하므로, 다른 방식들에 비해 데이터 양에 관계없이 처리 속도가 매우 빠름.<br>
 ▣ 원리: 다차원 공간을 격자로 나누고 각 격자 내 데이터의 통계 정보를 수집한 뒤, 밀도가 높은 인접 격자들을 병합하여 군집을 형성함.<br>
 ▣ 적용분야: 대규모 다차원 공간 데이터베이스 분석, 실시간 스트리밍 데이터 처리.<br>
-<ins>[1.5.1] WaveCluster (웨이브 클러스터)</ins><br>
-<ins>[1.5.2] STING (STatistical INformation Grid) (통계 정보 격자)</ins><br>
-<ins>[1.5.3] CLIQUE (CLustering In QUEst) (탐색 기반 클러스터링)</ins><br>
-<ins>[1.5.4] OptiGrid (최적 격자)</ins><br>
-<ins>[1.5.5] MAFIA (Merging of Adaptive Finite Intervals) (적응적 유한 구간 병합)</ins><br>
-[1.5.6] GridClus (격자 클러스터)<br>
+<ins>[1.4.1] WaveCluster (웨이브 클러스터)</ins><br>
+<ins>[1.4.2] STING (STatistical INformation Grid) (통계 정보 격자)</ins><br>
+<ins>[1.4.3] CLIQUE (CLustering In QUEst) (탐색 기반 클러스터링)</ins><br>
+<ins>[1.4.4] OptiGrid (최적 격자)</ins><br>
+<ins>[1.4.5] MAFIA (Merging of Adaptive Finite Intervals) (적응적 유한 구간 병합)</ins><br>
+[1.4.6] GridClus (격자 클러스터)<br>
 <br>
 ## 1.5 Model-Based Clustering (모델 기반 클러스터링)
 ▣ 정의: 데이터가 특정한 확률 분포(주로 가우시안 분포)들의 혼합으로 생성되었다고 가정하고 이를 추정하는 방식.<br>
