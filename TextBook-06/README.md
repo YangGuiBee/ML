@@ -68,29 +68,27 @@
 ▣ 원리: 각 군집의 중심점(Centroid)을 설정하고 각 데이터를 가장 가까운 중심에 할당한 뒤, 할당된 데이터를 바탕으로 중심점을 반복적으로 갱신하여 최적의 위치를 탐색함.<br>
 ▣ 적용분야: 고객 세분화, 이미지 압축 등 데이터 분포가 비교적 균일하고 대용량인 경우에 주로 사용됨.<br>
 <ins>[1.1.1] K-means (K-평균)</ins><br>
-<ins>[1.1.2] K-medoids (K-중앙점) : CLARA (Clustering LARge Applications), CLARANS (Clustering Large Applications based on RANdomized Search)</ins><br>
+<ins>[1.1.2] K-medoids (K-중앙점) : PAM(Partitioning Around Medoids), CLARA(Clustering LARge Applications), CLARANS(Clustering Large Applications based on RANdomized Search)</ins><br>
 <ins>[1.1.3] K-modes (K-최빈값)</ins><br>
 <ins>[1.1.4] K-prototypes (K-프로토타입)</ins><br>
 <ins>[1.1.5] Mini-Batch K-means (미니배치 K-평균)</ins><br>
 <ins>[1.1.6] FCM (Fuzzy C-means) (퍼지 C-평균)</ins><br>
 [1.1.7] K-means++ (K-평균 ++)<br>
 [1.1.8] PCM (Possibilistic C-means) (가능성 C-평균)<br>
-[1.1.9] Mean-Shift Clustering (평균 이동 클러스터링)<br>
-[1.1.10] Affinity Propagation (친화도 전파)<br>
-[1.1.11] X-means (X-평균)<br>
-[1.1.12] G-means (G-평균)<br>
+[1.1.9] X-means (X-평균)<br>
+[1.1.10] G-means (G-평균)<br>
 <br>
 ## 1.2 Hierarchical Clustering (계층적 클러스터링)
 ▣ 정의: 데이터 간의 유사도를 바탕으로 나무 모양의 계층 구조(Dendrogram)를 형성하는 방식.<br>
 ▣ 특징: 분할 기반 방식과 달리 군집 수(K)를 사전에 정할 필요가 없으며 데이터 간의 상하 관계 파악이 용이함. 그러나 계산 복잡도가 높아 대규모 데이터셋 적용에는 무리가 있음.<br>
 ▣ 원리: 개별 데이터에서 시작해 유사한 것끼리 병합하는 상향식(Agglomerative) 또는 전체에서 시작해 나누어가는 하향식(Divisive) 방식으로 거리를 측정하여 계층을 형성함.<br>
 ▣ 적용분야: 생물 계통도 분석, 문헌 분류 등 데이터 간의 계층적 구조 파악이 중요한 연구 분야.<br>
-[1.2.1] Agglomerative Clustering (Bottom-up) (병합적 클러스터링, 상향식)<br>
-[1.2.2] Divisive Clustering (Top-down) (분할적 클러스터링, 하향식)<br>
-[1.2.3] BIRCH (Balanced Iterative Reducing and Clustering using Hierarchies) (계층을 이용한 균형 반복 축소 클러스터링)<br>
-[1.2.4] CURE (Clustering Using Representatives) (대표점 기반 클러스터링)<br>
-[1.2.5] ROCK (Robust Clustering using Links) (링크 기반 강건 클러스터링)<br>
-[1.2.6] Chameleon (카멜레온)<br>
+<ins>[1.2.1] Agglomerative Clustering (Bottom-up) (병합적 클러스터링, 상향식), Divisive Clustering (Top-down) (분할적 클러스터링, 하향식)</ins><br>
+<ins>[1.2.2] BIRCH (Balanced Iterative Reducing and Clustering using Hierarchies) (계층을 이용한 균형 반복 축소 클러스터링)</ins><br>
+<ins>[1.2.3] CURE (Clustering Using Representatives) (대표점 기반 클러스터링)</ins><br>
+<ins>[1.2.4] ROCK (Robust Clustering using Links) (링크 기반 강건 클러스터링)</ins><br>
+<ins>[1.2.5] Chameleon (카멜레온)</ins><br>
+<ins>[1.2.6] HDBSCAN (Hierarchical DBSCAN) (계층적 DBSCAN)</ins><br>
 [1.2.7] AGNES (AGglomerative NESting) (병합적 중첩)<br>
 [1.2.8] DIANA (DIvisive ANAlysis) (분할적 분석)<br>
 <br>
@@ -99,32 +97,25 @@
 ▣ 특징: 분할 기반 방식이 찾지 못하는 기하학적이고 복잡한 형태의 군집을 탐색 가능함. 또한 이상치(Outlier)를 노이즈로 간주하여 효과적으로 제거할 수 있는 장점이 있음.<br>
 ▣ 원리: 특정 반경 내에 최소 데이터 개수가 포함되는지 확인하여 밀집 지역을 정의하고, 이를 연결하여 군집을 확장해 나감.<br>
 ▣ 적용분야: 지리 정보 시스템(GIS) 데이터 분석, 천체 관측 데이터, 노이즈가 많은 센서 데이터 분석.<br>
-[1.3.1] DBSCAN (Density-Based Spatial Clustering of Applications with Noise) (잡음을 포함한 밀도 기반 공간 클러스터링)<br>
-[1.3.2] OPTICS (Ordering Points To Identify the Clustering Structure) (클러스터 구조 식별을 위한 점 순서화)<br>
-[1.3.3] HDBSCAN (Hierarchical DBSCAN) (계층적 DBSCAN)<br>
-[1.3.4] DENCLUE (DENsity-based CLUstEring) (밀도 기반 클러스터링)<br>
-[1.3.5] DPC (Density Peaks Clustering) (밀도 봉우리 클러스터링)<br>
+<ins>[1.3.1] DBSCAN (Density-Based Spatial Clustering of Applications with Noise) (잡음을 포함한 밀도 기반 공간 클러스터링)</ins><br>
+<ins>[1.3.2] OPTICS (Ordering Points To Identify the Clustering Structure) (클러스터 구조 식별을 위한 점 순서화)</ins><br>
+<ins>[1.3.3] DENCLUE (DENsity-based CLUstEring) (밀도 기반 클러스터링)</ins><br>
+<ins>[1.3.4] Mean-Shift Clustering (평균 이동 클러스터링)</ins><br>
+<ins>[1.3.5] DPC (Density Peaks Clustering) (밀도 봉우리 클러스터링)</ins><br>
 [1.3.6] VDBSCAN (Varied Density DBSCAN) (가변 밀도 DBSCAN)<br>
 [1.3.7] ST-DBSCAN (Spatial-Temporal DBSCAN) (시공간 DBSCAN)<br>
 [1.3.8] ADBSCAN (Adaptive DBSCAN) (적응형 DBSCAN)<br>
-<br>
-<!-- ## 1.4 Centroid/Shift-Based Clustering (중심점/이동 기반 클러스터링)
-▣ 정의: 데이터 분포의 밀도가 가장 높은 지점(Mode)을 찾아 중심점을 이동시키며 군집화하는 방식.<br>
-▣ 특징: K-means와 유사하게 중심을 활용하지만, 고정된 K값이 아닌 데이터 분포에 따라 군집 수가 자동으로 결정됨. 밀도 기반 방식의 특성과 중심점 기반 방식의 특성을 동시에 보유함.<br>
-▣ 원리: 특정 커널 함수를 사용하여 데이터 밀도가 높아지는 방향으로 윈도우를 반복 이동시키며 최종적으로 수렴하는 지점을 군집 중심으로 설정함.<br>
-▣ 적용분야: 이미지 분할(Segmentation), 컴퓨터 비전 내 객체 추적.<br>
-[1-1-10] - [1-1-14] -->
 <br>
 ## 1.4 Grid-Based Clustering (격자 기반 클러스터링)
 ▣ 정의: 데이터 공간을 유한한 수의 격자(Grid) 셀 구조로 분할하여 군집화를 수행하는 방식.<br>
 ▣ 특징: 연산 속도가 데이터 포인트의 개수가 아닌 격자의 개수에 의존하므로, 다른 방식들에 비해 데이터 양에 관계없이 처리 속도가 매우 빠름.<br>
 ▣ 원리: 다차원 공간을 격자로 나누고 각 격자 내 데이터의 통계 정보를 수집한 뒤, 밀도가 높은 인접 격자들을 병합하여 군집을 형성함.<br>
 ▣ 적용분야: 대규모 다차원 공간 데이터베이스 분석, 실시간 스트리밍 데이터 처리.<br>
-[1.5.1] STING (STatistical INformation Grid) (통계 정보 격자)<br>
-[1.5.2] WaveCluster (웨이브 클러스터)<br>
-[1.5.3] CLIQUE (CLustering In QUEst) (탐색 기반 클러스터링)<br>
-[1.5.4] OptiGrid (최적 격자)<br>
-[1.5.5] MAFIA (Merging of Adaptive Finite Intervals) (적응적 유한 구간 병합)<br>
+<ins>[1.5.1] WaveCluster (웨이브 클러스터)</ins><br>
+<ins>[1.5.2] STING (STatistical INformation Grid) (통계 정보 격자)</ins><br>
+<ins>[1.5.3] CLIQUE (CLustering In QUEst) (탐색 기반 클러스터링)</ins><br>
+<ins>[1.5.4] OptiGrid (최적 격자)</ins><br>
+<ins>[1.5.5] MAFIA (Merging of Adaptive Finite Intervals) (적응적 유한 구간 병합)</ins><br>
 [1.5.6] GridClus (격자 클러스터)<br>
 <br>
 ## 1.5 Model-Based Clustering (모델 기반 클러스터링)
@@ -132,29 +123,28 @@
 ▣ 특징: 데이터를 특정 군집에 확정적으로 할당하는 대신, 속할 확률을 계산하는 소프트 클러스터링(Soft Clustering)이 가능함. 수학적 근거가 명확하지만 초기 모델 설정이 중요함.<br>
 ▣ 원리: 확률 모델(예: GMM)의 파라미터를 최댓값으로 만드는 EM(Expectation-Maximization) 알고리즘을 통해 데이터 분포의 최적 파라미터를 도출함.<br>
 ▣ 적용분야: 불확실성이 포함된 고객 성향 분석, 텍스트 문서의 주제 분포 모델링.<br>
-[1.6.1] GMM (Gaussian Mixture Model) (가우시안 혼합 모델)<br>
-[1.6.2] EM (Expectation-Maximization) (기대값 최대화 알고리즘)<br>
-[1.6.3] VBGM (Variational Bayesian Gaussian Mixture) (변분 베이지안 가우시안 혼합)<br>
-[1.6.4] COBWEB (코브웹)<br>
-[1.6.5] CLASSIT (분류 증분 학습 시스템)<br>
-[1.6.6] Bayesian Hierarchical Clustering (베이지안 계층적 클러스터링)<br>
-[1.6.7] LDA (Latent Dirichlet Allocation) for Clustering (클러스터링을 위한 잠재 디리클레 할당)<br>
-[1.6.8] Mixture of von Mises-Fisher Distributions (폰 미제스-피셔 분포 혼합)<br>
+<ins>[1.5.1] GMM (Gaussian Mixture Model) (가우시안 혼합 모델), EM (Expectation-Maximization) (기대값 최대화 알고리즘)</ins><br>
+<ins>[1.5.2] COBWEB (코브웹)</ins><br>
+<ins>[1.5.3] CLASSIT (Classification Incremental Learning System) (분류 증분 학습 시스템)</ins><br>
+<ins>[1.5.4] LDA (Latent Dirichlet Allocation) for Clustering (클러스터링을 위한 잠재 디리클레 할당)</ins><br>
+[1.5.5] VBGM (Variational Bayesian Gaussian Mixture) (변분 베이지안 가우시안 혼합)<br>
+[1.5.6] Bayesian Hierarchical Clustering (베이지안 계층적 클러스터링)<br>
+[1.5.7] Mixture of von Mises-Fisher Distributions (폰 미제스-피셔 분포 혼합)<br>
 <br>
 ## 1.6 Graph/Spectral Clustering (그래프/스펙트럴 클러스터링)
 ▣ 정의: 데이터 간의 관계를 그래프로 표현하고, 행렬의 고유값(Eigenvalue) 성질을 이용하여 군집화하는 방식.<br>
 ▣ 특징: 데이터 공간의 전역적 구조를 파악하는 데 유리하며, 비선형적인 구조를 가진 데이터도 저차원으로 투영하여 효과적으로 분리 가능함.<br>
 ▣ 원리: 데이터 간 유사도 행렬을 생성하고 라플라시안 행렬(Laplacian Matrix)의 고유벡터를 추출하여 차원을 축소한 뒤, 축소된 공간에서 기존 클러스터링 기법을 적용함.<br>
 ▣ 적용분야: 사회 관계망 서비스(SNS) 커뮤니티 탐지, 화합물 구조 분석, 뇌 네트워크 연결성 분석.<br>
-[1.7.1] Spectral Clustering (Normalized Cuts) (스펙트럴 클러스터링, 정규화 컷)<br>
-[1.7.2] Ratio Cuts (비율 컷)<br>
-[1.7.3] Shi-Malik Algorithm (시-말릭 알고리즘)<br>
-[1.7.4] Ng-Jordan-Weiss Algorithm (응-조던-와이스 알고리즘)<br>
-[1.7.5] MCL (Markov Clustering Algorithm) (마르코프 클러스터링 알고리즘)<br>
-[1.7.6] Louvain Algorithm (루뱅 알고리즘)<br>
-[1.7.7] Leiden Algorithm (라이덴 알고리즘)<br>
-[1.7.8] Girvan-Newman Algorithm (거반-뉴먼 알고리즘)<br>
-[1.7.9] Infomap (인포맵)<br>
+<ins>[1.6.1] Spectral Clustering (Normalized Cuts) (스펙트럴 클러스터링, 정규화 컷)</ins><br>
+<ins>[1.6.2] Affinity Propagation (친화도 전파)</ins><br>
+<ins>[1.6.3] MCL (Markov Clustering Algorithm) (마르코프 클러스터링 알고리즘)</ins><br>
+<ins>[1.6.4] Louvain Algorithm (루뱅 알고리즘), Leiden Algorithm (라이덴 알고리즘)</ins><br>
+[1.6.5] Ratio Cuts (비율 컷)<br>
+[1.6.6] Shi-Malik Algorithm (시-말릭 알고리즘)<br>
+[1.6.7] Ng-Jordan-Weiss Algorithm (응-조던-와이스 알고리즘)<br>
+[1.6.8] Girvan-Newman Algorithm (거반-뉴먼 알고리즘)<br>
+[1.6.9] Infomap (인포맵)<br>
 <br>
 ## 1.7 Subspace/Representation Clustering (부분공간/표현 기반 클러스터링)
 ▣ 정의: 전체 차원이 아닌 특정 부분공간(Subspace)이나 학습된 잠재 표현 공간에서 군집을 찾는 방식.<br>
@@ -164,6 +154,7 @@
 [1.8.1] PROCLUS (PROjected CLUStering) (투영 클러스터링)<br>
 [1.8.2] ORCLUS (ORiented projected CLUStering) (방향성 투영 클러스터링)<br>
 [1.8.3] SUBCLU (SUBspace CLUstering) (부분공간 클러스터링)<br>
+
 [1.8.4] FIRES (FIlter REfinement Subspace clustering) (필터 정제 부분공간 클러스터링)<br>
 [1.8.5] PreDeCon (Preference weighted DEnsity CONnected clustering) (선호도 가중 밀도 연결 클러스터링)<br>
 [1.8.6] P3C (Probabilistic and Projected Clustering) (확률적 투영 클러스터링)<br>
@@ -179,12 +170,6 @@
 [1.8.16] Bimax (바이맥스)<br>
 [1.8.17] FABIA (Factor Analysis for Bicluster Acquisition) (바이클러스터 획득을 위한 요인 분석)<br>
 <br>
-<!-- ## 1.9 Biclustering (이중 클러스터링)
-▣ 정의: 데이터 행렬에서 행(데이터)과 열(변수)을 동시에 군집화하는 방식.<br>
-▣ 특징: 일반적인 군집화가 전체 변수를 기준으로 데이터를 묶는 것과 달리, 특정 변수 집합 내에서만 유사성을 보이는 데이터 부분 집합을 찾아낼 수 있음.<br>
-▣ 원리: 행렬 내에서 특정 부분 행렬(Submatrix)이 일관된 패턴이나 유사한 값을 가지도록 최적화하는 영역을 탐색함.<br>
-▣ 적용분야: 특정 약물 조건(열)에 반응하는 유전자(행) 분석, 전자상거래의 고도화된 추천 시스템.<br>
-[1-8-9] - [1-8-17]-->
 
 ---
 # 2. 연관 규칙 학습 (Association Rule Learning)
