@@ -184,10 +184,10 @@
 ▣ 특징: 연관 규칙 학습의 모태가 되는 분야로, 이후 등장하는 고급(2.2)이나 시퀀스(2.3) 마이닝의 기반 기술로 활용됨. 데이터 간의 발생 순서보다는 '함께 발생하는 조합' 자체에 집중함.<br>
 ▣ 원리: 전체 데이터셋을 스캔하여 각 아이템의 빈도를 계산하고, 지지도 임계값을 넘지 못하는 조합을 후보군에서 제거(Pruning)하며 유의미한 패턴을 확장함.<br>
 ▣ 적용분야: 대형 마트의 장바구니 분석(Market Basket Analysis), 동시 구매 상품 추천, 단순 아이템 연관성 파악.<br>
-[2.1.1] Apriori Algorithm (선험적 알고리즘)<br>
-[2.1.2] FP-Growth (Frequent Pattern Growth) (빈발 패턴 성장)<br>
-[2.1.3] FP-Tree Construction (FP-트리 구성)<br>
-[2.1.4] Eclat (Equivalence Class Transformation) (동등 클래스 변환)<br>
+<ins>[2.1.1] Apriori Algorithm (선험적 알고리즘)</ins><br>
+<ins>[2.1.2] FP-Growth (Frequent Pattern Growth) (빈발 패턴 성장)</ins><br>
+<ins>[2.1.3] Eclat (Equivalence Class Transformation) (동등 클래스 변환)</ins><br>
+[2.1.4] FP-Tree Construction (FP-트리 구성)<br>
 [2.1.5] SPADE (Sequential Pattern Discovery using Equivalence classes) (동등 클래스를 이용한 순차 패턴 발견)<br>
 [2.1.6] dEclat (Diffset Eclat) (차집합 Eclat)<br>
 [2.1.7] H-Mine (Hyper-structure Mining) (하이퍼구조 마이닝)<br>
@@ -198,8 +198,8 @@
 ▣ 특징: 단순 아이템 조합만 보는 기본 알고리즘(2.1)과 달리 데이터의 속성(시간, 장소, 가격 등)이나 범주형 계층을 고려하므로 훨씬 구체적이고 실행 가능한 통찰을 제공함.<br>
 ▣ 원리: 데이터를 속성별로 다차원 큐브 형태로 구성하거나, 상위 개념(예: 과일)에서 하위 개념(예: 사과)으로 내려가며 단계적으로 마이닝을 수행함.<br>
 ▣ 적용분야: 재고 관리 시스템의 품목 분류별 연관 분석, 인구 통계학적 특성을 결합한 타겟 마케팅.<br>
-[2.2.1] Multi-level Association Rules (다계층 연관규칙)<br>
-[2.2.2] Multi-dimensional Association Rules (다차원 연관규칙)<br>
+<ins>[2.2.1] Multi-level Association Rules (다계층 연관규칙)</ins><br>
+<ins>[2.2.2] Multi-dimensional Association Rules (다차원 연관규칙)</ins><br>
 [2.2.3] Quantitative Association Rules (정량적 연관규칙)<br>
 [2.2.4] Fuzzy Association Rules (퍼지 연관규칙)<br>
 [2.2.5] Spatial Association Rules (공간 연관규칙)<br>
@@ -243,20 +243,20 @@
 ▣ 특징: 비선형 방식(3.2)에 비해 계산 복잡도가 낮고 결과의 해석이 상대적으로 용이함. 데이터의 전역적인 분산이나 구조를 보존하는 데 최적화되어 있으나, 복잡한 곡면 구조를 가진 데이터 처리에는 한계가 있음.<br>
 ▣ 원리: 데이터의 분산을 최대화하는 방향(주성분)을 찾거나, 원래의 행렬을 근사하는 기저 행렬과 계수 행렬을 찾아 차원을 축소함.<br>
 ▣ 적용분야: 노이즈 제거, 데이터 시각화, 특징 추출 등 가장 일반적이고 광범위한 전처리 단계.<br>
-[3.1.1] PCA (Principal Component Analysis) (주성분 분석)<br>
-[3.1.2] Kernel PCA (커널 주성분 분석)<br>
-[3.1.3] Incremental PCA (증분 주성분 분석)<br>
-[3.1.4] Sparse PCA (희소 주성분 분석)<br>
-[3.1.5] PPCA (Probabilistic PCA) (확률적 주성분 분석)<br>
-[3.1.6] Robust PCA (강건 주성분 분석)<br>
-[3.1.7] SVD (Singular Value Decomposition) (특이값 분해)<br>
-[3.1.8] Truncated SVD (절단 특이값 분해)<br>
-[3.1.9] LSA (Latent Semantic Analysis) (잠재 의미 분석)<br>
-[3.1.10] ICA (Independent Component Analysis) (독립성분 분석)<br>
-[3.1.11] FastICA (고속 독립성분 분석)<br>
-[3.1.12] FA (Factor Analysis) (요인 분석)<br>
-[3.1.13] Probabilistic Factor Analysis (확률적 요인 분석)<br>
-[3.1.14] NMF (Non-negative Matrix Factorization) (비음수 행렬 분해)<br>
+<ins>[3.1.1] PCA (Principal Component Analysis) (주성분 분석)</ins><br>
+<ins>[3.1.2] SVD (Singular Value Decomposition) (특이값 분해)</ins><br>
+<ins>[3.1.3] ICA (Independent Component Analysis) (독립성분 분석)</ins><br>
+<ins>[3.1.4] NMF (Non-negative Matrix Factorization) (비음수 행렬 분해)</ins><br>
+[3.1.5] Kernel PCA (커널 주성분 분석)<br>
+[3.1.6] Incremental PCA (증분 주성분 분석)<br>
+[3.1.7] Sparse PCA (희소 주성분 분석)<br>
+[3.1.8] PPCA (Probabilistic PCA) (확률적 주성분 분석)<br>
+[3.1.9] Robust PCA (강건 주성분 분석)<br>
+[3.1.10] Truncated SVD (절단 특이값 분해)<br>
+[3.1.11] LSA (Latent Semantic Analysis) (잠재 의미 분석)<br>
+[3.1.12] FastICA (고속 독립성분 분석)<br>
+[3.1.13] FA (Factor Analysis) (요인 분석)<br>
+[3.1.14] Probabilistic Factor Analysis (확률적 요인 분석)<br>
 [3.1.15] Sparse NMF (희소 비음수 행렬 분해)<br>
 [3.1.16] Dictionary Learning (사전 학습)<br>
 [3.1.17] Sparse Coding (희소 코딩)<br>
@@ -271,22 +271,22 @@
 ▣ 특징: 선형 방식(3.1)으로는 분리할 수 없는 비선형 구조를 효과적으로 파악함. 데이터 포인트 간의 국소적(Local) 거리를 보존하는 데 집중하며, 데이터가 특정 기하학적 형태를 띠고 있을 때 매우 강력함.<br>
 ▣ 원리: 데이터 포인트들 사이의 근접 이웃 관계를 유지하면서, 고차원에서의 기하학적 거리를 저차원에서도 최대한 보존하도록 좌표를 재구성함.<br>
 ▣ 적용분야: 복잡한 이미지 데이터의 군집 시각화, 유전자 발현 패턴 분석 등 비선형 관계가 지배적인 고차원 데이터 분석.<br>
-[3.2.1] Isomap (Isometric Mapping) (등거리 매핑)<br>
-[3.2.2] Landmark Isomap (랜드마크 등거리 매핑)<br>
-[3.2.3] LLE (Locally Linear Embedding) (지역 선형 임베딩)<br>
-[3.2.4] MLLE (Modified LLE) (수정된 지역 선형 임베딩)<br>
-[3.2.5] HLLE (Hessian Eigenmapping) (헤시안 고유 매핑)<br>
-[3.2.6] LTSA (Local Tangent Space Alignment) (지역 접평면 정렬)<br>
-[3.2.7] MDS (Multidimensional Scaling) (다차원 척도법)<br>
-[3.2.8] Metric MDS (거리 기반 다차원 척도법)<br>
-[3.2.9] Non-metric MDS (비거리 기반 다차원 척도법)<br>
-[3.2.10] Landmark MDS (랜드마크 다차원 척도법)<br>
-[3.2.11] Laplacian Eigenmaps (Spectral Embedding) (라플라시안 고유맵, 스펙트럴 임베딩)<br>
-[3.2.12] Diffusion Maps (확산 맵)<br>
-[3.2.13] t-SNE (t-distributed Stochastic Neighbor Embedding) (t-분포 확률적 이웃 임베딩)<br>
-[3.2.14] Barnes-Hut t-SNE (반스-헛 t-SNE)<br>
-[3.2.15] Parametric t-SNE (파라메트릭 t-SNE)<br>
-[3.2.16] UMAP (Uniform Manifold Approximation and Projection) (균일 매니폴드 근사 및 투영)<br>
+<ins>[3.2.1] t-SNE (t-distributed Stochastic Neighbor Embedding) (t-분포 확률적 이웃 임베딩)</ins><br>
+<ins>[3.2.2] UMAP (Uniform Manifold Approximation and Projection) (균일 매니폴드 근사 및 투영)</ins><br>
+<ins>[3.2.3] Isomap (Isometric Mapping) (등거리 매핑)</ins><br>
+<ins>[3.2.4] MDS (Multidimensional Scaling) (다차원 척도법)</ins><br>
+[3.2.5] Landmark Isomap (랜드마크 등거리 매핑)<br>
+[3.2.6] LLE (Locally Linear Embedding) (지역 선형 임베딩)<br>
+[3.2.7] MLLE (Modified LLE) (수정된 지역 선형 임베딩)<br>
+[3.2.8] HLLE (Hessian Eigenmapping) (헤시안 고유 매핑)<br>
+[3.2.9] LTSA (Local Tangent Space Alignment) (지역 접평면 정렬)<br>
+[3.2.10] Metric MDS (거리 기반 다차원 척도법)<br>
+[3.2.11] Non-metric MDS (비거리 기반 다차원 척도법)<br>
+[3.2.12] Landmark MDS (랜드마크 다차원 척도법)<br>
+[3.2.13] Laplacian Eigenmaps (Spectral Embedding) (라플라시안 고유맵, 스펙트럴 임베딩)<br>
+[3.2.14] Diffusion Maps (확산 맵)<br>
+[3.2.15] Barnes-Hut t-SNE (반스-헛 t-SNE)<br>
+[3.2.16] Parametric t-SNE (파라메트릭 t-SNE)<br>
 [3.2.17] Parametric UMAP (파라메트릭 UMAP)<br>
 [3.2.18] TriMap (트라이맵)<br>
 [3.2.19] PaCMAP (Pairwise Controlled Manifold Approximation) (쌍별 제어 매니폴드 근사)<br>
@@ -308,13 +308,13 @@
 ▣ 특징: 매니폴드 학습(3.2)보다 더 방대한 양의 데이터를 처리할 수 있으며, 학습된 모델을 통해 새로운 데이터에 대한 차원 축소(OOS, Out-of-Sample)가 매우 용이함. 생성 모델과 결합하여 데이터 복원 및 생성이 가능함.<br>
 ▣ 원리: 데이터를 압축하는 인코더(Encoder)와 다시 복원하는 디코더(Decoder)를 구성하고, 입력과 출력의 차이를 최소화하는 과정에서 잠재 공간(Latent Space)의 핵심 특징을 학습함.<br>
 ▣ 적용분야: 고해상도 이미지 특징 임베딩, 이상 탐지(Anomaly Detection), 대규모 비정형 데이터의 잠재 표현 학습.<br>
-[3.4.1] AE (Autoencoder) (오토인코더)<br>
-[3.4.2] DAE (Denoising Autoencoder) (잡음 제거 오토인코더)<br>
-[3.4.3] SAE (Sparse Autoencoder) (희소 오토인코더)<br>
-[3.4.4] CAE (Contractive Autoencoder) (수축 오토인코더)<br>
-[3.4.5] VAE (Variational Autoencoder) (변분 오토인코더)<br>
-[3.4.6] β-VAE (베타-변분 오토인코더)<br>
-[3.4.7] SOM (Self-Organizing Maps) (자기조직화지도)<br>
+<ins>[3.4.1] SOM (Self-Organizing Maps) (자기조직화지도)</ins><br>
+[3.4.2] AE (Autoencoder) (오토인코더)<br>
+[3.4.3] DAE (Denoising Autoencoder) (잡음 제거 오토인코더)<br>
+[3.4.4] SAE (Sparse Autoencoder) (희소 오토인코더)<br>
+[3.4.5] CAE (Contractive Autoencoder) (수축 오토인코더)<br>
+[3.4.6] VAE (Variational Autoencoder) (변분 오토인코더)<br>
+[3.4.7] β-VAE (베타-변분 오토인코더)<br>
 [3.4.8] GSOM (Growing Self-Organizing Maps) (성장하는 자기조직화지도)<br>
 [3.4.9] Neural Gas (뉴럴 가스)<br>
 [3.4.10] Growing Neural Gas (성장하는 뉴럴 가스)<br>
