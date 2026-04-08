@@ -339,6 +339,16 @@
 
 ---
 # 4. 이상치 탐지 (Anomaly/Outlier Detection)
+**4.1 Statistical Methods (통계 기반 방법)** <br>
+**4.2 Distance-based Methods (거리 기반 방법)** <br>
+**4.3 Density-based Methods (밀도 기반 방법)** <br>
+**4.4 Model-based Methods (모델 기반 방법)** <br>
+**4.5 Ensemble Methods (앙상블 방법)** <br>
+**4.6 Deep Learning-based Methods (딥러닝 기반 방법)** <br>
+**4.7 Time-series Anomaly Detection (시계열 이상치 탐지)** <br>
+**4.8 High-dimensional Outlier Detection (고차원 데이터 이상치 탐지)** <br>
+---
+
 ## 4.1 Statistical Methods (통계 기반 방법)
 ▣ 정의: 데이터가 특정 확률 분포를 따른다고 가정하고, 해당 분포에서 발생 확률이 매우 낮은 데이터를 이상치로 판정하는 방식.<br>
 ▣ 특징: 데이터의 통계적 특성이 명확할 때 가장 강력하며 모델이 단순하여 연산 비용이 매우 낮음. 그러나 데이터 분포가 가정과 다를 경우 성능이 급격히 저하되는 한계가 있음.<br>
