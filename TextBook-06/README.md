@@ -68,7 +68,8 @@
 ▣ 원리: 각 군집의 중심점(Centroid)을 설정하고 각 데이터를 가장 가까운 중심에 할당한 뒤, 할당된 데이터를 바탕으로 중심점을 반복적으로 갱신하여 최적의 위치를 탐색함.<br>
 ▣ 적용분야: 고객 세분화, 이미지 압축 등 데이터 분포가 비교적 균일하고 대용량인 경우에 주로 사용됨.<br>
 <ins>[1.1.1] K-means (K-평균)</ins><br>
-<ins>[1.1.2] K-medoids (K-중앙점) : PAM(Partitioning Around Medoids), CLARA(Clustering LARge Applications), CLARANS(Clustering Large Applications based on RANdomized Search)</ins><br>
+<ins>[1.1.2] K-medoids (K-중앙점) : PAM(Partitioning Around Medoids),</ins><br>
+        <ins>CLARA(Clustering LARge Applications), CLARANS(Clustering Large Applications based on RANdomized Search)</ins><br>
 <ins>[1.1.3] K-modes (K-최빈값)</ins><br>
 <ins>[1.1.4] K-prototypes (K-프로토타입)</ins><br>
 <ins>[1.1.5] Mini-Batch K-means (미니배치 K-평균)</ins><br>
