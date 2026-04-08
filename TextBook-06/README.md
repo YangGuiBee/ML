@@ -496,9 +496,9 @@
 ▣ 특징: 파라메트릭 방식(5.3)보다 유연하여 복잡하고 다봉형(Multimodal)인 분포도 정확하게 묘사 가능함. 다만, 추정을 위해 대규모 데이터셋이 요구되며 차원이 높아질수록 성능이 저하됨.<br>
 ▣ 원리: 특정 지점 주변의 이웃 데이터 개수를 세거나 공간을 데이터 밀도에 맞게 가변적으로 분할하여 밀도를 측정함.<br>
 ▣ 적용분야: 분포 형상을 예측하기 어려운 탐색적 데이터 분석(EDA), 기계학습의 비지도 학습 전처리.<br>
-[5.4.1] k-Nearest Neighbors Density Estimation (k-최근접 이웃 밀도 추정)
-[5.4.2] Local Likelihood Density Estimation (지역 우도 밀도 추정)
-[5.4.3] Orthogonal Series Density Estimation (직교 급수 밀도 추정)
+[5.4.1] k-Nearest Neighbors Density Estimation (k-최근접 이웃 밀도 추정)<br>
+[5.4.2] Local Likelihood Density Estimation (지역 우도 밀도 추정)<br>
+[5.4.3] Orthogonal Series Density Estimation (직교 급수 밀도 추정)<br>
 <br>
 ## 5.5 Advanced Density Estimation (고급 밀도 추정)
 ▣ 정의: 신경망이나 복잡한 수학적 변환을 활용하여 고차원 공간의 복잡한 데이터 분포를 정교하게 모델링하는 방식.<br>
