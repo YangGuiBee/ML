@@ -461,6 +461,13 @@
 
 ---
 # 5. 밀도 추정 (Density Estimation)
+**5.1 Histogram-based Methods (히스토그램 기반 방법)** <br>
+**5.2 Kernel Density Estimation (커널 밀도 추정)** <br>
+**5.3 Parametric Methods (파라메트릭 방법)** <br>
+**5.4 Non-parametric Methods (비파라메트릭 방법)** <br>
+**5.5 Advanced Density Estimation (고급 밀도 추정)** <br>
+---
+
 ## 5.1 Histogram-based Methods (히스토그램 기반 방법)
 ▣ 정의: 데이터 공간을 일정한 간격의 빈(Bin)으로 나누고 각 빈에 속하는 데이터의 개수를 측정하여 불연속적인 밀도를 추정하는 방식.<br>
 ▣ 특징: 가장 단순하고 직관적인 방식으로 연산 비용이 매우 낮음. 그러나 빈의 경계에서 밀도가 불연속적으로 변하며, 빈의 너비 설정에 따라 결과의 왜곡이 심하게 발생할 수 있음.<br>
@@ -526,6 +533,13 @@
 
 ---
 # 6. 신경망 기반 비지도학습 (Neural Network-based)
+**6.1 Generative Models (생성 모델)** <br>
+**6.2 Representation Learning (표현 학습)** <br>
+**6.3 Deep Learning-based Clustering (딥러닝 기반 클러스터링)** <br>
+**6.4 Deep Learning-based Dimensionality Reduction (딥러닝 기반 차원 축소)** <br>
+**6.5 Energy-Based Models (에너지 기반 모델)** <br>
+---
+
 ## 6.1 Generative Models (생성 모델)
 ▣ 정의: 학습 데이터의 확률 분포를 학습하여 그와 유사한 새로운 데이터를 생성해내는 신경망 모델.<br>
 ▣ 특징: 표현 학습(6.2)이 데이터의 특징 추출에 집중하는 것과 달리, 데이터 전체의 생성 프로세스를 모델링함. 결과물의 품질과 다양성이 성능 평가의 핵심 지표임.<br>
@@ -605,6 +619,14 @@
 
 ---
 # 7. 공분산 추정 (Covariance Estimation)
+**7.1 Basic Covariance Estimation (기본 공분산 추정)** <br>
+**7.2 Shrinkage Methods (축소 방법)** <br>
+**7.3 Sparse Covariance Estimation (희소 공분산 추정)** <br>
+**7.4 Robust Covariance Estimation (강건 공분산 추정)** <br>
+**7.5 Structured Covariance Estimation (구조화된 공분산 추정)** <br>
+**7.6 High-dimensional Covariance Estimation (고차원 공분산 추정)** <br>
+---
+
 ## 7.1 Basic Covariance Estimation (기본 공분산 추정)
 ▣ 정의: 주어진 표본 데이터를 이용하여 변수 간의 선형적 상관관계를 나타내는 공분산 행렬을 직접 계산하는 방식.<br>
 ▣ 특징: 가장 단순하고 계산량이 적으나, 표본 수가 변수 개수보다 적을 경우 행렬이 특이 행렬(Singular Matrix)이 되어 역행렬을 구할 수 없는 문제가 있음.<br>
