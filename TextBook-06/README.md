@@ -296,7 +296,6 @@
 ▣ 특징: 일반적인 비지도 학습 기반 차원 축소와 달리 분류 성능 극대화(지도 학습형)나 문서의 주제 추출 등 특정한 분석 목표에 최적화되어 있음.<br>
 ▣ 원리: 클래스 간 분별력을 최대화하는 축을 찾거나(LDA), 단어와 문서 간의 잠재적인 의미 관계를 확률적으로 모델링함(Topic Modeling).<br>
 ▣ 적용분야: 분류 모델 성능 향상을 위한 전처리, 대규모 텍스트 데이터의 주제 분류, 서로 다른 성격의 데이터셋(이미지-텍스트) 결합 분석.<br>
-[3.2.19] PaCMAP (Pairwise Controlled Manifold Approximation) (쌍별 제어 매니폴드 근사)<br>
 [3.3.1] LDA (Latent Dirichlet Allocation) - Topic Modeling (잠재 디리클레 할당 - 토픽 모델링)<br>
 [3.3.2] pLSA (Probabilistic Latent Semantic Analysis) (확률적 잠재 의미 분석)<br>
 [3.3.3] HDP (Hierarchical Dirichlet Process) (계층적 디리클레 프로세스)<br>
