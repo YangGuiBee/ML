@@ -190,13 +190,13 @@
 
 ---
 # 2. 연관 규칙 학습 (Association Rule Learning)
-**2.1 Frequent Pattern Mining (빈발 패턴 탐색)** <br>
-**2.2 Advanced Pattern Mining (고급 패턴 탐색)** <br>
+**2.1 Frequent Pattern Mining (빈발 패턴 마이닝)** <br>
+**2.2 Advanced Pattern Mining (고급 패턴 마이닝)** <br>
 **2.3 Sequential Pattern Mining (시퀀스 패턴 마이닝)** <br>
 **2.4 Specialized Pattern Mining (특수 패턴 마이닝)** <br>
 ---
 
-## 2.1 Frequent Pattern Mining (빈발 패턴 탐색)
+## 2.1 Frequent Pattern Mining (빈발 패턴 마이닝)
 ▣ 정의: 데이터베이스에서 설정된 최소 지지도(Minimum Support) 이상의 빈도로 발생하는 아이템 집합을 찾아내는 가장 기초적인 마이닝 방식.<br>
 ▣ 특징: 연관 규칙 학습의 모태가 되는 분야로, 이후 등장하는 고급(2.2)이나 시퀀스(2.3) 마이닝의 기반 기술로 활용됨. 데이터 간의 발생 순서보다는 '함께 발생하는 조합' 자체에 집중함.<br>
 ▣ 원리: 전체 데이터셋을 스캔하여 각 아이템의 빈도를 계산하고, 지지도 임계값을 넘지 못하는 조합을 후보군에서 제거(Pruning)하며 유의미한 패턴을 확장함.<br>
@@ -210,7 +210,7 @@
 [2.1.7] H-Mine (Hyper-structure Mining) (하이퍼구조 마이닝)<br>
 [2.1.8] LCM (Linear time Closed itemset Miner) (선형 시간 폐쇄 항목집합 마이너)<br>
 <br>
-## 2.2 Advanced Pattern Mining (고급 패턴 탐색)
+## 2.2 Advanced Pattern Mining (고급 패턴 마이닝)
 ▣ 정의: 기본적인 빈발 패턴 탐색을 넘어 데이터의 계층 구조, 다차원 속성, 또는 양적 속성을 반영하여 더 정교한 규칙을 추출하는 방식.<br>
 ▣ 특징: 단순 아이템 조합만 보는 기본 알고리즘(2.1)과 달리 데이터의 속성(시간, 장소, 가격 등)이나 범주형 계층을 고려하므로 훨씬 구체적이고 실행 가능한 통찰을 제공함.<br>
 ▣ 원리: 데이터를 속성별로 다차원 큐브 형태로 구성하거나, 상위 개념(예: 과일)에서 하위 개념(예: 사과)으로 내려가며 단계적으로 마이닝을 수행함.<br>
