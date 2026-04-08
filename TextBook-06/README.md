@@ -190,13 +190,13 @@
 
 ---
 # 2. 연관 규칙 학습 (Association Rule Learning)
-**2.1 Frequent Pattern Mining Algorithms (빈발 패턴 탐색 알고리즘)** <br>
+**2.1 Frequent Pattern Mining (빈발 패턴 탐색)** <br>
 **2.2 Advanced Pattern Mining (고급 패턴 탐색)** <br>
 **2.3 Sequential Pattern Mining (시퀀스 패턴 마이닝)** <br>
 **2.4 Specialized Pattern Mining (특수 패턴 마이닝)** <br>
 ---
 
-## 2.1 Frequent Pattern Mining Algorithms (빈발 패턴 탐색 알고리즘)
+## 2.1 Frequent Pattern Mining (빈발 패턴 탐색)
 ▣ 정의: 데이터베이스에서 설정된 최소 지지도(Minimum Support) 이상의 빈도로 발생하는 아이템 집합을 찾아내는 가장 기초적인 마이닝 방식.<br>
 ▣ 특징: 연관 규칙 학습의 모태가 되는 분야로, 이후 등장하는 고급(2.2)이나 시퀀스(2.3) 마이닝의 기반 기술로 활용됨. 데이터 간의 발생 순서보다는 '함께 발생하는 조합' 자체에 집중함.<br>
 ▣ 원리: 전체 데이터셋을 스캔하여 각 아이템의 빈도를 계산하고, 지지도 임계값을 넘지 못하는 조합을 후보군에서 제거(Pruning)하며 유의미한 패턴을 확장함.<br>
