@@ -315,15 +315,17 @@
 [3.4.11] CPC (Contrastive Predictive Coding) (대조 예측 코딩)<br>
 
 ---
+---
+
 # 4. 이상치 탐지 (Anomaly/Outlier Detection)
 **4.1 Statistical Methods (통계 기반 방법)** <br>
 **4.2 Distance-based Methods (거리 기반 방법)** <br>
 **4.3 Density-based Methods (밀도 기반 방법)** <br>
 **4.4 Model-based Methods (모델 기반 방법)** <br>
 **4.5 Ensemble Methods (앙상블 방법)** <br>
-**4.6 Deep Learning-based Methods (딥러닝 기반 방법)** <br>
-**4.7 Time-series Anomaly Detection (시계열 이상치 탐지)** <br>
-**4.8 High-dimensional Outlier Detection (고차원 데이터 이상치 탐지)** <br>
+**4.6 Time-series Anomaly Detection (시계열 이상치 탐지)** <br>
+**4.7 High-dimensional Outlier Detection (고차원 데이터 이상치 탐지)** <br>
+
 ---
 
 ## 4.1 Statistical Methods (통계 기반 방법)
@@ -396,274 +398,276 @@
 [4.5.6] Thresh (Threshold Sum) (임계값 합)<br>
 [4.5.7] SUOD (Scalable Unsupervised Outlier Detection) (확장 가능한 비지도 이상치 탐지)<br>
 <br>
-## 4.6 Deep Learning-based Methods (딥러닝 기반 방법)
-▣ 정의: 신경망을 통해 데이터의 복잡한 비선형 특징을 학습하여 정상 패턴에서 벗어난 데이터를 탐지하는 방식.<br>
-▣ 특징: 고차원 비정형 데이터(이미지, 음성 등) 처리에 독보적임. 특징 추출과 이상 탐지를 동시에 수행할 수 있으나 학습을 위해 많은 양의 데이터와 연산 자원이 필요함.<br>
-▣ 원리: 오토인코더를 통해 데이터를 압축 후 복원할 때, 정상 데이터는 복원 오차가 작고 이상치는 복원 오차가 크다는 원리를 주로 활용함.<br>
-▣ 적용분야: 제조 공정의 비전 검사(이미지 결함 탐지), 복잡한 센서 신호의 이상 거동 분석.<br>
-[4.6.1] Autoencoder-based Detection (오토인코더 기반 탐지)<br>
-[4.6.2] VAE (Variational Autoencoder) for Anomaly Detection (이상치 탐지를 위한 변분 오토인코더)<br>
-[4.6.3] AAE (Adversarial Autoencoder) (적대적 오토인코더)<br>
-[4.6.4] GAN (Generative Adversarial Networks) (생성적 적대 신경망)<br>
-[4.6.5] AnoGAN (Anomaly Detection with GAN) (GAN을 이용한 이상치 탐지)<br>
-[4.6.6] LSTM-based Anomaly Detection (Time-series) (LSTM 기반 이상치 탐지 (시계열))<br>
-[4.6.7] TCN (Temporal Convolutional Networks) (시간적 합성곱 신경망)<br>
-[4.6.8] Deep SVDD (심층 서포트 벡터 데이터 설명)<br>
-[4.6.9] OC-NN (One-Class Neural Networks) (일클래스 신경망)<br>
-[4.6.10] Self-Supervised Learning for Anomaly Detection (이상치 탐지를 위한 자기지도학습)<br>
-<br>
-## 4.7 Time-series Anomaly Detection (시계열 이상치 탐지)
+## 4.6 Time-series Anomaly Detection (시계열 이상치 탐지)
 ▣ 정의: 시간 흐름에 따라 수집된 데이터에서 추세(Trend), 계절성(Seasonality) 등의 패턴을 벗어난 시점을 찾아내는 방식.<br>
 ▣ 특징: 데이터의 순서와 시점 간의 상관관계가 핵심이며, 특정 시점의 단기적인 급증(Spike)뿐만 아니라 장기적인 패턴의 변화를 탐지해야 함.<br>
 ▣ 원리: 과거 데이터를 바탕으로 현재 값을 예측하고, 실제 값과 예측값 사이의 잔차(Residual)가 허용 범위를 넘어서는 지점을 식별함.<br>
 ▣ 적용분야: 주가 폭락 탐지, 서버 트래픽 급증 모니터링, 심전도(ECG) 이상 신호 탐지.<br>
-[4.7.1] Moving Average/Median (이동 평균/중앙값)<br>
-[4.7.2] Exponential Smoothing (지수 평활)<br>
-[4.7.3] ARIMA-based Residual Analysis (ARIMA 기반 잔차 분석)<br>
-[4.7.4] S-H-ESD (Seasonal Hybrid ESD) (계절성 하이브리드 극단 학생화 편차)<br>
-[4.7.5] Prophet Anomaly Detection (프로펫 이상치 탐지)<br>
-[4.7.6] Matrix Profile (행렬 프로파일)<br>
-[4.7.7] Discord Discovery (불일치 발견)<br>
+[4.6.1] Moving Average/Median (이동 평균/중앙값)<br>
+[4.6.2] Exponential Smoothing (지수 평활)<br>
+[4.6.3] ARIMA-based Residual Analysis (ARIMA 기반 잔차 분석)<br>
+[4.6.4] S-H-ESD (Seasonal Hybrid ESD) (계절성 하이브리드 극단 학생화 편차)<br>
+[4.6.5] Prophet Anomaly Detection (프로펫 이상치 탐지)<br>
+[4.6.6] Matrix Profile (행렬 프로파일)<br>
+[4.6.7] Discord Discovery (불일치 발견)<br>
 <br>
-## 4.8 High-dimensional Outlier Detection (고차원 데이터 이상치 탐지)
+## 4.7 High-dimensional Outlier Detection (고차원 데이터 이상치 탐지)
 ▣ 정의: 변수의 개수가 매우 많은 고차원 공간에서 '차원의 저주' 문제를 극복하며 이상치를 탐지하는 특화 방식.<br>
 ▣ 특징: 고차원에서는 모든 데이터 간의 거리가 멀어지는 현상이 발생하여 일반적인 거리 기반 방식(4.2)이 무력화됨. 이를 해결하기 위해 부분 공간이나 각도를 활용함.<br>
 ▣ 원리: 전체 변수 중 유의미한 변수 조합(부분 공간)을 찾거나, 데이터 포인트 간의 거리가 아닌 각도(Angle)의 분산을 측정하여 이상치를 판별함.<br>
 ▣ 적용분야: 수천 개의 변수를 가진 유전자 데이터 분석, 다변수 화학 공정의 이상 상태 감시.<br>
-[4.8.1] Subspace Outlier Detection (부분공간 이상치 탐지)<br>
-[4.8.2] HiCS (High-dimensional Outlier Detection) (고차원 이상치 탐지)<br>
-[4.8.3] Feature Selection for Outlier Detection (이상치 탐지를 위한 특징 선택)<br>
-[4.8.4] ABOD (Angle-based Outlier Detection) (각도 기반 이상치 탐지)<br>
-[4.8.5] FastABOD (고속 각도 기반 이상치 탐지)<br>
+[4.7.1] Subspace Outlier Detection (부분공간 이상치 탐지)<br>
+[4.7.2] HiCS (High-dimensional Outlier Detection) (고차원 이상치 탐지)<br>
+[4.7.3] Feature Selection for Outlier Detection (이상치 탐지를 위한 특징 선택)<br>
+[4.7.4] ABOD (Angle-based Outlier Detection) (각도 기반 이상치 탐지)<br>
+[4.7.5] FastABOD (고속 각도 기반 이상치 탐지)<br>
 
 ---
-# 5. 밀도 추정 (Density Estimation)
-**5.1 Histogram-based Methods (히스토그램 기반 방법)** <br>
-**5.2 Kernel Density Estimation (커널 밀도 추정)** <br>
-**5.3 Parametric Methods (파라메트릭 방법)** <br>
-**5.4 Non-parametric Methods (비파라메트릭 방법)** <br>
-**5.5 Advanced Density Estimation (고급 밀도 추정)** <br>
+# 5. 신경망 기반 비지도학습 (Neural Network-based)
+**5.1 Generative Models (생성 모델)** <br>
+**5.2 Representation Learning (표현 학습)** <br>
+**5.3 Deep Learning-based Clustering (딥러닝 기반 클러스터링)** <br>
+**5.4 Deep Learning-based Dimensionality Reduction (딥러닝 기반 차원 축소)** <br>
+**5.5 Energy-Based Models (에너지 기반 모델)** <br>
+
 ---
 
-## 5.1 Histogram-based Methods (히스토그램 기반 방법)
+## 5.1 Generative Models (생성 모델)
+▣ 정의: 학습 데이터의 확률 분포를 학습하여 그와 유사한 새로운 데이터를 생성해내는 신경망 모델.<br>
+▣ 특징: 표현 학습(5.2)이 데이터의 특징 추출에 집중하는 것과 달리, 데이터 전체의 생성 프로세스를 모델링함. 결과물의 품질과 다양성이 성능 평가의 핵심 지표임.<br>
+▣ 원리: 잠재 변수로부터 데이터를 복원하거나(VAE), 생성자와 판별자가 서로 대립하며 정교한 데이터를 생성하도록 유도함(GAN). 최근에는 노이즈를 점진적으로 제거하는 역과정을 학습함(Diffusion).<br>
+▣ 적용분야: 이미지 및 영상 합성, 데이터 증강(Data Augmentation), 예술 콘텐츠 생성.<br>
+[5.1.1] RBM (Restricted Boltzmann Machine) (제한 볼츠만 머신)<br>
+[5.1.2] CD (Contrastive Divergence) Algorithm (대조 발산 알고리즘)<br>
+[5.1.3] PCD (Persistent Contrastive Divergence) (지속 대조 발산)<br>
+[5.1.4] DBN (Deep Belief Networks) (심층 신념 신경망)<br>
+[5.1.5] β-VAE (베타 변분 오토인코더)<br>
+[5.1.6] Disentangled VAE (분리 표현 변분 오토인코더)<br>
+[5.1.7] GAN (Generative Adversarial Networks) (생성적 적대 신경망)<br>
+[5.1.8] DCGAN (Deep Convolutional GAN) (심층 합성곱 생성적 적대 신경망)<br>
+[5.1.9] WGAN (Wasserstein GAN) (바서슈타인 생성적 적대 신경망)<br>
+[5.1.10] StyleGAN (스타일 생성적 적대 신경망)<br>
+[5.1.11] CycleGAN (사이클 생성적 적대 신경망)<br>
+[5.1.12] Diffusion Models (확산 모델)<br>
+[5.1.13] DDPM (Denoising Diffusion Probabilistic Models) (잡음 제거 확산 확률 모델)<br>
+[5.1.14] Score-based Generative Models (점수 기반 생성 모델)<br>
+<br>
+## 5.2 Representation Learning (표현 학습)
+▣ 정의: 로우 데이터(Raw Data)로부터 다운스트림 태스크(분류, 회귀 등)에 유용한 핵심 특징(Feature)을 스스로 추출하도록 학습하는 방식.<br>
+▣ 특징: 생성 모델(5.1)처럼 데이터를 복원하는 데 목적을 두기보다, 데이터 간의 유사성과 차이점을 효과적으로 구별하는 임베딩 공간 구축에 집중함.<br>
+▣ 원리: 데이터의 일부를 가리고 맞히거나(Masking), 같은 데이터에서 변형된 개체끼리는 가깝게, 다른 데이터와는 멀게 배치하는 대조 학습(Contrastive Learning)을 수행함.<br>
+▣ 적용분야: 사전 학습(Pre-training) 모델 구축, 전이 학습(Transfer Learning)을 위한 특징 추출기.<br>
+[5.2.1] Stacked Autoencoder (적층 오토인코더)
+[5.2.2] DAE (Denoising Autoencoder) (잡음 제거 오토인코더)<br>
+[5.2.3] SAE (Sparse Autoencoder) (희소 오토인코더)<br>
+[5.2.4] CAE (Contractive Autoencoder) (수축 오토인코더)<br>
+[5.2.5] Winner-Take-All Autoencoder (승자 독식 오토인코더)<br>
+[5.2.6] AAE (Adversarial Autoencoder) (적대적 오토인코더)<br>
+[5.2.7] Self-Supervised Learning (자기지도학습)<br>
+[5.2.8] Contrastive Learning (대조 학습)<br>
+[5.2.9] SimCLR (Simple Framework for Contrastive Learning) (대조 학습을 위한 단순 프레임워크)<br>
+[5.2.10] MoCo (Momentum Contrast) (모멘텀 대조)<br>
+[5.2.11] BYOL (Bootstrap Your Own Latent) (자가 잠재 부트스트랩)<br>
+[5.2.12] SwAV (Swapped Assignment Views) (교환 할당 뷰)<br>
+[5.2.13] Barlow Twins (바를로 트윈스)<br>
+[5.2.14] VICReg (Variance-Invariance-Covariance Regularization) (분산-불변-공분산 정규화)<br>
+[5.2.15] MAE (Masked Autoencoders) (마스크 오토인코더)<br>
+[5.2.16] BERT-style Pretraining (Masked Language Modeling) (BERT 스타일 사전학습, 마스크 언어 모델링)<br>
+<br>
+## 5.3 Deep Learning-based Clustering (딥러닝 기반 클러스터링)
+▣ 정의: 신경망을 통해 고차원 데이터를 저차원 잠재 공간으로 투영함과 동시에 최적의 군집을 할당하는 방식.<br>
+▣ 특징: 전통적인 클러스터링이 차원의 저주에 취약한 것과 달리, 비선형 특징 추출을 통해 복잡한 비정형 데이터에서도 명확한 군집화가 가능함.<br>
+▣ 원리: 오토인코더 등으로 특징을 압축하면서, 잠재 공간 상의 데이터 분포가 특정 중심점(Centroid)에 뭉치도록 군집화 손실 함수(Clustering Loss)를 함께 최적화함.<br>
+▣ 적용분야: 대규모 이미지 라이브러리 자동 분류, 복잡한 사용자 행동 패턴 그룹화.<br>
+[5.3.1] SOM (Self-Organizing Maps) for Clustering (클러스터링을 위한 자기조직화지도)<br>
+[5.3.2] DEC (Deep Embedded Clustering) (심층 임베디드 클러스터링)<br>
+[5.3.3] IDEC (Improved Deep Embedded Clustering) (개선된 심층 임베디드 클러스터링)<br>
+[5.3.4] DKM (Deep K-Means) (심층 K-평균)<br>
+[5.3.5] SSC (Sparse Subspace Clustering) (희소 부분공간 클러스터링)<br>
+[5.3.6] IDEC (Improved Deep Embedded Clustering) (개선된 심층 임베디드 클러스터링)<br>
+[5.3.7] DKM (Deep K-Means) (심층 K-평균)<br>
+[5.3.8] JULE (Joint Unsupervised Learning) (결합 비지도학습)<br>
+[5.3.9] DAC (Deep Adaptive Clustering) (심층 적응 클러스터링)<br>
+[5.3.10] CORL (Clustering-Oriented Representation Learning) (클러스터링 지향 표현 학습)<br>
+[5.3.11] DCN (Deep Clustering Network) (심층 클러스터링 신경망)<br>
+<br>
+## 5.4 Deep Learning-based Dimensionality Reduction (딥러닝 기반 차원 축소)
+▣ 정의: 고차원 입력 데이터를 정보 손실을 최소화하면서 저차원의 압축된 표현으로 변환하는 신경망 기술.<br>
+▣ 특징: 선형 차원 축소인 PCA 등에 비해 훨씬 복잡한 비선형 상관관계를 포착할 수 있으며, 학습된 모델을 새 데이터에 즉시 적용 가능한 확장성을 가짐.<br>
+▣ 원리: 입력 데이터를 압축하는 인코더와 복원하는 디코더를 대칭적으로 구성하고, 입력과 출력의 차이(Reconstruction Error)를 최소화하는 과정에서 병목 지점(Bottleneck)의 차원을 제한함.<br>
+▣ 적용분야: 고차원 데이터의 시각화 전처리, 데이터 압축 및 통신 효율화, 이상 탐지용 특징 추출.<br>
+[5.4.1] Neural Network Embeddings (신경망 임베딩)<br>
+[5.4.2] Graph Neural Networks for Dimensionality Reduction (차원 축소를 위한 그래프 신경망)<br>
+<br>
+## 5.5 Energy-Based Models (에너지 기반 모델)
+▣ 정의: 데이터의 각 상태에 '에너지'라는 스칼라 값을 부여하여, 관측된 데이터에는 낮은 에너지를, 비정상 데이터에는 높은 에너지를 할당하도록 학습하는 방식.<br>
+▣ 특징: 확률 분포를 명시적으로 계산해야 하는 생성 모델(5.1)보다 유연하며, 정규화 상수 계산 없이도 복잡한 종속 관계를 모델링할 수 있음.<br>
+▣ 원리: 에너지 함수(Energy Function)를 정의하고, 학습 데이터의 에너지는 낮추고 그 외 지역의 에너지는 높이는 대조적 다이버전스(Contrastive Divergence) 등의 기법으로 파라미터를 조정함.<br>
+▣ 적용분야: 협업 필터링 추천 시스템, 다변량 데이터의 결합 분포 모델링, 노이즈 제거 및 데이터 복원.<br>
+[5.5.1] Boltzmann Machines (볼츠만 머신)<br>
+[5.5.2] Hopfield Networks (홉필드 신경망)<br>
+[5.5.3] Modern Hopfield Networks (현대 홉필드 신경망)<br>
+[5.5.4] Contrastive Learning as Energy-Based Model (에너지 기반 모델로서의 대조 학습)<br>
+<br>
+## 5.6 Deep Learning-based Methods (딥러닝 기반 방법)
+▣ 정의: 신경망을 통해 데이터의 복잡한 비선형 특징을 학습하여 정상 패턴에서 벗어난 데이터를 탐지하는 방식.<br>
+▣ 특징: 고차원 비정형 데이터(이미지, 음성 등) 처리에 독보적임. 특징 추출과 이상 탐지를 동시에 수행할 수 있으나 학습을 위해 많은 양의 데이터와 연산 자원이 필요함.<br>
+▣ 원리: 오토인코더를 통해 데이터를 압축 후 복원할 때, 정상 데이터는 복원 오차가 작고 이상치는 복원 오차가 크다는 원리를 주로 활용함.<br>
+▣ 적용분야: 제조 공정의 비전 검사(이미지 결함 탐지), 복잡한 센서 신호의 이상 거동 분석.<br>
+[5.6.1] Autoencoder-based Detection (오토인코더 기반 탐지)<br>
+[5.6.2] VAE (Variational Autoencoder) for Anomaly Detection (이상치 탐지를 위한 변분 오토인코더)<br>
+[5.6.3] AAE (Adversarial Autoencoder) (적대적 오토인코더)<br>
+[5.6.4] GAN (Generative Adversarial Networks) (생성적 적대 신경망)<br>
+[5.6.5] AnoGAN (Anomaly Detection with GAN) (GAN을 이용한 이상치 탐지)<br>
+[5.6.6] LSTM-based Anomaly Detection (Time-series) (LSTM 기반 이상치 탐지 (시계열))<br>
+[5.6.7] TCN (Temporal Convolutional Networks) (시간적 합성곱 신경망)<br>
+[5.6.8] Deep SVDD (심층 서포트 벡터 데이터 설명)<br>
+[5.6.9] OC-NN (One-Class Neural Networks) (일클래스 신경망)<br>
+[5.6.10] Self-Supervised Learning for Anomaly Detection (이상치 탐지를 위한 자기지도학습)<br>
+<br>
+
+---
+# 6. 통계 도구 : 밀도/공분산 추정 (Density/Covariance Estimation)
+
+밀도 추정 (Density Estimation)<br>
+**6.1 Histogram-based Methods (히스토그램 기반 방법)** <br>
+**6.2 Kernel Density Estimation (커널 밀도 추정)** <br>
+**6.3 Parametric Methods (파라메트릭 방법)** <br>
+**6.4 Non-parametric Methods (비파라메트릭 방법)** <br>
+**6.5 Advanced Density Estimation (고급 밀도 추정)** <br>
+공분산 추정 (Covariance Estimation)<br>
+**6.6 Basic Covariance Estimation (기본 공분산 추정)** <br>
+**6.7 Shrinkage Methods (축소 방법)** <br>
+**6.8 Sparse Covariance Estimation (희소 공분산 추정)** <br>
+**6.9 Robust Covariance Estimation (강건 공분산 추정)** <br>
+**6.10 Structured Covariance Estimation (구조화된 공분산 추정)** <br>
+**6.11 High-dimensional Covariance Estimation (고차원 공분산 추정)** <br>
+
+---
+
+## 6.1 Histogram-based Methods (히스토그램 기반 방법)
 ▣ 정의: 데이터 공간을 일정한 간격의 빈(Bin)으로 나누고 각 빈에 속하는 데이터의 개수를 측정하여 불연속적인 밀도를 추정하는 방식.<br>
 ▣ 특징: 가장 단순하고 직관적인 방식으로 연산 비용이 매우 낮음. 그러나 빈의 경계에서 밀도가 불연속적으로 변하며, 빈의 너비 설정에 따라 결과의 왜곡이 심하게 발생할 수 있음.<br>
 ▣ 원리: 전체 데이터 범위를 구간으로 나누어 각 구간의 높이를 해당 구간에 포함된 데이터 포인트의 빈도수에 비례하게 설정함.<br>
 ▣ 적용분야: 단변량 데이터의 대략적인 분포 확인, 실시간 데이터 스트림의 기초적인 통계 요약.<br>
-[5.1.1] Equal-Width Histogram (등간격 히스토그램)<br>
-[5.1.2] Equal-Frequency Histogram (등빈도 히스토그램)<br>
-[5.1.3] Bayesian Blocks (베이지안 블록)<br>
-[5.1.4] Adaptive Histogram (적응적 히스토그램)<br>
-[5.1.5] Multi-dimensional Histogram (다차원 히스토그램)<br>
+[6.1.1] Equal-Width Histogram (등간격 히스토그램)<br>
+[6.1.2] Equal-Frequency Histogram (등빈도 히스토그램)<br>
+[6.1.3] Bayesian Blocks (베이지안 블록)<br>
+[6.1.4] Adaptive Histogram (적응적 히스토그램)<br>
+[6.1.5] Multi-dimensional Histogram (다차원 히스토그램)<br>
 <br>
-## 5.2 Kernel Density Estimation (커널 밀도 추정)
+## 6.2 Kernel Density Estimation (커널 밀도 추정)
 ▣ 정의: 각 데이터 포인트에 커널 함수를 배치하고 이들을 합산하여 매끄러운(Smooth) 확률 밀도 함수를 생성하는 방식.<br>
-▣ 특징: 히스토그램 기반 방식(5.1)의 불연속성 문제를 해결하여 부드러운 곡선 형태의 밀도를 제공함. 데이터 분포에 대한 사전 가정이 필요 없는 비파라메트릭 방식의 대표 주자임.<br>
+▣ 특징: 히스토그램 기반 방식(6.1)의 불연속성 문제를 해결하여 부드러운 곡선 형태의 밀도를 제공함. 데이터 분포에 대한 사전 가정이 필요 없는 비파라메트릭 방식의 대표 주자임.<br>
 ▣ 원리: 개별 데이터 포인트마다 종 모양의 커널 함수를 적용하고, 전체 영역에서 이 함수들을 평균하여 누적된 밀도 값을 도출함.<br>
 ▣ 적용분야: 데이터 시각화(산점도의 밀도 표현), 이상치 탐지를 위한 임계치 설정, 통계적 가설 검정의 분포 추정.<br>
-[5.2.1] Univariate KDE (일변량 커널 밀도 추정)<br>
-[5.2.2] Multivariate KDE (다변량 커널 밀도 추정)<br>
-[5.2.3] Gaussian (Normal) Kernel (가우시안/정규 커널)<br>
-[5.2.4] Epanechnikov Kernel (에파네치니코프 커널)<br>
-[5.2.5] Triangular Kernel (삼각 커널)<br>
-[5.2.6] Biweight (Quartic) Kernel (바이웨이트/4차 커널)<br>
-[5.2.7] Triweight Kernel (트라이웨이트 커널)<br>
-[5.2.8] Cosine Kernel (코사인 커널)<br>
-[5.2.9] Silverman's Rule of Thumb (실버만의 경험 법칙)<br>
-[5.2.10] Scott's Rule (스콧의 법칙)<br>
-[5.2.11] Cross-Validation (교차 검증)<br>
-[5.2.12] Plug-in Methods (플러그인 방법)<br>
-[5.2.13] Adaptive KDE (적응적 커널 밀도 추정)<br>
-[5.2.14] Variable Bandwidth KDE (가변 대역폭 커널 밀도 추정)<br>
+[6.2.1] Univariate KDE (일변량 커널 밀도 추정)<br>
+[6.2.2] Multivariate KDE (다변량 커널 밀도 추정)<br>
+[6.2.3] Gaussian (Normal) Kernel (가우시안/정규 커널)<br>
+[6.2.4] Epanechnikov Kernel (에파네치니코프 커널)<br>
+[6.2.5] Triangular Kernel (삼각 커널)<br>
+[6.2.6] Biweight (Quartic) Kernel (바이웨이트/4차 커널)<br>
+[6.2.7] Triweight Kernel (트라이웨이트 커널)<br>
+[6.2.8] Cosine Kernel (코사인 커널)<br>
+[6.2.9] Silverman's Rule of Thumb (실버만의 경험 법칙)<br>
+[6.2.10] Scott's Rule (스콧의 법칙)<br>
+[6.2.11] Cross-Validation (교차 검증)<br>
+[6.2.12] Plug-in Methods (플러그인 방법)<br>
+[6.2.13] Adaptive KDE (적응적 커널 밀도 추정)<br>
+[6.2.14] Variable Bandwidth KDE (가변 대역폭 커널 밀도 추정)<br>
 <br>
-## 5.3 Parametric Methods (파라메트릭 방법)
+## 6.3 Parametric Methods (파라메트릭 방법)
 ▣ 정의: 데이터가 특정한 수학적 확률 분포(정규분포 등)를 따른다고 가정하고, 해당 분포를 결정하는 매개변수(평균, 분산 등)를 추정하는 방식.<br>
-▣ 특징: 비파라메트릭 방식(5.4)에 비해 적은 양의 데이터로도 효율적인 추정이 가능하며 모델이 매우 간결함. 단, 실제 데이터가 가정된 분포와 다를 경우 오차가 매우 큼.<br>
+▣ 특징: 비파라메트릭 방식(6.4)에 비해 적은 양의 데이터로도 효율적인 추정이 가능하며 모델이 매우 간결함. 단, 실제 데이터가 가정된 분포와 다를 경우 오차가 매우 큼.<br>
 ▣ 원리: 주어진 데이터를 바탕으로 확률 모델의 우도(Likelihood)를 최대화하거나 모멘트를 일치시키는 파라미터를 계산함.<br>
 ▣ 적용분야: 정규성이 보장된 공정 데이터 분석, 경제 지표의 장기적 추세 모델링.<br>
-[5.3.1] Variational Inference for GMM (GMM을 위한 변분 추론)<br>
-[5.3.2] Dirichlet Process Mixture Model (디리클레 프로세스 혼합 모델)<br>
-[5.3.3] MLE (Maximum Likelihood Estimation) (최대우도 추정)<br>
-[5.3.4] Method of Moments (적률법)<br>
+[6.3.1] Variational Inference for GMM (GMM을 위한 변분 추론)<br>
+[6.3.2] Dirichlet Process Mixture Model (디리클레 프로세스 혼합 모델)<br>
+[6.3.3] MLE (Maximum Likelihood Estimation) (최대우도 추정)<br>
+[6.3.4] Method of Moments (적률법)<br>
 <br>
-## 5.4 Non-parametric Methods (비파라메트릭 방법)
+## 6.4 Non-parametric Methods (비파라메트릭 방법)
 ▣ 정의: 데이터의 특정 분포 형태를 사전에 가정하지 않고, 오직 주어진 데이터의 구조만을 이용하여 밀도를 직접 추정하는 방식.<br>
-▣ 특징: 파라메트릭 방식(5.3)보다 유연하여 복잡하고 다봉형(Multimodal)인 분포도 정확하게 묘사 가능함. 다만, 추정을 위해 대규모 데이터셋이 요구되며 차원이 높아질수록 성능이 저하됨.<br>
+▣ 특징: 파라메트릭 방식(6.3)보다 유연하여 복잡하고 다봉형(Multimodal)인 분포도 정확하게 묘사 가능함. 다만, 추정을 위해 대규모 데이터셋이 요구되며 차원이 높아질수록 성능이 저하됨.<br>
 ▣ 원리: 특정 지점 주변의 이웃 데이터 개수를 세거나 공간을 데이터 밀도에 맞게 가변적으로 분할하여 밀도를 측정함.<br>
 ▣ 적용분야: 분포 형상을 예측하기 어려운 탐색적 데이터 분석(EDA), 기계학습의 비지도 학습 전처리.<br>
-[5.4.1] k-Nearest Neighbors Density Estimation (k-최근접 이웃 밀도 추정)<br>
-[5.4.2] Local Likelihood Density Estimation (지역 우도 밀도 추정)<br>
-[5.4.3] Orthogonal Series Density Estimation (직교 급수 밀도 추정)<br>
+[6.4.1] k-Nearest Neighbors Density Estimation (k-최근접 이웃 밀도 추정)<br>
+[6.4.2] Local Likelihood Density Estimation (지역 우도 밀도 추정)<br>
+[6.4.3] Orthogonal Series Density Estimation (직교 급수 밀도 추정)<br>
 <br>
-## 5.5 Advanced Density Estimation (고급 밀도 추정)
+## 6.5 Advanced Density Estimation (고급 밀도 추정)
 ▣ 정의: 신경망이나 복잡한 수학적 변환을 활용하여 고차원 공간의 복잡한 데이터 분포를 정교하게 모델링하는 방식.<br>
-▣ 특징: 기존 KDE(5.2)나 비파라메트릭 방식(5.4)이 해결하지 못하는 초고차원 데이터(이미지, 음성 등)의 밀도를 효과적으로 추정함. 생성 모델과의 연관성이 매우 높음.<br>
+▣ 특징: 기존 KDE나 비파라메트릭 방식이 해결하지 못하는 초고차원 데이터(이미지, 음성 등)의 밀도를 효과적으로 추정함. 생성 모델과의 연관성이 매우 높음.<br>
 ▣ 원리: 단순한 분포를 복잡한 가역 변환(Reversible Transformation)을 통해 실제 데이터 분포로 변환하거나, 딥러닝 잠재 공간에서 밀도를 학습함.<br>
 ▣ 적용분야: 생성형 AI의 데이터 샘플링, 고차원 이상 탐지, 베이지안 추론을 위한 복잡한 사후 분포 근사.<br>
-[5.5.1] Copula-based Density Estimation (코퓰라 기반 밀도 추정)<br>
-[5.5.2] Vine Copula (바인 코퓰라)<br>
-[5.5.3] Normalizing Flows (정규화 플로우)<br>
-[5.5.4] Real NVP (Real-valued Non-Volume Preserving) (실수값 비부피 보존 변환)<br>
-[5.5.5] MAF (Masked Autoregressive Flow) (마스크 자기회귀 플로우)<br>
-[5.5.6] Neural Density Estimation (신경망 밀도 추정)<br>
-
----
-# 6. 신경망 기반 비지도학습 (Neural Network-based)
-**6.1 Generative Models (생성 모델)** <br>
-**6.2 Representation Learning (표현 학습)** <br>
-**6.3 Deep Learning-based Clustering (딥러닝 기반 클러스터링)** <br>
-**6.4 Deep Learning-based Dimensionality Reduction (딥러닝 기반 차원 축소)** <br>
-**6.5 Energy-Based Models (에너지 기반 모델)** <br>
----
-
-## 6.1 Generative Models (생성 모델)
-▣ 정의: 학습 데이터의 확률 분포를 학습하여 그와 유사한 새로운 데이터를 생성해내는 신경망 모델.<br>
-▣ 특징: 표현 학습(6.2)이 데이터의 특징 추출에 집중하는 것과 달리, 데이터 전체의 생성 프로세스를 모델링함. 결과물의 품질과 다양성이 성능 평가의 핵심 지표임.<br>
-▣ 원리: 잠재 변수로부터 데이터를 복원하거나(VAE), 생성자와 판별자가 서로 대립하며 정교한 데이터를 생성하도록 유도함(GAN). 최근에는 노이즈를 점진적으로 제거하는 역과정을 학습함(Diffusion).<br>
-▣ 적용분야: 이미지 및 영상 합성, 데이터 증강(Data Augmentation), 예술 콘텐츠 생성.<br>
-[6.1.1] RBM (Restricted Boltzmann Machine) (제한 볼츠만 머신)<br>
-[6.1.2] CD (Contrastive Divergence) Algorithm (대조 발산 알고리즘)<br>
-[6.1.3] PCD (Persistent Contrastive Divergence) (지속 대조 발산)<br>
-[6.1.4] DBN (Deep Belief Networks) (심층 신념 신경망)<br>
-[6.1.5] β-VAE (베타 변분 오토인코더)<br>
-[6.1.6] Disentangled VAE (분리 표현 변분 오토인코더)<br>
-[6.1.7] GAN (Generative Adversarial Networks) (생성적 적대 신경망)<br>
-[6.1.8] DCGAN (Deep Convolutional GAN) (심층 합성곱 생성적 적대 신경망)<br>
-[6.1.9] WGAN (Wasserstein GAN) (바서슈타인 생성적 적대 신경망)<br>
-[6.1.10] StyleGAN (스타일 생성적 적대 신경망)<br>
-[6.1.11] CycleGAN (사이클 생성적 적대 신경망)<br>
-[6.1.12] Diffusion Models (확산 모델)<br>
-[6.1.13] DDPM (Denoising Diffusion Probabilistic Models) (잡음 제거 확산 확률 모델)<br>
-[6.1.14] Score-based Generative Models (점수 기반 생성 모델)<br>
+[6.5.1] Copula-based Density Estimation (코퓰라 기반 밀도 추정)<br>
+[6.5.2] Vine Copula (바인 코퓰라)<br>
+[6.5.3] Normalizing Flows (정규화 플로우)<br>
+[6.5.4] Real NVP (Real-valued Non-Volume Preserving) (실수값 비부피 보존 변환)<br>
+[6.5.5] MAF (Masked Autoregressive Flow) (마스크 자기회귀 플로우)<br>
+[6.5.6] Neural Density Estimation (신경망 밀도 추정)<br>
 <br>
-## 6.2 Representation Learning (표현 학습)
-▣ 정의: 로우 데이터(Raw Data)로부터 다운스트림 태스크(분류, 회귀 등)에 유용한 핵심 특징(Feature)을 스스로 추출하도록 학습하는 방식.<br>
-▣ 특징: 생성 모델(6.1)처럼 데이터를 복원하는 데 목적을 두기보다, 데이터 간의 유사성과 차이점을 효과적으로 구별하는 임베딩 공간 구축에 집중함.<br>
-▣ 원리: 데이터의 일부를 가리고 맞히거나(Masking), 같은 데이터에서 변형된 개체끼리는 가깝게, 다른 데이터와는 멀게 배치하는 대조 학습(Contrastive Learning)을 수행함.<br>
-▣ 적용분야: 사전 학습(Pre-training) 모델 구축, 전이 학습(Transfer Learning)을 위한 특징 추출기.<br>
-[6.2.1] Stacked Autoencoder (적층 오토인코더)
-[6.2.2] DAE (Denoising Autoencoder) (잡음 제거 오토인코더)<br>
-[6.2.3] SAE (Sparse Autoencoder) (희소 오토인코더)<br>
-[6.2.4] CAE (Contractive Autoencoder) (수축 오토인코더)<br>
-[6.2.5] Winner-Take-All Autoencoder (승자 독식 오토인코더)<br>
-[6.2.6] AAE (Adversarial Autoencoder) (적대적 오토인코더)<br>
-[6.2.7] Self-Supervised Learning (자기지도학습)<br>
-[6.2.8] Contrastive Learning (대조 학습)<br>
-[6.2.9] SimCLR (Simple Framework for Contrastive Learning) (대조 학습을 위한 단순 프레임워크)<br>
-[6.2.10] MoCo (Momentum Contrast) (모멘텀 대조)<br>
-[6.2.11] BYOL (Bootstrap Your Own Latent) (자가 잠재 부트스트랩)<br>
-[6.2.12] SwAV (Swapped Assignment Views) (교환 할당 뷰)<br>
-[6.2.13] Barlow Twins (바를로 트윈스)<br>
-[6.2.14] VICReg (Variance-Invariance-Covariance Regularization) (분산-불변-공분산 정규화)<br>
-[6.2.15] MAE (Masked Autoencoders) (마스크 오토인코더)<br>
-[6.2.16] BERT-style Pretraining (Masked Language Modeling) (BERT 스타일 사전학습, 마스크 언어 모델링)<br>
-<br>
-## 6.3 Deep Learning-based Clustering (딥러닝 기반 클러스터링)
-▣ 정의: 신경망을 통해 고차원 데이터를 저차원 잠재 공간으로 투영함과 동시에 최적의 군집을 할당하는 방식.<br>
-▣ 특징: 전통적인 클러스터링(1.1~1.9)이 차원의 저주에 취약한 것과 달리, 비선형 특징 추출을 통해 복잡한 비정형 데이터에서도 명확한 군집화가 가능함.<br>
-▣ 원리: 오토인코더 등으로 특징을 압축하면서, 잠재 공간 상의 데이터 분포가 특정 중심점(Centroid)에 뭉치도록 군집화 손실 함수(Clustering Loss)를 함께 최적화함.<br>
-▣ 적용분야: 대규모 이미지 라이브러리 자동 분류, 복잡한 사용자 행동 패턴 그룹화.<br>
-[6.3.1] SOM (Self-Organizing Maps) for Clustering (클러스터링을 위한 자기조직화지도)<br>
-[6.3.2] DEC (Deep Embedded Clustering) (심층 임베디드 클러스터링)<br>
-[6.3.3] IDEC (Improved Deep Embedded Clustering) (개선된 심층 임베디드 클러스터링)<br>
-[6.3.4] DKM (Deep K-Means) (심층 K-평균)<br>
-[6.3.5] SSC (Sparse Subspace Clustering) (희소 부분공간 클러스터링)<br>
-[6.3.6] IDEC (Improved Deep Embedded Clustering) (개선된 심층 임베디드 클러스터링)<br>
-[6.3.7] DKM (Deep K-Means) (심층 K-평균)<br>
-[6.3.8] JULE (Joint Unsupervised Learning) (결합 비지도학습)<br>
-[6.3.9] DAC (Deep Adaptive Clustering) (심층 적응 클러스터링)<br>
-[6.3.10] CORL (Clustering-Oriented Representation Learning) (클러스터링 지향 표현 학습)<br>
-[6.3.11] DCN (Deep Clustering Network) (심층 클러스터링 신경망)<br>
-<br>
-## 6.4 Deep Learning-based Dimensionality Reduction (딥러닝 기반 차원 축소)
-▣ 정의: 고차원 입력 데이터를 정보 손실을 최소화하면서 저차원의 압축된 표현으로 변환하는 신경망 기술.<br>
-▣ 특징: 선형 차원 축소(3.1)인 PCA 등에 비해 훨씬 복잡한 비선형 상관관계를 포착할 수 있으며, 학습된 모델을 새 데이터에 즉시 적용 가능한 확장성을 가짐.<br>
-▣ 원리: 입력 데이터를 압축하는 인코더와 복원하는 디코더를 대칭적으로 구성하고, 입력과 출력의 차이(Reconstruction Error)를 최소화하는 과정에서 병목 지점(Bottleneck)의 차원을 제한함.<br>
-▣ 적용분야: 고차원 데이터의 시각화 전처리, 데이터 압축 및 통신 효율화, 이상 탐지용 특징 추출.<br>
-[6.4.1] Neural Network Embeddings (신경망 임베딩)<br>
-[6.4.2] Graph Neural Networks for Dimensionality Reduction (차원 축소를 위한 그래프 신경망)<br>
-<br>
-## 6.5 Energy-Based Models (에너지 기반 모델)
-▣ 정의: 데이터의 각 상태에 '에너지'라는 스칼라 값을 부여하여, 관측된 데이터에는 낮은 에너지를, 비정상 데이터에는 높은 에너지를 할당하도록 학습하는 방식.<br>
-▣ 특징: 확률 분포를 명시적으로 계산해야 하는 생성 모델(6.1)보다 유연하며, 정규화 상수 계산 없이도 복잡한 종속 관계를 모델링할 수 있음.<br>
-▣ 원리: 에너지 함수(Energy Function)를 정의하고, 학습 데이터의 에너지는 낮추고 그 외 지역의 에너지는 높이는 대조적 다이버전스(Contrastive Divergence) 등의 기법으로 파라미터를 조정함.<br>
-▣ 적용분야: 협업 필터링 추천 시스템, 다변량 데이터의 결합 분포 모델링, 노이즈 제거 및 데이터 복원.<br>
-[6.5.1] Boltzmann Machines (볼츠만 머신)<br>
-[6.5.2] Hopfield Networks (홉필드 신경망)<br>
-[6.5.3] Modern Hopfield Networks (현대 홉필드 신경망)<br>
-[6.5.4] Contrastive Learning as Energy-Based Model (에너지 기반 모델로서의 대조 학습)<br>
-
----
-# 7. 공분산 추정 (Covariance Estimation)
-**7.1 Basic Covariance Estimation (기본 공분산 추정)** <br>
-**7.2 Shrinkage Methods (축소 방법)** <br>
-**7.3 Sparse Covariance Estimation (희소 공분산 추정)** <br>
-**7.4 Robust Covariance Estimation (강건 공분산 추정)** <br>
-**7.5 Structured Covariance Estimation (구조화된 공분산 추정)** <br>
-**7.6 High-dimensional Covariance Estimation (고차원 공분산 추정)** <br>
----
-
-## 7.1 Basic Covariance Estimation (기본 공분산 추정)
+## 6.6 Basic Covariance Estimation (기본 공분산 추정)
 ▣ 정의: 주어진 표본 데이터를 이용하여 변수 간의 선형적 상관관계를 나타내는 공분산 행렬을 직접 계산하는 방식.<br>
 ▣ 특징: 가장 단순하고 계산량이 적으나, 표본 수가 변수 개수보다 적을 경우 행렬이 특이 행렬(Singular Matrix)이 되어 역행렬을 구할 수 없는 문제가 있음.<br>
 ▣ 원리: 각 변수의 평균으로부터의 편차 곱을 합산한 뒤 표본 크기($N-1$)로 나누어 표본 공분산을 산출함.<br>
 ▣ 적용분야: 데이터 차원이 낮고 표본이 충분한 일반적인 통계 분석 및 기초 전처리.<br>
-[7.1.1] Empirical Covariance (경험적 공분산)<br>
-[7.1.2] Sample Covariance Matrix (표본 공분산 행렬)<br>
-[7.1.3] Maximum Likelihood Covariance Estimation (최대우도 공분산 추정)<br>
+[6.6.1] Empirical Covariance (경험적 공분산)<br>
+[6.6.2] Sample Covariance Matrix (표본 공분산 행렬)<br>
+[6.6.3] Maximum Likelihood Covariance Estimation (최대우도 공분산 추정)<br>
 <br>
-## 7.2 Shrinkage Methods (축소 방법)
+## 6.7 Shrinkage Methods (축소 방법)
 ▣ 정의: 표본 공분산 행렬과 항등 행렬(Identity Matrix)과 같은 구조적 타겟 행렬을 가중 결합하여 추정치의 분산을 줄이는 방식.<br>
-▣ 특징: 기본 추정 방식(7.1)의 불안정성을 해결하여 항상 역행렬이 존재하는 정칙 행렬(Invertible Matrix)을 보장함. 고차원 데이터에서 편향-분산 트레이드오프를 조절하는 데 탁월함.<br>
+▣ 특징: 기본 추정 방식의 불안정성을 해결하여 항상 역행렬이 존재하는 정칙 행렬(Invertible Matrix)을 보장함. 고차원 데이터에서 편향-분산 트레이드오프를 조절하는 데 탁월함.<br>
 ▣ 원리: 표본 공분산에 일정 비율의 편향을 주입하여 극단적인 고유값(Eigenvalue)을 중앙으로 수축시킴으로써 추정의 안정성을 높임.<br>
 ▣ 적용분야: 포트폴리오 최적화(Markowitz 모델), 변수 개수가 많은 금융 데이터 분석.<br>
-[7.2.1] Ledoit-Wolf Shrinkage (르두와-울프 축소)<br>
-[7.2.2] OAS (Oracle Approximating Shrinkage) (오라클 근사 축소)<br>
-[7.2.3] Shrunk Covariance (축소 공분산)<br>
-[7.2.4] Linear Shrinkage (선형 축소)<br>
-[7.2.5] Non-linear Shrinkage (비선형 축소)<br>
+[6.7.1] Ledoit-Wolf Shrinkage (르두와-울프 축소)<br>
+[6.7.2] OAS (Oracle Approximating Shrinkage) (오라클 근사 축소)<br>
+[6.7.3] Shrunk Covariance (축소 공분산)<br>
+[6.7.4] Linear Shrinkage (선형 축소)<br>
+[6.7.5] Non-linear Shrinkage (비선형 축소)<br>
 <br>
-## 7.3 Sparse Covariance Estimation (희소 공분산 추정)
+## 6.8 Sparse Covariance Estimation (희소 공분산 추정)
 ▣ 정의: 변수 간의 관계가 대부분 0(독립)이라고 가정하고, 유의미한 관계만을 남겨 행렬 내의 많은 원소를 0으로 만드는 방식.<br>
 ▣ 특징: 고차원 데이터에서 불필요한 노이즈 관계를 제거하여 모델의 해석력을 높임. 특히 정밀도 행렬(Precision Matrix)을 추정할 때 변수 간의 조건부 독립성을 파악하기 용이함.<br>
 ▣ 원리: $L_1$ 규제화(Regularization)를 공분산 또는 정밀도 행렬 추정식에 추가하여 작은 값들을 0으로 수축시킴.<br>
 ▣ 적용분야: 유전자 조절 네트워크 분석, 뇌 연결성 지도 작성, 변수 간 인과 관계 파악.<br>
-[7.3.1] GLASSO (Graphical Lasso) (그래프 라쏘)<br>
-[7.3.2] Sparse Inverse Covariance Estimation (희소 역공분산 추정)<br>
-[7.3.3] L1-Penalized Covariance Estimation (L1-페널티 공분산 추정)<br>
-[7.3.4] Neighborhood Selection (이웃 선택)<br>
-[7.3.5] CLIME (Constrained L1 Minimization for Inverse Matrix Estimation) (역행렬 추정을 위한 제약 L1 최소화)<br>
+[6.8.1] GLASSO (Graphical Lasso) (그래프 라쏘)<br>
+[6.8.2] Sparse Inverse Covariance Estimation (희소 역공분산 추정)<br>
+[6.8.3] L1-Penalized Covariance Estimation (L1-페널티 공분산 추정)<br>
+[6.8.4] Neighborhood Selection (이웃 선택)<br>
+[6.8.5] CLIME (Constrained L1 Minimization for Inverse Matrix Estimation) (역행렬 추정을 위한 제약 L1 최소화)<br>
 <br>
-## 7.4 Robust Covariance Estimation (강건 공분산 추정)
+## 6.9 Robust Covariance Estimation (강건 공분산 추정)
 ▣ 정의: 데이터 내에 포함된 이상치(Outlier)나 오염된 샘플의 영향을 최소화하여 공분산을 추정하는 방식.<br>
-▣ 특징: 일반적인 추정 방식(7.1)이 이상치에 매우 민감하여 결과가 왜곡되는 단점을 보완함. 데이터가 정규분포를 따르지 않거나 꼬리가 두꺼운 경우에도 안정적임.<br>
+▣ 특징: 일반적인 추정 방식이 이상치에 매우 민감하여 결과가 왜곡되는 단점을 보완함. 데이터가 정규분포를 따르지 않거나 꼬리가 두꺼운 경우에도 안정적임.<br>
 ▣ 원리: 데이터 중 가장 밀집된 부분 집합만을 선택하여 공분산을 계산하거나, 극단값에 낮은 가중치를 부여하는 가중치 함수를 사용함.<br>
 ▣ 적용분야: 이상치가 포함된 공정 센서 데이터 분석, 통계적 품질 관리, 강건한 주성분 분석(Robust PCA).<br>
-[7.4.1] MCD (Minimum Covariance Determinant) (최소 공분산 행렬식)<br>
-[7.4.2] FastMCD (Robust Covariance) (강건 공분산, 고속 MCD)<br>
-[7.4.3] M-Estimators (M-추정량)<br>
-[7.4.4] Robust PCA (Robust Principal Component Analysis) (강건 주성분 분석)<br>
+[6.9.1] MCD (Minimum Covariance Determinant) (최소 공분산 행렬식)<br>
+[6.9.2] FastMCD (Robust Covariance) (강건 공분산, 고속 MCD)<br>
+[6.9.3] M-Estimators (M-추정량)<br>
+[6.9.4] Robust PCA (Robust Principal Component Analysis) (강건 주성분 분석)<br>
 <br>
-## 7.5 Structured Covariance Estimation (구조화된 공분산 추정)
+## 6.10 Structured Covariance Estimation (구조화된 공분산 추정)
 ▣ 정의: 데이터의 물리적 성질이나 도메인 지식을 바탕으로 공분산 행렬이 특정한 수학적 구조(Toeplitz, Block-diagonal 등)를 가진다고 가정하고 추정하는 방식.<br>
 ▣ 특징: 임의의 행렬을 추정하는 다른 방식들과 달리 추정해야 할 파라미터 수를 획기적으로 줄여 추정 정밀도를 높임.<br>
 ▣ 원리: 공분산 행렬의 형태를 사전에 정의된 대칭성이나 순환성 구조로 고정하고, 해당 구조 내에서 최적의 파라미터를 탐색함.<br>
 ▣ 적용분야: 시공간 데이터 분석(기상, 지계), 신호 처리의 스펙트럼 분석, 반복 측정된 임상 데이터 분석.<br>
-[7.5.1] Block Diagonal Covariance (블록 대각 공분산)<br>
-[7.5.2] Banded Covariance (밴드 공분산)<br>
-[7.5.3] Toeplitz Covariance (토플리츠 공분산)<br>
-[7.5.4] Factor Model Covariance (요인 모델 공분산)<br>
-[7.5.5] Kronecker-structured Covariance (크로네커 구조 공분산)<br>
+[6.10.1] Block Diagonal Covariance (블록 대각 공분산)<br>
+[6.10.2] Banded Covariance (밴드 공분산)<br>
+[6.10.3] Toeplitz Covariance (토플리츠 공분산)<br>
+[6.10.4] Factor Model Covariance (요인 모델 공분산)<br>
+[6.10.5] Kronecker-structured Covariance (크로네커 구조 공분산)<br>
 <br>
-## 7.6 High-dimensional Covariance Estimation (고차원 공분산 추정)
+## 6.11 High-dimensional Covariance Estimation (고차원 공분산 추정)
 ▣ 정의: 변수의 수($p$)가 표본의 수($n$)보다 훨씬 많은 'Large $p$, Small $n$' 상황에서 공분산 행렬을 정확하게 추정하기 위한 특화 기법.<br>
 ▣ 특징: 차원의 저주로 인해 발생하는 고유값 왜곡 현상을 전문적으로 교정함. 축소 방법(7.2)이나 희소 방법(7.3)의 원리를 고차원 이론에 맞게 통합 및 확장한 형태임.<br>
 ▣ 원리: 랜덤 행렬 이론(Random Matrix Theory)을 적용하여 표본 고유값 분포의 편향을 보정하거나, 저차원 구조(Low-rank)와 희소 구조(Sparse)의 결합 모델을 사용함.<br>
 ▣ 적용분야: 유전체학(Genomics), 고해상도 위성 이미지 분석, 초고차원 특징 기반 머신러닝 모델링.<br>
-[7.6.1] Regularized Covariance Estimation (정규화 공분산 추정)<br>
-[7.6.2] Random Matrix Theory Approaches (무작위 행렬 이론 접근법)<br>
-[7.6.3] Thresholding Methods (임계값 방법)<br>
-[7.6.4] POET (Principal Orthogonal Complement Thresholding) (주 직교 보완 임계값)<br>
+[6.11.1] Regularized Covariance Estimation (정규화 공분산 추정)<br>
+[6.11.2] Random Matrix Theory Approaches (무작위 행렬 이론 접근법)<br>
+[6.11.3] Thresholding Methods (임계값 방법)<br>
+[6.11.4] POET (Principal Orthogonal Complement Thresholding) (주 직교 보완 임계값)<br>
 
 ---
 
