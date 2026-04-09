@@ -733,7 +733,7 @@ Component 2 (주성분 2): 그에 직교(수직)하는 방향 (두 번째로 중
 	[DR-1] PCA(Principal Component Analysis) : 주성분 분석 (1위)	
 	[DR-5] t-SNE(t-distributed Stochastic Neighbor Embedding) : t-분포 확률적 이웃 임베딩 (2위)
 	[DR-6] UMAP(Uniform Manifold Approximation and Projection) : 균일 매니폴드 근사적 사영 (3위)
-	[DR-2] SVD(Singular Value Decomposition) : 특이값 분해 (4위)
+	[] SVD(Singular Value Decomposition) : 특이값 분해 (4위)
 	[DR-3] ICA(Independent Component Analysis) : 독립성분 분석 (5위)	
 	[] NMF(Non-negative Matrix Factorization)  : 비음수 행렬 분해 (6위)	
 	[DR-8] MDS(Multidimensional Scaling) : 다차원 척도 (7위)
@@ -1357,8 +1357,6 @@ Component 2 (주성분 2): 그에 직교(수직)하는 방향 (두 번째로 중
 	print("Total Variance Retained:", sum(pca.explained_variance_ratio_))
 
 
-![](./images/PCA.png)
-<br>
 
 
 # [DR-2] t-SNE(t-distributed Stochastic Neighbor Embedding) : t-분포 확률적 이웃 임베딩
