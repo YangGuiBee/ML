@@ -199,6 +199,9 @@
 
 ## 2.1 Frequent Pattern Mining (빈발 패턴 마이닝)
 ▣ 정의: 데이터베이스에서 설정된 <ins>최소 지지도(Minimum Support) 이상의 빈도로 발생하는 아이템 집합을 찾아내는 가장 기초적인 마이닝</ins> 방식.<br>
+<img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-06/images/apriori.png'> 
+<br>
+
 ▣ 특징: 연관 규칙 학습의 모태가 되는 분야로, 이후 등장하는 고급(2.2)이나 시퀀스(2.3) 마이닝의 기반 기술로 활용됨. 데이터 간의 발생 순서보다는 '함께 발생하는 조합' 자체에 집중함.<br>
 ▣ 원리: 전체 데이터셋을 스캔하여 각 아이템의 빈도를 계산하고, 지지도 임계값을 넘지 못하는 조합을 후보군에서 제거(Pruning)하며 유의미한 패턴을 확장함.<br>
 ▣ 적용분야: 대형 마트의 장바구니 분석(Market Basket Analysis), 동시 구매 상품 추천, 단순 아이템 연관성 파악.<br>
@@ -742,10 +745,6 @@ Component 2 (주성분 2): 그에 직교(수직)하는 방향 (두 번째로 중
 -->
 
 # [AR-1] Apriori : 선험적 알고리즘
-
-![](./images/apriori.png)
-<br>
-https://nyamin9.github.io/data_mining/Data-Mining-Pattern-3/#-31-apriori-algorithm---example<br><br>
 ▣ 정의 : 연관규칙 학습을 위한 고전적인 알고리즘으로, 빈발항목 집합(frequent itemsets)을 찾아내고 그 집합 간 연관성을 추출<br>
 ▣ 필요성 : 대규모 데이터에서 연관성을 발견하는 작업은 계산 비용이 높을 수 있는데, Apriori는 빈발하지 않은 항목 집합을 먼저 제거해 검색 공간을 줄여주는 방식으로 효율적인 탐색<br>
 ▣ 장점 : 간단한 구조로 이해하기 쉽고, 계산 공간을 줄이기 위한 사전 단계를 가지고 있어, 효율적인 탐색이 가능<br>
