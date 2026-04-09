@@ -1,3 +1,26 @@
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-06/images/ML06_1.PNG'> 
+
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-06/images/ML06_2.PNG'> 
+
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-06/images/ML06_3.PNG'> 
+
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-06/images/ML06_4.PNG'> 
+
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-06/images/ML06_5.PNG'> 
+
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-06/images/ML06_6.PNG'> 
+
+<br>
 
 #  06 : 비지도 학습(Unsupervised Learning, UL)
 ---
