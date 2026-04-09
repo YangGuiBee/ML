@@ -7,6 +7,7 @@
 4. 이상치 탐지 (Anomaly/Outlier Detection) <br>
 5. 신경망 기반 (Neural Network-based) <br>
 6. 통계도구 : 밀도/공분산 추정 (Density/Covariance Estimation) <br>
+
 ---
 # 1. 클러스터링 (Clustering)
 ▣ 정의: 데이터 간의 유사성(Similarity)을 측정하여 비슷한 특성을 가진 데이터들끼리 그룹(군집)으로 묶는 기법.<br>
