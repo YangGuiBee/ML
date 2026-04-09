@@ -258,7 +258,20 @@
 
 ## 3.1 Linear Dimensionality Reduction / Matrix Factorization (선형 차원 축소 / 행렬 분해)
 ▣ 정의: 고차원 데이터를 원본 변수들의 선형 결합을 통해 저차원 공간으로 투영하거나, 하나의 행렬을 여러 개의 행렬 곱으로 분해하는 방식.<br>
-![](./images/PCA.png)
+<img width ='1000' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-06/images/PCA.png'> 
+<br>
+(좌상단) Original data : 상관관계<br>
+Component 1 (주성분 1): 데이터가 가장 많이 퍼진 방향 (분산 최대 방향)<br>
+Component 2 (주성분 2): 그에 직교(수직)하는 방향 (두 번째로 중요한 방향)<br>
+<br>
+(우상단) Transformed data : 데이터를 가장 중요한 방향으로 회전<br>
+데이터를 주성분 축으로 회전(좌표 변환) → 대부분의 정보가 첫 번째 주성분에 집중<br>
+<br>
+(좌하단) Transformed data w/ second component dropped : 중요하지 않은 축을 제거하여 차원 축소<br>
+두 번째 주성분을 아예 제거한 상태로 차원 축소(2D → 1D) : 정보 손실은 있지만 핵심 패턴은 유지됨<br>
+<br>
+(우하단) Back-rotation using only first component : 다시 복원하면 핵심 구조만 남고 세부 정보는 손실<br>
+→ 이 데이터는 사실상 1차원 구조이며, 주요 패턴만 남기고 나머지는 노이즈임<br>
 <br>
 ▣ 특징: 비선형 방식(3.2)에 비해 계산 복잡도가 낮고 결과의 해석이 상대적으로 용이함. 데이터의 전역적인 분산이나 구조를 보존하는 데 최적화되어 있으나, 복잡한 곡면 구조를 가진 데이터 처리에는 한계가 있음.<br>
 ▣ 원리: 데이터의 분산을 최대화하는 방향(주성분)을 찾거나, 원래의 행렬을 근사하는 기저 행렬과 계수 행렬을 찾아 차원을 축소함.<br>
