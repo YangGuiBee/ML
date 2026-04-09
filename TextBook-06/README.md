@@ -1687,39 +1687,146 @@ $𝑉[1,2]=6, 𝑉_{approx}[1,2]=5.99997718$ : 오차는 약 0.00002<br>
 ▣ 모델식 : 뉴런의 위치 𝑟와 입력 벡터 𝑥 간의 거리 함수로 클러스터를 형성(𝜂(𝑡)는 학습률, ℎ(𝑡)는 이웃 함수)<br>
 $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
 
-    !pip install minisom
+	!pip install minisom
+	
+	from minisom import MiniSom
+	import numpy as np
+	import matplotlib.pyplot as plt
+	from sklearn.datasets import load_iris
+	from sklearn.preprocessing import MinMaxScaler
+	from collections import defaultdict
+	
+	# ─────────────────────────────────────────
+	# 1. 데이터 로드 및 정규화
+	# ─────────────────────────────────────────
+	data = load_iris()
+	X = data.data          # 특성 데이터 (150 x 4)
+	y = data.target        # 레이블 (0: setosa, 1: versicolor, 2: virginica)
+	
+	# SOM은 거리 기반이므로 0~1 범위로 정규화 필수
+	scaler = MinMaxScaler()
+	X_scaled = scaler.fit_transform(X)
+	
+	# ─────────────────────────────────────────
+	# 2. SOM 초기화 및 학습
+	# ─────────────────────────────────────────
+	# x, y      : SOM 격자 크기 (10x10 = 100개 노드)
+	# input_len : 입력 벡터 차원 수 (iris는 4개 특성)
+	# sigma     : 이웃 반경 (학습 시 주변 노드에 영향을 주는 범위)
+	# learning_rate : 학습률 (가중치 업데이트 강도)
+	som = MiniSom(x=10, y=10, input_len=4,
+	              sigma=1.0, learning_rate=0.5, random_seed=42)
+	
+	# 가중치 무작위 초기화
+	som.random_weights_init(X_scaled)
+	
+	# 랜덤 샘플링 방식으로 1000회 학습 (횟수 증가로 정확도 향상)
+	som.train_random(X_scaled, 1000)
+	
+	# ─────────────────────────────────────────
+	# 3. 셀별 데이터 집계
+	#    - 같은 셀에 매핑된 데이터를 클래스별로 카운트
+	# ─────────────────────────────────────────
+	# cell_counts[셀좌표][클래스] = 개수
+	cell_counts = defaultdict(lambda: defaultdict(int))
+	
+	for i, x in enumerate(X_scaled):
+	    w = som.winner(x)          # BMU(Best Matching Unit): 가장 유사한 노드 좌표
+	    cell_counts[w][y[i]] += 1  # 해당 셀의 클래스 카운트 증가
+	
+	# ─────────────────────────────────────────
+	# 4. 시각화 (방법 2: 셀별 지배 클래스 + 샘플 수 표시)
+	# ─────────────────────────────────────────
+	# 클래스별 색상 및 이름 정의
+	class_colors = {0: 'red', 1: 'green', 2: 'blue'}
+	class_names  = {0: 'setosa', 1: 'versicolor', 2: 'virginica'}
+	
+	fig, axes = plt.subplots(1, 2, figsize=(18, 8))
+	
+	# ── subplot 1: 셀별 지배 클래스 + 샘플 수 ──────────────────
+	ax1 = axes[0]
+	
+	for (wx, wy), class_dict in cell_counts.items():
+	    # 해당 셀에서 가장 많은 클래스 선택
+	    dominant_class = max(class_dict, key=class_dict.get)
+	    total_count    = sum(class_dict.values())   # 셀 전체 샘플 수
+	
+	    # 지배 클래스 번호와 총 샘플 수를 셀 중앙에 표시
+	    ax1.text(wx + 0.5, wy + 0.5,
+	             f"{dominant_class}\n({total_count})",
+	             color=class_colors[dominant_class],
+	             fontdict={'weight': 'bold', 'size': 10},
+	             ha='center', va='center')
+	
+	ax1.set_title("SOM - Dominant Class per Cell\n(number = class, parentheses = sample count)",
+	              fontsize=12)
+	ax1.set_xlim([0, 10])
+	ax1.set_ylim([0, 10])
+	ax1.grid(True)
+	
+	# 범례 추가
+	for cls, color in class_colors.items():
+	    ax1.plot([], [], 'o', color=color, label=class_names[cls])
+	ax1.legend(loc='lower right', fontsize=10)
+	
+	# ── subplot 2: 히트맵 + 전체 데이터 산점도 ─────────────────
+	ax2 = axes[1]
+	
+	# 히트맵: 각 셀에 매핑된 샘플 수를 밀도로 표현
+	heatmap = np.zeros((10, 10))
+	for x in X_scaled:
+	    w = som.winner(x)
+	    heatmap[w[0]][w[1]] += 1   # 셀에 매핑될 때마다 카운트
+	
+	# pcolor은 (y, x) 순서이므로 전치(.T) 필요
+	pcm = ax2.pcolor(heatmap.T, cmap='Blues', alpha=0.6)
+	plt.colorbar(pcm, ax=ax2, label='Sample Count')
+	
+	# 전체 150개 데이터를 오프셋을 주어 겹침 방지
+	np.random.seed(42)   # 재현성을 위한 시드 고정
+	for i, x in enumerate(X_scaled):
+	    w = som.winner(x)
+	    # 셀(1x1) 안에서 랜덤 위치에 표시
+	    offset_x = np.random.uniform(0.1, 0.9)
+	    offset_y = np.random.uniform(0.1, 0.9)
+	    ax2.text(w[0] + offset_x, w[1] + offset_y,
+	             str(y[i]),
+	             color=class_colors[y[i]],
+	             fontdict={'weight': 'bold', 'size': 9},
+	             ha='center', va='center')
+	
+	ax2.set_title("SOM - All 150 Samples with Density Heatmap\n(color intensity = sample density)",
+	              fontsize=12)
+	ax2.set_xlim([0, 10])
+	ax2.set_ylim([0, 10])
+	ax2.grid(True, color='gray', alpha=0.3)
+	
+	# 범례 추가
+	for cls, color in class_colors.items():
+	    ax2.plot([], [], 'o', color=color, label=class_names[cls])
+	ax2.legend(loc='lower right', fontsize=10)
+	
+	# ─────────────────────────────────────────
+	# 5. 최종 출력
+	# ─────────────────────────────────────────
+	plt.suptitle("SOM Clustering of Iris Data", fontsize=15, fontweight='bold', y=1.01)
+	plt.tight_layout()
+	plt.show()
+	
+	# ─────────────────────────────────────────
+	# 6. 클러스터링 정확도 출력 (참고용)
+	# ─────────────────────────────────────────
+	print("\n[셀별 클래스 분포]")
+	print(f"{'셀 좌표':<12} {'setosa':>8} {'versicolor':>12} {'virginica':>10} {'합계':>6}")
+	print("-" * 52)
+	
+	for (wx, wy), class_dict in sorted(cell_counts.items()):
+	    s0 = class_dict.get(0, 0)
+	    s1 = class_dict.get(1, 0)
+	    s2 = class_dict.get(2, 0)
+	    print(f"({wx:2d}, {wy:2d})     {s0:>8} {s1:>12} {s2:>10} {s0+s1+s2:>6}")
 
-    from minisom import MiniSom
-    import numpy as np
-    import matplotlib.pyplot as plt
-    from sklearn.datasets import load_iris
-    from sklearn.preprocessing import MinMaxScaler
-
-    # 데이터 로드 및 정규화
-    data = load_iris()
-    X = data.data
-    scaler = MinMaxScaler()
-    X_scaled = scaler.fit_transform(X)
-
-    # SOM 초기화 및 학습
-    som = MiniSom(x=10, y=10, input_len=4, sigma=1.0, learning_rate=0.5, random_seed=42)
-    som.train_random(X_scaled, 100)  # 100회 반복 학습
-
-    # SOM 시각화
-    plt.figure(figsize=(10, 10))
-    for i, x in enumerate(X_scaled):
-        w = som.winner(x)
-        plt.text(w[0] + 0.5, w[1] + 0.5, str(data.target[i]),
-        color=plt.cm.rainbow(data.target[i] / 2.0),
-        fontdict={'weight': 'bold', 'size': 11})
-
-    plt.title("SOM Clustering of Iris Data")
-    plt.xlim([0, 10])
-    plt.ylim([0, 10])
-    plt.grid()
-    plt.show()
-
-![](./images/SOM.png)
+![](./images/SOM1.png)
 <br> 
 
 
@@ -1733,10 +1840,8 @@ $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
 | **[6] UMAP (Uniform Manifold Approximation and Projection)** 균일 매니폴드 근사적 사영 | ![](https://latex.codecogs.com/svg.image?w_%7Bij%7D%3D%5Cexp%5Cleft(-%5Cfrac%7Bd(x_i%2Cx_j)-%5Crho_i%7D%7B%5Csigma_i%7D%5Cright)) | ![](https://latex.codecogs.com/svg.image?%5Cmin_Y%5Csum_%7Bi%3Cj%7D%5BBig(w_%7Bij%7D%5Clog%5Cfrac%7Bw_%7Bij%7D%7D%7B%5Chat%7Bw%7D_%7Bij%7D%7D%2B(1-w_%7Bij%7D)%5Clog%5Cfrac%7B1-w_%7Bij%7D%7D%7B1-%5Chat%7Bw%7D_%7Bij%7D%7D%5CBig)%5D) |
 | **[7] Isomap (Isometric Mapping)** 등거리 매핑 | ![](https://latex.codecogs.com/svg.image?D_G(i%2Cj)%3D%5Cmathrm%7BShortestPathDistance%7D(x_i%2Cx_j)) | ![](https://latex.codecogs.com/svg.image?%5Cmin_Y%5ClVert%20D_G-D_Y%5CrVert_F%5E2%2C%5Cquad%20D_Y(i%2Cj)%3D%5ClVert%20y_i-y_j%5CrVert) |
 | **[8] MDS (Multidimensional Scaling)** 다차원 척도 | ![](https://latex.codecogs.com/svg.image?d_%7Bij%7D%3D%5ClVert%20x_i-x_j%5CrVert) | ![](https://latex.codecogs.com/svg.image?%5Cmin_Y%5Csum_%7Bi%3Cj%7D(d_%7Bij%7D-%5ClVert%20y_i-y_j%5CrVert)%5E2) |
-
-<!--
 | **[9] SOM (Self-Organizing Maps)** 자기 조직화 지도 | ![](https://latex.codecogs.com/svg.image?b%3D%5Carg%5Cmin_j%5ClVert%20x-w_j%5CrVert) | ![](https://latex.codecogs.com/svg.image?%5Cmin_%7B%5C%7Bw_j%5C%7D%7D%5Csum_i%20h_%7Bb%2Cj%7D%5ClVert%20x_i-w_j%5CrVert%5E2%2C%5Cquad%20h_%7Bb%2Cj%7D%3D%5Cexp%5Cleft(-%5Cfrac%7B%5ClVert%20r_b-r_j%5CrVert%5E2%7D%7B2%5Csigma%5E2%7D%5Cright)) |
--->
+
 
 ---
 
