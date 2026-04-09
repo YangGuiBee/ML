@@ -208,6 +208,15 @@
 <ins>[2.1.1] Apriori Algorithm (선험적 알고리즘)</ins><br>
 <ins>[2.1.2] FP-Growth (Frequent Pattern Growth) (빈발 패턴 성장)</ins><br>
 <ins>[2.1.3] Eclat (Equivalence Class Transformation) (동등 클래스 변환)</ins><br>
+![](./images/eclat.png)  
+<br>
+항목집합 격자(Itemset Lattice) 탐색 과정<br>
+(1단계) 데이터 구조의 변환 (TID-set) : 장바구니 하나에 무엇이 들었나?에서 특정 물건이 어떤 장바구니들에 들었나?로 변경<br>
+(2단계) 최상단 노드 (Empty Set, $\emptyset$) : 그래프의 가장 위쪽에 있는 **$\emptyset$**은 아무것도 선택하지 않은 상태로 모든 탐색의 시작점<br>
+(3단계) 1-항목집합 생성(1st Level) : 데이터 전체에서 각 항목이 몇 번 등장했는지 확인(노랑색은 최소 지지도(Minimum Support)를 통과한 '빈발 항목')<br>
+(4단계) 조합 및 교집합 계산 (Equivalence Class 확장) : 1-항목집합들을 서로 조합하여 더 큰 항목집합 생성<br>
+(5단계) 깊이우선탐색(DFS) 및 최종 패턴 도출 : 최종적으로 가장 아래쪽까지 살아남은 노란색 노드들이 이 데이터 세트에서 가장 유의미한 최대 빈발 패턴<br>
+<br>
 [2.1.4] FP-Tree Construction (FP-트리 구성)<br>
 [2.1.5] SPADE (Sequential Pattern Discovery using Equivalence classes) (동등 클래스를 이용한 순차 패턴 발견)<br>
 [2.1.6] dEclat (Diffset Eclat) (차집합 Eclat)<br>
@@ -892,11 +901,6 @@ Component 2 (주성분 2): 그에 직교(수직)하는 방향 (두 번째로 중
 <br>
 
 # [AR-3] Eclat(Equivalence Class Transformation) : 동등 클래스 변환
-![](./images/eclat.png)  
-<br>
-chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournier-viger.com/COURSES/Pattern_mining/Eclat.pdf
-<br>
-노란색 빈발 집합 : 사전 정의된 최소 지지도(minimum support) 이상의 지지도를 가지는 항목의 조합<br><br>
 ▣ 정의: Apriori와 FP-Growth의 대안으로, 트랜잭션 간의 공통항목(교집합)을 기반으로 빈발항목을 추출하는 알고리즘<br>
 ▣ 필요성: 데이터의 수가 많아도 트랜잭션 간 교차 계산을 통해 효율적으로 연관 규칙을 도출<br>
 ▣ 장점 : 수평적 데이터 구조를 이용하여 트랜잭션 데이터에서 빈발 항목 집합을 빠르게 찾고, 저장 공간을 효율적으로 사용하며, 교차 연산을 통해 빈발 항목을 추출<br>
