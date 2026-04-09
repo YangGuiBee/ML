@@ -253,7 +253,7 @@
 **3.1 Linear Dimensionality Reduction / Matrix Factorization (선형 차원 축소 / 행렬 분해)** <br>
 **3.2 Nonlinear Manifold Learning (비선형 매니폴드 학습)** <br>
 **3.3 Special Purpose Dimensionality Reduction (특수 목적 차원 축소)** <br>
-**3.4 Neural Network-based Dimensionality Reduction (신경망 기반 차원 축소)** <br>
+
 ---
 
 ## 3.1 Linear Dimensionality Reduction / Matrix Factorization (선형 차원 축소 / 행렬 분해)
@@ -319,23 +319,6 @@
 [3.3.3] HDP (Hierarchical Dirichlet Process) (계층적 디리클레 프로세스)<br>
 [3.3.4] CCA (Canonical Correlation Analysis) (정준 상관 분석)<br>
 [3.3.5] Multi-view Learning (다중 뷰 학습)<br>
-<br>
-## 3.4 Neural Network-based Dimensionality Reduction (신경망 기반 차원 축소)
-▣ 정의: <ins>딥러닝 아키텍처를 활용하여 비선형적인 특징 추출과 차원 축소</ins>를 수행하는 방식.<br>
-▣ 특징: 매니폴드 학습(3.2)보다 더 방대한 양의 데이터를 처리할 수 있으며, 학습된 모델을 통해 새로운 데이터에 대한 차원 축소(OOS, Out-of-Sample)가 매우 용이함. 생성 모델과 결합하여 데이터 복원 및 생성이 가능함.<br>
-▣ 원리: 데이터를 압축하는 인코더(Encoder)와 다시 복원하는 디코더(Decoder)를 구성하고, 입력과 출력의 차이를 최소화하는 과정에서 잠재 공간(Latent Space)의 핵심 특징을 학습함.<br>
-▣ 적용분야: 고해상도 이미지 특징 임베딩, 이상 탐지(Anomaly Detection), 대규모 비정형 데이터의 잠재 표현 학습.<br>
-<ins>[3.4.1] SOM (Self-Organizing Maps) (자기조직화지도)</ins><br>
-[3.4.2] AE (Autoencoder) (오토인코더)<br>
-[3.4.3] DAE (Denoising Autoencoder) (잡음 제거 오토인코더)<br>
-[3.4.4] SAE (Sparse Autoencoder) (희소 오토인코더)<br>
-[3.4.5] CAE (Contractive Autoencoder) (수축 오토인코더)<br>
-[3.4.6] VAE (Variational Autoencoder) (변분 오토인코더)<br>
-[3.4.7] β-VAE (베타-변분 오토인코더)<br>
-[3.4.8] GSOM (Growing Self-Organizing Maps) (성장하는 자기조직화지도)<br>
-[3.4.9] Neural Gas (뉴럴 가스)<br>
-[3.4.10] Growing Neural Gas (성장하는 뉴럴 가스)<br>
-[3.4.11] CPC (Contrastive Predictive Coding) (대조 예측 코딩)<br>
 
 ---
 ---
@@ -519,9 +502,20 @@
 ▣ 정의: 고차원 입력 데이터를 정보 손실을 최소화하면서 저차원의 압축된 표현으로 변환하는 신경망 기술.<br>
 ▣ 특징: 선형 차원 축소인 PCA 등에 비해 훨씬 복잡한 비선형 상관관계를 포착할 수 있으며, 학습된 모델을 새 데이터에 즉시 적용 가능한 확장성을 가짐.<br>
 ▣ 원리: 입력 데이터를 압축하는 인코더와 복원하는 디코더를 대칭적으로 구성하고, 입력과 출력의 차이(Reconstruction Error)를 최소화하는 과정에서 병목 지점(Bottleneck)의 차원을 제한함.<br>
-▣ 적용분야: 고차원 데이터의 시각화 전처리, 데이터 압축 및 통신 효율화, 이상 탐지용 특징 추출.<br>
-[5.4.1] Neural Network Embeddings (신경망 임베딩)<br>
-[5.4.2] Graph Neural Networks for Dimensionality Reduction (차원 축소를 위한 그래프 신경망)<br>
+▣ 적용분야: 고차원 데이터의 시각화 전처리, 고해상도 이미지 특징 임베딩, 대규모 비정형 데이터의 잠재 표현 학습, 데이터 압축 및 통신 효율화, 이상 탐지용 특징 추출.<br>
+<ins>[5.4.1] SOM (Self-Organizing Maps) (자기조직화지도)</ins><br>
+[5.4.2] Neural Network Embeddings (신경망 임베딩)<br>
+[5.4.3] Graph Neural Networks for Dimensionality Reduction (차원 축소를 위한 그래프 신경망)<br>
+[3.4.4] AE (Autoencoder) (오토인코더)<br>
+[3.4.5] DAE (Denoising Autoencoder) (잡음 제거 오토인코더)<br>
+[3.4.6] SAE (Sparse Autoencoder) (희소 오토인코더)<br>
+[3.4.7] CAE (Contractive Autoencoder) (수축 오토인코더)<br>
+[3.4.8] VAE (Variational Autoencoder) (변분 오토인코더)<br>
+[3.4.9] β-VAE (베타-변분 오토인코더)<br>
+[3.4.10] GSOM (Growing Self-Organizing Maps) (성장하는 자기조직화지도)<br>
+[3.4.11] Neural Gas (뉴럴 가스)<br>
+[3.4.12] Growing Neural Gas (성장하는 뉴럴 가스)<br>
+[3.4.13] CPC (Contrastive Predictive Coding) (대조 예측 코딩)<br>
 <br>
 ## 5.5 Energy-Based Models (에너지 기반 모델)
 ▣ 정의: 데이터의 각 상태에 '에너지'라는 스칼라 값을 부여하여, 관측된 데이터에는 낮은 에너지를, 비정상 데이터에는 높은 에너지를 할당하도록 학습하는 방식.<br>
