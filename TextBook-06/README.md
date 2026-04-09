@@ -1432,7 +1432,7 @@ Component 2 (주성분 2): 그에 직교(수직)하는 방향 (두 번째로 중
 ![](./images/SVD_1.png)
 <br>
 
-<img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-06/images/SVD1.png'> 
+<img width ='1000' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-06/images/SVD1.png'> 
 <br>
 영화 추천 시스템 : 행 = 영화, 열 = 사용자, 숫자 = 평점. SVD는 이 큰 표를 세 가지 의미 있는 조각으로 분해<br>
 U — "각 영화가 어떤 장르 성격을 얼마나 갖고 있는가"를 숫자로 표현한 행렬(행 = 영화, 열 = 숨겨진 장르 축).<br>
@@ -1518,7 +1518,7 @@ ICA는 신호들 간의 고차원적 통계적 독립성에 초점을 맞추기 
 
 
 # [DR-6] NMF(Non-negative Matrix Factorization) : 비음수 행렬 분해
-<img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-06/images/NMF1.png'> 
+<img width ='1000' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-06/images/NMF1.png'> 
 <br>
 ▣ 정의 : 데이터를 비음수 행렬로 나타내고 이를 두 개의 비음수 행렬의 곱으로 분해하는 행렬 분해(Matrix Factorization) 기법<br>
 ▣ 필요성 : 원본 데이터를 두 개의 비음수(예: 픽셀 값, 주파수 스펙트럼, 사용자 평가 점수 등) 행렬의 곱으로 분해함으로써 비음수 데이터를 압축적으로 표현하여 중요한 구조적 특징을 발견<br>
@@ -1688,7 +1688,7 @@ $𝑉[1,2]=6, 𝑉_{approx}[1,2]=5.99997718$ : 오차는 약 0.00002<br>
 
 # [DR-9] SOM(Self-Organizing Maps) : 자기 조직화
 ▣ 정의 : 고차원의 데이터를 저차원(일반적으로 2차원) 공간으로 투영하여 데이터의 구조를 시각화하는 데 사용. PCA는 선형 변환을 통해 차원 축소를 수행하지만, SOM은 비선형 변환을 사용하여 더 복잡한 데이터 구조를 반영할 수 있으며, k-평균은 각 군집의 중심을 찾는 방식으로 군집화를 수행하는 반면, SOM은 뉴런이 격자 형태로 조직되어 있어 더 직관적인 시각화가 가능<br> 
-<img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-06/images/SOM1.png'> 
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-06/images/SOM1.png'> 
 <br>
 ▣ 절차<br>
 (1) 초기화: SOM의 각 뉴런에 임의의 가중치 벡터를 할당(이 가중치 벡터는 입력 데이터와 같은 차원)<br>
