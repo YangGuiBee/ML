@@ -4,10 +4,9 @@
 **1. 클러스터링 (Clustering)** <br>
 **2. 연관 규칙 학습 (Association Rule Learning)** <br>
 **3. 차원 축소 (Dimensionality Reduction)** <br>
-**4. 이상치 탐지 (Anomaly/Outlier Detection)** <br>
-**5. 밀도 추정 (Density Estimation)** <br>
-**6. 신경망 기반 (Neural Network-based)** <br>
-**7. 공분산 추정 (Covariance Estimation)** <br>
+4. 이상치 탐지 (Anomaly/Outlier Detection) <br>
+5. 신경망 기반 (Neural Network-based) <br>
+6. 통계도구 : 밀도/공분산 추정 (Density/Covariance Estimation) <br>
 ---
 # 1. 클러스터링 (Clustering)
 ▣ 정의: 데이터 간의 유사성(Similarity)을 측정하여 비슷한 특성을 가진 데이터들끼리 그룹(군집)으로 묶는 기법.<br>
@@ -27,29 +26,23 @@
 ▣ 대표 알고리즘: PCA(주성분 분석), t-SNE, LDA.<br>
 ▣ 활용: 데이터 시각화, 노이즈 제거, 전처리.<br>
 <br>
-# 4. 이상치 탐지 (Anomaly/Outlier Detection)
+## 4. 이상치 탐지 (Anomaly/Outlier Detection)
 ▣ 정의: 대다수의 데이터와 비교했을 때 현저히 다른 특성을 보이는 드문 샘플을 찾아내는 기법.<br>
 ▣ 특징: '정상' 데이터의 패턴을 학습한 뒤, 이 패턴에서 벗어나는 데이터를 '이상치'로 판정.<br>
 ▣ 대표 알고리즘: Isolation Forest, Local Outlier Factor (LOF), One-Class SVM.<br>
 ▣ 활용: 금융 사기 탐지(FDS), 제조 공정 불량 탐지, 네트워크 침입 탐지.<br>
 <br>
-# 5. 밀도 추정 (Density Estimation)
-▣ 정의: 데이터가 생성된 바탕이 되는 확률 밀도 함수(Probability Density Function)를 추정하는 기법.<br>
-▣ 특징: 데이터가 특정 영역에 얼마나 집중되어 있는지를 수학적으로 모델링.<br>
-▣ 대표 알고리즘: 가우시안 혼합 모델(GMM), 커널 밀도 추정(KDE).<br>
-▣ 활용: 데이터 생성 모델링, 군집 분석의 기초 작업.<br>
-<br>
-# 6. 신경망 기반 (Neural Network-based)
+## 5. 신경망 기반 (Neural Network-based)
 ▣ 정의: 딥러닝 구조를 활용하여 데이터의 복잡한 계층적 특징을 스스로 추출하는 방식.<br>
 ▣ 특징: 데이터를 압축했다가 복원하는 과정에서 핵심 특징(Latent Space)을 학습하거나, 데이터의 분포를 흉내 내는 가상의 데이터를 생성.<br>
 ▣ 대표 알고리즘: Autoencoder (AE), Generative Adversarial Networks (GAN).<br>
 ▣ 활용: 딥페이크, 이미지 복원, 특징 추출.<br>
 <br>
-# 7. 공분산 추정 (Covariance Estimation)
-▣ 정의: 여러 변수 사이의 상관관계와 변동성을 나타내는 공분산 행렬을 데이터로부터 추정하는 기법.<br>
+## 6. 통계도구 : 밀도/공분산 추정 (Density/Covariance Estimation)
+▣ 정의: 확률 밀도 함수(Probability Density Function) 및 여러 변수 사이의 상관관계와 변동성을 나타내는 공분산 행렬을 데이터로부터 추정하는 기법.<br>
 ▣ 특징: 데이터 내 변수들이 서로 어떻게 연결되어 움직이는지 파악. 특히 데이터가 부족하거나 노이즈가 많을 때 안정적인 행렬을 얻는 것이 중요.<br>
-▣ 대표 알고리즘: Ledoit-Wolf 추정, Graphical Lasso.<br>
-▣ 활용: 포트폴리오 최적화(금융), 신호 처리, 마할라노비스 거리를 이용한 이상치 탐지 보조.<br>
+▣ 대표 알고리즘: 가우시안 혼합 모델(GMM), 커널 밀도 추정(KDE), Ledoit-Wolf 추정, Graphical Lasso.<br>
+▣ 활용: 데이터 생성 모델링, 군집 분석의 기초 작업, 포트폴리오 최적화(금융), 신호 처리, 마할라노비스 거리를 이용한 이상치 탐지 보조.<br>
 
 ---
 # 1. 클러스터링 (Clustering)
