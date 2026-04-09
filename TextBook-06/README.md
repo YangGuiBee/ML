@@ -1733,10 +1733,10 @@ $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
 | **[6] UMAP (Uniform Manifold Approximation and Projection)** 균일 매니폴드 근사적 사영 | ![](https://latex.codecogs.com/svg.image?w_%7Bij%7D%3D%5Cexp%5Cleft(-%5Cfrac%7Bd(x_i%2Cx_j)-%5Crho_i%7D%7B%5Csigma_i%7D%5Cright)) | ![](https://latex.codecogs.com/svg.image?%5Cmin_Y%5Csum_%7Bi%3Cj%7D%5BBig(w_%7Bij%7D%5Clog%5Cfrac%7Bw_%7Bij%7D%7D%7B%5Chat%7Bw%7D_%7Bij%7D%7D%2B(1-w_%7Bij%7D)%5Clog%5Cfrac%7B1-w_%7Bij%7D%7D%7B1-%5Chat%7Bw%7D_%7Bij%7D%7D%5CBig)%5D) |
 | **[7] Isomap (Isometric Mapping)** 등거리 매핑 | ![](https://latex.codecogs.com/svg.image?D_G(i%2Cj)%3D%5Cmathrm%7BShortestPathDistance%7D(x_i%2Cx_j)) | ![](https://latex.codecogs.com/svg.image?%5Cmin_Y%5ClVert%20D_G-D_Y%5CrVert_F%5E2%2C%5Cquad%20D_Y(i%2Cj)%3D%5ClVert%20y_i-y_j%5CrVert) |
 | **[8] MDS (Multidimensional Scaling)** 다차원 척도 | ![](https://latex.codecogs.com/svg.image?d_%7Bij%7D%3D%5ClVert%20x_i-x_j%5CrVert) | ![](https://latex.codecogs.com/svg.image?%5Cmin_Y%5Csum_%7Bi%3Cj%7D(d_%7Bij%7D-%5ClVert%20y_i-y_j%5CrVert)%5E2) |
+
+<!--
 | **[9] SOM (Self-Organizing Maps)** 자기 조직화 지도 | ![](https://latex.codecogs.com/svg.image?b%3D%5Carg%5Cmin_j%5ClVert%20x-w_j%5CrVert) | ![](https://latex.codecogs.com/svg.image?%5Cmin_%7B%5C%7Bw_j%5C%7D%7D%5Csum_i%20h_%7Bb%2Cj%7D%5ClVert%20x_i-w_j%5CrVert%5E2%2C%5Cquad%20h_%7Bb%2Cj%7D%3D%5Cexp%5Cleft(-%5Cfrac%7B%5ClVert%20r_b-r_j%5CrVert%5E2%7D%7B2%5Csigma%5E2%7D%5Cright)) |
-
-
-
+-->
 
 ---
 
