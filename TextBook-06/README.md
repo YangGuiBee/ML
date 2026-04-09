@@ -1826,7 +1826,7 @@ $W(t+1)=W(t)+\theta(t)\cdot\eta(t)\cdot(X-W(t))$<br>
 	    s2 = class_dict.get(2, 0)
 	    print(f"({wx:2d}, {wy:2d})     {s0:>8} {s1:>12} {s2:>10} {s0+s1+s2:>6}")
 
-![](./images/SOM1.png)
+![](./images/SOM2.png)
 <br> 
 
 
