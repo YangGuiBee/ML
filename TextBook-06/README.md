@@ -429,6 +429,7 @@
 **5.3 Deep Learning-based Clustering (딥러닝 기반 클러스터링)** <br>
 **5.4 Deep Learning-based Dimensionality Reduction (딥러닝 기반 차원 축소)** <br>
 **5.5 Energy-Based Models (에너지 기반 모델)** <br>
+**5.6 Deep Learning-based Methods (딥러닝 기반 방법)** <br>
 
 ---
 
@@ -671,39 +672,26 @@
 
 ---
 
+## 2. 연관 규칙(Association Rule)
 
-
-
-## 연관 규칙(Association Rule)
-
-	핵심 탐색 알고리즘
 	[AR-1] Apriori : 선험적 알고리즘 (1위)
 	[AR-2] FP-Growth(Frequent Pattern Growth) : 빈발 패턴 성장 (2위)
 	[AR-3] Eclat(Equivalence Class Transformation) : 동등 클래스 변환 (3위)
-
-	규칙 확장/변형 알고리즘
 	[AR-4] Multi-level Association Rules : 다계층 연관규칙 (4위)
 	[AR-5] Multi-dimensional Association Rules : 다차원 연관규칙 (5위)
-
-	추론/최적화 알고리즘
 	[AR-6] Artificial Immune System : 인공면역시스템 (6위)
 
     
-## 차원 축소(Dimensionality Reduction)
+## 3. 차원 축소(Dimensionality Reduction)
 
-	전통 통계·선형 알고리즘
 	[DR-1] PCA(Principal Component Analysis) : 주성분 분석 (1위)	
-	[DR-2] SVD(Singular Value Decomposition) : 특이값 분해 (4위)
-	[DR-3] ICA(Independent Component Analysis) : 독립성분 분석 (5위)	
-	[DR-4] NMF(Non-negative Matrix Factorization)  : 비음수 행렬 분해 (6위)
-
-	비선형/매니폴드 학습 알고리즘
 	[DR-5] t-SNE(t-distributed Stochastic Neighbor Embedding) : t-분포 확률적 이웃 임베딩 (2위)
 	[DR-6] UMAP(Uniform Manifold Approximation and Projection) : 균일 매니폴드 근사적 사영 (3위)
-	[DR-7] Isomap : 등거리 매핑 (8위)
+	[DR-2] SVD(Singular Value Decomposition) : 특이값 분해 (4위)
+	[DR-3] ICA(Independent Component Analysis) : 독립성분 분석 (5위)	
+	[DR-4] NMF(Non-negative Matrix Factorization)  : 비음수 행렬 분해 (6위)	
 	[DR-8] MDS(Multidimensional Scaling) : 다차원 척도 (7위)
-
-	신경망/딥러닝 알고리즘
+	[DR-7] Isomap : 등거리 매핑 (8위)
 	[DR-9] SOM(Self-Organizing Maps) : 자기 조직화 (9위)
 	
 ---
@@ -1331,7 +1319,74 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 <br>
 
 
-# [DR-2] SVD(Singular Value Decomposition) : 특이값 분해
+# [DR-2] t-SNE(t-distributed Stochastic Neighbor Embedding) : t-분포 확률적 이웃 임베딩
+▣ 정의: 고차원 데이터의 국소 구조를 잘 보존하여 저차원으로 투영하는 비선형 차원 축소 알고리즘<br>
+▣ 필요성: 데이터의 클러스터 구조를 유지한 상황에서 저차원으로 투영하여 데이터 간의 관계를 시각적으로 파악하기 위해 사용<br>
+▣ 장점 : 고차원 데이터의 군집 구조를 잘 반영하여 데이터의 숨겨진 패턴을 시각적으로 잘 드러내고, 비선형 구조를 가진 데이터에서도 효과적으로 작동<br>
+▣ 단점 : 데이터 포인트 수가 많아질수록 계산 시간이 급격히 증가하고, 초기 매개변수(예: σ 값 및 학습률)에 민감하게 반응<br> 
+▣ 응용 분야 : 이미지 데이터, 텍스트 데이터, 유전자 표현 데이터 등의 시각화, 클러스터링 분석, 데이터 전처리, 신경망 모델의 중간 출력을 시각화<br>
+▣ 모델식: 고차원 데이터의 유사도와 저차원 데이터의 유사도 분포를 맞추기 위해 코스트 함수 𝐾𝐿(𝑝∥𝑞)를 최소화<br>
+
+<br>
+
+    import matplotlib.pyplot as plt
+    from sklearn.manifold import TSNE
+    from sklearn.datasets import load_iris
+
+    # 데이터 로드
+    data = load_iris()
+    X = data.data
+
+    # t-SNE 적용
+    tsne = TSNE(n_components=2, random_state=42)
+    X_tsne = tsne.fit_transform(X)
+
+    # 결과 시각화
+    plt.scatter(X_tsne[:, 0], X_tsne[:, 1], c=data.target)
+    plt.xlabel("t-SNE Component 1")
+    plt.ylabel("t-SNE Component 2")
+    plt.title("t-SNE on Iris Dataset")
+    plt.colorbar()
+    plt.show()
+
+![](./images/tSNE.png)
+<br>
+
+
+# [DR-3] UMAP(Uniform Manifold Approximation and Projection) : 균일 매니폴드 근사적 사영
+▣ 정의: 데이터의 국소 구조와 전역 구조를 동시에 보존하면서 저차원으로 투영하는 비선형 차원 축소 알고리즘<br>
+▣ 필요성: 고차원 데이터를 저차원에서 시각화하면서 데이터의 전체적 및 국소적 관계를 동시에 보존하기 위해 사용<br>
+▣ 장점: t-SNE보다 계산이 빠르고, 대규모 데이터에서도 잘 작동, 데이터의 전역적 및 국소적 구조를 동시에 보존<br>
+▣ 단점: 일부 매개변수 조정이 필요하며, 결과가 매개변수에 민감할 수 있음<br>
+▣ 응용분야: 대용량 데이터 시각화, 생물정보학, 텍스트 분석 등<br>
+▣ 모델식: 이론적으로는 리만 거리와 초구 면적 개념을 이용하여 데이터의 근접성을 유지하면서 고차원에서 저차원으로 투영<br>
+
+    !pip install umap-learn
+    import umap
+    import matplotlib.pyplot as plt
+    from sklearn.datasets import load_iris
+
+    # 데이터 로드
+    data = load_iris()
+    X = data.data
+
+    # UMAP 적용
+    umap_model = umap.UMAP(n_components=2, random_state=42)
+    X_umap = umap_model.fit_transform(X)
+
+    # 결과 시각화
+    plt.scatter(X_umap[:, 0], X_umap[:, 1], c=data.target)
+    plt.xlabel("UMAP Component 1")
+    plt.ylabel("UMAP Component 2")
+    plt.title("UMAP on Iris Dataset")
+    plt.colorbar()
+    plt.show()
+
+![](./images/UMAP.png)
+<br>
+
+
+# [DR-4] SVD(Singular Value Decomposition) : 특이값 분해
 ![](./images/SVD_1.png)
 <br>
 ▣ 정의: 임의의 행렬을 세 개의 행렬로 분해하는 방식으로 행렬의 특이값과 특이벡터를 통해 행렬의 구조를 파악하고, 이를 통해 데이터의 패턴을 찾거나 압축하는 데 사용<br> 
@@ -1372,7 +1427,7 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.philippe-fournie
 <br>
 
 
-# [DR-3] ICA(Independent Component Analysis) : 독립성분 분석
+# [DR-5] ICA(Independent Component Analysis) : 독립성분 분석
 ▣ 정의 : 다변량 신호에서 통계적으로 독립적인 성분을 추출하는 비선형 차원 축소 기법<br>
 PCA는 데이터의 분산을 최대화하는 축을 찾는 반면, ICA는 신호 간의 독립성을 기반으로 성분을 찾는다.<br> 
 PCA는 가우시안 분포를 가정하고 데이터의 상관관계만을 이용해 차원을 축소하거나 성분을 찾는 반면,<br> 
@@ -1412,7 +1467,7 @@ ICA는 신호들 간의 고차원적 통계적 독립성에 초점을 맞추기 
 <br> 
 
 
-# [DR-4] NMF(Non-negative Matrix Factorization) : 비음수 행렬 분해
+# [DR-6] NMF(Non-negative Matrix Factorization) : 비음수 행렬 분해
 ▣ 정의 : 데이터를 비음수 행렬로 나타내고 이를 두 개의 비음수 행렬의 곱으로 분해하는 행렬 분해(Matrix Factorization) 기법<br>
 ▣ 필요성 : 원본 데이터를 두 개의 비음수(예: 픽셀 값, 주파수 스펙트럼, 사용자 평가 점수 등) 행렬의 곱으로 분해함으로써 비음수 데이터를 압축적으로 표현하여 중요한 구조적 특징을 발견<br>
 ▣ 장점 : 모든 요소가 비음수이므로 결과를 직관적으로 해석, 데이터의 저차원 표현을 효과적으로 학습하며, 각 데이터의 기여 요소를 명확히 구분<br>
@@ -1515,106 +1570,7 @@ $𝑉[1,2]=6, 𝑉_{approx}[1,2]=5.99997718$ : 오차는 약 0.00002<br>
 <br>
 
 
-# [DR-5] t-SNE(t-distributed Stochastic Neighbor Embedding) : t-분포 확률적 이웃 임베딩
-▣ 정의: 고차원 데이터의 국소 구조를 잘 보존하여 저차원으로 투영하는 비선형 차원 축소 알고리즘<br>
-▣ 필요성: 데이터의 클러스터 구조를 유지한 상황에서 저차원으로 투영하여 데이터 간의 관계를 시각적으로 파악하기 위해 사용<br>
-▣ 장점 : 고차원 데이터의 군집 구조를 잘 반영하여 데이터의 숨겨진 패턴을 시각적으로 잘 드러내고, 비선형 구조를 가진 데이터에서도 효과적으로 작동<br>
-▣ 단점 : 데이터 포인트 수가 많아질수록 계산 시간이 급격히 증가하고, 초기 매개변수(예: σ 값 및 학습률)에 민감하게 반응<br> 
-▣ 응용 분야 : 이미지 데이터, 텍스트 데이터, 유전자 표현 데이터 등의 시각화, 클러스터링 분석, 데이터 전처리, 신경망 모델의 중간 출력을 시각화<br>
-▣ 모델식: 고차원 데이터의 유사도와 저차원 데이터의 유사도 분포를 맞추기 위해 코스트 함수 𝐾𝐿(𝑝∥𝑞)를 최소화<br>
-
-<br>
-
-    import matplotlib.pyplot as plt
-    from sklearn.manifold import TSNE
-    from sklearn.datasets import load_iris
-
-    # 데이터 로드
-    data = load_iris()
-    X = data.data
-
-    # t-SNE 적용
-    tsne = TSNE(n_components=2, random_state=42)
-    X_tsne = tsne.fit_transform(X)
-
-    # 결과 시각화
-    plt.scatter(X_tsne[:, 0], X_tsne[:, 1], c=data.target)
-    plt.xlabel("t-SNE Component 1")
-    plt.ylabel("t-SNE Component 2")
-    plt.title("t-SNE on Iris Dataset")
-    plt.colorbar()
-    plt.show()
-
-![](./images/tSNE.png)
-<br>
-
-
-# [DR-6] UMAP(Uniform Manifold Approximation and Projection) : 균일 매니폴드 근사적 사영
-▣ 정의: 데이터의 국소 구조와 전역 구조를 동시에 보존하면서 저차원으로 투영하는 비선형 차원 축소 알고리즘<br>
-▣ 필요성: 고차원 데이터를 저차원에서 시각화하면서 데이터의 전체적 및 국소적 관계를 동시에 보존하기 위해 사용<br>
-▣ 장점: t-SNE보다 계산이 빠르고, 대규모 데이터에서도 잘 작동, 데이터의 전역적 및 국소적 구조를 동시에 보존<br>
-▣ 단점: 일부 매개변수 조정이 필요하며, 결과가 매개변수에 민감할 수 있음<br>
-▣ 응용분야: 대용량 데이터 시각화, 생물정보학, 텍스트 분석 등<br>
-▣ 모델식: 이론적으로는 리만 거리와 초구 면적 개념을 이용하여 데이터의 근접성을 유지하면서 고차원에서 저차원으로 투영<br>
-
-    !pip install umap-learn
-    import umap
-    import matplotlib.pyplot as plt
-    from sklearn.datasets import load_iris
-
-    # 데이터 로드
-    data = load_iris()
-    X = data.data
-
-    # UMAP 적용
-    umap_model = umap.UMAP(n_components=2, random_state=42)
-    X_umap = umap_model.fit_transform(X)
-
-    # 결과 시각화
-    plt.scatter(X_umap[:, 0], X_umap[:, 1], c=data.target)
-    plt.xlabel("UMAP Component 1")
-    plt.ylabel("UMAP Component 2")
-    plt.title("UMAP on Iris Dataset")
-    plt.colorbar()
-    plt.show()
-
-![](./images/UMAP.png)
-<br>
-
-
-# [DR-7] Isomap : 등거리 매핑
-▣ 정의: 데이터의 기하학적 구조를 보존하여 고차원 데이터를 저차원으로 투영하는 비선형 차원 축소 기법<br>
-▣ 필요성: 비선형적인 데이터 구조를 저차원에서도 유지하며 시각화할 때 유용<br>
-▣ 장점: 고차원 데이터의 매니폴드(저차원 다양체) 구조를 잘 보존하며, 국소적인 거리 정보를 기반으로 데이터의 구조를 유지<br>
-▣ 단점: 데이터가 고차원에서 매니폴드 구조를 형성하지 않는 경우 효과적이지 않으며, 계산 비용이 높아 대용량 데이터에는 부적합<br>
-▣ 응용분야: 시각화, 이미지 및 텍스트 데이터 분석, 생물정보학<br>
-▣ 모델식: 근접 그래프와 다차원 척도를 결합하여 비선형 구조를 보존<br>
-
-    from sklearn.manifold import Isomap
-    import matplotlib.pyplot as plt
-    from sklearn.datasets import load_iris
-
-    # 데이터 로드
-    data = load_iris()
-    X = data.data
-
-    # Isomap 적용
-    isomap = Isomap(n_components=2)
-    X_isomap = isomap.fit_transform(X)
-
-    # 결과 시각화
-    plt.scatter(X_isomap[:, 0], X_isomap[:, 1], c=data.target)
-    plt.xlabel("Isomap Component 1")
-    plt.ylabel("Isomap Component 2")
-    plt.title("Isomap on Iris Dataset")
-    plt.colorbar()
-    plt.show()
-
-![](./images/ISO.png)
-<br>
-
-
-# [DR-8] MDS(Multidimensional Scaling) : 다차원 척도
+# [DR-7] MDS(Multidimensional Scaling) : 다차원 척도
 ▣ 정의: MDS는 고차원 데이터 포인트 간의 거리를 보존하며 저차원으로 투영하는 차원 축소 기법<br>
 ▣ 필요성: 데이터의 유사성 또는 거리 정보를 저차원에서도 유지하여 시각화하기 위해 사용<br>
 ▣ 장점: 거리 정보를 보존하므로 데이터의 기하학적 관계를 잘 유지하며, 비선형 구조를 일부 보존<br>
@@ -1643,6 +1599,38 @@ $𝑉[1,2]=6, 𝑉_{approx}[1,2]=5.99997718$ : 오차는 약 0.00002<br>
     plt.show()
 
 ![](./images/MDS.png)
+<br>
+
+
+# [DR-8] Isomap : 등거리 매핑
+▣ 정의: 데이터의 기하학적 구조를 보존하여 고차원 데이터를 저차원으로 투영하는 비선형 차원 축소 기법<br>
+▣ 필요성: 비선형적인 데이터 구조를 저차원에서도 유지하며 시각화할 때 유용<br>
+▣ 장점: 고차원 데이터의 매니폴드(저차원 다양체) 구조를 잘 보존하며, 국소적인 거리 정보를 기반으로 데이터의 구조를 유지<br>
+▣ 단점: 데이터가 고차원에서 매니폴드 구조를 형성하지 않는 경우 효과적이지 않으며, 계산 비용이 높아 대용량 데이터에는 부적합<br>
+▣ 응용분야: 시각화, 이미지 및 텍스트 데이터 분석, 생물정보학<br>
+▣ 모델식: 근접 그래프와 다차원 척도를 결합하여 비선형 구조를 보존<br>
+
+    from sklearn.manifold import Isomap
+    import matplotlib.pyplot as plt
+    from sklearn.datasets import load_iris
+
+    # 데이터 로드
+    data = load_iris()
+    X = data.data
+
+    # Isomap 적용
+    isomap = Isomap(n_components=2)
+    X_isomap = isomap.fit_transform(X)
+
+    # 결과 시각화
+    plt.scatter(X_isomap[:, 0], X_isomap[:, 1], c=data.target)
+    plt.xlabel("Isomap Component 1")
+    plt.ylabel("Isomap Component 2")
+    plt.title("Isomap on Iris Dataset")
+    plt.colorbar()
+    plt.show()
+
+![](./images/ISO.png)
 <br>
 
 
