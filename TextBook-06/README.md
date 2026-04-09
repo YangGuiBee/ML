@@ -258,7 +258,7 @@
 
 ## 3.1 Linear Dimensionality Reduction / Matrix Factorization (선형 차원 축소 / 행렬 분해)
 ▣ 정의: 고차원 데이터를 원본 변수들의 선형 결합을 통해 저차원 공간으로 투영하거나, 하나의 행렬을 여러 개의 행렬 곱으로 분해하는 방식.<br>
-<img width ='1000' height = '600' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-06/images/PCA.png'> 
+<img width ='800' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-06/images/PCA.png'> 
 <br>
 (좌상단) Original data : 상관관계<br>
 Component 1 (주성분 1): 데이터가 가장 많이 퍼진 방향 (분산 최대 방향)<br>
