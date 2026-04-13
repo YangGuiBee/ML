@@ -71,6 +71,257 @@
 **Hierarchical Clustering (계층적 군집화):** 데이터 간의 거리를 계산하여 가장 가까운 데이터부터 순차적으로 묶어 나가는 방식. 덴드로그램(Dendrogram)이라는 트리 구조를 통해 데이터의 계층적 관계를 시각적으로 파악.<br>
 **GMM (가우시안 혼합 모델):** 데이터가 여러 개의 가우시안 분포(Gaussian Distribution)의 혼합에서 생성되었다고 가정하는 확률 기반(Model‑based) 군집화 알고리즘. 각 데이터 포인트는 하나의 군집에 고정적으로 속하는 것이 아니라, 각 군집에 속할 확률(probability)을 가지는 소프트 군집화(soft clustering)를 수행<br>
 <br>
+
+|지표|KM|DBSCAN|HC|GMM|
+|---|---|---|---|---|
+|[1.1] Silhouette Coefficient (실루엣 계수)|O|O|O|O|
+|[1.2] Davies-Bouldin Index (데이비스-볼딘 지수)|O|O|O|O|
+|[1.3] Calinski-Harabasz Index (칼린스키-하라바스 지수)|O|O|O|O|
+|[1.4] Dunn Index (던 지수)|O|O|O|O|
+|[1.5] WCSS (Within-Cluster Sum of Squares) (군집 내 제곱합)|O|X|O|O|
+|[1.6] Elbow Method (엘보 방법)|O|X|X|O|
+|[1.7] Gap Statistic (갭 통계량)|O|X|X|O|
+|[1.8] Information Criterion (AIC, BIC) (정보 기준)|X|X|X|O|
+|[1.9] Connectivity (연결성)|O|O|O|O|
+|[1.10] Xie-Beni Index (시에-베니 지수)|O|X|O|O|
+
+
+	# ============================================================
+	# 0. 라이브러리 불러오기
+	# ============================================================
+	
+	import numpy as np
+	import pandas as pd
+	
+	from sklearn.datasets import load_iris
+	from sklearn.preprocessing import StandardScaler
+	from sklearn.model_selection import train_test_split
+	
+	from sklearn.cluster import KMeans, DBSCAN, AgglomerativeClustering
+	from sklearn.mixture import GaussianMixture
+	
+	from sklearn.metrics import (
+	    silhouette_score,
+	    davies_bouldin_score,
+	    calinski_harabasz_score
+	)
+	
+	from scipy.spatial.distance import pdist, squareform
+	
+	
+	# ============================================================
+	# 1. 데이터 로드 및 분할 (7:2:1)
+	# ============================================================
+	
+	iris = load_iris()
+	X = iris.data
+	
+	# 거리 기반 군집을 위한 표준화
+	scaler = StandardScaler()
+	X_scaled = scaler.fit_transform(X)
+	
+	# 7:2:1 분할
+	X_train, X_temp = train_test_split(X_scaled, test_size=0.3, random_state=42)
+	X_test, X_val = train_test_split(X_temp, test_size=1/3, random_state=42)
+	
+	
+	# ============================================================
+	# 2. 군집 평가지표 함수 정의
+	# ============================================================
+	
+	def dunn_index(X, labels):
+	    """
+	    Dunn Index
+	    (클러스터 간 최소 거리) / (클러스터 내 최대 거리)
+	    """
+	    dist = squareform(pdist(X))
+	    clusters = np.unique(labels)
+	
+	    intra = []
+	    inter = []
+	
+	    for c in clusters:
+	        d = dist[labels == c][:, labels == c]
+	        if d.size > 0:
+	            intra.append(d.max())
+	
+	    for i in clusters:
+	        for j in clusters:
+	            if i < j:
+	                inter.append(
+	                    dist[labels == i][:, labels == j].min()
+	                )
+	
+	    return np.min(inter) / np.max(intra)
+	
+	
+	def wcss(X, labels, centers):
+	    """Within-Cluster Sum of Squares"""
+	    return np.sum((X - centers[labels]) ** 2)
+	
+	
+	def connectivity_index(X, labels, k=10):
+	    """
+	    Connectivity Index
+	    가까운 이웃이 다른 군집이면 페널티 부여
+	    """
+	    dist = squareform(pdist(X))
+	    conn = 0.0
+	
+	    for i in range(len(X)):
+	        nn = np.argsort(dist[i])[1:k+1]
+	        for r, j in enumerate(nn):
+	            if labels[i] != labels[j]:
+	                conn += 1 / (r + 1)
+	    return conn
+	
+	
+	def xie_beni_index(X, labels, centers):
+	    """
+	    Xie-Beni Index
+	    퍼지 군집 기반 지표 (값이 작을수록 좋음)
+	    """
+	    n = X.shape[0]
+	    num = np.sum((X - centers[labels]) ** 2)
+	    denom = n * (np.min(pdist(centers)) ** 2)
+	    return num / denom
+	
+	
+	def gap_statistic(X, k, n_refs=10):
+	    """
+	    Gap Statistic (K-means / GMM에만 의미 있음)
+	    """
+	    ref = []
+	    for _ in range(n_refs):
+	        X_ref = np.random.random_sample(X.shape)
+	        km = KMeans(n_clusters=k, random_state=42).fit(X_ref)
+	        ref.append(km.inertia_)
+	
+	    km = KMeans(n_clusters=k, random_state=42).fit(X)
+	    return np.log(np.mean(ref)) - np.log(km.inertia_)
+	
+	
+	# ============================================================
+	# 3. 모델 학습
+	# ============================================================
+	
+	# --- K-Means ---
+	kmeans = KMeans(n_clusters=3, random_state=42)
+	labels_km = kmeans.fit_predict(X_train)
+	
+	# Elbow
+	elbow = {k: KMeans(n_clusters=k, random_state=42).fit(X_train).inertia_
+	          for k in range(1, 8)}
+	
+	gap = gap_statistic(X_train, k=3)
+	
+	# --- DBSCAN ---
+	dbscan = DBSCAN(eps=0.8, min_samples=5)
+	labels_db = dbscan.fit_predict(X_train)
+	labels_db = np.where(labels_db == -1, 3, labels_db)  # noise 처리
+	
+	# --- Hierarchical ---
+	hc = AgglomerativeClustering(n_clusters=3, linkage='ward')
+	labels_hc = hc.fit_predict(X_train)
+	
+	hc_centers = np.array([
+	    X_train[labels_hc == i].mean(axis=0)
+	    for i in np.unique(labels_hc)
+	])
+	
+	# --- GMM ---
+	gmm = GaussianMixture(n_components=3, random_state=42)
+	labels_gmm = gmm.fit_predict(X_train)
+	gmm_centers = gmm.means_
+	
+	
+	# ============================================================
+	# 4. 평가 출력 함수
+	# ============================================================
+	
+	def evaluate(name, X, labels, centers=None, ic=None):
+	    print(f"\n===== {name} =====")
+	    print("Silhouette:", silhouette_score(X, labels))
+	    print("Davies-Bouldin:", davies_bouldin_score(X, labels))
+	    print("Calinski-Harabasz:", calinski_harabasz_score(X, labels))
+	    print("Dunn Index:", dunn_index(X, labels))
+	    print("Connectivity:", connectivity_index(X, labels))
+	
+	    if centers is not None:
+	        print("WCSS:", wcss(X, labels, centers))
+	        print("Xie-Beni:", xie_beni_index(X, labels, centers))
+	    else:
+	        print("WCSS: N/A")
+	        print("Xie-Beni: N/A")
+	
+	    if ic is not None:
+	        print("AIC:", ic.aic(X))
+	        print("BIC:", ic.bic(X))
+	    else:
+	        print("AIC / BIC: N/A")
+	
+	
+	# ============================================================
+	# 5. 결과 출력
+	# ============================================================
+	
+	evaluate("K-Means", X_train, labels_km, kmeans.cluster_centers_)
+	print("Elbow Method:", elbow)
+	print("Gap Statistic:", gap)
+	
+	evaluate("DBSCAN", X_train, labels_db)
+	
+	evaluate("Hierarchical Clustering", X_train, labels_hc, hc_centers)
+	
+	evaluate("GMM", X_train, labels_gmm, gmm_centers, ic=gmm)
+
+<br>
+
+	===== K-Means =====
+	Silhouette: 0.47253795146500105
+	Davies-Bouldin: 0.7809319048042321
+	Calinski-Harabasz: 165.81977452139458
+	Dunn Index: 0.06353869999836353
+	Connectivity: 14.61468253968253
+	WCSS: 94.48543843973876
+	Xie-Beni: 0.23071249804739527
+	AIC / BIC: N/A
+	Elbow Method: {1: 401.69238153057387, 2: 163.26877739394064, 3: 94.48543843973877, 
+		4: 79.22430325763727, 5: 59.14922079553456, 6: 54.1099279844571, 7: 51.083232137189235}
+	Gap Statistic: -1.4446085197985208
+	
+	===== DBSCAN =====
+	Silhouette: 0.49960412579717384
+	Davies-Bouldin: 3.0212839448963322
+	Calinski-Harabasz: 71.81781527517883
+	Dunn Index: 0.1449437782217304
+	Connectivity: 6.886904761904761
+	WCSS: N/A
+	Xie-Beni: N/A
+	AIC / BIC: N/A
+	
+	===== Hierarchical Clustering =====
+	Silhouette: 0.46503485028844105
+	Davies-Bouldin: 0.7724428605775691
+	Calinski-Harabasz: 150.4665429651713
+	Dunn Index: 0.09853012343741283
+	Connectivity: 11.002380952380948
+	WCSS: 101.68592341211145
+	Xie-Beni: 0.22156150422317425
+	AIC / BIC: N/A
+	
+	===== GMM =====
+	Silhouette: 0.3656821102989231
+	Davies-Bouldin: 1.0373109546641353
+	Calinski-Harabasz: 122.79368975811057
+	Dunn Index: 0.07880255949532074
+	Connectivity: 22.989285714285707
+	WCSS: 117.88234413032458
+	Xie-Beni: 0.45752338128621756
+	AIC: 485.7652098544704
+	BIC: 602.5394652614015
+	
+
 ## 2. 연관 규칙 학습 (Association Rule Learning)<br>
 데이터베이스 내에서 항목들 간의 '조건-결과(If-Then)' 패턴과 동시 발생 관계를 찾아내는 기법. (주로 장바구니 분석)<br>
 **Apriori (선험적 알고리즘):** 연관 규칙의 가장 고전적인 모델. '빈번하게 발생하는 항목 집합의 부분집합 역시 빈번하게 발생한다'는 원리를 이용해 탐색 공간을 줄여 규칙을 탐색.<br>
