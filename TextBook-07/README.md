@@ -4,52 +4,40 @@
 
 #  07-1 : 군집화 평가지표
 
-	[1] Silhouette Coefficient : 실루엣 계수
-	[2] Davies-Bouldin Index (DBI)
-	[3] Dunn Index (DI)
-	[4] Calinski-Harabasz Index (CHI)
-	[5] Within-Cluster Sum of Squares (WCSS) : 군집내 제곱합
-
-[1.1] Silhouette Coefficient (실루엣 계수)
-[1.2] DBI (Davies-Bouldin Index) (데이비스-볼딘 지수)
-[1.3] Dunn Index (던 지수)
-[1.4] CHI (Calinski-Harabasz Index) (칼린스키-하라바스 지수)
-[1.5] WCSS (Within-Cluster Sum of Squares) (군집 내 제곱합)
-[1.6] Elbow Method (엘보 방법)
-[1.7] Gap Statistic (갭 통계량)
-[1.8] Information Criterion (AIC, BIC) (정보 기준)
-[1.9] Connectivity (연결성)
-[1.10] Xie-Beni Index (시에-베니 지수)
+<ins>[1.1] Silhouette Coefficient (실루엣 계수)</ins><br>
+<ins>[1.2] DBI (Davies-Bouldin Index) (데이비스-볼딘 지수)</ins><br>
+<ins>[1.3] Dunn Index (던 지수)</ins><br>
+<ins>[1.4] CHI (Calinski-Harabasz Index) (칼린스키-하라바스 지수)</ins><br>
+<ins>[1.5] WCSS (Within-Cluster Sum of Squares) (군집 내 제곱합)</ins><br>
+[1.6] Elbow Method (엘보 방법)<br>
+[1.7] Gap Statistic (갭 통계량)<br>
+[1.8] Information Criterion (AIC, BIC) (정보 기준)<br>
+[1.9] Connectivity (연결성)<br>
+[1.10] Xie-Beni Index (시에-베니 지수)<br>
 
 
 
 #  07-2 : 연관규칙 평가지표
-
-	[1] 지지도(Support)
-	[2] 신뢰도(Confidence)
-	[3] 향상도(Lift)
-	[4] 레버리지(Leverage)
-	[5] 확신도(Conviction)
-	[6] 상관계수(Correlation Coefficient)
-
-[2.1] Support (지지도)
-[2.2] Confidence (신뢰도)
-[2.3] Lift (향상도)
-[2.4] Leverage (레버리지)
-[2.5] Conviction (확신도)
-
-[2.6] Kulczynski Measure (쿨친스키 측정)
-[2.7] Jaccard Coefficient (자카드 계수)
-[2.8] All-Confidence (전체 신뢰도)
-[2.9] Chi-Square Test (카이제곱 검정)
-[2.10] Collective Strength (집단 강도)
-[2.11] Piatetsky-Shapiro Measure (피아테츠키-샤피로 측정)
-[2.12] Odds Ratio (오즈비)
-[2.13] Yule's Q (율의 Q)
-[2.14] Yule's Y (율의 Y)
-[2.15] Information Gain (Rule-based) (정보 이득)
-[2.16] Zhang's Metric (장 메트릭)
-[2.17] Certainty Factor (확실성 인수)
+(기본)<br>
+<ins>[2.1] Support (지지도)</ins><br>
+<ins>[2.2] Confidence (신뢰도)</ins><br>
+<ins>[2.3] Lift (향상도)</ins><br>
+<ins>[2.4] Leverage (레버리지)</ins><br>
+<ins>[2.5] Conviction (확신도)</ins><br>
+[2.6] Jaccard Coefficient (자카드 계수)<br>
+[2.7] Kulczynski Measure (쿨친스키 측정)<br>
+[2.8] All-Confidence (전체 신뢰도)<br>
+[2.9] Chi-Square Test (카이제곱 검정)<br>
+[2.10] Collective Strength (집단 강도)<br>
+(확장)<br>
+<ins>[2.11] Phi Coefficient (Correlation)</ins><br>
+[2.12] Piatetsky-Shapiro (피아테츠키-샤피로)<br>
+[2.13] Odds Ratio (오즈비)<br>
+[2.14] Yule's Q (율의 Q)<br>
+[2.15] Yule's Y (율의 Y)<br>
+[2.16] Information Gain (정보 이득)<br>
+[2.17] Zhang's Metric (장 메트릭)<br>
+[2.18] Certainty Factor (확실성 인수)<br>
 
 	  
 #  07-3 : 차원축소 평가지표
