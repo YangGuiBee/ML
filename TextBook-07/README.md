@@ -9,7 +9,19 @@
 	[3] Dunn Index (DI)
 	[4] Calinski-Harabasz Index (CHI)
 	[5] Within-Cluster Sum of Squares (WCSS) : 군집내 제곱합
-	  
+
+[1.1] Silhouette Coefficient (실루엣 계수)
+[1.2] DBI (Davies-Bouldin Index) (데이비스-볼딘 지수)
+[1.3] Dunn Index (던 지수)
+[1.4] CHI (Calinski-Harabasz Index) (칼린스키-하라바스 지수)
+[1.5] WCSS (Within-Cluster Sum of Squares) (군집 내 제곱합)
+[1.6] Elbow Method (엘보 방법)
+[1.7] Gap Statistic (갭 통계량)
+[1.8] Information Criterion (AIC, BIC) (정보 기준)
+[1.9] Connectivity (연결성)
+[1.10] Xie-Beni Index (시에-베니 지수)
+
+
 
 #  07-2 : 연관규칙 평가지표
 
@@ -19,6 +31,26 @@
 	[4] 레버리지(Leverage)
 	[5] 확신도(Conviction)
 	[6] 상관계수(Correlation Coefficient)
+
+[2.1] Support (지지도)
+[2.2] Confidence (신뢰도)
+[2.3] Lift (향상도)
+[2.4] Leverage (레버리지)
+[2.5] Conviction (확신도)
+
+[2.6] Kulczynski Measure (쿨친스키 측정)
+[2.7] Jaccard Coefficient (자카드 계수)
+[2.8] All-Confidence (전체 신뢰도)
+[2.9] Chi-Square Test (카이제곱 검정)
+[2.10] Collective Strength (집단 강도)
+[2.11] Piatetsky-Shapiro Measure (피아테츠키-샤피로 측정)
+[2.12] Odds Ratio (오즈비)
+[2.13] Yule's Q (율의 Q)
+[2.14] Yule's Y (율의 Y)
+[2.15] Information Gain (Rule-based) (정보 이득)
+[2.16] Zhang's Metric (장 메트릭)
+[2.17] Certainty Factor (확실성 인수)
+
 	  
 #  07-3 : 차원축소 평가지표
 
@@ -34,6 +66,62 @@
 	[10] Adjusted Rand Index(ARI)
 	[11] Normalized Mutual Information(NMI)
 
+[3.1] Reconstruction Error (재구성 오차)
+[3.2] Explained Variance Ratio (설명된 분산 비율)
+[3.3] MSE (Mean Squared Error) (평균 제곱 오차)
+
+[3.4] Cumulative Explained Variance (누적 설명 분산)
+[3.5] Scree Plot (스크리 플롯)
+[3.6] Trustworthiness (신뢰성)
+[3.7] Continuity (연속성)
+[3.8] Neighborhood Preservation (이웃 보존)
+[3.9] Procrustes Analysis (프로크루스테스 분석)
+[3.10] Stress (MDS) (스트레스, 다차원 척도법)
+[3.11] KL Divergence (쿨백-라이블러 발산)
+[3.12] Local Continuity Meta-Criterion (LCMC) (국소 연속성 메타 기준)
+[3.13] Spearman Rank Correlation (스피어만 순위 상관)
+[3.14] Earth Mover's Distance (어스 무버 거리)
+[3.15] Sammon's Stress (샘몬 스트레스)
+
+---
+<br>
+
+## 1. 클러스터링 (Clustering)<br>
+데이터의 기하학적 거리나 밀도를 기반으로 비슷한 특성을 가진 데이터들을 그룹화하는 기법.<br>
+**K-Means (K-평균 군집화):** 가장 직관적이고 널리 쓰이는 알고리즘. 사전에 설정한 $K$개의 중심점(Centroid)을 기준으로 가장 가까운 데이터들을 묶어 군집을 형성.<br>
+**DBSCAN (밀도 기반 군집화):** 데이터의 밀집 지역을 하나의 군집으로 인식. K-Means와 달리 군집의 개수를 미리 지정할 필요가 없으며, 모양이 불규칙한 군집을 찾거나 노이즈(이상치)를 걸러내는 데 매우 탁월.<br>
+**Hierarchical Clustering (계층적 군집화):** 데이터 간의 거리를 계산하여 가장 가까운 데이터부터 순차적으로 묶어 나가는 방식. 덴드로그램(Dendrogram)이라는 트리 구조를 통해 데이터의 계층적 관계를 시각적으로 파악.<br>
+<br>
+## 2. 연관 규칙 학습 (Association Rule Learning)<br>
+데이터베이스 내에서 항목들 간의 '조건-결과(If-Then)' 패턴과 동시 발생 관계를 찾아내는 기법. (주로 장바구니 분석)<br>
+**Apriori (선험적 알고리즘):** 연관 규칙의 가장 고전적인 모델. '빈번하게 발생하는 항목 집합의 부분집합 역시 빈번하게 발생한다'는 원리를 이용해 탐색 공간을 줄여 규칙을 탐색.<br>
+**FP-Growth (Frequent Pattern Growth):** Apriori의 속도 문제를 개선한 알고리즘. 데이터를 트리 구조(FP-Tree)로 압축하여 저장한 뒤 패턴을 추출하므로, 데이터베이스를 여러 번 스캔할 필요가 없어 대용량 데이터 처리에 유리.<br>
+**Eclat (Equivalence Class Transformation):** 항목(Item)을 기준으로 데이터를 수직 형태로 변환하여 교집합 연산을 통해 연관성을 찾는 알고리즘. 구조가 단순하고 탐색 속도가 빠름.<br>
+<br>
+## 3. 차원 축소 (Dimensionality Reduction)<br>
+고차원 데이터의 핵심 정보(분산, 구조 등)를 최대한 보존하면서 시각화나 연산 효율을 위해 저차원으로 압축하는 기법.<br>
+**PCA (Principal Component Analysis):** 데이터의 분산(Variance)을 가장 잘 설명하는 새로운 축(주성분)을 찾아 투영하는 선형 차원 축소 기법. 전처리 단계에서 노이즈 제거 및 다중공선성 해결을 위해 기본적.<br>
+**t-SNE (t-Distributed Stochastic Neighbor Embedding):** 고차원 공간에서의 데이터 간 거리를 확률로 변환하여 저차원에서도 그 관계가 유지되도록 하는 비선형 기법입니다. 특히 데이터 '시각화'에 압도적인 성능.<br>
+**UMAP (Uniform Manifold Approximation and Projection):** t-SNE의 강력한 시각화 능력을 유지하면서도 연산 속도를 비약적으로 높이고, 데이터의 전역적(Global) 구조를 더 잘 보존하는 최신 매니폴드 학습 기법.<br>
+<br>
+## 4. 이상치 탐지 (Anomaly/Outlier Detection)<br>
+정상적인 데이터의 분포나 패턴에서 크게 벗어난 희귀한 샘플을 식별하는 기법.<br>
+**Isolation Forest:** 데이터를 무작위로 분할하는 의사결정 나무(Decision Tree)를 여러 개 만들어, 정상 데이터보다 훨씬 적은 횟수의 분할만으로 고립(Isolation)되는 데이터를 이상치로 판별. 빠르고 직관적.<br>
+**One-Class SVM:** 서포트 벡터 머신(SVM)을 변형한 모델로, 정상 데이터들이 모여 있는 영역을 감싸는 경계(Boundary)를 학습한 뒤 이 경계 밖에 있는 데이터를 이상치로 분류.<br>
+**LOF (Local Outlier Factor):** 특정 데이터가 주변 이웃 데이터들에 비해 밀도가 얼마나 낮은지(국소적 척도)를 계산하여 이상치를 탐지. 데이터의 군집 밀도가 불균형한 상황에서 유용.<br>
+<br>
+## 5. 신경망 : 생성모델/표현학습 (Generative Models & Representation Learning)<br>
+데이터의 숨겨진 특징(Latent Representation)을 학습하여 압축하거나, 학습된 분포를 바탕으로 새로운 데이터를 생성하는 딥러닝 기반 기법.<br>
+**Autoencoder (오토인코더):** 입력 데이터를 압축(Encoder)했다가 다시 원본과 똑같이 복원(Decoder)하도록 학습하는 신경망. 이 과정에서 병목(Bottleneck) 구간에 데이터의 핵심 표현이 저장되며, 차원 축소 및 노이즈 제거에 활용.<br>
+**VAE (Variational Autoencoder):** 오토인코더의 변형으로, 잠재 공간(Latent Space)을 고정된 값이 아닌 '확률 분포'로 학습. 연속적이고 의미 있는 특성 공간을 만들어 새로운 데이터를 생성하는 데 탁월.<br>
+**GAN (Generative Adversarial Network):** 가짜 데이터를 생성하는 생성자(Generator)와 진짜/가짜를 감별하는 판별자(Discriminator)가 경쟁하며 학습하는 모델로, 매우 정교하고 사실적인 이미지나 음성 데이터를 생성.<br>
+<br>
+## 6. 통계 : 밀도/공분산 추정 (Density/Covariance Estimation)<br>
+주어진 데이터가 어떤 확률 분포에서 추출되었는지 통계적으로 추정하거나 변수 간의 관계 구조를 파악하는 기법.<br>
+**GMM (Gaussian Mixture Model):** 복잡한 데이터 분포를 여러 개의 정규 분포(Gaussian)가 혼합된 형태로 가정하고, EM(Expectation-Maximization) 알고리즘을 통해 각 분포의 매개변수를 추정. 확률 기반의 유연한 군집화.<br>
+**KDE (Kernel Density Estimation):** 개별 데이터 포인트에 커널 함수(주로 가우시안)를 적용한 뒤 이를 모두 더해 부드러운 확률 밀도 함수를 추정하는 비모수적(Non-parametric) 방식. 데이터의 실제 분포 형태를 부드러운 곡선으로 파악.<br>
+**Graphical Lasso:** 다변량 정규 분포를 가정하고, 변수들 간의 정밀도 행렬(Precision Matrix, 공분산 행렬의 역행렬)을 추정할 때 L1 정규화(Lasso)를 적용하여 조건부 독립 구조(희소한 그래프 구조)를 찾아내는 기법.<br>
+<br>
 
 ---
 
