@@ -42,34 +42,24 @@
 	  
 #  07-3 : 차원축소 평가지표
 
-	[1] 재구성 오류(Reconstruction Error)
-	[2] 분산 유지율(Explained Variance Ratio)
-	[3] 상호 정보량(Mutual Information)
-	[4] 근접도 보존(Trustworthiness, Continuity)
-	[5] 거리/유사도 보존(Stress, Sammon Error)
-	[6] 지역/전역구조(Local Continuity Meta Criterion)
-	[7] 쌍의 상관계수(Spearman’s ρ)
-	[8] Silhouette Score
-	[9] Davies-Bouldin Index(DBI)
-	[10] Adjusted Rand Index(ARI)
-	[11] Normalized Mutual Information(NMI)
+<ins>[3.1] Reconstruction Error (재구성 오류)</ins><br>
+<ins>[3.2] Explained Variance Ratio (설명된 분산 비율)</ins><br>
+<ins>[3.3] Mutual Information (상호 정보량)</ins><br>
+<ins>[3.4] Trustworthiness (신뢰성)</ins><br>
+<ins>[3.5] Continuity (연속성)</ins><br>
+<ins>[3.6] Stress MDS (스트레스 다차원척도법)</ins><br>
+<ins>[3.7] Sammon Error (새먼 오차)</ins><br>
+<ins>[3.8] LCMC (Local Continuity Meta-Criterion) (국소 연속성 메타 기준)</ins><br>
+<ins>[3.9] Spearman’s ρ (Spearman Rank Correlation)  (스피어만 순위 상관계수)</ins><br>
+<ins>[3.10] Silhouette Score (실루엣 계수)</ins><br>
+<ins>[3.11] DBI (Davies–Bouldin Index) (데이비스–볼딘 지수)</ins><br>
+[3.12] MSE (Mean Squared Error) (평균 제곱 오차)<br>
+[3.13] Cumulative Explained Variance (누적 설명 분산)<br>
+[3.14] Scree Plot (스크리 플롯)<br>
+[3.15] Procrustes Analysis (프로크루스테스 분석)<br>
+[3.16] Neighborhood Preservation (이웃 보존도)<br>
+[3.17] KL Divergence (Kullback–Leibler Divergence) (쿨백–라이블러 발산)<br>
 
-[3.1] Reconstruction Error (재구성 오차)
-[3.2] Explained Variance Ratio (설명된 분산 비율)
-[3.3] MSE (Mean Squared Error) (평균 제곱 오차)
-
-[3.4] Cumulative Explained Variance (누적 설명 분산)
-[3.5] Scree Plot (스크리 플롯)
-[3.6] Trustworthiness (신뢰성)
-[3.7] Continuity (연속성)
-[3.8] Neighborhood Preservation (이웃 보존)
-[3.9] Procrustes Analysis (프로크루스테스 분석)
-[3.10] Stress (MDS) (스트레스, 다차원 척도법)
-[3.11] KL Divergence (쿨백-라이블러 발산)
-[3.12] Local Continuity Meta-Criterion (LCMC) (국소 연속성 메타 기준)
-[3.13] Spearman Rank Correlation (스피어만 순위 상관)
-[3.14] Earth Mover's Distance (어스 무버 거리)
-[3.15] Sammon's Stress (샘몬 스트레스)
 
 ---
 <br>
