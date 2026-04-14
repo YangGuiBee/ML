@@ -658,6 +658,7 @@
 	[2.18] Certainty Factor: 0.5773
 	--------------------------------------------------
 
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/2.Association.png'> 	
 
 ## 3. 차원 축소 (Dimensionality Reduction)<br>
 고차원 데이터의 핵심 정보(분산, 구조 등)를 최대한 보존하면서 시각화나 연산 효율을 위해 저차원으로 압축하는 기법.<br>
