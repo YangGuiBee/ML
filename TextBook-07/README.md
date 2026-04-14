@@ -311,591 +311,202 @@
 
 
 	# ============================================================
-	# Association Rule Learning (Apriori / FP-Growth / Eclat)
-	# on Iris dataset with split 7:2:1 (train/test/val)
-	# Evaluate 10 basic rule metrics on each split
-	#
-	# [2.1] Support
-	# [2.2] Confidence
-	# [2.3] Lift
-	# [2.4] Leverage
-	# [2.5] Conviction
-	# [2.6] Jaccard
-	# [2.7] Kulczynski
-	# [2.8] All-Confidence
-	# [2.9] Chi-Square
-	# [2.10] Collective Strength
+	# Association Rule Learning (Unsupervised Learning)
+	# Dataset : Iris
+	# Models  : Apriori, FP-Growth, Eclat
+	# Metrics : 18 Association Rule Evaluation Metrics
+	# 		  "[2.1] Support": supp_xy,
+	#         "[2.2] Confidence": conf,
+	#         "[2.3] Lift": lift,
+	#         "[2.4] Leverage": leverage,
+	#         "[2.5] Conviction": conviction,
+	#         "[2.6] Jaccard": jaccard,
+	#         "[2.7] Kulczynski": kulczynski,
+	#         "[2.8] All-Confidence": all_conf,
+	#         "[2.9] Chi-Square": chi_square,
+	#         "[2.10] Collective Strength": collective_strength,
+	#         "[2.11] Phi Coefficient": phi,
+	#         "[2.12] Piatetsky-Shapiro": ps,
+	#         "[2.13] Odds Ratio": odds_ratio,
+	#         "[2.14] Yule's Q": yule_q,
+	#         "[2.15] Yule's Y": yule_y,
+	#         "[2.16] Information Gain": info_gain,
+	#         "[2.17] Zhang's Metric": zhang,
+	#         "[2.18] Certainty Factor": certainty_factor
 	# ============================================================
+		import pandas as pd
 	import numpy as np
-	import pandas as pd
-	import math	
 	from sklearn.datasets import load_iris
-	from sklearn.model_selection import train_test_split
-	from sklearn.preprocessing import KBinsDiscretizer	
-	from scipy.stats import chi2_contingency
+	from mlxtend.preprocessing import TransactionEncoder
+	from mlxtend.frequent_patterns import apriori, fpgrowth, association_rules
 	
-	# --- mlxtend 의존성 체크 (미설치 시 가장 흔한 실행 실패 원인) ---
-	try:
-	    from mlxtend.preprocessing import TransactionEncoder
-	    from mlxtend.frequent_patterns import apriori, fpgrowth, association_rules
-	except Exception as e:
-	    print("ERROR: mlxtend 패키지가 없거나 import에 실패했습니다.")
-	    print("해결: pip install mlxtend")
-	    raise	
-	
-	# ============================================================
-	# 1) 데이터 로드 및 분할 (7:2:1)
-	# ============================================================	
+	# ------------------------------------------------------------
+	# 1. Iris 데이터 로드 및 연관규칙 학습용 전처리
+	# ------------------------------------------------------------
+	# Iris 데이터는 연속형 특성이므로 연관규칙 학습을 위해 이산화(discretization) 수행
 	iris = load_iris()
-	X = iris.data
-	feature_names = iris.feature_names
+	df = pd.DataFrame(iris.data, columns=iris.feature_names)
 	
-	# 7:2:1 = train 0.7, test 0.2, val 0.1
-	X_train, X_temp = train_test_split(X, test_size=0.3, random_state=42, shuffle=True)
-	X_test, X_val = train_test_split(X_temp, test_size=1/3, random_state=42, shuffle=True)
+	# 각 feature를 분위수 기준 3구간(Low, Mid, High)으로 이산화
+	for col in df.columns:
+	    df[col] = pd.qcut(
+	        df[col],
+	        q=3,
+	        labels=[f"{col}_Low", f"{col}_Mid", f"{col}_High"]
+	    )
 	
-	# ============================================================
-	# 2) 연속형 Iris → 연관규칙용 트랜잭션 데이터로 변환
-	#    - 핵심: 수치형은 바로 규칙 마이닝이 불가 → 이산화(discretization) 필요
-	#    - train으로 bin 경계를 학습하고, test/val에 동일 경계를 적용 (데이터 누수 방지)
-	# ============================================================
+	# 트랜잭션 형태로 변환
+	transactions = df.values.tolist()
 	
-	def make_transactions_with_shared_bins(X_train, X_test, X_val, feature_names, n_bins=3):
-	    """
-	    1) train으로만 bin 경계(분위수 기반)를 학습
-	    2) train/test/val 모두 동일한 bin 기준으로 변환
-	    3) 각 샘플을 '아이템들의 집합(트랜잭션)' 형태로 변환
-	    """
-	    disc = KBinsDiscretizer(n_bins=n_bins, encode="ordinal", strategy="quantile")
-	    Xtr = disc.fit_transform(X_train)     # bin 학습은 train에서만
-	    Xte = disc.transform(X_test)
-	    Xva = disc.transform(X_val)
-	
-	    def to_tx(Xbinned):
-	        tx = []
-	        for row in Xbinned:
-	            items = []
-	            for j, b in enumerate(row):
-	                items.append(f"{feature_names[j]}_bin{int(b)}")
-	            tx.append(items)
-	        return tx
-	
-	    return to_tx(Xtr), to_tx(Xte), to_tx(Xva)	
-	
-	tx_train, tx_test, tx_val = make_transactions_with_shared_bins(
-	    X_train, X_test, X_val, feature_names, n_bins=3
-	)
-	
-	# TransactionEncoder도 train 기준으로 fit하고 test/val은 transform만 수행(컬럼 일관성 유지)
+	# One-hot encoding
 	te = TransactionEncoder()
-	te_train = te.fit(tx_train).transform(tx_train)
-	te_test  = te.transform(tx_test)
-	te_val   = te.transform(tx_val)
+	te_array = te.fit(transactions).transform(transactions)
+	df_te = pd.DataFrame(te_array, columns=te.columns_)
 	
-	df_train = pd.DataFrame(te_train, columns=te.columns_)
-	df_test  = pd.DataFrame(te_test,  columns=te.columns_)
-	df_val   = pd.DataFrame(te_val,   columns=te.columns_)
-	
-	
-	# ============================================================
-	# 3) 지지도 계산 유틸 (규칙 평가는 split별로 재계산)
-	# ============================================================	
-	def support_of_itemset(df_bool, itemset):
+	# ------------------------------------------------------------
+	# 2. 빈발 항목집합 탐색 함수
+	# ------------------------------------------------------------
+	def mine_frequent_itemsets(data, method="apriori", min_support=0.2):
 	    """
-	    df_bool: 트랜잭션 one-hot (True/False)
-	    itemset: frozenset({"item1","item2",...})
+	    Apriori / FP-Growth / (단순화된) Eclat 빈발 항목집합 생성
 	    """
-	    if len(itemset) == 0:
-	        return 1.0
-	    cols = list(itemset)
-	    # 모든 아이템이 동시에 True인 행의 비율
-	    mask = df_bool[cols].all(axis=1)
-	    return mask.mean()
-		
-	# ============================================================
-	# 4) 10개 기본 평가지표 계산 (rule + split 데이터 기준)
-	# ============================================================	
-	def compute_10_metrics_for_rule(antecedents, consequents, df_split):
-	    """
-	    antecedents, consequents: frozenset
-	    df_split: 해당 split의 one-hot DataFrame
-	    """
-	    A = frozenset(antecedents)
-	    B = frozenset(consequents)
-	    AB = A.union(B)
+	    if method == "apriori":
+	        return apriori(data, min_support=min_support, use_colnames=True)
 	
-	    sA = support_of_itemset(df_split, A)
-	    sB = support_of_itemset(df_split, B)
-	    sAB = support_of_itemset(df_split, AB)
+	    elif method == "fpgrowth":
+	        return fpgrowth(data, min_support=min_support, use_colnames=True)
 	
-	    # [2.1] Support
-	    support = sAB
+	    elif method == "eclat":
+	        # Eclat은 수직 데이터(TID set) 기반 → 단일 항목 기준 구현
+	        itemsets = []
+	        n = len(data)
 	
-	    # [2.2] Confidence
-	    confidence = np.nan if sA == 0 else (sAB / sA)
+	        for col in data.columns:
+	            supp = data[col].sum() / n
+	            if supp >= min_support:
+	                itemsets.append({
+	                    "itemsets": frozenset([col]),
+	                    "support": supp
+	                })
 	
-	    # [2.3] Lift
-	    lift = np.nan if (sA == 0 or sB == 0) else (confidence / sB)
+	        return pd.DataFrame(itemsets)
+	
+	# ------------------------------------------------------------
+	# 3. 연관 규칙 평가지표 계산 함수 (18개)
+	# ------------------------------------------------------------
+	def compute_metrics(rule, n_transactions):
+	    supp_xy = rule["support"]
+	    supp_x = rule["antecedent support"]
+	    supp_y = rule["consequent support"]
+	    conf = rule["confidence"]
+	    lift = rule["lift"]
 	
 	    # [2.4] Leverage
-	    leverage = sAB - sA * sB
+	    leverage = supp_xy - supp_x * supp_y
 	
 	    # [2.5] Conviction
-	    # conviction = P(A)*P(not B) / P(A and not B) = (1 - sB) / (1 - conf)
-	    if np.isnan(confidence) or (1 - confidence) == 0:
-	        conviction = np.nan
-	    else:
-	        conviction = (1 - sB) / (1 - confidence + 1e-12)
+	    conviction = (1 - supp_y) / (1 - conf) if conf < 1 else np.inf
 	
-	    # [2.6] Jaccard
-	    denom_j = (sA + sB - sAB)
-	    jaccard = np.nan if denom_j == 0 else (sAB / denom_j)
+	    # [2.6] Jaccard Coefficient
+	    jaccard = supp_xy / (supp_x + supp_y - supp_xy)
 	
-	    # [2.7] Kulczynski
-	    kulc = np.nan
-	    if sA > 0 and sB > 0:
-	        kulc = 0.5 * ((sAB / sA) + (sAB / sB))
+	    # [2.7] Kulczynski Measure
+	    kulczynski = 0.5 * (conf + supp_xy / supp_y)
 	
 	    # [2.8] All-Confidence
-	    all_conf = np.nan if max(sA, sB) == 0 else (sAB / max(sA, sB))
+	    all_conf = supp_xy / max(supp_x, supp_y)
 	
-	    # [2.9] Chi-square (2x2 contingency table)
-	    n = len(df_split)
-	    n11 = int(round(sAB * n))                 # A and B
-	    n10 = int(round((sA - sAB) * n))          # A and not B
-	    n01 = int(round((sB - sAB) * n))          # not A and B
-	    n00 = max(0, n - n11 - n10 - n01)         # not A and not B
-	
-	    # chi2_contingency는 정수 카운트가 안정적
-	    try:
-	        chi2, _, _, _ = chi2_contingency([[n11, n10], [n01, n00]])
-	    except Exception:
-	        chi2 = np.nan
+	    # [2.9] Chi-Square Test
+	    chi_square = n_transactions * (supp_xy - supp_x * supp_y) ** 2 / (supp_x * supp_y)
 	
 	    # [2.10] Collective Strength
-	    # 관측된 일치(AB + notA notB) / 독립 가정 기대 일치(A*B + notA*notB)
-	    sNotA = 1 - sA
-	    sNotB = 1 - sB
-	    sNotA_NotB = 1 - sA - sB + sAB
+	    collective_strength = (
+	        supp_xy + (1 - supp_x - supp_y + supp_xy)
+	    ) / (
+	        (supp_x * supp_y) + (1 - supp_x) * (1 - supp_y)
+	    )
 	
-	    denom_cs = (sA * sB + sNotA * sNotB)
-	    cs = np.nan if denom_cs == 0 else ((sAB + sNotA_NotB) / denom_cs)
+	    # [2.11] Phi Coefficient
+	    phi = (supp_xy - supp_x * supp_y) / np.sqrt(
+	        supp_x * supp_y * (1 - supp_x) * (1 - supp_y)
+	    )
+	
+	    # [2.12] Piatetsky-Shapiro
+	    ps = supp_xy - supp_x * supp_y
+	
+	    # [2.13] Odds Ratio (0 division 예외 처리)
+	    denom = (supp_x - supp_xy) * (supp_y - supp_xy)
+	    if denom == 0:
+	        odds_ratio = np.inf
+	    else:
+	        odds_ratio = (supp_xy * (1 - supp_x - supp_y + supp_xy)) / denom
+	
+	    # [2.14] Yule's Q
+	    yule_q = 1.0 if odds_ratio == np.inf else (odds_ratio - 1) / (odds_ratio + 1)
+	
+	    # [2.15] Yule's Y
+	    yule_y = 1.0 if odds_ratio == np.inf else (
+	        (np.sqrt(odds_ratio) - 1) / (np.sqrt(odds_ratio) + 1)
+	    )
+	
+	    # [2.16] Information Gain
+	    info_gain = supp_xy * np.log2(lift)
+	
+	    # [2.17] Zhang's Metric
+	    zhang = (supp_xy - supp_x * supp_y) / max(
+	        supp_xy * (1 - supp_y),
+	        supp_y * (supp_x - supp_xy)
+	    )
+	
+	    # [2.18] Certainty Factor
+	    certainty_factor = (conf - supp_y) / (1 - supp_y)
 	
 	    return {
-	        "Support": support,
-	        "Confidence": confidence,
-	        "Lift": lift,
-	        "Leverage": leverage,
-	        "Conviction": conviction,
-	        "Jaccard": jaccard,
-	        "Kulczynski": kulc,
-	        "All-Confidence": all_conf,
-	        "Chi-Square": chi2,
-	        "Collective Strength": cs
+	        "[2.1] Support": supp_xy,
+	        "[2.2] Confidence": conf,
+	        "[2.3] Lift": lift,
+	        "[2.4] Leverage": leverage,
+	        "[2.5] Conviction": conviction,
+	        "[2.6] Jaccard": jaccard,
+	        "[2.7] Kulczynski": kulczynski,
+	        "[2.8] All-Confidence": all_conf,
+	        "[2.9] Chi-Square": chi_square,
+	        "[2.10] Collective Strength": collective_strength,
+	        "[2.11] Phi Coefficient": phi,
+	        "[2.12] Piatetsky-Shapiro": ps,
+	        "[2.13] Odds Ratio": odds_ratio,
+	        "[2.14] Yule's Q": yule_q,
+	        "[2.15] Yule's Y": yule_y,
+	        "[2.16] Information Gain": info_gain,
+	        "[2.17] Zhang's Metric": zhang,
+	        "[2.18] Certainty Factor": certainty_factor
 	    }
-		
-	# ============================================================
-	# 5) Eclat: 빈발 항목집합(Frequent Itemsets) 생성 (재귀/수직 포맷)
-	#    - 생성된 itemsets를 mlxtend의 association_rules에 넘길 수 있는 형태로 변환
-	# ============================================================	
-	def eclat_frequent_itemsets(df_bool, min_support=0.2, max_len=3):
-	    """
-	    Eclat(수직 포맷)로 빈발 itemset들을 탐색
-	    - df_bool: train one-hot
-	    - min_support: 최소 지지도
-	    - max_len: 탐색할 최대 itemset 크기 (iris는 아이템 수가 많지 않지만 과도 증가 방지)
-	    반환: DataFrame(columns=['support','itemsets'])
-	    """
-	    n = len(df_bool)
-	    items = list(df_bool.columns)
 	
-	    # 수직 표현: item -> {transaction ids}
-	    vertical = {it: set(df_bool.index[df_bool[it]]) for it in items}
+	# ------------------------------------------------------------
+	# 4. 모델별 학습 및 평가 결과 출력
+	# ------------------------------------------------------------
+	models = ["apriori", "fpgrowth", "eclat"]
 	
-	    freq = {}
+	for model in models:
+	    print(f"\n================ {model.upper()} =================")
 	
-	    # 1-itemset
-	    L1 = []
-	    for it, tids in vertical.items():
-	        supp = len(tids) / n
-	        if supp >= min_support:
-	            iset = frozenset([it])
-	            freq[iset] = supp
-	            L1.append((iset, tids))
+	    freq_items = mine_frequent_itemsets(df_te, method=model)
 	
-	    # 재귀(또는 반복)적으로 확장
-	    def extend(prefix_iset, prefix_tids, candidates, depth):
-	        if depth >= max_len:
-	            return
-	        # candidates: 리스트[(itemset, tids)]
-	        for i in range(len(candidates)):
-	            iset_i, tids_i = candidates[i]
-	            # 새로운 후보 = prefix ∪ iset_i (사실상 prefix 뒤에 item 하나 추가)
-	            new_iset = prefix_iset.union(iset_i)
-	            if len(new_iset) != len(prefix_iset) + 1:
-	                continue
-	            new_tids = prefix_tids.intersection(tids_i)
-	            supp = len(new_tids) / n
-	            if supp >= min_support:
-	                freq[new_iset] = supp
-	                # 이후 후보들로 더 확장
-	                extend(new_iset, new_tids, candidates[i+1:], depth + 1)
+	    # Eclat은 association_rules 미지원 → 평가 제외
+	    if model == "eclat":
+	        print("Eclat은 빈발 항목집합 탐색용 모델로, 규칙 평가는 Apriori/FP-Growth 결과를 사용")
+	        continue
 	
-	    # 2개 이상 확장
-	    for i in range(len(L1)):
-	        iset_i, tids_i = L1[i]
-	        extend(iset_i, tids_i, L1[i+1:], depth=1)
+	    rules = association_rules(freq_items, metric="confidence", min_threshold=0.6)
 	
-	    # DataFrame으로 변환 (mlxtend association_rules 호환)
-	    out = pd.DataFrame({
-	        "support": list(freq.values()),
-	        "itemsets": list(freq.keys())
-	    })
-	    return out.sort_values("support", ascending=False).reset_index(drop=True)
-	
-	
-	# ============================================================
-	# 6) 모델별(알고리즘별) 규칙 생성 + split별 평가 출력
-	# ============================================================	
-	def mine_rules_apriori(df_train, min_support=0.2, min_conf=0.6):
-	    freq = apriori(df_train, min_support=min_support, use_colnames=True)
-	    rules = association_rules(freq, metric="confidence", min_threshold=min_conf)
-	    return rules
-	
-	def mine_rules_fpgrowth(df_train, min_support=0.2, min_conf=0.6):
-	    freq = fpgrowth(df_train, min_support=min_support, use_colnames=True)
-	    rules = association_rules(freq, metric="confidence", min_threshold=min_conf)
-	    return rules
-	
-	def mine_rules_eclat(df_train, min_support=0.2, min_conf=0.6, max_len=3):
-	    freq = eclat_frequent_itemsets(df_train, min_support=min_support, max_len=max_len)
-	    rules = association_rules(freq, metric="confidence", min_threshold=min_conf)
-	    return rules	
-	
-	def evaluate_rules_on_splits(rules, df_train, df_test, df_val, top_n=5):
-	    """
-	    rules: mlxtend association_rules 결과(DataFrame)
-	    출력:
-	      1) 규칙 수
-	      2) train/test/val 각각에서 10개 지표의 평균(요약)
-	      3) train lift 기준 상위 규칙 top_n개의 split별 지표
-	    """
-	    if rules is None or len(rules) == 0:
-	        print("  -> 규칙이 생성되지 않았습니다. (threshold를 낮춰보세요)")
-	        return
-	
-	    # rule별 split 평가값을 모은 DataFrame 생성
-	    rows = []
-	    for _, r in rules.iterrows():
-	        A = r["antecedents"]
-	        B = r["consequents"]
-	
-	        m_tr = compute_10_metrics_for_rule(A, B, df_train)
-	        m_te = compute_10_metrics_for_rule(A, B, df_test)
-	        m_va = compute_10_metrics_for_rule(A, B, df_val)
-	
-	        row = {
-	            "Rule": f"{set(A)} -> {set(B)}",
-	            "train_Lift_for_sort": m_tr["Lift"]
-	        }
-	        # split별 metric 컬럼 확장
-	        for k, v in m_tr.items():
-	            row[f"train_{k}"] = v
-	        for k, v in m_te.items():
-	            row[f"test_{k}"] = v
-	        for k, v in m_va.items():
-	            row[f"val_{k}"] = v
-	
-	        rows.append(row)
-	
-	    res = pd.DataFrame(rows)
-	
-	    print(f"  -> 생성된 규칙 수: {len(res)}")
-	
-	    # ---- (1) 요약표(평균) 출력 ----
-	    metrics = ["Support","Confidence","Lift","Leverage","Conviction",
-	               "Jaccard","Kulczynski","All-Confidence","Chi-Square","Collective Strength"]
-	
-	    summary = pd.DataFrame({
-	        "train_mean": [res[f"train_{m}"].mean() for m in metrics],
-	        "test_mean":  [res[f"test_{m}"].mean()  for m in metrics],
-	        "val_mean":   [res[f"val_{m}"].mean()   for m in metrics],
-	    }, index=metrics)
-	
-	    print("\n  [요약: 지표 평균(train/test/val)]")
-	    print(summary.round(4))
-	
-	    # ---- (2) 상위 규칙 출력 (train lift 기준) ----
-	    res_sorted = res.sort_values("train_Lift_for_sort", ascending=False).head(top_n)
-	
-	    print(f"\n  [상위 규칙 TOP {top_n} (train Lift 기준)]")
-	    for i, row in enumerate(res_sorted.itertuples(index=False), 1):
-	        print(f"\n  #{i} {row.Rule}")
-	        for m in metrics:
-	            tr = getattr(row, f"train_{m}".replace("-", "_").replace(" ", "_"), None)
-	
-	        # itertuples에서 컬럼명이 자동 변환될 수 있어 안전하게 DataFrame로 접근
-	        for m in metrics:
-	            print(f"    {m:18s} | train={res_sorted.iloc[i-1][f'train_{m}']:.4f}"
-	                  f"  test={res_sorted.iloc[i-1][f'test_{m}']:.4f}"
-	                  f"  val={res_sorted.iloc[i-1][f'val_{m}']:.4f}")
-	
-	
-	# ============================================================
-	# 7) 실행 파라미터(필요 시 여기만 조정)
-	# ============================================================	
-	MIN_SUPPORT = 0.20
-	MIN_CONF    = 0.60
-	ECLAT_MAXLEN = 3     # iris 아이템 수가 12개(4특성*3bin)라 3이면 충분히 실습용	
-	
-	# ============================================================
-	# 8) 모델별 실행
-	# ============================================================	
-	print("\n==================== Apriori ====================")
-	rules_ap = mine_rules_apriori(df_train, min_support=MIN_SUPPORT, min_conf=MIN_CONF)
-	evaluate_rules_on_splits(rules_ap, df_train, df_test, df_val, top_n=5)
-	
-	print("\n==================== FP-Growth ==================")
-	rules_fp = mine_rules_fpgrowth(df_train, min_support=MIN_SUPPORT, min_conf=MIN_CONF)
-	evaluate_rules_on_splits(rules_fp, df_train, df_test, df_val, top_n=5)
-	
-	print("\n==================== Eclat =======================")
-	rules_ec = mine_rules_eclat(df_train, min_support=MIN_SUPPORT, min_conf=MIN_CONF, max_len=ECLAT_MAXLEN)
-	evaluate_rules_on_splits(rules_ec, df_train, df_test, df_val, top_n=5)
+	    # 상위 3개 규칙 출력
+	    for _, rule in rules.head(3).iterrows():
+	        metrics = compute_metrics(rule, len(df_te))
+	        for k, v in metrics.items():
+	            print(f"{k}: {v:.4f}")
+	        print("-" * 50)
 
-	==================== Apriori ====================
-	  -> 생성된 규칙 수: 46
-	
-	  [요약: 지표 평균(train/test/val)]
-	                     train_mean  test_mean  val_mean
-	Support                  0.2431     0.2826    0.2406
-	Confidence               0.7902     0.7862    0.8223
-	Lift                     2.5301     2.4841    3.2471
-	Leverage                 0.1446     0.1387    0.1376
-	Conviction               3.5333     2.1034    1.7781
-	Jaccard                  0.6445     0.6476    0.6683
-	Kulczynski               0.7848     0.7790    0.8192
-	All-Confidence           0.7251     0.6993    0.6911
-	Chi-Square              47.4829    11.4289    5.0953
-	Collective Strength      1.5078     1.5102    1.4857
-	
-	  [상위 규칙 TOP 5 (train Lift 기준)]
-	
-	  #1 {'petal width (cm)_bin0'} -> {'petal length (cm)_bin0', 'sepal width (cm)_bin2'}
-	    Support            | train=0.2190  test=0.4000  val=0.2000
-	    Confidence         | train=0.7419  test=0.7500  val=1.0000
-	    Lift               | train=3.3871  test=1.8750  val=5.0000
-	    Leverage           | train=0.1544  test=0.1867  val=0.1600
-	    Conviction         | train=3.0262  test=2.4000  val=nan
-	    Jaccard            | train=0.7419  test=0.7500  val=1.0000
-	    Kulczynski         | train=0.8710  test=0.8750  val=1.0000
-	    All-Confidence     | train=0.7419  test=0.7500  val=1.0000
-	    Chi-Square         | train=66.0327  test=14.5145  val=9.4010
-	    Collective Strength | train=1.5020  test=1.7568  val=1.4706
-	
-	  #2 {'petal length (cm)_bin0', 'sepal width (cm)_bin2'} -> {'petal width (cm)_bin0'}
-	    Support            | train=0.2190  test=0.4000  val=0.2000
-	    Confidence         | train=1.0000  test=1.0000  val=1.0000
-	    Lift               | train=3.3871  test=1.8750  val=5.0000
-	    Leverage           | train=0.1544  test=0.1867  val=0.1600
-	    Conviction         | train=nan  test=nan  val=nan
-	    Jaccard            | train=0.7419  test=0.7500  val=1.0000
-	    Kulczynski         | train=0.8710  test=0.8750  val=1.0000
-	    All-Confidence     | train=0.7419  test=0.7500  val=1.0000
-	    Chi-Square         | train=66.0327  test=14.5145  val=9.4010
-	    Collective Strength | train=1.5020  test=1.7568  val=1.4706
-	
-	  #3 {'petal width (cm)_bin0', 'sepal length (cm)_bin0'} -> {'petal length (cm)_bin0'}
-	    Support            | train=0.2571  test=0.4000  val=0.0667
-	    Confidence         | train=1.0000  test=1.0000  val=1.0000
-	    Lift               | train=3.0882  test=1.8750  val=5.0000
-	    Leverage           | train=0.1739  test=0.1867  val=0.0533
-	    Conviction         | train=nan  test=nan  val=nan
-	    Jaccard            | train=0.7941  test=0.7500  val=0.3333
-	    Kulczynski         | train=0.8971  test=0.8750  val=0.6667
-	    All-Confidence     | train=0.7941  test=0.7500  val=0.3333
-	    Chi-Square         | train=71.7990  test=14.5145  val=0.6027
-	    Collective Strength | train=1.5939  test=1.7568  val=1.1404
-	
-	  #4 {'petal length (cm)_bin0'} -> {'petal width (cm)_bin0', 'sepal length (cm)_bin0'}
-	    Support            | train=0.2571  test=0.4000  val=0.0667
-	    Confidence         | train=0.7941  test=0.7500  val=0.3333
-	    Lift               | train=3.0882  test=1.8750  val=5.0000
-	    Leverage           | train=0.1739  test=0.1867  val=0.0533
-	    Conviction         | train=3.6082  test=2.4000  val=1.4000
-	    Jaccard            | train=0.7941  test=0.7500  val=0.3333
-	    Kulczynski         | train=0.8971  test=0.8750  val=0.6667
-	    All-Confidence     | train=0.7941  test=0.7500  val=0.3333
-	    Chi-Square         | train=71.7990  test=14.5145  val=0.6027
-	    Collective Strength | train=1.5939  test=1.7568  val=1.1404
-	
-	  #5 {'petal width (cm)_bin0'} -> {'petal length (cm)_bin0'}
-	    Support            | train=0.2952  test=0.5333  val=0.2000
-	    Confidence         | train=1.0000  test=1.0000  val=1.0000
-	    Lift               | train=3.0882  test=1.8750  val=5.0000
-	    Leverage           | train=0.1996  test=0.2489  val=0.1600
-	    Conviction         | train=nan  test=nan  val=nan
-	    Jaccard            | train=0.9118  test=1.0000  val=1.0000
-	    Kulczynski         | train=0.9559  test=1.0000  val=1.0000
-	    All-Confidence     | train=0.9118  test=1.0000  val=1.0000
-	    Chi-Square         | train=87.5244  test=26.1167  val=9.4010
-	    Collective Strength | train=1.6978  test=1.9912  val=1.4706
-	
-	==================== FP-Growth ==================
-	  -> 생성된 규칙 수: 46
-	
-	  [요약: 지표 평균(train/test/val)]
-	                     train_mean  test_mean  val_mean
-	Support                  0.2431     0.2826    0.2406
-	Confidence               0.7902     0.7862    0.8223
-	Lift                     2.5301     2.4841    3.2471
-	Leverage                 0.1446     0.1387    0.1376
-	Conviction               3.5333     2.1034    1.7781
-	Jaccard                  0.6445     0.6476    0.6683
-	Kulczynski               0.7848     0.7790    0.8192
-	All-Confidence           0.7251     0.6993    0.6911
-	Chi-Square              47.4829    11.4289    5.0953
-	Collective Strength      1.5078     1.5102    1.4857
-	
-	  [상위 규칙 TOP 5 (train Lift 기준)]
-	
-	  #1 {'petal length (cm)_bin0', 'sepal width (cm)_bin2'} -> {'petal width (cm)_bin0'}
-	    Support            | train=0.2190  test=0.4000  val=0.2000
-	    Confidence         | train=1.0000  test=1.0000  val=1.0000
-	    Lift               | train=3.3871  test=1.8750  val=5.0000
-	    Leverage           | train=0.1544  test=0.1867  val=0.1600
-	    Conviction         | train=nan  test=nan  val=nan
-	    Jaccard            | train=0.7419  test=0.7500  val=1.0000
-	    Kulczynski         | train=0.8710  test=0.8750  val=1.0000
-	    All-Confidence     | train=0.7419  test=0.7500  val=1.0000
-	    Chi-Square         | train=66.0327  test=14.5145  val=9.4010
-	    Collective Strength | train=1.5020  test=1.7568  val=1.4706
-	
-	  #2 {'petal width (cm)_bin0'} -> {'petal length (cm)_bin0', 'sepal width (cm)_bin2'}
-	    Support            | train=0.2190  test=0.4000  val=0.2000
-	    Confidence         | train=0.7419  test=0.7500  val=1.0000
-	    Lift               | train=3.3871  test=1.8750  val=5.0000
-	    Leverage           | train=0.1544  test=0.1867  val=0.1600
-	    Conviction         | train=3.0262  test=2.4000  val=nan
-	    Jaccard            | train=0.7419  test=0.7500  val=1.0000
-	    Kulczynski         | train=0.8710  test=0.8750  val=1.0000
-	    All-Confidence     | train=0.7419  test=0.7500  val=1.0000
-	    Chi-Square         | train=66.0327  test=14.5145  val=9.4010
-	    Collective Strength | train=1.5020  test=1.7568  val=1.4706
-	
-	  #3 {'petal width (cm)_bin0'} -> {'petal length (cm)_bin0'}
-	    Support            | train=0.2952  test=0.5333  val=0.2000
-	    Confidence         | train=1.0000  test=1.0000  val=1.0000
-	    Lift               | train=3.0882  test=1.8750  val=5.0000
-	    Leverage           | train=0.1996  test=0.2489  val=0.1600
-	    Conviction         | train=nan  test=nan  val=nan
-	    Jaccard            | train=0.9118  test=1.0000  val=1.0000
-	    Kulczynski         | train=0.9559  test=1.0000  val=1.0000
-	    All-Confidence     | train=0.9118  test=1.0000  val=1.0000
-	    Chi-Square         | train=87.5244  test=26.1167  val=9.4010
-	    Collective Strength | train=1.6978  test=1.9912  val=1.4706
-	
-	  #4 {'petal length (cm)_bin0'} -> {'petal width (cm)_bin0'}
-	    Support            | train=0.2952  test=0.5333  val=0.2000
-	    Confidence         | train=0.9118  test=1.0000  val=1.0000
-	    Lift               | train=3.0882  test=1.8750  val=5.0000
-	    Leverage           | train=0.1996  test=0.2489  val=0.1600
-	    Conviction         | train=7.9873  test=nan  val=nan
-	    Jaccard            | train=0.9118  test=1.0000  val=1.0000
-	    Kulczynski         | train=0.9559  test=1.0000  val=1.0000
-	    All-Confidence     | train=0.9118  test=1.0000  val=1.0000
-	    Chi-Square         | train=87.5244  test=26.1167  val=9.4010
-	    Collective Strength | train=1.6978  test=1.9912  val=1.4706
-	
-	  #5 {'petal width (cm)_bin0', 'sepal length (cm)_bin0'} -> {'petal length (cm)_bin0'}
-	    Support            | train=0.2571  test=0.4000  val=0.0667
-	    Confidence         | train=1.0000  test=1.0000  val=1.0000
-	    Lift               | train=3.0882  test=1.8750  val=5.0000
-	    Leverage           | train=0.1739  test=0.1867  val=0.0533
-	    Conviction         | train=nan  test=nan  val=nan
-	    Jaccard            | train=0.7941  test=0.7500  val=0.3333
-	    Kulczynski         | train=0.8971  test=0.8750  val=0.6667
-	    All-Confidence     | train=0.7941  test=0.7500  val=0.3333
-	    Chi-Square         | train=71.7990  test=14.5145  val=0.6027
-	    Collective Strength | train=1.5939  test=1.7568  val=1.1404
-	
-	==================== Eclat =======================
-	  -> 생성된 규칙 수: 46
-	
-	  [요약: 지표 평균(train/test/val)]
-	                     train_mean  test_mean  val_mean
-	Support                  0.2431     0.2826    0.2406
-	Confidence               0.7902     0.7862    0.8223
-	Lift                     2.5301     2.4841    3.2471
-	Leverage                 0.1446     0.1387    0.1376
-	Conviction               3.5333     2.1034    1.7781
-	Jaccard                  0.6445     0.6476    0.6683
-	Kulczynski               0.7848     0.7790    0.8192
-	All-Confidence           0.7251     0.6993    0.6911
-	Chi-Square              47.4829    11.4289    5.0953
-	Collective Strength      1.5078     1.5102    1.4857
-	
-	  [상위 규칙 TOP 5 (train Lift 기준)]
-	
-	  #1 {'petal width (cm)_bin0'} -> {'petal length (cm)_bin0', 'sepal width (cm)_bin2'}
-	    Support            | train=0.2190  test=0.4000  val=0.2000
-	    Confidence         | train=0.7419  test=0.7500  val=1.0000
-	    Lift               | train=3.3871  test=1.8750  val=5.0000
-	    Leverage           | train=0.1544  test=0.1867  val=0.1600
-	    Conviction         | train=3.0262  test=2.4000  val=nan
-	    Jaccard            | train=0.7419  test=0.7500  val=1.0000
-	    Kulczynski         | train=0.8710  test=0.8750  val=1.0000
-	    All-Confidence     | train=0.7419  test=0.7500  val=1.0000
-	    Chi-Square         | train=66.0327  test=14.5145  val=9.4010
-	    Collective Strength | train=1.5020  test=1.7568  val=1.4706
-	
-	  #2 {'petal length (cm)_bin0', 'sepal width (cm)_bin2'} -> {'petal width (cm)_bin0'}
-	    Support            | train=0.2190  test=0.4000  val=0.2000
-	    Confidence         | train=1.0000  test=1.0000  val=1.0000
-	    Lift               | train=3.3871  test=1.8750  val=5.0000
-	    Leverage           | train=0.1544  test=0.1867  val=0.1600
-	    Conviction         | train=nan  test=nan  val=nan
-	    Jaccard            | train=0.7419  test=0.7500  val=1.0000
-	    Kulczynski         | train=0.8710  test=0.8750  val=1.0000
-	    All-Confidence     | train=0.7419  test=0.7500  val=1.0000
-	    Chi-Square         | train=66.0327  test=14.5145  val=9.4010
-	    Collective Strength | train=1.5020  test=1.7568  val=1.4706
-	
-	  #3 {'petal width (cm)_bin0', 'sepal length (cm)_bin0'} -> {'petal length (cm)_bin0'}
-	    Support            | train=0.2571  test=0.4000  val=0.0667
-	    Confidence         | train=1.0000  test=1.0000  val=1.0000
-	    Lift               | train=3.0882  test=1.8750  val=5.0000
-	    Leverage           | train=0.1739  test=0.1867  val=0.0533
-	    Conviction         | train=nan  test=nan  val=nan
-	    Jaccard            | train=0.7941  test=0.7500  val=0.3333
-	    Kulczynski         | train=0.8971  test=0.8750  val=0.6667
-	    All-Confidence     | train=0.7941  test=0.7500  val=0.3333
-	    Chi-Square         | train=71.7990  test=14.5145  val=0.6027
-	    Collective Strength | train=1.5939  test=1.7568  val=1.1404
-	
-	  #4 {'petal length (cm)_bin0'} -> {'petal width (cm)_bin0', 'sepal length (cm)_bin0'}
-	    Support            | train=0.2571  test=0.4000  val=0.0667
-	    Confidence         | train=0.7941  test=0.7500  val=0.3333
-	    Lift               | train=3.0882  test=1.8750  val=5.0000
-	    Leverage           | train=0.1739  test=0.1867  val=0.0533
-	    Conviction         | train=3.6082  test=2.4000  val=1.4000
-	    Jaccard            | train=0.7941  test=0.7500  val=0.3333
-	    Kulczynski         | train=0.8971  test=0.8750  val=0.6667
-	    All-Confidence     | train=0.7941  test=0.7500  val=0.3333
-	    Chi-Square         | train=71.7990  test=14.5145  val=0.6027
-	    Collective Strength | train=1.5939  test=1.7568  val=1.1404
-	
-	  #5 {'petal width (cm)_bin0'} -> {'petal length (cm)_bin0'}
-	    Support            | train=0.2952  test=0.5333  val=0.2000
-	    Confidence         | train=1.0000  test=1.0000  val=1.0000
-	    Lift               | train=3.0882  test=1.8750  val=5.0000
-	    Leverage           | train=0.1996  test=0.2489  val=0.1600
-	    Conviction         | train=nan  test=nan  val=nan
-	    Jaccard            | train=0.9118  test=1.0000  val=1.0000
-	    Kulczynski         | train=0.9559  test=1.0000  val=1.0000
-	    All-Confidence     | train=0.9118  test=1.0000  val=1.0000
-	    Chi-Square         | train=87.5244  test=26.1167  val=9.4010
-	    Collective Strength | train=1.6978  test=1.9912  val=1.4706	
+
 
 ## 3. 차원 축소 (Dimensionality Reduction)<br>
 고차원 데이터의 핵심 정보(분산, 구조 등)를 최대한 보존하면서 시각화나 연산 효율을 위해 저차원으로 압축하는 기법.<br>
