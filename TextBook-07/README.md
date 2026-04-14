@@ -870,21 +870,21 @@
 
 ## 4. 이상치 탐지 (Anomaly/Outlier Detection)<br>
 정상적인 데이터의 분포나 패턴에서 크게 벗어난 희귀한 샘플을 식별하는 기법.<br>
-**Isolation Forest:** 데이터를 무작위로 분할하는 의사결정 나무(Decision Tree)를 여러 개 만들어, 정상 데이터보다 훨씬 적은 횟수의 분할만으로 고립(Isolation)되는 데이터를 이상치로 판별. 빠르고 직관적.<br>
-**One-Class SVM:** 서포트 벡터 머신(SVM)을 변형한 모델로, 정상 데이터들이 모여 있는 영역을 감싸는 경계(Boundary)를 학습한 뒤 이 경계 밖에 있는 데이터를 이상치로 분류.<br>
-**LOF (Local Outlier Factor):** 특정 데이터가 주변 이웃 데이터들에 비해 밀도가 얼마나 낮은지(국소적 척도)를 계산하여 이상치를 탐지. 데이터의 군집 밀도가 불균형한 상황에서 유용.<br>
+**① Isolation Forest:** 데이터를 무작위로 분할하는 의사결정 나무(Decision Tree)를 여러 개 만들어, 정상 데이터보다 훨씬 적은 횟수의 분할만으로 고립(Isolation)되는 데이터를 이상치로 판별. 빠르고 직관적.<br>
+**② One-Class SVM:** 서포트 벡터 머신(SVM)을 변형한 모델로, 정상 데이터들이 모여 있는 영역을 감싸는 경계(Boundary)를 학습한 뒤 이 경계 밖에 있는 데이터를 이상치로 분류.<br>
+**③ LOF (Local Outlier Factor):** 특정 데이터가 주변 이웃 데이터들에 비해 밀도가 얼마나 낮은지(국소적 척도)를 계산하여 이상치를 탐지. 데이터의 군집 밀도가 불균형한 상황에서 유용.<br>
 <br>
 ## 5. 신경망 : 생성모델/표현학습 (Generative Models & Representation Learning)<br>
 데이터의 숨겨진 특징(Latent Representation)을 학습하여 압축하거나, 학습된 분포를 바탕으로 새로운 데이터를 생성하는 딥러닝 기반 기법.<br>
-**Autoencoder (오토인코더):** 입력 데이터를 압축(Encoder)했다가 다시 원본과 똑같이 복원(Decoder)하도록 학습하는 신경망. 이 과정에서 병목(Bottleneck) 구간에 데이터의 핵심 표현이 저장되며, 차원 축소 및 노이즈 제거에 활용.<br>
-**VAE (Variational Autoencoder):** 오토인코더의 변형으로, 잠재 공간(Latent Space)을 고정된 값이 아닌 '확률 분포'로 학습. 연속적이고 의미 있는 특성 공간을 만들어 새로운 데이터를 생성하는 데 탁월.<br>
-**GAN (Generative Adversarial Network):** 가짜 데이터를 생성하는 생성자(Generator)와 진짜/가짜를 감별하는 판별자(Discriminator)가 경쟁하며 학습하는 모델로, 매우 정교하고 사실적인 이미지나 음성 데이터를 생성.<br>
+**① Autoencoder (오토인코더):** 입력 데이터를 압축(Encoder)했다가 다시 원본과 똑같이 복원(Decoder)하도록 학습하는 신경망. 이 과정에서 병목(Bottleneck) 구간에 데이터의 핵심 표현이 저장되며, 차원 축소 및 노이즈 제거에 활용.<br>
+**② VAE (Variational Autoencoder):** 오토인코더의 변형으로, 잠재 공간(Latent Space)을 고정된 값이 아닌 '확률 분포'로 학습. 연속적이고 의미 있는 특성 공간을 만들어 새로운 데이터를 생성하는 데 탁월.<br>
+**③ GAN (Generative Adversarial Network):** 가짜 데이터를 생성하는 생성자(Generator)와 진짜/가짜를 감별하는 판별자(Discriminator)가 경쟁하며 학습하는 모델로, 매우 정교하고 사실적인 이미지나 음성 데이터를 생성.<br>
 <br>
 ## 6. 통계 : 밀도/공분산 추정 (Density/Covariance Estimation)<br>
 주어진 데이터가 어떤 확률 분포에서 추출되었는지 통계적으로 추정하거나 변수 간의 관계 구조를 파악하는 기법.<br>
-**GMM (Gaussian Mixture Model):** 복잡한 데이터 분포를 여러 개의 정규 분포(Gaussian)가 혼합된 형태로 가정하고, EM(Expectation-Maximization) 알고리즘을 통해 각 분포의 매개변수를 추정. 확률 기반의 유연한 군집화.<br>
-**KDE (Kernel Density Estimation):** 개별 데이터 포인트에 커널 함수(주로 가우시안)를 적용한 뒤 이를 모두 더해 부드러운 확률 밀도 함수를 추정하는 비모수적(Non-parametric) 방식. 데이터의 실제 분포 형태를 부드러운 곡선으로 파악.<br>
-**Graphical Lasso:** 다변량 정규 분포를 가정하고, 변수들 간의 정밀도 행렬(Precision Matrix, 공분산 행렬의 역행렬)을 추정할 때 L1 정규화(Lasso)를 적용하여 조건부 독립 구조(희소한 그래프 구조)를 찾아내는 기법.<br>
+**① GMM (Gaussian Mixture Model):** 복잡한 데이터 분포를 여러 개의 정규 분포(Gaussian)가 혼합된 형태로 가정하고, EM(Expectation-Maximization) 알고리즘을 통해 각 분포의 매개변수를 추정. 확률 기반의 유연한 군집화.<br>
+**② KDE (Kernel Density Estimation):** 개별 데이터 포인트에 커널 함수(주로 가우시안)를 적용한 뒤 이를 모두 더해 부드러운 확률 밀도 함수를 추정하는 비모수적(Non-parametric) 방식. 데이터의 실제 분포 형태를 부드러운 곡선으로 파악.<br>
+**③ Graphical Lasso:** 다변량 정규 분포를 가정하고, 변수들 간의 정밀도 행렬(Precision Matrix, 공분산 행렬의 역행렬)을 추정할 때 L1 정규화(Lasso)를 적용하여 조건부 독립 구조(희소한 그래프 구조)를 찾아내는 기법.<br>
 <br>
 
 ---
