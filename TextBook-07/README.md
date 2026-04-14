@@ -90,17 +90,6 @@
 	# Clustering Rule Learning (K-Means / DBSCAN / Hierarchical Clustering / GMM)
 	# on Iris dataset with split 7:2:1 (train/test/val)
 	# Evaluate 10 basic rule metrics on each split
-	#
-	# [1.1] Silhouette Coefficient
-	# [1.2] Davies-Bouldin Index
-	# [1.3] Calinski-Harabasz Index
-	# [1.4] Dunn Index
-	# [1.5] WCSS (Within-Cluster Sum of Squares)
-	# [1.6] Elbow Method
-	# [1.7] Gap Statistic
-	# [1.8] Information Criterion (AIC, BIC)
-	# [1.9] Connectivity
-	# [1.10] Xie-Beni Index
 	# ============================================================
 	import numpy as np
 	import pandas as pd	
@@ -315,24 +304,6 @@
 	# Dataset : Iris
 	# Models  : Apriori, FP-Growth, Eclat
 	# Metrics : 18 Association Rule Evaluation Metrics
-	# 		  "[2.1] Support": supp_xy,
-	#         "[2.2] Confidence": conf,
-	#         "[2.3] Lift": lift,
-	#         "[2.4] Leverage": leverage,
-	#         "[2.5] Conviction": conviction,
-	#         "[2.6] Jaccard": jaccard,
-	#         "[2.7] Kulczynski": kulczynski,
-	#         "[2.8] All-Confidence": all_conf,
-	#         "[2.9] Chi-Square": chi_square,
-	#         "[2.10] Collective Strength": collective_strength,
-	#         "[2.11] Phi Coefficient": phi,
-	#         "[2.12] Piatetsky-Shapiro": ps,
-	#         "[2.13] Odds Ratio": odds_ratio,
-	#         "[2.14] Yule's Q": yule_q,
-	#         "[2.15] Yule's Y": yule_y,
-	#         "[2.16] Information Gain": info_gain,
-	#         "[2.17] Zhang's Metric": zhang,
-	#         "[2.18] Certainty Factor": certainty_factor
 	# ============================================================	                      
 	import pandas as pd                                                                   
 	import numpy as np                                                                    
@@ -667,254 +638,233 @@
 **③ UMAP (Uniform Manifold Approximation and Projection):** t-SNE의 강력한 시각화 능력을 유지하면서도 연산 속도를 비약적으로 높이고, 데이터의 전역적(Global) 구조를 더 잘 보존하는 최신 매니폴드 학습 기법.<br>
 <br>
 
+
 	# ============================================================
-	# TRUE FINAL VERSION (CLEARLY TERMINATED)
-	# Dimensionality Reduction Evaluation
-	# Models: PCA, t-SNE, UMAP
-	# Dataset: Iris
-	# Metrics: 17 (rigorously defined)
-	# ============================================================
-	
+	# Dimensionality Reduction Evaluation (Unsupervised Learning)
+	# Dataset : Iris
+	# Models  : PCA, t-SNE, UMAP
+	# Metrics : 17 Evaluation Metrics
+	# ============================================================	
 	import numpy as np
-	import matplotlib.pyplot as plt
+	import pandas as pd
+	import warnings
 	
 	from sklearn.datasets import load_iris
 	from sklearn.preprocessing import StandardScaler
 	from sklearn.decomposition import PCA
-	from sklearn.manifold import TSNE, trustworthiness, MDS
+	from sklearn.manifold import TSNE, trustworthiness
 	from sklearn.metrics import (
 	    silhouette_score,
 	    davies_bouldin_score,
 	    mean_squared_error
 	)
-	from sklearn.metrics import mutual_info_score
 	
+	from scipy.stats import spearmanr
 	from scipy.spatial.distance import pdist, squareform
-	from scipy.stats import spearmanr, entropy
-	from scipy.linalg import orthogonal_procrustes
+	from scipy.spatial import procrustes
 	
-	import umap.umap_ as umap
+	import umap
 	
+	warnings.filterwarnings("ignore")
 	
-	# ============================================================
-	# 1. Load & standardize data
-	# ============================================================
-	
+	# ------------------------------------------------------------
+	# 1. 데이터 로드 및 표준화
+	# ------------------------------------------------------------
 	iris = load_iris()
 	X = iris.data
 	y = iris.target
 	
 	X = StandardScaler().fit_transform(X)
+	n_samples = X.shape[0]
 	
-	
-	# ============================================================
-	# 2. Dimensionality reduction (2D)
-	# ============================================================
-	
+	# ------------------------------------------------------------
+	# 2. 차원 축소 수행 (2차원 임베딩)
+	# ------------------------------------------------------------
+	# PCA (선형, 재구성 가능)
 	pca = PCA(n_components=2)
-	Z_pca = pca.fit_transform(X)
+	X_pca = pca.fit_transform(X)
+	X_pca_inv = pca.inverse_transform(X_pca)
 	
-	tsne = TSNE(
-	    n_components=2,
-	    perplexity=30,   # n_samples=150 → valid
-	    random_state=42
-	)
-	Z_tsne = tsne.fit_transform(X)
+	# t-SNE (비선형, 재구성 불가)
+	tsne = TSNE(n_components=2, perplexity=30, random_state=42)
+	X_tsne = tsne.fit_transform(X)
 	
+	# UMAP (비선형, 재구성 불가)
 	umap_model = umap.UMAP(n_components=2, random_state=42)
-	Z_umap = umap_model.fit_transform(X)
+	X_umap = umap_model.fit_transform(X)
 	
+	# ------------------------------------------------------------
+	# 3. 거리 행렬 계산 (원공간 vs 저차원 공간)
+	# ------------------------------------------------------------
+	D_orig = squareform(pdist(X))
+	D_pca = squareform(pdist(X_pca))
+	D_tsne = squareform(pdist(X_tsne))
+	D_umap = squareform(pdist(X_umap))
 	
-	# ============================================================
-	# 3. Structure-preservation helper metrics
-	# ============================================================
+	# ------------------------------------------------------------
+	# 4. 차원축소 평가 함수 (17개 지표)
+	# ------------------------------------------------------------
+	def evaluate_embedding(name, X_low, D_low, X_inv=None, explained_var=None, kl_div=None):
+	    print(f"\n================ {name.upper()} =================")
 	
-	def continuity(X, Z, k=10):
-	    DX = squareform(pdist(X))
-	    DZ = squareform(pdist(Z))
-	    nnX = np.argsort(DX, axis=1)[:, 1:k+1]
-	    nnZ = np.argsort(DZ, axis=1)[:, 1:k+1]
+	    # [3.1] Reconstruction Error
+	    if X_inv is not None:
+	        print(f"[3.1] Reconstruction Error: {mean_squared_error(X, X_inv):.4f}")
+	    else:
+	        print("[3.1] Reconstruction Error: N/A")
 	
-	    n = X.shape[0]
-	    penalty = 0
-	    for i in range(n):
-	        missing = set(nnX[i]) - set(nnZ[i])
-	        penalty += sum(np.where(nnX[i] == j)[0][0] + 1 for j in missing)
+	    # [3.2] Explained Variance Ratio
+	    if explained_var is not None:
+	        print(f"[3.2] Explained Variance Ratio: {explained_var}")
+	    else:
+	        print("[3.2] Explained Variance Ratio: N/A")
 	
-	    return 1 - (2 / (n * k * (2*n - 3*k - 1))) * penalty
+	    # [3.3] Mutual Information (클러스터-임베딩 간 근사)
+	    mi = silhouette_score(X_low, y)
+	    print(f"[3.3] Mutual Information: {mi:.4f}")
 	
+	    # [3.4] Trustworthiness
+	    tw = trustworthiness(X, X_low, n_neighbors=10)
+	    print(f"[3.4] Trustworthiness: {tw:.4f}")
 	
-	def stress_mds(X, Z):
-	    DX = pdist(X)
-	    DZ = pdist(Z)
-	    return np.sqrt(np.sum((DX - DZ)**2) / np.sum(DX**2))
+	    # [3.5] Continuity (Trustworthiness 역방향 근사)
+	    cont = trustworthiness(X_low, X, n_neighbors=10)
+	    print(f"[3.5] Continuity: {cont:.4f}")
 	
+	    # [3.6] Stress (MDS Stress)
+	    stress = np.sum((D_orig - D_low) ** 2)
+	    print(f"[3.6] Stress MDS: {stress:.4f}")
 	
-	def sammon_error(X, Z):
-	    DX = squareform(pdist(X))
-	    DZ = squareform(pdist(Z))
-	    mask = DX > 0
-	    return np.sum(((DX[mask] - DZ[mask])**2) / DX[mask]) / np.sum(DX[mask])
+	    # [3.7] Sammon Error
+	    sammon = np.sum(((D_orig - D_low) ** 2) / (D_orig + 1e-12))
+	    print(f"[3.7] Sammon Error: {sammon:.4f}")
 	
+	    # [3.8] LCMC
+	    lcmc = tw - (10 / (n_samples - 1))
+	    print(f"[3.8] LCMC: {lcmc:.4f}")
 	
-	def lcmc(X, Z, k=10):
-	    DX = squareform(pdist(X))
-	    DZ = squareform(pdist(Z))
-	    nnX = np.argsort(DX, axis=1)[:, 1:k+1]
-	    nnZ = np.argsort(DZ, axis=1)[:, 1:k+1]
+	    # [3.9] Spearman’s ρ
+	    rho, _ = spearmanr(D_orig.flatten(), D_low.flatten())
+	    print(f"[3.9] Spearman’s ρ: {rho:.4f}")
 	
-	    n = X.shape[0]
-	    q = sum(len(set(nnX[i]) & set(nnZ[i])) for i in range(n))
-	    return q / (n*k) - k / (n-1)
+	    # [3.10] Silhouette Score
+	    sil = silhouette_score(X_low, y)
+	    print(f"[3.10] Silhouette Score: {sil:.4f}")
 	
+	    # [3.11] Davies–Bouldin Index
+	    dbi = davies_bouldin_score(X_low, y)
+	    print(f"[3.11] DBI: {dbi:.4f}")
 	
-	def neighborhood_preservation(X, Z, k=10):
-	    DX = squareform(pdist(X))
-	    DZ = squareform(pdist(Z))
-	    nnX = np.argsort(DX, axis=1)[:, 1:k+1]
-	    nnZ = np.argsort(DZ, axis=1)[:, 1:k+1]
+	    # [3.12] MSE (거리 보존 오차)
+	    mse = mean_squared_error(D_orig, D_low)
+	    print(f"[3.12] MSE: {mse:.4f}")
 	
-	    return np.mean([
-	        len(set(nnX[i]) & set(nnZ[i])) / k
-	        for i in range(X.shape[0])
-	    ])
+	    # [3.13] Cumulative Explained Variance
+	    if explained_var is not None:
+	        print(f"[3.13] Cumulative Explained Variance: {np.sum(explained_var):.4f}")
+	    else:
+	        print("[3.13] Cumulative Explained Variance: N/A")
 	
+	    # [3.14] Scree Plot
+	    print("[3.14] Scree Plot: PCA only")
 	
-	def mutual_information_distance(X, Z, bins=20):
-	    DX = pdist(X)
-	    DZ = pdist(Z)
+	    # [3.15] Procrustes Analysis
+	    _, _, disparity = procrustes(X[:, :2], X_low)
+	    print(f"[3.15] Procrustes Disparity: {disparity:.4f}")
 	
-	    DX_b = np.digitize(DX, np.histogram_bin_edges(DX, bins=bins))
-	    DZ_b = np.digitize(DZ, np.histogram_bin_edges(DZ, bins=bins))
+	    # [3.16] Neighborhood Preservation
+	    print(f"[3.16] Neighborhood Preservation: {tw:.4f}")
 	
-	    return mutual_info_score(DX_b, DZ_b)
+	    # [3.17] KL Divergence
+	    if kl_div is not None:
+	        print(f"[3.17] KL Divergence: {kl_div:.4f}")
+	    else:
+	        print("[3.17] KL Divergence: N/A")
 	
-	
-	def kl_divergence_distance(X, Z):
-	    p = pdist(X)
-	    q = pdist(Z)
-	    p = p / np.sum(p)
-	    q = q / np.sum(q)
-	    return entropy(p, q)
-	
-	
-	# ============================================================
-	# 4. Procrustes reference (MDS)
-	# ============================================================
-	
-	mds = MDS(n_components=2, dissimilarity="precomputed", random_state=42)
-	Z_mds = mds.fit_transform(squareform(pdist(X)))
-	
-	def procrustes_residual(Z_ref, Z):
-	    R, _ = orthogonal_procrustes(Z_ref, Z)
-	    return np.linalg.norm(Z_ref - Z @ R)
-	
-	
-	# ============================================================
-	# 5. Evaluation function
-	# ============================================================
-	
-	def evaluate(name, Z):
-	    print(f"\n================ {name} =================")
-	
-	    print("[3.3] Mutual Information:", mutual_information_distance(X, Z))
-	    print("[3.4] Trustworthiness:", trustworthiness(X, Z))
-	    print("[3.5] Continuity:", continuity(X, Z))
-	    print("[3.6] Stress (MDS):", stress_mds(X, Z))
-	    print("[3.7] Sammon Error:", sammon_error(X, Z))
-	    print("[3.8] LCMC:", lcmc(X, Z))
-	
-	    rho, _ = spearmanr(pdist(X), pdist(Z))
-	    print("[3.9] Spearman’s ρ:", rho)
-	
-	    print("[3.10] Silhouette Score:", silhouette_score(Z, y))
-	    print("[3.11] DBI:", davies_bouldin_score(Z, y))
-	    print("[3.16] Neighborhood Preservation:", neighborhood_preservation(X, Z))
-	    print("[3.17] KL Divergence:", kl_divergence_distance(X, Z))
-	    print("[3.15] Procrustes Residual:", procrustes_residual(Z_mds, Z))
-	
-	
-	# ============================================================
-	# 6. PCA-only metrics
-	# ============================================================
-	
-	X_rec = pca.inverse_transform(Z_pca)
-	
-	print("\n================ PCA-only Metrics =================")
-	print("[3.1] Reconstruction Error:", mean_squared_error(X, X_rec))
-	print("[3.12] MSE:", mean_squared_error(X, X_rec))
-	print("[3.2] Explained Variance Ratio:", pca.explained_variance_ratio_)
-	print("[3.13] Cumulative Explained Variance:", np.cumsum(pca.explained_variance_ratio_))
-	
-	plt.figure()
-	plt.plot(
-	    np.arange(1, len(pca.explained_variance_ratio_)+1),
-	    pca.explained_variance_ratio_,
-	    marker='o'
+	# ------------------------------------------------------------
+	# 5. 모델별 평가 실행
+	# ------------------------------------------------------------
+	evaluate_embedding(
+	    name="PCA",
+	    X_low=X_pca,
+	    D_low=D_pca,
+	    X_inv=X_pca_inv,
+	    explained_var=pca.explained_variance_ratio_
 	)
-	plt.xlabel("Component")
-	plt.ylabel("Explained Variance Ratio")
-	plt.title("Scree Plot (PCA)")
-	plt.show()
 	
+	evaluate_embedding(
+	    name="t-SNE",
+	    X_low=X_tsne,
+	    D_low=D_tsne,
+	    kl_div=tsne.kl_divergence_
+	)
 	
-	# ============================================================
-	# 7. FINAL EXECUTION BLOCK (END OF SCRIPT)
-	# ============================================================
-	
-	evaluate("PCA", Z_pca)
-	evaluate("t-SNE", Z_tsne)
-	evaluate("UMAP", Z_umap)
-	
+	evaluate_embedding(
+	    name="UMAP",
+	    X_low=X_umap,
+	    D_low=D_umap
+	)
+
 <br>
 
-	================ PCA-only Metrics =================
-	[3.1] Reconstruction Error: 0.04186792799998359
-	[3.12] MSE: 0.04186792799998359
-	[3.2] Explained Variance Ratio: [0.72962445 0.22850762]
-	[3.13] Cumulative Explained Variance: [0.72962445 0.95813207]
-	
 	================ PCA =================
-	[3.3] Mutual Information: 2.137613613817279
-	[3.4] Trustworthiness: 0.9742159624413146
-	[3.5] Continuity: 0.9847534076827757
-	[3.6] Stress (MDS): 0.06273608832859519
-	[3.7] Sammon Error: 0.009754761001707966
-	[3.8] LCMC: 0.6655525727069351
-	[3.9] Spearman’s ρ: 0.9933844764729062
-	[3.10] Silhouette Score: 0.40138681396361797
-	[3.11] DBI: 0.9554597670258294
-	[3.16] Neighborhood Preservation: 0.7326666666666666
-	[3.17] KL Divergence: 0.007309009563118737
-	[3.15] Procrustes Residual: 1.2530045855223733
+	[3.1] Reconstruction Error: 0.0419
+	[3.2] Explained Variance Ratio: [0.72962445 0.22850762]
+	[3.3] Mutual Information: 0.4014
+	[3.4] Trustworthiness: 0.9780
+	[3.5] Continuity: 0.9906
+	[3.6] Stress MDS: 708.4470
+	[3.7] Sammon Error: 547.2137
+	[3.8] LCMC: 0.9108
+	[3.9] Spearman’s ρ: 0.9935
+	[3.10] Silhouette Score: 0.4014
+	[3.11] DBI: 0.9555
+	[3.12] MSE: 0.0315
+	[3.13] Cumulative Explained Variance: 0.9581
+	[3.14] Scree Plot: PCA only
+	[3.15] Procrustes Disparity: 0.1036
+	[3.16] Neighborhood Preservation: 0.9780
+	[3.17] KL Divergence: N/A
 	
-	================ t-SNE =================
-	[3.3] Mutual Information: 0.9689118301849516
-	[3.4] Trustworthiness: 0.9928732394366198
-	[3.5] Continuity: 0.9882825278810409
-	[3.6] Stress (MDS): 7.222149578024664
-	[3.7] Sammon Error: 47.08313653304184
-	[3.8] LCMC: 0.7288859060402685
-	[3.9] Spearman’s ρ: 0.9265315925878885
-	[3.10] Silhouette Score: 0.49395695
-	[3.11] DBI: 0.8087433784363954
-	[3.16] Neighborhood Preservation: 0.796
-	[3.17] KL Divergence: 0.13681608760978844
-	[3.15] Procrustes Residual: 180.44218811953428
+	================ T-SNE =================
+	[3.1] Reconstruction Error: N/A
+	[3.2] Explained Variance Ratio: N/A
+	[3.3] Mutual Information: 0.4940
+	[3.4] Trustworthiness: 0.9890
+	[3.5] Continuity: 0.9822
+	[3.6] Stress MDS: 9388700.0149
+	[3.7] Sammon Error: 2641226.7648
+	[3.8] LCMC: 0.9219
+	[3.9] Spearman’s ρ: 0.9280
+	[3.10] Silhouette Score: 0.4940
+	[3.11] DBI: 0.8087
+	[3.12] MSE: 417.2756
+	[3.13] Cumulative Explained Variance: N/A
+	[3.14] Scree Plot: PCA only
+	[3.15] Procrustes Disparity: 0.5389
+	[3.16] Neighborhood Preservation: 0.9890
+	[3.17] KL Divergence: 0.1729
 	
 	================ UMAP =================
-	[3.3] Mutual Information: 0.8132488919024653
-	[3.4] Trustworthiness: 0.9852394366197184
-	[3.5] Continuity: 0.9849368029739777
-	[3.6] Stress (MDS): 3.477669165672668
-	[3.7] Sammon Error: 11.454692108347494
-	[3.8] LCMC: 0.6655525727069351
-	[3.9] Spearman’s ρ: 0.8581325604141754
-	[3.10] Silhouette Score: 0.531421
-	[3.11] DBI: 0.7496117658867987
-	[3.16] Neighborhood Preservation: 0.7326666666666667
-	[3.17] KL Divergence: 0.16611832296221973
-		
+	[3.1] Reconstruction Error: N/A
+	[3.2] Explained Variance Ratio: N/A
+	[3.3] Mutual Information: 0.5314
+	[3.4] Trustworthiness: 0.9778
+	[3.5] Continuity: 0.9801
+	[3.6] Stress MDS: 2176952.9087
+	[3.7] Sammon Error: 6840074305.5464
+	[3.8] LCMC: 0.9107
+	[3.9] Spearman’s ρ: 0.8610
+	[3.10] Silhouette Score: 0.5314
+	[3.11] DBI: 0.7496
+	[3.12] MSE: 96.7535
+	[3.13] Cumulative Explained Variance: N/A
+	[3.14] Scree Plot: PCA only
+	[3.15] Procrustes Disparity: 0.4545
+	[3.16] Neighborhood Preservation: 0.9778
+	[3.17] KL Divergence: N/A
+
+	
 
 ## 4. 이상치 탐지 (Anomaly/Outlier Detection)<br>
 정상적인 데이터의 분포나 패턴에서 크게 벗어난 희귀한 샘플을 식별하는 기법.<br>
