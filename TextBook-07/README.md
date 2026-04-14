@@ -132,14 +132,10 @@
 	# ============================================================
 	# 2. 군집 평가지표 함수 정의
 	# ============================================================
+	# [1.4] Dunn Index = (클러스터 간 최소 거리) / (클러스터 내 최대 거리)
 	def dunn_index(X, labels):
-	    """
-	    Dunn Index
-	    (클러스터 간 최소 거리) / (클러스터 내 최대 거리)
-	    """
 	    dist = squareform(pdist(X))
 	    clusters = np.unique(labels)
-	
 	    intra = []
 	    inter = []
 	
@@ -151,23 +147,16 @@
 	    for i in clusters:
 	        for j in clusters:
 	            if i < j:
-	                inter.append(
-	                    dist[labels == i][:, labels == j].min()
-	                )
+	                inter.append(dist[labels == i][:, labels == j].min())
 	
 	    return np.min(inter) / np.max(intra)
 	
-	
+	# [1.5] Within-Cluster Sum of Squares
 	def wcss(X, labels, centers):
-	    """Within-Cluster Sum of Squares"""
 	    return np.sum((X - centers[labels]) ** 2)
 	
-	
+	# [1.9] Connectivity Index : 가까운 이웃이 다른 군집이면 페널티 부여
 	def connectivity_index(X, labels, k=10):
-	    """
-	    Connectivity Index
-	    가까운 이웃이 다른 군집이면 페널티 부여
-	    """
 	    dist = squareform(pdist(X))
 	    conn = 0.0
 	
@@ -178,22 +167,15 @@
 	                conn += 1 / (r + 1)
 	    return conn
 	
-	
+	# [1.10] Xie-Beni Index : 퍼지 군집 기반 지표 (값이 작을수록 좋음)
 	def xie_beni_index(X, labels, centers):
-	    """
-	    Xie-Beni Index
-	    퍼지 군집 기반 지표 (값이 작을수록 좋음)
-	    """
 	    n = X.shape[0]
 	    num = np.sum((X - centers[labels]) ** 2)
 	    denom = n * (np.min(pdist(centers)) ** 2)
 	    return num / denom
 	
-	
+	# [1.7] Gap Statistic (K-means / GMM에만 의미 있음)
 	def gap_statistic(X, k, n_refs=10):
-	    """
-	    Gap Statistic (K-means / GMM에만 의미 있음)
-	    """
 	    ref = []
 	    for _ in range(n_refs):
 	        X_ref = np.random.random_sample(X.shape)
@@ -211,7 +193,7 @@
 	kmeans = KMeans(n_clusters=3, random_state=42)
 	labels_km = kmeans.fit_predict(X_train)
 	
-	# Elbow
+	# [1.6] Elbow
 	elbow = {k: KMeans(n_clusters=k, random_state=42).fit(X_train).inertia_
 	          for k in range(1, 8)}
 	
@@ -241,31 +223,31 @@
 	# ============================================================	
 	def evaluate(name, X, labels, centers=None, ic=None):
 	    print(f"\n===== {name} =====")
-	    print("Silhouette:", silhouette_score(X, labels))
-	    print("Davies-Bouldin:", davies_bouldin_score(X, labels))
-	    print("Calinski-Harabasz:", calinski_harabasz_score(X, labels))
-	    print("Dunn Index:", dunn_index(X, labels))
-	    print("Connectivity:", connectivity_index(X, labels))
+	    print("[1.1] Silhouette:", silhouette_score(X, labels))
+	    print("[1.2] Davies-Bouldin:", davies_bouldin_score(X, labels))
+	    print("[1.3] Calinski-Harabasz:", calinski_harabasz_score(X, labels))
+	    print("[1.4] Dunn Index:", dunn_index(X, labels))
+	    print("[1.9] Connectivity:", connectivity_index(X, labels))
 	
 	    if centers is not None:
-	        print("WCSS:", wcss(X, labels, centers))
-	        print("Xie-Beni:", xie_beni_index(X, labels, centers))
+	        print("[1.5] WCSS:", wcss(X, labels, centers))
+	        print("[1.10] Xie-Beni:", xie_beni_index(X, labels, centers))
 	    else:
-	        print("WCSS: N/A")
-	        print("Xie-Beni: N/A")
+	        print("[1.5] WCSS: N/A")
+	        print("[1.10] Xie-Beni: N/A")
 	
 	    if ic is not None:
-	        print("AIC:", ic.aic(X))
-	        print("BIC:", ic.bic(X))
+	        print("[1.8] AIC:", ic.aic(X))
+	        print("[1.8] BIC:", ic.bic(X))
 	    else:
-	        print("AIC / BIC: N/A")
+	        print("[1.8] AIC / BIC: N/A")
 		
 	# ============================================================
 	# 5. 결과 출력
 	# ============================================================	
 	evaluate("K-Means", X_train, labels_km, kmeans.cluster_centers_)
-	print("Elbow Method:", elbow)
-	print("Gap Statistic:", gap)
+	print("[1.6] Elbow Method:", elbow)
+	print("[1.7] Gap Statistic:", gap)
 	
 	evaluate("DBSCAN", X_train, labels_db)
 	
