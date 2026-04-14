@@ -479,6 +479,184 @@
 	            print(f"{k}: {v:.4f}")                                                    
 	        print("-" * 50)                                                               
 
+<br>
+
+	================ APRIORI =================
+	[2.1] Support: 0.2733
+	[2.2] Confidence: 0.8913
+	[2.3] Lift: 2.7853
+	[2.4] Leverage: 0.1752
+	[2.5] Conviction: 6.2560
+	[2.6] Jaccard: 0.7736
+	[2.7] Kulczynski: 0.8727
+	[2.8] All-Confidence: 0.8542
+	[2.9] Chi-Square: 46.9184
+	[2.10] Collective Strength: 1.6152
+	[2.11] Phi Coefficient: 0.8145
+	[2.12] Piatetsky-Shapiro: 0.1752
+	[2.13] Odds Ratio: 113.6286
+	[2.14] Yule's Q: 0.9826
+	[2.15] Yule's Y: 0.8285
+	[2.16] Information Gain: 0.4039
+	[2.17] Zhang's Metric: 0.9426
+	[2.18] Certainty Factor: 0.8402
+	--------------------------------------------------
+	[2.1] Support: 0.2733
+	[2.2] Confidence: 0.8542
+	[2.3] Lift: 2.7853
+	[2.4] Leverage: 0.1752
+	[2.5] Conviction: 4.7543
+	[2.6] Jaccard: 0.7736
+	[2.7] Kulczynski: 0.8727
+	[2.8] All-Confidence: 0.8542
+	[2.9] Chi-Square: 46.9184
+	[2.10] Collective Strength: 1.6152
+	[2.11] Phi Coefficient: 0.8145
+	[2.12] Piatetsky-Shapiro: 0.1752
+	[2.13] Odds Ratio: 113.6286
+	[2.14] Yule's Q: 0.9826
+	[2.15] Yule's Y: 0.8285
+	[2.16] Information Gain: 0.4039
+	[2.17] Zhang's Metric: 0.9245
+	[2.18] Certainty Factor: 0.7897
+	--------------------------------------------------
+	[2.1] Support: 0.2133
+	[2.2] Confidence: 0.6957
+	[2.3] Lift: 2.4845
+	[2.4] Leverage: 0.1275
+	[2.5] Conviction: 2.3657
+	[2.6] Jaccard: 0.5714
+	[2.7] Kulczynski: 0.7288
+	[2.8] All-Confidence: 0.6957
+	[2.9] Chi-Square: 28.3831
+	[2.10] Collective Strength: 1.4357
+	[2.11] Phi Coefficient: 0.6157
+	[2.12] Piatetsky-Shapiro: 0.1275
+	[2.13] Odds Ratio: 21.4857
+	[2.14] Yule's Q: 0.9111
+	[2.15] Yule's Y: 0.6451
+	[2.16] Information Gain: 0.2801
+	[2.17] Zhang's Metric: 0.8299
+	[2.18] Certainty Factor: 0.5773
+	--------------------------------------------------
+	
+	================ FPGROWTH =================
+	[2.1] Support: 0.3000
+	[2.2] Confidence: 0.9000
+	[2.3] Lift: 2.5962
+	[2.4] Leverage: 0.1844
+	[2.5] Conviction: 6.5333
+	[2.6] Jaccard: 0.7895
+	[2.7] Kulczynski: 0.8827
+	[2.8] All-Confidence: 0.8654
+	[2.9] Chi-Square: 44.1603
+	[2.10] Collective Strength: 1.6694
+	[2.11] Phi Coefficient: 0.8221
+	[2.12] Piatetsky-Shapiro: 0.1844
+	[2.13] Odds Ratio: 119.5714
+	[2.14] Yule's Q: 0.9834
+	[2.15] Yule's Y: 0.8324
+	[2.16] Information Gain: 0.4129
+	[2.17] Zhang's Metric: 0.9410
+	[2.18] Certainty Factor: 0.8469
+	--------------------------------------------------
+	[2.1] Support: 0.3000
+	[2.2] Confidence: 0.8654
+	[2.3] Lift: 2.5962
+	[2.4] Leverage: 0.1844
+	[2.5] Conviction: 4.9524
+	[2.6] Jaccard: 0.7895
+	[2.7] Kulczynski: 0.8827
+	[2.8] All-Confidence: 0.8654
+	[2.9] Chi-Square: 44.1603
+	[2.10] Collective Strength: 1.6694
+	[2.11] Phi Coefficient: 0.8221
+	[2.12] Piatetsky-Shapiro: 0.1844
+	[2.13] Odds Ratio: 119.5714
+	[2.14] Yule's Q: 0.9834
+	[2.15] Yule's Y: 0.8324
+	[2.16] Information Gain: 0.4129
+	[2.17] Zhang's Metric: 0.9222
+	[2.18] Certainty Factor: 0.7981
+	--------------------------------------------------
+	[2.1] Support: 0.3333
+	[2.2] Confidence: 1.0000
+	[2.3] Lift: 3.0000
+	[2.4] Leverage: 0.2222
+	[2.5] Conviction: inf
+	[2.6] Jaccard: 1.0000
+	[2.7] Kulczynski: 1.0000
+	[2.8] All-Confidence: 1.0000
+	[2.9] Chi-Square: 66.6667
+	[2.10] Collective Strength: 1.8000
+	[2.11] Phi Coefficient: 1.0000
+	[2.12] Piatetsky-Shapiro: 0.2222
+	[2.13] Odds Ratio: inf
+	[2.14] Yule's Q: 1.0000
+	[2.15] Yule's Y: 1.0000
+	[2.16] Information Gain: 0.5283
+	[2.17] Zhang's Metric: 1.0000
+	[2.18] Certainty Factor: 1.0000
+	--------------------------------------------------
+	
+	================ ECLAT =================
+	[2.1] Support: 0.2733
+	[2.2] Confidence: 0.8913
+	[2.3] Lift: 2.7853
+	[2.4] Leverage: 0.1752
+	[2.5] Conviction: 6.2560
+	[2.6] Jaccard: 0.7736
+	[2.7] Kulczynski: 0.8727
+	[2.8] All-Confidence: 0.8542
+	[2.9] Chi-Square: 46.9184
+	[2.10] Collective Strength: 1.6152
+	[2.11] Phi Coefficient: 0.8145
+	[2.12] Piatetsky-Shapiro: 0.1752
+	[2.13] Odds Ratio: 113.6286
+	[2.14] Yule's Q: 0.9826
+	[2.15] Yule's Y: 0.8285
+	[2.16] Information Gain: 0.4039
+	[2.17] Zhang's Metric: 0.9426
+	[2.18] Certainty Factor: 0.8402
+	--------------------------------------------------
+	[2.1] Support: 0.2733
+	[2.2] Confidence: 0.8542
+	[2.3] Lift: 2.7853
+	[2.4] Leverage: 0.1752
+	[2.5] Conviction: 4.7543
+	[2.6] Jaccard: 0.7736
+	[2.7] Kulczynski: 0.8727
+	[2.8] All-Confidence: 0.8542
+	[2.9] Chi-Square: 46.9184
+	[2.10] Collective Strength: 1.6152
+	[2.11] Phi Coefficient: 0.8145
+	[2.12] Piatetsky-Shapiro: 0.1752
+	[2.13] Odds Ratio: 113.6286
+	[2.14] Yule's Q: 0.9826
+	[2.15] Yule's Y: 0.8285
+	[2.16] Information Gain: 0.4039
+	[2.17] Zhang's Metric: 0.9245
+	[2.18] Certainty Factor: 0.7897
+	--------------------------------------------------
+	[2.1] Support: 0.2133
+	[2.2] Confidence: 0.6957
+	[2.3] Lift: 2.4845
+	[2.4] Leverage: 0.1275
+	[2.5] Conviction: 2.3657
+	[2.6] Jaccard: 0.5714
+	[2.7] Kulczynski: 0.7288
+	[2.8] All-Confidence: 0.6957
+	[2.9] Chi-Square: 28.3831
+	[2.10] Collective Strength: 1.4357
+	[2.11] Phi Coefficient: 0.6157
+	[2.12] Piatetsky-Shapiro: 0.1275
+	[2.13] Odds Ratio: 21.4857
+	[2.14] Yule's Q: 0.9111
+	[2.15] Yule's Y: 0.6451
+	[2.16] Information Gain: 0.2801
+	[2.17] Zhang's Metric: 0.8299
+	[2.18] Certainty Factor: 0.5773
+	--------------------------------------------------
 
 
 ## 3. 차원 축소 (Dimensionality Reduction)<br>
