@@ -299,7 +299,8 @@
 	[1.10] Xie-Beni: 0.45752338128621756
 	[1.8] AIC: 485.7652098544704
 	
-	
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/1.clustering.png'> 	
 
 ## 2. 연관 규칙 학습 (Association Rule Learning)<br>
 데이터베이스 내에서 항목들 간의 '조건-결과(If-Then)' 패턴과 동시 발생 관계를 찾아내는 기법. (주로 장바구니 분석)<br>
