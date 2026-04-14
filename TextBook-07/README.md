@@ -864,7 +864,9 @@
 	[3.16] Neighborhood Preservation: 0.9778
 	[3.17] KL Divergence: N/A
 
-	
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/3.Dimensionality.png'> 	
+
 
 ## 4. 이상치 탐지 (Anomaly/Outlier Detection)<br>
 정상적인 데이터의 분포나 패턴에서 크게 벗어난 희귀한 샘플을 식별하는 기법.<br>
