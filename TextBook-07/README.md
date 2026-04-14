@@ -333,178 +333,151 @@
 	#         "[2.16] Information Gain": info_gain,
 	#         "[2.17] Zhang's Metric": zhang,
 	#         "[2.18] Certainty Factor": certainty_factor
-	# ============================================================
-		import pandas as pd
-	import numpy as np
-	from sklearn.datasets import load_iris
-	from mlxtend.preprocessing import TransactionEncoder
-	from mlxtend.frequent_patterns import apriori, fpgrowth, association_rules
-	
-	# ------------------------------------------------------------
-	# 1. Iris 데이터 로드 및 연관규칙 학습용 전처리
-	# ------------------------------------------------------------
-	# Iris 데이터는 연속형 특성이므로 연관규칙 학습을 위해 이산화(discretization) 수행
-	iris = load_iris()
-	df = pd.DataFrame(iris.data, columns=iris.feature_names)
-	
-	# 각 feature를 분위수 기준 3구간(Low, Mid, High)으로 이산화
-	for col in df.columns:
-	    df[col] = pd.qcut(
-	        df[col],
-	        q=3,
-	        labels=[f"{col}_Low", f"{col}_Mid", f"{col}_High"]
-	    )
-	
-	# 트랜잭션 형태로 변환
-	transactions = df.values.tolist()
-	
-	# One-hot encoding
-	te = TransactionEncoder()
-	te_array = te.fit(transactions).transform(transactions)
-	df_te = pd.DataFrame(te_array, columns=te.columns_)
-	
-	# ------------------------------------------------------------
-	# 2. 빈발 항목집합 탐색 함수
-	# ------------------------------------------------------------
-	def mine_frequent_itemsets(data, method="apriori", min_support=0.2):
-	    """
-	    Apriori / FP-Growth / (단순화된) Eclat 빈발 항목집합 생성
-	    """
-	    if method == "apriori":
-	        return apriori(data, min_support=min_support, use_colnames=True)
-	
-	    elif method == "fpgrowth":
-	        return fpgrowth(data, min_support=min_support, use_colnames=True)
-	
-	    elif method == "eclat":
-	        # Eclat은 수직 데이터(TID set) 기반 → 단일 항목 기준 구현
-	        itemsets = []
-	        n = len(data)
-	
-	        for col in data.columns:
-	            supp = data[col].sum() / n
-	            if supp >= min_support:
-	                itemsets.append({
-	                    "itemsets": frozenset([col]),
-	                    "support": supp
-	                })
-	
-	        return pd.DataFrame(itemsets)
-	
-	# ------------------------------------------------------------
-	# 3. 연관 규칙 평가지표 계산 함수 (18개)
-	# ------------------------------------------------------------
-	def compute_metrics(rule, n_transactions):
-	    supp_xy = rule["support"]
-	    supp_x = rule["antecedent support"]
-	    supp_y = rule["consequent support"]
-	    conf = rule["confidence"]
-	    lift = rule["lift"]
-	
-	    # [2.4] Leverage
-	    leverage = supp_xy - supp_x * supp_y
-	
-	    # [2.5] Conviction
-	    conviction = (1 - supp_y) / (1 - conf) if conf < 1 else np.inf
-	
-	    # [2.6] Jaccard Coefficient
-	    jaccard = supp_xy / (supp_x + supp_y - supp_xy)
-	
-	    # [2.7] Kulczynski Measure
-	    kulczynski = 0.5 * (conf + supp_xy / supp_y)
-	
-	    # [2.8] All-Confidence
-	    all_conf = supp_xy / max(supp_x, supp_y)
-	
-	    # [2.9] Chi-Square Test
+	# ============================================================	                      
+	import pandas as pd                                                                   
+	import numpy as np                                                                    
+	import warnings                                                                       
+	from sklearn.datasets import load_iris                                                
+	from mlxtend.preprocessing import TransactionEncoder                                  
+	from mlxtend.frequent_patterns import apriori, fpgrowth, association_rules            
+	from itertools import combinations                                                    
+	                                                                                      
+	warnings.filterwarnings("ignore", category=DeprecationWarning)                        
+	                                                                                      
+	# ------------------------------------------------------------                        
+	# 1. Iris 데이터 로드 및 전처리                                                       
+	# ------------------------------------------------------------                        
+	iris = load_iris()                                                                    
+	df = pd.DataFrame(iris.data, columns=iris.feature_names)                              
+	                                                                                      
+	# 연속형 → 이산형 (3구간)                                                            
+	for col in df.columns:                                                                
+	    df[col] = pd.qcut(df[col], q=3,                                                   
+	                      labels=[f"{col}_Low", f"{col}_Mid", f"{col}_High"])             
+	                                                                                      
+	transactions = df.values.tolist()                                                     
+	                                                                                      
+	te = TransactionEncoder()                                                             
+	df_te = pd.DataFrame(te.fit(transactions).transform(transactions),                    
+	                     columns=te.columns_)                                             
+	                                                                                      
+	n_transactions = len(df_te)                                                           
+	                                                                                      
+	# ------------------------------------------------------------                        
+	# 2. 빈발 항목집합 탐색 함수                                                          
+	# ------------------------------------------------------------                        
+	def mine_frequent_itemsets(data, method="apriori", min_support=0.2):                  
+	                                                                                      
+	    if method == "apriori":                                                           
+	        return apriori(data, min_support=min_support, use_colnames=True)              
+	                                                                                      
+	    elif method == "fpgrowth":                                                        
+	        return fpgrowth(data, min_support=min_support, use_colnames=True)             
+	                                                                                      
+	    elif method == "eclat":                                                           
+	        # -------- ECLAT 확장 구현 (1~3 itemsets) --------                            
+	        freq_itemsets = []                                                            
+	                                                                                      
+	        items = data.columns.tolist()                                                 
+	                                                                                      
+	        # 1-itemsets                                                                  
+	        for item in items:                                                            
+	            supp = data[item].mean()                                                  
+	            if supp >= min_support:                                                   
+	                freq_itemsets.append({                                                
+	                    "itemsets": frozenset([item]),                                    
+	                    "support": supp                                                   
+	                })                                                                    
+	                                                                                      
+	        # 2-itemsets, 3-itemsets                                                      
+	        for k in [2, 3]:                                                              
+	            for combo in combinations(items, k):                                      
+	                supp = data[list(combo)].all(axis=1).mean()                           
+	                if supp >= min_support:                                               
+	                    freq_itemsets.append({                                            
+	                        "itemsets": frozenset(combo),                                 
+	                        "support": supp                                               
+	                    })                                                                
+	                                                                                      
+	        return pd.DataFrame(freq_itemsets)                                            
+	                                                                                      
+	# ------------------------------------------------------------                        
+	# 3. 18개 평가지표 계산 함수                                                          
+	# ------------------------------------------------------------                        
+	def compute_metrics(rule):                                                            
+	    supp_xy = rule["support"]                                                         
+	    supp_x = rule["antecedent support"]                                               
+	    supp_y = rule["consequent support"]                                               
+	    conf = rule["confidence"]                                                         
+	    lift = rule["lift"]                                                               
+	                                                                                      
+	    leverage = supp_xy - supp_x * supp_y                                              
+	    conviction = (1 - supp_y) / (1 - conf) if conf < 1 else np.inf                    
+	    jaccard = supp_xy / (supp_x + supp_y - supp_xy)                                   
+	    kulczynski = 0.5 * (conf + supp_xy / supp_y)                                      
+	    all_conf = supp_xy / max(supp_x, supp_y)                                          
 	    chi_square = n_transactions * (supp_xy - supp_x * supp_y) ** 2 / (supp_x * supp_y)
-	
-	    # [2.10] Collective Strength
-	    collective_strength = (
-	        supp_xy + (1 - supp_x - supp_y + supp_xy)
-	    ) / (
-	        (supp_x * supp_y) + (1 - supp_x) * (1 - supp_y)
-	    )
-	
-	    # [2.11] Phi Coefficient
-	    phi = (supp_xy - supp_x * supp_y) / np.sqrt(
-	        supp_x * supp_y * (1 - supp_x) * (1 - supp_y)
-	    )
-	
-	    # [2.12] Piatetsky-Shapiro
-	    ps = supp_xy - supp_x * supp_y
-	
-	    # [2.13] Odds Ratio (0 division 예외 처리)
-	    denom = (supp_x - supp_xy) * (supp_y - supp_xy)
-	    if denom == 0:
-	        odds_ratio = np.inf
-	    else:
-	        odds_ratio = (supp_xy * (1 - supp_x - supp_y + supp_xy)) / denom
-	
-	    # [2.14] Yule's Q
-	    yule_q = 1.0 if odds_ratio == np.inf else (odds_ratio - 1) / (odds_ratio + 1)
-	
-	    # [2.15] Yule's Y
-	    yule_y = 1.0 if odds_ratio == np.inf else (
-	        (np.sqrt(odds_ratio) - 1) / (np.sqrt(odds_ratio) + 1)
-	    )
-	
-	    # [2.16] Information Gain
-	    info_gain = supp_xy * np.log2(lift)
-	
-	    # [2.17] Zhang's Metric
-	    zhang = (supp_xy - supp_x * supp_y) / max(
-	        supp_xy * (1 - supp_y),
-	        supp_y * (supp_x - supp_xy)
-	    )
-	
-	    # [2.18] Certainty Factor
-	    certainty_factor = (conf - supp_y) / (1 - supp_y)
-	
-	    return {
-	        "[2.1] Support": supp_xy,
-	        "[2.2] Confidence": conf,
-	        "[2.3] Lift": lift,
-	        "[2.4] Leverage": leverage,
-	        "[2.5] Conviction": conviction,
-	        "[2.6] Jaccard": jaccard,
-	        "[2.7] Kulczynski": kulczynski,
-	        "[2.8] All-Confidence": all_conf,
-	        "[2.9] Chi-Square": chi_square,
-	        "[2.10] Collective Strength": collective_strength,
-	        "[2.11] Phi Coefficient": phi,
-	        "[2.12] Piatetsky-Shapiro": ps,
-	        "[2.13] Odds Ratio": odds_ratio,
-	        "[2.14] Yule's Q": yule_q,
-	        "[2.15] Yule's Y": yule_y,
-	        "[2.16] Information Gain": info_gain,
-	        "[2.17] Zhang's Metric": zhang,
-	        "[2.18] Certainty Factor": certainty_factor
-	    }
-	
-	# ------------------------------------------------------------
-	# 4. 모델별 학습 및 평가 결과 출력
-	# ------------------------------------------------------------
-	models = ["apriori", "fpgrowth", "eclat"]
-	
-	for model in models:
-	    print(f"\n================ {model.upper()} =================")
-	
-	    freq_items = mine_frequent_itemsets(df_te, method=model)
-	
-	    # Eclat은 association_rules 미지원 → 평가 제외
-	    if model == "eclat":
-	        print("Eclat은 빈발 항목집합 탐색용 모델로, 규칙 평가는 Apriori/FP-Growth 결과를 사용")
-	        continue
-	
-	    rules = association_rules(freq_items, metric="confidence", min_threshold=0.6)
-	
-	    # 상위 3개 규칙 출력
-	    for _, rule in rules.head(3).iterrows():
-	        metrics = compute_metrics(rule, len(df_te))
-	        for k, v in metrics.items():
-	            print(f"{k}: {v:.4f}")
-	        print("-" * 50)
+	    collective_strength = (supp_xy + (1 - supp_x - supp_y + supp_xy)) / \             
+	                          ((supp_x * supp_y) + (1 - supp_x) * (1 - supp_y))           
+	    phi = (supp_xy - supp_x * supp_y) / np.sqrt(                                      
+	        supp_x * supp_y * (1 - supp_x) * (1 - supp_y))                                
+	                                                                                      
+	    ps = supp_xy - supp_x * supp_y                                                    
+	                                                                                      
+	    denom = (supp_x - supp_xy) * (supp_y - supp_xy)                                   
+	    odds_ratio = np.inf if denom == 0 else \                                          
+	        (supp_xy * (1 - supp_x - supp_y + supp_xy)) / denom                           
+	                                                                                      
+	    yule_q = 1.0 if odds_ratio == np.inf else (odds_ratio - 1) / (odds_ratio + 1)     
+	    yule_y = 1.0 if odds_ratio == np.inf else \                                       
+	        (np.sqrt(odds_ratio) - 1) / (np.sqrt(odds_ratio) + 1)                         
+	                                                                                      
+	    info_gain = supp_xy * np.log2(lift)                                               
+	    zhang = (supp_xy - supp_x * supp_y) / max(                                        
+	        supp_xy * (1 - supp_y), supp_y * (supp_x - supp_xy))                          
+	                                                                                      
+	    certainty_factor = (conf - supp_y) / (1 - supp_y)                                 
+	                                                                                      
+	    return {                                                                          
+	        "[2.1] Support": supp_xy,                                                     
+	        "[2.2] Confidence": conf,                                                     
+	        "[2.3] Lift": lift,                                                           
+	        "[2.4] Leverage": leverage,                                                   
+	        "[2.5] Conviction": conviction,                                               
+	        "[2.6] Jaccard": jaccard,                                                     
+	        "[2.7] Kulczynski": kulczynski,                                               
+	        "[2.8] All-Confidence": all_conf,                                             
+	        "[2.9] Chi-Square": chi_square,                                               
+	        "[2.10] Collective Strength": collective_strength,                            
+	        "[2.11] Phi Coefficient": phi,                                                
+	        "[2.12] Piatetsky-Shapiro": ps,                                               
+	        "[2.13] Odds Ratio": odds_ratio,                                              
+	        "[2.14] Yule's Q": yule_q,                                                    
+	        "[2.15] Yule's Y": yule_y,                                                    
+	        "[2.16] Information Gain": info_gain,                                         
+	        "[2.17] Zhang's Metric": zhang,                                               
+	        "[2.18] Certainty Factor": certainty_factor                                   
+	    }                                                                                 
+	                                                                                      
+	# ------------------------------------------------------------                        
+	# 4. 모델별 규칙 생성 및 평가                                                         
+	# ------------------------------------------------------------                        
+	models = ["apriori", "fpgrowth", "eclat"]                                             
+	                                                                                      
+	for model in models:                                                                  
+	    print(f"\n================ {model.upper()} =================")                    
+	                                                                                      
+	    freq_items = mine_frequent_itemsets(df_te, method=model)                          
+	                                                                                      
+	    rules = association_rules(freq_items,                                             
+	                              metric="confidence",                                    
+	                              min_threshold=0.6)                                      
+	                                                                                      
+	    for _, rule in rules.head(3).iterrows():                                          
+	        metrics = compute_metrics(rule)                                               
+	        for k, v in metrics.items():                                                  
+	            print(f"{k}: {v:.4f}")                                                    
+	        print("-" * 50)                                                               
 
 
 
