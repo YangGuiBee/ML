@@ -22,12 +22,12 @@
 
 <br>
 
-<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/content1.png'> 
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/content1-1.png'> 
 
 <br>
 
+<!--
 #  07-1 : 군집화 평가지표
-
 <ins>[1.1] Silhouette Coefficient (실루엣 계수)</ins><br>
 <ins>[1.2] DBI (Davies-Bouldin Index) (데이비스-볼딘 지수)</ins><br>
 <ins>[1.3] Dunn Index (던 지수)</ins><br>
@@ -38,8 +38,6 @@
 [1.8] Information Criterion (AIC, BIC) (정보 기준)<br>
 [1.9] Connectivity (연결성)<br>
 [1.10] Xie-Beni Index (시에-베니 지수)<br>
-
-
 
 #  07-2 : 연관규칙 평가지표
 (기본)<br>
@@ -62,10 +60,8 @@
 [2.16] Information Gain (정보 이득)<br>
 [2.17] Zhang's Metric (장 메트릭)<br>
 [2.18] Certainty Factor (확실성 인수)<br>
-
-	  
+	 
 #  07-3 : 차원축소 평가지표
-
 <ins>[3.1] Reconstruction Error (재구성 오류)</ins><br>
 <ins>[3.2] Explained Variance Ratio (설명된 분산 비율)</ins><br>
 <ins>[3.3] Mutual Information (상호 정보량)</ins><br>
@@ -83,10 +79,9 @@
 [3.15] Procrustes Analysis (프로크루스테스 분석)<br>
 [3.16] Neighborhood Preservation (이웃 보존도)<br>
 [3.17] KL Divergence (Kullback–Leibler Divergence) (쿨백–라이블러 발산)<br>
-
+-->
 
 ---
-<br>
 
 ## 1. 클러스터링 (Clustering)<br>
 데이터의 기하학적 거리나 밀도를 기반으로 비슷한 특성을 가진 데이터들을 그룹화하는 기법.<br>
@@ -894,7 +889,7 @@
 
 ---
 
-<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/content2.png'> 
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/content2-1.png'> 
 
 <br>
 
