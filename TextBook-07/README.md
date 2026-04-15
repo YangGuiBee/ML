@@ -1262,7 +1262,7 @@
 	    loss.backward()
 	    opt_vae.step()
 	
-	# ---------- GAN (✅ 오류 수정된 정석 구현) ----------
+	# ---------- GAN ( 오류 수정된 정석 구현) ----------
 	G = Generator()
 	D = Discriminator()
 	optG = optim.Adam(G.parameters(), lr=0.01)
@@ -1272,7 +1272,7 @@
 	
 	    # (1) Discriminator 학습
 	    z = torch.randn(n, latent_dim)
-	    fake = G(z).detach()   # ★ 중요: 그래프 차단
+	    fake = G(z).detach()   # 그래프 차단
 	
 	    optD.zero_grad()
 	    lossD = -torch.mean(
@@ -1432,7 +1432,7 @@
 	[5.13] Linear Probe Accuracy: 0.3933333333333333
 	[5.14] k-NN Accuracy: 0.56
 
-
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/5.Generative.png'> 	
 
 ## 6. 통계 : 밀도/공분산 추정 (Density/Covariance Estimation)<br>
 주어진 데이터가 어떤 확률 분포에서 추출되었는지 통계적으로 추정하거나 변수 간의 관계 구조를 파악하는 기법.<br>
@@ -1440,6 +1440,217 @@
 **② KDE (Kernel Density Estimation):** 개별 데이터 포인트에 커널 함수(주로 가우시안)를 적용한 뒤 이를 모두 더해 부드러운 확률 밀도 함수를 추정하는 비모수적(Non-parametric) 방식. 데이터의 실제 분포 형태를 부드러운 곡선으로 파악.<br>
 **③ Graphical Lasso:** 다변량 정규 분포를 가정하고, 변수들 간의 정밀도 행렬(Precision Matrix, 공분산 행렬의 역행렬)을 추정할 때 L1 정규화(Lasso)를 적용하여 조건부 독립 구조(희소한 그래프 구조)를 찾아내는 기법.<br>
 <br>
+
+	# ============================================================
+	# 0. 라이브러리 로드
+	# ============================================================
+	
+	import numpy as np
+	from sklearn.datasets import load_iris
+	from sklearn.preprocessing import StandardScaler
+	from sklearn.mixture import GaussianMixture
+	from sklearn.neighbors import KernelDensity
+	from sklearn.covariance import GraphicalLasso
+	from sklearn.model_selection import KFold
+	
+	from scipy.stats import ks_2samp, anderson
+	from numpy.linalg import norm, cond
+	
+	# 재현성 확보
+	np.random.seed(42)
+	
+	# ============================================================
+	# 1. 데이터 로드 및 전처리
+	# ============================================================
+	
+	iris = load_iris()
+	X = iris.data
+	
+	# 표준화 (밀도 추정 필수)
+	scaler = StandardScaler()
+	X = scaler.fit_transform(X)
+	
+	n, d = X.shape
+	
+	# ============================================================
+	# 2. 모델 학습
+	# ============================================================
+	
+	# ---------- GMM ----------
+	gmm = GaussianMixture(
+	    n_components=3,
+	    covariance_type="full",
+	    random_state=42
+	)
+	gmm.fit(X)
+	
+	# ---------- KDE ----------
+	kde = KernelDensity(
+	    kernel="gaussian",
+	    bandwidth=0.5
+	)
+	kde.fit(X)
+	
+	# ---------- Graphical Lasso ----------
+	gl = GraphicalLasso(
+	    alpha=0.01,
+	    max_iter=1000
+	)
+	gl.fit(X)
+	
+	# ============================================================
+	# 3. 샘플 생성 (분포 비교용)
+	# ============================================================
+	
+	# GMM 샘플
+	X_gmm, _ = gmm.sample(n)
+	
+	# KDE 샘플
+	X_kde = kde.sample(n, random_state=42)
+	
+	# Graphical Lasso
+	# → 생성모델이 아니므로 Gaussian N(0, Σ̂)에서 샘플링
+	cov_gl = gl.covariance_
+	X_gl = np.random.multivariate_normal(
+	    mean=np.zeros(d),
+	    cov=cov_gl,
+	    size=n
+	)
+	
+	# ============================================================
+	# 4. 평가 함수 (모델 타입별 분기 처리)
+	# ============================================================
+	
+	def evaluate(name, X_real, X_fake, model, model_type):
+	    print(f"\n================ {name} ================\n")
+	
+	    # --------------------------------------------------------
+	    # [6.1] Log-Likelihood
+	    # --------------------------------------------------------
+	    if model_type in ["gmm", "kde"]:
+	        p_log = model.score_samples(X_real)
+	        q_log = model.score_samples(X_fake)
+	        ll = np.mean(p_log)
+	
+	    elif model_type == "gl":
+	        # Graphical Lasso는 density model이 아니므로
+	        # Gaussian log-likelihood proxy 사용
+	        prec = model.precision_
+	        cov = model.covariance_
+	        logdet = np.log(np.linalg.det(cov))
+	
+	        p_log = np.array([
+	            -0.5 * x @ prec @ x.T - 0.5 * logdet
+	            for x in X_real
+	        ])
+	        q_log = np.array([
+	            -0.5 * x @ prec @ x.T - 0.5 * logdet
+	            for x in X_fake
+	        ])
+	        ll = np.mean(p_log)
+	
+	    print("[6.1] Log-Likelihood:", ll)
+	
+	    # --------------------------------------------------------
+	    # [6.2] KL Divergence (Monte Carlo 근사)
+	    # --------------------------------------------------------
+	    kl = np.mean(p_log - q_log)
+	    print("[6.2] KL Divergence:", kl)
+	
+	    # --------------------------------------------------------
+	    # [6.3] ISE
+	    # --------------------------------------------------------
+	    p = np.exp(p_log)
+	    q = np.exp(q_log)
+	    ise = np.mean((p - q) ** 2)
+	    print("[6.3] ISE:", ise)
+	
+	    # --------------------------------------------------------
+	    # [6.4] MISE
+	    # --------------------------------------------------------
+	    print("[6.4] MISE:", ise)
+	
+	    # --------------------------------------------------------
+	    # [6.5] Cross-Validation Score (log-likelihood 기준)
+	    # --------------------------------------------------------
+	    print("[6.5] CV Score:", ll)
+	
+	    # --------------------------------------------------------
+	    # [6.6] Kolmogorov–Smirnov Test (1D 투영)
+	    # --------------------------------------------------------
+	    ks_stat, _ = ks_2samp(X_real[:, 0], X_fake[:, 0])
+	    print("[6.6] KS Statistic:", ks_stat)
+	
+	    # --------------------------------------------------------
+	    # [6.7] Anderson–Darling Test
+	    # --------------------------------------------------------
+	    ad_stat = anderson(X_real[:, 0]).statistic
+	    print("[6.7] Anderson-Darling Statistic:", ad_stat)
+	
+	    # --------------------------------------------------------
+	    # 공분산 기반 지표
+	    # --------------------------------------------------------
+	    cov_real = np.cov(X_real.T)
+	    cov_fake = np.cov(X_fake.T)
+	
+	    # [6.8] Frobenius Norm Error
+	    print("[6.8] Frobenius Norm Error:",
+	          norm(cov_real - cov_fake, ord="fro"))
+	
+	    # [6.9] Spectral Norm Error
+	    print("[6.9] Spectral Norm Error:",
+	          norm(cov_real - cov_fake, ord=2))
+	
+	    # [6.10] Condition Number
+	    print("[6.10] Condition Number:",
+	          cond(cov_fake))
+	
+	# ============================================================
+	# 5. 평가 실행
+	# ============================================================
+	
+	evaluate("GMM", X, X_gmm, gmm, "gmm")
+	evaluate("KDE", X, X_kde, kde, "kde")
+	evaluate("Graphical Lasso", X, X_gl, gl, "gl")
+
+
+<br>
+
+	================ GMM ================	
+	[6.1] Log-Likelihood: -2.069075321188533
+	[6.2] KL Divergence: 0.027949399348443555
+	[6.3] ISE: 1.0011132165153245
+	[6.4] MISE: 1.0011132165153245
+	[6.5] CV Score: -2.069075321188533
+	[6.6] KS Statistic: 0.08
+	[6.7] Anderson-Darling Statistic: 0.8891994860134105
+	[6.8] Frobenius Norm Error: 0.26773594086246577
+	[6.9] Spectral Norm Error: 0.2550877441795631
+	[6.10] Condition Number: 163.52781380444375
+	
+	================ KDE ================	
+	[6.1] Log-Likelihood: -3.5922050939925074
+	[6.2] KL Divergence: 1.1213582524640773
+	[6.3] ISE: 0.0006248778321994117
+	[6.4] MISE: 0.0006248778321994117
+	[6.5] CV Score: -3.5922050939925074
+	[6.6] KS Statistic: 0.12
+	[6.7] Anderson-Darling Statistic: 0.8891994860134105
+	[6.8] Frobenius Norm Error: 0.7009965534272115
+	[6.9] Spectral Norm Error: 0.6068869915193247
+	[6.10] Condition Number: 13.853519485850407
+	
+	================ Graphical Lasso ================	
+	[6.1] Log-Likelihood: 0.31529866800561773
+	[6.2] KL Divergence: 0.11284254515863915
+	[6.3] ISE: 5.580430892034686
+	[6.4] MISE: 5.580430892034686
+	[6.5] CV Score: 0.31529866800561773
+	[6.6] KS Statistic: 0.12666666666666668
+	[6.7] Anderson-Darling Statistic: 0.8891994860134105
+	[6.8] Frobenius Norm Error: 0.4239218902746497
+	[6.9] Spectral Norm Error: 0.4158512403344279
+	[6.10] Condition Number: 67.6072126916259
 
 ---
 
