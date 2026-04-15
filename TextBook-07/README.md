@@ -1011,7 +1011,7 @@
 	
 	    print("[4.9] ROC-AUC:", roc_auc)
 	
-	    # ✅ [4.10] Precision–Recall Curve 결과 출력
+	    # [4.10] Precision–Recall Curve 결과 출력
 	    print("[4.10] Precision–Recall Curve (상위 5개 값)")
 	    print("   Precision:", precision[:5])
 	    print("   Recall   :", recall[:5])
@@ -1113,6 +1113,325 @@
 **② VAE (Variational Autoencoder):** 오토인코더의 변형으로, 잠재 공간(Latent Space)을 고정된 값이 아닌 '확률 분포'로 학습. 연속적이고 의미 있는 특성 공간을 만들어 새로운 데이터를 생성하는 데 탁월.<br>
 **③ GAN (Generative Adversarial Network):** 가짜 데이터를 생성하는 생성자(Generator)와 진짜/가짜를 감별하는 판별자(Discriminator)가 경쟁하며 학습하는 모델로, 매우 정교하고 사실적인 이미지나 음성 데이터를 생성.<br>
 <br>
+
+	# ============================================================
+	# 0. 라이브러리 로드
+	# ============================================================
+	import numpy as np
+	import torch
+	import torch.nn as nn
+	import torch.optim as optim
+	
+	from sklearn.datasets import load_iris
+	from sklearn.preprocessing import StandardScaler
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.neighbors import KNeighborsClassifier
+	from sklearn.metrics import accuracy_score
+	
+	from scipy.linalg import sqrtm
+	
+	# 재현성
+	torch.manual_seed(42)
+	np.random.seed(42)
+	
+	# ============================================================
+	# 1. 데이터 로드 및 전처리
+	# ============================================================
+	iris = load_iris()
+	X = iris.data
+	y = iris.target
+	
+	scaler = StandardScaler()
+	X = scaler.fit_transform(X)
+	
+	X_tensor = torch.tensor(X, dtype=torch.float32)
+	
+	input_dim = 4
+	latent_dim = 2
+	n = X.shape[0]
+	
+	# ============================================================
+	# 2. Autoencoder 정의
+	# ============================================================
+	class AutoEncoder(nn.Module):
+	    def __init__(self):
+	        super().__init__()
+	        self.encoder = nn.Sequential(
+	            nn.Linear(input_dim, 8),
+	            nn.ReLU(),
+	            nn.Linear(8, latent_dim)
+	        )
+	        self.decoder = nn.Sequential(
+	            nn.Linear(latent_dim, 8),
+	            nn.ReLU(),
+	            nn.Linear(8, input_dim)
+	        )
+	
+	    def forward(self, x):
+	        z = self.encoder(x)
+	        x_hat = self.decoder(z)
+	        return x_hat, z
+	
+	# ============================================================
+	# 3. VAE 정의
+	# ============================================================
+	class VAE(nn.Module):
+	    def __init__(self):
+	        super().__init__()
+	        self.fc1 = nn.Linear(input_dim, 8)
+	        self.mu = nn.Linear(8, latent_dim)
+	        self.logvar = nn.Linear(8, latent_dim)
+	        self.fc2 = nn.Linear(latent_dim, 8)
+	        self.fc3 = nn.Linear(8, input_dim)
+	
+	    def encode(self, x):
+	        h = torch.relu(self.fc1(x))
+	        return self.mu(h), self.logvar(h)
+	
+	    def reparameterize(self, mu, logvar):
+	        std = torch.exp(0.5 * logvar)
+	        eps = torch.randn_like(std)
+	        return mu + eps * std
+	
+	    def decode(self, z):
+	        h = torch.relu(self.fc2(z))
+	        return self.fc3(h)
+	
+	    def forward(self, x):
+	        mu, logvar = self.encode(x)
+	        z = self.reparameterize(mu, logvar)
+	        x_hat = self.decode(z)
+	        return x_hat, mu, logvar, z
+	
+	# ============================================================
+	# 4. GAN 정의 (Tabular GAN)
+	# ============================================================
+	class Generator(nn.Module):
+	    def __init__(self):
+	        super().__init__()
+	        self.net = nn.Sequential(
+	            nn.Linear(latent_dim, 8),
+	            nn.ReLU(),
+	            nn.Linear(8, input_dim)
+	        )
+	
+	    def forward(self, z):
+	        return self.net(z)
+	
+	class Discriminator(nn.Module):
+	    def __init__(self):
+	        super().__init__()
+	        self.net = nn.Sequential(
+	            nn.Linear(input_dim, 8),
+	            nn.ReLU(),
+	            nn.Linear(8, 1),
+	            nn.Sigmoid()
+	        )
+	
+	    def forward(self, x):
+	        return self.net(x)
+	
+	# ============================================================
+	# 5. 모델 학습
+	# ============================================================
+	
+	# ---------- Autoencoder ----------
+	ae = AutoEncoder()
+	opt_ae = optim.Adam(ae.parameters(), lr=0.01)
+	
+	for _ in range(500):
+	    opt_ae.zero_grad()
+	    X_hat, _ = ae(X_tensor)
+	    loss = nn.MSELoss()(X_hat, X_tensor)
+	    loss.backward()
+	    opt_ae.step()
+	
+	# ---------- VAE ----------
+	vae = VAE()
+	opt_vae = optim.Adam(vae.parameters(), lr=0.01)
+	
+	def vae_loss():
+	    X_hat, mu, logvar, _ = vae(X_tensor)
+	    recon = nn.MSELoss()(X_hat, X_tensor)
+	    kl = -0.5 * torch.mean(1 + logvar - mu**2 - logvar.exp())
+	    return recon + kl, recon, kl
+	
+	for _ in range(500):
+	    opt_vae.zero_grad()
+	    loss, _, _ = vae_loss()
+	    loss.backward()
+	    opt_vae.step()
+	
+	# ---------- GAN (✅ 오류 수정된 정석 구현) ----------
+	G = Generator()
+	D = Discriminator()
+	optG = optim.Adam(G.parameters(), lr=0.01)
+	optD = optim.Adam(D.parameters(), lr=0.01)
+	
+	for _ in range(500):
+	
+	    # (1) Discriminator 학습
+	    z = torch.randn(n, latent_dim)
+	    fake = G(z).detach()   # ★ 중요: 그래프 차단
+	
+	    optD.zero_grad()
+	    lossD = -torch.mean(
+	        torch.log(D(X_tensor) + 1e-8) +
+	        torch.log(1 - D(fake) + 1e-8)
+	    )
+	    lossD.backward()
+	    optD.step()
+	
+	    # (2) Generator 학습 (fake 재생성)
+	    z = torch.randn(n, latent_dim)
+	    fake = G(z)
+	
+	    optG.zero_grad()
+	    lossG = -torch.mean(torch.log(D(fake) + 1e-8))
+	    lossG.backward()
+	    optG.step()
+	
+	# ============================================================
+	# 6. 보조 함수 (FID)
+	# ============================================================
+	def fid(real, fake):
+	    mu1, mu2 = real.mean(0), fake.mean(0)
+	    cov1, cov2 = np.cov(real.T), np.cov(fake.T)
+	    return np.linalg.norm(mu1 - mu2) + np.trace(
+	        cov1 + cov2 - 2 * sqrtm(cov1 @ cov2)
+	    )
+	
+	# ============================================================
+	# 7. 결과 추출
+	# ============================================================
+	X_ae, Z_ae = ae(X_tensor)
+	X_vae, mu, logvar, Z_vae = vae(X_tensor)
+	Z_gan = torch.randn(n, latent_dim)
+	X_gan = G(Z_gan).detach().numpy()
+	
+	# ============================================================
+	# 8. 14개 평가지표 출력 함수
+	# ============================================================
+	def evaluate(name, Z, X_rec=None, elbo=None):
+	    print(f"\n================ {name} ================\n")
+	
+	    Z = Z.detach().numpy()
+	
+	    # 분류기 (IS, Mode Score, Linear Probe)
+	    clf = LogisticRegression(max_iter=1000).fit(Z, y)
+	    p = clf.predict_proba(Z)
+	
+	    # [5.1] IS
+	    is_score = np.exp(np.mean(np.sum(p * np.log(p + 1e-9), axis=1)))
+	    print("[5.1] IS:", is_score)
+	
+	    # [5.2] FID
+	    fake = X_rec.detach().numpy() if X_rec is not None else X_gan
+	    print("[5.2] FID:", fid(X, fake))
+	
+	    # [5.3] KID (MMD 근사)
+	    print("[5.3] KID:", np.mean((X - fake) ** 2))
+	
+	    # [5.4] Precision / Recall (분포)
+	    print("[5.4] Precision:", np.mean(np.linalg.norm(Z, axis=1) < 2))
+	    print("[5.4] Recall:", np.mean(np.linalg.norm(Z, axis=1) > 0.5))
+	
+	    # [5.5] SSIM (Cosine 유사도 대체)
+	    if X_rec is not None:
+	        ssim = np.mean(np.sum(X * fake, axis=1))
+	        print("[5.5] SSIM:", ssim)
+	
+	    # [5.6] PSNR
+	    if X_rec is not None:
+	        mse = np.mean((X - fake) ** 2)
+	        print("[5.6] PSNR:", -10 * np.log10(mse + 1e-9))
+	
+	    # [5.7] LPIPS (Latent 거리)
+	    print("[5.7] LPIPS:", np.mean(np.linalg.norm(Z, axis=1)))
+	
+	    # [5.8] ELBO
+	    if elbo is not None:
+	        print("[5.8] ELBO:", -elbo)
+	
+	    # [5.9] Reconstruction Loss
+	    if X_rec is not None:
+	        print("[5.9] Reconstruction Loss:", mse)
+	
+	    # [5.10] Mode Score
+	    print("[5.10] Mode Score:", is_score)
+	
+	    # [5.11] Coverage
+	    print("[5.11] Coverage:", np.mean(np.linalg.norm(Z, axis=1) < 1))
+	
+	    # [5.12] Perplexity
+	    print("[5.12] Perplexity:", np.exp(-np.mean(np.log(p + 1e-9))))
+	
+	    # [5.13] Linear Probe Accuracy
+	    print("[5.13] Linear Probe Accuracy:",
+	          accuracy_score(y, clf.predict(Z)))
+	
+	    # [5.14] k-NN Accuracy
+	    knn = KNeighborsClassifier(5).fit(Z, y)
+	    print("[5.14] k-NN Accuracy:",
+	          accuracy_score(y, knn.predict(Z)))
+	
+	# ============================================================
+	# 9. 평가 실행
+	# ============================================================
+	evaluate("Autoencoder", Z_ae, X_ae)
+	loss, recon, kl = vae_loss()
+	evaluate("VAE", Z_vae, X_vae, elbo=loss.item())
+	evaluate("GAN", Z_gan)
+
+
+<br>
+
+	================ Autoencoder ================	
+	[5.1] IS: 0.7098329820060414
+	[5.2] FID: 0.04886865424540987
+	[5.3] KID: 0.03564135651199882
+	[5.4] Precision: 0.2866666666666667
+	[5.4] Recall: 1.0
+	[5.5] SSIM: 3.8572156431693716
+	[5.6] PSNR: 14.480457628634893
+	[5.7] LPIPS: 2.4333105
+	[5.9] Reconstruction Loss: 0.03564135651199882
+	[5.10] Mode Score: 0.7098329820060414
+	[5.11] Coverage: 0.02
+	[5.12] Perplexity: 71.7442800332575
+	[5.13] Linear Probe Accuracy: 0.86
+	[5.14] k-NN Accuracy: 0.8866666666666667
+	
+	================ VAE ================	
+	[5.1] IS: 0.5337175666228489
+	[5.2] FID: 0.5147717833844603
+	[5.3] KID: 0.33431012536810545
+	[5.4] Precision: 0.86
+	[5.4] Recall: 0.9
+	[5.5] SSIM: 2.5849253319688903
+	[5.6] PSNR: 4.758504682797514
+	[5.7] LPIPS: 1.3023261
+	[5.8] ELBO: -0.7443549633026123
+	[5.9] Reconstruction Loss: 0.33431012536810545
+	[5.10] Mode Score: 0.5337175666228489
+	[5.11] Coverage: 0.3466666666666667
+	[5.12] Perplexity: 10.707620921121222
+	[5.13] Linear Probe Accuracy: 0.7466666666666667
+	[5.14] k-NN Accuracy: 0.78
+	
+	================ GAN ================	
+	[5.1] IS: 0.33714372319250463
+	[5.2] FID: 4.552434889898118
+	[5.3] KID: 2.500979971734286
+	[5.4] Precision: 0.8466666666666667
+	[5.4] Recall: 0.9066666666666666
+	[5.7] LPIPS: 1.3716581
+	[5.10] Mode Score: 0.33714372319250463
+	[5.11] Coverage: 0.32666666666666666
+	[5.12] Perplexity: 3.0351038635742
+	[5.13] Linear Probe Accuracy: 0.3933333333333333
+	[5.14] k-NN Accuracy: 0.56
+
 
 
 ## 6. 통계 : 밀도/공분산 추정 (Density/Covariance Estimation)<br>
