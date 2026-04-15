@@ -22,6 +22,10 @@
 
 <br>
 
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/content1.png'> 
+
+<br>
+
 #  07-1 : 군집화 평가지표
 
 <ins>[1.1] Silhouette Coefficient (실루엣 계수)</ins><br>
@@ -886,6 +890,12 @@
 
 
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/3.Dimensionality.png'> 	
+
+---
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/content2.png'> 
+
+<br>
 
 
 ## 4. 이상치 탐지 (Anomaly/Outlier Detection)<br>
