@@ -96,6 +96,7 @@
 **④ GMM (가우시안 혼합 모델):** 데이터가 여러 개의 가우시안 분포(Gaussian Distribution)의 혼합에서 생성되었다고 가정하는 확률 기반(Model‑based) 군집화 알고리즘. 각 데이터 포인트는 하나의 군집에 고정적으로 속하는 것이 아니라, 각 군집에 속할 확률(probability)을 가지는 소프트 군집화(soft clustering)를 수행<br>
 <br>
 
+<!--
 |지표|KM|DBSCAN|HC|GMM|
 |---|---|---|---|---|
 |[1.1] Silhouette Coefficient (실루엣 계수)|O|O|O|O|
@@ -108,7 +109,7 @@
 |[1.8] Information Criterion (AIC, BIC) (정보 기준)|X|X|X|O|
 |[1.9] Connectivity (연결성)|O|O|O|O|
 |[1.10] Xie-Beni Index (시에-베니 지수)|O|X|O|O|
-
+-->
 
 	# ============================================================
 	# Clustering Rule Learning (K-Means / DBSCAN / Hierarchical Clustering / GMM)
