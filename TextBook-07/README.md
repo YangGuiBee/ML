@@ -1652,6 +1652,9 @@
 	[6.9] Spectral Norm Error: 0.4158512403344279
 	[6.10] Condition Number: 67.6072126916259
 
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/6.Estimation.png'> 	
+
 ---
 
 #  07-1 : 군집화 평가지표
