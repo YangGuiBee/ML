@@ -2,6 +2,26 @@
 ![](./images/NSML.png)
 -->
 
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/ML07-1.png'> 
+
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/ML07-2.png'> 
+
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/ML07-3.png'> 
+
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/ML07-4.png'> 
+
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/ML07-5.png'> 
+
+<br>
+
 #  07-1 : 군집화 평가지표
 
 <ins>[1.1] Silhouette Coefficient (실루엣 계수)</ins><br>
