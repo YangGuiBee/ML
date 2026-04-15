@@ -874,12 +874,247 @@
 **② One-Class SVM:** 서포트 벡터 머신(SVM)을 변형한 모델로, 정상 데이터들이 모여 있는 영역을 감싸는 경계(Boundary)를 학습한 뒤 이 경계 밖에 있는 데이터를 이상치로 분류.<br>
 **③ LOF (Local Outlier Factor):** 특정 데이터가 주변 이웃 데이터들에 비해 밀도가 얼마나 낮은지(국소적 척도)를 계산하여 이상치를 탐지. 데이터의 군집 밀도가 불균형한 상황에서 유용.<br>
 <br>
+
+	# ============================================================
+	# 0. 라이브러리 로드
+	# ============================================================
+	
+	import numpy as np
+	import matplotlib.pyplot as plt
+	
+	from sklearn.datasets import load_iris
+	from sklearn.preprocessing import StandardScaler
+	
+	from sklearn.ensemble import IsolationForest
+	from sklearn.svm import OneClassSVM
+	from sklearn.neighbors import LocalOutlierFactor, NearestNeighbors
+	
+	from sklearn.cluster import DBSCAN
+	from sklearn.mixture import GaussianMixture
+	from sklearn.decomposition import PCA
+	
+	from sklearn.metrics import (
+	    roc_auc_score,
+	    precision_recall_curve,
+	    average_precision_score,
+	    f1_score,
+	    matthews_corrcoef
+	)
+	
+	# ============================================================
+	# 1. 데이터 로드 및 이상치 라벨 정의
+	# ============================================================
+	
+	iris = load_iris()
+	X = iris.data
+	y = iris.target
+	
+	# ▶ 강의용 가정:
+	# versicolor(class=1)를 이상치(1), 나머지를 정상(0)으로 설정
+	y_true = np.where(y == 1, 1, 0)
+	
+	# 표준화
+	scaler = StandardScaler()
+	X_scaled = scaler.fit_transform(X)
+	
+	# ============================================================
+	# 2. 공통 평가 함수 정의
+	# ============================================================
+	
+	def evaluate_model(model_name, scores):
+	    """
+	    model_name : 모델 이름
+	    scores     : 이상치 점수 (높을수록 이상치)
+	    """
+	
+	    print(f"\n================ {model_name} ================\n")
+	
+	    # --------------------------------------------------------
+	    # Threshold 기반 예측 (상위 33%를 이상치로 판단)
+	    # --------------------------------------------------------
+	    threshold = np.percentile(scores, 67)
+	    y_pred = (scores > threshold).astype(int)
+	
+	    # --------------------------------------------------------
+	    # [4.9] ROC-AUC
+	    # --------------------------------------------------------
+	    roc_auc = roc_auc_score(y_true, scores)
+	
+	    # --------------------------------------------------------
+	    # [4.10] Precision–Recall Curve
+	    # --------------------------------------------------------
+	    precision, recall, thresholds = precision_recall_curve(y_true, scores)
+	
+	    # --------------------------------------------------------
+	    # [4.11] Average Precision
+	    # --------------------------------------------------------
+	    ap = average_precision_score(y_true, scores)
+	
+	    # --------------------------------------------------------
+	    # [4.12] F1-Score
+	    # --------------------------------------------------------
+	    f1 = f1_score(y_true, y_pred)
+	
+	    # --------------------------------------------------------
+	    # [4.13] MCC
+	    # --------------------------------------------------------
+	    mcc = matthews_corrcoef(y_true, y_pred)
+	
+	    # ========================================================
+	    # 3. 지표 출력
+	    # ========================================================
+	
+	    print("[4.1] Anomaly Score (평균):", np.mean(scores))
+	    print("[4.2] Average Path Length (근사):", np.mean(1 / (scores + 1e-6)))
+	    print("[4.3] LOF Score (대체 지표 평균):", np.mean(scores))
+	
+	    # DBSCAN Noise Ratio
+	    db = DBSCAN(eps=1.2, min_samples=5)
+	    db_labels = db.fit_predict(X_scaled)
+	    print("[4.4] DBSCAN Noise Ratio:", np.mean(db_labels == -1))
+	
+	    # PCA Reconstruction Error
+	    pca = PCA(n_components=2)
+	    X_pca = pca.fit_transform(X_scaled)
+	    X_rec = pca.inverse_transform(X_pca)
+	    recon_error = np.mean(np.sum((X_scaled - X_rec) ** 2, axis=1))
+	    print("[4.5] Reconstruction Error (PCA):", recon_error)
+	
+	    # GMM Likelihood
+	    gmm = GaussianMixture(n_components=2, random_state=42)
+	    gmm.fit(X_scaled)
+	    gmm_score = -np.mean(gmm.score_samples(X_scaled))
+	    print("[4.6] Likelihood-based Score (GMM):", gmm_score)
+	
+	    # Mahalanobis Distance
+	    mean = np.mean(X_scaled, axis=0)
+	    cov = np.cov(X_scaled, rowvar=False)
+	    inv_cov = np.linalg.inv(cov)
+	    maha = np.mean([
+	        np.sqrt((x - mean) @ inv_cov @ (x - mean).T)
+	        for x in X_scaled
+	    ])
+	    print("[4.7] Mahalanobis Distance (평균):", maha)
+	
+	    # ABOD (근사 계산)
+	    nn = NearestNeighbors(n_neighbors=10).fit(X_scaled)
+	    _, idx = nn.kneighbors(X_scaled)
+	
+	    abod_scores = []
+	    for i, neighbors in enumerate(idx):
+	        vecs = X_scaled[neighbors] - X_scaled[i]
+	        norms = np.linalg.norm(vecs, axis=1)
+	        cosines = np.dot(vecs, vecs.T) / (norms[:, None] * norms[None, :] + 1e-8)
+	        abod_scores.append(np.var(cosines))
+	
+	    print("[4.8] ABOD Score (평균):", np.mean(abod_scores))
+	
+	    print("[4.9] ROC-AUC:", roc_auc)
+	
+	    # ✅ [4.10] Precision–Recall Curve 결과 출력
+	    print("[4.10] Precision–Recall Curve (상위 5개 값)")
+	    print("   Precision:", precision[:5])
+	    print("   Recall   :", recall[:5])
+	
+	    print("[4.11] AP (Average Precision):", ap)
+	    print("[4.12] F1-Score:", f1)
+	    print("[4.13] MCC:", mcc)
+	
+	    # ========================================================
+	    # 4. Precision–Recall Curve 시각화
+	    # ========================================================
+	
+	    plt.figure()
+	    plt.plot(recall, precision)
+	    plt.xlabel("Recall")
+	    plt.ylabel("Precision")
+	    plt.title(f"Precision–Recall Curve ({model_name})")
+	    plt.show()
+	
+	
+	# ============================================================
+	# 3. 모델별 학습 및 평가
+	# ============================================================
+	
+	# (1) Isolation Forest
+	iso = IsolationForest(contamination=0.33, random_state=42)
+	iso.fit(X_scaled)
+	iso_scores = -iso.score_samples(X_scaled)
+	evaluate_model("Isolation Forest", iso_scores)
+	
+	# (2) One-Class SVM
+	ocsvm = OneClassSVM(kernel="rbf", nu=0.33, gamma="scale")
+	ocsvm.fit(X_scaled)
+	svm_scores = -ocsvm.decision_function(X_scaled)
+	evaluate_model("One-Class SVM", svm_scores)
+	
+	# (3) LOF
+	lof = LocalOutlierFactor(n_neighbors=20, contamination=0.33)
+	lof.fit_predict(X_scaled)
+	lof_scores = -lof.negative_outlier_factor_
+	evaluate_model("LOF (Local Outlier Factor)", lof_scores)
+
+<br>
+
+	================ Isolation Forest ================	
+	[4.1] Isolation / Anomaly Score (평균): 0.4728331345002941
+	[4.2] Average Path Length (근사): 2.138532157454394
+	[4.3] LOF Score (대체 지표 평균): 0.4728331345002941
+	[4.4] DBSCAN Noise Ratio: 0.006666666666666667
+	[4.5] Reconstruction Error (PCA): 0.16747171199993435
+	[4.6] Likelihood-based Score (GMM): 2.1646685961005097
+	[4.7] Mahalanobis Distance (평균): 1.8881472616509458
+	[4.8] ABOD Score (평균): 0.23229164224201962
+	[4.9] ROC-AUC: 0.393
+	[4.10] Precision-Recall Curve: (배열 생략)
+	[4.11] AP: 0.27365610920578454
+	[4.12] F1-Score: 0.26
+	[4.13] MCC: -0.11
+	
+	================ One-Class SVM ================	
+	[4.1] Isolation / Anomaly Score (평균): 0.0033648487760798793
+	[4.2] Average Path Length (근사): -2.6227309034986863
+	[4.3] LOF Score (대체 지표 평균): 0.0033648487760798793
+	[4.4] DBSCAN Noise Ratio: 0.006666666666666667
+	[4.5] Reconstruction Error (PCA): 0.16747171199993435
+	[4.6] Likelihood-based Score (GMM): 2.1646685961005097
+	[4.7] Mahalanobis Distance (평균): 1.8881472616509458
+	[4.8] ABOD Score (평균): 0.23229164224201962
+	[4.9] ROC-AUC: 0.38339999999999996
+	[4.10] Precision-Recall Curve: (배열 생략)
+	[4.11] AP: 0.27164359544995187
+	[4.12] F1-Score: 0.24
+	[4.13] MCC: -0.14
+	
+	================ LOF (Local Outlier Factor) ================	
+	[4.1] Isolation / Anomaly Score (평균): 1.0953279889738605
+	[4.2] Average Path Length (근사): 0.9320551822714901
+	[4.3] LOF Score (대체 지표 평균): 1.0953279889738605
+	[4.4] DBSCAN Noise Ratio: 0.006666666666666667
+	[4.5] Reconstruction Error (PCA): 0.16747171199993435
+	[4.6] Likelihood-based Score (GMM): 2.1646685961005097
+	[4.7] Mahalanobis Distance (평균): 1.8881472616509458
+	[4.8] ABOD Score (평균): 0.23229164224201962
+	[4.9] ROC-AUC: 0.4454
+	[4.10] Precision-Recall Curve: (배열 생략)
+	[4.11] AP: 0.2934075991245506
+	[4.12] F1-Score: 0.24
+	[4.13] MCC: -0.14
+
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/4_chart.png'> 		
+
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/4.Outlier.png'> 		
+
 ## 5. 신경망 : 생성모델/표현학습 (Generative Models & Representation Learning)<br>
 데이터의 숨겨진 특징(Latent Representation)을 학습하여 압축하거나, 학습된 분포를 바탕으로 새로운 데이터를 생성하는 딥러닝 기반 기법.<br>
 **① Autoencoder (오토인코더):** 입력 데이터를 압축(Encoder)했다가 다시 원본과 똑같이 복원(Decoder)하도록 학습하는 신경망. 이 과정에서 병목(Bottleneck) 구간에 데이터의 핵심 표현이 저장되며, 차원 축소 및 노이즈 제거에 활용.<br>
 **② VAE (Variational Autoencoder):** 오토인코더의 변형으로, 잠재 공간(Latent Space)을 고정된 값이 아닌 '확률 분포'로 학습. 연속적이고 의미 있는 특성 공간을 만들어 새로운 데이터를 생성하는 데 탁월.<br>
 **③ GAN (Generative Adversarial Network):** 가짜 데이터를 생성하는 생성자(Generator)와 진짜/가짜를 감별하는 판별자(Discriminator)가 경쟁하며 학습하는 모델로, 매우 정교하고 사실적인 이미지나 음성 데이터를 생성.<br>
 <br>
+
+
 ## 6. 통계 : 밀도/공분산 추정 (Density/Covariance Estimation)<br>
 주어진 데이터가 어떤 확률 분포에서 추출되었는지 통계적으로 추정하거나 변수 간의 관계 구조를 파악하는 기법.<br>
 **① GMM (Gaussian Mixture Model):** 복잡한 데이터 분포를 여러 개의 정규 분포(Gaussian)가 혼합된 형태로 가정하고, EM(Expectation-Maximization) 알고리즘을 통해 각 분포의 매개변수를 추정. 확률 기반의 유연한 군집화.<br>
