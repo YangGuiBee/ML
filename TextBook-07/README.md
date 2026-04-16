@@ -1314,7 +1314,7 @@
 | **[4.1] Isolation Score (고립 점수)** | ↑ | 상대 비교 기준으로 상위 점수일수록 이상치 가능성 큼 | Isolation Forest의 파생 점수. 절대 임계치 없음, 랭킹 기반 해석 권장 |
 | **[4.2] Average Path Length (Isolation Forest)** | ↓ | 정상보다 짧을수록 이상치 | 트리에서 빨리 고립될수록 이상치. 데이터 크기에 따라 정규화 필요 |
 | **[4.3] LOF Score (Local Outlier Factor)** | ↑ (기준 1) | ≈ 1 정상, > 1.5 의심, > 2 이상치 | 국소 밀도 기반. k 선택에 민감, 경계·밀도 불균형 데이터에 주의 |
-| **[4.4] DBSCAN Noise Points Ratio** | ↓ | 도메인 의존 (과도하게 높으면 과분리 의심) | ε, minPts 설정 민감. 잡음 비율 자체는 품질 지표라기보다 참고용 |
+| **[4.4] DBSCAN Noise Points Ratio** | $noise\_ratio=\frac{\lvert \mathcal{N} \rvert}{N}$ | DBSCAN에서 잡음으로 분류된 점의 비율. 높을수록 이상치가 많거나 파라미터 부적절 가능성 |
 | **[4.5] Reconstruction Error (Autoencoder)** | ↑ | 상위 q% (예: 상위 1-5%)를 이상치로 설정 | 절대 임계치 없음. 분포 기반 threshold 설정 권장 |
 | **[4.6] Likelihood-based Score (GMM, KDE)** | ↓ | 낮은 likelihood(높은 −log p) 일수록 이상치 | 분포 가정에 강하게 의존. 고차원에서는 KDE 불안정 |
 | **[4.7] Mahalanobis Distance** | ↑ | χ² 분포 기반 임계치 초과 시 이상치 | 다변량 정규 가정 필요. 공분산 추정 안정성 중요 |
