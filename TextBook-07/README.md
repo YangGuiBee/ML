@@ -1295,7 +1295,7 @@
 | **[4.1] Isolation Score (고립 점수)** | $score(x)\propto\frac{1}{\mathbb{E}[h(x)]}$ | Isolation Forest에서 샘플이 얼마나 빨리 고립되는지 나타내는 점수. 값이 클수록 이상치 가능성 높음 |
 | **[4.2] Average Path Length (Isolation Forest)** | $\mathbb{E}[h(x)]=c(n)\cdot 2^{-\mathbb{E}[h(x)]/c(n)}$ | 샘플이 트리에서 고립되기까지의 평균 경로 길이. 짧을수록 이상치 |
 | **[4.3] LOF Score (Local Outlier Factor)** | $LOF_k(x)=\frac{\frac{1}{\lvert N_k(x)\rvert}\sum_{y\in N_k(x)}lrd_k(y)}{lrd_k(x)}$ | 국소 밀도 기반 이상치 점수. 1보다 크면 주변 대비 밀도가 낮아 이상치 가능성 큼 |
-| **[4.4] DBSCAN Noise Points Ratio** | $noise\_ratio=\frac{|\mathcal{N}|}{N}$ | DBSCAN에서 잡음으로 분류된 점의 비율. 높을수록 이상치가 많거나 파라미터 부적절 가능성 |
+| **[4.4] DBSCAN Noise Points Ratio** | $noise\_ratio=\frac{N_{\text{noise}}}{N}$ | DBSCAN에서 잡음으로 분류된 점의 비율. 높을수록 이상치가 많거나 파라미터 부적절 가능성 |
 | **[4.5] Reconstruction Error (Autoencoder)** | $RE(x)=\lVert x-\hat{x}\rVert^2$ | 입력과 재구성 결과 간 오차. 값이 클수록 정상 패턴에서 벗어남 |
 | **[4.6] Likelihood-based Score (GMM, KDE)** | $score(x)=-\log p(x)$ | 확률 모델에서의 음의 로그우도. 확률이 낮을수록 이상치 가능성 큼 |
 | **[4.7] Mahalanobis Distance** | $D_M(x)=\sqrt{(x-\mu)^T\Sigma^{-1}(x-\mu)}$ | 평균과 공분산을 고려한 거리 기반 이상치 점수. 다변량 정규 가정 |
@@ -1314,7 +1314,7 @@
 | **[4.1] Isolation Score (고립 점수)** | ↑ | 상대 비교 기준으로 상위 점수일수록 이상치 가능성 큼 | Isolation Forest의 파생 점수. 절대 임계치 없음, 랭킹 기반 해석 권장 |
 | **[4.2] Average Path Length (Isolation Forest)** | ↓ | 정상보다 짧을수록 이상치 | 트리에서 빨리 고립될수록 이상치. 데이터 크기에 따라 정규화 필요 |
 | **[4.3] LOF Score (Local Outlier Factor)** | ↑ (기준 1) | ≈ 1 정상, > 1.5 의심, > 2 이상치 | 국소 밀도 기반. k 선택에 민감, 경계·밀도 불균형 데이터에 주의 |
-| **[4.4] DBSCAN Noise Points Ratio** | $noise\_ratio=\frac{\lvert \mathcal{N} \rvert}{N}$ | DBSCAN에서 잡음으로 분류된 점의 비율. 높을수록 이상치가 많거나 파라미터 부적절 가능성 |
+| **[4.4] DBSCAN Noise Points Ratio** | ↓ | 도메인 의존적이나 과도하게 높으면 과분리 의심 | DBSCAN에서 잡음으로 분류된 점 비율. ε, minPts 설정 민감. 품질 지표라기보다 파라미터 진단용 |
 | **[4.5] Reconstruction Error (Autoencoder)** | ↑ | 상위 q% (예: 상위 1-5%)를 이상치로 설정 | 절대 임계치 없음. 분포 기반 threshold 설정 권장 |
 | **[4.6] Likelihood-based Score (GMM, KDE)** | ↓ | 낮은 likelihood(높은 −log p) 일수록 이상치 | 분포 가정에 강하게 의존. 고차원에서는 KDE 불안정 |
 | **[4.7] Mahalanobis Distance** | ↑ | χ² 분포 기반 임계치 초과 시 이상치 | 다변량 정규 가정 필요. 공분산 추정 안정성 중요 |
