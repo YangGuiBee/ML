@@ -83,12 +83,16 @@
 
 ---
 
-## 1. 클러스터링 (Clustering)<br>
+# 1. 클러스터링 (Clustering) 모델에 대한 평가<br>
 데이터의 기하학적 거리나 밀도를 기반으로 비슷한 특성을 가진 데이터들을 그룹화하는 기법.<br>
-**① K-Means (K-평균 군집화):** 가장 직관적이고 널리 쓰이는 알고리즘. 사전에 설정한 $K$개의 중심점(Centroid)을 기준으로 가장 가까운 데이터들을 묶어 군집을 형성.<br>
-**② DBSCAN (밀도 기반 군집화):** 데이터의 밀집 지역을 하나의 군집으로 인식. K-Means와 달리 군집의 개수를 미리 지정할 필요가 없으며, 모양이 불규칙한 군집을 찾거나 노이즈(이상치)를 걸러내는 데 매우 탁월.<br>
-**③ Hierarchical Clustering (계층적 군집화):** 데이터 간의 거리를 계산하여 가장 가까운 데이터부터 순차적으로 묶어 나가는 방식. 덴드로그램(Dendrogram)이라는 트리 구조를 통해 데이터의 계층적 관계를 시각적으로 파악.<br>
-**④ GMM (가우시안 혼합 모델):** 데이터가 여러 개의 가우시안 분포(Gaussian Distribution)의 혼합에서 생성되었다고 가정하는 확률 기반(Model‑based) 군집화 알고리즘. 각 데이터 포인트는 하나의 군집에 고정적으로 속하는 것이 아니라, 각 군집에 속할 확률(probability)을 가지는 소프트 군집화(soft clustering)를 수행<br>
+**① K-Means (K-평균 군집화):** <br>
+가장 직관적이고 널리 쓰이는 알고리즘. 사전에 설정한 $K$개의 중심점(Centroid)을 기준으로 가장 가까운 데이터들을 묶어 군집을 형성.<br>
+**② DBSCAN (밀도 기반 군집화):** <br>
+데이터의 밀집 지역을 하나의 군집으로 인식. K-Means와 달리 군집의 개수를 미리 지정할 필요가 없으며, 모양이 불규칙한 군집을 찾거나 노이즈(이상치)를 걸러내는 데 매우 탁월.<br>
+**③ Hierarchical Clustering (계층적 군집화):** <br>
+데이터 간의 거리를 계산하여 가장 가까운 데이터부터 순차적으로 묶어 나가는 방식. 덴드로그램(Dendrogram)이라는 트리 구조를 통해 데이터의 계층적 관계를 시각적으로 파악.<br>
+**④ GMM (가우시안 혼합 모델):** <br>
+데이터가 여러 개의 가우시안 분포(Gaussian Distribution)의 혼합에서 생성되었다고 가정하는 확률 기반(Model‑based) 군집화 알고리즘. 각 데이터 포인트는 하나의 군집에 고정적으로 속하는 것이 아니라, 각 군집에 속할 확률(probability)을 가지는 소프트 군집화(soft clustering)를 수행<br>
 <br>
 
 <!--
@@ -346,11 +350,14 @@
 
 ---
 
-## 2. 연관 규칙 학습 (Association Rule Learning)<br>
+## 2. 연관 규칙 학습 (Association Rule Learning) 모델에 대한 평가 <br>
 데이터베이스 내에서 항목들 간의 '조건-결과(If-Then)' 패턴과 동시 발생 관계를 찾아내는 기법. (주로 장바구니 분석)<br>
-**① Apriori (선험적 알고리즘):** 연관 규칙의 가장 고전적인 모델. '빈번하게 발생하는 항목 집합의 부분집합 역시 빈번하게 발생한다'는 원리를 이용해 탐색 공간을 줄여 규칙을 탐색.<br>
-**② FP-Growth (Frequent Pattern Growth):** Apriori의 속도 문제를 개선한 알고리즘. 데이터를 트리 구조(FP-Tree)로 압축하여 저장한 뒤 패턴을 추출하므로, 데이터베이스를 여러 번 스캔할 필요가 없어 대용량 데이터 처리에 유리.<br>
-**③ Eclat (Equivalence Class Transformation):** 항목(Item)을 기준으로 데이터를 수직 형태로 변환하여 교집합 연산을 통해 연관성을 찾는 알고리즘. 구조가 단순하고 탐색 속도가 빠름.<br>
+**① Apriori (선험적 알고리즘):** <br>
+연관 규칙의 가장 고전적인 모델. '빈번하게 발생하는 항목 집합의 부분집합 역시 빈번하게 발생한다'는 원리를 이용해 탐색 공간을 줄여 규칙을 탐색.<br>
+**② FP-Growth (Frequent Pattern Growth):** <br>
+Apriori의 속도 문제를 개선한 알고리즘. 데이터를 트리 구조(FP-Tree)로 압축하여 저장한 뒤 패턴을 추출하므로, 데이터베이스를 여러 번 스캔할 필요가 없어 대용량 데이터 처리에 유리.<br>
+**③ Eclat (Equivalence Class Transformation):** <br>
+항목(Item)을 기준으로 데이터를 수직 형태로 변환하여 교집합 연산을 통해 연관성을 찾는 알고리즘. 구조가 단순하고 탐색 속도가 빠름.<br>
 <br>
 
 
@@ -759,11 +766,14 @@
 
 ---
 
-## 3. 차원 축소 (Dimensionality Reduction)<br>
+# 3. 차원 축소 (Dimensionality Reduction) 모델에 대한 평가<br>
 고차원 데이터의 핵심 정보(분산, 구조 등)를 최대한 보존하면서 시각화나 연산 효율을 위해 저차원으로 압축하는 기법.<br>
-**① PCA (Principal Component Analysis):** 데이터의 분산(Variance)을 가장 잘 설명하는 새로운 축(주성분)을 찾아 투영하는 선형 차원 축소 기법. 전처리 단계에서 노이즈 제거 및 다중공선성 해결을 위해 기본적.<br>
-**② t-SNE (t-Distributed Stochastic Neighbor Embedding):** 고차원 공간에서의 데이터 간 거리를 확률로 변환하여 저차원에서도 그 관계가 유지되도록 하는 비선형 기법입니다. 특히 데이터 '시각화'에 압도적인 성능.<br>
-**③ UMAP (Uniform Manifold Approximation and Projection):** t-SNE의 강력한 시각화 능력을 유지하면서도 연산 속도를 비약적으로 높이고, 데이터의 전역적(Global) 구조를 더 잘 보존하는 최신 매니폴드 학습 기법.<br>
+**① PCA (Principal Component Analysis):** <br>
+데이터의 분산(Variance)을 가장 잘 설명하는 새로운 축(주성분)을 찾아 투영하는 선형 차원 축소 기법. 전처리 단계에서 노이즈 제거 및 다중공선성 해결을 위해 기본적.<br>
+**② t-SNE (t-Distributed Stochastic Neighbor Embedding):** <br>
+고차원 공간에서의 데이터 간 거리를 확률로 변환하여 저차원에서도 그 관계가 유지되도록 하는 비선형 기법입니다. 특히 데이터 '시각화'에 압도적인 성능.<br>
+**③ UMAP (Uniform Manifold Approximation and Projection):** <br>
+t-SNE의 강력한 시각화 능력을 유지하면서도 연산 속도를 비약적으로 높이고, 데이터의 전역적(Global) 구조를 더 잘 보존하는 최신 매니폴드 학습 기법.<br>
 <br>
 
 
@@ -1048,12 +1058,16 @@
 
 <br>
 
+---
 
-## 4. 이상치 탐지 (Anomaly/Outlier Detection)<br>
+# 4. 이상치 탐지 (Anomaly/Outlier Detection) 모델에 대한 평가<br>
 정상적인 데이터의 분포나 패턴에서 크게 벗어난 희귀한 샘플을 식별하는 기법.<br>
-**① Isolation Forest:** 데이터를 무작위로 분할하는 의사결정 나무(Decision Tree)를 여러 개 만들어, 정상 데이터보다 훨씬 적은 횟수의 분할만으로 고립(Isolation)되는 데이터를 이상치로 판별. 빠르고 직관적.<br>
-**② One-Class SVM:** 서포트 벡터 머신(SVM)을 변형한 모델로, 정상 데이터들이 모여 있는 영역을 감싸는 경계(Boundary)를 학습한 뒤 이 경계 밖에 있는 데이터를 이상치로 분류.<br>
-**③ LOF (Local Outlier Factor):** 특정 데이터가 주변 이웃 데이터들에 비해 밀도가 얼마나 낮은지(국소적 척도)를 계산하여 이상치를 탐지. 데이터의 군집 밀도가 불균형한 상황에서 유용.<br>
+**① Isolation Forest:** <br>
+데이터를 무작위로 분할하는 의사결정 나무(Decision Tree)를 여러 개 만들어, 정상 데이터보다 훨씬 적은 횟수의 분할만으로 고립(Isolation)되는 데이터를 이상치로 판별. 빠르고 직관적.<br>
+**② One-Class SVM:**  <br>
+서포트 벡터 머신(SVM)을 변형한 모델로, 정상 데이터들이 모여 있는 영역을 감싸는 경계(Boundary)를 학습한 뒤 이 경계 밖에 있는 데이터를 이상치로 분류.<br>
+**③ LOF (Local Outlier Factor):**  <br>
+특정 데이터가 주변 이웃 데이터들에 비해 밀도가 얼마나 낮은지(국소적 척도)를 계산하여 이상치를 탐지. 데이터의 군집 밀도가 불균형한 상황에서 유용.<br>
 <br>
 
 	# ============================================================
@@ -1325,13 +1339,16 @@
 | **[4.12] F1-Score** | ↑ | 0.7 이상 양호 (임계값 의존) | threshold 선택에 민감. 운영 임계값 평가용 |
 | **[4.13] MCC (Matthews Correlation Coefficient)** | ↑ (−1에서 1) | ≥ 0.5 양호, 0 무작위, < 0 음의 상관 | 극단적 클래스 불균형에서도 안정적인 종합 지표 |
 
+---
 
-
-## 5. 신경망 : 생성모델/표현학습 (Generative Models & Representation Learning)<br>
+# 5. 신경망 : 생성모델/표현학습 (Generative Models & Representation Learning) 모델에 대한 평가<br>
 데이터의 숨겨진 특징(Latent Representation)을 학습하여 압축하거나, 학습된 분포를 바탕으로 새로운 데이터를 생성하는 딥러닝 기반 기법.<br>
-**① Autoencoder (오토인코더):** 입력 데이터를 압축(Encoder)했다가 다시 원본과 똑같이 복원(Decoder)하도록 학습하는 신경망. 이 과정에서 병목(Bottleneck) 구간에 데이터의 핵심 표현이 저장되며, 차원 축소 및 노이즈 제거에 활용.<br>
-**② VAE (Variational Autoencoder):** 오토인코더의 변형으로, 잠재 공간(Latent Space)을 고정된 값이 아닌 '확률 분포'로 학습. 연속적이고 의미 있는 특성 공간을 만들어 새로운 데이터를 생성하는 데 탁월.<br>
-**③ GAN (Generative Adversarial Network):** 가짜 데이터를 생성하는 생성자(Generator)와 진짜/가짜를 감별하는 판별자(Discriminator)가 경쟁하며 학습하는 모델로, 매우 정교하고 사실적인 이미지나 음성 데이터를 생성.<br>
+**① Autoencoder (오토인코더):** <br>
+입력 데이터를 압축(Encoder)했다가 다시 원본과 똑같이 복원(Decoder)하도록 학습하는 신경망. 이 과정에서 병목(Bottleneck) 구간에 데이터의 핵심 표현이 저장되며, 차원 축소 및 노이즈 제거에 활용.<br>
+**② VAE (Variational Autoencoder):** <br>
+오토인코더의 변형으로, 잠재 공간(Latent Space)을 고정된 값이 아닌 '확률 분포'로 학습. 연속적이고 의미 있는 특성 공간을 만들어 새로운 데이터를 생성하는 데 탁월.<br>
+**③ GAN (Generative Adversarial Network):** <br>
+가짜 데이터를 생성하는 생성자(Generator)와 진짜/가짜를 감별하는 판별자(Discriminator)가 경쟁하며 학습하는 모델로, 매우 정교하고 사실적인 이미지나 음성 데이터를 생성.<br>
 <br>
 
 	# ============================================================
@@ -1694,12 +1711,16 @@
 | **[5.13] Linear Probe Accuracy** | ↑ | 지도 학습 대비 성능 유지 시 우수 | 고정 표현 위 선형 분류 성능. 표현 품질 평가 표준 |
 | **[5.14] k-NN Classification Accuracy** | ↑ | 선형 탐침과 유사하면 구조 우수 | 임베딩 공간의 국소 구조 평가. 레이블 필요 |
 
+---
 
-## 6. 통계 : 밀도/공분산 추정 (Density/Covariance Estimation)<br>
+# 6. 통계 : 밀도/공분산 추정 (Density/Covariance Estimation) 모델에 대한 평가<br>
 주어진 데이터가 어떤 확률 분포에서 추출되었는지 통계적으로 추정하거나 변수 간의 관계 구조를 파악하는 기법.<br>
-**① GMM (Gaussian Mixture Model):** 복잡한 데이터 분포를 여러 개의 정규 분포(Gaussian)가 혼합된 형태로 가정하고, EM(Expectation-Maximization) 알고리즘을 통해 각 분포의 매개변수를 추정. 확률 기반의 유연한 군집화.<br>
-**② KDE (Kernel Density Estimation):** 개별 데이터 포인트에 커널 함수(주로 가우시안)를 적용한 뒤 이를 모두 더해 부드러운 확률 밀도 함수를 추정하는 비모수적(Non-parametric) 방식. 데이터의 실제 분포 형태를 부드러운 곡선으로 파악.<br>
-**③ Graphical Lasso:** 다변량 정규 분포를 가정하고, 변수들 간의 정밀도 행렬(Precision Matrix, 공분산 행렬의 역행렬)을 추정할 때 L1 정규화(Lasso)를 적용하여 조건부 독립 구조(희소한 그래프 구조)를 찾아내는 기법.<br>
+**① GMM (Gaussian Mixture Model):** <br>
+복잡한 데이터 분포를 여러 개의 정규 분포(Gaussian)가 혼합된 형태로 가정하고, EM(Expectation-Maximization) 알고리즘을 통해 각 분포의 매개변수를 추정. 확률 기반의 유연한 군집화.<br>
+**② KDE (Kernel Density Estimation):** <br>
+개별 데이터 포인트에 커널 함수(주로 가우시안)를 적용한 뒤 이를 모두 더해 부드러운 확률 밀도 함수를 추정하는 비모수적(Non-parametric) 방식. 데이터의 실제 분포 형태를 부드러운 곡선으로 파악.<br>
+**③ Graphical Lasso:** <br>
+다변량 정규 분포를 가정하고, 변수들 간의 정밀도 행렬(Precision Matrix, 공분산 행렬의 역행렬)을 추정할 때 L1 정규화(Lasso)를 적용하여 조건부 독립 구조(희소한 그래프 구조)를 찾아내는 기법.<br>
 <br>
 
 	# ============================================================
