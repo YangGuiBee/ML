@@ -311,6 +311,41 @@
 
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/1.clustering.png'> 	
 
+
+## ▣ 군집화 평가지표 수식
+
+| 지표 | 의미 | 수식 |
+|---|---|---|
+| **[1.1] Silhouette Coefficient (실루엣 계수)** | 한 점이 자기 군집 평균거리 $a(i)$ 대비 가장 가까운 다른 군집 평균거리 $b(i)$ 로 분리도 측정 | $s(i)=\dfrac{b(i)-a(i)}{\max\{a(i),\,b(i)\}}$<br>$\bar{s}=\dfrac{1}{n}\sum_{i=1}^{n}s(i)$ |
+| **[1.2] Davies–Bouldin Index (DBI)** | 군집 내 응집도 대비 군집 간 분리도 | $DBI=\dfrac{1}{K}\sum_{i=1}^{K}\max_{j\ne i}\dfrac{S_i+S_j}{M_{ij}}$<br>$S_i=\dfrac{1}{\lvert C_i\rvert}\sum_{x\in C_i}\lVert x-\mu_i\rVert,\; M_{ij}=\lVert\mu_i-\mu_j\rVert$ |
+| **[1.3] Dunn Index (DI)** | 가장 가까운 군집 간 최소거리 대비 최대 군집 지름 | $DI=\dfrac{\min_{i\ne j}\,\delta(C_i,C_j)}{\max_k\,\Delta(C_k)}$<br>$\delta$: 군집 간 최소거리, $\Delta$: 군집 지름(내부 최대거리) |
+| **[1.4] Calinski–Harabasz Index (CHI)** | 군집 사이 분산 / 군집 내 분산 | $CH=\dfrac{\mathrm{Tr}(B_K)/(K-1)}{\mathrm{Tr}(W_K)/(n-K)}$<br>$\mathrm{Tr}(B_K)=\sum_k \lvert C_k\rvert\,\lVert\mu_k-\bar{x}\rVert^2,\;\mathrm{Tr}(W_K)=\sum_k\sum_{x\in C_k}\lVert x-\mu_k\rVert^2$ |
+| **[1.5] Within-Cluster Sum of Squares (WCSS)** | 각 점이 군집 중심까지의 제곱거리 합 (K-means 목적함수) | $\mathrm{WCSS}=\sum_{k=1}^{K}\sum_{x\in C_k}\lVert x-\mu_k\rVert^{2}$ |
+| **[1.6] Elbow Method (엘보 방법)** | WCSS 감소 곡선에서 군집 수 증가에 따른 한계효과가 급감하는 지점 탐색 | $k^\*=\arg\min_k\{\text{기울기 변화가 급격히 감소하는 지점}\}$<br>(명시적 폐형식 수식 없음, 시각적 휴리스틱) |
+| **[1.7] Gap Statistic (갭 통계량)** | 실제 데이터 군집 품질과 무작위 기준 분포 간 차이로 최적 $k$ 선택 | $\mathrm{Gap}(k)=\mathbb{E}[\log(W_k^{\text{ref}})]-\log(W_k)$<br>$k^\*=\min\{k:\mathrm{Gap}(k)\ge\mathrm{Gap}(k+1)-s_{k+1}\}$ |
+| **[1.8] Information Criterion (AIC / BIC)** | 모델 적합도와 복잡도 간 균형으로 최적 군집 수 선택 | $\mathrm{AIC}=-2\log L+2p$<br>$\mathrm{BIC}=-2\log L+p\log n$ |
+| **[1.9] Connectivity (연결성)** | 가까운 이웃 샘플들이 동일 군집에 속하는 정도 측정 | $\mathrm{Conn}=\sum_{i=1}^{n}\sum_{j=1}^{L}\dfrac{1}{j}\,\mathbb{I}\!\left(c_i \neq c_{\mathrm{NN}_j(i)}\right)$ |
+| **[1.10] Xie–Beni Index (XBI)** | 퍼지 군집에서 군집 내 응집도 대비 군집 중심 간 분리도 | $XBI=\dfrac{\sum_{i=1}^{n}\sum_{k=1}^{K}u_{ik}^m\lVert x_i-v_k\rVert^2}{n\cdot\min_{i\ne j}\lVert v_i-v_j\rVert^2}$ |
+
+<br>
+
+## ▣ 군집화 평가지표 결과해석
+
+| 지표 | 목표 | 권장 해석 기준 | 비고 |
+| --- | --- | --- | --- |
+| **[1.1] Silhouette Coefficient (실루엣 계수)** | ↑(−1~1) | ≥ 0.70 우수, 0.50-0.69 양호, 0.25-0.49 보통, < 0.25 미흡 | 군집 내 응집 vs 인접 군집과 분리. 평균값과 군집별 분포를 함께 확인 권장 |
+| **[1.2] Davies–Bouldin Index (DBI)** | ↓(하한 0) | ≤ 0.50 우수, 0.51-0.99 양호, 1.00-1.49 보통, ≥ 1.50 미흡 | 군집 응집도 대비 중심 간 분리. 스케일·거리척도에 민감 |
+| **[1.3] Dunn Index (DI)** | ↑(상한 데이터 의존) | ≥ 0.50 우수, 0.30-0.49 양호, 0.10-0.29 보통, < 0.10 미흡 | 최소 군집 간 거리 / 최대 군집 지름. 값이 작게 나오는 경향, 이상치·밀도 차이에 민감 |
+| **[1.4] Calinski–Harabasz Index (CHI)** | ↑ | 절대 임계치 없음 → 동일 데이터에서 k 간 상대 비교, 국소 최대값 권장 | 군집 간 분산 / 군집 내 분산. k 증가 시 과대평가 가능 |
+| **[1.5] Within-Cluster Sum of Squares (WCSS)** | ↓ | 절대 임계치 없음 → 엘보우 지점에서 k 선택 | k 증가 시 단조 감소. 표준화 여부·특징 수에 크게 영향 |
+| **[1.6] Elbow Method (엘보 방법)** | 굴절점 탐색 | WCSS 감소 폭이 급격히 둔화되는 엘보우 지점 선택 | 정량 지표라기보다 시각적 휴리스틱, 주관성 존재 |
+| **[1.7] Gap Statistic (갭 통계량)** | ↑ | Gap(k)가 최대이거나 최초로 Gap(k) ≥ Gap(k+1) − s(k+1) 만족 | 무작위 기준 분포와 비교. 이론적 근거 우수하나 계산 비용 큼 |
+| **[1.8] Information Criterion (AIC / BIC)** | ↓ | 최소값을 갖는 k 선택 (일반적으로 BIC가 더 보수적) | 확률모형 기반(GMM 등)에서만 사용 가능 |
+| **[1.9] Connectivity (연결성)** | ↓ | 값이 작을수록 인접 샘플이 같은 군집에 속함 | 국소 구조 평가. 계층적 군집에 적합, 전역 구조 반영 약함 |
+| **[1.10] Xie–Beni Index (XBI)** | ↓ | 값이 작을수록 응집·분리 우수 | 퍼지 군집(Fuzzy C-means) 전용. 노이즈·이상치에 민감 |
+
+---
+
 ## 2. 연관 규칙 학습 (Association Rule Learning)<br>
 데이터베이스 내에서 항목들 간의 '조건-결과(If-Then)' 패턴과 동시 발생 관계를 찾아내는 기법. (주로 장바구니 분석)<br>
 **① Apriori (선험적 알고리즘):** 연관 규칙의 가장 고전적인 모델. '빈번하게 발생하는 항목 집합의 부분집합 역시 빈번하게 발생한다'는 원리를 이용해 탐색 공간을 줄여 규칙을 탐색.<br>
@@ -651,6 +686,79 @@
 
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/2.Association.png'> 	
 
+## ▣ 연관규칙 평가지표 수식
+       
+<!--
+| 지표 | 의미 | 수식 |
+|---|---|---|
+| **[2.1] Support (지지도)** | A와 B가 동시에 발생할 비율 | `support(A→B) = P(A ∧ B) = count(A ∧ B) / N` |
+| **[2.2] Confidence (신뢰도)** | A가 발생했을 때 B가 함께 발생할 조건부 확률 | `confidence(A→B) = P(B ∣ A) = P(A ∧ B) / P(A)` |
+| **[2.3] Lift (향상도)** | A와 B가 독립일 때 대비 연관 강도 | `lift(A→B) = P(A ∧ B) / ( P(A) · P(B) ) = confidence(A→B) / P(B)` |
+| **[2.4] Leverage (레버리지)** | 실제 동시 발생 확률과 독립 가정 하 기대 확률의 차이 | `leverage(A,B) = P(A ∧ B) − P(A) · P(B)` |
+| **[2.5] Conviction (확신도)** | 규칙이 없을 때의 B 부정 확률 대비, 규칙 적용 시 오류율 감소 | `conviction(A→B) = (1 − P(B)) / (1 − confidence(A→B))` |
+| **[2.6] Jaccard Coefficient (자카드 계수)** | A와 B의 교집합 대비 합집합 비율 | `J(A,B) = P(A ∧ B) / ( P(A) + P(B) − P(A ∧ B) )` |
+| **[2.7] Kulczynski Measure (쿨친스키 측정)** | 양방향 조건부 확률의 평균 | `Kulc(A,B) = 1/2 · ( P(A ∧ B)/P(A) + P(A ∧ B)/P(B) )` |
+| **[2.8] All-Confidence (전체 신뢰도)** | A 또는 B 중 더 드문 사건 기준의 신뢰도 | `all-conf(A,B) = P(A ∧ B) / max(P(A), P(B))` |
+| **[2.9] Chi-Square Test (카이제곱 검정)** | 독립성 가설 하에서 관측 빈도와 기대 빈도의 차이 | `χ² = Σ (O_ij − E_ij)² / E_ij` |
+| **[2.10] Collective Strength (집단 강도)** | 동시 발생 및 동시 비발생을 모두 고려한 연관 강도 | `CS = [P(A ∧ B)+P(¬A ∧ ¬B)] / [P(A)P(B)+P(¬A)P(¬B)] · [1 − (P(A)P(B)+P(¬A)P(¬B))] / [1 − (P(A ∧ B)+P(¬A ∧ ¬B))]` |
+| **[2.11] Phi Coefficient (φ, 상관계수)** | A–B 이진 변수 간 피어슨 상관계수 | `φ = ( P(A ∧ B) − P(A)P(B) ) / √( P(A)(1−P(A)) · P(B)(1−P(B)) )` |
+| **[2.12] Piatetsky–Shapiro (PS)** | 실제 동시 발생과 독립 가정 간 차이 | `PS(A,B) = P(A ∧ B) − P(A) · P(B)` |
+| **[2.13] Odds Ratio (오즈비)** | A 발생 시 B 발생 오즈 대비 비발생 오즈 | `OR = [P(A ∧ B) · P(¬A ∧ ¬B)] / [P(A ∧ ¬B) · P(¬A ∧ B)]` |
+| **[2.14] Yule's Q (율의 Q)** | 오즈비를 −1~1 범위로 정규화 | `Q = (OR − 1) / (OR + 1)` |
+| **[2.15] Yule's Y (율의 Y)** | 로그 오즈비 기반 대칭 연관 지표 | `Y = (√OR − 1) / (√OR + 1)` |
+| **[2.16] Information Gain (정보 이득)** | A 발생 여부가 B의 불확실성을 얼마나 줄이는지 | `IG(B\|A) = P(A)[ P(B\|A)·log(P(B\|A)/P(B)) + P(¬B\|A)·log(P(¬B\|A)/P(¬B)) ] + P(¬A)[ P(B\|¬A)·log(P(B\|¬A)/P(B)) + P(¬B\|¬A)·log(P(¬B\|¬A)/P(¬B)) ]` |
+| **[2.17] Zhang's Metric (장 메트릭)** | Lift의 비대칭성 및 불안정성 보정 | `Zhang = [P(A ∧ B) − P(A)P(B)] / max{ P(A ∧ B)P(¬A), P(A)P(¬B) }` |
+| **[2.18] Certainty Factor (확실성 인수)** | 규칙이 B의 신뢰를 얼마나 증가/감소시키는지 | `CF = (confidence − P(B)) / (1 − P(B))` (if confidence ≥ P(B)) |
+-->
+
+| 지표명 | 수식 | 설명 |
+|---------|------|------|
+| **[2.1] Support (지지도)** | ![](https://latex.codecogs.com/svg.image?support(A,B)=P(A\cap%20B)) | 전체 거래 중 A와 B가 동시에 발생하는 비율 |
+| **[2.2] Confidence (신뢰도)** | ![](https://latex.codecogs.com/svg.image?confidence(A\to%20B)=P(B\mid%20A)=\frac{P(A\cap%20B)}{P(A)}) | A가 발생했을 때 B가 함께 발생할 조건부 확률 |
+| **[2.3] Lift (향상도)** | ![](https://latex.codecogs.com/svg.image?lift(A\to%20B)=\frac{P(A\cap%20B)}{P(A)P(B)}) | 독립 가정 대비 A,B의 연관 강도 |
+| **[2.4] Leverage (레버리지)** | ![](https://latex.codecogs.com/svg.image?leverage(A,B)=P(A\cap%20B)-P(A)P(B)) | 실제 동시 발생과 기대 동시 발생의 차이 |
+| **[2.5] Conviction (확신도)** | ![](https://latex.codecogs.com/svg.image?conviction(A\to%20B)=\frac{1-P(B)}{1-confidence(A\to%20B)}) | 규칙 A→B의 오류 감소 정도 |
+| **[2.6] Jaccard Coefficient** | ![](https://latex.codecogs.com/svg.image?J(A,B)=\frac{P(A\cap%20B)}{P(A)+P(B)-P(A\cap%20B)}) | A,B의 교집합 대비 합집합 비율 |
+| **[2.7] Kulczynski Measure** | ![](https://latex.codecogs.com/svg.image?Kulc(A,B)=\frac{1}{2}\left(\frac{P(A\cap%20B)}{P(A)}+\frac{P(A\cap%20B)}{P(B)}\right)) | 양방향 조건부 확률의 평균 |
+| **[2.8] All-Confidence** | ![](https://latex.codecogs.com/svg.image?AllConf(A,B)=\frac{P(A\cap%20B)}{\max(P(A),P(B))}) | 더 드문 사건 기준의 신뢰도 |
+| **[2.9] Chi\text{-}Square Test** | ![](https://latex.codecogs.com/svg.image?\chi^2=\sum_{i,j}\frac{(O_{ij}-E_{ij})^2}{E_{ij}}) | 관측 빈도와 기대 빈도의 차이로 독립성 검정 |
+| **[2.10] Collective Strength** | ![](https://latex.codecogs.com/svg.image?CS=\frac{P(A\cap%20B)+P(\neg%20A\cap\neg%20B)}{P(A)P(B)+P(\neg%20A)P(\neg%20B)}\cdot\frac{1-[P(A)P(B)+P(\neg%20A)P(\neg%20B)]}{1-[P(A\cap%20B)+P(\neg%20A\cap\neg%20B)]}) | 동시 발생·동시 비발생을 함께 고려한 연관성 |
+| **[2.11] Phi Coefficient (φ)** | ![](https://latex.codecogs.com/svg.image?\phi=\frac{P(A\cap%20B)-P(A)P(B)}{\sqrt{P(A)(1-P(A))P(B)(1-P(B))}}) | 이진 변수 A,B 간 피어슨 상관계수 |
+| **[2.12] Piatetsky–Shapiro** | ![](https://latex.codecogs.com/svg.image?PS(A,B)=P(A\cap%20B)-P(A)P(B)) | 실제 동시 발생과 독립 가정 차이 |
+| **[2.13] Odds Ratio** | ![](https://latex.codecogs.com/svg.image?OR=\frac{P(A\cap%20B)P(\neg%20A\cap\neg%20B)}{P(A\cap\neg%20B)P(\neg%20A\cap%20B)}) | 오즈 기반 연관 강도 |
+| **[2.14] Yule's Q** | ![](https://latex.codecogs.com/svg.image?Q=\frac{OR-1}{OR+1}) | 오즈비를 −1~1로 정규화 |
+| **[2.15] Yule's Y** | ![](https://latex.codecogs.com/svg.image?Y=\frac{\sqrt{OR}-1}{\sqrt{OR}+1}) | 로그 오즈비 기반 대칭 연관 지표 |
+| **[2.16] Information Gain** | ![](https://latex.codecogs.com/svg.image?IG(B\mid%20A)=\sum_{a\in\{A,\neg%20A\}}\sum_{b\in\{B,\neg%20B\}}P(a,b)\log\frac{P(a,b)}{P(a)P(b)}) | A 정보가 B의 불확실성을 얼마나 감소시키는지 |
+| **[2.17] Zhang's Metric** | ![](https://latex.codecogs.com/svg.image?Zhang=\frac{P(A\cap%20B)-P(A)P(B)}{\max(P(A\cap%20B)P(\neg%20A),P(A)P(\neg%20B))}) | Lift의 비대칭·불안정성 보정 |
+| **[2.18] Certainty Factor** | ![](https://latex.codecogs.com/svg.image?CF=\frac{confidence-P(B)}{1-P(B)}) | 규칙이 B 신뢰도를 얼마나 증가/감소시키는지 |
+
+<br>
+
+## ▣ 연관규칙 평가지표 결과해석
+
+| 지표 | 목표 | 권장 해석 기준 | 비고 |
+| --- | --- | --- | --- |
+| **[2.1] 지지도 (Support)** | 전체 거래 중 A와 B가 함께 등장하는 비율<br>→ 규칙의 빈도·보편성 평가 | 값이 높을수록 빈발한 규칙<br>보통 `0.01~0.05` 이상이면 의미 있음 (도메인 의존) | 빈도 기반 필터로 가장 먼저 사용<br>너무 낮으면 희귀, 너무 높으면 일반 규칙 |
+| **[2.2] 신뢰도 (Confidence)** | A 발생 시 B도 발생할 조건부 확률<br>→ 규칙의 정확도 | 값이 1에 가까울수록 강한 규칙<br>보통 `0.6~0.9` 이상이면 신뢰 높음 | B 단독 빈도가 높으면 과대평가 가능 |
+| **[2.3] 향상도 (Lift)** | 독립 가정 대비 A,B 동시 발생 강도<br>→ 상관성 평가 | &gt; 1 : 양의 상관<br>= 1 : 독립<br>&lt; 1 : 음의 상관 | Confidence의 편향 보정<br>가장 널리 쓰이는 지표 |
+| **[2.4] 레버리지 (Leverage)** | 독립 가정 대비 실제 동시 발생의 초과분 | 양수: 양의 상관<br>0: 독립<br>음수: 음의 상관 | 확률 차이를 직접 표현<br>범위는 대략 `[-0.25, +0.25]` |
+| **[2.5] 확신도 (Conviction)** | A→B 규칙의 오류 감소 정도<br>→ 방향성·일관성 | =1: 독립<br>&gt;1: 긍정적 규칙<br>&lt;1: 부정적 규칙 | Lift와 달리 **방향성** 반영 |
+| **[2.6] Jaccard Coefficient** | A,B 공통 발생 비율을 합집합 대비 측정 | 0~1 범위<br>값이 클수록 유사 | 빈도 작은 항목에 유리<br>대칭 지표 |
+| **[2.7] Kulczynski Measure** | 양방향 조건부 확률 평균 | 0~1 범위<br>0.5 ≈ 독립 | 불균형 데이터에 비교적 안정 |
+| **[2.8] All-Confidence** | 더 드문 사건 기준 신뢰도 | 0~1 범위<br>값이 클수록 강한 규칙 | 희귀 이벤트 분석에 적합 |
+| **[2.9] Chi-Square Test** | A,B 독립성 가설 검정 | χ² 값이 클수록 독립성 기각 | 표본 수에 매우 민감<br>통계적 유의성 지표 |
+| **[2.10] Collective Strength** | 동시 발생 + 동시 비발생 고려 연관성 | =1: 독립<br>&gt;1: 양의 연관 | ¬A, ¬B까지 포함한 대칭 지표 |
+| **[2.11] Phi Coefficient (φ)** | A,B 이진 변수 상관계수 | +1: 완전 양의 상관<br>0: 독립<br>-1: 완전 음의 상관 | Pearson 상관의 이진 버전 |
+| **[2.12] Piatetsky–Shapiro (PS)** | 실제 동시 발생 − 기대 동시 발생 | 0: 독립<br>양수: 양의 연관 | Leverage와 동일한 형태 |
+| **[2.13] Odds Ratio (오즈비)** | A 발생 시 B 발생 오즈 비율 | &gt;1: 양의 연관<br>=1: 독립<br>&lt;1: 음의 연관 | 2×2 분할표 기반<br>극단값에 민감 |
+| **[2.14] Yule’s Q** | 오즈비를 −1~1로 정규화 | +1: 완전 양의 연관<br>0: 독립<br>-1: 완전 음의 연관 | OR의 스케일 문제 완화 |
+| **[2.15] Yule’s Y** | 로그 오즈비 기반 대칭 지표 | −1~1 범위 | Q보다 완만한 변화 |
+| **[2.16] Information Gain** | A 여부가 B의 불확실성을 얼마나 감소시키는지 | 값이 클수록 정보 제공 큼 | 엔트로피 기반<br>표본 수 적으면 불안정 |
+| **[2.17] Zhang’s Metric** | Lift의 비대칭·불안정성 보정 | 0: 독립<br>양수: 양의 연관 | Confidence·Lift 한계 보완 |
+| **[2.18] Certainty Factor** | 규칙이 B 신뢰를 얼마나 증가/감소 | 양수: 신뢰 증가<br>음수: 신뢰 감소 | 전문가 시스템에서 유래 |
+
+---
+
 ## 3. 차원 축소 (Dimensionality Reduction)<br>
 고차원 데이터의 핵심 정보(분산, 구조 등)를 최대한 보존하면서 시각화나 연산 효율을 위해 저차원으로 압축하는 기법.<br>
 **① PCA (Principal Component Analysis):** 데이터의 분산(Variance)을 가장 잘 설명하는 새로운 축(주성분)을 찾아 투영하는 선형 차원 축소 기법. 전처리 단계에서 노이즈 제거 및 다중공선성 해결을 위해 기본적.<br>
@@ -886,6 +994,53 @@
 
 
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/3.Dimensionality.png'> 	
+
+
+## ▣ 차원축소 평가지표 수식
+
+| 지표명 | 수식 | 설명 |
+|---------|------|------|
+| **[3.1] Reconstruction Error (재구성 오류)** | ![](https://latex.codecogs.com/svg.image?RE%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5C%7C%20x_i%20-%20%5Chat%7Bx%7D_i%20%5C%7C%5E2) | 원본 데이터와 복원된 데이터 간 평균 제곱 오차. 값이 작을수록 정보 손실이 적음. |
+| **[3.2] Explained Variance Ratio (설명된 분산 비율)** | ![](https://latex.codecogs.com/svg.image?EVR_k%20%3D%20%5Cfrac%7B%5Csum_%7Bi%3D1%7D%5E%7Bk%7D%20%5Clambda_i%7D%7B%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Clambda_i%7D) | 상위 k개 성분이 전체 분산에서 차지하는 비율. PCA에서 차원 선택 기준. |
+| **[3.3] Mutual Information (상호 정보량)** | ![](https://latex.codecogs.com/svg.image?MI(X%2CY)%20%3D%20%5Csum_%7Bx%20%5Cin%20X%7D%20%5Csum_%7By%20%5Cin%20Y%7D%20p(x%2Cy)%5Clog%5Cfrac%7Bp(x%2Cy)%7D%7Bp(x)p(y)%7D) | 차원 축소 전후 변수 간 정보 공유 정도. 값이 클수록 정보 보존이 우수. |
+| **[3.4] Trustworthiness (신뢰성)** | ![](https://latex.codecogs.com/svg.image?T(k)%20%3D%201%20-%20%5Cfrac%7B2%7D%7Bnk(2n-3k-1)%7D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Csum_%7Bj%20%5Cin%20U_k(i)%7D%20(r(i%2Cj)%20-%20k)) | 고차원에서 이웃이 아니던 점이 저차원에서 잘못 이웃이 되는 정도 측정. |
+| **[3.5] Continuity (연속성)** | ![](https://latex.codecogs.com/svg.image?C(k)%20%3D%201%20-%20%5Cfrac%7B2%7D%7Bnk(2n-3k-1)%7D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Csum_%7Bj%20%5Cin%20V_k(i)%7D%20(r'(i%2Cj)%20-%20k)) | 저차원에서 이웃이던 점이 고차원에서 멀어지는 정도를 평가. |
+| **[3.6] Stress (MDS)** | ![](https://latex.codecogs.com/svg.image?Stress%20%3D%20%5Csqrt%7B%5Cfrac%7B%5Csum_%7Bi%3Cj%7D(d_%7Bij%7D-%5Chat%7Bd%7D_%7Bij%7D)%5E2%7D%7B%5Csum_%7Bi%3Cj%7Dd_%7Bij%7D%5E2%7D%7D) | 고차원 거리와 저차원 거리 간 상대 오차. 작을수록 거리 보존 우수. |
+| **[3.7] Sammon Error (새먼 오차)** | ![](https://latex.codecogs.com/svg.image?E_%7BSammon%7D%20%3D%20%5Cfrac%7B1%7D%7B%5Csum_%7Bi%3Cj%7D%20d_%7Bij%7D%7D%20%5Csum_%7Bi%3Cj%7D%20%5Cfrac%7B(d_%7Bij%7D-%5Chat%7Bd%7D_%7Bij%7D)%5E2%7D%7Bd_%7Bij%7D%7D) | 가까운 점 쌍의 거리 보존을 더 강하게 반영한 오차 지표. |
+| **[3.8] LCMC (Local Continuity Meta-Criterion)** | ![](https://latex.codecogs.com/svg.image?LCMC%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Cfrac%7B%7CN_H(i)%5Ccap%20N_L(i)%7C%7D%7Bk%7D%20-%20%5Cfrac%7Bk%7D%7Bn-1%7D) | 고차원·저차원 k-이웃 겹침 비율로 지역/전역 구조 보존 평가. |
+| **[3.9] Spearman’s ρ (순위 상관계수)** | ![](https://latex.codecogs.com/svg.image?%5Crho%20%3D%201%20-%20%5Cfrac%7B6%5Csum_%7Bi%3D1%7D%5E%7BN%7D(r_i%20-%20s_i)%5E2%7D%7BN(N%5E2%20-%201)%7D) | 거리 또는 이웃 순위의 일관성 평가. ρ=1이면 완전 보존. |
+| **[3.10] Silhouette Score** | ![](https://latex.codecogs.com/svg.image?s(i)%20%3D%20%5Cfrac%7Bb(i)%20-%20a(i)%7D%7B%5Cmax(a(i)%2C%20b(i))%7D) | 군집 내 응집도와 군집 간 분리도 동시 평가. |
+| **[3.11] Davies–Bouldin Index (DBI)** | ![](https://latex.codecogs.com/svg.image?DBI%20%3D%20%5Cfrac%7B1%7D%7Bk%7D%5Csum_%7Bi%3D1%7D%5E%7Bk%7D%20%5Cmax_%7Bj%5Cne%20i%7D%20%5Cfrac%7B%5Csigma_i%2B%5Csigma_j%7D%7Bd(c_i%2Cc_j)%7D) | 군집 내 분산 대비 군집 간 중심 거리 비율. 낮을수록 군집 품질 우수. |
+| **[3.12] MSE (Mean Squared Error)** | ![](https://latex.codecogs.com/svg.image?MSE%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20(x_i-%5Chat%7Bx%7D_i)%5E2) | 재구성 기반 차원축소 모델의 평균 제곱 오차. |
+| **[3.13] Cumulative Explained Variance** | ![](https://latex.codecogs.com/svg.image?CEV_k%20%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bk%7D%20EVR_i) | 누적 설명 분산으로 차원 수 선택에 활용. |
+| **[3.14] Scree Plot** | ![](https://latex.codecogs.com/svg.image?%5Clambda_1%20%5Cge%20%5Clambda_2%20%5Cge%20%5Ccdots) | 고유값 감소 패턴을 시각화하여 엘보우 지점 확인. |
+| **[3.15] Procrustes Analysis** | ![](https://latex.codecogs.com/svg.image?D%20%3D%20%5Cmin_%7BR%2Ct%2Cs%7D%20%5C%7C%20X%20-%20sYR%20-%20t%20%5C%7C_F) | 두 임베딩 간 회전·이동·스케일 정렬 후 차이 측정. |
+| **[3.16] Neighborhood Preservation** | ![](https://latex.codecogs.com/svg.image?NP%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Cfrac%7B%7CN_H(i)%5Ccap%20N_L(i)%7C%7D%7Bk%7D) | 고차원 이웃 구조가 저차원에서 얼마나 유지되는지 평가. |
+| **[3.17] KL Divergence (KL 발산)** | ![](https://latex.codecogs.com/svg.image?D_{KL}(P%20%5Cparallel%20Q)%20%3D%20%5Csum_i%20P(i)%5Clog%5Cfrac%7BP(i)%7D%7BQ(i)%7D) | 고차원 분포와 저차원 분포 간 차이 측정. t-SNE 최적화의 핵심 목적함수. |
+
+<br>
+
+## ▣ 차원축소 평가지표 결과해석
+
+| 지표명 | 목표 | 권장 해석 기준 | 비고 |
+| ------------------------------------- | ------- | --------------------------------------------------- | ------------------------------------------------------- |
+| **[3.1] 재구성 오류 (Reconstruction Error)** | ↓ | ≤ 0.05 우수, 0.05-0.10 양호, > 0.10 미흡 | (정규화 MSE) 주로 선형 DR(PCA)·오토인코더에서 사용. k 스윕 후 엘보우로 차원 결정 권장 |
+| **[3.2] 분산 유지율 (Explained Variance Ratio)** | ↑ | ≥ 0.95 우수, 0.90-0.95 양호, < 0.90 미흡 | (누적 EVR) PCA 등 선형 DR에 특화. 도메인상 필요한 분산 비율을 사전에 정하면 좋음 |
+| **[3.3] 상호 정보량 (Mutual Information)** | ↑ | 0.6 이상 양호 | (NMI 권장값) 절대 임계치보다는 동일 조건 간 상대 비교. 라벨 있을 때 원라벨 vs 임베딩 정보량 비교 |
+| **[3.4] 근접도 보존 – Trustworthiness** | ↑ | ≥ 0.95 우수, 0.90-0.95 양호, 0.85-0.89 보통, < 0.85 미흡 | 저차원 이웃 중 거짓 이웃(false neighbor)이 얼마나 적은지. t-SNE, UMAP 평가에 표준적으로 사용 |
+| **[3.5] 근접도 보존 – Continuity** | ↑ | ≥ 0.95 우수, 0.90-0.95 양호, 0.85-0.89 보통, < 0.85 미흡 | 고차원 이웃이 저차원에서도 유지되는 정도. Trustworthiness와 쌍으로 해석 |
+| **[3.6] 거리 보존 – Stress (MDS)** | ↓ | < 0.05 우수, 0.05-0.10 양호, 0.10-0.20 보통, > 0.20 미흡 | Kruskal Stress. 고전 MDS 기준. 거리 스케일에 민감 → 표준화 권장 |
+| **[3.7] 거리 보존 – Sammon Error** | ↓ | 0.1 내외 양호 | 짧은 거리 보존에 가중. 지역 구조 보존에 민감, outlier 영향 큼 |
+| **[3.8] LCMC (Local Continuity Meta-Criterion)** | ↑ | ≥ 0.90 우수, 0.80-0.89 양호, 0.70-0.79 보통 | 고차원·저차원 k-NN 겹침 비율 기반. 지역·전역 구조 종합 평가 |
+| **[3.9] Spearman’s ρ (순위 상관계수)** | ↑ | ≥ 0.90 우수, 0.80-0.89 양호, 0.60-0.79 보통, < 0.60 미흡 | 쌍거리 순위 일관성 평가. 전역 기하 보존. 계산량 큼 (O(n²)) |
+| **[3.10] Silhouette Score** | ↑ | ≥ 0.70 우수, 0.50-0.69 양호, 0.25-0.49 보통, < 0.25 미흡 | 임베딩 결과에서 군집 형성 품질 평가. 거리척도·스케일 영향 큼 |
+| **[3.11] Davies–Bouldin Index (DBI)** | ↓ | ≤ 0.50 우수, 0.51-0.99 양호, 1.00-1.49 보통, ≥ 1.50 미흡 | 군집 응집 대비 분리. 임베딩 스케일·거리척도에 민감 |
+| **[3.12] MSE (Mean Squared Error)** | ↓ | 0에 가까울수록 우수 | 재구성 기반 DR의 기본 오차 지표. 차원 수 증가 시 단조 감소 |
+| **[3.13] 누적 설명 분산 (Cumulative Explained Variance)** | ↑ | ≥ 0.90-0.95 권장 | PCA 차원 선택의 대표 기준. Scree plot과 함께 사용 |
+| **[3.14] Scree Plot (스크리 플롯)** | 엘보우 탐색 | 급격한 감소 후 완만해지는 지점 | 정량 지표라기보다 시각적 휴리스틱. 주관성 존재 |
+| **[3.15] Procrustes Analysis** | ↓ | 0에 가까울수록 유사 | 두 임베딩 간 회전·이동·스케일 정렬 후 차이 측정. 임베딩 비교에 유용 |
+| **[3.16] Neighborhood Preservation** | ↑ | ≥ 0.90 우수, 0.80-0.89 양호 | 고차원 이웃 구조가 저차원에서도 유지되는 비율 |
+| **[3.17] KL Divergence (KL 발산)** | ↓ | 작을수록 분포 유사 | 고차원·저차원 확률분포 차이. t-SNE 최적화의 핵심 목적함수 (비대칭) |
 
 ---
 
@@ -1683,69 +1838,15 @@
 
 ---
 
-#  07-1 : 군집화 평가지표
+#  [1] 군집화 평가지표
 
----
+**[1-1] Silhouette Coefficient** <br>
+**[1-2] Davies-Bouldin Index(DBI)** <br>
+**[1-3] Dunn Index(DI)** scikit-learn 미제공으로 커스텀 구현 <br>
+**[1-4] Calinski-Harabasz Index(CHI)** <br>
+**[1-5] Within-Cluster Sum of Squares(WCSS = inertia)** <br>
 
-	[1] Silhouette Coefficient : 실루엣 계수
-	[2] Davies-Bouldin Index (DBI)
-	[3] Dunn Index (DI)
-	[4] Calinski-Harabasz Index (CHI)
-	[5] Within-Cluster Sum of Squares (WCSS) : 군집내 제곱합
-	  
----
-
-
-## ▣ 군집화 평가지표 수식
-
-| 지표 | 의미 | 수식 |
-|---|---|---|
-| **[1.1] Silhouette Coefficient (실루엣 계수)** | 한 점이 자기 군집 평균거리 $a(i)$ 대비 가장 가까운 다른 군집 평균거리 $b(i)$ 로 분리도 측정 | $s(i)=\dfrac{b(i)-a(i)}{\max\{a(i),\,b(i)\}}$<br>$\bar{s}=\dfrac{1}{n}\sum_{i=1}^{n}s(i)$ |
-| **[1.2] Davies–Bouldin Index (DBI)** | 군집 내 응집도 대비 군집 간 분리도 | $DBI=\dfrac{1}{K}\sum_{i=1}^{K}\max_{j\ne i}\dfrac{S_i+S_j}{M_{ij}}$<br>$S_i=\dfrac{1}{\lvert C_i\rvert}\sum_{x\in C_i}\lVert x-\mu_i\rVert,\; M_{ij}=\lVert\mu_i-\mu_j\rVert$ |
-| **[1.3] Dunn Index (DI)** | 가장 가까운 군집 간 최소거리 대비 최대 군집 지름 | $DI=\dfrac{\min_{i\ne j}\,\delta(C_i,C_j)}{\max_k\,\Delta(C_k)}$<br>$\delta$: 군집 간 최소거리, $\Delta$: 군집 지름(내부 최대거리) |
-| **[1.4] Calinski–Harabasz Index (CHI)** | 군집 사이 분산 / 군집 내 분산 | $CH=\dfrac{\mathrm{Tr}(B_K)/(K-1)}{\mathrm{Tr}(W_K)/(n-K)}$<br>$\mathrm{Tr}(B_K)=\sum_k \lvert C_k\rvert\,\lVert\mu_k-\bar{x}\rVert^2,\;\mathrm{Tr}(W_K)=\sum_k\sum_{x\in C_k}\lVert x-\mu_k\rVert^2$ |
-| **[1.5] Within-Cluster Sum of Squares (WCSS)** | 각 점이 군집 중심까지의 제곱거리 합 (K-means 목적함수) | $\mathrm{WCSS}=\sum_{k=1}^{K}\sum_{x\in C_k}\lVert x-\mu_k\rVert^{2}$ |
-| **[1.6] Elbow Method (엘보 방법)** | WCSS 감소 곡선에서 군집 수 증가에 따른 한계효과가 급감하는 지점 탐색 | $k^\*=\arg\min_k\{\text{기울기 변화가 급격히 감소하는 지점}\}$<br>(명시적 폐형식 수식 없음, 시각적 휴리스틱) |
-| **[1.7] Gap Statistic (갭 통계량)** | 실제 데이터 군집 품질과 무작위 기준 분포 간 차이로 최적 $k$ 선택 | $\mathrm{Gap}(k)=\mathbb{E}[\log(W_k^{\text{ref}})]-\log(W_k)$<br>$k^\*=\min\{k:\mathrm{Gap}(k)\ge\mathrm{Gap}(k+1)-s_{k+1}\}$ |
-| **[1.8] Information Criterion (AIC / BIC)** | 모델 적합도와 복잡도 간 균형으로 최적 군집 수 선택 | $\mathrm{AIC}=-2\log L+2p$<br>$\mathrm{BIC}=-2\log L+p\log n$ |
-| **[1.9] Connectivity (연결성)** | 가까운 이웃 샘플들이 동일 군집에 속하는 정도 측정 | $\mathrm{Conn}=\sum_{i=1}^{n}\sum_{j=1}^{L}\dfrac{1}{j}\,\mathbb{I}\!\left(c_i \neq c_{\mathrm{NN}_j(i)}\right)$ |
-| **[1.10] Xie–Beni Index (XBI)** | 퍼지 군집에서 군집 내 응집도 대비 군집 중심 간 분리도 | $XBI=\dfrac{\sum_{i=1}^{n}\sum_{k=1}^{K}u_{ik}^m\lVert x_i-v_k\rVert^2}{n\cdot\min_{i\ne j}\lVert v_i-v_j\rVert^2}$ |
-
-<br>
-
-## ▣ 군집화 평가지표 결과해석
-
-| 지표 | 목표 | 권장 해석 기준 | 비고 |
-| --- | --- | --- | --- |
-| **[1.1] Silhouette Coefficient (실루엣 계수)** | ↑(−1~1) | ≥ 0.70 우수, 0.50-0.69 양호, 0.25-0.49 보통, < 0.25 미흡 | 군집 내 응집 vs 인접 군집과 분리. 평균값과 군집별 분포를 함께 확인 권장 |
-| **[1.2] Davies–Bouldin Index (DBI)** | ↓(하한 0) | ≤ 0.50 우수, 0.51-0.99 양호, 1.00-1.49 보통, ≥ 1.50 미흡 | 군집 응집도 대비 중심 간 분리. 스케일·거리척도에 민감 |
-| **[1.3] Dunn Index (DI)** | ↑(상한 데이터 의존) | ≥ 0.50 우수, 0.30-0.49 양호, 0.10-0.29 보통, < 0.10 미흡 | 최소 군집 간 거리 / 최대 군집 지름. 값이 작게 나오는 경향, 이상치·밀도 차이에 민감 |
-| **[1.4] Calinski–Harabasz Index (CHI)** | ↑ | 절대 임계치 없음 → 동일 데이터에서 k 간 상대 비교, 국소 최대값 권장 | 군집 간 분산 / 군집 내 분산. k 증가 시 과대평가 가능 |
-| **[1.5] Within-Cluster Sum of Squares (WCSS)** | ↓ | 절대 임계치 없음 → 엘보우 지점에서 k 선택 | k 증가 시 단조 감소. 표준화 여부·특징 수에 크게 영향 |
-| **[1.6] Elbow Method (엘보 방법)** | 굴절점 탐색 | WCSS 감소 폭이 급격히 둔화되는 엘보우 지점 선택 | 정량 지표라기보다 시각적 휴리스틱, 주관성 존재 |
-| **[1.7] Gap Statistic (갭 통계량)** | ↑ | Gap(k)가 최대이거나 최초로 Gap(k) ≥ Gap(k+1) − s(k+1) 만족 | 무작위 기준 분포와 비교. 이론적 근거 우수하나 계산 비용 큼 |
-| **[1.8] Information Criterion (AIC / BIC)** | ↓ | 최소값을 갖는 k 선택 (일반적으로 BIC가 더 보수적) | 확률모형 기반(GMM 등)에서만 사용 가능 |
-| **[1.9] Connectivity (연결성)** | ↓ | 값이 작을수록 인접 샘플이 같은 군집에 속함 | 국소 구조 평가. 계층적 군집에 적합, 전역 구조 반영 약함 |
-| **[1.10] Xie–Beni Index (XBI)** | ↓ | 값이 작을수록 응집·분리 우수 | 퍼지 군집(Fuzzy C-means) 전용. 노이즈·이상치에 민감 |
-
-
-<br>
-
-
-### Iris 데이터 + K-means(k=3) 학습 후 평가지표 5종 출력 소스
-
-**[1] Silhouette Coefficient**
-<br>
-**[2] Davies-Bouldin Index(DBI)**
-<br>
-**[3] Dunn Index(DI)** scikit-learn 미제공으로 커스텀 구현
-<br>
-**[4] Calinski-Harabasz Index(CHI)**
-<br>
-**[5] Within-Cluster Sum of Squares(WCSS = inertia)**
-<br>
-
-
+	# Iris 데이터 + K-means(k=3) 학습 후 평가지표 5종 출력 소스
 	# ---------- 경고 방지용 환경변수: 반드시 상단에서 설정 ----------
 	import os
 	os.environ["OMP_NUM_THREADS"] = "1"       # OpenMP 스레드
@@ -1854,118 +1955,16 @@
 
 ---
 
-#  07-2 : 연관규칙 평가지표
+#  [2] 연관규칙 평가지표
 
----
+**[1] 지지도(Support)** <br>
+**[2] 신뢰도(Confidence)** <br> 
+**[3] 향상도(Lift)** <br> 
+**[4] 레버리지(Leverage)** <br> 
+**[5] 확신도(Conviction)** <br> 
+**[6] 상관계수(Correlation Coefficient)** <br>
 	
-	[1] 지지도(Support)
-	[2] 신뢰도(Confidence)
-	[3] 향상도(Lift)
-	[4] 레버리지(Leverage)
-	[5] 확신도(Conviction)
-	[6] 상관계수(Correlation Coefficient)
-	  
----
-
-## ▣ 연관규칙 평가지표 수식
-           
-| 지표 | 의미 | 수식 |
-| --- | --- | --- |
-| **[1] 지지도(Support)**  | A와 B가 동시에 발생할 비율 | `support(A→B) = P(A ∧ B) = count(A ∧ B) / N` |
-| **[2] 신뢰도(Confidence)** | A가 발생했을 때 B가 함께 발생할 조건부 확률 | `confidence(A→B) = P(B ∣ A) = P(A ∧ B) / P(A)` |
-| **[3] 향상도(Lift)** | 독립 가정 대비 연관 강도 | `lift(A→B) = P(A ∧ B) / ( P(A) · P(B) ) = confidence(A→B) / P(B)` |
-| **[4] 레버리지(Leverage)** | 실제 동시발생과 기대 동시발생의 차이 | `leverage(A,B) = P(A ∧ B) − P(A)·P(B)` |
-| **[5] 확신도(Conviction)** | 규칙이 없을 때의 B 부정 확률 대비, 규칙 하의 오류율 감소 | `conviction(A→B) = (1 − P(B)) / (1 − confidence(A→B))`  |
-| **[6] 상관계수(Correlation)** | A–B 이진 상관(피어슨 φ) | `φ(A,B) = ( P(A ∧ B) − P(A)·P(B) ) / √( P(A)(1−P(A)) · P(B)(1−P(B)) )` |
-
-<!--
-| 지표 | 의미 | 수식 |
-|---|---|---|
-| **[2.1] Support (지지도)** | A와 B가 동시에 발생할 비율 | `support(A→B) = P(A ∧ B) = count(A ∧ B) / N` |
-| **[2.2] Confidence (신뢰도)** | A가 발생했을 때 B가 함께 발생할 조건부 확률 | `confidence(A→B) = P(B ∣ A) = P(A ∧ B) / P(A)` |
-| **[2.3] Lift (향상도)** | A와 B가 독립일 때 대비 연관 강도 | `lift(A→B) = P(A ∧ B) / ( P(A) · P(B) ) = confidence(A→B) / P(B)` |
-| **[2.4] Leverage (레버리지)** | 실제 동시 발생 확률과 독립 가정 하 기대 확률의 차이 | `leverage(A,B) = P(A ∧ B) − P(A) · P(B)` |
-| **[2.5] Conviction (확신도)** | 규칙이 없을 때의 B 부정 확률 대비, 규칙 적용 시 오류율 감소 | `conviction(A→B) = (1 − P(B)) / (1 − confidence(A→B))` |
-| **[2.6] Jaccard Coefficient (자카드 계수)** | A와 B의 교집합 대비 합집합 비율 | `J(A,B) = P(A ∧ B) / ( P(A) + P(B) − P(A ∧ B) )` |
-| **[2.7] Kulczynski Measure (쿨친스키 측정)** | 양방향 조건부 확률의 평균 | `Kulc(A,B) = 1/2 · ( P(A ∧ B)/P(A) + P(A ∧ B)/P(B) )` |
-| **[2.8] All-Confidence (전체 신뢰도)** | A 또는 B 중 더 드문 사건 기준의 신뢰도 | `all-conf(A,B) = P(A ∧ B) / max(P(A), P(B))` |
-| **[2.9] Chi-Square Test (카이제곱 검정)** | 독립성 가설 하에서 관측 빈도와 기대 빈도의 차이 | `χ² = Σ (O_ij − E_ij)² / E_ij` |
-| **[2.10] Collective Strength (집단 강도)** | 동시 발생 및 동시 비발생을 모두 고려한 연관 강도 | `CS = [P(A ∧ B)+P(¬A ∧ ¬B)] / [P(A)P(B)+P(¬A)P(¬B)] · [1 − (P(A)P(B)+P(¬A)P(¬B))] / [1 − (P(A ∧ B)+P(¬A ∧ ¬B))]` |
-| **[2.11] Phi Coefficient (φ, 상관계수)** | A–B 이진 변수 간 피어슨 상관계수 | `φ = ( P(A ∧ B) − P(A)P(B) ) / √( P(A)(1−P(A)) · P(B)(1−P(B)) )` |
-| **[2.12] Piatetsky–Shapiro (PS)** | 실제 동시 발생과 독립 가정 간 차이 | `PS(A,B) = P(A ∧ B) − P(A) · P(B)` |
-| **[2.13] Odds Ratio (오즈비)** | A 발생 시 B 발생 오즈 대비 비발생 오즈 | `OR = [P(A ∧ B) · P(¬A ∧ ¬B)] / [P(A ∧ ¬B) · P(¬A ∧ B)]` |
-| **[2.14] Yule's Q (율의 Q)** | 오즈비를 −1~1 범위로 정규화 | `Q = (OR − 1) / (OR + 1)` |
-| **[2.15] Yule's Y (율의 Y)** | 로그 오즈비 기반 대칭 연관 지표 | `Y = (√OR − 1) / (√OR + 1)` |
-| **[2.16] Information Gain (정보 이득)** | A 발생 여부가 B의 불확실성을 얼마나 줄이는지 | `IG(B\|A) = P(A)[ P(B\|A)·log(P(B\|A)/P(B)) + P(¬B\|A)·log(P(¬B\|A)/P(¬B)) ] + P(¬A)[ P(B\|¬A)·log(P(B\|¬A)/P(B)) + P(¬B\|¬A)·log(P(¬B\|¬A)/P(¬B)) ]` |
-| **[2.17] Zhang's Metric (장 메트릭)** | Lift의 비대칭성 및 불안정성 보정 | `Zhang = [P(A ∧ B) − P(A)P(B)] / max{ P(A ∧ B)P(¬A), P(A)P(¬B) }` |
-| **[2.18] Certainty Factor (확실성 인수)** | 규칙이 B의 신뢰를 얼마나 증가/감소시키는지 | `CF = (confidence − P(B)) / (1 − P(B))` (if confidence ≥ P(B)) |
--->
-
-| 지표명 | 수식 | 설명 |
-|---------|------|------|
-| **[2.1] Support (지지도)** | ![](https://latex.codecogs.com/svg.image?support(A,B)=P(A\cap%20B)) | 전체 거래 중 A와 B가 동시에 발생하는 비율 |
-| **[2.2] Confidence (신뢰도)** | ![](https://latex.codecogs.com/svg.image?confidence(A\to%20B)=P(B\mid%20A)=\frac{P(A\cap%20B)}{P(A)}) | A가 발생했을 때 B가 함께 발생할 조건부 확률 |
-| **[2.3] Lift (향상도)** | ![](https://latex.codecogs.com/svg.image?lift(A\to%20B)=\frac{P(A\cap%20B)}{P(A)P(B)}) | 독립 가정 대비 A,B의 연관 강도 |
-| **[2.4] Leverage (레버리지)** | ![](https://latex.codecogs.com/svg.image?leverage(A,B)=P(A\cap%20B)-P(A)P(B)) | 실제 동시 발생과 기대 동시 발생의 차이 |
-| **[2.5] Conviction (확신도)** | ![](https://latex.codecogs.com/svg.image?conviction(A\to%20B)=\frac{1-P(B)}{1-confidence(A\to%20B)}) | 규칙 A→B의 오류 감소 정도 |
-| **[2.6] Jaccard Coefficient** | ![](https://latex.codecogs.com/svg.image?J(A,B)=\frac{P(A\cap%20B)}{P(A)+P(B)-P(A\cap%20B)}) | A,B의 교집합 대비 합집합 비율 |
-| **[2.7] Kulczynski Measure** | ![](https://latex.codecogs.com/svg.image?Kulc(A,B)=\frac{1}{2}\left(\frac{P(A\cap%20B)}{P(A)}+\frac{P(A\cap%20B)}{P(B)}\right)) | 양방향 조건부 확률의 평균 |
-| **[2.8] All-Confidence** | ![](https://latex.codecogs.com/svg.image?AllConf(A,B)=\frac{P(A\cap%20B)}{\max(P(A),P(B))}) | 더 드문 사건 기준의 신뢰도 |
-| **[2.9] Chi\text{-}Square Test** | ![](https://latex.codecogs.com/svg.image?\chi^2=\sum_{i,j}\frac{(O_{ij}-E_{ij})^2}{E_{ij}}) | 관측 빈도와 기대 빈도의 차이로 독립성 검정 |
-| **[2.10] Collective Strength** | ![](https://latex.codecogs.com/svg.image?CS=\frac{P(A\cap%20B)+P(\neg%20A\cap\neg%20B)}{P(A)P(B)+P(\neg%20A)P(\neg%20B)}\cdot\frac{1-[P(A)P(B)+P(\neg%20A)P(\neg%20B)]}{1-[P(A\cap%20B)+P(\neg%20A\cap\neg%20B)]}) | 동시 발생·동시 비발생을 함께 고려한 연관성 |
-| **[2.11] Phi Coefficient (φ)** | ![](https://latex.codecogs.com/svg.image?\phi=\frac{P(A\cap%20B)-P(A)P(B)}{\sqrt{P(A)(1-P(A))P(B)(1-P(B))}}) | 이진 변수 A,B 간 피어슨 상관계수 |
-| **[2.12] Piatetsky–Shapiro** | ![](https://latex.codecogs.com/svg.image?PS(A,B)=P(A\cap%20B)-P(A)P(B)) | 실제 동시 발생과 독립 가정 차이 |
-| **[2.13] Odds Ratio** | ![](https://latex.codecogs.com/svg.image?OR=\frac{P(A\cap%20B)P(\neg%20A\cap\neg%20B)}{P(A\cap\neg%20B)P(\neg%20A\cap%20B)}) | 오즈 기반 연관 강도 |
-| **[2.14] Yule's Q** | ![](https://latex.codecogs.com/svg.image?Q=\frac{OR-1}{OR+1}) | 오즈비를 −1~1로 정규화 |
-| **[2.15] Yule's Y** | ![](https://latex.codecogs.com/svg.image?Y=\frac{\sqrt{OR}-1}{\sqrt{OR}+1}) | 로그 오즈비 기반 대칭 연관 지표 |
-| **[2.16] Information Gain** | ![](https://latex.codecogs.com/svg.image?IG(B\mid%20A)=\sum_{a\in\{A,\neg%20A\}}\sum_{b\in\{B,\neg%20B\}}P(a,b)\log\frac{P(a,b)}{P(a)P(b)}) | A 정보가 B의 불확실성을 얼마나 감소시키는지 |
-| **[2.17] Zhang's Metric** | ![](https://latex.codecogs.com/svg.image?Zhang=\frac{P(A\cap%20B)-P(A)P(B)}{\max(P(A\cap%20B)P(\neg%20A),P(A)P(\neg%20B))}) | Lift의 비대칭·불안정성 보정 |
-| **[2.18] Certainty Factor** | ![](https://latex.codecogs.com/svg.image?CF=\frac{confidence-P(B)}{1-P(B)}) | 규칙이 B 신뢰도를 얼마나 증가/감소시키는지 |
-
-<br>
-
-## ▣ 연관규칙 평가지표 결과해석
-
-| 지표 | 목표 | 권장 해석 기준 | 비고 |
-| --- | --- | --- | --- |
-| **[2.1] 지지도 (Support)** | 전체 거래 중 A와 B가 함께 등장하는 비율<br>→ 규칙의 빈도·보편성 평가 | 값이 높을수록 빈발한 규칙<br>보통 `0.01~0.05` 이상이면 의미 있음 (도메인 의존) | 빈도 기반 필터로 가장 먼저 사용<br>너무 낮으면 희귀, 너무 높으면 일반 규칙 |
-| **[2.2] 신뢰도 (Confidence)** | A 발생 시 B도 발생할 조건부 확률<br>→ 규칙의 정확도 | 값이 1에 가까울수록 강한 규칙<br>보통 `0.6~0.9` 이상이면 신뢰 높음 | B 단독 빈도가 높으면 과대평가 가능 |
-| **[2.3] 향상도 (Lift)** | 독립 가정 대비 A,B 동시 발생 강도<br>→ 상관성 평가 | &gt; 1 : 양의 상관<br>= 1 : 독립<br>&lt; 1 : 음의 상관 | Confidence의 편향 보정<br>가장 널리 쓰이는 지표 |
-| **[2.4] 레버리지 (Leverage)** | 독립 가정 대비 실제 동시 발생의 초과분 | 양수: 양의 상관<br>0: 독립<br>음수: 음의 상관 | 확률 차이를 직접 표현<br>범위는 대략 `[-0.25, +0.25]` |
-| **[2.5] 확신도 (Conviction)** | A→B 규칙의 오류 감소 정도<br>→ 방향성·일관성 | =1: 독립<br>&gt;1: 긍정적 규칙<br>&lt;1: 부정적 규칙 | Lift와 달리 **방향성** 반영 |
-| **[2.6] Jaccard Coefficient** | A,B 공통 발생 비율을 합집합 대비 측정 | 0~1 범위<br>값이 클수록 유사 | 빈도 작은 항목에 유리<br>대칭 지표 |
-| **[2.7] Kulczynski Measure** | 양방향 조건부 확률 평균 | 0~1 범위<br>0.5 ≈ 독립 | 불균형 데이터에 비교적 안정 |
-| **[2.8] All-Confidence** | 더 드문 사건 기준 신뢰도 | 0~1 범위<br>값이 클수록 강한 규칙 | 희귀 이벤트 분석에 적합 |
-| **[2.9] Chi-Square Test** | A,B 독립성 가설 검정 | χ² 값이 클수록 독립성 기각 | 표본 수에 매우 민감<br>통계적 유의성 지표 |
-| **[2.10] Collective Strength** | 동시 발생 + 동시 비발생 고려 연관성 | =1: 독립<br>&gt;1: 양의 연관 | ¬A, ¬B까지 포함한 대칭 지표 |
-| **[2.11] Phi Coefficient (φ)** | A,B 이진 변수 상관계수 | +1: 완전 양의 상관<br>0: 독립<br>-1: 완전 음의 상관 | Pearson 상관의 이진 버전 |
-| **[2.12] Piatetsky–Shapiro (PS)** | 실제 동시 발생 − 기대 동시 발생 | 0: 독립<br>양수: 양의 연관 | Leverage와 동일한 형태 |
-| **[2.13] Odds Ratio (오즈비)** | A 발생 시 B 발생 오즈 비율 | &gt;1: 양의 연관<br>=1: 독립<br>&lt;1: 음의 연관 | 2×2 분할표 기반<br>극단값에 민감 |
-| **[2.14] Yule’s Q** | 오즈비를 −1~1로 정규화 | +1: 완전 양의 연관<br>0: 독립<br>-1: 완전 음의 연관 | OR의 스케일 문제 완화 |
-| **[2.15] Yule’s Y** | 로그 오즈비 기반 대칭 지표 | −1~1 범위 | Q보다 완만한 변화 |
-| **[2.16] Information Gain** | A 여부가 B의 불확실성을 얼마나 감소시키는지 | 값이 클수록 정보 제공 큼 | 엔트로피 기반<br>표본 수 적으면 불안정 |
-| **[2.17] Zhang’s Metric** | Lift의 비대칭·불안정성 보정 | 0: 독립<br>양수: 양의 연관 | Confidence·Lift 한계 보완 |
-| **[2.18] Certainty Factor** | 규칙이 B 신뢰를 얼마나 증가/감소 | 양수: 신뢰 증가<br>음수: 신뢰 감소 | 전문가 시스템에서 유래 |
-
-
-
-
-### Groceries 데이터 + Apriori 학습 후 평가지표 6종 출력 소스
-
-**[1] 지지도(Support)**
-<br>
-**[2] 신뢰도(Confidence)**
-<br> 
-**[3] 향상도(Lift)**
-<br> 
-**[4] 레버리지(Leverage)**
-<br> 
-**[5] 확신도(Conviction)**
-<br> 
-**[6] 상관계수(Correlation Coefficient)**
-<br>
-	
-	
+	# Groceries 데이터 + Apriori 학습 후 평가지표 6종 출력 소스
 	import os
 	import io
 	import warnings
@@ -2177,104 +2176,23 @@
 
 ---
 
-#  07-3 : 차원축소 평가지표
-
----
-	
-	▣ 재구성 기반 : 원본 복원 능력
-	[1] 재구성 오류(Reconstruction Error)
-	[2] 분산 유지율(Explained Variance Ratio)
-	[3] 상호 정보량(Mutual Information)
-
-	▣ 구조 보존 기반 : 거리·이웃 관계 유지
-	[4] 근접도 보존(Trustworthiness, Continuity)
-	[5] 거리/유사도 보존(Stress, Sammon Error)
-	[6] 지역/전역구조(Local Continuity Meta Criterion)
-	[7] 쌍의 상관계수(Spearman’s ρ)
-
-	▣ 활용 성능 기반 : 축소된 표현의 유용성
-	[8] Silhouette Score
-	[9] Davies-Bouldin Index(DBI)
-	[10] Adjusted Rand Index(ARI)
-	[11] Normalized Mutual Information(NMI)
-	  
----
-
-## ▣ 차원축소 평가지표 수식
-
-| 지표명 | 수식 | 설명 |
-|---------|------|------|
-| **[3.1] Reconstruction Error (재구성 오류)** | ![](https://latex.codecogs.com/svg.image?RE%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5C%7C%20x_i%20-%20%5Chat%7Bx%7D_i%20%5C%7C%5E2) | 원본 데이터와 복원된 데이터 간 평균 제곱 오차. 값이 작을수록 정보 손실이 적음. |
-| **[3.2] Explained Variance Ratio (설명된 분산 비율)** | ![](https://latex.codecogs.com/svg.image?EVR_k%20%3D%20%5Cfrac%7B%5Csum_%7Bi%3D1%7D%5E%7Bk%7D%20%5Clambda_i%7D%7B%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Clambda_i%7D) | 상위 k개 성분이 전체 분산에서 차지하는 비율. PCA에서 차원 선택 기준. |
-| **[3.3] Mutual Information (상호 정보량)** | ![](https://latex.codecogs.com/svg.image?MI(X%2CY)%20%3D%20%5Csum_%7Bx%20%5Cin%20X%7D%20%5Csum_%7By%20%5Cin%20Y%7D%20p(x%2Cy)%5Clog%5Cfrac%7Bp(x%2Cy)%7D%7Bp(x)p(y)%7D) | 차원 축소 전후 변수 간 정보 공유 정도. 값이 클수록 정보 보존이 우수. |
-| **[3.4] Trustworthiness (신뢰성)** | ![](https://latex.codecogs.com/svg.image?T(k)%20%3D%201%20-%20%5Cfrac%7B2%7D%7Bnk(2n-3k-1)%7D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Csum_%7Bj%20%5Cin%20U_k(i)%7D%20(r(i%2Cj)%20-%20k)) | 고차원에서 이웃이 아니던 점이 저차원에서 잘못 이웃이 되는 정도 측정. |
-| **[3.5] Continuity (연속성)** | ![](https://latex.codecogs.com/svg.image?C(k)%20%3D%201%20-%20%5Cfrac%7B2%7D%7Bnk(2n-3k-1)%7D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Csum_%7Bj%20%5Cin%20V_k(i)%7D%20(r'(i%2Cj)%20-%20k)) | 저차원에서 이웃이던 점이 고차원에서 멀어지는 정도를 평가. |
-| **[3.6] Stress (MDS)** | ![](https://latex.codecogs.com/svg.image?Stress%20%3D%20%5Csqrt%7B%5Cfrac%7B%5Csum_%7Bi%3Cj%7D(d_%7Bij%7D-%5Chat%7Bd%7D_%7Bij%7D)%5E2%7D%7B%5Csum_%7Bi%3Cj%7Dd_%7Bij%7D%5E2%7D%7D) | 고차원 거리와 저차원 거리 간 상대 오차. 작을수록 거리 보존 우수. |
-| **[3.7] Sammon Error (새먼 오차)** | ![](https://latex.codecogs.com/svg.image?E_%7BSammon%7D%20%3D%20%5Cfrac%7B1%7D%7B%5Csum_%7Bi%3Cj%7D%20d_%7Bij%7D%7D%20%5Csum_%7Bi%3Cj%7D%20%5Cfrac%7B(d_%7Bij%7D-%5Chat%7Bd%7D_%7Bij%7D)%5E2%7D%7Bd_%7Bij%7D%7D) | 가까운 점 쌍의 거리 보존을 더 강하게 반영한 오차 지표. |
-| **[3.8] LCMC (Local Continuity Meta-Criterion)** | ![](https://latex.codecogs.com/svg.image?LCMC%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Cfrac%7B%7CN_H(i)%5Ccap%20N_L(i)%7C%7D%7Bk%7D%20-%20%5Cfrac%7Bk%7D%7Bn-1%7D) | 고차원·저차원 k-이웃 겹침 비율로 지역/전역 구조 보존 평가. |
-| **[3.9] Spearman’s ρ (순위 상관계수)** | ![](https://latex.codecogs.com/svg.image?%5Crho%20%3D%201%20-%20%5Cfrac%7B6%5Csum_%7Bi%3D1%7D%5E%7BN%7D(r_i%20-%20s_i)%5E2%7D%7BN(N%5E2%20-%201)%7D) | 거리 또는 이웃 순위의 일관성 평가. ρ=1이면 완전 보존. |
-| **[3.10] Silhouette Score** | ![](https://latex.codecogs.com/svg.image?s(i)%20%3D%20%5Cfrac%7Bb(i)%20-%20a(i)%7D%7B%5Cmax(a(i)%2C%20b(i))%7D) | 군집 내 응집도와 군집 간 분리도 동시 평가. |
-| **[3.11] Davies–Bouldin Index (DBI)** | ![](https://latex.codecogs.com/svg.image?DBI%20%3D%20%5Cfrac%7B1%7D%7Bk%7D%5Csum_%7Bi%3D1%7D%5E%7Bk%7D%20%5Cmax_%7Bj%5Cne%20i%7D%20%5Cfrac%7B%5Csigma_i%2B%5Csigma_j%7D%7Bd(c_i%2Cc_j)%7D) | 군집 내 분산 대비 군집 간 중심 거리 비율. 낮을수록 군집 품질 우수. |
-| **[3.12] MSE (Mean Squared Error)** | ![](https://latex.codecogs.com/svg.image?MSE%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20(x_i-%5Chat%7Bx%7D_i)%5E2) | 재구성 기반 차원축소 모델의 평균 제곱 오차. |
-| **[3.13] Cumulative Explained Variance** | ![](https://latex.codecogs.com/svg.image?CEV_k%20%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bk%7D%20EVR_i) | 누적 설명 분산으로 차원 수 선택에 활용. |
-| **[3.14] Scree Plot** | ![](https://latex.codecogs.com/svg.image?%5Clambda_1%20%5Cge%20%5Clambda_2%20%5Cge%20%5Ccdots) | 고유값 감소 패턴을 시각화하여 엘보우 지점 확인. |
-| **[3.15] Procrustes Analysis** | ![](https://latex.codecogs.com/svg.image?D%20%3D%20%5Cmin_%7BR%2Ct%2Cs%7D%20%5C%7C%20X%20-%20sYR%20-%20t%20%5C%7C_F) | 두 임베딩 간 회전·이동·스케일 정렬 후 차이 측정. |
-| **[3.16] Neighborhood Preservation** | ![](https://latex.codecogs.com/svg.image?NP%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Cfrac%7B%7CN_H(i)%5Ccap%20N_L(i)%7C%7D%7Bk%7D) | 고차원 이웃 구조가 저차원에서 얼마나 유지되는지 평가. |
-| **[3.17] KL Divergence (KL 발산)** | ![](https://latex.codecogs.com/svg.image?D_{KL}(P%20%5Cparallel%20Q)%20%3D%20%5Csum_i%20P(i)%5Clog%5Cfrac%7BP(i)%7D%7BQ(i)%7D) | 고차원 분포와 저차원 분포 간 차이 측정. t-SNE 최적화의 핵심 목적함수. |
-
-<br>
-
-## ▣ 차원축소 평가지표 결과해석
-
-| 지표명 | 목표 | 권장 해석 기준 | 비고 |
-| ------------------------------------- | ------- | --------------------------------------------------- | ------------------------------------------------------- |
-| **[3.1] 재구성 오류 (Reconstruction Error)** | ↓ | ≤ 0.05 우수, 0.05-0.10 양호, > 0.10 미흡 | (정규화 MSE) 주로 선형 DR(PCA)·오토인코더에서 사용. k 스윕 후 엘보우로 차원 결정 권장 |
-| **[3.2] 분산 유지율 (Explained Variance Ratio)** | ↑ | ≥ 0.95 우수, 0.90-0.95 양호, < 0.90 미흡 | (누적 EVR) PCA 등 선형 DR에 특화. 도메인상 필요한 분산 비율을 사전에 정하면 좋음 |
-| **[3.3] 상호 정보량 (Mutual Information)** | ↑ | 0.6 이상 양호 | (NMI 권장값) 절대 임계치보다는 동일 조건 간 상대 비교. 라벨 있을 때 원라벨 vs 임베딩 정보량 비교 |
-| **[3.4] 근접도 보존 – Trustworthiness** | ↑ | ≥ 0.95 우수, 0.90-0.95 양호, 0.85-0.89 보통, < 0.85 미흡 | 저차원 이웃 중 거짓 이웃(false neighbor)이 얼마나 적은지. t-SNE, UMAP 평가에 표준적으로 사용 |
-| **[3.5] 근접도 보존 – Continuity** | ↑ | ≥ 0.95 우수, 0.90-0.95 양호, 0.85-0.89 보통, < 0.85 미흡 | 고차원 이웃이 저차원에서도 유지되는 정도. Trustworthiness와 쌍으로 해석 |
-| **[3.6] 거리 보존 – Stress (MDS)** | ↓ | < 0.05 우수, 0.05-0.10 양호, 0.10-0.20 보통, > 0.20 미흡 | Kruskal Stress. 고전 MDS 기준. 거리 스케일에 민감 → 표준화 권장 |
-| **[3.7] 거리 보존 – Sammon Error** | ↓ | 0.1 내외 양호 | 짧은 거리 보존에 가중. 지역 구조 보존에 민감, outlier 영향 큼 |
-| **[3.8] LCMC (Local Continuity Meta-Criterion)** | ↑ | ≥ 0.90 우수, 0.80-0.89 양호, 0.70-0.79 보통 | 고차원·저차원 k-NN 겹침 비율 기반. 지역·전역 구조 종합 평가 |
-| **[3.9] Spearman’s ρ (순위 상관계수)** | ↑ | ≥ 0.90 우수, 0.80-0.89 양호, 0.60-0.79 보통, < 0.60 미흡 | 쌍거리 순위 일관성 평가. 전역 기하 보존. 계산량 큼 (O(n²)) |
-| **[3.10] Silhouette Score** | ↑ | ≥ 0.70 우수, 0.50-0.69 양호, 0.25-0.49 보통, < 0.25 미흡 | 임베딩 결과에서 군집 형성 품질 평가. 거리척도·스케일 영향 큼 |
-| **[3.11] Davies–Bouldin Index (DBI)** | ↓ | ≤ 0.50 우수, 0.51-0.99 양호, 1.00-1.49 보통, ≥ 1.50 미흡 | 군집 응집 대비 분리. 임베딩 스케일·거리척도에 민감 |
-| **[3.12] MSE (Mean Squared Error)** | ↓ | 0에 가까울수록 우수 | 재구성 기반 DR의 기본 오차 지표. 차원 수 증가 시 단조 감소 |
-| **[3.13] 누적 설명 분산 (Cumulative Explained Variance)** | ↑ | ≥ 0.90-0.95 권장 | PCA 차원 선택의 대표 기준. Scree plot과 함께 사용 |
-| **[3.14] Scree Plot (스크리 플롯)** | 엘보우 탐색 | 급격한 감소 후 완만해지는 지점 | 정량 지표라기보다 시각적 휴리스틱. 주관성 존재 |
-| **[3.15] Procrustes Analysis** | ↓ | 0에 가까울수록 유사 | 두 임베딩 간 회전·이동·스케일 정렬 후 차이 측정. 임베딩 비교에 유용 |
-| **[3.16] Neighborhood Preservation** | ↑ | ≥ 0.90 우수, 0.80-0.89 양호 | 고차원 이웃 구조가 저차원에서도 유지되는 비율 |
-| **[3.17] KL Divergence (KL 발산)** | ↓ | 작을수록 분포 유사 | 고차원·저차원 확률분포 차이. t-SNE 최적화의 핵심 목적함수 (비대칭) |
-
-
-### Iris 데이터 + PCA(Principal Component Analysis) 학습 후 평가지표 11종 출력 소스
-
-**[1] 재구성 오류(Reconstruction Error)**
-<br>
-**[2] 분산 유지율(Explained Variance Ratio)**
-<br>
-**[3] 상호 정보량(Mutual Information)**
-<br>
-**[4-1] 근접도 보존(Trustworthiness, Continuity)**
-<br>
-**[4-2] 근접도 보존(Trustworthiness, Continuity)**
-<br>
-**[5-1] 거리/유사도 보존(Stress, Sammon Error)**
-<br>
-**[5-2] 거리/유사도 보존(Stress, Sammon Error)**
-<br>
-**[6] 지역/전역구조(Local Continuity Meta Criterion)**
-<br>
-**[7] 쌍의 상관계수(Spearman’s ρ)**
-<br>
-**[8] Silhouette Score**
-<br>
-**[9] Davies-Bouldin Index(DBI)**
-<br>
-**[10] Adjusted Rand Index(ARI)**
-<br>
-**[11] Normalized Mutual Information(NMI)**
-<br>
+#  [3] 차원축소 평가지표
+(재구성 기반 : 원본 복원 능력) <br>
+**[3-1] 재구성 오류(Reconstruction Error)** <br>
+**[3-2] 분산 유지율(Explained Variance Ratio)** <br>
+**[3-3] 상호 정보량(Mutual Information)** <br>
+(구조 보존 기반 : 거리·이웃 관계 유지) <br>
+**[3-4-1] 근접도 보존(Trustworthiness, Continuity)** <br>
+**[3-4-2] 근접도 보존(Trustworthiness, Continuity)** <br>
+**[3-5-1] 거리/유사도 보존(Stress, Sammon Error)** <br>
+**[3-5-2] 거리/유사도 보존(Stress, Sammon Error)** <br>
+**[3-6] 지역/전역구조(Local Continuity Meta Criterion)** <br>
+**[3-7] 쌍의 상관계수(Spearman’s ρ)** <br>
+(활용 성능 기반 : 축소된 표현의 유용성) <br>
+**[3-8] Silhouette Score** <br>
+**[3-9] Davies-Bouldin Index(DBI)** <br>
+**[3-10] Adjusted Rand Index(ARI)** <br>
+**[3-11] Normalized Mutual Information(NMI)** <br>
 
 
 
@@ -2481,39 +2399,39 @@
 	    X_rec = pca.inverse_transform(Z)
 	
 	    # ---- Metrics ----
-	    rec_err = float(np.mean((X_std - X_rec)**2))                         # [1] Reconstruction Error
-	    evr_sum = float(np.sum(pca.explained_variance_ratio_))               # [2] EVR sum
-	    mi_avg  = float(np.mean(mutual_info_classif(Z, y, random_state=42))) # [3] MI avg (components vs y)
-	    trust   = float(trustworthiness_custom(X_std, Z, n_neighbors=k_neighbors)) # [4-1] Trustworthiness
-	    cont    = float(continuity_custom(X_std, Z, n_neighbors=k_neighbors))      # [4-2] Continuity
-	    stress  = float(kruskal_stress(X_std, Z))                            # [5-1] Kruskal Stress-1 (↓)
-	    sammon  = float(sammon_error(X_std, Z))                              # [5-2] Sammon Error (↓)
-	    lcmc_k, qnx = lcmc(X_std, Z, n_neighbors=k_neighbors)                # [6]  LCMC@k (with Q_NX)
-	    rho     = float(spearman_r_from_distances(X_std, Z))                 # [7]  Spearman ρ
+	    rec_err = float(np.mean((X_std - X_rec)**2))                         # [3-1] Reconstruction Error
+	    evr_sum = float(np.sum(pca.explained_variance_ratio_))               # [3-2] EVR sum
+	    mi_avg  = float(np.mean(mutual_info_classif(Z, y, random_state=42))) # [3-3] MI avg (components vs y)
+	    trust   = float(trustworthiness_custom(X_std, Z, n_neighbors=k_neighbors)) # [3-4-1] Trustworthiness
+	    cont    = float(continuity_custom(X_std, Z, n_neighbors=k_neighbors))      # [3-4-2] Continuity
+	    stress  = float(kruskal_stress(X_std, Z))                            # [3-5-1] Kruskal Stress-1 (↓)
+	    sammon  = float(sammon_error(X_std, Z))                              # [3-5-2] Sammon Error (↓)
+	    lcmc_k, qnx = lcmc(X_std, Z, n_neighbors=k_neighbors)                # [3-6]  LCMC@k (with Q_NX)
+	    rho     = float(spearman_r_from_distances(X_std, Z))                 # [3-7]  Spearman ρ
 	
 	    # Clustering-based metrics (on embedding)
 	    kmeans = KMeans(n_clusters=3, n_init=20, random_state=42)
 	    labels_pred = kmeans.fit_predict(Z)
 	
-	    sil = float(silhouette_score(Z, y, metric="euclidean"))              # [8] Silhouette (y on Z)
-	    dbi = float(davies_bouldin_score(Z, y))                              # [9] DBI (↓)
-	    ari = float(adjusted_rand_score(y, labels_pred))                     # [10] ARI
-	    nmi = float(normalized_mutual_info_score(y, labels_pred))            # [11] NMI
+	    sil = float(silhouette_score(Z, y, metric="euclidean"))              # [3-8] Silhouette (y on Z)
+	    dbi = float(davies_bouldin_score(Z, y))                              # [3-9] DBI (↓)
+	    ari = float(adjusted_rand_score(y, labels_pred))                     # [3-10] ARI
+	    nmi = float(normalized_mutual_info_score(y, labels_pred))            # [3-11] NMI
 	
 	    rows = [
-	        ("[1]  Reconstruction Error (MSE, std space)", rec_err),
-	        ("[2]  Explained Variance Ratio (sum, 2 comps)", evr_sum),
-	        ("[3]  Mutual Information avg(Z_i; y)", mi_avg),
-	        (f"[4-1] Trustworthiness@k={k_neighbors}", trust),
-	        (f"[4-2] Continuity@k={k_neighbors}", cont),
-	        ("[5-1] Kruskal Stress-1 (↓)", stress),
-	        ("[5-2] Sammon Error (↓)", sammon),
-	        (f"[6]  LCMC@k={k_neighbors}", lcmc_k),
-	        ("[7]  Spearman ρ (pairwise distances)", rho),
-	        ("[8]  Silhouette Score (using y on Z)", sil),
-	        ("[9]  Davies–Bouldin Index (using y on Z, ↓)", dbi),
-	        ("[10] Adjusted Rand Index (KMeans(Z) vs y)", ari),
-	        ("[11] Normalized Mutual Information (KMeans(Z) vs y)", nmi),
+	        ("[3-1]  Reconstruction Error (MSE, std space)", rec_err),
+	        ("[3-2]  Explained Variance Ratio (sum, 2 comps)", evr_sum),
+	        ("[3-3]  Mutual Information avg(Z_i; y)", mi_avg),
+	        (f"[3-4-1] Trustworthiness@k={k_neighbors}", trust),
+	        (f"[3-4-2] Continuity@k={k_neighbors}", cont),
+	        ("[3-5-1] Kruskal Stress-1 (↓)", stress),
+	        ("[3-5-2] Sammon Error (↓)", sammon),
+	        (f"[3-6]  LCMC@k={k_neighbors}", lcmc_k),
+	        ("[3-7]  Spearman ρ (pairwise distances)", rho),
+	        ("[3-8]  Silhouette Score (using y on Z)", sil),
+	        ("[3-9]  Davies–Bouldin Index (using y on Z, ↓)", dbi),
+	        ("[3-10] Adjusted Rand Index (KMeans(Z) vs y)", ari),
+	        ("[3-11] Normalized Mutual Information (KMeans(Z) vs y)", nmi),
 	    ]
 	    df = pd.DataFrame(rows, columns=["Metric", "Value"])
 	
@@ -2531,19 +2449,19 @@
 	Iris PCA (2D) Evaluation Summary
 	------------------------------------------
 	Metric    Value
-	[1]  Reconstruction Error (MSE, std space) 0.041868
-	[2]  Explained Variance Ratio (sum, 2 comps) 0.958132
-	[3]  Mutual Information avg(Z_i; y) 0.551648
-	[4-1] Trustworthiness@k=10 0.977963
-	[4-2] Continuity@k=10 0.990622
-	[5-1] Kruskal Stress-1 (↓) 0.062736
-	[5-2] Sammon Error (↓) 0.009755
-	[6]  LCMC@k=10 0.665553
-	[7]  Spearman ρ (pairwise distances) 0.993385
-	[8]  Silhouette Score (using y on Z) 0.401387
-	[9]  Davies–Bouldin Index (using y on Z, ↓) 0.955460
-	[10] Adjusted Rand Index (KMeans(Z) vs y) 0.620135
-	[11] Normalized Mutual Information (KMeans(Z) vs y) 0.659487
+	[3-1]  Reconstruction Error (MSE, std space) 0.041868
+	[3-2]  Explained Variance Ratio (sum, 2 comps) 0.958132
+	[3-3]  Mutual Information avg(Z_i; y) 0.551648
+	[3-4-1] Trustworthiness@k=10 0.977963
+	[3-4-2] Continuity@k=10 0.990622
+	[3-5-1] Kruskal Stress-1 (↓) 0.062736
+	[3-5-2] Sammon Error (↓) 0.009755
+	[3-6]  LCMC@k=10 0.665553
+	[3-7]  Spearman ρ (pairwise distances) 0.993385
+	[3-8]  Silhouette Score (using y on Z) 0.401387
+	[3-9]  Davies–Bouldin Index (using y on Z, ↓) 0.955460
+	[3-10] Adjusted Rand Index (KMeans(Z) vs y) 0.620135
+	[3-11] Normalized Mutual Information (KMeans(Z) vs y) 0.659487
 
 	Explained Variance Ratio per component:
   	PC1: 0.729624
@@ -2552,19 +2470,19 @@
   
 ### (결과 분석)
 
-	[1]  Reconstruction Error (MSE, std space) 0.041868 → 우수
-	[2]  Explained Variance Ratio (sum, 2 comps) 0.958132 → 우수
-	[3]  Mutual Information avg(Z_i; y) 0.551648 → 양호
-	[4-1] Trustworthiness@k=10 0.977963 → 우수
-	[4-2] Continuity@k=10 0.990622 → 우수
-	[5-1] Kruskal Stress-1 (↓) 0.062736 → 우수
-	[5-2] Sammon Error (↓) 0.009755 → 우수
-	[6]  LCMC@k=10 0.665553 → 우수
-	[7]  Spearman ρ (pairwise distances) 0.993385 → 우수
-	[8]  Silhouette Score (using y on Z) 0.401387 → 양호
-	[9]  Davies–Bouldin Index (using y on Z, ↓) 0.955460 → 양호
-	[10] Adjusted Rand Index (KMeans(Z) vs y) 0.620135 → 양호
-	[11] Normalized Mutual Information (KMeans(Z) vs y) 0.659487 → 양호
+	[3-1]  Reconstruction Error (MSE, std space) 0.041868 → 우수
+	[3-2]  Explained Variance Ratio (sum, 2 comps) 0.958132 → 우수
+	[3-3]  Mutual Information avg(Z_i; y) 0.551648 → 양호
+	[3-4-1] Trustworthiness@k=10 0.977963 → 우수
+	[3-4-2] Continuity@k=10 0.990622 → 우수
+	[3-5-1] Kruskal Stress-1 (↓) 0.062736 → 우수
+	[3-5-2] Sammon Error (↓) 0.009755 → 우수
+	[3-6]  LCMC@k=10 0.665553 → 우수
+	[3-7]  Spearman ρ (pairwise distances) 0.993385 → 우수
+	[3-8]  Silhouette Score (using y on Z) 0.401387 → 양호
+	[3-9]  Davies–Bouldin Index (using y on Z, ↓) 0.955460 → 양호
+	[3-10] Adjusted Rand Index (KMeans(Z) vs y) 0.620135 → 양호
+	[3-11] Normalized Mutual Information (KMeans(Z) vs y) 0.659487 → 양호
 
 
 <!--
