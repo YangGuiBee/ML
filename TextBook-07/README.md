@@ -1288,6 +1288,45 @@
 
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/4.Outlier.png'> 		
 
+## ▣ 이상치 탐지 평가지표 수식
+
+| 지표 | 수식 | 설명 |
+|---|---|---|
+| **[4.1] Isolation Score (고립 점수)** | `score(x) ∝ 1 / E[h(x)]` | Isolation Forest에서 샘플이 얼마나 빨리 고립되는지 나타내는 점수. 값이 클수록 이상치 가능성 높음. |
+| **[4.2] Average Path Length (Isolation Forest)** | `E[h(x)] = c(n) · 2^{−E(h(x))/c(n)}` | 샘플이 트리에서 고립되기까지의 평균 경로 길이. 짧을수록 이상치. |
+| **[4.3] LOF Score (Local Outlier Factor)** | `LOF_k(x) = ( Σ_{y∈N_k(x)} lrd_k(y) / |N_k(x)| ) / lrd_k(x)` | 국소 밀도 기반 이상치 점수. 1보다 크면 주변 대비 밀도가 낮아 이상치 가능성 큼. |
+| **[4.4] DBSCAN Noise Points Ratio** | `noise_ratio = (# noise points) / N` | DBSCAN에서 잡음으로 분류된 점의 비율. 높을수록 이상치가 많거나 파라미터 부적절 가능성. |
+| **[4.5] Reconstruction Error (Autoencoder)** | `RE(x) = || x − x̂ ||²` | 입력과 재구성 결과 간 오차. 값이 클수록 정상 패턴에서 벗어남. |
+| **[4.6] Likelihood-based Score (GMM, KDE)** | `score(x) = − log p(x)` | 확률 모델에서의 음의 로그우도. 확률이 낮을수록 이상치 가능성 큼. |
+| **[4.7] Mahalanobis Distance** | `D_M(x) = sqrt((x−μ)^T Σ^{−1} (x−μ))` | 평균과 공분산을 고려한 거리 기반 이상치 점수. 다변량 정규 가정. |
+| **[4.8] ABOD (Angle-Based Outlier Detection)** | `ABOD(x) = Var( angle(xi−x, xj−x) )` | 이웃들과 이루는 각도의 분산 기반 이상치 탐지. 고차원에서 거리기반 한계 보완. |
+| **[4.9] ROC-AUC** | `AUC = P(score(x⁺) > score(x⁻))` | 임계값 독립적 분리 성능. 이상치(+)가 정상(−)보다 높은 점수를 받을 확률. |
+| **[4.10] Precision–Recall Curve (PR Curve)** | `Precision = TP/(TP+FP), Recall = TP/(TP+FN)` | 희귀 이상치 상황에서 성능을 시각화. FP에 민감. |
+| **[4.11] Average Precision (AP)** | `AP = Σ_n (R_n − R_{n−1}) · P_n` | PR Curve 아래 면적. 이상치 탐지에서 ROC-AUC보다 권장. |
+| **[4.12] F1-Score** | `F1 = 2·(Precision·Recall)/(Precision+Recall)` | 정밀도와 재현율의 조화 평균. 임계값 의존. |
+| **[4.13] MCC (Matthews Correlation Coefficient)** | `MCC = (TP·TN − FP·FN)/sqrt((TP+FP)(TP+FN)(TN+FP)(TN+FN))` | 클래스 불균형에서도 안정적인 이진 분류 성능 지표. |
+
+
+## ▣ 이상치 탐지 평가지표 결과해석
+
+| 지표명 | 목표 | 권장 해석 기준 | 비고 |
+| --- | --- | --- | --- |
+| **[4.1] Isolation Score (고립 점수)** | ↑ | 상대 비교 기준으로 상위 점수일수록 이상치 가능성 큼 | Isolation Forest의 파생 점수. 절대 임계치 없음, 랭킹 기반 해석 권장 |
+| **[4.2] Average Path Length (Isolation Forest)** | ↓ | 정상보다 짧을수록 이상치 | 트리에서 빨리 고립될수록 이상치. 데이터 크기에 따라 정규화 필요 |
+| **[4.3] LOF Score (Local Outlier Factor)** | ↑ (기준 1) | ≈ 1 정상, > 1.5 의심, > 2 이상치 | 국소 밀도 기반. k 선택에 민감, 경계·밀도 불균형 데이터에 주의 |
+| **[4.4] DBSCAN Noise Points Ratio** | ↓ | 도메인 의존 (과도하게 높으면 과분리 의심) | ε, minPts 설정 민감. 잡음 비율 자체는 품질 지표라기보다 참고용 |
+| **[4.5] Reconstruction Error (Autoencoder)** | ↑ | 상위 q% (예: 상위 1-5%)를 이상치로 설정 | 절대 임계치 없음. 분포 기반 threshold 설정 권장 |
+| **[4.6] Likelihood-based Score (GMM, KDE)** | ↓ | 낮은 likelihood(높은 −log p) 일수록 이상치 | 분포 가정에 강하게 의존. 고차원에서는 KDE 불안정 |
+| **[4.7] Mahalanobis Distance** | ↑ | χ² 분포 기반 임계치 초과 시 이상치 | 다변량 정규 가정 필요. 공분산 추정 안정성 중요 |
+| **[4.8] ABOD (Angle-Based Outlier Detection)** | ↓ | 각도 분산이 작을수록 이상치 | 고차원에서 거리기반 방법 대안. 계산량 큼(O(n³)) |
+| **[4.9] ROC-AUC** | ↑ (0.5-1) | ≥ 0.90 우수, 0.80-0.89 양호, < 0.70 미흡 | 클래스 불균형에 둔감. 이상치 비율이 매우 낮을 때 해석 주의 |
+| **[4.10] Precision–Recall Curve (PR Curve)** | ↑ | baseline(이상치 비율) 대비 높을수록 우수 | 희귀 이상치 문제에서 ROC보다 중요. FP에 매우 민감 |
+| **[4.11] AP (Average Precision)** | ↑ | baseline 대비 충분히 높으면 의미 있음 | PR Curve의 요약 지표. 이상치 탐지 논문 표준 |
+| **[4.12] F1-Score** | ↑ | 0.7 이상 양호 (임계값 의존) | threshold 선택에 민감. 운영 임계값 평가용 |
+| **[4.13] MCC (Matthews Correlation Coefficient)** | ↑ (−1에서 1) | ≥ 0.5 양호, 0 무작위, < 0 음의 상관 | 극단적 클래스 불균형에서도 안정적인 종합 지표 |
+
+
+
 ## 5. 신경망 : 생성모델/표현학습 (Generative Models & Representation Learning)<br>
 데이터의 숨겨진 특징(Latent Representation)을 학습하여 압축하거나, 학습된 분포를 바탕으로 새로운 데이터를 생성하는 딥러닝 기반 기법.<br>
 **① Autoencoder (오토인코더):** 입력 데이터를 압축(Encoder)했다가 다시 원본과 똑같이 복원(Decoder)하도록 학습하는 신경망. 이 과정에서 병목(Bottleneck) 구간에 데이터의 핵심 표현이 저장되며, 차원 축소 및 노이즈 제거에 활용.<br>
@@ -1615,6 +1654,46 @@
 
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/5.Generative.png'> 	
 
+
+## ▣ 신경망 평가지표 수식
+
+| 지표 | 수식 | 설명 |
+|---------|------|------|
+| **[5.1] Inception Score (IS)** | ![](https://latex.codecogs.com/svg.image?IS=\exp(\mathbb{E}_x[KL(p(y|x)\parallel p(y))])) | 생성 이미지의 품질(명확성)과 다양성을 동시에 평가. 높을수록 좋음. |
+| **[5.2] Fréchet Inception Distance (FID)** | ![](https://latex.codecogs.com/svg.image?FID=\|\mu_r-\mu_g\|^2+\mathrm{Tr}(\Sigma_r+\Sigma_g-2(\Sigma_r\Sigma_g)^{1/2})) | 실제 이미지와 생성 이미지 분포 간 거리. 낮을수록 실제 분포와 유사. |
+| **[5.3] Kernel Inception Distance (KID)** | ![](https://latex.codecogs.com/svg.image?KID=\mathbb{E}[k(x,x')]+k(y,y')-2k(x,y)) | MMD 기반 분포 거리. FID 대비 편향이 적음. |
+| **[5.4] Precision & Recall (for Distributions)** | ![](https://latex.codecogs.com/svg.image?Precision=\frac{|G\cap R|}{|G|},\;Recall=\frac{|G\cap R|}{|R|}) | Precision: 품질, Recall: 다양성. 생성 분포 품질을 분해 평가. |
+| **[5.5] SSIM** | ![](https://latex.codecogs.com/svg.image?SSIM(x,y)=\frac{(2\mu_x\mu_y+C_1)(2\sigma_{xy}+C_2)}{(\mu_x^2+\mu_y^2+C_1)(\sigma_x^2+\sigma_y^2+C_2)}) | 구조·명암·대비 유사도 측정. 1에 가까울수록 유사. |
+| **[5.6] PSNR** | ![](https://latex.codecogs.com/svg.image?PSNR=10\log_{10}\frac{MAX^2}{MSE}) | 재구성 품질 평가. 값이 클수록 왜곡이 적음. |
+| **[5.7] LPIPS** | ![](https://latex.codecogs.com/svg.image?LPIPS=\sum_l\|\phi_l(x)-\phi_l(y)\|^2) | 딥러닝 기반 지각적 유사도. 낮을수록 시각적으로 유사. |
+| **[5.8] ELBO** | ![](https://latex.codecogs.com/svg.image?\mathcal{L}=\mathbb{E}_{q(z|x)}[\log p(x|z)]-KL(q(z|x)\parallel p(z))) | VAE 학습 목표. 재구성 품질과 잠재공간 정규화 균형. |
+| **[5.9] Reconstruction Loss** | ![](https://latex.codecogs.com/svg.image?\mathcal{L}_{rec}=\|x-\hat{x}\|^2) | 생성/오토인코더에서 원본 대비 재구성 오차. |
+| **[5.10] Mode Score** | ![](https://latex.codecogs.com/svg.image?MS=\exp(\mathbb{E}[KL(p(y|x)\parallel p(y))]-KL(p(y)\parallel p_{data}(y)))) | IS의 mode collapse 문제 보완. 다양성 반영 강화. |
+| **[5.11] Coverage** | ![](https://latex.codecogs.com/svg.image?Coverage=\frac{|R_{covered}|}{|R|}) | 실제 데이터 모드가 얼마나 생성 분포에 포함되는지 평가. |
+| **[5.12] Perplexity** | ![](https://latex.codecogs.com/svg.image?Perplexity=\exp\left(-\frac{1}{N}\sum_{i=1}^N\log p(x_i)\right)) | 언어/확률 모델의 불확실성. 낮을수록 예측력 우수. |
+| **[5.13] Linear Probe Accuracy** | ![](https://latex.codecogs.com/svg.image?Acc=\frac{1}{N}\sum\mathbb{I}(\hat{y}=y)) | 고정 표현 위 선형 분류 성능. 표현 품질 평가. |
+| **[5.14] k-NN Classification Accuracy** | ![](https://latex.codecogs.com/svg.image?Acc_{kNN}=\frac{1}{N}\sum\mathbb{I}(y=\mathrm{mode}(N_k(x)))) | 임베딩 공간에서 이웃 기반 분류 성능. 표현 구조 평가. |
+
+## ▣ 신경망 평가지표 결과해석
+
+| 지표명 | 목표 | 권장 해석 기준 | 비고 |
+| --- | --- | --- | --- |
+| **[5.1] IS (Inception Score)** | ↑ | 상대 비교 기준: 동일 데이터·조건에서 높을수록 우수 | 이미지 품질(명확성)과 다양성 동시 반영. 실제 데이터 분포 반영 못함, 클래스 편향에 민감 |
+| **[5.2] FID (Fréchet Inception Distance)** | ↓ | ≤ 10 매우 우수, 10-50 양호, > 50 미흡 | 실제 분포와 생성 분포 거리. 현재 GAN 평가 표준. 샘플 수·특징 추출기에 의존 |
+| **[5.3] KID (Kernel Inception Distance)** | ↓ | 0에 가까울수록 우수 | MMD 기반. FID 대비 편향 적음. 샘플 수 적을 때 안정적 |
+| **[5.4] Precision & Recall (Distributions)** | ↑ | Precision↑: 품질 우수<br>Recall↑: 다양성 우수 | 생성 분포를 품질/다양성으로 분해 평가. GAN 비교에 유용 |
+| **[5.5] SSIM (Structural Similarity Index)** | ↑ (0~1) | ≥ 0.9 매우 유사, 0.8-0.9 양호 | 재구성·초해상도 평가에 적합. 인간 지각과 비교적 일치 |
+| **[5.6] PSNR (Peak Signal-to-Noise Ratio)** | ↑ (dB) | ≥ 30 dB 양호, ≥ 40 dB 우수 | MSE 기반. 지각적 품질 반영 한계 존재 |
+| **[5.7] LPIPS** | ↓ | 낮을수록 시각적으로 유사 | 딥러닝 기반 지각 거리. 인간 평가와 높은 상관 |
+| **[5.8] ELBO (Evidence Lower Bound)** | ↑ | 상대 비교: 값이 클수록 모델 적합도 우수 | VAE 학습 목표. 재구성 vs 잠재공간 정규화 트레이드오프 |
+| **[5.9] Reconstruction Loss** | ↓ | 0에 가까울수록 우수 | 오토인코더·VAE 기본 지표. 과적합 여부 함께 고려 |
+| **[5.10] Mode Score** | ↑ | IS보다 높으면 다양성 개선 | IS의 mode collapse 문제 보완. 실제 클래스 분포 필요 |
+| **[5.11] Coverage** | ↑ | ≥ 0.8 양호 | 실제 데이터 모드가 생성 분포에 얼마나 포함되는지 평가 |
+| **[5.12] Perplexity** | ↓ | 낮을수록 예측력 우수 | 언어모델·확률모형 평가 표준. 데이터 분포 의존 |
+| **[5.13] Linear Probe Accuracy** | ↑ | 지도 학습 대비 성능 유지 시 우수 | 고정 표현 위 선형 분류 성능. 표현 품질 평가 표준 |
+| **[5.14] k-NN Classification Accuracy** | ↑ | 선형 탐침과 유사하면 구조 우수 | 임베딩 공간의 국소 구조 평가. 레이블 필요 |
+
+
 ## 6. 통계 : 밀도/공분산 추정 (Density/Covariance Estimation)<br>
 주어진 데이터가 어떤 확률 분포에서 추출되었는지 통계적으로 추정하거나 변수 간의 관계 구조를 파악하는 기법.<br>
 **① GMM (Gaussian Mixture Model):** 복잡한 데이터 분포를 여러 개의 정규 분포(Gaussian)가 혼합된 형태로 가정하고, EM(Expectation-Maximization) 알고리즘을 통해 각 분포의 매개변수를 추정. 확률 기반의 유연한 군집화.<br>
@@ -1835,6 +1914,39 @@
 
 
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-07/images/6.Estimation.png'> 	
+
+
+## ▣ 통계 평가지표 수식
+
+| 지표 | 수식 | 설명 |
+| --- | --- | --- |
+| **[6.1] Log-Likelihood (로그우도)** | `LL = Σ_{i=1}^n log p(x_i | θ)` | 확률모형이 데이터를 얼마나 잘 설명하는지 측정. 값이 클수록 모델 적합도 우수. |
+| **[6.2] KL Divergence (쿨백–라이블러 발산)** | `D_KL(P||Q) = Σ P(x) log(P(x)/Q(x))` | 실제 분포 P와 추정 분포 Q 간 정보 손실. 0이면 동일 분포 (비대칭). |
+| **[6.3] ISE (Integrated Squared Error)** | `ISE = ∫ (f̂(x) − f(x))² dx` | 추정 밀도와 실제 밀도 간 제곱 오차 적분. 값이 작을수록 정확한 추정. |
+| **[6.4] MISE (Mean Integrated Squared Error)** | `MISE = E[ISE]` | ISE의 기댓값. 밀도추정 이론적 성능 분석에 사용. |
+| **[6.5] Cross-Validation Score** | `CV = (1/K) Σ_{k=1}^K L_k` | 데이터 분할 기반 일반화 성능 평가. 커널 폭·모델 선택에 활용. |
+| **[6.6] Kolmogorov–Smirnov Test (KS Test)** | `D = sup_x |F_n(x) − F(x)|` | 경험적 분포와 이론 분포 간 최대 차이. 분포 적합도 검정. |
+| **[6.7] Anderson–Darling Test** | `A² = −n − (1/n) Σ (2i−1)[log F(x_i)+log(1−F(x_{n+1−i}))]` | KS보다 꼬리(tail)에 민감한 분포 적합도 검정. |
+| **[6.8] Frobenius Norm Error** | `||A−B||_F = sqrt(Σ_i Σ_j (a_ij − b_ij)²)` | 행렬 근사 오차의 전체 크기 측정. 저차원 근사·공분산 추정 평가. |
+| **[6.9] Spectral Norm Error** | `||A−B||_2 = σ_max(A−B)` | 최대 특이값 기준 오차. 최악 방향(worst-case) 왜곡 평가. |
+| **[6.10] Condition Number (조건수)** | `κ(A) = ||A|| · ||A^{-1}|| = σ_max/σ_min` | 수치적 안정성 지표. 값이 클수록 작은 오차에 민감. |
+
+
+## ▣ 통계 평가지표 결과해석
+
+| 지표명 | 목표 | 권장 해석 기준 | 비고 |
+| --- | --- | --- | --- |
+| **[6.1] Log-Likelihood (로그우도)** | ↑ | 동일 데이터·모델 간 상대 비교에서 클수록 우수 | 확률모형 적합도 기본 지표. 데이터 수 증가 시 값이 커지므로 절대값 비교 금물 |
+| **[6.2] KL Divergence (쿨백–라이블러 발산)** | ↓ | 0에 가까울수록 분포 유사 | 비대칭 지표(P‖Q ≠ Q‖P). 거리(metric)가 아님. 분포 차이 해석용 |
+| **[6.3] ISE (Integrated Squared Error)** | ↓ | 작을수록 밀도 추정 정확 | 실제 밀도 f(x)를 아는 이론적 상황에서 주로 사용 |
+| **[6.4] MISE (Mean Integrated Squared Error)** | ↓ | 작을수록 평균적 추정 성능 우수 | ISE의 기댓값. 커널 밀도추정 이론 분석에서 핵심 |
+| **[6.5] Cross-Validation Score** | ↑ (또는 ↓, 정의 의존) | 검증 성능이 가장 좋은 모델 선택 | 로그우도·오차 기반 등 정의 다양. 대역폭·모델 선택에 실무적으로 가장 많이 사용 |
+| **[6.6] Kolmogorov–Smirnov Test (KS Test)** | ↓ | D 값 작을수록 적합, p-value > 0.05면 기각 불가 | 분포 적합도 검정. 중심부에 민감, 꼬리에는 둔감 |
+| **[6.7] Anderson–Darling Test** | ↓ | 통계량 작을수록 적합, p-value 기준 해석 | KS보다 꼬리(tail)에 민감. 이상치·극단값 평가에 유리 |
+| **[6.8] Frobenius Norm Error** | ↓ | 0에 가까울수록 근사 정확 | 행렬 전체 평균 오차. 공분산·저차원 근사 평가에 사용 |
+| **[6.9] Spectral Norm Error** | ↓ | 작을수록 최악 방향 오차 작음 | 최대 특이값 기준. 안정성·worst-case 분석에 적합 |
+| **[6.10] Condition Number (조건수)** | ↓ | ≈ 1 매우 안정, ≫ 10⁴ 불안정 | 수치해석 안정성 지표. 값이 크면 역행렬·최적화 문제 발생 |
+``
 
 ---
 
