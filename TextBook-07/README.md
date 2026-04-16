@@ -1659,20 +1659,23 @@
 
 | 지표 | 수식 | 설명 |
 |---------|------|------|
-| **[5.1] Inception Score (IS)** | ![](https://latex.codecogs.com/svg.image?IS=\exp(\mathbb{E}_x[KL(p(y|x)\parallel p(y))])) | 생성 이미지의 품질(명확성)과 다양성을 동시에 평가. 높을수록 좋음. |
-| **[5.2] Fréchet Inception Distance (FID)** | ![](https://latex.codecogs.com/svg.image?FID=\|\mu_r-\mu_g\|^2+\mathrm{Tr}(\Sigma_r+\Sigma_g-2(\Sigma_r\Sigma_g)^{1/2})) | 실제 이미지와 생성 이미지 분포 간 거리. 낮을수록 실제 분포와 유사. |
-| **[5.3] Kernel Inception Distance (KID)** | ![](https://latex.codecogs.com/svg.image?KID=\mathbb{E}[k(x,x')]+k(y,y')-2k(x,y)) | MMD 기반 분포 거리. FID 대비 편향이 적음. |
-| **[5.4] Precision & Recall (for Distributions)** | ![](https://latex.codecogs.com/svg.image?Precision=\frac{|G\cap R|}{|G|},\;Recall=\frac{|G\cap R|}{|R|}) | Precision: 품질, Recall: 다양성. 생성 분포 품질을 분해 평가. |
-| **[5.5] SSIM** | ![](https://latex.codecogs.com/svg.image?SSIM(x,y)=\frac{(2\mu_x\mu_y+C_1)(2\sigma_{xy}+C_2)}{(\mu_x^2+\mu_y^2+C_1)(\sigma_x^2+\sigma_y^2+C_2)}) | 구조·명암·대비 유사도 측정. 1에 가까울수록 유사. |
-| **[5.6] PSNR** | ![](https://latex.codecogs.com/svg.image?PSNR=10\log_{10}\frac{MAX^2}{MSE}) | 재구성 품질 평가. 값이 클수록 왜곡이 적음. |
-| **[5.7] LPIPS** | ![](https://latex.codecogs.com/svg.image?LPIPS=\sum_l\|\phi_l(x)-\phi_l(y)\|^2) | 딥러닝 기반 지각적 유사도. 낮을수록 시각적으로 유사. |
-| **[5.8] ELBO** | ![](https://latex.codecogs.com/svg.image?\mathcal{L}=\mathbb{E}_{q(z|x)}[\log p(x|z)]-KL(q(z|x)\parallel p(z))) | VAE 학습 목표. 재구성 품질과 잠재공간 정규화 균형. |
+| 지표 | 수식 | 설명 |
+|---------|------|------|
+| **[5.1] Inception Score (IS)** | ![](https://latex.codecogs.com/svg.image?IS=\exp\left(\sum_y p(y\mid x)\log\frac{p(y\mid x)}{p(y)}\right)) | 생성 이미지의 품질(명확성)과 다양성을 동시에 평가. 값이 클수록 좋음. |
+| **[5.2] Fréchet Inception Distance (FID)** | ![](https://latex.codecogs.com/svg.image?FID=\|\mu_r-\mu_g\|^2+\mathrm{Tr}\left(\Sigma_r+\Sigma_g-2(\Sigma_r\Sigma_g)^{1/2}\right)) | 실제 이미지와 생성 이미지 분포 간 거리. 낮을수록 실제 분포와 유사. |
+| **[5.3] Kernel Inception Distance (KID)** | ![](https://latex.codecogs.com/svg.image?KID=\mathbb{E}[k(x,x')]+ \mathbb{E}[k(y,y')] -2\mathbb{E}[k(x,y)]) | MMD 기반 분포 거리. FID 대비 편향이 적고 샘플 수에 안정적. |
+| **[5.4] Precision & Recall (Distributions)** | ![](https://latex.codecogs.com/svg.image?Precision=\frac{|G\cap R|}{|G|},\quad Recall=\frac{|G\cap R|}{|R|}) | Precision은 품질, Recall은 다양성 평가. 생성 분포를 분해해 해석 가능. |
+| **[5.5] SSIM** | ![](https://latex.codecogs.com/svg.image?SSIM(x,y)=\frac{(2\mu_x\mu_y+C_1)(2\sigma_{xy}+C_2)}{(\mu_x^2+\mu_y^2+C_1)(\sigma_x^2+\sigma_y^2+C_2)}) | 구조·명암·대비 기반 유사도. 1에 가까울수록 구조적으로 유사. |
+| **[5.6] PSNR** | ![](https://latex.codecogs.com/svg.image?PSNR=10\log_{10}\frac{MAX^2}{MSE}) | 재구성 품질 평가 지표. 값이 클수록 왜곡이 적음. |
+| **[5.7] LPIPS** | ![](https://latex.codecogs.com/svg.image?LPIPS=\sum_l\|\phi_l(x)-\phi_l(y)\|^2) | 딥러닝 특징공간 기반 지각적 유사도. 낮을수록 시각적으로 유사. |
+| **[5.8] ELBO** | ![](https://latex.codecogs.com/svg.image?ELBO=\log p(x)-D_{KL}(q(z\mid x)\parallel p(z))) | VAE의 학습 목표. 재구성 품질과 잠재공간 정규화 균형. |
 | **[5.9] Reconstruction Loss** | ![](https://latex.codecogs.com/svg.image?\mathcal{L}_{rec}=\|x-\hat{x}\|^2) | 생성/오토인코더에서 원본 대비 재구성 오차. |
-| **[5.10] Mode Score** | ![](https://latex.codecogs.com/svg.image?MS=\exp(\mathbb{E}[KL(p(y|x)\parallel p(y))]-KL(p(y)\parallel p_{data}(y)))) | IS의 mode collapse 문제 보완. 다양성 반영 강화. |
-| **[5.11] Coverage** | ![](https://latex.codecogs.com/svg.image?Coverage=\frac{|R_{covered}|}{|R|}) | 실제 데이터 모드가 얼마나 생성 분포에 포함되는지 평가. |
-| **[5.12] Perplexity** | ![](https://latex.codecogs.com/svg.image?Perplexity=\exp\left(-\frac{1}{N}\sum_{i=1}^N\log p(x_i)\right)) | 언어/확률 모델의 불확실성. 낮을수록 예측력 우수. |
-| **[5.13] Linear Probe Accuracy** | ![](https://latex.codecogs.com/svg.image?Acc=\frac{1}{N}\sum\mathbb{I}(\hat{y}=y)) | 고정 표현 위 선형 분류 성능. 표현 품질 평가. |
-| **[5.14] k-NN Classification Accuracy** | ![](https://latex.codecogs.com/svg.image?Acc_{kNN}=\frac{1}{N}\sum\mathbb{I}(y=\mathrm{mode}(N_k(x)))) | 임베딩 공간에서 이웃 기반 분류 성능. 표현 구조 평가. |
+| **[5.10] Mode Score** | ![](https://latex.codecogs.com/svg.image?MS=\exp\left(D_{KL}(p(y\mid x)\parallel p(y))-D_{KL}(p(y)\parallel p_{data}(y))\right)) | IS의 mode collapse 문제를 보완. 다양성 반영 강화. |
+| **[5.11] Coverage** | ![](https://latex.codecogs.com/svg.image?Coverage=\frac{|R_{covered}|}{|R|}) | 실제 데이터 모드가 생성 분포에 얼마나 포함되는지 평가. |
+| **[5.12] Perplexity** | ![](https://latex.codecogs.com/svg.image?Perplexity=\exp\left(-\frac{1}{N}\sum_{i=1}^N\log p(x_i)\right)) | 언어·확률모형의 불확실성 지표. 낮을수록 예측력 우수. |
+| **[5.13] Linear Probe Accuracy** | ![](https://latex.codecogs.com/svg.image?Acc=\frac{1}{N}\sum_{i=1}^N\mathbb{I}(\hat{y}_i=y_i)) | 고정 표현 위 선형 분류 성능. 표현 품질 평가 표준. |
+| **[5.14] k-NN Classification Accuracy** | ![](https://latex.codecogs.com/svg.image?Acc_{kNN}=\frac{1}{N}\sum_{i=1}^N\mathbb{I}(y_i=\mathrm{mode}(N_k(x_i)))) | 임베딩 공간의 국소 구조 보존 정도 평가. |
+
 
 ## ▣ 신경망 평가지표 결과해석
 
