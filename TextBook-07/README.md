@@ -1905,16 +1905,6 @@
 
 ## ▣ 연관규칙 평가지표 결과해석
 
-| 지표 | 목표 | 권장 해석 기준  | 비고 |  
-| --- | --- | --- | --- | 
-| **[1] 지지도 (Support)**    | 전체 거래 중 A와 B가 함께 등장하는 비율<br>→ 규칙의 빈도·보편성 평가   | 값이 높을수록 빈발한 규칙<br>보통 `0.01~0.05` 이상이면 의미 있음 (도메인에 따라 다름)   | 빈도 기반 필터로 먼저 사용됨<br>너무 낮으면 희귀, 너무 높으면 일반 규칙           |  
-| **[2] 신뢰도 (Confidence)**  | A가 발생했을 때 B도 발생할 조건부 확률<br>→ 규칙의 정확도 평가   | 값이 1에 가까울수록 강한 규칙<br>보통`0.6~0.9` 이상이면 신뢰 높은 규칙 | 단독 빈도가 높은 B항목은 과대평가 가능 |
-| **[3] 향상도 (Lift)**  | A와 B가 독립일 때 대비 얼마나 자주 함께 발생하는가<br>→ 상관성 강도 평가 | >1 → 양의 상관<br> =1 → 독립<br> <1 → 음의 상관 | 신뢰도의 편향 보정 지표<br>가장 자주 사용하는 상관성 지표   | 
-| **[4] 레버리지 (Leverage)**  | 독립 가정 하 기대빈도와 실제빈도의 차이<br>→ A,B의 공동발생 초과 정도   | 양수 → 양의 상관<br> 0 → 독립<br> 음수 → 음의 상관 | 확률 차이 자체를 표현해 직관적<br>값의 범위: `[-0.25, +0.25]` 내외|    
-| **[5] 확신도 (Conviction)**  | “A 발생 시 B가 발생하지 않을 확률”의 역수<br>→ 규칙의 방향성·일관성 평가    | =1 → 독립<br> >1 → 긍정적 관계<br> <1 → 음의 관계   | Lift와 달리 A→B 방향성 고려<br>신뢰도와 함께 해석 시 유용   |     
-| **[6] 상관계수 (Correlation Coefficient, φ)** | 두 사건 A, B 간의 선형 상관 정도<br>→ 동시발생의 독립성 측정  | +1 → 완전 양의 상관<br> 0 → 독립<br> -1 → 완전 음의 상관 | Lift·Leverage와 유사하지만 정규화되어 있음<br>확률 분포 불균형에 민감   |   
-
-
 | 지표 | 목표 | 권장 해석 기준 | 비고 |
 | --- | --- | --- | --- |
 | **[2.1] 지지도 (Support)** | 전체 거래 중 A와 B가 함께 등장하는 비율<br>→ 규칙의 빈도·보편성 평가 | 값이 높을수록 빈발한 규칙<br>보통 `0.01~0.05` 이상이면 의미 있음 (도메인 의존) | 빈도 기반 필터로 가장 먼저 사용<br>너무 낮으면 희귀, 너무 높으면 일반 규칙 |
@@ -2207,6 +2197,28 @@
 | **[10] Adjusted Rand Index(ARI)** | ![](https://latex.codecogs.com/svg.image?ARI%20%3D%20%5Cfrac%7B%5Csum_%7Bij%7D%20%5Cbinom%7Bn_%7Bij%7D%7D%7B2%7D%20-%20%5B%5Csum_i%20%5Cbinom%7Ba_i%7D%7B2%7D%5Csum_j%20%5Cbinom%7Bb_j%7D%7B2%7D%5D%2F%5Cbinom%7Bn%7D%7B2%7D%7D%7B%5Cfrac%7B1%7D%7B2%7D%5B%5Csum_i%20%5Cbinom%7Ba_i%7D%7B2%7D%20%2B%20%5Csum_j%20%5Cbinom%7Bb_j%7D%7B2%7D%5D%20-%20%5B%5Csum_i%20%5Cbinom%7Ba_i%7D%7B2%7D%5Csum_j%20%5Cbinom%7Bb_j%7D%7B2%7D%5D%2F%5Cbinom%7Bn%7D%7B2%7D%7D) | 군집 일치도 평가. 1이면 완벽 일치, 0은 무작위 수준. |
 | **[11] Normalized Mutual Information(NMI)** | ![](https://latex.codecogs.com/svg.image?NMI(U%2CV)%20%3D%20%5Cfrac%7B2I(U%3BV)%7D%7BH(U)%20%2B%20H(V)%7D) | 군집 결과와 실제 레이블 간의 상호 정보량을 정규화. 값이 1에 가까울수록 유사도가 높음. |
 
+
+
+
+| 지표명 | 수식 | 설명 |
+|---------|------|------|
+| **[3.1] Reconstruction Error (재구성 오류)** | ![](https://latex.codecogs.com/svg.image?RE%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5C%7C%20x_i%20-%20%5Chat%7Bx%7D_i%20%5C%7C%5E2) | 원본 데이터와 복원된 데이터 간 평균 제곱 오차. 값이 작을수록 정보 손실이 적음. |
+| **[3.2] Explained Variance Ratio (설명된 분산 비율)** | ![](https://latex.codecogs.com/svg.image?EVR_k%20%3D%20%5Cfrac%7B%5Csum_%7Bi%3D1%7D%5E%7Bk%7D%20%5Clambda_i%7D%7B%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Clambda_i%7D) | 상위 k개 성분이 전체 분산에서 차지하는 비율. PCA에서 차원 선택 기준. |
+| **[3.3] Mutual Information (상호 정보량)** | ![](https://latex.codecogs.com/svg.image?MI(X%2CY)%20%3D%20%5Csum_%7Bx%20%5Cin%20X%7D%20%5Csum_%7By%20%5Cin%20Y%7D%20p(x%2Cy)%5Clog%5Cfrac%7Bp(x%2Cy)%7D%7Bp(x)p(y)%7D) | 차원 축소 전후 변수 간 정보 공유 정도. 값이 클수록 정보 보존이 우수. |
+| **[3.4] Trustworthiness (신뢰성)** | ![](https://latex.codecogs.com/svg.image?T(k)%20%3D%201%20-%20%5Cfrac%7B2%7D%7Bnk(2n-3k-1)%7D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Csum_%7Bj%20%5Cin%20U_k(i)%7D%20(r(i%2Cj)%20-%20k)) | 고차원에서 이웃이 아니던 점이 저차원에서 잘못 이웃이 되는 정도 측정. |
+| **[3.5] Continuity (연속성)** | ![](https://latex.codecogs.com/svg.image?C(k)%20%3D%201%20-%20%5Cfrac%7B2%7D%7Bnk(2n-3k-1)%7D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Csum_%7Bj%20%5Cin%20V_k(i)%7D%20(r'(i%2Cj)%20-%20k)) | 저차원에서 이웃이던 점이 고차원에서 멀어지는 정도를 평가. |
+| **[3.6] Stress (MDS)** | ![](https://latex.codecogs.com/svg.image?Stress%20%3D%20%5Csqrt%7B%5Cfrac%7B%5Csum_%7Bi%3Cj%7D(d_%7Bij%7D-%5Chat%7Bd%7D_%7Bij%7D)%5E2%7D%7B%5Csum_%7Bi%3Cj%7Dd_%7Bij%7D%5E2%7D%7D) | 고차원 거리와 저차원 거리 간 상대 오차. 작을수록 거리 보존 우수. |
+| **[3.7] Sammon Error (새먼 오차)** | ![](https://latex.codecogs.com/svg.image?E_%7BSammon%7D%20%3D%20%5Cfrac%7B1%7D%7B%5Csum_%7Bi%3Cj%7D%20d_%7Bij%7D%7D%20%5Csum_%7Bi%3Cj%7D%20%5Cfrac%7B(d_%7Bij%7D-%5Chat%7Bd%7D_%7Bij%7D)%5E2%7D%7Bd_%7Bij%7D%7D) | 가까운 점 쌍의 거리 보존을 더 강하게 반영한 오차 지표. |
+| **[3.8] LCMC (Local Continuity Meta-Criterion)** | ![](https://latex.codecogs.com/svg.image?LCMC%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Cfrac%7B%7CN_H(i)%5Ccap%20N_L(i)%7C%7D%7Bk%7D%20-%20%5Cfrac%7Bk%7D%7Bn-1%7D) | 고차원·저차원 k-이웃 겹침 비율로 지역/전역 구조 보존 평가. |
+| **[3.9] Spearman’s ρ (순위 상관계수)** | ![](https://latex.codecogs.com/svg.image?%5Crho%20%3D%201%20-%20%5Cfrac%7B6%5Csum_%7Bi%3D1%7D%5E%7BN%7D(r_i%20-%20s_i)%5E2%7D%7BN(N%5E2%20-%201)%7D) | 거리 또는 이웃 순위의 일관성 평가. ρ=1이면 완전 보존. |
+| **[3.10] Silhouette Score** | ![](https://latex.codecogs.com/svg.image?s(i)%20%3D%20%5Cfrac%7Bb(i)%20-%20a(i)%7D%7B%5Cmax(a(i)%2C%20b(i))%7D) | 군집 내 응집도와 군집 간 분리도 동시 평가. |
+| **[3.11] Davies–Bouldin Index (DBI)** | ![](https://latex.codecogs.com/svg.image?DBI%20%3D%20%5Cfrac%7B1%7D%7Bk%7D%5Csum_%7Bi%3D1%7D%5E%7Bk%7D%20%5Cmax_%7Bj%5Cne%20i%7D%20%5Cfrac%7B%5Csigma_i%2B%5Csigma_j%7D%7Bd(c_i%2Cc_j)%7D) | 군집 내 분산 대비 군집 간 중심 거리 비율. 낮을수록 군집 품질 우수. |
+| **[3.12] MSE (Mean Squared Error)** | ![](https://latex.codecogs.com/svg.image?MSE%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20(x_i-%5Chat%7Bx%7D_i)%5E2) | 재구성 기반 차원축소 모델의 평균 제곱 오차. |
+| **[3.13] Cumulative Explained Variance** | ![](https://latex.codecogs.com/svg.image?CEV_k%20%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bk%7D%20EVR_i) | 누적 설명 분산으로 차원 수 선택에 활용. |
+| **[3.14] Scree Plot** | ![](https://latex.codecogs.com/svg.image?%5Clambda_1%20%5Cge%20%5Clambda_2%20%5Cge%20%5Ccdots) | 고유값 감소 패턴을 시각화하여 엘보우 지점 확인. |
+| **[3.15] Procrustes Analysis** | ![](https://latex.codecogs.com/svg.image?D%20%3D%20%5Cmin_%7BR%2Ct%2Cs%7D%20%5C%7C%20X%20-%20sYR%20-%20t%20%5C%7C_F) | 두 임베딩 간 회전·이동·스케일 정렬 후 차이 측정. |
+| **[3.16] Neighborhood Preservation** | ![](https://latex.codecogs.com/svg.image?NP%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Cfrac%7B%7CN_H(i)%5Ccap%20N_L(i)%7C%7D%7Bk%7D) | 고차원 이웃 구조가 저차원에서 얼마나 유지되는지 평가. |
+| **[3.17] KL Divergence (KL 발산)** | ![](https://latex.codecogs.com/svg.image?D_%7BKL%7D(P%7C%7CQ)%20%3D%20%5Csum_i%20P(i)%5Clog%5Cfrac%7BP(i)%7DQ(i)%7D) | 고차원 분포와 저차원 분포 간 차이. t-SNE 최적화 핵심 지표. |
 
 <br>
 
