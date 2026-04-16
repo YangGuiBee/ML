@@ -1920,17 +1920,18 @@
 ## ▣ 통계 평가지표 수식
 
 | 지표 | 수식 | 설명 |
-| --- | --- | --- |
-| **[6.1] Log-Likelihood (로그우도)** | `LL = Σ_{i=1}^n log p(x_i | θ)` | 확률모형이 데이터를 얼마나 잘 설명하는지 측정. 값이 클수록 모델 적합도 우수. |
-| **[6.2] KL Divergence (쿨백–라이블러 발산)** | `D_KL(P||Q) = Σ P(x) log(P(x)/Q(x))` | 실제 분포 P와 추정 분포 Q 간 정보 손실. 0이면 동일 분포 (비대칭). |
-| **[6.3] ISE (Integrated Squared Error)** | `ISE = ∫ (f̂(x) − f(x))² dx` | 추정 밀도와 실제 밀도 간 제곱 오차 적분. 값이 작을수록 정확한 추정. |
-| **[6.4] MISE (Mean Integrated Squared Error)** | `MISE = E[ISE]` | ISE의 기댓값. 밀도추정 이론적 성능 분석에 사용. |
-| **[6.5] Cross-Validation Score** | `CV = (1/K) Σ_{k=1}^K L_k` | 데이터 분할 기반 일반화 성능 평가. 커널 폭·모델 선택에 활용. |
-| **[6.6] Kolmogorov–Smirnov Test (KS Test)** | `D = sup_x |F_n(x) − F(x)|` | 경험적 분포와 이론 분포 간 최대 차이. 분포 적합도 검정. |
-| **[6.7] Anderson–Darling Test** | `A² = −n − (1/n) Σ (2i−1)[log F(x_i)+log(1−F(x_{n+1−i}))]` | KS보다 꼬리(tail)에 민감한 분포 적합도 검정. |
-| **[6.8] Frobenius Norm Error** | `||A−B||_F = sqrt(Σ_i Σ_j (a_ij − b_ij)²)` | 행렬 근사 오차의 전체 크기 측정. 저차원 근사·공분산 추정 평가. |
-| **[6.9] Spectral Norm Error** | `||A−B||_2 = σ_max(A−B)` | 최대 특이값 기준 오차. 최악 방향(worst-case) 왜곡 평가. |
-| **[6.10] Condition Number (조건수)** | `κ(A) = ||A|| · ||A^{-1}|| = σ_max/σ_min` | 수치적 안정성 지표. 값이 클수록 작은 오차에 민감. |
+|---|---|---|
+| **[6.1] Log-Likelihood (로그우도)** | $LL=\sum_{i=1}^n \log p(x_i\mid\theta)$ | 확률모형이 데이터를 얼마나 잘 설명하는지 측정. 값이 클수록 모델 적합도 우수 |
+| **[6.2] Kullback–Leibler Divergence (KL 발산)** | $D_{KL}(P\parallel Q)=\sum_x P(x)\log\frac{P(x)}{Q(x)}$ | 실제 분포 $P$와 추정 분포 $Q$ 간 정보 손실. 0이면 동일 분포 (비대칭) |
+| **[6.3] ISE (Integrated Squared Error)** | $ISE=\int(\hat{f}(x)-f(x))^2\,dx$ | 추정 밀도와 실제 밀도 간 제곱 오차 적분. 값이 작을수록 정확 |
+| **[6.4] MISE (Mean Integrated Squared Error)** | $MISE=\mathbb{E}[ISE]$ | ISE의 기댓값. 밀도추정 이론적 성능 분석에 사용 |
+| **[6.5] Cross-Validation Score** | $CV=\frac{1}{K}\sum_{k=1}^K L_k$ | 데이터 분할 기반 일반화 성능 평가. 커널 폭·모델 선택에 활용 |
+| **[6.6] Kolmogorov–Smirnov Test (KS Test)** | $D=\sup_x\lvert F_n(x)-F(x)\rvert$ | 경험적 분포와 이론 분포 간 최대 차이. 분포 적합도 검정 |
+| **[6.7] Anderson–Darling Test** | $A^2=-n-\frac{1}{n}\sum_{i=1}^n(2i-1)\left[\log F(x_i)+\log(1-F(x_{n+1-i}))\right]$ | KS보다 꼬리(tail)에 민감한 분포 적합도 검정 |
+| **[6.8] Frobenius Norm Error** | $\lVert A-B\rVert_F=\sqrt{\sum_i\sum_j (a_{ij}-b_{ij})^2}$ | 행렬 근사 오차의 전체 크기 측정. 공분산·저차원 근사 평가 |
+| **[6.9] Spectral Norm Error** | $\lVert A-B\rVert_2=\sigma_{\max}(A-B)$ | 최대 특이값 기준 오차. 최악 방향(worst-case) 왜곡 평가 |
+| **[6.10] Condition Number (조건수)** | $\kappa(A)=\lVert A\rVert\lVert A^{-1}\rVert=\frac{\sigma_{\max}}{\sigma_{\min}}$ | 수치적 안정성 지표. 값이 클수록 작은 오차에 민감 |
+
 
 
 ## ▣ 통계 평가지표 결과해석
@@ -1947,9 +1948,11 @@
 | **[6.8] Frobenius Norm Error** | ↓ | 0에 가까울수록 근사 정확 | 행렬 전체 평균 오차. 공분산·저차원 근사 평가에 사용 |
 | **[6.9] Spectral Norm Error** | ↓ | 작을수록 최악 방향 오차 작음 | 최대 특이값 기준. 안정성·worst-case 분석에 적합 |
 | **[6.10] Condition Number (조건수)** | ↓ | ≈ 1 매우 안정, ≫ 10⁴ 불안정 | 수치해석 안정성 지표. 값이 크면 역행렬·최적화 문제 발생 |
-``
+
 
 ---
+
+<!--
 
 #  [1] 군집화 평가지표
 
@@ -2597,6 +2600,7 @@
 	[3-10] Adjusted Rand Index (KMeans(Z) vs y) 0.620135 → 양호
 	[3-11] Normalized Mutual Information (KMeans(Z) vs y) 0.659487 → 양호
 
+-->
 
 <!--
 
