@@ -1897,11 +1897,15 @@
 | **[2.13] Odds Ratio (오즈비)** | A 발생 시 B 발생 오즈 대비 비발생 오즈 | `OR = [P(A ∧ B) · P(¬A ∧ ¬B)] / [P(A ∧ ¬B) · P(¬A ∧ B)]` |
 | **[2.14] Yule's Q (율의 Q)** | 오즈비를 −1~1 범위로 정규화 | `Q = (OR − 1) / (OR + 1)` |
 | **[2.15] Yule's Y (율의 Y)** | 로그 오즈비 기반 대칭 연관 지표 | `Y = (√OR − 1) / (√OR + 1)` |
-| **[2.16] Information Gain (정보 이득)** | A 발생 여부가 B의 불확실성을 얼마나 줄이는지 | `IG(B|A) = P(A)[ P(B|A)·log(P(B|A)/P(B)) + P(¬B|A)·log(P(¬B|A)/P(¬B)) ] + P(¬A)[ P(B|¬A)·log(P(B|¬A)/P(B)) + P(¬B|¬A)·log(P(¬B|¬A)/P(¬B)) ]` |
+| **[2.16] Information Gain (정보 이득)** | A 발생 여부가 B의 불확실성을 얼마나 줄이는지 | `IG(B\|A) = H(B) − H(B\|A)` |
+| **[2.16] Information Gain (정보 이득)** | A 발생 여부가 B의 불확실성을 얼마나 줄이는지 | `IG(B\|A) = P(A)[ P(B\|A)·log(P(B\|A)/P(B)) + P(¬B\|A)·log(P(¬B\|A)/P(¬B)) ] + P(¬A)[ P(B\|¬A)·log(P(B\|¬A)/P(B)) + P(¬B\|¬A)·log(P(¬B\|¬A)/P(¬B)) ]` |
 | **[2.17] Zhang's Metric (장 메트릭)** | Lift의 비대칭성 및 불안정성 보정 | `Zhang = [P(A ∧ B) − P(A)P(B)] / max{ P(A ∧ B)P(¬A), P(A)P(¬B) }` |
 | **[2.18] Certainty Factor (확실성 인수)** | 규칙이 B의 신뢰를 얼마나 증가/감소시키는지 | `CF = (confidence − P(B)) / (1 − P(B))` (if confidence ≥ P(B)) |
 
 <br>
+
+
+
 
 
 
