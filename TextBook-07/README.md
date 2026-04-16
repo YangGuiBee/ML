@@ -1295,7 +1295,7 @@
 | **[4.1] Isolation Score (고립 점수)** | $score(x)\propto\frac{1}{\mathbb{E}[h(x)]}$ | Isolation Forest에서 샘플이 얼마나 빨리 고립되는지 나타내는 점수. 값이 클수록 이상치 가능성 높음 |
 | **[4.2] Average Path Length (Isolation Forest)** | $\mathbb{E}[h(x)]=c(n)\cdot 2^{-\mathbb{E}[h(x)]/c(n)}$ | 샘플이 트리에서 고립되기까지의 평균 경로 길이. 짧을수록 이상치 |
 | **[4.3] LOF Score (Local Outlier Factor)** | $LOF_k(x)=\frac{\frac{1}{\lvert N_k(x)\rvert}\sum_{y\in N_k(x)}lrd_k(y)}{lrd_k(x)}$ | 국소 밀도 기반 이상치 점수. 1보다 크면 주변 대비 밀도가 낮아 이상치 가능성 큼 |
-| **[4.4] DBSCAN Noise Points Ratio** | $noise\_ratio=\frac{\#\text{ noise points}}{N}$ | DBSCAN에서 잡음으로 분류된 점의 비율. 높을수록 이상치가 많거나 파라미터 부적절 가능성 |
+| **[4.4] DBSCAN Noise Points Ratio** | $noise\_ratio=\frac{|\mathcal{N}|}{N}$ | DBSCAN에서 잡음으로 분류된 점의 비율. 높을수록 이상치가 많거나 파라미터 부적절 가능성 |
 | **[4.5] Reconstruction Error (Autoencoder)** | $RE(x)=\lVert x-\hat{x}\rVert^2$ | 입력과 재구성 결과 간 오차. 값이 클수록 정상 패턴에서 벗어남 |
 | **[4.6] Likelihood-based Score (GMM, KDE)** | $score(x)=-\log p(x)$ | 확률 모델에서의 음의 로그우도. 확률이 낮을수록 이상치 가능성 큼 |
 | **[4.7] Mahalanobis Distance** | $D_M(x)=\sqrt{(x-\mu)^T\Sigma^{-1}(x-\mu)}$ | 평균과 공분산을 고려한 거리 기반 이상치 점수. 다변량 정규 가정 |
@@ -1305,7 +1305,6 @@
 | **[4.11] Average Precision (AP)** | $AP=\sum_n (R_n-R_{n-1})\cdot P_n$ | PR Curve 아래 면적. 이상치 탐지에서 ROC-AUC보다 권장 |
 | **[4.12] F1-Score** | $F1=\frac{2\cdot Precision\cdot Recall}{Precision+Recall}$ | 정밀도와 재현율의 조화 평균. 임계값 의존 |
 | **[4.13] MCC (Matthews Correlation Coefficient)** | $MCC=\frac{TP\cdot TN-FP\cdot FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}$ | 클래스 불균형에서도 안정적인 이진 분류 성능 지표 |
-
 
 
 ## ▣ 이상치 탐지 평가지표 결과해석
