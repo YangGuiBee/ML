@@ -1901,6 +1901,30 @@
 | **[2.17] Zhang's Metric (장 메트릭)** | Lift의 비대칭성 및 불안정성 보정 | `Zhang = [P(A ∧ B) − P(A)P(B)] / max{ P(A ∧ B)P(¬A), P(A)P(¬B) }` |
 | **[2.18] Certainty Factor (확실성 인수)** | 규칙이 B의 신뢰를 얼마나 증가/감소시키는지 | `CF = (confidence − P(B)) / (1 − P(B))` (if confidence ≥ P(B)) |
 
+
+
+| 지표명 | 수식 | 설명 |
+|---------|------|------|
+| **[2.1] Support (지지도)** | ![](https://latex.codecogs.com/svg.image?support(A,B)=P(A\cap%20B)) | 전체 거래 중 A와 B가 동시에 발생하는 비율 |
+| **[2.2] Confidence (신뢰도)** | ![](https://latex.codecogs.com/svg.image?confidence(A\to%20B)=P(B\mid%20A)=\frac{P(A\cap%20B)}{P(A)}) | A가 발생했을 때 B가 함께 발생할 조건부 확률 |
+| **[2.3] Lift (향상도)** | ![](https://latex.codecogs.com/svg.image?lift(A\to%20B)=\frac{P(A\cap%20B)}{P(A)P(B)}) | 독립 가정 대비 A,B의 연관 강도 |
+| **[2.4] Leverage (레버리지)** | ![](https://latex.codecogs.com/svg.image?leverage(A,B)=P(A\cap%20B)-P(A)P(B)) | 실제 동시 발생과 기대 동시 발생의 차이 |
+| **[2.5] Conviction (확신도)** | ![](https://latex.codecogs.com/svg.image?conviction(A\to%20B)=\frac{1-P(B)}{1-confidence(A\to%20B)}) | 규칙 A→B의 오류 감소 정도 |
+| **[2.6] Jaccard Coefficient** | ![](https://latex.codecogs.com/svg.image?J(A,B)=\frac{P(A\cap%20B)}{P(A)+P(B)-P(A\cap%20B)}) | A,B의 교집합 대비 합집합 비율 |
+| **[2.7] Kulczynski Measure** | ![](https://latex.codecogs.com/svg.image?Kulc(A,B)=\frac{1}{2}\left(\frac{P(A\cap%20B)}{P(A)}+\frac{P(A\cap%20B)}{P(B)}\right)) | 양방향 조건부 확률의 평균 |
+| **[2.8] All-Confidence** | ![](https://latex.codecogs.com/svg.image?AllConf(A,B)=\frac{P(A\cap%20B)}{\max(P(A),P(B))}) | 더 드문 사건 기준의 신뢰도 |
+| **[2.9] Chi\text{-}Square Test** | ![](https://latex.codecogs.com/svg.image?\chi^2=\sum_{i,j}\frac{(O_{ij}-E_{ij})^2}{E_{ij}}) | 관측 빈도와 기대 빈도의 차이로 독립성 검정 |
+| **[2.10] Collective Strength** | ![](https://latex.codecogs.com/svg.image?CS=\frac{P(A\cap%20B)+P(\neg%20A\cap\neg%20B)}{P(A)P(B)+P(\neg%20A)P(\neg%20B)}\cdot\frac{1-[P(A)P(B)+P(\neg%20A)P(\neg%20B)]}{1-[P(A\cap%20B)+P(\neg%20A\cap\neg%20B)]}) | 동시 발생·동시 비발생을 함께 고려한 연관성 |
+| **[2.11] Phi Coefficient (φ)** | ![](https://latex.codecogs.com/svg.image?\phi=\frac{P(A\cap%20B)-P(A)P(B)}{\sqrt{P(A)(1-P(A))P(B)(1-P(B))}}) | 이진 변수 A,B 간 피어슨 상관계수 |
+| **[2.12] Piatetsky–Shapiro** | ![](https://latex.codecogs.com/svg.image?PS(A,B)=P(A\cap%20B)-P(A)P(B)) | 실제 동시 발생과 독립 가정 차이 |
+| **[2.13] Odds Ratio** | ![](https://latex.codecogs.com/svg.image?OR=\frac{P(A\cap%20B)P(\neg%20A\cap\neg%20B)}{P(A\cap\neg%20B)P(\neg%20A\cap%20B)}) | 오즈 기반 연관 강도 |
+| **[2.14] Yule's Q** | ![](https://latex.codecogs.com/svg.image?Q=\frac{OR-1}{OR+1}) | 오즈비를 −1~1로 정규화 |
+| **[2.15] Yule's Y** | ![](https://latex.codecogs.com/svg.image?Y=\frac{\sqrt{OR}-1}{\sqrt{OR}+1}) | 로그 오즈비 기반 대칭 연관 지표 |
+| **[2.16] Information Gain** | ![](https://latex.codecogs.com/svg.image?IG(B\mid%20A)=\sum_{a\in\{A,\neg%20A\}}\sum_{b\in\{B,\neg%20B\}}P(a,b)\log\frac{P(a,b)}{P(a)P(b)}) | A 정보가 B의 불확실성을 얼마나 감소시키는지 |
+| **[2.17] Zhang's Metric** | ![](https://latex.codecogs.com/svg.image?Zhang=\frac{P(A\cap%20B)-P(A)P(B)}{\max(P(A\cap%20B)P(\neg%20A),P(A)P(\neg%20B))}) | Lift의 비대칭·불안정성 보정 |
+| **[2.18] Certainty Factor** | ![](https://latex.codecogs.com/svg.image?CF=\frac{confidence-P(B)}{1-P(B)}) | 규칙이 B 신뢰도를 얼마나 증가/감소시키는지 |
+``
+
 <br>
 
 ## ▣ 연관규칙 평가지표 결과해석
@@ -2183,25 +2207,6 @@
 
 | 지표명 | 수식 | 설명 |
 |---------|------|------|
-| **[1] 재구성 오류 (Reconstruction Error)** | ![](https://latex.codecogs.com/svg.image?RE%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5C%7C%20x_i%20-%20%5Chat%7Bx%7D_i%20%5C%7C%5E2) | 원본 데이터와 복원된 데이터의 평균제곱오차(MSE). 값이 작을수록 복원력이 높음. |
-| **[2] 분산 유지율 (Explained Variance Ratio)** | ![](https://latex.codecogs.com/svg.image?EVR_k%20%3D%20%5Cfrac%7B%5Csum_%7Bi%3D1%7D%5E%7Bk%7D%20%5Clambda_i%7D%7B%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Clambda_i%7D) | 상위 k개의 고유값이 전체 분산에서 차지하는 비율. PCA 등에서 정보 손실 정도 평가. |
-| **[3] 상호 정보량 (Mutual Information)** | ![](https://latex.codecogs.com/svg.image?MI(X%2CY)%20%3D%20%5Csum_%7Bx%20%5Cin%20X%7D%20%5Csum_%7By%20%5Cin%20Y%7D%20p(x%2Cy)%5Clog%5Cfrac%7Bp(x%2Cy)%7D%7Bp(x)p(y)%7D) | 축소 전후 데이터의 정보량 비교. 값이 클수록 정보 보존이 잘됨. |
-| **[4-1] 근접도 보존 – Trustworthiness** | ![](https://latex.codecogs.com/svg.image?T(k)%20%3D%201%20-%20%5Cfrac%7B2%7D%7Bnk(2n-3k-1)%7D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Csum_%7Bj%20%5Cin%20U_k(i)%7D%20(r(i%2Cj)%20-%20k)) | 고차원에서 이웃이 아니던 점이 저차원에서 잘못 가까워지는 정도를 측정. |
-| **[4-2] 근접도 보존 – Continuity** | ![](https://latex.codecogs.com/svg.image?C(k)%20%3D%201%20-%20%5Cfrac%7B2%7D%7Bnk(2n-3k-1)%7D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Csum_%7Bj%20%5Cin%20V_k(i)%7D%20(r'(i%2Cj)%20-%20k)) | 저차원에서 이웃이던 점이 고차원에서 멀어지는 정도를 측정. |
-| **[5-1] 거리 보존 – Stress (Kruskal’s Stress)** | ![](https://latex.codecogs.com/svg.image?Stress%20%3D%20%5Csqrt%7B%5Cfrac%7B%5Csum_%7Bi%3Cj%7D(d_%7Bij%7D-%5Chat%7Bd%7D_%7Bij%7D)%5E2%7D%7B%5Csum_%7Bi%3Cj%7Dd_%7Bij%7D%5E2%7D%7D) | 고차원 거리와 저차원 거리 간의 차이 비율. 작을수록 거리 보존이 잘됨. |
-| **[5-2] 거리 보존 - Sammon Error** | ![](https://latex.codecogs.com/svg.image?E_%7BSammon%7D%20%3D%20%5Cfrac%7B1%7D%7B%5Csum_%7Bi%3Cj%7D%20d_%7Bij%7D%7D%20%5Csum_%7Bi%3Cj%7D%20%5Cfrac%7B(d_%7Bij%7D-%5Chat%7Bd%7D_%7Bij%7D)%5E2%7D%7Bd_%7Bij%7D%7D) | 근접 관계를 강조한 거리 보존 오차. |
-| **[6] 지역/전역 구조(LCMC)** | ![](https://latex.codecogs.com/svg.image?LCMC%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Cfrac%7B%7CN_H(i)%5Ccap%20N_L(i)%7C%7D%7Bk%7D%20-%20%5Cfrac%7Bk%7D%7Bn-1%7D) | 고차원/저차원 k-이웃의 겹침 비율로 지역/전역 구조를 함께 평가. |
-| **[7] 쌍의 상관계수(Spearman’s ρ)** | ![](https://latex.codecogs.com/svg.image?%5Crho%20%3D%201%20-%20%5Cfrac%7B6%5Csum_%7Bi%3D1%7D%5E%7BN%7D(r_i%20-%20s_i)%5E2%7D%7BN(N%5E2%20-%201)%7D) | 거리 순위 일관성을 평가. ρ=1이면 완전히 동일한 순서. |
-| **[8] Silhouette Score** | ![](https://latex.codecogs.com/svg.image?s(i)%20%3D%20%5Cfrac%7Bb(i)%20-%20a(i)%7D%7B%5Cmax(a(i)%2C%20b(i))%7D) | 군집 간 거리 대비 군집 내 밀집도 평가. |
-| **[9] Davies–Bouldin Index(DBI)** | ![](https://latex.codecogs.com/svg.image?DBI%20%3D%20%5Cfrac%7B1%7D%7Bk%7D%5Csum_%7Bi%3D1%7D%5E%7Bk%7D%20%5Cmax_%7Bj%5Cne%20i%7D%20%5Cfrac%7B%5Csigma_i%2B%5Csigma_j%7D%7Bd(c_i%2Cc_j)%7D) | 군집 내 분산과 군집 간 중심 거리의 비율. 낮을수록 좋음. |
-| **[10] Adjusted Rand Index(ARI)** | ![](https://latex.codecogs.com/svg.image?ARI%20%3D%20%5Cfrac%7B%5Csum_%7Bij%7D%20%5Cbinom%7Bn_%7Bij%7D%7D%7B2%7D%20-%20%5B%5Csum_i%20%5Cbinom%7Ba_i%7D%7B2%7D%5Csum_j%20%5Cbinom%7Bb_j%7D%7B2%7D%5D%2F%5Cbinom%7Bn%7D%7B2%7D%7D%7B%5Cfrac%7B1%7D%7B2%7D%5B%5Csum_i%20%5Cbinom%7Ba_i%7D%7B2%7D%20%2B%20%5Csum_j%20%5Cbinom%7Bb_j%7D%7B2%7D%5D%20-%20%5B%5Csum_i%20%5Cbinom%7Ba_i%7D%7B2%7D%5Csum_j%20%5Cbinom%7Bb_j%7D%7B2%7D%5D%2F%5Cbinom%7Bn%7D%7B2%7D%7D) | 군집 일치도 평가. 1이면 완벽 일치, 0은 무작위 수준. |
-| **[11] Normalized Mutual Information(NMI)** | ![](https://latex.codecogs.com/svg.image?NMI(U%2CV)%20%3D%20%5Cfrac%7B2I(U%3BV)%7D%7BH(U)%20%2B%20H(V)%7D) | 군집 결과와 실제 레이블 간의 상호 정보량을 정규화. 값이 1에 가까울수록 유사도가 높음. |
-
-
-
-
-| 지표명 | 수식 | 설명 |
-|---------|------|------|
 | **[3.1] Reconstruction Error (재구성 오류)** | ![](https://latex.codecogs.com/svg.image?RE%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5C%7C%20x_i%20-%20%5Chat%7Bx%7D_i%20%5C%7C%5E2) | 원본 데이터와 복원된 데이터 간 평균 제곱 오차. 값이 작을수록 정보 손실이 적음. |
 | **[3.2] Explained Variance Ratio (설명된 분산 비율)** | ![](https://latex.codecogs.com/svg.image?EVR_k%20%3D%20%5Cfrac%7B%5Csum_%7Bi%3D1%7D%5E%7Bk%7D%20%5Clambda_i%7D%7B%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Clambda_i%7D) | 상위 k개 성분이 전체 분산에서 차지하는 비율. PCA에서 차원 선택 기준. |
 | **[3.3] Mutual Information (상호 정보량)** | ![](https://latex.codecogs.com/svg.image?MI(X%2CY)%20%3D%20%5Csum_%7Bx%20%5Cin%20X%7D%20%5Csum_%7By%20%5Cin%20Y%7D%20p(x%2Cy)%5Clog%5Cfrac%7Bp(x%2Cy)%7D%7Bp(x)p(y)%7D) | 차원 축소 전후 변수 간 정보 공유 정도. 값이 클수록 정보 보존이 우수. |
@@ -2218,7 +2223,8 @@
 | **[3.14] Scree Plot** | ![](https://latex.codecogs.com/svg.image?%5Clambda_1%20%5Cge%20%5Clambda_2%20%5Cge%20%5Ccdots) | 고유값 감소 패턴을 시각화하여 엘보우 지점 확인. |
 | **[3.15] Procrustes Analysis** | ![](https://latex.codecogs.com/svg.image?D%20%3D%20%5Cmin_%7BR%2Ct%2Cs%7D%20%5C%7C%20X%20-%20sYR%20-%20t%20%5C%7C_F) | 두 임베딩 간 회전·이동·스케일 정렬 후 차이 측정. |
 | **[3.16] Neighborhood Preservation** | ![](https://latex.codecogs.com/svg.image?NP%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Cfrac%7B%7CN_H(i)%5Ccap%20N_L(i)%7C%7D%7Bk%7D) | 고차원 이웃 구조가 저차원에서 얼마나 유지되는지 평가. |
-| **[3.17] KL Divergence (KL 발산)** | ![](https://latex.codecogs.com/svg.image?D_%7BKL%7D(P%7C%7CQ)%20%3D%20%5Csum_i%20P(i)%5Clog%5Cfrac%7BP(i)%7DQ(i)%7D) | 고차원 분포와 저차원 분포 간 차이. t-SNE 최적화 핵심 지표. |
+| **[3.17] KL Divergence (KL 발산)** | ![](https://latex.codecogs.com/svg.image?D_{KL}(P%20%5Cparallel%20Q)%20%3D%20%5Csum_i%20P(i)%5Clog%5Cfrac%7BP(i)%7D%7BQ(i)%7D) | 고차원 분포와 저차원 분포 간 차이 측정. t-SNE 최적화의 핵심 목적함수. |
+
 
 <br>
 
