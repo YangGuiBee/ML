@@ -1700,16 +1700,6 @@
 
 | 지표 | 의미 | 수식 |
 |---|---|---|
-| **[1] Silhouette Coefficient** | 한 점이 자기 군집 평균거리 $a(i)$ 대비 가장 가까운 다른 군집 평균거리 $b(i)$ 로 분리도 측정 | $s(i)=\dfrac{b(i)-a(i)}{\max\{a(i),\,b(i)\}}$<br>$\bar{s}=\dfrac{1}{n}\sum_{i=1}^{n}s(i)$ |
-| **[2] Davies–Bouldin Index (DBI)** | 군집 내 응집도 대비 군집 간 분리도 | $DBI=\dfrac{1}{K}\sum_{i=1}^{K}\max_{j\ne i}\dfrac{S_i+S_j}{M_{ij}}$<br>$S_i=\dfrac{1}{\lvert C_i\rvert}\sum_{x\in C_i}\lVert x-\mu_i\rVert,\; M_{ij}=\lVert\mu_i-\mu_j\rVert$ |
-| **[3] Dunn Index (DI)** | 가장 가까운 군집 간 최소거리 대비 최대 군집 지름 | $DI=\dfrac{\min_{i\ne j}\,\delta(C_i,C_j)}{\max_k\,\Delta(C_k)}$<br>$\delta$: 군집 간 최소거리, $\Delta$: 군집 지름(내부 최대거리) |
-| **[4] Calinski–Harabasz Index (CHI)** | 군집 사이 분산 / 군집 내 분산 | $CH=\dfrac{\mathrm{Tr}(B_K)/(K-1)}{\mathrm{Tr}(W_K)/(n-K)}$<br>$\mathrm{Tr}(B_K)=\sum_k \lvert C_k\rvert\,\lVert\mu_k-\bar{x}\rVert^2,\;\mathrm{Tr}(W_K)=\sum_k\sum_{x\in C_k}\lVert x-\mu_k\rVert^2$ |
-| **[5] Within-Cluster Sum of Squares (WCSS)** | 각 점이 군집 중심까지의 제곱거리 합 K-means 목적함수와 동일 | $\mathrm{WCSS}=\sum_{k=1}^{K}\sum_{x\in C_k}\lVert x-\mu_k\rVert^{2}$ |
-
-
-
-| 지표 | 의미 | 수식 |
-|---|---|---|
 | **[1.1] Silhouette Coefficient (실루엣 계수)** | 한 점이 자기 군집 평균거리 $a(i)$ 대비 가장 가까운 다른 군집 평균거리 $b(i)$ 로 분리도 측정 | $s(i)=\dfrac{b(i)-a(i)}{\max\{a(i),\,b(i)\}}$<br>$\bar{s}=\dfrac{1}{n}\sum_{i=1}^{n}s(i)$ |
 | **[1.2] Davies–Bouldin Index (DBI)** | 군집 내 응집도 대비 군집 간 분리도 | $DBI=\dfrac{1}{K}\sum_{i=1}^{K}\max_{j\ne i}\dfrac{S_i+S_j}{M_{ij}}$<br>$S_i=\dfrac{1}{\lvert C_i\rvert}\sum_{x\in C_i}\lVert x-\mu_i\rVert,\; M_{ij}=\lVert\mu_i-\mu_j\rVert$ |
 | **[1.3] Dunn Index (DI)** | 가장 가까운 군집 간 최소거리 대비 최대 군집 지름 | $DI=\dfrac{\min_{i\ne j}\,\delta(C_i,C_j)}{\max_k\,\Delta(C_k)}$<br>$\delta$: 군집 간 최소거리, $\Delta$: 군집 지름(내부 최대거리) |
@@ -1721,12 +1711,7 @@
 | **[1.9] Connectivity (연결성)** | 가까운 이웃 샘플들이 동일 군집에 속하는 정도 측정 | $\mathrm{Conn}=\sum_{i=1}^{n}\sum_{j=1}^{L}\dfrac{1}{j}\,\mathbb{I}\!\left(c_i \neq c_{\mathrm{NN}_j(i)}\right)$ |
 | **[1.10] Xie–Beni Index (XBI)** | 퍼지 군집에서 군집 내 응집도 대비 군집 중심 간 분리도 | $XBI=\dfrac{\sum_{i=1}^{n}\sum_{k=1}^{K}u_{ik}^m\lVert x_i-v_k\rVert^2}{n\cdot\min_{i\ne j}\lVert v_i-v_j\rVert^2}$ |
 
-
-
 <br>
-
-
-
 
 ## ▣ 군집화 평가지표 결과해석
 
@@ -1884,15 +1869,37 @@
 
 ## ▣ 연관규칙 평가지표 수식
            
-| 지표                       | 의미                                         | 수식                                                             |
-| ------------------------- | ------------------------------------------ | ---------------------------------------------------------------------- |
-| **[1] 지지도(Support)**         | A와 B가 동시에 발생할 비율                       | `support(A→B) = P(A ∧ B) = count(A ∧ B) / N`                           |
-| **[2] 신뢰도(Confidence)**      | A가 발생했을 때 B가 함께 발생할 조건부 확률             | `confidence(A→B) = P(B ∣ A) = P(A ∧ B) / P(A)`                         |
-| **[3] 향상도(Lift)**            | 독립 가정 대비 연관 강도                         | `lift(A→B) = P(A ∧ B) / ( P(A) · P(B) ) = confidence(A→B) / P(B)`      |
-| **[4] 레버리지(Leverage)**       | 실제 동시발생과 기대 동시발생의 차이                   | `leverage(A,B) = P(A ∧ B) − P(A)·P(B)`                                 |
-| **[5] 확신도(Conviction)**      | 규칙이 없을 때의 B 부정 확률 대비, 규칙 하의 오류율 감소 | `conviction(A→B) = (1 − P(B)) / (1 − confidence(A→B))`                 |
-| **[6] 상관계수(Correlation)** | A–B 이진 상관(피어슨 φ)                       | `φ(A,B) = ( P(A ∧ B) − P(A)·P(B) ) / √( P(A)(1−P(A)) · P(B)(1−P(B)) )` |
+| 지표 | 의미 | 수식 |
+| --- | --- | --- |
+| **[1] 지지도(Support)**  | A와 B가 동시에 발생할 비율 | `support(A→B) = P(A ∧ B) = count(A ∧ B) / N` |
+| **[2] 신뢰도(Confidence)** | A가 발생했을 때 B가 함께 발생할 조건부 확률 | `confidence(A→B) = P(B ∣ A) = P(A ∧ B) / P(A)` |
+| **[3] 향상도(Lift)** | 독립 가정 대비 연관 강도 | `lift(A→B) = P(A ∧ B) / ( P(A) · P(B) ) = confidence(A→B) / P(B)` |
+| **[4] 레버리지(Leverage)** | 실제 동시발생과 기대 동시발생의 차이 | `leverage(A,B) = P(A ∧ B) − P(A)·P(B)` |
+| **[5] 확신도(Conviction)** | 규칙이 없을 때의 B 부정 확률 대비, 규칙 하의 오류율 감소 | `conviction(A→B) = (1 − P(B)) / (1 − confidence(A→B))`  |
+| **[6] 상관계수(Correlation)** | A–B 이진 상관(피어슨 φ) | `φ(A,B) = ( P(A ∧ B) − P(A)·P(B) ) / √( P(A)(1−P(A)) · P(B)(1−P(B)) )` |
 
+
+
+| 지표 | 의미 | 수식 |
+|---|---|---|
+| **[2.1] Support (지지도)** | A와 B가 동시에 발생할 비율 | `support(A→B) = P(A ∧ B) = count(A ∧ B) / N` |
+| **[2.2] Confidence (신뢰도)** | A가 발생했을 때 B가 함께 발생할 조건부 확률 | `confidence(A→B) = P(B ∣ A) = P(A ∧ B) / P(A)` |
+| **[2.3] Lift (향상도)** | A와 B가 독립일 때 대비 연관 강도 | `lift(A→B) = P(A ∧ B) / ( P(A) · P(B) ) = confidence(A→B) / P(B)` |
+| **[2.4] Leverage (레버리지)** | 실제 동시 발생 확률과 독립 가정 하 기대 확률의 차이 | `leverage(A,B) = P(A ∧ B) − P(A) · P(B)` |
+| **[2.5] Conviction (확신도)** | 규칙이 없을 때의 B 부정 확률 대비, 규칙 적용 시 오류율 감소 | `conviction(A→B) = (1 − P(B)) / (1 − confidence(A→B))` |
+| **[2.6] Jaccard Coefficient (자카드 계수)** | A와 B의 교집합 대비 합집합 비율 | `J(A,B) = P(A ∧ B) / ( P(A) + P(B) − P(A ∧ B) )` |
+| **[2.7] Kulczynski Measure (쿨친스키 측정)** | 양방향 조건부 확률의 평균 | `Kulc(A,B) = 1/2 · ( P(A ∧ B)/P(A) + P(A ∧ B)/P(B) )` |
+| **[2.8] All-Confidence (전체 신뢰도)** | A 또는 B 중 더 드문 사건 기준의 신뢰도 | `all-conf(A,B) = P(A ∧ B) / max(P(A), P(B))` |
+| **[2.9] Chi-Square Test (카이제곱 검정)** | 독립성 가설 하에서 관측 빈도와 기대 빈도의 차이 | `χ² = Σ (O_ij − E_ij)² / E_ij` |
+| **[2.10] Collective Strength (집단 강도)** | 동시 발생 및 동시 비발생을 모두 고려한 연관 강도 | `CS = [P(A ∧ B)+P(¬A ∧ ¬B)] / [P(A)P(B)+P(¬A)P(¬B)] · [1 − (P(A)P(B)+P(¬A)P(¬B))] / [1 − (P(A ∧ B)+P(¬A ∧ ¬B))]` |
+| **[2.11] Phi Coefficient (φ, 상관계수)** | A–B 이진 변수 간 피어슨 상관계수 | `φ = ( P(A ∧ B) − P(A)P(B) ) / √( P(A)(1−P(A)) · P(B)(1−P(B)) )` |
+| **[2.12] Piatetsky–Shapiro (PS)** | 실제 동시 발생과 독립 가정 간 차이 | `PS(A,B) = P(A ∧ B) − P(A) · P(B)` |
+| **[2.13] Odds Ratio (오즈비)** | A 발생 시 B 발생 오즈 대비 비발생 오즈 | `OR = [P(A ∧ B) · P(¬A ∧ ¬B)] / [P(A ∧ ¬B) · P(¬A ∧ B)]` |
+| **[2.14] Yule's Q (율의 Q)** | 오즈비를 −1~1 범위로 정규화 | `Q = (OR − 1) / (OR + 1)` |
+| **[2.15] Yule's Y (율의 Y)** | 로그 오즈비 기반 대칭 연관 지표 | `Y = (√OR − 1) / (√OR + 1)` |
+| **[2.16] Information Gain (정보 이득)** | A 발생 여부가 B의 불확실성을 얼마나 줄이는지 | `IG(B|A) = H(B) − H(B|A)` |
+| **[2.17] Zhang's Metric (장 메트릭)** | Lift의 비대칭성 및 불안정성 보정 | `Zhang = [P(A ∧ B) − P(A)P(B)] / max{ P(A ∧ B)P(¬A), P(A)P(¬B) }` |
+| **[2.18] Certainty Factor (확실성 인수)** | 규칙이 B의 신뢰를 얼마나 증가/감소시키는지 | `CF = (confidence − P(B)) / (1 − P(B))` (if confidence ≥ P(B)) |
 
 <br>
 
