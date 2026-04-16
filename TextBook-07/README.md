@@ -1718,10 +1718,12 @@
 | **[1.6] Elbow Method (엘보 방법)** | WCSS 감소 곡선에서 군집 수 증가에 따른 한계효과가 급감하는 지점 탐색 | $k^\*=\arg\min_k\{\text{기울기 변화가 급격히 감소하는 지점}\}$<br>(명시적 폐형식 수식 없음, 시각적 휴리스틱) |
 | **[1.7] Gap Statistic (갭 통계량)** | 실제 데이터 군집 품질과 무작위 기준 분포 간 차이로 최적 $k$ 선택 | $\mathrm{Gap}(k)=\mathbb{E}[\log(W_k^{\text{ref}})]-\log(W_k)$<br>$k^\*=\min\{k:\mathrm{Gap}(k)\ge\mathrm{Gap}(k+1)-s_{k+1}\}$ |
 | **[1.8] Information Criterion (AIC / BIC)** | 모델 적합도와 복잡도 간 균형으로 최적 군집 수 선택 | $\mathrm{AIC}=-2\log L+2p$<br>$\mathrm{BIC}=-2\log L+p\log n$ |
-| **[1.9] Connectivity (연결성)** | 가까운 이웃 샘플들이 동일 군집에 속하는 정도 측정 | $\mathrm{Conn}=\sum_{i=1}^{n}\sum_{j=1}^{L}\alpha_{ij}$<br>$\alpha_{ij}=\begin{cases}0,&\text{같은 군집}\\1/j,&\text{다른 군집}\end{cases}$ |
+| **[1.9] Connectivity (연결성)** | 가까운 이웃 샘플들이 동일 군집에 속하는 정도 측정 | $\mathrm{Conn}=\sum_{i=1}^{n}\sum_{j=1}^{L}\alpha_{ij}$<br>$\alpha_{ij}=\begin{cases}0,&\text{같은 군집}\\ \dfrac{1}{j},&\text{다른 군집}\end{cases}$ |
 | **[1.10] Xie–Beni Index (XBI)** | 퍼지 군집에서 군집 내 응집도 대비 군집 중심 간 분리도 | $XBI=\dfrac{\sum_{i=1}^{n}\sum_{k=1}^{K}u_{ik}^m\lVert x_i-v_k\rVert^2}{n\cdot\min_{i\ne j}\lVert v_i-v_j\rVert^2}$ |
 
 <br>
+
+
 
 
 ## ▣ 군집화 평가지표 결과해석
