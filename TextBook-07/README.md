@@ -1292,19 +1292,20 @@
 
 | 지표 | 수식 | 설명 |
 |---|---|---|
-| **[4.1] Isolation Score (고립 점수)** | `score(x) ∝ 1 / E[h(x)]` | Isolation Forest에서 샘플이 얼마나 빨리 고립되는지 나타내는 점수. 값이 클수록 이상치 가능성 높음. |
-| **[4.2] Average Path Length (Isolation Forest)** | `E[h(x)] = c(n) · 2^{−E(h(x))/c(n)}` | 샘플이 트리에서 고립되기까지의 평균 경로 길이. 짧을수록 이상치. |
-| **[4.3] LOF Score (Local Outlier Factor)** | `LOF_k(x) = ( Σ_{y∈N_k(x)} lrd_k(y) / |N_k(x)| ) / lrd_k(x)` | 국소 밀도 기반 이상치 점수. 1보다 크면 주변 대비 밀도가 낮아 이상치 가능성 큼. |
-| **[4.4] DBSCAN Noise Points Ratio** | `noise_ratio = (# noise points) / N` | DBSCAN에서 잡음으로 분류된 점의 비율. 높을수록 이상치가 많거나 파라미터 부적절 가능성. |
-| **[4.5] Reconstruction Error (Autoencoder)** | `RE(x) = || x − x̂ ||²` | 입력과 재구성 결과 간 오차. 값이 클수록 정상 패턴에서 벗어남. |
-| **[4.6] Likelihood-based Score (GMM, KDE)** | `score(x) = − log p(x)` | 확률 모델에서의 음의 로그우도. 확률이 낮을수록 이상치 가능성 큼. |
-| **[4.7] Mahalanobis Distance** | `D_M(x) = sqrt((x−μ)^T Σ^{−1} (x−μ))` | 평균과 공분산을 고려한 거리 기반 이상치 점수. 다변량 정규 가정. |
-| **[4.8] ABOD (Angle-Based Outlier Detection)** | `ABOD(x) = Var( angle(xi−x, xj−x) )` | 이웃들과 이루는 각도의 분산 기반 이상치 탐지. 고차원에서 거리기반 한계 보완. |
-| **[4.9] ROC-AUC** | `AUC = P(score(x⁺) > score(x⁻))` | 임계값 독립적 분리 성능. 이상치(+)가 정상(−)보다 높은 점수를 받을 확률. |
-| **[4.10] Precision–Recall Curve (PR Curve)** | `Precision = TP/(TP+FP), Recall = TP/(TP+FN)` | 희귀 이상치 상황에서 성능을 시각화. FP에 민감. |
-| **[4.11] Average Precision (AP)** | `AP = Σ_n (R_n − R_{n−1}) · P_n` | PR Curve 아래 면적. 이상치 탐지에서 ROC-AUC보다 권장. |
-| **[4.12] F1-Score** | `F1 = 2·(Precision·Recall)/(Precision+Recall)` | 정밀도와 재현율의 조화 평균. 임계값 의존. |
-| **[4.13] MCC (Matthews Correlation Coefficient)** | `MCC = (TP·TN − FP·FN)/sqrt((TP+FP)(TP+FN)(TN+FP)(TN+FN))` | 클래스 불균형에서도 안정적인 이진 분류 성능 지표. |
+| **[4.1] Isolation Score (고립 점수)** | $score(x)\propto\frac{1}{\mathbb{E}[h(x)]}$ | Isolation Forest에서 샘플이 얼마나 빨리 고립되는지 나타내는 점수. 값이 클수록 이상치 가능성 높음 |
+| **[4.2] Average Path Length (Isolation Forest)** | $\mathbb{E}[h(x)]=c(n)\cdot 2^{-\mathbb{E}[h(x)]/c(n)}$ | 샘플이 트리에서 고립되기까지의 평균 경로 길이. 짧을수록 이상치 |
+| **[4.3] LOF Score (Local Outlier Factor)** | $LOF_k(x)=\frac{\frac{1}{\lvert N_k(x)\rvert}\sum_{y\in N_k(x)}lrd_k(y)}{lrd_k(x)}$ | 국소 밀도 기반 이상치 점수. 1보다 크면 주변 대비 밀도가 낮아 이상치 가능성 큼 |
+| **[4.4] DBSCAN Noise Points Ratio** | $noise\_ratio=\frac{\#\text{ noise points}}{N}$ | DBSCAN에서 잡음으로 분류된 점의 비율. 높을수록 이상치가 많거나 파라미터 부적절 가능성 |
+| **[4.5] Reconstruction Error (Autoencoder)** | $RE(x)=\lVert x-\hat{x}\rVert^2$ | 입력과 재구성 결과 간 오차. 값이 클수록 정상 패턴에서 벗어남 |
+| **[4.6] Likelihood-based Score (GMM, KDE)** | $score(x)=-\log p(x)$ | 확률 모델에서의 음의 로그우도. 확률이 낮을수록 이상치 가능성 큼 |
+| **[4.7] Mahalanobis Distance** | $D_M(x)=\sqrt{(x-\mu)^T\Sigma^{-1}(x-\mu)}$ | 평균과 공분산을 고려한 거리 기반 이상치 점수. 다변량 정규 가정 |
+| **[4.8] ABOD (Angle-Based Outlier Detection)** | $ABOD(x)=\mathrm{Var}\big(\angle(x_i-x,\;x_j-x)\big)$ | 이웃들과 이루는 각도의 분산 기반 이상치 탐지. 고차원에서 거리 기반 방법의 한계 보완 |
+| **[4.9] ROC-AUC** | $AUC=\mathbb{P}(score(x^+)>score(x^-))$ | 임계값 독립적 분리 성능. 이상치(+)가 정상(−)보다 높은 점수를 받을 확률 |
+| **[4.10] Precision–Recall Curve** | $Precision=\frac{TP}{TP+FP},\quad Recall=\frac{TP}{TP+FN}$ | 희귀 이상치 상황에서 성능을 시각화. False Positive에 민감 |
+| **[4.11] Average Precision (AP)** | $AP=\sum_n (R_n-R_{n-1})\cdot P_n$ | PR Curve 아래 면적. 이상치 탐지에서 ROC-AUC보다 권장 |
+| **[4.12] F1-Score** | $F1=\frac{2\cdot Precision\cdot Recall}{Precision+Recall}$ | 정밀도와 재현율의 조화 평균. 임계값 의존 |
+| **[4.13] MCC (Matthews Correlation Coefficient)** | $MCC=\frac{TP\cdot TN-FP\cdot FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}$ | 클래스 불균형에서도 안정적인 이진 분류 성능 지표 |
+
 
 
 ## ▣ 이상치 탐지 평가지표 결과해석
