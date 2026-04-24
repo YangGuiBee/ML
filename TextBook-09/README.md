@@ -245,12 +245,14 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 
 # [2-2] 포아송 회귀 (Poisson Regression)
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.PoissonRegressor.html<br>
-포아송 회귀(Poisson Regression)는 발생 횟수(count data) 를 예측하기 위해 사용하는 일반화 선형 모형(GLM: Generalized Linear Model) 의 한 종류<br>
-종속변수가 포아송 분포(Poisson Distribution)를 따르는 경우에 사용되며, 이산형 카운트 데이터를 모델링하는 데 적합하다.<br> 
+<ins>포아송 회귀(Poisson Regression)는 발생 횟수(count data)를 예측하기 위해 사용하는 일반화 선형 모형(GLM: Generalized Linear Model)의 한 종류</ins><br>
+일정한 시간·공간 구간에서 어떤 사건이 몇 번 발생하는지를 확률적으로 모델링하는 이산확률분포로 사건이 드물고, 서로 독립적이며, 평균 발생률이 일정할 때에 적합<br>
+
 포아송 분포는 단위(한정된) 시간이나 공간에서 발생하는 평균적인 사건의 횟수(λ)를 바탕으로 특정 횟수의 사건이 발생할 확률을 설명한다.<br> 
 종속변수가 빈도변수로 0이상 정수이거나, 왜도가 크거나, 분포유형이 포아송 로그선형일 경우에 실시한다.<br>
 참고로 평균보다 분산이 큰 경우에 적용하는 **음이항 회귀(Negative binomial regression)** 는 분산이 포아송 모델의 평균과 동일하다는 매우 제한적인 가정을 완화할 수 있다.
 전통적인 음이항 회귀 모델은 포아송과 **감마(gamma regression)** 혼합 분포를 기반으로 하여 널리 사용된다.<br><br>
+
 **포아송 확률변수 $X$의 확률밀도함수(probability mass function)** : $P(X = k; \lambda) = \frac{e^{-\lambda}\lambda^k}{k!}$<br>
 ###### X : 사건이 발생하는 횟수를 나타내는 확률 변수, 𝑘 : 발생한 사건의 횟수(0, 1, 2, 3, ...), 𝜆 : 단위 시간 또는 공간 내에서 사건이 발생하는 평균 횟수(포아송 분포의 모수, 평균이자 분산으로 λ가 작을수록 사건이 드물게 발생하는 상황을 나타내며, λ가 클수록 사건이 자주 발생하는 상황), 𝑒 : 자연 상수 ≈2.718, 𝑘! : k의 팩토리얼로, 𝑘×(𝑘−1)×⋯×1<br>
 
