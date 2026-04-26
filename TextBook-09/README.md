@@ -1288,51 +1288,39 @@ $e∼N(0,σ^2I_N)$<br>
 
 <br>
 
-# [3-1] 단계적 회귀 (Stepwise Regression)
-여러 독립변수 중에서 종속변수를 가장 잘 설명하는 변수들을 자동으로 선택하는 방법<br>
-**단계적 회귀 (Stepwise Regression)** 는 독립 변수들을 자동으로 모델에 추가하거나 제거하여 최적의 모델을 탐색(변수의 추가나 제거가 통계적으로 유의미한지 여부에 따라 이루어짐)<br>
-예를 들어, 변수를 추가할 때마다 F 통계량이유의미하게 증가하는지 확인하거나, 제거할 때마다 변수의 t 통계량이 유의미하게 감소하는지 확인<br> 
-장점: 자동으로 변수를 선택하므로 모델이 데이터에 더 잘 맞을 가능성이 있음<br><br>
-
-# [3-2] 위계적 회귀 (Hierarchical Regression) 
-여러 독립변수 중에서 종속변수를 가장 잘 설명하는 변수들을 수동으로 선택하는 방법<br>
-**위계적 회귀 (Hierarchical Regression)** 는 독립 변수들을 미리 정의한 순서에 따라 모델에 추가하는 것으로,<br>
-이론적으로 중요한 변수부터 시작하여 덜 중요한 변수를 차례로 추가하는 방식<br>
-장점: 이론적 근거에 따라 변수를 추가하므로 결과 해석이 이론적으로 타당함.<br>
-
-
-| 구분 | **단계적 회귀 (Stepwise Regression)** | **위계적 회귀 (Hierarchical Regression)** |
-|---|---|---|
-|**정의**|통계적으로 유의한 독립변수를 **자동 선택(Auto Selection)** 하는 절차적 회귀 방법|연구자가 **이론적 근거 또는 가설에 따라** 변수를 단계적으로 투입하는 회귀 분석 방법|
-|**목적**|모델의 예측력과 단순성을 동시에 극대화하기 위해, **불필요한 변수 제거 및 최적 변수 선택**|변수 간 **이론적 관계 검증**, 변수 추가에 따른 **설명력 변화(ΔR²)** 확인|
-|**변수 투입 방식**|알고리즘이 자동으로 변수를 **추가·제거**함<br>→ Forward, Backward, Stepwise 세 가지 절차 존재|연구자가 **직접 변수 투입 순서를 지정**함<br>→ Block 또는 단계별 투입(hierarchical entry)|
-|**기준**|통계적 기준(p-value, AIC, BIC, F-test 등)에 따라 선택|이론적 중요도, 선행연구, 연구가설 등에 근거하여 순서 결정|
-|**장점**|- 변수 선택이 자동화되어 편리함<br>- 많은 변수 중 핵심변수 추출 가능<br>- 과적합 방지 효과| - 변수 추가의 영향(ΔR²)을 명확히 확인 가능<br>- 이론적 해석력이 높고 연구 논문에 적합|
-|**단점**|- 통계적 기준에만 의존 → 이론적 타당성 약화<br>- 데이터마다 선택 결과 달라질 수 있음<br>- 다중공선성 영향 큼|- 연구자의 주관이 개입<br>- 절차가 수동적이며 복잡<br>- 변수 순서에 따라 결과 달라짐|
-|**결과 해석 초점**|최종 선택된 변수들의 **통계적 유의성과 예측력**|각 단계(모델)의 **R² 변화량(ΔR²)** 과 **추가 변수의 설명력**|
-|**대표적 절차**| ① Forward Selection (전진선택)<br>② Backward Elimination (후진제거)<br>③ Stepwise (혼합형)| ① Model 1: 통제변수만 포함<br>② Model 2: 주요 예측변수 추가<br>③ Model 3: 상호작용항 등 추가|
-|**적용사례 (연구·산업 분야별)**| - **경제/마케팅**: 광고비, 인구, 소득수준 등 변수로 판매량 예측<br> - **부동산**: 주거특성 중 임대료 예측에 기여하는 변수 자동선택<br> - **의료통계**: 다수의 임상지표 중 질병위험도에 유의한 변수 식별<br> - **환경/기상**: 기후요소 중 미세먼지 농도에 영향 큰 요인 탐색 | - **심리학**: 통제변수(성별, 나이) → 주요변수(스트레스, 자존감) 순으로 투입해 영향 비교<br> - **사회학**: 사회경제적 요인이 삶의 만족도에 미치는 단계적 효과 분석<br> - **교육학**: 학업성취도에 교사요인, 가정요인, 학교요인이 순차적으로 기여하는 정도 분석<br> - **보건학/공중정책**: 건강행태 → 사회지원 → 정책요인의 누적 영향 평가|
-|**대표 분야**|데이터마이닝, 경제·마케팅, 부동산, 공학적 예측| 심리학, 사회과학, 교육학, 보건학, 정책평가|
-|**핵심 키워드**| “통계적 최적화”, “자동 변수 선택”, “예측 중심”| “이론적 검증”, “단계별 투입”, “설명력 중심”|
-
-
-| 구분 | **단계적 회귀 (Stepwise Regression)** | **위계적 회귀 (Hierarchical Regression)** | **강건 회귀 (Robust Regression)** | **분위수 회귀 (Quantile Regression)** |
+| 구분 | **단계적 회귀<br>(Stepwise Regression)** | **위계적 회귀<br>(Hierarchical Regression)** | **강건 회귀<br>(Robust Regression)** | **분위수 회귀<br>(Quantile Regression)** |
 |---|---|---|---|---|
-| **정의** | 통계적으로 유의한 독립변수를 **자동 선택(Auto Selection)** 하는 절차적 회귀 방법 | 연구자가 **이론적 근거 또는 가설에 따라** 변수를 단계적으로 투입하는 회귀 분석 방법 | 이상치(outlier)나 가정 위반의 영향을 줄이기 위해 **손실함수 또는 추정 방식을 수정**한 회귀 방법 | 평균이 아닌 **조건부 분위수(quantile)** 를 직접 추정하는 회귀 분석 방법 |
-| **목적** | 모델의 예측력과 단순성을 동시에 극대화하기 위해 **불필요한 변수 제거 및 최적 변수 선택** | 변수 간 **이론적 관계 검증**, 변수 추가에 따른 **설명력 변화(ΔR²)** 확인 | 이상치·이분산·정규성 위반 상황에서도 **안정적인 추정값 확보** | 반응변수 분포의 **다양한 위치(중앙·하위·상위)** 에서의 관계 분석 |
-| **변수 투입 방식** | 알고리즘이 자동으로 변수를 **추가·제거**함<br>→ Forward, Backward, Stepwise 절차 | 연구자가 **직접 변수 투입 순서를 지정**함<br>→ Block 또는 단계별 투입 | 변수 투입 방식은 일반 회귀와 동일<br>→ **추정 단계에서 가중치 또는 손실함수 조정** | 변수 투입은 일반 회귀와 동일<br>→ **분위수 수준(τ)에 따라 별도 추정** |
+| **정의** | 통계적으로 유의한 독립변수를 자동 선택(Auto Selection)하는 절차적 회귀 방법 | 연구자가 이론적 근거 또는 가설에 따라 변수를 단계적으로 투입하는 회귀 분석 방법 | 이상치(outlier)나 가정 위반의 영향을 줄이기 위해 손실함수 또는 추정 방식을 수정한 회귀 방법 | 평균이 아닌 조건부 분위수(quantile)를 직접 추정하는 회귀 분석 방법 |
+| **목적** | 모델의 예측력과 단순성을 동시에 극대화하기 위해 불필요한 변수 제거 및 최적 변수 선택 | 변수 간 이론적 관계 검증, 변수 추가에 따른 설명력 변화(ΔR²) 확인 | 이상치·이분산·정규성 위반 상황에서도 안정적인 추정값 확보 | 반응변수 분포의 다양한 위치(중앙·하위·상위)에서의 관계 분석 |
+| **변수 투입 방식** | 알고리즘이 자동으로 변수를 추가·제거함<br>→ Forward, Backward, Stepwise 절차 | 연구자가 직접 변수 투입 순서를 지정함<br>→ Block 또는 단계별 투입 | 변수 투입 방식은 일반 회귀와 동일<br>→ 추정 단계에서 가중치 또는 손실함수 조정 | 변수 투입은 일반 회귀와 동일<br>→ 분위수 수준(τ)에 따라 별도 추정 |
 | **기준** | 통계적 기준(p-value, AIC, BIC, F-test 등)에 따라 선택 | 이론적 중요도, 선행연구, 연구가설에 근거 | 이상치에 대한 민감도 감소 기준<br>(Huber, Tukey 손실 등) | 분위수 손실함수(Check loss)<br>및 선택한 분위수 τ |
 | **장점** | - 변수 선택 자동화로 편리함<br>- 핵심 변수 탐색에 유리<br>- 과적합 완화 가능 | - 변수 추가 효과를 명확히 해석 가능<br>- 이론 검증에 매우 적합 | - 이상치에 강건<br>- 실제 데이터 환경에서 안정적 | - 평균 가정 불필요<br>- 분포 비대칭·꼬리 분석 가능 |
 | **단점** | - 이론적 타당성 약화 가능<br>- 데이터에 따라 결과 불안정 | - 연구자 주관 개입<br>- 변수 순서에 민감 | - 추정 및 해석이 다소 복잡<br>- 표준 회귀 대비 직관성 감소 | - 계산 복잡도 증가<br>- 분위수 선택에 따라 결과 상이 |
-| **결과 해석 초점** | 최종 선택된 변수들의 **통계적 유의성 및 예측력** | 각 단계별 **R² 변화(ΔR²)** 와 추가 변수의 설명력 | 회귀계수의 **안정성 및 이상치 영향 감소 여부** | 분위수별 회귀계수 차이<br>→ 분포 구조 해석 |
+| **결과 해석 초점** | 최종 선택된 변수들의 통계적 유의성 및 예측력 | 각 단계별 R² 변화(ΔR²)와 추가 변수의 설명력 | 회귀계수의 안정성 및 이상치 영향 감소 여부 | 분위수별 회귀계수 차이<br>→ 분포 구조 해석 |
 | **대표적 절차** | ① Forward Selection<br>② Backward Elimination<br>③ Stepwise | ① 통제변수 모델<br>② 주요 설명변수 추가<br>③ 상호작용항 포함 | ① M-estimation<br>② Huber Regression<br>③ RANSAC 등 | ① τ=0.25<br>② τ=0.50 (중앙값)<br>③ τ=0.75 |
 | **적용사례 (연구·산업)** | - 마케팅: 판매량 예측 변수 자동 선택<br>- 의료: 다수 임상지표 중 유의 변수 탐색 | - 심리·사회과학: 통제변수 → 핵심변수 효과 검증<br>- 정책평가: 요인별 기여도 비교 | - 금융: 이상치 많은 수익률 분석<br>- 공정데이터: 센서 오류 존재 데이터 | - 소득분석: 하위·상위 소득층 영향 요인 비교<br>- 리스크 분석 |
 | **대표 분야** | 데이터마이닝, 경제·마케팅, 공학 | 심리학, 사회과학, 교육학, 보건학 | 금융, 공학, 품질관리, 환경데이터 | 경제학, 노동·소득 분석, 리스크 관리 |
 | **핵심 키워드** | “자동 변수 선택”, “예측 중심” | “이론 검증”, “설명력 변화” | “이상치 대응”, “가정 완화” | “분포 분석”, “비대칭·꼬리” |
 
-<br>
 
-# [3-3] 분위수 회귀 (Quantile Regression)
+# [3-1] 단계적 회귀 (Stepwise Regression)
+여러 독립변수 중에서 종속변수를 가장 잘 설명하는 변수들을 자동으로 선택하는 방법<br>
+단계적 회귀 (Stepwise Regression)는 독립 변수들을 자동으로 모델에 추가하거나 제거하여 최적의 모델을 탐색(변수의 추가나 제거가 통계적으로 유의미한지 여부에 따라 이루어짐)<br>
+예를 들어, 변수를 추가할 때마다 F 통계량이유의미하게 증가하는지 확인하거나, 제거할 때마다 변수의 t 통계량이 유의미하게 감소하는지 확인<br> 
+장점: 자동으로 변수를 선택하므로 모델이 데이터에 더 잘 맞을 가능성이 있음<br><br>
+
+# [3-2] 위계적 회귀 (Hierarchical Regression) 
+여러 독립변수 중에서 종속변수를 가장 잘 설명하는 변수들을 수동으로 선택하는 방법<br>
+위계적 회귀 (Hierarchical Regression)는 독립 변수들을 미리 정의한 순서에 따라 모델에 추가하는 것으로,<br>
+이론적으로 중요한 변수부터 시작하여 덜 중요한 변수를 차례로 추가하는 방식<br>
+장점: 이론적 근거에 따라 변수를 추가하므로 결과 해석이 이론적으로 타당함.<br><br>
+
+# [3-3] 강건 회귀 (Robust Regression)
+“이상치가 없어야만 제대로 동작하는” OLS(최소제곱 회귀)의 약점을 보완하는 방법<br>
+강건 회귀(Robust Regression)는 이상치(outlier)나 회귀 가정 위반이 존재하더라도, 회귀계수를 안정적으로 추정하도록 설계된 회귀 분석 방법<br>
+강건 회귀는 평균을 지키되 이상치에 둔감하게 만들고, 분위수 회귀는 아예 평균을 포기하고 분포를 직접 본다<br>
+
+# [3-4] 분위수 회귀 (Quantile Regression)
 종속변수 𝑦의 조건부 분위수(Conditional Quantile)를 설명변수 𝑋로부터 추정하는 회귀 기법<br>
 즉, 평균이 아니라 특정 분위수 𝑞∈(0,1)의 위치(예: 중앙값, 상위 10%)를 예측<br>
 반응 변수의 조건부 분위수를 모델링 할때 사용되는 선형 회귀의 확장 버전<br>
@@ -1343,7 +1331,6 @@ $e∼N(0,σ^2I_N)$<br>
 5) 점 추정이 아닌 구간추정을 통해 결과의 정확도를 높이기 위하여<br>
 6) 반응변수의 스프레드를 같이 살펴보기 위하여<br>
 7) 회귀곡선에 대한 설득력을 높이기 위하여<br>
-
 <br>
 보통 OLS 회귀는 조건부 평균값을 모델링하는 반면 분위수 회귀는 조건부 분위수를 모델링하고<br>
 조건부 분위수를 모델링하기 위해 Pinball loss를 사용<br>
@@ -1452,14 +1439,16 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 |---|---|---|
 | **[3-1] 단계적 회귀** | 선형 회귀 기반 변수 선택 이론<br>→통계적 기준에 따라 설명변수를 단계적으로 추가 또는 제거 | 다중 선형 회귀가 기본 모델<br>변수 선택 과정을 자동화<br>→ 모델 단순화 및 과적합 완화 |
 | **[3-2] 위계적 회귀** | 선형 회귀 기반 모형 비교 이론<br>→이론적 중요도에 따라 변수 블록을 순차적으로 투입 | 다중 선형 회귀가 기본 모델<br>변수 투입 순서를 연구자가 통제<br>→ 설명력 증가의 해석 가능 |
-| **[3-3] 분위수 회귀** | 조건부 분포 추정 이론<br>→평균이 아닌 특정 분위수를 직접 추정 | 다중 선형 회귀의 평균 추정 한계 보완<br>이상치와 분포 비대칭에 강건<br>→ 분포 전체 구조 분석 가능 |
+| **[3-3] 강건 회귀** | 이상치 및 가정 위반 대응 이론<br>→손실함수 또는 추정 방식을 수정하여 안정적 계수 추정 | 다중 선형 회귀의 가정(정규성·등분산성) 완화<br>이상치 영향 감소<br>→ 현실 데이터에서 추정 안정성 향상 |
+| **[3-4] 분위수 회귀** | 조건부 분포 추정 이론<br>→평균이 아닌 특정 분위수를 직접 추정 | 다중 선형 회귀의 평균 추정 한계 보완<br>이상치와 분포 비대칭에 강건<br>→ 분포 전체 구조 분석 가능 |
 
 
 | 모델명 | 수식 | 수식의 항목 설명 | 그래프형태 | 적용분야 |
 |---|---|---|---|---|
 | **[3-1] 단계적 회귀** | $Y = X\beta + \varepsilon$ | $Y$: 반응변수<br>$X$: 설명변수 행렬<br>$\beta$: 회귀계수 벡터<br>$\varepsilon$: 오차항 | 변수 추가·제거에 따른 회귀선 변화 | 변수 선택이 중요한 예측 모델<br>경제·사회과학 회귀분석 |
 | **[3-2] 위계적 회귀** | $Y = X_1\beta_1 + X_2\beta_2 + \varepsilon$ | $Y$: 반응변수<br>$X_1, X_2$: 변수 블록<br>$\beta_1, \beta_2$: 블록별 계수<br>$\varepsilon$: 오차항 | 단계별 설명력 증가 곡선 | 이론 검증 중심 연구<br>심리·교육·사회과학 |
-| **[3-3] 분위수 회귀** | $\min \sum_i \rho_{\tau}(y_i - x_i^\top\beta)$ | $y_i$: 관측값<br>$x_i$: 설명변수 벡터<br>$\beta$: 회귀계수<br>$\tau$: 분위수 수준<br>$\rho_{\tau}$: 분위수 손실함수 | 분위수별 다중 회귀선 | 소득·리스크 분석<br>이상치·비대칭 분포 데이터 |
+| **[3-3] 강건 회귀** | $\min \sum_i \rho(e_i)$ | $e_i$: 잔차<br>$\rho(\cdot)$: 강건 손실함수<br>(Huber, Tukey 등) | 이상치 영향이 제한된 회귀선 | 이상치·잡음이 많은 데이터<br>금융·공정·환경·센서 데이터 |
+| **[3-4] 분위수 회귀** | $\min \sum_i \rho_{\tau}(y_i - x_i^\top\beta)$ | $y_i$: 관측값<br>$x_i$: 설명변수 벡터<br>$\beta$: 회귀계수<br>$\tau$: 분위수 수준<br>$\rho_{\tau}$: 분위수 손실함수 | 분위수별 다중 회귀선 | 소득·리스크 분석<br>이상치·비대칭 분포 데이터 |
 
 
 | 구분 | 조건 | 모델명 |
@@ -1467,7 +1456,8 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 | ① 기본 선형 회귀가 필요한가? | 연속형 반응변수<br>설명변수와 선형 관계 가정 | **[3] 다중 선형 회귀 (Multiple Linear Regression)** |
 | ② 설명변수가 많아 변수 선택이 필요한가? | 변수 수가 많음<br>모형 단순화 필요 | **[3-1] 단계적 회귀 (Stepwise Regression)** |
 | ③ 변수 투입 순서에 이론적 근거가 있는가? | 변수 블록별 효과 비교 필요<br>설명력 증가 해석 중요 | **[3-2] 위계적 회귀 (Hierarchical Regression)** |
-| ④ 평균이 아닌 분포의 다른 위치를 보고 싶은가? | 이상치 존재<br>분포 비대칭 또는 꼬리 분석 필요 | **[3-3] 분위수 회귀 (Quantile Regression)** |
+| ④ 이상치 또는 회귀 가정 위반이 우려되는가? | 극단값 존재 가능<br>이분산·정규성 위반 우려 | **[3-3] 강건 회귀 (Robust Regression)** |
+| ⑤ 평균이 아닌 분포의 다른 위치를 보고 싶은가? | 이상치 존재<br>분포 비대칭 또는 꼬리 분석 필요 | **[3-4] 분위수 회귀 (Quantile Regression)** |
 
 
 | 모델명 | sk-learn 사용 예제 요약 | 최적의 훈련 데이터셋 |
@@ -1475,7 +1465,8 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 | **[3] 다중 선형 회귀** | LinearRegression<br>fit / predict<br>r2_score | sklearn Diabetes Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset |
 | **[3-1] 단계적 회귀** | LinearRegression<br>fit / predict<br>r2_score | sklearn Diabetes Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset |
 | **[3-2] 위계적 회귀** | LinearRegression (block-wise)<br>fit / score | sklearn Diabetes Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset |
-| **[3-3] 분위수 회귀** | QuantReg (statsmodels)<br>fit<br>summary | sklearn Diabetes Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset |
+| **[3-3] 강건 회귀** | HuberRegressor<br>fit / predict<br>r2_score | sklearn Diabetes Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset |
+| **[3-4] 분위수 회귀** | QuantileRegressor (sklearn)<br>fit / predict<br>score | sklearn Diabetes Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset |
 
 
 ### [3] 다중 선형 회귀
@@ -1543,7 +1534,29 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 	print(model2.score(Xte[:, :6], yte))
 
 
-### [3-3] 분위수 회귀 (scikit‑learn에는 없으므로 statsmodels 사용이 표준)
+
+### [3-3] 강건 회귀 (Robust Regression)
+▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#robustness-and-outliers<br>
+▣ API : (Huber Regressor) https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.HuberRegressor.html<br>
+(RANSAC Regressor) https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.RANSACRegressor.html<br>
+(Theil–Sen Regressor）https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.TheilSenRegressor.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/plot_robust_fit.html<br>
+
+	import statsmodels.api as sm
+	from sklearn.datasets import load_diabetes
+	from sklearn.model_selection import train_test_split
+
+	X, y = load_diabetes(return_X_y=True)
+	X = sm.add_constant(X)
+	Xtr, Xte, ytr, yte = train_test_split(X, y, random_state=0)
+
+	model = sm.RLM(ytr, Xtr, M=sm.robust.norms.HuberT())
+	result = model.fit()
+	print(result.summary())
+
+
+
+### [3-4] 분위수 회귀 (scikit‑learn에는 없으므로 statsmodels 사용이 표준)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#quantile-regression<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.QuantileRegressor.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/plot_quantile_regression.html<br>
