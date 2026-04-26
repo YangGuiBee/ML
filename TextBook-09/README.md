@@ -1454,55 +1454,96 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 | ④ 평균이 아닌 분포의 다른 위치를 보고 싶은가? | 이상치 존재<br>분포 비대칭 또는 꼬리 분석 필요 | **[3-3] 분위수 회귀 (Quantile Regression)** |
 
 
-| 모델명 | sk-learn 사용 예제 소스 | 최적의 훈련 데이터셋 |
+| 모델명 | sk-learn 사용 예제 요약 | 최적의 훈련 데이터셋 |
 |---|---|---|
-| **[3] 다중 선형 회귀** | <pre><code>from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import r2_score
+| **[3] 다중 선형 회귀** | LinearRegression<br>fit / predict<br>r2_score | sklearn Diabetes Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset |
+| **[3-1] 단계적 회귀** | LinearRegression<br>fit / predict<br>r2_score | sklearn Diabetes Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset |
+| **[3-2] 위계적 회귀** | LinearRegression (block-wise)<br>fit / score | sklearn Diabetes Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset |
+| **[3-3] 분위수 회귀** | QuantReg (statsmodels)<br>fit<br>summary | sklearn Diabetes Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset |
 
-X, y = load_diabetes(return_X_y=True)
-Xtr, Xte, ytr, yte = train_test_split(X, y)
 
-model = LinearRegression()
-model.fit(Xtr, ytr)
+### [3] 다중 선형 회귀
+▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html
 
-pred = model.predict(Xte)
-print(r2_score(yte, pred))</code></pre> | sklearn Diabetes Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset |
-| **[3-1] 단계적 회귀** | <pre><code>from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import r2_score
+	from sklearn.datasets import load_diabetes
+	from sklearn.linear_model import LinearRegression
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import r2_score
 
-X, y = load_diabetes(return_X_y=True)
-Xtr, Xte, ytr, yte = train_test_split(X, y)
+	X, y = load_diabetes(return_X_y=True)
+	Xtr, Xte, ytr, yte = train_test_split(X, y, random_state=0)
 
-model = LinearRegression()
-model.fit(Xtr[:, :5], ytr)  # 단계적 변수 선택 가정
+	model = LinearRegression()
+	model.fit(Xtr, ytr)
 
-pred = model.predict(Xte[:, :5])
-print(r2_score(yte, pred))</code></pre> | sklearn Diabetes Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset |
-| **[3-2] 위계적 회귀** | <pre><code>from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import r2_score
+	pred = model.predict(Xte)
+	print(r2_score(yte, pred))
 
-X, y = load_diabetes(return_X_y=True)
-Xtr, Xte, ytr, yte = train_test_split(X, y)
 
-model1 = LinearRegression().fit(Xtr[:, :3], ytr)
-model2 = LinearRegression().fit(Xtr[:, :6], ytr)
+### [3-1] 단계적 회귀 (단계적 변수 선택이 “있다고 가정한” 단순 예시)
+▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html
+▣ API : 전용 API는 없음(기본 API: https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html)
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/index.html
 
-print(model1.score(Xte[:, :3], yte),
-      model2.score(Xte[:, :6], yte))</code></pre> | sklearn Diabetes Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset |
-| **[3-3] 분위수 회귀** | <pre><code>import statsmodels.api as sm
-from sklearn.model_selection import train_test_split
+	from sklearn.datasets import load_diabetes
+	from sklearn.linear_model import LinearRegression
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import r2_score
 
-X, y = load_diabetes(return_X_y=True)
-X = sm.add_constant(X)
-Xtr, Xte, ytr, yte = train_test_split(X, y)
+	X, y = load_diabetes(return_X_y=True)
+	Xtr, Xte, ytr, yte = train_test_split(X, y, random_state=0)
 
-model = sm.QuantReg(ytr, Xtr)
-result = model.fit(q=0.5)
+	# 예시: 선택된 일부 변수만 사용
+	model = LinearRegression()
+	model.fit(Xtr[:, :5], ytr)
 
-print(result.summary())</code></pre> | sklearn Diabetes Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset |
+	pred = model.predict(Xte[:, :5])
+	print(r2_score(yte, pred))
+
+
+### [3-2] 위계적 회귀 (변수 블록을 순차적으로 투입)
+▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html
+▣ API : 전용 API는 없음(기본 API: https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html)
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/index.html
+
+	from sklearn.datasets import load_diabetes
+	from sklearn.linear_model import LinearRegression
+	from sklearn.model_selection import train_test_split
+
+	X, y = load_diabetes(return_X_y=True)
+	Xtr, Xte, ytr, yte = train_test_split(X, y, random_state=0)
+
+	# 1단계 모델
+	model1 = LinearRegression()
+	model1.fit(Xtr[:, :3], ytr)
+
+	# 2단계 모델
+	model2 = LinearRegression()
+	model2.fit(Xtr[:, :6], ytr)
+
+	print(model1.score(Xte[:, :3], yte))
+	print(model2.score(Xte[:, :6], yte))
+
+
+### [3-3] 분위수 회귀 (scikit‑learn에는 없으므로 statsmodels 사용이 표준)
+▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#quantile-regression
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.QuantileRegressor.html
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/plot_quantile_regression.html
+
+	import statsmodels.api as sm
+	from sklearn.datasets import load_diabetes
+	from sklearn.model_selection import train_test_split
+
+	X, y = load_diabetes(return_X_y=True)
+	X = sm.add_constant(X)
+	Xtr, Xte, ytr, yte = train_test_split(X, y, random_state=0)
+
+	model = sm.QuantReg(ytr, Xtr)
+	result = model.fit(q=0.5)
+	print(result.summary())
+
 
 ---
 # [4] 다항 선형 회귀 (Polynomial Linear Regression)
