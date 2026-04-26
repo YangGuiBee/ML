@@ -1317,8 +1317,14 @@ $e∼N(0,σ^2I_N)$<br>
 
 # [3-3] 강건 회귀 (Robust Regression)
 “이상치가 없어야만 제대로 동작하는” OLS(최소제곱 회귀)의 약점을 보완하는 방법<br>
-강건 회귀(Robust Regression)는 이상치(outlier)나 회귀 가정 위반이 존재하더라도, 회귀계수를 안정적으로 추정하도록 설계된 회귀 분석 방법<br>
-강건 회귀는 평균을 지키되 이상치에 둔감하게 만들고, 분위수 회귀는 아예 평균을 포기하고 분포를 직접 본다<br>
+강건 회귀(Robust Regression)는 이상치(outlier)나 회귀 가정 위반이 존재하더라도, 회귀계수를 안정적으로 추정하도록 설계된 회귀 분석<br>
+강건 회귀는 평균을 지키되 이상치에 둔감하게 만들고, 분위수 회귀는 아예 평균을 포기하고 분포를 직접 분석<br>
+장점 : 이상치에 대한 영향 감소, 모델 해석의 신뢰성 향상, 데이터 전처리 부담 감소, 고차원·다중공선성 상황에서도 유리<br>
+[3-3-1] Huber 회귀 : 작은 오차는 OLS처럼 처리하고 큰 오차는 선형 손실로 처리<br>
+[3-3-2] LAD 회귀 (Least Absolute Deviations) : L2(제곱) 대신에 L1 손실 처리(중앙값 회귀와 밀접)<br>
+[3-3-3] RANSAC 회귀 : 무작위 샘플에 합의 집합(consensus) 선택<br>
+[3-3-4] MM-estimator / M-estimator<br>
+[3-3-5] Tukey’s Biweight (Bisquare) : 큰 잔차는 완전히 무시(가중치 0)<br>
 
 # [3-4] 분위수 회귀 (Quantile Regression)
 종속변수 𝑦의 조건부 분위수(Conditional Quantile)를 설명변수 𝑋로부터 추정하는 회귀 기법<br>
