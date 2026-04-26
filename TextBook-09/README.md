@@ -17,17 +17,23 @@
 	[1] 선형 회귀 (Linear Regression)
   
   	[2] 일반화 선형 회귀(Generalized Linear Regression, GLM)
-   		[2-1] 로지스틱 회귀 (Logistic Regression) → 분류(10강)
+		[2-1] 이항 회귀 (Binomial Regression)
 		[2-2] 포아송 회귀 (Poisson Regression)
-		[2-3] Cox의 비례위험 회귀(Cox's Proportional Hazard Regression) : 일반통계
-		[2-4] 감마 회귀 (Gamma Regression)
-		[2-5] 음이항 회귀 (Negative Binomial Regression)
-		[2-6] 일반화 가법모형 (Generalized Additive Model, GAM)
+		[2-3] 준포아송 회귀 (Quasi-Poisson Regression)
+		[2-4] 음이항 회귀 (Negative Binomial Regression)
+		[2-5] 감마 회귀 (Gamma Regression)
+		[2-6] 역가우시안 회귀 (Inverse Gaussian Regression)
 		[2-7] 트위디 회귀 (Tweedie Regression)
+		[2-8] 콕스 비례위험 모형 (Cox Proportional Hazard Model)
+		[2-9] 영과잉 모형 (Zero-Inflated Model)
+		[2-10] 허들 모형 (Hurdle Model)
+		[2-11] 일반화 가법모형 (Generalized Additive Model, GAM)
+		[2-12] 베이즈 GLM (Bayesian Generalized Linear Model)
+		[2-13] 정규화 GLM (Regularized Generalized Linear Model)
      
  	[3] 다중 선형 회귀 (Multiple Linear Regression)
 		[3-1] 단계적 회귀 (Stepwise Regression)
-		[3-2] 위계적 회귀 (Hierarchical Regression) : 일반통계
+		[3-2] 위계적 회귀 (Hierarchical Regression)
 		[3-3] 분위수 회귀 (Quantile Regression)
   
 	[4] 다항 선형 회귀 (Polynomial Linear Regression)
