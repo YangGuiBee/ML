@@ -250,7 +250,6 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 <br>
 
 # [2-2] 포아송 회귀 (Poisson Regression)
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.PoissonRegressor.html<br><br>
 <ins>포아송 회귀(Poisson Regression)는 발생 횟수(count data)를 예측하기 위해 사용하는 일반화 선형 모형(GLM: Generalized Linear Model)의 한 종류</ins><br>
 **포아송 분포의 성립 조건** : 종속변수가 빈도변수로 0이상 정수이거나, 왜도가 크거나, 분포유형이 포아송 로그선형일 경우<br> 
 ① 사건은 서로 독립적 (사건 간 의존성이 있으면 부적절)<br>
@@ -1448,6 +1447,12 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 | **[2-3] 분위수 회귀** | $\min \sum_i \rho_{\tau}(y_i - x_i^\top\beta)$ | $y_i$: 관측값<br>$x_i$: 설명변수 벡터<br>$\beta$: 회귀계수<br>$\tau$: 분위수 수준<br>$\rho_{\tau}$: 분위수 손실함수 | 분위수별 다중 회귀선 | 소득·리스크 분석<br>이상치·비대칭 분포 데이터 |
 
 
+| 구분 | 조건 | 모델명 |
+|---|---|---|
+| ① 기본 선형 회귀가 필요한가? | 연속형 반응변수<br>설명변수와 선형 관계 가정 | **[2-0] 다중 선형 회귀 (Multiple Linear Regression)** |
+| ② 설명변수가 많아 변수 선택이 필요한가? | 변수 수가 많음<br>모형 단순화 필요 | **[2-1] 단계적 회귀 (Stepwise Regression)** |
+| ③ 변수 투입 순서에 이론적 근거가 있는가? | 변수 블록별 효과 비교 필요<br>설명력 증가 해석 중요 | **[2-2] 위계적 회귀 (Hierarchical Regression)** |
+| ④ 평균이 아닌 분포의 다른 위치를 보고 싶은가? | 이상치 존재<br>분포 비대칭 또는 꼬리 분석 필요 | **[2-3] 분위수 회귀 (Quantile Regression)** |
 
 ---
 # [4] 다항 선형 회귀 (Polynomial Linear Regression)
