@@ -979,6 +979,215 @@ Cox의 비례위험 회귀는 생존 분석(survival analysis)에서 주로 사�
 | **[2-12] 베이즈 일반화 선형모형** | PyMC<br>Model / sample | 합성 데이터 또는 UCI Count Dataset |
 | **[2-13] 정규화 일반화 선형모형** | Lasso, Ridge<br>fit / score | sklearn Diabetes Dataset |
 
+
+### [2-1] 이항 회귀 (Binomial Regression)
+
+	from sklearn.datasets import load_breast_cancer
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score
+
+	X, y = load_breast_cancer(return_X_y=True)
+	Xtr, Xte, ytr, yte = train_test_split(X, y, random_state=0)
+	
+	model = LogisticRegression(max_iter=1000)
+	model.fit(Xtr, ytr)
+	pred = model.predict(Xte)
+	print(accuracy_score(yte, pred))
+
+
+### [2-2] 포아송 회귀 (Poisson Regression)
+
+	from sklearn.linear_model import PoissonRegressor
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import mean_poisson_deviance
+	import pandas as pd
+
+	data = pd.read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset/day.csv")
+	X = data[["temp", "hum", "windspeed"]]
+	y = data["cnt"]
+	Xtr, Xte, ytr, yte = train_test_split(X, y)
+	
+	model = PoissonRegressor()
+	model.fit(Xtr, ytr)
+	pred = model.predict(Xte)
+	print(mean_poisson_deviance(yte, pred))
+
+
+### [2-3] 준포아송 회귀 (Quasi-Poisson Regression)
+
+	import statsmodels.api as sm
+	import pandas as pd
+	
+	data = pd.read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset/day.csv")
+	X = sm.add_constant(data[["temp", "hum", "windspeed"]])
+	y = data["cnt"]
+	
+	model = sm.GLM(y, X, family=sm.families.Poisson())
+	result = model.fit(scale="X2")
+	print(result.summary())
+
+
+### [2-4] 음이항 회귀 (Negative Binomial Regression)
+
+	import statsmodels.api as sm
+	import pandas as pd
+
+	data = pd.read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset/day.csv")
+	X = sm.add_constant(data[["temp", "hum", "windspeed"]])
+	y = data["cnt"]
+	
+	model = sm.GLM(y, X, family=sm.families.NegativeBinomial())
+	result = model.fit()
+	print(result.summary())
+
+
+### [2-5] 감마 회귀 (Gamma Regression)
+
+	from sklearn.linear_model import GammaRegressor
+	from sklearn.model_selection import train_test_split
+	import pandas as pd
+
+	data = pd.read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/00294/insurance.csv")
+	X = data[["age", "bmi", "children"]]
+	y = data["charges"]
+	Xtr, Xte, ytr, yte = train_test_split(X, y)
+	
+	model = GammaRegressor()
+	model.fit(Xtr, ytr)
+	print(model.score(Xte, yte))
+
+
+### [2-6] 역가우시안 회귀 (Inverse Gaussian Regression)
+
+	import statsmodels.api as sm
+	import pandas as pd
+
+	data = pd.read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/00294/insurance.csv")
+	X = sm.add_constant(data[["age", "bmi", "children"]])
+	y = data["charges"]
+	
+	model = sm.GLM(y, X, family=sm.families.InverseGaussian())
+	result = model.fit()
+	print(result.summary())
+
+
+### [2-7] 트위디 회귀 (Tweedie Regression)
+
+	from sklearn.linear_model import TweedieRegressor
+	from sklearn.model_selection import train_test_split
+	import pandas as pd
+
+	data = pd.read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/00294/insurance.csv")
+	X = data[["age", "bmi", "children"]]
+	y = data["charges"]
+	Xtr, Xte, ytr, yte = train_test_split(X, y)
+
+	model = TweedieRegressor(power=1.5)
+	model.fit(Xtr, ytr)
+	print(model.score(Xte, yte))
+
+
+### [2-8] 콕스 비례위험 모형 (Cox Proportional Hazard Model)
+
+	from lifelines import CoxPHFitter
+	import pandas as pd
+
+	data = pd.read_csv("https://raw.githubusercontent.com/CamDavidsonPilon/lifelines/master/lifelines/datasets/rossi.csv")
+
+	model = CoxPHFitter()
+	model.fit(data, duration_col="week", event_col="arrest")
+	model.print_summary()
+
+
+### [2-9] 영과잉 모형 (Zero-Inflated Model)
+
+	from statsmodels.discrete.count_model import ZeroInflatedPoisson
+	import pandas as pd
+
+	data = pd.read_csv("https://raw.githubusercontent.com/vincentarelbundock/Rdatasets/master/csv/pscl/fishing.csv")
+	X = data[["persons", "child"]]
+	y = data["count"]
+
+	model = ZeroInflatedPoisson(y, X)
+	result = model.fit()
+	print(result.summary())
+
+
+### [2-10] 허들 모형 (Hurdle Model)
+
+	import pandas as pd
+	from sklearn.linear_model import LogisticRegression, PoissonRegressor
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score, mean_poisson_deviance
+
+	# 데이터 로드 (예시: 전처리된 retail 데이터라고 가정)
+	data = pd.read_csv("online_retail_preprocessed.csv")
+
+	# 1단계: 발생 여부 (허들 통과 여부)
+	# y_binary: 구매 발생 여부 (0 또는 1)
+	X = data[["price", "customer_freq", "promotion"]]
+	y_binary = (data["quantity"] > 0).astype(int)
+	Xtr, Xte, ytr_bin, yte_bin = train_test_split(X, y_binary, random_state=0)
+
+	binary_model = LogisticRegression(max_iter=1000)
+	binary_model.fit(Xtr, ytr_bin)
+	pred_bin = binary_model.predict(Xte)
+	print("발생 여부 정확도:", accuracy_score(yte_bin, pred_bin))
+
+	# 2단계: 양수 값 모델 (허들 통과한 경우만)
+	positive_data = data[data["quantity"] > 0]
+
+	X_pos = positive_data[["price", "customer_freq", "promotion"]]
+	y_pos = positive_data["quantity"]
+	Xtr_p, Xte_p, ytr_p, yte_p = train_test_split(X_pos, y_pos, random_state=0)
+
+	count_model = PoissonRegressor()
+	count_model.fit(Xtr_p, ytr_p)
+	pred_count = count_model.predict(Xte_p)
+	print("양수 부분 Poisson deviance:", mean_poisson_deviance(yte_p, pred_count))
+
+
+### [2-11] 일반화 가법모형 (Generalized Additive Model, GAM)
+
+	from pygam import LinearGAM, s
+	import pandas as pd
+
+	data = pd.read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset/day.csv")
+	X = data[["temp", "hum", "windspeed"]].values
+	y = data["cnt"].values
+
+	model = LinearGAM(s(0) + s(1) + s(2))
+	model.fit(X, y)
+	print(model.statistics_)
+
+
+### [2-12] 베이즈 일반화 선형모형 (Bayesian Generalized Linear Model)
+
+	import pymc as pm
+	import numpy as np
+
+	with pm.Model():
+    	beta = pm.Normal("beta", 0, 1)
+    	mu = pm.math.exp(beta)
+    	y = pm.Poisson("y", mu)
+    	trace = pm.sample(1000)
+
+
+### [2-13] 정규화 일반화 선형모형 (Regularized Generalized Linear Model)
+
+	from sklearn.linear_model import Lasso, Ridge
+	from sklearn.datasets import load_diabetes
+	from sklearn.model_selection import train_test_split
+
+	X, y = load_diabetes(return_X_y=True)
+	Xtr, Xte, ytr, yte = train_test_split(X, y)
+
+	lasso = Lasso(alpha=0.1).fit(Xtr, ytr)
+	ridge = Ridge(alpha=1.0).fit(Xtr, ytr)
+	print(lasso.score(Xte, yte), ridge.score(Xte, yte))
+
+
 <br>
 
 ---
