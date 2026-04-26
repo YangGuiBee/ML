@@ -1319,7 +1319,6 @@ $e∼N(0,σ^2I_N)$<br>
 # [3-3] 분위수 회귀 (Quantile Regression)
 종속변수 𝑦의 조건부 분위수(Conditional Quantile)를 설명변수 𝑋로부터 추정하는 회귀 기법<br>
 즉, 평균이 아니라 특정 분위수 𝑞∈(0,1)의 위치(예: 중앙값, 상위 10%)를 예측<br>
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.QuantileRegressor.html<br>
 반응 변수의 조건부 분위수를 모델링 할때 사용되는 선형 회귀의 확장 버전<br>
 1) 선형 회귀 조건이 충족되지 않는 경우<br>
 2) 오차의 분산이 큰 경우<br>
@@ -1435,24 +1434,75 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 
 | 모델명 | 이론 개요 | 특징 |
 |---|---|---|
-| **[2-1] 단계적 회귀** | 선형 회귀 기반 변수 선택 이론<br>→통계적 기준에 따라 설명변수를 단계적으로 추가 또는 제거 | 다중 선형 회귀가 기본 모델<br>변수 선택 과정을 자동화<br>→ 모델 단순화 및 과적합 완화 |
-| **[2-2] 위계적 회귀** | 선형 회귀 기반 모형 비교 이론<br>→이론적 중요도에 따라 변수 블록을 순차적으로 투입 | 다중 선형 회귀가 기본 모델<br>변수 투입 순서를 연구자가 통제<br>→ 설명력 증가의 해석 가능 |
-| **[2-3] 분위수 회귀** | 조건부 분포 추정 이론<br>→평균이 아닌 특정 분위수를 직접 추정 | 다중 선형 회귀의 평균 추정 한계 보완<br>이상치와 분포 비대칭에 강건<br>→ 분포 전체 구조 분석 가능 |
+| **[3-1] 단계적 회귀** | 선형 회귀 기반 변수 선택 이론<br>→통계적 기준에 따라 설명변수를 단계적으로 추가 또는 제거 | 다중 선형 회귀가 기본 모델<br>변수 선택 과정을 자동화<br>→ 모델 단순화 및 과적합 완화 |
+| **[3-2] 위계적 회귀** | 선형 회귀 기반 모형 비교 이론<br>→이론적 중요도에 따라 변수 블록을 순차적으로 투입 | 다중 선형 회귀가 기본 모델<br>변수 투입 순서를 연구자가 통제<br>→ 설명력 증가의 해석 가능 |
+| **[3-3] 분위수 회귀** | 조건부 분포 추정 이론<br>→평균이 아닌 특정 분위수를 직접 추정 | 다중 선형 회귀의 평균 추정 한계 보완<br>이상치와 분포 비대칭에 강건<br>→ 분포 전체 구조 분석 가능 |
 
 
 | 모델명 | 수식 | 수식의 항목 설명 | 그래프형태 | 적용분야 |
 |---|---|---|---|---|
-| **[2-1] 단계적 회귀** | $Y = X\beta + \varepsilon$ | $Y$: 반응변수<br>$X$: 설명변수 행렬<br>$\beta$: 회귀계수 벡터<br>$\varepsilon$: 오차항 | 변수 추가·제거에 따른 회귀선 변화 | 변수 선택이 중요한 예측 모델<br>경제·사회과학 회귀분석 |
-| **[2-2] 위계적 회귀** | $Y = X_1\beta_1 + X_2\beta_2 + \varepsilon$ | $Y$: 반응변수<br>$X_1, X_2$: 변수 블록<br>$\beta_1, \beta_2$: 블록별 계수<br>$\varepsilon$: 오차항 | 단계별 설명력 증가 곡선 | 이론 검증 중심 연구<br>심리·교육·사회과학 |
-| **[2-3] 분위수 회귀** | $\min \sum_i \rho_{\tau}(y_i - x_i^\top\beta)$ | $y_i$: 관측값<br>$x_i$: 설명변수 벡터<br>$\beta$: 회귀계수<br>$\tau$: 분위수 수준<br>$\rho_{\tau}$: 분위수 손실함수 | 분위수별 다중 회귀선 | 소득·리스크 분석<br>이상치·비대칭 분포 데이터 |
+| **[3-1] 단계적 회귀** | $Y = X\beta + \varepsilon$ | $Y$: 반응변수<br>$X$: 설명변수 행렬<br>$\beta$: 회귀계수 벡터<br>$\varepsilon$: 오차항 | 변수 추가·제거에 따른 회귀선 변화 | 변수 선택이 중요한 예측 모델<br>경제·사회과학 회귀분석 |
+| **[3-2] 위계적 회귀** | $Y = X_1\beta_1 + X_2\beta_2 + \varepsilon$ | $Y$: 반응변수<br>$X_1, X_2$: 변수 블록<br>$\beta_1, \beta_2$: 블록별 계수<br>$\varepsilon$: 오차항 | 단계별 설명력 증가 곡선 | 이론 검증 중심 연구<br>심리·교육·사회과학 |
+| **[3-3] 분위수 회귀** | $\min \sum_i \rho_{\tau}(y_i - x_i^\top\beta)$ | $y_i$: 관측값<br>$x_i$: 설명변수 벡터<br>$\beta$: 회귀계수<br>$\tau$: 분위수 수준<br>$\rho_{\tau}$: 분위수 손실함수 | 분위수별 다중 회귀선 | 소득·리스크 분석<br>이상치·비대칭 분포 데이터 |
 
 
 | 구분 | 조건 | 모델명 |
 |---|---|---|
-| ① 기본 선형 회귀가 필요한가? | 연속형 반응변수<br>설명변수와 선형 관계 가정 | **[2-0] 다중 선형 회귀 (Multiple Linear Regression)** |
-| ② 설명변수가 많아 변수 선택이 필요한가? | 변수 수가 많음<br>모형 단순화 필요 | **[2-1] 단계적 회귀 (Stepwise Regression)** |
-| ③ 변수 투입 순서에 이론적 근거가 있는가? | 변수 블록별 효과 비교 필요<br>설명력 증가 해석 중요 | **[2-2] 위계적 회귀 (Hierarchical Regression)** |
-| ④ 평균이 아닌 분포의 다른 위치를 보고 싶은가? | 이상치 존재<br>분포 비대칭 또는 꼬리 분석 필요 | **[2-3] 분위수 회귀 (Quantile Regression)** |
+| ① 기본 선형 회귀가 필요한가? | 연속형 반응변수<br>설명변수와 선형 관계 가정 | **[3] 다중 선형 회귀 (Multiple Linear Regression)** |
+| ② 설명변수가 많아 변수 선택이 필요한가? | 변수 수가 많음<br>모형 단순화 필요 | **[3-1] 단계적 회귀 (Stepwise Regression)** |
+| ③ 변수 투입 순서에 이론적 근거가 있는가? | 변수 블록별 효과 비교 필요<br>설명력 증가 해석 중요 | **[3-2] 위계적 회귀 (Hierarchical Regression)** |
+| ④ 평균이 아닌 분포의 다른 위치를 보고 싶은가? | 이상치 존재<br>분포 비대칭 또는 꼬리 분석 필요 | **[3-3] 분위수 회귀 (Quantile Regression)** |
+
+
+| 모델명 | sk-learn 사용 예제 소스 | 최적의 훈련 데이터셋 |
+|---|---|---|
+| **[3] 다중 선형 회귀** | <pre><code>from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import r2_score
+
+X, y = load_diabetes(return_X_y=True)
+Xtr, Xte, ytr, yte = train_test_split(X, y)
+
+model = LinearRegression()
+model.fit(Xtr, ytr)
+
+pred = model.predict(Xte)
+print(r2_score(yte, pred))</code></pre> | sklearn Diabetes Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset |
+| **[3-1] 단계적 회귀** | <pre><code>from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import r2_score
+
+X, y = load_diabetes(return_X_y=True)
+Xtr, Xte, ytr, yte = train_test_split(X, y)
+
+model = LinearRegression()
+model.fit(Xtr[:, :5], ytr)  # 단계적 변수 선택 가정
+
+pred = model.predict(Xte[:, :5])
+print(r2_score(yte, pred))</code></pre> | sklearn Diabetes Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset |
+| **[3-2] 위계적 회귀** | <pre><code>from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import r2_score
+
+X, y = load_diabetes(return_X_y=True)
+Xtr, Xte, ytr, yte = train_test_split(X, y)
+
+model1 = LinearRegression().fit(Xtr[:, :3], ytr)
+model2 = LinearRegression().fit(Xtr[:, :6], ytr)
+
+print(model1.score(Xte[:, :3], yte),
+      model2.score(Xte[:, :6], yte))</code></pre> | sklearn Diabetes Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset |
+| **[3-3] 분위수 회귀** | <pre><code>import statsmodels.api as sm
+from sklearn.model_selection import train_test_split
+
+X, y = load_diabetes(return_X_y=True)
+X = sm.add_constant(X)
+Xtr, Xte, ytr, yte = train_test_split(X, y)
+
+model = sm.QuantReg(ytr, Xtr)
+result = model.fit(q=0.5)
+
+print(result.summary())</code></pre> | sklearn Diabetes Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset |
 
 ---
 # [4] 다항 선형 회귀 (Polynomial Linear Regression)
