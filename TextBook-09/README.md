@@ -181,7 +181,7 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 
 ---
 
-**(1 예제 소스)**
+**(선형 회귀 예제소스)**
 
 	# -------------------------------
 	# Scikit-Learn LinearRegression 예제
@@ -229,7 +229,7 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 
 <br>
 
-**(1 실행 결과)**
+**(선형 회귀 예제소스 실행결과)**
 
 	기울기 (coef_): [[2.77011339]]
 	절편 (intercept_): [5.21509616]
@@ -1283,7 +1283,7 @@ $e∼N(0,σ^2I_N)$<br>
 	plt.title('Multiple Linear Regression')
 	plt.show()
 
-**((다중 선형 회귀 예제소스 실행결과)**
+**(다중 선형 회귀 예제소스 실행결과)**
 
 ![](./images/MLR.png)
 
