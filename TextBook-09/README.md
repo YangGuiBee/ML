@@ -1463,9 +1463,9 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 
 
 ### [3] 다중 선형 회귀
-▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
-▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html
+▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html<br>
 
 	from sklearn.datasets import load_diabetes
 	from sklearn.linear_model import LinearRegression
@@ -1483,9 +1483,9 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 
 
 ### [3-1] 단계적 회귀 (단계적 변수 선택이 “있다고 가정한” 단순 예시)
-▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html
-▣ API : 전용 API는 없음(기본 API: https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html)
-▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/index.html
+▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html<br>
+▣ API : 전용 API는 없음(기본 API: https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html)<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/index.html<br>
 
 	from sklearn.datasets import load_diabetes
 	from sklearn.linear_model import LinearRegression
@@ -1504,9 +1504,9 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 
 
 ### [3-2] 위계적 회귀 (변수 블록을 순차적으로 투입)
-▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html
-▣ API : 전용 API는 없음(기본 API: https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html)
-▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/index.html
+▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html<br>
+▣ API : 전용 API는 없음(기본 API: https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html)<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/index.html<br>
 
 	from sklearn.datasets import load_diabetes
 	from sklearn.linear_model import LinearRegression
@@ -1528,9 +1528,9 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 
 
 ### [3-3] 분위수 회귀 (scikit‑learn에는 없으므로 statsmodels 사용이 표준)
-▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#quantile-regression
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.QuantileRegressor.html
-▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/plot_quantile_regression.html
+▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#quantile-regression<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.QuantileRegressor.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/plot_quantile_regression.html<br>
 
 	import statsmodels.api as sm
 	from sklearn.datasets import load_diabetes
