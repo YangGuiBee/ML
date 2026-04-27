@@ -1336,110 +1336,21 @@ $e∼N(0,σ^2I_N)$<br>
 4) 많은 이상치의 영향을 줄이기 위하여<br>
 5) 점 추정이 아닌 구간추정을 통해 결과의 정확도를 높이기 위하여<br>
 6) 반응변수의 스프레드를 같이 살펴보기 위하여<br>
-7) 회귀곡선에 대한 설득력을 높이기 위하여<br>
+7) 회귀곡선에 대한 설득력을 높이기 위하여 분위수 회귀를 사용<br>
 <br>
 보통 OLS 회귀는 조건부 평균값을 모델링하는 반면 분위수 회귀는 조건부 분위수를 모델링하고<br>
 조건부 분위수를 모델링하기 위해 Pinball loss를 사용<br>
-기존의 조건부 평균 값 예측이 아닌 조건부 분위수 값을 예측하는 문제로 풀이 될 수 있다.<br>
+기존의 조건부 평균 값 예측이 아닌 조건부 분위수 값을 예측<br>
 
+<!--
 $Q_{\tau}(y_{i}) = \beta_{0}(\tau) + \beta_{1}(\tau)x_{i1} + \cdots + \beta_{p}(\tau)x_{ip}$<br>
 
 최적의 분위수 방정식을 찾기 위한 과정은 중위수절대편차인 MAD(Median Absolute Deviation) 값을 최소화함으로써 찾을 수 있다.<br>
 $MAD = \frac{1}{n} \sum_{i=1}^{n} \rho_{\tau}(y_{i} - (\beta_{0}(\tau) + \beta_{1}(\tau)x_{i1} +\cdots +\beta_{p}(\tau)x_{ip}))$<br>
  
 ρ함수는 오차의 분위수와 전체적인 부호에 따라 오차에 비대칭 가중치를 부여하는 체크 함수<br>
-$\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
-<br>
-
-**(분위수 회귀 예제소스)**
-
-	import pandas as pd
-	import numpy as np
-	import matplotlib.pyplot as plt
-	# statsmodels의 formula API에서 Quantile Regression 함수 임포트
-	import statsmodels.formula.api as smf
-	# sklearn 라이브러리에서 make_regression 함수 임포트 (회귀용 데이터 생성에 사용)
-	from sklearn.datasets import make_regression
-	from sklearn.model_selection import train_test_split
-	# MSE 평가를 위한 라이브러리 추가
-	from sklearn.metrics import mean_absolute_error
-
-	# 가상의 회귀용 데이터를 생성 (10000개의 샘플, 1개의 특성, 1개의 타겟 변수)
-	x, y = make_regression(n_samples=10000, n_features=1, n_informative=1, n_targets=1, random_state=42)
-
-	# 생성된 데이터를 DataFrame으로 변환
-	df = pd.DataFrame([x.reshape(-1), y.reshape(-1)]).T
-
-	# 컬럼 이름을 'distance'와 'time'으로 설정
-	df.columns = ['distance', 'time']
-
-	# 'distance' 컬럼에 노이즈를 추가하여 변형
-	df['distance'] = df['distance'].apply(lambda x: 10 + (x + np.random.normal()))
-
-	# 'time' 컬럼에 노이즈를 추가하여 변형 (기울기가 0.2인 선형 모델을 기반으로 함)
-	df['time'] = df['time'].apply(lambda x: 40 + 0.2 * (x + np.random.normal()))
-
-	# 데이터를 훈련 세트와 테스트 세트로 나눔 (90%는 훈련, 10%는 테스트)
-	train_x, test_x, train_y, test_y = train_test_split(df[['distance']], df[['time']], test_size=0.1, random_state=42)
-
-	# 훈련 데이터와 테스트 데이터의 크기 출력
-	print(train_x.shape)
-	print(train_y.shape)
-	print(test_x.shape)
-	print(test_y.shape)
-
-	# 모델 리스트와 예측값을 저장할 딕셔너리 초기화
-	model_list = []
-	pred_dict = {}
-
-	# 0.1, 0.5, 0.9 분위수를 사용하여 Quantile Regression 모델을 훈련 및 예측
-	# 0.1 분위수 : 하위 10% 지점, 0.5 분위수는 중앙값(중위수)으로 전체 데이터의 중간 지점, 0.9 분위수 : 상위 90% 지점에 해당하는 값
-	for quantile in [0.1, 0.5, 0.9]:
-  		# 훈련 데이터(거리와 시간)를 하나의 DataFrame으로 결합하여 초기화
-  		df = pd.concat([train_x, train_y], axis=1).reset_index(drop=True)
-
-  		# 분위수 회귀(Quantile Regression)를 수행하여 모델 피팅
-  		quantile_reg = smf.quantreg('time ~ distance', df).fit(q=quantile)
-
-  		# 테스트 데이터로 예측 수행
-  		pred = quantile_reg.predict(test_x)
-
-  		# 예측 결과를 분위수별로 저장
-  		pred_dict[quantile] = pred
-
-	# 테스트 데이터, 예측 결과, 실제 결과를 하나의 DataFrame으로 결합
-	pred_df = pd.concat([test_x.reset_index(drop=True), pd.DataFrame(pred_dict).reset_index(drop=True), test_y.reset_index(drop=True)], axis=1)
-
-	# 컬럼명 추가: distance, 0.1 분위수 예측값, 0.5 분위수 예측값, 0.9 분위수 예측값, 실제값(time)
-	pred_df.columns = ['distance', 'pred_0.1', 'pred_0.5', 'pred_0.9', 'actual']
-
-	# 평가 결과(MAE)를 출력하는 부분 추가 : 평가 결과는 0.1, 0.5, 0.9 분위수 각각에 대해 출력됨
-	for quantile in [0.1, 0.5, 0.9]:
-    		mae = mean_absolute_error(pred_df['actual'], pred_df[f'pred_{quantile}'])
-    		print(f'Mean Absolute Error (MAE) for quantile {quantile}: {mae:.4f}')
-
-
-**(분위수 회귀 예제소스 실행결과)**
-
-	(9000, 1)
-	(9000, 1)
-	(1000, 1)
-	(1000, 1)
-	Mean Absolute Error (MAE) for quantile 0.1: 6.3079
-	Mean Absolute Error (MAE) for quantile 0.5: 3.5775
-	Mean Absolute Error (MAE) for quantile 0.9: 6.1966
-
-**(분위수 회귀 예제소스 실행결과 해석)**
-
-	(9000, 1)  ← train_x : 훈련 입력데이터 9,000개 (특성 1개)
-	(9000, 1)  ← train_y : 훈련 타깃데이터 9,000개 (출력값 1개)
-	(1000, 1)  ← test_x  : 테스트 입력데이터 1,000개
-	(1000, 1)  ← test_y  : 테스트 타깃데이터 1,000개
-	평균절대오차(Mean Absolute Error, MAE)
-	0.1 분위수(하위10%) : 평균 오차 ≈ 6.3 모델이 낮은 쪽 극단의 변동을 설명(실제 값의 분산이 커서 오차도 큼)
-	0.5 분위수(중앙값) : 평균 오차 ≈ 3.6(가장낮음) 전체 데이터의 일반적 관계를 잘 설명(평균적 패턴)
-	0.9 분위수(상위10%) : 평균 오차 ≈ 6.2 상위 구간의 오차도 하위와 비슷(대칭적인 분포일 가능성 시사)
-
+$\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br><br>
+-->
 
 | 모델명 | 이론 개요 | 특징 |
 |---|---|---|
@@ -1540,7 +1451,6 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 	print(model2.score(Xte[:, :6], yte))
 
 
-
 ### [3-3] 강건 회귀 (Robust Regression)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#robustness-and-outliers<br>
 ▣ API : (Huber Regressor) https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.HuberRegressor.html<br>
@@ -1559,7 +1469,6 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br>
 	model = sm.RLM(ytr, Xtr, M=sm.robust.norms.HuberT())
 	result = model.fit()
 	print(result.summary())
-
 
 
 ### [3-4] 분위수 회귀 (scikit‑learn에는 없으므로 statsmodels 사용이 표준)
