@@ -1647,31 +1647,44 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 
 |모델명|이론 개요|특징|
 |---|---|---|
-|[4-1] 단변량 다항 회귀|단일 독립변수를 다항식 기저로 확장한 선형 회귀 모델<br>→ 단일 입력 변수의 비선형 관계를 선형 회귀 틀에서 표현|기본 선형 회귀를 단일 변수의 고차 다항식으로 확장<br>→ 구조는 단순하나 차수 증가 시 과적합과 진동 현상 발생|
-|[4-2] 다변량 다항 회귀|여러 독립변수와 교호항을 포함한 다항 회귀 모델<br>→ 변수 간 상호작용을 포함한 비선형 구조를 표현|단변량 다항 회귀를 다변수로 확장<br>→ 설명력은 증가하나 차원의 저주와 다중공선성 문제 발생|
-|[4-3] 직교 다항 회귀|서로 직교하는 다항 기저를 사용한 다항 선형 회귀<br>→ 수치적 안정성과 공선성 문제를 개선|일반 다항 회귀의 기저를 직교 기저로 변환<br>→ 계수 해석은 어렵지만 추정 안정성이 우수|
-|[4-4] 부분 최소제곱 다항 회귀|다항 특성 공간에서 부분 최소제곱 기법을 적용한 회귀 모델<br>→ 반응변수와 공분산이 큰 잠재요인으로 회귀 수행|다항 회귀에 차원 축소를 결합<br>→ 고차 다항·고차원 데이터에서도 안정적 추정 가능|
-|[4-5] 커널 다항 회귀|다항 커널을 이용해 다항 특성 공간에서 선형 회귀 수행<br>→ 명시적 특성 생성 없이 비선형 관계 모델링|다항 특성 확장을 커널 트릭으로 대체<br>→ 계산 효율적으로 고차 다항 모델 구현 가능|
+|**[4-1] 단변량 다항 회귀**|단일 독립변수를 다항식 기저로 확장한 선형 회귀 모델<br>→ 단일 입력 변수의 비선형 관계를 선형 회귀 틀에서 표현|기본 선형 회귀를 단일 변수의 고차 다항식으로 확장<br>→ 구조는 단순하나 차수 증가 시 과적합과 진동 현상 발생|
+|**[4-2] 다변량 다항 회귀**|여러 독립변수와 교호항을 포함한 다항 회귀 모델<br>→ 변수 간 상호작용을 포함한 비선형 구조를 표현|단변량 다항 회귀를 다변수로 확장<br>→ 설명력은 증가하나 차원의 저주와 다중공선성 문제 발생|
+|**[4-3] 직교 다항 회귀**|서로 직교하는 다항 기저를 사용한 다항 선형 회귀<br>→ 수치적 안정성과 공선성 문제를 개선|일반 다항 회귀의 기저를 직교 기저로 변환<br>→ 계수 해석은 어렵지만 추정 안정성이 우수|
+|**[4-4] 부분 최소제곱 다항 회귀**|다항 특성 공간에서 부분 최소제곱 기법을 적용한 회귀 모델<br>→ 반응변수와 공분산이 큰 잠재요인으로 회귀 수행|다항 회귀에 차원 축소를 결합<br>→ 고차 다항·고차원 데이터에서도 안정적 추정 가능|
+|**[4-5] 커널 다항 회귀**|다항 커널을 이용해 다항 특성 공간에서 선형 회귀 수행<br>→ 명시적 특성 생성 없이 비선형 관계 모델링|다항 특성 확장을 커널 트릭으로 대체<br>→ 계산 효율적으로 고차 다항 모델 구현 가능|
 
 
 |모델명|수식|수식의 항목 설명|그래프형태|적용분야|
 |---|---|---|---|---|
-|[4-1] 단변량 다항 회귀|$y = \beta_0 + \beta_1 x + \beta_2 x^2 + \cdots + \beta_d x^d + \varepsilon$|$y$: 종속변수; $x$: 단일 독립변수; $\beta_0$: 절편; $\beta_k$: $k$차 다항 계수; $d$: 다항 차수; $\varepsilon$: 오차항|곡선 형태의 2차원 비선형 곡선|물리 실험 곡선 적합, 단일 변수 성장·반응 모델|
-|[4-2] 다변량 다항 회귀|$y = \beta_0 + \sum_i \beta_i x_i + \sum_{i,j} \beta_{ij} x_i x_j + \varepsilon$|$x_i$: 다변량 독립변수; $\beta_i$: 1차 계수; $\beta_{ij}$: 교호항 계수; $\beta_0$: 절편; $\varepsilon$: 오차항|고차원 곡면 형태|경제·사회 데이터 상호작용 분석, 공정 모델링|
-|[4-3] 직교 다항 회귀|$y = \beta_0 + \sum_{k=1}^{d} \beta_k \phi_k(x) + \varepsilon$|$\phi_k(x)$: 서로 직교하는 다항 기저 함수; $\beta_k$: 기저 계수; $d$: 차수; $\varepsilon$: 오차항|진동이 완화된 매끄러운 곡선|수치해석, 실험설계, 고차 다항 안정 추정|
-|[4-4] 부분 최소제곱 다항 회귀|$X^{(p)} = T P^\top,\; y = T c + \varepsilon$|$X^{(p)}$: 다항 확장 설계행렬; $T$: 잠재요인 점수; $P$: 적재행렬; $c$: 회귀계수; $\varepsilon$: 오차항|저차 잠재공간 회귀 곡면|화학계량학, 스펙트럼 분석, 고차원 회귀|
-|[4-5] 커널 다항 회귀|$y = \sum_{i=1}^{n} \alpha_i K(x_i, x) + \varepsilon$|$\alpha_i$: 이중계수; $K(x_i, x)$: 다항 커널 함수; $x_i$: 학습 샘플; $\varepsilon$: 오차항|암묵적 고차원 비선형 곡면|비선형 패턴 학습, 커널 기반 회귀 문제|
+|**[4-1] 단변량 다항 회귀**|$y = \beta_0 + \beta_1 x + \beta_2 x^2 + \cdots + \beta_d x^d + \varepsilon$|$y$: 종속변수; $x$: 단일 독립변수; $\beta_0$: 절편; $\beta_k$: $k$차 다항 계수; $d$: 다항 차수; $\varepsilon$: 오차항|곡선 형태의 2차원 비선형 곡선|물리 실험 곡선 적합, 단일 변수 성장·반응 모델|
+|**[4-2] 다변량 다항 회귀**|$y = \beta_0 + \sum_i \beta_i x_i + \sum_{i,j} \beta_{ij} x_i x_j + \varepsilon$|$x_i$: 다변량 독립변수; $\beta_i$: 1차 계수; $\beta_{ij}$: 교호항 계수; $\beta_0$: 절편; $\varepsilon$: 오차항|고차원 곡면 형태|경제·사회 데이터 상호작용 분석, 공정 모델링|
+|**[4-3] 직교 다항 회귀**|$y = \beta_0 + \sum_{k=1}^{d} \beta_k \phi_k(x) + \varepsilon$|$\phi_k(x)$: 서로 직교하는 다항 기저 함수; $\beta_k$: 기저 계수; $d$: 차수; $\varepsilon$: 오차항|진동이 완화된 매끄러운 곡선|수치해석, 실험설계, 고차 다항 안정 추정|
+|**[4-4] 부분 최소제곱 다항 회귀**|$X^{(p)} = T P^\top,\; y = T c + \varepsilon$|$X^{(p)}$: 다항 확장 설계행렬; $T$: 잠재요인 점수; $P$: 적재행렬; $c$: 회귀계수; $\varepsilon$: 오차항|저차 잠재공간 회귀 곡면|화학계량학, 스펙트럼 분석, 고차원 회귀|
+|**[4-5] 커널 다항 회귀**|$y = \sum_{i=1}^{n} \alpha_i K(x_i, x) + \varepsilon$|$\alpha_i$: 이중계수; $K(x_i, x)$: 다항 커널 함수; $x_i$: 학습 샘플; $\varepsilon$: 오차항|암묵적 고차원 비선형 곡면|비선형 패턴 학습, 커널 기반 회귀 문제|
 
 
 | 모델 | 기본 수식 | 그래프 형태 및 주요 적용 분야 |
 |------|-----------|-------------------------------|
-| **[4-1] 단변량 다항 회귀 (Univariate Polynomial Regression)** | ![eq](https://latex.codecogs.com/png.latex?\hat{y}=\beta_0+\beta_1x+\beta_2x^2+\cdots+\beta_p%20x^p) | **그래프:** U자형, S자형, W자형 등 다양한 곡선<br>**적용:** 단일 변수의 비선형 관계 — 성장 곡선, 온도–압력 곡선, 거리–시간 관계 |
-| **[4-2] 다변량 다항 회귀 (Multivariate Polynomial Regression)** | ![eq](https://latex.codecogs.com/png.latex?\hat{y}=\beta_0+\sum_i\beta_i%20x_i+\sum_{i,j}\beta_{ij}x_i%20x_j+\sum_i\beta_{ii}x_i^2+\cdots) | **그래프:** 다차원 비선형 곡면<br>**적용:** 다요인 비선형 모델 — 제조 공정, 에너지 소비, 경제·환경 지표 예측 |
-| **[4-3] 직교 다항 회귀 (Orthogonal Polynomial Regression)** | ![eq](https://latex.codecogs.com/png.latex?\hat{y}=\beta_0P_0(x)+\beta_1P_1(x)+\cdots+\beta_pP_p(x))<br>(\(P_k(x)\): 직교 다항식) | **그래프:** 동일 차수 대비 진동이 적은 매끈한 곡선<br>**적용:** 다중공선성 방지 필요 — 시계열 스무딩, 물리·공학적 근사 |
-| **[4-4] PLS 다항 회귀 (PLS–Polynomial Regression)** | ![eq](https://latex.codecogs.com/png.latex?\hat{y}=\sum_{k=1}^m%20c_k%20t_k),<br>![eq](https://latex.codecogs.com/png.latex?t_k=f_k(X)) | **그래프:** 차원 축소된 안정적 비선형 곡선<br>**적용:** 고차 다항·고차원 데이터 — 스펙트럼 분석, 화학계량학(Chemometrics) |
-| **[4-5] 커널 다항 회귀 (Kernel Polynomial Regression)** | ![eq](https://latex.codecogs.com/png.latex?K(x_i,x_j)=(\gamma%20x_i^\top%20x_j+r)^d)<br>![eq](https://latex.codecogs.com/png.latex?\hat{y}=\sum_i\alpha_iK(x,x_i)) | **그래프:** 고차 커널 기반의 복잡한 비선형 곡선<br>**적용:** 고비선형 패턴 — 이미지 특징, 금융 변동성, 복잡 패턴 예측 |
-| **[4-6] 정규화 다항 회귀 (Regularized Polynomial Regression)** | Ridge:<br>![eq](https://latex.codecogs.com/png.latex?\min_\beta%20\|y-X_p\beta\|^2+\lambda\|\beta\|^2)<br>Lasso:<br>![eq](https://latex.codecogs.com/png.latex?\min_\beta%20\|y-X_p\beta\|^2+\lambda\|\beta\|_1) | **그래프:** 과적합이 억제된 안정된 곡선 형태<br>**적용:** 고차 다항에서의 과적합 방지 — 금융·의료 예측, 소규모 데이터 |
+| **[4-1] 단변량 다항 회귀** | ![eq](https://latex.codecogs.com/png.latex?\hat{y}=\beta_0+\beta_1x+\beta_2x^2+\cdots+\beta_p%20x^p) | **그래프:** U자형, S자형, W자형 등 다양한 곡선<br>**적용:** 단일 변수의 비선형 관계 — 성장 곡선, 온도–압력 곡선, 거리–시간 관계 |
+| **[4-2] 다변량 다항 회귀** | ![eq](https://latex.codecogs.com/png.latex?\hat{y}=\beta_0+\sum_i\beta_i%20x_i+\sum_{i,j}\beta_{ij}x_i%20x_j+\sum_i\beta_{ii}x_i^2+\cdots) | **그래프:** 다차원 비선형 곡면<br>**적용:** 다요인 비선형 모델 — 제조 공정, 에너지 소비, 경제·환경 지표 예측 |
+| **[4-3] 직교 다항 회귀** | ![eq](https://latex.codecogs.com/png.latex?\hat{y}=\beta_0P_0(x)+\beta_1P_1(x)+\cdots+\beta_pP_p(x))<br>(\(P_k(x)\): 직교 다항식) | **그래프:** 동일 차수 대비 진동이 적은 매끈한 곡선<br>**적용:** 다중공선성 방지 필요 — 시계열 스무딩, 물리·공학적 근사 |
+| **[4-4] PLS 다항 회귀** | ![eq](https://latex.codecogs.com/png.latex?\hat{y}=\sum_{k=1}^m%20c_k%20t_k),<br>![eq](https://latex.codecogs.com/png.latex?t_k=f_k(X)) | **그래프:** 차원 축소된 안정적 비선형 곡선<br>**적용:** 고차 다항·고차원 데이터 — 스펙트럼 분석, 화학계량학(Chemometrics) |
+| **[4-5] 커널 다항 회귀** | ![eq](https://latex.codecogs.com/png.latex?K(x_i,x_j)=(\gamma%20x_i^\top%20x_j+r)^d)<br>![eq](https://latex.codecogs.com/png.latex?\hat{y}=\sum_i\alpha_iK(x,x_i)) | **그래프:** 고차 커널 기반의 복잡한 비선형 곡선<br>**적용:** 고비선형 패턴 — 이미지 특징, 금융 변동성, 복잡 패턴 예측 |
 
+<!--
+| **[4-6] 정규화 다항 회귀** | Ridge:<br>![eq](https://latex.codecogs.com/png.latex?\min_\beta%20\|y-X_p\beta\|^2+\lambda\|\beta\|^2)<br>Lasso:<br>![eq](https://latex.codecogs.com/png.latex?\min_\beta%20\|y-X_p\beta\|^2+\lambda\|\beta\|_1) | **그래프:** 과적합이 억제된 안정된 곡선 형태<br>**적용:** 고차 다항에서의 과적합 방지 — 금융·의료 예측, 소규모 데이터 |
+-->
+
+|구분|조건|모델명|
+|---|---|---|
+|① 입력 변수가 단일 연속형 변수인가?|하나의 독립변수와 반응변수 간 비선형 관계를 모델링하고 싶음|**[4-1] 단변량 다항 회귀 (Univariate Polynomial Regression)**|
+|② 입력 변수가 다변량 연속형 변수인가?|여러 독립변수 각각의 비선형 효과만 고려|**[4-2] 다변량 다항 회귀 (Multivariate Polynomial Regression)**|
+||변수 간 상호작용(교호항)을 함께 모델링하고 싶음|**[4-2] 다변량 다항 회귀 (Multivariate Polynomial Regression)**|
+|③ 다항 차수가 높아 다중공선성이 문제되는가?|고차 다항에서 계수 불안정·수치적 불안정 발생|**[4-3] 직교 다항 회귀 (Orthogonal Polynomial Regression)**|
+|④ 입력 차원이 매우 높거나 교호항 수가 과도한가?|다항 확장 후 변수 수가 샘플 수보다 많음|**[4-4] 부분 최소제곱 다항 회귀 (PLS-Polynomial Regression)**|
+||반응변수와 설명변수 간 공분산을 최대한 보존하며 차원 축소 필요|**[4-4] 부분 최소제곱 다항 회귀 (PLS-Polynomial Regression)**|
+|⑤ 명시적 다항 특성 생성이 계산적으로 부담되는가?|고차 다항 특성 공간을 직접 구성하기 어려움|**[4-5] 커널 다항 회귀 (Kernel Polynomial Regression)**|
+||비선형 관계를 커널 트릭으로 효율적으로 모델링하고 싶음|**[4-5] 커널 다항 회귀 (Kernel Polynomial Regression)**|
 
 ---
 
