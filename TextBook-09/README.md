@@ -70,10 +70,10 @@
 		[6-15] 베이즈 비선형 회귀 (Bayesian Nonlinear Regression)
 		[6-16] 신경망 회귀 (Neural Network Regression)
 		[6-17] 특수 형상 회귀 (Geometric Regression)											
-		[6-18] 로버스트 회귀 (Robust Regression)			 										
+		[6-18] 로버스트 회귀 (Robust Regression)		 										
 		[6-19] 혼합 회귀 (Mixture of Regressions) 									
-		[6-20] 위치-규모-형상 회귀 (GAMLSS)																		
-		[6-21] 함수형 회귀 (Functional Regression)										 			
+		[6-20] 위치-규모-형상 회귀 (GAMLSS)														
+		[6-21] 함수형 회귀 (Functional Regression)									 			
 		[6-22] 형상기반 회귀 (Shape-aware / Geodesic Regression)				 	
 		[6-23] 딥 가우시안 프로세스 회귀 (Deep Gaussian Process Regression)		
 		[6-24] 물리정보 회귀 (Physics-Informed Regression)					
@@ -1614,9 +1614,7 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 	3차 회귀(d=3) : 미세한 굴곡까지 추종 (R²=0.66), 약간의 과적합 가능
 	적정 모델 : 현실적으로는 2차 다항식(Quadratic) 이 가장 적절
 	
-
 <br>
-
 
 	입력데이터의 Feature들이 너무 많은 경우(Feature수에 비해 관측치 수가 적은 경우) 과적합이 발생
 	→ 
@@ -1626,9 +1624,8 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 
 <br>
 
-**다중회귀 (Multiple Regression)** → X가 여러 개, 관계는 “직선적” : 폭을 넓히는 모델 (변수 수 확대)
-**다항회귀 (Polynomial Regression)** → X는 적어도 하나지만 항이 여러 개, 관계는 “곡선적”: 깊이를 더하는 모델 (항의 차수 확대)
-
+**다중회귀 (Multiple Regression)** → X가 여러 개, 관계는 “직선적” : 폭을 넓히는 모델 (변수 수 확대)<br>
+**다항회귀 (Polynomial Regression)** → X는 적어도 하나지만 항이 여러 개, 관계는 “곡선적”: 깊이를 더하는 모델 (항의 차수 확대)<br>
 
 | 구분 | **다중회귀 (Multiple Regression)** | **다항회귀 (Polynomial Regression)** |
 |:--|:--|:--|
@@ -1647,6 +1644,24 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 | **핵심 키워드** | “X(변수)가 여러 개 → 선형 결합” | “X의 항(term)이 여러 개 → 비선형 곡선 표현” |
 
 <br>
+
+|모델명|이론 개요|특징|
+|---|---|---|
+|[4-1] 단변량 다항 회귀|단일 독립변수를 다항식 기저로 확장하여 선형 회귀로 추정&lt;br&gt;→ 입력 변수 하나의 비선형 관계를 선형 회귀 틀에서 모델링|기본 선형 회귀를 단일 변수의 고차 다항식으로 확장&lt;br&gt;→ 단순하지만 고차수에서 과적합과 진동 현상 발생|
+|[4-2] 다변량 다항 회귀|여러 독립변수와 그 교호항을 포함한 다항식 회귀 모델&lt;br&gt;→ 변수 간 상호작용을 포함한 비선형 구조 표현|단변량 다항 회귀를 다변수로 확장&lt;br&gt;→ 교호항 증가로 설명력은 높으나 차원의 저주와 다중공선성 문제 발생|
+|[4-3] 직교 다항 회귀|서로 직교하는 다항 기저를 사용한 다항 선형 회귀&lt;br&gt;→ 다중공선성을 줄이고 수치적 안정성을 향상|일반 다항 회귀의 기저를 직교 기저로 변환&lt;br&gt;→ 회귀계수 해석은 어렵지만 추정 안정성이 우수|
+|[4-4] 부분 최소제곱 다항 회귀|다항 특성 공간에서 PLS를 적용한 회귀 모델&lt;br&gt;→ 반응변수와 공분산이 큰 잠재요인으로 회귀 수행|다항 회귀에 차원 축소를 결합&lt;br&gt;→ 고차 다항·고차원 데이터에서도 안정적 추정 가능|
+|[4-5] 커널 다항 회귀|다항 커널을 이용해 다항 특성 공간에서 선형 회귀 수행&lt;br&gt;→ 명시적 특성 생성 없이 비선형 관계 모델링|명시적 다항 확장을 커널 트릭으로 대체&lt;br&gt;→ 고차 다항 모델을 계산 효율적으로 구현 가능|
+
+
+|모델명|수식|수식의 항목 설명|그래프형태|적용분야|
+|---|---|---|---|---|
+|[4-1] 단변량 다항 회귀|$y = \beta_0 + \beta_1 x + \beta_2 x^2 + \cdots + \beta_d x^d + \varepsilon$|$y$: 종속변수&lt;br&gt;$x$: 단일 독립변수&lt;br&gt;$\beta_0$: 절편&lt;br&gt;$\beta_k$: $k$차 다항 계수&lt;br&gt;$d$: 다항 차수&lt;br&gt;$\varepsilon$: 오차항|곡선 형태의 2차원 비선형 곡선|물리 실험 곡선 적합, 단일 변수 성장 모델|
+|[4-2] 다변량 다항 회귀|$y = \beta_0 + \sum_i \beta_i x_i + \sum_{i,j} \beta_{ij} x_i x_j + \cdots + \varepsilon$|$x_i$: 다변량 독립변수&lt;br&gt;$\beta_{ij}$: 교호항 계수&lt;br&gt;$\beta_0$: 절편&lt;br&gt;$\varepsilon$: 오차항|고차원 곡면(surface) 형태|경제·사회 데이터의 변수 간 상호작용 분석|
+|[4-3] 직교 다항 회귀|$y = \beta_0 + \sum_{k=1}^{d} \beta_k \phi_k(x) + \varepsilon$|$\phi_k(x)$: 서로 직교하는 다항 기저 함수&lt;br&gt;$\beta_k$: 직교 기저 계수&lt;br&gt;$d$: 차수&lt;br&gt;$\varepsilon$: 오차항|진동이 완화된 매끄러운 곡선|수치해석, 실험설계, 고차 다항 안정 추정|
+|[4-4] 부분 최소제곱 다항 회귀|$X^{(p)} = T P^\top,\quad y = T c + \varepsilon$|$X^{(p)}$: 다항 확장된 설계행렬&lt;br&gt;$T$: 잠재요인 점수&lt;br&gt;$P$: 적재행렬&lt;br&gt;$c$: 회귀계수&lt;br&gt;$\varepsilon$: 오차항|저차 잠재공간에서의 회귀 곡면|화학계량학, 스펙트럼 분석, 고차원 회귀|
+|[4-5] 커널 다항 회귀|$y = \sum_{i=1}^{n} \alpha_i K(x_i, x) + \varepsilon$|$\alpha_i$: 이중계수&lt;br&gt;$K(x_i, x)$: 다항 커널 함수&lt;br&gt;$x_i$: 학습 샘플&lt;br&gt;$\varepsilon$: 오차항|암묵적 고차원 비선형 곡면|비선형 패턴 학습, 커널 기반 회귀 문제|
+
 
 | 모델 | 기본 수식 | 그래프 형태 및 주요 적용 분야 |
 |------|-----------|-------------------------------|
