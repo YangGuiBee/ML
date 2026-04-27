@@ -43,7 +43,6 @@
 		[4-3] 직교 다항 회귀 (Orthogonal Polynomial Regression)
 		[4-4] 부분 최소제곱 다항 회귀 (PLS-Polynomial Regression)
 		[4-5] 커널 다항 회귀 (Kernel Polynomial Regression)
-		[4-6] 정규화 다항 회귀 (Regularized Polynomial Regression)
 
    	[5] 정규화 (Regularization) : 벌점부여 (Penalized) 선형 회귀
 		[5-1] 릿지 회귀 (Ridge Regression, L2)
