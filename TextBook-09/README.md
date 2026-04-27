@@ -1686,14 +1686,19 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 
 |모델명|sk-learn 사용 예제 소스|최적의 훈련 데이터셋|
 |---|---|---|
-|**[3-1] 단변량 다항 회귀**|PolynomialFeatures, LinearRegression, r2_score|https://www.kaggle.com/datasets/andonians/random-linear-regression|
-|**[3-2] 다변량 다항 회귀**|PolynomialFeatures, LinearRegression, r2_score|https://scikit-learn.org/stable/datasets/real_world.html#california-housing-dataset|
-|**[3-3] 직교 다항 회귀**|PolynomialFeatures, LinearRegression, r2_score|https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset|
-|**[3-4] 부분 최소제곱 다항 회귀**|PLSRegression, r2_score|https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset|
-|**[3-5] 커널 다항 회귀**|KernelRidge, r2_score|https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset|
+|**[4-1] 단변량 다항 회귀**|PolynomialFeatures, LinearRegression, r2_score|https://www.kaggle.com/datasets/andonians/random-linear-regression|
+|**[4-2] 다변량 다항 회귀**|PolynomialFeatures, LinearRegression, r2_score|https://scikit-learn.org/stable/datasets/real_world.html#california-housing-dataset|
+|**[4-3] 직교 다항 회귀**|PolynomialFeatures, LinearRegression, r2_score|https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset|
+|**[4-4] 부분 최소제곱 다항 회귀**|PLSRegression, r2_score|https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset|
+|**[4-5] 커널 다항 회귀**|KernelRidge, r2_score|https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset|
 
 
- ### [3-1] 단변량 다항 회귀
+### [4-1] 단변량 다항 회귀
+▣ 가이드 : Linear Models (선형 회귀 전반 가이드) https://scikit-learn.org/stable/modules/linear_model.html<br>
+Polynomial feature 확장 (Feature engineering) https://scikit-learn.org/stable/modules/preprocessing.html#polynomial-features<br>
+▣ API : PolynomialFeatures : https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html<br>
+LinearRegression : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html<br>
+▣ 예제 : Polynomial Regression (Linear Models 예제 모음) https://scikit-learn.org/stable/auto_examples/linear_model/index.html<br>
 
 	from sklearn.preprocessing import PolynomialFeatures
 	from sklearn.linear_model import LinearRegression
@@ -1709,7 +1714,12 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 	print(r2_score(y, y_pred))
 
 	
-### [3-2] 다변량 다항 회귀
+### [4-2] 다변량 다항 회귀
+▣ 가이드 : Linear Models : https://scikit-learn.org/stable/modules/linear_model.html<br>
+Polynomial and interaction features : https://scikit-learn.org/stable/modules/preprocessing.html#polynomial-features<br>
+▣ API : PolynomialFeatures : https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html<br>
+LinearRegression : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html<br>
+▣ 예제 : Linear regression with polynomial and interaction features : https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html<br>
 
 	from sklearn.preprocessing import PolynomialFeatures
 	from sklearn.linear_model import LinearRegression
@@ -1726,7 +1736,11 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 
 
 
-### [3-3] 직교 다항 회귀
+### [4-3] 직교 다항 회귀
+▣ 가이드 :  Linear Regression (OLS 기반 설명) https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares<br>
+Multicollinearity 관련 설명 : https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification<br>
+▣ API : LinearRegression : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html<br>
+▣ 예제 : Linear regression examples (기저 변환 후 적용 개념 설명용) https://scikit-learn.org/stable/auto_examples/linear_model/index.html<br>
 
 	from sklearn.preprocessing import PolynomialFeatures
 	from sklearn.linear_model import LinearRegression
@@ -1743,7 +1757,10 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 
 
 
-### [3-4] 부분 최소제곱 다항 회귀
+### [4-4] 부분 최소제곱 다항 회귀
+▣ 가이드 : Partial Least Squares : https://scikit-learn.org/stable/modules/cross_decomposition.html#cross-decomposition<br>
+▣ API : PLSRegression : https://scikit-learn.org/stable/modules/generated/sklearn.cross_decomposition.PLSRegression.html<br>
+▣ 예제 : PLS regression example : https://scikit-learn.org/stable/auto_examples/cross_decomposition/plot_pls.html<br>
 
 	from sklearn.cross_decomposition import PLSRegression
 	from sklearn.metrics import r2_score
@@ -1756,7 +1773,10 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 
 
 
-### [3-5] 커널 다항 회귀
+### [4-5] 커널 다항 회귀
+▣ 가이드 : Kernel Ridge Regression : https://scikit-learn.org/stable/modules/kernel_ridge.html<br>
+▣ API : KernelRidge : https://scikit-learn.org/stable/modules/generated/sklearn.kernel_ridge.KernelRidge.html<br>
+▣ 예제 : Kernel ridge regression example : https://scikit-learn.org/stable/auto_examples/kernel_ridge/plot_kernel_ridge_regression.html<br>
 
 	from sklearn.kernel_ridge import KernelRidge
 	from sklearn.metrics import r2_score
