@@ -1493,14 +1493,10 @@ $\rho_{\tau}(u) = \tau\max(u,0) + (1-\tau)\max(-u,0)$<br><br>
 # [4] 다항 선형 회귀 (Polynomial Linear Regression)
 독립변수𝑋 와 종속변수𝑦 사이의 관계가 직선이 아닌 곡선 형태일 때,<br> 
 이를 수학적으로 표현하기 위해 변수의 거듭제곱항이나 교차항을 추가하여 선형모델로 확장한 회귀분석 방법<br>
-▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#polynomial-regression-extending-linear-models-with-basis-functions<br>
-
 비선형 관계를 선형회귀모델의 형태로 표현<br>
 $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
-
 <br>
-편향이 높으면 분산은 낮아짐 : 과소적합(Under fitting), 분산이 높으면 편향이 낮아짐 : 과대적합(Over fitting)<br>
-  
+편향이 높으면 분산은 낮아짐 : 과소적합(Under fitting), 분산이 높으면 편향이 낮아짐 : 과대적합(Over fitting)<br>  
 ![](./images/ddd.PNG)
 
 1	MSE = 4.08e-01	MSE = 0.41
@@ -1686,11 +1682,11 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 
 |모델명|sk-learn 사용 예제 소스|최적의 훈련 데이터셋|
 |---|---|---|
-|**[4-1] 단변량 다항 회귀**|PolynomialFeatures, LinearRegression, r2_score|https://www.kaggle.com/datasets/andonians/random-linear-regression|
-|**[4-2] 다변량 다항 회귀**|PolynomialFeatures, LinearRegression, r2_score|https://scikit-learn.org/stable/datasets/real_world.html#california-housing-dataset|
-|**[4-3] 직교 다항 회귀**|PolynomialFeatures, LinearRegression, r2_score|https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset|
-|**[4-4] 부분 최소제곱 다항 회귀**|PLSRegression, r2_score|https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset|
-|**[4-5] 커널 다항 회귀**|KernelRidge, r2_score|https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset|
+|**[4-1] 단변량 다항 회귀**|PolynomialFeatures<br>LinearRegression<br>r2_score|https://www.kaggle.com/datasets/andonians/random-linear-regression|
+|**[4-2] 다변량 다항 회귀**|PolynomialFeatures<br>LinearRegression<br>r2_score|https://scikit-learn.org/stable/datasets/real_world.html#california-housing-dataset|
+|**[4-3] 직교 다항 회귀**|PolynomialFeatures<br>LinearRegression<br>r2_score|https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset|
+|**[4-4] 부분 최소제곱 다항 회귀**|PLSRegression<br>r2_score|https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset|
+|**[4-5] 커널 다항 회귀**|KernelRidge<br>r2_score|https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset|
 
 
 ### [4-1] 단변량 다항 회귀
