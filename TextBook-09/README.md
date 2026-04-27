@@ -1678,14 +1678,97 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 |구분|조건|모델명|
 |---|---|---|
 |① 입력 변수가 단일 연속형 변수인가?|하나의 독립변수와 반응변수 간 비선형 관계를 모델링하고 싶음|**[4-1] 단변량 다항 회귀 (Univariate Polynomial Regression)**|
-|② 입력 변수가 다변량 연속형 변수인가?|여러 독립변수 각각의 비선형 효과만 고려|**[4-2] 다변량 다항 회귀 (Multivariate Polynomial Regression)**|
-||변수 간 상호작용(교호항)을 함께 모델링하고 싶음|**[4-2] 다변량 다항 회귀 (Multivariate Polynomial Regression)**|
+|② 입력 변수가 다변량 연속형 변수인가?|여러 독립변수 각각의 비선형 효과만 고려<br>변수 간 상호작용(교호항)을 함께 모델링|**[4-2] 다변량 다항 회귀 (Multivariate Polynomial Regression)**|
 |③ 다항 차수가 높아 다중공선성이 문제되는가?|고차 다항에서 계수 불안정·수치적 불안정 발생|**[4-3] 직교 다항 회귀 (Orthogonal Polynomial Regression)**|
-|④ 입력 차원이 매우 높거나 교호항 수가 과도한가?|다항 확장 후 변수 수가 샘플 수보다 많음|**[4-4] 부분 최소제곱 다항 회귀 (PLS-Polynomial Regression)**|
-||반응변수와 설명변수 간 공분산을 최대한 보존하며 차원 축소 필요|**[4-4] 부분 최소제곱 다항 회귀 (PLS-Polynomial Regression)**|
-|⑤ 명시적 다항 특성 생성이 계산적으로 부담되는가?|고차 다항 특성 공간을 직접 구성하기 어려움|**[4-5] 커널 다항 회귀 (Kernel Polynomial Regression)**|
-||비선형 관계를 커널 트릭으로 효율적으로 모델링하고 싶음|**[4-5] 커널 다항 회귀 (Kernel Polynomial Regression)**|
+|④ 입력 차원이 매우 높거나 교호항 수가 과도한가?|다항 확장 후 변수 수가 샘플 수보다 많음<br>반응변수와 설명변수 간 공분산을 최대한 보존하며 차원 축소 필요|**[4-4] 부분 최소제곱 다항 회귀 (PLS-Polynomial Regression)**|
+|⑤ 명시적 다항 특성 생성이 계산적으로 부담되는가?|고차 다항 특성 공간을 직접 구성하기 어려움<br>비선형 관계를 커널 트릭으로 효율적으로 모델링|**[4-5] 커널 다항 회귀 (Kernel Polynomial Regression)**|
 
+
+|모델명|sk-learn 사용 예제 소스|최적의 훈련 데이터셋|
+|---|---|---|
+|**[3-1] 단변량 다항 회귀**|PolynomialFeatures, LinearRegression, r2_score|https://www.kaggle.com/datasets/andonians/random-linear-regression|
+|**[3-2] 다변량 다항 회귀**|PolynomialFeatures, LinearRegression, r2_score|https://scikit-learn.org/stable/datasets/real_world.html#california-housing-dataset|
+|**[3-3] 직교 다항 회귀**|PolynomialFeatures, LinearRegression, r2_score|https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset|
+|**[3-4] 부분 최소제곱 다항 회귀**|PLSRegression, r2_score|https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset|
+|**[3-5] 커널 다항 회귀**|KernelRidge, r2_score|https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset|
+
+
+ ### [3-1] 단변량 다항 회귀
+
+	from sklearn.preprocessing import PolynomialFeatures
+	from sklearn.linear_model import LinearRegression
+	from sklearn.metrics import r2_score
+
+	poly = PolynomialFeatures(degree=3)
+	X_poly = poly.fit_transform(X)
+
+	model = LinearRegression()
+	model.fit(X_poly, y)
+
+	y_pred = model.predict(X_poly)
+	print(r2_score(y, y_pred))
+
+	
+### [3-2] 다변량 다항 회귀
+
+	from sklearn.preprocessing import PolynomialFeatures
+	from sklearn.linear_model import LinearRegression
+	from sklearn.metrics import r2_score
+
+	poly = PolynomialFeatures(degree=2, include_bias=False)
+	X_poly = poly.fit_transform(X)
+
+	model = LinearRegression()
+	model.fit(X_poly, y)
+
+	y_pred = model.predict(X_poly)
+	print(r2_score(y, y_pred))
+
+
+
+### [3-3] 직교 다항 회귀
+
+	from sklearn.preprocessing import PolynomialFeatures
+	from sklearn.linear_model import LinearRegression
+	from sklearn.metrics import r2_score
+
+	poly = PolynomialFeatures(degree=3, include_bias=False)
+	X_poly = poly.fit_transform(X)
+
+	model = LinearRegression()
+	model.fit(X_poly, y)
+
+	y_pred = model.predict(X_poly)
+	print(r2_score(y, y_pred))
+
+
+
+### [3-4] 부분 최소제곱 다항 회귀
+
+	from sklearn.cross_decomposition import PLSRegression
+	from sklearn.metrics import r2_score
+
+	model = PLSRegression(n_components=5)
+	model.fit(X, y)
+
+	y_pred = model.predict(X)
+	print(r2_score(y, y_pred))
+
+
+
+### [3-5] 커널 다항 회귀
+
+	from sklearn.kernel_ridge import KernelRidge
+	from sklearn.metrics import r2_score
+
+	model = KernelRidge(kernel="polynomial", degree=3)
+	model.fit(X, y)
+
+	y_pred = model.predict(X)
+	print(r2_score(y, y_pred))
+
+
+ 
 ---
 
 # [5] 정규화 (Regularization) : 벌점부여 (Penalized) 선형 회귀
