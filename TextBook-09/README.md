@@ -2309,6 +2309,153 @@ $$
 |**[6-11] 딥 가우시안 프로세스 회귀**|sklearn 미지원(GPyTorch)<br>r2_score|https://archive.ics.uci.edu/ml/datasets/YearPredictionMSD|
 |**[6-12] 물리정보 기반 회귀**|sklearn 미지원(PINN)<br>r2_score|https://www.kaggle.com/datasets/paultimothymooney/partial-differential-equations|
 
+
+### [6-1] 비선형 최소제곱 회귀 (Nonlinear Least Squares Regression)
+
+
+	from scipy.optimize import curve_fit
+	from sklearn.metrics import r2_score
+
+	params, _ = curve_fit(f, X.flatten(), y)
+	y_pred = f(X.flatten(), *params)
+	print(r2_score(y, y_pred))
+
+
+### [6-2] 스플라인 기반 회귀 (Spline-based Regression)
+
+
+	from sklearn.preprocessing import SplineTransformer
+	from sklearn.linear_model import LinearRegression
+	from sklearn.metrics import r2_score
+
+	X_spline = SplineTransformer(n_knots=5, degree=3).fit_transform(X)
+	model = LinearRegression()
+	model.fit(X_spline, y)
+
+	y_pred = model.predict(X_spline)
+	print(r2_score(y, y_pred))
+
+
+### [6-3] 커널 기반 회귀 (Kernel-based Regression)
+
+
+	from sklearn.kernel_ridge import KernelRidge
+	from sklearn.metrics import r2_score
+
+	model = KernelRidge(kernel="rbf")
+	model.fit(X, y)
+
+	y_pred = model.predict(X)
+	print(r2_score(y, y_pred))
+
+
+### [6-4] 고차 다항 회귀 (High-order Polynomial Regression)
+
+
+	from sklearn.preprocessing import PolynomialFeatures
+	from sklearn.linear_model import LinearRegression
+	from sklearn.metrics import r2_score
+
+	X_poly = PolynomialFeatures(degree=3).fit_transform(X)
+	model = LinearRegression()
+	model.fit(X_poly, y)
+
+	y_pred = model.predict(X_poly)
+	print(r2_score(y, y_pred))
+
+
+### [6-5] 베이즈 비선형 회귀 (Bayesian Nonlinear Regression)
+
+
+	from sklearn.linear_model import BayesianRidge
+	from sklearn.metrics import r2_score
+
+	model = BayesianRidge()
+	model.fit(X, y)
+
+	y_pred = model.predict(X)
+	print(r2_score(y, y_pred))
+
+
+### [6-6] 신경망 기반 회귀 (Neural Network-based Regression)
+
+
+	from sklearn.neural_network import MLPRegressor
+	from sklearn.metrics import r2_score
+
+	model = MLPRegressor(hidden_layer_sizes=(100, 100))
+	model.fit(X, y)
+
+	y_pred = model.predict(X)
+	print(r2_score(y, y_pred))
+
+
+### [6-7] 강건 비선형 회귀 (Robust Nonlinear Regression)
+
+
+	from sklearn.linear_model import HuberRegressor
+	from sklearn.metrics import r2_score
+
+	model = HuberRegressor()
+	model.fit(X, y)
+
+	y_pred = model.predict(X)
+	print(r2_score(y, y_pred))
+
+
+### [6-8] 혼합 비선형 회귀 (Mixture of Nonlinear Regressions)
+
+
+	from sklearn.mixture import GaussianMixture
+	from sklearn.linear_model import LinearRegression
+	from sklearn.metrics import r2_score
+
+	gmm = GaussianMixture(n_components=2)
+	labels = gmm.fit_predict(X)
+
+	model = LinearRegression()
+	model.fit(X, y)
+
+	y_pred = model.predict(X)
+	print(r2_score(y, y_pred))
+
+
+### [6-9] 위치–규모–형상 회귀 (GAMLSS: Generalized Additive Models for Location, Scale and Shape)
+
+
+	# sklearn 공식 미지원
+	# 외부 라이브러리: gamlss, pyGAMLSS 등 사용
+
+
+### [6-10] 함수형 데이터 회귀 (Functional Data Regression)
+
+
+	from sklearn.decomposition import PCA
+	from sklearn.linear_model import LinearRegression
+	from sklearn.metrics import r2_score
+
+	X_pca = PCA(n_components=5).fit_transform(X)
+	model = LinearRegression()
+	model.fit(X_pca, y)
+
+	y_pred = model.predict(X_pca)
+	print(r2_score(y, y_pred))
+
+
+### [6-11] 딥 가우시안 프로세스 회귀 (Deep Gaussian Process Regression)
+
+
+	# sklearn 공식 미지원
+	# GPyTorch, GPflow 기반 구현
+
+
+### [6-12] 물리정보 기반 회귀 (Physics-Informed Regression)
+
+
+	# sklearn 공식 미지원
+	# PyTorch + PINN 구조로 구현
+
+
 <!--
 
 | 구분 | 수식 | 곡선 형태 및 주요 적용 분야 |
