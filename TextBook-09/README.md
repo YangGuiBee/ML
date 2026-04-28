@@ -2311,7 +2311,9 @@ $$
 
 
 ### [6-1] 비선형 최소제곱 회귀 (Nonlinear Least Squares Regression)
-
+▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/index.html<br>
 
 	from scipy.optimize import curve_fit
 	from sklearn.metrics import r2_score
@@ -2322,7 +2324,9 @@ $$
 
 
 ### [6-2] 스플라인 기반 회귀 (Spline-based Regression)
-
+▣ 가이드 : https://scikit-learn.org/stable/modules/preprocessing.html#spline-features<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.SplineTransformer.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html<br>
 
 	from sklearn.preprocessing import SplineTransformer
 	from sklearn.linear_model import LinearRegression
@@ -2337,7 +2341,9 @@ $$
 
 
 ### [6-3] 커널 기반 회귀 (Kernel-based Regression)
-
+▣ 가이드 : https://scikit-learn.org/stable/modules/kernel_ridge.html<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.kernel_ridge.KernelRidge.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/kernel_ridge/plot_kernel_ridge_regression.html<br>
 
 	from sklearn.kernel_ridge import KernelRidge
 	from sklearn.metrics import r2_score
@@ -2350,7 +2356,9 @@ $$
 
 
 ### [6-4] 고차 다항 회귀 (High-order Polynomial Regression)
-
+▣ 가이드 : https://scikit-learn.org/stable/modules/preprocessing.html#polynomial-features<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html<br>
 
 	from sklearn.preprocessing import PolynomialFeatures
 	from sklearn.linear_model import LinearRegression
@@ -2365,7 +2373,9 @@ $$
 
 
 ### [6-5] 베이즈 비선형 회귀 (Bayesian Nonlinear Regression)
-
+▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#bayesian-regression<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.BayesianRidge.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/plot_bayesian_ridge.html<br>
 
 	from sklearn.linear_model import BayesianRidge
 	from sklearn.metrics import r2_score
@@ -2378,7 +2388,9 @@ $$
 
 
 ### [6-6] 신경망 기반 회귀 (Neural Network-based Regression)
-
+▣ 가이드 : https://scikit-learn.org/stable/modules/neural_networks_supervised.html<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPRegressor.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/neural_networks/plot_mlp_regression.html<br>
 
 	from sklearn.neural_network import MLPRegressor
 	from sklearn.metrics import r2_score
@@ -2391,7 +2403,9 @@ $$
 
 
 ### [6-7] 강건 비선형 회귀 (Robust Nonlinear Regression)
-
+▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#robustness-regression-outliers-and-modeling-errors<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.HuberRegressor.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/plot_robust_fit.html<br>
 
 	from sklearn.linear_model import HuberRegressor
 	from sklearn.metrics import r2_score
@@ -2404,7 +2418,9 @@ $$
 
 
 ### [6-8] 혼합 비선형 회귀 (Mixture of Nonlinear Regressions)
-
+▣ 가이드 : https://scikit-learn.org/stable/modules/mixture.html<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.mixture.GaussianMixture.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/mixture/plot_gmm.html<br>
 
 	from sklearn.mixture import GaussianMixture
 	from sklearn.linear_model import LinearRegression
@@ -2421,14 +2437,39 @@ $$
 
 
 ### [6-9] 위치–규모–형상 회귀 (GAMLSS: Generalized Additive Models for Location, Scale and Shape)
-
+▣ 가이드 : 없음 (sklearn 미지원)<br>
+▣ API : 없음 (sklearn 미지원)<br>
+▣ 예제 : sklearn 예제 없음<br>
 
 	# sklearn 공식 미지원
 	# 외부 라이브러리: gamlss, pyGAMLSS 등 사용
+	import numpy as np
+	from sklearn.linear_model import LinearRegression
+
+	# 평균(μ) 모델
+	mu_model = LinearRegression()
+	mu_model.fit(X, y)
+
+	# 분산(σ) 모델 (로그 분산을 예측)
+	residuals = y - mu_model.predict(X)
+	log_sigma = np.log(residuals**2 + 1e-6)
+
+	sigma_model = LinearRegression()
+	sigma_model.fit(X, log_sigma)
+
+	# 예측
+	mu_pred = mu_model.predict(X)
+	sigma_pred = np.exp(sigma_model.predict(X))
+
+	print("μ (location) prediction:", mu_pred[:5])
+	print("σ (scale) prediction:", sigma_pred[:5])
+
 
 
 ### [6-10] 함수형 데이터 회귀 (Functional Data Regression)
-
+▣ 가이드 : https://scikit-learn.org/stable/modules/decomposition.html<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/decomposition/plot_pca_vs_lda.html<br>
 
 	from sklearn.decomposition import PCA
 	from sklearn.linear_model import LinearRegression
@@ -2443,17 +2484,136 @@ $$
 
 
 ### [6-11] 딥 가우시안 프로세스 회귀 (Deep Gaussian Process Regression)
-
+▣ 가이드 : https://scikit-learn.org/stable/modules/gaussian_process.html<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/gaussian_process/plot_gpr_noisy_targets.html<br>
 
 	# sklearn 공식 미지원
 	# GPyTorch, GPflow 기반 구현
+	import torch
+	import gpytorch
+	
+	# 1층 GP
+	class GP_Layer(gpytorch.models.ApproximateGP):
+	    def __init__(self, inducing_points):
+	        variational_distribution = gpytorch.variational.CholeskyVariationalDistribution(
+	            inducing_points.size(0)
+	        )
+	        variational_strategy = gpytorch.variational.VariationalStrategy(
+	            self, inducing_points, variational_distribution, learn_inducing_locations=True
+	        )
+	        super().__init__(variational_strategy)
+	
+	        self.mean_module = gpytorch.means.ZeroMean()
+	        self.covar_module = gpytorch.kernels.RBFKernel()
+	
+	    def forward(self, x):
+	        mean_x = self.mean_module(x)
+	        covar_x = self.covar_module(x)
+	        return gpytorch.distributions.MultivariateNormal(mean_x, covar_x)
+	
+	# Deep GP (2-layer)
+	class DeepGPModel(gpytorch.models.DeepGP):
+	    def __init__(self):
+	        super().__init__()
+	        self.hidden_layer = GP_Layer(torch.randn(20, 1))
+	        self.output_layer = GP_Layer(torch.randn(20, 1))
+	        self.likelihood = gpytorch.likelihoods.GaussianLikelihood()
+	
+	    def forward(self, x):
+	        h = self.hidden_layer(x)
+	        return self.output_layer(h.mean)
+	
+	model = DeepGPModel()
+	model.train()
 
 
 ### [6-12] 물리정보 기반 회귀 (Physics-Informed Regression)
-
+▣ 가이드 : 없음 (sklearn 미지원)<br>
+▣ API : 없음 (sklearn 미지원)<br>
+▣ 예제 : sklearn 예제 없음<br>
 
 	# sklearn 공식 미지원
 	# PyTorch + PINN 구조로 구현
+	import numpy as np
+	import torch
+	import torch.nn as nn
+	from sklearn.metrics import r2_score
+	
+	np.random.seed(0)
+	x_np = np.linspace(0, 1, 50).reshape(-1, 1)
+	y_np = np.exp(-x_np) + 0.05 * np.random.randn(*x_np.shape)
+	
+	x_data = torch.tensor(x_np, dtype=torch.float32)
+	y_data = torch.tensor(y_np, dtype=torch.float32)
+	
+	# 물리 제약을 적용할 collocation points
+	x_phys = torch.linspace(0, 1, 100).view(-1, 1)
+	x_phys.requires_grad_(True)
+	
+	# =========================
+	# PINN 모델 정의
+	# =========================
+	class PINN(nn.Module):
+	    def __init__(self):
+	        super().__init__()
+	        self.net = nn.Sequential(
+	            nn.Linear(1, 50),
+	            nn.Tanh(),
+	            nn.Linear(50, 50),
+	            nn.Tanh(),
+	            nn.Linear(50, 1)
+	        )
+	
+	    def forward(self, x):
+	        return self.net(x)
+	
+	model = PINN()
+	
+	# =========================
+	# 물리 잔차 정의
+	# dy/dx + y = 0
+	# =========================
+	def physics_residual(model, x):
+	    y_hat = model(x)
+	    dy_dx = torch.autograd.grad(
+	        y_hat, x,
+	        grad_outputs=torch.ones_like(y_hat),
+	        create_graph=True
+	    )[0]
+	    return dy_dx + y_hat
+	
+	# =========================
+	# 학습
+	# =========================
+	optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+	lambda_phys = 1.0  # 물리 제약 가중치
+	
+	for epoch in range(2000):
+	    optimizer.zero_grad()
+	
+	    # 데이터 손실
+	    y_pred = model(x_data)
+	    loss_data = torch.mean((y_pred - y_data) ** 2)
+	
+	    # 물리 손실
+	    res = physics_residual(model, x_phys)
+	    loss_phys = torch.mean(res ** 2)
+	
+	    # 전체 손실
+	    loss = loss_data + lambda_phys * loss_phys
+	    loss.backward()
+	    optimizer.step()
+	
+	# =========================
+	# 평가
+	# =========================
+	model.eval()
+	with torch.no_grad():
+	    y_hat = model(x_data).numpy()
+	
+	print("[6-12] PINN R2 score:", r2_score(y_np, y_hat))
+
 
 
 <!--
