@@ -2301,18 +2301,18 @@ $$
 
 |모델명|수식|수식의 항목 설명|그래프형태|적용분야|
 |---|---|---|---|---|
-|[6-1] 비선형 최소제곱 회귀|$\min_\theta \sum_i \lVert y_i - f(x_i;\theta) \rVert_2^2$|$y_i$: 반응변수;<br>$x_i$: 입력변수;<br>$f(\cdot)$: 비선형 함수;<br>$\theta$: 모수;<br>$\lVert\cdot\rVert_2$: L2 노름|매끄러운 비선형 곡선|실험 곡선 피팅|
-|[6-2] 스플라인 기반 회귀|$y=\sum_k \beta_k B_k(x)$|$y$: 반응변수;<br>$B_k(x)$: 스플라인 기저 함수;<br>$\beta_k$: 기저 계수;<br>$x$: 입력변수|구간별 매끄러운 곡선|신호·시계열|
-|[6-3] 커널 기반 회귀|$y=\sum_i \alpha_i K(x_i,x)$|$y$: 반응변수;<br>$x,x_i$: 입력변수;<br>$K(\cdot,\cdot)$: 커널 함수;<br>$\alpha_i$: 가중치|암묵적 고차원 곡면|비선형 패턴|
-|[6-4] 고차 다항 회귀|$y=\sum_{k=0}^d \beta_k x^k$|$y$: 반응변수;<br>$x$: 입력변수;<br>$\beta_k$: 다항 계수;<br>$d$: 다항 차수|진동 가능 곡선|근사이론|
-|[6-5] 베이즈 비선형 회귀|$p(\theta\mid D)\propto p(D\mid\theta)p(\theta)$|$\theta$: 모수;<br>$D$: 데이터;<br>$p(\theta)$: 사전분포;<br>$p(D\mid\theta)$: 우도|확률적 곡선|불확실성 추정|
-|[6-6] 신경망 기반 회귀|$y=f(x;W)$|$y$: 반응변수;<br>$x$: 입력변수;<br>$f(\cdot)$: 신경망 함수;<br>$W$: 신경망 가중치|고차원 비선형 곡선|딥러닝|
-|[6-7] 강건 비선형 회귀|$\min_\theta \sum_i \rho(y_i-f(x_i;\theta))$|$y_i$: 반응변수;<br>$x_i$: 입력변수;<br>$f(\cdot)$: 비선형 함수;<br>$\theta$: 모수;<br>$\rho(\cdot)$: 강건 손실 함수|이상치 둔감 곡선|노이즈 데이터|
-|[6-8] 혼합 비선형 회귀|$p(y\mid x)=\sum_k \pi_k p_k(y\mid x)$|$y$: 반응변수;<br>$x$: 입력변수;<br>$\pi_k$: 혼합계수;<br>$p_k(\cdot)$: 부분 회귀 모형|다중 회귀선|군집 데이터|
-|[6-9] 위치–규모–형상 회귀|$y\sim D(\mu,\sigma,\nu)$|$y$: 반응변수;<br>$D$: 분포;<br>$\mu$: 위치;<br>$\sigma$: 규모;<br>$\nu$: 형상|분포 전체 변화|보험·리스크|
-|[6-10] 함수형 데이터 회귀|$y(t)=\int x(s)\beta(s,t)\,ds$|$y(t)$: 출력 함수;<br>$x(s)$: 입력 함수;<br>$\beta(s,t)$: 함수 계수;<br>$s,t$: 연속 변수|곡선 대 곡선|생체신호|
-|[6-11] 딥 가우시안 프로세스 회귀|$f_L\circ f_{L-1}\circ\cdots\circ f_1(x)$|$x$: 입력변수;<br>$f_l$: GP 계층 함수;<br>$L$: 계층 수|확률적 깊은 곡선|불확실성 딥러닝|
-|[6-12] 물리정보 기반 회귀|$\min_\theta \sum_i \lVert y_i - f(x_i;\theta) \rVert_2^2 + \lambda \sum_j \lVert \mathcal{N}[f(x_j;\theta)] \rVert_2^2$|$y_i$: 관측 반응변수;<br>$x_i,x_j$: 입력변수;<br>$f(\cdot)$: 비선형 회귀 함수;<br>$\theta$: 모델 파라미터;<br>$\lambda$: 물리 제약 가중치;<br>$\mathcal{N}[\cdot]$: 물리 방정식 연산자;<br>$\lVert\cdot\rVert_2$: L2 노름|물리 일관 곡선|과학·공학|
+|**[6-1] 비선형 최소제곱 회귀**|$\min_\theta \sum_i \lVert y_i - f(x_i;\theta) \rVert_2^2$|$y_i$: 반응변수;<br>$x_i$: 입력변수;<br>$f(\cdot)$: 비선형 함수;<br>$\theta$: 모수;<br>$\lVert\cdot\rVert_2$: L2 노름|매끄러운 비선형 곡선|실험 곡선 피팅|
+|**[6-2] 스플라인 기반 회귀**|$y=\sum_k \beta_k B_k(x)$|$y$: 반응변수;<br>$B_k(x)$: 스플라인 기저 함수;<br>$\beta_k$: 기저 계수;<br>$x$: 입력변수|구간별 매끄러운 곡선|신호·시계열|
+|**[6-3] 커널 기반 회귀**|$y=\sum_i \alpha_i K(x_i,x)$|$y$: 반응변수;<br>$x,x_i$: 입력변수;<br>$K(\cdot,\cdot)$: 커널 함수;<br>$\alpha_i$: 가중치|암묵적 고차원 곡면|비선형 패턴|
+|**[6-4] 고차 다항 회귀**|$y=\sum_{k=0}^d \beta_k x^k$|$y$: 반응변수;<br>$x$: 입력변수;<br>$\beta_k$: 다항 계수;<br>$d$: 다항 차수|진동 가능 곡선|근사이론|
+|**[6-5] 베이즈 비선형 회귀**|$p(\theta\mid D)\propto p(D\mid\theta)p(\theta)$|$\theta$: 모수;<br>$D$: 데이터;<br>$p(\theta)$: 사전분포;<br>$p(D\mid\theta)$: 우도|확률적 곡선|불확실성 추정|
+|**[6-6] 신경망 기반 회귀**|$y=f(x;W)$|$y$: 반응변수;<br>$x$: 입력변수;<br>$f(\cdot)$: 신경망 함수;<br>$W$: 신경망 가중치|고차원 비선형 곡선|딥러닝|
+|**[6-7] 강건 비선형 회귀**|$\min_\theta \sum_i \rho(y_i-f(x_i;\theta))$|$y_i$: 반응변수;<br>$x_i$: 입력변수;<br>$f(\cdot)$: 비선형 함수;<br>$\theta$: 모수;<br>$\rho(\cdot)$: 강건 손실 함수|이상치 둔감 곡선|노이즈 데이터|
+|**[6-8] 혼합 비선형 회귀**|$p(y\mid x)=\sum_k \pi_k p_k(y\mid x)$|$y$: 반응변수;<br>$x$: 입력변수;<br>$\pi_k$: 혼합계수;<br>$p_k(\cdot)$: 부분 회귀 모형|다중 회귀선|군집 데이터|
+|**[6-9] 위치–규모–형상 회귀**|$y\sim D(\mu,\sigma,\nu)$|$y$: 반응변수;<br>$D$: 분포;<br>$\mu$: 위치;<br>$\sigma$: 규모;<br>$\nu$: 형상|분포 전체 변화|보험·리스크|
+|**[6-10] 함수형 데이터 회귀**|$y(t)=\int x(s)\beta(s,t)\,ds$|$y(t)$: 출력 함수;<br>$x(s)$: 입력 함수;<br>$\beta(s,t)$: 함수 계수;<br>$s,t$: 연속 변수|곡선 대 곡선|생체신호|
+|**[6-11] 딥 가우시안 프로세스 회귀**|$f_L\circ f_{L-1}\circ\cdots\circ f_1(x)$|$x$: 입력변수;<br>$f_l$: GP 계층 함수;<br>$L$: 계층 수|확률적 깊은 곡선|불확실성 딥러닝|
+|**[6-12] 물리정보 기반 회귀**|$\min_\theta \sum_i \lVert y_i - f(x_i;\theta) \rVert_2^2 + \lambda \sum_j \lVert \mathcal{N}[f(x_j;\theta)] \rVert_2^2$|$y_i$: 관측 반응변수;<br>$x_i,x_j$: 입력변수;<br>$f(\cdot)$: 비선형 회귀 함수;<br>$\theta$: 모델 파라미터;<br>$\lambda$: 물리 제약 가중치;<br>$\mathcal{N}[\cdot]$: 물리 방정식 연산자;<br>$\lVert\cdot\rVert_2$: L2 노름|물리 일관 곡선|과학·공학|
 
 ---
 
