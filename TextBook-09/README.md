@@ -1750,11 +1750,8 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 
 
 ### [4-1] 단변량 다항 회귀
-▣ 가이드 : (Linear) https://scikit-learn.org/stable/modules/linear_model.html<br>
-(Polynomial) https://scikit-learn.org/stable/modules/preprocessing.html#polynomial-features<br>
-▣ API : (Linear) https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html<br>
-(Polynomial) https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html<br>
-
+▣ 가이드 : https://scikit-learn.org/stable/modules/preprocessing.html#polynomial-features<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html<br>
 ▣ 예제 : Polynomial Regression (Linear Models 예제 모음) https://scikit-learn.org/stable/auto_examples/linear_model/index.html<br>
 
 	from sklearn.preprocessing import PolynomialFeatures
@@ -1772,10 +1769,8 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 
 	
 ### [4-2] 다변량 다항 회귀
-▣ 가이드 : (Linear) : https://scikit-learn.org/stable/modules/linear_model.html<br>
-(Polynomial) features : https://scikit-learn.org/stable/modules/preprocessing.html#polynomial-features<br>
-▣ API : (Linear) https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html<br>
-(Polynomial) : https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html<br>
+▣ 가이드 : https://scikit-learn.org/stable/modules/preprocessing.html#polynomial-features<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html<br>
 
 	from sklearn.preprocessing import PolynomialFeatures
@@ -1794,8 +1789,7 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 
 
 ### [4-3] 직교 다항 회귀
-▣ 가이드 :  https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares<br>
-(Multicollinearity) : https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification<br>
+▣ 가이드 : https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/index.html<br>
 
