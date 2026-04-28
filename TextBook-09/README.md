@@ -56,29 +56,17 @@
 
   	[6] 비선형 회귀 (nonlinear regression)
 		[6-1] 비선형 최소제곱 회귀 (Nonlinear Least Squares Regression)
-		[6-2] 지수 회귀 (Exponential Regression)
-		[6-3] 로그형 회귀 (Logarithmic Regression)
-		[6-4] 전력 회귀 (Power Regression)
-		[6-5] 시그모이드 회귀 (Sigmoid Regression)
-		[6-6] 스플라인 회귀 (Spline Regression)
-		[6-7] 커널 회귀 (Kernel Regression)
-		[6-8] 다항식 회귀 (Polynomial Regression, High-order)
-		[6-9] 로지스틱 성장 회귀 (Logistic Growth Regression)
-		[6-10] 곰퍼츠 회귀 (Gompertz Regression)
-		[6-11] 가우시안 회귀 (Gaussian Regression)
-		[6-12] 볼츠만 시그모이드 회귀 (Boltzmann Sigmoidal Regression)
-		[6-13] 래셔널 함수 회귀 (Rational Function Regression)
-		[6-14] 구간별 회귀 (Piecewise / Segmented Regression)
-		[6-15] 베이즈 비선형 회귀 (Bayesian Nonlinear Regression)
-		[6-16] 신경망 회귀 (Neural Network Regression)
-		[6-17] 특수 형상 회귀 (Geometric Regression)											
-		[6-18] 로버스트 회귀 (Robust Regression)		 										
-		[6-19] 혼합 회귀 (Mixture of Regressions) 									
-		[6-20] 위치-규모-형상 회귀 (GAMLSS)														
-		[6-21] 함수형 회귀 (Functional Regression)									 			
-		[6-22] 형상기반 회귀 (Shape-aware / Geodesic Regression)				 	
-		[6-23] 딥 가우시안 프로세스 회귀 (Deep Gaussian Process Regression)		
-		[6-24] 물리정보 회귀 (Physics-Informed Regression)					
+		[6-2] 스플라인 기반 회귀 (Spline-based Regression)
+		[6-3] 커널 기반 회귀 (Kernel-based Regression)
+		[6-4] 고차 다항 회귀 (High-order Polynomial Regression)
+		[6-5] 베이즈 비선형 회귀 (Bayesian Nonlinear Regression)
+		[6-6] 신경망 기반 회귀 (Neural Network-based Regression)
+		[6-7] 강건 비선형 회귀 (Robust Nonlinear Regression)
+		[6-8] 혼합 비선형 회귀 (Mixture of Nonlinear Regressions)
+		[6-9] 위치–규모–형상 회귀 (GAMLSS: Generalized Additive Models for Location, Scale and Shape)
+		[6-10] 함수형 데이터 회귀 (Functional Data Regression)
+		[6-11] 딥 가우시안 프로세스 회귀 (Deep Gaussian Process Regression)
+		[6-12] 물리정보 기반 회귀 (Physics-Informed Regression)				
 
 ---
 (참고)
@@ -2256,32 +2244,7 @@ $$
 데이터를 어떻게 변형하더라도 파라미터를 선형 결합식으로 표현할 수 없는 모델로 회귀모형에 주어진 회귀식이 모수들의 비선형함수로 나타나는 경우 선형회귀에서 회귀계수는 설명변수의 변화량에 따른 반응변수의 평균변화량으로 해석되지만, 비선형회귀에서는 각 모수가 특정한 의미를 가지게 된다.<br>
 <br>
 
-| 구분 | 수식 | 곡선 형태 및 주요 적용 분야 |
-|------|------|------------------------------|
-| [6-1] 비선형 최소제곱 회귀 (*Nonlinear Least Squares Regression, NLS*) | ![eq](https://latex.codecogs.com/png.latex?%5Cmin_%7B%5Ctheta%7D%20%5Csum_%7Bi%3D1%7D%5En%20%28y_i%20-%20f%28x_i%3B%5Ctheta%29%29%5E2) | 모든 비선형 회귀의 기본 틀 — 물리·공학·경제모형 파라미터 추정 |
-| [6-2] 지수 회귀 (*Exponential Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20a%20e%5E%7Bb%20x%7D) | 지수 성장/감쇠형 — 세균 성장, 방사능 붕괴, 수익률 감소 |
-| [6-3] 로그형 회귀 (*Logarithmic Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20a%20%2B%20b%20%5Cln%28x%29) | 완만한 증가·감소형 (Concave/Convex) — 학습곡선, 효용함수 |
-| [6-4] 전력 회귀 (*Power Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20a%20x%5E%7Bb%7D) | 거듭제곱형 (Scaling law) — 물리량 관계, 생산함수, 탄성분석 |
-| [6-5] 시그모이드 회귀 (*Sigmoid Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cfrac%7BL%7D%7B1%20%2B%20e%5E%7B-k%28x-x_0%29%7D%7D) | S-curve (대칭형) — 확산, 포화, 학습 진전 곡선 |
-| [6-6] 스플라인 회귀 (*Spline Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Csum_%7Bj%3D1%7D%5EK%20%5Cbeta_j%20B_j%28x%29) | Piecewise Smooth Curve — 복잡한 곡선 근사, 경제·기하 모델 |
-| [6-7] 커널 회귀 (*Kernel Regression*) | ![eq](https://latex.codecogs.com/png.latex?%5Chat%7By%7D%28x%29%20%3D%20%5Cfrac%7B%5Csum_i%20K%28x-x_i%29%20y_i%7D%7B%5Csum_i%20K%28x-x_i%29%7D) | 부드러운 비모수 추세 — 시계열 평활화, 비선형 예측 |
-| [6-8] 다항식 회귀 (*Polynomial Regression, High-order*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cbeta_0%20%2B%20%5Cbeta_1%20x%20%2B%20%5Cbeta_2%20x%5E2%20%2B%20%5Ccdots%20%2B%20%5Cbeta_n%20x%5En) | 곡률 가변형 — 복잡한 추세 적합, 곡선 회귀 |
-| [6-9] 로지스틱 성장 회귀 (*Logistic Growth Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cfrac%7BK%7D%7B1%20%2B%20A%20e%5E%7B-Bx%7D%7D) | S-curve (포화 성장형) — 인구·시장·바이러스 확산 모델 |
-| [6-10] 곰퍼츠 회귀 (*Gompertz Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20a%20e%5E%7B-b%20e%5E%7B-cx%7D%7D) | 비대칭 S-curve — 생물 성장, 약물 반응, 감염 전파 곡선 |
-| [6-11] 가우시안 회귀 (*Gaussian Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20a%20%5Cexp%5Cleft%28-%5Cfrac%7B%28x-b%29%5E2%7D%7B2c%5E2%7D%5Cright%29) | Bell-shape (대칭형) — 분포형 반응, 최적점 탐색, 약물 농도 반응 |
-| [6-12] 볼츠만 시그모이드 회귀 (*Boltzmann Sigmoidal Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cfrac%7BA_1-A_2%7D%7B1%20%2B%20e%5E%7B%28x-x_0%29%2Fd%7D%7D%20%2B%20A_2) | S-curve (단계적 포화) — 물질 전이, 온도 반응, 전기신호 변화 |
-| [6-13] 래셔널 함수 회귀 (*Rational Function Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cfrac%7Ba_0%2Ba_1x%2B...%2Ba_mx%5Em%7D%7B1%2Bb_1x%2B...%2Bb_nx%5En%7D) | 복합 비선형 곡선형 — 실험 데이터 근사, 제어모델 |
-| [6-14] 구간별 회귀 (*Piecewise / Segmented Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cbegin%7Bcases%7D%20a_1%2Bb_1x%2C%26x%3Cc%5C%5C%20a_2%2Bb_2x%2C%26x%5Cge%20c%5Cend%7Bcases%7D) | Break-point형 — 구조적 변화 탐지, 정책효과 분석 |
-| [6-15] 베이즈 비선형 회귀 (*Bayesian Nonlinear Regression*) | ![eq](https://latex.codecogs.com/png.latex?p%28%5Ctheta%7CD%29%5Cpropto%20p%28D%7C%5Ctheta%29p%28%5Ctheta%29) | 불확실성 반영형 — 소표본 데이터, 확률적 예측 모델 |
-| [6-16] 신경망 회귀 (*Neural Network Regression*) | ![eq](https://latex.codecogs.com/png.latex?%5Chat%7By%7D%20%3D%20f%28W_2%5Csigma%28W_1x%2Bb_1%29%2Bb_2%29) | Universal Approximation — 복잡한 비선형 함수 학습, 예측·제어 |
-| [6-17] 특수 형상 회귀 (*Geometric Regression*) | ![eq](https://latex.codecogs.com/png.latex?%5Cmin_%7BR%2Ct%7D%20%5Csum_i%20%7C%7C%20x_i-%28Ry_i%2Bt%29%20%7C%7C%5E2) | 공간 변환 기반 — 3D 포인트 정합, 기하 보정, 영상 정렬, 구조광 측정 |
-| [6-18] 로버스트 회귀 (*Robust Regression*) | ![eq](https://latex.codecogs.com/png.latex?%5Cmin_%7B%5Ctheta%7D%20%5Csum_i%20%5Crho%28y_i-f%28x_i%3B%5Ctheta%29%29) | 이상치·노이즈에 강건 — Huber, Tukey loss 사용, 실험데이터 보정 |
-| [6-19] 혼합 회귀 (*Mixture of Regressions*) | ![eq](https://latex.codecogs.com/svg.latex?p(y%7Cx)%20%3D%20%5Csum_%7Bk%3D1%7D%5EK%20%5Cpi_k%20%5Cmathcal%7BN%7D%5Cleft(y%3B%20f_k(x)%2C%20%5Csigma_k%5E2%5Cright)) | 여러 회귀모델의 혼합 — 군집별 이질적 패턴 모델링 |
-| [6-20] 위치-규모-형상 회귀 (*GAMLSS*) | ![eq](https://latex.codecogs.com/svg.latex?y%20%5Csim%20D(%5Clambda_1%2C%20%5Clambda_2%2C%20%5Clambda_3)%2C%20%5Clog%5Clambda_j%20%3D%20%5Ceta_j(x)) | 평균뿐 아니라 분산·왜도·첨도까지 설명 — 금융위험, 생존·보험분석 |
-| [6-21] 함수형 회귀 (*Functional Regression*) | ![eq](https://latex.codecogs.com/svg.latex?y(t)%20%3D%20%5Cint%20%5Cbeta(s%2C%20t)x(s)%5C%2Cds%20%2B%20%5Cepsilon(t)) | 입력·출력이 함수형(곡선형) — 생체신호, 시계열, 스펙트럼 분석 |
-| [6-22] 형상기반 회귀 (*Shape-aware / Geodesic Regression*) | ![eq](https://latex.codecogs.com/svg.latex?%5Cmin_%7B%5Cmu%2C%20v%7D%20%5Csum_i%20d_%7B%5Cmathcal%7BM%7D%7D%5E2%5Cleft(%5Cexp_%5Cmu(vt_i)%2C%20y_i%5Cright)) | 리만다양체 상 회귀 — 의료영상, 3D 형상·자세 추정 |
-| [6-23] 딥 가우시안 프로세스 회귀 (*Deep Gaussian Process Regression*) | ![eq](https://latex.codecogs.com/png.latex?f_L%28x%29%20%3D%20f_L%28f_%7BL-1%7D%28...f_1%28x%29%29%29) | 계층적 GP — 불확실성+복잡한 비선형 구조 학습 |
-| [6-24] 물리정보 회귀 (*Physics-Informed Regression*) | ![eq](https://latex.codecogs.com/png.latex?L%20%3D%20%5Calpha%20%5Csum_i%7C%7Cf%28x_i%3B%5Ctheta%29-y_i%7C%7C%5E2%20%2B%20%5Cbeta%20%5Csum_j%7C%7C%5Cmathcal%7BF%7D%28f%28x_j%3B%5Ctheta%29%29%7C%7C%5E2) | 물리제약 포함 회귀 — PDE/ODE 기반 공학·유체·재료 시뮬레이션 |
+
 
 
 |모델명|이론 개요|특징|
@@ -2314,9 +2277,54 @@ $$
 |**[6-11] 딥 가우시안 프로세스 회귀**|$f_L\circ f_{L-1}\circ\cdots\circ f_1(x)$|$x$: 입력변수;<br>$f_l$: GP 계층 함수;<br>$L$: 계층 수|확률적 깊은 곡선|불확실성 딥러닝|
 |**[6-12] 물리정보 기반 회귀**|$\min_\theta \sum_i \lVert y_i - f(x_i;\theta) \rVert_2^2 + \lambda \sum_j \lVert \mathcal{N}[f(x_j;\theta)] \rVert_2^2$|$y_i$: 관측 반응변수;<br>$x_i,x_j$: 입력변수;<br>$f(\cdot)$: 비선형 회귀 함수;<br>$\theta$: 모델 파라미터;<br>$\lambda$: 물리 제약 가중치;<br>$\mathcal{N}[\cdot]$: 물리 방정식 연산자;<br>$\lVert\cdot\rVert_2$: L2 노름|물리 일관 곡선|과학·공학|
 
----
+
+|구분|조건|모델명|
+|---|---|---|
+|① 입력–출력 관계가 명시적으로 비선형인가?|모델 함수 형태가 선형으로 표현되지 않음|**[6-1] 비선형 최소제곱 회귀 (Nonlinear Least Squares Regression)**|
+|② 국소적으로 매끄러운 곡선을 원하나?|구간별로 다른 곡률, 경계에서 연속성 필요|**[6-2] 스플라인 기반 회귀 (Spline-based Regression)**|
+|③ 명시적 특성 변환 없이 비선형 학습이 필요한가?|고차원 특성 공간을 암묵적으로 사용|**[6-3] 커널 기반 회귀 (Kernel-based Regression)**|
+|④ 단순 모델로 비선형성을 빠르게 설명하고 싶은가?|차수 증가로 표현력 확보 가능|**[6-4] 고차 다항 회귀 (High-order Polynomial Regression)**|
+|⑤ 모델 추정의 불확실성이 중요한가?|점추정이 아닌 분포 기반 추론 필요|**[6-5] 베이즈 비선형 회귀 (Bayesian Nonlinear Regression)**|
+|⑥ 매우 복잡한 비선형 구조를 학습해야 하는가?|데이터로 표현 자체를 학습|**[6-6] 신경망 기반 회귀 (Neural Network-based Regression)**|
+|⑦ 이상치나 비정상 관측값이 많은가?|손실함수의 강건성이 필요|**[6-7] 강건 비선형 회귀 (Robust Nonlinear Regression)**|
+|⑧ 데이터가 여러 하위 집단의 혼합으로 보이는가?|집단별로 다른 비선형 관계 존재|**[6-8] 혼합 비선형 회귀 (Mixture of Nonlinear Regressions)**|
+|⑨ 평균뿐 아니라 분산·왜도까지 모델링해야 하는가?|반응변수 분포 전체를 설명|**[6-9] 위치–규모–형상 회귀 (GAMLSS: Generalized Additive Models for Location, Scale and Shape)**|
+|⑩ 입력 또는 출력이 함수(곡선) 형태인가?|시간·공간에 따른 연속 데이터|**[6-10] 함수형 데이터 회귀 (Functional Data Regression)**|
+|⑪ 비선형 + 확률적 불확실성을 동시에 다루는가?|깊은 계층 구조의 확률 모델 필요|**[6-11] 딥 가우시안 프로세스 회귀 (Deep Gaussian Process Regression)**|
+|⑫ 물리 법칙이나 미분방정식을 반드시 만족해야 하는가?|데이터 + 물리 제약 동시 학습|**[6-12] 물리정보 기반 회귀 (Physics-Informed Regression)**|
+
 
 <!--
+
+| 구분 | 수식 | 곡선 형태 및 주요 적용 분야 |
+|------|------|------------------------------|
+| [6-1] 비선형 최소제곱 회귀 (*Nonlinear Least Squares Regression, NLS*) | ![eq](https://latex.codecogs.com/png.latex?%5Cmin_%7B%5Ctheta%7D%20%5Csum_%7Bi%3D1%7D%5En%20%28y_i%20-%20f%28x_i%3B%5Ctheta%29%29%5E2) | 모든 비선형 회귀의 기본 틀 — 물리·공학·경제모형 파라미터 추정 |
+| [6-2] 지수 회귀 (*Exponential Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20a%20e%5E%7Bb%20x%7D) | 지수 성장/감쇠형 — 세균 성장, 방사능 붕괴, 수익률 감소 |
+| [6-3] 로그형 회귀 (*Logarithmic Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20a%20%2B%20b%20%5Cln%28x%29) | 완만한 증가·감소형 (Concave/Convex) — 학습곡선, 효용함수 |
+| [6-4] 전력 회귀 (*Power Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20a%20x%5E%7Bb%7D) | 거듭제곱형 (Scaling law) — 물리량 관계, 생산함수, 탄성분석 |
+| [6-5] 시그모이드 회귀 (*Sigmoid Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cfrac%7BL%7D%7B1%20%2B%20e%5E%7B-k%28x-x_0%29%7D%7D) | S-curve (대칭형) — 확산, 포화, 학습 진전 곡선 |
+| [6-6] 스플라인 회귀 (*Spline Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Csum_%7Bj%3D1%7D%5EK%20%5Cbeta_j%20B_j%28x%29) | Piecewise Smooth Curve — 복잡한 곡선 근사, 경제·기하 모델 |
+| [6-7] 커널 회귀 (*Kernel Regression*) | ![eq](https://latex.codecogs.com/png.latex?%5Chat%7By%7D%28x%29%20%3D%20%5Cfrac%7B%5Csum_i%20K%28x-x_i%29%20y_i%7D%7B%5Csum_i%20K%28x-x_i%29%7D) | 부드러운 비모수 추세 — 시계열 평활화, 비선형 예측 |
+| [6-8] 다항식 회귀 (*Polynomial Regression, High-order*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cbeta_0%20%2B%20%5Cbeta_1%20x%20%2B%20%5Cbeta_2%20x%5E2%20%2B%20%5Ccdots%20%2B%20%5Cbeta_n%20x%5En) | 곡률 가변형 — 복잡한 추세 적합, 곡선 회귀 |
+| [6-9] 로지스틱 성장 회귀 (*Logistic Growth Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cfrac%7BK%7D%7B1%20%2B%20A%20e%5E%7B-Bx%7D%7D) | S-curve (포화 성장형) — 인구·시장·바이러스 확산 모델 |
+| [6-10] 곰퍼츠 회귀 (*Gompertz Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20a%20e%5E%7B-b%20e%5E%7B-cx%7D%7D) | 비대칭 S-curve — 생물 성장, 약물 반응, 감염 전파 곡선 |
+| [6-11] 가우시안 회귀 (*Gaussian Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20a%20%5Cexp%5Cleft%28-%5Cfrac%7B%28x-b%29%5E2%7D%7B2c%5E2%7D%5Cright%29) | Bell-shape (대칭형) — 분포형 반응, 최적점 탐색, 약물 농도 반응 |
+| [6-12] 볼츠만 시그모이드 회귀 (*Boltzmann Sigmoidal Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cfrac%7BA_1-A_2%7D%7B1%20%2B%20e%5E%7B%28x-x_0%29%2Fd%7D%7D%20%2B%20A_2) | S-curve (단계적 포화) — 물질 전이, 온도 반응, 전기신호 변화 |
+| [6-13] 래셔널 함수 회귀 (*Rational Function Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cfrac%7Ba_0%2Ba_1x%2B...%2Ba_mx%5Em%7D%7B1%2Bb_1x%2B...%2Bb_nx%5En%7D) | 복합 비선형 곡선형 — 실험 데이터 근사, 제어모델 |
+| [6-14] 구간별 회귀 (*Piecewise / Segmented Regression*) | ![eq](https://latex.codecogs.com/png.latex?y%20%3D%20%5Cbegin%7Bcases%7D%20a_1%2Bb_1x%2C%26x%3Cc%5C%5C%20a_2%2Bb_2x%2C%26x%5Cge%20c%5Cend%7Bcases%7D) | Break-point형 — 구조적 변화 탐지, 정책효과 분석 |
+| [6-15] 베이즈 비선형 회귀 (*Bayesian Nonlinear Regression*) | ![eq](https://latex.codecogs.com/png.latex?p%28%5Ctheta%7CD%29%5Cpropto%20p%28D%7C%5Ctheta%29p%28%5Ctheta%29) | 불확실성 반영형 — 소표본 데이터, 확률적 예측 모델 |
+| [6-16] 신경망 회귀 (*Neural Network Regression*) | ![eq](https://latex.codecogs.com/png.latex?%5Chat%7By%7D%20%3D%20f%28W_2%5Csigma%28W_1x%2Bb_1%29%2Bb_2%29) | Universal Approximation — 복잡한 비선형 함수 학습, 예측·제어 |
+| [6-17] 특수 형상 회귀 (*Geometric Regression*) | ![eq](https://latex.codecogs.com/png.latex?%5Cmin_%7BR%2Ct%7D%20%5Csum_i%20%7C%7C%20x_i-%28Ry_i%2Bt%29%20%7C%7C%5E2) | 공간 변환 기반 — 3D 포인트 정합, 기하 보정, 영상 정렬, 구조광 측정 |
+| [6-18] 로버스트 회귀 (*Robust Regression*) | ![eq](https://latex.codecogs.com/png.latex?%5Cmin_%7B%5Ctheta%7D%20%5Csum_i%20%5Crho%28y_i-f%28x_i%3B%5Ctheta%29%29) | 이상치·노이즈에 강건 — Huber, Tukey loss 사용, 실험데이터 보정 |
+| [6-19] 혼합 회귀 (*Mixture of Regressions*) | ![eq](https://latex.codecogs.com/svg.latex?p(y%7Cx)%20%3D%20%5Csum_%7Bk%3D1%7D%5EK%20%5Cpi_k%20%5Cmathcal%7BN%7D%5Cleft(y%3B%20f_k(x)%2C%20%5Csigma_k%5E2%5Cright)) | 여러 회귀모델의 혼합 — 군집별 이질적 패턴 모델링 |
+| [6-20] 위치-규모-형상 회귀 (*GAMLSS*) | ![eq](https://latex.codecogs.com/svg.latex?y%20%5Csim%20D(%5Clambda_1%2C%20%5Clambda_2%2C%20%5Clambda_3)%2C%20%5Clog%5Clambda_j%20%3D%20%5Ceta_j(x)) | 평균뿐 아니라 분산·왜도·첨도까지 설명 — 금융위험, 생존·보험분석 |
+| [6-21] 함수형 회귀 (*Functional Regression*) | ![eq](https://latex.codecogs.com/svg.latex?y(t)%20%3D%20%5Cint%20%5Cbeta(s%2C%20t)x(s)%5C%2Cds%20%2B%20%5Cepsilon(t)) | 입력·출력이 함수형(곡선형) — 생체신호, 시계열, 스펙트럼 분석 |
+| [6-22] 형상기반 회귀 (*Shape-aware / Geodesic Regression*) | ![eq](https://latex.codecogs.com/svg.latex?%5Cmin_%7B%5Cmu%2C%20v%7D%20%5Csum_i%20d_%7B%5Cmathcal%7BM%7D%7D%5E2%5Cleft(%5Cexp_%5Cmu(vt_i)%2C%20y_i%5Cright)) | 리만다양체 상 회귀 — 의료영상, 3D 형상·자세 추정 |
+| [6-23] 딥 가우시안 프로세스 회귀 (*Deep Gaussian Process Regression*) | ![eq](https://latex.codecogs.com/png.latex?f_L%28x%29%20%3D%20f_L%28f_%7BL-1%7D%28...f_1%28x%29%29%29) | 계층적 GP — 불확실성+복잡한 비선형 구조 학습 |
+| [6-24] 물리정보 회귀 (*Physics-Informed Regression*) | ![eq](https://latex.codecogs.com/png.latex?L%20%3D%20%5Calpha%20%5Csum_i%7C%7Cf%28x_i%3B%5Ctheta%29-y_i%7C%7C%5E2%20%2B%20%5Cbeta%20%5Csum_j%7C%7C%5Cmathcal%7BF%7D%28f%28x_j%3B%5Ctheta%29%29%7C%7C%5E2) | 물리제약 포함 회귀 — PDE/ODE 기반 공학·유체·재료 시뮬레이션 |
+
+
+
 (1) 다항 회귀 (Polynomial Regression)
  $y = β_0 + β_1X + β_2X^2 +⋯+ β_nX^n + ϵ$
 
