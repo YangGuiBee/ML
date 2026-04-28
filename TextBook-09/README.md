@@ -1774,10 +1774,11 @@ $y = w_1x_1 + w_2x_2^2 + ... + w_nx_n^n + w_0$ <br>
 
 
 ### [4-1] 단변량 다항 회귀
-▣ 가이드 : Linear Models (선형 회귀 전반 가이드) https://scikit-learn.org/stable/modules/linear_model.html<br>
-Polynomial feature 확장 (Feature engineering) https://scikit-learn.org/stable/modules/preprocessing.html#polynomial-features<br>
-▣ API : PolynomialFeatures : https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html<br>
-LinearRegression : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html<br>
+▣ 가이드 : (Linear) https://scikit-learn.org/stable/modules/linear_model.html<br>
+(Polynomial) https://scikit-learn.org/stable/modules/preprocessing.html#polynomial-features<br>
+▣ API : (Linear) https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html<br>
+(Polynomial) https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html<br>
+
 ▣ 예제 : Polynomial Regression (Linear Models 예제 모음) https://scikit-learn.org/stable/auto_examples/linear_model/index.html<br>
 
 	from sklearn.preprocessing import PolynomialFeatures
@@ -1795,11 +1796,11 @@ LinearRegression : https://scikit-learn.org/stable/modules/generated/sklearn.lin
 
 	
 ### [4-2] 다변량 다항 회귀
-▣ 가이드 : Linear Models : https://scikit-learn.org/stable/modules/linear_model.html<br>
-Polynomial and interaction features : https://scikit-learn.org/stable/modules/preprocessing.html#polynomial-features<br>
-▣ API : PolynomialFeatures : https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html<br>
-LinearRegression : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html<br>
-▣ 예제 : Linear regression with polynomial and interaction features : https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html<br>
+▣ 가이드 : (Linear) : https://scikit-learn.org/stable/modules/linear_model.html<br>
+(Polynomial) features : https://scikit-learn.org/stable/modules/preprocessing.html#polynomial-features<br>
+▣ API : (Linear) https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html<br>
+(Polynomial) : https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html<br>
 
 	from sklearn.preprocessing import PolynomialFeatures
 	from sklearn.linear_model import LinearRegression
@@ -1817,10 +1818,10 @@ LinearRegression : https://scikit-learn.org/stable/modules/generated/sklearn.lin
 
 
 ### [4-3] 직교 다항 회귀
-▣ 가이드 :  Linear Regression (OLS 기반 설명) https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares<br>
-Multicollinearity 관련 설명 : https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification<br>
-▣ API : LinearRegression : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html<br>
-▣ 예제 : Linear regression examples (기저 변환 후 적용 개념 설명용) https://scikit-learn.org/stable/auto_examples/linear_model/index.html<br>
+▣ 가이드 :  https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares<br>
+(Multicollinearity) : https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/linear_model/index.html<br>
 
 	from sklearn.preprocessing import PolynomialFeatures
 	from sklearn.linear_model import LinearRegression
@@ -1838,9 +1839,9 @@ Multicollinearity 관련 설명 : https://scikit-learn.org/stable/modules/linear
 
 
 ### [4-4] 부분 최소제곱 다항 회귀
-▣ 가이드 : Partial Least Squares : https://scikit-learn.org/stable/modules/cross_decomposition.html#cross-decomposition<br>
-▣ API : PLSRegression : https://scikit-learn.org/stable/modules/generated/sklearn.cross_decomposition.PLSRegression.html<br>
-▣ 예제 : PLS regression example : https://scikit-learn.org/stable/auto_examples/cross_decomposition/plot_pls.html<br>
+▣ 가이드 : https://scikit-learn.org/stable/modules/cross_decomposition.html#cross-decomposition<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.cross_decomposition.PLSRegression.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/cross_decomposition/plot_pls.html<br>
 
 	from sklearn.cross_decomposition import PLSRegression
 	from sklearn.metrics import r2_score
@@ -1854,9 +1855,9 @@ Multicollinearity 관련 설명 : https://scikit-learn.org/stable/modules/linear
 
 
 ### [4-5] 커널 다항 회귀
-▣ 가이드 : Kernel Ridge Regression : https://scikit-learn.org/stable/modules/kernel_ridge.html<br>
-▣ API : KernelRidge : https://scikit-learn.org/stable/modules/generated/sklearn.kernel_ridge.KernelRidge.html<br>
-▣ 예제 : Kernel ridge regression example : https://scikit-learn.org/stable/auto_examples/kernel_ridge/plot_kernel_ridge_regression.html<br>
+▣ 가이드 : https://scikit-learn.org/stable/modules/kernel_ridge.html<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.kernel_ridge.KernelRidge.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/kernel_ridge/plot_kernel_ridge_regression.html<br>
 
 	from sklearn.kernel_ridge import KernelRidge
 	from sklearn.metrics import r2_score
@@ -1867,8 +1868,6 @@ Multicollinearity 관련 설명 : https://scikit-learn.org/stable/modules/linear
 	y_pred = model.predict(X)
 	print(r2_score(y, y_pred))
 
-
- 
 ---
 
 # [5] 정규화 (Regularization) : 벌점부여 (Penalized) 선형 회귀
@@ -2114,11 +2113,11 @@ L1-norm 패널티항으로 회귀모델에 패널티를 부과함으로써 회�
 |**[5-1] 릿지 회귀**|Ridge<br>r2_score|https://scikit-learn.org/stable/datasets/real_world.html#california-housing-dataset|
 |**[5-2] 라쏘 회귀**|Lasso<br>r2_score|https://scikit-learn.org/stable/datasets/real_world.html#diabetes-dataset|
 |**[5-3] 엘라스틱넷 회귀**|ElasticNet<br>r2_score|https://scikit-learn.org/stable/datasets/real_world.html#california-housing-dataset|
-|**[5-4] 그룹 라쏘 회귀**|Group Lasso(외부 구현)<br>r2_score|https://www.kaggle.com/datasets/crawford/20-newsgroups|
-|**[5-5] 희소 그룹 라쏘 회귀**|Sparse Group Lasso(외부 구현)<br>r2_score|https://www.kaggle.com/datasets/crawford/20-newsgroups|
+|**[5-4] 그룹 라쏘 회귀**|외부 구현<br>r2_score|https://www.kaggle.com/datasets/crawford/20-newsgroups|
+|**[5-5] 희소 그룹 라쏘 회귀**|외부 구현<br>r2_score|https://www.kaggle.com/datasets/crawford/20-newsgroups|
 |**[5-6] 적응적 라쏘 회귀**|Lasso(가중치 적용)<br>r2_score|https://scikit-learn.org/stable/datasets/real_world.html#diabetes-dataset|
-|**[5-7] SCAD 벌점 회귀**|SCAD(이론/외부 구현)<br>r2_score|https://archive.ics.uci.edu/ml/datasets/Communities+and+Crime|
-|**[5-8] MCP 벌점 회귀**|MCP(이론/외부 구현)<br>r2_score|https://archive.ics.uci.edu/ml/datasets/YearPredictionMSD|
+|**[5-7] SCAD 벌점 회귀**|외부 구현<br>r2_score|https://archive.ics.uci.edu/ml/datasets/Communities+and+Crime|
+|**[5-8] MCP 벌점 회귀**|외부 구현<br>r2_score|https://archive.ics.uci.edu/ml/datasets/YearPredictionMSD|
 
 
 ### [5-1] 릿지 회귀 (Ridge Regression, L2)
