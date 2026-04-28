@@ -2296,18 +2296,18 @@ $$
 
 |모델명|sk-learn 사용 예제 소스|최적의 훈련 데이터셋|
 |---|---|---|
-|[6-1] 비선형 최소제곱 회귀|scipy.optimize.curve_fit, r2_score|https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset|
-|[6-2] 스플라인 기반 회귀|SplineTransformer, LinearRegression, r2_score|https://scikit-learn.org/stable/datasets/real_world.html#california-housing-dataset|
-|[6-3] 커널 기반 회귀|KernelRidge, r2_score|https://scikit-learn.org/stable/datasets/real_world.html#diabetes-dataset|
-|[6-4] 고차 다항 회귀|PolynomialFeatures, LinearRegression, r2_score|https://scikit-learn.org/stable/datasets/real_world.html#california-housing-dataset|
-|[6-5] 베이즈 비선형 회귀|BayesianRidge, r2_score|https://scikit-learn.org/stable/datasets/real_world.html#diabetes-dataset|
-|[6-6] 신경망 기반 회귀|MLPRegressor, r2_score|https://scikit-learn.org/stable/datasets/real_world.html#california-housing-dataset|
-|[6-7] 강건 비선형 회귀|HuberRegressor, r2_score|https://scikit-learn.org/stable/datasets/real_world.html#diabetes-dataset|
-|[6-8] 혼합 비선형 회귀|GaussianMixture + LinearRegression, r2_score|https://scikit-learn.org/stable/datasets/real_world.html#diabetes-dataset|
-|[6-9] 위치–규모–형상 회귀|※ sklearn 미지원 (GAMLSS), r2_score|https://www.kaggle.com/datasets/camnugent/insurance|
-|[6-10] 함수형 데이터 회귀|PCA + LinearRegression, r2_score|https://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones|
-|[6-11] 딥 가우시안 프로세스 회귀|※ sklearn 미지원 (GPyTorch), r2_score|https://archive.ics.uci.edu/ml/datasets/YearPredictionMSD|
-|[6-12] 물리정보 기반 회귀|※ sklearn 미지원 (PINN), r2_score|https://www.kaggle.com/datasets/paultimothymooney/partial-differential-equations|
+|**[6-1] 비선형 최소제곱 회귀**|scipy.optimize.curve_fit<br>r2_score|https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset|
+|**[6-2] 스플라인 기반 회귀**|SplineTransformer<br>LinearRegression<br>r2_score|https://scikit-learn.org/stable/datasets/real_world.html#california-housing-dataset|
+|**[6-3] 커널 기반 회귀**|KernelRidge<br>r2_score|https://scikit-learn.org/stable/datasets/real_world.html#diabetes-dataset|
+|**[6-4] 고차 다항 회귀**|PolynomialFeatures<br>LinearRegression, r2_score|https://scikit-learn.org/stable/datasets/real_world.html#california-housing-dataset|
+|**[6-5] 베이즈 비선형 회귀**|BayesianRidge<br>r2_score|https://scikit-learn.org/stable/datasets/real_world.html#diabetes-dataset|
+|**[6-6] 신경망 기반 회귀**|MLPRegressor<br>r2_score|https://scikit-learn.org/stable/datasets/real_world.html#california-housing-dataset|
+|**[6-7] 강건 비선형 회귀**|HuberRegressor<br>r2_score|https://scikit-learn.org/stable/datasets/real_world.html#diabetes-dataset|
+|**[6-8] 혼합 비선형 회귀**|GaussianMixture +<br>LinearRegression<br>r2_score|https://scikit-learn.org/stable/datasets/real_world.html#diabetes-dataset|
+|**[6-9] 위치–규모–형상 회귀**|sklearn 미지원(GAMLSS)<br>r2_score|https://www.kaggle.com/datasets/camnugent/insurance|
+|**[6-10] 함수형 데이터 회귀**|PCA +<br>LinearRegression<br>r2_score|https://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones|
+|**[6-11] 딥 가우시안 프로세스 회귀**|sklearn 미지원(GPyTorch)<br>r2_score|https://archive.ics.uci.edu/ml/datasets/YearPredictionMSD|
+|**[6-12] 물리정보 기반 회귀**|sklearn 미지원(PINN)<br>r2_score|https://www.kaggle.com/datasets/paultimothymooney/partial-differential-equations|
 
 <!--
 
