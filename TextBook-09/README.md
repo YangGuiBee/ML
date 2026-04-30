@@ -231,7 +231,6 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 
 **(선형회귀모델과 경사하강법 비교 예제)**
 
-
 	import numpy as np
 	import matplotlib.pyplot as plt
 	from sklearn.linear_model import LinearRegression, SGDRegressor
