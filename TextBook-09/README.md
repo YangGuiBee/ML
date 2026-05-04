@@ -11,7 +11,7 @@
 
 <br>
 
-<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-09/images/ML09-4.jpg'> 
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-09/images/ML09-4f.jpg'> 
 
 <br>
 
@@ -39,7 +39,7 @@
 
 <br>
 
-<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-09/images/ML09-5.jpg'> 
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-09/images/ML09-5f.jpg'> 
 
 <br>
 
