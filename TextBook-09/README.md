@@ -263,6 +263,24 @@ OLS는 회귀분석의 기본이며, MSE 기반 비용함수의 최소화와 동
 ![](./images/lrs.png)
 
 
+**경사하강법(Gradient Decent)** : 비용함수 f의 값이 줄어드는 방향으로 함수의 계수(기울기, 절편)를 일정 크기(학습량)만큼 더해나가며 f의 최소값을 찾는 최적화 기법<br>
+모델의 오차(error)=손실(loss)를 줄이기 위해 기울기(slope)=가중치(weight)와 절편(bias, baseline)을 반복적으로 조정하는 최적화(optimization) 방법<br>
+
+<!--
+기울기 $Gradient(f)=∇f(x)=[ ∂f(x_0)/∂x_0, ∂f(x_1)/∂x_1,...,∂f(x_{N−1}/∂x_{N−1}]^T$
+​미분 가능한 N개의 다변수 함수 f를 각 축에 대하여 편미분한 값으로, 스칼라 함수의 모든 축에 대응하는 벡터장을 생성하는 역할을 한다.
+-->
+
+![](./images/gradient_descent.gif)                    ![](./images/gd.png)
+<br>
+오류가 작아지는 방향으로 w값을 보정할 수 있는 해법을 구하는 방법<br>
+(1) $W_1$, $W_0$을 임의의 값으로 설정하고 첫 비용함수의 값을 계산한다.<br>
+(2) $W_1$, $W_0$의 값을 주어진 횟수만큼 계속 업데이트한다.<br>
+$x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_i)$<br>
+
+![](./images/w1.svg) , ![](./images/w0.svg)
+
+
 **(선형회귀모델과 경사하강법 비교 예제)**
 
 	import numpy as np
@@ -332,24 +350,6 @@ OLS는 회귀분석의 기본이며, MSE 기반 비용함수의 최소화와 동
 ![](./images/LR_SGD.png)
 
 <br>
-
-**경사하강법(Gradient Decent)** : 비용함수 f의 값이 줄어드는 방향으로 함수의 계수(기울기, 절편)를 일정 크기(학습량)만큼 더해나가며 f의 최소값을 찾는 최적화 기법<br>
-모델의 오차(error)=손실(loss)를 줄이기 위해 기울기(slope)=가중치(weight)와 절편(bias, baseline)을 반복적으로 조정하는 최적화(optimization) 방법<br>
-
-<!--
-기울기 $Gradient(f)=∇f(x)=[ ∂f(x_0)/∂x_0, ∂f(x_1)/∂x_1,...,∂f(x_{N−1}/∂x_{N−1}]^T$
-​미분 가능한 N개의 다변수 함수 f를 각 축에 대하여 편미분한 값으로, 스칼라 함수의 모든 축에 대응하는 벡터장을 생성하는 역할을 한다.
--->
-
-![](./images/gradient_descent.gif)                    ![](./images/gd.png)
-<br>
-오류가 작아지는 방향으로 w값을 보정할 수 있는 해법을 구하는 방법<br>
-(1) $W_1$, $W_0$을 임의의 값으로 설정하고 첫 비용함수의 값을 계산한다.<br>
-(2) $W_1$, $W_0$의 값을 주어진 횟수만큼 계속 업데이트한다.<br>
-$x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_i)$<br>
-
-![](./images/w1.svg) , ![](./images/w0.svg)
-
 
 ### 경사하강법(Gradient Descent) : 머신러닝과 딥러닝의 핵심 학습 원리이자, 함수의 최소값을 찾는 최적화 알고리즘(Optimization Algorithm)
 
