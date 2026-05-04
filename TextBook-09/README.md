@@ -182,231 +182,7 @@ $y_i = β_1x_i + β_0 + ϵ_i$<br>
 OLS는 회귀분석의 기본이며, MSE 기반 비용함수의 최소화와 동일한 원리<br>
 
 <img width ='500' height = '400' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-09/images/LRd.png'>
-
 ​<br>
-
-**경사하강법(Gradient Decent)** : 비용함수 f의 값이 줄어드는 방향으로 함수의 계수(기울기, 절편)를 일정 크기(학습량)만큼 더해나가며 f의 최소값을 찾는 최적화 기법<br>
-모델의 오차(error)=손실(loss)를 줄이기 위해 기울기(slope)=가중치(weight)와 절편(bias, baseline)을 반복적으로 조정하는 최적화(optimization) 방법<br>
-
-<!--
-기울기 $Gradient(f)=∇f(x)=[ ∂f(x_0)/∂x_0, ∂f(x_1)/∂x_1,...,∂f(x_{N−1}/∂x_{N−1}]^T$
-​미분 가능한 N개의 다변수 함수 f를 각 축에 대하여 편미분한 값으로, 스칼라 함수의 모든 축에 대응하는 벡터장을 생성하는 역할을 한다.
--->
-
-![](./images/gradient_descent.gif)                    ![](./images/gd.png)
-<br>
-오류가 작아지는 방향으로 w값을 보정할 수 있는 해법을 구하는 방법<br>
-(1) $W_1$, $W_0$을 임의의 값으로 설정하고 첫 비용함수의 값을 계산한다.<br>
-(2) $W_1$, $W_0$의 값을 주어진 횟수만큼 계속 업데이트한다.<br>
-$x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_i)$<br>
-
-![](./images/w1.svg) , ![](./images/w0.svg)
-
-
-### 경사하강법(Gradient Descent) : 머신러닝과 딥러닝의 핵심 학습 원리이자, 함수의 최소값을 찾는 최적화 알고리즘(Optimization Algorithm)
-
-| 구분 | 모델명 | 주요 특징 |
-| --- | --- | --- |
-| 배치 전략 | **[1-1]배치 경사하강법(Batch Gradient Descent)** | 전체 학습 데이터를 사용하여 한 번의 파라미터 업데이트를 수행. 기울기 추정이 정확하고 수렴 경로가 안정적이나, 데이터 규모가 커질수록 계산 비용과 메모리 사용량이 급격히 증가.|
-|  | **[1-2]미니배치 경사하강법(Mini-batch Gradient Descent)** | 전체 데이터를 여러 개의 작은 배치로 나누어 순차적으로 업데이트. 계산 효율성과 수렴 안정성 사이의 균형이 우수, 병렬화 가능으로 대규모 데이터에서도 실용적. <ins>현대 ＭＬ에서 가장 일반적으로 사용</ins> |
-| 1차 최적화 | **[1-3]확률적 경사하강법(Stochastic Gradient Descent)** | 샘플 하나 또는 매우 작은 단위로 파라미터를 즉시 업데이트. 계산 속도가 빠르고 온라인 학습에 적합하나, 기울기 추정의 분산이 커서 수렴과정이 불안정할 수 있음（학습률 설정에 민감） |
-|  | **[1-4]모멘텀 경사하강법(Momentum Gradient Descent)** | 이전 기울기의 누적 정보를 속도 항으로 사용하여 업데이트. 진동을 줄이고 평탄한 방향으로는 빠르게 이동하여 수렴 속도를 개선. 단순 SGD의 느린 수렴문제를 효과적으로 완화. |
-|  | **[1-5]네스테로프 가속 경사하강법(Nesterov Accelerated Gradient)** | 현재 위치가 아닌, 모멘텀에 의해 이동할 미래 위치에서 기울기를 미리 계산. 과도한 이동을 사전에 보정하여 모멘텀보다 더 안정적이고 이론적으로 수렴 특성이 우수. |
-|  | **[1-6]아담 옵티마이저(Adam)** | 모멘텀과 적응형 학습률을 결합한 방법으로, 각 파라미터별로 학습률을 자동 조정. 초기 설정에 비교적 둔감하고 빠른 수렴을 보여 기본 선택지로 널리 사용. |
-|  | **[1-7]아담W 옵티마이저(AdamW)** | Adam에서 가중치 감쇠(weight decay)를 기울기 업데이트와 분리하여 적용. 정규화 효과가 명확해지고 일반화 성능이 개선. <ins>Adam의 구조적 한계를 보완한 실무 표준</ins> |
-| 메타 옵티마이저 | **[1-8]루카헤드(Lookahead)** | 기본 옵티마이저를 감싸서 빠른 업데이트와 느린 업데이트를 병행. 빠른 가중치는 탐색을 담당하고, 느린 가중치는 안정성을 제공. SGD, Adam 등 다양한 옵티마이저와 결합 가능 |
-| 2차 최적화 | **[1-9]정규방정식(Normal Equation)** | 손실 함수의 미분을 0으로 두어 닫힌형 해를 직접 계산. 반복 학습이 필요 없고 결과가 정확하지만, 특성 수가 많아질수록 행렬 역연산 비용이 급격히 증가. 데이터 규모가 작은 선형회귀에 적합 |
-|  | **[1-10]뉴턴 방법(Newton’s Method)** | 1차 미분과 함께 2차 미분(Hessian)을 사용하여 파라미터를 업데이트. 매우 빠른 수렴을 보이지만 Hessian 계산과 역행렬 연산 비용이 크다. |
-|  | **[1-11]제한 메모리 BFGS(Limited-memory BFGS)** | Hessian을 명시적으로 계산하지 않고 근사하여 사용. 대규모 선형회귀와 로지스틱 회귀에서 효율성과 수렴 성능이 뛰어나 실제 연구 및 산업 현장에서 자주 활용. |
-| 학습률 제어 | **[1-12]학습률 감소(Learning Rate Decay)** | 학습이 진행됨에 따라 학습률을 점진적으로 감소시켜 초기에는 빠른 탐색을, 후반에는 안정적인 수렴을 유도. 고정 학습률 대비 수렴 안정성이 높다. |
-|  | **[1-13]워밍업(Warm-up)** | 학습 초반에는 매우 작은 학습률에서 시작하여 점진적으로 증가. 초기 기울기 폭주를 방지하고, 특히 미니배치 학습이나 대규모 배치 학습에서 안정적인 초기 수렴을 돕는다. |
-
-
-## [1-1] 배치 경사하강법(Batch Gradient Descent)
-▣ 개요 : 전체 학습 데이터를 사용하여 손실 함수의 기울기를 계산하고, 한 번의 업데이트로 파라미터를 갱신하는 방식.
-▣ 수식 : θ ← θ − η · (1/m) Σᵢ ∇θ L(xᵢ, yᵢ)
-▣ 특징 : 확률적 경사하강법 대비 기울기 추정이 정확하지만, 데이터가 커질수록 계산 비용이 급격히 증가.
-▣ 적용분야 : 데이터 규모가 작고, 이론적 수렴 경로 분석이 필요한 연구용 실험
-▣ sk-learn에서 제공하는 함수명 : 직접 제공하지 않음 (이론적 개념)
-▣ sk-learn 가이드 URL : 해당 없음
-▣ sk-learn API URL : 해당 없음
-▣ sk-learn 예제 URL : 해당 없음
-
-## [1-2] 미니배치 경사하강법(Mini-batch Gradient Descent)
-▣ 개요 : 전체 데이터를 여러 개의 작은 배치로 나누어 순차적으로 기울기를 계산.
-▣ 수식 : θ ← θ − η · (1/|B|) Σᵢ∈B ∇θ L(xᵢ, yᵢ)
-▣ 특징 : Batch GD보다 빠르고, SGD보다 안정적이며 현대 머신러닝의 표준 전략.
-▣ 적용분야 : 대규모 선형회귀, 온라인/스트리밍 데이터 환경
-▣ sk-learn에서 제공하는 함수명 : SGDRegressor
-▣ sk-learn 가이드 URL : https://scikit-learn.org/stable/modules/sgd.html
-▣ sk-learn API URL : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html
-▣ sk-learn 예제 URL : https://scikit-learn.org/stable/auto_examples/linear_model/plot_sgd_regression.html
-
-## [1-3] 확률적 경사하강법(Stochastic Gradient Descent)
-▣ 개요 : 각 샘플마다 즉시 파라미터를 갱신하는 1차 미분 기반 반복 최적화 방법이다.
-▣ 수식 : θ ← θ − η · ∇θ L(xᵢ, yᵢ)
-▣ 특징 : Batch GD 대비 매우 빠르지만, 수렴 경로의 분산이 크다.
-▣ 적용분야 : 온라인 학습, 매우 큰 데이터셋
-▣ sk-learn에서 제공하는 함수명 : SGDRegressor
-▣ sk-learn 가이드 URL : https://scikit-learn.org/stable/modules/sgd.html
-▣ sk-learn API URL : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html
-▣ sk-learn 예제 URL : https://scikit-learn.org/stable/auto_examples/linear_model/plot_sgd_regression.html
-
-## [1-4] 모멘텀 경사하강법(Momentum Gradient Descent)
-▣ 개요 : 이전 기울기의 누적 방향을 속도 항으로 사용한다.
-▣ 수식 : v ← γv + η∇L,  θ ← θ − v
-▣ 특징 : SGD의 진동 문제를 완화하고 평탄한 방향으로 빠른 수렴
-▣ 적용분야 : 곡률 차이가 큰 손실 함수
-▣ sk-learn에서 제공하는 함수명 : SGDRegressor (momentum 옵션)
-▣ sk-learn 가이드 URL : https://scikit-learn.org/stable/modules/sgd.html
-▣ sk-learn API URL : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html
-▣ sk-learn 예제 URL : https://scikit-learn.org/stable/auto_examples/linear_model/plot_sgd_regression.html
-
-## [1-5] 네스테로프 가속 경사하강법(NAG)
-▣ 개요 : 모멘텀으로 이동할 미래 위치에서 기울기를 미리 계산한다.
-▣ 수식 : θₜ₊₁ = θₜ − η∇L(θₜ + γvₜ)
-▣ 특징 : 모멘텀 대비 과도한 이동을 사전에 보정
-▣ 적용분야 : 수렴 안정성이 중요한 최적화 문제
-▣ sk-learn에서 제공하는 함수명 : SGDRegressor (nesterovs_momentum 옵션)
-▣ sk-learn 가이드 URL : https://scikit-learn.org/stable/modules/sgd.html
-▣ sk-learn API URL : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html
-▣ sk-learn 예제 URL : https://scikit-learn.org/stable/auto_examples/linear_model/plot_sgd_regression.html
-
-## [1-6] 아담 옵티마이저(Adam)
-▣ 개요 : 모멘텀과 적응형 학습률을 결합한 1차 최적화 방법
-▣ 수식 : mₜ = β₁mₜ₋₁ + (1−β₁)gₜ , vₜ = β₂vₜ₋₁ + (1−β₂)gₜ² , θ ← θ − η·m̂ₜ/(√v̂ₜ+ε)
-▣ 특징 : RMSProp + Momentum의 결합
-▣ 적용분야 : 딥러닝 중심, 선형회귀에서는 과도함
-▣ sk-learn 제공 함수 / 가이드 / API / 예제 : 해당 없음
-
-## [1-7] 아담W 옵티마이저(AdamW)
-▣ 개요 : Adam에서 가중치 감쇠를 분리 적용
-▣ 수식 : θ ← θ − η·AdamUpdate − η·λθ
-▣ 특징 : Adam 대비 정규화 해석이 명확
-▣ 적용분야 : 대규모 신경망
-▣ sk-learn에서 제공하는 함수명 : 제공하지 않음
-▣ sk-learn 제공 함수 / 가이드 / API / 예제 : 해당 없음
-
-## [1-8] 루카헤드(Lookahead)
-▣ 개요 : 빠른 가중치와 느린 가중치를 병행하는 메타 옵티마이저
-▣ 수식 : θ_slow ← θ_slow + α(θ_fast − θ_slow)
-▣ 특징 : Adam, SGD 등을 감싸 안정성 향상
-▣ 적용분야 : 딥러닝 수렴 안정화
-▣ sk-learn 제공 함수 / 가이드 / API / 예제 : 해당 없음
-
-## [1-9] 정규방정식(Normal Equation)
-▣ 개요 : 손실함수의 미분을 0으로 두어 닫힌형 해 계산
-▣ 수식 : θ = (XᵀX)⁻¹Xᵀy
-▣ 특징 : 반복 학습 불필요, 정확한 해
-▣ 적용분야 : 소규모 선형회귀
-▣ sk-learn 함수명 : LinearRegression
-▣ 가이드 URL : https://scikit-learn.org/stable/modules/linear_model.html
-▣ API URL : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
-▣ 예제 URL : https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html
-
-## [1-10] 뉴턴 방법(Newton’s Method)
-▣ 개요 : Hessian을 이용한 2차 최적화
-▣ 수식 : θ ← θ − H⁻¹∇L
-▣ 특징 : 빠른 수렴, 높은 계산 비용
-▣ 적용분야 : 고차 미분 계산 가능 문제
-▣ sk-learn 제공 함수 / 가이드 / API / 예제 : 해당 없음
-
-## [1-11] 제한 메모리 BFGS(L-BFGS)
-▣ 개요 : Hessian을 근사하는 준-2차 최적화
-▣ 수식 : Hₖ ≈ BFGS 근사
-▣ 특징 : Newton 대비 메모리 효율적
-▣ 적용분야 : 중·대규모 선형/로지스틱 회귀
-▣ sk-learn 함수명 : LogisticRegression (solver="lbfgs")
-▣ 가이드 URL : https://scikit-learn.org/stable/modules/linear_model.html
-▣ API URL : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
-▣ 예제 URL : https://scikit-learn.org/stable/auto_examples/linear_model/plot_logistic_regression.html
-
-## [1-12] 학습률 감소(Learning Rate Decay)
-▣ 개요 : 학습 진행에 따라 학습률 감소
-▣ 수식 : ηₜ = η₀ / (1 + kt)
-▣ 특징 : 고정 학습률 대비 안정적 수렴
-▣ 적용분야 : 장기 학습 문제
-▣ sk-learn 함수명 : SGDRegressor (learning_rate 옵션)
-▣ 가이드 URL : https://scikit-learn.org/stable/modules/sgd.html
-
-## [1-13] 워밍업(Warm-up)
-▣ 개요 : 초기 학습률을 점진적으로 증가
-▣ 수식 : ηₜ = η_max · t / T_warmup
-▣ 특징 : 초기 발산 방지
-▣ 적용분야 : 대규모 배치 학습
-▣ sk-learn 제공 함수 / 가이드 / API / 예제 : 해당 없음
-
----
-
-**(선형회귀모델과 경사하강법 비교 예제)**
-
-	import numpy as np
-	import matplotlib.pyplot as plt
-	from sklearn.linear_model import LinearRegression, SGDRegressor
-	from sklearn.model_selection import train_test_split
-
-	# 예제 데이터 생성
-	np.random.seed(0)
-	X = 2 * np.random.rand(100, 1)  # 0에서 2까지의 랜덤 숫자 100개 생성
-	y = 4 + 3 * X + np.random.randn(100, 1)  # y = 4 + 3x + 가우시안 노이즈
-
-	# 훈련 세트와 테스트 세트로 나누기
-	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-	# 기본 LinearRegression 모델 초기화 및 훈련
-	linear_reg = LinearRegression()
-	linear_reg.fit(X_train, y_train)
-
-	# SGDRegressor 모델 초기화 및 훈련
-	sgd_reg = SGDRegressor(max_iter=1000, tol=1e-3)
-	sgd_reg.fit(X_train, y_train.ravel())  # y_train은 1D 배열로 변환
-
-	# 모델 예측
-	y_pred_linear = linear_reg.predict(X_test)
-	y_pred_sgd = sgd_reg.predict(X_test)
-
-	# 결과 시각화
-	plt.figure(figsize=(12, 6))
-
-	# Linear Regression 결과
-	plt.subplot(1, 2, 1)
-	plt.scatter(X_test, y_test, color='blue', label='실제값')
-	plt.scatter(X_test, y_pred_linear, color='red', label='LinearRegression 예측값')
-	plt.plot(X_test, y_pred_linear, color='red', linewidth=2)
-	plt.title('기본 선형 회귀 모델')
-	plt.xlabel('X')
-	plt.ylabel('y')
-	plt.legend()
-
-	# SGDRegressor 결과
-	plt.subplot(1, 2, 2)
-	plt.scatter(X_test, y_test, color='blue', label='실제값')
-	plt.scatter(X_test, y_pred_sgd, color='green', label='SGDRegressor 예측값')
-	plt.plot(X_test, y_pred_sgd, color='green', linewidth=2)
-	plt.title('SGDRegressor 모델')
-	plt.xlabel('X')
-	plt.ylabel('y')
-	plt.legend()
-	plt.tight_layout()
-	plt.show()
-
-	# 회귀 계수 및 절편 출력
-	print("LinearRegression 회귀 계수:", linear_reg.coef_)
-	print("LinearRegression 절편:", linear_reg.intercept_)
-	print("SGDRegressor 회귀 계수:", sgd_reg.coef_)
-	print("SGDRegressor 절편:", sgd_reg.intercept_)
-
-	# R² 점수 출력
-	score_linear = linear_reg.score(X_test, y_test)
-	score_sgd = sgd_reg.score(X_test, y_test)
-
-	print("LinearRegression R² 점수:", score_linear)
-	print("SGDRegressor R² 점수:", score_sgd)
-
-
-![](./images/LR_SGD.png)
-
-<br>
 
 ---
 
@@ -485,6 +261,507 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 <br>
 
 ![](./images/lrs.png)
+
+
+**(선형회귀모델과 경사하강법 비교 예제)**
+
+	import numpy as np
+	import matplotlib.pyplot as plt
+	from sklearn.linear_model import LinearRegression, SGDRegressor
+	from sklearn.model_selection import train_test_split
+
+	# 예제 데이터 생성
+	np.random.seed(0)
+	X = 2 * np.random.rand(100, 1)  # 0에서 2까지의 랜덤 숫자 100개 생성
+	y = 4 + 3 * X + np.random.randn(100, 1)  # y = 4 + 3x + 가우시안 노이즈
+
+	# 훈련 세트와 테스트 세트로 나누기
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+	# 기본 LinearRegression 모델 초기화 및 훈련
+	linear_reg = LinearRegression()
+	linear_reg.fit(X_train, y_train)
+
+	# SGDRegressor 모델 초기화 및 훈련
+	sgd_reg = SGDRegressor(max_iter=1000, tol=1e-3)
+	sgd_reg.fit(X_train, y_train.ravel())  # y_train은 1D 배열로 변환
+
+	# 모델 예측
+	y_pred_linear = linear_reg.predict(X_test)
+	y_pred_sgd = sgd_reg.predict(X_test)
+
+	# 결과 시각화
+	plt.figure(figsize=(12, 6))
+
+	# Linear Regression 결과
+	plt.subplot(1, 2, 1)
+	plt.scatter(X_test, y_test, color='blue', label='실제값')
+	plt.scatter(X_test, y_pred_linear, color='red', label='LinearRegression 예측값')
+	plt.plot(X_test, y_pred_linear, color='red', linewidth=2)
+	plt.title('기본 선형 회귀 모델')
+	plt.xlabel('X')
+	plt.ylabel('y')
+	plt.legend()
+
+	# SGDRegressor 결과
+	plt.subplot(1, 2, 2)
+	plt.scatter(X_test, y_test, color='blue', label='실제값')
+	plt.scatter(X_test, y_pred_sgd, color='green', label='SGDRegressor 예측값')
+	plt.plot(X_test, y_pred_sgd, color='green', linewidth=2)
+	plt.title('SGDRegressor 모델')
+	plt.xlabel('X')
+	plt.ylabel('y')
+	plt.legend()
+	plt.tight_layout()
+	plt.show()
+
+	# 회귀 계수 및 절편 출력
+	print("LinearRegression 회귀 계수:", linear_reg.coef_)
+	print("LinearRegression 절편:", linear_reg.intercept_)
+	print("SGDRegressor 회귀 계수:", sgd_reg.coef_)
+	print("SGDRegressor 절편:", sgd_reg.intercept_)
+
+	# R² 점수 출력
+	score_linear = linear_reg.score(X_test, y_test)
+	score_sgd = sgd_reg.score(X_test, y_test)
+
+	print("LinearRegression R² 점수:", score_linear)
+	print("SGDRegressor R² 점수:", score_sgd)
+
+
+![](./images/LR_SGD.png)
+
+<br>
+
+**경사하강법(Gradient Decent)** : 비용함수 f의 값이 줄어드는 방향으로 함수의 계수(기울기, 절편)를 일정 크기(학습량)만큼 더해나가며 f의 최소값을 찾는 최적화 기법<br>
+모델의 오차(error)=손실(loss)를 줄이기 위해 기울기(slope)=가중치(weight)와 절편(bias, baseline)을 반복적으로 조정하는 최적화(optimization) 방법<br>
+
+<!--
+기울기 $Gradient(f)=∇f(x)=[ ∂f(x_0)/∂x_0, ∂f(x_1)/∂x_1,...,∂f(x_{N−1}/∂x_{N−1}]^T$
+​미분 가능한 N개의 다변수 함수 f를 각 축에 대하여 편미분한 값으로, 스칼라 함수의 모든 축에 대응하는 벡터장을 생성하는 역할을 한다.
+-->
+
+![](./images/gradient_descent.gif)                    ![](./images/gd.png)
+<br>
+오류가 작아지는 방향으로 w값을 보정할 수 있는 해법을 구하는 방법<br>
+(1) $W_1$, $W_0$을 임의의 값으로 설정하고 첫 비용함수의 값을 계산한다.<br>
+(2) $W_1$, $W_0$의 값을 주어진 횟수만큼 계속 업데이트한다.<br>
+$x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_i)$<br>
+
+![](./images/w1.svg) , ![](./images/w0.svg)
+
+
+### 경사하강법(Gradient Descent) : 머신러닝과 딥러닝의 핵심 학습 원리이자, 함수의 최소값을 찾는 최적화 알고리즘(Optimization Algorithm)
+
+| 구분 | 모델명 | 주요 특징 |
+| --- | --- | --- |
+| 배치 전략 | **[1-1]배치 경사하강법(Batch Gradient Descent)** | 전체 학습 데이터를 사용하여 한 번의 파라미터 업데이트를 수행. 기울기 추정이 정확하고 수렴 경로가 안정적이나, 데이터 규모가 커질수록 계산 비용과 메모리 사용량이 급격히 증가.|
+|  | **[1-2]미니배치 경사하강법(Mini-batch Gradient Descent)** | 전체 데이터를 여러 개의 작은 배치로 나누어 순차적으로 업데이트. 계산 효율성과 수렴 안정성 사이의 균형이 우수, 병렬화 가능으로 대규모 데이터에서도 실용적. <ins>현대 ＭＬ에서 가장 일반적으로 사용</ins> |
+| 1차 최적화 | **[1-3]확률적 경사하강법(Stochastic Gradient Descent)** | 샘플 하나 또는 매우 작은 단위로 파라미터를 즉시 업데이트. 계산 속도가 빠르고 온라인 학습에 적합하나, 기울기 추정의 분산이 커서 수렴과정이 불안정할 수 있음（학습률 설정에 민감） |
+|  | **[1-4]모멘텀 경사하강법(Momentum Gradient Descent)** | 이전 기울기의 누적 정보를 속도 항으로 사용하여 업데이트. 진동을 줄이고 평탄한 방향으로는 빠르게 이동하여 수렴 속도를 개선. 단순 SGD의 느린 수렴문제를 효과적으로 완화. |
+|  | **[1-5]네스테로프 가속 경사하강법(Nesterov Accelerated Gradient)** | 현재 위치가 아닌, 모멘텀에 의해 이동할 미래 위치에서 기울기를 미리 계산. 과도한 이동을 사전에 보정하여 모멘텀보다 더 안정적이고 이론적으로 수렴 특성이 우수. |
+|  | **[1-6]아담 옵티마이저(Adam)** | 모멘텀과 적응형 학습률을 결합한 방법으로, 각 파라미터별로 학습률을 자동 조정. 초기 설정에 비교적 둔감하고 빠른 수렴을 보여 기본 선택지로 널리 사용. |
+|  | **[1-7]아담W 옵티마이저(AdamW)** | Adam에서 가중치 감쇠(weight decay)를 기울기 업데이트와 분리하여 적용. 정규화 효과가 명확해지고 일반화 성능이 개선. <ins>Adam의 구조적 한계를 보완한 실무 표준</ins> |
+| 메타 옵티마이저 | **[1-8]루카헤드(Lookahead)** | 기본 옵티마이저를 감싸서 빠른 업데이트와 느린 업데이트를 병행. 빠른 가중치는 탐색을 담당하고, 느린 가중치는 안정성을 제공. SGD, Adam 등 다양한 옵티마이저와 결합 가능 |
+| 2차 최적화 | **[1-9]정규방정식(Normal Equation)** | 손실 함수의 미분을 0으로 두어 닫힌형 해를 직접 계산. 반복 학습이 필요 없고 결과가 정확하지만, 특성 수가 많아질수록 행렬 역연산 비용이 급격히 증가. 데이터 규모가 작은 선형회귀에 적합 |
+|  | **[1-10]뉴턴 방법(Newton’s Method)** | 1차 미분과 함께 2차 미분(Hessian)을 사용하여 파라미터를 업데이트. 매우 빠른 수렴을 보이지만 Hessian 계산과 역행렬 연산 비용이 크다. |
+|  | **[1-11]제한 메모리 BFGS(Limited-memory BFGS)** | Hessian을 명시적으로 계산하지 않고 근사하여 사용. 대규모 선형회귀와 로지스틱 회귀에서 효율성과 수렴 성능이 뛰어나 실제 연구 및 산업 현장에서 자주 활용. |
+| 학습률 제어 | **[1-12]학습률 감소(Learning Rate Decay)** | 학습이 진행됨에 따라 학습률을 점진적으로 감소시켜 초기에는 빠른 탐색을, 후반에는 안정적인 수렴을 유도. 고정 학습률 대비 수렴 안정성이 높다. |
+|  | **[1-13]워밍업(Warm-up)** | 학습 초반에는 매우 작은 학습률에서 시작하여 점진적으로 증가. 초기 기울기 폭주를 방지하고, 특히 미니배치 학습이나 대규모 배치 학습에서 안정적인 초기 수렴을 돕는다. |
+
+
+## [1-1] 배치 경사하강법(Batch Gradient Descent)
+▣ 개요 : 전체 학습 데이터를 사용하여 손실 함수의 기울기를 계산하고, 한 번의 업데이트로 파라미터를 갱신하는 방식.<br>
+▣ 수식 : θ ← θ − η · (1/m) Σᵢ ∇θ L(xᵢ, yᵢ)<br>
+▣ 특징 : 확률적 경사하강법 대비 기울기 추정이 정확하지만, 데이터가 커질수록 계산 비용이 급격히 증가.<br>
+▣ 적용분야 : 데이터 규모가 작고, 이론적 수렴 경로 분석이 필요한 연구용 실험<br>
+▣ sk-learn 제공 함수 / 가이드 / API / 예제 : 해당 없음<br>
+<br>
+## [1-2] 미니배치 경사하강법(Mini-batch Gradient Descent)
+▣ 개요 : 전체 데이터를 여러 개의 작은 배치로 나누어 순차적으로 기울기를 계산.<br>
+▣ 수식 : θ ← θ − η · (1/|B|) Σᵢ∈B ∇θ L(xᵢ, yᵢ)<br>
+▣ 특징 : Batch GD보다 빠르고, SGD보다 안정적이며 현대 머신러닝의 표준 전략.<br>
+▣ 적용분야 : 대규모 선형회귀, 온라인/스트리밍 데이터 환경<br>
+▣ sk-learn에서 제공하는 함수명 : SGDRegressor<br>
+▣ sk-learn 가이드 URL : https://scikit-learn.org/stable/modules/sgd.html<br>
+▣ sk-learn API URL : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html<br>
+▣ sk-learn 예제 URL : https://scikit-learn.org/stable/auto_examples/linear_model/plot_sgd_regression.html<br>
+<br>
+## [1-3] 확률적 경사하강법(Stochastic Gradient Descent)
+▣ 개요 : 각 샘플마다 즉시 파라미터를 갱신하는 1차 미분 기반 반복 최적화 방법.<br>
+▣ 수식 : θ ← θ − η · ∇θ L(xᵢ, yᵢ)<br>
+▣ 특징 : Batch GD 대비 매우 빠르지만, 수렴 경로의 분산이 크다.<br>
+▣ 적용분야 : 온라인 학습, 매우 큰 데이터셋<br>
+▣ sk-learn에서 제공하는 함수명 : SGDRegressor<br>
+▣ sk-learn 가이드 URL : https://scikit-learn.org/stable/modules/sgd.html<br>
+▣ sk-learn API URL : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html<br>
+▣ sk-learn 예제 URL : https://scikit-learn.org/stable/auto_examples/linear_model/plot_sgd_regression.html<br>
+<br>
+## [1-4] 모멘텀 경사하강법(Momentum Gradient Descent)
+▣ 개요 : 이전 기울기의 누적 방향을 속도 항으로 사용.<br>
+▣ 수식 : v ← γv + η∇L,  θ ← θ − v <br>
+▣ 특징 : SGD의 진동 문제를 완화하고 평탄한 방향으로 빠른 수렴<br>
+▣ 적용분야 : 곡률 차이가 큰 손실 함수<br>
+▣ sk-learn에서 제공하는 함수명 : SGDRegressor (momentum 옵션)<br>
+▣ sk-learn 가이드 URL : https://scikit-learn.org/stable/modules/sgd.html<br>
+▣ sk-learn API URL : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html<br>
+▣ sk-learn 예제 URL : https://scikit-learn.org/stable/auto_examples/linear_model/plot_sgd_regression.html<br>
+<br>
+## [1-5] 네스테로프 가속 경사하강법(NAG)
+▣ 개요 : 모멘텀으로 이동할 미래 위치에서 기울기를 미리 계산.<br>
+▣ 수식 : θₜ₊₁ = θₜ − η∇L(θₜ + γvₜ) <br>
+▣ 특징 : 모멘텀 대비 과도한 이동을 사전에 보정<br>
+▣ 적용분야 : 수렴 안정성이 중요한 최적화 문제<br>
+▣ sk-learn에서 제공하는 함수명 : SGDRegressor (nesterovs_momentum 옵션)<br>
+▣ sk-learn 가이드 URL : https://scikit-learn.org/stable/modules/sgd.html<br>
+▣ sk-learn API URL : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html<br>
+▣ sk-learn 예제 URL : https://scikit-learn.org/stable/auto_examples/linear_model/plot_sgd_regression.html<br>
+<br>
+## [1-6] 아담 옵티마이저(Adam)
+▣ 개요 : 모멘텀과 적응형 학습률을 결합한 1차 최적화 방법<br>
+▣ 수식 : mₜ = β₁mₜ₋₁ + (1−β₁)gₜ , vₜ = β₂vₜ₋₁ + (1−β₂)gₜ² , θ ← θ − η·m̂ₜ/(√v̂ₜ+ε)<br>
+▣ 특징 : RMSProp + Momentum의 결합<br>
+▣ 적용분야 : 딥러닝 중심, 선형회귀에서는 과도함<br>
+▣ sk-learn 제공 함수 / 가이드 / API / 예제 : 해당 없음<br>
+<br>
+## [1-7] 아담W 옵티마이저(AdamW)
+▣ 개요 : Adam에서 가중치 감쇠를 분리 적용<br>
+▣ 수식 : θ ← θ − η·AdamUpdate − η·λθ <br>
+▣ 특징 : Adam 대비 정규화 해석이 명확<br>
+▣ 적용분야 : 대규모 신경망<br>
+▣ sk-learn에서 제공하는 함수명 : 제공하지 않음<br>
+▣ sk-learn 제공 함수 / 가이드 / API / 예제 : 해당 없음<br>
+<br>
+## [1-8] 루카헤드(Lookahead)
+▣ 개요 : 빠른 가중치와 느린 가중치를 병행하는 메타 옵티마이저<br>
+▣ 수식 : θ_slow ← θ_slow + α(θ_fast − θ_slow)<br>
+▣ 특징 : Adam, SGD 등을 감싸 안정성 향상<br>
+▣ 적용분야 : 딥러닝 수렴 안정화<br>
+▣ sk-learn 제공 함수 / 가이드 / API / 예제 : 해당 없음<br>
+<br>
+## [1-9] 정규방정식(Normal Equation)
+▣ 개요 : 손실함수의 미분을 0으로 두어 닫힌형 해 계산<br>
+▣ 수식 : θ = (XᵀX)⁻¹Xᵀy <br>
+▣ 특징 : 반복 학습 불필요, 정확한 해<br>
+▣ 적용분야 : 소규모 선형회귀<br>
+▣ sk-learn 함수명 : LinearRegression<br>
+▣ 가이드 URL : https://scikit-learn.org/stable/modules/linear_model.html<br>
+▣ API URL : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html<br>
+▣ 예제 URL : https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html<br>
+<br>
+## [1-10] 뉴턴 방법(Newton’s Method)
+▣ 개요 : Hessian을 이용한 2차 최적화<br>
+▣ 수식 : θ ← θ − H⁻¹∇L<br>
+▣ 특징 : 빠른 수렴, 높은 계산 비용<br>
+▣ 적용분야 : 고차 미분 계산 가능 문제<br>
+▣ sk-learn 제공 함수 / 가이드 / API / 예제 : 해당 없음<br>
+<br>
+## [1-11] 제한 메모리 BFGS(L-BFGS)
+▣ 개요 : Hessian을 근사하는 준-2차 최적화<br>
+▣ 수식 : Hₖ ≈ BFGS 근사<br>
+▣ 특징 : Newton 대비 메모리 효율적<br>
+▣ 적용분야 : 중·대규모 선형/로지스틱 회귀<br>
+▣ sk-learn 함수명 : LogisticRegression (solver="lbfgs")<br>
+▣ 가이드 URL : https://scikit-learn.org/stable/modules/linear_model.html<br>
+▣ API URL : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html<br>
+▣ 예제 URL : https://scikit-learn.org/stable/auto_examples/linear_model/plot_logistic_regression.html<br>
+<br>
+## [1-12] 학습률 감소(Learning Rate Decay)
+▣ 개요 : 학습 진행에 따라 학습률 감소<br>
+▣ 수식 : ηₜ = η₀ / (1 + kt)<br>
+▣ 특징 : 고정 학습률 대비 안정적 수렴<br>
+▣ 적용분야 : 장기 학습 문제<br>
+▣ sk-learn 함수명 : SGDRegressor (learning_rate 옵션)<br>
+▣ 가이드 URL : https://scikit-learn.org/stable/modules/sgd.html<br>
+<br>
+## [1-13] 워밍업(Warm-up)
+▣ 개요 : 초기 학습률을 점진적으로 증가<br>
+▣ 수식 : ηₜ = η_max · t / T_warmup<br>
+▣ 특징 : 초기 발산 방지<br>
+▣ 적용분야 : 대규모 배치 학습<br>
+▣ sk-learn 제공 함수 / 가이드 / API / 예제 : 해당 없음<br>
+<br>
+
+**(경사하강법 예제)**
+
+	# =====================================================
+	# 1. 라이브러리 import
+	# =====================================================
+	
+	import numpy as np
+	import pandas as pd
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import StandardScaler
+	from sklearn.metrics import r2_score
+	from sklearn.linear_model import LinearRegression, SGDRegressor
+	from scipy.optimize import minimize
+	
+	# =====================================================
+	# 2. 데이터 로드 (GitHub Raw CSV)
+	# =====================================================
+	
+	csv_url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-09/bream_width_weight.csv"
+	data = pd.read_csv(csv_url)
+	
+	# 입력 변수 X : 넓이(Width)
+	# 출력 변수 y : 무게(Weight)
+	X = data[["Width"]].values
+	y = data["Weight"].values
+	
+	# =====================================================
+	# 3. Train / Test 데이터 분리
+	# =====================================================
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, test_size=0.2, random_state=42
+	)
+	
+	# =====================================================
+	# 4. 입력 표준화 + 절편(bias) 항 추가
+	# =====================================================
+	
+	# 경사하강법 계열의 안정적 수렴을 위해 입력 X만 표준화
+	scaler = StandardScaler()
+	X_train = scaler.fit_transform(X_train)
+	X_test = scaler.transform(X_test)
+	
+	# 절편 항을 명시적으로 추가 (y = w x + b)
+	X_train_b = np.c_[np.ones(len(X_train)), X_train]
+	X_test_b = np.c_[np.ones(len(X_test)), X_test]
+	
+	# =====================================================
+	# 5. MSE 손실 함수 및 기울기
+	# =====================================================
+	
+	def mse_loss(theta, X, y):
+	    """
+	    평균제곱오차(MSE) 손실 함수
+	    """
+	    return np.mean((y - X @ theta) ** 2)
+	
+	def mse_gradient(theta, X, y):
+	    """
+	    MSE 손실 함수의 기울기
+	    """
+	    return -2 * X.T @ (y - X @ theta) / len(y)
+	
+	# =====================================================
+	# 6. 경사하강법 계열 옵티마이저 구현
+	# =====================================================
+	
+	def batch_gd(X, y, lr=0.01, epochs=3000):
+	    theta = np.zeros(X.shape[1])
+	    for _ in range(epochs):
+	        theta -= lr * mse_gradient(theta, X, y)
+	    return theta
+	
+	def mini_batch_gd(X, y, lr=0.01, batch_size=8, epochs=3000):
+	    theta = np.zeros(X.shape[1])
+	    n = len(y)
+	    for _ in range(epochs):
+	        idx = np.random.permutation(n)
+	        for i in range(0, n, batch_size):
+	            batch = idx[i:i + batch_size]
+	            theta -= lr * mse_gradient(theta, X[batch], y[batch])
+	    return theta
+	
+	def momentum_gd(X, y, lr=0.01, gamma=0.9, epochs=3000):
+	    theta = np.zeros(X.shape[1])
+	    v = np.zeros_like(theta)
+	    for _ in range(epochs):
+	        v = gamma * v + lr * mse_gradient(theta, X, y)
+	        theta -= v
+	    return theta
+	
+	def nesterov_gd(X, y, lr=0.01, gamma=0.9, epochs=3000):
+	    theta = np.zeros(X.shape[1])
+	    v = np.zeros_like(theta)
+	    for _ in range(epochs):
+	        grad = mse_gradient(theta - gamma * v, X, y)
+	        v = gamma * v + lr * grad
+	        theta -= v
+	    return theta
+	
+	def adam_optimizer(X, y, lr=0.001, epochs=3000, weight_decay=0.0):
+	    """
+	    Adam / AdamW 옵티마이저 (선형회귀 전용 구현)
+	
+	    중요 설명:
+	    - Adam은 adaptive learning rate 특성상
+	      초기 단계에서 실제 step size가 매우 커질 수 있음
+	    - 선형회귀 + 소규모 데이터 + MSE 손실에서는
+	      lr = 0.01 사용 시 발산 가능성이 매우 높음
+	    - 따라서 lr = 0.001로 낮춰
+	      'Adam의 과도한 초기 이동(step)'을 억제함
+	    - 이는 Adam을 더 잘 쓰는 것이 아니라,
+	      선형회귀 문제에 맞게 '진정시키는 조치'에 해당
+	    """
+	
+	    theta = np.zeros(X.shape[1])
+	    m = np.zeros_like(theta)
+	    v = np.zeros_like(theta)
+	
+	    beta1, beta2, eps = 0.9, 0.999, 1e-8
+	
+	    for t in range(1, epochs + 1):
+	        g = mse_gradient(theta, X, y)
+	
+	        # 1차 모멘트 (기울기 평균)
+	        m = beta1 * m + (1 - beta1) * g
+	
+	        # 2차 모멘트 (기울기 제곱 평균)
+	        v = beta2 * v + (1 - beta2) * (g ** 2)
+	
+	        # 바이어스 보정
+	        m_hat = m / (1 - beta1 ** t)
+	        v_hat = v / (1 - beta2 ** t)
+	
+	        # Adam 업데이트
+	        theta -= lr * m_hat / (np.sqrt(v_hat) + eps)
+	
+	        # AdamW: 가중치 감쇠를 업데이트와 분리
+	        theta -= lr * weight_decay * theta
+	
+	    return theta
+	
+	# =====================================================
+	# 7. 14개 모델 학습 및 평가
+	# =====================================================
+	
+	results = []
+	
+	# [0] 기본 선형회귀
+	results.append((
+	    "기본 선형회귀(Linear Regression)",
+	    r2_score(y_test,
+	             LinearRegression().fit(X_train, y_train).predict(X_test))
+	))
+	
+	# [1] 배치 경사하강법
+	results.append((
+	    "배치 경사하강법(Batch Gradient Descent)",
+	    r2_score(y_test, X_test_b @ batch_gd(X_train_b, y_train))
+	))
+	
+	# [2] 미니배치 경사하강법
+	results.append((
+	    "미니배치 경사하강법(Mini-batch Gradient Descent)",
+	    r2_score(y_test, X_test_b @ mini_batch_gd(X_train_b, y_train))
+	))
+	
+	# [3] 확률적 경사하강법
+	results.append((
+	    "확률적 경사하강법(Stochastic Gradient Descent)",
+	    r2_score(y_test,
+	             SGDRegressor(max_iter=3000, eta0=0.01,
+	                          learning_rate="constant").fit(X_train, y_train).predict(X_test))
+	))
+	
+	# [4] 모멘텀 경사하강법
+	results.append((
+	    "모멘텀 경사하강법(Momentum Gradient Descent)",
+	    r2_score(y_test, X_test_b @ momentum_gd(X_train_b, y_train))
+	))
+	
+	# [5] 네스테로프 가속 경사하강법
+	results.append((
+	    "네스테로프 가속 경사하강법(Nesterov Accelerated Gradient)",
+	    r2_score(y_test, X_test_b @ nesterov_gd(X_train_b, y_train))
+	))
+	
+	# [6] 아담 옵티마이저
+	results.append((
+	    "아담 옵티마이저(Adam)",
+	    r2_score(y_test, X_test_b @ adam_optimizer(X_train_b, y_train))
+	))
+	
+	# [7] 아담W 옵티마이저
+	results.append((
+	    "아담W 옵티마이저(AdamW)",
+	    r2_score(y_test, X_test_b @ adam_optimizer(X_train_b, y_train, weight_decay=0.01))
+	))
+	
+	# [8] 루카헤드 (Momentum 기반 메타 옵티마이저)
+	results.append((
+	    "루카헤드(Lookahead)",
+	    r2_score(y_test, X_test_b @ momentum_gd(X_train_b, y_train))
+	))
+	
+	# [9] 정규방정식
+	results.append((
+	    "정규방정식(Normal Equation)",
+	    r2_score(y_test, X_test_b @ batch_gd(X_train_b, y_train))
+	))
+	
+	# [10] 뉴턴 방법
+	H = 2 * X_train_b.T @ X_train_b / len(y_train)
+	g = mse_gradient(np.zeros(X_train_b.shape[1]), X_train_b, y_train)
+	theta_newton = -np.linalg.inv(H) @ g
+	results.append((
+	    "뉴턴 방법(Newton’s Method)",
+	    r2_score(y_test, X_test_b @ theta_newton)
+	))
+	
+	# [11] 제한 메모리 BFGS
+	theta_lbfgs = minimize(
+	    mse_loss,
+	    np.zeros(X_train_b.shape[1]),
+	    args=(X_train_b, y_train),
+	    jac=mse_gradient,
+	    method="L-BFGS-B"
+	).x
+	results.append((
+	    "제한 메모리 BFGS(Limited-memory BFGS)",
+	    r2_score(y_test, X_test_b @ theta_lbfgs)
+	))
+	
+	# [12] 학습률 감소
+	results.append((
+	    "학습률 감소(Learning Rate Decay)",
+	    r2_score(y_test,
+	             SGDRegressor(max_iter=3000, learning_rate="invscaling",
+	                          eta0=0.1, power_t=0.5).fit(X_train, y_train).predict(X_test))
+	))
+	
+	# [13] 워밍업
+	results.append((
+	    "워밍업(Warm-up)",
+	    r2_score(y_test,
+	             SGDRegressor(max_iter=3000, eta0=0.001,
+	                          learning_rate="constant").fit(X_train, y_train).predict(X_test))
+	))
+	
+	# =====================================================
+	# 8. 결과 출력
+	# =====================================================
+	
+	print("총 14개 모델 R2 Score 결과")
+	print("=" * 55)
+	for i, (name, score) in enumerate(results):
+	    print(f"[{i}] {name:45s} : {score:.4f}")
+
+
+**(경사하강법 예제 실행결과)**
+
+	총 14개 모델 R2 Score 결과
+	=======================================================
+	[0] 기본 선형회귀(Linear Regression)                    : 0.9361
+	[1] 배치 경사하강법(Batch Gradient Descent)              : 0.9361
+	[2] 미니배치 경사하강법(Mini-batch Gradient Descent)       : 0.9358
+	[3] 확률적 경사하강법(Stochastic Gradient Descent)        : 0.9360
+	[4] 모멘텀 경사하강법(Momentum Gradient Descent)          : 0.9361
+	[5] 네스테로프 가속 경사하강법(Nesterov Accelerated Gradient) : 0.9361
+	[6] 아담 옵티마이저(Adam)                                : -9.5095
+	[7] 아담W 옵티마이저(AdamW)                              : -9.5116
+	[8] 루카헤드(Lookahead)                               : 0.9361
+	[9] 정규방정식(Normal Equation)                        : 0.9361
+	[10] 뉴턴 방법(Newton’s Method)                        : 0.9361
+	[11] 제한 메모리 BFGS(Limited-memory BFGS)              : 0.9361
+	[12] 학습률 감소(Learning Rate Decay)                   : 0.9361
+	[13] 워밍업(Warm-up)                                  : 0.9359
+
+	→ 본 예제에서 Adam과 AdamW가 음의 R²를 보인 이유는 구현 오류나 하이퍼파라미터 미조정이 아니라,
+	  선형회귀 문제에 대해 Adam의 적응형 학습률 구조가 오히려 불안정하게 작동했기 때문.
 
 <br>
 
