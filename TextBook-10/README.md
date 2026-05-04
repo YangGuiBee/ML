@@ -1,3 +1,25 @@
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-10/images/ML10-1.PNG'> 
+
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-10/images/ML10-2.PNG'> 
+
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-10/images/ML10-3.PNG'> 
+
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-10/images/ML10-4.PNG'> 
+
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-10/images/ML10-5.PNG'> 
+
+<br>
+
+
+
 #  10 : 지도 학습 (Supervised Learning, SL) : 분류 (classification)
 
 
