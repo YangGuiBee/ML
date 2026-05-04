@@ -351,7 +351,7 @@ $x_{i+1} = x_i - \alpha \frac{df}{dx}(x_i)$, $x_{i+1} = x_i - \alpha \nabla f(x_
 
 <br>
 
-### 경사하강법(Gradient Descent) : 머신러닝과 딥러닝의 핵심 학습 원리이자, 함수의 최소값을 찾는 최적화 알고리즘(Optimization Algorithm)
+### 경사하강법(Gradient Descent) : 함수의 최소값을 찾는 최적화 알고리즘(Optimization Algorithm)
 
 | 구분 | 모델명 | 주요 특징 |
 | --- | --- | --- |
