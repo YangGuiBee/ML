@@ -43,7 +43,7 @@
 
 <br>
 
-<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-09/images/ML09-6.jpg'> 
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-09/images/ML09-6f.png'> 
 
 <br>
 
@@ -65,6 +65,22 @@
 ---
 
 	[1] 선형 회귀 (Linear Regression)
+
+		→ 경사하강법 최적화 기법(회귀+분류 모두 적용)
+		[1-1]배치 경사하강법(Batch Gradient Descent)
+		[1-2]미니배치 경사하강법(Mini-batch Gradient Descent)
+		[1-3]확률적 경사하강법(Stochastic Gradient Descent)
+		[1-4]모멘텀 경사하강법(Momentum Gradient Descent)
+		[1-5]네스테로프 가속 경사하강법(Nesterov Accelerated Gradient)
+		[1-6]아담 옵티마이저(Adam)
+		[1-7]아담W 옵티마이저(AdamW)
+		[1-8]루카헤드(Lookahead)
+		[1-9]정규방정식(Normal Equation)
+		[1-10]뉴턴 방법(Newton’s Method)
+		[1-11]제한 메모리 BFGS(Limited-memory BFGS)
+		[1-12]학습률 감소(Learning Rate Decay)
+		[1-13]워밍업(Warm-up)
+
   
   	[2] 일반화 선형 회귀(Generalized Linear Regression, GLM)
 		[2-1] 이항 회귀 (Binomial Regression)
