@@ -1232,9 +1232,9 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 
 
 ## [1-1] 로지스틱 회귀 (Logistic Regression)
-▣ Guide : https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
-▣ Example : https://scikit-learn.org/stable/auto_examples/linear_model/plot_logistic_regression.html
+▣ Guide : https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html<br>
+▣ Example : https://scikit-learn.org/stable/auto_examples/linear_model/plot_logistic_regression.html<br>
 
 	import pandas as pd
 	url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-02/iris.data"
@@ -1269,9 +1269,9 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 
 
 ## [1-2] 베이즈 로지스틱 회귀 (Bayesian Logistic Regression)
-▣ Guide : scikit‑learn 공식 가이드 없음
-▣ API : scikit‑learn에 Bayesian Logistic Regression API 없음
-▣ Example : scikit‑learn 공식 예제 없음
+▣ Guide : scikit‑learn 공식 가이드 없음<br>
+▣ API : scikit‑learn에 Bayesian Logistic Regression API 없음<br>
+▣ Example : scikit‑learn 공식 예제 없음<br>
 
 	# 베이즈 로지스틱 근사(scikit-learn의 BayesianRidge)
 	from sklearn.linear_model import BayesianRidge
@@ -1366,10 +1366,10 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 
 		
 ## [1-3] 프로빗 회귀 (Probit Regression)
-▣ Guide : scikit‑learn 공식 가이드 없음
-▣ API : scikit‑learn에 Bayesian Logistic Regression API 없음
-▣ Example : scikit‑learn 공식 예제 없음
-▣ https://www.statsmodels.org/stable/generated/statsmodels.discrete.discrete_model.Probit.html
+▣ Guide : scikit‑learn 공식 가이드 없음<br>
+▣ API : scikit‑learn에 Bayesian Logistic Regression API 없음<br>
+▣ Example : scikit‑learn 공식 예제 없음<br>
+▣ https://www.statsmodels.org/stable/generated/statsmodels.discrete.discrete_model.Probit.html<br>
 
 	import statsmodels.api as sm
 	from sklearn.model_selection import train_test_split
@@ -1401,9 +1401,9 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 		
 
 ## [1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀 (Multinomial Logistic Regression / Softmax Regression)
-▣ Guide : https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
-▣ Example : https://scikit-learn.org/stable/auto_examples/linear_model/plot_logistic_multinomial.html
+▣ Guide : https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html<br>
+▣ Example : https://scikit-learn.org/stable/auto_examples/linear_model/plot_logistic_multinomial.html<br>
 
 	from sklearn.linear_model import LogisticRegression
 	from sklearn.model_selection import train_test_split
@@ -1463,6 +1463,115 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 |② 반응변수가 범주형(class)이며 계산 효율과 단순성이 중요한가?|특성 간 조건부 독립 가정을 허용할 수 있는 경우|**[2-2] 나이브 베이즈 분류 (Naive Bayes Classification)**|
 |③ 각 클래스의 데이터 분포가 단일 분포로는 설명되지 않는가?|다봉(multimodal) 분포, 군집 구조가 클래스 내부에 존재|**[2-3] 혼합모형 기반 생성 분류 (Gaussian Mixture Model Classification using EM)**|
 
+
+|모델명|sk-learn 사용 예제 소스|최적의 훈련 데이터셋|
+|---|---|---|
+|[2-1] 베이즈 네트워크 분류|GaussianNB / fit / accuracy_score, recall_score|Iris Dataset<br>https://archive.ics.uci.edu/ml/datasets/iris|
+|[2-2] 나이브 베이즈 분류|GaussianNB / fit / accuracy_score, recall_score|Iris Dataset<br>https://archive.ics.uci.edu/ml/datasets/iris|
+|[2-3] 혼합모형 기반 생성 분류(GMM)|GaussianMixture / fit / predict|Iris Dataset<br>https://archive.ics.uci.edu/ml/datasets/iris|
+
+
+## [2-1] 베이즈 네트워크 분류 (Bayesian Network Classification)
+▣ Guide : scikit‑learn 공식 가이드 없음<br>
+▣ API : scikit‑learn에 Bayesian Logistic Regression API 없음<br>
+▣ Example : scikit‑learn 공식 예제 없음<br>
+
+	import pandas as pd
+	url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-02/iris.data"
+	columns = ["sepal_length", "sepal_width", "petal_length", "petal_width", "class"]
+	data = pd.read_csv(url, header=None, names=columns)
+
+	X = data.iloc[:, :-1]
+	y = data["class"]
+	classes = ["Iris-setosa", "Iris-versicolor", "Iris-virginica"]
+
+	from sklearn.naive_bayes import GaussianNB
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score, recall_score
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, random_state=42
+	)
+	
+	model = GaussianNB()
+	model.fit(X_train, y_train)
+	
+	y_pred = model.predict(X_test)
+	
+	acc = accuracy_score(y_test, y_pred)
+	recalls = recall_score(y_test, y_pred, labels=classes, average=None)
+	
+	print("[2-1] Bayesian Network Classification (Simple BN)")
+	print(f"Overall Accuracy: {acc:.3f}")
+	for c, r in zip(classes, recalls):
+	    print(f"{c} Recall: {r:.3f}")
+
+
+## [2-2] 나이브 베이즈 분류 (Naive Bayes Classification)
+▣ Guide : https://scikit-learn.org/stable/modules/naive_bayes.html<br>
+▣ API : (Gaussian Naive Bayes) https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html<br>
+(Multinomial Naive Bayes) https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.MultinomialNB.html<br>
+(Bernoulli Naive Bayes) https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.BernoulliNB.html<br>
+▣ Example : https://scikit-learn.org/stable/auto_examples/naive_bayes/index.html<br>
+
+	from sklearn.naive_bayes import GaussianNB
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score, recall_score
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, random_state=42
+	)
+	
+	model = GaussianNB()
+	model.fit(X_train, y_train)
+	
+	y_pred = model.predict(X_test)
+	
+	acc = accuracy_score(y_test, y_pred)
+	recalls = recall_score(y_test, y_pred, labels=classes, average=None)
+	
+	print("[2-2] Naive Bayes Classification")
+	print(f"Overall Accuracy: {acc:.3f}")
+	for c, r in zip(classes, recalls):
+	    print(f"{c} Recall: {r:.3f}")
+
+## [2-3] 혼합모형 기반 생성 분류 (Gaussian Mixture Model (GMM) Classification using Expectation–Maximization (EM))
+▣ Guide : https://scikit-learn.org/stable/modules/mixture.html<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.mixture.GaussianMixture.html<br>
+▣ Example : https://scikit-learn.org/stable/auto_examples/mixture/index.html<br>
+
+	from sklearn.mixture import GaussianMixture
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score, recall_score
+	import numpy as np
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, random_state=42
+	)
+	
+	gmm = GaussianMixture(n_components=3, random_state=42)
+	gmm.fit(X_train)
+	
+	# 군집 결과 → 클래스 매핑
+	cluster_labels = gmm.predict(X_train)
+	mapping = {}
+	
+	for k in range(3):
+	    true_labels = y_train[cluster_labels == k]
+	    mapping[k] = true_labels.value_counts().idxmax()
+	
+	# 예측
+	test_clusters = gmm.predict(X_test)
+	y_pred = np.array([mapping[c] for c in test_clusters])
+	
+	acc = accuracy_score(y_test, y_pred)
+	recalls = recall_score(y_test, y_pred, labels=classes, average=None)
+	
+	print("[2-3] GMM Classification (EM)")
+	print(f"Overall Accuracy: {acc:.3f}")
+	for c, r in zip(classes, recalls):
+	    print(f"{c} Recall: {r:.3f}")
+		
 ---
 
 # [3] 거리 기반
