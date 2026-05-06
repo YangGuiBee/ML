@@ -72,12 +72,53 @@
 |모델명|sk-learn 사용 예제 소스|최적의 훈련 데이터셋|
 |---|---|---|
 |[1-1] 로지스틱 회귀|LogisticRegression / fit / score|Breast Cancer Wisconsin Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#breast-cancer-dataset|
-|[1-2] 베이즈 로지스틱 회귀|BayesianRidge (근사) / fit / score|UCI Heart Disease Dataset<br>https://archive.ics.uci.edu/ml/datasets/heart+disease|
+|[1-2] 베이즈 로지스틱 회귀|BayesianRidge / fit / score|UCI Heart Disease Dataset<br>https://archive.ics.uci.edu/ml/datasets/heart+disease|
 |[1-3] 프로빗 회귀|statsmodels Probit / fit / predict|UCI Adult Income Dataset<br>https://archive.ics.uci.edu/ml/datasets/adult|
 |[1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀|LogisticRegression (multinomial) / fit / score|Iris Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#iris-dataset|
 
 
+## [1-1] 로지스틱 회귀 (Logistic Regression)
 
+	import pandas as pd
+
+	url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-02/iris.data"
+	columns = ["sepal_length", "sepal_width", "petal_length", "petal_width", "class"]
+	data = pd.read_csv(url, header=None, names=columns)
+
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.model_selection import train_test_split
+
+	X = data.iloc[:, :-1]
+	y = (data["class"] == "Iris-setosa").astype(int)
+
+	X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
+
+	model = LogisticRegression(max_iter=1000)
+	model.fit(X_train, y_train)
+
+	accuracy = model.score(X_test, y_test)
+	print("Accuracy:", accuracy)
+
+
+## [1-2] 베이즈 로지스틱 회귀 (Bayesian Logistic Regression)
+
+	from sklearn.linear_model import BayesianRidge
+	from sklearn.model_selection import train_test_split
+
+	X = data.iloc[:, :-1]
+	y = (data["class"] == "Iris-setosa").astype(int)
+
+	X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
+
+	model = BayesianRidge()
+	model.fit(X_train, y_train)
+
+	score = model.score(X_test, y_test)
+	print("R^2 Score:", score)
+
+## [1-3] 프로빗 회귀 (Probit Regression)
+
+## [1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀 (Multinomial Logistic Regression / Softmax Regression)
 
 ---
 
