@@ -25,11 +25,11 @@
 
 ---
 
-	[1] 회귀 기반
+	[1] 확률적 판별
 		[1-1] 로지스틱 회귀 (Logistic Regression)
 		[1-2] 베이즈 로지스틱 회귀 (Bayesian Logistic Regression)
 		[1-3] 프로빗 회귀 (Probit Regression)
-		[1-4] 다항 로지스틱 회귀(Multinomial Logistic Regression) : 소프트맥스 회귀 (Softmax Regression)
+		[1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀 (Multinomial Logistic Regression / Softmax Regression)
 
 	[2] 통계·확률 기반
 		[2-1] 베이즈 네트워크 분류 (Bayesian Network Classification)
@@ -802,7 +802,7 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 <br>
 
 
-# [1-4] 다항 로지스틱 회귀(Multinomial Logistic Regression) : 소프트맥스 회귀 (Softmax Regression)
+# [1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀 (Multinomial Logistic Regression / Softmax Regression)
 
 **▣ 정의 :** 로지스틱 회귀를 다중 클래스 분류로 확장한 모델로 각 클래스에 속할 확률을 동시에 계산하는 <ins>다항 로지스틱 회귀모델</ins><br>
 **▣ 목적 :** 3개 이상의 클래스 중 어느 하나에 속할 확률을 추정<br>
