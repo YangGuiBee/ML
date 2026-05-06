@@ -1586,6 +1586,83 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 |[3-1] 최근접 중심 분류|$d_k(x)=\|x-\mu_k\|$|$x$: 입력 특성 벡터<br>$\mu_k$: 클래스 $k$의 평균 벡터<br>$\|\cdot\|$: 유클리드 거리|선형 보로노이 분할|문서 분류 초기 모델<br>고차원 저비용 분류|
 |[3-2] 마할라노비스 거리 기반 분류|$d_k(x)=(x-\mu_k)^T S_k^{-1}(x-\mu_k)$|$x$: 입력 특성 벡터<br>$\mu_k$: 클래스 $k$의 평균 벡터<br>$S_k$: 클래스 $k$의 공분산 행렬|이차 결정 경계(타원형)|이상 탐지<br>얼굴·의료 영상 인식|
 
+|구분|조건|모델명|
+|---|---|---|
+|① 반응변수가 범주형(class)이며 클래스의 중심 간 거리로 분류하고 싶은가?|각 클래스가 하나의 대표 중심(평균)으로 잘 요약되는 경우|**[3-1] 최근접 중심 분류 (Nearest Centroid Classification)**|
+|② 반응변수가 범주형(class)이며 특성 간 분산과 상관관계를 고려해야 하는가?|클래스별 분산 구조가 다르거나 특성 스케일·상관관계가 중요한 경우|**[3-2] 마할라노비스 거리 기반 분류 (Mahalanobis Distance-based Classification)**|
+
+
+|모델명|sk-learn 사용 예제 소스|최적의 훈련 데이터셋|
+|---|---|---|
+|[3-1] 최근접 중심 분류|NearestCentroid / fit / accuracy_score, recall_score|Iris Dataset<br>https://archive.ics.uci.edu/ml/datasets/iris|
+|[3-2] 마할라노비스 거리 기반 분류|QuadraticDiscriminantAnalysis / fit / accuracy_score, recall_score|Iris Dataset<br>https://archive.ics.uci.edu/ml/datasets/iris|
+
+
+## [3-1] 최근접 중심 분류 (Nearest Centroid Classification)
+▣ Guide : https://scikit-learn.org/stable/modules/neighbors.html#nearest-centroid-classifier<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.NearestCentroid.html<br>
+▣ Example : https://scikit-learn.org/stable/auto_examples/neighbors/plot_nearest_centroid.html<br>
+
+	import pandas as pd
+	url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-02/iris.data"
+	columns = ["sepal_length", "sepal_width", "petal_length", "petal_width", "class"]
+	data = pd.read_csv(url, header=None, names=columns)
+
+	X = data.iloc[:, :-1]
+	y = data["class"]
+	classes = ["Iris-setosa", "Iris-versicolor", "Iris-virginica"]
+
+	from sklearn.neighbors import NearestCentroid
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score, recall_score
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, random_state=42
+	)
+	
+	model = NearestCentroid()
+	model.fit(X_train, y_train)
+	
+	y_pred = model.predict(X_test)
+	
+	acc = accuracy_score(y_test, y_pred)
+	recalls = recall_score(y_test, y_pred, labels=classes, average=None)
+	
+	print("[3-1] Nearest Centroid Classification")
+	print(f"Overall Accuracy: {acc:.3f}")
+	for c, r in zip(classes, recalls):
+	    print(f"{c} Recall: {r:.3f}")
+	
+
+## [3-2] 마할라노비스 거리 기반 분류 (Mahalanobis Distance-based Classification)
+▣ Guide : scikit‑learn 공식 가이드 없음<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise_distances.html<br>
+▣ Example :https://scikit-learn.org/stable/auto_examples/classification/plot_qda.html<br>
+
+	from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score, recall_score
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, random_state=42
+	)
+	
+	model = QuadraticDiscriminantAnalysis()
+	model.fit(X_train, y_train)
+	
+	y_pred = model.predict(X_test)
+	
+	acc = accuracy_score(y_test, y_pred)
+	recalls = recall_score(y_test, y_pred, labels=classes, average=None)
+	
+	print("[3-2] Mahalanobis Distance-based Classification (QDA)")
+	print(f"Overall Accuracy: {acc:.3f}")
+	for c, r in zip(classes, recalls):
+	    print(f"{c} Recall: {r:.3f}")
+	
+
+
+
 
 <!--
 │ ├── [1] 판별 분석 (Discriminant Analysis)
