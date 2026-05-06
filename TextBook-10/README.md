@@ -42,6 +42,8 @@
 		
 ---
 
+# [1] 확률적 판별
+
 |모델명|이론 개요|특징|
 |---|---|---|
 |[1-1] 로지스틱 회귀|일반화 선형모형(GLM) 이론<br>→ 입력의 선형 결합을 시그모이드 함수로 변환하여 이진 확률을 직접 추정|확률적 판별 모델의 기본형<br>→ 분포 가정 없이 결정경계를 직접 학습하는 판별적 접근|
@@ -66,6 +68,26 @@
 ||이진 선택을 잠재 연속 변수 기반으로 해석하고 싶음|**[1-3] 프로빗 회귀 (Probit Regression)**|
 |② 반응변수가 범주형 확률 데이터인가?|3개 이상의 클래스 중 하나를 선택하는 문제|**[1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀 (Multinomial Logistic Regression / Softmax Regression)**|
 
+
+|모델명|sk-learn 사용 예제 소스|최적의 훈련 데이터셋|
+|---|---|---|
+|[1-1] 로지스틱 회귀|LogisticRegression / fit / score|Breast Cancer Wisconsin Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#breast-cancer-dataset|
+|[1-2] 베이즈 로지스틱 회귀|BayesianRidge (근사) / fit / score|UCI Heart Disease Dataset<br>https://archive.ics.uci.edu/ml/datasets/heart+disease|
+|[1-3] 프로빗 회귀|statsmodels Probit / fit / predict|UCI Adult Income Dataset<br>https://archive.ics.uci.edu/ml/datasets/adult|
+|[1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀|LogisticRegression (multinomial) / fit / score|Iris Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#iris-dataset|
+
+
+
+
+---
+
+# [2] 통계·확률 기반
+
+---
+
+# [3] 거리 기반
+
+---
 
 # [1-1] 로지스틱 회귀 (Logistic Regression)
 
