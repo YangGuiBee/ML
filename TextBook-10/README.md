@@ -42,259 +42,6 @@
 		
 ---
 
-# [1] 확률적 판별
-
-|모델명|이론 개요|특징|
-|---|---|---|
-|[1-1] 로지스틱 회귀|일반화 선형모형(GLM) 이론<br>→ 입력의 선형 결합을 시그모이드 함수로 변환하여 이진 확률을 직접 추정|확률적 판별 모델의 기본형<br>→ 분포 가정 없이 결정경계를 직접 학습하는 판별적 접근|
-|[1-2] 베이즈 로지스틱 회귀|베이즈 추론 이론<br>→ 로지스틱 회귀의 파라미터를 확률변수로 두고 사후분포를 추정|로지스틱 회귀를 기본 모델로 사용<br>→ 파라미터 불확실성을 반영하여 과적합 완화 및 신뢰구간 제공|
-|[1-3] 프로빗 회귀|잠재변수(latent variable) 기반 확률모형 이론<br>→ 잠재 연속변수가 임계값을 넘을 확률로 이진 반응을 설명|로지스틱 회귀와 구조는 유사<br>→ 시그모이드 대신 정규분포 누적분포함수 사용|
-|[1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀|다변수 일반화 선형모형 이론<br>→ 다중 클래스에 대해 소프트맥스 함수로 확률 벡터를 추정|이진 로지스틱 회귀를 기본 모델로 확장<br>→ 클래스 수가 3개 이상인 문제를 직접 처리|
-
-
-
-|모델명|수식|수식의 항목 설명|그래프형태|적용분야|
-|---|---|---|---|---|
-|[1-1] 로지스틱 회귀|$P(y=1 \mid \mathbf{x})=\frac{1}{1+\exp(-\mathbf{w}^T\mathbf{x})}$|$y$: 이진 클래스 레이블<br>$\mathbf{x}$: 입력 특성 벡터<br>$\mathbf{w}$: 가중치 벡터<br>$\exp(\cdot)$: 지수 함수|선형 결정 경계|의료 진단<br>사회과학 이진 선택 모형|
-|[1-2] 베이즈 로지스틱 회귀|$P(\mathbf{w}\mid\mathcal{D})\propto P(\mathcal{D}\mid\mathbf{w})P(\mathbf{w})$|$\mathbf{w}$: 가중치 파라미터<br>$\mathcal{D}$: 관측 데이터<br>$P(\mathbf{w})$: 사전분포<br>$P(\mathbf{w}\mid\mathcal{D})$: 사후분포|확률적 선형 경계|소표본 문제<br>의사결정 신뢰성 분석|
-|[1-3] 프로빗 회귀|$P(y=1 \mid \mathbf{x})=\Phi(\mathbf{w}^T\mathbf{x})$|$\Phi(\cdot)$: 표준 정규분포 누적분포함수<br>$\mathbf{x}$: 입력 특성 벡터<br>$\mathbf{w}$: 가중치 벡터|선형 결정 경계|경제학 계량모형<br>선호 선택 분석|
-|[1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀|$P(y=k \mid x)=\frac{\exp(w_k^T x)}{\sum_{j=1}^{K}\exp(w_j^T x)}$|$K$: 클래스 개수<br>$w_k$: 클래스 $k$의 가중치 벡터<br>$y$: 다중 클래스 레이블<br>$x$: 입력 특성 벡터|다중 선형 결정 경계|이미지 분류<br>자연어 처리 다중 분류|
-
-
-|구분|조건|모델명|
-|---|---|---|
-|① 반응변수가 이진 확률 데이터인가?|성공/실패, Yes/No, 0/1 데이터|**[1-1] 로지스틱 회귀 (Logistic Regression)**|
-||이진 데이터이며 파라미터 불확실성을 함께 고려하고 싶음|**[1-2] 베이즈 로지스틱 회귀 (Bayesian Logistic Regression)**|
-||이진 선택을 잠재 연속 변수 기반으로 해석하고 싶음|**[1-3] 프로빗 회귀 (Probit Regression)**|
-|② 반응변수가 범주형 확률 데이터인가?|3개 이상의 클래스 중 하나를 선택하는 문제|**[1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀 (Multinomial Logistic Regression / Softmax Regression)**|
-
-
-|모델명|sk-learn 사용 예제 소스|최적의 훈련 데이터셋|
-|---|---|---|
-|[1-1] 로지스틱 회귀|LogisticRegression / fit / score|Breast Cancer Wisconsin Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#breast-cancer-dataset|
-|[1-2] 베이즈 로지스틱 회귀|BayesianRidge / fit / score|UCI Heart Disease Dataset<br>https://archive.ics.uci.edu/ml/datasets/heart+disease|
-|[1-3] 프로빗 회귀|statsmodels Probit / fit / predict|UCI Adult Income Dataset<br>https://archive.ics.uci.edu/ml/datasets/adult|
-|[1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀|LogisticRegression (multinomial) / fit / score|Iris Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#iris-dataset|
-
-
-## [1-1] 로지스틱 회귀 (Logistic Regression)
-▣ Guide : https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
-▣ Example : https://scikit-learn.org/stable/auto_examples/linear_model/plot_logistic_regression.html
-
-	import pandas as pd
-	url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-02/iris.data"
-	columns = ["sepal_length", "sepal_width", "petal_length", "petal_width", "class"]
-	data = pd.read_csv(url, header=None, names=columns)
-
-	X = data.iloc[:, :-1]
-	species_list = ["Iris-setosa", "Iris-versicolor", "Iris-virginica"]
-
-	from sklearn.linear_model import LogisticRegression
-	from sklearn.model_selection import train_test_split
-	from sklearn.metrics import accuracy_score, recall_score
-	
-	print("[1-1] Logistic Regression")
-	
-	for species in species_list:
-	    y = (data["class"] == species).astype(int)
-	
-	    X_train, X_test, y_train, y_test = train_test_split(
-	        X, y, random_state=42
-	    )
-	
-	    model = LogisticRegression(max_iter=1000)
-	    model.fit(X_train, y_train)
-	
-	    y_pred = model.predict(X_test)
-	
-	    acc = accuracy_score(y_test, y_pred)
-	    recall = recall_score(y_test, y_pred)
-	
-	    print(f"{species} | Accuracy: {acc:.3f} | Recall: {recall:.3f}")
-
-
-## [1-2] 베이즈 로지스틱 회귀 (Bayesian Logistic Regression)
-▣ Guide : scikit‑learn 공식 가이드 없음
-▣ API : scikit‑learn에 Bayesian Logistic Regression API 없음
-▣ Example : scikit‑learn 공식 예제 없음
-
-	# 베이즈 로지스틱 근사(scikit-learn의 BayesianRidge)
-	from sklearn.linear_model import BayesianRidge
-	from sklearn.model_selection import train_test_split
-	from sklearn.metrics import accuracy_score, recall_score
-	import numpy as np
-	
-	print("[1-2] Bayesian Logistic Regression (Approx.)")
-	
-	for species in species_list:
-	    y = (data["class"] == species).astype(int)
-	
-	    X_train, X_test, y_train, y_test = train_test_split(
-	        X, y, random_state=42
-	    )
-	
-	    model = BayesianRidge()
-	    model.fit(X_train, y_train)
-	
-	    y_prob = model.predict(X_test)
-	    y_pred = (y_prob >= 0.5).astype(int)
-	
-	    acc = accuracy_score(y_test, y_pred)
-	    recall = recall_score(y_test, y_pred)
-	
-	    print(f"{species} | Accuracy: {acc:.3f} | Recall: {recall:.3f}")
-
-<br>
-
-	import pandas as pd
-	import numpy as np
-	import pymc as pm
-	import arviz as az
-	from sklearn.model_selection import train_test_split
-	from sklearn.metrics import accuracy_score, recall_score
-	
-	# 데이터 로드
-	url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-02/iris.data"
-	columns = ["sepal_length", "sepal_width", "petal_length", "petal_width", "class"]
-	data = pd.read_csv(url, header=None, names=columns)
-	
-	X = data.iloc[:, :-1].values
-	y = (data["class"] == "Iris-setosa").astype(int).values
-	
-	# train / test split
-	X_train, X_test, y_train, y_test = train_test_split(
-	    X, y, random_state=42
-	)
-	
-	# Bayesian Logistic Regression
-	with pm.Model() as blr:
-	    # prior
-	    w = pm.Normal("w", mu=0, sigma=5, shape=X_train.shape[1])
-	    b = pm.Normal("b", mu=0, sigma=5)
-	
-	    # linear predictor
-	    logits = pm.math.dot(X_train, w) + b
-	    p = pm.Deterministic("p", pm.math.sigmoid(logits))
-	
-	    # likelihood
-	    y_obs = pm.Bernoulli("y_obs", p=p, observed=y_train)
-	
-	    # posterior sampling
-	    trace = pm.sample(1000, tune=1000, target_accept=0.9, progressbar=False)
-	
-	# posterior predictive (mean probability)
-	w_post = trace.posterior["w"].mean(dim=("chain", "draw")).values
-	b_post = trace.posterior["b"].mean(dim=("chain", "draw")).values
-	
-	p_test = 1 / (1 + np.exp(-(X_test @ w_post + b_post)))
-	y_pred = (p_test >= 0.5).astype(int)
-	
-	# evaluation
-	acc = accuracy_score(y_test, y_pred)
-	recall = recall_score(y_test, y_pred)
-	
-	print("[1-2] Bayesian Logistic Regression (Proper)")
-	print(f"Accuracy: {acc:.3f}")
-	print(f"Recall:   {recall:.3f}")
-
-<br>
-
-|항목|Bayesian Logistic Regression|BayesianRidge|설명|
-|---|---|---|---|
-|문제 유형|이진 분류|연속 회귀|모델이 본질적으로 다루는 출력 변수의 형태를 의미함 (분류 vs 회귀)|
-|우도 분포|Bernoulli|Gaussian|관측 데이터가 따른다고 가정하는 확률분포로, 문제 유형을 결정하는 핵심 요소|
-|링크 함수|Sigmoid|Identity|선형 예측값을 출력 공간으로 변환하는 함수 (확률 vs 실수값)|
-|손실|Log-loss|MSE|모델 학습 시 최소화하는 목적 함수로, 우도 분포와 직접적으로 연결됨|
-|사후분포|근사 필요|닫힌 해|베이즈 추론에서 파라미터 사후분포를 계산하는 방식 (근사 추론 vs 해석적 해)|
-|분류 확률|정식 확률|임계값으로 강제 변환|모델 출력이 확률로 해석 가능한지 여부를 나타냄|
-
-
-		
-## [1-3] 프로빗 회귀 (Probit Regression)
-▣ Guide : scikit‑learn 공식 가이드 없음
-▣ API : scikit‑learn에 Bayesian Logistic Regression API 없음
-▣ Example : scikit‑learn 공식 예제 없음
-▣ https://www.statsmodels.org/stable/generated/statsmodels.discrete.discrete_model.Probit.html
-
-	import statsmodels.api as sm
-	from sklearn.model_selection import train_test_split
-	from sklearn.metrics import accuracy_score, recall_score
-	import numpy as np
-	
-	print("[1-3] Probit Regression")
-	
-	for species in species_list:
-	    y = (data["class"] == species).astype(int)
-	
-	    X_train, X_test, y_train, y_test = train_test_split(
-	        X, y, random_state=42
-	    )
-	
-	    X_train = sm.add_constant(X_train)
-	    X_test = sm.add_constant(X_test)
-	
-	    model = sm.Probit(y_train, X_train)
-	    result = model.fit(disp=False)
-	
-	    y_prob = result.predict(X_test)
-	    y_pred = (y_prob >= 0.5).astype(int)
-	
-	    acc = accuracy_score(y_test, y_pred)
-	    recall = recall_score(y_test, y_pred)
-	
-	    print(f"{species} | Accuracy: {acc:.3f} | Recall: {recall:.3f}")
-		
-
-## [1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀 (Multinomial Logistic Regression / Softmax Regression)
-▣ Guide : https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
-▣ Example : https://scikit-learn.org/stable/auto_examples/linear_model/plot_logistic_multinomial.html
-
-	from sklearn.linear_model import LogisticRegression
-	from sklearn.model_selection import train_test_split
-	from sklearn.metrics import accuracy_score, recall_score
-	
-	print("[1-4] Multinomial Logistic Regression (Softmax)")
-	
-	y = data["class"]
-	
-	X_train, X_test, y_train, y_test = train_test_split(
-	    X, y, random_state=42
-	)
-	
-	model = LogisticRegression(
-	    multi_class="multinomial",
-	    solver="lbfgs",
-	    max_iter=1000
-	)
-	model.fit(X_train, y_train)
-	
-	y_pred = model.predict(X_test)
-	
-	acc = accuracy_score(y_test, y_pred)
-	recalls = recall_score(
-	    y_test,
-	    y_pred,
-	    labels=species_list,
-	    average=None
-	)
-	
-	print(f"Overall Accuracy: {acc:.3f}")
-	for cls, r in zip(species_list, recalls):
-	    print(f"{cls} Recall: {r:.3f}")
-
-		
----
-
-# [2] 통계·확률 기반
-
----
-
-# [3] 거리 기반
-
----
-
 # [1-1] 로지스틱 회귀 (Logistic Regression)
 
 **▣ 정의 :** 입력 변수의 선형 결합을 <ins>시그모이드(Sigmoid) 함수를 통해 0~1 사이의 확률로 변환하는 이진 분류 모델</ins><br>
@@ -1446,6 +1193,274 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 | **11.Wasserstein 거리 (지구 이동 거리, EMD)** | $\inf_{\gamma \in \Pi(p,q)} \mathbb{E}_{(x,y)\sim \gamma} [\|x - y\|]$ | 확률분포 간 “이동량” 최소화 | 분포 비교 직관적 | 계산 복잡 | GAN, 분포 비교, 이미지 |
 | **12.DTW (Dynamic Time Warping)** | $\displaystyle \min_{\pi} \sum_{(i,j)\in\pi} d(x_i, y_j)$ | 시계열의 비선형 정렬 기반 거리 | 시간 왜곡 허용 | 계산량 많음 | 음성, ECG, 시계열 패턴 |
 | **13.Canberra 거리** | $\sum_i \dfrac{\lvert x_i - y_i \rvert}{\lvert x_i \rvert + \lvert y_i \rvert}$ | 상대적 비율 중심 거리 | 스케일 차이 완화 | 0 근처 불안정 | 생물정보학, 생화학 데이터 |
+
+
+
+# [1] 확률적 판별
+
+|모델명|이론 개요|특징|
+|---|---|---|
+|[1-1] 로지스틱 회귀|일반화 선형모형(GLM) 이론<br>→ 입력의 선형 결합을 시그모이드 함수로 변환하여 이진 확률을 직접 추정|확률적 판별 모델의 기본형<br>→ 분포 가정 없이 결정경계를 직접 학습하는 판별적 접근|
+|[1-2] 베이즈 로지스틱 회귀|베이즈 추론 이론<br>→ 로지스틱 회귀의 파라미터를 확률변수로 두고 사후분포를 추정|로지스틱 회귀를 기본 모델로 사용<br>→ 파라미터 불확실성을 반영하여 과적합 완화 및 신뢰구간 제공|
+|[1-3] 프로빗 회귀|잠재변수(latent variable) 기반 확률모형 이론<br>→ 잠재 연속변수가 임계값을 넘을 확률로 이진 반응을 설명|로지스틱 회귀와 구조는 유사<br>→ 시그모이드 대신 정규분포 누적분포함수 사용|
+|[1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀|다변수 일반화 선형모형 이론<br>→ 다중 클래스에 대해 소프트맥스 함수로 확률 벡터를 추정|이진 로지스틱 회귀를 기본 모델로 확장<br>→ 클래스 수가 3개 이상인 문제를 직접 처리|
+
+
+
+|모델명|수식|수식의 항목 설명|그래프형태|적용분야|
+|---|---|---|---|---|
+|[1-1] 로지스틱 회귀|$P(y=1 \mid \mathbf{x})=\frac{1}{1+\exp(-\mathbf{w}^T\mathbf{x})}$|$y$: 이진 클래스 레이블<br>$\mathbf{x}$: 입력 특성 벡터<br>$\mathbf{w}$: 가중치 벡터<br>$\exp(\cdot)$: 지수 함수|선형 결정 경계|의료 진단<br>사회과학 이진 선택 모형|
+|[1-2] 베이즈 로지스틱 회귀|$P(\mathbf{w}\mid\mathcal{D})\propto P(\mathcal{D}\mid\mathbf{w})P(\mathbf{w})$|$\mathbf{w}$: 가중치 파라미터<br>$\mathcal{D}$: 관측 데이터<br>$P(\mathbf{w})$: 사전분포<br>$P(\mathbf{w}\mid\mathcal{D})$: 사후분포|확률적 선형 경계|소표본 문제<br>의사결정 신뢰성 분석|
+|[1-3] 프로빗 회귀|$P(y=1 \mid \mathbf{x})=\Phi(\mathbf{w}^T\mathbf{x})$|$\Phi(\cdot)$: 표준 정규분포 누적분포함수<br>$\mathbf{x}$: 입력 특성 벡터<br>$\mathbf{w}$: 가중치 벡터|선형 결정 경계|경제학 계량모형<br>선호 선택 분석|
+|[1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀|$P(y=k \mid x)=\frac{\exp(w_k^T x)}{\sum_{j=1}^{K}\exp(w_j^T x)}$|$K$: 클래스 개수<br>$w_k$: 클래스 $k$의 가중치 벡터<br>$y$: 다중 클래스 레이블<br>$x$: 입력 특성 벡터|다중 선형 결정 경계|이미지 분류<br>자연어 처리 다중 분류|
+
+
+|구분|조건|모델명|
+|---|---|---|
+|① 반응변수가 이진 확률 데이터인가?|성공/실패, Yes/No, 0/1 데이터|**[1-1] 로지스틱 회귀 (Logistic Regression)**|
+||이진 데이터이며 파라미터 불확실성을 함께 고려하고 싶음|**[1-2] 베이즈 로지스틱 회귀 (Bayesian Logistic Regression)**|
+||이진 선택을 잠재 연속 변수 기반으로 해석하고 싶음|**[1-3] 프로빗 회귀 (Probit Regression)**|
+|② 반응변수가 범주형 확률 데이터인가?|3개 이상의 클래스 중 하나를 선택하는 문제|**[1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀 (Multinomial Logistic Regression / Softmax Regression)**|
+
+
+|모델명|sk-learn 사용 예제 소스|최적의 훈련 데이터셋|
+|---|---|---|
+|[1-1] 로지스틱 회귀|LogisticRegression / fit / score|Breast Cancer Wisconsin Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#breast-cancer-dataset|
+|[1-2] 베이즈 로지스틱 회귀|BayesianRidge / fit / score|UCI Heart Disease Dataset<br>https://archive.ics.uci.edu/ml/datasets/heart+disease|
+|[1-3] 프로빗 회귀|statsmodels Probit / fit / predict|UCI Adult Income Dataset<br>https://archive.ics.uci.edu/ml/datasets/adult|
+|[1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀|LogisticRegression (multinomial) / fit / score|Iris Dataset<br>https://scikit-learn.org/stable/datasets/toy_dataset.html#iris-dataset|
+
+
+## [1-1] 로지스틱 회귀 (Logistic Regression)
+▣ Guide : https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+▣ Example : https://scikit-learn.org/stable/auto_examples/linear_model/plot_logistic_regression.html
+
+	import pandas as pd
+	url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-02/iris.data"
+	columns = ["sepal_length", "sepal_width", "petal_length", "petal_width", "class"]
+	data = pd.read_csv(url, header=None, names=columns)
+
+	X = data.iloc[:, :-1]
+	species_list = ["Iris-setosa", "Iris-versicolor", "Iris-virginica"]
+
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score, recall_score
+	
+	print("[1-1] Logistic Regression")
+	
+	for species in species_list:
+	    y = (data["class"] == species).astype(int)
+	
+	    X_train, X_test, y_train, y_test = train_test_split(
+	        X, y, random_state=42
+	    )
+	
+	    model = LogisticRegression(max_iter=1000)
+	    model.fit(X_train, y_train)
+	
+	    y_pred = model.predict(X_test)
+	
+	    acc = accuracy_score(y_test, y_pred)
+	    recall = recall_score(y_test, y_pred)
+	
+	    print(f"{species} | Accuracy: {acc:.3f} | Recall: {recall:.3f}")
+
+
+## [1-2] 베이즈 로지스틱 회귀 (Bayesian Logistic Regression)
+▣ Guide : scikit‑learn 공식 가이드 없음
+▣ API : scikit‑learn에 Bayesian Logistic Regression API 없음
+▣ Example : scikit‑learn 공식 예제 없음
+
+	# 베이즈 로지스틱 근사(scikit-learn의 BayesianRidge)
+	from sklearn.linear_model import BayesianRidge
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score, recall_score
+	import numpy as np
+	
+	print("[1-2] Bayesian Logistic Regression (Approx.)")
+	
+	for species in species_list:
+	    y = (data["class"] == species).astype(int)
+	
+	    X_train, X_test, y_train, y_test = train_test_split(
+	        X, y, random_state=42
+	    )
+	
+	    model = BayesianRidge()
+	    model.fit(X_train, y_train)
+	
+	    y_prob = model.predict(X_test)
+	    y_pred = (y_prob >= 0.5).astype(int)
+	
+	    acc = accuracy_score(y_test, y_pred)
+	    recall = recall_score(y_test, y_pred)
+	
+	    print(f"{species} | Accuracy: {acc:.3f} | Recall: {recall:.3f}")
+
+<br>
+
+	import pandas as pd
+	import numpy as np
+	import pymc as pm
+	import arviz as az
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score, recall_score
+	
+	# 데이터 로드
+	url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-02/iris.data"
+	columns = ["sepal_length", "sepal_width", "petal_length", "petal_width", "class"]
+	data = pd.read_csv(url, header=None, names=columns)
+	
+	X = data.iloc[:, :-1].values
+	y = (data["class"] == "Iris-setosa").astype(int).values
+	
+	# train / test split
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, random_state=42
+	)
+	
+	# Bayesian Logistic Regression
+	with pm.Model() as blr:
+	    # prior
+	    w = pm.Normal("w", mu=0, sigma=5, shape=X_train.shape[1])
+	    b = pm.Normal("b", mu=0, sigma=5)
+	
+	    # linear predictor
+	    logits = pm.math.dot(X_train, w) + b
+	    p = pm.Deterministic("p", pm.math.sigmoid(logits))
+	
+	    # likelihood
+	    y_obs = pm.Bernoulli("y_obs", p=p, observed=y_train)
+	
+	    # posterior sampling
+	    trace = pm.sample(1000, tune=1000, target_accept=0.9, progressbar=False)
+	
+	# posterior predictive (mean probability)
+	w_post = trace.posterior["w"].mean(dim=("chain", "draw")).values
+	b_post = trace.posterior["b"].mean(dim=("chain", "draw")).values
+	
+	p_test = 1 / (1 + np.exp(-(X_test @ w_post + b_post)))
+	y_pred = (p_test >= 0.5).astype(int)
+	
+	# evaluation
+	acc = accuracy_score(y_test, y_pred)
+	recall = recall_score(y_test, y_pred)
+	
+	print("[1-2] Bayesian Logistic Regression (Proper)")
+	print(f"Accuracy: {acc:.3f}")
+	print(f"Recall:   {recall:.3f}")
+
+<br>
+
+|항목|Bayesian Logistic Regression|BayesianRidge|설명|
+|---|---|---|---|
+|문제 유형|이진 분류|연속 회귀|모델이 본질적으로 다루는 출력 변수의 형태를 의미함 (분류 vs 회귀)|
+|우도 분포|Bernoulli|Gaussian|관측 데이터가 따른다고 가정하는 확률분포로, 문제 유형을 결정하는 핵심 요소|
+|링크 함수|Sigmoid|Identity|선형 예측값을 출력 공간으로 변환하는 함수 (확률 vs 실수값)|
+|손실|Log-loss|MSE|모델 학습 시 최소화하는 목적 함수로, 우도 분포와 직접적으로 연결됨|
+|사후분포|근사 필요|닫힌 해|베이즈 추론에서 파라미터 사후분포를 계산하는 방식 (근사 추론 vs 해석적 해)|
+|분류 확률|정식 확률|임계값으로 강제 변환|모델 출력이 확률로 해석 가능한지 여부를 나타냄|
+
+
+		
+## [1-3] 프로빗 회귀 (Probit Regression)
+▣ Guide : scikit‑learn 공식 가이드 없음
+▣ API : scikit‑learn에 Bayesian Logistic Regression API 없음
+▣ Example : scikit‑learn 공식 예제 없음
+▣ https://www.statsmodels.org/stable/generated/statsmodels.discrete.discrete_model.Probit.html
+
+	import statsmodels.api as sm
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score, recall_score
+	import numpy as np
+	
+	print("[1-3] Probit Regression")
+	
+	for species in species_list:
+	    y = (data["class"] == species).astype(int)
+	
+	    X_train, X_test, y_train, y_test = train_test_split(
+	        X, y, random_state=42
+	    )
+	
+	    X_train = sm.add_constant(X_train)
+	    X_test = sm.add_constant(X_test)
+	
+	    model = sm.Probit(y_train, X_train)
+	    result = model.fit(disp=False)
+	
+	    y_prob = result.predict(X_test)
+	    y_pred = (y_prob >= 0.5).astype(int)
+	
+	    acc = accuracy_score(y_test, y_pred)
+	    recall = recall_score(y_test, y_pred)
+	
+	    print(f"{species} | Accuracy: {acc:.3f} | Recall: {recall:.3f}")
+		
+
+## [1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀 (Multinomial Logistic Regression / Softmax Regression)
+▣ Guide : https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+▣ Example : https://scikit-learn.org/stable/auto_examples/linear_model/plot_logistic_multinomial.html
+
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score, recall_score
+	
+	print("[1-4] Multinomial Logistic Regression (Softmax)")
+	
+	y = data["class"]
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, random_state=42
+	)
+	
+	model = LogisticRegression(
+	    multi_class="multinomial",
+	    solver="lbfgs",
+	    max_iter=1000
+	)
+	model.fit(X_train, y_train)
+	
+	y_pred = model.predict(X_test)
+	
+	acc = accuracy_score(y_test, y_pred)
+	recalls = recall_score(
+	    y_test,
+	    y_pred,
+	    labels=species_list,
+	    average=None
+	)
+	
+	print(f"Overall Accuracy: {acc:.3f}")
+	for cls, r in zip(species_list, recalls):
+	    print(f"{cls} Recall: {r:.3f}")
+
+		
+---
+
+# [2] 통계·확률 기반
+
+|모델명|이론 개요|특징|
+|---|---|---|
+|[2-1] 베이즈 네트워크 분류|확률 그래프 모델 이론<br>→ 변수 간 조건부 의존관계를 DAG로 표현하여 사후확률 기반 분류|가장 일반적인 생성 모델을 기본으로 사용<br>→ 변수 간 의존관계를 명시적으로 모델링하여 표현력이 높음|
+|[2-2] 나이브 베이즈 분류|베이즈 정리 기반 확률 추론 이론<br>→ 조건부 독립 가정을 통해 사후확률을 단순 계산|베이즈 네트워크의 특수한 형태를 기본 모델로 사용<br>→ 특성 간 독립 가정으로 계산 효율과 안정성 극대화|
+|[2-3] 혼합모형 기반 생성 분류(GMM)|혼합 확률분포 및 EM 알고리즘 이론<br>→ 클래스 분포를 여러 가우시안의 결합으로 생성 모델링|단일 가우시안 생성 모델을 기본으로 확장<br>→ 다봉(multimodal) 분포를 표현 가능하여 복잡한 데이터 구조에 적합|
+
+
+|모델명|수식|수식의 항목 설명|그래프형태|적용분야|
+|---|---|---|---|---|
+|[2-1] 베이즈 네트워크 분류|$ P(y \mid \mathbf{x}) \propto P(y)\prod_{i} P(x_i \mid \mathrm{Pa}(x_i), y) $|$ y $: 클래스 레이블<br>$ \mathbf{x} $: 입력 특성 벡터<br>$ x_i $: i번째 특성<br>$ \mathrm{Pa}(x_i) $: 특성 $x_i$의 부모 노드 집합|방향성 비순환 그래프(DAG)|의료 진단 시스템<br>원인–결과 추론|
+|[2-2] 나이브 베이즈 분류|$ P(y \mid \mathbf{x}) \propto P(y)\prod_{i} P(x_i \mid y) $|$ y $: 클래스 레이블<br>$ \mathbf{x} $: 입력 특성 벡터<br>$ x_i $: i번째 특성<br>모든 $x_i$는 $y$에 대해 조건부 독립 가정|축에 평행한 결정 경계|문서 분류<br>스팸 필터링|
+|[2-3] 혼합모형 기반 생성 분류(GMM)|$ P(\mathbf{x} \mid y) = \sum_{k=1}^{K} \pi_{k,y}\,\mathcal{N}(\mathbf{x} \mid \boldsymbol{\mu}_{k,y}, \Sigma_{k,y}) $|$ K $: 혼합 성분 개수<br>$ \pi_{k,y} $: 클래스 $y$에서 k번째 혼합 가중치<br>$ \boldsymbol{\mu}_{k,y} $: 평균 벡터<br>$ \Sigma_{k,y} $: 공분산 행렬|비선형·다봉 결정 경계|음성 인식<br>이상 탐지|
+
+
+---
+
+# [3] 거리 기반
+
 
 
 
