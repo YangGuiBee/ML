@@ -1452,9 +1452,9 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 
 |모델명|수식|수식의 항목 설명|그래프형태|적용분야|
 |---|---|---|---|---|
-|[2-1] 베이즈 네트워크 분류|$ P(y \mid \mathbf{x}) \propto P(y)\prod_{i} P(x_i \mid \mathrm{Pa}(x_i), y) $|$ y $: 클래스 레이블<br>$ \mathbf{x} $: 입력 특성 벡터<br>$ x_i $: i번째 특성<br>$ \mathrm{Pa}(x_i) $: 특성 $x_i$의 부모 노드 집합|방향성 비순환 그래프(DAG)|의료 진단 시스템<br>원인–결과 추론|
-|[2-2] 나이브 베이즈 분류|$ P(y \mid \mathbf{x}) \propto P(y)\prod_{i} P(x_i \mid y) $|$ y $: 클래스 레이블<br>$ \mathbf{x} $: 입력 특성 벡터<br>$ x_i $: i번째 특성<br>모든 $x_i$는 $y$에 대해 조건부 독립 가정|축에 평행한 결정 경계|문서 분류<br>스팸 필터링|
-|[2-3] 혼합모형 기반 생성 분류(GMM)|$ P(\mathbf{x} \mid y) = \sum_{k=1}^{K} \pi_{k,y}\,\mathcal{N}(\mathbf{x} \mid \boldsymbol{\mu}_{k,y}, \Sigma_{k,y}) $|$ K $: 혼합 성분 개수<br>$ \pi_{k,y} $: 클래스 $y$에서 k번째 혼합 가중치<br>$ \boldsymbol{\mu}_{k,y} $: 평균 벡터<br>$ \Sigma_{k,y} $: 공분산 행렬|비선형·다봉 결정 경계|음성 인식<br>이상 탐지|
+|[2-1] 베이즈 네트워크 분류|$P(y \mid x) \propto P(y)\prod_i P(x_i \mid y)$|$y$: 클래스 레이블<br>$x$: 입력 특성 벡터<br>$x_i$: i번째 특성<br>각 특성은 네트워크 구조에 따라 조건부 확률로 모델링됨|방향성 비순환 그래프(DAG)|의료 진단 시스템<br>원인–결과 추론|
+|[2-2] 나이브 베이즈 분류|$P(y \mid x) \propto P(y)\prod_i P(x_i \mid y)$|$y$: 클래스 레이블<br>$x$: 입력 특성 벡터<br>$x_i$: i번째 특성<br>모든 $x_i$는 $y$에 대해 조건부 독립 가정|축에 평행한 결정 경계|문서 분류<br>스팸 필터링|
+|[2-3] 혼합모형 기반 생성 분류(GMM)|$P(x \mid y)=\sum_{k=1}^{K}\pi_{k,y}\mathcal{N}(x;\mu_{k,y},\Sigma_{k,y})$|$K$: 혼합 성분 개수<br>$\pi_{k,y}$: 클래스 $y$에서 k번째 혼합 가중치<br>$\mu_{k,y}$: 평균 벡터<br>$\Sigma_{k,y}$: 공분산 행렬|비선형·다봉 결정 경계|음성 인식<br>이상 탐지|
 
 
 ---
