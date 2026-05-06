@@ -53,21 +53,10 @@
 
 |모델명|수식|수식의 항목 설명|그래프형태|적용분야|
 |---|---|---|---|---|
-|[1-1] 로지스틱 회귀|$$
-P(y=1 \mid \mathbf{x}) = \frac{1}{1 + \exp(-\mathbf{w}^T \mathbf{x})}
-$$|$ y $: 이진 클래스 레이블<br>$ \mathbf{x} $: 입력 특성 벡터<br>$ \mathbf{w} $: 가중치 벡터<br>$ \exp(\cdot) $: 지수 함수|선형 결정 경계|의료 진단<br>사회과학 이진 선택 모형|
-|[1-2] 베이즈 로지스틱 회귀|$$
-P(\mathbf{w} \mid \mathcal{D}) \propto P(\mathcal{D} \mid \mathbf{w}) P(\mathbf{w})
-$$|$ \mathbf{w} $: 가중치 파라미터<br>$ \mathcal{D} $: 관측 데이터<br>$ P(\mathbf{w}) $: 사전분포<br>$ P(\mathbf{w} \mid \mathcal{D}) $: 사후분포|확률적 선형 경계|소표본 문제<br>의사결정 신뢰성 분석|
-|[1-3] 프로빗 회귀|$$
-P(y=1 \mid \mathbf{x}) = \Phi(\mathbf{w}^T \mathbf{x})
-$$|$ \Phi(\cdot) $: 표준 정규분포 누적분포함수<br>$ \mathbf{x} $: 입력 특성 벡터<br>$ \mathbf{w} $: 가중치 벡터|선형 결정 경계|경제학 계량모형<br>선호 선택 분석|
-|[1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀|$$
-P(y=k \mid \mathbf{x}) =
-\frac{\exp(\mathbf{w}_k^T \mathbf{x})}
-{\sum_{j=1}^{K} \exp(\mathbf{w}_j^T \mathbf{x})}
-$$|$ K $: 클래스 개수<br>$ \mathbf{w}_k $: 클래스 $k$의 가중치 벡터<br>$ y $: 다중 클래스 레이블<br>$ \mathbf{x} $: 입력 특성 벡터|다중 선형 결정 경계|이미지 분류<br>자연어 처리 다중 분류|
-
+|[1-1] 로지스틱 회귀|$P(y=1 \mid \mathbf{x})=\frac{1}{1+\exp(-\mathbf{w}^T\mathbf{x})}$|$y$: 이진 클래스 레이블<br>$\mathbf{x}$: 입력 특성 벡터<br>$\mathbf{w}$: 가중치 벡터<br>$\exp(\cdot)$: 지수 함수|선형 결정 경계|의료 진단<br>사회과학 이진 선택 모형|
+|[1-2] 베이즈 로지스틱 회귀|$P(\mathbf{w}\mid\mathcal{D})\propto P(\mathcal{D}\mid\mathbf{w})P(\mathbf{w})$|$\mathbf{w}$: 가중치 파라미터<br>$\mathcal{D}$: 관측 데이터<br>$P(\mathbf{w})$: 사전분포<br>$P(\mathbf{w}\mid\mathcal{D})$: 사후분포|확률적 선형 경계|소표본 문제<br>의사결정 신뢰성 분석|
+|[1-3] 프로빗 회귀|$P(y=1 \mid \mathbf{x})=\Phi(\mathbf{w}^T\mathbf{x})$|$\Phi(\cdot)$: 표준 정규분포 누적분포함수<br>$\mathbf{x}$: 입력 특성 벡터<br>$\mathbf{w}$: 가중치 벡터|선형 결정 경계|경제학 계량모형<br>선호 선택 분석|
+|[1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀|$P(y=k \mid \mathbf{x})=\frac{\exp(\mathbf{w}_k^T\mathbf{x})}{\sum_{j=1}^{K}\exp(\mathbf{w}_j^T\mathbf{x})}$|$K$: 클래스 개수<br>$\mathbf{w}_k$: 클래스 $k$의 가중치 벡터<br>$y$: 다중 클래스 레이블<br>$\mathbf{x}$: 입력 특성 벡터|다중 선형 결정 경계|이미지 분류<br>자연어 처리 다중 분류|
 
 
 
