@@ -59,6 +59,13 @@
 |[1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀|$P(y=k \mid x)=\frac{\exp(w_k^T x)}{\sum_{j=1}^{K}\exp(w_j^T x)}$|$K$: 클래스 개수<br>$w_k$: 클래스 $k$의 가중치 벡터<br>$y$: 다중 클래스 레이블<br>$x$: 입력 특성 벡터|다중 선형 결정 경계|이미지 분류<br>자연어 처리 다중 분류|
 
 
+|구분|조건|모델명|
+|---|---|---|
+|① 반응변수가 이진 확률 데이터인가?|성공/실패, Yes/No, 0/1 데이터|**[1-1] 로지스틱 회귀 (Logistic Regression)**|
+||이진 데이터이며 파라미터 불확실성을 함께 고려하고 싶음|**[1-2] 베이즈 로지스틱 회귀 (Bayesian Logistic Regression)**|
+||이진 선택을 잠재 연속 변수 기반으로 해석하고 싶음|**[1-3] 프로빗 회귀 (Probit Regression)**|
+|② 반응변수가 범주형 확률 데이터인가?|3개 이상의 클래스 중 하나를 선택하는 문제|**[1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀 (Multinomial Logistic Regression / Softmax Regression)**|
+
 
 # [1-1] 로지스틱 회귀 (Logistic Regression)
 
