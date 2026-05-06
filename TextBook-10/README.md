@@ -78,48 +78,213 @@
 
 
 ## [1-1] 로지스틱 회귀 (Logistic Regression)
+▣ Guide : https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+▣ Example : https://scikit-learn.org/stable/auto_examples/linear_model/plot_logistic_regression.html
 
 	import pandas as pd
-
 	url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-02/iris.data"
 	columns = ["sepal_length", "sepal_width", "petal_length", "petal_width", "class"]
 	data = pd.read_csv(url, header=None, names=columns)
 
+	X = data.iloc[:, :-1]
+	species_list = ["Iris-setosa", "Iris-versicolor", "Iris-virginica"]
+
 	from sklearn.linear_model import LogisticRegression
 	from sklearn.model_selection import train_test_split
-
-	X = data.iloc[:, :-1]
-	y = (data["class"] == "Iris-setosa").astype(int)
-
-	X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
-
-	model = LogisticRegression(max_iter=1000)
-	model.fit(X_train, y_train)
-
-	accuracy = model.score(X_test, y_test)
-	print("Accuracy:", accuracy)
+	from sklearn.metrics import accuracy_score, recall_score
+	
+	print("[1-1] Logistic Regression")
+	
+	for species in species_list:
+	    y = (data["class"] == species).astype(int)
+	
+	    X_train, X_test, y_train, y_test = train_test_split(
+	        X, y, random_state=42
+	    )
+	
+	    model = LogisticRegression(max_iter=1000)
+	    model.fit(X_train, y_train)
+	
+	    y_pred = model.predict(X_test)
+	
+	    acc = accuracy_score(y_test, y_pred)
+	    recall = recall_score(y_test, y_pred)
+	
+	    print(f"{species} | Accuracy: {acc:.3f} | Recall: {recall:.3f}")
 
 
 ## [1-2] 베이즈 로지스틱 회귀 (Bayesian Logistic Regression)
+▣ Guide : scikit‑learn 공식 가이드 없음
+▣ API : scikit‑learn에 Bayesian Logistic Regression API 없음
+▣ Example : scikit‑learn 공식 예제 없음
 
+	# 베이즈 로지스틱 근사(scikit-learn의 BayesianRidge)
 	from sklearn.linear_model import BayesianRidge
 	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score, recall_score
+	import numpy as np
+	
+	print("[1-2] Bayesian Logistic Regression (Approx.)")
+	
+	for species in species_list:
+	    y = (data["class"] == species).astype(int)
+	
+	    X_train, X_test, y_train, y_test = train_test_split(
+	        X, y, random_state=42
+	    )
+	
+	    model = BayesianRidge()
+	    model.fit(X_train, y_train)
+	
+	    y_prob = model.predict(X_test)
+	    y_pred = (y_prob >= 0.5).astype(int)
+	
+	    acc = accuracy_score(y_test, y_pred)
+	    recall = recall_score(y_test, y_pred)
+	
+	    print(f"{species} | Accuracy: {acc:.3f} | Recall: {recall:.3f}")
 
-	X = data.iloc[:, :-1]
-	y = (data["class"] == "Iris-setosa").astype(int)
+<br>
 
-	X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
+	import pandas as pd
+	import numpy as np
+	import pymc as pm
+	import arviz as az
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score, recall_score
+	
+	# 데이터 로드
+	url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-02/iris.data"
+	columns = ["sepal_length", "sepal_width", "petal_length", "petal_width", "class"]
+	data = pd.read_csv(url, header=None, names=columns)
+	
+	X = data.iloc[:, :-1].values
+	y = (data["class"] == "Iris-setosa").astype(int).values
+	
+	# train / test split
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, random_state=42
+	)
+	
+	# Bayesian Logistic Regression
+	with pm.Model() as blr:
+	    # prior
+	    w = pm.Normal("w", mu=0, sigma=5, shape=X_train.shape[1])
+	    b = pm.Normal("b", mu=0, sigma=5)
+	
+	    # linear predictor
+	    logits = pm.math.dot(X_train, w) + b
+	    p = pm.Deterministic("p", pm.math.sigmoid(logits))
+	
+	    # likelihood
+	    y_obs = pm.Bernoulli("y_obs", p=p, observed=y_train)
+	
+	    # posterior sampling
+	    trace = pm.sample(1000, tune=1000, target_accept=0.9, progressbar=False)
+	
+	# posterior predictive (mean probability)
+	w_post = trace.posterior["w"].mean(dim=("chain", "draw")).values
+	b_post = trace.posterior["b"].mean(dim=("chain", "draw")).values
+	
+	p_test = 1 / (1 + np.exp(-(X_test @ w_post + b_post)))
+	y_pred = (p_test >= 0.5).astype(int)
+	
+	# evaluation
+	acc = accuracy_score(y_test, y_pred)
+	recall = recall_score(y_test, y_pred)
+	
+	print("[1-2] Bayesian Logistic Regression (Proper)")
+	print(f"Accuracy: {acc:.3f}")
+	print(f"Recall:   {recall:.3f}")
 
-	model = BayesianRidge()
-	model.fit(X_train, y_train)
+<br>
 
-	score = model.score(X_test, y_test)
-	print("R^2 Score:", score)
+|항목|Bayesian Logistic Regression|BayesianRidge|설명|
+|---|---|---|---|
+|문제 유형|이진 분류|연속 회귀|모델이 본질적으로 다루는 출력 변수의 형태를 의미함 (분류 vs 회귀)|
+|우도 분포|Bernoulli|Gaussian|관측 데이터가 따른다고 가정하는 확률분포로, 문제 유형을 결정하는 핵심 요소|
+|링크 함수|Sigmoid|Identity|선형 예측값을 출력 공간으로 변환하는 함수 (확률 vs 실수값)|
+|손실|Log-loss|MSE|모델 학습 시 최소화하는 목적 함수로, 우도 분포와 직접적으로 연결됨|
+|사후분포|근사 필요|닫힌 해|베이즈 추론에서 파라미터 사후분포를 계산하는 방식 (근사 추론 vs 해석적 해)|
+|분류 확률|정식 확률|임계값으로 강제 변환|모델 출력이 확률로 해석 가능한지 여부를 나타냄|
 
+
+		
 ## [1-3] 프로빗 회귀 (Probit Regression)
+▣ Guide : scikit‑learn 공식 가이드 없음
+▣ API : scikit‑learn에 Bayesian Logistic Regression API 없음
+▣ Example : scikit‑learn 공식 예제 없음
+▣ https://www.statsmodels.org/stable/generated/statsmodels.discrete.discrete_model.Probit.html
+
+	import statsmodels.api as sm
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score, recall_score
+	import numpy as np
+	
+	print("[1-3] Probit Regression")
+	
+	for species in species_list:
+	    y = (data["class"] == species).astype(int)
+	
+	    X_train, X_test, y_train, y_test = train_test_split(
+	        X, y, random_state=42
+	    )
+	
+	    X_train = sm.add_constant(X_train)
+	    X_test = sm.add_constant(X_test)
+	
+	    model = sm.Probit(y_train, X_train)
+	    result = model.fit(disp=False)
+	
+	    y_prob = result.predict(X_test)
+	    y_pred = (y_prob >= 0.5).astype(int)
+	
+	    acc = accuracy_score(y_test, y_pred)
+	    recall = recall_score(y_test, y_pred)
+	
+	    print(f"{species} | Accuracy: {acc:.3f} | Recall: {recall:.3f}")
+		
 
 ## [1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀 (Multinomial Logistic Regression / Softmax Regression)
+▣ Guide : https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+▣ Example : https://scikit-learn.org/stable/auto_examples/linear_model/plot_logistic_multinomial.html
 
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score, recall_score
+	
+	print("[1-4] Multinomial Logistic Regression (Softmax)")
+	
+	y = data["class"]
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, random_state=42
+	)
+	
+	model = LogisticRegression(
+	    multi_class="multinomial",
+	    solver="lbfgs",
+	    max_iter=1000
+	)
+	model.fit(X_train, y_train)
+	
+	y_pred = model.predict(X_test)
+	
+	acc = accuracy_score(y_test, y_pred)
+	recalls = recall_score(
+	    y_test,
+	    y_pred,
+	    labels=species_list,
+	    average=None
+	)
+	
+	print(f"Overall Accuracy: {acc:.3f}")
+	for cls, r in zip(species_list, recalls):
+	    print(f"{cls} Recall: {r:.3f}")
+
+		
 ---
 
 # [2] 통계·확률 기반
