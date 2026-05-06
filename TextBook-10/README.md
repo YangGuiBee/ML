@@ -10,7 +10,7 @@
 
 <br>
 
-<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-10/images/ML10-4.PNG'> 
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-10/images/ML10-4f.png'> 
 
 <br>
 
