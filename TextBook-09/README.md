@@ -74,12 +74,11 @@
 		[1-5]네스테로프 가속 경사하강법(Nesterov Accelerated Gradient)
 		[1-6]아담 옵티마이저(Adam)
 		[1-7]아담W 옵티마이저(AdamW)
-		[1-8]루카헤드(Lookahead)
-		[1-9]정규방정식(Normal Equation)
-		[1-10]뉴턴 방법(Newton’s Method)
-		[1-11]제한 메모리 BFGS(Limited-memory BFGS)
-		[1-12]학습률 감소(Learning Rate Decay)
-		[1-13]워밍업(Warm-up)
+		[1-8]루카헤드(Lookahead)		
+		[1-9]뉴턴 방법(Newton’s Method)
+		[1-10]제한 메모리 BFGS(Limited-memory BFGS)
+		[1-11]학습률 감소(Learning Rate Decay)
+		[1-12]워밍업(Warm-up)
 
   
   	[2] 일반화 선형 회귀(Generalized Linear Regression, GLM)
