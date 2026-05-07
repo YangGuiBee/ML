@@ -57,12 +57,9 @@
 **<ins>③ 서수 로지스틱 회귀(Ordinal Logistic Regression)</ins> :** 서수 로지스틱 회귀 분석 또는 순서형 로짓 모델은 숫자가 실제 값이 아닌 순위를 나타내는 문제를 풀기 위한 특수한 유형의 다항 회귀 분석이다. 예를 들어 서수 회귀 분석을 사용하여 고객이 1년 동안 구매한 품목 수 등의 숫자 값을 기준으로, 서비스를 나쁨, 양호, 좋음 또는 우수 등급으로 평가하도록 요청하는 설문 조사 질문의 답을 예측할 수 있다.<br>
 **▣ 장점 :** 계산이 간단하고 빠르며 해석이 용이, 확률 기반 예측으로 의사결정에 활용 가능, 정규화 적용 시 과적합 방지 가능<br>
 **▣ 단점 :** 비선형 관계 데이터에는 부적합, 이상치(outlier)에 민감<br> 
-**▣ Scikit-learn 클래스 :** `sklearn.linear_model.LogisticRegression`<br>
-**▣ 가이드 :** https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression<br>
-**▣ API :** https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html<br><br>
+**▣ Scikit-learn 클래스 :** sklearn.linear_model.LogisticRegression
 
 ![](./images/LRLR.PNG)
-
 
 **▣ 회귀식 :**   ![eq](https://latex.codecogs.com/png.latex?P(y=1|x)=\frac{1}{1+e^{-(\beta_0+\beta_1x_1+\cdots+\beta_kx_k)}}) <br><br>
 Linear Regression : $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1x_1 + \hat{\beta}_2x_2 + ...+\hat{\beta}_dx_d$
@@ -602,9 +599,6 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 **▣ 장점 :** 불확실성 정량화 가능, 과적합 방지 효과, 작은 데이터셋에서도 안정적 성능<br>
 **▣ 단점 :** 계산 복잡도 높음 (MCMC, VI 등 필요), 수렴 속도 느림<br>
 **▣ Scikit-learn 클래스 :** 직접 구현 없음 → PyMC / scikit-bayes (`sklearn_bayes.LogisticRegression`) 활용<br>
-**▣ 회귀식 :** $P(\beta|D)\propto P(D|\beta)P(\beta))$ <br>
-
-
 **▣ 베이즈 로지스틱 회귀 적용분야 :**
 
 | 분야         | 대표 연구사례                               | 연구 목적 / 문제 정의                | 독립변수 (X)                | 종속변수 (y)                     |
@@ -642,9 +636,6 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 **▣ 장점 :** 정규분포 기반으로 통계적 엄밀성 높음,  이상치에 덜 민감<br>
 **▣ 단점 :** 계산 복잡하고 직관성 낮음 , 로지스틱 회귀보다 구현 복잡<br>
 **▣ Scikit-learn 클래스 :** 직접 지원 없음 → `statsmodels.discrete.discrete_model.Probit` 사용<br>
-**▣ 회귀식 :**  ![eq](https://latex.codecogs.com/png.latex?P(y=1|x)=\Phi(\beta_0+\beta_1x_1+\cdots+\beta_kx_k)) <br>
-
-
 **▣ 프로빗 회귀 적용분야 :**
 
 | 분야         | 대표 연구사례                               | 연구 목적 / 문제 정의                | 독립변수 (X)                | 종속변수 (y)                     |
@@ -809,9 +800,6 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 **▣ 장점 :** 다중 클래스 문제 해결 가능, 각 클래스 확률을 해석적으로 제공<br>
 **▣ 단점 :** 클래스가 많을수록 계산량 증가, 데이터 불균형에 민감<br>
 **▣ Scikit-learn 클래스 :** `sklearn.linear_model.LogisticRegression(multi_class='multinomial', solver='lbfgs')`<br>
-**▣ 회귀식 :**  ![eq](https://latex.codecogs.com/png.latex?P(y=i|x)=\frac{e^{\beta_i^Tx}}{\sum_{j=1}^Ke^{\beta_j^Tx}}) <br>
-
-
 **▣ 소프트맥스 회귀 적용분야 :**
 
 | 분야         | 대표 연구사례                               | 연구 목적 / 문제 정의                | 독립변수 (X)                | 종속변수 (y)                     |
@@ -838,9 +826,6 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 **▣ 장점 :** 변수 간 인과관계 해석 가능, 결측치 처리에 강함, 확률적 추론 및 구조 해석 가능<br>
 **▣ 단점 :** 구조 학습 복잡도 매우 높음, 고차원 데이터에서는 비효율적<br>
 **▣ Scikit-learn 클래스 :** 없음 → `pgmpy.models.BayesianNetwork` 활용 가능<br>
-**▣ 회귀식 :**  ![eq](https://latex.codecogs.com/png.latex?P(X_1,\ldots,X_n)=\prod_iP(X_i|Pa(X_i))) <br>
-
-
 **▣ 베이즈 네트워크 분류 적용분야 :**
 
 | 분야         | 대표 연구사례                               | 연구 목적 / 문제 정의                | 독립변수 (X)                | 종속변수 (y)                     |
@@ -870,8 +855,6 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 **▣ 단점 :** 독립성 가정이 비현실적, 연속형 변수 처리에 추가 전처리 필요<br>
 feature 간의 독립성(feature간에 서로 상관관계 無)이어야 하므로 실생활에서 바로 적용하기는 곤란<br>
 **▣ Scikit-learn 클래스 :** `sklearn.naive_bayes.GaussianNB`, `MultinomialNB`, `BernoulliNB`<br>
-**▣ 가이드 :** https://scikit-learn.org/stable/modules/naive_bayes.html<br>
-**▣ 회귀식 :**  ![eq](https://latex.codecogs.com/png.latex?P(C|X)=\frac{P(X|C)P(C)}{P(X)})<br>
 
 ![](./images/nb.png)
 <br>
@@ -904,17 +887,10 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 
 <br> 
 
-**▣ 회귀식 :**  독립변수의 조건부 확률에 조건부 독립가정을 추가한 베이즈 분류기가 나이브 베이즈 분류기<br>
-
-![](./images/NB.png)
-
-<br>
-
-**▣ 유형**<br>
+**▣ 나이브 베이즈 분류 유형**<br>
 
  **<ins>① 가우시안 나이브 베이즈(Gaussian Naive Bayes, GaussianNB)</ins> :** 연속적인 값을 지닌 데이터 처리시, 전형적으로 각 클래스의 연속적인 값들이 가우스 분포를 따른다고 가정<br>
  **API :** https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB<br>
- **회귀식 :** $P(x_i \mid y) = \frac{1}{\sqrt{2\pi\sigma^2_y}} \exp\left(-\frac{(x_i - \mu_y)^2}{2\sigma^2_y}\right)$<br>
 
 <br>
 
@@ -949,8 +925,6 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 
 **<ins>② 다항 나이브 베이즈(Multinomial Naive Bayes, MultinomialNB)</ins> :** 하나의 문서에서 단어의 출현을 나타내는 이벤트를 가지고 문서 분류를 하는데 사용되는 이벤트 모델이다.<br>
 **API :**  https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB<br>
-<!-- $\hat{\theta}_{yi} = \frac{N_{yi} + \alpha}{N_y + \alpha n}$<br> -->
-**회귀식 :**   ![](./images/theta.svg)
 
 <br>
 
@@ -991,7 +965,6 @@ p(스팸|광고) = P(광고|스팸)P(스팸)/P(광고) = (4/20*20/100)/(5/100) =
 
 **<ins>③ 베르누이 나이브 베이즈(Bernoulli Naive Bayes, Bernoulli NB)</ins> :** 다변량 베르누이 분포에 따라 분포된 데이터에 대한 나이브 베이즈 학습 및 분류 알고리즘으로, 특성들은 입력들을 설명하는 독립적인 부울 값(이진 변수)이다.<br>
 **API :** https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.BernoulliNB.html#sklearn.naive_bayes.BernoulliNB<br>
-**회귀식 :** $P(x_i \mid y) = P(x_i = 1 \mid y) x_i + (1 - P(x_i = 1 \mid y)) (1 - x_i)$<br>
 
 <br>
 
@@ -1061,10 +1034,6 @@ EM 알고리즘은 잠재변수를 포함한 확률 모델에서 최대우도추
 **▣ 장점 :** 복잡한 분포 구조 모델링 가능, 각 클래스에 대한 사후확률 계산 가능<br>
 **▣ 단점 :** 초기값에 따라 수렴이 불안정, 지역 최적해에 빠질 수 있음, 계산량 많음<br>
 **▣ Scikit-learn 클래스 :** `sklearn.mixture.GaussianMixture`<br>
-**▣ 회귀식 :**  ![eq](https://latex.codecogs.com/png.latex?p(x)=\sum_{k=1}^K\pi_k\mathcal{N}(x|\mu_k,\Sigma_k))<br>
-
-<br>
-
 **▣ 혼합모형 기반 분류 적용분야 :**
 
 | 분야         | 대표 연구사례                               | 연구 목적 / 문제 정의                | 독립변수 (X)                | 종속변수 (y)                     |
@@ -1091,10 +1060,6 @@ EM 알고리즘은 잠재변수를 포함한 확률 모델에서 최대우도추
 **▣ 장점 :** 계산이 단순하고 빠른 예측, 메모리 효율적, 고차원에서도 적용 가능<br>
 **▣ 단점 :** 클래스 분산이 다른 경우 오분류 가능, 비선형 데이터에는 부적합<br>
 **▣ Scikit-learn 클래스 :** `sklearn.neighbors.NearestCentroid`<br>
-**▣ 회귀식 :**  ![eq](https://latex.codecogs.com/png.latex?\hat{y}=\arg\min_c\|x-\mu_c\|^2) <br>
-
-<br>
-
 **▣ 최근접 중심 분류 적용분야 :**
 
 | 분야         | 대표 연구사례                               | 연구 목적 / 문제 정의                | 독립변수 (X)                | 종속변수 (y)                     |
@@ -1121,10 +1086,6 @@ EM 알고리즘은 잠재변수를 포함한 확률 모델에서 최대우도추
 **▣ 장점 :** 변수 간 상관관계 반영, 스케일 조정 불필요, 이상치 탐지에 효과적<br>
 **▣ 단점 :** 공분산 추정이 어려움, 고차원 데이터에서는 계산량 증가<br>
 **▣ Scikit-learn 클래스 :** `sklearn.covariance.EmpiricalCovariance` (직접 Mahalanobis 거리 계산: `scipy.spatial.distance.mahalanobis`)<br>
-**▣ 회귀식 :**  ![eq](https://latex.codecogs.com/png.latex?D_M(x)=\sqrt{(x-\mu)^T\Sigma^{-1}(x-\mu)}) <br>
-
-<br>
-
 **▣ 마할라노비스 거리 분류 적용분야 :**
 
 
