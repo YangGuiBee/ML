@@ -66,14 +66,114 @@
 |① 반응변수가 범주형(class) 데이터인가?|클래스별 데이터가 정규분포를 따른다고 가정할 수 있으며, 모든 클래스가 유사한 분산 구조를 가짐|**[1-1] 선형 판별 분석 (Linear Discriminant Analysis, LDA)**|
 |② 반응변수가 범주형(class) 데이터인가?|클래스별 데이터가 정규분포를 따르지만, 클래스마다 분산 구조가 서로 다름|**[1-2] 이차 판별 분석 (Quadratic Discriminant Analysis, QDA)**|
 
+|모델명|sk-learn 사용 예제 소스|최적의 훈련 데이터셋|
+|---|---|---|
+|[1-1] 선형 판별 분석|LinearDiscriminantAnalysis / fit / accuracy_score, recall_score|Iris Dataset<br>[UCI Iris Dataset](https://archive.ics.uci.edu/ml/datasets/iris)|
+|[1-2] 이차 판별 분석|QuadraticDiscriminantAnalysis / fit / accuracy_score, recall_score|Iris Dataset<br>[UCI Iris Dataset](https://archive.ics.uci.edu/ml/datasets/iris)|
+
+## [1-1] 선형 판별 분석 (Linear Discriminant Analysis, LDA)
+▣ 가이드 : https://scikit-learn.org/stable/modules/lda_qda.html<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/classification/plot_lda.html<br>
+
+	import pandas as pd
+	url = "https://raw.githubusercontent.com/YangGuiBee/ML/main/TextBook-02/iris.data"
+	columns = ["sepal_length", "sepal_width", "petal_length", "petal_width", "class"]
+	data = pd.read_csv(url, header=None, names=columns)
+	
+	X = data.iloc[:, :-1]
+	y = data["class"]
+	classes = ["Iris-setosa", "Iris-versicolor", "Iris-virginica"]
+
+	from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score, recall_score
+
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, random_state=42
+	)
+	
+	model = LinearDiscriminantAnalysis()
+	model.fit(X_train, y_train)
+	
+	y_pred = model.predict(X_test)
+	
+	acc = accuracy_score(y_test, y_pred)
+	recalls = recall_score(y_test, y_pred, labels=classes, average=None)
+	
+	print("[1-1] Linear Discriminant Analysis (LDA)")
+	print(f"Overall Accuracy: {acc:.3f}")
+	for c, r in zip(classes, recalls):
+	    print(f"{c} Recall: {r:.3f}")
+		
+
+## [1-2] 이차 판별 분석 (Quadratic Discriminant Analysis, QDA)
+▣ 가이드 : https://scikit-learn.org/stable/modules/lda_qda.html<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/classification/plot_qda.html<br>
+
+	from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score, recall_score
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, random_state=42
+	)
+	
+	model = QuadraticDiscriminantAnalysis()
+	model.fit(X_train, y_train)
+	
+	y_pred = model.predict(X_test)
+	
+	acc = accuracy_score(y_test, y_pred)
+	recalls = recall_score(y_test, y_pred, labels=classes, average=None)
+	
+	print("[1-2] Quadratic Discriminant Analysis (QDA)")
+	print(f"Overall Accuracy: {acc:.3f}")
+	for c, r in zip(classes, recalls):
+	    print(f"{c} Recall: {r:.3f}")
+	
+
+<br>
 
 # [2] 트리 및 앙상블 기반
 
+## [2-1] 결정 트리 (Decision Tree, DT)
+## [2-2] 랜덤 포레스트 (Random Forest, RF)
+## [2-3] 그래디언트 부스팅 (Gradient Boosting Machine, GBM)
+## [2-4] 익스트림 그래디언트 부스팅 (Extreme Gradient Boosting, XGBoost)
+## [2-5] 라이트 그래디언트 부스팅 머신 (Light Gradient Boosting Machine, LightGBM)
+
+<br>
+
 # [3] 거리 기반
+
+## [3-1] k-최근접 이웃 (k-Nearest Neighbors, K-NN)
+## [3-2] 서포트 벡터 머신 (Support Vector Machine, SVM)
+
+
+<br>
 
 # [4] 차원 축소 + 예측
 
+## [4-1] 주성분 회귀 (Principal Component Regression, PCR) : 주성분 분석(Principal Component Analysis, PCA) + 회귀
+## [4-2] 부분 최소제곱 회귀 (Partial Least Squares, PLS)
+## [4-3] 부분 최소제곱 판별 분석 (Partial Least Squares Discriminant Analysis, PLS‑DA)
+## [4-4] 감독 주성분 분석 (Supervised Principal Component Analysis, Supervised PCA)
+
+
+<br>
+
 # [5] 신경망 기반
+
+## [5-1] 다층 퍼셉트론 (Multilayer Perceptron, MLP)
+## [5-2] 합성곱 신경망 / 순환 신경망 (Convolutional Neural Network / Recurrent Neural Network, CNN / RNN)
+## [5-3] 트랜스포머 (Transformer)
+## [5-4] 오토인코더 (Autoencoder, AE)
+
+
+
+<br>
 
 
 	
