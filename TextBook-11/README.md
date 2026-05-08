@@ -66,10 +66,10 @@
 |① 반응변수가 범주형(class) 데이터인가?|클래스별 데이터가 정규분포를 따른다고 가정할 수 있으며, 모든 클래스가 유사한 분산 구조를 가짐|**[1-1] 선형 판별 분석 (Linear Discriminant Analysis, LDA)**|
 |② 반응변수가 범주형(class) 데이터인가?|클래스별 데이터가 정규분포를 따르지만, 클래스마다 분산 구조가 서로 다름|**[1-2] 이차 판별 분석 (Quadratic Discriminant Analysis, QDA)**|
 
-|모델명|sk-learn 사용 예제 소스|최적의 훈련 데이터셋|
+|모델명|sk-learn 사용 예제 소스|최적의 데이터셋|
 |---|---|---|
-|[1-1] 선형 판별 분석|LinearDiscriminantAnalysis / fit / accuracy_score, recall_score|Iris Dataset<br>[UCI Iris Dataset](https://archive.ics.uci.edu/ml/datasets/iris)|
-|[1-2] 이차 판별 분석|QuadraticDiscriminantAnalysis / fit / accuracy_score, recall_score|Iris Dataset<br>[UCI Iris Dataset](https://archive.ics.uci.edu/ml/datasets/iris)|
+|**[1-1] 선형 판별 분석**|LinearDiscriminantAnalysis / fit / score|[UCI Iris Dataset](https://archive.ics.uci.edu/ml/datasets/iris)|
+|**[1-2] 이차 판별 분석**|QuadraticDiscriminantAnalysis / fit / score|[UCI Wine Dataset](https://archive.ics.uci.edu/ml/datasets/wine)|
 
 ## [1-1] 선형 판별 분석 (Linear Discriminant Analysis, LDA)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/lda_qda.html<br>
