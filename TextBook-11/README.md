@@ -275,8 +275,6 @@ LightGBM → 로그·클릭·금융 거래 등 초대규모 데이터 처리 특
 
 # [3] 거리 기반
 
-## [3-1] k-최근접 이웃 (k-Nearest Neighbors, K-NN)
-
 |모델명|이론 개요|특징|
 |---|---|---|
 |[3-1] k-최근접 이웃|사례 기반 학습 이론<br>→입력 데이터와 가장 가까운 k개의 이웃을 기준으로 예측|기본 모델은 최근접 이웃(1-NN)<br>→단일 이웃의 불안정성을 k개 다수결로 완화한 비모수 모델|
@@ -286,14 +284,6 @@ LightGBM → 로그·클릭·금융 거래 등 초대규모 데이터 처리 특
 |---|---|---|---|---|
 |[3-1] k-최근접 이웃|$d(x,x_i)=(x-x_i)^T(x-x_i)$|$x$: 입력 샘플, $x_i$: 학습 데이터의 i번째 샘플, $d$: 두 샘플 간 거리|데이터 분포에 따라 결정 경계가 국소적으로 형성됨|추천 시스템, 패턴 인식, 소규모 의료 진단 데이터|
 [3-2] 서포트 벡터 머신|$f(x)=w^T x+b$|$x$: 입력 벡터, $w$: 가중치 벡터, $b$: 편향, $f(x)$: 결정 함수|초평면과 마진, 경계에 위치한 서포트 벡터 중심 구조|텍스트 분류, 고차원 바이오 데이터, 이상 탐지|
-
-|구분|조건|모델명|
-|---|---|---|
-|① 학습 데이터 구조|유사한 데이터는 가까운 공간에 위치|**[3-1] k-최근접 이웃 (k-Nearest Neighbors, K-NN)**|
-|② 데이터 크기|학습 데이터가 크지 않음|**[3-1] k-최근접 이웃 (k-Nearest Neighbors, K-NN)**|
-|③ 모델 가정|분포 가정이나 모형 가정이 필요 없음|**[3-1] k-최근접 이웃 (k-Nearest Neighbors, K-NN)**|
-|④ 결정 경계 형태|복잡하고 비선형적인 경계가 필요|**[3-1] k-최근접 이웃 (k-Nearest Neighbors, K-NN)**|
-|⑤ 해석 목적보다는 예측 목적|모델 해석보다 유사도 기반 예측이 중요|**[3-1] k-최근접 이웃 (k-Nearest Neighbors, K-NN)**|
 
 |구분|조건|모델명|
 |---|---|---|
@@ -310,9 +300,49 @@ LightGBM → 로그·클릭·금융 거래 등 초대규모 데이터 처리 특
 |⑥ 이상치 영향|이상치도 동일하게 고려해도 무방|**[3-1] k-최근접 이웃 (k-Nearest Neighbors, K-NN)**|
 ||이상치는 제외하고 핵심 경계만 반영 원함|**[3-2] 서포트 벡터 머신 (Support Vector Machine, SVM)**|
 
+|모델명|sk-learn 사용 예제 소스|최적의 데이터셋|
+|---|---|---|
+|[3-1] k-최근접 이웃|KNeighborsClassifier / knn.fit() / accuracy_score|Iris Dataset (UCI ML Repository)|
+|[3-2] 서포트 벡터 머신|SVC / svm.fit() / classification_report|Breast Cancer Wisconsin Dataset (UCI ML Repository)|
+
+## [3-1] k-최근접 이웃 (k-Nearest Neighbors, K-NN)
+▣ 가이드 : https://scikit-learn.org/stable/modules/neighbors.html<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html<br>
+
+	from sklearn.datasets import load_iris
+	from sklearn.model_selection import train_test_split
+	from sklearn.neighbors import KNeighborsClassifier
+	from sklearn.metrics import accuracy_score
+
+	X, y = load_iris(return_X_y=True)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+	knn = KNeighborsClassifier(n_neighbors=5)
+	knn.fit(X_train, y_train)
+
+	y_pred = knn.predict(X_test)
+	accuracy_score(y_test, y_pred)
+
 
 ## [3-2] 서포트 벡터 머신 (Support Vector Machine, SVM)
+▣ 가이드 : https://scikit-learn.org/stable/modules/svm.html<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/svm/plot_svm_margin.html<br>
 
+	from sklearn.datasets import load_breast_cancer
+	from sklearn.model_selection import train_test_split
+	from sklearn.svm import SVC
+	from sklearn.metrics import classification_report
+
+	X, y = load_breast_cancer(return_X_y=True)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+	svm = SVC(kernel='linear')
+	svm.fit(X_train, y_train)
+
+	y_pred = svm.predict(X_test)
+	classification_report(y_test, y_pred)
 
 <br>
 
