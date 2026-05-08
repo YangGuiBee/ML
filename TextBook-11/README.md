@@ -542,12 +542,137 @@ LightGBM → 로그·클릭·금융 거래 등 초대규모 데이터 처리 특
 |[5-3] 트랜스포머|$z=xW$|$x$: 입력 토큰 표현, $W$: 변환 가중치, $z$: 변환된 표현|자기주의 기반 병렬 연결 구조|자연어 처리, 대규모 언어 모델|
 |[5-4] 오토인코더|$\hat{x}=g(f(x))$|$x$: 입력, $f$: 인코더, $g$: 디코더, $\hat{x}$: 재구성 입력|인코더–디코더 대칭 구조|차원 축소, 이상 탐지, 표현 학습|
 
+|구분|조건|모델명|
+|---|---|---|
+|① 문제 유형|지도학습 기반의 일반적인 분류·회귀 문제|**[5-1] 다층 퍼셉트론 (Multilayer Perceptron, MLP)**|
+||비지도 학습 또는 표현 학습이 목적|**[5-4] 오토인코더 (Autoencoder, AE)**|
+|② 데이터 구조|입력 데이터에 명확한 공간·시간 구조가 없음|**[5-1] 다층 퍼셉트론 (Multilayer Perceptron, MLP)**|
+||공간 구조가 있는 데이터(이미지, 영상)|**[5-2] 합성곱 신경망 (Convolutional Neural Network, CNN)**|
+||순서·시간 의존성이 있는 데이터(시계열, 음성)|**[5-2] 순환 신경망 (Recurrent Neural Network, RNN)**|
+|③ 장기 의존성|장기 의존성이 크지 않음|**[5-2] 순환 신경망 (Recurrent Neural Network, RNN)**|
+||장기 의존성·전역 관계 학습이 중요|**[5-3] 트랜스포머 (Transformer)**|
+|④ 데이터 규모|데이터 규모가 작거나 중간 수준|**[5-1] 다층 퍼셉트론 (Multilayer Perceptron, MLP)**|
+||대규모 데이터·병렬 학습 환경|**[5-3] 트랜스포머 (Transformer)**|
+|⑤ 목적|예측 성능 중심의 범용 모델 필요|**[5-1] 다층 퍼셉트론 (Multilayer Perceptron, MLP)**|
+||특징 추출·차원 축소·이상 탐지 목적|**[5-4] 오토인코더 (Autoencoder, AE)**|
+|⑥ 모델 확장성|구조가 단순하고 구현이 쉬운 모델 선호|**[5-1] 다층 퍼셉트론 (Multilayer Perceptron, MLP)**|
+||최신 성능·확장성·전이학습 활용|**[5-3] 트랜스포머 (Transformer)**|
+
+|모델명|sk-learn 사용 예제 소스|최적의 데이터셋|
+|---|---|---|
+|[5-1] 다층 퍼셉트론|MLPClassifier / mlp.fit() / accuracy_score|MNIST (OpenML)|
+|[5-2] 합성곱·순환 신경망|MLPClassifier(대체) / model.fit() / accuracy_score|Fashion-MNIST (OpenML)|
+|[5-3] 트랜스포머|SGDClassifier(대체) / model.fit() / accuracy_score|20 Newsgroups (sklearn)|
+|[5-4] 오토인코더|MLPRegressor / ae.fit() / mean_squared_error|MNIST (OpenML)|
 
 ## [5-1] 다층 퍼셉트론 (Multilayer Perceptron, MLP)
-## [5-2] 합성곱 신경망 / 순환 신경망 (Convolutional Neural Network / Recurrent Neural Network, CNN / RNN)
-## [5-3] 트랜스포머 (Transformer)
-## [5-4] 오토인코더 (Autoencoder, AE)
+▣ 가이드 : https://scikit-learn.org/stable/modules/neural_networks_supervised.html<br>
+▣ API : (분류) https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html<br>
+(회귀) https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPRegressor.html<br>
+▣ 예제 :  https://scikit-learn.org/stable/auto_examples/neural_networks/plot_mlp_alpha.html<br>
 
+	from sklearn.datasets import fetch_openml
+	from sklearn.model_selection import train_test_split
+	from sklearn.neural_network import MLPClassifier
+	from sklearn.metrics import accuracy_score
+	
+	# 데이터셋 로드
+	X, y = fetch_openml("mnist_784", version=1, return_X_y=True, as_frame=False)
+	X = X / 255.0  # 정규화
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, test_size=0.3, random_state=42
+	)
+	
+	# 모델 학습
+	mlp = MLPClassifier(hidden_layer_sizes=(100,), max_iter=20)
+	mlp.fit(X_train, y_train)
+	
+	# 모델 평가
+	accuracy_score(y_test, mlp.predict(X_test))
+
+	
+## [5-2] 합성곱 신경망 / 순환 신경망 (Convolutional Neural Network / Recurrent Neural Network, CNN / RNN)
+▣ 가이드·API·예제 : (CNN) https://www.tensorflow.org/tutorials/images/cnn<br>
+(RNN) https://www.tensorflow.org/tutorials/text/text_generation<br>
+
+	from sklearn.datasets import fetch_openml
+	from sklearn.model_selection import train_test_split
+	from sklearn.neural_network import MLPClassifier
+	from sklearn.metrics import accuracy_score
+	
+	# 데이터셋 로드
+	X, y = fetch_openml("Fashion-MNIST", version=1, return_X_y=True, as_frame=False)
+	X = X / 255.0
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, test_size=0.3, random_state=42
+	)
+	
+	# CNN/RNN 대체용 MLP
+	model = MLPClassifier(hidden_layer_sizes=(200,), max_iter=20)
+	model.fit(X_train, y_train)
+	
+	# 평가
+	accuracy_score(y_test, model.predict(X_test))
+
+	
+## [5-3] 트랜스포머 (Transformer)
+▣ 가이드 : https://arxiv.org/abs/1706.03762 <br>
+▣ API : https://huggingface.co/docs/transformers/index<br>
+▣ 예제 : https://huggingface.co/docs/transformers/quicktour<br>
+
+	from sklearn.datasets import fetch_20newsgroups
+	from sklearn.feature_extraction.text import TfidfVectorizer
+	from sklearn.linear_model import SGDClassifier
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score
+	
+	# 데이터셋 로드
+	data = fetch_20newsgroups(subset="all")
+	X_train, X_test, y_train, y_test = train_test_split(
+	    data.data, data.target, test_size=0.3, random_state=42
+	)
+	
+	# 텍스트 벡터화
+	vectorizer = TfidfVectorizer(max_features=5000)
+	X_train_vec = vectorizer.fit_transform(X_train)
+	X_test_vec = vectorizer.transform(X_test)
+	
+	# 모델 학습
+	clf = SGDClassifier()
+	clf.fit(X_train_vec, y_train)
+	
+	# 모델 평가
+	accuracy_score(y_test, clf.predict(X_test_vec))
+
+	
+## [5-4] 오토인코더 (Autoencoder, AE)
+▣ 가이드 : https://keras.io/examples/vision/autoencoder/<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPRegressor.html<br>
+▣ 예제 : https://pytorch.org/tutorials/beginner/autoencoder_tutorial.html<br>
+
+	from sklearn.datasets import fetch_openml
+	from sklearn.model_selection import train_test_split
+	from sklearn.neural_network import MLPRegressor
+	from sklearn.metrics import mean_squared_error
+	
+	# 데이터셋 로드
+	X, _ = fetch_openml("mnist_784", version=1, return_X_y=True, as_frame=False)
+	X = X / 255.0
+	
+	X_train, X_test = train_test_split(
+	    X, test_size=0.3, random_state=42
+	)
+	
+	# Autoencoder (입력 = 출력)
+	ae = MLPRegressor(hidden_layer_sizes=(64,), max_iter=20)
+	ae.fit(X_train, X_train)
+	
+	# 모델 평가 (재구성 오류)
+	X_recon = ae.predict(X_test)
+	mean_squared_error(X_test, X_recon)
+	
 
 
 <br>
