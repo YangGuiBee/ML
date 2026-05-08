@@ -140,39 +140,143 @@
 
 |모델명|이론 개요|특징|
 |---|---|---|
-|[1-1] 결정 트리|특성 공간을 분할하는 규칙 기반 모델<br>→불순도를 최소화하는 방향으로 트리를 성장시키는 분류·회귀 모델|기본 모델: 단일 트리<br>→해석 가능성이 높으나 과적합에 취약|
-|[1-2] 랜덤 포레스트|다수의 결정 트리를 앙상블하는 배깅 기반 모델<br>→무작위성으로 분산을 감소시키는 모델|기본 모델: 결정 트리<br>→부트스트랩 샘플링과 특성 무작위 선택으로 안정성 향상|
-|[1-3] 그래디언트 부스팅 머신|손실함수를 단계적으로 최소화하는 가산 모델<br>→이전 오차를 보정하며 약한 학습기를 순차 결합|기본 모델: 결정 트리(stump)<br>→편향 감소에 강하나 학습이 순차적|
-|[1-4] 익스트림 그래디언트 부스팅|그래디언트 부스팅을 정규화·최적화한 모델<br>→속도와 일반화 성능을 강화한 부스팅 모델|기본 모델: GBM<br>→정규화·병렬화·결측값 처리 강화|
-|[1-5] 라이트 그래디언트 부스팅 머신|히스토그램 기반의 리프 중심 트리 학습 모델<br>→대규모 데이터에 특화된 경량 부스팅 모델|기본 모델: GBM<br>→Leaf-wise 성장으로 학습 속도 극대화|
+|[2-1] 결정 트리|특성 공간을 분할하는 규칙 기반 모델<br>→불순도를 최소화하는 방향으로 트리를 성장시키는 분류·회귀 모델|기본 모델: 단일 트리<br>→해석 가능성이 높으나 과적합에 취약|
+|[2-2] 랜덤 포레스트|다수의 결정 트리를 앙상블하는 배깅 기반 모델<br>→무작위성으로 분산을 감소시키는 모델|기본 모델: 결정 트리<br>→부트스트랩 샘플링과 특성 무작위 선택으로 안정성 향상|
+|[2-3] 그래디언트 부스팅 머신|손실함수를 단계적으로 최소화하는 가산 모델<br>→이전 오차를 보정하며 약한 학습기를 순차 결합|기본 모델: 결정 트리(stump)<br>→편향 감소에 강하나 학습이 순차적|
+|[2-4] 익스트림 그래디언트 부스팅|그래디언트 부스팅을 정규화·최적화한 모델<br>→속도와 일반화 성능을 강화한 부스팅 모델|기본 모델: GBM<br>→정규화·병렬화·결측값 처리 강화|
+|[2-5] 라이트 그래디언트 부스팅 머신|히스토그램 기반의 리프 중심 트리 학습 모델<br>→대규모 데이터에 특화된 경량 부스팅 모델|기본 모델: GBM<br>→Leaf-wise 성장으로 학습 속도 극대화|
 
 |모델명|수식|수식의 항목 설명|그래프형태|적용분야|
 |---|---|---|---|---|
-|[1-1] 결정 트리|$f(x)=leaf(x)$|$x$: 입력 특성 벡터<br>$leaf(x)$: 규칙을 따라 도달한 리프의 예측값|트리 구조|의사결정 규칙 설명이 중요한 금융·의료|
-|[1-2] 랜덤 포레스트|$f(x)=sum(t_k(x))$|$t_k(x)$: k번째 트리 예측값<br>$sum$: 트리 앙상블 결합|트리 집합|변수 중요도 분석·리스크 모델링|
-|[1-3] 그래디언트 부스팅|$F(x)=sum(h_m(x))$|$h_m(x)$: m번째 약한 학습기<br>$sum$: 단계적 모델 누적|순차 트리|정형 데이터 예측·신용평가|
-|[1-4] XGBoost|$F(x)=sum(h_m(x))+reg$|$h_m(x)$: 트리 예측값<br>$reg$: 모델 복잡도 제어 항|정규화 트리 앙상블|대회·고성능 산업 모델|
-|[1-5] LightGBM|$F(x)=sum(h_l(x))$|$h_l(x)$: 리프 중심 트리 모델<br>$sum$: 부스팅 결합|Leaf-wise 트리|대규모 로그·클릭 데이터|
+|[2-1] 결정 트리|$f(x)=leaf(x)$|$x$: 입력 특성 벡터<br>$leaf(x)$: 규칙을 따라 도달한 리프의 예측값|트리 구조|의사결정 규칙 설명이 중요한 금융·의료|
+|[2-2] 랜덤 포레스트|$f(x)=sum(t_k(x))$|$t_k(x)$: k번째 트리 예측값<br>$sum$: 트리 앙상블 결합|트리 집합|변수 중요도 분석·리스크 모델링|
+|[2-3] 그래디언트 부스팅|$F(x)=sum(h_m(x))$|$h_m(x)$: m번째 약한 학습기<br>$sum$: 단계적 모델 누적|순차 트리|정형 데이터 예측·신용평가|
+|[2-4] XGBoost|$F(x)=sum(h_m(x))+reg$|$h_m(x)$: 트리 예측값<br>$reg$: 모델 복잡도 제어 항|정규화 트리 앙상블|대회·고성능 산업 모델|
+|[2-5] LightGBM|$F(x)=sum(h_l(x))$|$h_l(x)$: 리프 중심 트리 모델<br>$sum$: 부스팅 결합|Leaf-wise 트리|대규모 로그·클릭 데이터|
 
 |구분|조건|모델명|
 |---|---|---|
-|① 반응변수가 범주형(이진/다중) 또는 연속형인가?|해석 가능성이 매우 중요함, 규칙 기반 설명 필요|**[1-1] 결정 트리 (Decision Tree)**|
-|② 단일 결정 트리의 과적합이 우려되는가?|데이터 분산이 크고 안정적인 예측이 필요|**[1-2] 랜덤 포레스트 (Random Forest)**|
-|③ 반응변수 예측 정확도가 가장 중요한가?|편향을 줄이고 복잡한 패턴을 점진적으로 학습|**[1-3] 그래디언트 부스팅 머신 (Gradient Boosting Machine)**|
-|④ 성능 최적화 및 일반화가 핵심 요구사항인가?|정규화·결측값 처리·고성능 학습 필요|**[1-4] 익스트림 그래디언트 부스팅 (XGBoost)**|
-|⑤ 데이터 규모가 매우 큰가?|대규모·고차원 데이터, 빠른 학습 필요|**[1-5] 라이트 그래디언트 부스팅 머신 (LightGBM)**|
+|① 반응변수가 범주형(이진/다중) 또는 연속형인가?|해석 가능성이 매우 중요함, 규칙 기반 설명 필요|**[2-1] 결정 트리 (Decision Tree)**|
+|② 단일 결정 트리의 과적합이 우려되는가?|데이터 분산이 크고 안정적인 예측이 필요|**[2-2] 랜덤 포레스트 (Random Forest)**|
+|③ 반응변수 예측 정확도가 가장 중요한가?|편향을 줄이고 복잡한 패턴을 점진적으로 학습|**[2-3] 그래디언트 부스팅 머신 (Gradient Boosting Machine)**|
+|④ 성능 최적화 및 일반화가 핵심 요구사항인가?|정규화·결측값 처리·고성능 학습 필요|**[2-4] 익스트림 그래디언트 부스팅 (XGBoost)**|
+|⑤ 데이터 규모가 매우 큰가?|대규모·고차원 데이터, 빠른 학습 필요|**[2-5] 라이트 그래디언트 부스팅 머신 (LightGBM)**|
+결정 트리 → “왜 이런 예측이 나왔는가?”를 설명해야 하는 경우 최적<br>
+랜덤 포레스트 → 단일 트리의 불안정성을 줄이고 범용적 기본 성능 확보<br>
+GBM → 예측 정확도 중심, 정형 데이터에서 강력<br>
+XGBoost → 실무·대회 표준, 성능 + 안정성 균형<br>
+LightGBM → 로그·클릭·금융 거래 등 초대규모 데이터 처리 특화<br>
+
+|모델명|sk-learn 사용 예제 소스|최적의 데이터셋|
+|---|---|---|
+|**[2-1] 결정 트리**|DecisionTreeClassifier / fit / score|[UCI Adult Income Dataset](https://archive.ics.uci.edu/ml/datasets/adult)|
+|**[2-2] 랜덤 포레스트**|RandomForestClassifier / fit / score|[UCI Breast Cancer Wisconsin Dataset](https://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+(diagnostic))|
+|**[2-3] 그래디언트 부스팅 머신**|GradientBoostingClassifier / fit / score|[UCI Wine Quality Dataset](https://archive.ics.uci.edu/ml/datasets/wine+quality)|
+|**[2-4] 익스트림 그래디언트 부스팅**|XGBClassifier / fit / score|[Kaggle Higgs Boson Dataset](https://www.kaggle.com/c/higgs-boson)|
+|**[2-5] 라이트 그래디언트 부스팅 머신**|LGBMClassifier / fit / score|[Microsoft MSLR-WEB10K Dataset](https://www.microsoft.com/en-us/research/project/mslr/)|
+
 
 ## [2-1] 결정 트리 (Decision Tree, DT)
+▣ 가이드 : https://scikit-learn.org/stable/modules/tree.html<br>
+▣ API : (분류) https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html<br>
+(회귀) https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/tree/plot_unveil_tree_structure.html<br>
+
+	from sklearn.datasets import fetch_openml
+	from sklearn.model_selection import train_test_split
+	from sklearn.tree import DecisionTreeClassifier
+
+	X, y = fetch_openml("adult", version=2, as_frame=False, return_X_y=True)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+	model = DecisionTreeClassifier(random_state=42)
+	model.fit(X_train, y_train)
+
+	print("DT Accuracy:", model.score(X_test, y_test))
+
+
 ## [2-2] 랜덤 포레스트 (Random Forest, RF)
+▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#random-forests<br>
+▣ API : (분류) https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html<br>
+(회귀) https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_importances.html<br>
+
+	from sklearn.datasets import load_breast_cancer
+	from sklearn.model_selection import train_test_split
+	from sklearn.ensemble import RandomForestClassifier
+
+	X, y = load_breast_cancer(return_X_y=True)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+	model = RandomForestClassifier(random_state=42)
+	model.fit(X_train, y_train)
+
+	print("RF Accuracy:", model.score(X_test, y_test))
+	
+
 ## [2-3] 그래디언트 부스팅 (Gradient Boosting Machine, GBM)
+▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#gradient-boosting<br>
+▣ API : (분류) https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html<br>
+(회귀) https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html<br>
+▣ 예제 : (분류)https://scikit-learn.org/stable/auto_examples/ensemble/plot_gradient_boosting_classification.html<br>
+(회귀) https://scikit-learn.org/stable/auto_examples/ensemble/plot_gradient_boosting_regression.html<br>
+
+	from sklearn.datasets import fetch_openml
+	from sklearn.model_selection import train_test_split
+	from sklearn.ensemble import GradientBoostingClassifier
+
+	X, y = fetch_openml("wine-quality-red", version=1, as_frame=False, return_X_y=True)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+	model = GradientBoostingClassifier(random_state=42)
+	model.fit(X_train, y_train)
+
+	print("GBM Accuracy:", model.score(X_test, y_test))
+
+
 ## [2-4] 익스트림 그래디언트 부스팅 (Extreme Gradient Boosting, XGBoost)
+▣ 가이드 : https://xgboost.readthedocs.io/en/stable/<br>
+▣ API : (분류) https://xgboost.readthedocs.io/en/stable/python/python_api.html#xgboost.XGBClassifier<br>
+(회귀) https://xgboost.readthedocs.io/en/stable/python/python_api.html#xgboost.XGBRegressor<br>
+▣ 예제 : https://xgboost.readthedocs.io/en/stable/python/examples/index.html<br>
+
+	from xgboost import XGBClassifier
+	from sklearn.model_selection import train_test_split
+	from sklearn.datasets import make_classification
+
+	X, y = make_classification(n_samples=5000, n_features=20, random_state=42)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+	model = XGBClassifier(eval_metric="logloss", random_state=42)
+	model.fit(X_train, y_train)
+
+	print("XGBoost Accuracy:", model.score(X_test, y_test))
+
+
 ## [2-5] 라이트 그래디언트 부스팅 머신 (Light Gradient Boosting Machine, LightGBM)
+▣ 가이드 : https://lightgbm.readthedocs.io/en/latest/<br>
+▣ API :  (분류) https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMClassifier.html<br>
+(회귀) https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMRegressor.html<br>
+▣ 예제 : https://lightgbm.readthedocs.io/en/latest/Python-Intro.html<br>
+
+	from lightgbm import LGBMClassifier
+	from sklearn.model_selection import train_test_split
+	from sklearn.datasets import make_classification
+
+	X, y = make_classification(n_samples=10000, n_features=30, random_state=42)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+	model = LGBMClassifier(random_state=42)
+	model.fit(X_train, y_train)
+
+	print("LightGBM Accuracy:", model.score(X_test, y_test))
 
 <br>
 
 # [3] 거리 기반
 
 ## [3-1] k-최근접 이웃 (k-Nearest Neighbors, K-NN)
+
 ## [3-2] 서포트 벡터 머신 (Support Vector Machine, SVM)
 
 
