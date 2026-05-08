@@ -362,11 +362,166 @@ LightGBM → 로그·클릭·금융 거래 등 초대규모 데이터 처리 특
 |[4-3] 부분 최소제곱 판별 분석|$y=t c$|$t$: 잠재변수, $c$: 클래스 계수, $y$: 클래스 반응값|클래스 분리를 강조한 잠재 공간|오믹스 데이터 분류, 생물정보학|
 |[4-4] 감독 주성분 분석|$z=X_s w$|$X_s$: 선택된 변수 행렬, $w$: 주성분 방향, $z$: 감독 주성분|반응변수 관련 축만 남긴 PCA 구조|고차원 유전자 데이터 탐색|
 
+|구분|조건|모델명|
+|---|---|---|
+|① 반응변수 유형|연속형 반응변수, 예측이 목적|**[4-1] 주성분 회귀 (Principal Component Regression, PCR)**|
+||연속형 반응변수, 예측 성능이 가장 중요|**[4-2] 부분 최소제곱 회귀 (Partial Least Squares, PLS)**|
+||범주형 반응변수(분류 문제)|**[4-3] 부분 최소제곱 판별 분석 (Partial Least Squares Discriminant Analysis, PLS‑DA)**|
+|② 차원 문제|설명변수 간 다중공선성이 매우 강함|**[4-1] 주성분 회귀 (Principal Component Regression, PCR)**|
+||고차원 데이터에서 반응변수와 관련된 축만 필요|**[4-2] 부분 최소제곱 회귀 (Partial Least Squares, PLS)**|
+|③ 성분 추출 기준|설명변수의 분산 구조만 반영해도 충분|**[4-1] 주성분 회귀 (Principal Component Regression, PCR)**|
+||설명변수–반응변수 공분산을 직접 반영|**[4-2] 부분 최소제곱 회귀 (Partial Least Squares, PLS)**|
+|④ 분류 목적 차원축소|차원 축소 후 분류기를 따로 적용|**[4-4] 감독 주성분 분석 (Supervised Principal Component Analysis, Supervised PCA)**|
+||차원 축소와 분류를 동시에 수행|**[4-3] 부분 최소제곱 판별 분석 (Partial Least Squares Discriminant Analysis, PLS‑DA)**|
+|⑤ 변수 선택 필요성|반응변수와 무관한 변수를 사전에 제거하고 싶음|**[4-4] 감독 주성분 분석 (Supervised Principal Component Analysis, Supervised PCA)**|
+|⑥ 해석 vs 예측|모형 구조의 단순성과 해석 중시|**[4-1] 주성분 회귀 (Principal Component Regression, PCR)**|
+||예측 성능과 반응변수 설명력이 최우선|**[4-2] 부분 최소제곱 회귀 (Partial Least Squares, PLS)**|
+
+|모델명|sk-learn 사용 예제 소스|최적의 데이터셋|
+|---|---|---|
+|[4-1] 주성분 회귀|PCA, LinearRegression / model.fit() / r2_score|Hitters Dataset (ISLR)|
+|[4-2] 부분 최소제곱 회귀|PLSRegression / pls.fit() / r2_score|Wine Quality Dataset (UCI)|
+|[4-3] 부분 최소제곱 판별 분석|PLSRegression, LabelBinarizer / pls.fit() / accuracy_score|Wine Dataset (UCI)|
+|[4-4] 감독 주성분 분석|SelectKBest, PCA, LogisticRegression / model.fit() / accuracy_score|Golub Leukemia Dataset|
+
 
 ## [4-1] 주성분 회귀 (Principal Component Regression, PCR) : 주성분 분석(Principal Component Analysis, PCA) + 회귀
+▣ 가이드 : https://scikit-learn.org/stable/modules/decomposition.html#pca<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/decomposition/plot_pca_vs_lda.html<br>
+
+	import pandas as pd
+	from sklearn.decomposition import PCA
+	from sklearn.linear_model import LinearRegression
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import r2_score
+	
+	# 데이터 로드
+	url = "https://raw.githubusercontent.com/selva86/datasets/master/Hitters.csv"
+	data = pd.read_csv(url).dropna()
+	
+	X = data.drop(columns=["Salary"])
+	y = data["Salary"]
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, test_size=0.3, random_state=42
+	)
+	
+	# PCA + 회귀
+	pca = PCA(n_components=5)
+	X_train_pca = pca.fit_transform(X_train)
+	X_test_pca = pca.transform(X_test)
+	
+	lr = LinearRegression()
+	lr.fit(X_train_pca, y_train)
+	
+	# 평가
+	y_pred = lr.predict(X_test_pca)
+	r2_score(y_test, y_pred)
+	
+
 ## [4-2] 부분 최소제곱 회귀 (Partial Least Squares, PLS)
+▣ 가이드 : https://scikit-learn.org/stable/modules/cross_decomposition.html<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.cross_decomposition.PLSRegression.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/cross_decomposition/plot_compare_cross_decomposition.html<br>
+
+	import pandas as pd
+	from sklearn.cross_decomposition import PLSRegression
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import r2_score
+	
+	# 데이터 로드
+	url = "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"
+	data = pd.read_csv(url, sep=";")
+	
+	X = data.drop(columns=["quality"])
+	y = data["quality"]
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, test_size=0.3, random_state=42
+	)
+	
+	# PLS 회귀
+	pls = PLSRegression(n_components=5)
+	pls.fit(X_train, y_train)
+	
+	# 평가
+	y_pred = pls.predict(X_test)
+	r2_score(y_test, y_pred)
+	
 ## [4-3] 부분 최소제곱 판별 분석 (Partial Least Squares Discriminant Analysis, PLS‑DA)
+▣ 가이드 : https://mixomics.org/methods/plsda/<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.cross_decomposition.PLSRegression.html<br>
+▣ 예제 : https://mixomics.org/mixomics-methods/pls-da/<br>
+
+	from sklearn.datasets import load_wine
+	from sklearn.cross_decomposition import PLSRegression
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import LabelBinarizer
+	from sklearn.metrics import accuracy_score
+	import numpy as np
+	
+	# 데이터 로드
+	X, y = load_wine(return_X_y=True)
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, test_size=0.3, random_state=42
+	)
+	
+	# 반응변수 더미화
+	lb = LabelBinarizer()
+	Y_train_bin = lb.fit_transform(y_train)
+	Y_test_bin = lb.transform(y_test)
+	
+	# PLS-DA
+	pls = PLSRegression(n_components=2)
+	pls.fit(X_train, Y_train_bin)
+	
+	# 예측 및 평가
+	y_pred = pls.predict(X_test)
+	y_pred_class = np.argmax(y_pred, axis=1)
+	
+	accuracy_score(y_test, y_pred_class)
+	
 ## [4-4] 감독 주성분 분석 (Supervised Principal Component Analysis, Supervised PCA)
+▣ 가이드 : https://statweb.stanford.edu/~tibs/ftp/superpc.pdf<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html<br>
+▣ 예제 : https://cran.r-project.org/package=superpc<br>
+
+	import pandas as pd
+	from sklearn.feature_selection import SelectKBest, f_classif
+	from sklearn.decomposition import PCA
+	from sklearn.linear_model import LogisticRegression
+	from sklearn.model_selection import train_test_split
+	from sklearn.metrics import accuracy_score
+	
+	# 데이터 로드
+	url = "https://raw.githubusercontent.com/selva86/datasets/master/Golub.csv"
+	data = pd.read_csv(url)
+	
+	X = data.drop(columns=["class"])
+	y = data["class"]
+	
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, test_size=0.3, random_state=42
+	)
+	
+	# 감독 변수 선택
+	selector = SelectKBest(score_func=f_classif, k=50)
+	X_train_sel = selector.fit_transform(X_train, y_train)
+	X_test_sel = selector.transform(X_test)
+	
+	# PCA
+	pca = PCA(n_components=5)
+	X_train_pca = pca.fit_transform(X_train_sel)
+	X_test_pca = pca.transform(X_test_sel)
+	
+	# 분류기 학습
+	clf = LogisticRegression(max_iter=1000)
+	clf.fit(X_train_pca, y_train)
+	
+	# 평가
+	accuracy_score(y_test, clf.predict(X_test_pca))
 
 
 <br>
