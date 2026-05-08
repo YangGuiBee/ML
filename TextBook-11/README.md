@@ -24,6 +24,56 @@
 
 ---
 
+	[1] 판별 분석
+		[1-1] 선형 판별 분석 (Linear Discriminant Analysis, LDA)
+		[1-2] 이차 판별 분석 (Quadratic Discriminant Analysis, QDA)
+	[2] 트리 및 앙상블 기반
+		[2-1] 결정 트리 (Decision Tree, DT)
+		[2-2] 랜덤 포레스트 (Random Forest, RF)
+		[2-3] 그래디언트 부스팅 (Gradient Boosting Machine, GBM)
+		[2-4] 익스트림 그래디언트 부스팅 (Extreme Gradient Boosting, XGBoost)
+		[2-5] 라이트 그래디언트 부스팅 머신 (Light Gradient Boosting Machine, LightGBM)
+	[3] 거리 기반
+		[3-1] k-최근접 이웃 (k-Nearest Neighbors, K-NN)
+		[3-2] 서포트 벡터 머신 (Support Vector Machine, SVM)
+	[4] 차원 축소 + 예측
+		[4-1] 주성분 회귀 (Principal Component Regression, PCR) : 주성분 분석(Principal Component Analysis, PCA) + 회귀
+		[4-2] 부분 최소제곱 회귀 (Partial Least Squares, PLS)
+		[4-3] 부분 최소제곱 판별 분석 (Partial Least Squares Discriminant Analysis, PLS‑DA)
+		[4-4] 감독 주성분 분석 (Supervised Principal Component Analysis, Supervised PCA)
+	[5] 신경망 기반
+		[5-1] 다층 퍼셉트론 (Multilayer Perceptron, MLP)
+		[5-2] 합성곱 신경망 / 순환 신경망 (Convolutional Neural Network / Recurrent Neural Network, CNN / RNN)
+		[5-3] 트랜스포머 (Transformer)
+		[5-4] 오토인코더 (Autoencoder, AE)
+	
+---
+
+# [1] 판별 분석
+
+|모델명|이론 개요|특징|
+|---|---|---|
+|[1-1] 선형 판별 분석|다변량 정규분포 기반 판별 이론<br>→ 모든 클래스가 동일한 공분산을 가진다는 가정 하에 사후확률로 분류|기본 생성 모델을 사용<br>→ 클래스 간 공분산을 공유하여 결정 경계가 선형으로 제한됨|
+|[1-2] 이차 판별 분석|다변량 정규분포 기반 판별 이론<br>→ 클래스별로 서로 다른 공분산을 허용하여 사후확률로 분류|LDA를 기본 모델로 사용<br>→ 클래스별 공분산을 허용하여 비선형(이차) 결정 경계 형성|
+
+|모델명|수식|수식의 항목 설명|그래프형태|적용분야|
+|---|---|---|---|---|
+|[1-1] 선형 판별 분석|$d_k(x)=x^T S^{-1}\mu_k-\frac{1}{2}\mu_k^T S^{-1}\mu_k+\log\pi_k$|$x$: 입력 특성 벡터<br>$\mu_k$: 클래스 $k$의 평균 벡터<br>$S$: 모든 클래스가 공유하는 공분산 행렬<br>$\pi_k$: 클래스 $k$의 사전확률|선형 결정 경계|텍스트 분류<br>고차원 소표본 문제|
+|[1-2] 이차 판별 분석|$d_k(x)=-\frac{1}{2}(x-\mu_k)^T S_k^{-1}(x-\mu_k)-\frac{1}{2}\log|S_k|+\log\pi_k$|$x$: 입력 특성 벡터<br>$\mu_k$: 클래스 $k$의 평균 벡터<br>$S_k$: 클래스 $k$의 공분산 행렬<br>$\pi_k$: 클래스 $k$의 사전확률|이차(곡선) 결정 경계|의료 영상 분류<br>생체 신호 인식|
+
+
+# [2] 트리 및 앙상블 기반
+
+# [3] 거리 기반
+
+# [4] 차원 축소 + 예측
+
+# [5] 신경망 기반
+
+
+	
+---
+
 	[1] 판별 분석 (Discriminant Analysis)
 		[1-1] LDA (Linear Discriminant Analysis)
 		[1-2] QDA (Quadratic Discriminant Analysis)
