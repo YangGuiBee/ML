@@ -64,15 +64,17 @@
 
 $c_k$와 $b_k$는 본질적으로 같은 역할(상수항)을 하지만, LDA에서는 “선형식의 절편”, QDA에서는 “베이즈 유도 상수항”이라는 관점 차이로 구분<br>
 
-|구분|조건|모델명|
+
+|모델 선택 기준|적합한 데이터 조건|선택 모델|
 |---|---|---|
-|① 반응변수가 범주형(class) 데이터인가?|클래스별 데이터가 정규분포를 따른다고 가정할 수 있으며, 모든 클래스가 유사한 분산 구조를 가짐|**[1-1] 선형 판별 분석 (Linear Discriminant Analysis, LDA)**|
-|② 반응변수가 범주형(class) 데이터인가?|클래스별 데이터가 정규분포를 따르지만, 클래스마다 분산 구조가 서로 다름|**[1-2] 이차 판별 분석 (Quadratic Discriminant Analysis, QDA)**|
+|① 단순한 공분산 가정이 가능한 경우|클래스 간 분산 구조 차이가 크지 않고,<br>고차원·소표본 상황에서 안정적인 분류가 필요한 경우|**[1-1] 선형 판별 분석 (Linear Discriminant Analysis, LDA)**|
+|② 복잡한 공분산 구조를 반영해야 하는 경우|클래스별 분산 구조 차이가 뚜렷하고,<br>충분한 표본 수가 확보된 경우|**[1-2] 이차 판별 분석 (Quadratic Discriminant Analysis, QDA)**|
+
 
 |모델명|sk-learn 사용 예제 소스|최적의 데이터셋|
 |---|---|---|
-|**[1-1] 선형 판별 분석**|LinearDiscriminantAnalysis / fit / score|[UCI Iris Dataset](https://archive.ics.uci.edu/ml/datasets/iris)|
-|**[1-2] 이차 판별 분석**|QuadraticDiscriminantAnalysis / fit / score|[UCI Wine Dataset](https://archive.ics.uci.edu/ml/datasets/wine)|
+|[1-1] 선형 판별 분석 (LDA)|LinearDiscriminantAnalysis / fit / score|[UCI Iris Dataset](https://archive.ics.uci.edu/ml/datasets/iris)|
+|[1-2] 이차 판별 분석 (QDA)|QuadraticDiscriminantAnalysis / fit / score|[UCI Wine Dataset](https://archive.ics.uci.edu/ml/datasets/wine)|
 
 ## [1-1] 선형 판별 분석 (Linear Discriminant Analysis, LDA)
 ▣ 가이드 : https://scikit-learn.org/stable/modules/lda_qda.html<br>
