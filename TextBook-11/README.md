@@ -818,10 +818,18 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 
 
 ## [2-2] 랜덤 포레스트 (Random Forest, RF)
-▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#random-forests<br>
-▣ API : (분류) https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html<br>
-(회귀) https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html<br>
-▣ 예제 : https://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_importances.html<br>
+▣ 정의 : 많은 트리를 무작위로 만들어 다수결로 예측하는 방법<br>
+여러 개의 Decision Tree를 배깅(Bagging, Bootstrap Aggregating) 방식으로 학습하여,<br>
+그 예측값을 평균(회귀) 또는 다수결(분류)로 통합하는 앙상블(Ensemble) 학습 알고리즘<br>
+각 트리는 서로 다른 부트스트랩 표본과 일부 특성(feature subset)을 사용하여 모델 간 상관을 줄이고, 과적합(overfitting)을 완화<br>
+▣ 목적 : 단일 결정 트리의 불안정성(variance 높음)을 보완하고, 예측의 안정성(stability)과 정확도(accuracy)를 높이기<br>
+▣ 장점 : 트리 여러 개를 평균/투표함으로써 분산(variance)을 낮춰서 과적합 방지, 변수 중요도(Feature Importance) 자동 산출, 비선형 관계 및 변수 간 상호작용을 자연스럽게 포착, 데이터 스케일 조정 불필요, 결측값에도 비교적 강건, 분류와 회귀 모두 사용 가능하며, 이상치(outlier)에 민감하지 않음<br>
+▣ 단점 : 개별 트리 수가 많아 모델 해석이 어렵고, 많은 트리 수로 훈련과 예측시간이 길어짐(메모리 및 연산량 증가), 트리 간 상관성 완전 제거 불가<br>
+
+![](./images/Bootstrap.png)
+<br>
+출처: https://www.researchgate.net/figure/Schematic-of-the-RF-algorithm-based-on-the-Bagging-Bootstrap-Aggregating-method_fig1_309031320<br>
+
 
 	from sklearn.datasets import load_breast_cancer
 	from sklearn.model_selection import train_test_split
@@ -836,27 +844,12 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 	print("RF Accuracy:", model.score(X_test, y_test))
 
 
-# [2-2] 랜덤 포레스트 (Random Forest)
-▣ 정의 : 많은 트리를 무작위로 만들어 다수결로 예측하는 방법<br>
-여러 개의 Decision Tree를 배깅(Bagging, Bootstrap Aggregating) 방식으로 학습하여,<br>
-그 예측값을 평균(회귀) 또는 다수결(분류)로 통합하는 앙상블(Ensemble) 학습 알고리즘<br>
-각 트리는 서로 다른 부트스트랩 표본과 일부 특성(feature subset)을 사용하여 모델 간 상관을 줄이고, 과적합(overfitting)을 완화<br>
-▣ 목적 : 단일 결정 트리의 불안정성(variance 높음)을 보완하고, 예측의 안정성(stability)과 정확도(accuracy)를 높이기<br>
-▣ 장점 : 트리 여러 개를 평균/투표함으로써 분산(variance)을 낮춰서 과적합 방지, 변수 중요도(Feature Importance) 자동 산출, 비선형 관계 및 변수 간 상호작용을 자연스럽게 포착, 데이터 스케일 조정 불필요, 결측값에도 비교적 강건, 분류와 회귀 모두 사용 가능하며, 이상치(outlier)에 민감하지 않음<br>
-▣ 단점 : 개별 트리 수가 많아 모델 해석이 어렵고, 많은 트리 수로 훈련과 예측시간이 길어짐(메모리 및 연산량 증가), 트리 간 상관성 완전 제거 불가<br>
-
-![](./images/Bootstrap.png)
-<br>
-출처: https://www.researchgate.net/figure/Schematic-of-the-RF-algorithm-based-on-the-Bagging-Bootstrap-Aggregating-method_fig1_309031320<br>
-
-
-## 랜덤 포레스트 회귀(Random Forest Regression)  
+## 랜덤 포레스트 회귀(Random Forest Regression)
 ▣ 정의 : 각 트리가 예측한 값들의 평균을 통해 최종 예측값을 도출하는 모델로, 다수결 대신 트리에서 얻은 예측값의 평균을 사용하여 연속값 예측<br>
 ▣ 가이드 : https://scikit-learn.org/stable/modules/ensemble.html#forest<br>
 ▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html<br>
 ▣ 예제 : https://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_importances.html<br>
 ▣ 모델식 : https://scikit-learn.org/stable/modules/ensemble.html#random-forests<br>
-
 
 	from sklearn.ensemble import RandomForestRegressor
  
@@ -1027,27 +1020,7 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 |[3-2] 서포트 벡터 머신(SVM)|SVC / svm.fit() / classification_report|Breast Cancer Wisconsin Dataset (UCI ML Repository)|
 
 
-## [3-1] k-최근접 이웃 (k-Nearest Neighbors, K-NN)
-▣ 가이드 : https://scikit-learn.org/stable/modules/neighbors.html<br>
-▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html<br>
-▣ 예제 : https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html<br>
-
-	from sklearn.datasets import load_iris
-	from sklearn.model_selection import train_test_split
-	from sklearn.neighbors import KNeighborsClassifier
-	from sklearn.metrics import accuracy_score
-
-	X, y = load_iris(return_X_y=True)
-	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
-
-	knn = KNeighborsClassifier(n_neighbors=5)
-	knn.fit(X_train, y_train)
-
-	y_pred = knn.predict(X_test)
-	accuracy_score(y_test, y_pred)
-
-
-# [3-1] k-최근접 이웃(k-Nearest Neighbors, K-NN)
+## [3-1] k-최근접 이웃(k-Nearest Neighbors, K-NN)
 ▣ 정의 : 머신러닝에서 데이터를 가장 가까운 유사속성에 따라 분류하여 데이터를 거리기반으로 분류분석하는 기법으로,<br>
 비지도학습인 군집화(Clustering)과 유사한 개념이나 기존 관측치의 y 값이 존재한다는 점에서 지도학습에 해당<br>
 새로운 입력 샘플에 대해 학습데이터 중 가장 가까운 𝑘개의 이웃을 찾아, 이들의 레이블(분류)이나 평균(회귀)을 이용해 예측하는 비모수 기반의 지도학습 모델<br> 
@@ -1067,6 +1040,21 @@ $X_{new} = \frac{X-min(X)}{max(X)-min(X)}$<br>
 $X_{new} = \frac{X-\mu}{\sigma}= \frac{X-min(X)}{StdDev(X)}$
 
 <br>
+
+	from sklearn.datasets import load_iris
+	from sklearn.model_selection import train_test_split
+	from sklearn.neighbors import KNeighborsClassifier
+	from sklearn.metrics import accuracy_score
+
+	X, y = load_iris(return_X_y=True)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+	knn = KNeighborsClassifier(n_neighbors=5)
+	knn.fit(X_train, y_train)
+
+	y_pred = knn.predict(X_test)
+	accuracy_score(y_test, y_pred)
+
 
 ## k-최근접 이웃 회귀(k-Nearest Neighbors Regression)
 ▣ 정의 : 새로운 입력값이 주어졌을 때, 가장 가까운 k개의 이웃 데이터의 타깃값 평균(또는 가중평균) 으로 예측하는 비모수적 회귀 알고리즘<br>
@@ -1633,7 +1621,7 @@ $k(x,y) = e^{-\frac{-\left\|x_i-x_j\right\|^2}{2\sigma^2}}$<br><br>
 
 ---  
 
-# [1-1] LDA (Linear Discriminant Analysis)
+## PCA vs LDA
 
 ![](./images/PCA_LDA.png)
 <br>
