@@ -1,24 +1,18 @@
 
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-11/images/ML11_1.PNG'> 
-
 <br>
 
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-11/images/ML11_2.PNG'> 
-
 <br>
 
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-11/images/ML11_3.PNG'> 
-
 <br>
 
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-11/images/ML11_4.PNG'> 
-
 <br>
 
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-11/images/ML11_5.PNG'> 
-
 <br>
-
 
 #  11 : 지도 학습(Supervised Learning, SL) : 회귀(regression) + 분류(classification)
 
