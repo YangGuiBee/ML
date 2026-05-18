@@ -1226,14 +1226,16 @@
 	  
 ---
 
-# [1] 오차행렬, 혼동행렬 (Confusion Matrix)
+# [1] 혼동행렬 (Confusion Matrix) : TP, FP, FN, TN의 분포
 
 ![](./images/CM_table.PNG)<br>
 ▣ 정의: 실제 값과 예측 값 간의 분류 결과를 행렬 형태로 표현<br>
 ▣ 필요성: 분류 모델의 다양한 평가 지표 계산의 기초<br>
 ▣ 장점: 예측의 전체적인 분포를 한눈에 파악<br>
 ▣ 단점: 이진 분류에 적합하며 다중 클래스에 적용 시 복잡도가 증가<br>
-▣ 예제: https://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html<br>
+▣ 가이드 : https://scikit-learn.org/stable/modules/model_evaluation.html#confusion-matrix<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html<br>
+▣ 예제 : https://scikit-learn.org/stable/modules/model_evaluation.html#confusion-matrix<br>
 
 TP(True Positive): 모델이 positive라고 예측했는데 실제로 정답이 positive (정답)<br>
 TN(True Negative): 모델이 negative라고 예측했는데 실제로 정답이 negative (정답)<br>
@@ -1252,14 +1254,16 @@ FN(False Negative): 모델이 negative라고 예측했는데 실제로 정답이
 
 <br>
 
-# [2] 정확도 (Accuracy)
+# [2] 정확도 (Accuracy) : 전체 데이터 중 올바르게 예측한 비율
 
 $Accuracy = \frac{TP + TN}{TP + TN + FP + FN}$<br><br>
 ▣ 정의: 전체 데이터 중 올바르게 예측된 비율(데이터가 불균형할 때(positive:negative=9:1)는 Accuracy만으로 제대로 분류했는지는 알 수 없기 때문에 Recall과 Precision을 사용)<br>
 ▣ 필요성: 모델이 얼마나 잘 작동하는지 전반적인 성능을 평가<br>
 ▣ 장점: 단순하고 이해가 용이<br>
 ▣ 단점: 불균형 데이터에서는 성능을 잘못 평가할 가능성<br>
-▣ 예제: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html<br>
+▣ 가이드 : https://scikit-learn.org/stable/modules/model_evaluation.html#accuracy-score<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html<br>
+▣ 예제 : https://scikit-learn.org/stable/modules/model_evaluation.html#accuracy-score<br>
 
 <br>
 
@@ -1269,14 +1273,16 @@ $Accuracy = \frac{TP + TN}{TP + TN + FP + FN}$<br><br>
 
 <br>
 
-# [3] 정밀도 (Precision), PPV(Positive Predictive Value)
+# [3] 정밀도 (Precision), PPV (Positive Predictive Value) : 양성 예측의 신뢰도
 
 $Precision = \frac{TP}{TP + FP}$<br><br>
 ▣ 정의: 모델이 예측한 긍정(positive) 클래스 중 실제로 긍정(positive) 클래스인 비율로, 실제 정답이 negative인 데이터를 positive라고 잘못 예측하면 안 되는 경우에 중요한 지표가 될 수 있으며 Precision을 높이기 위해선 FP(모델이 positive라고 예측했는데 정답은 negative인 경우)를 낮추는 것이 중요<br>
 ▣ 필요성: 잘못된 긍정 예측(FP)을 줄이는 데 중요한 지표<br>
 ▣ 장점: 정확한 예측을 강조<br>
 ▣ 단점: FN은 고려하지 않아 재현율과 함께 사용 필요<br>
-▣ 예제: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html<br>
+▣ 가이드 : https://scikit-learn.org/stable/modules/model_evaluation.html#precision-recall-f-measure-metrics<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html<br>
+▣ 예제 : https://scikit-learn.org/stable/modules/model_evaluation.html#precision-recall-f-measure-metrics<br>
 
 <br>
 
@@ -1286,14 +1292,16 @@ $Precision = \frac{TP}{TP + FP}$<br><br>
 
 <br>
 
-# [4] 재현율 (Recall), 민감도 (Sensitivity), TPR (True Positive Rate)
+# [4] 재현율 (Recall), 민감도 (Sensitivity), TPR (True Positive Rate) : 실제 양성 탐지율
 
 $Recall = \frac{TP}{TP + FN}$<br><br>
 ▣ 정의: 실제로 정답이 긍정(positive)인 것들 중에서 모델이 긍정(positive)이라고 예측한 비율로, 실제 정답이 positive인 데이터를 negative라고 잘못 예측하면 안 되는 경우에 중요한 지표가 될 수 있으며, Recall를 높이기 위해선 FN(모델이 negative라고 예측했는데 정답이 positive인 경우)을 낮추는 것이 중요<br>
 ▣ 필요성: 놓친 긍정 예측(FN)을 줄이는 데 중요<br>
 ▣ 장점: 실제 긍정 클래스에 대한 모델의 민감성을 나타냄<br>
 ▣ 단점: FP는 고려하지 않아 Precision과 함께 사용 필요<br>
-▣ 예제: https://scikit-learn.org/stable/auto_examples/model_selection/plot_precision_recall.html<br>
+▣ 가이드 : https://scikit-learn.org/stable/modules/model_evaluation.html#precision-recall-f-measure-metrics<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.metrics.recall_score.html<br>
+▣ 예제 : https://scikit-learn.org/stable/modules/model_evaluation.html#precision-recall-f-measure-metrics<br>
 
 <br>
 
@@ -1303,14 +1311,16 @@ $Recall = \frac{TP}{TP + FN}$<br><br>
 
 <br>
 
-# [5] F1 score
+# [5] F1 score : 정밀도와 재현율의 조화 평균
 
 $F1 = \frac{2 \times Precision \times Recall}{Precision + Recall}$<br><br>
 ▣ 정의: Precision과 Recall의 조화 평균으로 두 값의 균형을 평가. Recall과 Precision은 상호 보완적인 평가 지표이기 때문에 F1 score를 사용하며, Precision과 Recall이 한쪽으로 치우쳐지지 않고 모두 클 때 큰 값<br>
 ▣ 필요성: 불균형 데이터에서 Precision과 Recall 간의 균형을 평가<br>
 ▣ 장점: 두 지표 간의 트레이드오프를 반영<br>
 ▣ 단점: 개별적인 성능을 평가하기 어려울 수 있음<br>
-▣ 예제:https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html<br>
+▣ 가이드 : https://scikit-learn.org/stable/modules/model_evaluation.html#precision-recall-f-measure-metrics<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html<br>
+▣ 예제 : https://scikit-learn.org/stable/modules/model_evaluation.html#precision-recall-f-measure-metrics<br>
 
 <br>
 
@@ -1320,14 +1330,16 @@ $F1 = \frac{2 \times Precision \times Recall}{Precision + Recall}$<br><br>
 
 <br>
 
-# [6] 오분류율 (Error Rate)
+# [6] 오분류율 (Error Rate) : 1 - 정확도
 
 $Error Rate = \frac{FP + FN}{TP + TN + FP + FN}$<br><br>
 ▣ 정의: 전체 데이터 중 잘못 예측된 비율<br>
 ▣ 필요성: 모델의 부정확도를 나타냄<br>
 ▣ 장점: 정확도의 보완 지표로 활용 가능<br>
 ▣ 단점: 불균형 데이터에서는 유의미하지 않을 가능성<br>
-▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_train_error_vs_test_error.html<br>
+▣ 가이드 : https://scikit-learn.org/stable/modules/model_evaluation.html#accuracy-score<br>
+▣ API : 직접 계산 <br>
+▣ 예제 : https://scikit-learn.org/stable/modules/model_evaluation.html#accuracy-score<br>
 
 <br>
 
@@ -1335,14 +1347,16 @@ $Error Rate = \frac{FP + FN}{TP + TN + FP + FN}$<br><br>
 
 <br>
 
-# [7] 특이도 (Specificity), TNR(True Negative Rate)
+# [7] 특이도 (Specificity), TNR(True Negative Rate) : 실제 음성 탐지율
 
 $Specificity = \frac{TN}{TN + FP}$<br><br>
 ▣ 정의: 실제 부정 데이터 중에서 올바르게 부정으로 예측한 비율<br>
 ▣ 필요성: 부정 클래스를 정확히 예측하는 능력을 평가<br>
 ▣ 장점: Negative class에 초점을 맞춘 분석이 가능<br>
 ▣ 단점: Positive class의 성능은 고려하지 않음<br>
-▣ 예제: https://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html<br>
+▣ 가이드 : https://scikit-learn.org/stable/modules/model_evaluation.html#confusion-matrix<br>
+▣ API : 직접 계산<br>
+▣ 예제 : https://scikit-learn.org/stable/modules/model_evaluation.html#confusion-matrix<br>
 
 <br>
 
@@ -1352,15 +1366,16 @@ $Specificity = \frac{TN}{TN + FP}$<br><br>
 
 <br>
 
-# [8] 위양성률 (Fall Out), FPR(False Positive Rate)
+# [8] 위양성률 (Fall Out), FPR(False Positive Rate) : 음성을 양성으로 오분류 비율
 
 $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><br>
 ▣ 정의: 실제 부정(negative) 데이터 중에서 긍정(positive)으로 잘못 예측한 비율<br>
 ▣ 필요성: 모델이 잘못된 긍정을 얼마나 생성하는지 평가<br>
 ▣ 장점: 특이도의 보완 지표로 사용<br>
 ▣ 단점: 긍정 클래스의 성능은 평가하지 못함<br>
-▣ 예제1 (FPR 제공되는 ROC 커브 API):https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_curve.html<br>
-▣ 예제2 (ROC 곡선 = FPR vs TPR):https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html<br>
+▣ 가이드 : https://scikit-learn.org/stable/modules/model_evaluation.html#receiver-operating-characteristic-roc<br>
+▣ API : (FPR 제공되는 ROC 커브 API):https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_curve.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html<br>
 
 <br>
 
@@ -1370,12 +1385,14 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 
 <br>
 
-# [9] ROC curve
+# [9] ROC curve : 모든 임계값에 대한 TPR과 FPR의 관계 시각화
 ▣ 정의: TPR(재현율) Y축과 FPR(위양성률) X축의 관계를 나타낸 곡선으로 다양한 임계값에서 Recall-Fallout의 변화를 시각화한 것(Fallout은 실제 False인 data 중에서 모델이 True로 분류항 비율을, Recall은 실제 True인 data 중에서 모델이 True로 분류한 비율을 나타냄)<br>
 ▣ 필요성: 분류 모델의 성능을 시각적으로 평가<br>
 ▣ 장점: Threshold에 따른 성능 변화 확인이 가능<br>
 ▣ 단점: 곡선이 단일 숫자로 요약되지 않아 비교가 어려울 가능성<br>
-▣ 예제: https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html<br>
+▣ 가이드 : https://scikit-learn.org/stable/modules/model_evaluation.html#receiver-operating-characteristic-roc<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_curve.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html<br>
 
 <br>
 
@@ -1388,12 +1405,14 @@ $Fall Out = 1 - Specificity = 1 - \frac{TN}{TN + FP} = \frac{FP}{FP + TN}$<br><b
 <br>	
 
 
-# [10] AUC (Area Under Curve) score
+# [10] AUC score : ROC 곡선 아래 면적
 ▣ 정의: ROC Curve의 아래 면적으로, 0에서 1 사이의 값을 가짐<br>
 ▣ 필요성: 모델의 분류 성능을 숫자로 간단히 나타냄<br>
 ▣ 장점: Threshold에 관계없이 모델 성능을 평가<br>
 ▣ 단점: 데이터 불균형이 심한 경우 왜곡될 가능성<br>
-▣ 예제: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html<br>
+▣ 가이드 : https://scikit-learn.org/stable/modules/model_evaluation.html#roc-metrics<br>
+▣ API : https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html<br>
+▣ 예제 : https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html<br>
 
 <br>
 
