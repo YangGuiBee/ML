@@ -949,6 +949,9 @@ $f(k,t_k) = \frac{m_{left}}{m}G_{left}+\frac{m_{right}}{m}G_{right}$<br>
 
 ---
 
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-11/images/GBM_XGBoost_LightGBM.png'> 
+<br>
+
 | 구분 | GBM (Gradient Boosting Machine) | XGBoost (Extreme Gradient Boosting) | LightGBM (Light Gradient Boosting Machine) |
 |---|---|---|---|
 | 개발 목적 | 그래디언트 부스팅의 기본 구현 | GBM의 성능·안정성 극대화 | 대규모 데이터에서 초고속 학습 |
