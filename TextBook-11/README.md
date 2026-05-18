@@ -31,10 +31,10 @@
 		[3-1] k-최근접 이웃 (k-Nearest Neighbors, K-NN)
 		[3-2] 서포트 벡터 머신 (Support Vector Machine, SVM)
 	[4] 차원 축소 + 예측
-		[4-1] 주성분 회귀 (Principal Component Regression, PCR) : 주성분 분석(Principal Component Analysis, PCA) + 회귀
-		[4-2] 부분 최소제곱 회귀 (Partial Least Squares, PLS)
-		[4-3] 부분 최소제곱 판별 분석 (Partial Least Squares Discriminant Analysis, PLS‑DA)
-		[4-4] 감독 주성분 분석 (Supervised Principal Component Analysis, Supervised PCA)
+		[4-1] 주성분 회귀 (Principal Component Regression, PCR) : 주성분 분석(Principal Component Analysis, PCA) + 회귀 → 회귀
+		[4-2] 부분 최소제곱 회귀 (Partial Least Squares, PLS) → 회귀
+		[4-3] 부분 최소제곱 판별 분석 (Partial Least Squares Discriminant Analysis, PLS‑DA) → 분류
+		[4-4] 감독 주성분 분석 (Supervised Principal Component Analysis, Supervised PCA) → 회귀+분류
 	[5] 신경망 기반
 		[5-1] 다층 퍼셉트론 (Multilayer Perceptron, MLP)
 		[5-2] 합성곱 신경망 / 순환 신경망 (Convolutional Neural Network / Recurrent Neural Network, CNN / RNN)
