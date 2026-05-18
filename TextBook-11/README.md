@@ -1679,6 +1679,10 @@ https://nirpyresearch.com/classification-nir-spectra-linear-discriminant-analysi
 		[5-4] 오토인코더 (Autoencoder, AE)
 		
 
+<img width ='1000' height = '1200' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-11/images/MLPs.png'> 
+<br>
+
+
 |모델명|이론 개요|특징|
 |---|---|---|
 |[5-1] 다층 퍼셉트론(MLP)|신경망 이론<br>→여러 은닉층을 갖는 완전연결 신경망|기본 모델은 단층 퍼셉트론<br>→은닉층을 추가하여 비선형 표현력을 확장|
