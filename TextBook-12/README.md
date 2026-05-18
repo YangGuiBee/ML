@@ -1,24 +1,38 @@
 
-![](./images/NSML.png)
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/ML12_1.PNG'> 
+<br>
 
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/ML12_2.PNG'> 
+<br>
 
-![](./images/SML.png)
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/ML12_3.PNG'> 
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/ML12_4.PNG'> 
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/ML12_5.PNG'> 
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/ML12_6.PNG'> 
+<br>
 
 
 #  12-1 : 회귀 평가 지표
 
 ---
 
-	[1] 평균 오차 (Mean Error, ME)
- 	[2] 평균 절대 오차 (Mean Absolute Error, MAE)
-	[3] 평균 제곱 오차 (Mean Squared Error, MSE)
-	[4] 평균 제곱 오차(로그적용) (Mean Squared Log Error, MSLE)
-	[5] 평균 제곱근 오차 (Root Mean Squared Error, RMSE)
-	[6] 평균 제곱근 오차(로그적용) (Root Mean Squared Log Error, RMSLE)
- 	[7] 평균 비율 오차 (Mean Percentage Error, MPE)
-	[8] 평균 절대 비율 오차 (Mean Absolute Percentage Error, MAPE)
-	[9] 평균 절대 규모 오차 (Mean Absolute Scaled Error, MASE)
-	[10] R2 score
+	[1] 평균 오차 (Mean Error, ME) : 예측 오차의 부호를 유지한 평균
+	[2] 평균 절대 오차 (Mean Absolute Error, MAE) : 오차의 절댓값 평균
+	[3] 평균 제곱 오차 (Mean Squared Error, MSE) : 오차 제곱의 평균
+	[4] 평균 제곱 오차(로그적용) (Mean Squared Log Error, MSLE) : 로그 변환 후 MSE
+	[5] 평균 제곱근 오차 (Root Mean Squared Error, RMSE) : MSE의 제곱근
+	[6] 평균 제곱근 오차(로그적용) (Root Mean Squared Log Error, RMSLE) : 로그 기반 RMSE
+	[7] 평균 비율 오차 (Mean Percentage Error, MPE) : 오차를 실제값으로 나눈 평균
+	[8] 평균 절대 비율 오차 (Mean Absolute Percentage Error, MAPE) : 비율 기반 직관적 지표
+	[9] 평균 절대 규모 오차 (Mean Absolute Scaled Error, MASE) : 기준 예측(naive forecast) 대비 오차
+	[10] 결정계수 (R2 score) : 분산 설명력
+
 	  
 ---
 
@@ -1169,19 +1183,19 @@
 <br>
 
 ---
-#  12-2 : 분류 평가 지표
+#  12-2 : 지도학습(분류) 평가 지표
 ---
 	
- 	[1] 오차행렬, 혼동행렬 (Confusion Matrix) : 각 모델이 클래스 간 데이터를 어떻게 분류했는지를 나타냄
-  	[2] 정확도 (Accuracy) : 가장 간단한 기준으로, 전체 데이터 중 올바르게 예측한 비율
-	[3] 정밀도 (Precision), PPV (Positive Predictive Value) : 모델이 양성으로 예측한 데이터 중 실제로 양성인 비율
-	[4] 재현율 (Recall), 민감도 (Sensitivity), TPR (True Positive Rate) : 실제 양성 데이터를 얼마나 잘 탐지했는지 나타냄
-	[5] F1 score : 정밀도와 재현율의 조화 평균으로, 두 지표의 균형을 평가
- 	[6] 오분류율 (Error Rate) : 정확도의 보완 지표로, 전체 데이터 중 모델이 잘못 예측한 비율
-  	[7] 특이도 (Specificity), TNR(True Negative Rate) : 실제 음성 데이터를 얼마나 잘 탐지했는지 나타냄
-   	[8] 위양성률 (Fall Out), FPR(False Positive Rate) : 음성 데이터를 양성 데이터로 잘못 분류한 비율
-	[9] ROC curve : 모든 임계값(threshold)에 대해 TPR(민감도, Recall)와 FPR(위양성률)의 관계 시각화
-	[10]AUC score : 모델이 클래스 분류에서 얼마나 잘 분리할 수 있는지 나타내는 지표
+ 	[1] 혼동행렬 (Confusion Matrix) : TP, FP, FN, TN의 분포
+	[2] 정확도 (Accuracy) : 전체 데이터 중 올바르게 예측한 비율
+	[3] 정밀도 (Precision), PPV (Positive Predictive Value) : 양성 예측의 신뢰도
+	[4] 재현율 (Recall), 민감도 (Sensitivity), TPR (True Positive Rate) : 실제 양성 탐지율
+	[5] F1 score : 정밀도와 재현율의 조화 평균
+	[6] 오분류율 (Error Rate) : 1 - 정확도
+	[7] 특이도 (Specificity), TNR(True Negative Rate) : 실제 음성 탐지율
+	[8] 위양성률 (Fall Out), FPR(False Positive Rate) : 음성을 양성으로 오분류 비율
+	[9] ROC curve : 모든 임계값에 대한 TPR과 FPR의 관계 시각화
+	[10]AUC score : ROC 곡선 아래 면적
 	  
 ---
 
