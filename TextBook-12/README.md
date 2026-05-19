@@ -17,7 +17,6 @@
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/ML12_6.PNG'> 
 <br>
 
-
 #  12-1 : 회귀 평가 지표
 
 ---
