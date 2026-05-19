@@ -36,7 +36,7 @@
 	  
 ---
 
-# [1] 평균 오차 (Mean Error, ME)
+# [1] 평균 오차 (Mean Error, ME) : 예측 오차의 부호를 유지한 평균
 ![](./images/ME.svg)
 <br>
 ▣ 정의: 실제값과 예측값의 차이를 평균낸 값으로, 오차의 방향성을 포함한 예측오차의 산술평균을 의미<br>
@@ -52,7 +52,7 @@
 
 <br>
 
-# [2] 평균 절대 오차 (Mean Absolute Error, MAE)
+# [2] 평균 절대 오차 (Mean Absolute Error, MAE) : 오차의 절댓값 평균
 ![](./images/MAE.svg)
 <br>
 ▣ 정의: 실제 정답 값과 예측 값의 차이를 절댓값으로 변환한 뒤 합산하여 평균을 구한다.<br>
@@ -74,7 +74,7 @@
    
 <br>
 
-# [3] 평균 제곱 오차 (Mean Squared Error, MSE)
+# [3] 평균 제곱 오차 (Mean Squared Error, MSE) : 오차 제곱의 평균
 ![](./images/MSE.svg)
 <br>
 ▣ 정의: 실제 정답 값과 예측 값의 차이를 제곱(예측값과 실제값 차이의 면적)한 뒤 평균을 구한다.<br>
@@ -96,7 +96,7 @@
 
 <br>
 
-# [4] 평균 제곱 오차(로그적용) (Mean Squared Log Error, MSLE)
+# [4] 평균 제곱 오차(로그적용) (Mean Squared Log Error, MSLE) : 로그 변환 후 MSE(오차 제곱의 평균)
 ![](./images/MSLE.svg)
 <br>
 ▣ 정의: 예측값과 실제값 간의 로그 차이에 대한 제곱 평균으로 MSE에 로그를 적용<br> 
@@ -118,7 +118,7 @@
 
 <br>
 
-# [5] 평균 제곱근 오차 (Root Mean Squared Error, RMSE)
+# [5] 평균 제곱근 오차 (Root Mean Squared Error, RMSE) : MSE(오차 제곱의 평균)의 제곱근
 ![](./images/RMSE.svg)
 <br>
 ▣ 정의: MSE의 제곱근으로, 실제값과 예측값 간의 평균적 차이를 원 단위로 환산<br>
@@ -136,7 +136,7 @@
 
 <br>
 
-# [6] 평균 제곱근 오차(로그적용) (Root Mean Squared Log Error, RMSLE)
+# [6] 평균 제곱근 오차(로그적용) (Root Mean Squared Log Error, RMSLE) : 로그 기반 RMSE(MSE(오차 제곱의 평균)의 제곱근)
 ![](./images/RMSLE.svg)
 <br>
 ▣ 정의: MSLE의 제곱근 값으로, 로그 차이를 원 단위로 환산한 값으로 RMSE값에 로그를 취한 값<br>
@@ -152,7 +152,7 @@
 
 <br>
 
-# [7] 평균 비율 오차 (Mean Percentage Error, MPE)
+# [7] 평균 비율 오차 (Mean Percentage Error, MPE) : 오차를 실제값으로 나눈 평균
 ![](./images/MPE.svg)
 <br>
 ▣ 정의: 오차를 실제값에 대한 백분율로 계산해 평균<br>
@@ -168,7 +168,7 @@
 
 <br>
 
-# [8] 평균 절대 비율 오차 (Mean Absolute Percentage Error, MAPE)
+# [8] 평균 절대 비율 오차 (Mean Absolute Percentage Error, MAPE) : 비율 기반 직관적 지표
 ![](./images/MAPE.svg)
 <br>
 ▣ 정의: 절대 오차를 백분율로 계산해 평균(MAE를 비율, 퍼센트로 표현하여 스케인 의존적 에러의 문제점을 개선)<br>
@@ -190,7 +190,7 @@
 
 <br>
 
-# [9] 평균 절대 규모 오차 (Mean Absolute Scaled Error, MASE)
+# [9] 평균 절대 규모 오차 (Mean Absolute Scaled Error, MASE) : 기준 예측(naive forecast) 대비 오차
 <!-- ![](./images/MASE.svg) ![](./images/MASE1.svg) -->
 ![](./images/[9].png)
 <br>
@@ -211,7 +211,7 @@
 
 <br>
 
-# [10] R2 score
+# [10] 결정계수 (R2 score) : 분산 설명력
 ▣ 정의: 모델의 설명력을 나타내는 지표로 **SST(Total Sum of Squares)** 관측값에서 관측값의 평균(혹은 추정치의 평균)을 뺀 결과의 총합인 총 제곱합<br>
 ▣ 필요성: 전체(Total)에 대한 변동성을 나타냄으로써 모델이 데이터를 얼마나 잘 설명하는지 파악<br>
 ▣ 장점: 직관적<br>
