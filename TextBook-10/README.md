@@ -1,27 +1,20 @@
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-10/images/ML10-1.PNG'> 
-
 <br>
 
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-10/images/ML10-2.PNG'> 
-
 <br>
 
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-10/images/ML10-3.PNG'> 
-
 <br>
 
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-10/images/ML10-4f.png'> 
-
 <br>
 
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-10/images/ML10-5.PNG'> 
-
 <br>
 
 
-
 #  10 : 지도 학습 (Supervised Learning, SL) : 분류 (classification)
-
 
 ---
 
@@ -41,6 +34,13 @@
 		[3-2] 마할라노비스 거리 분류 (Mahalanobis Distance Classification)
 		
 ---
+
+	[1] 확률적 판별
+		[1-1] 로지스틱 회귀 (Logistic Regression)
+		[1-2] 베이즈 로지스틱 회귀 (Bayesian Logistic Regression)
+		[1-3] 프로빗 회귀 (Probit Regression)
+		[1-4] 다항 로지스틱 회귀 / 소프트맥스 회귀 (Multinomial Logistic Regression / Softmax Regression)
+
 
 # [1-1] 로지스틱 회귀 (Logistic Regression)
 
@@ -818,6 +818,17 @@ $f(\omega_{new})=f(\omega_{old}-\alpha f'(\omega_{old}))\cong f(\omega_{old})-\a
 
 <br>
 
+---
+
+	[2] 통계·확률 기반
+		[2-1] 베이즈 네트워크 분류 (Bayesian Network Classification)
+		[2-2] 나이브 베이즈 분류 (Naive Bayes Classification)
+		[2-3] 혼합모형 기반 분류 (GMM + EM Classification)
+
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-10/images/2_vs.png'> 
+<br>
+
 
 # [2-1] 베이즈 네트워크 분류 (Bayesian Network Classification)
 
@@ -1052,7 +1063,13 @@ EM 알고리즘은 잠재변수를 포함한 확률 모델에서 최대우도추
 
 <br>
 
+---
 
+	[3] 거리 기반
+		[3-1] 최근접 중심 분류 (Nearest Centroid Classification)
+		[3-2] 마할라노비스 거리 분류 (Mahalanobis Distance Classification)
+		
+		
 # [3-1] 최근접 중심 분류 (Nearest Centroid Classification)
 
 **▣ 정의 :** 각 클래스의 평균 벡터(centroid)를 계산하고, 새로운 데이터가 가장 가까운 중심에 속하는 클래스로 분류<br>
