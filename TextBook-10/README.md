@@ -1063,7 +1063,7 @@ EM 알고리즘은 잠재변수를 포함한 확률 모델에서 최대우도추
 
 <br>
 
-<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-10/images/2_vs2.png'> 
+<img width ='1000' height = '800' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-10/images/2_vs2.png'> 
 <br>
 
 ---
