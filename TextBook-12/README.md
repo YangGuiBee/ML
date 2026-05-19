@@ -502,8 +502,6 @@
 | **[10] R²** 결정계수            | R² ≥ 0.80                          | 0.50 ≤ R² < 0.80              | < 0.50   |
 
 
-
-
 ---
 
 **(데이터구조)** ![](./images/db.png)
@@ -1204,10 +1202,20 @@
 	Predicted Charges             12901.765317  10175.989258  11811.794421  
 
 
----
-
 ![](./images/tscore2.png)
 <br>
+
+---
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/1_vs.png'> 
+<br>
+오차의 방향(과대/과소)이 중요하다 → ME, MPE<br>
+이상치가 많은 데이터 → MAE, MASE<br>
+큰 오차에 더 엄격히 패널티를 주고 싶다 → MSE, RMSE<br>
+실제값 크기가 지수적으로 다양하다(매출, 인구) → MSLE, RMSLE<br>
+비즈니스 보고용 %(퍼센트) 오차 → MAPE<br>
+시계열 예측 모델 간 비교 → MASE<br>
+모델이 전체 분산의 몇 %를 설명하는지 → R²<br>
 
 ---
 #  12-2 : 지도학습(분류) 평가 지표
@@ -2008,10 +2016,16 @@ ROC로만 평가 했을때 분류모델의 평가순위<br>
 
 
 ![](./images/result2.PNG)
-<br><br> 
-
+<br> 
 
 ---
 
-
-
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/2_vs.png'> 
+<br>
+오차의 방향(과대/과소)이 중요할 때, 편향 방향을 파악해야 하는 경우 →  ME  /  MPE (수요 예측 편향 진단, 가격 모델 방향 검토)<br>
+이상치가 많은 데이터, 극단값에 덜 민감한 지표 필요 →  MAE  /  MASE (부동산 가격, 이상 거래 포함 데이터셋)<br>
+큰 오차에 더 엄격히 패널티를 주고 싶을 때, 이상치 억제·정밀도 강조 →  MSE  /  RMSE (경사하강법 손실함수, 일반 회귀 성능 리포트)<br>
+실제값 크기가 지수적으로 다양할 때, 매출·인구처럼 스케일 차이가 클 때  →  MSLE  /  RMSLE (매출 예측, 인구 추정, Kaggle 가격 대회)<br>
+비즈니스 보고용 % 오차, 단위 무관하게 직관적 비율로 표현  →  MAPE (KPI 리포트, 수요 예측, 경영진 보고 자료)<br>
+시계열 예측 모델 간 비교, naive forecast 대비 성능 측정 →  MASE (재고·판매량 시계열, 다중 시계열 모델 비교)<br>
+모델이 전체 분산의 몇 %를 설명하는지, 선형 회귀 설명력 평가  →  R² score (선형 회귀 모델 평가, 특징 설명력 분석)<br>
