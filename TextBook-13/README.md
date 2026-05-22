@@ -1,4 +1,21 @@
 
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-13/images/ML13_1.PNG'> 
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-13/images/ML13_2.PNG'> 
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-13/images/ML13_3.PNG'> 
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-13/images/ML13_4.PNG'> 
+<br>
+
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-13/images/ML13_5.PNG'> 
+<br>
+
+
+
 **[1][2] 예제 참고 => https://github.com/YangGuiBee/ML/blob/main/TextBook-13/TextBook_13.ipynb**
 
 <br>
