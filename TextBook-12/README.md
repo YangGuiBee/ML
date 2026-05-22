@@ -8,7 +8,7 @@
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/ML12_3.PNG'> 
 <br>
 
-<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/ML12_4.PNG'> 
+<img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/ML12_4_1.PNG'> 
 <br>
 
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/ML12_5.PNG'> 
