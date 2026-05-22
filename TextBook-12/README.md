@@ -2021,10 +2021,12 @@ ROC로만 평가 했을때 분류모델의 평가순위<br>
 
 <img width ='1000' height = '1000' src = 'https://github.com/YangGuiBee/ML/blob/main/TextBook-12/images/2_vs.png'> 
 <br>
-오차의 방향(과대/과소)이 중요할 때, 편향 방향을 파악해야 하는 경우 →  ME  /  MPE (수요 예측 편향 진단, 가격 모델 방향 검토)<br>
-이상치가 많은 데이터, 극단값에 덜 민감한 지표 필요 →  MAE  /  MASE (부동산 가격, 이상 거래 포함 데이터셋)<br>
-큰 오차에 더 엄격히 패널티를 주고 싶을 때, 이상치 억제·정밀도 강조 →  MSE  /  RMSE (경사하강법 손실함수, 일반 회귀 성능 리포트)<br>
-실제값 크기가 지수적으로 다양할 때, 매출·인구처럼 스케일 차이가 클 때  →  MSLE  /  RMSLE (매출 예측, 인구 추정, Kaggle 가격 대회)<br>
-비즈니스 보고용 % 오차, 단위 무관하게 직관적 비율로 표현  →  MAPE (KPI 리포트, 수요 예측, 경영진 보고 자료)<br>
-시계열 예측 모델 간 비교, naive forecast 대비 성능 측정 →  MASE (재고·판매량 시계열, 다중 시계열 모델 비교)<br>
-모델이 전체 분산의 몇 %를 설명하는지, 선형 회귀 설명력 평가  →  R² score (선형 회귀 모델 평가, 특징 설명력 분석)<br>
+전체 오류 유형을 한눈에 보고 싶다 → Confusion Matrix<br>
+데이터가 균형 잡혀 있고 직관적 기준이 필요하다 → Accuracy<br>
+양성으로 예측한 것의 “정확성”이 중요하다(FP 비용 큼) → Precision<br>
+실제 양성을 놓치지 않는 것이 중요하다(FN 비용 큼) → Recall (Sensitivity)<br>
+Precision과 Recall의 균형이 필요하다(불균형 데이터) → F1 score<br>
+음성을 정확히 배제하는 능력이 중요하다 → Specificity (TNR)<br>
+위양성(FP)을 얼마나 발생시키는지가 핵심이다 → Fall-out (FPR)<br>
+임계값에 따른 성능 변화가 중요하다 → ROC curve<br>
+모델 간 전반적 분류 성능을 비교하고 싶다 → AUC score<br>
