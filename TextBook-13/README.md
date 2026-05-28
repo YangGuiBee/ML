@@ -114,6 +114,40 @@
 ![](./images/RL3.PNG)
 <br>
 
+**<ins>▣ Optimal Control (최적 제어)</ins>** <br>
+동적 시스템(dynamic system)을 시간에 따라 제어하여 누적 비용을 최소화하거나 보상을 최대화하는 수학·공학 이론<br>
+“상태가 변하는 시스템을 어떻게 제어해야 가장 좋은 결과가 나오는가?”<br>
+강화학습의 수학적 조상 : Model-based RL의 이론적 토대<br>
+예 : 로봇 팔의 토크 제어, 발전소 출력 제어, 자율주행 차량의 조향 제어<br>
+→ RL = 최적 제어를 ‘모델 없이’ 혹은 ‘불완전한 모델로’ 확장한 것<br>
+<br>
+**<ins>▣ Operations Research (운용연구)</ins>** <br>
+제한된 자원 하에서 최적의 의사결정을 찾는 응용 수학 분야<br>
+동적 계획법 (Dynamic Programming), 마르코프 결정 과정 (MDP), 스케줄링, 자원 할당, 큐잉 이론<br>
+예 : 클라우드 자원 할당, 물류 경로 최적화, 교통 신호 제어<br>
+→ RL은 OR을 “불확실·대규모 환경”으로 확장한 프레임워크<br>
+<br>
+**<ins>▣ Bounded Rationality (제한된 합리성)</ins>** <br>
+인간(또는 에이전트)은 완벽한 정보와 계산 능력을 갖지 못하므로 제한된 자원 안에서 “충분히 좋은” 선택을 함<br>
+RL 에이전트는 환경을 완전히 모르므로 시행착오(trial-and-error)로 학습하여 완전 최적이 아닌 점진적 개선<br>
+RL 의사결정은 항상 불확실성, 탐험(exploration), 오류 가능성을 내포<br>
+→ RL은 ‘이상적 합리성’이 아닌 ‘현실적 합리성’을 모델링<br>
+<br>
+**<ins>▣ Classical / Operant Conditioning (고전적 / 조작적 조건화)</ins>** <br>
+Classical conditioning: 자극–반응 연결 (파블로프)<br>
+Operant conditioning: 행동–보상 연결 (스키너)<br>
+Operant conditioning = RL의 직접적 심리학적 기원이며, 보상(reward)에 의해 행동이 강화됨<br>
+예 : 동물 실험, 인간 행동 강화, RLHF (인간 피드백 기반 학습)<br>
+→ RL은 ‘행동은 보상에 의해 학습된다’는 이론의 계산적 구현<br>
+<br>
+**<ins>▣ Reward System (보상 시스템)</ins>** <br>
+행동의 결과를 정량적 신호로 평가하는 메커니즘<br>
+보상 설계가 RL 성능의 핵심으로 잘못된 보상 → 잘못된 행동 (Reward Hacking)<br>
+보상 설계 = 가치 내재화 목표 오정렬(misalignment)의 주원인<br>
+예 : LLM의 RLHF, 자율주행의 안전 보상, 금융 RL의 리스크 설계<br>
+→ Reward는 ‘수식’이 아니라 ‘가치 선택’ 문제<br>
+<br>
+
 시행착오(Trial and Error)를 통하여 실수와 보상을 통해 학습을 하여 목표를 찾아가는 알고리즘으로,<br> 
 어떤 환경 안에서 정의된 에이전트가 현재의 상태를 인식하여, 선택가능한 행동들 중 보상을 최대화하는 행동 혹은 행동순서를 선택하는 방법.<br>
 기존의 알고리즘이 라벨(정답)이 있는 데이터를 통해서 가중치와 편향을 학습하는 것과 비슷하게<br> 
