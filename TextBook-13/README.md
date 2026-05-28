@@ -42,7 +42,7 @@
 
 ## 강화 학습(Reinforcement Learning, RL)
 
-	[1] Model-free RL : Value Iteration
+	[1] Model-free RL : Value based methods
 	테이블 기반
 		(1-1) Q-Learning: 상태 공간에서 사용되는 표(Q-Table) 기반
 		(1-2) SARSA(State Action Reward State Action)
@@ -63,7 +63,7 @@
 		(1-13) HER(Hindsight Experience Replay): 목표 달성을 학습할 수 있도록 과거 경험을 재사용
 		(1-14) NoisyNet: 신경망 가중치에 노이즈를 추가해 탐색 효율성을 높이는 방식
 
-	[2] Model-free RL : Policy Iteration 
+	[2] Model-free RL : Policy based methods
 	기본 Policy Gradient 및 Actor-Critic 계열
 		(2-1) REINFORCE: 정책 경사법의 기본 형태
 		(2-2) Actor-Critic: 기본적인 Actor-Critic 구조, Policy Gradient와 Critic의 Q값 평가 결합
