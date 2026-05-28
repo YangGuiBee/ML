@@ -147,6 +147,15 @@ Operant conditioning = RL의 직접적 심리학적 기원이며, 보상(reward)
 예 : LLM의 RLHF, 자율주행의 안전 보상, 금융 RL의 리스크 설계<br>
 → Reward는 ‘수식’이 아니라 ‘가치 선택’ 문제<br>
 <br>
+**<ins>▣ Reinforcement Learning (강화학습)</ins>** <br>
+에이전트가 환경과 상호작용하며 누적 보상을 최대화하는 정책을 학습하는 방법으로 아래 개념들의 결합체<br>
+Optimal Control → 목표<br>
+Operations Research → 수학적 구조<br>
+Bounded Rationality → 현실성<br>
+Conditioning → 학습 메커니즘<br>
+Reward System → 가치 신호<br>
+→ 강화학습은 ‘기술’이 아니라 ‘의사결정 이론’<br>
+<br>
 
 시행착오(Trial and Error)를 통하여 실수와 보상을 통해 학습을 하여 목표를 찾아가는 알고리즘으로,<br> 
 어떤 환경 안에서 정의된 에이전트가 현재의 상태를 인식하여, 선택가능한 행동들 중 보상을 최대화하는 행동 혹은 행동순서를 선택하는 방법.<br>
