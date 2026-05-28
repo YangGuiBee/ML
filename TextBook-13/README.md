@@ -2220,6 +2220,7 @@ https://www.kaggle.com/code/marvivek/a3c-implementation<br>
 
 ## (2-5) ACER(Actor-Critic with Experience Replay): 경험 리플레이를 추가한 Actor-Critic 방법
 ▣ 정의 : Actor-Critic에 경험 재생(Experience Replay)을 추가하여 샘플 효율성을 높인 알고리즘. PPO의 클리핑 방식과 유사하게 정책 업데이트를 안정화하는 기법도 포함<br>
+<ins>Actor‑Critic 구조에 경험 재생을 적용하여 과거 경험을 반복 활용함으로써 학습 효율을 높이고, 정책이 너무 급하게 변하지 않도록 업데이트를 제한해 안정성을 확보한 강화학습 알고리즘</ins>
 ▣ 장점 : 샘플 효율성 향상, Actor-Critic 구조의 안정성과 효율성을 제공<br>
 ▣ 단점 : 구현이 복잡, 추가적인 메모리와 계산 비용이 요구<br>
 ▣ 적용 분야 : 복잡한 연속 제어 환경, 로봇 공학<br>
@@ -2247,6 +2248,7 @@ https://www.kaggle.com/code/marvivek/a3c-implementation<br>
 
 ## (2-8) PPO(Proximal Policy Optimization): 신뢰 구간을 사용해 안정적으로 정책을 업데이트
 ▣ 정의 : Policy Gradient를 안정적으로 학습하기 위해 손실 함수에 클리핑을 도입한 알고리즘. 기존 정책과 새로운 정책 간의 차이를 제한하여 학습 안정성을 확보<br>
+<ins>PPO는 정책을 업데이트할 때 기존 정책과 너무 크게 달라지지 않도록 손실 함수에 클리핑을 적용하여, 정책을 안정적으로 학습하는 Policy Gradient 알고리즘</ins>
 ▣ 장점 : 구현이 간단하고 안정적이며, Hyperparameter에 덜 민감하고 높은 성능<br>
 ▣ 단점 : 일부 환경에서 클리핑이 비효율적, 계산 비용이 높다<br>
 ▣ 적용 분야 : 게임 AI, 로봇 공학, 자율적 제어 시스템<br>
@@ -2258,6 +2260,7 @@ https://www.kaggle.com/code/borisdee/proximal-policy-optimization-ppo<br>
 
 ## (2-9) TRPO(Trust Region Policy Optimization): 정책 급변을 방지하는 최적화 기법
 ▣ 정의 : 정책 업데이트 시 큰 변화를 방지하기 위해 신뢰 영역(Trust Region)을 유지하며 학습. Kullback-Leibler (KL) 발산을 사용하여 정책 간 차이를 제한<br>
+<ins>TRPO는 정책 업데이트 시 이전 정책과의 KL 발산을 제한하는 신뢰 영역을 설정하여 정책 급변을 방지하고 학습 안정성을 확보하는 알고리즘</ins><br>
 ▣ 장점 : 안정적인 정책 업데이트, 수렴이 빠르고 신뢰성이 높음
 ▣ 단점 : 계산 비용이 매우 높고, 구현이 복잡<br>
 ▣ 적용 분야 : 연속적인 제어 문제, 복잡한 로봇 학습<br>
@@ -2267,6 +2270,7 @@ https://www.kaggle.com/code/borisdee/proximal-policy-optimization-ppo<br>
 
 ## (2-10) DDPG(Deep Deterministic Policy Gradient) : 연속적 행동 공간에서 학습
 ▣ 정의: Actor-Critic 기반으로, 연속적인 행동 공간에서 작동하도록 설계된 모델. Actor는 행동을 생성하고, Critic은 행동의 𝑄-값을 평가<br>
+<ins>DDPG는 Actor‑Critic 구조를 사용하여, 연속적인 값으로 행동을 직접 생성하는 Actor와 그 행동이 얼마나 좋은지를 평가하는 Critic이 함께 학습하는 강화학습 알고리즘<ins><br>
 ▣ 장점 : 연속적인 행동 공간에서 효율적, 고차원 작업에 적합<br>
 ▣ 단점 : 샘플 효율성이 낮고 탐색 문제에 취약<br>
 ▣ 적용 분야 : 로봇 학습, 자율 시스템 제어<br>
@@ -2275,7 +2279,8 @@ https://www.kaggle.com/code/borisdee/proximal-policy-optimization-ppo<br>
 <br>
 
 ## (2-11) TD3(Twin Delayed DDPG) : DDPG의 한계점을 극복하기 위한 개선된 모델
-▣ 정의 : DDPG의 개선된 버전으로, 행동 가치 평가의 과대 추정을 방지하기 위해 두 개의 Critic 네트워크를 사용하고 행동 업데이트를 지연시켜 안정성을 강화<br>
+▣ 정의 : DDPG의 개선된 버전으로, 행동 가치 평가의 과대 추정을 방지하기 위해 두 개의 Critic 네트워크를 사용하고 행동 업데이트를 지연시켜 안정성을 강화<br>																
+<ins>두 개의 Critic 네트워크를 사용한다는 것은 동일한 상태–행동 쌍에 대해 두 개의 Q값을 계산하고, 그중 작은 값을 사용함으로써 DDPG에서 발생하는 Q값의 과대 추정을 방지하기 위함</ins><br>
 ▣ 장점 : 과대 추정을 줄이고, 안정적인 학습 성능<br>
 ▣ 단점 : 구현이 복잡, 추가 계산 비용<br>
 ▣ 적용 분야 : 연속 제어 문제, 로봇 공학<br>
@@ -2285,6 +2290,7 @@ https://www.kaggle.com/code/borisdee/proximal-policy-optimization-ppo<br>
 
 ## (2-12) SAC(Soft Actor-Critic): 탐색과 활용의 균형을 유지하도록 설계된 정책 학습 모델
 ▣ 정의 : 정책 엔트로피를 최대화하여 탐색 성능을 높이고 안정성을 강화한 Actor-Critic 알고리즘<br>
+<ins>SAC는 보상을 최대화하는 동시에 정책 엔트로피를 유지하여 지속적인 탐색이 가능하도록 설계된 안정적인 Actor‑Critic 기반 강화학습 알고리즘<ins><br>
 ▣ 장점 : 안정적이고 강력한 성능, 샘플 효율성 우수<br>
 ▣ 단점 : 계산 비용이 높고 복잡한 튜닝 필요<br>
 ▣ 적용 분야 : 로봇 동작 학습, 복잡한 환경 학습<br>
@@ -2295,6 +2301,7 @@ https://www.kaggle.com/code/sz8416/soft-actor-critic-sac-lunarlandercontinuous<b
 
 ## (2-13) BCBC(Behavioral Cloning) : 데이터를 기반으로 정책을 모방하는 방식
 ▣ 정의 : 주어진 행동 데이터를 사용해 정책을 모방 학습(Imitation Learning)하며 지도 학습 접근법으로 주로 사용<br>
+<ins>전문가가 수행한 (상태, 행동) 데이터를 이용해 그 행동을 그대로 따라 하도록 정책을 학습하는 방법으로 이 과정은 보상을 사용하지 않고, 일반적인 지도학습으로 진행(보상이나 환경 상호작용을 사용하지 않음)</ins><br>
 ▣ 장점 : 간단하고 구현이 용이하고 지도 학습 알고리즘을 활용 가능<br>
 ▣ 단점 : 일반화가 어렵고 충분한 데이터가 없으면 성능이 저하<br>
 ▣ 적용 분야 : 자율 주행 학습, 인간 행동 모방<br>
@@ -2304,8 +2311,7 @@ https://www.kaggle.com/code/hugomathien/behavioral-cloning<br>
 <br>
 
 ## (2-14) DDPGfD(DDPG from Demonstrations) : 전문가의 시범을 사용해 DDPG 성능을 개선
-▣ 정의 : DDPG(Deep Deterministic Policy Gradient)에 전문가 시연 데이터를 추가로 활용하여 초기 학습을 강화하는 알고리즘<br>
-시연 데이터를 우선적으로 활용하여 학습 효율성을 높이는 경험 재생(Experience Replay) 기법을 포함<br>
+▣ 정의 : <ins>DDPG(Deep Deterministic Policy Gradient)에 전문가 시연 데이터를 추가로 활용하여 초기 학습을 강화하는 알고리즘으로 경험 재생 과정에서 전문가 시연 데이터를 우선적으로 사용</ins><br>
 ▣ 장점 : 학습 초기 성능이 향상, 샘플 효율성을 개선, 희소 보상 환경에서도 학습이 용이<br>
 ▣ 단점 : 전문가 시연 데이터가 필수적, 추가 메모리 및 계산 비용이 필요<br>
 ▣ 적용 분야 : 로봇 공학(시연 데이터를 활용한 로봇 작업), 자율 주행 및 복잡한 제어 작업<br>
