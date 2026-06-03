@@ -1,22 +1,22 @@
-
-
-
-
 #  15 : CASE Study
+# 머신러닝 모델의 최적화 사례 발표
 
 ---
 
-  https://scikit-learn.org/stable/auto_examples/applications/index.html
-
+▣ 검색 사이트 : https://www.kaggle.com/  등<br>
+▣ 방법1 : 이미 완료된 챌린지에서 사용한 머신러닝 모델(본인이 관심있는 모델) 최적화 방법에 대한 리뷰 **또는** <br>
+▣ 방법2 : 현재 진행중인 챌린지에 본인이 직접 모델 제출하고 제출한 내용 소개<br>
 <br>
-
-  https://www.kaggle.com/
-
+### 발표 파일
+방법1 또는 방법2에 대한 요약을 ppt파일로 1~2페이지로 작성(가로)하여 제출후 발표<br>
+발표자료 파일명 : 15장(발표)_이름(학번).ppt<br>
 <br>
+▣ 발표 파일 제출 : ecampus.konkuk.ac.kr (과제 게시판), ~ 2026.6.11(목) 18시<br>
+▣ 발표 : 2026.6.11(목) 19시부터 1인당 4분이내 발표<br>
 
-  참고 : https://github.com/dair-ai/ML-Course-Notes
-
-<br>
+---
+  
+참고
 
 # Machine Learning 최적화 방안
 
