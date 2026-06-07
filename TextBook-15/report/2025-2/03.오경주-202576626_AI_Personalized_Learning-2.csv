@@ -1,0 +1,1001 @@
+student_id,age,gender,education_level,learning_style,previous_gpa,completed_modules,avg_time_per_module,engagement_score,distraction_events,quiz_accuracy,feedback_score,contextual_difficulty_level,recommended_path,actual_path_followed,path_efficiency_score,final_assessment_score,learning_outcome
+STU001,20,Male,UG,Visual,3.75,5,42.7,67,4,100,4,Medium,M1→M2→M4,M1→M3→M5,84,69,Excellent
+STU002,24,Female,UG,Kinesthetic,2.55,3,31.29,65,2,79,2,Medium,M1→M3→M5,M1→M3→M5,83,68,Fail
+STU003,22,Male,PG,Visual,3.51,6,52.92,84,5,70,1,Medium,M1→M3→M5,M1→M2→M4,77,84,Good
+STU004,23,Female,High School,Auditory,3.52,4,40.1,79,0,65,3,Medium,M1→M3→M5,M1→M2→M4,78,91,Fair
+STU005,21,Female,High School,Kinesthetic,3.19,10,35.34,72,3,50,5,Hard,M1→M2→M4,M1→M3→M5,75,68,Fair
+STU006,20,Female,UG,Auditory,2.75,5,35.05,99,0,60,4,Medium,M1→M3→M5,M1→M3→M5,70,86,Fair
+STU007,20,Female,High School,Visual,2.98,9,34.84,94,3,50,3,Hard,M1→M2→M4,M1→M2→M4,80,83,Good
+STU008,24,Male,UG,Kinesthetic,2.21,7,51.35,72,2,91,4,Hard,M1→M2→M4,M1→M3→M5,84,74,Excellent
+STU009,18,Male,High School,Kinesthetic,3.36,7,49.87,75,1,78,5,Hard,M1→M3→M5,M1→M2→M4,71,83,Excellent
+STU010,25,Male,UG,Auditory,2.88,9,40.25,90,3,53,2,Hard,M1→M3→M5,M1→M3→M5,79,99,Good
+STU011,21,Male,PG,Auditory,2.75,6,56.41,63,1,83,3,Medium,M1→M3→M5,M1→M2→M4,99,81,Fail
+STU012,23,Male,PG,Auditory,2.37,5,26.63,92,0,81,1,Medium,M1→M3→M5,M1→M2→M4,94,83,Fair
+STU013,18,Female,UG,Kinesthetic,3.12,3,40.06,65,5,52,1,Medium,M1→M2→M4,M1→M3→M5,76,100,Fail
+STU014,25,Female,UG,Kinesthetic,2.69,7,23.53,72,4,100,5,Hard,M1→M3→M5,M1→M2→M4,88,92,Fair
+STU015,19,Female,UG,Auditory,2.35,10,39.1,99,0,51,2,Medium,M1→M2→M4,M1→M3→M5,78,64,Fair
+STU016,22,Male,PG,Auditory,3.19,3,59.6,67,0,85,1,Medium,M1→M3→M5,M1→M2→M4,81,80,Excellent
+STU017,21,Male,UG,Auditory,3.06,9,24.5,98,4,90,2,Medium,M1→M3→M5,M1→M3→M5,79,73,Fail
+STU018,18,Female,PG,Visual,3.18,9,27.65,82,5,90,5,Medium,M1→M3→M5,M1→M2→M4,79,62,Fail
+STU019,18,Male,High School,Kinesthetic,2.2,3,27.62,82,5,98,2,Hard,M1→M2→M4,M1→M2→M4,85,96,Fail
+STU020,25,Female,PG,Auditory,3.1,5,32.16,80,3,75,4,Hard,M1→M2→M4,M1→M3→M5,98,78,Fair
+STU021,21,Female,PG,Kinesthetic,3.2,7,41.8,75,1,70,3,Easy,M1→M3→M5,M1→M3→M5,84,86,Fail
+STU022,21,Male,High School,Kinesthetic,3.14,3,53.98,91,0,83,1,Hard,M1→M3→M5,M1→M2→M4,83,93,Excellent
+STU023,24,Male,High School,Kinesthetic,3.83,7,34.64,88,3,88,4,Easy,M1→M2→M4,M1→M2→M4,96,90,Fair
+STU024,25,Male,UG,Auditory,2.4,4,29.44,84,5,96,3,Hard,M1→M2→M4,M1→M3→M5,77,68,Fair
+STU025,21,Male,UG,Kinesthetic,2.69,3,21.7,61,0,92,2,Easy,M1→M3→M5,M1→M3→M5,83,76,Fair
+STU026,24,Female,High School,Visual,3.56,5,30.31,72,0,66,2,Hard,M1→M3→M5,M1→M2→M4,73,90,Excellent
+STU027,21,Female,PG,Auditory,3.72,9,23.82,63,3,94,1,Easy,M1→M3→M5,M1→M2→M4,87,83,Excellent
+STU028,19,Female,UG,Kinesthetic,2.2,10,41.53,63,2,74,1,Medium,M1→M3→M5,M1→M2→M4,87,65,Excellent
+STU029,24,Male,PG,Visual,2.66,10,20.04,74,2,61,4,Hard,M1→M2→M4,M1→M3→M5,82,77,Excellent
+STU030,20,Female,PG,Visual,2.07,8,47.03,66,4,100,4,Medium,M1→M2→M4,M1→M3→M5,76,60,Fail
+STU031,18,Female,PG,Auditory,3.97,9,31.92,86,1,82,5,Medium,M1→M3→M5,M1→M3→M5,72,76,Excellent
+STU032,23,Male,High School,Visual,2.97,9,24.89,81,2,67,2,Easy,M1→M2→M4,M1→M2→M4,82,90,Fail
+STU033,24,Female,PG,Kinesthetic,2.61,7,51.51,91,4,95,1,Medium,M1→M2→M4,M1→M3→M5,83,66,Excellent
+STU034,20,Male,UG,Kinesthetic,2.62,9,29.76,63,3,84,5,Hard,M1→M2→M4,M1→M3→M5,92,97,Excellent
+STU035,18,Female,PG,Kinesthetic,3.0,9,37.66,77,5,96,3,Hard,M1→M2→M4,M1→M2→M4,82,92,Fail
+STU036,20,Male,High School,Kinesthetic,2.63,6,31.16,86,1,78,1,Easy,M1→M2→M4,M1→M2→M4,80,90,Good
+STU037,24,Female,High School,Auditory,2.01,3,45.57,66,0,90,2,Hard,M1→M2→M4,M1→M3→M5,91,100,Excellent
+STU038,23,Male,PG,Auditory,3.58,3,54.53,99,4,92,1,Hard,M1→M3→M5,M1→M3→M5,80,88,Good
+STU039,21,Female,PG,Auditory,3.92,6,30.98,82,1,59,1,Easy,M1→M3→M5,M1→M3→M5,71,63,Excellent
+STU040,20,Male,High School,Visual,3.38,6,50.43,67,4,77,1,Hard,M1→M3→M5,M1→M2→M4,82,96,Fair
+STU041,25,Male,High School,Visual,2.31,10,47.73,70,4,75,3,Medium,M1→M2→M4,M1→M2→M4,80,69,Excellent
+STU042,23,Male,UG,Visual,3.69,5,45.11,82,5,71,5,Easy,M1→M2→M4,M1→M2→M4,78,93,Fail
+STU043,21,Female,High School,Auditory,2.93,9,40.5,90,1,97,1,Easy,M1→M2→M4,M1→M3→M5,83,87,Fail
+STU044,24,Male,UG,Kinesthetic,2.74,8,37.47,67,0,94,3,Easy,M1→M2→M4,M1→M2→M4,81,76,Good
+STU045,19,Female,High School,Visual,2.01,6,44.84,77,3,95,3,Medium,M1→M2→M4,M1→M2→M4,74,84,Fair
+STU046,18,Male,PG,Visual,2.1,6,59.65,92,5,81,4,Hard,M1→M3→M5,M1→M3→M5,88,61,Fail
+STU047,18,Male,High School,Kinesthetic,3.23,6,37.78,83,3,100,1,Medium,M1→M2→M4,M1→M2→M4,80,72,Fair
+STU048,20,Male,UG,Auditory,3.95,10,52.3,67,4,61,5,Hard,M1→M3→M5,M1→M2→M4,97,63,Fair
+STU049,24,Female,UG,Kinesthetic,2.19,6,30.58,75,4,93,4,Easy,M1→M2→M4,M1→M3→M5,94,95,Fail
+STU050,21,Male,PG,Auditory,2.34,10,58.69,71,0,87,5,Hard,M1→M2→M4,M1→M2→M4,77,100,Fair
+STU051,22,Male,High School,Visual,2.67,3,38.03,87,0,78,4,Easy,M1→M2→M4,M1→M3→M5,98,88,Fail
+STU052,24,Male,PG,Auditory,3.74,10,55.68,70,2,97,3,Hard,M1→M2→M4,M1→M2→M4,92,100,Fair
+STU053,21,Female,UG,Kinesthetic,2.04,6,57.47,86,5,59,2,Hard,M1→M3→M5,M1→M2→M4,97,94,Excellent
+STU054,18,Male,High School,Kinesthetic,2.77,3,59.98,62,2,85,5,Medium,M1→M2→M4,M1→M2→M4,97,85,Fail
+STU055,25,Male,High School,Visual,3.88,7,23.73,74,3,61,5,Hard,M1→M3→M5,M1→M3→M5,77,70,Fail
+STU056,23,Female,PG,Auditory,2.03,8,51.41,89,4,61,5,Easy,M1→M2→M4,M1→M2→M4,100,83,Fail
+STU057,18,Male,PG,Kinesthetic,2.5,4,49.46,81,1,90,4,Hard,M1→M3→M5,M1→M2→M4,80,97,Good
+STU058,18,Female,UG,Kinesthetic,2.58,9,59.73,72,2,80,3,Medium,M1→M2→M4,M1→M3→M5,97,82,Good
+STU059,18,Male,UG,Auditory,2.63,7,22.5,75,4,100,3,Hard,M1→M3→M5,M1→M2→M4,89,100,Fair
+STU060,23,Female,High School,Auditory,2.0,5,57.93,85,2,87,1,Hard,M1→M2→M4,M1→M2→M4,70,72,Fair
+STU061,21,Female,PG,Visual,3.19,10,37.35,86,5,77,5,Easy,M1→M3→M5,M1→M3→M5,74,98,Fail
+STU062,23,Female,PG,Visual,3.65,6,57.04,70,4,64,3,Hard,M1→M3→M5,M1→M3→M5,96,69,Fail
+STU063,25,Female,UG,Visual,3.02,10,21.93,91,0,80,5,Easy,M1→M3→M5,M1→M3→M5,83,89,Excellent
+STU064,23,Female,UG,Kinesthetic,2.72,4,59.22,81,5,53,5,Medium,M1→M3→M5,M1→M3→M5,86,62,Fail
+STU065,22,Male,PG,Visual,3.07,10,49.42,81,2,62,4,Easy,M1→M3→M5,M1→M3→M5,95,80,Good
+STU066,19,Female,High School,Visual,2.68,3,20.58,94,3,92,2,Hard,M1→M2→M4,M1→M2→M4,95,81,Fair
+STU067,25,Male,High School,Kinesthetic,3.44,9,52.78,81,5,55,2,Easy,M1→M3→M5,M1→M2→M4,88,93,Excellent
+STU068,19,Male,High School,Kinesthetic,3.52,8,32.5,63,5,95,4,Hard,M1→M3→M5,M1→M3→M5,83,71,Excellent
+STU069,18,Male,High School,Auditory,3.22,7,20.5,65,0,59,3,Easy,M1→M2→M4,M1→M3→M5,84,97,Good
+STU070,21,Male,PG,Auditory,2.23,9,41.08,97,1,51,4,Easy,M1→M2→M4,M1→M2→M4,95,91,Fail
+STU071,20,Male,UG,Auditory,3.62,10,41.45,78,3,56,3,Easy,M1→M2→M4,M1→M2→M4,80,73,Fail
+STU072,23,Female,UG,Kinesthetic,3.73,8,26.14,100,3,98,5,Easy,M1→M2→M4,M1→M3→M5,85,76,Excellent
+STU073,24,Female,PG,Visual,3.64,4,28.9,61,5,80,5,Hard,M1→M2→M4,M1→M3→M5,74,68,Excellent
+STU074,21,Female,High School,Kinesthetic,3.25,9,57.97,82,2,68,2,Easy,M1→M3→M5,M1→M3→M5,73,91,Fair
+STU075,19,Male,PG,Kinesthetic,3.14,7,55.87,72,4,51,5,Easy,M1→M3→M5,M1→M2→M4,78,89,Excellent
+STU076,20,Male,PG,Auditory,2.92,10,50.63,68,1,70,1,Easy,M1→M3→M5,M1→M2→M4,72,71,Fail
+STU077,24,Male,High School,Visual,3.58,5,48.16,65,3,99,3,Easy,M1→M3→M5,M1→M3→M5,94,74,Good
+STU078,21,Female,PG,Visual,3.96,9,41.36,74,3,58,2,Medium,M1→M3→M5,M1→M3→M5,70,73,Good
+STU079,19,Female,High School,Kinesthetic,3.2,10,59.18,63,1,71,3,Medium,M1→M2→M4,M1→M3→M5,71,91,Good
+STU080,23,Female,UG,Kinesthetic,3.95,5,59.15,88,0,86,2,Medium,M1→M2→M4,M1→M2→M4,96,71,Good
+STU081,18,Male,UG,Auditory,3.12,7,42.74,78,0,74,2,Medium,M1→M2→M4,M1→M2→M4,80,87,Fair
+STU082,25,Female,UG,Visual,2.45,10,52.67,94,3,73,3,Hard,M1→M3→M5,M1→M2→M4,100,63,Fail
+STU083,19,Male,PG,Kinesthetic,2.67,10,48.59,84,5,65,3,Medium,M1→M2→M4,M1→M2→M4,83,93,Fail
+STU084,19,Female,High School,Visual,3.35,9,36.31,80,0,72,3,Hard,M1→M3→M5,M1→M2→M4,95,76,Good
+STU085,19,Female,PG,Visual,2.58,10,21.78,62,2,100,4,Easy,M1→M3→M5,M1→M3→M5,73,79,Good
+STU086,24,Female,PG,Auditory,2.88,3,21.97,84,0,93,2,Medium,M1→M2→M4,M1→M2→M4,94,82,Fail
+STU087,20,Male,PG,Visual,3.25,8,45.24,91,4,98,2,Hard,M1→M2→M4,M1→M3→M5,87,89,Excellent
+STU088,18,Male,High School,Visual,3.82,7,43.46,66,4,51,5,Hard,M1→M2→M4,M1→M3→M5,74,91,Excellent
+STU089,18,Male,PG,Kinesthetic,2.74,8,20.25,94,0,85,4,Hard,M1→M2→M4,M1→M3→M5,72,77,Fair
+STU090,22,Male,PG,Kinesthetic,3.24,3,40.17,87,3,67,2,Hard,M1→M2→M4,M1→M3→M5,100,87,Good
+STU091,23,Male,High School,Kinesthetic,3.23,10,29.42,74,2,91,5,Easy,M1→M3→M5,M1→M2→M4,100,99,Fail
+STU092,25,Female,PG,Visual,2.21,4,38.0,62,1,96,3,Medium,M1→M3→M5,M1→M3→M5,96,82,Fail
+STU093,25,Male,High School,Kinesthetic,3.91,4,37.3,72,4,81,3,Hard,M1→M3→M5,M1→M3→M5,86,67,Good
+STU094,21,Male,UG,Auditory,3.27,10,32.46,97,0,65,1,Medium,M1→M2→M4,M1→M3→M5,99,60,Excellent
+STU095,24,Male,High School,Auditory,2.54,5,30.1,96,4,82,3,Hard,M1→M3→M5,M1→M3→M5,96,97,Fair
+STU096,22,Female,PG,Kinesthetic,2.68,3,33.79,82,4,80,4,Easy,M1→M3→M5,M1→M3→M5,93,60,Good
+STU097,25,Male,UG,Visual,3.07,3,55.38,81,1,90,2,Easy,M1→M3→M5,M1→M2→M4,76,95,Fair
+STU098,23,Male,High School,Visual,2.2,4,28.72,72,2,56,5,Hard,M1→M3→M5,M1→M2→M4,84,76,Excellent
+STU099,20,Male,High School,Visual,3.53,10,58.07,83,0,100,5,Hard,M1→M3→M5,M1→M2→M4,70,97,Fair
+STU100,18,Male,PG,Kinesthetic,2.64,6,52.39,68,5,97,3,Easy,M1→M2→M4,M1→M2→M4,76,81,Fail
+STU101,24,Female,UG,Visual,3.72,9,39.6,81,4,61,1,Hard,M1→M3→M5,M1→M3→M5,88,98,Excellent
+STU102,20,Female,UG,Kinesthetic,2.2,9,54.14,64,5,68,2,Hard,M1→M3→M5,M1→M2→M4,94,95,Fail
+STU103,23,Female,High School,Auditory,2.16,6,22.57,76,5,99,4,Medium,M1→M3→M5,M1→M2→M4,88,88,Good
+STU104,20,Male,PG,Visual,2.35,10,23.11,68,5,73,2,Easy,M1→M2→M4,M1→M3→M5,81,99,Fail
+STU105,21,Female,High School,Visual,2.69,3,26.15,93,1,70,4,Easy,M1→M2→M4,M1→M2→M4,89,95,Good
+STU106,23,Female,High School,Auditory,2.91,6,30.84,92,3,89,3,Easy,M1→M2→M4,M1→M3→M5,99,70,Good
+STU107,19,Male,PG,Auditory,2.98,9,25.32,100,2,59,2,Medium,M1→M3→M5,M1→M3→M5,90,74,Fair
+STU108,22,Male,UG,Auditory,2.23,7,22.32,98,5,71,4,Easy,M1→M2→M4,M1→M2→M4,90,72,Fair
+STU109,22,Female,High School,Auditory,2.11,8,50.97,71,0,77,4,Hard,M1→M2→M4,M1→M2→M4,85,82,Good
+STU110,24,Female,High School,Kinesthetic,2.1,9,53.93,61,4,92,3,Hard,M1→M3→M5,M1→M3→M5,95,62,Fair
+STU111,20,Female,High School,Auditory,2.89,8,29.43,99,3,56,5,Easy,M1→M3→M5,M1→M3→M5,77,100,Good
+STU112,24,Female,PG,Visual,3.36,3,24.69,85,3,96,5,Hard,M1→M2→M4,M1→M2→M4,80,93,Fair
+STU113,22,Male,High School,Kinesthetic,3.88,9,20.18,62,2,74,2,Medium,M1→M2→M4,M1→M2→M4,80,81,Fair
+STU114,18,Male,PG,Auditory,3.65,6,45.26,60,4,93,5,Easy,M1→M3→M5,M1→M3→M5,87,85,Fail
+STU115,21,Female,UG,Auditory,3.68,7,22.76,63,5,51,1,Easy,M1→M3→M5,M1→M3→M5,81,80,Fail
+STU116,21,Female,High School,Kinesthetic,3.41,6,41.39,91,1,100,5,Easy,M1→M2→M4,M1→M2→M4,81,100,Fail
+STU117,25,Female,UG,Auditory,3.85,4,37.01,97,4,90,3,Medium,M1→M3→M5,M1→M2→M4,94,95,Fair
+STU118,23,Male,High School,Kinesthetic,3.15,9,27.91,69,0,76,4,Medium,M1→M3→M5,M1→M2→M4,91,100,Good
+STU119,20,Female,UG,Kinesthetic,2.34,9,24.12,65,2,82,1,Medium,M1→M2→M4,M1→M3→M5,74,88,Fair
+STU120,20,Male,PG,Auditory,2.99,8,50.97,95,1,74,2,Hard,M1→M3→M5,M1→M2→M4,78,63,Good
+STU121,22,Male,PG,Visual,3.61,10,21.5,60,0,55,1,Medium,M1→M2→M4,M1→M3→M5,81,72,Fail
+STU122,24,Female,High School,Kinesthetic,3.94,9,55.76,79,0,57,5,Hard,M1→M3→M5,M1→M3→M5,75,99,Excellent
+STU123,19,Male,UG,Kinesthetic,3.85,8,31.01,63,5,67,2,Medium,M1→M3→M5,M1→M3→M5,77,87,Fair
+STU124,21,Female,UG,Kinesthetic,2.41,10,22.49,65,3,61,1,Medium,M1→M2→M4,M1→M2→M4,90,84,Excellent
+STU125,20,Female,PG,Kinesthetic,2.38,3,26.81,60,1,82,3,Medium,M1→M2→M4,M1→M2→M4,87,73,Excellent
+STU126,20,Male,UG,Kinesthetic,2.69,6,57.13,65,5,94,3,Easy,M1→M3→M5,M1→M2→M4,79,92,Fail
+STU127,19,Male,UG,Visual,3.28,4,22.48,78,3,53,4,Hard,M1→M3→M5,M1→M2→M4,93,87,Fail
+STU128,24,Female,High School,Auditory,3.24,8,44.66,82,4,60,1,Easy,M1→M2→M4,M1→M3→M5,79,97,Fail
+STU129,23,Male,UG,Kinesthetic,3.41,3,51.9,81,2,50,5,Medium,M1→M3→M5,M1→M2→M4,88,76,Excellent
+STU130,22,Female,UG,Kinesthetic,2.33,3,53.82,65,0,78,4,Easy,M1→M3→M5,M1→M3→M5,91,65,Excellent
+STU131,22,Male,PG,Kinesthetic,3.78,3,30.12,98,0,68,2,Easy,M1→M3→M5,M1→M3→M5,99,62,Excellent
+STU132,23,Male,PG,Kinesthetic,2.17,10,43.18,96,3,86,1,Easy,M1→M3→M5,M1→M2→M4,88,75,Good
+STU133,23,Female,PG,Visual,2.51,8,34.23,99,4,73,4,Hard,M1→M2→M4,M1→M2→M4,100,84,Excellent
+STU134,20,Male,High School,Auditory,2.4,6,54.89,93,0,54,4,Medium,M1→M2→M4,M1→M2→M4,73,62,Fail
+STU135,25,Female,UG,Auditory,2.3,9,49.01,81,3,83,5,Medium,M1→M3→M5,M1→M3→M5,79,87,Excellent
+STU136,20,Female,UG,Kinesthetic,2.96,3,28.17,87,3,65,4,Medium,M1→M2→M4,M1→M2→M4,93,85,Excellent
+STU137,19,Female,UG,Visual,2.58,9,46.24,76,1,64,1,Hard,M1→M2→M4,M1→M3→M5,93,66,Good
+STU138,21,Female,PG,Kinesthetic,3.27,3,29.62,66,4,61,2,Hard,M1→M2→M4,M1→M3→M5,72,67,Excellent
+STU139,21,Male,PG,Auditory,2.03,10,25.37,92,0,50,2,Medium,M1→M3→M5,M1→M2→M4,77,87,Fail
+STU140,22,Male,High School,Kinesthetic,2.44,3,51.11,96,1,87,5,Hard,M1→M3→M5,M1→M3→M5,85,99,Fail
+STU141,23,Male,UG,Visual,3.21,5,50.71,87,3,62,5,Medium,M1→M3→M5,M1→M3→M5,89,77,Fair
+STU142,22,Female,PG,Visual,3.2,10,41.14,95,4,87,4,Medium,M1→M3→M5,M1→M3→M5,97,85,Fail
+STU143,23,Female,UG,Auditory,2.84,5,54.61,89,2,76,5,Medium,M1→M2→M4,M1→M2→M4,81,81,Good
+STU144,24,Female,High School,Auditory,3.66,9,57.81,100,5,58,3,Hard,M1→M2→M4,M1→M3→M5,93,61,Fair
+STU145,21,Male,PG,Visual,2.26,3,34.58,73,4,82,5,Easy,M1→M2→M4,M1→M3→M5,78,89,Fail
+STU146,25,Male,PG,Auditory,3.09,6,28.62,96,1,100,4,Hard,M1→M2→M4,M1→M2→M4,96,75,Fair
+STU147,25,Female,UG,Auditory,3.45,8,40.57,75,4,71,4,Easy,M1→M2→M4,M1→M3→M5,74,74,Fail
+STU148,22,Female,High School,Auditory,2.91,4,57.43,71,5,67,3,Medium,M1→M2→M4,M1→M2→M4,73,77,Fair
+STU149,18,Female,PG,Visual,3.45,10,33.96,72,4,71,2,Medium,M1→M3→M5,M1→M2→M4,98,77,Fair
+STU150,20,Male,PG,Kinesthetic,2.89,5,26.93,66,1,67,3,Hard,M1→M2→M4,M1→M3→M5,71,74,Fail
+STU151,25,Male,High School,Visual,2.86,3,33.82,99,5,87,5,Medium,M1→M3→M5,M1→M3→M5,90,78,Excellent
+STU152,24,Female,UG,Kinesthetic,3.95,7,47.47,87,5,54,1,Easy,M1→M3→M5,M1→M3→M5,79,96,Fair
+STU153,20,Female,PG,Auditory,2.23,5,36.43,93,2,80,3,Medium,M1→M3→M5,M1→M2→M4,91,74,Fail
+STU154,22,Male,UG,Kinesthetic,2.87,9,42.35,62,4,59,3,Easy,M1→M3→M5,M1→M3→M5,75,71,Good
+STU155,24,Female,PG,Visual,2.8,7,47.14,97,3,80,1,Easy,M1→M2→M4,M1→M2→M4,91,71,Fair
+STU156,24,Male,UG,Kinesthetic,3.91,4,43.61,83,1,74,2,Medium,M1→M3→M5,M1→M3→M5,90,75,Fail
+STU157,20,Female,High School,Auditory,3.19,7,58.67,70,0,70,1,Medium,M1→M3→M5,M1→M3→M5,94,79,Fair
+STU158,22,Female,High School,Visual,3.32,10,37.61,94,1,73,3,Easy,M1→M2→M4,M1→M2→M4,92,84,Fail
+STU159,25,Male,High School,Kinesthetic,3.66,8,42.83,90,4,55,4,Easy,M1→M3→M5,M1→M2→M4,79,96,Excellent
+STU160,22,Female,High School,Visual,2.35,9,32.43,63,1,93,4,Easy,M1→M3→M5,M1→M3→M5,75,84,Good
+STU161,24,Male,High School,Kinesthetic,2.76,8,20.07,63,0,52,2,Medium,M1→M3→M5,M1→M2→M4,82,85,Fail
+STU162,25,Female,PG,Visual,2.46,5,48.84,96,1,87,2,Medium,M1→M2→M4,M1→M2→M4,78,79,Fail
+STU163,25,Female,UG,Visual,3.36,7,36.63,67,4,92,5,Medium,M1→M3→M5,M1→M2→M4,86,92,Good
+STU164,23,Male,PG,Auditory,3.39,3,23.96,86,0,84,5,Hard,M1→M3→M5,M1→M3→M5,70,66,Excellent
+STU165,18,Female,PG,Visual,2.18,3,21.86,80,1,99,2,Easy,M1→M2→M4,M1→M3→M5,92,71,Good
+STU166,22,Male,PG,Kinesthetic,2.04,8,58.56,65,2,52,5,Hard,M1→M2→M4,M1→M2→M4,84,82,Fail
+STU167,22,Male,PG,Kinesthetic,2.41,7,20.96,69,2,85,5,Hard,M1→M3→M5,M1→M2→M4,84,95,Good
+STU168,20,Female,PG,Kinesthetic,2.92,5,23.41,93,2,62,2,Hard,M1→M2→M4,M1→M2→M4,82,98,Excellent
+STU169,23,Male,High School,Kinesthetic,3.74,6,37.31,85,3,68,2,Medium,M1→M2→M4,M1→M3→M5,87,85,Excellent
+STU170,25,Male,High School,Visual,3.06,9,55.54,85,1,100,2,Hard,M1→M2→M4,M1→M2→M4,88,65,Good
+STU171,24,Male,High School,Auditory,3.34,8,20.46,78,0,96,5,Medium,M1→M2→M4,M1→M2→M4,73,60,Excellent
+STU172,25,Female,PG,Kinesthetic,2.76,3,48.53,64,2,74,1,Medium,M1→M3→M5,M1→M3→M5,79,64,Fair
+STU173,23,Female,PG,Kinesthetic,3.91,9,43.49,62,1,51,5,Hard,M1→M2→M4,M1→M2→M4,93,88,Good
+STU174,23,Male,PG,Kinesthetic,2.2,10,43.65,78,4,64,5,Medium,M1→M2→M4,M1→M2→M4,71,89,Fair
+STU175,21,Female,UG,Kinesthetic,2.8,3,42.21,65,4,88,3,Hard,M1→M2→M4,M1→M2→M4,78,69,Fair
+STU176,19,Female,PG,Kinesthetic,2.11,4,41.14,89,3,97,1,Medium,M1→M2→M4,M1→M2→M4,90,73,Excellent
+STU177,22,Male,High School,Kinesthetic,3.35,7,58.25,95,3,55,3,Medium,M1→M2→M4,M1→M3→M5,89,77,Good
+STU178,18,Female,High School,Auditory,2.35,8,35.88,66,0,75,1,Medium,M1→M2→M4,M1→M2→M4,71,100,Fair
+STU179,21,Male,High School,Kinesthetic,3.71,10,47.76,89,4,62,4,Hard,M1→M2→M4,M1→M3→M5,97,73,Fail
+STU180,20,Male,High School,Visual,2.34,6,27.82,68,5,50,1,Hard,M1→M2→M4,M1→M2→M4,84,97,Fair
+STU181,20,Female,UG,Auditory,2.46,6,28.28,79,5,88,5,Medium,M1→M2→M4,M1→M2→M4,71,77,Fair
+STU182,18,Male,PG,Auditory,2.7,3,49.89,93,1,63,2,Medium,M1→M3→M5,M1→M2→M4,98,67,Good
+STU183,19,Male,PG,Auditory,2.04,5,44.15,89,1,53,4,Hard,M1→M2→M4,M1→M2→M4,72,97,Excellent
+STU184,20,Female,High School,Kinesthetic,2.04,7,43.53,82,1,57,3,Easy,M1→M2→M4,M1→M2→M4,86,70,Fair
+STU185,24,Male,PG,Kinesthetic,3.91,9,36.82,95,5,60,2,Hard,M1→M3→M5,M1→M3→M5,71,97,Fair
+STU186,21,Male,UG,Auditory,2.7,7,37.51,70,2,81,4,Medium,M1→M3→M5,M1→M2→M4,82,60,Good
+STU187,25,Male,UG,Kinesthetic,2.21,6,25.59,64,5,100,1,Easy,M1→M3→M5,M1→M2→M4,85,100,Excellent
+STU188,24,Female,PG,Visual,3.18,3,44.37,67,0,83,2,Easy,M1→M2→M4,M1→M3→M5,87,71,Excellent
+STU189,24,Female,PG,Kinesthetic,3.51,8,20.57,95,5,80,1,Hard,M1→M3→M5,M1→M3→M5,75,83,Excellent
+STU190,21,Female,High School,Visual,2.04,10,59.11,79,3,93,4,Easy,M1→M2→M4,M1→M2→M4,92,70,Fair
+STU191,20,Female,UG,Kinesthetic,3.19,4,20.17,64,4,78,5,Easy,M1→M3→M5,M1→M3→M5,85,80,Fail
+STU192,21,Female,PG,Auditory,2.19,10,31.47,86,2,52,4,Hard,M1→M3→M5,M1→M3→M5,87,97,Fair
+STU193,21,Male,PG,Visual,3.09,9,21.58,78,1,83,5,Easy,M1→M2→M4,M1→M2→M4,97,88,Good
+STU194,19,Male,High School,Visual,3.5,6,57.24,87,1,56,4,Medium,M1→M3→M5,M1→M2→M4,85,63,Good
+STU195,19,Female,PG,Kinesthetic,3.38,5,38.74,69,0,62,3,Hard,M1→M2→M4,M1→M2→M4,82,75,Excellent
+STU196,23,Male,UG,Visual,3.17,7,47.52,84,0,79,5,Easy,M1→M3→M5,M1→M2→M4,91,67,Good
+STU197,18,Male,High School,Kinesthetic,2.08,3,35.78,100,4,70,5,Medium,M1→M2→M4,M1→M2→M4,94,91,Good
+STU198,19,Male,PG,Visual,2.5,4,38.24,92,4,69,3,Medium,M1→M2→M4,M1→M2→M4,99,91,Good
+STU199,18,Male,PG,Kinesthetic,2.78,6,34.85,94,1,70,3,Hard,M1→M3→M5,M1→M2→M4,88,91,Fair
+STU200,19,Male,UG,Visual,2.02,7,29.38,74,1,71,1,Hard,M1→M3→M5,M1→M3→M5,75,87,Fair
+STU201,24,Female,High School,Kinesthetic,2.86,4,40.83,97,0,59,4,Medium,M1→M3→M5,M1→M3→M5,85,83,Fair
+STU202,21,Female,UG,Kinesthetic,2.89,5,21.11,79,3,71,1,Easy,M1→M2→M4,M1→M3→M5,99,82,Fail
+STU203,21,Male,PG,Visual,3.87,5,24.55,82,4,73,1,Medium,M1→M3→M5,M1→M3→M5,70,98,Fail
+STU204,20,Male,UG,Auditory,3.5,3,23.57,81,0,85,4,Hard,M1→M2→M4,M1→M3→M5,93,71,Fair
+STU205,19,Female,High School,Auditory,2.59,7,31.78,76,1,95,5,Hard,M1→M2→M4,M1→M3→M5,98,90,Excellent
+STU206,25,Male,PG,Kinesthetic,2.03,8,30.74,91,3,95,4,Medium,M1→M2→M4,M1→M2→M4,73,76,Good
+STU207,24,Female,PG,Auditory,3.33,6,20.77,98,1,99,5,Medium,M1→M3→M5,M1→M2→M4,86,70,Fair
+STU208,25,Male,High School,Visual,3.45,10,58.07,74,3,68,2,Easy,M1→M3→M5,M1→M2→M4,77,65,Fail
+STU209,18,Female,High School,Kinesthetic,2.05,8,52.62,79,2,52,3,Medium,M1→M3→M5,M1→M3→M5,97,67,Excellent
+STU210,20,Male,High School,Auditory,2.72,6,35.12,94,3,56,2,Easy,M1→M2→M4,M1→M2→M4,76,77,Excellent
+STU211,22,Male,High School,Kinesthetic,3.15,3,52.31,82,0,64,3,Easy,M1→M2→M4,M1→M2→M4,76,64,Good
+STU212,22,Male,High School,Kinesthetic,2.72,3,49.83,75,5,98,1,Easy,M1→M2→M4,M1→M3→M5,91,97,Fair
+STU213,21,Male,PG,Visual,2.27,10,32.62,75,2,95,2,Easy,M1→M2→M4,M1→M2→M4,81,79,Excellent
+STU214,20,Male,PG,Kinesthetic,2.55,9,38.78,95,4,94,1,Medium,M1→M2→M4,M1→M3→M5,80,68,Good
+STU215,20,Male,UG,Kinesthetic,3.33,7,57.38,88,4,98,2,Easy,M1→M3→M5,M1→M2→M4,70,63,Fair
+STU216,19,Male,UG,Kinesthetic,3.24,3,59.52,65,5,63,4,Easy,M1→M2→M4,M1→M2→M4,73,62,Fair
+STU217,18,Male,PG,Kinesthetic,3.4,3,41.74,67,2,60,3,Medium,M1→M3→M5,M1→M2→M4,80,82,Fail
+STU218,22,Female,PG,Kinesthetic,2.36,10,59.57,73,3,56,1,Hard,M1→M3→M5,M1→M3→M5,73,96,Excellent
+STU219,25,Male,UG,Visual,2.38,8,47.17,85,5,92,1,Medium,M1→M3→M5,M1→M3→M5,96,87,Fail
+STU220,18,Female,PG,Auditory,3.3,7,49.5,74,5,98,5,Hard,M1→M2→M4,M1→M3→M5,97,91,Fair
+STU221,20,Male,PG,Visual,3.66,10,33.12,71,0,69,3,Hard,M1→M3→M5,M1→M2→M4,74,76,Excellent
+STU222,23,Male,High School,Visual,2.32,10,35.82,68,5,83,5,Hard,M1→M2→M4,M1→M2→M4,73,61,Good
+STU223,21,Female,UG,Visual,3.89,8,47.62,64,5,63,1,Easy,M1→M2→M4,M1→M3→M5,90,76,Fair
+STU224,20,Female,High School,Auditory,2.4,10,20.8,98,3,71,4,Hard,M1→M2→M4,M1→M3→M5,80,97,Fair
+STU225,21,Female,High School,Visual,3.95,9,30.06,95,3,57,2,Hard,M1→M3→M5,M1→M2→M4,71,80,Good
+STU226,22,Female,PG,Kinesthetic,2.7,8,43.51,83,1,84,1,Medium,M1→M2→M4,M1→M2→M4,87,89,Good
+STU227,18,Male,UG,Kinesthetic,3.83,4,33.3,85,5,80,2,Hard,M1→M2→M4,M1→M3→M5,74,88,Excellent
+STU228,25,Female,UG,Kinesthetic,2.1,6,41.24,80,2,84,3,Medium,M1→M2→M4,M1→M3→M5,77,75,Good
+STU229,23,Female,UG,Visual,3.64,7,48.06,95,1,84,5,Hard,M1→M3→M5,M1→M2→M4,81,74,Good
+STU230,18,Male,PG,Kinesthetic,3.41,7,34.33,92,4,66,1,Medium,M1→M2→M4,M1→M2→M4,78,91,Fail
+STU231,20,Female,UG,Kinesthetic,2.76,10,44.25,60,0,100,1,Medium,M1→M3→M5,M1→M3→M5,87,86,Fail
+STU232,23,Male,PG,Auditory,2.24,6,43.94,68,2,66,1,Hard,M1→M2→M4,M1→M3→M5,90,64,Excellent
+STU233,24,Male,PG,Kinesthetic,3.55,10,32.6,63,2,86,4,Medium,M1→M2→M4,M1→M3→M5,79,98,Fail
+STU234,25,Female,High School,Kinesthetic,2.18,10,54.74,84,1,61,1,Medium,M1→M3→M5,M1→M3→M5,82,83,Fail
+STU235,22,Female,High School,Visual,3.08,8,47.95,81,5,52,3,Medium,M1→M2→M4,M1→M2→M4,83,79,Fair
+STU236,24,Female,PG,Auditory,3.1,9,27.82,72,1,69,3,Easy,M1→M2→M4,M1→M2→M4,84,100,Fail
+STU237,23,Female,High School,Auditory,2.31,9,20.85,97,1,89,2,Easy,M1→M3→M5,M1→M2→M4,99,81,Fair
+STU238,20,Male,UG,Auditory,2.48,3,31.35,84,4,52,4,Hard,M1→M3→M5,M1→M3→M5,86,67,Good
+STU239,20,Female,UG,Visual,2.89,8,22.04,86,4,71,5,Easy,M1→M3→M5,M1→M2→M4,94,78,Excellent
+STU240,20,Female,UG,Kinesthetic,2.13,8,30.68,82,2,50,5,Hard,M1→M3→M5,M1→M3→M5,70,86,Fail
+STU241,21,Female,High School,Kinesthetic,3.95,8,57.17,75,4,82,5,Easy,M1→M3→M5,M1→M2→M4,70,94,Good
+STU242,22,Female,UG,Visual,3.91,4,49.61,65,2,72,3,Easy,M1→M3→M5,M1→M2→M4,78,75,Fail
+STU243,24,Female,High School,Auditory,2.47,8,56.59,61,0,95,4,Easy,M1→M2→M4,M1→M2→M4,98,81,Fail
+STU244,20,Male,UG,Auditory,2.46,7,26.67,73,1,94,4,Hard,M1→M2→M4,M1→M2→M4,80,93,Good
+STU245,21,Female,High School,Auditory,3.21,6,48.82,61,4,57,1,Easy,M1→M3→M5,M1→M2→M4,89,75,Fail
+STU246,19,Female,PG,Kinesthetic,3.28,6,32.98,98,0,88,4,Easy,M1→M3→M5,M1→M2→M4,99,76,Good
+STU247,25,Female,UG,Visual,3.53,8,32.17,72,2,64,4,Medium,M1→M3→M5,M1→M3→M5,78,100,Fail
+STU248,18,Male,PG,Kinesthetic,2.73,6,45.28,68,2,67,3,Easy,M1→M3→M5,M1→M3→M5,96,87,Fair
+STU249,22,Female,UG,Visual,2.77,7,52.19,81,4,99,2,Medium,M1→M2→M4,M1→M2→M4,95,93,Fair
+STU250,23,Male,PG,Auditory,3.78,6,56.55,77,5,76,5,Easy,M1→M3→M5,M1→M2→M4,79,63,Fair
+STU251,20,Female,High School,Kinesthetic,2.01,4,58.56,74,3,70,3,Easy,M1→M2→M4,M1→M3→M5,74,90,Fail
+STU252,24,Female,PG,Auditory,2.22,8,23.7,72,1,82,2,Easy,M1→M3→M5,M1→M2→M4,100,91,Good
+STU253,23,Female,UG,Visual,2.5,9,32.5,71,1,57,5,Easy,M1→M2→M4,M1→M2→M4,99,83,Excellent
+STU254,23,Female,High School,Visual,2.29,8,50.55,86,0,81,2,Easy,M1→M2→M4,M1→M3→M5,99,67,Excellent
+STU255,23,Male,PG,Kinesthetic,2.42,7,37.22,74,1,69,1,Medium,M1→M3→M5,M1→M2→M4,70,92,Fail
+STU256,23,Male,PG,Kinesthetic,3.46,4,52.07,99,3,93,3,Medium,M1→M2→M4,M1→M2→M4,95,96,Fair
+STU257,23,Female,High School,Auditory,3.08,6,49.29,66,4,75,3,Hard,M1→M3→M5,M1→M2→M4,94,61,Fail
+STU258,23,Female,High School,Visual,2.95,3,41.4,70,1,88,5,Hard,M1→M3→M5,M1→M3→M5,79,83,Excellent
+STU259,18,Female,High School,Auditory,2.5,5,59.23,69,1,94,5,Easy,M1→M2→M4,M1→M2→M4,91,72,Fair
+STU260,25,Male,High School,Visual,3.67,5,58.06,96,0,100,3,Medium,M1→M2→M4,M1→M2→M4,94,87,Fair
+STU261,24,Female,High School,Visual,3.82,9,52.09,100,5,71,4,Easy,M1→M2→M4,M1→M3→M5,75,66,Excellent
+STU262,20,Male,PG,Visual,3.64,4,51.12,78,5,78,5,Hard,M1→M3→M5,M1→M3→M5,99,97,Excellent
+STU263,20,Male,High School,Auditory,3.07,9,58.62,89,2,70,4,Hard,M1→M3→M5,M1→M3→M5,95,93,Good
+STU264,20,Male,PG,Visual,3.1,9,57.02,81,4,75,3,Medium,M1→M2→M4,M1→M2→M4,76,69,Good
+STU265,21,Male,PG,Visual,2.43,10,26.83,98,3,72,5,Hard,M1→M3→M5,M1→M2→M4,90,92,Fail
+STU266,23,Male,High School,Auditory,3.12,3,49.82,74,2,78,2,Easy,M1→M2→M4,M1→M3→M5,73,68,Fail
+STU267,25,Female,PG,Kinesthetic,3.76,7,58.19,72,0,76,2,Easy,M1→M2→M4,M1→M3→M5,91,84,Excellent
+STU268,19,Male,High School,Auditory,2.01,9,35.05,83,0,77,4,Medium,M1→M2→M4,M1→M3→M5,86,71,Fair
+STU269,20,Female,UG,Auditory,3.63,8,22.86,67,2,85,5,Hard,M1→M3→M5,M1→M3→M5,83,87,Fail
+STU270,21,Female,PG,Kinesthetic,2.2,8,43.65,95,2,65,5,Hard,M1→M2→M4,M1→M2→M4,87,92,Fair
+STU271,22,Male,UG,Kinesthetic,2.02,3,32.98,93,0,60,2,Medium,M1→M3→M5,M1→M3→M5,82,90,Fail
+STU272,24,Female,PG,Kinesthetic,3.79,5,27.4,83,1,78,2,Medium,M1→M2→M4,M1→M3→M5,80,80,Good
+STU273,22,Male,UG,Visual,3.26,6,57.82,61,0,80,4,Easy,M1→M3→M5,M1→M3→M5,96,71,Fail
+STU274,22,Male,UG,Auditory,2.76,10,24.6,70,3,50,3,Hard,M1→M3→M5,M1→M3→M5,85,97,Fair
+STU275,23,Male,PG,Kinesthetic,3.01,10,22.98,63,5,86,3,Easy,M1→M2→M4,M1→M2→M4,82,78,Good
+STU276,25,Female,UG,Auditory,2.41,9,27.32,82,2,81,2,Medium,M1→M3→M5,M1→M2→M4,86,72,Fail
+STU277,21,Female,PG,Visual,2.1,7,55.39,82,3,95,3,Medium,M1→M3→M5,M1→M3→M5,94,90,Excellent
+STU278,18,Male,High School,Kinesthetic,3.6,5,35.64,76,5,81,2,Hard,M1→M3→M5,M1→M3→M5,76,64,Excellent
+STU279,19,Female,High School,Kinesthetic,2.43,10,43.22,96,0,51,2,Hard,M1→M3→M5,M1→M2→M4,91,63,Fail
+STU280,21,Female,UG,Auditory,2.42,9,27.65,70,2,91,2,Easy,M1→M2→M4,M1→M2→M4,97,65,Good
+STU281,22,Female,PG,Kinesthetic,3.72,10,33.22,85,1,97,2,Medium,M1→M2→M4,M1→M3→M5,70,88,Good
+STU282,21,Female,UG,Visual,3.22,10,31.84,82,1,100,1,Easy,M1→M2→M4,M1→M2→M4,74,97,Fail
+STU283,21,Female,PG,Kinesthetic,2.31,6,46.04,78,5,86,2,Medium,M1→M3→M5,M1→M3→M5,99,77,Fail
+STU284,24,Male,High School,Auditory,3.74,4,30.17,62,3,100,2,Easy,M1→M3→M5,M1→M2→M4,100,65,Excellent
+STU285,23,Male,UG,Auditory,2.35,7,23.35,64,1,92,1,Medium,M1→M2→M4,M1→M3→M5,80,76,Excellent
+STU286,18,Female,PG,Visual,3.86,3,39.23,95,2,94,4,Hard,M1→M2→M4,M1→M3→M5,88,73,Fair
+STU287,19,Male,High School,Kinesthetic,2.75,9,41.23,79,4,51,1,Easy,M1→M2→M4,M1→M2→M4,79,71,Excellent
+STU288,19,Female,UG,Auditory,2.85,4,26.89,84,3,66,4,Easy,M1→M2→M4,M1→M3→M5,74,66,Good
+STU289,22,Female,PG,Auditory,2.04,5,27.61,69,5,81,2,Medium,M1→M2→M4,M1→M3→M5,100,69,Excellent
+STU290,21,Male,High School,Visual,3.53,3,40.85,89,3,67,5,Hard,M1→M2→M4,M1→M3→M5,96,62,Excellent
+STU291,18,Male,UG,Kinesthetic,2.62,6,48.03,99,0,76,5,Easy,M1→M2→M4,M1→M2→M4,78,68,Good
+STU292,18,Female,UG,Auditory,2.53,9,50.14,76,4,59,4,Easy,M1→M2→M4,M1→M2→M4,88,95,Fair
+STU293,20,Female,High School,Auditory,2.09,4,36.93,99,2,85,4,Medium,M1→M2→M4,M1→M3→M5,79,80,Fair
+STU294,20,Female,PG,Auditory,3.24,9,59.53,83,2,50,1,Medium,M1→M3→M5,M1→M3→M5,77,71,Good
+STU295,20,Male,High School,Kinesthetic,3.77,8,20.36,89,2,67,2,Hard,M1→M2→M4,M1→M2→M4,81,95,Good
+STU296,20,Female,PG,Kinesthetic,3.8,4,59.17,86,4,72,1,Hard,M1→M2→M4,M1→M2→M4,87,60,Fair
+STU297,18,Male,High School,Visual,2.69,4,42.08,93,5,77,3,Easy,M1→M3→M5,M1→M3→M5,92,74,Fair
+STU298,19,Male,High School,Kinesthetic,2.85,4,25.68,73,1,87,4,Medium,M1→M3→M5,M1→M2→M4,85,74,Good
+STU299,18,Male,UG,Kinesthetic,2.6,8,48.83,89,2,84,4,Hard,M1→M3→M5,M1→M3→M5,81,100,Fair
+STU300,18,Male,UG,Visual,2.13,8,20.8,88,0,71,5,Hard,M1→M3→M5,M1→M2→M4,92,61,Fair
+STU301,24,Male,PG,Visual,3.22,9,57.22,69,2,76,5,Medium,M1→M3→M5,M1→M3→M5,80,66,Fail
+STU302,25,Female,UG,Visual,2.08,5,32.75,93,0,79,4,Easy,M1→M3→M5,M1→M3→M5,84,67,Excellent
+STU303,21,Male,PG,Visual,2.68,4,20.29,74,1,84,1,Hard,M1→M3→M5,M1→M3→M5,96,85,Fair
+STU304,24,Female,High School,Kinesthetic,2.68,4,44.67,83,4,75,2,Hard,M1→M2→M4,M1→M2→M4,94,71,Fail
+STU305,21,Female,High School,Visual,2.25,7,41.74,93,5,79,5,Hard,M1→M2→M4,M1→M2→M4,79,60,Fail
+STU306,20,Female,High School,Visual,2.13,6,26.9,69,1,76,1,Medium,M1→M3→M5,M1→M2→M4,71,100,Excellent
+STU307,19,Male,High School,Visual,3.76,5,49.9,96,1,64,1,Hard,M1→M2→M4,M1→M3→M5,85,74,Fair
+STU308,21,Male,High School,Visual,2.58,3,48.2,60,3,85,4,Medium,M1→M2→M4,M1→M3→M5,83,73,Excellent
+STU309,21,Male,PG,Kinesthetic,3.53,8,22.82,89,1,58,5,Easy,M1→M3→M5,M1→M3→M5,100,100,Excellent
+STU310,21,Male,UG,Auditory,3.73,4,54.69,67,3,67,4,Hard,M1→M3→M5,M1→M2→M4,84,66,Fail
+STU311,24,Female,UG,Visual,3.65,7,32.0,71,2,68,5,Hard,M1→M3→M5,M1→M2→M4,88,73,Fair
+STU312,21,Female,UG,Auditory,3.74,4,44.94,75,5,70,5,Hard,M1→M3→M5,M1→M2→M4,88,64,Fair
+STU313,23,Male,High School,Auditory,2.15,5,44.54,70,4,54,2,Hard,M1→M3→M5,M1→M3→M5,73,64,Fail
+STU314,20,Male,High School,Auditory,2.36,3,38.2,99,2,51,5,Hard,M1→M3→M5,M1→M3→M5,72,96,Fail
+STU315,20,Male,High School,Visual,2.8,8,41.26,95,0,90,2,Easy,M1→M2→M4,M1→M3→M5,80,66,Excellent
+STU316,23,Male,High School,Auditory,2.64,9,26.14,88,1,96,3,Hard,M1→M3→M5,M1→M3→M5,94,76,Excellent
+STU317,24,Male,PG,Auditory,3.87,4,35.26,85,2,86,4,Hard,M1→M3→M5,M1→M2→M4,79,87,Good
+STU318,21,Female,High School,Auditory,3.64,6,37.74,72,1,67,5,Hard,M1→M3→M5,M1→M3→M5,91,89,Excellent
+STU319,20,Male,High School,Visual,3.02,7,59.75,73,1,53,3,Medium,M1→M3→M5,M1→M3→M5,99,76,Fail
+STU320,21,Female,High School,Visual,2.48,6,25.92,90,3,85,3,Hard,M1→M2→M4,M1→M2→M4,98,67,Fair
+STU321,19,Male,UG,Kinesthetic,2.16,7,35.31,99,3,59,1,Medium,M1→M3→M5,M1→M2→M4,72,81,Good
+STU322,20,Male,High School,Visual,2.1,9,22.44,70,2,58,5,Medium,M1→M2→M4,M1→M3→M5,76,77,Good
+STU323,24,Female,UG,Kinesthetic,3.95,10,39.06,63,3,55,2,Hard,M1→M2→M4,M1→M3→M5,84,74,Fair
+STU324,23,Male,High School,Kinesthetic,2.75,8,33.67,79,3,66,5,Hard,M1→M3→M5,M1→M3→M5,81,95,Excellent
+STU325,24,Female,PG,Auditory,2.49,9,42.13,60,3,61,5,Hard,M1→M2→M4,M1→M2→M4,86,100,Excellent
+STU326,25,Male,High School,Visual,3.68,4,31.95,87,2,61,3,Medium,M1→M2→M4,M1→M2→M4,75,96,Good
+STU327,22,Female,PG,Visual,2.69,7,33.75,61,2,57,3,Easy,M1→M3→M5,M1→M3→M5,74,88,Good
+STU328,23,Male,UG,Visual,2.67,4,42.59,72,2,62,5,Easy,M1→M3→M5,M1→M3→M5,74,90,Fair
+STU329,25,Female,High School,Kinesthetic,2.31,4,43.43,98,1,70,2,Medium,M1→M2→M4,M1→M3→M5,79,79,Excellent
+STU330,24,Male,High School,Visual,3.54,6,24.02,91,5,56,2,Easy,M1→M3→M5,M1→M2→M4,90,79,Fail
+STU331,24,Male,PG,Auditory,2.08,7,25.63,64,5,62,4,Easy,M1→M3→M5,M1→M2→M4,72,73,Fair
+STU332,22,Female,High School,Auditory,2.67,8,45.81,87,3,61,1,Medium,M1→M3→M5,M1→M3→M5,100,77,Good
+STU333,23,Male,UG,Kinesthetic,2.27,6,26.62,63,2,58,3,Medium,M1→M2→M4,M1→M3→M5,77,73,Fair
+STU334,21,Male,UG,Auditory,3.83,6,36.58,71,1,52,1,Hard,M1→M2→M4,M1→M3→M5,77,77,Fair
+STU335,23,Male,High School,Auditory,3.13,4,51.58,81,0,100,4,Easy,M1→M2→M4,M1→M3→M5,97,100,Good
+STU336,22,Male,UG,Auditory,3.15,10,34.26,70,3,58,3,Easy,M1→M2→M4,M1→M2→M4,100,99,Excellent
+STU337,18,Female,UG,Visual,2.22,8,42.14,71,4,84,3,Medium,M1→M2→M4,M1→M2→M4,100,66,Excellent
+STU338,22,Male,UG,Kinesthetic,3.55,5,44.47,85,3,78,1,Hard,M1→M3→M5,M1→M2→M4,98,63,Fair
+STU339,22,Male,PG,Auditory,3.55,5,29.62,98,3,87,4,Easy,M1→M2→M4,M1→M3→M5,100,72,Good
+STU340,21,Female,High School,Auditory,3.29,8,58.2,73,3,72,4,Easy,M1→M3→M5,M1→M2→M4,81,69,Excellent
+STU341,19,Female,UG,Visual,2.06,10,24.85,60,0,70,2,Medium,M1→M3→M5,M1→M3→M5,84,73,Good
+STU342,25,Male,UG,Kinesthetic,2.74,10,25.19,89,5,100,1,Easy,M1→M2→M4,M1→M2→M4,84,90,Fail
+STU343,22,Female,PG,Auditory,2.16,10,33.03,82,1,60,1,Easy,M1→M2→M4,M1→M2→M4,81,68,Good
+STU344,24,Male,High School,Visual,3.74,10,55.62,97,2,61,1,Medium,M1→M3→M5,M1→M2→M4,83,99,Excellent
+STU345,24,Female,High School,Auditory,3.8,8,39.72,60,1,65,4,Medium,M1→M3→M5,M1→M3→M5,76,93,Excellent
+STU346,23,Female,PG,Visual,3.07,9,24.75,65,2,79,3,Easy,M1→M3→M5,M1→M3→M5,77,78,Excellent
+STU347,24,Male,UG,Visual,3.63,5,41.66,97,2,63,2,Medium,M1→M2→M4,M1→M2→M4,73,92,Excellent
+STU348,23,Female,High School,Visual,3.07,10,43.21,99,0,88,3,Hard,M1→M3→M5,M1→M3→M5,84,93,Fail
+STU349,22,Male,PG,Kinesthetic,2.02,8,52.91,66,2,84,4,Medium,M1→M2→M4,M1→M3→M5,72,68,Good
+STU350,18,Male,High School,Auditory,2.77,8,35.1,76,4,76,3,Hard,M1→M2→M4,M1→M2→M4,100,73,Fail
+STU351,21,Female,UG,Kinesthetic,3.02,9,59.89,62,2,97,3,Hard,M1→M3→M5,M1→M2→M4,87,84,Good
+STU352,24,Female,High School,Auditory,3.07,6,37.73,92,3,60,1,Hard,M1→M3→M5,M1→M2→M4,98,92,Fair
+STU353,25,Male,High School,Kinesthetic,3.9,9,51.84,92,0,86,3,Hard,M1→M2→M4,M1→M2→M4,74,74,Excellent
+STU354,19,Male,UG,Visual,3.45,7,38.57,60,2,91,5,Hard,M1→M2→M4,M1→M2→M4,79,75,Fail
+STU355,20,Male,PG,Auditory,3.23,9,26.83,80,3,86,5,Hard,M1→M3→M5,M1→M3→M5,92,73,Excellent
+STU356,23,Female,High School,Visual,3.38,7,53.51,95,3,52,5,Hard,M1→M3→M5,M1→M3→M5,80,72,Good
+STU357,20,Male,PG,Visual,3.89,4,25.67,96,1,67,4,Medium,M1→M2→M4,M1→M2→M4,83,61,Excellent
+STU358,22,Female,High School,Auditory,3.43,9,49.22,94,2,86,5,Hard,M1→M2→M4,M1→M3→M5,94,71,Good
+STU359,20,Male,High School,Visual,3.78,5,44.06,95,3,62,1,Hard,M1→M3→M5,M1→M2→M4,86,60,Excellent
+STU360,19,Male,PG,Visual,3.53,8,46.23,89,5,100,4,Hard,M1→M3→M5,M1→M2→M4,75,64,Good
+STU361,24,Male,UG,Kinesthetic,2.11,3,21.72,66,2,89,1,Medium,M1→M3→M5,M1→M3→M5,99,80,Excellent
+STU362,18,Male,PG,Auditory,2.83,6,43.73,76,0,62,3,Easy,M1→M2→M4,M1→M3→M5,83,84,Good
+STU363,22,Male,High School,Kinesthetic,2.97,3,42.18,99,4,90,1,Easy,M1→M2→M4,M1→M2→M4,72,99,Fail
+STU364,24,Female,UG,Kinesthetic,3.71,8,51.96,61,1,85,2,Hard,M1→M3→M5,M1→M2→M4,74,95,Good
+STU365,20,Female,High School,Kinesthetic,3.74,7,49.51,61,4,68,3,Medium,M1→M3→M5,M1→M2→M4,70,71,Excellent
+STU366,21,Male,PG,Kinesthetic,2.39,4,53.9,95,5,54,3,Easy,M1→M3→M5,M1→M3→M5,74,64,Fair
+STU367,21,Female,High School,Auditory,2.56,6,28.06,94,4,74,5,Hard,M1→M3→M5,M1→M3→M5,83,95,Fail
+STU368,19,Female,PG,Visual,3.41,6,32.69,99,0,91,1,Easy,M1→M3→M5,M1→M2→M4,78,74,Good
+STU369,23,Male,UG,Auditory,3.84,7,45.87,64,0,58,5,Medium,M1→M2→M4,M1→M2→M4,92,69,Fair
+STU370,18,Male,PG,Auditory,3.84,8,34.28,80,3,50,2,Hard,M1→M2→M4,M1→M2→M4,99,100,Fail
+STU371,20,Male,PG,Kinesthetic,2.29,9,31.89,69,4,65,2,Medium,M1→M2→M4,M1→M3→M5,90,84,Excellent
+STU372,23,Male,PG,Auditory,2.4,9,52.18,98,4,73,5,Easy,M1→M2→M4,M1→M2→M4,77,98,Excellent
+STU373,18,Female,High School,Visual,3.25,8,30.71,81,2,58,3,Hard,M1→M2→M4,M1→M3→M5,90,71,Fail
+STU374,23,Female,UG,Auditory,2.88,6,57.0,94,0,51,4,Medium,M1→M2→M4,M1→M3→M5,87,72,Excellent
+STU375,25,Female,PG,Kinesthetic,2.94,9,43.78,73,3,68,5,Medium,M1→M3→M5,M1→M3→M5,85,92,Fail
+STU376,25,Female,High School,Auditory,3.95,8,45.06,85,2,71,4,Hard,M1→M3→M5,M1→M3→M5,78,66,Excellent
+STU377,20,Male,PG,Kinesthetic,3.09,6,28.4,80,0,59,2,Medium,M1→M3→M5,M1→M3→M5,76,99,Fair
+STU378,23,Female,High School,Auditory,2.78,7,24.49,83,4,50,4,Hard,M1→M3→M5,M1→M3→M5,93,68,Excellent
+STU379,21,Male,UG,Visual,2.77,10,45.22,75,3,74,3,Hard,M1→M3→M5,M1→M2→M4,82,65,Good
+STU380,22,Male,PG,Auditory,3.11,3,20.25,100,1,82,2,Easy,M1→M2→M4,M1→M2→M4,78,94,Excellent
+STU381,23,Female,PG,Visual,3.6,9,48.17,100,5,54,4,Medium,M1→M2→M4,M1→M3→M5,80,83,Fail
+STU382,20,Female,PG,Auditory,2.6,10,53.15,88,5,79,3,Hard,M1→M2→M4,M1→M2→M4,96,85,Good
+STU383,22,Female,PG,Auditory,2.72,3,50.1,70,3,51,5,Medium,M1→M2→M4,M1→M2→M4,75,97,Fair
+STU384,20,Female,UG,Visual,2.75,5,20.95,73,2,52,3,Medium,M1→M3→M5,M1→M3→M5,94,67,Fair
+STU385,20,Male,UG,Auditory,2.6,7,47.82,85,5,99,2,Hard,M1→M3→M5,M1→M2→M4,81,99,Fair
+STU386,22,Female,UG,Kinesthetic,3.93,9,49.68,82,2,67,1,Medium,M1→M2→M4,M1→M3→M5,73,71,Excellent
+STU387,20,Male,High School,Visual,2.33,8,20.07,94,3,54,1,Medium,M1→M2→M4,M1→M3→M5,100,87,Fair
+STU388,18,Male,UG,Visual,3.58,9,31.37,98,4,80,3,Medium,M1→M2→M4,M1→M2→M4,76,70,Fail
+STU389,20,Female,PG,Kinesthetic,3.47,8,45.87,99,3,61,3,Medium,M1→M3→M5,M1→M2→M4,85,87,Fair
+STU390,23,Female,High School,Kinesthetic,2.71,9,27.53,78,4,65,5,Hard,M1→M3→M5,M1→M3→M5,99,83,Excellent
+STU391,24,Female,UG,Auditory,3.89,8,26.66,71,1,72,3,Easy,M1→M2→M4,M1→M3→M5,95,91,Fair
+STU392,21,Male,PG,Visual,3.72,4,43.78,87,0,99,2,Hard,M1→M2→M4,M1→M3→M5,95,61,Fail
+STU393,22,Male,PG,Kinesthetic,3.44,9,33.63,89,4,69,5,Easy,M1→M2→M4,M1→M2→M4,85,90,Good
+STU394,22,Male,UG,Visual,2.36,3,38.13,68,0,57,2,Medium,M1→M2→M4,M1→M2→M4,94,88,Fair
+STU395,20,Male,High School,Kinesthetic,3.37,5,53.0,99,3,61,5,Hard,M1→M3→M5,M1→M3→M5,84,84,Fail
+STU396,18,Male,UG,Auditory,2.19,6,44.38,92,2,50,3,Easy,M1→M3→M5,M1→M2→M4,73,82,Fail
+STU397,22,Male,PG,Auditory,3.15,7,37.79,62,0,77,1,Medium,M1→M3→M5,M1→M3→M5,74,97,Fail
+STU398,24,Male,PG,Kinesthetic,3.83,3,49.74,95,0,95,5,Hard,M1→M3→M5,M1→M2→M4,75,92,Fair
+STU399,21,Female,UG,Kinesthetic,3.41,3,35.4,97,4,53,3,Hard,M1→M2→M4,M1→M3→M5,92,82,Fail
+STU400,18,Female,UG,Kinesthetic,3.57,7,46.29,97,5,99,5,Hard,M1→M3→M5,M1→M2→M4,73,66,Good
+STU401,24,Male,High School,Auditory,2.91,7,57.36,80,1,97,5,Easy,M1→M2→M4,M1→M2→M4,72,92,Excellent
+STU402,24,Male,PG,Auditory,3.02,5,31.74,92,4,90,4,Hard,M1→M3→M5,M1→M2→M4,100,87,Good
+STU403,20,Female,PG,Kinesthetic,2.2,9,58.01,74,3,61,2,Easy,M1→M3→M5,M1→M2→M4,96,90,Good
+STU404,18,Female,PG,Auditory,2.9,4,58.57,98,2,67,3,Easy,M1→M3→M5,M1→M2→M4,74,73,Fail
+STU405,25,Female,High School,Auditory,3.42,9,44.83,96,2,69,4,Easy,M1→M2→M4,M1→M2→M4,94,73,Fail
+STU406,25,Male,PG,Auditory,2.9,9,59.46,83,1,76,4,Hard,M1→M2→M4,M1→M2→M4,98,82,Fail
+STU407,24,Female,UG,Kinesthetic,2.41,3,25.15,63,3,100,2,Hard,M1→M3→M5,M1→M2→M4,96,67,Good
+STU408,22,Male,UG,Kinesthetic,2.09,10,53.36,84,3,74,5,Easy,M1→M2→M4,M1→M3→M5,96,94,Good
+STU409,21,Male,PG,Visual,2.75,8,59.65,85,5,52,3,Hard,M1→M3→M5,M1→M3→M5,94,92,Fair
+STU410,23,Female,UG,Auditory,3.6,10,57.55,75,0,78,2,Medium,M1→M3→M5,M1→M2→M4,100,60,Fair
+STU411,20,Female,UG,Visual,2.89,9,37.86,70,2,86,1,Easy,M1→M2→M4,M1→M2→M4,92,85,Good
+STU412,25,Male,High School,Auditory,3.83,4,55.48,74,3,92,2,Medium,M1→M2→M4,M1→M3→M5,83,61,Fail
+STU413,24,Female,PG,Visual,2.41,7,51.63,82,3,66,5,Easy,M1→M2→M4,M1→M2→M4,88,73,Fail
+STU414,22,Male,High School,Auditory,2.74,8,45.37,97,4,91,2,Medium,M1→M3→M5,M1→M3→M5,82,75,Good
+STU415,20,Female,UG,Visual,2.9,8,45.24,82,4,84,3,Hard,M1→M2→M4,M1→M2→M4,73,90,Good
+STU416,19,Female,UG,Visual,2.35,10,58.42,62,4,85,3,Easy,M1→M2→M4,M1→M2→M4,70,99,Fail
+STU417,20,Male,High School,Visual,3.51,8,43.58,67,3,60,3,Hard,M1→M3→M5,M1→M3→M5,75,91,Fail
+STU418,20,Male,High School,Kinesthetic,3.95,4,41.54,66,3,53,2,Easy,M1→M3→M5,M1→M2→M4,96,91,Good
+STU419,20,Female,UG,Visual,3.7,7,32.55,78,0,73,5,Hard,M1→M2→M4,M1→M2→M4,94,71,Fair
+STU420,21,Male,UG,Auditory,3.9,5,24.2,90,4,75,1,Medium,M1→M3→M5,M1→M2→M4,70,100,Fair
+STU421,23,Female,UG,Kinesthetic,2.22,8,47.12,81,4,51,4,Easy,M1→M3→M5,M1→M2→M4,70,75,Good
+STU422,18,Male,UG,Auditory,2.5,6,42.72,92,5,70,4,Hard,M1→M2→M4,M1→M3→M5,97,96,Good
+STU423,20,Female,High School,Kinesthetic,2.87,8,53.73,61,2,96,5,Hard,M1→M2→M4,M1→M3→M5,70,95,Fail
+STU424,22,Male,High School,Auditory,2.05,6,20.05,77,3,71,1,Medium,M1→M2→M4,M1→M2→M4,76,82,Good
+STU425,20,Male,UG,Visual,3.34,7,51.77,93,5,64,4,Medium,M1→M3→M5,M1→M3→M5,75,80,Excellent
+STU426,25,Male,High School,Visual,2.62,4,49.21,75,4,66,5,Medium,M1→M3→M5,M1→M3→M5,93,85,Fail
+STU427,24,Female,UG,Visual,3.17,10,38.63,69,2,81,4,Medium,M1→M3→M5,M1→M3→M5,89,97,Fair
+STU428,20,Female,High School,Visual,2.17,7,57.25,68,5,84,2,Medium,M1→M2→M4,M1→M3→M5,73,87,Excellent
+STU429,20,Male,PG,Visual,2.17,6,23.46,63,2,100,5,Easy,M1→M2→M4,M1→M2→M4,81,63,Fail
+STU430,19,Male,UG,Kinesthetic,2.42,10,46.61,98,2,53,1,Hard,M1→M3→M5,M1→M2→M4,87,87,Fair
+STU431,19,Female,UG,Auditory,2.02,4,49.38,84,2,83,2,Hard,M1→M3→M5,M1→M2→M4,70,95,Excellent
+STU432,18,Male,PG,Visual,2.03,4,55.03,64,0,95,3,Hard,M1→M3→M5,M1→M2→M4,98,75,Fail
+STU433,20,Female,UG,Kinesthetic,2.52,6,59.87,85,0,91,3,Medium,M1→M2→M4,M1→M3→M5,72,98,Excellent
+STU434,23,Female,PG,Kinesthetic,3.32,7,39.75,64,3,84,2,Easy,M1→M3→M5,M1→M2→M4,71,70,Fail
+STU435,22,Female,High School,Visual,3.07,6,41.08,66,0,81,1,Hard,M1→M2→M4,M1→M2→M4,70,92,Good
+STU436,24,Male,PG,Auditory,2.64,3,51.65,77,0,52,3,Easy,M1→M3→M5,M1→M2→M4,91,94,Fair
+STU437,22,Male,UG,Kinesthetic,2.25,9,30.19,91,4,71,3,Hard,M1→M2→M4,M1→M3→M5,88,75,Good
+STU438,19,Female,High School,Kinesthetic,3.98,6,29.77,94,2,67,4,Medium,M1→M3→M5,M1→M2→M4,85,84,Fail
+STU439,21,Female,High School,Visual,2.47,6,52.52,61,1,81,4,Hard,M1→M2→M4,M1→M2→M4,99,62,Good
+STU440,20,Male,PG,Visual,2.06,5,55.2,97,3,53,1,Easy,M1→M3→M5,M1→M2→M4,78,85,Good
+STU441,21,Male,PG,Kinesthetic,2.78,8,44.41,68,0,62,2,Hard,M1→M2→M4,M1→M3→M5,71,71,Good
+STU442,23,Male,PG,Kinesthetic,2.42,7,42.69,87,0,89,3,Hard,M1→M3→M5,M1→M3→M5,73,73,Fair
+STU443,22,Male,High School,Auditory,3.43,3,26.43,68,3,50,4,Hard,M1→M2→M4,M1→M2→M4,85,98,Fair
+STU444,21,Male,High School,Auditory,3.86,9,39.01,76,2,77,1,Medium,M1→M2→M4,M1→M2→M4,98,70,Good
+STU445,24,Male,PG,Kinesthetic,3.74,8,27.07,70,2,58,2,Easy,M1→M2→M4,M1→M2→M4,98,91,Good
+STU446,21,Female,PG,Kinesthetic,2.56,3,33.56,100,1,79,3,Easy,M1→M2→M4,M1→M3→M5,100,85,Fair
+STU447,20,Female,UG,Visual,2.72,4,51.1,97,4,70,1,Easy,M1→M3→M5,M1→M2→M4,81,60,Fail
+STU448,21,Male,UG,Auditory,2.98,7,21.01,92,2,79,1,Hard,M1→M3→M5,M1→M2→M4,80,90,Good
+STU449,23,Male,UG,Kinesthetic,3.13,7,47.29,77,0,84,5,Hard,M1→M3→M5,M1→M3→M5,74,89,Fair
+STU450,18,Female,High School,Kinesthetic,3.23,7,52.44,61,4,79,5,Hard,M1→M2→M4,M1→M2→M4,77,99,Fair
+STU451,18,Female,High School,Auditory,3.12,7,29.8,99,3,90,5,Medium,M1→M3→M5,M1→M3→M5,74,60,Fair
+STU452,24,Female,High School,Auditory,2.76,3,50.22,87,4,86,3,Medium,M1→M3→M5,M1→M3→M5,95,66,Fail
+STU453,18,Female,High School,Visual,2.65,5,52.93,99,5,63,3,Medium,M1→M2→M4,M1→M2→M4,80,99,Good
+STU454,21,Female,UG,Kinesthetic,2.26,9,29.49,68,5,90,4,Hard,M1→M2→M4,M1→M2→M4,81,62,Excellent
+STU455,25,Male,UG,Kinesthetic,3.51,3,48.17,67,0,86,2,Easy,M1→M3→M5,M1→M2→M4,92,74,Excellent
+STU456,21,Male,UG,Auditory,2.64,7,50.48,86,5,89,5,Medium,M1→M3→M5,M1→M3→M5,79,63,Excellent
+STU457,21,Female,UG,Auditory,3.44,3,42.36,73,5,51,3,Medium,M1→M2→M4,M1→M3→M5,74,80,Excellent
+STU458,24,Male,High School,Kinesthetic,3.24,5,40.94,63,1,69,5,Hard,M1→M2→M4,M1→M3→M5,93,99,Fail
+STU459,21,Male,High School,Auditory,3.13,8,37.53,77,4,86,3,Hard,M1→M3→M5,M1→M3→M5,95,86,Fair
+STU460,25,Male,PG,Auditory,3.14,4,54.18,82,1,64,4,Hard,M1→M3→M5,M1→M3→M5,73,77,Fail
+STU461,20,Female,High School,Visual,2.83,8,46.81,92,5,80,1,Easy,M1→M3→M5,M1→M2→M4,88,88,Fail
+STU462,21,Male,PG,Visual,3.61,5,33.81,89,5,91,5,Hard,M1→M2→M4,M1→M3→M5,100,61,Fair
+STU463,24,Male,UG,Auditory,3.38,3,57.22,66,1,52,1,Medium,M1→M3→M5,M1→M2→M4,89,71,Excellent
+STU464,21,Female,UG,Auditory,3.85,5,35.1,76,4,97,3,Medium,M1→M3→M5,M1→M2→M4,94,79,Fail
+STU465,24,Female,High School,Kinesthetic,3.47,10,28.96,77,1,75,4,Easy,M1→M3→M5,M1→M3→M5,83,91,Fail
+STU466,19,Male,UG,Auditory,2.13,9,31.99,77,4,53,2,Hard,M1→M2→M4,M1→M3→M5,92,78,Fail
+STU467,23,Female,UG,Auditory,2.3,5,50.36,98,0,57,5,Medium,M1→M2→M4,M1→M2→M4,71,89,Excellent
+STU468,22,Male,PG,Visual,2.93,9,47.39,69,5,84,5,Easy,M1→M2→M4,M1→M3→M5,88,66,Good
+STU469,21,Female,High School,Kinesthetic,2.8,5,42.99,81,3,88,1,Hard,M1→M2→M4,M1→M2→M4,82,99,Excellent
+STU470,18,Male,PG,Auditory,2.81,8,28.92,75,0,95,1,Hard,M1→M2→M4,M1→M2→M4,83,79,Good
+STU471,21,Female,High School,Kinesthetic,3.69,4,31.19,81,0,90,4,Medium,M1→M2→M4,M1→M2→M4,87,82,Good
+STU472,19,Female,PG,Visual,2.37,7,41.14,83,3,54,4,Hard,M1→M2→M4,M1→M2→M4,87,70,Excellent
+STU473,24,Female,High School,Kinesthetic,2.58,9,27.96,88,1,69,1,Easy,M1→M3→M5,M1→M2→M4,87,100,Fail
+STU474,21,Female,UG,Visual,2.78,8,31.73,61,5,65,2,Easy,M1→M3→M5,M1→M2→M4,84,75,Good
+STU475,24,Female,PG,Auditory,2.98,6,40.24,89,4,80,2,Easy,M1→M3→M5,M1→M2→M4,75,71,Fair
+STU476,19,Male,UG,Kinesthetic,2.86,3,39.34,68,4,92,5,Easy,M1→M3→M5,M1→M2→M4,84,71,Fail
+STU477,23,Female,UG,Auditory,2.88,3,41.61,73,3,80,1,Hard,M1→M2→M4,M1→M2→M4,81,82,Fair
+STU478,21,Female,PG,Visual,2.8,5,22.51,76,5,84,4,Medium,M1→M2→M4,M1→M2→M4,73,95,Excellent
+STU479,25,Male,PG,Kinesthetic,3.92,9,22.83,70,1,86,3,Medium,M1→M2→M4,M1→M2→M4,78,68,Fail
+STU480,18,Female,UG,Visual,2.83,7,26.93,86,0,97,3,Easy,M1→M3→M5,M1→M3→M5,76,90,Fail
+STU481,22,Female,High School,Kinesthetic,3.37,10,58.43,83,4,98,5,Hard,M1→M2→M4,M1→M2→M4,73,70,Fair
+STU482,22,Male,UG,Auditory,3.9,3,32.84,82,3,53,1,Medium,M1→M2→M4,M1→M2→M4,77,100,Fair
+STU483,20,Male,UG,Visual,2.84,7,54.56,75,4,52,4,Medium,M1→M3→M5,M1→M3→M5,98,77,Good
+STU484,20,Male,High School,Visual,3.17,7,35.22,97,4,58,4,Easy,M1→M2→M4,M1→M2→M4,81,62,Excellent
+STU485,22,Male,PG,Visual,2.19,5,53.64,97,0,94,2,Hard,M1→M2→M4,M1→M2→M4,70,61,Fail
+STU486,19,Female,UG,Kinesthetic,3.35,4,23.84,67,5,77,3,Medium,M1→M2→M4,M1→M2→M4,99,86,Good
+STU487,20,Male,UG,Visual,3.15,5,37.11,70,2,69,4,Easy,M1→M2→M4,M1→M3→M5,86,69,Fail
+STU488,24,Female,High School,Auditory,3.13,9,24.12,96,4,77,4,Hard,M1→M2→M4,M1→M3→M5,92,84,Excellent
+STU489,18,Female,High School,Visual,2.34,6,21.83,77,5,89,4,Medium,M1→M3→M5,M1→M2→M4,78,100,Excellent
+STU490,18,Male,High School,Kinesthetic,3.15,4,38.28,95,4,76,5,Easy,M1→M2→M4,M1→M2→M4,88,86,Fail
+STU491,24,Male,UG,Kinesthetic,2.53,10,23.7,71,3,65,5,Medium,M1→M2→M4,M1→M3→M5,86,97,Excellent
+STU492,20,Female,UG,Auditory,3.79,6,38.15,71,5,73,3,Easy,M1→M3→M5,M1→M2→M4,98,81,Fair
+STU493,25,Male,UG,Visual,2.56,5,30.81,80,3,69,1,Hard,M1→M3→M5,M1→M3→M5,89,72,Excellent
+STU494,18,Female,PG,Kinesthetic,3.09,6,34.88,63,3,94,4,Medium,M1→M3→M5,M1→M2→M4,79,85,Good
+STU495,22,Male,PG,Kinesthetic,2.69,9,58.02,93,2,56,1,Hard,M1→M2→M4,M1→M3→M5,83,75,Fail
+STU496,25,Female,UG,Visual,2.1,4,39.02,73,2,79,2,Medium,M1→M3→M5,M1→M2→M4,80,92,Fail
+STU497,22,Female,UG,Auditory,3.67,5,45.9,74,0,51,2,Hard,M1→M2→M4,M1→M3→M5,97,61,Good
+STU498,19,Female,UG,Kinesthetic,3.5,10,57.4,93,2,75,2,Easy,M1→M3→M5,M1→M3→M5,83,85,Good
+STU499,22,Male,PG,Kinesthetic,3.89,9,42.19,88,1,88,4,Hard,M1→M2→M4,M1→M2→M4,84,64,Excellent
+STU500,19,Female,UG,Kinesthetic,2.66,9,53.98,86,4,53,1,Medium,M1→M2→M4,M1→M2→M4,96,72,Fail
+STU501,22,Female,UG,Visual,3.14,8,45.06,92,1,99,1,Hard,M1→M2→M4,M1→M2→M4,77,81,Excellent
+STU502,19,Male,High School,Auditory,3.16,10,54.36,95,4,59,4,Hard,M1→M2→M4,M1→M2→M4,94,89,Good
+STU503,20,Female,High School,Kinesthetic,2.91,7,26.63,78,2,82,5,Easy,M1→M3→M5,M1→M2→M4,70,75,Fair
+STU504,25,Female,PG,Kinesthetic,2.89,4,36.02,72,4,97,3,Hard,M1→M3→M5,M1→M2→M4,97,66,Excellent
+STU505,25,Male,UG,Kinesthetic,3.76,8,56.52,62,0,55,3,Hard,M1→M2→M4,M1→M2→M4,80,80,Excellent
+STU506,22,Female,High School,Visual,2.53,10,44.32,86,1,85,4,Easy,M1→M2→M4,M1→M3→M5,89,69,Fail
+STU507,19,Female,High School,Visual,2.4,4,22.15,100,1,81,3,Medium,M1→M3→M5,M1→M2→M4,79,93,Good
+STU508,24,Female,PG,Kinesthetic,2.28,7,47.7,65,0,71,1,Hard,M1→M3→M5,M1→M2→M4,81,77,Excellent
+STU509,20,Female,PG,Auditory,3.99,9,54.81,76,3,59,4,Hard,M1→M2→M4,M1→M3→M5,92,82,Excellent
+STU510,24,Male,High School,Auditory,2.84,5,57.13,85,0,53,2,Easy,M1→M3→M5,M1→M2→M4,77,78,Excellent
+STU511,18,Male,High School,Auditory,3.89,8,55.3,95,1,81,3,Easy,M1→M2→M4,M1→M2→M4,79,63,Fail
+STU512,20,Male,High School,Visual,2.32,6,57.64,86,5,98,2,Medium,M1→M2→M4,M1→M2→M4,79,96,Excellent
+STU513,23,Male,UG,Visual,3.39,5,22.06,64,0,82,3,Easy,M1→M2→M4,M1→M2→M4,74,71,Fail
+STU514,25,Female,High School,Visual,2.48,7,53.48,68,5,61,3,Hard,M1→M2→M4,M1→M2→M4,91,99,Fair
+STU515,25,Female,UG,Kinesthetic,3.34,5,34.11,62,2,79,3,Medium,M1→M3→M5,M1→M2→M4,91,88,Excellent
+STU516,18,Male,PG,Kinesthetic,3.81,9,56.93,72,3,59,5,Hard,M1→M3→M5,M1→M3→M5,81,79,Excellent
+STU517,21,Female,High School,Kinesthetic,2.77,8,25.49,89,0,57,2,Medium,M1→M3→M5,M1→M3→M5,90,79,Fair
+STU518,21,Male,High School,Auditory,3.89,4,22.32,82,3,75,5,Medium,M1→M2→M4,M1→M2→M4,83,73,Fail
+STU519,20,Male,UG,Auditory,2.95,8,45.01,67,2,97,4,Medium,M1→M3→M5,M1→M2→M4,98,78,Good
+STU520,20,Male,UG,Kinesthetic,3.68,7,26.18,95,3,92,4,Hard,M1→M2→M4,M1→M2→M4,91,76,Fail
+STU521,22,Male,PG,Kinesthetic,2.18,3,54.27,89,5,77,1,Hard,M1→M2→M4,M1→M3→M5,78,100,Fair
+STU522,21,Male,PG,Kinesthetic,3.31,6,53.67,80,5,73,3,Hard,M1→M3→M5,M1→M3→M5,96,91,Excellent
+STU523,19,Male,UG,Visual,2.74,8,58.27,81,5,62,3,Hard,M1→M2→M4,M1→M2→M4,96,66,Fail
+STU524,23,Female,High School,Visual,2.9,6,45.2,86,0,88,1,Easy,M1→M3→M5,M1→M3→M5,87,89,Fair
+STU525,22,Male,PG,Visual,3.18,7,43.24,99,3,64,5,Medium,M1→M3→M5,M1→M3→M5,91,88,Fair
+STU526,20,Male,UG,Visual,3.06,7,58.86,91,5,83,4,Medium,M1→M3→M5,M1→M3→M5,99,82,Excellent
+STU527,25,Female,PG,Kinesthetic,2.87,3,42.93,86,1,74,2,Easy,M1→M2→M4,M1→M3→M5,70,63,Good
+STU528,23,Female,PG,Visual,3.15,3,47.45,81,1,53,2,Hard,M1→M3→M5,M1→M2→M4,75,81,Fair
+STU529,24,Female,PG,Kinesthetic,2.46,7,27.63,61,4,63,3,Easy,M1→M3→M5,M1→M2→M4,99,68,Fair
+STU530,18,Male,UG,Auditory,3.56,3,40.28,78,2,56,1,Hard,M1→M3→M5,M1→M3→M5,84,75,Fail
+STU531,20,Male,PG,Kinesthetic,2.59,3,20.3,65,5,54,1,Medium,M1→M2→M4,M1→M3→M5,81,61,Good
+STU532,18,Female,PG,Kinesthetic,2.28,10,22.92,96,5,97,5,Medium,M1→M3→M5,M1→M3→M5,88,78,Fail
+STU533,19,Male,High School,Kinesthetic,3.05,3,38.55,62,1,62,2,Medium,M1→M2→M4,M1→M3→M5,78,97,Good
+STU534,19,Male,UG,Kinesthetic,2.21,9,27.97,79,4,72,3,Easy,M1→M3→M5,M1→M2→M4,90,85,Fail
+STU535,18,Female,High School,Auditory,3.18,5,21.32,69,5,55,4,Hard,M1→M3→M5,M1→M3→M5,82,83,Fail
+STU536,24,Female,UG,Auditory,2.12,6,40.01,84,5,55,5,Hard,M1→M2→M4,M1→M3→M5,78,74,Excellent
+STU537,24,Female,UG,Kinesthetic,3.25,8,46.31,94,5,91,4,Easy,M1→M2→M4,M1→M2→M4,70,84,Good
+STU538,18,Male,PG,Visual,2.69,7,27.59,69,0,50,2,Hard,M1→M2→M4,M1→M3→M5,76,62,Excellent
+STU539,18,Male,UG,Kinesthetic,2.47,9,42.3,85,4,91,2,Medium,M1→M2→M4,M1→M3→M5,86,90,Fair
+STU540,22,Female,PG,Auditory,2.87,3,26.07,89,2,73,1,Easy,M1→M2→M4,M1→M2→M4,98,62,Excellent
+STU541,21,Male,UG,Kinesthetic,3.9,10,26.1,63,1,61,3,Medium,M1→M3→M5,M1→M2→M4,70,88,Good
+STU542,20,Female,UG,Auditory,3.23,9,21.82,74,2,86,3,Easy,M1→M3→M5,M1→M3→M5,92,98,Excellent
+STU543,22,Male,UG,Kinesthetic,2.4,9,39.78,80,5,65,3,Hard,M1→M2→M4,M1→M3→M5,72,62,Fail
+STU544,18,Female,PG,Visual,3.54,5,46.61,93,1,68,3,Medium,M1→M2→M4,M1→M3→M5,90,89,Good
+STU545,18,Female,High School,Auditory,2.26,9,59.32,83,2,100,3,Hard,M1→M3→M5,M1→M3→M5,87,77,Fail
+STU546,20,Male,High School,Auditory,3.13,8,38.89,62,1,74,3,Hard,M1→M3→M5,M1→M2→M4,95,92,Excellent
+STU547,22,Female,High School,Auditory,3.68,4,42.13,78,0,94,4,Hard,M1→M2→M4,M1→M3→M5,76,78,Good
+STU548,23,Male,High School,Kinesthetic,3.98,3,26.8,66,5,94,1,Medium,M1→M3→M5,M1→M2→M4,70,71,Excellent
+STU549,20,Female,High School,Visual,3.36,3,30.28,63,2,53,2,Easy,M1→M3→M5,M1→M3→M5,77,61,Fail
+STU550,19,Female,High School,Kinesthetic,3.69,10,59.58,62,0,79,3,Medium,M1→M2→M4,M1→M3→M5,86,95,Excellent
+STU551,23,Female,High School,Auditory,3.58,7,24.93,77,0,95,2,Hard,M1→M2→M4,M1→M3→M5,97,100,Good
+STU552,25,Female,High School,Auditory,3.14,5,28.08,66,5,61,2,Easy,M1→M3→M5,M1→M2→M4,74,63,Fair
+STU553,23,Male,UG,Auditory,2.58,10,52.52,66,0,83,4,Hard,M1→M2→M4,M1→M2→M4,87,82,Good
+STU554,18,Male,PG,Auditory,3.3,9,51.91,98,2,50,5,Hard,M1→M2→M4,M1→M2→M4,74,95,Fail
+STU555,22,Female,PG,Auditory,2.73,6,51.25,90,0,60,3,Easy,M1→M3→M5,M1→M3→M5,92,75,Good
+STU556,22,Male,PG,Visual,3.42,9,42.98,65,0,83,1,Hard,M1→M2→M4,M1→M2→M4,83,87,Excellent
+STU557,21,Female,High School,Kinesthetic,2.62,3,48.31,96,5,63,3,Hard,M1→M2→M4,M1→M2→M4,100,82,Fail
+STU558,18,Female,High School,Kinesthetic,2.24,4,53.55,80,3,71,3,Hard,M1→M3→M5,M1→M3→M5,97,98,Good
+STU559,19,Male,High School,Kinesthetic,2.47,5,31.8,67,1,70,5,Easy,M1→M3→M5,M1→M3→M5,81,95,Fair
+STU560,19,Male,UG,Kinesthetic,3.45,8,30.97,81,0,53,4,Hard,M1→M3→M5,M1→M2→M4,71,69,Fail
+STU561,25,Male,UG,Kinesthetic,3.73,8,47.26,90,4,51,1,Medium,M1→M3→M5,M1→M2→M4,82,73,Excellent
+STU562,25,Male,UG,Kinesthetic,3.92,6,35.09,97,2,96,4,Medium,M1→M2→M4,M1→M3→M5,79,76,Good
+STU563,20,Female,PG,Visual,2.98,6,45.69,100,0,52,1,Medium,M1→M3→M5,M1→M2→M4,100,77,Fair
+STU564,20,Female,PG,Kinesthetic,2.26,9,43.18,93,5,84,4,Medium,M1→M2→M4,M1→M3→M5,98,73,Fair
+STU565,20,Female,UG,Auditory,2.62,3,47.51,63,0,52,2,Hard,M1→M3→M5,M1→M2→M4,80,94,Excellent
+STU566,23,Male,PG,Visual,3.25,6,26.24,93,0,54,4,Hard,M1→M2→M4,M1→M2→M4,80,61,Excellent
+STU567,24,Male,UG,Visual,3.39,4,21.26,92,5,91,4,Medium,M1→M3→M5,M1→M3→M5,93,78,Fail
+STU568,21,Female,High School,Visual,3.56,3,48.86,89,4,82,5,Medium,M1→M3→M5,M1→M3→M5,87,97,Good
+STU569,20,Male,PG,Kinesthetic,2.71,10,24.94,68,2,92,5,Medium,M1→M3→M5,M1→M3→M5,96,95,Excellent
+STU570,25,Male,UG,Auditory,2.12,5,33.8,96,4,87,3,Easy,M1→M3→M5,M1→M2→M4,96,94,Fair
+STU571,19,Female,High School,Visual,2.89,3,45.19,97,4,92,5,Medium,M1→M3→M5,M1→M3→M5,76,85,Good
+STU572,18,Female,PG,Kinesthetic,2.7,4,28.36,85,1,69,5,Hard,M1→M3→M5,M1→M2→M4,100,79,Fair
+STU573,23,Female,PG,Visual,3.03,9,29.21,70,1,86,3,Easy,M1→M3→M5,M1→M2→M4,92,91,Excellent
+STU574,23,Male,PG,Auditory,3.07,8,43.54,75,3,89,4,Hard,M1→M2→M4,M1→M3→M5,94,90,Excellent
+STU575,25,Female,PG,Visual,2.28,5,53.45,81,4,50,4,Medium,M1→M2→M4,M1→M2→M4,90,76,Good
+STU576,18,Male,PG,Auditory,3.11,8,26.92,81,1,67,2,Medium,M1→M2→M4,M1→M3→M5,84,79,Excellent
+STU577,24,Male,High School,Auditory,3.59,9,44.76,99,0,56,5,Medium,M1→M2→M4,M1→M2→M4,86,68,Fail
+STU578,19,Female,PG,Auditory,2.74,7,50.02,74,5,85,3,Hard,M1→M2→M4,M1→M2→M4,79,97,Excellent
+STU579,22,Male,High School,Visual,3.07,9,47.11,66,4,62,5,Hard,M1→M3→M5,M1→M2→M4,72,66,Good
+STU580,18,Male,UG,Visual,2.37,9,55.7,99,2,89,1,Easy,M1→M2→M4,M1→M2→M4,99,82,Excellent
+STU581,20,Male,PG,Kinesthetic,3.39,9,31.63,97,2,78,3,Medium,M1→M3→M5,M1→M2→M4,98,67,Good
+STU582,24,Female,PG,Kinesthetic,2.73,8,31.34,77,2,50,1,Easy,M1→M2→M4,M1→M2→M4,87,71,Fail
+STU583,18,Female,High School,Kinesthetic,2.62,10,33.07,100,3,98,3,Hard,M1→M3→M5,M1→M2→M4,95,70,Fail
+STU584,19,Male,PG,Kinesthetic,3.8,5,29.32,80,4,83,1,Medium,M1→M3→M5,M1→M3→M5,94,78,Good
+STU585,20,Female,High School,Auditory,2.98,4,52.33,67,5,84,5,Hard,M1→M3→M5,M1→M3→M5,80,68,Fair
+STU586,24,Female,PG,Visual,3.69,10,48.31,93,1,60,1,Easy,M1→M3→M5,M1→M3→M5,84,72,Excellent
+STU587,20,Female,High School,Kinesthetic,2.44,3,57.33,66,4,94,3,Hard,M1→M2→M4,M1→M2→M4,75,98,Excellent
+STU588,21,Female,PG,Auditory,3.25,5,26.23,79,3,78,2,Medium,M1→M2→M4,M1→M3→M5,96,74,Fail
+STU589,24,Male,PG,Visual,3.62,6,49.71,99,0,94,1,Easy,M1→M3→M5,M1→M2→M4,100,66,Excellent
+STU590,20,Male,High School,Kinesthetic,3.09,3,49.74,91,4,88,4,Medium,M1→M3→M5,M1→M3→M5,99,95,Fair
+STU591,25,Female,PG,Kinesthetic,3.46,9,57.74,85,1,85,5,Easy,M1→M3→M5,M1→M3→M5,83,80,Excellent
+STU592,21,Male,High School,Kinesthetic,2.51,6,58.73,65,1,88,1,Easy,M1→M3→M5,M1→M2→M4,88,64,Good
+STU593,20,Male,High School,Kinesthetic,3.31,4,33.1,71,4,59,4,Hard,M1→M3→M5,M1→M3→M5,94,70,Fail
+STU594,20,Male,High School,Visual,2.43,10,45.9,78,1,86,2,Medium,M1→M2→M4,M1→M3→M5,70,85,Excellent
+STU595,18,Female,High School,Visual,2.47,6,36.21,65,3,64,5,Medium,M1→M3→M5,M1→M2→M4,86,87,Good
+STU596,22,Female,UG,Visual,3.66,4,26.17,60,2,86,5,Hard,M1→M2→M4,M1→M2→M4,79,92,Excellent
+STU597,21,Male,PG,Kinesthetic,3.21,10,31.78,66,2,95,1,Easy,M1→M2→M4,M1→M2→M4,91,68,Excellent
+STU598,25,Male,High School,Kinesthetic,3.45,7,35.0,87,3,69,2,Hard,M1→M2→M4,M1→M3→M5,95,86,Good
+STU599,21,Male,High School,Kinesthetic,3.41,10,49.48,74,4,84,4,Medium,M1→M2→M4,M1→M2→M4,97,95,Excellent
+STU600,21,Female,UG,Kinesthetic,3.13,7,39.78,64,4,88,3,Hard,M1→M2→M4,M1→M3→M5,95,92,Good
+STU601,23,Male,High School,Auditory,3.07,5,55.58,66,3,77,1,Hard,M1→M2→M4,M1→M2→M4,91,74,Excellent
+STU602,19,Female,PG,Visual,3.5,6,41.82,96,3,78,1,Easy,M1→M2→M4,M1→M2→M4,84,61,Good
+STU603,19,Male,UG,Kinesthetic,3.04,4,59.93,62,5,60,2,Medium,M1→M3→M5,M1→M3→M5,78,88,Good
+STU604,21,Male,PG,Kinesthetic,3.36,8,47.12,71,2,61,3,Easy,M1→M2→M4,M1→M2→M4,86,67,Fair
+STU605,21,Male,UG,Kinesthetic,3.33,5,22.09,69,0,56,5,Easy,M1→M2→M4,M1→M3→M5,76,78,Excellent
+STU606,19,Female,PG,Auditory,2.53,3,54.37,82,2,53,3,Medium,M1→M2→M4,M1→M3→M5,81,83,Fair
+STU607,22,Male,High School,Auditory,3.04,7,52.23,62,4,94,2,Easy,M1→M2→M4,M1→M3→M5,92,72,Fair
+STU608,19,Female,PG,Auditory,3.37,3,47.78,60,2,89,4,Hard,M1→M2→M4,M1→M2→M4,71,91,Good
+STU609,23,Female,UG,Visual,2.75,7,45.62,71,2,88,3,Easy,M1→M3→M5,M1→M3→M5,83,91,Good
+STU610,19,Male,PG,Kinesthetic,3.29,9,21.97,93,5,93,2,Medium,M1→M3→M5,M1→M3→M5,93,68,Fair
+STU611,24,Female,UG,Visual,3.37,4,54.21,65,4,73,3,Easy,M1→M3→M5,M1→M2→M4,71,75,Fair
+STU612,19,Male,High School,Kinesthetic,2.85,8,42.68,62,0,81,1,Medium,M1→M3→M5,M1→M2→M4,77,60,Good
+STU613,18,Female,UG,Visual,3.56,8,36.07,96,1,69,5,Easy,M1→M3→M5,M1→M2→M4,72,86,Fair
+STU614,25,Female,UG,Visual,3.18,9,21.46,91,5,89,2,Medium,M1→M3→M5,M1→M3→M5,89,73,Fail
+STU615,25,Female,UG,Visual,3.44,10,45.68,97,3,53,3,Hard,M1→M3→M5,M1→M3→M5,82,98,Good
+STU616,18,Female,High School,Kinesthetic,3.11,4,59.19,69,0,69,3,Hard,M1→M3→M5,M1→M2→M4,97,83,Good
+STU617,25,Female,UG,Auditory,3.59,3,57.13,74,1,87,1,Hard,M1→M3→M5,M1→M3→M5,72,67,Fail
+STU618,23,Male,PG,Visual,3.45,7,47.14,70,2,81,1,Medium,M1→M2→M4,M1→M3→M5,100,85,Good
+STU619,23,Male,High School,Visual,3.79,10,57.58,90,3,57,5,Easy,M1→M2→M4,M1→M2→M4,91,99,Excellent
+STU620,23,Female,High School,Visual,3.32,9,31.63,63,2,88,3,Easy,M1→M3→M5,M1→M3→M5,72,76,Excellent
+STU621,20,Male,PG,Kinesthetic,2.96,6,29.59,63,3,80,4,Medium,M1→M3→M5,M1→M3→M5,98,79,Excellent
+STU622,23,Female,High School,Kinesthetic,2.7,9,37.5,73,0,61,5,Hard,M1→M2→M4,M1→M3→M5,77,64,Excellent
+STU623,24,Male,High School,Auditory,3.85,9,33.92,79,0,71,3,Easy,M1→M2→M4,M1→M3→M5,70,93,Excellent
+STU624,22,Female,UG,Kinesthetic,2.46,5,52.44,66,0,80,1,Easy,M1→M3→M5,M1→M2→M4,76,62,Good
+STU625,19,Female,PG,Auditory,3.64,4,40.35,73,5,63,4,Hard,M1→M3→M5,M1→M3→M5,92,81,Good
+STU626,19,Male,UG,Visual,2.23,10,21.14,78,2,51,1,Easy,M1→M3→M5,M1→M3→M5,88,61,Fair
+STU627,21,Male,UG,Visual,3.9,3,59.74,63,1,82,1,Hard,M1→M2→M4,M1→M3→M5,77,73,Fail
+STU628,21,Female,PG,Kinesthetic,2.23,10,30.21,60,5,75,2,Easy,M1→M3→M5,M1→M2→M4,98,70,Fair
+STU629,20,Male,UG,Kinesthetic,2.13,4,23.52,70,3,58,4,Hard,M1→M2→M4,M1→M2→M4,90,65,Excellent
+STU630,19,Female,High School,Visual,2.38,5,41.15,77,0,75,5,Medium,M1→M2→M4,M1→M2→M4,82,78,Fail
+STU631,25,Male,PG,Auditory,3.67,6,22.94,67,0,76,3,Easy,M1→M2→M4,M1→M2→M4,83,88,Good
+STU632,21,Female,UG,Kinesthetic,2.2,4,55.28,86,4,90,3,Easy,M1→M3→M5,M1→M2→M4,92,96,Good
+STU633,18,Female,High School,Visual,2.9,3,52.25,85,4,88,2,Easy,M1→M2→M4,M1→M2→M4,99,96,Fail
+STU634,22,Male,UG,Auditory,2.37,3,29.43,76,1,100,2,Easy,M1→M3→M5,M1→M3→M5,90,73,Fair
+STU635,18,Male,PG,Visual,2.82,5,34.43,67,2,56,1,Hard,M1→M3→M5,M1→M2→M4,72,94,Excellent
+STU636,20,Female,UG,Auditory,3.54,10,28.2,75,3,94,5,Medium,M1→M2→M4,M1→M2→M4,99,91,Excellent
+STU637,20,Male,PG,Kinesthetic,3.74,4,33.5,77,5,83,2,Hard,M1→M2→M4,M1→M2→M4,86,60,Excellent
+STU638,22,Male,PG,Auditory,3.22,9,34.94,97,4,93,4,Medium,M1→M3→M5,M1→M3→M5,92,93,Fail
+STU639,19,Male,High School,Auditory,2.19,3,31.48,100,3,72,5,Medium,M1→M3→M5,M1→M2→M4,79,96,Fail
+STU640,20,Female,PG,Visual,2.69,8,40.45,70,4,70,1,Medium,M1→M3→M5,M1→M3→M5,99,70,Good
+STU641,20,Female,UG,Visual,3.89,6,38.0,84,5,78,3,Easy,M1→M3→M5,M1→M3→M5,87,73,Excellent
+STU642,18,Female,UG,Visual,2.17,9,35.16,100,4,87,1,Medium,M1→M3→M5,M1→M2→M4,91,66,Excellent
+STU643,20,Female,PG,Visual,3.29,6,49.8,67,5,78,5,Easy,M1→M2→M4,M1→M3→M5,99,89,Fair
+STU644,19,Male,UG,Auditory,2.52,4,53.67,75,0,89,1,Medium,M1→M3→M5,M1→M2→M4,97,86,Fair
+STU645,18,Female,UG,Visual,3.75,4,58.47,74,1,85,2,Easy,M1→M2→M4,M1→M2→M4,98,96,Fail
+STU646,21,Female,PG,Kinesthetic,2.97,9,59.65,74,2,80,2,Medium,M1→M2→M4,M1→M2→M4,83,84,Excellent
+STU647,20,Female,UG,Visual,2.66,10,50.78,76,1,69,2,Medium,M1→M3→M5,M1→M3→M5,91,93,Fair
+STU648,25,Male,UG,Kinesthetic,3.51,8,29.35,80,4,99,1,Easy,M1→M3→M5,M1→M2→M4,76,91,Fail
+STU649,20,Female,High School,Visual,2.91,5,52.26,85,5,90,1,Medium,M1→M2→M4,M1→M2→M4,78,91,Fail
+STU650,19,Female,High School,Visual,3.82,5,46.13,66,0,54,3,Medium,M1→M3→M5,M1→M3→M5,88,90,Fail
+STU651,19,Male,High School,Kinesthetic,2.96,10,23.86,68,3,86,3,Hard,M1→M2→M4,M1→M2→M4,98,76,Fail
+STU652,25,Male,UG,Visual,2.25,10,47.08,95,2,66,2,Hard,M1→M2→M4,M1→M2→M4,87,78,Fail
+STU653,18,Male,UG,Visual,3.22,3,51.57,72,0,78,1,Hard,M1→M3→M5,M1→M3→M5,80,100,Fair
+STU654,21,Male,UG,Kinesthetic,3.97,8,23.61,64,5,93,5,Hard,M1→M3→M5,M1→M3→M5,82,93,Good
+STU655,18,Male,UG,Visual,3.39,5,25.99,88,4,55,3,Easy,M1→M2→M4,M1→M2→M4,88,95,Fail
+STU656,19,Male,UG,Visual,2.88,3,44.94,75,5,94,3,Medium,M1→M2→M4,M1→M3→M5,70,70,Excellent
+STU657,23,Male,UG,Visual,2.71,10,22.36,71,4,71,1,Easy,M1→M3→M5,M1→M2→M4,72,73,Good
+STU658,18,Male,PG,Auditory,2.78,6,46.16,99,2,88,2,Medium,M1→M2→M4,M1→M3→M5,99,66,Fair
+STU659,18,Female,UG,Kinesthetic,2.05,5,31.47,89,4,63,3,Medium,M1→M2→M4,M1→M3→M5,87,91,Good
+STU660,19,Male,UG,Auditory,2.03,5,53.33,85,3,74,3,Medium,M1→M3→M5,M1→M2→M4,89,69,Fair
+STU661,22,Male,UG,Kinesthetic,3.08,9,24.01,97,0,56,2,Hard,M1→M3→M5,M1→M3→M5,98,64,Fair
+STU662,23,Male,UG,Auditory,2.74,5,59.27,89,4,82,2,Hard,M1→M2→M4,M1→M2→M4,79,82,Good
+STU663,24,Female,PG,Kinesthetic,3.8,5,54.12,92,0,91,3,Medium,M1→M3→M5,M1→M2→M4,78,81,Fail
+STU664,23,Male,UG,Auditory,3.19,7,55.28,91,3,60,4,Medium,M1→M3→M5,M1→M3→M5,87,71,Good
+STU665,25,Female,High School,Kinesthetic,3.82,6,46.19,65,5,93,5,Easy,M1→M3→M5,M1→M3→M5,84,76,Fair
+STU666,24,Male,PG,Kinesthetic,3.05,8,38.29,61,0,97,2,Hard,M1→M2→M4,M1→M3→M5,85,69,Excellent
+STU667,19,Female,High School,Visual,2.38,5,47.43,65,3,77,5,Easy,M1→M3→M5,M1→M2→M4,72,98,Good
+STU668,20,Male,UG,Visual,2.27,6,54.84,70,5,71,3,Hard,M1→M2→M4,M1→M3→M5,78,79,Fail
+STU669,20,Male,UG,Auditory,3.6,4,26.67,90,2,70,4,Easy,M1→M2→M4,M1→M2→M4,89,93,Excellent
+STU670,20,Male,PG,Visual,2.53,7,59.29,80,4,77,3,Easy,M1→M2→M4,M1→M2→M4,85,75,Excellent
+STU671,22,Female,High School,Kinesthetic,2.64,6,21.58,92,1,77,2,Hard,M1→M3→M5,M1→M2→M4,70,74,Good
+STU672,25,Male,High School,Kinesthetic,3.77,6,24.23,74,1,67,3,Hard,M1→M2→M4,M1→M2→M4,82,79,Excellent
+STU673,19,Female,High School,Visual,3.61,3,30.88,98,4,52,2,Easy,M1→M2→M4,M1→M2→M4,95,88,Fair
+STU674,18,Female,UG,Auditory,3.78,3,36.17,69,3,81,5,Easy,M1→M3→M5,M1→M3→M5,89,93,Good
+STU675,18,Male,UG,Kinesthetic,2.58,4,34.04,81,3,96,1,Medium,M1→M2→M4,M1→M3→M5,89,63,Fail
+STU676,25,Female,High School,Auditory,2.28,10,56.85,77,3,55,5,Hard,M1→M3→M5,M1→M2→M4,97,82,Good
+STU677,19,Female,High School,Visual,2.5,5,59.86,61,4,52,1,Medium,M1→M3→M5,M1→M2→M4,73,93,Excellent
+STU678,24,Female,UG,Visual,2.42,4,55.3,60,0,78,1,Medium,M1→M3→M5,M1→M3→M5,78,72,Fail
+STU679,21,Male,UG,Kinesthetic,3.81,6,50.98,90,4,68,4,Hard,M1→M3→M5,M1→M2→M4,84,85,Excellent
+STU680,22,Male,UG,Visual,3.57,7,57.86,67,4,65,4,Easy,M1→M3→M5,M1→M2→M4,71,96,Good
+STU681,22,Male,High School,Kinesthetic,3.09,8,26.05,88,0,90,3,Hard,M1→M3→M5,M1→M2→M4,98,80,Good
+STU682,19,Female,UG,Kinesthetic,3.57,3,23.01,82,2,94,5,Hard,M1→M2→M4,M1→M3→M5,94,92,Fair
+STU683,19,Male,UG,Auditory,2.11,9,26.51,76,5,84,2,Medium,M1→M2→M4,M1→M2→M4,77,70,Excellent
+STU684,19,Female,PG,Kinesthetic,3.82,3,56.84,85,4,84,5,Easy,M1→M2→M4,M1→M3→M5,76,70,Fail
+STU685,25,Female,UG,Auditory,2.39,3,45.74,85,5,55,5,Easy,M1→M2→M4,M1→M3→M5,72,86,Fail
+STU686,22,Male,UG,Visual,2.58,6,23.95,97,4,84,1,Medium,M1→M2→M4,M1→M3→M5,93,94,Excellent
+STU687,23,Male,UG,Kinesthetic,3.79,10,52.86,85,2,71,4,Hard,M1→M2→M4,M1→M2→M4,93,65,Fail
+STU688,24,Female,High School,Auditory,2.59,3,37.76,83,3,72,4,Easy,M1→M2→M4,M1→M2→M4,100,76,Good
+STU689,21,Female,PG,Kinesthetic,2.82,10,48.53,90,5,77,2,Medium,M1→M2→M4,M1→M3→M5,70,87,Fair
+STU690,22,Male,High School,Auditory,3.35,4,36.93,64,1,50,5,Medium,M1→M2→M4,M1→M2→M4,72,90,Good
+STU691,21,Female,High School,Visual,3.86,8,50.81,89,3,99,5,Hard,M1→M3→M5,M1→M2→M4,83,77,Good
+STU692,20,Male,High School,Auditory,2.94,5,48.45,78,3,59,3,Easy,M1→M3→M5,M1→M3→M5,83,92,Fair
+STU693,25,Male,UG,Kinesthetic,2.87,3,37.02,78,5,70,1,Hard,M1→M3→M5,M1→M3→M5,100,71,Excellent
+STU694,25,Male,High School,Kinesthetic,3.36,3,35.63,99,2,53,4,Easy,M1→M3→M5,M1→M3→M5,76,98,Fail
+STU695,19,Male,UG,Kinesthetic,2.9,8,45.42,74,0,62,2,Easy,M1→M3→M5,M1→M3→M5,76,66,Fail
+STU696,24,Male,PG,Kinesthetic,2.23,10,54.11,61,1,50,4,Hard,M1→M3→M5,M1→M3→M5,75,98,Fail
+STU697,22,Female,PG,Kinesthetic,3.55,6,31.3,68,0,54,5,Hard,M1→M2→M4,M1→M3→M5,76,85,Fail
+STU698,20,Female,PG,Auditory,3.88,6,26.29,98,5,89,5,Easy,M1→M3→M5,M1→M3→M5,84,74,Fail
+STU699,25,Female,UG,Auditory,2.81,10,24.66,94,2,51,4,Medium,M1→M2→M4,M1→M2→M4,87,69,Good
+STU700,23,Male,PG,Visual,3.68,4,32.98,97,3,82,4,Hard,M1→M2→M4,M1→M3→M5,81,67,Excellent
+STU701,23,Female,PG,Visual,3.35,10,39.33,100,0,100,3,Easy,M1→M3→M5,M1→M3→M5,85,96,Fair
+STU702,21,Male,PG,Visual,3.47,5,31.53,74,5,50,4,Medium,M1→M2→M4,M1→M3→M5,95,65,Good
+STU703,22,Female,UG,Visual,3.69,6,43.45,79,3,88,2,Hard,M1→M2→M4,M1→M2→M4,76,69,Fail
+STU704,18,Female,High School,Auditory,3.95,8,41.03,74,3,74,2,Hard,M1→M3→M5,M1→M3→M5,78,62,Good
+STU705,23,Female,PG,Kinesthetic,2.48,9,34.96,71,5,76,4,Easy,M1→M2→M4,M1→M3→M5,73,72,Fair
+STU706,20,Female,High School,Visual,3.6,3,32.87,74,4,90,4,Medium,M1→M3→M5,M1→M3→M5,74,61,Good
+STU707,23,Female,High School,Auditory,2.44,5,51.95,64,2,89,3,Hard,M1→M3→M5,M1→M2→M4,79,82,Good
+STU708,18,Female,High School,Visual,2.04,8,24.56,78,1,74,1,Medium,M1→M2→M4,M1→M2→M4,95,80,Good
+STU709,22,Male,PG,Visual,3.84,7,39.67,74,2,56,1,Easy,M1→M3→M5,M1→M3→M5,70,97,Fail
+STU710,18,Female,PG,Visual,2.96,5,42.2,93,2,52,3,Easy,M1→M2→M4,M1→M2→M4,84,89,Fair
+STU711,22,Female,High School,Visual,2.26,5,38.03,94,2,77,5,Medium,M1→M3→M5,M1→M2→M4,82,90,Good
+STU712,19,Male,PG,Kinesthetic,2.47,6,48.52,85,2,92,4,Medium,M1→M3→M5,M1→M3→M5,82,88,Good
+STU713,25,Female,High School,Visual,3.21,9,51.99,97,4,58,2,Easy,M1→M3→M5,M1→M3→M5,98,74,Fair
+STU714,18,Female,High School,Auditory,2.67,6,38.6,70,3,78,1,Easy,M1→M3→M5,M1→M2→M4,74,88,Fair
+STU715,19,Male,PG,Kinesthetic,2.32,7,58.95,83,4,97,1,Medium,M1→M2→M4,M1→M3→M5,70,73,Fail
+STU716,21,Male,UG,Kinesthetic,2.85,4,33.76,64,1,74,1,Hard,M1→M3→M5,M1→M3→M5,99,87,Fail
+STU717,22,Male,PG,Kinesthetic,3.92,6,25.3,80,1,51,4,Hard,M1→M3→M5,M1→M3→M5,97,60,Excellent
+STU718,25,Female,PG,Auditory,2.28,8,49.8,88,5,71,4,Medium,M1→M3→M5,M1→M2→M4,86,90,Good
+STU719,25,Male,High School,Kinesthetic,3.26,7,40.41,83,3,98,4,Easy,M1→M3→M5,M1→M3→M5,77,95,Fair
+STU720,19,Female,High School,Visual,3.64,9,35.14,93,0,99,2,Easy,M1→M2→M4,M1→M2→M4,81,74,Excellent
+STU721,23,Male,High School,Visual,3.43,8,30.97,90,5,58,4,Hard,M1→M2→M4,M1→M2→M4,97,70,Fair
+STU722,20,Male,High School,Auditory,2.99,3,28.9,98,3,71,4,Hard,M1→M3→M5,M1→M3→M5,99,86,Fair
+STU723,23,Male,UG,Auditory,3.03,6,33.01,96,1,87,2,Medium,M1→M3→M5,M1→M3→M5,80,79,Fail
+STU724,19,Female,UG,Visual,3.84,7,25.67,89,5,78,1,Easy,M1→M2→M4,M1→M3→M5,92,62,Good
+STU725,18,Female,UG,Auditory,2.26,5,36.2,87,0,79,4,Hard,M1→M3→M5,M1→M2→M4,82,60,Fair
+STU726,23,Male,PG,Visual,3.58,4,58.99,93,3,86,2,Hard,M1→M3→M5,M1→M2→M4,70,64,Good
+STU727,18,Female,UG,Visual,3.99,8,52.34,99,0,79,2,Easy,M1→M3→M5,M1→M2→M4,78,77,Good
+STU728,22,Male,UG,Auditory,3.95,10,32.16,74,2,91,4,Hard,M1→M2→M4,M1→M3→M5,91,79,Excellent
+STU729,18,Male,PG,Kinesthetic,3.0,5,54.77,97,0,96,5,Hard,M1→M2→M4,M1→M3→M5,75,80,Fair
+STU730,18,Male,PG,Visual,2.89,5,50.45,91,2,71,3,Medium,M1→M3→M5,M1→M2→M4,78,94,Fail
+STU731,20,Female,High School,Kinesthetic,2.61,9,21.91,97,5,77,2,Hard,M1→M3→M5,M1→M3→M5,70,65,Fail
+STU732,25,Female,UG,Auditory,3.16,6,28.68,100,5,51,1,Hard,M1→M3→M5,M1→M2→M4,82,92,Good
+STU733,21,Male,High School,Visual,2.7,5,54.32,76,5,92,1,Medium,M1→M2→M4,M1→M2→M4,97,86,Fair
+STU734,19,Female,PG,Visual,2.11,4,41.38,100,2,75,3,Easy,M1→M3→M5,M1→M3→M5,73,92,Good
+STU735,25,Female,UG,Auditory,3.29,4,54.04,91,3,81,2,Easy,M1→M3→M5,M1→M2→M4,88,62,Good
+STU736,20,Female,UG,Kinesthetic,2.51,9,56.65,79,0,91,5,Medium,M1→M2→M4,M1→M2→M4,88,66,Excellent
+STU737,23,Male,UG,Kinesthetic,3.47,5,23.66,78,1,66,3,Easy,M1→M2→M4,M1→M2→M4,70,80,Fair
+STU738,25,Male,PG,Visual,2.07,10,56.08,89,2,67,5,Hard,M1→M2→M4,M1→M3→M5,92,97,Good
+STU739,25,Male,PG,Auditory,3.97,10,40.59,89,5,77,4,Hard,M1→M3→M5,M1→M2→M4,90,82,Fail
+STU740,18,Male,High School,Auditory,3.43,4,51.26,63,3,78,3,Easy,M1→M3→M5,M1→M3→M5,87,62,Excellent
+STU741,18,Male,PG,Kinesthetic,2.44,4,39.49,81,4,55,4,Easy,M1→M3→M5,M1→M3→M5,90,76,Fair
+STU742,21,Male,UG,Kinesthetic,3.41,5,45.67,100,0,75,5,Medium,M1→M3→M5,M1→M2→M4,77,70,Excellent
+STU743,20,Female,UG,Kinesthetic,2.77,8,48.64,92,0,99,5,Easy,M1→M2→M4,M1→M2→M4,76,77,Excellent
+STU744,21,Female,High School,Kinesthetic,3.68,9,48.3,98,0,61,4,Hard,M1→M3→M5,M1→M3→M5,100,66,Fair
+STU745,19,Female,High School,Kinesthetic,3.19,7,41.19,69,0,64,5,Hard,M1→M3→M5,M1→M3→M5,100,92,Good
+STU746,21,Female,UG,Visual,2.25,8,44.9,60,2,69,4,Hard,M1→M3→M5,M1→M3→M5,82,81,Fair
+STU747,23,Male,UG,Auditory,2.39,6,33.15,100,3,71,5,Hard,M1→M3→M5,M1→M2→M4,71,98,Excellent
+STU748,25,Male,UG,Kinesthetic,3.76,9,50.34,95,2,74,5,Medium,M1→M2→M4,M1→M3→M5,95,78,Fail
+STU749,24,Female,UG,Visual,3.13,4,58.76,99,1,54,3,Hard,M1→M2→M4,M1→M2→M4,98,91,Good
+STU750,25,Male,UG,Auditory,2.63,9,37.42,100,2,77,1,Hard,M1→M3→M5,M1→M2→M4,97,61,Good
+STU751,20,Female,High School,Kinesthetic,3.1,3,59.88,73,4,52,4,Hard,M1→M2→M4,M1→M2→M4,84,65,Fail
+STU752,24,Female,High School,Kinesthetic,3.62,7,33.43,74,0,92,2,Medium,M1→M3→M5,M1→M2→M4,100,87,Excellent
+STU753,22,Female,High School,Kinesthetic,3.32,9,55.53,93,1,58,1,Easy,M1→M3→M5,M1→M3→M5,82,85,Excellent
+STU754,19,Female,PG,Auditory,2.5,6,26.1,76,2,81,5,Medium,M1→M3→M5,M1→M2→M4,83,76,Good
+STU755,22,Female,High School,Kinesthetic,2.19,9,34.72,79,3,50,2,Easy,M1→M2→M4,M1→M3→M5,82,100,Excellent
+STU756,24,Female,UG,Visual,2.89,5,48.67,63,5,73,2,Hard,M1→M2→M4,M1→M2→M4,83,79,Fair
+STU757,19,Female,High School,Visual,3.55,8,34.03,94,4,74,3,Easy,M1→M2→M4,M1→M3→M5,96,98,Good
+STU758,18,Male,High School,Kinesthetic,3.74,5,54.28,70,2,94,1,Hard,M1→M3→M5,M1→M2→M4,93,86,Excellent
+STU759,24,Male,UG,Kinesthetic,3.49,3,58.75,72,1,94,4,Medium,M1→M3→M5,M1→M3→M5,79,97,Fail
+STU760,24,Male,High School,Kinesthetic,2.01,5,40.0,100,4,100,5,Easy,M1→M3→M5,M1→M3→M5,87,90,Excellent
+STU761,21,Female,High School,Visual,3.35,5,51.19,88,2,84,1,Easy,M1→M3→M5,M1→M2→M4,79,98,Fail
+STU762,18,Female,PG,Auditory,2.57,7,21.36,62,5,99,1,Hard,M1→M2→M4,M1→M3→M5,89,93,Fair
+STU763,21,Male,High School,Auditory,3.53,9,55.07,64,3,66,3,Easy,M1→M3→M5,M1→M2→M4,74,84,Fair
+STU764,24,Male,UG,Visual,2.17,6,24.93,78,0,75,1,Hard,M1→M3→M5,M1→M2→M4,94,86,Excellent
+STU765,18,Female,UG,Visual,2.55,8,58.76,78,4,55,4,Easy,M1→M3→M5,M1→M3→M5,99,84,Fair
+STU766,18,Female,High School,Visual,2.2,9,57.24,96,4,97,1,Easy,M1→M2→M4,M1→M3→M5,75,77,Fail
+STU767,21,Male,High School,Kinesthetic,2.18,4,34.98,61,5,81,5,Hard,M1→M3→M5,M1→M3→M5,96,71,Good
+STU768,20,Female,High School,Kinesthetic,3.39,6,35.98,97,5,88,5,Easy,M1→M3→M5,M1→M2→M4,89,93,Fail
+STU769,24,Male,PG,Visual,2.39,4,53.54,83,0,81,3,Easy,M1→M3→M5,M1→M2→M4,89,89,Good
+STU770,20,Female,PG,Kinesthetic,2.82,5,49.14,77,2,58,1,Easy,M1→M3→M5,M1→M2→M4,72,93,Fair
+STU771,25,Male,PG,Visual,3.66,6,24.34,92,5,79,3,Easy,M1→M2→M4,M1→M2→M4,86,70,Fair
+STU772,20,Female,PG,Auditory,3.4,9,47.48,80,0,52,3,Medium,M1→M2→M4,M1→M2→M4,75,87,Good
+STU773,25,Male,PG,Visual,3.9,3,31.35,90,3,89,4,Hard,M1→M3→M5,M1→M3→M5,96,81,Fail
+STU774,24,Female,PG,Kinesthetic,2.21,4,28.21,100,3,52,4,Easy,M1→M2→M4,M1→M2→M4,71,77,Fair
+STU775,23,Female,High School,Auditory,3.06,9,51.52,64,4,98,2,Easy,M1→M3→M5,M1→M3→M5,80,97,Excellent
+STU776,24,Male,PG,Auditory,2.91,4,44.63,80,0,95,1,Easy,M1→M3→M5,M1→M3→M5,78,70,Fair
+STU777,19,Male,UG,Kinesthetic,2.69,6,50.18,62,1,96,5,Hard,M1→M2→M4,M1→M2→M4,72,99,Good
+STU778,21,Male,High School,Visual,2.56,3,27.62,97,5,63,2,Hard,M1→M3→M5,M1→M2→M4,80,84,Excellent
+STU779,18,Male,High School,Kinesthetic,2.34,6,20.52,100,5,66,4,Easy,M1→M3→M5,M1→M3→M5,96,67,Excellent
+STU780,21,Male,PG,Auditory,3.79,9,57.6,63,1,92,5,Hard,M1→M2→M4,M1→M2→M4,100,83,Good
+STU781,19,Male,PG,Visual,2.44,7,42.25,92,4,60,2,Hard,M1→M2→M4,M1→M2→M4,74,61,Excellent
+STU782,23,Female,High School,Kinesthetic,3.88,10,51.53,60,0,66,3,Medium,M1→M2→M4,M1→M2→M4,77,76,Excellent
+STU783,20,Male,PG,Visual,3.76,6,25.55,85,3,81,2,Easy,M1→M2→M4,M1→M3→M5,78,63,Excellent
+STU784,20,Female,High School,Kinesthetic,2.23,9,56.23,64,0,98,5,Medium,M1→M2→M4,M1→M3→M5,83,99,Excellent
+STU785,19,Male,High School,Kinesthetic,2.34,5,26.93,60,5,67,1,Hard,M1→M2→M4,M1→M3→M5,85,83,Excellent
+STU786,23,Male,UG,Auditory,2.48,10,41.6,95,0,97,5,Easy,M1→M2→M4,M1→M3→M5,75,76,Excellent
+STU787,18,Male,PG,Auditory,2.62,9,56.7,67,1,54,3,Easy,M1→M2→M4,M1→M3→M5,79,70,Excellent
+STU788,20,Male,UG,Auditory,2.74,3,28.3,93,5,72,4,Easy,M1→M2→M4,M1→M2→M4,88,75,Fair
+STU789,19,Male,PG,Visual,3.5,9,54.84,90,3,59,4,Medium,M1→M3→M5,M1→M2→M4,70,75,Excellent
+STU790,19,Female,UG,Visual,3.48,4,30.22,60,0,100,1,Medium,M1→M3→M5,M1→M3→M5,82,65,Excellent
+STU791,21,Male,High School,Auditory,2.66,7,45.37,84,3,73,5,Hard,M1→M3→M5,M1→M2→M4,72,63,Good
+STU792,24,Female,High School,Auditory,2.19,6,44.35,61,0,58,2,Medium,M1→M2→M4,M1→M2→M4,99,81,Good
+STU793,25,Male,PG,Visual,3.59,7,32.95,68,0,87,1,Hard,M1→M3→M5,M1→M3→M5,85,86,Good
+STU794,18,Male,UG,Kinesthetic,3.14,6,34.2,94,1,100,4,Easy,M1→M3→M5,M1→M2→M4,81,75,Excellent
+STU795,18,Female,UG,Visual,2.5,9,56.19,100,3,72,3,Easy,M1→M2→M4,M1→M2→M4,78,94,Excellent
+STU796,20,Male,UG,Visual,2.04,8,56.15,68,0,65,3,Easy,M1→M3→M5,M1→M3→M5,91,95,Fail
+STU797,24,Male,PG,Visual,3.58,4,29.2,100,5,50,3,Easy,M1→M3→M5,M1→M3→M5,93,77,Fail
+STU798,25,Female,PG,Visual,3.39,9,37.37,92,0,93,5,Medium,M1→M2→M4,M1→M3→M5,82,90,Fair
+STU799,19,Male,High School,Kinesthetic,3.18,10,58.04,78,5,90,1,Hard,M1→M2→M4,M1→M3→M5,90,96,Excellent
+STU800,22,Female,PG,Kinesthetic,2.01,7,28.78,91,2,52,2,Easy,M1→M3→M5,M1→M2→M4,73,99,Good
+STU801,25,Male,PG,Visual,2.47,4,47.68,90,3,67,4,Medium,M1→M2→M4,M1→M3→M5,94,69,Excellent
+STU802,18,Male,High School,Visual,2.21,6,22.5,74,4,92,5,Hard,M1→M3→M5,M1→M2→M4,96,81,Good
+STU803,23,Female,UG,Auditory,3.67,5,45.51,68,0,77,2,Medium,M1→M3→M5,M1→M2→M4,79,85,Excellent
+STU804,21,Female,High School,Kinesthetic,3.47,5,54.42,66,0,97,5,Easy,M1→M3→M5,M1→M2→M4,95,66,Fail
+STU805,18,Male,UG,Auditory,2.34,6,44.02,71,1,96,3,Medium,M1→M3→M5,M1→M2→M4,75,74,Excellent
+STU806,24,Female,PG,Kinesthetic,2.63,3,36.17,79,5,50,3,Easy,M1→M2→M4,M1→M2→M4,80,95,Fair
+STU807,21,Female,UG,Visual,3.96,9,33.07,79,0,68,3,Hard,M1→M3→M5,M1→M3→M5,85,62,Fail
+STU808,20,Male,PG,Auditory,2.65,7,54.88,78,4,80,4,Medium,M1→M2→M4,M1→M2→M4,96,90,Good
+STU809,18,Male,UG,Kinesthetic,2.63,8,39.93,97,5,75,3,Easy,M1→M2→M4,M1→M2→M4,72,97,Good
+STU810,22,Male,PG,Auditory,2.54,7,32.51,63,1,99,1,Easy,M1→M2→M4,M1→M3→M5,87,96,Fair
+STU811,21,Male,High School,Kinesthetic,3.31,3,58.34,85,4,97,1,Medium,M1→M3→M5,M1→M3→M5,76,75,Good
+STU812,25,Female,High School,Kinesthetic,3.98,9,54.07,91,5,67,2,Medium,M1→M2→M4,M1→M3→M5,89,69,Fair
+STU813,23,Female,PG,Auditory,3.06,9,54.41,91,5,65,2,Medium,M1→M3→M5,M1→M3→M5,73,98,Good
+STU814,20,Male,PG,Kinesthetic,3.36,7,33.59,89,1,72,2,Medium,M1→M2→M4,M1→M2→M4,77,71,Excellent
+STU815,23,Female,High School,Visual,3.91,8,57.36,82,0,70,2,Hard,M1→M3→M5,M1→M3→M5,93,70,Fail
+STU816,18,Female,UG,Visual,3.86,7,21.9,97,4,72,5,Easy,M1→M3→M5,M1→M2→M4,90,78,Fair
+STU817,19,Male,UG,Auditory,2.98,8,57.77,89,1,53,4,Easy,M1→M2→M4,M1→M3→M5,93,60,Good
+STU818,25,Female,PG,Visual,2.46,7,47.69,84,1,65,3,Hard,M1→M2→M4,M1→M2→M4,97,61,Fail
+STU819,21,Male,PG,Auditory,3.29,4,26.19,74,0,74,5,Easy,M1→M3→M5,M1→M3→M5,97,86,Fair
+STU820,25,Female,UG,Kinesthetic,2.34,10,42.86,84,0,63,1,Medium,M1→M2→M4,M1→M2→M4,89,81,Excellent
+STU821,19,Female,UG,Kinesthetic,2.22,5,44.08,61,3,74,2,Easy,M1→M2→M4,M1→M2→M4,79,61,Fair
+STU822,25,Male,High School,Auditory,2.92,6,39.94,78,5,67,1,Easy,M1→M3→M5,M1→M3→M5,79,93,Good
+STU823,25,Male,High School,Kinesthetic,3.9,9,37.53,73,3,78,1,Medium,M1→M2→M4,M1→M2→M4,87,67,Excellent
+STU824,22,Female,UG,Auditory,2.3,8,56.95,74,1,76,1,Medium,M1→M2→M4,M1→M2→M4,80,61,Fair
+STU825,19,Female,PG,Auditory,3.38,8,43.67,69,3,89,2,Medium,M1→M3→M5,M1→M2→M4,92,60,Fail
+STU826,23,Female,UG,Auditory,2.4,3,49.84,66,5,82,5,Medium,M1→M2→M4,M1→M3→M5,95,83,Good
+STU827,25,Male,UG,Kinesthetic,2.23,6,33.41,83,3,77,4,Easy,M1→M3→M5,M1→M2→M4,76,97,Excellent
+STU828,22,Female,PG,Kinesthetic,2.95,3,43.36,91,2,50,2,Hard,M1→M2→M4,M1→M3→M5,77,73,Excellent
+STU829,23,Male,PG,Kinesthetic,2.03,7,58.1,69,1,61,3,Easy,M1→M2→M4,M1→M2→M4,87,90,Excellent
+STU830,24,Male,High School,Visual,3.6,3,27.82,91,1,79,1,Medium,M1→M2→M4,M1→M2→M4,84,76,Fail
+STU831,18,Male,High School,Kinesthetic,3.96,4,45.68,90,2,64,3,Hard,M1→M3→M5,M1→M2→M4,76,72,Good
+STU832,20,Female,PG,Kinesthetic,2.4,3,23.3,71,0,95,1,Hard,M1→M3→M5,M1→M3→M5,87,73,Fair
+STU833,20,Male,UG,Auditory,3.8,6,32.04,78,2,56,2,Easy,M1→M3→M5,M1→M2→M4,71,61,Fail
+STU834,22,Male,UG,Auditory,2.27,5,26.33,71,1,52,5,Easy,M1→M3→M5,M1→M3→M5,90,62,Good
+STU835,21,Male,UG,Auditory,2.34,4,29.61,95,3,66,2,Easy,M1→M2→M4,M1→M3→M5,91,86,Excellent
+STU836,21,Female,PG,Kinesthetic,3.34,9,28.32,67,4,59,1,Medium,M1→M2→M4,M1→M3→M5,92,97,Fair
+STU837,23,Male,High School,Auditory,2.31,10,43.46,77,5,60,2,Medium,M1→M3→M5,M1→M2→M4,82,88,Good
+STU838,20,Male,PG,Visual,2.8,5,56.37,75,2,85,2,Easy,M1→M3→M5,M1→M2→M4,71,63,Good
+STU839,18,Male,High School,Visual,2.8,6,58.03,80,5,100,4,Hard,M1→M2→M4,M1→M2→M4,70,79,Fail
+STU840,22,Female,High School,Auditory,3.85,10,36.24,87,4,98,5,Hard,M1→M3→M5,M1→M2→M4,97,75,Fail
+STU841,24,Male,UG,Visual,2.57,8,25.01,78,3,83,4,Easy,M1→M3→M5,M1→M3→M5,89,63,Fail
+STU842,22,Male,High School,Visual,2.1,7,37.86,65,2,52,2,Hard,M1→M2→M4,M1→M3→M5,89,61,Good
+STU843,22,Male,UG,Auditory,3.68,9,26.67,65,2,88,1,Medium,M1→M3→M5,M1→M2→M4,74,81,Excellent
+STU844,22,Male,PG,Auditory,3.61,4,45.25,65,0,71,3,Medium,M1→M2→M4,M1→M2→M4,91,70,Fail
+STU845,20,Female,PG,Auditory,2.59,9,31.17,64,4,71,2,Hard,M1→M3→M5,M1→M3→M5,80,62,Excellent
+STU846,18,Male,UG,Auditory,2.53,4,30.88,72,4,59,1,Medium,M1→M2→M4,M1→M3→M5,76,79,Fair
+STU847,18,Female,High School,Visual,3.09,3,40.28,62,1,96,3,Easy,M1→M2→M4,M1→M3→M5,74,93,Fail
+STU848,24,Female,High School,Kinesthetic,2.14,10,39.34,72,0,63,1,Hard,M1→M3→M5,M1→M3→M5,73,68,Good
+STU849,21,Female,PG,Visual,3.95,9,51.89,92,0,60,1,Medium,M1→M2→M4,M1→M3→M5,78,90,Fair
+STU850,21,Male,PG,Kinesthetic,3.67,5,39.14,79,2,78,1,Hard,M1→M3→M5,M1→M2→M4,85,61,Fail
+STU851,23,Male,UG,Kinesthetic,2.7,3,58.5,88,0,99,2,Medium,M1→M3→M5,M1→M2→M4,98,98,Fair
+STU852,23,Male,PG,Kinesthetic,3.98,9,48.37,80,2,60,3,Hard,M1→M2→M4,M1→M2→M4,97,97,Fair
+STU853,21,Male,UG,Visual,2.12,10,24.0,62,0,64,5,Medium,M1→M3→M5,M1→M3→M5,75,98,Good
+STU854,19,Female,UG,Kinesthetic,2.72,3,37.99,94,4,61,4,Medium,M1→M3→M5,M1→M2→M4,92,74,Excellent
+STU855,24,Female,High School,Auditory,3.43,8,46.26,71,5,61,5,Hard,M1→M3→M5,M1→M2→M4,88,90,Excellent
+STU856,24,Female,UG,Kinesthetic,2.34,8,46.32,94,4,100,3,Medium,M1→M2→M4,M1→M3→M5,93,85,Fair
+STU857,18,Male,High School,Visual,3.69,10,42.69,84,3,61,4,Hard,M1→M2→M4,M1→M2→M4,73,74,Good
+STU858,25,Male,PG,Kinesthetic,3.21,3,58.19,93,3,78,1,Hard,M1→M3→M5,M1→M2→M4,80,93,Fail
+STU859,22,Male,PG,Kinesthetic,2.6,6,54.42,88,2,73,3,Easy,M1→M3→M5,M1→M3→M5,88,64,Excellent
+STU860,21,Male,UG,Visual,2.6,10,35.91,73,4,91,4,Hard,M1→M3→M5,M1→M2→M4,94,72,Excellent
+STU861,23,Male,High School,Auditory,2.45,8,57.86,85,3,82,2,Hard,M1→M3→M5,M1→M2→M4,75,100,Good
+STU862,22,Male,High School,Auditory,3.58,5,25.59,92,0,63,4,Easy,M1→M3→M5,M1→M2→M4,96,68,Fair
+STU863,22,Female,UG,Visual,2.69,9,58.46,66,5,58,5,Hard,M1→M2→M4,M1→M2→M4,81,67,Excellent
+STU864,19,Male,High School,Visual,3.08,7,35.86,75,4,99,4,Easy,M1→M2→M4,M1→M2→M4,94,60,Fair
+STU865,20,Female,High School,Auditory,2.87,4,38.4,61,5,56,1,Hard,M1→M3→M5,M1→M2→M4,80,67,Good
+STU866,19,Male,UG,Auditory,2.27,8,25.33,67,4,89,2,Hard,M1→M3→M5,M1→M3→M5,90,82,Fair
+STU867,18,Male,UG,Auditory,3.41,5,56.63,89,5,74,3,Hard,M1→M2→M4,M1→M2→M4,85,69,Good
+STU868,24,Female,High School,Kinesthetic,2.22,10,43.21,90,1,72,5,Medium,M1→M3→M5,M1→M2→M4,85,61,Fair
+STU869,19,Female,UG,Visual,2.8,3,29.78,84,3,50,5,Medium,M1→M2→M4,M1→M2→M4,75,87,Good
+STU870,25,Male,UG,Visual,2.74,6,25.54,70,1,63,2,Easy,M1→M2→M4,M1→M2→M4,72,81,Excellent
+STU871,22,Female,High School,Kinesthetic,3.85,7,46.9,89,4,83,2,Hard,M1→M2→M4,M1→M3→M5,82,85,Excellent
+STU872,22,Male,High School,Visual,3.73,10,30.74,81,3,100,5,Easy,M1→M2→M4,M1→M3→M5,81,98,Fair
+STU873,18,Male,UG,Auditory,2.77,6,30.94,94,4,90,4,Medium,M1→M3→M5,M1→M2→M4,82,74,Good
+STU874,24,Male,PG,Kinesthetic,2.66,5,23.77,65,5,75,4,Medium,M1→M2→M4,M1→M2→M4,79,63,Fair
+STU875,22,Male,PG,Auditory,3.53,9,38.96,77,0,66,4,Easy,M1→M3→M5,M1→M2→M4,88,100,Excellent
+STU876,24,Male,UG,Visual,2.24,9,57.74,92,1,93,3,Easy,M1→M2→M4,M1→M3→M5,92,72,Good
+STU877,20,Female,High School,Visual,2.22,4,51.31,77,4,97,3,Easy,M1→M2→M4,M1→M2→M4,89,69,Fail
+STU878,20,Female,UG,Visual,2.44,9,33.46,95,2,64,3,Easy,M1→M2→M4,M1→M3→M5,95,91,Excellent
+STU879,25,Male,PG,Kinesthetic,2.27,8,50.77,75,4,71,1,Easy,M1→M3→M5,M1→M2→M4,73,65,Fair
+STU880,19,Female,UG,Auditory,3.32,10,59.68,100,5,52,2,Easy,M1→M3→M5,M1→M2→M4,70,94,Fair
+STU881,18,Male,High School,Visual,3.74,6,20.39,77,2,79,4,Hard,M1→M2→M4,M1→M3→M5,97,79,Excellent
+STU882,18,Female,UG,Visual,3.22,4,51.44,88,3,73,1,Easy,M1→M3→M5,M1→M3→M5,85,86,Fair
+STU883,21,Female,UG,Visual,3.9,5,25.3,68,5,96,5,Medium,M1→M2→M4,M1→M2→M4,96,87,Good
+STU884,18,Male,PG,Auditory,2.52,10,41.77,64,5,94,1,Medium,M1→M3→M5,M1→M3→M5,98,60,Excellent
+STU885,25,Female,High School,Kinesthetic,3.36,3,42.68,81,5,80,5,Easy,M1→M2→M4,M1→M2→M4,100,97,Fair
+STU886,23,Male,High School,Kinesthetic,2.15,6,25.67,81,2,68,4,Easy,M1→M2→M4,M1→M2→M4,89,86,Fail
+STU887,24,Female,UG,Auditory,3.35,7,45.39,73,5,72,1,Easy,M1→M3→M5,M1→M2→M4,91,64,Good
+STU888,18,Female,UG,Kinesthetic,2.97,9,30.03,63,1,75,2,Hard,M1→M3→M5,M1→M2→M4,73,76,Good
+STU889,24,Female,PG,Auditory,3.42,5,37.48,63,5,73,2,Easy,M1→M2→M4,M1→M3→M5,78,80,Fair
+STU890,21,Male,UG,Auditory,3.99,3,55.02,91,4,77,3,Medium,M1→M2→M4,M1→M2→M4,71,61,Good
+STU891,18,Male,High School,Auditory,3.18,8,23.85,62,0,53,1,Hard,M1→M2→M4,M1→M3→M5,89,93,Excellent
+STU892,18,Female,PG,Visual,3.78,10,21.38,98,5,87,5,Medium,M1→M2→M4,M1→M3→M5,94,66,Excellent
+STU893,21,Female,UG,Auditory,3.31,6,46.23,99,4,52,3,Medium,M1→M2→M4,M1→M2→M4,86,92,Excellent
+STU894,22,Male,High School,Auditory,2.73,8,54.08,98,4,75,4,Medium,M1→M2→M4,M1→M3→M5,83,70,Fail
+STU895,21,Male,PG,Auditory,3.8,7,54.83,85,4,65,2,Medium,M1→M3→M5,M1→M2→M4,73,84,Fail
+STU896,25,Female,UG,Visual,3.75,4,49.36,67,2,58,3,Hard,M1→M3→M5,M1→M3→M5,81,62,Excellent
+STU897,21,Male,High School,Kinesthetic,3.42,6,29.41,100,1,80,2,Hard,M1→M2→M4,M1→M3→M5,92,100,Fair
+STU898,19,Female,UG,Kinesthetic,3.99,6,31.49,69,5,77,3,Medium,M1→M2→M4,M1→M3→M5,75,64,Good
+STU899,19,Female,PG,Visual,2.12,7,55.8,86,5,96,4,Medium,M1→M3→M5,M1→M3→M5,84,74,Fair
+STU900,19,Female,UG,Visual,3.18,8,43.66,83,2,98,3,Medium,M1→M2→M4,M1→M2→M4,85,76,Fail
+STU901,24,Female,High School,Kinesthetic,3.88,5,51.31,84,1,70,4,Hard,M1→M3→M5,M1→M2→M4,73,65,Good
+STU902,25,Female,High School,Kinesthetic,2.61,7,59.78,78,5,56,4,Easy,M1→M2→M4,M1→M2→M4,83,98,Fair
+STU903,21,Male,High School,Visual,3.87,4,24.09,73,1,50,1,Hard,M1→M2→M4,M1→M3→M5,98,99,Excellent
+STU904,23,Female,UG,Visual,3.19,7,37.0,65,1,66,4,Medium,M1→M3→M5,M1→M2→M4,76,66,Good
+STU905,22,Male,PG,Auditory,3.07,3,35.46,77,2,75,2,Easy,M1→M2→M4,M1→M2→M4,81,72,Fail
+STU906,18,Male,UG,Visual,2.93,5,59.99,83,4,64,2,Medium,M1→M2→M4,M1→M3→M5,88,83,Excellent
+STU907,24,Male,High School,Auditory,2.3,10,51.39,96,4,70,4,Hard,M1→M3→M5,M1→M2→M4,78,72,Excellent
+STU908,20,Female,High School,Kinesthetic,3.29,5,44.6,72,4,58,3,Medium,M1→M2→M4,M1→M2→M4,72,72,Fair
+STU909,21,Female,UG,Kinesthetic,2.68,4,52.14,81,1,63,2,Hard,M1→M2→M4,M1→M3→M5,88,84,Excellent
+STU910,25,Male,UG,Visual,2.82,10,28.51,77,3,84,5,Medium,M1→M3→M5,M1→M3→M5,93,83,Fail
+STU911,18,Female,PG,Kinesthetic,3.53,7,29.31,94,5,65,4,Easy,M1→M2→M4,M1→M3→M5,87,84,Fair
+STU912,25,Male,UG,Kinesthetic,2.81,3,35.57,62,1,83,3,Hard,M1→M3→M5,M1→M2→M4,90,75,Fail
+STU913,24,Male,PG,Kinesthetic,2.57,10,25.35,70,4,79,5,Easy,M1→M3→M5,M1→M3→M5,88,78,Good
+STU914,25,Female,High School,Auditory,2.3,9,37.81,64,3,74,1,Hard,M1→M2→M4,M1→M2→M4,71,79,Excellent
+STU915,20,Male,High School,Visual,2.91,10,50.64,93,2,53,1,Hard,M1→M3→M5,M1→M2→M4,81,96,Excellent
+STU916,24,Male,PG,Kinesthetic,2.24,8,43.11,68,0,62,5,Hard,M1→M2→M4,M1→M2→M4,92,99,Fair
+STU917,21,Male,UG,Visual,2.2,10,53.04,66,1,51,4,Hard,M1→M3→M5,M1→M3→M5,98,98,Fail
+STU918,21,Male,PG,Auditory,3.63,9,36.78,71,3,74,4,Medium,M1→M3→M5,M1→M2→M4,90,89,Fail
+STU919,22,Female,High School,Auditory,3.0,9,47.79,100,3,54,2,Medium,M1→M3→M5,M1→M2→M4,97,82,Fair
+STU920,19,Male,UG,Auditory,3.37,9,43.1,88,1,97,1,Easy,M1→M3→M5,M1→M2→M4,71,69,Fail
+STU921,24,Female,PG,Auditory,3.81,4,56.17,71,2,88,5,Easy,M1→M3→M5,M1→M2→M4,92,81,Good
+STU922,21,Male,High School,Kinesthetic,3.11,8,26.61,79,5,64,4,Easy,M1→M2→M4,M1→M3→M5,88,60,Fail
+STU923,22,Male,UG,Auditory,3.14,10,25.44,99,3,83,5,Easy,M1→M3→M5,M1→M2→M4,93,76,Fail
+STU924,24,Male,PG,Kinesthetic,3.2,9,36.93,100,1,88,1,Hard,M1→M3→M5,M1→M2→M4,90,74,Fair
+STU925,19,Female,UG,Auditory,3.82,10,38.17,92,5,63,5,Hard,M1→M2→M4,M1→M3→M5,91,97,Fair
+STU926,23,Female,UG,Auditory,2.2,8,20.65,60,4,65,3,Easy,M1→M3→M5,M1→M2→M4,78,63,Good
+STU927,25,Male,PG,Auditory,2.77,4,56.99,90,5,79,3,Easy,M1→M2→M4,M1→M2→M4,97,82,Fail
+STU928,22,Female,High School,Auditory,3.4,10,51.47,85,5,81,3,Hard,M1→M2→M4,M1→M3→M5,98,68,Fail
+STU929,21,Male,PG,Visual,2.52,8,22.89,72,2,70,2,Hard,M1→M2→M4,M1→M2→M4,84,63,Fail
+STU930,21,Female,High School,Kinesthetic,3.04,8,51.63,64,4,81,4,Medium,M1→M2→M4,M1→M3→M5,78,61,Good
+STU931,18,Female,PG,Visual,3.51,3,46.13,74,0,69,3,Medium,M1→M3→M5,M1→M3→M5,96,80,Fail
+STU932,25,Male,High School,Auditory,3.4,10,28.02,93,1,67,3,Easy,M1→M2→M4,M1→M2→M4,85,86,Fair
+STU933,20,Male,UG,Auditory,3.95,10,36.42,82,2,65,4,Easy,M1→M2→M4,M1→M2→M4,91,76,Good
+STU934,19,Male,PG,Kinesthetic,3.88,6,43.76,85,0,74,5,Easy,M1→M2→M4,M1→M2→M4,80,93,Fair
+STU935,22,Male,UG,Visual,3.5,3,55.91,68,4,79,2,Hard,M1→M3→M5,M1→M2→M4,73,81,Fail
+STU936,21,Female,PG,Auditory,3.27,10,46.88,99,4,96,4,Hard,M1→M3→M5,M1→M2→M4,80,66,Good
+STU937,19,Male,High School,Kinesthetic,3.08,10,31.88,75,1,52,2,Hard,M1→M3→M5,M1→M2→M4,92,61,Fail
+STU938,25,Male,UG,Kinesthetic,2.49,10,48.48,90,0,62,5,Medium,M1→M3→M5,M1→M2→M4,87,87,Excellent
+STU939,23,Male,PG,Kinesthetic,2.03,7,25.18,74,0,63,1,Hard,M1→M3→M5,M1→M3→M5,74,71,Good
+STU940,18,Male,High School,Kinesthetic,2.01,10,33.89,93,5,50,4,Medium,M1→M2→M4,M1→M2→M4,82,91,Fail
+STU941,20,Male,High School,Visual,2.09,8,48.0,97,4,82,1,Hard,M1→M2→M4,M1→M2→M4,84,88,Fail
+STU942,20,Female,High School,Kinesthetic,2.44,7,28.78,62,2,99,4,Easy,M1→M3→M5,M1→M2→M4,86,85,Good
+STU943,21,Male,High School,Auditory,2.21,3,41.86,82,2,72,3,Easy,M1→M2→M4,M1→M3→M5,84,93,Good
+STU944,24,Female,UG,Kinesthetic,3.92,5,41.36,78,2,53,2,Hard,M1→M2→M4,M1→M3→M5,70,90,Fair
+STU945,21,Female,UG,Kinesthetic,2.98,10,33.96,60,4,90,2,Hard,M1→M2→M4,M1→M3→M5,85,85,Excellent
+STU946,24,Male,UG,Kinesthetic,2.53,5,48.2,78,0,65,5,Hard,M1→M2→M4,M1→M2→M4,100,74,Fair
+STU947,25,Female,High School,Auditory,2.92,9,53.65,75,0,96,5,Hard,M1→M3→M5,M1→M2→M4,80,65,Fail
+STU948,24,Female,High School,Visual,3.66,10,32.35,62,4,65,2,Easy,M1→M2→M4,M1→M2→M4,89,94,Fail
+STU949,20,Male,High School,Auditory,2.26,5,49.72,74,3,76,1,Medium,M1→M3→M5,M1→M2→M4,92,97,Excellent
+STU950,18,Female,PG,Auditory,3.06,9,30.04,97,1,88,2,Hard,M1→M3→M5,M1→M3→M5,82,60,Fail
+STU951,22,Male,UG,Kinesthetic,3.12,7,41.96,78,1,81,1,Medium,M1→M3→M5,M1→M3→M5,85,60,Excellent
+STU952,19,Female,PG,Auditory,3.24,3,50.38,82,4,51,3,Easy,M1→M3→M5,M1→M2→M4,71,71,Fair
+STU953,19,Female,UG,Visual,2.26,4,33.97,86,4,83,5,Medium,M1→M3→M5,M1→M3→M5,97,91,Excellent
+STU954,18,Male,UG,Visual,3.7,3,50.27,61,2,72,5,Easy,M1→M3→M5,M1→M3→M5,82,97,Good
+STU955,23,Male,PG,Kinesthetic,3.16,8,50.43,91,1,91,5,Hard,M1→M3→M5,M1→M2→M4,78,98,Fair
+STU956,23,Female,PG,Visual,2.22,5,28.56,98,5,82,1,Easy,M1→M2→M4,M1→M2→M4,85,79,Good
+STU957,18,Male,High School,Kinesthetic,3.49,6,20.56,91,1,100,5,Medium,M1→M2→M4,M1→M3→M5,98,66,Excellent
+STU958,19,Male,PG,Visual,2.82,8,30.45,62,5,76,1,Medium,M1→M3→M5,M1→M2→M4,88,80,Fail
+STU959,23,Male,UG,Auditory,2.8,6,41.26,94,3,91,3,Hard,M1→M3→M5,M1→M2→M4,88,99,Excellent
+STU960,22,Female,High School,Visual,3.49,4,58.34,91,1,69,3,Medium,M1→M3→M5,M1→M3→M5,98,92,Good
+STU961,24,Female,UG,Auditory,2.63,9,53.36,74,4,75,1,Hard,M1→M3→M5,M1→M3→M5,95,95,Fail
+STU962,19,Female,High School,Visual,3.56,4,45.25,86,3,56,4,Medium,M1→M3→M5,M1→M3→M5,73,85,Fail
+STU963,23,Female,High School,Visual,3.38,9,51.73,64,1,95,3,Hard,M1→M2→M4,M1→M3→M5,88,80,Fail
+STU964,18,Female,High School,Kinesthetic,3.71,6,25.44,86,2,84,3,Medium,M1→M2→M4,M1→M2→M4,70,77,Fail
+STU965,25,Female,PG,Auditory,3.07,3,49.16,99,5,56,2,Easy,M1→M2→M4,M1→M3→M5,92,75,Fail
+STU966,25,Female,PG,Visual,2.93,6,32.1,86,1,89,4,Easy,M1→M3→M5,M1→M3→M5,75,88,Excellent
+STU967,20,Male,PG,Visual,2.38,8,50.83,67,0,79,2,Hard,M1→M3→M5,M1→M3→M5,89,85,Fail
+STU968,22,Female,High School,Kinesthetic,3.28,5,34.28,67,2,61,3,Medium,M1→M2→M4,M1→M3→M5,99,82,Good
+STU969,25,Male,High School,Visual,2.56,8,46.27,71,2,97,4,Easy,M1→M2→M4,M1→M2→M4,84,85,Excellent
+STU970,22,Female,PG,Auditory,3.6,5,47.32,97,5,97,2,Medium,M1→M2→M4,M1→M2→M4,100,88,Fair
+STU971,24,Male,PG,Kinesthetic,2.27,10,41.86,73,1,77,1,Easy,M1→M3→M5,M1→M2→M4,92,68,Good
+STU972,20,Male,High School,Kinesthetic,2.91,10,22.69,81,4,79,5,Easy,M1→M2→M4,M1→M2→M4,80,95,Fail
+STU973,23,Male,PG,Kinesthetic,3.83,5,52.42,69,1,94,1,Hard,M1→M2→M4,M1→M2→M4,91,99,Good
+STU974,22,Male,PG,Auditory,2.98,9,54.07,76,3,67,4,Medium,M1→M2→M4,M1→M3→M5,86,88,Fair
+STU975,22,Male,PG,Auditory,2.5,4,54.02,64,1,52,4,Hard,M1→M3→M5,M1→M3→M5,98,94,Good
+STU976,21,Male,UG,Visual,2.76,7,40.52,85,1,72,2,Easy,M1→M3→M5,M1→M2→M4,98,61,Fair
+STU977,21,Female,UG,Kinesthetic,2.16,6,44.49,94,3,51,3,Medium,M1→M3→M5,M1→M3→M5,98,81,Fair
+STU978,21,Female,PG,Kinesthetic,2.09,4,29.01,78,0,68,3,Hard,M1→M3→M5,M1→M3→M5,80,65,Fair
+STU979,21,Female,High School,Kinesthetic,3.02,9,53.4,78,3,77,4,Medium,M1→M3→M5,M1→M2→M4,82,66,Excellent
+STU980,21,Female,PG,Visual,2.07,9,54.55,84,4,60,1,Hard,M1→M3→M5,M1→M3→M5,79,93,Excellent
+STU981,24,Female,UG,Auditory,3.43,6,51.68,88,0,60,5,Hard,M1→M3→M5,M1→M2→M4,91,92,Excellent
+STU982,22,Female,PG,Auditory,2.55,8,21.09,87,1,71,2,Medium,M1→M3→M5,M1→M3→M5,73,89,Good
+STU983,18,Female,High School,Kinesthetic,2.76,3,32.78,67,4,75,4,Hard,M1→M3→M5,M1→M3→M5,84,89,Excellent
+STU984,20,Male,PG,Visual,2.2,8,46.02,67,4,56,4,Hard,M1→M3→M5,M1→M3→M5,72,91,Excellent
+STU985,25,Female,High School,Visual,3.92,6,26.17,67,0,62,3,Medium,M1→M2→M4,M1→M3→M5,81,85,Good
+STU986,20,Male,UG,Kinesthetic,3.62,4,37.65,98,3,73,5,Easy,M1→M3→M5,M1→M3→M5,94,99,Excellent
+STU987,25,Female,UG,Kinesthetic,3.42,3,59.17,68,4,64,4,Medium,M1→M3→M5,M1→M3→M5,93,67,Good
+STU988,22,Male,PG,Visual,3.9,5,58.53,63,0,82,4,Easy,M1→M2→M4,M1→M3→M5,95,69,Fair
+STU989,20,Female,UG,Kinesthetic,2.19,6,41.36,95,0,98,5,Medium,M1→M2→M4,M1→M3→M5,77,85,Excellent
+STU990,25,Male,PG,Kinesthetic,2.2,10,25.4,97,5,98,4,Medium,M1→M3→M5,M1→M2→M4,89,95,Excellent
+STU991,24,Male,UG,Auditory,2.65,8,24.81,94,0,62,3,Easy,M1→M2→M4,M1→M3→M5,74,62,Fail
+STU992,19,Female,High School,Visual,3.75,3,43.39,99,4,74,5,Easy,M1→M3→M5,M1→M3→M5,92,81,Excellent
+STU993,24,Male,UG,Auditory,2.31,4,27.09,96,4,51,2,Easy,M1→M3→M5,M1→M2→M4,77,74,Fair
+STU994,25,Male,PG,Visual,3.17,7,51.45,82,0,93,5,Hard,M1→M2→M4,M1→M2→M4,87,87,Excellent
+STU995,21,Male,High School,Auditory,3.14,8,41.21,99,3,53,4,Medium,M1→M2→M4,M1→M3→M5,88,93,Good
+STU996,21,Male,UG,Visual,3.36,5,43.25,68,3,63,4,Medium,M1→M3→M5,M1→M2→M4,81,100,Excellent
+STU997,23,Female,UG,Kinesthetic,2.04,9,27.69,93,4,98,5,Hard,M1→M3→M5,M1→M3→M5,77,97,Good
+STU998,19,Female,PG,Kinesthetic,3.55,8,39.5,60,2,81,3,Hard,M1→M3→M5,M1→M3→M5,78,70,Fail
+STU999,25,Female,UG,Kinesthetic,2.49,5,29.29,84,4,89,5,Medium,M1→M3→M5,M1→M2→M4,97,86,Good
+STU1000,24,Female,UG,Auditory,3.16,4,22.63,62,3,63,4,Hard,M1→M3→M5,M1→M2→M4,84,76,Fair
